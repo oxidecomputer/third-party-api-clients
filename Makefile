@@ -1,3 +1,8 @@
+DOCUSIGN_SPEC_DIR = $(CURDIR)/specs/docusign
+DOCUSIGN_SPEC = $(DOCUSIGN_SPEC_DIR)/docusign.json
+DOCUSIGN_SPEC_REPO = docusign/OpenAPI-Specifications
+DOCUSIGN_SPEC_REMOTE = https://raw.githubusercontent.com/$(DOCUSIGN_SPEC_REPO)/master/esignature.rest.swagger-v2.1.json
+
 GITHUB_SPEC_DIR = $(CURDIR)/specs/github
 GITHUB_SPEC = $(GITHUB_SPEC_DIR)/api.github.com.json
 GITHUB_SPEC_REPO = github/rest-api-description
@@ -34,8 +39,29 @@ run:
 update: update-specs
 
 update-specs:
-	$(RM) -r $(GITHUB_SPEC_DIR) $(GUSTO_SPEC_DIR) $(RAMP_SPEC_DIR) $(ZOOM_SPEC_DIR)
-	make $(GITHUB_SPEC) $(GUSTO_SPEC) $(RAMP_SPEC) $(ZOOM_SPEC)
+	$(RM) -r $(DOCUSIGN_SPEC_DIR) $(GITHUB_SPEC_DIR) $(GUSTO_SPEC_DIR) $(RAMP_SPEC_DIR) $(ZOOM_SPEC_DIR)
+	make $(DOCUSIGN_SPEC) $(GITHUB_SPEC) $(GUSTO_SPEC) $(RAMP_SPEC) $(ZOOM_SPEC)
+
+$(DOCUSIGN_SPEC_DIR):
+	mkdir -p $@
+
+$(DOCUSIGN_SPEC): $(DOCUSIGN_SPEC_DIR)
+	npx swagger2openapi \
+		--outfile $@ \
+		--patch \
+		$(DOCUSIGN_SPEC_REMOTE)
+
+docusign: target/debug/generator $(DOCUSIGN_SPEC)
+	./target/debug/generator -i $(DOCUSIGN_SPEC) -v 0.2.0 \
+		-o docusign \
+		-n docusign \
+		--proper-name DocuSign \
+		-d "A fully generated & opinionated API client for the DocuSign API." \
+		--spec-link "https://github.com/$(DOCUSIGN_SPEC_REPO)" \
+		--host "na4.docusign.net" \
+		--token-endpoint "account.docusign.com/oauth/token" \
+		--user-consent-endpoint "account.docusign.com/oauth/auth"
+	cargo fmt -p docusign-api
 
 $(GITHUB_SPEC_DIR):
 	mkdir -p $@

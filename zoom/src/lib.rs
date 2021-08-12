@@ -75,7 +75,7 @@ pub mod deprecated_api_endpoints;
 
 use anyhow::{anyhow, Error, Result};
 
-const DEFAULT_HOST: &str = "https://api.zoom.us/v2";
+pub const DEFAULT_HOST: &str = "https://api.zoom.us/v2";
 
 mod progenitor_support {
     use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};

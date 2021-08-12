@@ -3,6 +3,50 @@ use std::{fmt, str::FromStr};
 
 use serde::de::{self, Visitor};
 
+pub mod date_time_format {
+    use chrono::{DateTime, TimeZone, Utc};
+    use serde::{self, Deserialize, Deserializer};
+
+    // The date format Ramp returns looks like this: "2021-04-24T01:03:21"
+    const FORMAT: &str = "%Y-%m-%dT%H:%M:%S%:z";
+
+    // The signature of a deserialize_with function must follow the pattern:
+    //
+    //    fn deserialize<'de, D>(D) -> Result<T, D::Error>
+    //    where
+    //        D: Deserializer<'de>
+    //
+    // although it may also be generic over the output types T.
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<Option<DateTime<Utc>>, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s: Option<String> = Option::deserialize(deserializer)?;
+        if let Some(mut s) = s {
+            match Utc.datetime_from_str(&s, "%+") {
+                Ok(t) => Ok(Some(t)),
+                Err(_) => {
+                    s = format!("{}+00:00", s);
+                    // Try both ways to parse the date.
+                    match Utc.datetime_from_str(&s, FORMAT) {
+                        Ok(r) => Ok(Some(r)),
+                        Err(_) => {
+                            match Utc.datetime_from_str(&s, "%+") {
+                                Ok(d) => Ok(Some(d)),
+                                Err(e) => {
+                                   Err(serde::de::Error::custom(e.to_string()))
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            Ok(None)
+        }
+    }
+}
+
 // TODO: we should add a function for deserializing a null vector.
 pub mod deserialize_null_string {
     use serde::{self, Deserialize, Deserializer};

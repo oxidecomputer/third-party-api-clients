@@ -162,6 +162,7 @@ pub account_type: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub created_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -193,6 +194,7 @@ pub seats: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub subscription_end_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -200,6 +202,7 @@ pub subscription_end_time: Option<chrono::DateTime<chrono::Utc>>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub subscription_start_time: Option<chrono::DateTime<chrono::Utc>>,
 }
@@ -2781,6 +2784,7 @@ pub occurrence_id: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -3473,6 +3477,7 @@ pub struct Recurrence {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub end_date_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -3548,6 +3553,7 @@ pub agenda: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub created_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -3623,6 +3629,7 @@ pub settings: Option<MeetingSettings>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -3752,6 +3759,7 @@ pub agenda: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub created_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -3835,6 +3843,7 @@ pub settings: Option<MeetingSettings>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -3949,6 +3958,7 @@ pub email: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub end_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -4037,6 +4047,7 @@ pub participants: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -4793,6 +4804,7 @@ pub play_url: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub recording_end: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -4800,6 +4812,7 @@ pub recording_end: Option<chrono::DateTime<chrono::Utc>>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub recording_start: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -5307,6 +5320,7 @@ pub settings: Option<MeetingSettings>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -5415,6 +5429,7 @@ pub settings: Option<MeetingSettings>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -5466,6 +5481,7 @@ pub struct RecurrenceWebinar {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub end_date_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -6003,6 +6019,7 @@ pub settings: Option<WebinarSettings>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -6084,6 +6101,7 @@ pub settings: Option<WebinarSettings>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -6343,6 +6361,7 @@ pub struct User {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub created_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -6382,6 +6401,7 @@ pub last_client_version: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub last_login_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -7946,6 +7966,7 @@ pub agenda: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub created_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -7998,6 +8019,7 @@ pub settings: Option<WebinarSettings>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -8105,6 +8127,7 @@ pub email: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub end_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -8185,6 +8208,7 @@ pub participants: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -9488,6 +9512,7 @@ pub settings: Option<MeetingCreateSettings>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -9597,6 +9622,7 @@ pub settings: Option<CreateWebinarSettings>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -10105,6 +10131,7 @@ pub cpu_usage: Option<CpuUsage>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -10177,6 +10204,7 @@ pub ip_address: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub join_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -10184,6 +10212,7 @@ pub join_time: Option<chrono::DateTime<chrono::Utc>>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -10640,7 +10669,7 @@ pub webinar_password: bool,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserSettingsResponse {
+pub struct MeetingSecuritySettings {
 #[serde(default,
 skip_serializing_if = "Option::is_none",
 )]
@@ -10726,6 +10755,7 @@ pub email: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub end_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -10814,6 +10844,7 @@ pub participants: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -11120,6 +11151,7 @@ pub recording_count: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -14664,6 +14696,7 @@ pub struct InviteChannelMembersResponse {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub added_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -14682,6 +14715,7 @@ pub struct JoinChannelResponse {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub added_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -14791,6 +14825,7 @@ pub struct AccountResponse {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub created_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -15886,6 +15921,7 @@ pub members: Vec<GroupMembersCreateRequest>,
 pub struct GroupMembersCreateResponse {
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub added_at: Option<chrono::DateTime<chrono::Utc>>,
 #[serde(default,
@@ -16463,6 +16499,7 @@ pub duration: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub end_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -16494,6 +16531,7 @@ pub participants_count: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -17117,6 +17155,7 @@ pub duration: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub end_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -17140,6 +17179,7 @@ pub participants_count: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -17254,6 +17294,7 @@ pub answer: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -17323,6 +17364,7 @@ pub questions: Vec<ReportMeetingPollsResponseQuestions>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -17365,6 +17407,7 @@ pub duration: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub end_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -17388,6 +17431,7 @@ pub participants_count: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -17536,6 +17580,7 @@ pub questions: Vec<ReportWebinarPollsResponseQuestions>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -17619,6 +17664,7 @@ pub questions: Vec<ReportWebinarQaResponseQuestions>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -17840,6 +17886,7 @@ pub struct AddRoleMembersResponse {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub add_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -18185,6 +18232,7 @@ pub struct Users {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub created_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -18269,6 +18317,7 @@ pub last_client_version: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub last_login_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -18605,6 +18654,7 @@ pub token: String,
 pub struct UserAssistantCreateResponse {
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub add_at: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -18661,7 +18711,7 @@ impl UserSettingsOption {
 /// 
 /// - `UserSettings`
 /// - `Domains`
-/// - `UserSettingsResponse`
+/// - `MeetingSecuritySettings`
 /// 
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 /// 
@@ -18669,8 +18719,8 @@ impl UserSettingsOption {
 #[serde(untagged)]
 pub enum UserSettingsResponseOneOf {
 Domains(Domains),
+MeetingSecuritySettings(MeetingSecuritySettings),
 UserSettings(UserSettings),
-UserSettingsResponse(UserSettingsResponse),
 }
 
 impl UserSettingsResponseOneOf {
@@ -18681,15 +18731,15 @@ pub fn domains(&self) -> Option<&Domains> {
                             None
                         }
 
-pub fn user_settings(&self) -> Option<&UserSettings> {
-                            if let UserSettingsResponseOneOf::UserSettings(ref_) = self {
+pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+                            if let UserSettingsResponseOneOf::MeetingSecuritySettings(ref_) = self {
                                 return Some(ref_);
                             }
                             None
                         }
 
-pub fn user_settings_response(&self) -> Option<&UserSettingsResponse> {
-                            if let UserSettingsResponseOneOf::UserSettingsResponse(ref_) = self {
+pub fn user_settings(&self) -> Option<&UserSettings> {
+                            if let UserSettingsResponseOneOf::UserSettings(ref_) = self {
                                 return Some(ref_);
                             }
                             None
@@ -18703,15 +18753,15 @@ impl From<Domains> for UserSettingsResponseOneOf {
                                     }
                             }
 
-impl From<UserSettings> for UserSettingsResponseOneOf {
-                                    fn from(f: UserSettings) -> Self {
-                                        UserSettingsResponseOneOf::UserSettings(f)
+impl From<MeetingSecuritySettings> for UserSettingsResponseOneOf {
+                                    fn from(f: MeetingSecuritySettings) -> Self {
+                                        UserSettingsResponseOneOf::MeetingSecuritySettings(f)
                                     }
                             }
 
-impl From<UserSettingsResponse> for UserSettingsResponseOneOf {
-                                    fn from(f: UserSettingsResponse) -> Self {
-                                        UserSettingsResponseOneOf::UserSettingsResponse(f)
+impl From<UserSettings> for UserSettingsResponseOneOf {
+                                    fn from(f: UserSettings) -> Self {
+                                        UserSettingsResponseOneOf::UserSettings(f)
                                     }
                             }
 
@@ -18721,15 +18771,15 @@ impl From<UserSettingsResponseOneOf> for Domains {
                                     }
                             }
 
-impl From<UserSettingsResponseOneOf> for UserSettings {
+impl From<UserSettingsResponseOneOf> for MeetingSecuritySettings {
                                     fn from(f: UserSettingsResponseOneOf) -> Self {
-                                        f.user_settings().unwrap().clone()
+                                        f.meeting_security_settings().unwrap().clone()
                                     }
                             }
 
-impl From<UserSettingsResponseOneOf> for UserSettingsResponse {
+impl From<UserSettingsResponseOneOf> for UserSettings {
                                     fn from(f: UserSettingsResponseOneOf) -> Self {
-                                        f.user_settings_response().unwrap().clone()
+                                        f.user_settings().unwrap().clone()
                                     }
                             }
 
@@ -18737,7 +18787,7 @@ impl From<UserSettingsResponseOneOf> for UserSettingsResponse {
 /// 
 /// - `UserSettingsUpdate`
 /// - `Domains`
-/// - `UserSettingsResponse`
+/// - `MeetingSecuritySettings`
 /// 
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 /// 
@@ -18745,7 +18795,7 @@ impl From<UserSettingsResponseOneOf> for UserSettingsResponse {
 #[serde(untagged)]
 pub enum UserSettingsUpdateRequestOneOf {
 Domains(Domains),
-UserSettingsResponse(UserSettingsResponse),
+MeetingSecuritySettings(MeetingSecuritySettings),
 UserSettingsUpdate(UserSettingsUpdate),
 }
 
@@ -18757,8 +18807,8 @@ pub fn domains(&self) -> Option<&Domains> {
                             None
                         }
 
-pub fn user_settings_response(&self) -> Option<&UserSettingsResponse> {
-                            if let UserSettingsUpdateRequestOneOf::UserSettingsResponse(ref_) = self {
+pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+                            if let UserSettingsUpdateRequestOneOf::MeetingSecuritySettings(ref_) = self {
                                 return Some(ref_);
                             }
                             None
@@ -18779,9 +18829,9 @@ impl From<Domains> for UserSettingsUpdateRequestOneOf {
                                     }
                             }
 
-impl From<UserSettingsResponse> for UserSettingsUpdateRequestOneOf {
-                                    fn from(f: UserSettingsResponse) -> Self {
-                                        UserSettingsUpdateRequestOneOf::UserSettingsResponse(f)
+impl From<MeetingSecuritySettings> for UserSettingsUpdateRequestOneOf {
+                                    fn from(f: MeetingSecuritySettings) -> Self {
+                                        UserSettingsUpdateRequestOneOf::MeetingSecuritySettings(f)
                                     }
                             }
 
@@ -18797,9 +18847,9 @@ impl From<UserSettingsUpdateRequestOneOf> for Domains {
                                     }
                             }
 
-impl From<UserSettingsUpdateRequestOneOf> for UserSettingsResponse {
+impl From<UserSettingsUpdateRequestOneOf> for MeetingSecuritySettings {
                                     fn from(f: UserSettingsUpdateRequestOneOf) -> Self {
-                                        f.user_settings_response().unwrap().clone()
+                                        f.meeting_security_settings().unwrap().clone()
                                     }
                             }
 
@@ -19258,7 +19308,7 @@ pub tsp_bridge: Option<TspBridge>,
 */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum UserUpdateRequestDialInNumbersType {
+pub enum TspAccountDialInNumbersTypeData {
 #[serde(rename = "media_link")]
 MediaLink,
 #[serde(rename = "toll")]
@@ -19270,33 +19320,33 @@ Noop,
 FallthroughString(String),
 }
 
-impl std::fmt::Display for UserUpdateRequestDialInNumbersType {
+impl std::fmt::Display for TspAccountDialInNumbersTypeData {
 fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
 match &*self {
-UserUpdateRequestDialInNumbersType::MediaLink => "media_link",
-UserUpdateRequestDialInNumbersType::Toll => "toll",
-UserUpdateRequestDialInNumbersType::Tollfree => "tollfree",
-UserUpdateRequestDialInNumbersType::Noop => "",
-UserUpdateRequestDialInNumbersType::FallthroughString(s) => s,
+TspAccountDialInNumbersTypeData::MediaLink => "media_link",
+TspAccountDialInNumbersTypeData::Toll => "toll",
+TspAccountDialInNumbersTypeData::Tollfree => "tollfree",
+TspAccountDialInNumbersTypeData::Noop => "",
+TspAccountDialInNumbersTypeData::FallthroughString(s) => s,
 }
 .fmt(f)
 }
 }
 
-impl Default for UserUpdateRequestDialInNumbersType {
-fn default() -> UserUpdateRequestDialInNumbersType {
-UserUpdateRequestDialInNumbersType::Noop
+impl Default for TspAccountDialInNumbersTypeData {
+fn default() -> TspAccountDialInNumbersTypeData {
+TspAccountDialInNumbersTypeData::Noop
 }
 }
-impl UserUpdateRequestDialInNumbersType {
+impl TspAccountDialInNumbersTypeData {
             pub fn is_noop(&self) -> bool {
-                matches!(self, UserUpdateRequestDialInNumbersType::Noop)
+                matches!(self, TspAccountDialInNumbersTypeData::Noop)
             }
     }
 
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserUpdateRequestDialInNumbers {
+pub struct TspAccountDialInNumbersData {
 /**
 * Country code.
 */
@@ -19327,12 +19377,12 @@ pub number: String,
 #[serde(default,
 skip_serializing_if = "Option::is_none",
 rename = "type")]
-pub type_: Option<UserUpdateRequestDialInNumbersType>,
+pub type_: Option<TspAccountDialInNumbersTypeData>,
 }
 
 /// TSP account.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserUpdateRequest {
+pub struct TspAccountData {
 /**
 * Conference code: numeric value, length is less than 16.
 */
@@ -19347,7 +19397,7 @@ pub conference_code: String,
 #[serde(default,
 skip_serializing_if = "Vec::is_empty",
 )]
-pub dial_in_numbers: Vec<UserUpdateRequestDialInNumbers>,
+pub dial_in_numbers: Vec<TspAccountDialInNumbersData>,
 /**
 * Leader PIN: numeric value, length is less than 16.
 */
@@ -19664,6 +19714,7 @@ pub id: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
@@ -19699,6 +19750,7 @@ pub registrant_id: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -20068,6 +20120,7 @@ pub robot_jid: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub sent_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -20195,6 +20248,7 @@ pub struct ListimmessagesResponseMessages {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -20238,6 +20292,7 @@ pub struct ListimmessagesResponse {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -20776,7 +20831,7 @@ pub name: String,
 
 /// Phone User Setting
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserSettingsResponseData {
+pub struct UserSettingsResponse {
 /**
 * Phone User Setting
 */
@@ -24229,6 +24284,7 @@ pub struct AccountCallLogsResponse {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub answer_start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -24813,6 +24869,7 @@ pub caller_number_type: Option<serde_json::Value>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -24843,6 +24900,7 @@ pub duration: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub end_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -25209,6 +25267,7 @@ pub ip_address: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -26059,7 +26118,7 @@ pub telephony: Option<GetGroupSettingsResponseTelephony>,
 /// 
 /// - `GetGroupSettingsResponse`
 /// - `Domains`
-/// - `UserSettingsResponse`
+/// - `MeetingSecuritySettings`
 /// 
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 /// 
@@ -26068,7 +26127,7 @@ pub telephony: Option<GetGroupSettingsResponseTelephony>,
 pub enum GetGroupSettingsResponseOneOf {
 Domains(Domains),
 GetGroupSettingsResponse(GetGroupSettingsResponse),
-UserSettingsResponse(UserSettingsResponse),
+MeetingSecuritySettings(MeetingSecuritySettings),
 }
 
 impl GetGroupSettingsResponseOneOf {
@@ -26086,8 +26145,8 @@ pub fn get_group_settings_response(&self) -> Option<&GetGroupSettingsResponse> {
                             None
                         }
 
-pub fn user_settings_response(&self) -> Option<&UserSettingsResponse> {
-                            if let GetGroupSettingsResponseOneOf::UserSettingsResponse(ref_) = self {
+pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+                            if let GetGroupSettingsResponseOneOf::MeetingSecuritySettings(ref_) = self {
                                 return Some(ref_);
                             }
                             None
@@ -26107,9 +26166,9 @@ impl From<GetGroupSettingsResponse> for GetGroupSettingsResponseOneOf {
                                     }
                             }
 
-impl From<UserSettingsResponse> for GetGroupSettingsResponseOneOf {
-                                    fn from(f: UserSettingsResponse) -> Self {
-                                        GetGroupSettingsResponseOneOf::UserSettingsResponse(f)
+impl From<MeetingSecuritySettings> for GetGroupSettingsResponseOneOf {
+                                    fn from(f: MeetingSecuritySettings) -> Self {
+                                        GetGroupSettingsResponseOneOf::MeetingSecuritySettings(f)
                                     }
                             }
 
@@ -26125,9 +26184,9 @@ impl From<GetGroupSettingsResponseOneOf> for GetGroupSettingsResponse {
                                     }
                             }
 
-impl From<GetGroupSettingsResponseOneOf> for UserSettingsResponse {
+impl From<GetGroupSettingsResponseOneOf> for MeetingSecuritySettings {
                                     fn from(f: GetGroupSettingsResponseOneOf) -> Self {
-                                        f.user_settings_response().unwrap().clone()
+                                        f.meeting_security_settings().unwrap().clone()
                                     }
                             }
 
@@ -26728,7 +26787,7 @@ pub telephony: Option<UpdateGroupSettingsRequestTelephony>,
 /// 
 /// - `UpdateGroupSettingsRequest`
 /// - `Domains`
-/// - `UserSettingsResponse`
+/// - `MeetingSecuritySettings`
 /// 
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 /// 
@@ -26736,8 +26795,8 @@ pub telephony: Option<UpdateGroupSettingsRequestTelephony>,
 #[serde(untagged)]
 pub enum UpdateGroupSettingsRequestOneOf {
 Domains(Domains),
+MeetingSecuritySettings(MeetingSecuritySettings),
 UpdateGroupSettingsRequest(UpdateGroupSettingsRequest),
-UserSettingsResponse(UserSettingsResponse),
 }
 
 impl UpdateGroupSettingsRequestOneOf {
@@ -26748,15 +26807,15 @@ pub fn domains(&self) -> Option<&Domains> {
                             None
                         }
 
-pub fn update_group_settings_request(&self) -> Option<&UpdateGroupSettingsRequest> {
-                            if let UpdateGroupSettingsRequestOneOf::UpdateGroupSettingsRequest(ref_) = self {
+pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+                            if let UpdateGroupSettingsRequestOneOf::MeetingSecuritySettings(ref_) = self {
                                 return Some(ref_);
                             }
                             None
                         }
 
-pub fn user_settings_response(&self) -> Option<&UserSettingsResponse> {
-                            if let UpdateGroupSettingsRequestOneOf::UserSettingsResponse(ref_) = self {
+pub fn update_group_settings_request(&self) -> Option<&UpdateGroupSettingsRequest> {
+                            if let UpdateGroupSettingsRequestOneOf::UpdateGroupSettingsRequest(ref_) = self {
                                 return Some(ref_);
                             }
                             None
@@ -26770,15 +26829,15 @@ impl From<Domains> for UpdateGroupSettingsRequestOneOf {
                                     }
                             }
 
-impl From<UpdateGroupSettingsRequest> for UpdateGroupSettingsRequestOneOf {
-                                    fn from(f: UpdateGroupSettingsRequest) -> Self {
-                                        UpdateGroupSettingsRequestOneOf::UpdateGroupSettingsRequest(f)
+impl From<MeetingSecuritySettings> for UpdateGroupSettingsRequestOneOf {
+                                    fn from(f: MeetingSecuritySettings) -> Self {
+                                        UpdateGroupSettingsRequestOneOf::MeetingSecuritySettings(f)
                                     }
                             }
 
-impl From<UserSettingsResponse> for UpdateGroupSettingsRequestOneOf {
-                                    fn from(f: UserSettingsResponse) -> Self {
-                                        UpdateGroupSettingsRequestOneOf::UserSettingsResponse(f)
+impl From<UpdateGroupSettingsRequest> for UpdateGroupSettingsRequestOneOf {
+                                    fn from(f: UpdateGroupSettingsRequest) -> Self {
+                                        UpdateGroupSettingsRequestOneOf::UpdateGroupSettingsRequest(f)
                                     }
                             }
 
@@ -26788,15 +26847,15 @@ impl From<UpdateGroupSettingsRequestOneOf> for Domains {
                                     }
                             }
 
-impl From<UpdateGroupSettingsRequestOneOf> for UpdateGroupSettingsRequest {
+impl From<UpdateGroupSettingsRequestOneOf> for MeetingSecuritySettings {
                                     fn from(f: UpdateGroupSettingsRequestOneOf) -> Self {
-                                        f.update_group_settings_request().unwrap().clone()
+                                        f.meeting_security_settings().unwrap().clone()
                                     }
                             }
 
-impl From<UpdateGroupSettingsRequestOneOf> for UserSettingsResponse {
+impl From<UpdateGroupSettingsRequestOneOf> for UpdateGroupSettingsRequest {
                                     fn from(f: UpdateGroupSettingsRequestOneOf) -> Self {
-                                        f.user_settings_response().unwrap().clone()
+                                        f.update_group_settings_request().unwrap().clone()
                                     }
                             }
 
@@ -27307,7 +27366,7 @@ pub telephony: Option<GetGroupLockSettingsResponseTelephony>,
 /// One of the following types:
 /// 
 /// - `GetGroupLockSettingsResponse`
-/// - `UserSettingsResponse`
+/// - `MeetingSecuritySettings`
 /// 
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 /// 
@@ -27315,7 +27374,7 @@ pub telephony: Option<GetGroupLockSettingsResponseTelephony>,
 #[serde(untagged)]
 pub enum GetGroupLockSettingsResponseOneOf {
 GetGroupLockSettingsResponse(GetGroupLockSettingsResponse),
-UserSettingsResponse(UserSettingsResponse),
+MeetingSecuritySettings(MeetingSecuritySettings),
 }
 
 impl GetGroupLockSettingsResponseOneOf {
@@ -27326,8 +27385,8 @@ pub fn get_group_lock_settings_response(&self) -> Option<&GetGroupLockSettingsRe
                             None
                         }
 
-pub fn user_settings_response(&self) -> Option<&UserSettingsResponse> {
-                            if let GetGroupLockSettingsResponseOneOf::UserSettingsResponse(ref_) = self {
+pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+                            if let GetGroupLockSettingsResponseOneOf::MeetingSecuritySettings(ref_) = self {
                                 return Some(ref_);
                             }
                             None
@@ -27341,9 +27400,9 @@ impl From<GetGroupLockSettingsResponse> for GetGroupLockSettingsResponseOneOf {
                                     }
                             }
 
-impl From<UserSettingsResponse> for GetGroupLockSettingsResponseOneOf {
-                                    fn from(f: UserSettingsResponse) -> Self {
-                                        GetGroupLockSettingsResponseOneOf::UserSettingsResponse(f)
+impl From<MeetingSecuritySettings> for GetGroupLockSettingsResponseOneOf {
+                                    fn from(f: MeetingSecuritySettings) -> Self {
+                                        GetGroupLockSettingsResponseOneOf::MeetingSecuritySettings(f)
                                     }
                             }
 
@@ -27353,9 +27412,9 @@ impl From<GetGroupLockSettingsResponseOneOf> for GetGroupLockSettingsResponse {
                                     }
                             }
 
-impl From<GetGroupLockSettingsResponseOneOf> for UserSettingsResponse {
+impl From<GetGroupLockSettingsResponseOneOf> for MeetingSecuritySettings {
                                     fn from(f: GetGroupLockSettingsResponseOneOf) -> Self {
-                                        f.user_settings_response().unwrap().clone()
+                                        f.meeting_security_settings().unwrap().clone()
                                     }
                             }
 
@@ -27814,7 +27873,7 @@ pub telephony: Option<GetGroupLockSettingsResponseTelephony>,
 /// One of the following types:
 /// 
 /// - `GroupLockedSettingsRequest`
-/// - `UserSettingsResponse`
+/// - `MeetingSecuritySettings`
 /// 
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 /// 
@@ -27822,7 +27881,7 @@ pub telephony: Option<GetGroupLockSettingsResponseTelephony>,
 #[serde(untagged)]
 pub enum GroupLockedSettingsRequestOneOf {
 GroupLockedSettingsRequest(GroupLockedSettingsRequest),
-UserSettingsResponse(UserSettingsResponse),
+MeetingSecuritySettings(MeetingSecuritySettings),
 }
 
 impl GroupLockedSettingsRequestOneOf {
@@ -27833,8 +27892,8 @@ pub fn group_locked_settings_request(&self) -> Option<&GroupLockedSettingsReques
                             None
                         }
 
-pub fn user_settings_response(&self) -> Option<&UserSettingsResponse> {
-                            if let GroupLockedSettingsRequestOneOf::UserSettingsResponse(ref_) = self {
+pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+                            if let GroupLockedSettingsRequestOneOf::MeetingSecuritySettings(ref_) = self {
                                 return Some(ref_);
                             }
                             None
@@ -27848,9 +27907,9 @@ impl From<GroupLockedSettingsRequest> for GroupLockedSettingsRequestOneOf {
                                     }
                             }
 
-impl From<UserSettingsResponse> for GroupLockedSettingsRequestOneOf {
-                                    fn from(f: UserSettingsResponse) -> Self {
-                                        GroupLockedSettingsRequestOneOf::UserSettingsResponse(f)
+impl From<MeetingSecuritySettings> for GroupLockedSettingsRequestOneOf {
+                                    fn from(f: MeetingSecuritySettings) -> Self {
+                                        GroupLockedSettingsRequestOneOf::MeetingSecuritySettings(f)
                                     }
                             }
 
@@ -27860,9 +27919,9 @@ impl From<GroupLockedSettingsRequestOneOf> for GroupLockedSettingsRequest {
                                     }
                             }
 
-impl From<GroupLockedSettingsRequestOneOf> for UserSettingsResponse {
+impl From<GroupLockedSettingsRequestOneOf> for MeetingSecuritySettings {
                                     fn from(f: GroupLockedSettingsRequestOneOf) -> Self {
-                                        f.user_settings_response().unwrap().clone()
+                                        f.meeting_security_settings().unwrap().clone()
                                     }
                             }
 
@@ -28611,6 +28670,7 @@ pub recording_files: Vec<RecordingFiles>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -28646,6 +28706,7 @@ pub struct GetAccountCloudRecordingResponse {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub from: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -28676,6 +28737,7 @@ pub page_size: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub to: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -29607,6 +29669,7 @@ pub answer: String,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -29670,6 +29733,7 @@ pub questions: Vec<ListPastMeetingPollsResponseQuestions>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -29745,6 +29809,7 @@ pub questions: Vec<ListPastMeetingPollsResponseQuestions>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -29820,6 +29885,7 @@ pub questions: Vec<ListPastWebinarQaResponseQuestions>,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -35270,6 +35336,7 @@ pub struct Sending {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 #[serde(default,
@@ -35339,6 +35406,7 @@ pub struct Receiving {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 #[serde(default,
@@ -35443,6 +35511,7 @@ pub struct GetCallQoSResponseCalleeQosSendingData {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 #[serde(default,
@@ -35458,6 +35527,7 @@ pub struct GetCallQoSResponseCalleeQosReceiving {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 #[serde(default,
@@ -36023,6 +36093,7 @@ pub struct ParticipantFeedbackResponseParticipants {
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub date_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
@@ -36780,6 +36851,7 @@ pub recording_count: i64,
 */
 #[serde(default,
 skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_time_format::deserialize",
 )]
 pub start_time: Option<chrono::DateTime<chrono::Utc>>,
 /**
