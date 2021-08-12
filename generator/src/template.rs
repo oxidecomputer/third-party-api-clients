@@ -636,7 +636,7 @@ pub fn generate_docs_generic_token(
 //! );
 //! ```
 //!
-//! It is okay to pass empty values for token and `refresh_token`. In
+//! It is okay to pass empty values for `token` and `refresh_token`. In
 //! the initial state of the client, you will not know these values.
 //!
 //! To start off a fresh client and get a `token` and `refresh_token`, use the following.
