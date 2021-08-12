@@ -158,23 +158,32 @@ pub struct AccessToken {
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub access_token: String,
+    pub token_type: String,
+
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub token_type: String,
+    pub access_token: String,
     #[serde(default)]
     pub expires_in: i64,
-    #[serde(default, alias = "x_refresh_token_expires_in")]
-    pub refresh_token_expires_in: i64,
+
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub refresh_token: String,
+    #[serde(default, alias = "x_refresh_token_expires_in")]
+    pub refresh_token_expires_in: i64,
+
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub scope: String,
 }
 
 impl Client {

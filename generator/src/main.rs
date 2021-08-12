@@ -2059,7 +2059,7 @@ fn gen(
     // Print the client template.
     if proper_name == "GitHub" {
         a(crate::client::GITHUB_TEMPLATE);
-    } else if proper_name == "Gusto" || proper_name == "Ramp" {
+    } else {
         a(&crate::client::generate_client_generic_token(
             proper_name,
             token_endpoint,
@@ -2700,25 +2700,24 @@ rustdoc-args = ["--cfg", "docsrs"]
             /*
              * Generate our documentation for the library.
              */
-            let mut docs = String::new();
-            if proper_name == "GitHub" {
-                docs = template::generate_docs_github(
+            let docs = if proper_name == "GitHub" {
+                template::generate_docs_github(
                     &api,
                     &to_snake_case(&name),
                     &version,
                     &proper_name,
                     host.trim_start_matches("https://"),
                     &spec_link,
-                );
+                )
             } else {
-                docs = template::generate_docs_generic_token(
+                template::generate_docs_generic_token(
                     &api,
                     &to_snake_case(&name),
                     &version,
                     &proper_name,
                     &spec_link,
-                );
-            }
+                )
+            };
             let mut readme = root.clone();
             readme.push("README.md");
             save(

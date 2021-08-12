@@ -1,4 +1,3 @@
-
 use std::{fmt, str::FromStr};
 
 use serde::de::{self, Visitor};
@@ -30,14 +29,10 @@ pub mod date_time_format {
                     // Try both ways to parse the date.
                     match Utc.datetime_from_str(&s, FORMAT) {
                         Ok(r) => Ok(Some(r)),
-                        Err(_) => {
-                            match Utc.datetime_from_str(&s, "%+") {
-                                Ok(d) => Ok(Some(d)),
-                                Err(e) => {
-                                   Err(serde::de::Error::custom(e.to_string()))
-                                }
-                            }
-                        }
+                        Err(_) => match Utc.datetime_from_str(&s, "%+") {
+                            Ok(d) => Ok(Some(d)),
+                            Err(e) => Err(serde::de::Error::custom(e.to_string())),
+                        },
                     }
                 }
             }

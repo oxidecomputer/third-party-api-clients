@@ -1,15 +1,107 @@
-
+//! A fully generated, opinionated API client library for Zoom.
+//!
+//! ## API Details
+//!
+//! The Zoom API allows developers to access information from Zoom. You can use this API to build private services or public applications on the [Zoom App Marketplace](http://marketplace.zoom.us). To learn how to get your credentials and create private/public applications, read our [Authorization Guide](https://marketplace.zoom.us/docs/guides/authorization/credentials).
+//! All endpoints are available via `https` and are located at `api.zoom.us/v2/`.
+//!
+//! For instance you can list all users on an account via `https://api.zoom.us/v2/users/`.
+//!
+//! [API Terms of Service](https://zoom.us/docs/en-us/zoom_api_license_and_tou.html)
+//!
+//! ### Contact
+//!
+//!
+//! | name | url | email |
+//! |----|----|----|
+//! | Zoom Developers | https://developer.zoom.us/ | developersupport@zoom.us |
+//!
+//! ### License
+//!
+//!
+//! | name | url |
+//! |----|----|
+//! | MIT for OAS 2.0 | https://opensource.org/licenses/MIT |
+//!
+//!
+//! ## Client Details
+//!
+//! This client is generated from the [Zoom OpenAPI
+//! specs](https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json) based on OpenAPI spec version `2.0.0`. This way it will remain
+//! up to date as features are added. The documentation for the crate is generated
+//! along with the code to make this library easy to use.
+//! //! To install the library, add the following to your `Cargo.toml` file.
+//!
+//! ```toml
+//! [dependencies]
+//! zoom_api = "0.2.0"
+//! ```
+//!
+//! ## Basic example
+//!
+//! Typical use will require intializing a `Client`. This requires
+//! a user agent string and set of credentials.
+//!
+//! ```
+//! use zoom_api::Client;
+//!
+//! let zoom = Client::new(
+//!     String::from("client-id"),
+//!     String::from("client-secret"),
+//!     String::from("redirect-uri"),
+//!     String::from("token"),
+//!     String::from("refresh-token"),
+//! );
+//! ```
+//!
+//! Alternatively, the library can search for most of the variables required for
+//! the client in the environment:
+//!
+//! - `ZOOM_CLIENT_ID`
+//! - `ZOOM_CLIENT_SECRET`
+//! - `ZOOM_REDIRECT_URI`
+//!
+//! And then you can create a client from the environment.
+//!
+//! ```
+//! use zoom_api::Client;
+//!
+//! let zoom = Client::new_from_env(String::from("token"), String::from("refresh-token"));
+//! ```
+//!
+//! It is okay to pass empty values for `token` and `refresh_token`. In
+//! the initial state of the client, you will not know these values.
+//!
+//! To start off a fresh client and get a `token` and `refresh_token`, use the following.
+//!
+//! ```
+//! use zoom_api::Client;
+//!
+//! async fn do_call() {
+//!     let mut zoom = Client::new_from_env("", "");
+//!
+//!     // Get the URL to request consent from the user.
+//!     // You can optionally pass in scopes. If none are provided, then the
+//!     // resulting URL will not have any scopes.
+//!     let user_consent_url = zoom.user_consent_url(&["some-scope".to_string()]);
+//!
+//!     // In your redirect URL capture the code sent and our state.
+//!     // Send it along to the request for the token.
+//!     let code = "thing-from-redirect-url";
+//!     let state = "state-from-redirect-url";
+//!     let mut access_token = zoom.get_access_token(code, state).await.unwrap();
+//!
+//!     // You can additionally refresh the access token with the following.
+//!     // You must have a refresh token to be able to call this function.
+//!     access_token = zoom.refresh_access_token().await.unwrap();
+//! }
+//! ```
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-#[cfg(test)]
-mod tests;
-pub mod types;
-#[doc(hidden)]
-pub mod utils;
 /// Account operations.
 pub mod accounts;
 pub mod archiving;
@@ -20,13 +112,14 @@ pub mod chat_channels_account_level;
 /// Chat Messages operations.
 pub mod chat_messages;
 pub mod chatbot_messages;
-/// Contacts operations.
-pub mod contacts;
 /// Cloud Recording operations.
 pub mod cloud_recording;
+pub mod common_area_phones;
+/// Contacts operations.
+pub mod contacts;
 /// Dashboard operations.
 pub mod dashboards;
-pub mod data_compliance;
+pub mod deprecated_api_endpoints;
 /// H323 Device operations.
 pub mod devices;
 /// Group operations.
@@ -47,38 +140,35 @@ pub mod phone_devices;
 pub mod phone_reports;
 pub mod phone_shared_line_groups;
 pub mod phone_site;
-pub mod common_area_phones;
 /// Report operations.
 pub mod reports;
-/// User Roles.
-pub mod roles;
 /// ZoomRooms operations.
 pub mod rooms;
 pub mod rooms_account;
+pub mod rooms_devices;
 pub mod rooms_location;
+pub mod sip_connected_audio;
 pub mod sip_phone;
+#[cfg(test)]
+mod tests;
 /// Tracking Field operations.
 pub mod tracking_field;
 /// TSP operations.
 pub mod tsp;
+pub mod types;
 /// User operations.
 pub mod users;
-/// Webhook operations.
-pub mod webhooks;
+#[doc(hidden)]
+pub mod utils;
 /// Webinar operations.
 pub mod webinars;
-/// APIs available to the master account for a Zoom account.
-pub mod master_account_ap_is;
-pub mod rooms_devices;
-pub mod sip_connected_audio;
-pub mod deprecated_api_endpoints;
 
 use anyhow::{anyhow, Error, Result};
 
 pub const DEFAULT_HOST: &str = "https://api.zoom.us/v2";
 
 mod progenitor_support {
-    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
+    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')
@@ -97,211 +187,585 @@ mod progenitor_support {
     }
 }
 
+use std::env;
 
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
-/// Account operations.
-               pub fn accounts(&self) -> accounts::Accounts {
-                    accounts::Accounts::new(self.clone())
-               }
+const TOKEN_ENDPOINT: &str = "https://zoom.us/oauth/token";
+const USER_CONSENT_ENDPOINT: &str = "https://zoom.us/oauth/authorize";
 
-/// Return a reference to an interface that provides access to Archiving operations.
-               pub fn archiving(&self) -> archiving::Archiving {
-                    archiving::Archiving::new(self.clone())
-               }
+/// Entrypoint for interacting with the API client.
+#[derive(Clone)]
+pub struct Client {
+    token: String,
+    // This will expire within a certain amount of time as determined by the
+    // expiration date passed back in the initial request.
+    refresh_token: String,
+    client_id: String,
+    client_secret: String,
+    redirect_uri: String,
 
-/// Billing operations.
-               pub fn billing(&self) -> billing::Billing {
-                    billing::Billing::new(self.clone())
-               }
+    client: reqwest::Client,
+}
 
-/// Return a reference to an interface that provides access to Chat Channels operations.
-               pub fn chat_channels(&self) -> chat_channels::ChatChannels {
-                    chat_channels::ChatChannels::new(self.clone())
-               }
+#[derive(Debug, JsonSchema, Clone, Default, Serialize, Deserialize)]
+pub struct AccessToken {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub token_type: String,
 
-/// Return a reference to an interface that provides access to Chat Channels (Account-level) operations.
-               pub fn chat_channels_account_level(&self) -> chat_channels_account_level::ChatChannelsAccountLevel {
-                    chat_channels_account_level::ChatChannelsAccountLevel::new(self.clone())
-               }
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub access_token: String,
+    #[serde(default)]
+    pub expires_in: i64,
 
-/// Chat Messages operations.
-               pub fn chat_messages(&self) -> chat_messages::ChatMessages {
-                    chat_messages::ChatMessages::new(self.clone())
-               }
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub refresh_token: String,
+    #[serde(default, alias = "x_refresh_token_expires_in")]
+    pub refresh_token_expires_in: i64,
 
-/// Return a reference to an interface that provides access to Chatbot Messages operations.
-               pub fn chatbot_messages(&self) -> chatbot_messages::ChatbotMessages {
-                    chatbot_messages::ChatbotMessages::new(self.clone())
-               }
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub scope: String,
+}
 
-/// Contacts operations.
-               pub fn contacts(&self) -> contacts::Contacts {
-                    contacts::Contacts::new(self.clone())
-               }
+impl Client {
+    /// Create a new Client struct. It takes a type that can convert into
+    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
+    /// given a valid API key your requests will work.
+    pub fn new<I, K, R, T, Q>(
+        client_id: I,
+        client_secret: K,
+        redirect_uri: R,
+        token: T,
+        refresh_token: Q,
+    ) -> Self
+    where
+        I: ToString,
+        K: ToString,
+        R: ToString,
+        T: ToString,
+        Q: ToString,
+    {
+        let client = reqwest::Client::builder().build();
+        match client {
+            Ok(c) => {
+                // We do not refresh the access token here since we leave that up to the
+                // user to do so they can re-save it to their database.
+                // TODO: But in the future we should save the expires in date and refresh it
+                // if it needs to be refreshed.
+                //
+                Client {
+                    client_id: client_id.to_string(),
+                    client_secret: client_secret.to_string(),
+                    redirect_uri: redirect_uri.to_string(),
+                    token: token.to_string(),
+                    refresh_token: refresh_token.to_string(),
 
-/// Cloud Recording operations.
-               pub fn cloud_recording(&self) -> cloud_recording::CloudRecording {
-                    cloud_recording::CloudRecording::new(self.clone())
-               }
+                    client: c,
+                }
+            }
+            Err(e) => panic!("creating reqwest client failed: {:?}", e),
+        }
+    }
 
-/// Dashboard operations.
-               pub fn dashboards(&self) -> dashboards::Dashboards {
-                    dashboards::Dashboards::new(self.clone())
-               }
+    /// Create a new Client struct from environment variables. It
+    /// takes a type that can convert into
+    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
+    /// given a valid API key and your requests will work.
+    /// We pass in the token and refresh token to the client so if you are storing
+    /// it in a database, you can get it first.
+    pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
+    where
+        T: ToString,
+        R: ToString,
+    {
+        let client_id = env::var("ZOOM_CLIENT_ID").unwrap();
+        let client_secret = env::var("ZOOM_CLIENT_SECRET").unwrap();
+        let redirect_uri = env::var("ZOOM_REDIRECT_URI").unwrap();
 
-/// Return a reference to an interface that provides access to Data Compliance operations.
-               pub fn data_compliance(&self) -> data_compliance::DataCompliance {
-                    data_compliance::DataCompliance::new(self.clone())
-               }
+        Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
+    }
 
-/// H323 Device operations.
-               pub fn devices(&self) -> devices::Devices {
-                    devices::Devices::new(self.clone())
-               }
+    async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
+        let parsed_url = uri.parse::<reqwest::Url>();
 
-/// Group operations.
-               pub fn groups(&self) -> groups::Groups {
-                    groups::Groups::new(self.clone())
-               }
+        let auth = format!("Bearer {}", self.token);
+        parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+    }
 
-/// IM Chat operations.
-               pub fn im_chat(&self) -> im_chat::ImChat {
-                    im_chat::ImChat::new(self.clone())
-               }
+    async fn request<Out>(
+        &self,
+        method: reqwest::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<Out>
+    where
+        Out: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let (url, auth) = self.url_and_auth(uri).await?;
 
-/// IM Group operations.
-               pub fn im_groups(&self) -> im_groups::ImGroups {
-                    im_groups::ImGroups::new(self.clone())
-               }
+        let instance = <&Client>::clone(&self);
 
-/// Meeting operations.
-               pub fn meetings(&self) -> meetings::Meetings {
-                    meetings::Meetings::new(self.clone())
-               }
+        let mut req = instance.client.request(method, url);
 
-/// PAC operations.
-               pub fn pac(&self) -> pac::Pac {
-                    pac::Pac::new(self.clone())
-               }
+        // Set the default headers.
+        req = req.header(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
 
-/// Return a reference to an interface that provides access to Phone operations.
-               pub fn phone(&self) -> phone::Phone {
-                    phone::Phone::new(self.clone())
-               }
+        if let Some(auth_str) = auth {
+            req = req.header(http::header::AUTHORIZATION, &*auth_str);
+        }
 
-/// Return a reference to an interface that provides access to Phone Auto Receptionists operations.
-               pub fn phone_auto_receptionists(&self) -> phone_auto_receptionists::PhoneAutoReceptionists {
-                    phone_auto_receptionists::PhoneAutoReceptionists::new(self.clone())
-               }
+        if let Some(body) = body {
+            //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
+            req = req.body(body);
+        }
+        //println!("Request: {:?}", &req);
+        let response = req.send().await?;
 
-/// Return a reference to an interface that provides access to Phone Blocked List operations.
-               pub fn phone_blocked_list(&self) -> phone_blocked_list::PhoneBlockedList {
-                    phone_blocked_list::PhoneBlockedList::new(self.clone())
-               }
+        let status = response.status();
 
-/// Return a reference to an interface that provides access to Phone Call Queues operations.
-               pub fn phone_call_queues(&self) -> phone_call_queues::PhoneCallQueues {
-                    phone_call_queues::PhoneCallQueues::new(self.clone())
-               }
+        let response_body = response.bytes().await?;
 
-/// Return a reference to an interface that provides access to Phone Devices operations.
-               pub fn phone_devices(&self) -> phone_devices::PhoneDevices {
-                    phone_devices::PhoneDevices::new(self.clone())
-               }
+        if status.is_success() {
+            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            let parsed_response = if status == http::StatusCode::NO_CONTENT {
+                serde_json::from_str("null")
+            } else {
+                serde_json::from_slice::<Out>(&response_body)
+            };
+            parsed_response.map_err(Error::from)
+        } else {
+            /*println!("error status: {:?}, response payload: {}",
+                status,
+                String::from_utf8_lossy(&response_body),
+            );*/
 
-/// Return a reference to an interface that provides access to Phone Reports operations.
-               pub fn phone_reports(&self) -> phone_reports::PhoneReports {
-                    phone_reports::PhoneReports::new(self.clone())
-               }
+            let error = if response_body.is_empty() {
+                anyhow!("code: {}, empty response", status)
+            } else {
+                anyhow!(
+                    "code: {}, error: {:?}",
+                    status,
+                    String::from_utf8_lossy(&response_body),
+                )
+            };
 
-/// Return a reference to an interface that provides access to Phone Shared Line Groups operations.
-               pub fn phone_shared_line_groups(&self) -> phone_shared_line_groups::PhoneSharedLineGroups {
-                    phone_shared_line_groups::PhoneSharedLineGroups::new(self.clone())
-               }
+            Err(error)
+        }
+    }
 
-/// Return a reference to an interface that provides access to Phone Site operations.
-               pub fn phone_site(&self) -> phone_site::PhoneSite {
-                    phone_site::PhoneSite::new(self.clone())
-               }
+    async fn request_entity<D>(
+        &self,
+        method: http::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let r = self.request(method, uri, body).await?;
+        Ok(r)
+    }
 
-/// Return a reference to an interface that provides access to Common Area Phones operations.
-               pub fn common_area_phones(&self) -> common_area_phones::CommonAreaPhones {
-                    common_area_phones::CommonAreaPhones::new(self.clone())
-               }
+    /// Return a user consent url with an optional set of scopes.
+    /// If no scopes are provided, they will not be passed in the url.
+    pub fn user_consent_url(&self, scopes: &[String]) -> String {
+        let state = uuid::Uuid::new_v4();
 
-/// Report operations.
-               pub fn reports(&self) -> reports::Reports {
-                    reports::Reports::new(self.clone())
-               }
+        let url = format!(
+            "{}?client_id={}&response_type=code&redirect_uri={}&state={}",
+            USER_CONSENT_ENDPOINT, self.client_id, self.redirect_uri, state
+        );
 
-/// User Roles.
-               pub fn roles(&self) -> roles::Roles {
-                    roles::Roles::new(self.clone())
-               }
+        if scopes.is_empty() {
+            return url;
+        }
 
-/// ZoomRooms operations.
-               pub fn rooms(&self) -> rooms::Rooms {
-                    rooms::Rooms::new(self.clone())
-               }
+        // Add the scopes.
+        format!("{}&scope={}", url, scopes.join(" "))
+    }
 
-/// Return a reference to an interface that provides access to Rooms Account operations.
-               pub fn rooms_account(&self) -> rooms_account::RoomsAccount {
-                    rooms_account::RoomsAccount::new(self.clone())
-               }
+    /// Refresh an access token from a refresh token. Client must have a refresh token
+    /// for this to work.
+    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
+        if self.refresh_token.is_empty() {
+            anyhow!("refresh token cannot be empty");
+        }
 
-/// Return a reference to an interface that provides access to Rooms Location operations.
-               pub fn rooms_location(&self) -> rooms_location::RoomsLocation {
-                    rooms_location::RoomsLocation::new(self.clone())
-               }
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.append(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
 
-/// Return a reference to an interface that provides access to SIP Phone operations.
-               pub fn sip_phone(&self) -> sip_phone::SipPhone {
-                    sip_phone::SipPhone::new(self.clone())
-               }
+        let params = [
+            ("grant_type", "refresh_token"),
+            ("refresh_token", &self.refresh_token),
+            ("client_id", &self.client_id),
+            ("client_secret", &self.client_secret),
+            ("redirect_uri", &self.redirect_uri),
+        ];
+        let client = reqwest::Client::new();
+        let resp = client
+            .post(TOKEN_ENDPOINT)
+            .headers(headers)
+            .form(&params)
+            .basic_auth(&self.client_id, Some(&self.client_secret))
+            .send()
+            .await
+            .unwrap();
 
-/// Tracking Field operations.
-               pub fn tracking_field(&self) -> tracking_field::TrackingField {
-                    tracking_field::TrackingField::new(self.clone())
-               }
+        // Unwrap the response.
+        let t: AccessToken = resp.json().await.unwrap();
 
-/// TSP operations.
-               pub fn tsp(&self) -> tsp::Tsp {
-                    tsp::Tsp::new(self.clone())
-               }
+        self.token = t.access_token.to_string();
+        self.refresh_token = t.refresh_token.to_string();
 
-/// User operations.
-               pub fn users(&self) -> users::Users {
-                    users::Users::new(self.clone())
-               }
+        Ok(t)
+    }
 
-/// Webhook operations.
-               pub fn webhooks(&self) -> webhooks::Webhooks {
-                    webhooks::Webhooks::new(self.clone())
-               }
+    /// Get an access token from the code returned by the URL paramter sent to the
+    /// redirect URL.
+    pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<AccessToken> {
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.append(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
 
-/// Webinar operations.
-               pub fn webinars(&self) -> webinars::Webinars {
-                    webinars::Webinars::new(self.clone())
-               }
+        let params = [
+            ("grant_type", "authorization_code"),
+            ("code", code),
+            ("client_id", &self.client_id),
+            ("client_secret", &self.client_secret),
+            ("redirect_uri", &self.redirect_uri),
+            ("state", state),
+        ];
+        let client = reqwest::Client::new();
+        let resp = client
+            .post(TOKEN_ENDPOINT)
+            .headers(headers)
+            .form(&params)
+            .basic_auth(&self.client_id, Some(&self.client_secret))
+            .send()
+            .await
+            .unwrap();
 
-/// APIs available to the master account for a Zoom account.
-               pub fn master_account_ap_is(&self) -> master_account_ap_is::MasterAccountApIs {
-                    master_account_ap_is::MasterAccountApIs::new(self.clone())
-               }
+        // Unwrap the response.
+        let t: AccessToken = resp.json().await.unwrap();
 
-/// Return a reference to an interface that provides access to Rooms Devices operations.
-               pub fn rooms_devices(&self) -> rooms_devices::RoomsDevices {
-                    rooms_devices::RoomsDevices::new(self.clone())
-               }
+        self.token = t.access_token.to_string();
+        self.refresh_token = t.refresh_token.to_string();
 
-/// Return a reference to an interface that provides access to SIP Connected Audio operations.
-               pub fn sip_connected_audio(&self) -> sip_connected_audio::SipConnectedAudio {
-                    sip_connected_audio::SipConnectedAudio::new(self.clone())
-               }
+        Ok(t)
+    }
 
-/// Return a reference to an interface that provides access to Deprecated API Endpoints operations.
-               pub fn deprecated_api_endpoints(&self) -> deprecated_api_endpoints::DeprecatedApiEndpoints {
-                    deprecated_api_endpoints::DeprecatedApiEndpoints::new(self.clone())
-               }
+    #[allow(dead_code)]
+    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::GET,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
+    }
 
+    #[allow(dead_code)]
+    async fn get_all_pages<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        // TODO: implement this.
+        self.request_entity(
+            http::Method::GET,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
+    }
+
+    #[allow(dead_code)]
+    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::POST,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
+    }
+
+    #[allow(dead_code)]
+    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::PATCH,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
+    }
+
+    #[allow(dead_code)]
+    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::PUT,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
+    }
+
+    #[allow(dead_code)]
+    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::DELETE,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        )
+        .await
+    }
+
+    /// Account operations.
+    pub fn accounts(&self) -> accounts::Accounts {
+        accounts::Accounts::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Archiving operations.
+    pub fn archiving(&self) -> archiving::Archiving {
+        archiving::Archiving::new(self.clone())
+    }
+
+    /// Billing operations.
+    pub fn billing(&self) -> billing::Billing {
+        billing::Billing::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Chat Channels operations.
+    pub fn chat_channels(&self) -> chat_channels::ChatChannels {
+        chat_channels::ChatChannels::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Chat Channels (Account-level) operations.
+    pub fn chat_channels_account_level(
+        &self,
+    ) -> chat_channels_account_level::ChatChannelsAccountLevel {
+        chat_channels_account_level::ChatChannelsAccountLevel::new(self.clone())
+    }
+
+    /// Chat Messages operations.
+    pub fn chat_messages(&self) -> chat_messages::ChatMessages {
+        chat_messages::ChatMessages::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Chatbot Messages operations.
+    pub fn chatbot_messages(&self) -> chatbot_messages::ChatbotMessages {
+        chatbot_messages::ChatbotMessages::new(self.clone())
+    }
+
+    /// Contacts operations.
+    pub fn contacts(&self) -> contacts::Contacts {
+        contacts::Contacts::new(self.clone())
+    }
+
+    /// Cloud Recording operations.
+    pub fn cloud_recording(&self) -> cloud_recording::CloudRecording {
+        cloud_recording::CloudRecording::new(self.clone())
+    }
+
+    /// Dashboard operations.
+    pub fn dashboards(&self) -> dashboards::Dashboards {
+        dashboards::Dashboards::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Data Compliance operations.
+    pub fn data_compliance(&self) -> data_compliance::DataCompliance {
+        data_compliance::DataCompliance::new(self.clone())
+    }
+
+    /// H323 Device operations.
+    pub fn devices(&self) -> devices::Devices {
+        devices::Devices::new(self.clone())
+    }
+
+    /// Group operations.
+    pub fn groups(&self) -> groups::Groups {
+        groups::Groups::new(self.clone())
+    }
+
+    /// IM Chat operations.
+    pub fn im_chat(&self) -> im_chat::ImChat {
+        im_chat::ImChat::new(self.clone())
+    }
+
+    /// IM Group operations.
+    pub fn im_groups(&self) -> im_groups::ImGroups {
+        im_groups::ImGroups::new(self.clone())
+    }
+
+    /// Meeting operations.
+    pub fn meetings(&self) -> meetings::Meetings {
+        meetings::Meetings::new(self.clone())
+    }
+
+    /// PAC operations.
+    pub fn pac(&self) -> pac::Pac {
+        pac::Pac::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Phone operations.
+    pub fn phone(&self) -> phone::Phone {
+        phone::Phone::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Phone Auto Receptionists operations.
+    pub fn phone_auto_receptionists(&self) -> phone_auto_receptionists::PhoneAutoReceptionists {
+        phone_auto_receptionists::PhoneAutoReceptionists::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Phone Blocked List operations.
+    pub fn phone_blocked_list(&self) -> phone_blocked_list::PhoneBlockedList {
+        phone_blocked_list::PhoneBlockedList::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Phone Call Queues operations.
+    pub fn phone_call_queues(&self) -> phone_call_queues::PhoneCallQueues {
+        phone_call_queues::PhoneCallQueues::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Phone Devices operations.
+    pub fn phone_devices(&self) -> phone_devices::PhoneDevices {
+        phone_devices::PhoneDevices::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Phone Reports operations.
+    pub fn phone_reports(&self) -> phone_reports::PhoneReports {
+        phone_reports::PhoneReports::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Phone Shared Line Groups operations.
+    pub fn phone_shared_line_groups(&self) -> phone_shared_line_groups::PhoneSharedLineGroups {
+        phone_shared_line_groups::PhoneSharedLineGroups::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Phone Site operations.
+    pub fn phone_site(&self) -> phone_site::PhoneSite {
+        phone_site::PhoneSite::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Common Area Phones operations.
+    pub fn common_area_phones(&self) -> common_area_phones::CommonAreaPhones {
+        common_area_phones::CommonAreaPhones::new(self.clone())
+    }
+
+    /// Report operations.
+    pub fn reports(&self) -> reports::Reports {
+        reports::Reports::new(self.clone())
+    }
+
+    /// User Roles.
+    pub fn roles(&self) -> roles::Roles {
+        roles::Roles::new(self.clone())
+    }
+
+    /// ZoomRooms operations.
+    pub fn rooms(&self) -> rooms::Rooms {
+        rooms::Rooms::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Rooms Account operations.
+    pub fn rooms_account(&self) -> rooms_account::RoomsAccount {
+        rooms_account::RoomsAccount::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Rooms Location operations.
+    pub fn rooms_location(&self) -> rooms_location::RoomsLocation {
+        rooms_location::RoomsLocation::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to SIP Phone operations.
+    pub fn sip_phone(&self) -> sip_phone::SipPhone {
+        sip_phone::SipPhone::new(self.clone())
+    }
+
+    /// Tracking Field operations.
+    pub fn tracking_field(&self) -> tracking_field::TrackingField {
+        tracking_field::TrackingField::new(self.clone())
+    }
+
+    /// TSP operations.
+    pub fn tsp(&self) -> tsp::Tsp {
+        tsp::Tsp::new(self.clone())
+    }
+
+    /// User operations.
+    pub fn users(&self) -> users::Users {
+        users::Users::new(self.clone())
+    }
+
+    /// Webhook operations.
+    pub fn webhooks(&self) -> webhooks::Webhooks {
+        webhooks::Webhooks::new(self.clone())
+    }
+
+    /// Webinar operations.
+    pub fn webinars(&self) -> webinars::Webinars {
+        webinars::Webinars::new(self.clone())
+    }
+
+    /// APIs available to the master account for a Zoom account.
+    pub fn master_account_ap_is(&self) -> master_account_ap_is::MasterAccountApIs {
+        master_account_ap_is::MasterAccountApIs::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Rooms Devices operations.
+    pub fn rooms_devices(&self) -> rooms_devices::RoomsDevices {
+        rooms_devices::RoomsDevices::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to SIP Connected Audio operations.
+    pub fn sip_connected_audio(&self) -> sip_connected_audio::SipConnectedAudio {
+        sip_connected_audio::SipConnectedAudio::new(self.clone())
+    }
+
+    /// Return a reference to an interface that provides access to Deprecated API Endpoints operations.
+    pub fn deprecated_api_endpoints(&self) -> deprecated_api_endpoints::DeprecatedApiEndpoints {
+        deprecated_api_endpoints::DeprecatedApiEndpoints::new(self.clone())
+    }
 }
