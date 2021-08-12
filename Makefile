@@ -22,6 +22,10 @@ GOOGLE_DRIVE_SPEC_DIR = $(GOOGLE_SPEC_DIR)/drive
 GOOGLE_DRIVE_SPEC = $(GOOGLE_DRIVE_SPEC_DIR)/drive.yaml
 GOOGLE_DRIVE_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/drive/v3/openapi.yaml
 
+GOOGLE_GROUPS_SETTINGS_SPEC_DIR = $(GOOGLE_SPEC_DIR)/groups-settings
+GOOGLE_GROUPS_SETTINGS_SPEC = $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR)/groups-settings.yaml
+GOOGLE_GROUPS_SETTINGS_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/groupssettings/v1/openapi.yaml
+
 GUSTO_SPEC_DIR = $(CURDIR)/specs/gusto
 GUSTO_SPEC = $(GUSTO_SPEC_DIR)/gusto.v1.yaml
 GUSTO_SPEC_REPO = Gusto-API/api.gusto.dev
@@ -77,6 +81,7 @@ update-specs:
 		$(GOOGLE_ADMIN_SPEC_DIR) \
 		$(GOOGLE_CALENDAR_SPEC_DIR) \
 		$(GOOGLE_DRIVE_SPEC_DIR) \
+		$(GOOGLE_GROUPS_SETTINGS_SPEC_DIR) \
 		$(GUSTO_SPEC_DIR) \
 		$(MAILCHIMP_SPEC_DIR) \
 		$(OKTA_SPEC_DIR) \
@@ -88,6 +93,7 @@ update-specs:
 		$(GOOGLE_ADMIN_SPEC) \
 		$(GOOGLE_CALENDAR_SPEC) \
 		$(GOOGLE_DRIVE_SPEC) \
+		$(GOOGLE_GROUPS_SETTINGS_SPEC) \
 		$(GUSTO_SPEC) \
 		$(MAILCHIMP_SPEC) \
 		$(OKTA_SPEC) \
@@ -179,6 +185,22 @@ google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
 		--spec-link "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest" \
 		--host "www.googleapis.com/drive/directory/v1"
 	cargo fmt -p google-drive
+
+$(GOOGLE_GROUPS_SETTINGS_SPEC_DIR):
+	mkdir -p $@
+
+$(GOOGLE_GROUPS_SETTINGS_SPEC): $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR)
+	curl -sSL $(GOOGLE_GROUPS_SETTINGS_SPEC_REMOTE) -o $@
+
+google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
+	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.1.0 \
+		-o google/groups-settings \
+		-n google-groups-settings \
+		--proper-name "Google Groups Settings" \
+		-d "A fully generated & opinionated API client for the Google Groups Settings API." \
+		--spec-link "https://groupssettings.googleapis.com/$discovery/rest?version=v1" \
+		--host "www.googleapis.com/groupssettings/directory/v1"
+	cargo fmt -p google-groups-settings
 
 $(GUSTO_SPEC_DIR):
 	mkdir -p $@

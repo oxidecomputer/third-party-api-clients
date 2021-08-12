@@ -2,6 +2,8 @@
 members = [
 	"generator",
 	"github",
+	"google/calendar",
+	"google/groups-settings",
 	"gusto",
 	"ramp",
 	"zoom"

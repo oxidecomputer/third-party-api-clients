@@ -1,8 +1,8 @@
-//! A fully generated, opinionated API client library for Google Calendar.
+//! A fully generated, opinionated API client library for Google Groups Settings.
 //!
 //! ## API Details
 //!
-//! Manipulates events and other calendar data.
+//! Manages permission levels and related settings of a group.
 //!
 //! [API Terms of Service](https://developers.google.com/terms/)
 //!
@@ -23,15 +23,15 @@
 //!
 //! ## Client Details
 //!
-//! This client is generated from the [Google Calendar OpenAPI
-//! specs](https://calendar-json.googleapis.com/iscovery/rest?version=v3) based on OpenAPI spec version `v3`. This way it will remain
+//! This client is generated from the [Google Groups Settings OpenAPI
+//! specs](https://groupssettings.googleapis.com/iscovery/rest?version=v1) based on OpenAPI spec version `v1`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //! //! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]
-//! google_calendar = "0.1.0"
+//! google_groups_settings = "0.1.0"
 //! ```
 //!
 //! ## Basic example
@@ -40,9 +40,9 @@
 //! a user agent string and set of credentials.
 //!
 //! ```
-//! use google_calendar::Client;
+//! use google_groups_settings::Client;
 //!
-//! let google calendar = Client::new(
+//! let google groups settings = Client::new(
 //!     String::from("client-id"),
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
@@ -54,16 +54,16 @@
 //! Alternatively, the library can search for most of the variables required for
 //! the client in the environment:
 //!
-//! - `GOOGLE CALENDAR_CLIENT_ID`
-//! - `GOOGLE CALENDAR_CLIENT_SECRET`
-//! - `GOOGLE CALENDAR_REDIRECT_URI`
+//! - `GOOGLE GROUPS SETTINGS_CLIENT_ID`
+//! - `GOOGLE GROUPS SETTINGS_CLIENT_SECRET`
+//! - `GOOGLE GROUPS SETTINGS_REDIRECT_URI`
 //!
 //! And then you can create a client from the environment.
 //!
 //! ```
-//! use google_calendar::Client;
+//! use google_groups_settings::Client;
 //!
-//! let google calendar = Client::new_from_env(
+//! let google groups settings = Client::new_from_env(
 //!     String::from("token"),
 //!     String::from("refresh-token")
 //! );
@@ -75,25 +75,25 @@
 //! To start off a fresh client and get a `token` and `refresh_token`, use the following.
 //!
 //! ```
-//! use google_calendar::Client;
+//! use google_groups_settings::Client;
 //!
 //! async fn do_call() {
-//!     let mut google calendar = Client::new_from_env("", "");
+//!     let mut google groups settings = Client::new_from_env("", "");
 //!
 //!     // Get the URL to request consent from the user.
 //!     // You can optionally pass in scopes. If none are provided, then the
 //!     // resulting URL will not have any scopes.
-//!     let user_consent_url = google calendar.user_consent_url(&["some-scope".to_string()]);
+//!     let user_consent_url = google groups settings.user_consent_url(&["some-scope".to_string()]);
 //!
 //!     // In your redirect URL capture the code sent and our state.
 //!     // Send it along to the request for the token.
 //!     let code = "thing-from-redirect-url";
 //!     let state = "state-from-redirect-url";
-//!     let mut access_token = google calendar.get_access_token(code, state).await.unwrap();
+//!     let mut access_token = google groups settings.get_access_token(code, state).await.unwrap();
 //!
 //!     // You can additionally refresh the access token with the following.
 //!     // You must have a refresh token to be able to call this function.
-//!     access_token = google calendar.refresh_access_token().await.unwrap();
+//!     access_token = google groups settings.refresh_access_token().await.unwrap();
 //! }
 //! ```
 #![feature(async_stream)]
@@ -102,14 +102,7 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-pub mod acl;
-pub mod calendar_list;
-pub mod calendars;
-pub mod channels;
-pub mod colors;
-pub mod events;
-pub mod freebusy;
-pub mod settings;
+pub mod groups;
 #[cfg(test)]
 mod tests;
 pub mod types;
@@ -118,7 +111,7 @@ pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://www.googleapis.com/calendar/directory/v1";
+pub const DEFAULT_HOST: &str = "https://www.googleapis.com/groupssettings/directory/v1";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
@@ -248,9 +241,9 @@ impl Client {
         T: ToString,
         R: ToString,
     {
-        let client_id = env::var("GOOGLE CALENDAR_CLIENT_ID").unwrap();
-        let client_secret = env::var("GOOGLE CALENDAR_CLIENT_SECRET").unwrap();
-        let redirect_uri = env::var("GOOGLE CALENDAR_REDIRECT_URI").unwrap();
+        let client_id = env::var("GOOGLE GROUPS SETTINGS_CLIENT_ID").unwrap();
+        let client_secret = env::var("GOOGLE GROUPS SETTINGS_CLIENT_SECRET").unwrap();
+        let redirect_uri = env::var("GOOGLE GROUPS SETTINGS_REDIRECT_URI").unwrap();
 
         Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
     }
@@ -515,43 +508,8 @@ impl Client {
         .await
     }
 
-    /// Return a reference to an interface that provides access to acl operations.
-    pub fn acl(&self) -> acl::Acl {
-        acl::Acl::new(self.clone())
-    }
-
-    /// Return a reference to an interface that provides access to calendarList operations.
-    pub fn calendar_list(&self) -> calendar_list::CalendarList {
-        calendar_list::CalendarList::new(self.clone())
-    }
-
-    /// Return a reference to an interface that provides access to calendars operations.
-    pub fn calendars(&self) -> calendars::Calendars {
-        calendars::Calendars::new(self.clone())
-    }
-
-    /// Return a reference to an interface that provides access to channels operations.
-    pub fn channels(&self) -> channels::Channels {
-        channels::Channels::new(self.clone())
-    }
-
-    /// Return a reference to an interface that provides access to colors operations.
-    pub fn colors(&self) -> colors::Colors {
-        colors::Colors::new(self.clone())
-    }
-
-    /// Return a reference to an interface that provides access to events operations.
-    pub fn events(&self) -> events::Events {
-        events::Events::new(self.clone())
-    }
-
-    /// Return a reference to an interface that provides access to freebusy operations.
-    pub fn freebusy(&self) -> freebusy::Freebusy {
-        freebusy::Freebusy::new(self.clone())
-    }
-
-    /// Return a reference to an interface that provides access to settings operations.
-    pub fn settings(&self) -> settings::Settings {
-        settings::Settings::new(self.clone())
+    /// Return a reference to an interface that provides access to groups operations.
+    pub fn groups(&self) -> groups::Groups {
+        groups::Groups::new(self.clone())
     }
 }
