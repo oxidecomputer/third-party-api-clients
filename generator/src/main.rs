@@ -525,9 +525,9 @@ pub enum TypeDetails {
      * order in the generated code.
      */
     Object(BTreeMap<String, TypeId>, openapiv3::SchemaData),
-    OneOf(BTreeMap<String, TypeId>, openapiv3::SchemaData),
-    AnyOf(BTreeMap<String, TypeId>, openapiv3::SchemaData),
-    AllOf(BTreeMap<String, TypeId>, openapiv3::SchemaData),
+    OneOf(Vec<TypeId>, openapiv3::SchemaData),
+    AnyOf(Vec<TypeId>, openapiv3::SchemaData),
+    AllOf(Vec<TypeId>, openapiv3::SchemaData),
 }
 
 #[allow(dead_code)]
@@ -639,23 +639,17 @@ impl PartialEq for TypeDetails {
             }
             TypeDetails::OneOf(s, _d) => {
                 if let TypeDetails::OneOf(os, _od) = other {
-                    let t: Vec<TypeId> = s.values().cloned().collect();
-                    let r: Vec<TypeId> = os.values().cloned().collect();
-                    return t == r;
+                    return s == os;
                 }
             }
             TypeDetails::AnyOf(s, _d) => {
                 if let TypeDetails::AnyOf(os, _od) = other {
-                    let t: Vec<TypeId> = s.values().cloned().collect();
-                    let r: Vec<TypeId> = os.values().cloned().collect();
-                    return t == r;
+                    return s == os;
                 }
             }
             TypeDetails::AllOf(s, _d) => {
                 if let TypeDetails::AllOf(os, _od) = other {
-                    let t: Vec<TypeId> = s.values().cloned().collect();
-                    let r: Vec<TypeId> = os.values().cloned().collect();
-                    return t == r;
+                    return s == os;
                 }
             }
             TypeDetails::Unknown => {
@@ -1697,9 +1691,7 @@ impl TypeSpace {
                 }
                 all_of_name.push_str(" all of");
 
-                let mut all_of_description = "All of the following types:\n\n".to_string();
-
-                let mut omap = BTreeMap::new();
+                let mut omap: Vec<TypeId> = Default::default();
                 for one in all_of {
                     let itid = self.select(
                         Some(all_of_name.trim_end_matches("all of").trim()),
@@ -1707,21 +1699,15 @@ impl TypeSpace {
                         additional_description,
                     )?;
 
-                    let rt = self.render_type(&itid, true)?;
-                    all_of_description.push_str(&format!("- `{}`\n", rt));
-
-                    omap.insert(rt, itid);
+                    omap.push(itid);
                 }
-                all_of_description.push_str(
-                    "\nYou can easily convert this enum to the inner value with `From` and \
-                     `Into`, as both are implemented for each type.\n",
-                );
+                omap.sort_unstable();
+                omap.dedup();
 
-                let sd = openapiv3::SchemaData {
-                    description: Some(all_of_description),
-                    ..Default::default()
-                };
-                Ok((Some(all_of_name), TypeDetails::AllOf(omap, sd)))
+                Ok((
+                    Some(all_of_name),
+                    TypeDetails::AllOf(omap, Default::default()),
+                ))
             }
             openapiv3::SchemaKind::OneOf { one_of } => {
                 // Iterate over each one of and add each of them to our typeset.
@@ -1735,9 +1721,7 @@ impl TypeSpace {
                 }
                 one_of_name.push_str(" one of");
 
-                let mut one_of_description = "One of the following types:\n\n".to_string();
-
-                let mut omap = BTreeMap::new();
+                let mut omap: Vec<TypeId> = Default::default();
                 for one in one_of {
                     let itid = self.select(
                         Some(one_of_name.trim_end_matches("one of").trim()),
@@ -1745,21 +1729,16 @@ impl TypeSpace {
                         additional_description,
                     )?;
 
-                    let rt = self.render_type(&itid, true)?;
-                    one_of_description.push_str(&format!("- `{}`\n", rt));
-
-                    omap.insert(rt, itid);
+                    omap.push(itid);
                 }
-                one_of_description.push_str(
-                    "\nYou can easily convert this enum to the inner value with `From` and \
-                     `Into`, as both are implemented for each type.\n",
-                );
 
-                let sd = openapiv3::SchemaData {
-                    description: Some(one_of_description),
-                    ..Default::default()
-                };
-                Ok((Some(one_of_name), TypeDetails::OneOf(omap, sd)))
+                omap.sort_unstable();
+                omap.dedup();
+
+                Ok((
+                    Some(one_of_name),
+                    TypeDetails::OneOf(omap, Default::default()),
+                ))
             }
             openapiv3::SchemaKind::AnyOf { any_of } => {
                 // TODO: This is a stop gap for now, we should figure out a better solution later.
@@ -1774,9 +1753,7 @@ impl TypeSpace {
                 }
                 any_of_name.push_str(" any of");
 
-                let mut any_of_description = "Any of the following types:\n\n".to_string();
-
-                let mut omap = BTreeMap::new();
+                let mut omap: Vec<TypeId> = Default::default();
                 for one in any_of {
                     let itid = self.select(
                         Some(any_of_name.trim_end_matches("any of").trim()),
@@ -1784,21 +1761,16 @@ impl TypeSpace {
                         additional_description,
                     )?;
 
-                    let rt = self.render_type(&itid, true)?;
-                    any_of_description.push_str(&format!("- `{}`\n", rt));
-
-                    omap.insert(rt, itid);
+                    omap.push(itid);
                 }
-                any_of_description.push_str(
-                    "\nYou can easily convert this enum to the inner value with `From` and \
-                     `Into`, as both are implemented for each type.\n",
-                );
 
-                let sd = openapiv3::SchemaData {
-                    description: Some(any_of_description),
-                    ..Default::default()
-                };
-                Ok((Some(any_of_name), TypeDetails::AnyOf(omap, sd)))
+                omap.sort_unstable();
+                omap.dedup();
+
+                Ok((
+                    Some(any_of_name),
+                    TypeDetails::AnyOf(omap, Default::default()),
+                ))
             }
             openapiv3::SchemaKind::Any(any) => {
                 // There is at least one occurance where the github api spec gives "items"
@@ -2121,6 +2093,7 @@ fn gen(
     a("#![feature(async_stream)]");
     a("#![allow(clippy::too_many_arguments)]");
     a("#![allow(clippy::nonstandard_macro_braces)]");
+    a("#![allow(clippy::large_enum_variant)]");
     a("#![allow(missing_docs)]"); // TODO: Make this a deny.
     a("#![cfg_attr(docsrs, feature(doc_cfg))]");
     a("");

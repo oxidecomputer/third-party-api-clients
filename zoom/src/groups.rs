@@ -397,7 +397,7 @@ impl Groups {
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      */
-    pub async fn get_group_settings_domains(
+    pub async fn get_group_settings_crate_types_domains(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -443,12 +443,12 @@ impl Groups {
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      */
-    pub async fn get_group_settings_response(
+    pub async fn get_group_settings_crate_types_meeting_security(
         &self,
         group_id: &str,
         custom_query_fields: &str,
         option: crate::types::OptionData,
-    ) -> Result<crate::types::GetGroupSettingsResponse> {
+    ) -> Result<crate::types::MeetingSecuritySettings> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {
@@ -489,12 +489,12 @@ impl Groups {
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      */
-    pub async fn get_group_settings_meeting_security(
+    pub async fn get_group_settings_crate_types_response(
         &self,
         group_id: &str,
         custom_query_fields: &str,
         option: crate::types::OptionData,
-    ) -> Result<crate::types::MeetingSecuritySettings> {
+    ) -> Result<crate::types::GetGroupSettingsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {
@@ -628,12 +628,12 @@ impl Groups {
      * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
-    pub async fn get_group_lock_settings_response(
+    pub async fn get_group_lock_settings_crate_types_meeting_security(
         &self,
         group_id: &str,
         custom_query_fields: &str,
         option: &str,
-    ) -> Result<crate::types::GetGroupLockSettingsResponse> {
+    ) -> Result<crate::types::MeetingSecuritySettings> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {
@@ -674,12 +674,12 @@ impl Groups {
      * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
-    pub async fn get_group_lock_settings_meeting_security(
+    pub async fn get_group_lock_settings_crate_types_response(
         &self,
         group_id: &str,
         custom_query_fields: &str,
         option: &str,
-    ) -> Result<crate::types::MeetingSecuritySettings> {
+    ) -> Result<crate::types::GetGroupLockSettingsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {

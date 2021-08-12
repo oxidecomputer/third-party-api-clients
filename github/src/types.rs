@@ -147,6 +147,15 @@ pub enum UserAllOf {
     SimpleUser(SimpleUser),
 }
 
+impl UserAllOf {
+    pub fn simple_user(&self) -> Option<&SimpleUser> {
+        if let UserAllOf::SimpleUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// The set of permissions for the GitHub app
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Permissions {
@@ -253,14 +262,6 @@ pub struct GitHubApp {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub owner: UserAllOf,
     #[serde(
@@ -345,7 +346,7 @@ pub struct ValidationErrorSimple {
     pub message: String,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `String`
 /// - `f64`
@@ -356,6 +357,46 @@ pub struct ValidationErrorSimple {
 pub enum WebhookConfigInsecureSslOneOf {
     String(String),
     F64(f64),
+}
+
+impl WebhookConfigInsecureSslOneOf {
+    pub fn f64(&self) -> Option<&f64> {
+        if let WebhookConfigInsecureSslOneOf::F64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let WebhookConfigInsecureSslOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<f64> for WebhookConfigInsecureSslOneOf {
+    fn from(f: f64) -> Self {
+        WebhookConfigInsecureSslOneOf::F64(f)
+    }
+}
+
+impl From<String> for WebhookConfigInsecureSslOneOf {
+    fn from(f: String) -> Self {
+        WebhookConfigInsecureSslOneOf::String(f)
+    }
+}
+
+impl From<WebhookConfigInsecureSslOneOf> for f64 {
+    fn from(f: WebhookConfigInsecureSslOneOf) -> Self {
+        *f.f64().unwrap()
+    }
+}
+
+impl From<WebhookConfigInsecureSslOneOf> for String {
+    fn from(f: WebhookConfigInsecureSslOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// Configuration object of the webhook
@@ -499,7 +540,7 @@ pub struct ScimError {
     pub status: i64,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `String`
 /// - `i64`
@@ -510,11 +551,70 @@ pub struct ScimError {
 #[serde(untagged)]
 pub enum ValueOneOf {
     String(String),
+    I64(i64),
     /**
      * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
-    I64(i64),
+}
+
+impl ValueOneOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let ValueOneOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ValueOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ValueOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<i64> for ValueOneOf {
+    fn from(f: i64) -> Self {
+        ValueOneOf::I64(f)
+    }
+}
+
+impl From<String> for ValueOneOf {
+    fn from(f: String) -> Self {
+        ValueOneOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for ValueOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ValueOneOf::StringVector(f)
+    }
+}
+
+impl From<ValueOneOf> for i64 {
+    fn from(f: ValueOneOf) -> Self {
+        *f.i64().unwrap()
+    }
+}
+
+impl From<ValueOneOf> for String {
+    fn from(f: ValueOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<ValueOneOf> for Vec<String> {
+    fn from(f: ValueOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -549,16 +649,6 @@ pub struct Errors {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub resource: String,
-    /**
-     * One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  - `Vec<String>`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub value: Option<ValueOneOf>,
 }
@@ -1065,7 +1155,7 @@ pub struct AppPermissions {
     pub workflows: Option<Workflows>,
 }
 
-/// Any of the following types:
+/// All of the following types:
 ///
 /// - `SimpleUser`
 /// - `Enterprise`
@@ -1075,13 +1165,29 @@ pub struct AppPermissions {
 #[serde(untagged)]
 pub enum AccountAnyOf {
     /**
-     * An enterprise account
-     */
-    Enterprise(Enterprise),
-    /**
      * Simple User
      */
     SimpleUser(SimpleUser),
+    /**
+     * An enterprise account
+     */
+    Enterprise(Enterprise),
+}
+
+impl AccountAnyOf {
+    pub fn enterprise(&self) -> Option<&Enterprise> {
+        if let AccountAnyOf::Enterprise(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn simple_user(&self) -> Option<&SimpleUser> {
+        if let AccountAnyOf::SimpleUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -1131,15 +1237,6 @@ pub struct Installation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub access_tokens_url: String,
-    /**
-     * Any of the following types:
-     *  
-     *  - `SimpleUser`
-     *  - `Enterprise`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub account: AccountAnyOf,
     #[serde(
@@ -1224,14 +1321,6 @@ pub struct Installation {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub suspended_by: UserAllOf,
     #[serde(
@@ -1307,6 +1396,15 @@ pub enum LicenseAllOf {
      * License Simple
      */
     LicenseSimple(LicenseSimple),
+}
+
+impl LicenseAllOf {
+    pub fn license_simple(&self) -> Option<&LicenseSimple> {
+        if let LicenseAllOf::LicenseSimple(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -2239,14 +2337,6 @@ pub struct Repository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub languages_url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `LicenseSimple`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub license: LicenseAllOf,
     #[serde(
@@ -2637,6 +2727,15 @@ pub struct ScopedInstallation {
 #[serde(untagged)]
 pub enum InstallationAllOf {
     ScopedInstallation(ScopedInstallation),
+}
+
+impl InstallationAllOf {
+    pub fn scoped_installation(&self) -> Option<&ScopedInstallation> {
+        if let InstallationAllOf::ScopedInstallation(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
@@ -3645,14 +3744,6 @@ pub struct Milestone {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub creator: UserAllOf,
     #[serde(
@@ -3798,6 +3889,15 @@ pub enum MilestoneAllOf {
     Milestone(Milestone),
 }
 
+impl MilestoneAllOf {
+    pub fn milestone(&self) -> Option<&Milestone> {
+        if let MilestoneAllOf::Milestone(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequest {
     #[serde(
@@ -3846,6 +3946,15 @@ pub enum AppAllOf {
     GitHubApp(GitHubApp),
 }
 
+impl AppAllOf {
+    pub fn git_hub_app(&self) -> Option<&GitHubApp> {
+        if let AppAllOf::GitHubApp(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Issue Simple
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueSimple {
@@ -3855,14 +3964,6 @@ pub struct IssueSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub active_lock_reason: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -3945,14 +4046,6 @@ pub struct IssueSimple {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub locked: bool,
-    /**
-     * All of the following types:
-     *  
-     *  - `Milestone`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub milestone: MilestoneAllOf,
     #[serde(
@@ -4018,14 +4111,6 @@ pub struct IssueSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -4174,14 +4259,6 @@ pub struct IssueComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -4537,14 +4614,6 @@ pub struct BaseGist {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -5034,14 +5103,6 @@ pub struct Gist {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -5217,14 +5278,6 @@ pub struct GistComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -5246,14 +5299,6 @@ pub struct GistCommit {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
     #[serde(
@@ -5326,7 +5371,7 @@ pub struct LabelsData {
     pub url: String,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `String`
 /// - `LabelsData`
@@ -5335,8 +5380,36 @@ pub struct LabelsData {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum LabelsOneOf {
-    LabelsData(LabelsData),
     String(String),
+    LabelsData(LabelsData),
+}
+
+impl LabelsOneOf {
+    pub fn labels_data(&self) -> Option<&LabelsData> {
+        if let LabelsOneOf::LabelsData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let LabelsOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<String> for LabelsOneOf {
+    fn from(f: String) -> Self {
+        LabelsOneOf::String(f)
+    }
+}
+
+impl From<LabelsOneOf> for String {
+    fn from(f: LabelsOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
@@ -5348,14 +5421,6 @@ pub struct Issue {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub active_lock_reason: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -5446,14 +5511,6 @@ pub struct Issue {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub locked: bool,
-    /**
-     * All of the following types:
-     *  
-     *  - `Milestone`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub milestone: MilestoneAllOf,
     #[serde(
@@ -5524,14 +5581,6 @@ pub struct Issue {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -7657,6 +7706,15 @@ pub enum ParentAllOf {
     TeamSimple(TeamSimple),
 }
 
+impl ParentAllOf {
+    pub fn team_simple(&self) -> Option<&TeamSimple> {
+        if let ParentAllOf::TeamSimple(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Groups of organization members that gives permissions on specified repositories.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Team {
@@ -7696,14 +7754,6 @@ pub struct Team {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `TeamSimple`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub parent: ParentAllOf,
     #[serde(
@@ -7866,14 +7916,6 @@ pub struct OrgMembership {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -7926,14 +7968,6 @@ pub struct Migration {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub owner: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -8052,6 +8086,15 @@ pub enum RepositoryAllOf {
      * Minimal Repository
      */
     MinimalRepository(MinimalRepository),
+}
+
+impl RepositoryAllOf {
+    pub fn minimal_repository(&self) -> Option<&MinimalRepository> {
+        if let RepositoryAllOf::MinimalRepository(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /// A software package
@@ -8278,14 +8321,6 @@ pub struct Project {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub creator: UserAllOf,
     #[serde(
@@ -8552,14 +8587,6 @@ pub struct FullTeam {
 /// A team discussion is a persistent record of a free-form conversation within a team.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamDiscussion {
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub author: UserAllOf,
     #[serde(
@@ -8666,14 +8693,6 @@ pub struct TeamDiscussion {
 /// A reply to a discussion within a team.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamDiscussionComment {
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub author: UserAllOf,
     #[serde(
@@ -8831,14 +8850,6 @@ pub struct Reaction {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -9318,14 +9329,6 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub languages_url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `LicenseSimple`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub license: LicenseAllOf,
     #[serde(
@@ -9391,14 +9394,6 @@ pub struct TeamRepository {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub open_issues_count: i64,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub owner: UserAllOf,
     /**
@@ -9587,14 +9582,6 @@ pub struct ProjectCard {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub creator: UserAllOf,
     #[serde(
@@ -9703,14 +9690,6 @@ pub struct RepositoryCollaboratorPermission {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub permission: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -10185,14 +10164,6 @@ pub struct FullRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub languages_url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `LicenseSimple`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub license: LicenseAllOf,
     #[serde(
@@ -10784,6 +10755,15 @@ pub enum HeadCommitAllOf {
     SimpleCommit(SimpleCommit),
 }
 
+impl HeadCommitAllOf {
+    pub fn simple_commit(&self) -> Option<&SimpleCommit> {
+        if let HeadCommitAllOf::SimpleCommit(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// An invocation of a workflow
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WorkflowRun {
@@ -10844,14 +10824,6 @@ pub struct WorkflowRun {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub head_branch: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleCommit`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub head_commit: HeadCommitAllOf,
     /**
@@ -11143,7 +11115,7 @@ pub struct Environment {
     pub url: String,
 }
 
-/// Any of the following types:
+/// All of the following types:
 ///
 /// - `SimpleUser`
 /// - `Team`
@@ -11162,17 +11134,24 @@ pub enum ReviewerAnyOf {
     Team(Team),
 }
 
+impl ReviewerAnyOf {
+    pub fn simple_user(&self) -> Option<&SimpleUser> {
+        if let ReviewerAnyOf::SimpleUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn team(&self) -> Option<&Team> {
+        if let ReviewerAnyOf::Team(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Reviewers {
-    /**
-     * Any of the following types:
-     *  
-     *  - `SimpleUser`
-     *  - `Team`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reviewer: Option<ReviewerAnyOf>,
     /**
@@ -11211,17 +11190,45 @@ pub struct PendingDeployment {
     pub wait_timer_started_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `Data`
 /// - `String`
+/// - `Data`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PayloadOneOf {
-    Data(Data),
     String(String),
+    Data(Data),
+}
+
+impl PayloadOneOf {
+    pub fn data(&self) -> Option<&Data> {
+        if let PayloadOneOf::Data(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let PayloadOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<String> for PayloadOneOf {
+    fn from(f: String) -> Self {
+        PayloadOneOf::String(f)
+    }
+}
+
+impl From<PayloadOneOf> for String {
+    fn from(f: PayloadOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// A request for a specific ref(branch,sha,tag) to be deployed
@@ -11233,14 +11240,6 @@ pub struct Deployment {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub creator: UserAllOf,
     #[serde(
@@ -11273,15 +11272,6 @@ pub struct Deployment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub original_environment: String,
-    /**
-     * One of the following types:
-     *  
-     *  - `Data`
-     *  - `String`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub payload: PayloadOneOf,
     /**
@@ -12219,25 +12209,26 @@ pub struct Verification {
 
 /// All of the following types:
 ///
-/// - `GitUser`
+/// - `Tagger`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AuthorAllOf {
-    GitUser(GitUser),
+    Tagger(Tagger),
+}
+
+impl AuthorAllOf {
+    pub fn tagger(&self) -> Option<&Tagger> {
+        if let AuthorAllOf::Tagger(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitData {
-    /**
-     * All of the following types:
-     *  
-     *  - `GitUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub author: AuthorAllOf,
     #[serde(
@@ -12246,14 +12237,6 @@ pub struct CommitData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub comment_count: i64,
-    /**
-     * All of the following types:
-     *  
-     *  - `GitUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub committer: AuthorAllOf,
     #[serde(
@@ -12369,14 +12352,6 @@ pub struct Files {
 /// Commit
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitDataType {
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub author: UserAllOf,
     #[serde(
@@ -12387,14 +12362,6 @@ pub struct CommitDataType {
     pub comments_url: String,
     #[serde()]
     pub commit: CommitData,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub committer: UserAllOf,
     /**
@@ -12840,14 +12807,6 @@ pub struct CheckSuite {
 /// A check performed on the code of a given code change
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CheckRun {
-    /**
-     * All of the following types:
-     *  
-     *  - `GitHubApp`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub app: AppAllOf,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -13004,14 +12963,6 @@ pub struct CheckSuiteData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub after: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `GitHubApp`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub app: AppAllOf,
     #[serde(
@@ -14103,24 +14054,8 @@ pub struct RepositoryInvitation {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub invitee: UserAllOf,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub inviter: UserAllOf,
     #[serde(
@@ -14229,14 +14164,6 @@ pub struct CommitComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -14364,14 +14291,6 @@ pub struct Base {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub sha: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -14431,14 +14350,6 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub active_lock_reason: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -14538,14 +14449,6 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `Milestone`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub milestone: MilestoneAllOf,
     #[serde(
@@ -14615,14 +14518,6 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -14838,6 +14733,15 @@ pub enum CodeOfConductAll {
     CodeOfConductSimple(CodeOfConductSimple),
 }
 
+impl CodeOfConductAll {
+    pub fn code_of_conduct_simple(&self) -> Option<&CodeOfConductSimple> {
+        if let CodeOfConductAll::CodeOfConductSimple(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// All of the following types:
 ///
 /// - `CommunityHealthFile`
@@ -14849,76 +14753,29 @@ pub enum ReadmeAllOf {
     CommunityHealthFile(CommunityHealthFile),
 }
 
+impl ReadmeAllOf {
+    pub fn community_health_file(&self) -> Option<&CommunityHealthFile> {
+        if let ReadmeAllOf::CommunityHealthFile(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommunityProfileFiles {
-    /**
-     * All of the following types:
-     *  
-     *  - `CodeOfConductSimple`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub code_of_conduct: CodeOfConductAll,
-    /**
-     * All of the following types:
-     *  
-     *  - `CommunityHealthFile`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub code_of_conduct_file: ReadmeAllOf,
-    /**
-     * All of the following types:
-     *  
-     *  - `CommunityHealthFile`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub contributing: ReadmeAllOf,
-    /**
-     * All of the following types:
-     *  
-     *  - `CommunityHealthFile`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub issue_template: ReadmeAllOf,
-    /**
-     * All of the following types:
-     *  
-     *  - `LicenseSimple`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub license: LicenseAllOf,
-    /**
-     * All of the following types:
-     *  
-     *  - `CommunityHealthFile`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub pull_request_template: ReadmeAllOf,
-    /**
-     * All of the following types:
-     *  
-     *  - `CommunityHealthFile`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub readme: ReadmeAllOf,
 }
@@ -15894,14 +15751,6 @@ pub struct DeploymentStatus {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub creator: UserAllOf,
     #[serde(
@@ -16077,7 +15926,7 @@ pub struct ProtectionRulesDataType {
     pub type_: String,
 }
 
-/// Any of the following types:
+/// All of the following types:
 ///
 /// - `ProtectionRules`
 /// - `ProtectionRulesData`
@@ -16090,6 +15939,29 @@ pub enum ProtectionRulesAnyOf {
     ProtectionRules(ProtectionRules),
     ProtectionRulesData(ProtectionRulesData),
     ProtectionRulesDataType(ProtectionRulesDataType),
+}
+
+impl ProtectionRulesAnyOf {
+    pub fn protection_rules(&self) -> Option<&ProtectionRules> {
+        if let ProtectionRulesAnyOf::ProtectionRules(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn protection_rules_data(&self) -> Option<&ProtectionRulesData> {
+        if let ProtectionRulesAnyOf::ProtectionRulesData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn protection_rules_data_type(&self) -> Option<&ProtectionRulesDataType> {
+        if let ProtectionRulesAnyOf::ProtectionRulesDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /// Details of a deployment environment
@@ -16473,15 +16345,6 @@ pub struct HookConfig {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
-    /**
-     * One of the following types:
-     *  
-     *  - `String`
-     *  - `f64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub insecure_ssl: Option<WebhookConfigInsecureSslOneOf>,
     #[serde(
@@ -17047,14 +16910,6 @@ pub struct Rename {
 /// Issue Event
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueEvent {
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub actor: UserAllOf,
     /**
@@ -17936,7 +17791,7 @@ pub struct ConvertedNoteIssueEvent {
     pub url: String,
 }
 
-/// Any of the following types:
+/// All of the following types:
 ///
 /// - `LabeledIssueEvent`
 /// - `LabeledIssueEvent`
@@ -17959,29 +17814,41 @@ pub struct ConvertedNoteIssueEvent {
 #[serde(untagged)]
 pub enum IssueEventAnyOf {
     /**
-     * Added to Project Issue Event
+     * Labeled Issue Event
      */
-    AddedProjectIssueEvent(AddedProjectIssueEvent),
+    LabeledIssueEvent(LabeledIssueEvent),
     /**
      * Assigned Issue Event
      */
     AssignedIssueEvent(AssignedIssueEvent),
     /**
-     * Converted Note to Issue Issue Event
+     * Milestoned Issue Event
      */
-    ConvertedNoteIssueEvent(ConvertedNoteIssueEvent),
+    MilestonedIssueEvent(MilestonedIssueEvent),
     /**
-     * Labeled Issue Event
+     * Renamed Issue Event
      */
-    LabeledIssueEvent(LabeledIssueEvent),
+    RenamedIssueEvent(RenamedIssueEvent),
+    /**
+     * Review Requested Issue Event
+     */
+    ReviewRequestedIssueEvent(ReviewRequestedIssueEvent),
+    /**
+     * Review Request Removed Issue Event
+     */
+    ReviewRequestRemovedIssueEvent(ReviewRequestRemovedIssueEvent),
+    /**
+     * Review Dismissed Issue Event
+     */
+    ReviewDismissedIssueEvent(ReviewDismissedIssueEvent),
     /**
      * Locked Issue Event
      */
     LockedIssueEvent(LockedIssueEvent),
     /**
-     * Milestoned Issue Event
+     * Added to Project Issue Event
      */
-    MilestonedIssueEvent(MilestonedIssueEvent),
+    AddedProjectIssueEvent(AddedProjectIssueEvent),
     /**
      * Moved Column in Project Issue Event
      */
@@ -17991,21 +17858,95 @@ pub enum IssueEventAnyOf {
      */
     RemovedFromProjectIssueEvent(RemovedFromProjectIssueEvent),
     /**
-     * Renamed Issue Event
+     * Converted Note to Issue Issue Event
      */
-    RenamedIssueEvent(RenamedIssueEvent),
-    /**
-     * Review Dismissed Issue Event
-     */
-    ReviewDismissedIssueEvent(ReviewDismissedIssueEvent),
-    /**
-     * Review Request Removed Issue Event
-     */
-    ReviewRequestRemovedIssueEvent(ReviewRequestRemovedIssueEvent),
-    /**
-     * Review Requested Issue Event
-     */
-    ReviewRequestedIssueEvent(ReviewRequestedIssueEvent),
+    ConvertedNoteIssueEvent(ConvertedNoteIssueEvent),
+}
+
+impl IssueEventAnyOf {
+    pub fn added_project_issue_event(&self) -> Option<&AddedProjectIssueEvent> {
+        if let IssueEventAnyOf::AddedProjectIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn assigned_issue_event(&self) -> Option<&AssignedIssueEvent> {
+        if let IssueEventAnyOf::AssignedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn converted_note_issue_event(&self) -> Option<&ConvertedNoteIssueEvent> {
+        if let IssueEventAnyOf::ConvertedNoteIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn labeled_issue_event(&self) -> Option<&LabeledIssueEvent> {
+        if let IssueEventAnyOf::LabeledIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn locked_issue_event(&self) -> Option<&LockedIssueEvent> {
+        if let IssueEventAnyOf::LockedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn milestoned_issue_event(&self) -> Option<&MilestonedIssueEvent> {
+        if let IssueEventAnyOf::MilestonedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn moved_column_in_project_issue_event(&self) -> Option<&MovedColumnInProjectIssueEvent> {
+        if let IssueEventAnyOf::MovedColumnInProjectIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn removed_from_project_issue_event(&self) -> Option<&RemovedFromProjectIssueEvent> {
+        if let IssueEventAnyOf::RemovedFromProjectIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn renamed_issue_event(&self) -> Option<&RenamedIssueEvent> {
+        if let IssueEventAnyOf::RenamedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn review_dismissed_issue_event(&self) -> Option<&ReviewDismissedIssueEvent> {
+        if let IssueEventAnyOf::ReviewDismissedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn review_request_removed_issue_event(&self) -> Option<&ReviewRequestRemovedIssueEvent> {
+        if let IssueEventAnyOf::ReviewRequestRemovedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn review_requested_issue_event(&self) -> Option<&ReviewRequestedIssueEvent> {
+        if let IssueEventAnyOf::ReviewRequestedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /// Timeline Comment Event
@@ -18727,14 +18668,6 @@ pub struct LicenseContent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub html_url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `LicenseSimple`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub license: LicenseAllOf,
     #[serde(
@@ -18997,14 +18930,6 @@ pub struct PageBuild {
     pub duration: i64,
     #[serde()]
     pub error: Error,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub pusher: UserAllOf,
     #[serde(
@@ -20224,14 +20149,6 @@ pub struct PullRequestBaseRepo {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub languages_url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `LicenseSimple`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub license: LicenseAllOf,
     #[serde(
@@ -20462,14 +20379,6 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub additions: i64,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -20614,24 +20523,8 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub merged_by: UserAllOf,
-    /**
-     * All of the following types:
-     *  
-     *  - `Milestone`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub milestone: MilestoneAllOf,
     #[serde(
@@ -20711,14 +20604,6 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -20830,14 +20715,6 @@ pub struct PullRequestReviewData {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -21033,14 +20910,6 @@ pub struct ReviewComment {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -21151,14 +21020,6 @@ pub struct ReleaseAsset {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub uploader: UserAllOf,
     #[serde(
@@ -21459,14 +21320,6 @@ pub struct Stargazer {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub starred_at: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -21524,14 +21377,6 @@ pub struct Weeks {
 /// Contributor Activity
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContributorActivity {
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub author: UserAllOf,
     #[serde(
@@ -22081,22 +21926,69 @@ impl Op {
     }
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `String`
-/// - `Data`
 /// - `Vec<String>`
+/// - `Data`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ScimUserOperationsValueOneOf {
-    Data(Data),
     String(String),
     /**
      * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
+    Data(Data),
+}
+
+impl ScimUserOperationsValueOneOf {
+    pub fn data(&self) -> Option<&Data> {
+        if let ScimUserOperationsValueOneOf::Data(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ScimUserOperationsValueOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ScimUserOperationsValueOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<String> for ScimUserOperationsValueOneOf {
+    fn from(f: String) -> Self {
+        ScimUserOperationsValueOneOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for ScimUserOperationsValueOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ScimUserOperationsValueOneOf::StringVector(f)
+    }
+}
+
+impl From<ScimUserOperationsValueOneOf> for String {
+    fn from(f: ScimUserOperationsValueOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<ScimUserOperationsValueOneOf> for Vec<String> {
+    fn from(f: ScimUserOperationsValueOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -22109,16 +22001,6 @@ pub struct Operations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub path: String,
-    /**
-     * One of the following types:
-     *  
-     *  - `String`
-     *  - `Data`
-     *  - `Vec<String>`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub value: Option<ScimUserOperationsValueOneOf>,
 }
@@ -22351,17 +22233,6 @@ pub struct CodeSearchResultItem {
     pub url: String,
 }
 
-/// All of the following types:
-///
-/// - `Tagger`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum CommitterAllOf {
-    Tagger(Tagger),
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitSearchResultItem {
     /**
@@ -22375,16 +22246,8 @@ pub struct CommitSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub comment_count: i64,
-    /**
-     * All of the following types:
-     *  
-     *  - `Tagger`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
-    pub committer: CommitterAllOf,
+    pub committer: AuthorAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22406,14 +22269,6 @@ pub struct CommitSearchResultItem {
 /// Commit Search Result Item
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitSearchResultItemData {
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub author: UserAllOf,
     #[serde(
@@ -22424,16 +22279,8 @@ pub struct CommitSearchResultItemData {
     pub comments_url: String,
     #[serde()]
     pub commit: CommitSearchResultItem,
-    /**
-     * All of the following types:
-     *  
-     *  - `Tagger`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
-    pub committer: CommitterAllOf,
+    pub committer: AuthorAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22487,14 +22334,6 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub active_lock_reason: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub assignee: UserAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -22585,14 +22424,6 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub locked: bool,
-    /**
-     * All of the following types:
-     *  
-     *  - `Milestone`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub milestone: MilestoneAllOf,
     #[serde(
@@ -22669,14 +22500,6 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub user: UserAllOf,
 }
@@ -23037,14 +22860,6 @@ pub struct RepoSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub languages_url: String,
-    /**
-     * All of the following types:
-     *  
-     *  - `LicenseSimple`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub license: LicenseAllOf,
     #[serde(
@@ -23101,14 +22916,6 @@ pub struct RepoSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub open_issues_count: i64,
-    /**
-     * All of the following types:
-     *  
-     *  - `SimpleUser`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub owner: UserAllOf,
     /**
@@ -24442,7 +24249,7 @@ impl WorkflowRunStatus {
     }
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `String`
 /// - `i64`
@@ -24453,6 +24260,46 @@ impl WorkflowRunStatus {
 pub enum TitleOneOf {
     String(String),
     I64(i64),
+}
+
+impl TitleOneOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let TitleOneOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let TitleOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<i64> for TitleOneOf {
+    fn from(f: i64) -> Self {
+        TitleOneOf::I64(f)
+    }
+}
+
+impl From<String> for TitleOneOf {
+    fn from(f: String) -> Self {
+        TitleOneOf::String(f)
+    }
+}
+
+impl From<TitleOneOf> for i64 {
+    fn from(f: TitleOneOf) -> Self {
+        *f.i64().unwrap()
+    }
+}
+
+impl From<TitleOneOf> for String {
+    fn from(f: TitleOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -24802,11 +24649,27 @@ pub struct AppsCreateFromManifestResponse {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AppsCreateFromManifestResponseAllOf {
-    AppsCreateFromManifestResponse(AppsCreateFromManifestResponse),
     /**
      * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
      */
     GitHubApp(GitHubApp),
+    AppsCreateFromManifestResponse(AppsCreateFromManifestResponse),
+}
+
+impl AppsCreateFromManifestResponseAllOf {
+    pub fn apps_create_from_manifest_response(&self) -> Option<&AppsCreateFromManifestResponse> {
+        if let AppsCreateFromManifestResponseAllOf::AppsCreateFromManifestResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn git_hub_app(&self) -> Option<&GitHubApp> {
+        if let AppsCreateFromManifestResponseAllOf::GitHubApp(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -24911,6 +24774,15 @@ pub enum AppsCheckAuthorizationResponseAllOf {
      * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
      */
     Authorization(Authorization),
+}
+
+impl AppsCheckAuthorizationResponseAllOf {
+    pub fn authorization(&self) -> Option<&Authorization> {
+        if let AppsCheckAuthorizationResponseAllOf::Authorization(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25196,7 +25068,7 @@ impl Default for Public {
     }
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `bool`
 /// - `Public`
@@ -25205,8 +25077,36 @@ impl Default for Public {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum PublicOneOf {
-    Public(Public),
     Bool(bool),
+    Public(Public),
+}
+
+impl PublicOneOf {
+    pub fn bool(&self) -> Option<&bool> {
+        if let PublicOneOf::Bool(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn public(&self) -> Option<&Public> {
+        if let PublicOneOf::Public(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<bool> for PublicOneOf {
+    fn from(f: bool) -> Self {
+        PublicOneOf::Bool(f)
+    }
+}
+
+impl From<PublicOneOf> for bool {
+    fn from(f: PublicOneOf) -> Self {
+        *f.bool().unwrap()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25219,15 +25119,6 @@ pub struct GistsCreateRequest {
     pub description: String,
     #[serde()]
     pub files: Data,
-    /**
-     * One of the following types:
-     *  
-     *  - `bool`
-     *  - `Public`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub public: Option<PublicOneOf>,
 }
@@ -25583,23 +25474,39 @@ pub struct OrgsUpdateRequest {
     pub twitter_username: String,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `ValidationError`
 /// - `ValidationErrorSimple`
+/// - `ValidationError`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum OrgsUpdateResponseOneOf {
     /**
-     * Validation Error
-     */
-    ValidationError(ValidationError),
-    /**
      * Validation Error Simple
      */
     ValidationErrorSimple(ValidationErrorSimple),
+    /**
+     * Validation Error
+     */
+    ValidationError(ValidationError),
+}
+
+impl OrgsUpdateResponseOneOf {
+    pub fn validation_error(&self) -> Option<&ValidationError> {
+        if let OrgsUpdateResponseOneOf::ValidationError(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn validation_error_simple(&self) -> Option<&ValidationErrorSimple> {
+        if let OrgsUpdateResponseOneOf::ValidationErrorSimple(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25896,10 +25803,10 @@ pub struct AppsListInstallationsResponse {
     pub total_count: i64,
 }
 
-/// Any of the following types:
+/// All of the following types:
 ///
-/// - `InteractionLimits`
 /// - `Data`
+/// - `InteractionLimits`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25910,6 +25817,22 @@ pub enum InteractionsGetRestrictionsResponseAnyOf {
      * Interaction limit settings.
      */
     InteractionLimits(InteractionLimits),
+}
+
+impl InteractionsGetRestrictionsResponseAnyOf {
+    pub fn data(&self) -> Option<&Data> {
+        if let InteractionsGetRestrictionsResponseAnyOf::Data(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn interaction_limits(&self) -> Option<&InteractionLimits> {
+        if let InteractionsGetRestrictionsResponseAnyOf::InteractionLimits(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -26907,7 +26830,7 @@ pub struct ProjectsCreateCardRequestData {
     pub content_type: String,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `ProjectsCreateCardRequest`
 /// - `ProjectsCreateCardRequestData`
@@ -26918,6 +26841,22 @@ pub struct ProjectsCreateCardRequestData {
 pub enum ProjectsCreateCardRequestOneOf {
     ProjectsCreateCardRequest(ProjectsCreateCardRequest),
     ProjectsCreateCardRequestData(ProjectsCreateCardRequestData),
+}
+
+impl ProjectsCreateCardRequestOneOf {
+    pub fn projects_create_card_request(&self) -> Option<&ProjectsCreateCardRequest> {
+        if let ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn projects_create_card_request_data(&self) -> Option<&ProjectsCreateCardRequestData> {
+        if let ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequestData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27412,20 +27351,52 @@ pub struct ReposAddStatusCheckContextsRequest {
     pub contexts: Vec<String>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `ReposAddStatusCheckContextsRequest`
 /// - `Vec<String>`
+/// - `ReposAddStatusCheckContextsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddStatusCheckContextsRequestOneOf {
-    ReposAddStatusCheckContextsRequest(ReposAddStatusCheckContextsRequest),
     /**
      * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
+    ReposAddStatusCheckContextsRequest(ReposAddStatusCheckContextsRequest),
+}
+
+impl ReposAddStatusCheckContextsRequestOneOf {
+    pub fn repos_add_status_check_contexts_request(
+        &self,
+    ) -> Option<&ReposAddStatusCheckContextsRequest> {
+        if let ReposAddStatusCheckContextsRequestOneOf::ReposAddStatusCheckContextsRequest(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ReposAddStatusCheckContextsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<String>> for ReposAddStatusCheckContextsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ReposAddStatusCheckContextsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<ReposAddStatusCheckContextsRequestOneOf> for Vec<String> {
+    fn from(f: ReposAddStatusCheckContextsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27437,20 +27408,53 @@ pub struct ReposAddAppAccessRestrictionsRequest {
     pub apps: Vec<String>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `ReposAddAppAccessRestrictionsRequest`
 /// - `Vec<String>`
+/// - `ReposAddAppAccessRestrictionsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddAppAccessRestrictionsRequestOneOf {
-    ReposAddAppAccessRestrictionsRequest(ReposAddAppAccessRestrictionsRequest),
     /**
      * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
+    ReposAddAppAccessRestrictionsRequest(ReposAddAppAccessRestrictionsRequest),
+}
+
+impl ReposAddAppAccessRestrictionsRequestOneOf {
+    pub fn repos_add_app_access_restrictions_request(
+        &self,
+    ) -> Option<&ReposAddAppAccessRestrictionsRequest> {
+        if let ReposAddAppAccessRestrictionsRequestOneOf::ReposAddAppAccessRestrictionsRequest(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ReposAddAppAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<String>> for ReposAddAppAccessRestrictionsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ReposAddAppAccessRestrictionsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<ReposAddAppAccessRestrictionsRequestOneOf> for Vec<String> {
+    fn from(f: ReposAddAppAccessRestrictionsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27462,20 +27466,53 @@ pub struct ReposAddTeamAccessRestrictionsRequest {
     pub teams: Vec<String>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `ReposAddTeamAccessRestrictionsRequest`
 /// - `Vec<String>`
+/// - `ReposAddTeamAccessRestrictionsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddTeamAccessRestrictionsRequestOneOf {
-    ReposAddTeamAccessRestrictionsRequest(ReposAddTeamAccessRestrictionsRequest),
     /**
      * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
+    ReposAddTeamAccessRestrictionsRequest(ReposAddTeamAccessRestrictionsRequest),
+}
+
+impl ReposAddTeamAccessRestrictionsRequestOneOf {
+    pub fn repos_add_team_access_restrictions_request(
+        &self,
+    ) -> Option<&ReposAddTeamAccessRestrictionsRequest> {
+        if let ReposAddTeamAccessRestrictionsRequestOneOf::ReposAddTeamAccessRestrictionsRequest(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ReposAddTeamAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<String>> for ReposAddTeamAccessRestrictionsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ReposAddTeamAccessRestrictionsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<ReposAddTeamAccessRestrictionsRequestOneOf> for Vec<String> {
+    fn from(f: ReposAddTeamAccessRestrictionsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27487,20 +27524,53 @@ pub struct ReposAddUserAccessRestrictionsRequest {
     pub users: Vec<String>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `ReposAddUserAccessRestrictionsRequest`
 /// - `Vec<String>`
+/// - `ReposAddUserAccessRestrictionsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposAddUserAccessRestrictionsRequestOneOf {
-    ReposAddUserAccessRestrictionsRequest(ReposAddUserAccessRestrictionsRequest),
     /**
      * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
+    ReposAddUserAccessRestrictionsRequest(ReposAddUserAccessRestrictionsRequest),
+}
+
+impl ReposAddUserAccessRestrictionsRequestOneOf {
+    pub fn repos_add_user_access_restrictions_request(
+        &self,
+    ) -> Option<&ReposAddUserAccessRestrictionsRequest> {
+        if let ReposAddUserAccessRestrictionsRequestOneOf::ReposAddUserAccessRestrictionsRequest(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let ReposAddUserAccessRestrictionsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<String>> for ReposAddUserAccessRestrictionsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        ReposAddUserAccessRestrictionsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<ReposAddUserAccessRestrictionsRequestOneOf> for Vec<String> {
+    fn from(f: ReposAddUserAccessRestrictionsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -28033,7 +28103,7 @@ pub struct ChecksListSuitesRefResponse {
     pub total_count: i64,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `Vec<Entries>`
 /// - `ContentFile`
@@ -28044,6 +28114,7 @@ pub struct ChecksListSuitesRefResponse {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ReposGetContentResponseOneOf {
+    EntriesVector(Vec<Entries>),
     /**
      * Content File
      */
@@ -28051,12 +28122,53 @@ pub enum ReposGetContentResponseOneOf {
     /**
      * An object describing a symlink
      */
-    ContentSubmodule(ContentSubmodule),
+    SymlinkContent(SymlinkContent),
     /**
      * An object describing a symlink
      */
-    SymlinkContent(SymlinkContent),
-    EntriesVector(Vec<Entries>),
+    ContentSubmodule(ContentSubmodule),
+}
+
+impl ReposGetContentResponseOneOf {
+    pub fn content_file(&self) -> Option<&ContentFile> {
+        if let ReposGetContentResponseOneOf::ContentFile(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn content_submodule(&self) -> Option<&ContentSubmodule> {
+        if let ReposGetContentResponseOneOf::ContentSubmodule(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_entries(&self) -> Option<&Vec<Entries>> {
+        if let ReposGetContentResponseOneOf::EntriesVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn symlink_content(&self) -> Option<&SymlinkContent> {
+        if let ReposGetContentResponseOneOf::SymlinkContent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<Entries>> for ReposGetContentResponseOneOf {
+    fn from(f: Vec<Entries>) -> Self {
+        ReposGetContentResponseOneOf::EntriesVector(f)
+    }
+}
+
+impl From<ReposGetContentResponseOneOf> for Vec<Entries> {
+    fn from(f: ReposGetContentResponseOneOf) -> Self {
+        f.vec_entries().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -28133,15 +28245,6 @@ pub struct ReposCreateDeploymentRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub environment: String,
-    /**
-     * One of the following types:
-     *  
-     *  - `Data`
-     *  - `String`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub payload: Option<PayloadOneOf>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -29002,7 +29105,7 @@ pub struct LabelsDataType {
     pub name: String,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `String`
 /// - `LabelsDataType`
@@ -29011,8 +29114,36 @@ pub struct LabelsDataType {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesCreateRequestLabelsOneOf {
-    LabelsDataType(LabelsDataType),
     String(String),
+    LabelsDataType(LabelsDataType),
+}
+
+impl IssuesCreateRequestLabelsOneOf {
+    pub fn labels_data_type(&self) -> Option<&LabelsDataType> {
+        if let IssuesCreateRequestLabelsOneOf::LabelsDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let IssuesCreateRequestLabelsOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<String> for IssuesCreateRequestLabelsOneOf {
+    fn from(f: String) -> Self {
+        IssuesCreateRequestLabelsOneOf::String(f)
+    }
+}
+
+impl From<IssuesCreateRequestLabelsOneOf> for String {
+    fn from(f: IssuesCreateRequestLabelsOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -29039,26 +29170,8 @@ pub struct IssuesCreateRequest {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
-    /**
-     * One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub milestone: Option<TitleOneOf>,
-    /**
-     * One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde()]
     pub title: TitleOneOf,
 }
@@ -29087,15 +29200,6 @@ pub struct IssuesUpdateRequest {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
-    /**
-     * One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub milestone: Option<TitleOneOf>,
     /**
@@ -29103,15 +29207,6 @@ pub struct IssuesUpdateRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub state: Option<State>,
-    /**
-     * One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub title: Option<TitleOneOf>,
 }
@@ -29140,48 +29235,194 @@ pub struct IssuesSetLabelsRequest {
     pub labels: Vec<ProjectsUpdateColumnRequest>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `IssuesAddLabelsRequest`
-/// - `Vec<String>`
-/// - `IssuesAddLabelsRequestData`
-/// - `Vec<ProjectsUpdateColumnRequest>`
 /// - `String`
+/// - `Vec<String>`
+/// - `IssuesAddLabelsRequest`
+/// - `Vec<ProjectsUpdateColumnRequest>`
+/// - `IssuesSetLabelsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesAddLabelsRequestOneOf {
-    IssuesAddLabelsRequest(IssuesAddLabelsRequest),
-    IssuesAddLabelsRequestData(IssuesAddLabelsRequestData),
     String(String),
-    ProjectsUpdateColumnRequestVector(Vec<ProjectsUpdateColumnRequest>),
     /**
      * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
+    IssuesAddLabelsRequest(IssuesAddLabelsRequest),
+    ProjectsUpdateColumnRequestVector(Vec<ProjectsUpdateColumnRequest>),
+    IssuesSetLabelsRequest(IssuesSetLabelsRequest),
 }
 
-/// Any of the following types:
+impl IssuesAddLabelsRequestOneOf {
+    pub fn issues_add_labels_request(&self) -> Option<&IssuesAddLabelsRequest> {
+        if let IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn issues_set_labels_request(&self) -> Option<&IssuesSetLabelsRequest> {
+        if let IssuesAddLabelsRequestOneOf::IssuesSetLabelsRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_projects_update_column_request(&self) -> Option<&Vec<ProjectsUpdateColumnRequest>> {
+        if let IssuesAddLabelsRequestOneOf::ProjectsUpdateColumnRequestVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let IssuesAddLabelsRequestOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let IssuesAddLabelsRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<ProjectsUpdateColumnRequest>> for IssuesAddLabelsRequestOneOf {
+    fn from(f: Vec<ProjectsUpdateColumnRequest>) -> Self {
+        IssuesAddLabelsRequestOneOf::ProjectsUpdateColumnRequestVector(f)
+    }
+}
+
+impl From<String> for IssuesAddLabelsRequestOneOf {
+    fn from(f: String) -> Self {
+        IssuesAddLabelsRequestOneOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for IssuesAddLabelsRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        IssuesAddLabelsRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<IssuesAddLabelsRequestOneOf> for Vec<ProjectsUpdateColumnRequest> {
+    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
+        f.vec_projects_update_column_request().unwrap().clone()
+    }
+}
+
+impl From<IssuesAddLabelsRequestOneOf> for String {
+    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<IssuesAddLabelsRequestOneOf> for Vec<String> {
+    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
-/// - `IssuesAddLabelsRequest`
-/// - `Vec<String>`
-/// - `IssuesSetLabelsRequest`
-/// - `Vec<ProjectsUpdateColumnRequest>`
 /// - `String`
+/// - `Vec<String>`
+/// - `IssuesAddLabelsRequest`
+/// - `Vec<ProjectsUpdateColumnRequest>`
+/// - `IssuesSetLabelsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum IssuesSetLabelsRequestAnyOf {
-    IssuesAddLabelsRequest(IssuesAddLabelsRequest),
-    IssuesSetLabelsRequest(IssuesSetLabelsRequest),
     String(String),
-    ProjectsUpdateColumnRequestVector(Vec<ProjectsUpdateColumnRequest>),
     /**
      * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
+    IssuesAddLabelsRequest(IssuesAddLabelsRequest),
+    ProjectsUpdateColumnRequestVector(Vec<ProjectsUpdateColumnRequest>),
+    IssuesSetLabelsRequest(IssuesSetLabelsRequest),
+}
+
+impl IssuesSetLabelsRequestAnyOf {
+    pub fn issues_add_labels_request(&self) -> Option<&IssuesAddLabelsRequest> {
+        if let IssuesSetLabelsRequestAnyOf::IssuesAddLabelsRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn issues_set_labels_request(&self) -> Option<&IssuesSetLabelsRequest> {
+        if let IssuesSetLabelsRequestAnyOf::IssuesSetLabelsRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_projects_update_column_request(&self) -> Option<&Vec<ProjectsUpdateColumnRequest>> {
+        if let IssuesSetLabelsRequestAnyOf::ProjectsUpdateColumnRequestVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let IssuesSetLabelsRequestAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let IssuesSetLabelsRequestAnyOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<ProjectsUpdateColumnRequest>> for IssuesSetLabelsRequestAnyOf {
+    fn from(f: Vec<ProjectsUpdateColumnRequest>) -> Self {
+        IssuesSetLabelsRequestAnyOf::ProjectsUpdateColumnRequestVector(f)
+    }
+}
+
+impl From<String> for IssuesSetLabelsRequestAnyOf {
+    fn from(f: String) -> Self {
+        IssuesSetLabelsRequestAnyOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for IssuesSetLabelsRequestAnyOf {
+    fn from(f: Vec<String>) -> Self {
+        IssuesSetLabelsRequestAnyOf::StringVector(f)
+    }
+}
+
+impl From<IssuesSetLabelsRequestAnyOf> for Vec<ProjectsUpdateColumnRequest> {
+    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
+        f.vec_projects_update_column_request().unwrap().clone()
+    }
+}
+
+impl From<IssuesSetLabelsRequestAnyOf> for String {
+    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<IssuesSetLabelsRequestAnyOf> for Vec<String> {
+    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
 }
 
 /**
@@ -29518,7 +29759,7 @@ pub struct SourceDataType {
     pub path: Path,
 }
 
-/// Any of the following types:
+/// All of the following types:
 ///
 /// - `SourceData`
 /// - `SourceDataType`
@@ -29537,6 +29778,22 @@ pub enum SourceAnyOf {
     SourceDataType(SourceDataType),
 }
 
+impl SourceAnyOf {
+    pub fn source_data(&self) -> Option<&SourceData> {
+        if let SourceAnyOf::SourceData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn source_data_type(&self) -> Option<&SourceDataType> {
+        if let SourceAnyOf::SourceDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateInformationAboutPagesSiteRequest {
     #[serde(
@@ -29549,15 +29806,6 @@ pub struct ReposUpdateInformationAboutPagesSiteRequest {
     pub https_enforced: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub public: Option<bool>,
-    /**
-     * Any of the following types:
-     *  
-     *  - `SourceData`
-     *  - `SourceDataType`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub source: Option<SourceAnyOf>,
 }
@@ -30145,7 +30393,7 @@ pub struct SecretScanningUpdateAlertRequest {
     pub state: SecretScanningAlertState,
 }
 
-/// Any of the following types:
+/// All of the following types:
 ///
 /// - `Vec<SimpleUser>`
 /// - `Vec<Stargazer>`
@@ -30156,6 +30404,46 @@ pub struct SecretScanningUpdateAlertRequest {
 pub enum ActivityListStargazersRepoResponseAnyOf {
     SimpleUserVector(Vec<SimpleUser>),
     StargazerVector(Vec<Stargazer>),
+}
+
+impl ActivityListStargazersRepoResponseAnyOf {
+    pub fn vec_simple_user(&self) -> Option<&Vec<SimpleUser>> {
+        if let ActivityListStargazersRepoResponseAnyOf::SimpleUserVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_stargazer(&self) -> Option<&Vec<Stargazer>> {
+        if let ActivityListStargazersRepoResponseAnyOf::StargazerVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<SimpleUser>> for ActivityListStargazersRepoResponseAnyOf {
+    fn from(f: Vec<SimpleUser>) -> Self {
+        ActivityListStargazersRepoResponseAnyOf::SimpleUserVector(f)
+    }
+}
+
+impl From<Vec<Stargazer>> for ActivityListStargazersRepoResponseAnyOf {
+    fn from(f: Vec<Stargazer>) -> Self {
+        ActivityListStargazersRepoResponseAnyOf::StargazerVector(f)
+    }
+}
+
+impl From<ActivityListStargazersRepoResponseAnyOf> for Vec<SimpleUser> {
+    fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
+        f.vec_simple_user().unwrap().clone()
+    }
+}
+
+impl From<ActivityListStargazersRepoResponseAnyOf> for Vec<Stargazer> {
+    fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
+        f.vec_stargazer().unwrap().clone()
+    }
 }
 
 /**
@@ -30352,16 +30640,6 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub path: String,
-    /**
-     * One of the following types:
-     *  
-     *  - `String`
-     *  - `Data`
-     *  - `Vec<String>`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub value: Option<ScimUserOperationsValueOneOf>,
 }
@@ -30511,22 +30789,70 @@ pub struct Value {
     pub user_name: String,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `Value`
-/// - `Vec<ScimUserEmails>`
 /// - `String`
+/// - `Vec<ScimUserEmails>`
+/// - `Value`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ScimUpdateAttributeUserRequestOperationsValueOneOf {
     String(String),
-    Value(Value),
     /**
      * user emails
      */
     ScimUserEmailsVector(Vec<ScimUserEmails>),
+    Value(Value),
+}
+
+impl ScimUpdateAttributeUserRequestOperationsValueOneOf {
+    pub fn vec_scim_user_emails(&self) -> Option<&Vec<ScimUserEmails>> {
+        if let ScimUpdateAttributeUserRequestOperationsValueOneOf::ScimUserEmailsVector(ref_) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ScimUpdateAttributeUserRequestOperationsValueOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn value(&self) -> Option<&Value> {
+        if let ScimUpdateAttributeUserRequestOperationsValueOneOf::Value(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<ScimUserEmails>> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
+    fn from(f: Vec<ScimUserEmails>) -> Self {
+        ScimUpdateAttributeUserRequestOperationsValueOneOf::ScimUserEmailsVector(f)
+    }
+}
+
+impl From<String> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
+    fn from(f: String) -> Self {
+        ScimUpdateAttributeUserRequestOperationsValueOneOf::String(f)
+    }
+}
+
+impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for Vec<ScimUserEmails> {
+    fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
+        f.vec_scim_user_emails().unwrap().clone()
+    }
+}
+
+impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for String {
+    fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -30539,16 +30865,6 @@ pub struct ScimUpdateAttributeUserRequestOperations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub path: String,
-    /**
-     * One of the following types:
-     *  
-     *  - `Value`
-     *  - `Vec<ScimUserEmails>`
-     *  - `String`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub value: Option<ScimUpdateAttributeUserRequestOperationsValueOneOf>,
 }
@@ -30985,23 +31301,39 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
     pub synced_at: String,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `PrivateUser`
 /// - `PublicUser`
+/// - `PrivateUser`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsersGetByUsernameResponseOneOf {
     /**
-     * Private User
-     */
-    PrivateUser(PrivateUser),
-    /**
      * Public User
      */
     PublicUser(PublicUser),
+    /**
+     * Private User
+     */
+    PrivateUser(PrivateUser),
+}
+
+impl UsersGetByUsernameResponseOneOf {
+    pub fn private_user(&self) -> Option<&PrivateUser> {
+        if let UsersGetByUsernameResponseOneOf::PrivateUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn public_user(&self) -> Option<&PublicUser> {
+        if let UsersGetByUsernameResponseOneOf::PublicUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31067,22 +31399,73 @@ pub struct UsersAddEmailAuthenticatedRequest {
     pub emails: Vec<String>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `UsersAddEmailAuthenticatedRequest`
-/// - `Vec<String>`
 /// - `String`
+/// - `Vec<String>`
+/// - `UsersAddEmailAuthenticatedRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UsersAddEmailAuthenticatedRequestOneOf {
     String(String),
-    UsersAddEmailAuthenticatedRequest(UsersAddEmailAuthenticatedRequest),
     /**
      * The list of events for the GitHub app
      */
     StringVector(Vec<String>),
+    UsersAddEmailAuthenticatedRequest(UsersAddEmailAuthenticatedRequest),
+}
+
+impl UsersAddEmailAuthenticatedRequestOneOf {
+    pub fn string(&self) -> Option<&String> {
+        if let UsersAddEmailAuthenticatedRequestOneOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let UsersAddEmailAuthenticatedRequestOneOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn users_add_email_authenticated_request(
+        &self,
+    ) -> Option<&UsersAddEmailAuthenticatedRequest> {
+        if let UsersAddEmailAuthenticatedRequestOneOf::UsersAddEmailAuthenticatedRequest(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<String> for UsersAddEmailAuthenticatedRequestOneOf {
+    fn from(f: String) -> Self {
+        UsersAddEmailAuthenticatedRequestOneOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for UsersAddEmailAuthenticatedRequestOneOf {
+    fn from(f: Vec<String>) -> Self {
+        UsersAddEmailAuthenticatedRequestOneOf::StringVector(f)
+    }
+}
+
+impl From<UsersAddEmailAuthenticatedRequestOneOf> for String {
+    fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<UsersAddEmailAuthenticatedRequestOneOf> for Vec<String> {
+    fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31373,10 +31756,10 @@ impl Default for ReposListUserType {
     }
 }
 
-/// Any of the following types:
+/// All of the following types:
 ///
-/// - `Vec<StarredRepository>`
 /// - `Vec<Repository>`
+/// - `Vec<StarredRepository>`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -31384,4 +31767,44 @@ impl Default for ReposListUserType {
 pub enum ActivityListReposStarredByUserResponseAnyOf {
     RepositoryVector(Vec<Repository>),
     StarredRepositoryVector(Vec<StarredRepository>),
+}
+
+impl ActivityListReposStarredByUserResponseAnyOf {
+    pub fn vec_repository(&self) -> Option<&Vec<Repository>> {
+        if let ActivityListReposStarredByUserResponseAnyOf::RepositoryVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_starred_repository(&self) -> Option<&Vec<StarredRepository>> {
+        if let ActivityListReposStarredByUserResponseAnyOf::StarredRepositoryVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<Repository>> for ActivityListReposStarredByUserResponseAnyOf {
+    fn from(f: Vec<Repository>) -> Self {
+        ActivityListReposStarredByUserResponseAnyOf::RepositoryVector(f)
+    }
+}
+
+impl From<Vec<StarredRepository>> for ActivityListReposStarredByUserResponseAnyOf {
+    fn from(f: Vec<StarredRepository>) -> Self {
+        ActivityListReposStarredByUserResponseAnyOf::StarredRepositoryVector(f)
+    }
+}
+
+impl From<ActivityListReposStarredByUserResponseAnyOf> for Vec<Repository> {
+    fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
+        f.vec_repository().unwrap().clone()
+    }
+}
+
+impl From<ActivityListReposStarredByUserResponseAnyOf> for Vec<StarredRepository> {
+    fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
+        f.vec_starred_repository().unwrap().clone()
+    }
 }

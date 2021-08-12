@@ -2630,8 +2630,8 @@ pub struct Groups {
 
 /// All of the following types:
 ///
-/// - `Groups`
 /// - `Group`
+/// - `Groups`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5900,18 +5900,18 @@ pub struct SessionWebinar {
 
 /// All of the following types:
 ///
-/// - `SessionWebinarSettings`
 /// - `SettingsData`
+/// - `WebinarSettings`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum SessionWebinarUpdateSettingsAllOf {
+    SettingsData(SettingsData),
     /**
      * Webinar settings.
      */
-    SessionWebinarSettings(SessionWebinarSettings),
-    SettingsData(SettingsData),
+    WebinarSettings(WebinarSettings),
 }
 
 /// Base webinar object for sessions.
@@ -10773,7 +10773,7 @@ pub struct ArchiveFiles {
     pub status: String,
 }
 
-/// Any of the following types:
+/// All of the following types:
 ///
 /// - `ArchiveFiles`
 ///
@@ -13968,30 +13968,30 @@ impl OptionData {
     }
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `AccountSettings`
 /// - `Domains`
 /// - `Security`
+/// - `AccountSettings`
 /// - `MeetingSecuritySettings`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AccountSettingsResponseOneOf {
-    AccountSettings(AccountSettings),
     Domains(Domains),
-    MeetingSecuritySettings(MeetingSecuritySettings),
     /**
      * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
     Security(Security),
+    AccountSettings(AccountSettings),
+    MeetingSecuritySettings(MeetingSecuritySettings),
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `UpdateAccountSettings`
 /// - `Domains`
+/// - `UpdateAccountSettings`
 /// - `MeetingSecuritySettings`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
@@ -13999,8 +13999,8 @@ pub enum AccountSettingsResponseOneOf {
 #[serde(untagged)]
 pub enum AccountSettingsUpdateRequestOneOf {
     Domains(Domains),
-    MeetingSecuritySettings(MeetingSecuritySettings),
     UpdateAccountSettings(UpdateAccountSettings),
+    MeetingSecuritySettings(MeetingSecuritySettings),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14396,18 +14396,18 @@ pub struct AccountPlanCreateRequest {
 
 /// All of the following types:
 ///
-/// - `AccountPlanCreateRequest`
 /// - `AccountPlans`
+/// - `AccountPlanCreateRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum AccountPlanCreateRequestAllOf {
-    AccountPlanCreateRequest(AccountPlanCreateRequest),
     /**
      * Account Plans object.
      */
     AccountPlans(AccountPlans),
+    AccountPlanCreateRequest(AccountPlanCreateRequest),
 }
 
 /// Zoom Phone Plan Object
@@ -14430,7 +14430,7 @@ pub struct AccountPlanAddonCreateRequest {
     pub type_: String,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
 /// - `PlanBase`
 /// - `AccountPlanAddonCreateRequest`
@@ -14440,13 +14440,13 @@ pub struct AccountPlanAddonCreateRequest {
 #[serde(untagged)]
 pub enum AccountPlanAddonCreateRequestOneOf {
     /**
-     * Zoom Phone Plan Object
-     */
-    AccountPlanAddonCreateRequest(AccountPlanAddonCreateRequest),
-    /**
      * Account base plan object.
      */
     PlanBase(PlanBase),
+    /**
+     * Zoom Phone Plan Object
+     */
+    AccountPlanAddonCreateRequest(AccountPlanAddonCreateRequest),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14690,8 +14690,8 @@ pub struct UpdateGroupMemberRequest {
 
 /// All of the following types:
 ///
-/// - `Groups`
 /// - `Device`
+/// - `Groups`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14843,8 +14843,8 @@ pub struct ImGroupCreateResponse {
 
 /// All of the following types:
 ///
-/// - `Groups`
 /// - `Domains`
+/// - `Groups`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14953,20 +14953,20 @@ pub struct ImChatSessionsResponseData {
 
 /// All of the following types:
 ///
-/// - `ImChatSessionsResponse`
 /// - `PaginationToken4ImChat`
+/// - `DashboardImResponse`
 /// - `ImChatSessionsResponseData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ImChatSessionsResponseAllOf {
-    ImChatSessionsResponse(ImChatSessionsResponse),
-    ImChatSessionsResponseData(ImChatSessionsResponseData),
     /**
      * Pagination object.
      */
     PaginationToken4ImChat(PaginationToken4ImChat),
+    DashboardImResponse(DashboardImResponse),
+    ImChatSessionsResponseData(ImChatSessionsResponseData),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15052,20 +15052,20 @@ pub struct ImChatMessagesResponseDataType {
 
 /// All of the following types:
 ///
-/// - `ImChatMessagesResponse`
 /// - `PaginationToken4ImChat`
+/// - `ImChatMessagesResponse`
 /// - `ImChatMessagesResponseDataType`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum ImChatMessagesResponseAllOf {
-    ImChatMessagesResponse(ImChatMessagesResponse),
-    ImChatMessagesResponseDataType(ImChatMessagesResponseDataType),
     /**
      * Pagination object.
      */
     PaginationToken4ImChat(PaginationToken4ImChat),
+    ImChatMessagesResponse(ImChatMessagesResponse),
+    ImChatMessagesResponseDataType(ImChatMessagesResponseDataType),
 }
 
 /**
@@ -15143,18 +15143,18 @@ pub struct MeetingCreateResponse {
 
 /// All of the following types:
 ///
-/// - `MeetingCreateResponse`
 /// - `MeetingInfo`
+/// - `MeetingCreateResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum MeetingCreateResponseAllOf {
-    MeetingCreateResponse(MeetingCreateResponse),
     /**
      * Meeting object
      */
     MeetingInfo(MeetingInfo),
+    MeetingCreateResponse(MeetingCreateResponse),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15208,8 +15208,8 @@ pub struct MeetingResponse {
 
 /// All of the following types:
 ///
-/// - `MeetingResponse`
 /// - `MeetingInfoGet`
+/// - `MeetingResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15237,8 +15237,8 @@ pub struct MeetingUpdateRequest {
 
 /// All of the following types:
 ///
-/// - `MeetingUpdateRequest`
 /// - `Domains`
+/// - `MeetingUpdateRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15628,34 +15628,18 @@ pub struct MeetingPollGetResponse {
 
 /// All of the following types:
 ///
-/// - `MeetingPollCreateResponse`
 /// - `Poll`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingPollCreateResponseAllOf {
-    MeetingPollCreateResponse(MeetingPollCreateResponse),
-    /**
-     * Poll
-     */
-    Poll(Poll),
-}
-
-/// All of the following types:
-///
 /// - `MeetingPollGetResponse`
-/// - `Poll`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum MeetingPollGetResponseAllOf {
-    MeetingPollGetResponse(MeetingPollGetResponse),
     /**
      * Poll
      */
     Poll(Poll),
+    MeetingPollGetResponse(MeetingPollGetResponse),
 }
 
 /// All of the following types:
@@ -15698,7 +15682,6 @@ pub struct RecordingGetResponse {
 ///
 /// - `Domains`
 /// - `RecordingGetResponse`
-/// - `Domains`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15873,20 +15856,20 @@ pub struct DashboardMeetingsResponse {
 
 /// All of the following types:
 ///
-/// - `ImChatSessionsResponse`
 /// - `PaginationToken`
+/// - `DashboardImResponse`
 /// - `DashboardMeetingsResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DashboardMeetingsResponseAllOf {
-    DashboardMeetingsResponse(DashboardMeetingsResponse),
-    ImChatSessionsResponse(ImChatSessionsResponse),
     /**
      * Pagination object.
      */
     PaginationToken(PaginationToken),
+    DashboardImResponse(DashboardImResponse),
+    DashboardMeetingsResponse(DashboardMeetingsResponse),
 }
 
 /**
@@ -16419,11 +16402,11 @@ pub struct DashboardMeetingParticipantsResponseData {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DashboardMeetingParticipantsResponseAllOf {
-    DashboardMeetingParticipantsResponseData(DashboardMeetingParticipantsResponseData),
     /**
      * Pagination object.
      */
     PaginationToken(PaginationToken),
+    DashboardMeetingParticipantsResponseData(DashboardMeetingParticipantsResponseData),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -16511,11 +16494,11 @@ pub struct DashboardMeetingParticipantShareResponse {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DashboardMeetingParticipantShareResponseAllOf {
-    DashboardMeetingParticipantShareResponse(DashboardMeetingParticipantShareResponse),
     /**
      * Pagination object.
      */
     PaginationToken(PaginationToken),
+    DashboardMeetingParticipantShareResponse(DashboardMeetingParticipantShareResponse),
 }
 
 /**
@@ -16559,20 +16542,20 @@ pub struct DashboardWebinarsResponse {
 
 /// All of the following types:
 ///
-/// - `ImChatSessionsResponse`
 /// - `PaginationToken`
+/// - `DashboardImResponse`
 /// - `DashboardWebinarsResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DashboardWebinarsResponseAllOf {
-    DashboardWebinarsResponse(DashboardWebinarsResponse),
-    ImChatSessionsResponse(ImChatSessionsResponse),
     /**
      * Pagination object.
      */
     PaginationToken(PaginationToken),
+    DashboardImResponse(DashboardImResponse),
+    DashboardWebinarsResponse(DashboardWebinarsResponse),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -16848,11 +16831,11 @@ pub struct DashboardWebinarParticipantsResponseData {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DashboardWebinarParticipantsResponseAllOf {
-    DashboardWebinarParticipantsResponseData(DashboardWebinarParticipantsResponseData),
     /**
      * Pagination object.
      */
     PaginationToken(PaginationToken),
+    DashboardWebinarParticipantsResponseData(DashboardWebinarParticipantsResponseData),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17038,20 +17021,20 @@ pub struct DashboardImResponseData {
 
 /// All of the following types:
 ///
-/// - `DashboardImResponse`
 /// - `PaginationToken`
+/// - `DashboardImResponse`
 /// - `DashboardImResponseData`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DashboardImResponseAllOf {
-    DashboardImResponse(DashboardImResponse),
-    DashboardImResponseData(DashboardImResponseData),
     /**
      * Pagination object.
      */
     PaginationToken(PaginationToken),
+    DashboardImResponse(DashboardImResponse),
+    DashboardImResponseData(DashboardImResponseData),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17360,20 +17343,20 @@ pub struct DashboardIssueDetailZoomRoomResponse {
 
 /// All of the following types:
 ///
-/// - `DashboardImResponse`
 /// - `PaginationToken`
+/// - `DashboardImResponse`
 /// - `DashboardIssueDetailZoomRoomResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DashboardIssueDetailZoomRoomResponseAllOf {
-    DashboardImResponse(DashboardImResponse),
-    DashboardIssueDetailZoomRoomResponse(DashboardIssueDetailZoomRoomResponse),
     /**
      * Pagination object.
      */
     PaginationToken(PaginationToken),
+    DashboardImResponse(DashboardImResponse),
+    DashboardIssueDetailZoomRoomResponse(DashboardIssueDetailZoomRoomResponse),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -19527,10 +19510,10 @@ pub struct UserZakResponse {
     pub token: String,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `UserSettings`
 /// - `Domains`
+/// - `UserSettings`
 /// - `MeetingSecuritySettings`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
@@ -19538,14 +19521,14 @@ pub struct UserZakResponse {
 #[serde(untagged)]
 pub enum UserSettingsResponseOneOf {
     Domains(Domains),
-    MeetingSecuritySettings(MeetingSecuritySettings),
     UserSettings(UserSettings),
+    MeetingSecuritySettings(MeetingSecuritySettings),
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `UserSettingsUpdate`
 /// - `Domains`
+/// - `UserSettingsUpdate`
 /// - `MeetingSecuritySettings`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
@@ -19553,8 +19536,8 @@ pub enum UserSettingsResponseOneOf {
 #[serde(untagged)]
 pub enum UserSettingsUpdateRequestOneOf {
     Domains(Domains),
-    MeetingSecuritySettings(MeetingSecuritySettings),
     UserSettingsUpdate(UserSettingsUpdate),
+    MeetingSecuritySettings(MeetingSecuritySettings),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -19947,18 +19930,18 @@ pub struct WebinarCreateResponse {
 
 /// All of the following types:
 ///
-/// - `WebinarCreateResponse`
 /// - `WebinarInfo`
+/// - `WebinarCreateResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum WebinarCreateResponseAllOf {
-    WebinarCreateResponse(WebinarCreateResponse),
     /**
      * Webinar object.
      */
     WebinarInfo(WebinarInfo),
+    WebinarCreateResponse(WebinarCreateResponse),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20003,8 +19986,8 @@ pub struct WebinarResponse {
 
 /// All of the following types:
 ///
-/// - `WebinarResponse`
 /// - `WebinarInfo`
+/// - `WebinarResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20566,20 +20549,20 @@ pub struct DashboardClientFeedbackDetailResponse {
 
 /// All of the following types:
 ///
-/// - `DashboardImResponse`
 /// - `PaginationToken4ImChat`
+/// - `DashboardImResponse`
 /// - `DashboardClientFeedbackDetailResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum DashboardClientFeedbackDetailResponseAllOf {
-    DashboardClientFeedbackDetailResponse(DashboardClientFeedbackDetailResponse),
-    DashboardImResponse(DashboardImResponse),
     /**
      * Pagination object.
      */
     PaginationToken4ImChat(PaginationToken4ImChat),
+    DashboardImResponse(DashboardImResponse),
+    DashboardClientFeedbackDetailResponse(DashboardClientFeedbackDetailResponse),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25839,19 +25822,19 @@ pub struct GetGroupSettingsResponse {
     pub telephony: Option<GetGroupSettingsResponseTelephony>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `GetGroupSettingsResponse`
 /// - `Domains`
 /// - `MeetingSecuritySettings`
+/// - `GetGroupSettingsResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetGroupSettingsResponseOneOf {
     Domains(Domains),
-    GetGroupSettingsResponse(GetGroupSettingsResponse),
     MeetingSecuritySettings(MeetingSecuritySettings),
+    GetGroupSettingsResponse(GetGroupSettingsResponse),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26355,11 +26338,11 @@ pub struct UpdateGroupSettingsRequest {
     pub telephony: Option<UpdateGroupSettingsRequestTelephony>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `UpdateGroupSettingsRequest`
 /// - `Domains`
 /// - `MeetingSecuritySettings`
+/// - `UpdateGroupSettingsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26918,17 +26901,17 @@ pub struct GetGroupLockSettingsResponse {
     pub telephony: Option<GetGroupLockSettingsResponseTelephony>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `GetGroupLockSettingsResponse`
 /// - `MeetingSecuritySettings`
+/// - `GetGroupLockSettingsResponse`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GetGroupLockSettingsResponseOneOf {
-    GetGroupLockSettingsResponse(GetGroupLockSettingsResponse),
     MeetingSecuritySettings(MeetingSecuritySettings),
+    GetGroupLockSettingsResponse(GetGroupLockSettingsResponse),
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27137,17 +27120,17 @@ pub struct GroupLockedSettingsRequest {
     pub telephony: Option<GetGroupLockSettingsResponseTelephony>,
 }
 
-/// One of the following types:
+/// All of the following types:
 ///
-/// - `GroupLockedSettingsRequest`
 /// - `MeetingSecuritySettings`
+/// - `GroupLockedSettingsRequest`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum GroupLockedSettingsRequestOneOf {
-    GroupLockedSettingsRequest(GroupLockedSettingsRequest),
     MeetingSecuritySettings(MeetingSecuritySettings),
+    GroupLockedSettingsRequest(GroupLockedSettingsRequest),
 }
 
 /// This field will only be displayed to accounts that are enrolled in a partner plan and follow the master accounts and sub accounts structure.

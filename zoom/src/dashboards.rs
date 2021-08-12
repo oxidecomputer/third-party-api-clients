@@ -42,7 +42,7 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::IncludeFields,
-    ) -> Result<crate::types::DashboardMeetingsResponseAllOfData> {
+    ) -> Result<crate::types::DashboardMeetingsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -348,7 +348,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::DashboardWebinarsResponseAllOfData> {
+    ) -> Result<crate::types::DashboardWebinarsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));

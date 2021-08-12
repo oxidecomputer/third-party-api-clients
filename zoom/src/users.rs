@@ -611,7 +611,7 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_settings_domains(
+    pub async fn user_settings_crate_types_domains(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
@@ -672,13 +672,13 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_settings_meeting_security(
+    pub async fn user_settings_crate_types(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> Result<crate::types::MeetingSecuritySettings> {
+    ) -> Result<crate::types::UserSettings> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {
@@ -733,13 +733,13 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_settings(
+    pub async fn user_settings_crate_types_meeting_security(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
         option: crate::types::OptionData,
         custom_query_fields: &str,
-    ) -> Result<crate::types::UserSettings> {
+    ) -> Result<crate::types::MeetingSecuritySettings> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {

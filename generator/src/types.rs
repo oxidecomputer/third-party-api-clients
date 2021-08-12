@@ -40,9 +40,9 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                     );
                     a(&p);
                 }
-                TypeDetails::OneOf(omap, schema_data) => a(&do_of_type(ts, omap, schema_data, sn)),
-                TypeDetails::AnyOf(omap, schema_data) => a(&do_of_type(ts, omap, schema_data, sn)),
-                TypeDetails::AllOf(omap, schema_data) => a(&do_of_type(ts, omap, schema_data, sn)),
+                TypeDetails::OneOf(omap, _) => a(&do_of_type(ts, omap, sn)),
+                TypeDetails::AnyOf(omap, _) => a(&do_of_type(ts, omap, sn)),
+                TypeDetails::AllOf(omap, _) => a(&do_of_type(ts, omap, sn)),
                 TypeDetails::Object(omap, schema_data) => {
                     /*
                      * TODO: This breaks things so ignore for now.
@@ -185,12 +185,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
     Ok(out.to_string())
 }
 
-fn do_of_type(
-    ts: &mut TypeSpace,
-    omap: &BTreeMap<String, crate::TypeId>,
-    schema_data: &openapiv3::SchemaData,
-    sn: String,
-) -> String {
+fn do_of_type(ts: &mut TypeSpace, omap: &Vec<crate::TypeId>, sn: String) -> String {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -198,15 +193,19 @@ fn do_of_type(
         out.push('\n');
     };
 
-    let desc = if let Some(description) = &schema_data.description {
-        format!("/// {}", description.replace('\n', "\n/// "))
-    } else {
-        "".to_string()
-    };
+    // Get the description.
+    let mut description = "All of the following types:\n\n".to_string();
 
-    if !desc.is_empty() {
-        a(&desc);
+    for itid in omap {
+        let rt = ts.render_type(&itid, true).unwrap();
+        description.push_str(&format!("- `{}`\n", rt));
     }
+    description.push_str(
+        "\nYou can easily convert this enum to the inner value with `From` and `Into`, as both \
+         are implemented for each type.\n",
+    );
+    description = format!("/// {}", description.replace('\n', "\n/// "));
+    a(&description);
 
     a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
     a("#[serde(untagged)]");
@@ -215,14 +214,9 @@ fn do_of_type(
     // Becasue we have so many defaults set on our serde types these enums
     // sometimes parse the wrong value. It's better to instead use the functions we
     // inject that force the value to a specific type.
-    for (name, tid) in omap.iter() {
-        // Try to render the docs.
-        let p = ts.render_docs(tid);
-        if !p.is_empty() && p != desc {
-            a("/**");
-            a(&p);
-            a("*/");
-        }
+    let mut fns: Vec<String> = Default::default();
+    for tid in omap.iter() {
+        let name = ts.render_type(tid, true).unwrap();
 
         let fn_name = if name.starts_with("Vec<") {
             format!(
@@ -234,17 +228,28 @@ fn do_of_type(
         } else if name.starts_with("serde_json") {
             "Value".to_string()
         } else {
-            struct_name(name)
+            struct_name(&name)
         };
 
-        a(&format!("{}({}),", fn_name, name));
-        name_map.insert(fn_name.to_string(), name.to_string());
+        if !fns.contains(&fn_name) {
+            // Try to render the docs.
+            let p = ts.render_docs(tid);
+            if !p.is_empty() && p != description {
+                a("/**");
+                a(&p);
+                a("*/");
+            }
+
+            a(&format!("{}({}),", fn_name, name));
+            name_map.insert(fn_name.to_string(), name.to_string());
+            fns.push(fn_name);
+        }
     }
     a("}");
     a("");
 
     // Render the implementation to easily unpack these things for the end user.
-    /*a(&format!("impl {} {{", sn));
+    a(&format!("impl {} {{", sn));
     for (fn_name, name) in &name_map {
         a(&format!(
             r#"pub fn {}(&self) -> Option<&{}> {{
@@ -265,13 +270,13 @@ fn do_of_type(
         a("");
     }
     a("}");
-    a("");*/
+    a("");
 
     // TODO: Implement defaults for these then turn on defaults for
     // the objects above.
 
     // Render the implementation to easily unpack these things for the end user.
-    /*for (fn_name, name) in &name_map {
+    for (fn_name, name) in &name_map {
         if name == "i64"
             || name == "i32"
             || name == "f64"
@@ -323,7 +328,7 @@ fn do_of_type(
             ));
         }
         a("");
-    }*/
+    }
 
     out
 }

@@ -2872,13 +2872,7 @@ impl Actions {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `workflow_id: &str` -- One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *.
+     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn get_workflow(
         &self,
@@ -2911,13 +2905,7 @@ impl Actions {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `workflow_id: &str` -- One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *.
+     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn disable_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<()> {
         let url = format!(
@@ -2947,13 +2935,7 @@ impl Actions {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `workflow_id: &str` -- One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *.
+     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn create_workflow_dispatch(
         &self,
@@ -2992,13 +2974,7 @@ impl Actions {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `workflow_id: &str` -- One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *.
+     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn enable_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<()> {
         let url = format!(
@@ -3026,13 +3002,7 @@ impl Actions {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `workflow_id: &str` -- One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *.
+     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      * * `actor: &str` -- Returns someone's workflow runs. Use the login for the user who created the `push` associated with the check suite or workflow run.
      * * `branch: &str` -- Returns workflow runs associated with a branch. Use the name of the branch of the `push`.
      * * `event: &str` -- Returns workflow run triggered by the event you specify. For example, `push`, `pull_request` or `issue`. For more information, see "[Events that trigger workflows](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows).".
@@ -3107,13 +3077,7 @@ impl Actions {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `workflow_id: &str` -- One of the following types:
-     *  
-     *  - `String`
-     *  - `i64`
-     *  
-     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
-     *.
+     * * `workflow_id: &str` -- The ID of the workflow. You can also pass the workflow file name as a string.
      */
     pub async fn get_workflow_usage(
         &self,

@@ -210,19 +210,20 @@ pub fn generate_files(
                 // If we have a one of, we can generate a few different subfunctions to
                 // help as well.
                 if let crate::TypeDetails::OneOf(one_of, _) = &te.details {
-                    for (rt, itid) in one_of {
+                    for itid in one_of {
+                        let rt = ts.render_type(itid, false)?;
                         print_fn(
                             &docs,
                             &bounds,
                             &fn_params_str,
                             &body_param,
-                            &ts.render_type(itid, false)?,
+                            &rt,
                             &template,
                             &fn_inner,
                             &to_snake_case(&struct_name(&format!(
                                 "{}_{}",
                                 oid.trim_start_matches(&tag).trim_start_matches('_'),
-                                to_snake_case(rt)
+                                to_snake_case(&rt)
                             ))),
                         );
                     }
