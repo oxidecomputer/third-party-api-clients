@@ -2644,6 +2644,22 @@ pub enum GroupsAllOf {
     Groups(Groups),
 }
 
+impl GroupsAllOf {
+    pub fn group(&self) -> Option<&Group> {
+        if let GroupsAllOf::Group(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn groups(&self) -> Option<&Groups> {
+        if let GroupsAllOf::Groups(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// List of Groups.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupList {
@@ -4378,6 +4394,29 @@ pub enum PanelistsAllOf {
     Panelists(Panelists),
 }
 
+impl PanelistsAllOf {
+    pub fn groups(&self) -> Option<&Groups> {
+        if let PanelistsAllOf::Groups(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn panelist(&self) -> Option<&Panelist> {
+        if let PanelistsAllOf::Panelist(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn panelists(&self) -> Option<&Panelists> {
+        if let PanelistsAllOf::Panelists(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// List of panelists.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PanelistList {
@@ -5213,6 +5252,22 @@ pub enum SettingsAllOf {
     SettingsData(SettingsData),
 }
 
+impl SettingsAllOf {
+    pub fn meeting_settings(&self) -> Option<&MeetingSettings> {
+        if let SettingsAllOf::MeetingSettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn settings_data(&self) -> Option<&SettingsData> {
+        if let SettingsAllOf::SettingsData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Base object for sessions.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SessionUpdate {
@@ -5912,6 +5967,22 @@ pub enum SessionWebinarUpdateSettingsAllOf {
      * Webinar settings.
      */
     WebinarSettings(WebinarSettings),
+}
+
+impl SessionWebinarUpdateSettingsAllOf {
+    pub fn settings_data(&self) -> Option<&SettingsData> {
+        if let SessionWebinarUpdateSettingsAllOf::SettingsData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn webinar_settings(&self) -> Option<&WebinarSettings> {
+        if let SessionWebinarUpdateSettingsAllOf::WebinarSettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /// Base webinar object for sessions.
@@ -7966,6 +8037,15 @@ pub enum WebinarPanelistPanelistsAllOf {
      * Panelist base object.
      */
     Panelist(Panelist),
+}
+
+impl WebinarPanelistPanelistsAllOf {
+    pub fn panelist(&self) -> Option<&Panelist> {
+        if let WebinarPanelistPanelistsAllOf::Panelist(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /// Webinar panelist.
@@ -10782,6 +10862,15 @@ pub struct ArchiveFiles {
 #[serde(untagged)]
 pub enum ArchiveFilesAnyOf {
     ArchiveFiles(ArchiveFiles),
+}
+
+impl ArchiveFilesAnyOf {
+    pub fn archive_files(&self) -> Option<&ArchiveFiles> {
+        if let ArchiveFilesAnyOf::ArchiveFiles(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -13988,6 +14077,36 @@ pub enum AccountSettingsResponseOneOf {
     MeetingSecuritySettings(MeetingSecuritySettings),
 }
 
+impl AccountSettingsResponseOneOf {
+    pub fn account_settings(&self) -> Option<&AccountSettings> {
+        if let AccountSettingsResponseOneOf::AccountSettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn domains(&self) -> Option<&Domains> {
+        if let AccountSettingsResponseOneOf::Domains(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+        if let AccountSettingsResponseOneOf::MeetingSecuritySettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn security(&self) -> Option<&Security> {
+        if let AccountSettingsResponseOneOf::Security(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// All of the following types:
 ///
 /// - `Domains`
@@ -14001,6 +14120,29 @@ pub enum AccountSettingsUpdateRequestOneOf {
     Domains(Domains),
     UpdateAccountSettings(UpdateAccountSettings),
     MeetingSecuritySettings(MeetingSecuritySettings),
+}
+
+impl AccountSettingsUpdateRequestOneOf {
+    pub fn domains(&self) -> Option<&Domains> {
+        if let AccountSettingsUpdateRequestOneOf::Domains(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+        if let AccountSettingsUpdateRequestOneOf::MeetingSecuritySettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn update_account_settings(&self) -> Option<&UpdateAccountSettings> {
+        if let AccountSettingsUpdateRequestOneOf::UpdateAccountSettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14410,6 +14552,22 @@ pub enum AccountPlanCreateRequestAllOf {
     AccountPlanCreateRequest(AccountPlanCreateRequest),
 }
 
+impl AccountPlanCreateRequestAllOf {
+    pub fn account_plan_create_request(&self) -> Option<&AccountPlanCreateRequest> {
+        if let AccountPlanCreateRequestAllOf::AccountPlanCreateRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn account_plans(&self) -> Option<&AccountPlans> {
+        if let AccountPlanCreateRequestAllOf::AccountPlans(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Zoom Phone Plan Object
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlanAddonCreateRequest {
@@ -14447,6 +14605,22 @@ pub enum AccountPlanAddonCreateRequestOneOf {
      * Zoom Phone Plan Object
      */
     AccountPlanAddonCreateRequest(AccountPlanAddonCreateRequest),
+}
+
+impl AccountPlanAddonCreateRequestOneOf {
+    pub fn account_plan_addon_create_request(&self) -> Option<&AccountPlanAddonCreateRequest> {
+        if let AccountPlanAddonCreateRequestOneOf::AccountPlanAddonCreateRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn plan_base(&self) -> Option<&PlanBase> {
+        if let AccountPlanAddonCreateRequestOneOf::PlanBase(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14704,6 +14878,22 @@ pub enum DeviceCreateResponseAllOf {
     Groups(Groups),
 }
 
+impl DeviceCreateResponseAllOf {
+    pub fn device(&self) -> Option<&Device> {
+        if let DeviceCreateResponseAllOf::Device(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn groups(&self) -> Option<&Groups> {
+        if let DeviceCreateResponseAllOf::Groups(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// All of the following types:
 ///
 /// - `Groups`
@@ -14718,6 +14908,22 @@ pub enum TrackingfieldGetResponseAllOf {
      * Tracking Field
      */
     TrackingField(TrackingField),
+}
+
+impl TrackingfieldGetResponseAllOf {
+    pub fn groups(&self) -> Option<&Groups> {
+        if let TrackingfieldGetResponseAllOf::Groups(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn tracking_field(&self) -> Option<&TrackingField> {
+        if let TrackingfieldGetResponseAllOf::TrackingField(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -14854,6 +15060,22 @@ pub enum ImGroupResponseAllOf {
     Groups(Groups),
 }
 
+impl ImGroupResponseAllOf {
+    pub fn domains(&self) -> Option<&Domains> {
+        if let ImGroupResponseAllOf::Domains(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn groups(&self) -> Option<&Groups> {
+        if let ImGroupResponseAllOf::Groups(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DashboardImResponse {
     /**
@@ -14969,6 +15191,29 @@ pub enum ImChatSessionsResponseAllOf {
     ImChatSessionsResponseData(ImChatSessionsResponseData),
 }
 
+impl ImChatSessionsResponseAllOf {
+    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
+        if let ImChatSessionsResponseAllOf::DashboardImResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn im_chat_sessions_response_data(&self) -> Option<&ImChatSessionsResponseData> {
+        if let ImChatSessionsResponseAllOf::ImChatSessionsResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
+        if let ImChatSessionsResponseAllOf::PaginationToken4ImChat(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImChatMessagesResponse {
     /**
@@ -15068,6 +15313,29 @@ pub enum ImChatMessagesResponseAllOf {
     ImChatMessagesResponseDataType(ImChatMessagesResponseDataType),
 }
 
+impl ImChatMessagesResponseAllOf {
+    pub fn im_chat_messages_response(&self) -> Option<&ImChatMessagesResponse> {
+        if let ImChatMessagesResponseAllOf::ImChatMessagesResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn im_chat_messages_response_data_type(&self) -> Option<&ImChatMessagesResponseDataType> {
+        if let ImChatMessagesResponseAllOf::ImChatMessagesResponseDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
+        if let ImChatMessagesResponseAllOf::PaginationToken4ImChat(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /**
  * The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
  */
@@ -15157,6 +15425,22 @@ pub enum MeetingCreateResponseAllOf {
     MeetingCreateResponse(MeetingCreateResponse),
 }
 
+impl MeetingCreateResponseAllOf {
+    pub fn meeting_create_response(&self) -> Option<&MeetingCreateResponse> {
+        if let MeetingCreateResponseAllOf::MeetingCreateResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_info(&self) -> Option<&MeetingInfo> {
+        if let MeetingCreateResponseAllOf::MeetingInfo(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingResponse {
     /**
@@ -15222,6 +15506,22 @@ pub enum MeetingResponseAllOf {
     MeetingResponse(MeetingResponse),
 }
 
+impl MeetingResponseAllOf {
+    pub fn meeting_info_get(&self) -> Option<&MeetingInfoGet> {
+        if let MeetingResponseAllOf::MeetingInfoGet(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_response(&self) -> Option<&MeetingResponse> {
+        if let MeetingResponseAllOf::MeetingResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingUpdateRequest {
     /**
@@ -15246,6 +15546,22 @@ pub struct MeetingUpdateRequest {
 pub enum MeetingUpdateRequestAllOf {
     Domains(Domains),
     MeetingUpdateRequest(MeetingUpdateRequest),
+}
+
+impl MeetingUpdateRequestAllOf {
+    pub fn domains(&self) -> Option<&Domains> {
+        if let MeetingUpdateRequestAllOf::Domains(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_update_request(&self) -> Option<&MeetingUpdateRequest> {
+        if let MeetingUpdateRequestAllOf::MeetingUpdateRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -15550,6 +15866,22 @@ pub enum PastMeetingParticipantsResponseAllOf {
     PastMeetingParticipantsResponse(PastMeetingParticipantsResponse),
 }
 
+impl PastMeetingParticipantsResponseAllOf {
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let PastMeetingParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn past_meeting_participants_response(&self) -> Option<&PastMeetingParticipantsResponse> {
+        if let PastMeetingParticipantsResponseAllOf::PastMeetingParticipantsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// All of the following types:
 ///
 /// - `Poll`
@@ -15562,6 +15894,15 @@ pub enum MeetingPollCreateRequestAllOf {
      * Poll
      */
     Poll(Poll),
+}
+
+impl MeetingPollCreateRequestAllOf {
+    pub fn poll(&self) -> Option<&Poll> {
+        if let MeetingPollCreateRequestAllOf::Poll(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -15642,6 +15983,22 @@ pub enum MeetingPollGetResponseAllOf {
     MeetingPollGetResponse(MeetingPollGetResponse),
 }
 
+impl MeetingPollGetResponseAllOf {
+    pub fn meeting_poll_get_response(&self) -> Option<&MeetingPollGetResponse> {
+        if let MeetingPollGetResponseAllOf::MeetingPollGetResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn poll(&self) -> Option<&Poll> {
+        if let MeetingPollGetResponseAllOf::Poll(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// All of the following types:
 ///
 /// - `MeetingRegistrantQuestionsData`
@@ -15654,6 +16011,17 @@ pub enum MeetingRegistrantsQuestionsGetResponseAllOf {
      * Meeting Registrant Questions
      */
     MeetingRegistrantQuestionsData(MeetingRegistrantQuestionsData),
+}
+
+impl MeetingRegistrantsQuestionsGetResponseAllOf {
+    pub fn meeting_registrant_questions_data(&self) -> Option<&MeetingRegistrantQuestionsData> {
+        if let MeetingRegistrantsQuestionsGetResponseAllOf::MeetingRegistrantQuestionsData(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -15689,6 +16057,22 @@ pub struct RecordingGetResponse {
 pub enum RecordingGetResponseAllOf {
     Domains(Domains),
     RecordingGetResponse(RecordingGetResponse),
+}
+
+impl RecordingGetResponseAllOf {
+    pub fn domains(&self) -> Option<&Domains> {
+        if let RecordingGetResponseAllOf::Domains(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn recording_get_response(&self) -> Option<&RecordingGetResponse> {
+        if let RecordingGetResponseAllOf::RecordingGetResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -15773,6 +16157,18 @@ pub enum RecordingRegistrantQuestionUpdateRequestAllOf {
      * Recording Registrant Questions
      */
     RecordingRegistrantQuestionsData(RecordingRegistrantQuestionsData),
+}
+
+impl RecordingRegistrantQuestionUpdateRequestAllOf {
+    pub fn recording_registrant_questions_data(&self) -> Option<&RecordingRegistrantQuestionsData> {
+        if let RecordingRegistrantQuestionUpdateRequestAllOf::RecordingRegistrantQuestionsData(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -15870,6 +16266,29 @@ pub enum DashboardMeetingsResponseAllOf {
     PaginationToken(PaginationToken),
     DashboardImResponse(DashboardImResponse),
     DashboardMeetingsResponse(DashboardMeetingsResponse),
+}
+
+impl DashboardMeetingsResponseAllOf {
+    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
+        if let DashboardMeetingsResponseAllOf::DashboardImResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_meetings_response(&self) -> Option<&DashboardMeetingsResponse> {
+        if let DashboardMeetingsResponseAllOf::DashboardMeetingsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardMeetingsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -16409,6 +16828,27 @@ pub enum DashboardMeetingParticipantsResponseAllOf {
     DashboardMeetingParticipantsResponseData(DashboardMeetingParticipantsResponseData),
 }
 
+impl DashboardMeetingParticipantsResponseAllOf {
+    pub fn dashboard_meeting_participants_response_data(
+        &self,
+    ) -> Option<&DashboardMeetingParticipantsResponseData> {
+        if let DashboardMeetingParticipantsResponseAllOf::DashboardMeetingParticipantsResponseData(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardMeetingParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Details {
     /**
@@ -16501,6 +16941,24 @@ pub enum DashboardMeetingParticipantShareResponseAllOf {
     DashboardMeetingParticipantShareResponse(DashboardMeetingParticipantShareResponse),
 }
 
+impl DashboardMeetingParticipantShareResponseAllOf {
+    pub fn dashboard_meeting_participant_share_response(
+        &self,
+    ) -> Option<&DashboardMeetingParticipantShareResponse> {
+        if let DashboardMeetingParticipantShareResponseAllOf::DashboardMeetingParticipantShareResponse(ref_) = self {
+                                return Some(ref_);
+                            }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardMeetingParticipantShareResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /**
  * The webinar type.
  */
@@ -16556,6 +17014,29 @@ pub enum DashboardWebinarsResponseAllOf {
     PaginationToken(PaginationToken),
     DashboardImResponse(DashboardImResponse),
     DashboardWebinarsResponse(DashboardWebinarsResponse),
+}
+
+impl DashboardWebinarsResponseAllOf {
+    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
+        if let DashboardWebinarsResponseAllOf::DashboardImResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_webinars_response(&self) -> Option<&DashboardWebinarsResponse> {
+        if let DashboardWebinarsResponseAllOf::DashboardWebinarsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardWebinarsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -16838,6 +17319,27 @@ pub enum DashboardWebinarParticipantsResponseAllOf {
     DashboardWebinarParticipantsResponseData(DashboardWebinarParticipantsResponseData),
 }
 
+impl DashboardWebinarParticipantsResponseAllOf {
+    pub fn dashboard_webinar_participants_response_data(
+        &self,
+    ) -> Option<&DashboardWebinarParticipantsResponseData> {
+        if let DashboardWebinarParticipantsResponseAllOf::DashboardWebinarParticipantsResponseData(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardWebinarParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Users {
     /**
@@ -17037,6 +17539,29 @@ pub enum DashboardImResponseAllOf {
     DashboardImResponseData(DashboardImResponseData),
 }
 
+impl DashboardImResponseAllOf {
+    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
+        if let DashboardImResponseAllOf::DashboardImResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_im_response_data(&self) -> Option<&DashboardImResponseData> {
+        if let DashboardImResponseAllOf::DashboardImResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardImResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DashboardChatResponse {
     /**
@@ -17209,6 +17734,22 @@ pub enum DashboardChatResponseAllOf {
     DashboardChatResponseData(DashboardChatResponseData),
 }
 
+impl DashboardChatResponseAllOf {
+    pub fn dashboard_chat_response(&self) -> Option<&DashboardChatResponse> {
+        if let DashboardChatResponseAllOf::DashboardChatResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_chat_response_data(&self) -> Option<&DashboardChatResponseData> {
+        if let DashboardChatResponseAllOf::DashboardChatResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ClientFeedbacks {
     /**
@@ -17313,6 +17854,25 @@ pub enum DashboardIssueZoomRoomResponseAllOf {
     DashboardIssueZoomRoomResponseData(DashboardIssueZoomRoomResponseData),
 }
 
+impl DashboardIssueZoomRoomResponseAllOf {
+    pub fn dashboard_issue_zoom_room_response(&self) -> Option<&DashboardIssueZoomRoomResponse> {
+        if let DashboardIssueZoomRoomResponseAllOf::DashboardIssueZoomRoomResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_issue_zoom_room_response_data(
+        &self,
+    ) -> Option<&DashboardIssueZoomRoomResponseData> {
+        if let DashboardIssueZoomRoomResponseAllOf::DashboardIssueZoomRoomResponseData(ref_) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueDetails {
     /**
@@ -17357,6 +17917,34 @@ pub enum DashboardIssueDetailZoomRoomResponseAllOf {
     PaginationToken(PaginationToken),
     DashboardImResponse(DashboardImResponse),
     DashboardIssueDetailZoomRoomResponse(DashboardIssueDetailZoomRoomResponse),
+}
+
+impl DashboardIssueDetailZoomRoomResponseAllOf {
+    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
+        if let DashboardIssueDetailZoomRoomResponseAllOf::DashboardImResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_issue_detail_zoom_room_response(
+        &self,
+    ) -> Option<&DashboardIssueDetailZoomRoomResponse> {
+        if let DashboardIssueDetailZoomRoomResponseAllOf::DashboardIssueDetailZoomRoomResponse(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardIssueDetailZoomRoomResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17661,6 +18249,22 @@ pub enum ReportMeetingsResponseAllOf {
     ReportMeetingsResponse(ReportMeetingsResponse),
 }
 
+impl ReportMeetingsResponseAllOf {
+    pub fn pagination(&self) -> Option<&Pagination> {
+        if let ReportMeetingsResponseAllOf::Pagination(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_meetings_response(&self) -> Option<&ReportMeetingsResponse> {
+        if let ReportMeetingsResponseAllOf::ReportMeetingsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingDetailsResponse {
     /**
@@ -17904,6 +18508,26 @@ pub enum ReportMeetingParticipantsResponseAllOf {
     ReportMeetingParticipantsResponseData(ReportMeetingParticipantsResponseData),
 }
 
+impl ReportMeetingParticipantsResponseAllOf {
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let ReportMeetingParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_meeting_participants_response_data(
+        &self,
+    ) -> Option<&ReportMeetingParticipantsResponseData> {
+        if let ReportMeetingParticipantsResponseAllOf::ReportMeetingParticipantsResponseData(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct QuestionDetails {
     /**
@@ -18118,6 +18742,26 @@ pub enum ReportWebinarParticipantsResponseAllOf {
     ReportWebinarParticipantsResponseData(ReportWebinarParticipantsResponseData),
 }
 
+impl ReportWebinarParticipantsResponseAllOf {
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let ReportWebinarParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_webinar_participants_response_data(
+        &self,
+    ) -> Option<&ReportWebinarParticipantsResponseData> {
+        if let ReportWebinarParticipantsResponseAllOf::ReportWebinarParticipantsResponseData(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarQaResponseQuestionsQuestionDetails {
     /**
@@ -18256,6 +18900,22 @@ pub struct ReportCloudRecordingResponse {
 pub enum ReportCloudRecordingResponseAllOf {
     DashboardImResponse(DashboardImResponse),
     ReportCloudRecordingResponse(ReportCloudRecordingResponse),
+}
+
+impl ReportCloudRecordingResponseAllOf {
+    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
+        if let ReportCloudRecordingResponseAllOf::DashboardImResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_cloud_recording_response(&self) -> Option<&ReportCloudRecordingResponse> {
+        if let ReportCloudRecordingResponseAllOf::ReportCloudRecordingResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -18400,6 +19060,22 @@ pub enum ReportOperationLogsResponseAllOf {
      */
     PaginationToken4ImChat(PaginationToken4ImChat),
     ReportOperationLogsResponse(ReportOperationLogsResponse),
+}
+
+impl ReportOperationLogsResponseAllOf {
+    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
+        if let ReportOperationLogsResponseAllOf::PaginationToken4ImChat(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_operation_logs_response(&self) -> Option<&ReportOperationLogsResponse> {
+        if let ReportOperationLogsResponseAllOf::ReportOperationLogsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -19467,6 +20143,29 @@ pub enum UserResponseAllOf {
     UserResponse(UserResponse),
 }
 
+impl UserResponseAllOf {
+    pub fn groups(&self) -> Option<&Groups> {
+        if let UserResponseAllOf::Groups(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn user(&self) -> Option<&User> {
+        if let UserResponseAllOf::User(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn user_response(&self) -> Option<&UserResponse> {
+        if let UserResponseAllOf::UserResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /**
  * Delete action options:<br>`disassociate` - Disassociate a user.<br>`delete`-  Permanently delete a user.<br>Note: To delete pending user in the account, use `disassociate`
  */
@@ -19525,6 +20224,29 @@ pub enum UserSettingsResponseOneOf {
     MeetingSecuritySettings(MeetingSecuritySettings),
 }
 
+impl UserSettingsResponseOneOf {
+    pub fn domains(&self) -> Option<&Domains> {
+        if let UserSettingsResponseOneOf::Domains(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+        if let UserSettingsResponseOneOf::MeetingSecuritySettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn user_settings(&self) -> Option<&UserSettings> {
+        if let UserSettingsResponseOneOf::UserSettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// All of the following types:
 ///
 /// - `Domains`
@@ -19538,6 +20260,29 @@ pub enum UserSettingsUpdateRequestOneOf {
     Domains(Domains),
     UserSettingsUpdate(UserSettingsUpdate),
     MeetingSecuritySettings(MeetingSecuritySettings),
+}
+
+impl UserSettingsUpdateRequestOneOf {
+    pub fn domains(&self) -> Option<&Domains> {
+        if let UserSettingsUpdateRequestOneOf::Domains(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+        if let UserSettingsUpdateRequestOneOf::MeetingSecuritySettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn user_settings_update(&self) -> Option<&UserSettingsUpdate> {
+        if let UserSettingsUpdateRequestOneOf::UserSettingsUpdate(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -19944,6 +20689,22 @@ pub enum WebinarCreateResponseAllOf {
     WebinarCreateResponse(WebinarCreateResponse),
 }
 
+impl WebinarCreateResponseAllOf {
+    pub fn webinar_create_response(&self) -> Option<&WebinarCreateResponse> {
+        if let WebinarCreateResponseAllOf::WebinarCreateResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn webinar_info(&self) -> Option<&WebinarInfo> {
+        if let WebinarCreateResponseAllOf::WebinarInfo(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarResponse {
     /**
@@ -19998,6 +20759,22 @@ pub enum WebinarResponseAllOf {
      */
     WebinarInfo(WebinarInfo),
     WebinarResponse(WebinarResponse),
+}
+
+impl WebinarResponseAllOf {
+    pub fn webinar_info(&self) -> Option<&WebinarInfo> {
+        if let WebinarResponseAllOf::WebinarInfo(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn webinar_response(&self) -> Option<&WebinarResponse> {
+        if let WebinarResponseAllOf::WebinarResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20245,6 +21022,16 @@ pub enum WebinarRegistrantsQuestionsGetResponseAllOf {
      * Webinar Registrant Questions
      */
     WebinarRegistrantQuestions(WebinarRegistrantQuestions),
+}
+
+impl WebinarRegistrantsQuestionsGetResponseAllOf {
+    pub fn webinar_registrant_questions(&self) -> Option<&WebinarRegistrantQuestions> {
+        if let WebinarRegistrantsQuestionsGetResponseAllOf::WebinarRegistrantQuestions(ref_) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -20563,6 +21350,34 @@ pub enum DashboardClientFeedbackDetailResponseAllOf {
     PaginationToken4ImChat(PaginationToken4ImChat),
     DashboardImResponse(DashboardImResponse),
     DashboardClientFeedbackDetailResponse(DashboardClientFeedbackDetailResponse),
+}
+
+impl DashboardClientFeedbackDetailResponseAllOf {
+    pub fn dashboard_client_feedback_detail_response(
+        &self,
+    ) -> Option<&DashboardClientFeedbackDetailResponse> {
+        if let DashboardClientFeedbackDetailResponseAllOf::DashboardClientFeedbackDetailResponse(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
+        if let DashboardClientFeedbackDetailResponseAllOf::DashboardImResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
+        if let DashboardClientFeedbackDetailResponseAllOf::PaginationToken4ImChat(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -25837,6 +26652,29 @@ pub enum GetGroupSettingsResponseOneOf {
     GetGroupSettingsResponse(GetGroupSettingsResponse),
 }
 
+impl GetGroupSettingsResponseOneOf {
+    pub fn domains(&self) -> Option<&Domains> {
+        if let GetGroupSettingsResponseOneOf::Domains(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn get_group_settings_response(&self) -> Option<&GetGroupSettingsResponse> {
+        if let GetGroupSettingsResponseOneOf::GetGroupSettingsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+        if let GetGroupSettingsResponseOneOf::MeetingSecuritySettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupSettingsRequestScheduleMeeting {
     /**
@@ -26351,6 +27189,29 @@ pub enum UpdateGroupSettingsRequestOneOf {
     Domains(Domains),
     MeetingSecuritySettings(MeetingSecuritySettings),
     UpdateGroupSettingsRequest(UpdateGroupSettingsRequest),
+}
+
+impl UpdateGroupSettingsRequestOneOf {
+    pub fn domains(&self) -> Option<&Domains> {
+        if let UpdateGroupSettingsRequestOneOf::Domains(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+        if let UpdateGroupSettingsRequestOneOf::MeetingSecuritySettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn update_group_settings_request(&self) -> Option<&UpdateGroupSettingsRequest> {
+        if let UpdateGroupSettingsRequestOneOf::UpdateGroupSettingsRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -26914,6 +27775,22 @@ pub enum GetGroupLockSettingsResponseOneOf {
     GetGroupLockSettingsResponse(GetGroupLockSettingsResponse),
 }
 
+impl GetGroupLockSettingsResponseOneOf {
+    pub fn get_group_lock_settings_response(&self) -> Option<&GetGroupLockSettingsResponse> {
+        if let GetGroupLockSettingsResponseOneOf::GetGroupLockSettingsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+        if let GetGroupLockSettingsResponseOneOf::MeetingSecuritySettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupLockedSettingsRequestScheduleMeeting {
     /**
@@ -27131,6 +28008,22 @@ pub struct GroupLockedSettingsRequest {
 pub enum GroupLockedSettingsRequestOneOf {
     MeetingSecuritySettings(MeetingSecuritySettings),
     GroupLockedSettingsRequest(GroupLockedSettingsRequest),
+}
+
+impl GroupLockedSettingsRequestOneOf {
+    pub fn group_locked_settings_request(&self) -> Option<&GroupLockedSettingsRequest> {
+        if let GroupLockedSettingsRequestOneOf::GroupLockedSettingsRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_security_settings(&self) -> Option<&MeetingSecuritySettings> {
+        if let GroupLockedSettingsRequestOneOf::MeetingSecuritySettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /// This field will only be displayed to accounts that are enrolled in a partner plan and follow the master accounts and sub accounts structure.
@@ -32402,6 +33295,15 @@ pub enum WebinarInviteLinksCreateRequestAllOf {
     InviteLink(InviteLink),
 }
 
+impl WebinarInviteLinksCreateRequestAllOf {
+    pub fn invite_link(&self) -> Option<&InviteLink> {
+        if let WebinarInviteLinksCreateRequestAllOf::InviteLink(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// All of the following types:
 ///
 /// - `InviteLinks`
@@ -32414,6 +33316,15 @@ pub enum WebinarInviteLinksCreateResponseAllOf {
      * Invite links response.
      */
     InviteLinks(InviteLinks),
+}
+
+impl WebinarInviteLinksCreateResponseAllOf {
+    pub fn invite_links(&self) -> Option<&InviteLinks> {
+        if let WebinarInviteLinksCreateResponseAllOf::InviteLinks(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**

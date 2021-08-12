@@ -99,6 +99,7 @@
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
+#![allow(clippy::large_enum_variant)]
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 

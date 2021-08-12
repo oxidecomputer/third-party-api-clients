@@ -185,7 +185,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
     Ok(out.to_string())
 }
 
-fn do_of_type(ts: &mut TypeSpace, omap: &Vec<crate::TypeId>, sn: String) -> String {
+fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -197,7 +197,7 @@ fn do_of_type(ts: &mut TypeSpace, omap: &Vec<crate::TypeId>, sn: String) -> Stri
     let mut description = "All of the following types:\n\n".to_string();
 
     for itid in omap {
-        let rt = ts.render_type(&itid, true).unwrap();
+        let rt = ts.render_type(itid, true).unwrap();
         description.push_str(&format!("- `{}`\n", rt));
     }
     description.push_str(
