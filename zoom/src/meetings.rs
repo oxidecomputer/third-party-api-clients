@@ -92,7 +92,7 @@ impl Meetings {
         &self,
         user_id: &str,
         body: &crate::types::MeetingCreate,
-    ) -> Result<crate::types::MeetingCreateResponse> {
+    ) -> Result<crate::types::MeetingCreateResponseAllOf> {
         let url = format!(
             "/users/{}/meetings",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -131,7 +131,7 @@ impl Meetings {
         meeting_id: i64,
         occurrence_id: &str,
         show_previous_occurrences: bool,
-    ) -> Result<crate::types::MeetingResponse> {
+    ) -> Result<crate::types::MeetingResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
@@ -240,7 +240,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         occurrence_id: &str,
-        body: &crate::types::MeetingUpdateRequest,
+        body: &crate::types::MeetingUpdateRequestAllOf,
     ) -> Result<()> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -554,7 +554,7 @@ impl Meetings {
         meeting_uuid: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::PaginationToken> {
+    ) -> Result<crate::types::PastMeetingParticipantsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -654,8 +654,8 @@ impl Meetings {
     pub async fn meeting_poll_create(
         &self,
         meeting_id: i64,
-        body: &crate::types::Poll,
-    ) -> Result<crate::types::MeetingPollGetResponse> {
+        body: &crate::types::MeetingPollCreateRequestAllOf,
+    ) -> Result<crate::types::MeetingPollGetResponseAllOf> {
         let url = format!(
             "/meetings/{}/polls",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -693,7 +693,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         poll_id: &str,
-    ) -> Result<crate::types::MeetingPollGetResponse> {
+    ) -> Result<crate::types::MeetingPollGetResponseAllOf> {
         let url = format!(
             "/meetings/{}/polls/{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -726,7 +726,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         poll_id: &str,
-        body: &crate::types::Poll,
+        body: &crate::types::MeetingPollCreateRequestAllOf,
     ) -> Result<()> {
         let url = format!(
             "/meetings/{}/polls/{}",
@@ -794,7 +794,7 @@ impl Meetings {
     pub async fn meeting_registrants_questions_get(
         &self,
         meeting_id: i64,
-    ) -> Result<crate::types::MeetingRegistrantQuestionsData> {
+    ) -> Result<crate::types::MeetingRegistrantsQuestionsGetResponseAllOf> {
         let url = format!(
             "/meetings/{}/registrants/questions",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -824,7 +824,7 @@ impl Meetings {
     pub async fn meeting_registrant_question_update(
         &self,
         meeting_id: i64,
-        body: &crate::types::MeetingRegistrantQuestionsData,
+        body: &crate::types::MeetingRegistrantsQuestionsGetResponseAllOf,
     ) -> Result<()> {
         let url = format!(
             "/meetings/{}/registrants/questions",
@@ -1177,8 +1177,8 @@ impl Meetings {
     pub async fn meeting_invite_links_create(
         &self,
         meeting_id: i64,
-        body: &crate::types::InviteLink,
-    ) -> Result<crate::types::InviteLinks> {
+        body: &crate::types::WebinarInviteLinksCreateRequestAllOf,
+    ) -> Result<crate::types::WebinarInviteLinksCreateResponseAllOf> {
         let url = format!(
             "/meetings/{}/invite_links",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),

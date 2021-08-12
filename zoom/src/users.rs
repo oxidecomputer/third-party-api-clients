@@ -45,7 +45,7 @@ impl Users {
         page_number: &str,
         include_fields: crate::types::UsersIncludeFields,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::Users>> {
+    ) -> Result<Vec<crate::types::UsersResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
@@ -70,7 +70,7 @@ impl Users {
         }
         let url = format!("/users?{}", query);
 
-        let resp: crate::types::UsersResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::UsersResponseData = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
         Ok(resp.users)
@@ -93,7 +93,7 @@ impl Users {
         role_id: &str,
         page_number: &str,
         include_fields: crate::types::UsersIncludeFields,
-    ) -> Result<Vec<crate::types::Users>> {
+    ) -> Result<Vec<crate::types::UsersResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
@@ -112,7 +112,7 @@ impl Users {
         }
         let url = format!("/users?{}", query);
 
-        let mut resp: crate::types::UsersResponse = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::UsersResponseData = self.client.get(&url, None).await.unwrap();
 
         let mut users = resp.users;
         let mut page = resp.next_page_token;
@@ -205,7 +205,7 @@ impl Users {
         user_id: &str,
         login_type: crate::types::LoginType,
         encrypted_email: bool,
-    ) -> Result<crate::types::UserResponse> {
+    ) -> Result<crate::types::UserResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if encrypted_email {

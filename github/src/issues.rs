@@ -1209,7 +1209,7 @@ impl Issues {
         issue_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::LabeledIssueEvent>> {
+    ) -> Result<Vec<crate::types::IssueEventAnyOf>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -1251,7 +1251,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-    ) -> Result<Vec<crate::types::LabeledIssueEvent>> {
+    ) -> Result<Vec<crate::types::IssueEventAnyOf>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/events",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1359,7 +1359,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &crate::types::IssuesAddLabelsRequest,
+        body: &crate::types::IssuesSetLabelsRequestAnyOf,
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
@@ -1396,7 +1396,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &crate::types::IssuesAddLabelsRequestOneOf,
+        body: &crate::types::IssuesAddLabelsRequestOneOfData,
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",

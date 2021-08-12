@@ -44,7 +44,7 @@ impl TrackingField {
     pub async fn trackingfield_create(
         &self,
         body: &crate::types::TrackingField,
-    ) -> Result<crate::types::TrackingfieldGetResponse> {
+    ) -> Result<crate::types::TrackingfieldGetResponseAllOf> {
         let url = "/tracking_fields".to_string();
         self.client
             .post(
@@ -74,7 +74,7 @@ impl TrackingField {
     pub async fn trackingfield_get(
         &self,
         field_id: &str,
-    ) -> Result<crate::types::TrackingfieldGetResponse> {
+    ) -> Result<crate::types::TrackingfieldGetResponseAllOf> {
         let url = format!(
             "/tracking_fields/{}",
             crate::progenitor_support::encode_path(&field_id.to_string()),

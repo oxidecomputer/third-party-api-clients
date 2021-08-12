@@ -526,6 +526,8 @@ pub enum TypeDetails {
      */
     Object(BTreeMap<String, TypeId>, openapiv3::SchemaData),
     OneOf(BTreeMap<String, TypeId>, openapiv3::SchemaData),
+    AnyOf(BTreeMap<String, TypeId>, openapiv3::SchemaData),
+    AllOf(BTreeMap<String, TypeId>, openapiv3::SchemaData),
 }
 
 #[allow(dead_code)]
@@ -539,6 +541,20 @@ impl TypeDetails {
 
     pub fn is_one_of(&self) -> bool {
         if let TypeDetails::OneOf(..) = self {
+            return true;
+        }
+        false
+    }
+
+    pub fn is_any_of(&self) -> bool {
+        if let TypeDetails::AnyOf(..) = self {
+            return true;
+        }
+        false
+    }
+
+    pub fn is_all_of(&self) -> bool {
+        if let TypeDetails::AllOf(..) = self {
             return true;
         }
         false
@@ -567,6 +583,8 @@ impl TypeDetails {
             TypeDetails::Optional(_, d) => d.description.as_ref(),
             TypeDetails::Object(_, d) => d.description.as_ref(),
             TypeDetails::OneOf(_, d) => d.description.as_ref(),
+            TypeDetails::AnyOf(_, d) => d.description.as_ref(),
+            TypeDetails::AllOf(_, d) => d.description.as_ref(),
             TypeDetails::Unknown => None,
         };
 
@@ -620,6 +638,16 @@ impl PartialEq for TypeDetails {
                     return s == os;
                 }
             }
+            TypeDetails::AnyOf(s, _d) => {
+                if let TypeDetails::AnyOf(os, _od) = other {
+                    return s == os;
+                }
+            }
+            TypeDetails::AllOf(s, _d) => {
+                if let TypeDetails::AllOf(os, _od) = other {
+                    return s == os;
+                }
+            }
             TypeDetails::Unknown => {
                 return self == other;
             }
@@ -629,7 +657,7 @@ impl PartialEq for TypeDetails {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct TypeEntry {
     id: TypeId,
     name: Option<String>,
@@ -657,7 +685,7 @@ impl PartialEq for TypeId {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct TypeSpace {
     next_id: u64,
     /*
@@ -746,6 +774,20 @@ impl TypeSpace {
                         format!("[ONE_OF {} !NONAME?]", tid.0)
                     }
                 }
+                TypeDetails::AnyOf(..) => {
+                    if let Some(n) = &te.name {
+                        format!("any_of {}", n)
+                    } else {
+                        format!("[ANY_OF {} !NONAME?]", tid.0)
+                    }
+                }
+                TypeDetails::AllOf(..) => {
+                    if let Some(n) = &te.name {
+                        format!("all_of {}", n)
+                    } else {
+                        format!("[ALL_OF {} !NONAME?]", tid.0)
+                    }
+                }
                 TypeDetails::Unknown => {
                     format!("[UNKNOWN {}]", tid.0)
                 }
@@ -771,7 +813,6 @@ impl TypeSpace {
                     }
                 }
                 TypeDetails::Enum(_, schema_data) => Some(schema_data),
-                TypeDetails::OneOf(_, schema_data) => Some(schema_data),
                 TypeDetails::Array(_, schema_data) => Some(schema_data),
                 TypeDetails::Optional(id, schema_data) => {
                     let def: openapiv3::SchemaData = Default::default();
@@ -782,6 +823,9 @@ impl TypeSpace {
                     }
                 }
                 TypeDetails::Object(_, schema_data) => Some(schema_data),
+                TypeDetails::OneOf(_, schema_data) => Some(schema_data),
+                TypeDetails::AnyOf(_, schema_data) => Some(schema_data),
+                TypeDetails::AllOf(_, schema_data) => Some(schema_data),
                 TypeDetails::Unknown => None,
             }
         } else {
@@ -852,6 +896,40 @@ impl TypeSpace {
                         }
                     } else {
                         bail!("one_of type {:?} does not have a name?", tid);
+                    }
+                }
+                TypeDetails::AnyOf(..) => {
+                    if let Some(n) = &te.name {
+                        let struct_name = struct_name(n);
+                        if in_mod {
+                            Ok(struct_name)
+                        } else {
+                            /*
+                             * Model types are declared in the "types" module,
+                             * and must be referenced with that prefix when not
+                             * in the module itself.
+                             */
+                            Ok(format!("crate::types::{}", struct_name))
+                        }
+                    } else {
+                        bail!("any_of type {:?} does not have a name?", tid);
+                    }
+                }
+                TypeDetails::AllOf(..) => {
+                    if let Some(n) = &te.name {
+                        let struct_name = struct_name(n);
+                        if in_mod {
+                            Ok(struct_name)
+                        } else {
+                            /*
+                             * Model types are declared in the "types" module,
+                             * and must be referenced with that prefix when not
+                             * in the module itself.
+                             */
+                            Ok(format!("crate::types::{}", struct_name))
+                        }
+                    } else {
+                        bail!("all_of type {:?} does not have a name?", tid);
                     }
                 }
                 TypeDetails::Array(itid, _) => {
@@ -1274,7 +1352,6 @@ impl TypeSpace {
         self.add_if_not_exists(n, details, parent_name, false)
     }
 
-    #[allow(clippy::if_same_then_else)]
     fn get_type_name_and_details(
         &mut self,
         name: Option<&str>,
@@ -1350,18 +1427,15 @@ impl TypeSpace {
                         (Some(""), Some(t)) => t,
                         (Some(n), Some(t)) => {
                             // Check if we already have a type with this name.
-                            if n == t {
+                            if n == t
+                                || (n.ends_with("response") || n.ends_with("request"))
+                                || self.name_to_id.get(&clean_name(n)).is_some()
+                            {
                                 t
-                            } else if n.ends_with("response") || n.ends_with("request") {
-                                t
-                            } else if t.ends_with("response") || t.ends_with("request") {
-                                n
-                            } else if self.name_to_id.get(&clean_name(n)).is_some() {
-                                t
-                            } else if self.name_to_id.get(&clean_name(t)).is_some() {
-                                n
-                            } else if n.len() < t.len() {
-                                // Pick the shorter of the names.
+                            } else if (t.ends_with("response") || t.ends_with("request"))
+                                || self.name_to_id.get(&clean_name(t)).is_some()
+                                || n.len() < t.len()
+                            {
                                 n
                             } else {
                                 t
@@ -1436,18 +1510,15 @@ impl TypeSpace {
                             (Some(""), Some(t)) => t,
                             (Some(n), Some(t)) => {
                                 // Check if we already have a type with this name.
-                                if n == t {
+                                if n == t
+                                    || (n.ends_with("response") || n.ends_with("request"))
+                                    || self.name_to_id.get(&clean_name(n)).is_some()
+                                {
                                     t
-                                } else if n.ends_with("response") || n.ends_with("request") {
-                                    t
-                                } else if t.ends_with("response") || t.ends_with("request") {
-                                    n
-                                } else if self.name_to_id.get(&clean_name(n)).is_some() {
-                                    t
-                                } else if self.name_to_id.get(&clean_name(t)).is_some() {
-                                    n
-                                } else if n.len() < t.len() {
-                                    // Pick the shorter of the names.
+                                } else if (t.ends_with("response") || t.ends_with("request"))
+                                    || self.name_to_id.get(&clean_name(t)).is_some()
+                                    || n.len() < t.len()
+                                {
                                     n
                                 } else {
                                     t
@@ -1595,25 +1666,43 @@ impl TypeSpace {
                 )),
             },
             openapiv3::SchemaKind::AllOf { all_of } => {
-                // So for the github api specifically they only ever pass one
-                // thing into this. So let's just get the first thing and embed it.
-                let id = self.select(name, all_of.get(0).unwrap(), "")?;
-                if let Some(et) = self.id_to_entry.get(&id) {
-                    let sd = self.get_schema_data_for_id(&id).unwrap().clone();
-
-                    if s.schema_data.nullable {
-                        if let TypeDetails::Optional(..) = &et.details {
-                            // Do nothing we already have an optional.
-                        } else {
-                            // Set it as optional.
-                            return Ok((Some(nam), TypeDetails::Optional(id, sd)));
-                        }
-                    }
-
-                    Ok((et.name.clone(), et.details.clone()))
-                } else {
-                    bail!("allof schema kind not found: {:?} {:?} {:?}", id, name, s,);
+                // TODO: this is a stop gap for now, we should figure out a better solution later.
+                // Iterate over each one of and add each of them to our typeset.
+                // AllOf types must have a consistent name.
+                let mut all_of_name = nam;
+                if all_of_name.is_empty() && !parent_name.is_empty() {
+                    all_of_name = parent_name.to_string();
                 }
+                if all_of_name.is_empty() {
+                    bail!("all_of name cannot be empty!");
+                }
+                all_of_name.push_str(" all of");
+
+                let mut all_of_description = "All of the following types:\n\n".to_string();
+
+                let mut omap = BTreeMap::new();
+                for one in all_of {
+                    let itid = self.select(
+                        Some(all_of_name.trim_end_matches("all of").trim()),
+                        one,
+                        additional_description,
+                    )?;
+
+                    let rt = self.render_type(&itid, true)?;
+                    all_of_description.push_str(&format!("- `{}`\n", rt));
+
+                    omap.insert(rt, itid);
+                }
+                all_of_description.push_str(
+                    "\nYou can easily convert this enum to the inner value with `From` and \
+                     `Into`, as both are implemented for each type.\n",
+                );
+
+                let sd = openapiv3::SchemaData {
+                    description: Some(all_of_description),
+                    ..Default::default()
+                };
+                Ok((Some(all_of_name), TypeDetails::AllOf(omap, sd)))
             }
             openapiv3::SchemaKind::OneOf { one_of } => {
                 // Iterate over each one of and add each of them to our typeset.
@@ -1654,17 +1743,43 @@ impl TypeSpace {
                 Ok((Some(one_of_name), TypeDetails::OneOf(omap, sd)))
             }
             openapiv3::SchemaKind::AnyOf { any_of } => {
-                // TODO: Actually combine all the types.
-                let id = self.select(name, any_of.get(0).unwrap(), "")?;
-                if let Some(et) = self.id_to_entry.get(&id) {
-                    if let Some(n) = name {
-                        Ok((Some(n.to_string()), et.details.clone()))
-                    } else {
-                        bail!("any_of types need a name? {:?} {:?}", name, any_of)
-                    }
-                } else {
-                    bail!("anyof schema kind: {:?} {:?}\n{:?}", name, s, any_of);
+                // TODO: This is a stop gap for now, we should figure out a better solution later.
+                // Iterate over each one of and add each of them to our typeset.
+                // AnyOf types must have a consistent name.
+                let mut any_of_name = nam;
+                if any_of_name.is_empty() && !parent_name.is_empty() {
+                    any_of_name = parent_name.to_string();
                 }
+                if any_of_name.is_empty() {
+                    bail!("any_of name cannot be empty!");
+                }
+                any_of_name.push_str(" any of");
+
+                let mut any_of_description = "Any of the following types:\n\n".to_string();
+
+                let mut omap = BTreeMap::new();
+                for one in any_of {
+                    let itid = self.select(
+                        Some(any_of_name.trim_end_matches("any of").trim()),
+                        one,
+                        additional_description,
+                    )?;
+
+                    let rt = self.render_type(&itid, true)?;
+                    any_of_description.push_str(&format!("- `{}`\n", rt));
+
+                    omap.insert(rt, itid);
+                }
+                any_of_description.push_str(
+                    "\nYou can easily convert this enum to the inner value with `From` and \
+                     `Into`, as both are implemented for each type.\n",
+                );
+
+                let sd = openapiv3::SchemaData {
+                    description: Some(any_of_description),
+                    ..Default::default()
+                };
+                Ok((Some(any_of_name), TypeDetails::AnyOf(omap, sd)))
             }
             openapiv3::SchemaKind::Any(any) => {
                 // There is at least one occurance where the github api spec gives "items"
@@ -1697,14 +1812,15 @@ impl TypeSpace {
                         (Some(""), Some(t)) => t,
                         (Some(n), Some(t)) => {
                             // Check if we already have a type with this name.
-                            if n == t {
+                            if n == t
+                                || (n.ends_with("response") || n.ends_with("request"))
+                                || self.name_to_id.get(&clean_name(n)).is_some()
+                            {
                                 t
-                            } else if self.name_to_id.get(&clean_name(n)).is_some() {
-                                t
-                            } else if self.name_to_id.get(&clean_name(t)).is_some() {
-                                n
-                            } else if n.len() < t.len() {
-                                // Pick the shorter of the names.
+                            } else if (t.ends_with("response") || t.ends_with("request"))
+                                || self.name_to_id.get(&clean_name(t)).is_some()
+                                || n.len() < t.len()
+                            {
                                 n
                             } else {
                                 t

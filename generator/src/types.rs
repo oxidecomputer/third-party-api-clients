@@ -21,7 +21,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
     a("    use serde::{Serialize, Deserialize};");
     a("");
 
-    for te in ts.id_to_entry.values() {
+    for te in ts.clone().id_to_entry.values() {
         if let Some(sn) = te.name.as_deref() {
             let sn = struct_name(sn);
 
@@ -40,131 +40,9 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                     );
                     a(&p);
                 }
-                TypeDetails::OneOf(omap, schema_data) => {
-                    let desc = if let Some(description) = &schema_data.description {
-                        format!("/// {}", description.replace('\n', "\n/// "))
-                    } else {
-                        "".to_string()
-                    };
-
-                    if !desc.is_empty() {
-                        a(&desc);
-                    }
-
-                    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
-                    a("#[serde(untagged)]");
-                    a(&format!("pub enum {} {{", sn));
-                    let mut name_map: BTreeMap<String, String> = Default::default();
-                    // Becasue we have so many defaults set on our serde types these enums
-                    // sometimes parse the wrong value. It's better to instead use the functions we
-                    // inject that force the value to a specific type.
-                    for (name, tid) in omap.iter() {
-                        // Try to render the docs.
-                        let p = ts.render_docs(tid);
-                        if !p.is_empty() && p != desc {
-                            a("/**");
-                            a(&p);
-                            a("*/");
-                        }
-
-                        let fn_name = if name.starts_with("Vec<") {
-                            format!(
-                                "{}Vector",
-                                name.trim_start_matches("Vec<")
-                                    .trim_end_matches('>')
-                                    .replace("serde_json::", "")
-                            )
-                        } else if name.starts_with("serde_json") {
-                            "Value".to_string()
-                        } else {
-                            struct_name(name)
-                        };
-
-                        a(&format!("{}({}),", fn_name, name));
-                        name_map.insert(fn_name, name.to_string());
-                    }
-                    a("}");
-                    a("");
-
-                    // Render the implementation to easily unpack these things for the end user.
-                    a(&format!("impl {} {{", sn));
-                    for (fn_name, name) in &name_map {
-                        a(&format!(
-                            r#"pub fn {}(&self) -> Option<&{}> {{
-                            if let {}::{}(ref_) = self {{
-                                return Some(ref_);
-                            }}
-                            None
-                        }}"#,
-                            to_snake_case(name)
-                                .replace("f_64", "f64")
-                                .replace("f_32", "f32")
-                                .replace("i_64", "i64")
-                                .replace("i_32", "i32"),
-                            name,
-                            sn,
-                            fn_name,
-                        ));
-                        a("");
-                    }
-                    a("}");
-                    a("");
-
-                    // Render the implementation to easily unpack these things for the end user.
-                    for (fn_name, name) in &name_map {
-                        a(&format!(
-                            r#"impl From<{}> for {} {{
-                                    fn from(f: {}) -> Self {{
-                                        {}::{}(f)
-                                    }}
-                            }}"#,
-                            name, sn, name, sn, fn_name,
-                        ));
-                        a("");
-                    }
-
-                    for name in name_map.values() {
-                        if name == "i64"
-                            || name == "i32"
-                            || name == "f64"
-                            || name == "f32"
-                            || name == "bool"
-                        {
-                            a(&format!(
-                                r#"impl From<{}> for {} {{
-                                    fn from(f: {}) -> Self {{
-                                        *f.{}().unwrap()
-                                    }}
-                            }}"#,
-                                sn,
-                                name,
-                                sn,
-                                to_snake_case(name)
-                                    .replace("f_64", "f64")
-                                    .replace("f_32", "f32")
-                                    .replace("i_64", "i64")
-                                    .replace("i_32", "i32"),
-                            ));
-                        } else {
-                            a(&format!(
-                                r#"impl From<{}> for {} {{
-                                    fn from(f: {}) -> Self {{
-                                        f.{}().unwrap().clone()
-                                    }}
-                            }}"#,
-                                sn,
-                                name,
-                                sn,
-                                to_snake_case(name)
-                                    .replace("f_64", "f64")
-                                    .replace("f_32", "f32")
-                                    .replace("i_64", "i64")
-                                    .replace("i_32", "i32"),
-                            ));
-                        }
-                        a("");
-                    }
-                }
+                TypeDetails::OneOf(omap, schema_data) => a(&do_of_type(ts, omap, schema_data, sn)),
+                TypeDetails::AnyOf(omap, schema_data) => a(&do_of_type(ts, omap, schema_data, sn)),
+                TypeDetails::AllOf(omap, schema_data) => a(&do_of_type(ts, omap, schema_data, sn)),
                 TypeDetails::Object(omap, schema_data) => {
                     /*
                      * TODO: This breaks things so ignore for now.
@@ -185,10 +63,8 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                         a(&desc);
                     }
 
-                    // TODO: We could likely have default's for a lot of these.
-                    // Don't hard code these in the future as exceptions.
-                    if sn != "IssuesCreateRequest" && sn != "Deployment" {
-                        a("#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]");
+                    if sn == "Page" {
+                        a("#[derive(Serialize,Default, Deserialize, Debug, Clone, JsonSchema)]");
                     } else {
                         a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
                     }
@@ -307,4 +183,147 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
     }
 
     Ok(out.to_string())
+}
+
+fn do_of_type(
+    ts: &mut TypeSpace,
+    omap: &BTreeMap<String, crate::TypeId>,
+    schema_data: &openapiv3::SchemaData,
+    sn: String,
+) -> String {
+    let mut out = String::new();
+
+    let mut a = |s: &str| {
+        out.push_str(s);
+        out.push('\n');
+    };
+
+    let desc = if let Some(description) = &schema_data.description {
+        format!("/// {}", description.replace('\n', "\n/// "))
+    } else {
+        "".to_string()
+    };
+
+    if !desc.is_empty() {
+        a(&desc);
+    }
+
+    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+    a("#[serde(untagged)]");
+    a(&format!("pub enum {} {{", sn));
+    let mut name_map: BTreeMap<String, String> = Default::default();
+    // Becasue we have so many defaults set on our serde types these enums
+    // sometimes parse the wrong value. It's better to instead use the functions we
+    // inject that force the value to a specific type.
+    for (name, tid) in omap.iter() {
+        // Try to render the docs.
+        let p = ts.render_docs(tid);
+        if !p.is_empty() && p != desc {
+            a("/**");
+            a(&p);
+            a("*/");
+        }
+
+        let fn_name = if name.starts_with("Vec<") {
+            format!(
+                "{}Vector",
+                name.trim_start_matches("Vec<")
+                    .trim_end_matches('>')
+                    .replace("serde_json::", "")
+            )
+        } else if name.starts_with("serde_json") {
+            "Value".to_string()
+        } else {
+            struct_name(name)
+        };
+
+        a(&format!("{}({}),", fn_name, name));
+        name_map.insert(fn_name.to_string(), name.to_string());
+    }
+    a("}");
+    a("");
+
+    // Render the implementation to easily unpack these things for the end user.
+    a(&format!("impl {} {{", sn));
+    for (fn_name, name) in &name_map {
+        a(&format!(
+            r#"pub fn {}(&self) -> Option<&{}> {{
+                            if let {}::{}(ref_) = self {{
+                                return Some(ref_);
+                            }}
+                            None
+                        }}"#,
+            to_snake_case(name)
+                .replace("f_64", "f64")
+                .replace("f_32", "f32")
+                .replace("i_64", "i64")
+                .replace("i_32", "i32"),
+            name,
+            sn,
+            fn_name,
+        ));
+        a("");
+    }
+    a("}");
+    a("");
+
+    // TODO: Implement defaults for these then turn on defaults for
+    // the objects above.
+
+    // Render the implementation to easily unpack these things for the end user.
+    for (fn_name, name) in &name_map {
+        if name == "i64"
+            || name == "i32"
+            || name == "f64"
+            || name == "f32"
+            || name == "bool"
+            || name == "String"
+            || name.starts_with("Vec<")
+        {
+            a(&format!(
+                r#"impl From<{}> for {} {{
+                                    fn from(f: {}) -> Self {{
+                                        {}::{}(f)
+                                    }}
+                            }}"#,
+                name, sn, name, sn, fn_name,
+            ));
+            a("");
+        }
+    }
+
+    for name in name_map.values() {
+        if name == "i64" || name == "i32" || name == "f64" || name == "f32" || name == "bool" {
+            a(&format!(
+                r#"impl From<{}> for {} {{
+                                    fn from(f: {}) -> Self {{
+                                        *f.{}().unwrap()
+                                    }}
+                            }}"#,
+                sn,
+                name,
+                sn,
+                to_snake_case(name)
+                    .replace("f_64", "f64")
+                    .replace("f_32", "f32")
+                    .replace("i_64", "i64")
+                    .replace("i_32", "i32"),
+            ));
+        } else if name == "String" || name.starts_with("Vec<") {
+            a(&format!(
+                r#"impl From<{}> for {} {{
+                                    fn from(f: {}) -> Self {{
+                                        f.{}().unwrap().clone()
+                                    }}
+                            }}"#,
+                sn,
+                name,
+                sn,
+                to_snake_case(name)
+            ));
+        }
+        a("");
+    }
+
+    out
 }

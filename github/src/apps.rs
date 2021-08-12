@@ -41,7 +41,10 @@ impl Apps {
      *
      * * `code: &str`
      */
-    pub async fn create_from_manifest(&self, code: &str) -> Result<crate::types::GitHubApp> {
+    pub async fn create_from_manifest(
+        &self,
+        code: &str,
+    ) -> Result<crate::types::AppsCreateFromManifestResponseAllOf> {
         let url = format!(
             "/app-manifests/{}/conversions",
             crate::progenitor_support::encode_path(&code.to_string()),
@@ -644,7 +647,7 @@ impl Apps {
         &self,
         client_id: &str,
         access_token: &str,
-    ) -> Result<crate::types::Authorization> {
+    ) -> Result<crate::types::AppsCheckAuthorizationResponseAllOf> {
         let url = format!(
             "/applications/{}/tokens/{}",
             crate::progenitor_support::encode_path(&client_id.to_string()),

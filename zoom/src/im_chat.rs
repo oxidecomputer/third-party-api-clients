@@ -33,13 +33,13 @@ impl ImChat {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn sessions(
+    pub async fn session(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ImChatSessionsResponse> {
+    ) -> Result<crate::types::ImChatSessionsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -87,14 +87,14 @@ impl ImChat {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn messages(
+    pub async fn message(
         &self,
         session_id: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ImChatMessagesResponse> {
+    ) -> Result<crate::types::ImChatMessagesResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));

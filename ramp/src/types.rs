@@ -3,10 +3,10 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /// Extra metadata about the error, may be empty. Usually depends on the error type.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Details {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Error {
     /**
      * Extra metadata about the error, may be empty. Usually depends on the error type.
@@ -21,13 +21,13 @@ pub struct Error {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ErrorResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub error: Option<Error>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TaskResponse {
     /**
      * ID of the job started.
@@ -82,7 +82,7 @@ impl Role {
 }
 
 /// Ramp User
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct User {
     #[serde(
         default,
@@ -160,7 +160,7 @@ pub struct User {
     pub role: Role,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PatchUsersRequest {
     #[serde(
         default,
@@ -184,7 +184,7 @@ pub struct PatchUsersRequest {
     pub role: Option<Role>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Page {
     #[serde(
         default,
@@ -194,7 +194,7 @@ pub struct Page {
     pub next: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CardHolder {
     #[serde(
         default,
@@ -234,7 +234,7 @@ pub struct CardHolder {
     pub location_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountingCategories {
     #[serde(
         default,
@@ -285,7 +285,7 @@ impl Type {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PolicyViolations {
     #[serde(
         default,
@@ -353,7 +353,7 @@ impl GetTransactionResponseDataDisputesType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Disputes {
     #[serde(
         default,
@@ -381,7 +381,7 @@ pub struct Disputes {
 }
 
 /// Ramp transaction
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Data {
     /**
      * Ramp transaction
@@ -470,7 +470,7 @@ pub struct Data {
     pub user_transaction_time: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetTransactionResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Data>,
@@ -479,7 +479,7 @@ pub struct GetTransactionResponse {
 }
 
 /// Ramp location
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Location {
     /**
      * Ramp location
@@ -501,7 +501,7 @@ pub struct Location {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Location>,
@@ -510,7 +510,7 @@ pub struct GetLocationResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostLocationRequest {
     #[serde(
         default,
@@ -521,7 +521,7 @@ pub struct PostLocationRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetUsersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<User>,
@@ -529,7 +529,7 @@ pub struct GetUsersResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PatchLocationRequest {
     /**
      * New name of location
@@ -543,7 +543,7 @@ pub struct PatchLocationRequest {
 }
 
 /// Ramp Department
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Department {
     /**
      * Ramp Department
@@ -565,7 +565,7 @@ pub struct Department {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetDepartmentsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Department>,
@@ -573,7 +573,7 @@ pub struct GetDepartmentsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PatchDepartmentRequest {
     /**
      * New department name
@@ -586,7 +586,7 @@ pub struct PatchDepartmentRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecipientAddress {
     #[serde(
         default,
@@ -632,14 +632,14 @@ pub struct RecipientAddress {
     pub state: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Shipping {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipient_address: Option<RecipientAddress>,
 }
 
 /// Details for shipping physical cards
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Fulfillment {
     /**
      * Details for shipping physical cards
@@ -693,7 +693,7 @@ impl Interval {
 }
 
 /// Specifies the spend restrictions on a Ramp card.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SpendingRestrictions {
     /**
      * Amount limit total per interval.
@@ -748,7 +748,7 @@ pub struct SpendingRestrictions {
 }
 
 /// Card data that holds mostly static information about a card.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Card {
     /**
      * Card data that holds mostly static information about a card.
@@ -824,7 +824,7 @@ pub struct Card {
     pub spending_restrictions: Option<SpendingRestrictions>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCardsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub cards: Vec<Card>,
@@ -832,7 +832,7 @@ pub struct GetCardsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PatchResourcesCardsCardRequest {
     /**
      * Set to link card with a card program, or set to null to detach a card from a card program. If the card is already linked with a card program, it will detach from original card program before linking with the new one.
@@ -864,7 +864,7 @@ pub struct PatchResourcesCardsCardRequest {
     pub spending_restrictions: Option<SpendingRestrictions>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCustomProviderResponse {
     #[serde(
         default,
@@ -874,7 +874,7 @@ pub struct GetCustomProviderResponse {
     pub custom_id_provider: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostcustomProviderResponse {
     #[serde(
         default,
@@ -884,7 +884,7 @@ pub struct PostcustomProviderResponse {
     pub provider_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BillingAddress {
     #[serde(
         default,
@@ -919,7 +919,7 @@ pub struct BillingAddress {
 }
 
 /// Mostly static information about a business that doesn't change often.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Business {
     #[serde(
         default,
@@ -1007,7 +1007,7 @@ pub struct Business {
     pub website: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardPhysicalRequest {
     /**
      * Alternative method to create card using a card program. Card program's is_physical must be true. If this value is given, no other attributes (other than idempotency_key) may be given.
@@ -1051,7 +1051,7 @@ pub struct PostResourcesCardPhysicalRequest {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardVirtualRequest {
     /**
      * Alternative method to create card using a card program. Card program's is_physical must be false. If this value is given, no other attributes (other than idempotency_key) may be given.
@@ -1123,7 +1123,7 @@ impl TokenType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OAuth2Token {
     #[serde(
         default,
@@ -1172,7 +1172,7 @@ pub struct OAuth2Token {
 }
 
 /// Current data about the business.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BusinessCurrentStatus {
     /**
      * Current data about the business.
@@ -1213,7 +1213,7 @@ pub struct BusinessCurrentStatus {
     pub statement_balance: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardsCardSuspensionRequest {
     /**
      * Idempotency key
@@ -1226,7 +1226,7 @@ pub struct PostResourcesCardsCardSuspensionRequest {
     pub idempotency_key: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetEntityTypeCustomRampResponse {
     #[serde(
         default,
@@ -1236,7 +1236,7 @@ pub struct GetEntityTypeCustomRampResponse {
     pub ramp_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetEntityTypeRampCustomResponse {
     #[serde(
         default,
@@ -1246,7 +1246,7 @@ pub struct GetEntityTypeRampCustomResponse {
     pub custom_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetResourcesCardsDeferredResponseData {
     #[serde(
         default,
@@ -1315,7 +1315,7 @@ impl Status {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetResourcesCardsDeferredResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<GetResourcesCardsDeferredResponseData>,
@@ -1389,7 +1389,7 @@ impl Icon {
 }
 
 /// Card Program data that serves as a template for creating new cards.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CardProgram {
     /**
      * Card Program data that serves as a template for creating new cards.
@@ -1446,7 +1446,7 @@ pub struct CardProgram {
     pub spending_restrictions: Option<SpendingRestrictions>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCardProgramsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub card_programs: Vec<CardProgram>,
@@ -1454,7 +1454,7 @@ pub struct GetCardProgramsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardProgramRequest {
     #[serde(
         default,
@@ -1481,7 +1481,7 @@ pub struct PostResourcesCardProgramRequest {
     pub spending_restrictions: SpendingRestrictions,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostUsersDeferredRequest {
     #[serde(
         default,
@@ -1529,7 +1529,7 @@ pub struct PostUsersDeferredRequest {
     pub role: Role,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponseData {
     #[serde(
         default,
@@ -1558,7 +1558,7 @@ pub struct GetUsersDeferredStatusResponseData {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponse {
     /**
      *
@@ -1586,7 +1586,7 @@ pub struct GetUsersDeferredStatusResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponseDataType {
     /**
      *
@@ -1595,7 +1595,7 @@ pub struct GetUsersDeferredStatusResponseDataType {
     pub error: Option<Error>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Receipt {
     #[serde(
         default,
@@ -1629,7 +1629,7 @@ pub struct Receipt {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetReceiptsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Receipt>,
@@ -1637,7 +1637,7 @@ pub struct GetReceiptsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Reimbursement {
     #[serde(
         default,
@@ -1681,7 +1681,7 @@ pub struct Reimbursement {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetReimbursementsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Reimbursement>,
@@ -1689,7 +1689,7 @@ pub struct GetReimbursementsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostCustomProviderEntityTypeLinkRequest {
     #[serde(
         default,

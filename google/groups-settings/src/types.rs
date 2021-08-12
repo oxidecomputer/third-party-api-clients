@@ -3,7 +3,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /// JSON template for Group resource
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Groups {
     /**
      * JSON template for Group resource

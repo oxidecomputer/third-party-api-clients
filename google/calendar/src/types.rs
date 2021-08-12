@@ -2,7 +2,7 @@
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Acl {
     /**
      * ETag of the collection.
@@ -48,7 +48,7 @@ pub struct Acl {
 }
 
 /// The extent to which calendar access is granted by this ACL rule.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Scope {
     /**
      * The extent to which calendar access is granted by this ACL rule.
@@ -71,7 +71,7 @@ pub struct Scope {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AclRule {
     /**
      * ETag of the resource.
@@ -121,7 +121,7 @@ pub struct AclRule {
     pub scope: Option<Scope>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Calendar {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conference_properties: Option<ConferenceProperties>,
@@ -190,7 +190,7 @@ pub struct Calendar {
     pub time_zone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CalendarList {
     /**
      * ETag of the collection.
@@ -236,7 +236,7 @@ pub struct CalendarList {
 }
 
 /// The notifications that the authenticated user is receiving for this calendar.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct NotificationSettings {
     /**
      * The notifications that the authenticated user is receiving for this calendar.
@@ -245,7 +245,7 @@ pub struct NotificationSettings {
     pub notifications: Vec<CalendarNotification>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CalendarListEntry {
     /**
      * The effective access role that the authenticated user has on the calendar. Read-only. Possible values are:  
@@ -405,7 +405,7 @@ pub struct CalendarListEntry {
     pub time_zone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CalendarNotification {
     /**
      * The method used to deliver the notification. The possible value is:  
@@ -437,10 +437,10 @@ pub struct CalendarNotification {
 }
 
 /// Additional parameters controlling delivery channel behavior. Optional.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Params {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
      * The address where notifications are delivered for this channel.
@@ -530,7 +530,7 @@ pub struct Channel {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ColorDefinition {
     /**
      * The background color associated with this color definition.
@@ -553,14 +553,14 @@ pub struct ColorDefinition {
 }
 
 /// A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ColorsCalendar {}
 
 /// A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Event {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Colors {
     /**
      * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
@@ -592,7 +592,7 @@ pub struct Colors {
     pub updated: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ConferenceData {
     /**
      * The ID of the conference.
@@ -645,22 +645,22 @@ pub struct ConferenceData {
     pub signature: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ConferenceParameters {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub add_on_parameters: Option<ConferenceParametersAddOn>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Parameters {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ConferenceParametersAddOn {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub parameters: Option<Parameters>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ConferenceProperties {
     /**
      * The types of conference solutions that are supported for this calendar.
@@ -673,7 +673,7 @@ pub struct ConferenceProperties {
     pub allowed_conference_solution_types: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ConferenceRequestStatus {
     /**
      * The current status of the conference create request. Read-only.
@@ -690,7 +690,7 @@ pub struct ConferenceRequestStatus {
     pub status_code: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ConferenceSolution {
     /**
      * The user-visible icon for this solution.
@@ -714,7 +714,7 @@ pub struct ConferenceSolution {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ConferenceSolutionKey {
     /**
      * The conference solution type.
@@ -734,7 +734,7 @@ pub struct ConferenceSolutionKey {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateConferenceRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conference_solution_key: Option<ConferenceSolutionKey>,
@@ -752,7 +752,7 @@ pub struct CreateConferenceRequest {
     pub status: Option<ConferenceRequestStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EntryPoint {
     /**
      * The access code to access the conference. The maximum length is 128 characters.
@@ -868,7 +868,7 @@ pub struct EntryPoint {
     pub uri: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Error {
     /**
      * Domain, or broad category, of the error.
@@ -895,7 +895,7 @@ pub struct Error {
 }
 
 /// The creator of the event. Read-only.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Creator {
     /**
      * The creator of the event. Read-only.
@@ -936,15 +936,15 @@ pub struct Creator {
 }
 
 /// Properties that are private to the copy of the event that appears on this calendar.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Private {}
 
 /// Properties that are shared between copies of the event on other attendees' calendars.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Shared {}
 
 /// Extended properties of the event.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ExtendedProperties {
     /**
      * Extended properties of the event.
@@ -959,11 +959,11 @@ pub struct ExtendedProperties {
 }
 
 /// Preferences.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Preferences {}
 
 /// A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Gadget {
     /**
      * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
@@ -1037,7 +1037,7 @@ pub struct Gadget {
 }
 
 /// The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Organizer {
     /**
      * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
@@ -1078,7 +1078,7 @@ pub struct Organizer {
 }
 
 /// Information about the event's reminders for the authenticated user.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Reminders {
     /**
      * Information about the event's reminders for the authenticated user.
@@ -1096,7 +1096,7 @@ pub struct Reminders {
 }
 
 /// Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Source {
     /**
      * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
@@ -1118,7 +1118,7 @@ pub struct Source {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EventData {
     /**
      * Whether anyone can invite themselves to the event (deprecated). Optional. The default is False.
@@ -1426,7 +1426,7 @@ pub struct EventData {
     pub visibility: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EventAttachment {
     /**
      * ID of the attached file. Read-only.
@@ -1478,7 +1478,7 @@ pub struct EventAttachment {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EventAttendee {
     /**
      * Number of additional guests. Optional. The default is 0.
@@ -1574,7 +1574,7 @@ pub struct EventAttendee {
     pub self_: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EventDateTime {
     /**
      * The date, in the format "yyyy-mm-dd", if this is an all-day event.
@@ -1601,7 +1601,7 @@ pub struct EventDateTime {
     pub time_zone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EventReminder {
     /**
      * The method used by this reminder. Possible values are:  
@@ -1627,7 +1627,7 @@ pub struct EventReminder {
     pub minutes: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Events {
     /**
      * The user's access role for this calendar. Read-only. Possible values are:  
@@ -1727,7 +1727,7 @@ pub struct Events {
     pub updated: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FreeBusyCalendar {
     /**
      * List of time ranges during which this calendar should be regarded as busy.
@@ -1741,7 +1741,7 @@ pub struct FreeBusyCalendar {
     pub errors: Vec<Error>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FreeBusyGroup {
     /**
      * List of calendars' identifiers within a group.
@@ -1755,7 +1755,7 @@ pub struct FreeBusyGroup {
     pub errors: Vec<Error>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FreeBusyRequest {
     /**
      * Maximal number of calendars for which FreeBusy information is to be provided. Optional. Maximum value is 50.
@@ -1809,7 +1809,7 @@ pub struct FreeBusyRequest {
     pub time_zone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FreeBusyRequestItem {
     /**
      * The identifier of a calendar or a group.
@@ -1823,14 +1823,14 @@ pub struct FreeBusyRequestItem {
 }
 
 /// List of free/busy information for calendars.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Calendars {}
 
 /// Expansion of groups.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Groups {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FreeBusyResponse {
     /**
      * List of free/busy information for calendars.
@@ -1871,7 +1871,7 @@ pub struct FreeBusyResponse {
     pub time_min: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Setting {
     /**
      * ETag of the resource.
@@ -1911,7 +1911,7 @@ pub struct Setting {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Settings {
     /**
      * Etag of the collection.
@@ -1956,7 +1956,7 @@ pub struct Settings {
     pub next_sync_token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimePeriod {
     /**
      * The (exclusive) end of the time period.

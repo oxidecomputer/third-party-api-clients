@@ -62,7 +62,7 @@ impl ImGroups {
      * * `group_id: &str` -- The group ID.<br>
      *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn im_group(&self, group_id: &str) -> Result<crate::types::Groups> {
+    pub async fn im_group(&self, group_id: &str) -> Result<crate::types::ImGroupResponseAllOf> {
         let url = format!(
             "/im/groups/{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),

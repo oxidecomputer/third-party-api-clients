@@ -724,7 +724,7 @@ impl Activity {
         repo: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
+    ) -> Result<crate::types::ActivityListStargazersRepoResponseAnyOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -747,33 +747,6 @@ impl Activity {
         );
 
         self.client.get(&url, None).await
-    }
-
-    /**
-     * List stargazers.
-     *
-     * This function performs a `GET` to the `/repos/{owner}/{repo}/stargazers` endpoint.
-     *
-     * As opposed to `list_stargazers_for_repo`, this function returns all the pages of the request at once.
-     *
-     * Lists the people that have starred the repository.
-     *
-     * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
-     *
-     * FROM: <https://docs.github.com/rest/reference/activity#list-stargazers>
-     */
-    pub async fn list_all_stargazers_for_repo(
-        &self,
-        owner: &str,
-        repo: &str,
-    ) -> Result<Vec<crate::types::SimpleUser>> {
-        let url = format!(
-            "/repos/{}/{}/stargazers",
-            crate::progenitor_support::encode_path(&owner.to_string()),
-            crate::progenitor_support::encode_path(&repo.to_string()),
-        );
-
-        self.client.get_all_pages(&url, None).await
     }
 
     /**
@@ -1511,7 +1484,7 @@ impl Activity {
         direction: crate::types::Order,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::StarredRepository>> {
+    ) -> Result<crate::types::ActivityListReposStarredByUserResponseAnyOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
@@ -1535,44 +1508,6 @@ impl Activity {
         );
 
         self.client.get(&url, None).await
-    }
-
-    /**
-     * List repositories starred by a user.
-     *
-     * This function performs a `GET` to the `/users/{username}/starred` endpoint.
-     *
-     * As opposed to `list_repos_starred_by_user`, this function returns all the pages of the request at once.
-     *
-     * Lists repositories a user has starred.
-     *
-     * You can also find out _when_ stars were created by passing the following custom [media type](https://docs.github.com/rest/overview/media-types/) via the `Accept` header:
-     *
-     * FROM: <https://docs.github.com/rest/reference/activity#list-repositories-starred-by-a-user>
-     */
-    pub async fn list_all_repos_starred_by_user(
-        &self,
-        username: &str,
-        sort: crate::types::Sort,
-        direction: crate::types::Order,
-    ) -> Result<Vec<crate::types::StarredRepository>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("sort={}", sort));
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
-        let url = format!(
-            "/users/{}/starred?{}",
-            crate::progenitor_support::encode_path(&username.to_string()),
-            query
-        );
-
-        self.client.get_all_pages(&url, None).await
     }
 
     /**

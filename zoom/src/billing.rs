@@ -122,7 +122,7 @@ impl Billing {
     pub async fn account_plan_create(
         &self,
         account_id: &str,
-        body: &crate::types::AccountPlanCreateRequest,
+        body: &crate::types::AccountPlanCreateRequestAllOf,
     ) -> Result<()> {
         let url = format!(
             "/accounts/{}/plans",

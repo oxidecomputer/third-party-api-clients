@@ -33,7 +33,7 @@ impl Default for PayMode {
 }
 
 /// Account options object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Options {
     /**
      * Account options object.
@@ -77,7 +77,7 @@ pub struct Options {
 }
 
 /// The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Account {
     /**
      * User's email address.
@@ -131,7 +131,7 @@ pub struct Account {
     pub vanity_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Accounts {
     /**
      * Account name.
@@ -217,7 +217,7 @@ pub struct Accounts {
 }
 
 /// Account object in the account list.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountListItem {
     /**
      * Account object in the account list.
@@ -227,11 +227,11 @@ pub struct AccountListItem {
 }
 
 /// List of Accounts.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountList {}
 
 /// Account plan object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlan {
     /**
      * Account plan object.
@@ -255,7 +255,7 @@ pub struct AccountPlan {
 }
 
 /// Account base plan object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PlanBase {
     /**
      * Account base plan number of hosts. For a Pro Plan please select a value between 1 and 9. For a Business Plan please select a value between 10 and 49. For a Education Plan please select a value between 20 and 149. For a Free Trial Plan please select a value between 1 and 9999.
@@ -279,7 +279,7 @@ pub struct PlanBase {
 }
 
 /// Account plan object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlanRequired {
     /**
      * Number of hosts for this plan.
@@ -303,7 +303,7 @@ pub struct AccountPlanRequired {
 }
 
 /// Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PlanAudio {
     /**
      * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type</a>.
@@ -354,7 +354,7 @@ pub struct PlanAudio {
 }
 
 /// Additional phone base plans.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlansPhonePlanBase {
     /**
      * Additional phone base plans.
@@ -377,7 +377,7 @@ pub struct AccountPlansPhonePlanBase {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PlanCalling {
     #[serde(
         default,
@@ -397,7 +397,7 @@ pub struct PlanCalling {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PlanNumber {
     #[serde(
         default,
@@ -418,7 +418,7 @@ pub struct PlanNumber {
 }
 
 /// Phone Plan Object
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhonePlan {
     /**
      * Phone Plan Object
@@ -438,7 +438,7 @@ pub struct PhonePlan {
 }
 
 /// Account Plans object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlans {
     /**
      * Account Plans object.
@@ -565,7 +565,7 @@ impl RequirePasswordPmiMeetings {
 }
 
 /// Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingPasswordRequirement {
     /**
      * Account wide meeting/webinar [password requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
@@ -636,7 +636,7 @@ pub struct MeetingPasswordRequirement {
 }
 
 /// Account Settings: Schedule Meeting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScheduleMeeting {
     /**
      * Account Settings: Schedule Meeting.
@@ -818,7 +818,7 @@ impl EntryExitChime {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Files {
     /**
      * Unique identifier of the file.
@@ -868,7 +868,7 @@ pub struct Files {
 }
 
 /// Settings to manage virtual background.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct VirtualBackgroundSettings {
     /**
      * Settings to manage virtual background.
@@ -984,7 +984,7 @@ impl WhoCanShareScreenWhenSomeoneSharing {
 }
 
 /// Account Settings: In Meeting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InMeeting {
     /**
      * Account Settings: In Meeting.
@@ -1402,7 +1402,7 @@ pub struct InMeeting {
 }
 
 /// Account Settings: Notification.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EmailNotification {
     /**
      * Account Settings: Notification.
@@ -1455,7 +1455,7 @@ pub struct EmailNotification {
 }
 
 /// Account Settings: Zoom Rooms.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ZoomRooms {
     /**
      * Account Settings: Zoom Rooms.
@@ -1540,7 +1540,7 @@ pub struct ZoomRooms {
 }
 
 /// This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PasswordRequirement {
     /**
      * This object refers to the [enhanced password rules](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) that allows Zoom account admins and owners to apply extra requiremets to the users' Zoom login password.
@@ -1629,7 +1629,7 @@ impl SignInWithTwoFactorAuth {
 }
 
 /// [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Security {
     /**
      * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
@@ -1737,7 +1737,7 @@ impl AutoRecording {
 }
 
 /// This object represents the minimum password requirements set for recordings via Account Recording Settings.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingPasswordRequirement {
     /**
      * This object represents the minimum password requirements set for recordings via Account Recording Settings.
@@ -1783,7 +1783,7 @@ pub struct RecordingPasswordRequirement {
 }
 
 /// Setting to allow cloud recording access only from specific IP address ranges.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IpAddressAccessControl {
     /**
      * Setting to allow cloud recording access only from specific IP address ranges.
@@ -1806,7 +1806,7 @@ pub struct IpAddressAccessControl {
     pub ip_addresses_or_ranges: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Settings {
     /**
      * Include in-meeting and/or in-webinar audio in the archive.
@@ -1851,7 +1851,7 @@ pub struct Settings {
 }
 
 /// [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted with archiving solution access by the Zoom support team.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Archive {
     /**
      * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted with archiving solution access by the Zoom support team.
@@ -1879,7 +1879,7 @@ pub struct Archive {
 }
 
 /// Account Settings: Recording.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Recording {
     /**
      * Account Settings: Recording.
@@ -2057,7 +2057,7 @@ pub struct Recording {
 }
 
 /// Indicates where most of the participants call into or call from duriing a meeting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TelephonyRegions {
     /**
      * Indicates where most of the participants call into or call from duriing a meeting.
@@ -2072,7 +2072,7 @@ pub struct TelephonyRegions {
 }
 
 /// Account Settings: Telephony.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Telephony {
     /**
      * Account Settings: Telephony.
@@ -2099,7 +2099,7 @@ pub struct Telephony {
 }
 
 /// Account Settings: Integration.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Integration {
     /**
      * Account Settings: Integration.
@@ -2153,7 +2153,7 @@ pub struct Integration {
 }
 
 /// Account Settings: Feature.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Feature {
     /**
      * Account Settings: Feature.
@@ -2167,7 +2167,7 @@ pub struct Feature {
 }
 
 /// Account Settings: TSP.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Tsp {
     /**
      * Account Settings: TSP.
@@ -2200,7 +2200,7 @@ pub struct Tsp {
     pub show_international_numbers_link: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingStorageLocation {
     /**
      * Users can choose the country to store their recorded content. Content can include meeting, webinar, and phone recordings, as well as voicemail, transcripts, and custom greeting prompts. See [Managing the Communications Content storage location](https://support.zoom.us/hc/en-us/articles/360050781131) for details.
@@ -2220,13 +2220,13 @@ pub struct RecordingStorageLocation {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Profile {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recording_storage_location: Option<RecordingStorageLocation>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountSettings {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_notification: Option<EmailNotification>,
@@ -2253,7 +2253,7 @@ pub struct AccountSettings {
 }
 
 /// Indicates where most of the participants call into or call from duriing a meeting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateAccountSettingsTelephonyRegions {
     /**
      * Indicates where most of the participants call into or call from duriing a meeting.
@@ -2263,7 +2263,7 @@ pub struct UpdateAccountSettingsTelephonyRegions {
 }
 
 /// Account Settings Update: Telephony.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateAccountSettingsTelephony {
     /**
      * Account Settings Update: Telephony.
@@ -2289,7 +2289,7 @@ pub struct UpdateAccountSettingsTelephony {
     pub third_party_audio: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateAccountSettings {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_notification: Option<EmailNotification>,
@@ -2315,11 +2315,11 @@ pub struct UpdateAccountSettings {
     pub zoom_rooms: Option<ZoomRooms>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Domains {}
 
 /// List of managed domains.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DomainsList {
     /**
      * List of managed domains.
@@ -2338,7 +2338,7 @@ pub struct DomainsList {
 }
 
 /// Billing Contact object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BillingContact {
     /**
      * Billing Contact object.
@@ -2433,7 +2433,7 @@ pub struct BillingContact {
 }
 
 /// Billing Contact object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Contact {
     /**
      * Billing Contact's address.
@@ -2528,7 +2528,7 @@ pub struct Contact {
 }
 
 /// Custom Question.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CustomQuestion {
     /**
      * Custom Question.
@@ -2551,7 +2551,7 @@ pub struct CustomQuestion {
 }
 
 /// DateTime Object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DateTime {
     /**
      * DateTime Object.
@@ -2645,7 +2645,7 @@ impl Encryption {
 }
 
 /// The H.323/SIP device object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Device {
     /**
      * Device encryption:<br>`auto` - auto.<br>`yes` - yes.<br>`no` - no.
@@ -2678,11 +2678,11 @@ pub struct Device {
 }
 
 /// List of H.323/SIP Devices.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DeviceList {}
 
 /// Group object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Group {
     /**
      * Group object.
@@ -2704,7 +2704,7 @@ pub struct Group {
     pub total_members: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Groups {
     /**
      * Group ID.
@@ -2717,14 +2717,46 @@ pub struct Groups {
     pub id: String,
 }
 
+/// All of the following types:
+///
+/// - `Groups`
+/// - `Group`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum GroupsAllOf {
+    /**
+     * Group object.
+     */
+    Group(Group),
+    Groups(Groups),
+}
+
+impl GroupsAllOf {
+    pub fn group(&self) -> Option<&Group> {
+        if let GroupsAllOf::Group(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn groups(&self) -> Option<&Groups> {
+        if let GroupsAllOf::Groups(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// List of Groups.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupList {
     /**
      * List of Groups.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub groups: Vec<Groups>,
+    pub groups: Vec<GroupsAllOf>,
     /**
      * List of Groups.
      */
@@ -2737,7 +2769,7 @@ pub struct GroupList {
 }
 
 /// Group member object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupMember {
     /**
      * Group member object.
@@ -2788,26 +2820,26 @@ pub struct GroupMember {
 }
 
 /// List of Group Members.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupMemberList {}
 
 /// IM group object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImGroup {}
 
 /// List of IM Groups.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImGroupList {}
 
 /// Meeting object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Meeting {}
 
 /// Meeting object
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingUpdate {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TrackingFields {
     /**
      * Label of the tracking field.
@@ -2842,7 +2874,7 @@ pub struct TrackingFields {
 }
 
 /// Occurence object. This object is only returned for Recurring Webinars.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Occurrence {
     /**
      * Occurence object. This object is only returned for Recurring Webinars.
@@ -2953,7 +2985,7 @@ impl Type {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GlobalDialInNumbers {
     /**
      * City of the number, if any. For example, Chicago.
@@ -3080,7 +3112,7 @@ impl Method {
 }
 
 /// Approve or block users from specific regions/countries from joining this meeting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ApprovedDeniedCountriesRegions {
     /**
      * Approve or block users from specific regions/countries from joining this meeting.
@@ -3111,7 +3143,7 @@ pub struct ApprovedDeniedCountriesRegions {
     pub method: Option<Method>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AuthenticationException {
     /**
      * Email address of the participant.
@@ -3133,7 +3165,7 @@ pub struct AuthenticationException {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Rooms {
     /**
      * Name of the breakout room.
@@ -3152,7 +3184,7 @@ pub struct Rooms {
 }
 
 /// Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BreakoutRoom {
     /**
      * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
@@ -3169,7 +3201,7 @@ pub struct BreakoutRoom {
     pub rooms: Vec<Rooms>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Interpreters {
     /**
      * Email address of the interpreter.
@@ -3193,7 +3225,7 @@ pub struct Interpreters {
     pub languages: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LanguageInterpretation {
     #[serde(
         default,
@@ -3207,7 +3239,7 @@ pub struct LanguageInterpretation {
     pub interpreters: Vec<Interpreters>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CustomKeys {
     /**
      * Custom key associated with the user.
@@ -3230,7 +3262,7 @@ pub struct CustomKeys {
 }
 
 /// Meeting settings.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingSettings {
     /**
      * Meeting settings.
@@ -3558,7 +3590,7 @@ impl Default for WeeklyDays {
 }
 
 /// Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Recurrence {
     /**
      * Recurrence object. Use this object only for a meeting with type `8` i.e., a recurring meeting with fixed time.
@@ -3632,7 +3664,7 @@ pub struct Recurrence {
 }
 
 /// Meeting object
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingInfo {
     /**
      * Meeting object
@@ -3811,7 +3843,7 @@ impl Status {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingInfoGetTrackingFields {
     /**
      * Label of the tracking field.
@@ -3846,7 +3878,7 @@ pub struct MeetingInfoGetTrackingFields {
 }
 
 /// Meeting object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingInfoGet {
     /**
      * Meeting object.
@@ -4002,10 +4034,10 @@ pub struct MeetingInfoGet {
 }
 
 /// List of meetings.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingList {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingMetricCustomKeys {
     /**
      * Custom key associated with the meetinh.
@@ -4028,7 +4060,7 @@ pub struct MeetingMetricCustomKeys {
 }
 
 /// Meeting metric details.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingMetric {
     /**
      * Meeting metric details.
@@ -4202,7 +4234,7 @@ pub struct MeetingMetric {
 }
 
 /// Meeting invitation details.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingInvitation {
     /**
      * Meeting invitation details.
@@ -4216,19 +4248,19 @@ pub struct MeetingInvitation {
 }
 
 ///  Registrant.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingRegistrant {}
 
 /// List of users.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserList {}
 
 /// List of meeting recording registrant
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingRecordingRegistrantList {}
 
 /// Meeting live stream.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingLiveStream {
     /**
      * The livestream page URL.
@@ -4302,7 +4334,7 @@ impl Action {
 }
 
 /// Update the settings of a live streaming session. The settings can only be updated for a live stream that has been stopped. You can not update the settings of an ongoing live stream.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingLiveStreamStatusSettings {
     /**
      * Update the settings of a live streaming session. The settings can only be updated for a live stream that has been stopped. You can not update the settings of an ongoing live stream.
@@ -4324,7 +4356,7 @@ pub struct MeetingLiveStreamStatusSettings {
 }
 
 /// Meeting live stream status.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingLiveStreamStatus {
     /**
      * Meeting live stream status.
@@ -4339,7 +4371,7 @@ pub struct MeetingLiveStreamStatus {
 }
 
 /// Webinar live stream.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarLiveStream {
     /**
      * The webinar live stream page's URL.
@@ -4413,7 +4445,7 @@ impl WebinarLiveStreamStatusAction {
 }
 
 /// Update the live stream session's settings. You can **only** update settings for a stopped live stream.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarLiveStreamStatusSettings {
     /**
      * Update the live stream session's settings. You can \*\*only\*\* update settings for a stopped live stream.
@@ -4435,7 +4467,7 @@ pub struct WebinarLiveStreamStatusSettings {
 }
 
 /// Webinar live stream status.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarLiveStreamStatus {
     /**
      * Webinar live stream status.
@@ -4450,11 +4482,11 @@ pub struct WebinarLiveStreamStatus {
 }
 
 /// List of Meetings
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingInstances {}
 
 /// Pagination Object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Pagination {
     /**
      * Pagination Object.
@@ -4504,7 +4536,7 @@ pub struct Pagination {
 }
 
 /// Pagination object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PaginationToken {
     /**
      * Pagination object.
@@ -4545,7 +4577,7 @@ pub struct PaginationToken {
 }
 
 /// Pagination object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PaginationToken4Qos {
     /**
      * Pagination object.
@@ -4586,7 +4618,7 @@ pub struct PaginationToken4Qos {
 }
 
 /// Pagination object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PaginationToken4ImChat {
     /**
      * Pagination object.
@@ -4609,7 +4641,7 @@ pub struct PaginationToken4ImChat {
 }
 
 /// Panelist base object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Panelist {
     /**
      * Panelist base object.
@@ -4631,7 +4663,7 @@ pub struct Panelist {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Panelists {
     /**
      * Panelist's ID.
@@ -4644,14 +4676,68 @@ pub struct Panelists {
     pub id: String,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct PanelistsData {
+    /**
+     * Join URL.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub join_url: String,
+}
+
+/// All of the following types:
+///
+/// - `Panelists`
+/// - `Panelist`
+/// - `PanelistsData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum PanelistsAllOf {
+    /**
+     * Panelist base object.
+     */
+    Panelist(Panelist),
+    Panelists(Panelists),
+    PanelistsData(PanelistsData),
+}
+
+impl PanelistsAllOf {
+    pub fn panelist(&self) -> Option<&Panelist> {
+        if let PanelistsAllOf::Panelist(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn panelists(&self) -> Option<&Panelists> {
+        if let PanelistsAllOf::Panelists(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn panelists_data(&self) -> Option<&PanelistsData> {
+        if let PanelistsAllOf::PanelistsData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// List of panelists.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PanelistList {
     /**
      * List of panelists.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub panelists: Vec<Panelists>,
+    pub panelists: Vec<PanelistsAllOf>,
     /**
      * List of panelists.
      */
@@ -4664,7 +4750,7 @@ pub struct PanelistList {
 }
 
 /// Quality of Service object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct QosAudio {
     /**
      * Quality of Service object.
@@ -4714,11 +4800,11 @@ pub struct QosAudio {
 }
 
 /// Participant QOS list.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ParticipantQosList {}
 
 /// Quality of service object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AsInput {}
 
 /**
@@ -4757,7 +4843,7 @@ impl RecordingStatus {
 }
 
 /// Recording file object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingData {
     /**
      * Recording file object.
@@ -4857,7 +4943,7 @@ pub struct RecordingData {
 }
 
 /// List of recording file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingList {}
 
 /**
@@ -4896,7 +4982,7 @@ impl RecordingSeparateAudioStatus {
 }
 
 /// The recording file object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingSeparateAudio {
     /**
      * The recording file object.
@@ -4978,15 +5064,15 @@ pub struct RecordingSeparateAudio {
 }
 
 /// Return a list of recording files for each participant. The API only returns this response when the **Record a separate audio file of each participant** setting is enabled.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingSeparateAudioList {}
 
 /// The recording meeting object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingMeeting {}
 
 /// List of recordings.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingMeetingList {}
 
 /**
@@ -5030,7 +5116,7 @@ impl ShareRecording {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingSettings {
     #[serde(
         default,
@@ -5127,7 +5213,7 @@ impl RecordingRegistrantStatusAction {
 }
 
 /// Registrant Status
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingRegistrantStatus {
     #[serde(
         default,
@@ -5142,7 +5228,7 @@ pub struct RecordingRegistrantStatus {
 }
 
 /// Registrant base object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Registrant {
     /**
      * Registrant base object.
@@ -5296,7 +5382,7 @@ pub struct Registrant {
 }
 
 /// List of Recording Registration
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingRegistrantList {}
 
 /**
@@ -5340,7 +5426,7 @@ impl RegistrantStatusAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Registrants {
     #[serde(
         default,
@@ -5356,7 +5442,7 @@ pub struct Registrants {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RegistrantStatus {
     /**
      * Registrant Status:<br>`approve` - Approve registrant.<br>`cancel` - Cancel previously approved registrant's registration.<br>`deny` - Deny registrant.
@@ -5371,11 +5457,11 @@ pub struct RegistrantStatus {
 }
 
 /// List of Roles
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RoleList {}
 
 /// List of a Role Members
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RoleMembersList {
     /**
      * List of a Role Members
@@ -5430,7 +5516,7 @@ pub struct RoleMembersList {
 }
 
 /// Add Role Members
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddRoleMembers {
     /**
      * Add Role Members
@@ -5440,7 +5526,7 @@ pub struct AddRoleMembers {
 }
 
 /// Base object for sessions.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Session {
     /**
      * Base object for sessions.
@@ -5523,7 +5609,7 @@ pub struct Session {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SessionUpdateTrackingFields {
     /**
      * Tracking fields type
@@ -5545,8 +5631,52 @@ pub struct SessionUpdateTrackingFields {
     pub value: String,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct SettingsData {
+    /**
+     * Send confirmation Email to Registrants
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub registrants_confirmation_email: bool,
+}
+
+/// All of the following types:
+///
+/// - `MeetingSettings`
+/// - `SettingsData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum SettingsAllOf {
+    /**
+     * Meeting settings.
+     */
+    MeetingSettings(MeetingSettings),
+    SettingsData(SettingsData),
+}
+
+impl SettingsAllOf {
+    pub fn meeting_settings(&self) -> Option<&MeetingSettings> {
+        if let SettingsAllOf::MeetingSettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn settings_data(&self) -> Option<&SettingsData> {
+        if let SettingsAllOf::SettingsData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Base object for sessions.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SessionUpdate {
     /**
      * Base object for sessions.
@@ -5592,7 +5722,7 @@ pub struct SessionUpdate {
      * Base object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub settings: Option<MeetingSettings>,
+    pub settings: Option<SettingsAllOf>,
     /**
      * Base object for sessions.
      */
@@ -5647,7 +5777,7 @@ pub struct SessionUpdate {
 }
 
 /// Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecurrenceWebinar {
     /**
      * Recurrence object. Use this object only for a webinar of type `9` i.e., a recurring webinar with fixed time.
@@ -5800,7 +5930,7 @@ impl AnswerQuestions {
 }
 
 /// [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct QuestionAnswer {
     /**
      * [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
@@ -5842,7 +5972,7 @@ pub struct QuestionAnswer {
 }
 
 /// Send reminder email to attendees and panelists.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AttendeesPanelistsReminderEmailNotification {
     /**
      * Send reminder email to attendees and panelists.
@@ -5865,7 +5995,7 @@ pub struct AttendeesPanelistsReminderEmailNotification {
 }
 
 /// Send follow-up email to attendees.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FollowUpAttendeesEmailNotification {
     /**
      * Send follow-up email to attendees.
@@ -5888,7 +6018,7 @@ pub struct FollowUpAttendeesEmailNotification {
 }
 
 /// Send follow-up email to absentees.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FollowUpAbsenteesEmailNotification {
     /**
      * Send follow-up email to absentees.
@@ -5911,7 +6041,7 @@ pub struct FollowUpAbsenteesEmailNotification {
 }
 
 /// Webinar settings.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarSettings {
     /**
      * Webinar settings.
@@ -6180,7 +6310,7 @@ pub struct WebinarSettings {
 }
 
 /// Base webinar object for sessions.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SessionWebinar {
     /**
      * Base webinar object for sessions.
@@ -6263,8 +6393,52 @@ pub struct SessionWebinar {
     pub type_: i64,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct SettingsDataType {
+    /**
+     * Send confirmation email to registrants.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub registrants_confirmation_email: bool,
+}
+
+/// All of the following types:
+///
+/// - `SessionWebinarSettings`
+/// - `SettingsDataType`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum SessionWebinarUpdateSettingsAllOf {
+    /**
+     * Webinar settings.
+     */
+    SessionWebinarSettings(SessionWebinarSettings),
+    SettingsDataType(SettingsDataType),
+}
+
+impl SessionWebinarUpdateSettingsAllOf {
+    pub fn session_webinar_settings(&self) -> Option<&SessionWebinarSettings> {
+        if let SessionWebinarUpdateSettingsAllOf::SessionWebinarSettings(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn settings_data_type(&self) -> Option<&SettingsDataType> {
+        if let SessionWebinarUpdateSettingsAllOf::SettingsDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Base webinar object for sessions.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SessionWebinarUpdate {
     /**
      * Base webinar object for sessions.
@@ -6302,7 +6476,7 @@ pub struct SessionWebinarUpdate {
      * Base webinar object for sessions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub settings: Option<WebinarSettings>,
+    pub settings: Option<SessionWebinarUpdateSettingsAllOf>,
     /**
      * Base webinar object for sessions.
      */
@@ -6389,7 +6563,7 @@ impl TspAccountsListDialInNumbersType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DialInNumbers {
     /**
      * Country code.
@@ -6465,7 +6639,7 @@ impl TspBridge {
 }
 
 /// List of TSP accounts.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspAccountsList {
     /**
      * Conference code: numeric value, length is less than 16.
@@ -6497,7 +6671,7 @@ pub struct TspAccountsList {
     pub tsp_bridge: Option<TspBridge>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DedicatedDialInNumber {
     /**
      * Country code.
@@ -6520,7 +6694,7 @@ pub struct DedicatedDialInNumber {
 }
 
 /// List of PAC accounts.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Pac {
     /**
      * List of PAC accounts.
@@ -6562,7 +6736,7 @@ pub struct Pac {
 }
 
 /// The user object represents a specific user on Zoom.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
      * The user object represents a specific user on Zoom.
@@ -6675,7 +6849,7 @@ pub struct User {
 }
 
 /// Custom attribute(s) of the user.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CustomAttributes {
     /**
      * Custom attribute(s) of the user.
@@ -6755,7 +6929,7 @@ impl Label {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneNumbers {
     /**
      * Country code of the phone number. For example, for United States phone numbers, the value of this field should be "+1".
@@ -6797,7 +6971,7 @@ pub struct PhoneNumbers {
 }
 
 /// The user update object represents a user on Zoom.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserUpdate {
     /**
      * The user update object represents a user on Zoom.
@@ -6973,7 +7147,7 @@ pub struct UserUpdate {
     pub vanity_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Assistants {
     /**
      * Assistant's email address.
@@ -6996,7 +7170,7 @@ pub struct Assistants {
 }
 
 /// List of user's assistants.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserAssistantsList {
     /**
      * List of user's assistants.
@@ -7005,7 +7179,7 @@ pub struct UserAssistantsList {
     pub assistants: Vec<Assistants>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Schedulers {
     /**
      * Email address of the scheduler.
@@ -7037,7 +7211,7 @@ pub struct Schedulers {
 }
 
 /// List of user's schedulers.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSchedulersList {
     /**
      * List of user's schedulers.
@@ -7125,7 +7299,7 @@ impl UserSettingsMeetingRequirePasswordPmiMeetings {
 }
 
 /// Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsMeetingPasswordRequirement {
     /**
      * Account wide meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
@@ -7196,7 +7370,7 @@ pub struct UserSettingsMeetingPasswordRequirement {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsMeeting {
     /**
      *
@@ -7363,7 +7537,7 @@ impl Default for UserSettingsMeetingEntryExitChime {
 }
 
 /// Settings to manage virtual background.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsMeetingVirtualBackground {
     /**
      * Settings to manage virtual background.
@@ -7397,7 +7571,7 @@ pub struct UserSettingsMeetingVirtualBackground {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsInMeeting {
     /**
      *
@@ -7684,7 +7858,7 @@ pub struct UserSettingsInMeeting {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsNotification {
     /**
      *
@@ -7754,7 +7928,7 @@ impl Default for UserSettingsRecordingAuto {
 }
 
 /// This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsRecordingPasswordRequirement {
     /**
      * This object represents the minimum passcode requirements set for recordings via Account Recording Settings.
@@ -7800,7 +7974,7 @@ pub struct UserSettingsRecordingPasswordRequirement {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsRecording {
     /**
      *
@@ -7940,7 +8114,7 @@ pub struct UserSettingsRecording {
     pub show_timestamp: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsTelephony {
     #[serde(
         default,
@@ -7963,7 +8137,7 @@ pub struct UserSettingsTelephony {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsFeature {
     /**
      *
@@ -8052,7 +8226,7 @@ pub struct UserSettingsFeature {
 }
 
 /// Account Settings: TSP.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsTsp {
     /**
      * Account Settings: TSP.
@@ -8077,7 +8251,7 @@ pub struct UserSettingsTsp {
     pub show_international_numbers_link: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettings {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_notification: Option<UserSettingsNotification>,
@@ -8097,7 +8271,7 @@ pub struct UserSettings {
     pub tsp: Option<UserSettingsTsp>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SettingsUpdateTelephony {
     #[serde(
         default,
@@ -8120,7 +8294,7 @@ pub struct SettingsUpdateTelephony {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsUpdateFeature {
     /**
      *
@@ -8192,7 +8366,7 @@ pub struct UserSettingsUpdateFeature {
     pub zoom_phone: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSettingsUpdate {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_notification: Option<UserSettingsNotification>,
@@ -8213,7 +8387,7 @@ pub struct UserSettingsUpdate {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserPermissions {
     /**
      *
@@ -8223,15 +8397,15 @@ pub struct UserPermissions {
 }
 
 /// Webinar object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Webinar {}
 
 /// Webinar object
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarUpdate {}
 
 /// Webinar object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarInfo {
     /**
      * Webinar object.
@@ -8347,10 +8521,10 @@ pub struct WebinarInfo {
 }
 
 /// List of webinars.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarList {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarMetricCustomKeys {
     /**
      * Custom key associated with the Webinar.
@@ -8373,8 +8547,8 @@ pub struct WebinarMetricCustomKeys {
 }
 
 /// Webinar metric details.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct WebinarMetric {
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct Webinars {
     /**
      * Webinar metric details.
      */
@@ -8537,26 +8711,49 @@ pub struct WebinarMetric {
     pub uuid: String,
 }
 
+/// All of the following types:
+///
+/// - `Panelist`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WebinarPanelistPanelistsAllOf {
+    /**
+     * Panelist base object.
+     */
+    Panelist(Panelist),
+}
+
+impl WebinarPanelistPanelistsAllOf {
+    pub fn panelist(&self) -> Option<&Panelist> {
+        if let WebinarPanelistPanelistsAllOf::Panelist(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Webinar panelist.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarPanelist {
     /**
      * Webinar panelist.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub panelists: Vec<Panelist>,
+    pub panelists: Vec<WebinarPanelistPanelistsAllOf>,
 }
 
 /// Webinar panelist.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarPanelistList {}
 
 /// Webinar registrant.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarRegistrant {}
 
 /// Zoom room.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ZoomRoom {
     /**
      * Zoom room.
@@ -8683,11 +8880,11 @@ pub struct ZoomRoom {
 }
 
 /// Zoom Room List
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ZoomRoomList {}
 
 /// Poll List
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PollList {}
 
 /**
@@ -8728,7 +8925,7 @@ impl PollQuestionsType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Questions {
     /**
      * Answers to the questions
@@ -8752,7 +8949,7 @@ pub struct Questions {
 }
 
 /// Poll
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Poll {
     /**
      * Poll
@@ -8841,7 +9038,7 @@ impl FieldName {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingRegistrantQuestions {
     /**
      * Field name of the question.
@@ -8896,7 +9093,7 @@ impl MeetingRegistrantQuestionsCustomType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CustomQuestions {
     /**
      * Answer choices for the question. Can not be used for `short` question type as this type of question requires registrants to type out the answer.
@@ -8928,7 +9125,7 @@ pub struct CustomQuestions {
 }
 
 /// Meeting Registrant Questions
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingRegistrantQuestionsData {
     /**
      * Meeting Registrant Questions
@@ -8943,7 +9140,7 @@ pub struct MeetingRegistrantQuestionsData {
 }
 
 /// Webinar Registrant Questions
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarRegistrantQuestions {
     /**
      * Webinar Registrant Questions
@@ -9033,7 +9230,7 @@ impl RecordingRegistrantQuestionsFieldName {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingRegistrantQuestions {
     /**
      * Field name.
@@ -9091,7 +9288,7 @@ impl RecordingRegistrantQuestionsCustomType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingRegistrantQuestionsCustom {
     /**
      * Answer choices for the question. Can not be used with Short answer type.
@@ -9123,7 +9320,7 @@ pub struct RecordingRegistrantQuestionsCustom {
 }
 
 /// Recording Registrant Questions
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingRegistrantQuestionsData {
     /**
      * Recording Registrant Questions
@@ -9138,11 +9335,11 @@ pub struct RecordingRegistrantQuestionsData {
 }
 
 /// Tracking Field List
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TrackingFieldList {}
 
 /// Tracking Field
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TrackingField {
     /**
      * Tracking Field
@@ -9210,7 +9407,7 @@ impl Default for CreateWebinarSettingsAudio {
 }
 
 /// Create Webinar settings.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateWebinarSettings {
     /**
      * Create Webinar settings.
@@ -9453,7 +9650,7 @@ pub struct CreateWebinarSettings {
     pub survey_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateTrackingFields {
     /**
      * Label of the tracking field.
@@ -9478,7 +9675,7 @@ pub struct MeetingCreateTrackingFields {
 /// Language interpretation [settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars#h_01EGGQFD3Q4BST3378SA762MJ1) for meetings.
 ///
 /// **Note:** This feature is only available on certain Webinar add-on, Education, Business and higher plans. If this feature is not enabled on the host's account, this setting will not be applied for the meeting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateSettingsLanguageInterpretation {
     /**
      * Language interpretation [settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars#h_01EGGQFD3Q4BST3378SA762MJ1) for meetings.
@@ -9500,7 +9697,7 @@ pub struct MeetingCreateSettingsLanguageInterpretation {
 }
 
 /// Meeting settings.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateSettings {
     /**
      * Meeting settings.
@@ -9750,7 +9947,7 @@ pub struct MeetingCreateSettings {
 }
 
 /// Base object for meeting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingCreate {
     /**
      * Base object for meeting.
@@ -9859,7 +10056,7 @@ pub struct MeetingCreate {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateWebinarTrackingFields {
     /**
      * Tracking fields type
@@ -9882,7 +10079,7 @@ pub struct CreateWebinarTrackingFields {
 }
 
 /// Base webinar object for sessions.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateWebinar {
     /**
      * Base webinar object for sessions.
@@ -9965,7 +10162,7 @@ pub struct CreateWebinar {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspGlobalDialIn {
     #[serde(
         default,
@@ -9975,7 +10172,7 @@ pub struct TspGlobalDialIn {
     pub audio_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChannelSettings {
     /**
      * Allow members to add external users to the channel. The value can be one of the following:<br>
@@ -10012,7 +10209,7 @@ pub struct ChannelSettings {
     pub posting_permissions: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Properties {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel_settings: Option<ChannelSettings>,
@@ -10061,7 +10258,7 @@ pub struct Properties {
 }
 
 /// The channel object represents a Zoom chat [channel](https://support.zoom.us/hc/en-us/articles/200912909-Getting-Started-With-Channels-Group-Messaging-).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
      * The channel object represents a Zoom chat [channel](https://support.zoom.us/hc/en-us/articles/200912909-Getting-Started-With-Channels-Group-Messaging-).
@@ -10070,7 +10267,7 @@ pub struct Channel {
     pub properties: Option<Properties>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CpuUsage {
     /**
      * System Maximum CPU Usage
@@ -10111,7 +10308,7 @@ pub struct CpuUsage {
 }
 
 /// QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AudioDeviceFromCrc {
     /**
      * QoS metrics on audio being sent by a participant who joined the meeting via a Cloud Room Connector.
@@ -10161,7 +10358,7 @@ pub struct AudioDeviceFromCrc {
 }
 
 /// QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AudioDeviceCrc {
     /**
      * QoS metrics on audio received by a participant who joined the meeting via a Cloud Room Connector.
@@ -10211,7 +10408,7 @@ pub struct AudioDeviceCrc {
 }
 
 /// QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct VideoDeviceFromCrc {
     /**
      * QoS metrics on video input being sent from a Cloud Room Connector used by the participant to join the meeting.
@@ -10261,7 +10458,7 @@ pub struct VideoDeviceFromCrc {
 }
 
 /// QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct VideoDeviceCrc {
     /**
      * QoS metrics on video output received by a participant who joined the meeting via a Cloud Room Connector.
@@ -10311,7 +10508,7 @@ pub struct VideoDeviceCrc {
 }
 
 /// QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AsDeviceFromCrc {
     /**
      * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
@@ -10361,7 +10558,7 @@ pub struct AsDeviceFromCrc {
 }
 
 /// QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AsDeviceCrc {
     /**
      * QoS metrics on screen shares output being received by a participant who joined the meeting via a Cloud Room Connector.
@@ -10410,7 +10607,7 @@ pub struct AsDeviceCrc {
     pub max_loss: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserQos {
     /**
      * QoS metrics on screen shares by a participant who joined the meeting via a Cloud Room Connector.
@@ -10486,7 +10683,7 @@ pub struct UserQos {
 }
 
 /// Participant QOS.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ParticipantQos {
     /**
      * Participant QOS.
@@ -10687,7 +10884,7 @@ impl AccountSettingsRecordingAuthenticationUpdateOptionAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AuthenticationOption {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<AccountSettingsRecordingAuthenticationUpdateOptionAction>,
@@ -10720,7 +10917,7 @@ pub struct AuthenticationOption {
 
 /// Only authenticated users can view cloud recordings
 /// The viewers need to authenticate prior to viewing the cloud recordings, hosts can choose one of the authentication methods when sharing a cloud recording.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountSettingsRecordingAuthenticationUpdate {
     /**
      * Only authenticated users can view cloud recordings
@@ -10740,7 +10937,7 @@ pub struct AccountSettingsRecordingAuthenticationUpdate {
 }
 
 /// Quality of Service object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct QoSPhone {
     /**
      * Quality of Service object.
@@ -10799,7 +10996,7 @@ pub struct QoSPhone {
 }
 
 /// Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingSecuritySettingsPasswordRequirement {
     /**
      * Meeting/webinar [passcode requirements](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604).
@@ -10870,7 +11067,7 @@ pub struct MeetingSecuritySettingsPasswordRequirement {
 }
 
 /// Specify the settings to be applied if waiting room is enabled.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WaitingRoomSettings {
     /**
      * Specify the settings to be applied if waiting room is enabled.
@@ -10901,7 +11098,7 @@ pub struct WaitingRoomSettings {
     pub whitelisted_domains_for_waiting_room: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingSecurity {
     /**
      * `true`: Require that all meetings are secured with at least one security option.
@@ -11024,13 +11221,13 @@ pub struct MeetingSecurity {
     pub webinar_password: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingSecuritySettings {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub meeting_security: Option<MeetingSecurity>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MetricsCustomKeys {
     /**
      * Custom key associated with the meeting.
@@ -11052,7 +11249,7 @@ pub struct MetricsCustomKeys {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MetricsTrackingFields {
     /**
      * Label of the tracking field.
@@ -11075,7 +11272,7 @@ pub struct MetricsTrackingFields {
 }
 
 /// Meeting metric details.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Metrics {
     /**
      * Meeting metric details.
@@ -11389,7 +11586,7 @@ impl RecordingType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ArchiveFiles {
     /**
      * The URL from which to download the archived file.
@@ -11477,13 +11674,33 @@ pub struct ArchiveFiles {
     pub status: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/// Any of the following types:
+///
+/// - `ArchiveFiles`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ArchiveFilesAnyOf {
+    ArchiveFiles(ArchiveFiles),
+}
+
+impl ArchiveFilesAnyOf {
+    pub fn archive_files(&self) -> Option<&ArchiveFiles> {
+        if let ArchiveFilesAnyOf::ArchiveFiles(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CloudArchivedFiles {
     /**
      * Information about the archive files.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub archive_files: Vec<ArchiveFiles>,
+    pub archive_files: Vec<ArchiveFilesAnyOf>,
     /**
      * The meeting's duration.
      */
@@ -11589,7 +11806,7 @@ pub struct CloudArchivedFiles {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Attendees {
     /**
      * User display name.
@@ -11603,7 +11820,7 @@ pub struct Attendees {
 }
 
 /// Invite Links
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InviteLink {
     /**
      * Invite Links
@@ -11621,7 +11838,7 @@ pub struct InviteLink {
     pub ttl: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InviteLinksAttendees {
     /**
      * The URL to join the meeting.
@@ -11644,7 +11861,7 @@ pub struct InviteLinksAttendees {
 }
 
 /// Invite links response.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InviteLinks {
     /**
      * Invite links response.
@@ -11653,7 +11870,7 @@ pub struct InviteLinks {
     pub attendees: Vec<InviteLinksAttendees>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateChannelBodyRequest {
     /**
      * A new name for the channel.
@@ -11698,13 +11915,13 @@ impl RecordingStatusUpdateBodyRequestAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingStatusUpdateBodyRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<RecordingStatusUpdateBodyRequestAction>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UploadVbRequest {
     /**
      * Provide the file's path here.
@@ -11718,7 +11935,7 @@ pub struct UploadVbRequest {
 }
 
 /// Specify emergency address for the account.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EmergencyAddress {
     /**
      * Specify the street address.
@@ -11776,7 +11993,7 @@ pub struct EmergencyAddress {
     pub zip: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SetUpAccountRequest {
     /**
      * Specify emergency address for the account.
@@ -12084,7 +12301,7 @@ impl ListAccountPhoneNumbersResponseAssigneeType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Assignee {
     /**
      * Extension number of the Phone.
@@ -12122,7 +12339,7 @@ pub struct Assignee {
     pub type_: Option<ListAccountPhoneNumbersResponseAssigneeType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Site {
     /**
      * Target [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites) in which the phone number was assigned. Sites allow you to organize the phone users in your organization. For example, you sites could be created based on different office locations.
@@ -12145,7 +12362,7 @@ pub struct Site {
 }
 
 /// Displayed when the `type` request parameter is `byoc`.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Carrier {
     /**
      * Displayed when the `type` request parameter is `byoc`.
@@ -12168,7 +12385,7 @@ pub struct Carrier {
 }
 
 /// Displayed when the `type` request parameter is `byoc`.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SipGroup {
     /**
      * Displayed when the `type` request parameter is `byoc`.
@@ -12190,7 +12407,7 @@ pub struct SipGroup {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListAccountPhoneNumbersResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<Assignee>,
@@ -12265,7 +12482,7 @@ pub struct ListAccountPhoneNumbersResponse {
     pub status: Option<ListAccountPhoneNumbersResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListAccountPhoneNumbersResponseData {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.)
@@ -12342,7 +12559,7 @@ impl TransportProtocol {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Phones {
     /**
      * Authorization name of the user  registered for SIP Phone.
@@ -12488,7 +12705,7 @@ pub struct Phones {
     pub voice_mail: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSipPhonesResponse {
     #[serde(
         default,
@@ -12539,7 +12756,7 @@ pub struct ListSipPhonesResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateSipPhoneRequest {
     /**
      * Authorization name of the user registered for SIP Phone.
@@ -12675,7 +12892,7 @@ pub struct CreateSipPhoneRequest {
     pub voice_mail: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSipPhoneRequest {
     /**
      * Authorization name of the user  registered for SIP Phone.
@@ -12931,7 +13148,7 @@ impl ListZoomRoomsResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListZoomRoomsResponse {
     /**
      * Activation Code is the code that is used to complete the setup of the Zoom Room.
@@ -12985,7 +13202,7 @@ pub struct ListZoomRoomsResponse {
     pub status: Option<ListZoomRoomsResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListZoomRoomsResponseData {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -13053,7 +13270,7 @@ impl AddRoomRequestType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddRoomRequest {
     /**
      * \*\*Optional\*\*<br>Location ID of the lowest level location in the [location hierarchy](https://support.zoom.us/hc/en-us/articles/115000342983-Zoom-Rooms-Location-Hierarchy) where the Zoom Room is to be added. For instance if the structure of the location hierarchy is set up as “country, states, city, campus, building, floor”, a room can only be added under the floor level location.
@@ -13127,7 +13344,7 @@ impl AddRoomResponseType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddRoomResponse {
     /**
      * Unique Identifier of the Zoom Room.
@@ -13173,7 +13390,7 @@ pub struct AddRoomResponse {
 }
 
 /// Auto Receptionist for each site.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MainAutoReceptionist {
     /**
      * Auto Receptionist for each site.
@@ -13214,7 +13431,7 @@ pub struct MainAutoReceptionist {
 }
 
 /// Site country
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Country {
     /**
      * Site country
@@ -13236,7 +13453,7 @@ pub struct Country {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Sites {
     /**
      * Site country
@@ -13277,7 +13494,7 @@ pub struct Sites {
     pub site_code: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPhoneSitesResponse {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -13313,7 +13530,7 @@ pub struct ListPhoneSitesResponse {
     pub total_records: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DefaultEmergencyAddress {
     /**
      * Address Line 1 of the  [emergency address](https://support.zoom.us/hc/en-us/articles/360021062871-Setting-an-Emergency-Address) consisting of house number and street name.
@@ -13372,7 +13589,7 @@ pub struct DefaultEmergencyAddress {
 }
 
 /// Short extension of the phone site.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ShortExtension {
     /**
      * Short extension of the phone site.
@@ -13385,7 +13602,7 @@ pub struct ShortExtension {
     pub length: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreatePhoneSiteRequest {
     /**
      * Display name of the [auto-receptionist](https://support.zoom.us/hc/en-us/articles/360021121312-Managing-Auto-Receptionists-and-Integrated-Voice-Response-IVR-) for the site.
@@ -13425,7 +13642,7 @@ pub struct CreatePhoneSiteRequest {
     pub site_code: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreatePhoneSiteResponse {
     /**
      * Site ID: Unique Identifier of a site.
@@ -13448,7 +13665,7 @@ pub struct CreatePhoneSiteResponse {
 }
 
 /// [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSiteResponseMainAutoReceptionist {
     /**
      * [Main Auto Receptionist](https://support.zoom.us/hc/en-us/articles/360021121312#h_bc7ff1d5-0e6c-40cd-b889-62010cb98c57) for each site.
@@ -13489,7 +13706,7 @@ pub struct GetSiteResponseMainAutoReceptionist {
 }
 
 /// Short extension of the phone site.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSiteResponseShortExtension {
     /**
      * Short extension of the phone site.
@@ -13502,7 +13719,7 @@ pub struct GetSiteResponseShortExtension {
     pub length: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSiteResponse {
     /**
      * Site country
@@ -13548,7 +13765,7 @@ pub struct GetSiteResponse {
     pub site_code: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSiteDetailsRequest {
     /**
      * Name of the site.
@@ -13615,7 +13832,7 @@ impl PresenceStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Contacts {
     /**
      * Department of the contact as provided in the user's Zoom profile.
@@ -13738,7 +13955,7 @@ pub struct Contacts {
     pub sip_phone_number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchCompanyContactsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub contacts: Vec<Contacts>,
@@ -13806,10 +14023,10 @@ impl GetChatMessagesResponseStatus {
 }
 
 /// The Chatbot's message, in JSON format. For more information, read the [Chatbots: Send, Edit, and Delete Messages](https://marketplace.zoom.us/docs/guides/chatbots/send-edit-and-delete-messages) documentation.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BotMessage {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Messages {
     /**
      * The Chatbot's message, in JSON format. For more information, read the [Chatbots: Send, Edit, and Delete Messages](https://marketplace.zoom.us/docs/guides/chatbots/send-edit-and-delete-messages) documentation.
@@ -13923,7 +14140,7 @@ pub struct Messages {
 }
 
 /// Chat message object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetChatMessagesResponse {
     /**
      * Chat message object.
@@ -13955,7 +14172,7 @@ pub struct GetChatMessagesResponse {
     pub page_size: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AtItems {
     /**
      * This field is required if the value of `at_type` field is set to 1.
@@ -14011,7 +14228,7 @@ pub struct AtItems {
     pub start_position: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SendaChatMessageRequest {
     /**
      * [Chat mentions](https://support.zoom.us/hc/en-us/articles/360037567431-Using-chat-mentions-and-slash-commands) object. Use this object to include mentions in the message that will be sent to  a channel.
@@ -14047,7 +14264,7 @@ pub struct SendaChatMessageRequest {
     pub to_contact: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SendaChatMessageResponse {
     /**
      * Message ID: Unique Identifier of the message.
@@ -14060,7 +14277,7 @@ pub struct SendaChatMessageResponse {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MarkMessageRequest {
     /**
      * Values include <br>`read` or `unread`.
@@ -14142,7 +14359,7 @@ impl ReactMessageRequestAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactMessageRequest {
     /**
      * The action to perform with the message:
@@ -14184,7 +14401,7 @@ pub struct ReactMessageRequest {
     pub to_contact: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Reactions {
     /**
      * The emoji's Unicode value, in `UTF-32` format.
@@ -14207,7 +14424,7 @@ pub struct Reactions {
 }
 
 /// A chat message object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetChatMessageResponse {
     /**
      * A chat message object.
@@ -14316,7 +14533,7 @@ pub struct GetChatMessageResponse {
     pub timestamp: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EditMessageRequest {
     /**
      * The edited message.
@@ -14349,7 +14566,7 @@ pub struct EditMessageRequest {
     pub to_contact: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChannelsSettings {
     #[serde(
         default,
@@ -14370,7 +14587,7 @@ pub struct ChannelsSettings {
     pub posting_permissions: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Channels {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channels_settings: Option<ChannelsSettings>,
@@ -14409,7 +14626,7 @@ pub struct Channels {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetChannelsResponse {
     /**
      * Chat Channel object(s).
@@ -14446,7 +14663,7 @@ pub struct GetChannelsResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Members {
     /**
      * Member's email address.
@@ -14459,7 +14676,7 @@ pub struct Members {
     pub email: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateChannelRequest {
     /**
      * Member(s) to include in the channel. A max of 5 members can be added to the channel at once with this API.
@@ -14491,7 +14708,7 @@ pub struct CreateChannelRequest {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateChannelResponse {
     /**
      * Channel ID: Unique Identifier of the Channel.
@@ -14532,7 +14749,7 @@ pub struct CreateChannelResponse {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetUserContactsResponse {
     /**
      * Contact's email address.
@@ -14572,7 +14789,7 @@ pub struct GetUserContactsResponse {
     pub last_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetUserContactsResponseData {
     /**
      * The contacts object.
@@ -14644,7 +14861,7 @@ impl GetUserContactResponsePresenceStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetUserContactResponse {
     /**
      * Direct number(s) assigned to the contact.
@@ -14753,7 +14970,7 @@ impl Role {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListChannelMembersResponse {
     /**
      * Email address of the member.
@@ -14807,7 +15024,7 @@ pub struct ListChannelMembersResponse {
     pub role: Option<Role>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListChannelMembersResponseData {
     /**
      * Members in a channel.
@@ -14843,7 +15060,7 @@ pub struct ListChannelMembersResponseData {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InviteChannelMembersRequest {
     /**
      * Email address of the member.
@@ -14856,7 +15073,7 @@ pub struct InviteChannelMembersRequest {
     pub email: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InviteChannelMembersRequestData {
     /**
      * Members of a channel. You can invite up to a max number of 5 members with a single API call.
@@ -14865,7 +15082,7 @@ pub struct InviteChannelMembersRequestData {
     pub members: Vec<InviteChannelMembersRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InviteChannelMembersResponse {
     /**
      * The date and time at which the member(s) are added to the channel.
@@ -14883,7 +15100,7 @@ pub struct InviteChannelMembersResponse {
     pub ids: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct JoinChannelResponse {
     /**
      * The date and time at which a user joined the channel.
@@ -14906,7 +15123,7 @@ pub struct JoinChannelResponse {
 }
 
 /// The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountCreateRequest {
     /**
      * The account object represents an account on Zoom. The account owner is the user who created the account or had an account created for them. You can read more about the Zoom account structure <a href='https://medium.com/zoom-developer-blog/a-brief-look-at-zoom-account-structures-1d19c745bf8a' target='_blank'>here</a>.
@@ -14962,7 +15179,7 @@ pub struct AccountCreateRequest {
     pub password: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountCreateResponse {
     /**
      * Account created date time.
@@ -15002,7 +15219,7 @@ pub struct AccountCreateResponse {
     pub owner_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountResponse {
     /**
      * Account creation date and time.
@@ -15148,54 +15365,6 @@ impl AccountSettingsResponseOneOf {
     }
 }
 
-impl From<AccountSettings> for AccountSettingsResponseOneOf {
-    fn from(f: AccountSettings) -> Self {
-        AccountSettingsResponseOneOf::AccountSettings(f)
-    }
-}
-
-impl From<Domains> for AccountSettingsResponseOneOf {
-    fn from(f: Domains) -> Self {
-        AccountSettingsResponseOneOf::Domains(f)
-    }
-}
-
-impl From<MeetingSecuritySettings> for AccountSettingsResponseOneOf {
-    fn from(f: MeetingSecuritySettings) -> Self {
-        AccountSettingsResponseOneOf::MeetingSecuritySettings(f)
-    }
-}
-
-impl From<Security> for AccountSettingsResponseOneOf {
-    fn from(f: Security) -> Self {
-        AccountSettingsResponseOneOf::Security(f)
-    }
-}
-
-impl From<AccountSettingsResponseOneOf> for AccountSettings {
-    fn from(f: AccountSettingsResponseOneOf) -> Self {
-        f.account_settings().unwrap().clone()
-    }
-}
-
-impl From<AccountSettingsResponseOneOf> for Domains {
-    fn from(f: AccountSettingsResponseOneOf) -> Self {
-        f.domains().unwrap().clone()
-    }
-}
-
-impl From<AccountSettingsResponseOneOf> for MeetingSecuritySettings {
-    fn from(f: AccountSettingsResponseOneOf) -> Self {
-        f.meeting_security_settings().unwrap().clone()
-    }
-}
-
-impl From<AccountSettingsResponseOneOf> for Security {
-    fn from(f: AccountSettingsResponseOneOf) -> Self {
-        f.security().unwrap().clone()
-    }
-}
-
 /// One of the following types:
 ///
 /// - `UpdateAccountSettings`
@@ -15231,42 +15400,6 @@ impl AccountSettingsUpdateRequestOneOf {
             return Some(ref_);
         }
         None
-    }
-}
-
-impl From<Domains> for AccountSettingsUpdateRequestOneOf {
-    fn from(f: Domains) -> Self {
-        AccountSettingsUpdateRequestOneOf::Domains(f)
-    }
-}
-
-impl From<MeetingSecuritySettings> for AccountSettingsUpdateRequestOneOf {
-    fn from(f: MeetingSecuritySettings) -> Self {
-        AccountSettingsUpdateRequestOneOf::MeetingSecuritySettings(f)
-    }
-}
-
-impl From<UpdateAccountSettings> for AccountSettingsUpdateRequestOneOf {
-    fn from(f: UpdateAccountSettings) -> Self {
-        AccountSettingsUpdateRequestOneOf::UpdateAccountSettings(f)
-    }
-}
-
-impl From<AccountSettingsUpdateRequestOneOf> for Domains {
-    fn from(f: AccountSettingsUpdateRequestOneOf) -> Self {
-        f.domains().unwrap().clone()
-    }
-}
-
-impl From<AccountSettingsUpdateRequestOneOf> for MeetingSecuritySettings {
-    fn from(f: AccountSettingsUpdateRequestOneOf) -> Self {
-        f.meeting_security_settings().unwrap().clone()
-    }
-}
-
-impl From<AccountSettingsUpdateRequestOneOf> for UpdateAccountSettings {
-    fn from(f: AccountSettingsUpdateRequestOneOf) -> Self {
-        f.update_account_settings().unwrap().clone()
     }
 }
 
@@ -15311,7 +15444,7 @@ impl AccountSettingsUpdateOption {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountTrustedDomainResponse {
     /**
      * List of trusted domains
@@ -15361,7 +15494,7 @@ impl AccountPlansResponsePlanBaseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlansResponsePlanBase {
     /**
      * Account base plan number of hosts. For a Pro Plan please select a value between 1 and 9. For a Business Plan please select a value between 10 and 49. For a Education Plan please select a value between 20 and 149. For a Free Trial Plan please select a value between 1 and 9999.
@@ -15399,7 +15532,7 @@ pub struct AccountPlansResponsePlanBase {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PlanZoomRooms {
     /**
      * Account plan number of hosts.
@@ -15438,7 +15571,7 @@ pub struct PlanZoomRooms {
 }
 
 /// Account plan object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PlanWebinar {
     /**
      * Account plan object.
@@ -15515,7 +15648,7 @@ impl PlanRecordingStatus {
 }
 
 /// Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlansResponsePlanAudio {
     /**
      * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
@@ -15581,7 +15714,7 @@ pub struct AccountPlansResponsePlanAudio {
 }
 
 /// Additional phone base plans.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlansResponsePlanPhoneBase {
     /**
      * Additional phone base plans.
@@ -15619,7 +15752,7 @@ pub struct AccountPlansResponsePlanPhoneBase {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlansResponsePlanPhoneCalling {
     #[serde(
         default,
@@ -15654,7 +15787,7 @@ pub struct AccountPlansResponsePlanPhoneCalling {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlansResponsePlanPhoneNumber {
     #[serde(
         default,
@@ -15690,7 +15823,7 @@ pub struct AccountPlansResponsePlanPhoneNumber {
 }
 
 /// Phone Plan Object
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PlanPhone {
     /**
      * Phone Plan Object
@@ -15709,7 +15842,7 @@ pub struct PlanPhone {
     pub plan_number: Vec<AccountPlansResponsePlanPhoneNumber>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlansResponse {
     /**
      * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
@@ -15757,7 +15890,7 @@ pub struct AccountPlansResponse {
     pub plan_zoom_rooms: Option<PlanZoomRooms>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlanCreateRequest {
     /**
      * Billing Contact object.
@@ -15766,8 +15899,40 @@ pub struct AccountPlanCreateRequest {
     pub contact: Option<Contact>,
 }
 
+/// All of the following types:
+///
+/// - `AccountPlanCreateRequest`
+/// - `AccountPlans`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum AccountPlanCreateRequestAllOf {
+    AccountPlanCreateRequest(AccountPlanCreateRequest),
+    /**
+     * Account Plans object.
+     */
+    AccountPlans(AccountPlans),
+}
+
+impl AccountPlanCreateRequestAllOf {
+    pub fn account_plan_create_request(&self) -> Option<&AccountPlanCreateRequest> {
+        if let AccountPlanCreateRequestAllOf::AccountPlanCreateRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn account_plans(&self) -> Option<&AccountPlans> {
+        if let AccountPlanCreateRequestAllOf::AccountPlans(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Zoom Phone Plan Object
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlanAddonCreateRequest {
     /**
      * Phone Plan Object
@@ -15821,31 +15986,7 @@ impl AccountPlanAddonCreateRequestOneOf {
     }
 }
 
-impl From<AccountPlanAddonCreateRequest> for AccountPlanAddonCreateRequestOneOf {
-    fn from(f: AccountPlanAddonCreateRequest) -> Self {
-        AccountPlanAddonCreateRequestOneOf::AccountPlanAddonCreateRequest(f)
-    }
-}
-
-impl From<AccountPlanRequired> for AccountPlanAddonCreateRequestOneOf {
-    fn from(f: AccountPlanRequired) -> Self {
-        AccountPlanAddonCreateRequestOneOf::AccountPlanRequired(f)
-    }
-}
-
-impl From<AccountPlanAddonCreateRequestOneOf> for AccountPlanAddonCreateRequest {
-    fn from(f: AccountPlanAddonCreateRequestOneOf) -> Self {
-        f.account_plan_addon_create_request().unwrap().clone()
-    }
-}
-
-impl From<AccountPlanAddonCreateRequestOneOf> for AccountPlanRequired {
-    fn from(f: AccountPlanAddonCreateRequestOneOf) -> Self {
-        f.account_plan_required().unwrap().clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupCreateRequest {
     /**
      * Group name.
@@ -15858,7 +15999,7 @@ pub struct GroupCreateRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupCreateResponse {
     /**
      * Group ID.
@@ -15889,7 +16030,7 @@ pub struct GroupCreateResponse {
     pub total_members: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupResponse {
     /**
      * Group ID.
@@ -15920,7 +16061,7 @@ pub struct GroupResponse {
     pub total_members: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupUpdateRequest {
     /**
      * Group name. It must be unique to one account and less than 128 characters.
@@ -15933,7 +16074,7 @@ pub struct GroupUpdateRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupMembersResponse {
     /**
      * User's email address.
@@ -15983,7 +16124,7 @@ pub struct GroupMembersResponse {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupMembersResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub members: Vec<GroupMembersResponse>,
@@ -16034,7 +16175,7 @@ pub struct GroupMembersResponseData {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupMembersCreateRequest {
     /**
      * User email. If the user ID is given then the user email should be ignored.
@@ -16056,7 +16197,7 @@ pub struct GroupMembersCreateRequest {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupMembersCreateRequestData {
     /**
      * List of Group members
@@ -16065,7 +16206,7 @@ pub struct GroupMembersCreateRequestData {
     pub members: Vec<GroupMembersCreateRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupMembersCreateResponse {
     #[serde(
         default,
@@ -16121,7 +16262,7 @@ impl UpdateGroupMemberRequestAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupMemberRequest {
     /**
      * The action to perform:
@@ -16146,7 +16287,7 @@ pub struct UpdateGroupMemberRequest {
     pub target_group_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DeviceCreateResponse {
     /**
      * Device ID.
@@ -16159,7 +16300,39 @@ pub struct DeviceCreateResponse {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/// All of the following types:
+///
+/// - `DeviceCreateResponse`
+/// - `Device`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DeviceCreateResponseAllOf {
+    /**
+     * The H.323/SIP device object.
+     */
+    Device(Device),
+    DeviceCreateResponse(DeviceCreateResponse),
+}
+
+impl DeviceCreateResponseAllOf {
+    pub fn device(&self) -> Option<&Device> {
+        if let DeviceCreateResponseAllOf::Device(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn device_create_response(&self) -> Option<&DeviceCreateResponse> {
+        if let DeviceCreateResponseAllOf::DeviceCreateResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TrackingfieldGetResponse {
     /**
      * Tracking Field ID
@@ -16170,6 +16343,70 @@ pub struct TrackingfieldGetResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
+}
+
+/// All of the following types:
+///
+/// - `TrackingfieldCreateResponse`
+/// - `TrackingField`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum TrackingfieldCreateResponseAllOf {
+    /**
+     * Tracking Field
+     */
+    TrackingField(TrackingField),
+    TrackingfieldCreateResponse(TrackingfieldCreateResponse),
+}
+
+impl TrackingfieldCreateResponseAllOf {
+    pub fn tracking_field(&self) -> Option<&TrackingField> {
+        if let TrackingfieldCreateResponseAllOf::TrackingField(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn trackingfield_create_response(&self) -> Option<&TrackingfieldCreateResponse> {
+        if let TrackingfieldCreateResponseAllOf::TrackingfieldCreateResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
+///
+/// - `TrackingfieldGetResponse`
+/// - `TrackingField`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum TrackingfieldGetResponseAllOf {
+    /**
+     * Tracking Field
+     */
+    TrackingField(TrackingField),
+    TrackingfieldGetResponse(TrackingfieldGetResponse),
+}
+
+impl TrackingfieldGetResponseAllOf {
+    pub fn tracking_field(&self) -> Option<&TrackingField> {
+        if let TrackingfieldGetResponseAllOf::TrackingField(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn trackingfield_get_response(&self) -> Option<&TrackingfieldGetResponse> {
+        if let TrackingfieldGetResponseAllOf::TrackingfieldGetResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -16205,7 +16442,7 @@ impl Default for ImGroupCreateRequestType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImGroupCreateRequest {
     /**
      * Group name: must be unique to one account.
@@ -16238,7 +16475,7 @@ pub struct ImGroupCreateRequest {
     pub type_: Option<ImGroupCreateRequestType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImGroupCreateResponse {
     /**
      * Group ID.
@@ -16293,6 +16530,38 @@ pub struct ImGroupCreateResponse {
     pub total_members: i64,
 }
 
+/// All of the following types:
+///
+/// - `Groups`
+/// - `ImGroup`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ImGroupResponseAllOf {
+    Groups(Groups),
+    /**
+     * IM group object.
+     */
+    ImGroup(ImGroup),
+}
+
+impl ImGroupResponseAllOf {
+    pub fn groups(&self) -> Option<&Groups> {
+        if let ImGroupResponseAllOf::Groups(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn im_group(&self) -> Option<&ImGroup> {
+        if let ImGroupResponseAllOf::ImGroup(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /**
  * IM Group types:<br>`normal` - Only group members can automatically see others in their group. Other people can search for members in the group.<br>`shared` - Everyone under the account can see the group and members automatically.<br>`restricted` - Nobody can see the group or search for members except for the members in the group.
  */
@@ -16334,7 +16603,7 @@ impl ImGroupUpdateRequestType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImGroupUpdateRequest {
     /**
      * Group name: must be unique to one account.
@@ -16367,7 +16636,7 @@ pub struct ImGroupUpdateRequest {
     pub type_: Option<ImGroupUpdateRequestType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImGroupMembersCreateRequest {
     /**
      * User email. If the user ID is given then ignore the user email.
@@ -16389,7 +16658,7 @@ pub struct ImGroupMembersCreateRequest {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImGroupMembersCreateRequestData {
     /**
      * List of IM group members.
@@ -16398,7 +16667,7 @@ pub struct ImGroupMembersCreateRequestData {
     pub members: Vec<ImGroupMembersCreateRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImChatSessionsResponse {
     /**
      * Start date.
@@ -16412,7 +16681,131 @@ pub struct ImChatSessionsResponse {
     pub to: Option<chrono::NaiveDate>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/**
+ * IM chat session type.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ImChatSessionsResponseType {
+    #[serde(rename = "1:1")]
+    One,
+    #[serde(rename = "Group")]
+    Group,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for ImChatSessionsResponseType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            ImChatSessionsResponseType::One => "1:1",
+            ImChatSessionsResponseType::Group => "Group",
+            ImChatSessionsResponseType::Noop => "",
+            ImChatSessionsResponseType::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for ImChatSessionsResponseType {
+    fn default() -> ImChatSessionsResponseType {
+        ImChatSessionsResponseType::Noop
+    }
+}
+impl ImChatSessionsResponseType {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, ImChatSessionsResponseType::Noop)
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct Sessions {
+    /**
+     * Last message sent time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub last_message_sent_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Meeting topic.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+     * IM chat session ID.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub session_id: String,
+    /**
+     * IM chat session type.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
+    pub type_: Option<ImChatSessionsResponseType>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ImChatSessionsResponseData {
+    /**
+     * Array of session objects.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub sessions: Vec<Sessions>,
+}
+
+/// All of the following types:
+///
+/// - `ImChatSessionsResponse`
+/// - `PaginationToken4ImChat`
+/// - `ImChatSessionsResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ImChatSessionsResponseAllOf {
+    ImChatSessionsResponse(ImChatSessionsResponse),
+    ImChatSessionsResponseData(ImChatSessionsResponseData),
+    /**
+     * Pagination object.
+     */
+    PaginationToken4ImChat(PaginationToken4ImChat),
+}
+
+impl ImChatSessionsResponseAllOf {
+    pub fn im_chat_sessions_response(&self) -> Option<&ImChatSessionsResponse> {
+        if let ImChatSessionsResponseAllOf::ImChatSessionsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn im_chat_sessions_response_data(&self) -> Option<&ImChatSessionsResponseData> {
+        if let ImChatSessionsResponseAllOf::ImChatSessionsResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
+        if let ImChatSessionsResponseAllOf::PaginationToken4ImChat(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ImChatMessagesResponse {
     /**
      * Start date.
@@ -16433,6 +16826,105 @@ pub struct ImChatMessagesResponse {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub to: Option<chrono::NaiveDate>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ImChatMessagesResponseData {
+    /**
+     * IM chat message action.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub action: String,
+    /**
+     * Action time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub action_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * IM chat message sent time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub date_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * IM chat message content.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub message: String,
+    /**
+     * IM chat message sender.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub sender: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ImChatMessagesResponseDataType {
+    /**
+     * Array of session objects.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub messages: Vec<ImChatMessagesResponseData>,
+}
+
+/// All of the following types:
+///
+/// - `ImChatMessagesResponse`
+/// - `PaginationToken4ImChat`
+/// - `ImChatMessagesResponseDataType`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ImChatMessagesResponseAllOf {
+    ImChatMessagesResponse(ImChatMessagesResponse),
+    ImChatMessagesResponseDataType(ImChatMessagesResponseDataType),
+    /**
+     * Pagination object.
+     */
+    PaginationToken4ImChat(PaginationToken4ImChat),
+}
+
+impl ImChatMessagesResponseAllOf {
+    pub fn im_chat_messages_response(&self) -> Option<&ImChatMessagesResponse> {
+        if let ImChatMessagesResponseAllOf::ImChatMessagesResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn im_chat_messages_response_data_type(&self) -> Option<&ImChatMessagesResponseDataType> {
+        if let ImChatMessagesResponseAllOf::ImChatMessagesResponseDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
+        if let ImChatMessagesResponseAllOf::PaginationToken4ImChat(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -16468,7 +16960,7 @@ impl Default for MeetingsType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingCreateResponse {
     /**
      * Unique identifier of the scheduler who scheduled this meeting on behalf of the host. This field is only returned if you used "schedule_for" option in the [Create a Meeting API request](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate).
@@ -16508,7 +17000,39 @@ pub struct MeetingCreateResponse {
     pub registration_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/// All of the following types:
+///
+/// - `MeetingCreateResponse`
+/// - `MeetingInfo`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MeetingCreateResponseAllOf {
+    MeetingCreateResponse(MeetingCreateResponse),
+    /**
+     * Meeting object
+     */
+    MeetingInfo(MeetingInfo),
+}
+
+impl MeetingCreateResponseAllOf {
+    pub fn meeting_create_response(&self) -> Option<&MeetingCreateResponse> {
+        if let MeetingCreateResponseAllOf::MeetingCreateResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_info(&self) -> Option<&MeetingInfo> {
+        if let MeetingCreateResponseAllOf::MeetingInfo(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingResponse {
     /**
      * Unique identifier of the scheduler who scheduled this meeting on behalf of the host. This field is only returned if you used "schedule_for" option in the [Create a Meeting API request](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingcreate).
@@ -16558,7 +17082,39 @@ pub struct MeetingResponse {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/// All of the following types:
+///
+/// - `MeetingResponse`
+/// - `MeetingInfoGet`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MeetingResponseAllOf {
+    /**
+     * Meeting object.
+     */
+    MeetingInfoGet(MeetingInfoGet),
+    MeetingResponse(MeetingResponse),
+}
+
+impl MeetingResponseAllOf {
+    pub fn meeting_info_get(&self) -> Option<&MeetingInfoGet> {
+        if let MeetingResponseAllOf::MeetingInfoGet(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_response(&self) -> Option<&MeetingResponse> {
+        if let MeetingResponseAllOf::MeetingResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingUpdateRequest {
     /**
      * Email or userId if you want to schedule meeting for another user.
@@ -16569,6 +17125,38 @@ pub struct MeetingUpdateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub schedule_for: String,
+}
+
+/// All of the following types:
+///
+/// - `MeetingUpdateRequest`
+/// - `MeetingUpdate`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MeetingUpdateRequestAllOf {
+    /**
+     * Meeting object
+     */
+    MeetingUpdate(MeetingUpdate),
+    MeetingUpdateRequest(MeetingUpdateRequest),
+}
+
+impl MeetingUpdateRequestAllOf {
+    pub fn meeting_update(&self) -> Option<&MeetingUpdate> {
+        if let MeetingUpdateRequestAllOf::MeetingUpdate(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn meeting_update_request(&self) -> Option<&MeetingUpdateRequest> {
+        if let MeetingUpdateRequestAllOf::MeetingUpdateRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -16611,7 +17199,7 @@ impl MeetingStatusRequestAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingStatusRequest {
     /**
      * `end` - End a meeting.<br>
@@ -16655,7 +17243,7 @@ impl Default for MeetingRegistrantsStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingRegistrantCreateResponse {
     /**
      * [Meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in "\*\*long\*\*" format(represented as int64 data type in JSON), also known as the meeting number.
@@ -16705,7 +17293,7 @@ pub struct MeetingRegistrantCreateResponse {
     pub topic: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PastMeetingDetailsResponse {
     /**
      * Meeting duration.
@@ -16818,6 +17406,101 @@ pub struct PastMeetingDetailsResponse {
     pub uuid: String,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct Participants {
+    /**
+     * Universally unique identifier of the Participant. It is the same as the User ID of the participant if the participant joins the meeting by logging into Zoom. If the participant joins the meeting without logging in, the value of this field will be blank.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
+    /**
+     * Participant display name.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+     * Email address of the user. This field will be returned if the user logged into Zoom to join the meeting.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_email: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct PastMeetingParticipantsResponse {
+    /**
+     * Array of meeting participant objects.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub participants: Vec<Participants>,
+}
+
+/// All of the following types:
+///
+/// - `PaginationToken`
+/// - `PastMeetingParticipantsResponse`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum PastMeetingParticipantsResponseAllOf {
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+    PastMeetingParticipantsResponse(PastMeetingParticipantsResponse),
+}
+
+impl PastMeetingParticipantsResponseAllOf {
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let PastMeetingParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn past_meeting_participants_response(&self) -> Option<&PastMeetingParticipantsResponse> {
+        if let PastMeetingParticipantsResponseAllOf::PastMeetingParticipantsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
+///
+/// - `Poll`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MeetingPollCreateRequestAllOf {
+    /**
+     * Poll
+     */
+    Poll(Poll),
+}
+
+impl MeetingPollCreateRequestAllOf {
+    pub fn poll(&self) -> Option<&Poll> {
+        if let MeetingPollCreateRequestAllOf::Poll(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /**
  * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
  */
@@ -16862,7 +17545,7 @@ impl MeetingPollCreateResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingPollGetResponse {
     /**
      * Meeting Poll ID
@@ -16878,6 +17561,162 @@ pub struct MeetingPollGetResponse {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<MeetingPollCreateResponseStatus>,
+}
+
+/// All of the following types:
+///
+/// - `MeetingPollCreateResponse`
+/// - `Poll`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MeetingPollCreateResponseAllOf {
+    MeetingPollCreateResponse(MeetingPollCreateResponse),
+    /**
+     * Poll
+     */
+    Poll(Poll),
+}
+
+impl MeetingPollCreateResponseAllOf {
+    pub fn meeting_poll_create_response(&self) -> Option<&MeetingPollCreateResponse> {
+        if let MeetingPollCreateResponseAllOf::MeetingPollCreateResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn poll(&self) -> Option<&Poll> {
+        if let MeetingPollCreateResponseAllOf::Poll(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
+///
+/// - `MeetingPollGetResponse`
+/// - `Poll`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MeetingPollGetResponseAllOf {
+    MeetingPollGetResponse(MeetingPollGetResponse),
+    /**
+     * Poll
+     */
+    Poll(Poll),
+}
+
+impl MeetingPollGetResponseAllOf {
+    pub fn meeting_poll_get_response(&self) -> Option<&MeetingPollGetResponse> {
+        if let MeetingPollGetResponseAllOf::MeetingPollGetResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn poll(&self) -> Option<&Poll> {
+        if let MeetingPollGetResponseAllOf::Poll(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
+///
+/// - `MeetingRegistrantQuestionsData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MeetingRegistrantsQuestionsGetResponseAllOf {
+    /**
+     * Meeting Registrant Questions
+     */
+    MeetingRegistrantQuestionsData(MeetingRegistrantQuestionsData),
+}
+
+impl MeetingRegistrantsQuestionsGetResponseAllOf {
+    pub fn meeting_registrant_questions_data(&self) -> Option<&MeetingRegistrantQuestionsData> {
+        if let MeetingRegistrantsQuestionsGetResponseAllOf::MeetingRegistrantQuestionsData(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct RecordingGetResponse {
+    /**
+     * JWT token for downloading the meeting recording.
+     *   This is only returned if the `include_fields` query parameter contains `download_access_token`.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub download_access_token: String,
+    /**
+     * The password of the sharing recording file.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub password: String,
+}
+
+/// All of the following types:
+///
+/// - `RecordingMeeting`
+/// - `RecordingGetResponse`
+/// - `RecordingSeparateAudioList`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum RecordingGetResponseAllOf {
+    RecordingGetResponse(RecordingGetResponse),
+    /**
+     * The recording meeting object.
+     */
+    RecordingMeeting(RecordingMeeting),
+    /**
+     * Return a list of recording files for each participant. The API only returns this response when the \*\*Record a separate audio file of each participant\*\* setting is enabled.
+     */
+    RecordingSeparateAudioList(RecordingSeparateAudioList),
+}
+
+impl RecordingGetResponseAllOf {
+    pub fn recording_get_response(&self) -> Option<&RecordingGetResponse> {
+        if let RecordingGetResponseAllOf::RecordingGetResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn recording_meeting(&self) -> Option<&RecordingMeeting> {
+        if let RecordingGetResponseAllOf::RecordingMeeting(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn recording_separate_audio_list(&self) -> Option<&RecordingSeparateAudioList> {
+        if let RecordingGetResponseAllOf::RecordingSeparateAudioList(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -16910,7 +17749,7 @@ impl Default for RecordingDeleteAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MeetingRecordingRegistrantCreateResponse {
     /**
      * [Meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in "\*\*long\*\*" format(represented as int64 data type in JSON), also known as the meeting number.
@@ -16948,6 +17787,32 @@ pub struct MeetingRecordingRegistrantCreateResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub topic: String,
+}
+
+/// All of the following types:
+///
+/// - `RecordingRegistrantQuestionsData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum RecordingRegistrantQuestionUpdateRequestAllOf {
+    /**
+     * Recording Registrant Questions
+     */
+    RecordingRegistrantQuestionsData(RecordingRegistrantQuestionsData),
+}
+
+impl RecordingRegistrantQuestionUpdateRequestAllOf {
+    pub fn recording_registrant_questions_data(&self) -> Option<&RecordingRegistrantQuestionsData> {
+        if let RecordingRegistrantQuestionUpdateRequestAllOf::RecordingRegistrantQuestionsData(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -17020,7 +17885,7 @@ impl IncludeFields {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DashboardMeetingsResponse {
     /**
      * Start date for this report in 'yyyy-mm-dd' format.
@@ -17032,6 +17897,56 @@ pub struct DashboardMeetingsResponse {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub to: Option<chrono::NaiveDate>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardMeetingsResponseData {
+    /**
+     * Array of meeting objects.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub meetings: Vec<Metrics>,
+}
+
+/// All of the following types:
+///
+/// - `DashboardMeetingsResponse`
+/// - `PaginationToken`
+/// - `DashboardMeetingsResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardMeetingsResponseAllOf {
+    DashboardMeetingsResponse(DashboardMeetingsResponse),
+    DashboardMeetingsResponseData(DashboardMeetingsResponseData),
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+}
+
+impl DashboardMeetingsResponseAllOf {
+    pub fn dashboard_meetings_response(&self) -> Option<&DashboardMeetingsResponse> {
+        if let DashboardMeetingsResponseAllOf::DashboardMeetingsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_meetings_response_data(&self) -> Option<&DashboardMeetingsResponseData> {
+        if let DashboardMeetingsResponseAllOf::DashboardMeetingsResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardMeetingsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -17103,6 +18018,637 @@ impl DashboardMeetingParticipantsIncludeFields {
 }
 
 /**
+ * The type of device the participant used to join the meeting:
+ *   * `Phone` — Participant joined via PSTN.
+ *   * `H.323/SIP` — Participant joined via an H.323 or SIP device.
+ *   * `Windows` — Participant joined via VoIP using a Windows device.
+ *   * `Mac` — Participant joined via VoIP using a Mac device.
+ *   * `iOS` — Participant joined via VoIP using an iOS device.
+ *   * `Android` — Participant joined via VoIP using an Android device.
+ *   
+ *   **Note:** This response returns an empty string (`““`) value for any users who are **not** a part of the host’s account (external users).
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardMeetingParticipantsResponseDevice {
+    #[serde(rename = "Android")]
+    Android,
+    #[serde(rename = "H.323/SIP")]
+    H323Sip,
+    #[serde(rename = "Mac")]
+    Mac,
+    #[serde(rename = "Phone")]
+    Phone,
+    #[serde(rename = "Windows")]
+    Windows,
+    #[serde(rename = "iOS")]
+    IOs,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for DashboardMeetingParticipantsResponseDevice {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            DashboardMeetingParticipantsResponseDevice::Android => "Android",
+            DashboardMeetingParticipantsResponseDevice::H323Sip => "H.323/SIP",
+            DashboardMeetingParticipantsResponseDevice::Mac => "Mac",
+            DashboardMeetingParticipantsResponseDevice::Phone => "Phone",
+            DashboardMeetingParticipantsResponseDevice::Windows => "Windows",
+            DashboardMeetingParticipantsResponseDevice::IOs => "iOS",
+            DashboardMeetingParticipantsResponseDevice::Noop => "",
+            DashboardMeetingParticipantsResponseDevice::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for DashboardMeetingParticipantsResponseDevice {
+    fn default() -> DashboardMeetingParticipantsResponseDevice {
+        DashboardMeetingParticipantsResponseDevice::Noop
+    }
+}
+impl DashboardMeetingParticipantsResponseDevice {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, DashboardMeetingParticipantsResponseDevice::Noop)
+    }
+}
+
+/**
+ * The participant's network type:
+ *   
+ *   * `Wired`
+ *   * `Wifi`
+ *   * `PPP` — Point-to-Point.
+ *   * `Cellular` — 3G, 4G, and 5G cellular.
+ *   * `Others` — An unknown device.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum NetworkType {
+    #[serde(rename = "Cellular")]
+    Cellular,
+    #[serde(rename = "Others")]
+    Others,
+    #[serde(rename = "PPP")]
+    Ppp,
+    #[serde(rename = "Wifi")]
+    Wifi,
+    #[serde(rename = "Wired")]
+    Wired,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for NetworkType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            NetworkType::Cellular => "Cellular",
+            NetworkType::Others => "Others",
+            NetworkType::Ppp => "PPP",
+            NetworkType::Wifi => "Wifi",
+            NetworkType::Wired => "Wired",
+            NetworkType::Noop => "",
+            NetworkType::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for NetworkType {
+    fn default() -> NetworkType {
+        NetworkType::Noop
+    }
+}
+impl NetworkType {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, NetworkType::Noop)
+    }
+}
+
+/**
+ * Audio quality of the participant.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum AudioQuality {
+    #[serde(rename = "bad")]
+    Bad,
+    #[serde(rename = "fair")]
+    Fair,
+    #[serde(rename = "good")]
+    Good,
+    #[serde(rename = "poor")]
+    Poor,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for AudioQuality {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            AudioQuality::Bad => "bad",
+            AudioQuality::Fair => "fair",
+            AudioQuality::Good => "good",
+            AudioQuality::Poor => "poor",
+            AudioQuality::Noop => "",
+            AudioQuality::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for AudioQuality {
+    fn default() -> AudioQuality {
+        AudioQuality::Noop
+    }
+}
+impl AudioQuality {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, AudioQuality::Noop)
+    }
+}
+
+/**
+ * Video quality of the participant.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum VideoQuality {
+    #[serde(rename = "bad")]
+    Bad,
+    #[serde(rename = "fair")]
+    Fair,
+    #[serde(rename = "good")]
+    Good,
+    #[serde(rename = "poor")]
+    Poor,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for VideoQuality {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            VideoQuality::Bad => "bad",
+            VideoQuality::Fair => "fair",
+            VideoQuality::Good => "good",
+            VideoQuality::Poor => "poor",
+            VideoQuality::Noop => "",
+            VideoQuality::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for VideoQuality {
+    fn default() -> VideoQuality {
+        VideoQuality::Noop
+    }
+}
+impl VideoQuality {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, VideoQuality::Noop)
+    }
+}
+
+/**
+ * Screen share quality of the participant.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ScreenShareQuality {
+    #[serde(rename = "bad")]
+    Bad,
+    #[serde(rename = "fair")]
+    Fair,
+    #[serde(rename = "good")]
+    Good,
+    #[serde(rename = "poor")]
+    Poor,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for ScreenShareQuality {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            ScreenShareQuality::Bad => "bad",
+            ScreenShareQuality::Fair => "fair",
+            ScreenShareQuality::Good => "good",
+            ScreenShareQuality::Poor => "poor",
+            ScreenShareQuality::Noop => "",
+            ScreenShareQuality::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for ScreenShareQuality {
+    fn default() -> ScreenShareQuality {
+        ScreenShareQuality::Noop
+    }
+}
+impl ScreenShareQuality {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, ScreenShareQuality::Noop)
+    }
+}
+
+/**
+ * Indicates whether the participant is in the waiting room or in the meeting.
+ *   
+ *   The value of this field can be `in_meeting` or `in_waiting_room`.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardMeetingParticipantsResponseStatus {
+    #[serde(rename = "in_meeting")]
+    InMeeting,
+    #[serde(rename = "in_waiting_room")]
+    InWaitingRoom,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for DashboardMeetingParticipantsResponseStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            DashboardMeetingParticipantsResponseStatus::InMeeting => "in_meeting",
+            DashboardMeetingParticipantsResponseStatus::InWaitingRoom => "in_waiting_room",
+            DashboardMeetingParticipantsResponseStatus::Noop => "",
+            DashboardMeetingParticipantsResponseStatus::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for DashboardMeetingParticipantsResponseStatus {
+    fn default() -> DashboardMeetingParticipantsResponseStatus {
+        DashboardMeetingParticipantsResponseStatus::Noop
+    }
+}
+impl DashboardMeetingParticipantsResponseStatus {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, DashboardMeetingParticipantsResponseStatus::Noop)
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardMeetingParticipantsResponse {
+    /**
+     * Audio quality of the participant.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub audio_quality: Option<AudioQuality>,
+    /**
+     * The type of camera that the participant used during the meeting.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub camera: String,
+    /**
+     * Participant connection type.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub connection_type: String,
+    /**
+     * Another identifier for the participant. Can be a number or characters, maximum length of 15 characters.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub customer_key: String,
+    /**
+     * Data Center where participant's meeting data is stored.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub data_center: String,
+    /**
+     * The type of device the participant used to join the meeting:
+     *  \* `Phone` — Participant joined via PSTN.
+     *  \* `H.323/SIP` — Participant joined via an H.323 or SIP device.
+     *  \* `Windows` — Participant joined via VoIP using a Windows device.
+     *  \* `Mac` — Participant joined via VoIP using a Mac device.
+     *  \* `iOS` — Participant joined via VoIP using an iOS device.
+     *  \* `Android` — Participant joined via VoIP using an Android device.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub device: Option<DashboardMeetingParticipantsResponseDevice>,
+    /**
+     * The participant's PC domain.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub domain: String,
+    /**
+     * Email address of the participant.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub email: String,
+    /**
+     * The participant's hard disk ID.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub harddisk_id: String,
+    /**
+     * Universally unique identifier of the Participant. It is the same as the User ID of the participant if the participant joins the meeting by logging into Zoom. If the participant joins the meeting without logging in, the value of this field will be blank.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
+    /**
+     * The number of participants who joined via Zoom Room.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub in_room_participants: i64,
+    /**
+     * Participant's IP address.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub ip_address: String,
+    /**
+     * The time at which participant joined the meeting.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub join_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Possible reasons for why participant left the meeting.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub leave_reason: String,
+    /**
+     * The time at which a participant left the meeting. For live meetings, this field will only be returned if a participant has left the ongoing meeting.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Participant's location.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub location: String,
+    /**
+     * The participant's MAC address.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub mac_addr: String,
+    /**
+     * The type of microphone that the participant used during the meeting.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub microphone: String,
+    /**
+     * The participant's network type:
+     *  
+     *  \* `Wired`
+     *  \* `Wifi`
+     *  \* `PPP` — Point-to-Point.
+     *  \* `Cellular` — 3G, 4G, and 5G cellular.
+     *  \* `Others` — An unknown device.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub network_type: Option<NetworkType>,
+    /**
+     * Name of Participant's PC.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub pc_name: String,
+    /**
+     * Indicates whether or not recording was used during the meeting.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub recording: bool,
+    /**
+     * Unique identifier of the registrant. This field is only returned if you entered "registrant_id" as the value of `include_fields` query parameter. This is not supported for `live` meeting types.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub registrant_id: String,
+    /**
+     * Screen share quality of the participant.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub screen_share_quality: Option<ScreenShareQuality>,
+    /**
+     * Indicates whether or not a user selected to share an iPhone/iPad app during the screenshare.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub share_application: bool,
+    /**
+     * Indicates whether or not a user selected to share their desktop during the screenshare.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub share_desktop: bool,
+    /**
+     * Indicates whether or not a user selected to share their whiteboard during the screenshare.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub share_whiteboard: bool,
+    /**
+     * The type of speaker that the participant used during the meeting.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub speaker: String,
+    /**
+     * Indicates whether the participant is in the waiting room or in the meeting.
+     *  
+     *  The value of this field can be `in_meeting` or `in_waiting_room`.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<DashboardMeetingParticipantsResponseStatus>,
+    /**
+     * Participant ID. This is a unique ID assigned to the participant joining a meeting and is valid for that meeting only.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_id: String,
+    /**
+     * Participant display name.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_name: String,
+    /**
+     * Participant's Zoom Client version.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub version: String,
+    /**
+     * Video quality of the participant.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub video_quality: Option<VideoQuality>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardMeetingParticipantsResponseData {
+    /**
+     * Array of participant session objects. If a participant left a meeting and rejoined the same meeting, their information will appear multiple times (as many times as they joined the meeting).
+     *  
+     *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `user_name`, `ip_address`, `location`, and `email` responses.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub participants: Vec<DashboardMeetingParticipantsResponse>,
+}
+
+/// All of the following types:
+///
+/// - `PaginationToken`
+/// - `DashboardMeetingParticipantsResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardMeetingParticipantsResponseAllOf {
+    DashboardMeetingParticipantsResponseData(DashboardMeetingParticipantsResponseData),
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+}
+
+impl DashboardMeetingParticipantsResponseAllOf {
+    pub fn dashboard_meeting_participants_response_data(
+        &self,
+    ) -> Option<&DashboardMeetingParticipantsResponseData> {
+        if let DashboardMeetingParticipantsResponseAllOf::DashboardMeetingParticipantsResponseData(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardMeetingParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/**
  * The meeting types: <br>`past` - Past meetings.<br>`live` - Live Meetings.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17135,6 +18681,116 @@ impl Default for DashboardMeetingParticipantQosType {
     }
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct Details {
+    /**
+     * Type of content shared.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub content: String,
+    /**
+     * End time of sharing.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub end_time: String,
+    /**
+     * Start time of sharing.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub start_time: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardMeetingParticipantShareResponseParticipants {
+    /**
+     * Array of sharing and recording details.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub details: Vec<Details>,
+    /**
+     * Universally unique identifier of the Participant. It is the same as the User ID of the participant if the participant joins the meeting by logging into Zoom. If the participant joins the meeting without logging in, the value of this field will be blank.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
+    /**
+     * Participant ID. This is a unique ID assigned to the participant joining a meeting and is valid for that meeting only.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_id: String,
+    /**
+     * Participant display name.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_name: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardMeetingParticipantShareResponse {
+    /**
+     * Array of participants.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub participants: Vec<DashboardMeetingParticipantShareResponseParticipants>,
+}
+
+/// All of the following types:
+///
+/// - `PaginationToken`
+/// - `DashboardMeetingParticipantShareResponse`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardMeetingParticipantShareResponseAllOf {
+    DashboardMeetingParticipantShareResponse(DashboardMeetingParticipantShareResponse),
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+}
+
+impl DashboardMeetingParticipantShareResponseAllOf {
+    pub fn dashboard_meeting_participant_share_response(
+        &self,
+    ) -> Option<&DashboardMeetingParticipantShareResponse> {
+        if let DashboardMeetingParticipantShareResponseAllOf::DashboardMeetingParticipantShareResponse(ref_) = self {
+                                return Some(ref_);
+                            }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardMeetingParticipantShareResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /**
  * The webinar type.
  */
@@ -17162,6 +18818,56 @@ impl std::fmt::Display for DashboardWebinarsType {
 impl Default for DashboardWebinarsType {
     fn default() -> DashboardWebinarsType {
         DashboardWebinarsType::Live
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardWebinarsResponse {
+    /**
+     * Array of webinar objects.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub webinars: Vec<Webinars>,
+}
+
+/// All of the following types:
+///
+/// - `DashboardMeetingsResponse`
+/// - `PaginationToken`
+/// - `DashboardWebinarsResponse`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardWebinarsResponseAllOf {
+    DashboardMeetingsResponse(DashboardMeetingsResponse),
+    DashboardWebinarsResponse(DashboardWebinarsResponse),
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+}
+
+impl DashboardWebinarsResponseAllOf {
+    pub fn dashboard_meetings_response(&self) -> Option<&DashboardMeetingsResponse> {
+        if let DashboardWebinarsResponseAllOf::DashboardMeetingsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_webinars_response(&self) -> Option<&DashboardWebinarsResponse> {
+        if let DashboardWebinarsResponseAllOf::DashboardWebinarsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardWebinarsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
     }
 }
 
@@ -17202,7 +18908,391 @@ impl DashboardWebinarParticipantsIncludeFields {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/**
+ * The type of device the participant used to join the webinar:
+ *   * `Phone` — Participant joined via PSTN.
+ *   * `H.323/SIP` — Participant joined via an H.323 or SIP device.
+ *   * `Windows` — Participant joined via VoIP using a Windows device.
+ *   * `Mac` — Participant joined via VoIP using a Mac device.
+ *   * `iOS` — Participant joined via VoIP using an iOS device.
+ *   * `Android` — Participant joined via VoIP using an Android device.
+ *   
+ *   **Note:** This response returns an empty string (`““`) value for any users who are **not** a part of the host’s account (external users).
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardWebinarParticipantsResponseDevice {
+    #[serde(rename = "Android")]
+    Android,
+    #[serde(rename = "H.323/SIP")]
+    H323Sip,
+    #[serde(rename = "Mac")]
+    Mac,
+    #[serde(rename = "Phone")]
+    Phone,
+    #[serde(rename = "Windows")]
+    Windows,
+    #[serde(rename = "iOS")]
+    IOs,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for DashboardWebinarParticipantsResponseDevice {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            DashboardWebinarParticipantsResponseDevice::Android => "Android",
+            DashboardWebinarParticipantsResponseDevice::H323Sip => "H.323/SIP",
+            DashboardWebinarParticipantsResponseDevice::Mac => "Mac",
+            DashboardWebinarParticipantsResponseDevice::Phone => "Phone",
+            DashboardWebinarParticipantsResponseDevice::Windows => "Windows",
+            DashboardWebinarParticipantsResponseDevice::IOs => "iOS",
+            DashboardWebinarParticipantsResponseDevice::Noop => "",
+            DashboardWebinarParticipantsResponseDevice::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for DashboardWebinarParticipantsResponseDevice {
+    fn default() -> DashboardWebinarParticipantsResponseDevice {
+        DashboardWebinarParticipantsResponseDevice::Noop
+    }
+}
+impl DashboardWebinarParticipantsResponseDevice {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, DashboardWebinarParticipantsResponseDevice::Noop)
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardWebinarParticipantsResponse {
+    /**
+     * Audio quality of the participant.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub audio_quality: Option<AudioQuality>,
+    /**
+     * Participant connection type.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub connection_type: String,
+    /**
+     * Another identifier for the participant. Can be a number or characters, maximum length of 15 characters.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub customer_key: String,
+    /**
+     * Participant data center.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub data_center: String,
+    /**
+     * The type of device the participant used to join the webinar:
+     *  \* `Phone` — Participant joined via PSTN.
+     *  \* `H.323/SIP` — Participant joined via an H.323 or SIP device.
+     *  \* `Windows` — Participant joined via VoIP using a Windows device.
+     *  \* `Mac` — Participant joined via VoIP using a Mac device.
+     *  \* `iOS` — Participant joined via VoIP using an iOS device.
+     *  \* `Android` — Participant joined via VoIP using an Android device.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub device: Option<DashboardWebinarParticipantsResponseDevice>,
+    /**
+     * The participant's PC domain.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub domain: String,
+    /**
+     * Email address of the participant.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub email: String,
+    /**
+     * The participant's hard disk ID.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub harddisk_id: String,
+    /**
+     * Universally unique identifier of the Participant. It is the same as the User ID of the participant if the participant joins the meeting by logging into Zoom. If the participant joins the meeting without logging in, the value of this field will be blank.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
+    /**
+     * Participant IP address.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub ip_address: String,
+    /**
+     * Participant join time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub join_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Possible reasons for why a participant left the Webinar.
+     *
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub leave_reason: String,
+    /**
+     * Participant leave time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Participant location.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub location: String,
+    /**
+     * The participant's MAC address.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub mac_addr: String,
+    /**
+     * The participant's microphone.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub microphone: String,
+    /**
+     * The participant's network type:
+     *  
+     *  \* `Wired`
+     *  \* `Wifi`
+     *  \* `PPP` — Point-to-Point.
+     *  \* `Cellular` — 3G, 4G, and 5G cellular.
+     *  \* `Others` — An unknown device.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub network_type: String,
+    /**
+     * Participant PC name.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub pc_name: String,
+    /**
+     * Participant record?
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub recording: bool,
+    /**
+     * Unique identifier of the registrant. This field is only returned if you entered "registrant_id" as the value of `include_fields` query parameter.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub registrant_id: String,
+    /**
+     * Screen share quality of the participant.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub screen_share_quality: Option<ScreenShareQuality>,
+    /**
+     * Did the participant share an application?
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub share_application: bool,
+    /**
+     * Did the participant share their desktop?
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub share_desktop: bool,
+    /**
+     * Did the participant share their whiteboard?
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub share_whiteboard: bool,
+    /**
+     * The participant's speaker.
+     *  
+     *  \*\*Note:\*\* This response returns an empty string (`““`) value for any users who are \*\*not\*\* a part of the host’s account (external users).
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub speaker: String,
+    /**
+     * Participant ID. This is a unique ID assigned to the participant joining a meeting and is valid for that meeting only.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_id: String,
+    /**
+     * Participant display name.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_name: String,
+    /**
+     * Participant version.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub version: String,
+    /**
+     * Video quality of the participant.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub video_quality: Option<VideoQuality>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardWebinarParticipantsResponseData {
+    /**
+     * Array of user objects.
+     *  
+     *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `user_name`, `ip_address`, `location`, and `email` responses.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub participants: Vec<DashboardWebinarParticipantsResponse>,
+}
+
+/// All of the following types:
+///
+/// - `PaginationToken`
+/// - `DashboardWebinarParticipantsResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardWebinarParticipantsResponseAllOf {
+    DashboardWebinarParticipantsResponseData(DashboardWebinarParticipantsResponseData),
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+}
+
+impl DashboardWebinarParticipantsResponseAllOf {
+    pub fn dashboard_webinar_participants_response_data(
+        &self,
+    ) -> Option<&DashboardWebinarParticipantsResponseData> {
+        if let DashboardWebinarParticipantsResponseAllOf::DashboardWebinarParticipantsResponseData(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardWebinarParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DashboardImResponse {
     /**
      * Start date for this report.
@@ -17216,7 +19306,229 @@ pub struct DashboardImResponse {
     pub to: Option<chrono::NaiveDate>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct Users {
+    /**
+     * Total number of instant meeting calls received by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub calls_receive: i64,
+    /**
+     * Total number of instant meeting calls made by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub calls_send: i64,
+    /**
+     * User email.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub email: String,
+    /**
+     * Total number of emojis received by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub emoji_receive: i64,
+    /**
+     * Total number of emojis sent by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub emoji_send: i64,
+    /**
+     * Total number of files received by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub files_receive: i64,
+    /**
+     * Total number of files sent by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub files_send: i64,
+    /**
+     * Total number of messages received by the user in channels.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub group_receive: i64,
+    /**
+     * Total number of messages sent by the user in channels.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub group_send: i64,
+    /**
+     * Total number of images received by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub images_receive: i64,
+    /**
+     * Total number of images sent by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub images_send: i64,
+    /**
+     * Total number of messages received by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub total_receive: i64,
+    /**
+     * Total number of messages sent by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub total_send: i64,
+    /**
+     * User ID.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_id: String,
+    /**
+     * User display name.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_name: String,
+    /**
+     * Total number of video files received by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub videos_receive: i64,
+    /**
+     * Total number of video files sent by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub videos_send: i64,
+    /**
+     * Total number of voice files received by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub voice_receive: i64,
+    /**
+     * Total number of voice files sent by the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub voice_send: i64,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardImResponseData {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub users: Vec<Users>,
+}
+
+/// All of the following types:
+///
+/// - `DashboardImResponse`
+/// - `PaginationToken`
+/// - `DashboardImResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardImResponseAllOf {
+    DashboardImResponse(DashboardImResponse),
+    DashboardImResponseData(DashboardImResponseData),
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+}
+
+impl DashboardImResponseAllOf {
+    pub fn dashboard_im_response(&self) -> Option<&DashboardImResponse> {
+        if let DashboardImResponseAllOf::DashboardImResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_im_response_data(&self) -> Option<&DashboardImResponseData> {
+        if let DashboardImResponseAllOf::DashboardImResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardImResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DashboardChatResponse {
     /**
      * The report's start date.
@@ -17248,7 +19560,163 @@ pub struct DashboardChatResponse {
     pub to: Option<chrono::NaiveDate>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardChatResponseUsers {
+    /**
+     * The user's total number of audio files sent.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub audio_sent: i64,
+    /**
+     * The user's total number of code snippets sent.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub code_sippet_sent: i64,
+    /**
+     * UThe user's email address.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub email: String,
+    /**
+     * The user's total number of files sent.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub files_sent: i64,
+    /**
+     * The user's total number of [GIPHY](https://giphy.com/) images sent.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub giphys_sent: i64,
+    /**
+     * The user's total number of messages sent in Zoom Chat channels.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub group_sent: i64,
+    /**
+     * The user's total number of images sent.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub images_sent: i64,
+    /**
+     * The user's total number of peer-to-peer (P2P) chat messages sent.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub p_2p_sent: i64,
+    /**
+     * The user's total number of text messages sent.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub text_sent: i64,
+    /**
+     * The user's total number of messages sent.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub total_sent: i64,
+    /**
+     * The user's ID.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_id: String,
+    /**
+     * The user's display name.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_name: String,
+    /**
+     * The user's total number of video files sent.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub video_sent: i64,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardChatResponseData {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub users: Vec<DashboardChatResponseUsers>,
+}
+
+/// All of the following types:
+///
+/// - `DashboardChatResponse`
+/// - `DashboardChatResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardChatResponseAllOf {
+    DashboardChatResponse(DashboardChatResponse),
+    DashboardChatResponseData(DashboardChatResponseData),
+}
+
+impl DashboardChatResponseAllOf {
+    pub fn dashboard_chat_response(&self) -> Option<&DashboardChatResponse> {
+        if let DashboardChatResponseAllOf::DashboardChatResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_chat_response_data(&self) -> Option<&DashboardChatResponseData> {
+        if let DashboardChatResponseAllOf::DashboardChatResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ClientFeedbacks {
     /**
      * Feedback Id
@@ -17279,7 +19747,7 @@ pub struct ClientFeedbacks {
     pub participants_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DashboardClientFeedbackResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub client_feedbacks: Vec<ClientFeedbacks>,
@@ -17304,7 +19772,7 @@ pub struct DashboardClientFeedbackResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DashboardIssueZoomRoomResponse {
     /**
      * Start date for this report
@@ -17327,7 +19795,45 @@ pub struct DashboardIssueZoomRoomResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardIssueZoomRoomResponseData {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub zoom_rooms: Vec<String>,
+}
+
+/// All of the following types:
+///
+/// - `DashboardIssueZoomRoomResponse`
+/// - `DashboardIssueZoomRoomResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardIssueZoomRoomResponseAllOf {
+    DashboardIssueZoomRoomResponse(DashboardIssueZoomRoomResponse),
+    DashboardIssueZoomRoomResponseData(DashboardIssueZoomRoomResponseData),
+}
+
+impl DashboardIssueZoomRoomResponseAllOf {
+    pub fn dashboard_issue_zoom_room_response(&self) -> Option<&DashboardIssueZoomRoomResponse> {
+        if let DashboardIssueZoomRoomResponseAllOf::DashboardIssueZoomRoomResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_issue_zoom_room_response_data(
+        &self,
+    ) -> Option<&DashboardIssueZoomRoomResponseData> {
+        if let DashboardIssueZoomRoomResponseAllOf::DashboardIssueZoomRoomResponseData(ref_) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportCloudRecordingResponse {
     /**
      * Start date for this report
@@ -17341,7 +19847,108 @@ pub struct ReportCloudRecordingResponse {
     pub to: Option<chrono::NaiveDate>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct IssueDetails {
+    /**
+     * Zoom Room Issue Detail.<br> The value of the this field could be one of the following:<br>
+     *  \* `Room Controller disconnected`<br>
+     *  \* `Room Controller connected`
+     *  \* `Selected camera has disconnected`
+     *  \* `Selected camera is reconnected`
+     *  \* `Selected microphone has disconnected`
+     *  \* `Selected microphone is reconnected`
+     *  \* `Selected speaker has disconnected`
+     *  \* `Selected speaker is reconnected`
+     *  \* `Zoom room is offline`
+     *  \* `Zoom room is online`
+     *  \* `High CPU usage is detected`
+     *  \* `Low bandwidth network is detected`
+     *  \* `{name} battery is low`
+     *  \* `{name} battery is normal`
+     *  \* `{name} disconnected`
+     *  \* `{name} connected`
+     *  \* `{name} is not charging`
+     *  
+     *  Possible values for {name}: <br>
+     *  \* Zoom Rooms Computer
+     *  \* Controller
+     *  \* Scheduling Display
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub issue: String,
+    /**
+     * Time at which the issue was encountered.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub time: Option<chrono::DateTime<chrono::Utc>>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardIssueDetailZoomRoomResponseData {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub issue_details: Vec<IssueDetails>,
+}
+
+/// All of the following types:
+///
+/// - `DashboardIssueDetailZoomRoomResponse`
+/// - `PaginationToken`
+/// - `DashboardIssueDetailZoomRoomResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardIssueDetailZoomRoomResponseAllOf {
+    DashboardIssueDetailZoomRoomResponse(DashboardIssueDetailZoomRoomResponse),
+    DashboardIssueDetailZoomRoomResponseData(DashboardIssueDetailZoomRoomResponseData),
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+}
+
+impl DashboardIssueDetailZoomRoomResponseAllOf {
+    pub fn dashboard_issue_detail_zoom_room_response(
+        &self,
+    ) -> Option<&DashboardIssueDetailZoomRoomResponse> {
+        if let DashboardIssueDetailZoomRoomResponseAllOf::DashboardIssueDetailZoomRoomResponse(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dashboard_issue_detail_zoom_room_response_data(
+        &self,
+    ) -> Option<&DashboardIssueDetailZoomRoomResponseData> {
+        if let DashboardIssueDetailZoomRoomResponseAllOf::DashboardIssueDetailZoomRoomResponseData(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let DashboardIssueDetailZoomRoomResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Dates {
     /**
      * Date for this object.
@@ -17386,7 +19993,7 @@ pub struct Dates {
     pub participants: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportDailyResponse {
     /**
      * Array of date objects.
@@ -17481,7 +20088,190 @@ impl Default for ReportMeetingsType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct Meetings {
+    /**
+     * Custom keys and values assigned to the meeting.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub custom_keys: Vec<CustomKeys>,
+    /**
+     * Meeting duration.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub duration: i64,
+    /**
+     * Meeting end time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub end_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * [Meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-):            Unique identifier of the meeting in "\*\*long\*\*" format(represented as int64
+     *  data type in JSON), also known as the meeting number.
+     *
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub id: i64,
+    /**
+     * Number of meeting participants.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub participants_count: i64,
+    /**
+     * Indicates whether the meeting was created directly through Zoom or through an API request.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub source: String,
+    /**
+     * Meeting start time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub start_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Meeting topic.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub topic: String,
+    /**
+     * Sum of meeting minutes from all participants in the meeting.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub total_minutes: i64,
+    /**
+     *
+     *  Meeting Type:<br> `1` - Instant Meeting<br> `2` - Scheduled Meeting<br> `3` - Recurring Meeting with no fixed time.<br>
+     *  `4` - This value is returned if the meeting was started using a Personal Meeting ID. <br>
+     *  `8` - Recurring Meeting with a fixed time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "type"
+    )]
+    pub type_: i64,
+    /**
+     * User email.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_email: String,
+    /**
+     * User display name.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_name: String,
+    /**
+     * Meeting UUID. Each meeting instance will generate its own UUID(i.e., after a meeting ends, a new UUID will be generated for the next instance of the meeting). Please double encode your UUID when using it for API calls if the UUID begins with a '/' or contains '//' in it.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub uuid: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ReportMeetingsResponse {
+    /**
+     * Start date for this report.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub from: Option<chrono::NaiveDate>,
+    /**
+     * Array of meeting objects.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub meetings: Vec<Meetings>,
+    /**
+     * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub next_page_token: String,
+    /**
+     * End date for this report.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub to: Option<chrono::NaiveDate>,
+}
+
+/// All of the following types:
+///
+/// - `Pagination`
+/// - `ReportMeetingsResponse`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReportMeetingsResponseAllOf {
+    /**
+     * Pagination Object.
+     */
+    Pagination(Pagination),
+    ReportMeetingsResponse(ReportMeetingsResponse),
+}
+
+impl ReportMeetingsResponseAllOf {
+    pub fn pagination(&self) -> Option<&Pagination> {
+        if let ReportMeetingsResponseAllOf::Pagination(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_meetings_response(&self) -> Option<&ReportMeetingsResponse> {
+        if let ReportMeetingsResponseAllOf::ReportMeetingsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingDetailsResponseTrackingFields {
     /**
      * Tracking fields type.
@@ -17503,7 +20293,7 @@ pub struct ReportMeetingDetailsResponseTrackingFields {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingDetailsResponse {
     /**
      * Custom keys and values assigned to the meeting.
@@ -17665,7 +20455,151 @@ impl ReportMeetingParticipantsIncludeFields {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ReportMeetingParticipantsResponse {
+    /**
+     * Another identifier for the participant. Can be a number or characters, maximum length of 15 characters.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub customer_key: String,
+    /**
+     * Participant duration.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub duration: i64,
+    /**
+     * Indicates if failover happened during the meeting.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub failover: bool,
+    /**
+     * Universally unique identifier of the Participant. It is the same as the User ID of the participant if the participant joins the meeting by logging into Zoom. If the participant joins the meeting without logging in, the value of this field will be blank..
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
+    /**
+     * Participant join time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub join_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Participant leave time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Participant display name.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+     * Unique identifier of the registrant. This field is only returned if you entered "registrant_id" as the value of `include_fields` query parameter.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub registrant_id: String,
+    /**
+     * Participant email.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_email: String,
+    /**
+     * Participant ID. This is a unique ID assigned to the participant joining a meeting and is valid for that meeting only.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_id: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ReportMeetingParticipantsResponseData {
+    /**
+     * Array of meeting participant objects.
+     *  
+     *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `name` and `user_email` responses.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub participants: Vec<ReportMeetingParticipantsResponse>,
+}
+
+/// All of the following types:
+///
+/// - `PaginationToken`
+/// - `ReportMeetingParticipantsResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReportMeetingParticipantsResponseAllOf {
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+    ReportMeetingParticipantsResponseData(ReportMeetingParticipantsResponseData),
+}
+
+impl ReportMeetingParticipantsResponseAllOf {
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let ReportMeetingParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_meeting_participants_response_data(
+        &self,
+    ) -> Option<&ReportMeetingParticipantsResponseData> {
+        if let ReportMeetingParticipantsResponseAllOf::ReportMeetingParticipantsResponseData(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct QuestionDetails {
     /**
      * Given answer.
@@ -17705,7 +20639,7 @@ pub struct QuestionDetails {
     pub question: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingPollsResponseQuestions {
     /**
      * Participant email.
@@ -17732,7 +20666,7 @@ pub struct ReportMeetingPollsResponseQuestions {
     pub question_details: Vec<QuestionDetails>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportMeetingPollsResponse {
     /**
      * [Meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in "\*\*long\*\*" format(represented as int64 data type in JSON), also known as the meeting number.
@@ -17768,7 +20702,7 @@ pub struct ReportMeetingPollsResponse {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarDetailsResponse {
     /**
      * Custom keys and values assigned to the meeting.
@@ -17930,7 +20864,142 @@ impl ReportWebinarParticipantsIncludeFields {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ReportWebinarParticipantsResponse {
+    /**
+     * Another identifier for the participant. Can be a number or characters, maximum length of 15 characters.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub customer_key: String,
+    /**
+     * Participant duration.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub duration: i64,
+    /**
+     * Indicates if failover happened during the webinar.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub failover: bool,
+    /**
+     * Universally unique identifier of the Participant. It is the same as the User ID of the participant if the participant joins the meeting by logging into Zoom. If the participant joins the meeting without logging in, the value of this field will be blank.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
+    /**
+     * Participant join time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub join_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Participant leave time.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub leave_time: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Participant display name.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+     * Participant email.
+     *  
+     *  This returns an empty string value if the account calling the API is a BAA account.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_email: String,
+    /**
+     * Participant ID. This is a unique ID assigned to the participant joining the webinar and is valid for that webinar only.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_id: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ReportWebinarParticipantsResponseData {
+    /**
+     * Array of webinar participant objects.
+     *  
+     *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `name` and `user_email` responses.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub participants: Vec<ReportWebinarParticipantsResponse>,
+}
+
+/// All of the following types:
+///
+/// - `PaginationToken`
+/// - `ReportWebinarParticipantsResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReportWebinarParticipantsResponseAllOf {
+    /**
+     * Pagination object.
+     */
+    PaginationToken(PaginationToken),
+    ReportWebinarParticipantsResponseData(ReportWebinarParticipantsResponseData),
+}
+
+impl ReportWebinarParticipantsResponseAllOf {
+    pub fn pagination_token(&self) -> Option<&PaginationToken> {
+        if let ReportWebinarParticipantsResponseAllOf::PaginationToken(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_webinar_participants_response_data(
+        &self,
+    ) -> Option<&ReportWebinarParticipantsResponseData> {
+        if let ReportWebinarParticipantsResponseAllOf::ReportWebinarParticipantsResponseData(ref_) =
+            self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarPollsResponseQuestions {
     /**
      * Participant email.
@@ -17957,7 +21026,7 @@ pub struct ReportWebinarPollsResponseQuestions {
     pub question_details: Vec<QuestionDetails>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarPollsResponse {
     /**
      * Webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON), also known as the webinar number.
@@ -17993,7 +21062,7 @@ pub struct ReportWebinarPollsResponse {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarQaResponseQuestionsQuestionDetails {
     /**
      * Given answer.
@@ -18015,7 +21084,7 @@ pub struct ReportWebinarQaResponseQuestionsQuestionDetails {
     pub question: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarQaResponseQuestions {
     /**
      * Participant email.
@@ -18044,7 +21113,7 @@ pub struct ReportWebinarQaResponseQuestions {
     pub question_details: Vec<ReportWebinarQaResponseQuestionsQuestionDetails>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportWebinarQaResponse {
     /**
      * Webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON), also known as the webinar number.
@@ -18107,6 +21176,46 @@ impl std::fmt::Display for QueryDateType {
 impl Default for QueryDateType {
     fn default() -> QueryDateType {
         QueryDateType::StartTime
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ReportCloudRecordingResponseData {
+    /**
+     * Array of cloud usage objects
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub cloud_recording_storage: Vec<String>,
+}
+
+/// All of the following types:
+///
+/// - `ReportCloudRecordingResponse`
+/// - `ReportCloudRecordingResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReportCloudRecordingResponseAllOf {
+    ReportCloudRecordingResponse(ReportCloudRecordingResponse),
+    ReportCloudRecordingResponseData(ReportCloudRecordingResponseData),
+}
+
+impl ReportCloudRecordingResponseAllOf {
+    pub fn report_cloud_recording_response(&self) -> Option<&ReportCloudRecordingResponse> {
+        if let ReportCloudRecordingResponseAllOf::ReportCloudRecordingResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_cloud_recording_response_data(
+        &self,
+    ) -> Option<&ReportCloudRecordingResponseData> {
+        if let ReportCloudRecordingResponseAllOf::ReportCloudRecordingResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
     }
 }
 
@@ -18180,7 +21289,97 @@ impl CategoryType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct OperationLogs {
+    /**
+     * Action
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub action: String,
+    /**
+     * Category type
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub category_type: String,
+    /**
+     * Operation detail
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub operation_detail: String,
+    /**
+     * The user who performed the operation.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub operator: String,
+    /**
+     * The time at which the operation was performed.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub time: Option<chrono::DateTime<chrono::Utc>>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ReportOperationLogsResponse {
+    /**
+     * Array of operation log objects
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub operation_logs: Vec<OperationLogs>,
+}
+
+/// All of the following types:
+///
+/// - `PaginationToken4ImChat`
+/// - `ReportOperationLogsResponse`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReportOperationLogsResponseAllOf {
+    /**
+     * Pagination object.
+     */
+    PaginationToken4ImChat(PaginationToken4ImChat),
+    ReportOperationLogsResponse(ReportOperationLogsResponse),
+}
+
+impl ReportOperationLogsResponseAllOf {
+    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
+        if let ReportOperationLogsResponseAllOf::PaginationToken4ImChat(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_operation_logs_response(&self) -> Option<&ReportOperationLogsResponse> {
+        if let ReportOperationLogsResponseAllOf::ReportOperationLogsResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateRoleRequest {
     /**
      * Description of the role.
@@ -18207,7 +21406,7 @@ pub struct CreateRoleRequest {
     pub privileges: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateRoleResponse {
     /**
      * Description of the role.
@@ -18252,7 +21451,7 @@ pub struct CreateRoleResponse {
     pub total_members: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddRoleMembersRequest {
     /**
      * Email address of the user to whom you would like to assign the role. Provide either the userId in the ID field or the email address in the email field. If both fields are provided, only userId is used.
@@ -18274,7 +21473,7 @@ pub struct AddRoleMembersRequest {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddRoleMembersRequestData {
     /**
      * Array of userId/user email of users to whom you would like to assign this role. Upto 30 users can be assigned a role at once.
@@ -18283,7 +21482,7 @@ pub struct AddRoleMembersRequestData {
     pub members: Vec<AddRoleMembersRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddRoleMembersResponse {
     /**
      * Date and time at which the members are assigned to the role.
@@ -18305,7 +21504,7 @@ pub struct AddRoleMembersResponse {
     pub ids: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspResponseDialInNumbers {
     /**
      * Country Code
@@ -18375,7 +21574,7 @@ impl TspResponseBridge {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspResponse {
     /**
      * Control restriction on account users adding a TSP number outside of account's dial in numbers.
@@ -18435,7 +21634,7 @@ pub struct TspResponse {
     pub tsp_provider: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspUpdateRequest {
     /**
      * Control restriction on account users adding a TSP number outside of account's dial in numbers.
@@ -18600,7 +21799,7 @@ impl UsersResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersResponseCustomAttributes {
     /**
      * The custom attribute's unique ID.
@@ -18631,8 +21830,8 @@ pub struct UsersResponseCustomAttributes {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Users {
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct UsersResponse {
     /**
      * The time at which the user's account was created.
      */
@@ -18808,8 +22007,8 @@ pub struct Users {
     pub verified: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UsersResponse {
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct UsersResponseData {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -18859,7 +22058,7 @@ pub struct UsersResponse {
      * Information about the users.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub users: Vec<Users>,
+    pub users: Vec<UsersResponse>,
 }
 
 /**
@@ -18906,7 +22105,7 @@ impl UserCreateRequestAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserInfo {
     /**
      * User email address.
@@ -18958,7 +22157,7 @@ pub struct UserInfo {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserCreateRequest {
     /**
      * Specify how to create the new user: <br>`create` - User will get an email sent from Zoom. There is a confirmation link in this email. The user will then need to use the link to activate their Zoom account. The user can then set or change their password.<br>`autoCreate` - This action is provided for the enterprise customer who has a managed domain. This feature is disabled by default because of the security risk involved in creating a user who does not belong to your domain.<br>`custCreate` - Users created via this option do not have passwords and will not have the ability to log into the Zoom Web Portal or the Zoom Client. These users can still host and join meetings using the `start_url` and `join_url` respectively. To use this option, you must contact the ISV Platform Sales team at isv@zoom.us.<br>`ssoCreate` - This action is provided for the enabled “Pre-provisioning SSO User” option. A user created in this way has no password. If not a basic user, a personal vanity URL using the user name (no domain) of the provisioning email will be generated. If the user name or PMI is invalid or occupied, it will use a random number or random personal vanity URL.
@@ -18969,7 +22168,7 @@ pub struct UserCreateRequest {
     pub user_info: Option<UserInfo>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserCreateResponse {
     /**
      * User email address.
@@ -19094,7 +22293,7 @@ impl LoginType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserResponse {
     /**
      * User ID.
@@ -19105,6 +22304,428 @@ pub struct UserResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
+}
+
+/**
+ * The phone number's label:
+ *   
+ *   * `Mobile`
+ *   * `Office`
+ *   * `Home`
+ *   * `Fax`
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum UserResponsePhoneNumbersLabel {
+    #[serde(rename = "Fax")]
+    Fax,
+    #[serde(rename = "Home")]
+    Home,
+    #[serde(rename = "Mobile")]
+    Mobile,
+    #[serde(rename = "Office")]
+    Office,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for UserResponsePhoneNumbersLabel {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            UserResponsePhoneNumbersLabel::Fax => "Fax",
+            UserResponsePhoneNumbersLabel::Home => "Home",
+            UserResponsePhoneNumbersLabel::Mobile => "Mobile",
+            UserResponsePhoneNumbersLabel::Office => "Office",
+            UserResponsePhoneNumbersLabel::Noop => "",
+            UserResponsePhoneNumbersLabel::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for UserResponsePhoneNumbersLabel {
+    fn default() -> UserResponsePhoneNumbersLabel {
+        UserResponsePhoneNumbersLabel::Noop
+    }
+}
+impl UserResponsePhoneNumbersLabel {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, UserResponsePhoneNumbersLabel::Noop)
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct UserResponsePhoneNumbers {
+    /**
+     * Country code of the phone number. For example, for United States phone numbers, the value of this field should be "+1".
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub code: String,
+    /**
+     * [Country ID](https://marketplace.zoom.us/docs/api-reference/other-references/abbreviation-lists#countries) of the phone number. For example, if the phone number provided in the `number` field is a Brazil based number, the value of the `country` field should be `BR`.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub country: String,
+    /**
+     * The phone number's label:
+     *  
+     *  \* `Mobile`
+     *  \* `Office`
+     *  \* `Home`
+     *  \* `Fax`
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub label: Option<UserResponsePhoneNumbersLabel>,
+    /**
+     * Phone number of the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub number: String,
+    /**
+     * Indicates whether the phone number has been verified by Zoom or not.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub verified: bool,
+}
+
+/**
+ * Status of user's account.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum UserResponseStatus {
+    #[serde(rename = "active")]
+    Active,
+    #[serde(rename = "inactive")]
+    Inactive,
+    #[serde(rename = "pending")]
+    Pending,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for UserResponseStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            UserResponseStatus::Active => "active",
+            UserResponseStatus::Inactive => "inactive",
+            UserResponseStatus::Pending => "pending",
+            UserResponseStatus::Noop => "",
+            UserResponseStatus::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for UserResponseStatus {
+    fn default() -> UserResponseStatus {
+        UserResponseStatus::Noop
+    }
+}
+impl UserResponseStatus {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, UserResponseStatus::Noop)
+    }
+}
+
+/// Custom attribute(s) that have been assigned to the user.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct UserResponseCustomAttributes {
+    /**
+     * Custom attribute(s) that have been assigned to the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub key: String,
+    /**
+     * Custom attribute(s) that have been assigned to the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+     * Custom attribute(s) that have been assigned to the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub value: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct UserResponseData {
+    /**
+     * User's account ID.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub account_id: String,
+    /**
+     * CMS ID of user, only enabled for Kaltura integration.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub cms_user_id: String,
+    /**
+     * User's company.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub company: String,
+    /**
+     * The date and time at which this user was created.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub created_at: Option<chrono::DateTime<chrono::Utc>>,
+    /**
+     * Custom attribute(s) that have been assigned to the user.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub custom_attributes: Option<UserResponseCustomAttributes>,
+    /**
+     * IDs of the web groups user belongs to.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub group_ids: Vec<String>,
+    /**
+     * User's host key.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub host_key: String,
+    /**
+     * IM IDs of the groups user belongs to.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub im_group_ids: Vec<String>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub jid: String,
+    /**
+     * User's job title.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub job_title: String,
+    /**
+     * Default language for the Zoom Web Portal.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub language: String,
+    /**
+     * User's location.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub location: String,
+    /**
+     * The user's login method:
+     *  
+     *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+     *  
+     *  The following login methods are only available in China:
+     *  
+     *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub login_type: i64,
+    /**
+     * The manager for the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub manager: String,
+    /**
+     * User's personal meeting url.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub personal_meeting_url: String,
+    /**
+     * \*\*Note:\*\* This field has been \*\*deprecated\*\* and will not be supported in the future. Use the \*\*phone_numbers\*\* field instead of this field. <br> User's country for Company Phone Number.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub phone_country: String,
+    /**
+     * \*\*Note:\*\* This field has been \*\*deprecated\*\* and will not be supported in the future. Use the \*\*phone_numbers\*\* field instead of this field. <br> User's phone number.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub phone_number: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub phone_numbers: Option<UserResponsePhoneNumbers>,
+    /**
+     * The URL for user's profile picture.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub pic_url: String,
+    /**
+     * United plan [type](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-united-plans). Only returned if user is enrolled in the Zoom United plan.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub plan_united_type: String,
+    /**
+     * Unique identifier of the [role](https://marketplace.zoom.us/docs/api-reference/zoom-api/roles/roles) assigned to the user.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub role_id: String,
+    /**
+     * Status of user's account.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<UserResponseStatus>,
+    /**
+     * Displays `true` if user has enabled PMI for instant meetinsgs, `false` otherwise.
+     */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub use_pmi: bool,
+    /**
+     * Personal meeting room URL, if the user has one.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub vanity_url: String,
+    /**
+     * Displays whether user is verified or not. <br>
+     *  `1` - Account verified.<br>
+     *  `0` - Account not verified.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub verified: i64,
+}
+
+/// All of the following types:
+///
+/// - `UserResponse`
+/// - `User`
+/// - `UserResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum UserResponseAllOf {
+    /**
+     * The user object represents a specific user on Zoom.
+     */
+    User(User),
+    UserResponse(UserResponse),
+    UserResponseData(UserResponseData),
+}
+
+impl UserResponseAllOf {
+    pub fn user(&self) -> Option<&User> {
+        if let UserResponseAllOf::User(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn user_response(&self) -> Option<&UserResponse> {
+        if let UserResponseAllOf::UserResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn user_response_data(&self) -> Option<&UserResponseData> {
+        if let UserResponseAllOf::UserResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -19137,7 +22758,7 @@ impl Default for UserDeleteAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserZakResponse {
     /**
      * The user's ZAK.
@@ -19150,7 +22771,7 @@ pub struct UserZakResponse {
     pub token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserAssistantCreateResponse {
     #[serde(
         default,
@@ -19246,42 +22867,6 @@ impl UserSettingsResponseOneOf {
     }
 }
 
-impl From<Domains> for UserSettingsResponseOneOf {
-    fn from(f: Domains) -> Self {
-        UserSettingsResponseOneOf::Domains(f)
-    }
-}
-
-impl From<MeetingSecuritySettings> for UserSettingsResponseOneOf {
-    fn from(f: MeetingSecuritySettings) -> Self {
-        UserSettingsResponseOneOf::MeetingSecuritySettings(f)
-    }
-}
-
-impl From<UserSettings> for UserSettingsResponseOneOf {
-    fn from(f: UserSettings) -> Self {
-        UserSettingsResponseOneOf::UserSettings(f)
-    }
-}
-
-impl From<UserSettingsResponseOneOf> for Domains {
-    fn from(f: UserSettingsResponseOneOf) -> Self {
-        f.domains().unwrap().clone()
-    }
-}
-
-impl From<UserSettingsResponseOneOf> for MeetingSecuritySettings {
-    fn from(f: UserSettingsResponseOneOf) -> Self {
-        f.meeting_security_settings().unwrap().clone()
-    }
-}
-
-impl From<UserSettingsResponseOneOf> for UserSettings {
-    fn from(f: UserSettingsResponseOneOf) -> Self {
-        f.user_settings().unwrap().clone()
-    }
-}
-
 /// One of the following types:
 ///
 /// - `UserSettingsUpdate`
@@ -19317,42 +22902,6 @@ impl UserSettingsUpdateRequestOneOf {
             return Some(ref_);
         }
         None
-    }
-}
-
-impl From<Domains> for UserSettingsUpdateRequestOneOf {
-    fn from(f: Domains) -> Self {
-        UserSettingsUpdateRequestOneOf::Domains(f)
-    }
-}
-
-impl From<MeetingSecuritySettings> for UserSettingsUpdateRequestOneOf {
-    fn from(f: MeetingSecuritySettings) -> Self {
-        UserSettingsUpdateRequestOneOf::MeetingSecuritySettings(f)
-    }
-}
-
-impl From<UserSettingsUpdate> for UserSettingsUpdateRequestOneOf {
-    fn from(f: UserSettingsUpdate) -> Self {
-        UserSettingsUpdateRequestOneOf::UserSettingsUpdate(f)
-    }
-}
-
-impl From<UserSettingsUpdateRequestOneOf> for Domains {
-    fn from(f: UserSettingsUpdateRequestOneOf) -> Self {
-        f.domains().unwrap().clone()
-    }
-}
-
-impl From<UserSettingsUpdateRequestOneOf> for MeetingSecuritySettings {
-    fn from(f: UserSettingsUpdateRequestOneOf) -> Self {
-        f.meeting_security_settings().unwrap().clone()
-    }
-}
-
-impl From<UserSettingsUpdateRequestOneOf> for UserSettingsUpdate {
-    fn from(f: UserSettingsUpdateRequestOneOf) -> Self {
-        f.user_settings_update().unwrap().clone()
     }
 }
 
@@ -19433,7 +22982,7 @@ impl UserStatusRequestAction {
 }
 
 /// The action.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserStatusRequest {
     /**
      * The action types:<br>`activate` - Activate a deactivated user.<br>`deactivate` - Deactivate a user.
@@ -19442,7 +22991,7 @@ pub struct UserStatusRequest {
     pub action: UserStatusRequestAction,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserPasswordRequest {
     /**
      * User password. Should be less than 32 characters.
@@ -19457,7 +23006,7 @@ pub struct UserPasswordRequest {
     pub password: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PacAccounts {
     /**
      * Conference ID.
@@ -19498,7 +23047,7 @@ pub struct PacAccounts {
     pub participant_password: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserPaCsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub pac_accounts: Vec<PacAccounts>,
@@ -19546,7 +23095,7 @@ impl UserTsPsResponseTspAccountsDialInNumbersType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserTsPsResponseTspAccountsDialInNumbers {
     /**
      * Country code.
@@ -19623,7 +23172,7 @@ impl UserTsPsResponseTspAccountsBridge {
 }
 
 /// List of TSP accounts.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspAccounts {
     /**
      * Conference code: numeric value, length is less than 16.
@@ -19664,7 +23213,7 @@ pub struct TspAccounts {
     pub tsp_bridge: Option<UserTsPsResponseTspAccountsBridge>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserTsPsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub tsp_accounts: Vec<TspAccounts>,
@@ -19711,7 +23260,7 @@ impl TspAccountDialInNumbersType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspAccountDialInNumbers {
     /**
      * Country code.
@@ -19748,7 +23297,7 @@ pub struct TspAccountDialInNumbers {
 }
 
 /// TSP account of the user.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspAccount {
     /**
      * Conference code: numeric value, length is less than 16.
@@ -19830,7 +23379,7 @@ impl TspAccountDialInNumbersTypeData {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspAccountDialInNumbersData {
     /**
      * Country code.
@@ -19867,7 +23416,7 @@ pub struct TspAccountDialInNumbersData {
 }
 
 /// TSP account.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TspAccountData {
     /**
      * Conference code: numeric value, length is less than 16.
@@ -19937,7 +23486,7 @@ impl UserTokenType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserTokenResponse {
     /**
      * User token.
@@ -19950,7 +23499,7 @@ pub struct UserTokenResponse {
     pub token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserEmailResponse {
     /**
      * Indicates whether or not the email already exists in Zoom.
@@ -19962,7 +23511,7 @@ pub struct UserEmailResponse {
     pub existed_email: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserEmailUpdateRequest {
     /**
      * User’s email. The length should be less than 128 characters.
@@ -19975,7 +23524,7 @@ pub struct UserEmailUpdateRequest {
     pub email: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserVanityNameResponse {
     /**
      * If `true`, it indicates that the personal meeting room with the given name exists.<br> `false` - The room name does not exist.
@@ -19987,7 +23536,7 @@ pub struct UserVanityNameResponse {
     pub existed: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarCreateResponse {
     /**
      * Email address of the meeting host.
@@ -20045,7 +23594,39 @@ pub struct WebinarCreateResponse {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/// All of the following types:
+///
+/// - `WebinarCreateResponse`
+/// - `WebinarInfo`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WebinarCreateResponseAllOf {
+    WebinarCreateResponse(WebinarCreateResponse),
+    /**
+     * Webinar object.
+     */
+    WebinarInfo(WebinarInfo),
+}
+
+impl WebinarCreateResponseAllOf {
+    pub fn webinar_create_response(&self) -> Option<&WebinarCreateResponse> {
+        if let WebinarCreateResponseAllOf::WebinarCreateResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn webinar_info(&self) -> Option<&WebinarInfo> {
+        if let WebinarCreateResponseAllOf::WebinarInfo(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarResponse {
     /**
      * Email address of the meeting host.
@@ -20087,8 +23668,40 @@ pub struct WebinarResponse {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Participants {
+/// All of the following types:
+///
+/// - `WebinarResponse`
+/// - `WebinarInfo`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WebinarResponseAllOf {
+    /**
+     * Webinar object.
+     */
+    WebinarInfo(WebinarInfo),
+    WebinarResponse(WebinarResponse),
+}
+
+impl WebinarResponseAllOf {
+    pub fn webinar_info(&self) -> Option<&WebinarInfo> {
+        if let WebinarResponseAllOf::WebinarInfo(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn webinar_response(&self) -> Option<&WebinarResponse> {
+        if let WebinarResponseAllOf::WebinarResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ListWebinarParticipantsResponse {
     /**
      * Unique identifier of the participant.
      */
@@ -20118,8 +23731,8 @@ pub struct Participants {
     pub user_email: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ListWebinarParticipantsResponse {
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ListWebinarParticipantsResponseData {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -20148,7 +23761,7 @@ pub struct ListWebinarParticipantsResponse {
     )]
     pub page_size: i64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub participants: Vec<Participants>,
+    pub participants: Vec<ListWebinarParticipantsResponse>,
     /**
      * The total number of records available across all pages.
      */
@@ -20192,13 +23805,13 @@ impl WebinarStatusRequestAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarStatusRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<WebinarStatusRequestAction>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarPanelistCreateResponse {
     /**
      * Webinar Id.
@@ -20220,7 +23833,7 @@ pub struct WebinarPanelistCreateResponse {
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarRegistrantCreateResponse {
     /**
      * Webinar ID
@@ -20269,7 +23882,7 @@ pub struct WebinarRegistrantCreateResponse {
     pub topic: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddBatchWebinarRegistrantsRequest {
     /**
      * Email address of the registrant.
@@ -20300,7 +23913,7 @@ pub struct AddBatchWebinarRegistrantsRequest {
     pub last_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddBatchRegistrantsRequest {
     /**
      * If a meeting was scheduled with approval_type `1` (manual approval), but you would like to automatically approve the registrants that are added via this API, you can set the value of this field to `true`.
@@ -20313,7 +23926,7 @@ pub struct AddBatchRegistrantsRequest {
     pub registrants: Vec<AddBatchWebinarRegistrantsRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddBatchWebinarRegistrantsResponse {
     /**
      * Email address of the registrant.
@@ -20344,7 +23957,7 @@ pub struct AddBatchWebinarRegistrantsResponse {
     pub registrant_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddBatchWebinarRegistrantsResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub registrants: Vec<AddBatchWebinarRegistrantsResponse>,
@@ -20391,7 +24004,7 @@ impl WebinarRegistrantStatusRequestAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarRegistrantStatusRequestRegistrants {
     /**
      * Registrant's email address.
@@ -20413,7 +24026,7 @@ pub struct WebinarRegistrantStatusRequestRegistrants {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarRegistrantStatusRequest {
     /**
      * Used to approve a registrant, deny a registrant, or cancel a previously approved registrant.
@@ -20474,7 +24087,7 @@ impl WebinarPollCreateResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebinarPollGetResponse {
     /**
      * Webinar Poll ID
@@ -20492,11 +24105,99 @@ pub struct WebinarPollGetResponse {
     pub status: Option<WebinarPollCreateResponseStatus>,
 }
 
+/// All of the following types:
+///
+/// - `WebinarPollCreateResponse`
+/// - `Poll`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WebinarPollCreateResponseAllOf {
+    /**
+     * Poll
+     */
+    Poll(Poll),
+    WebinarPollCreateResponse(WebinarPollCreateResponse),
+}
+
+impl WebinarPollCreateResponseAllOf {
+    pub fn poll(&self) -> Option<&Poll> {
+        if let WebinarPollCreateResponseAllOf::Poll(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn webinar_poll_create_response(&self) -> Option<&WebinarPollCreateResponse> {
+        if let WebinarPollCreateResponseAllOf::WebinarPollCreateResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
+///
+/// - `WebinarPollGetResponse`
+/// - `Poll`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WebinarPollGetResponseAllOf {
+    /**
+     * Poll
+     */
+    Poll(Poll),
+    WebinarPollGetResponse(WebinarPollGetResponse),
+}
+
+impl WebinarPollGetResponseAllOf {
+    pub fn poll(&self) -> Option<&Poll> {
+        if let WebinarPollGetResponseAllOf::Poll(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn webinar_poll_get_response(&self) -> Option<&WebinarPollGetResponse> {
+        if let WebinarPollGetResponseAllOf::WebinarPollGetResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
+///
+/// - `WebinarRegistrantQuestions`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WebinarRegistrantsQuestionsGetResponseAllOf {
+    /**
+     * Webinar Registrant Questions
+     */
+    WebinarRegistrantQuestions(WebinarRegistrantQuestions),
+}
+
+impl WebinarRegistrantsQuestionsGetResponseAllOf {
+    pub fn webinar_registrant_questions(&self) -> Option<&WebinarRegistrantQuestions> {
+        if let WebinarRegistrantsQuestionsGetResponseAllOf::WebinarRegistrantQuestions(ref_) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// JSON template describing how the message should be displayed for the user. For more information please see our ["Send Message" templates](https://marketplace.zoom.us/docs/guides/chatbots/sending-messages#example-request).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Content {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SendchatbotRequest {
     /**
      * Account ID of the authorized account.
@@ -20558,10 +24259,10 @@ pub struct SendchatbotRequest {
 }
 
 /// JSON template describing how the edited message should be displayed for the user. For more information please see our ["Send Message" templates](https://marketplace.zoom.us/docs/guides/chatbots/sending-messages#example-request).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EditChatbotMessageRequestContent {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EditChatbotMessageRequest {
     /**
      * The AccountID of the Zoom account to which the message was sent. Retrieve this from the Chatbot request sent to your server as shown in the example [here]( https://marketplace.zoom.us/docs/guides/chatbots/sending-messages).
@@ -20604,7 +24305,7 @@ pub struct EditChatbotMessageRequest {
     pub user_jid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EditChatbotMessageResponse {
     /**
      * Unique Identifier of the updated message,
@@ -20653,7 +24354,7 @@ pub struct EditChatbotMessageResponse {
     pub user_jid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DeleteChatbotMessageRequest {
     /**
      * The AccountID of the Zoom account to which the message was sent. Retrieve this from the Chatbot request sent to your server as shown in the example [here]( https://marketplace.zoom.us/docs/guides/chatbots/sending-messages).
@@ -20684,7 +24385,7 @@ pub struct DeleteChatbotMessageRequest {
     pub user_jid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DeleteChatbotMessageResponse {
     /**
      * Unique identifier of the message that was deleted.
@@ -20733,7 +24434,7 @@ pub struct DeleteChatbotMessageResponse {
     pub user_jid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetLiveStreamDetailsResponse {
     /**
      * Live streaming page URL. This is the URL using which anyone can view the live stream of the meeting.
@@ -20764,7 +24465,100 @@ pub struct GetLiveStreamDetailsResponse {
     pub stream_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ClientFeedbackDetails {
+    /**
+     * Email address of the participant.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub email: String,
+    /**
+     * Meeting ID
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub meeting_id: String,
+    /**
+     * Participant Name
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub participant_name: String,
+    /**
+     * Time at which the feedback was submitted by the participant.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub time: Option<chrono::DateTime<chrono::Utc>>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct DashboardClientFeedbackDetailResponse {
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub client_feedback_details: Vec<ClientFeedbackDetails>,
+}
+
+/// All of the following types:
+///
+/// - `ReportCloudRecordingResponse`
+/// - `PaginationToken4ImChat`
+/// - `DashboardClientFeedbackDetailResponse`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardClientFeedbackDetailResponseAllOf {
+    DashboardClientFeedbackDetailResponse(DashboardClientFeedbackDetailResponse),
+    /**
+     * Pagination object.
+     */
+    PaginationToken4ImChat(PaginationToken4ImChat),
+    ReportCloudRecordingResponse(ReportCloudRecordingResponse),
+}
+
+impl DashboardClientFeedbackDetailResponseAllOf {
+    pub fn dashboard_client_feedback_detail_response(
+        &self,
+    ) -> Option<&DashboardClientFeedbackDetailResponse> {
+        if let DashboardClientFeedbackDetailResponseAllOf::DashboardClientFeedbackDetailResponse(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
+        if let DashboardClientFeedbackDetailResponseAllOf::PaginationToken4ImChat(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn report_cloud_recording_response(&self) -> Option<&ReportCloudRecordingResponse> {
+        if let DashboardClientFeedbackDetailResponseAllOf::ReportCloudRecordingResponse(ref_) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListimmessagesResponseMessages {
     /**
      * IM message send time.
@@ -20813,7 +24607,7 @@ pub struct ListimmessagesResponseMessages {
     pub timstamp: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListimmessagesResponse {
     /**
      * Query date time, format as yyyy-mm-dd.
@@ -20849,7 +24643,7 @@ pub struct ListimmessagesResponse {
     pub page_size: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SendimmessagesRequest {
     /**
      * IM message content.
@@ -20862,7 +24656,7 @@ pub struct SendimmessagesRequest {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SendimmessagesResponse {
     /**
      * IM message UUID.
@@ -20875,7 +24669,7 @@ pub struct SendimmessagesResponse {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CallingPlan {
     /**
      * The [type](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) of calling plan.
@@ -20889,7 +24683,7 @@ pub struct CallingPlan {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneUserResponseNumbers {
     /**
      * Phone Number Id
@@ -20952,7 +24746,7 @@ impl PhoneUserResponseStatus {
 }
 
 /// A list of the user's policies. Policies are exceptions to the user's calling plan restrictions.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Policy {
     /**
      * A list of the user's policies. Policies are exceptions to the user's calling plan restrictions.
@@ -20965,7 +24759,7 @@ pub struct Policy {
 }
 
 /// Zoom User Profile
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneUserResponse {
     /**
      * Zoom User Profile
@@ -21043,7 +24837,7 @@ pub struct PhoneUserResponse {
 }
 
 /// A list of the user's policies.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateUserProfileRequestPolicy {
     /**
      * A list of the user's policies.
@@ -21055,7 +24849,7 @@ pub struct UpdateUserProfileRequestPolicy {
     pub international_calling: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateUserProfileRequest {
     /**
      * The extension number of the user. The number must be complete (i.e. site number + short extension).
@@ -21083,7 +24877,7 @@ pub struct UpdateUserProfileRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneSettingResponseCountry {
     /**
      *
@@ -21106,7 +24900,7 @@ pub struct PhoneSettingResponseCountry {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MultipleSites {
     /**
      *
@@ -21128,7 +24922,7 @@ pub struct MultipleSites {
 }
 
 /// BYOC setting
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Byoc {
     /**
      * BYOC setting
@@ -21140,7 +24934,7 @@ pub struct Byoc {
     pub enable: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ShowDeviceIpCallLog {
     /**
      * If the value of this field is `true`, then to allow `/phone/call_logs` and `/phone/call_logs/{callLogId}` APIs show `device_public_ip` and `device_private_ip` in response.
@@ -21153,7 +24947,7 @@ pub struct ShowDeviceIpCallLog {
 }
 
 /// Zoom Account Setting
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneSettingResponse {
     /**
      * Zoom Account Setting
@@ -21184,7 +24978,7 @@ pub struct PhoneSettingResponse {
 ///
 /// **Prerequisites**: <br>
 /// * Business or enterprise Account.<br>
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdatePhoneSettingsRequestByoc {
     /**
      * Only [master account owners](https://marketplace.zoom.us/docs/api-reference/master-account-apis) can use this MA API to enable BYOC(Bring your own carrier) option for a sub account.<br>
@@ -21202,7 +24996,7 @@ pub struct UpdatePhoneSettingsRequestByoc {
     pub enable: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdatePhoneSettingsRequestShowDeviceIpCallLog {
     /**
      * Set the value of this field to `true` to allow `/phone/call_logs` and `/phone/call_logs/{callLogId}` APIs show `device_public_ip` and `device_private_ip` in response.
@@ -21214,7 +25008,7 @@ pub struct UpdatePhoneSettingsRequestShowDeviceIpCallLog {
     pub enable: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdatePhoneSettingsRequest {
     /**
      * Only [master account owners](https://marketplace.zoom.us/docs/api-reference/master-account-apis) can use this MA API to enable BYOC(Bring your own carrier) option for a sub account.<br>
@@ -21232,7 +25026,7 @@ pub struct UpdatePhoneSettingsRequest {
 }
 
 /// Outbound Caller Info
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OutboundCaller {
     /**
      * Outbound Caller Info
@@ -21245,7 +25039,7 @@ pub struct OutboundCaller {
     pub number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct KeysPositions {
     /**
      * Primary number of the user.
@@ -21259,7 +25053,7 @@ pub struct KeysPositions {
 }
 
 /// Contains information on phones or devices provisioned for the user.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DeskPhone {
     /**
      * Contains information on phones or devices provisioned for the user.
@@ -21269,7 +25063,7 @@ pub struct DeskPhone {
 }
 
 /// [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct VoiceMail {
     /**
      * [Shared voicemail access](https://support.zoom.us/hc/en-us/articles/360033863991-Sharing-and-controlling-access-to-a-voicemail-inbox) assigned to user.
@@ -21307,7 +25101,7 @@ pub struct VoiceMail {
     pub shared_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OutboundCallerIds {
     /**
      * Whether the outbound caller ID is the default or not. If `true`, the outbound caller ID is the default caller ID.
@@ -21338,7 +25132,7 @@ pub struct OutboundCallerIds {
 }
 
 /// The site's country.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneUserSettingsResponseCountry {
     /**
      * The site's country.
@@ -21370,7 +25164,7 @@ pub struct PhoneUserSettingsResponseCountry {
 }
 
 /// Phone User Setting
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneUserSettingsResponse {
     /**
      * Phone User Setting
@@ -21483,7 +25277,7 @@ impl ListSettingTemplatesResponseType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Templates {
     /**
      * Template description.
@@ -21526,7 +25320,7 @@ pub struct Templates {
     pub type_: Option<ListSettingTemplatesResponseType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSettingTemplatesResponse {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes
@@ -21606,7 +25400,7 @@ impl AddSettingTemplateRequestType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddSettingTemplateRequest {
     /**
      * A description of the template.
@@ -21646,7 +25440,7 @@ pub struct AddSettingTemplateRequest {
     pub type_: AddSettingTemplateRequestType,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddSettingTemplateResponse {
     /**
      * Template description.
@@ -21687,7 +25481,7 @@ pub struct AddSettingTemplateResponse {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BatchAddLocationsRequestEmergencyAddress {
     /**
      * The location's physical address.
@@ -21756,7 +25550,7 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     pub zip: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct NetworkSwitches {
     /**
      * The location's assigned MAC address.
@@ -21811,7 +25605,7 @@ pub struct NetworkSwitches {
     pub port_range_to: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Locations {
     /**
      * The location's BSSID (Basic Service Set Identifier).
@@ -21893,7 +25687,7 @@ pub struct Locations {
     pub sip_group_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BatchAddLocationsRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub locations: Vec<Locations>,
@@ -21908,7 +25702,7 @@ pub struct BatchAddLocationsRequest {
     pub site_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BatchAddLocationsResponse {
     /**
      * The location's display name.
@@ -21931,7 +25725,7 @@ pub struct BatchAddLocationsResponse {
 }
 
 /// The emergency service location's ELIN (Emergency Location Identification Number).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Elin {
     /**
      * The emergency service location's ELIN (Emergency Location Identification Number).
@@ -21953,7 +25747,7 @@ pub struct Elin {
     pub phone_number_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListLocationsResponseNetworkSwitches {
     /**
      * The MAC address.
@@ -22003,7 +25797,7 @@ pub struct ListLocationsResponseNetworkSwitches {
 }
 
 /// The emergency service location's SIP group information.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListLocationsResponseSipGroup {
     /**
      * The emergency service location's SIP group information.
@@ -22026,7 +25820,7 @@ pub struct ListLocationsResponseSipGroup {
 }
 
 /// The emergency service location's site information.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListLocationsResponseSite {
     /**
      * The emergency service location's site information.
@@ -22048,7 +25842,7 @@ pub struct ListLocationsResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListLocationsResponse {
     /**
      * The emergency service location's BSSID (Basic Service Set Identifier).
@@ -22132,7 +25926,7 @@ pub struct ListLocationsResponse {
     pub site: Option<ListLocationsResponseSite>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListLocationsResponseData {
     /**
      * Information about emergency service locations.
@@ -22159,7 +25953,7 @@ pub struct ListLocationsResponseData {
     pub page_size: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddLocationRequest {
     /**
      * A comma-separated list of the emergency service location's BSSIDs (Basic Service Set Identifiers).
@@ -22244,7 +26038,7 @@ pub struct AddLocationRequest {
     pub site_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddLocationResponse {
     /**
      * The phone's location ID.
@@ -22267,7 +26061,7 @@ pub struct AddLocationResponse {
 }
 
 /// The ELIN (Emergency Location Identification Number).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponseElin {
     /**
      * The ELIN (Emergency Location Identification Number).
@@ -22290,7 +26084,7 @@ pub struct GetLocationResponseElin {
 }
 
 /// The emergency location's address information.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponseEmergencyAddress {
     /**
      * The emergency location's address information.
@@ -22357,7 +26151,7 @@ pub struct GetLocationResponseEmergencyAddress {
     pub zip: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponseNetworkSwitches {
     /**
      * The emergency location's assigned MAC address.
@@ -22407,7 +26201,7 @@ pub struct GetLocationResponseNetworkSwitches {
 }
 
 /// The emergency location's SIP group information.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponseSipGroup {
     /**
      * The emergency location's SIP group information.
@@ -22430,7 +26224,7 @@ pub struct GetLocationResponseSipGroup {
 }
 
 /// The emergency location's site information.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponseSite {
     /**
      * The emergency location's site information.
@@ -22452,7 +26246,7 @@ pub struct GetLocationResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponse {
     /**
      * The emergency service location's BSSIDs (Basic Service Set Identifiers).
@@ -22532,7 +26326,7 @@ pub struct GetLocationResponse {
     pub site: Option<GetLocationResponseSite>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateLocationRequestNetworkSwitches {
     /**
      * The emergency location's assigned MAC address.
@@ -22587,7 +26381,7 @@ pub struct UpdateLocationRequestNetworkSwitches {
     pub port_range_to: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateLocationRequest {
     /**
      * A comma-separated list of the emergency service location's BSSIDs (Basic Service Set Identifiers).
@@ -22657,7 +26451,7 @@ pub struct UpdateLocationRequest {
 }
 
 /// The SIP trunk group.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SipTrunk {
     /**
      * The SIP trunk group.
@@ -22679,7 +26473,7 @@ pub struct SipTrunk {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SipGroups {
     /**
      * The SIP group's description.
@@ -22723,7 +26517,7 @@ pub struct SipGroups {
     pub sip_trunk: Option<SipTrunk>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSipGroupsResponse {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -22800,7 +26594,7 @@ impl GetSettingTemplateResponseType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponseProfile {
     /**
      * The area code from which the phone account was created.
@@ -22822,7 +26616,7 @@ pub struct GetSettingTemplateResponseProfile {
     pub country: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AutoCallRecording {
     /**
      * Enable automatic call recording.
@@ -22859,7 +26653,7 @@ pub struct AutoCallRecording {
     pub recording_transcription: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AdHocCallRecording {
     /**
      * Allow current extension to record and save calls in the cloud.
@@ -22887,7 +26681,7 @@ pub struct AdHocCallRecording {
     pub recording_transcription: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Sms {
     /**
      * Allow user to send and receive messages.
@@ -22904,7 +26698,7 @@ pub struct Sms {
     pub international_sms: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Voicemail {
     /**
      * Allow voicemail transcription.
@@ -22924,7 +26718,7 @@ pub struct Voicemail {
     pub enable: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponsePolicy {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ad_hoc_call_recording: Option<AdHocCallRecording>,
@@ -22936,7 +26730,7 @@ pub struct GetSettingTemplateResponsePolicy {
     pub voicemail: Option<Voicemail>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CustomHours {
     /**
      * Values:<br>
@@ -23035,7 +26829,7 @@ impl GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOpera
 }
 
 /// Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ConnectOperator {
     /**
      * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
@@ -23062,7 +26856,7 @@ pub struct ConnectOperator {
         Option<GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BusinessHours {
     /**
      * When a call is not answered:<br>
@@ -23113,7 +26907,7 @@ pub struct BusinessHours {
 }
 
 /// Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponseUserSettingsCallHandlingCloseHoursConnectOperator {
     /**
      * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
@@ -23140,7 +26934,7 @@ pub struct GetSettingTemplateResponseUserSettingsCallHandlingCloseHoursConnectOp
         Option<GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CloseHours {
     /**
      * Action to take when a call is not answered:<br>
@@ -23171,7 +26965,7 @@ pub struct CloseHours {
     pub max_wait_time: Option<serde_json::Value>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CallHandling {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub business_hours: Option<BusinessHours>,
@@ -23179,7 +26973,7 @@ pub struct CallHandling {
     pub close_hours: Option<CloseHours>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponseUserSettingsDeskPhone {
     /**
      * Pin code.
@@ -23234,7 +27028,7 @@ impl HoldMusic {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponseUserSettings {
     /**
      * Audio prompt language code.<br> American English: `en-US`<br>
@@ -23283,7 +27077,7 @@ pub struct GetSettingTemplateResponseUserSettings {
     pub hold_music: Option<HoldMusic>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSettingTemplateResponse {
     /**
      * The description of the template.
@@ -23366,7 +27160,7 @@ impl RecordingCalls {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequestPolicyAutoCallRecording {
     /**
      * Automatic call recording.
@@ -23399,7 +27193,7 @@ pub struct UpdateSettingTemplateRequestPolicyAutoCallRecording {
     pub recording_transcription: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequestPolicySms {
     /**
      * Allow user to send and receive messages.
@@ -23419,7 +27213,7 @@ pub struct UpdateSettingTemplateRequestPolicySms {
     pub international_sms: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequestPolicy {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub ad_hoc_call_recording: Option<AdHocCallRecording>,
@@ -23432,7 +27226,7 @@ pub struct UpdateSettingTemplateRequestPolicy {
 }
 
 /// Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequestUserSettingsCallHandlingBusinessHoursConnectOperator {
     /**
      * Allow callers to press Zero to reach an operator or press One to leave a message, or allow neither of these options.
@@ -23459,7 +27253,7 @@ pub struct UpdateSettingTemplateRequestUserSettingsCallHandlingBusinessHoursConn
         Option<GetSettingTemplateResponseUserSettingsCallHandlingBusinessHoursConnectOperatorType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequestUserSettingsCallHandlingBusinessHours {
     /**
      * When a call is not answered:<br>
@@ -23510,7 +27304,7 @@ pub struct UpdateSettingTemplateRequestUserSettingsCallHandlingBusinessHours {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequestUserSettingsCallHandlingCloseHours {
     /**
      * Action to take when a call is not answered:<br>
@@ -23541,7 +27335,7 @@ pub struct UpdateSettingTemplateRequestUserSettingsCallHandlingCloseHours {
     pub max_wait_time: Option<serde_json::Value>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequestUserSettingsCallHandling {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub business_hours: Option<UpdateSettingTemplateRequestUserSettingsCallHandlingBusinessHours>,
@@ -23549,7 +27343,7 @@ pub struct UpdateSettingTemplateRequestUserSettingsCallHandling {
     pub close_hours: Option<UpdateSettingTemplateRequestUserSettingsCallHandlingCloseHours>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequestUserSettings {
     /**
      * Audio prompt language code.<br> American English: `en-US`<br>
@@ -23598,7 +27392,7 @@ pub struct UpdateSettingTemplateRequestUserSettings {
     pub hold_music: Option<HoldMusic>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSettingTemplateRequest {
     /**
      * The description of the template.
@@ -23692,7 +27486,7 @@ impl Default for TimeType {
 }
 
 /// Indicates who the call was forwarded to.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ForwardedTo {
     /**
      * Indicates who the call was forwarded to.
@@ -23791,7 +27585,7 @@ impl PhoneUserCallLogsResponseForwardedByExtensionType {
 }
 
 /// Indicates where the call was forwarded from.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ForwardedBy {
     /**
      * Indicates where the call was forwarded from.
@@ -23846,7 +27640,7 @@ pub struct ForwardedBy {
 }
 
 /// Indicates who accepted the call.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AcceptedBy {
     /**
      * Indicates who accepted the call.
@@ -23895,7 +27689,7 @@ pub struct AcceptedBy {
     pub phone_number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OutgoingBy {
     #[serde(
         default,
@@ -23929,7 +27723,7 @@ pub struct OutgoingBy {
     pub phone_number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CallLogs {
     /**
      * Indicates who accepted the call.
@@ -24155,7 +27949,7 @@ pub struct CallLogs {
 }
 
 /// Phone User Call Logs
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneUserCallLogsResponse {
     /**
      * Phone User Call Logs
@@ -24218,7 +28012,7 @@ pub struct PhoneUserCallLogsResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Recordings {
     /**
      * The phone call's unique ID.
@@ -24345,7 +28139,7 @@ pub struct Recordings {
 }
 
 /// Phone User Recordings
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneUserRecordingsResponse {
     /**
      * Phone User Recordings
@@ -24471,7 +28265,7 @@ impl PhoneUserVoiceMailsResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct VoiceMails {
     /**
      * Contact name of callee
@@ -24567,7 +28361,7 @@ pub struct VoiceMails {
 }
 
 /// Phone User Voice Mails
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PhoneUserVoiceMailsResponse {
     /**
      * Phone User Voice Mails
@@ -24623,7 +28417,7 @@ pub struct PhoneUserVoiceMailsResponse {
 }
 
 /// Update the voicemail setting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddUserSettingRequestVoiceMail {
     /**
      * Update the voicemail setting.
@@ -24652,7 +28446,7 @@ pub struct AddUserSettingRequestVoiceMail {
     pub download: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddUserSettingRequest {
     /**
      * Update the voicemail setting.
@@ -24661,7 +28455,7 @@ pub struct AddUserSettingRequest {
     pub voice_mail: Option<AddUserSettingRequestVoiceMail>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddUserSettingResponseVoiceMail {
     /**
      * The user that is allowed to access voicemail messages for the extension.
@@ -24699,14 +28493,14 @@ pub struct AddUserSettingResponseVoiceMail {
     pub shared_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddUserSettingResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub voice_mail: Option<AddUserSettingResponseVoiceMail>,
 }
 
 /// Update the voicemail setting.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateUserSettingRequestVoiceMail {
     /**
      * Update the voicemail setting.
@@ -24744,7 +28538,7 @@ pub struct UpdateUserSettingRequestVoiceMail {
     pub shared_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateUserSettingRequest {
     /**
      * Update the voicemail setting.
@@ -24857,7 +28651,7 @@ impl AccountCallLogsResponseOwnerType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Owner {
     /**
      * The owner's extension number.
@@ -24898,7 +28692,7 @@ pub struct Owner {
     pub type_: Option<AccountCallLogsResponseOwnerType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountCallLogsResponse {
     /**
      * GMT date and time at which the inbound call was answered. The value of this field is in `yyyy-MM-dd'T'HH:mm:ss'Z'` format.
@@ -25119,7 +28913,7 @@ pub struct AccountCallLogsResponse {
 }
 
 /// Account Call Logs
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountCallLogsResponseData {
     /**
      * Account Call Logs
@@ -25182,7 +28976,7 @@ pub struct AccountCallLogsResponseData {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumberRequestNumbers {
     /**
      * ID for phone number
@@ -25204,13 +28998,13 @@ pub struct AssignPhoneNumberRequestNumbers {
     pub number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumberRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub phone_numbers: Vec<AssignPhoneNumberRequestNumbers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumberResponseNumbers {
     /**
      * ID of the phone number
@@ -25232,7 +29026,7 @@ pub struct AssignPhoneNumberResponseNumbers {
     pub number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumberResponse {
     /**
      * Assigned phone number
@@ -25241,7 +29035,7 @@ pub struct AssignPhoneNumberResponse {
     pub phone_numbers: Vec<AssignPhoneNumberResponseNumbers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CallingPlans {
     /**
      * [Type](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) of the calling plan.
@@ -25255,7 +29049,7 @@ pub struct CallingPlans {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlanRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub calling_plans: Vec<CallingPlans>,
@@ -25334,7 +29128,7 @@ impl GetPhoneRecordingsResponseOwnerType {
 }
 
 /// The owner of the recording.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPhoneRecordingsResponseOwner {
     /**
      * The owner of the recording.
@@ -25370,7 +29164,7 @@ pub struct GetPhoneRecordingsResponseOwner {
     pub type_: Option<GetPhoneRecordingsResponseOwnerType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPhoneRecordingsResponseSite {
     /**
      * The site ID.
@@ -25430,7 +29224,7 @@ impl Direction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPhoneRecordingsResponse {
     /**
      * The phone call's unique ID.
@@ -25569,7 +29363,7 @@ pub struct GetPhoneRecordingsResponse {
     pub site: Option<GetPhoneRecordingsResponseSite>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPhoneRecordingsResponseData {
     /**
      * The current page number of returned records.
@@ -25602,7 +29396,7 @@ pub struct GetPhoneRecordingsResponseData {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ByocSipTrunk {
     /**
      * Name of the carrier.
@@ -25660,7 +29454,7 @@ pub struct ByocSipTrunk {
     pub sbc_label: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListByocsipTrunkResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub byoc_sip_trunk: Vec<ByocSipTrunk>,
@@ -25684,7 +29478,7 @@ pub struct ListByocsipTrunkResponse {
     pub page_size: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SipTrunks {
     /**
      * The account associated to the carrier.
@@ -25716,7 +29510,7 @@ pub struct SipTrunks {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostPhoneSipTrunkRequest {
     /**
      * SIP trunk configurations.
@@ -25725,7 +29519,7 @@ pub struct PostPhoneSipTrunkRequest {
     pub sip_trunks: Vec<SipTrunks>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostPhoneSipTrunkResponseTrunks {
     /**
      * Carrier account.
@@ -25756,13 +29550,13 @@ pub struct PostPhoneSipTrunkResponseTrunks {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostPhoneSipTrunkResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub sip_trunks: Vec<PostPhoneSipTrunkResponseTrunks>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdatePhoneSipTrunkRequest {
     /**
      * Account associated with the carrier.
@@ -25784,7 +29578,7 @@ pub struct UpdatePhoneSipTrunkRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlanBaseDeleteRequest {
     /**
      * The action that needs to be taken for this sub account. Value must be set to "cancel".
@@ -25851,7 +29645,7 @@ impl AccountPlanAddonCancelRequestAction {
 }
 
 /// Account plan object
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountPlanAddonCancelRequest {
     /**
      * Account plan object
@@ -25888,7 +29682,7 @@ pub struct AccountPlanAddonCancelRequest {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActivityLogs {
     /**
      * The client interface type using which the activity was performed.
@@ -25948,7 +29742,7 @@ pub struct ActivityLogs {
 }
 
 /// Report object
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReportSignInOutActivitiesResponse {
     /**
      * Report object
@@ -26078,7 +29872,7 @@ impl GetGroupSettingsResponseScheduleMeetingRequirePasswordPmiMeetings {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseScheduleMeeting {
     /**
      * Determine how participants can join the audio portion of the meeting.
@@ -26224,7 +30018,7 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     pub use_pmi_for_schedule_meetings: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseInMeeting {
     /**
      * Allow participants who belong to your account to see that a guest (someone who does not belong to your account) is participating in the meeting/webinar.
@@ -26578,7 +30372,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     pub who_can_share_screen_when_someone_is_sharing: Option<WhoCanShareScreenWhenSomeoneSharing>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseEmailNotification {
     /**
      * Notify the alternative host who is set or removed.
@@ -26623,7 +30417,7 @@ pub struct GetGroupSettingsResponseEmailNotification {
 }
 
 /// [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseRecordingArchive {
     /**
      * [Archiving solution](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) settings. This setting can only be used if you have been granted archiving solution access by the Zoom Support team.
@@ -26650,7 +30444,7 @@ pub struct GetGroupSettingsResponseRecordingArchive {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseRecording {
     /**
      * Make cloud recordings accessible to account members only.
@@ -26788,7 +30582,7 @@ pub struct GetGroupSettingsResponseRecording {
     pub show_timestamp: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponseTelephony {
     #[serde(
         default,
@@ -26811,7 +30605,7 @@ pub struct GetGroupSettingsResponseTelephony {
     pub third_party_audio: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupSettingsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_notification: Option<GetGroupSettingsResponseEmailNotification>,
@@ -26865,43 +30659,7 @@ impl GetGroupSettingsResponseOneOf {
     }
 }
 
-impl From<Domains> for GetGroupSettingsResponseOneOf {
-    fn from(f: Domains) -> Self {
-        GetGroupSettingsResponseOneOf::Domains(f)
-    }
-}
-
-impl From<GetGroupSettingsResponse> for GetGroupSettingsResponseOneOf {
-    fn from(f: GetGroupSettingsResponse) -> Self {
-        GetGroupSettingsResponseOneOf::GetGroupSettingsResponse(f)
-    }
-}
-
-impl From<MeetingSecuritySettings> for GetGroupSettingsResponseOneOf {
-    fn from(f: MeetingSecuritySettings) -> Self {
-        GetGroupSettingsResponseOneOf::MeetingSecuritySettings(f)
-    }
-}
-
-impl From<GetGroupSettingsResponseOneOf> for Domains {
-    fn from(f: GetGroupSettingsResponseOneOf) -> Self {
-        f.domains().unwrap().clone()
-    }
-}
-
-impl From<GetGroupSettingsResponseOneOf> for GetGroupSettingsResponse {
-    fn from(f: GetGroupSettingsResponseOneOf) -> Self {
-        f.get_group_settings_response().unwrap().clone()
-    }
-}
-
-impl From<GetGroupSettingsResponseOneOf> for MeetingSecuritySettings {
-    fn from(f: GetGroupSettingsResponseOneOf) -> Self {
-        f.meeting_security_settings().unwrap().clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupSettingsRequestScheduleMeeting {
     /**
      * Determine how participants can join the audio portion of the meeting.
@@ -27020,7 +30778,7 @@ pub struct UpdateGroupSettingsRequestScheduleMeeting {
     pub upcoming_meeting_reminder: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupSettingsRequestInMeeting {
     /**
      * Allow participants who belong to your account to see that a guest (someone who does not belong to your account) is participating in the meeting/webinar.
@@ -27369,7 +31127,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     pub who_can_share_screen_when_someone_is_sharing: Option<WhoCanShareScreenWhenSomeoneSharing>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupSettingsRequestRecording {
     /**
      * Make cloud recordings accessible to account members only.
@@ -27507,7 +31265,7 @@ pub struct UpdateGroupSettingsRequestRecording {
     pub show_timestamp: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupSettingsRequestTelephony {
     #[serde(
         default,
@@ -27525,7 +31283,7 @@ pub struct UpdateGroupSettingsRequestTelephony {
     pub third_party_audio: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateGroupSettingsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_notification: Option<GetGroupSettingsResponseEmailNotification>,
@@ -27579,42 +31337,6 @@ impl UpdateGroupSettingsRequestOneOf {
     }
 }
 
-impl From<Domains> for UpdateGroupSettingsRequestOneOf {
-    fn from(f: Domains) -> Self {
-        UpdateGroupSettingsRequestOneOf::Domains(f)
-    }
-}
-
-impl From<MeetingSecuritySettings> for UpdateGroupSettingsRequestOneOf {
-    fn from(f: MeetingSecuritySettings) -> Self {
-        UpdateGroupSettingsRequestOneOf::MeetingSecuritySettings(f)
-    }
-}
-
-impl From<UpdateGroupSettingsRequest> for UpdateGroupSettingsRequestOneOf {
-    fn from(f: UpdateGroupSettingsRequest) -> Self {
-        UpdateGroupSettingsRequestOneOf::UpdateGroupSettingsRequest(f)
-    }
-}
-
-impl From<UpdateGroupSettingsRequestOneOf> for Domains {
-    fn from(f: UpdateGroupSettingsRequestOneOf) -> Self {
-        f.domains().unwrap().clone()
-    }
-}
-
-impl From<UpdateGroupSettingsRequestOneOf> for MeetingSecuritySettings {
-    fn from(f: UpdateGroupSettingsRequestOneOf) -> Self {
-        f.meeting_security_settings().unwrap().clone()
-    }
-}
-
-impl From<UpdateGroupSettingsRequestOneOf> for UpdateGroupSettingsRequest {
-    fn from(f: UpdateGroupSettingsRequestOneOf) -> Self {
-        f.update_group_settings_request().unwrap().clone()
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum UpdateGroupSettingsOption {
@@ -27653,7 +31375,7 @@ impl UpdateGroupSettingsOption {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupLockSettingsResponseScheduleMeeting {
     /**
      * Determine how participants can join the audio portion of the meeting.
@@ -27762,7 +31484,7 @@ pub struct GetGroupLockSettingsResponseScheduleMeeting {
     pub upcoming_meeting_reminder: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupLockSettingsResponseInMeeting {
     /**
      * Allow participants who belong to your account to see that a guest (someone who does not belong to your account) is participating in the meeting/webinar.
@@ -28049,7 +31771,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     pub whiteboard: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupLockSettingsResponseRecording {
     /**
      * Make cloud recordings accessible to account members only.
@@ -28134,7 +31856,7 @@ pub struct GetGroupLockSettingsResponseRecording {
     pub recording_authentication: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupLockSettingsResponseTelephony {
     #[serde(
         default,
@@ -28151,7 +31873,7 @@ pub struct GetGroupLockSettingsResponseTelephony {
     pub third_party_audio: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetGroupLockSettingsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_notification: Option<GetGroupSettingsResponseEmailNotification>,
@@ -28194,31 +31916,7 @@ impl GetGroupLockSettingsResponseOneOf {
     }
 }
 
-impl From<GetGroupLockSettingsResponse> for GetGroupLockSettingsResponseOneOf {
-    fn from(f: GetGroupLockSettingsResponse) -> Self {
-        GetGroupLockSettingsResponseOneOf::GetGroupLockSettingsResponse(f)
-    }
-}
-
-impl From<MeetingSecuritySettings> for GetGroupLockSettingsResponseOneOf {
-    fn from(f: MeetingSecuritySettings) -> Self {
-        GetGroupLockSettingsResponseOneOf::MeetingSecuritySettings(f)
-    }
-}
-
-impl From<GetGroupLockSettingsResponseOneOf> for GetGroupLockSettingsResponse {
-    fn from(f: GetGroupLockSettingsResponseOneOf) -> Self {
-        f.get_group_lock_settings_response().unwrap().clone()
-    }
-}
-
-impl From<GetGroupLockSettingsResponseOneOf> for MeetingSecuritySettings {
-    fn from(f: GetGroupLockSettingsResponseOneOf) -> Self {
-        f.meeting_security_settings().unwrap().clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupLockedSettingsRequestScheduleMeeting {
     /**
      * Determine how participants can join the audio portion of the meeting.
@@ -28341,7 +32039,7 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
     pub upcoming_meeting_reminder: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupLockedSettingsRequestInMeeting {
     /**
      * Allow participants who belong to your account to see that a guest (someone who does not belong to your account) is participating in the meeting/webinar.
@@ -28628,7 +32326,7 @@ pub struct GroupLockedSettingsRequestInMeeting {
     pub whiteboard: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupLockedSettingsRequestRecording {
     /**
      * Make cloud recordings accessible to account members only.
@@ -28701,7 +32399,7 @@ pub struct GroupLockedSettingsRequestRecording {
     pub recording_authentication: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupLockedSettingsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_notification: Option<GetGroupSettingsResponseEmailNotification>,
@@ -28744,32 +32442,8 @@ impl GroupLockedSettingsRequestOneOf {
     }
 }
 
-impl From<GroupLockedSettingsRequest> for GroupLockedSettingsRequestOneOf {
-    fn from(f: GroupLockedSettingsRequest) -> Self {
-        GroupLockedSettingsRequestOneOf::GroupLockedSettingsRequest(f)
-    }
-}
-
-impl From<MeetingSecuritySettings> for GroupLockedSettingsRequestOneOf {
-    fn from(f: MeetingSecuritySettings) -> Self {
-        GroupLockedSettingsRequestOneOf::MeetingSecuritySettings(f)
-    }
-}
-
-impl From<GroupLockedSettingsRequestOneOf> for GroupLockedSettingsRequest {
-    fn from(f: GroupLockedSettingsRequestOneOf) -> Self {
-        f.group_locked_settings_request().unwrap().clone()
-    }
-}
-
-impl From<GroupLockedSettingsRequestOneOf> for MeetingSecuritySettings {
-    fn from(f: GroupLockedSettingsRequestOneOf) -> Self {
-        f.meeting_security_settings().unwrap().clone()
-    }
-}
-
 /// This field will only be displayed to accounts that are enrolled in a partner plan and follow the master accounts and sub accounts structure.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SubAccountPrivileges {
     /**
      * This field will only be displayed to accounts that are enrolled in a partner plan and follow the master accounts and sub accounts structure.
@@ -28782,7 +32456,7 @@ pub struct SubAccountPrivileges {
     pub second_level: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetRoleInformationResponse {
     /**
      * Description of the role.
@@ -28834,7 +32508,7 @@ pub struct GetRoleInformationResponse {
 }
 
 /// This field will only be displayed to accounts that are enrolled in the partner plan and follow master accounts and sub accounts structure.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateRoleRequestSubAccountPrivileges {
     /**
      * This field will only be displayed to accounts that are enrolled in the partner plan and follow master accounts and sub accounts structure.
@@ -28847,7 +32521,7 @@ pub struct UpdateRoleRequestSubAccountPrivileges {
     pub second_level: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateRoleRequest {
     /**
      * Description of the role.
@@ -28898,7 +32572,7 @@ pub struct UpdateRoleRequest {
     pub total_members: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPlanUsageResponseBase {
     /**
      * Number of hosts under the base plan.
@@ -28930,7 +32604,7 @@ pub struct GetPlanUsageResponseBase {
     pub usage: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPlanUsageResponseWebinar {
     /**
      * The number of hosts in this plan.
@@ -28962,7 +32636,7 @@ pub struct GetPlanUsageResponseWebinar {
     pub usage: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPlanUsageResponseLargeMeeting {
     /**
      * Number of hosts in this plan.
@@ -28994,7 +32668,7 @@ pub struct GetPlanUsageResponseLargeMeeting {
     pub usage: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPlanUsageResponseZoomRooms {
     /**
      * The number of hosts in this plan.
@@ -29027,7 +32701,7 @@ pub struct GetPlanUsageResponseZoomRooms {
 }
 
 /// Recording Plan
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PlanRecording {
     /**
      * Recording Plan
@@ -29087,7 +32761,7 @@ pub struct PlanRecording {
 }
 
 /// [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PlanUnited {
     /**
      * [Zoom United](https://zoom.us/pricing/zoom-bundles) plan.
@@ -29128,7 +32802,7 @@ pub struct PlanUnited {
     pub usage: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPlanUsageResponse {
     /**
      * The base plan subscribed for the sub account.
@@ -29162,7 +32836,7 @@ pub struct GetPlanUsageResponse {
     pub plan_zoom_rooms: Vec<GetPlanUsageResponseZoomRooms>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateAccountOwnerRequest {
     /**
      * The email address of the account's new owner.
@@ -29175,7 +32849,7 @@ pub struct UpdateAccountOwnerRequest {
     pub email: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SwitchUserAccountRequest {
     /**
      * The Account ID of the account to which you would like move the user to.
@@ -29395,7 +33069,7 @@ impl GetAccountCloudRecordingResponseMeetingsFilesType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RecordingFiles {
     /**
      * The URL using which the recording can be downloaded
@@ -29502,8 +33176,8 @@ pub struct RecordingFiles {
     pub status: Option<GetAccountCloudRecordingResponseMeetingsFilesStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Meetings {
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct GetAccountCloudRecordingResponseMeetings {
     /**
      * The scheduled duration of the meeting.
      */
@@ -29583,7 +33257,7 @@ pub struct Meetings {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetAccountCloudRecordingResponse {
     /**
      * The start date for the monthly range for which you would like to retrieve recordings. The maximum range can be a month. If no value is provided for this field, the default will be current date. For example, if you make the API request on June 30, 2020, without providing the “from” and “to” parameters, by default the value of 'from' field will be “2020-06-30” and the value of the 'to' field will be “2020-07-01”.
@@ -29598,7 +33272,7 @@ pub struct GetAccountCloudRecordingResponse {
      * Meetings Object
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub meetings: Vec<Meetings>,
+    pub meetings: Vec<GetAccountCloudRecordingResponseMeetings>,
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -29637,7 +33311,7 @@ pub struct GetAccountCloudRecordingResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TrackingSources {
     /**
      * Unique Identifier of the tracking source.
@@ -29686,7 +33360,7 @@ pub struct TrackingSources {
     pub visitor_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetTrackingSourcesResponse {
     /**
      * The total number of registration records for this Webinar.
@@ -29704,7 +33378,7 @@ pub struct GetTrackingSourcesResponse {
     pub tracking_sources: Vec<TrackingSources>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Basic {
     /**
      * Require code to exit out of the Zoom Rooms application to switch between other apps.
@@ -29744,7 +33418,7 @@ pub struct Basic {
     pub support_phone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateZrAccProfileRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub basic: Option<Basic>,
@@ -29833,7 +33507,7 @@ impl ListZrLocationsResponseType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListZrLocationsResponse {
     /**
      * Unique Identifier of the location.
@@ -29871,7 +33545,7 @@ pub struct ListZrLocationsResponse {
     pub type_: Option<ListZrLocationsResponseType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListZrLocationsResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub locations: Vec<ListZrLocationsResponse>,
@@ -29895,7 +33569,7 @@ pub struct ListZrLocationsResponseData {
     pub page_size: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddAzrLocationRequest {
     /**
      * Name of the location. The name must be unique and shouldn't have already been used in the same account.
@@ -29968,7 +33642,7 @@ impl AddAzrLocationResponseType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddAzrLocationResponse {
     /**
      * Location ID: Unique Identifier of the location that was added.
@@ -30005,7 +33679,7 @@ pub struct AddAzrLocationResponse {
     pub type_: Option<AddAzrLocationResponseType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetZrLocationProfileResponseBasic {
     /**
      * Address
@@ -30083,13 +33757,13 @@ pub struct GetZrLocationProfileResponseBasic {
     pub timezone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetZrLocationProfileResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub basic: Option<GetZrLocationProfileResponseBasic>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateZrLocationProfileRequestBasic {
     /**
      * Address. Can only be updated for Campus and Building.
@@ -30167,13 +33841,13 @@ pub struct UpdateZrLocationProfileRequestBasic {
     pub timezone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateZrLocationProfileRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub basic: Option<UpdateZrLocationProfileRequestBasic>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetZrLocationStructureResponse {
     /**
      * Hierarchial structure array of the Zoom Rooms location.
@@ -30182,7 +33856,7 @@ pub struct GetZrLocationStructureResponse {
     pub structures: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateZoomRoomsLocationStructureRequest {
     /**
      * Location Structure. The value can be either one or a combination of the following strings separated by comma:
@@ -30192,7 +33866,7 @@ pub struct UpdateZoomRoomsLocationStructureRequest {
     pub structures: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetZrProfileResponseBasic {
     /**
      * Activation Code is the code that is used to complete the setup of the Zoom Room.
@@ -30259,13 +33933,13 @@ pub struct GetZrProfileResponseBasic {
     pub support_phone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetZrProfileResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub basic: Option<GetZrProfileResponseBasic>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateRoomProfileRequestBasic {
     /**
      * Hide this Zoom Room from your Contact List.
@@ -30323,7 +33997,7 @@ pub struct UpdateRoomProfileRequestBasic {
     pub support_phone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateRoomProfileRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub basic: Option<UpdateRoomProfileRequestBasic>,
@@ -30414,7 +34088,7 @@ impl ListZrDevicesResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Devices {
     /**
      * App version of Zoom Rooms.
@@ -30464,13 +34138,13 @@ pub struct Devices {
     pub status: Option<ListZrDevicesResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListZrDevicesResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub devices: Vec<Devices>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSipTrunkNumbersResponsePhone {
     /**
      * Country ID (example: US)
@@ -30492,7 +34166,7 @@ pub struct ListSipTrunkNumbersResponsePhone {
     pub number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSipTrunkNumbersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub phone_numbers: Vec<ListSipTrunkNumbersResponsePhone>,
@@ -30507,7 +34181,7 @@ pub struct ListSipTrunkNumbersResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignSipConfigRequest {
     /**
      * Assign or delete the SIP configuration:
@@ -30552,7 +34226,7 @@ pub struct AssignSipConfigRequest {
     pub show_zoom_provided_numbers: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunkNumbersRequest {
     /**
      * Phone number(s) to be assigned to the sub account.
@@ -30561,7 +34235,7 @@ pub struct AssignSipTrunkNumbersRequest {
     pub phone_numbers: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPastMeetingPollsResponseQuestionsQuestionDetails {
     /**
      * Answer submitted by the user.
@@ -30601,7 +34275,7 @@ pub struct ListPastMeetingPollsResponseQuestionsQuestionDetails {
     pub question: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPastMeetingPollsResponseQuestions {
     /**
      * Email address of the user who submitted answers to the poll.
@@ -30625,7 +34299,7 @@ pub struct ListPastMeetingPollsResponseQuestions {
     pub question_details: Vec<ListPastMeetingPollsResponseQuestionsQuestionDetails>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPastMeetingPollsResponse {
     /**
      * [Meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in "\*\*long\*\*" format(represented as int64 data type in JSON), also known as the meeting number.
@@ -30658,7 +34332,7 @@ pub struct ListPastMeetingPollsResponse {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InMeetingFiles {
     /**
      * URL to download the file.
@@ -30689,7 +34363,7 @@ pub struct InMeetingFiles {
     pub file_size: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPastMeetingFilesResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub in_meeting_files: Vec<InMeetingFiles>,
@@ -30704,7 +34378,7 @@ pub struct ListPastMeetingFilesResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPastWebinarPollResultsResponse {
     /**
      * Webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON), also known as the webinar number.
@@ -30737,7 +34411,7 @@ pub struct ListPastWebinarPollResultsResponse {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPastWebinarQaResponseQuestionsQuestionDetails {
     /**
      * Answer submitted for the question.
@@ -30759,7 +34433,7 @@ pub struct ListPastWebinarQaResponseQuestionsQuestionDetails {
     pub question: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPastWebinarQaResponseQuestions {
     /**
      * Email address of the user.
@@ -30783,7 +34457,7 @@ pub struct ListPastWebinarQaResponseQuestions {
     pub question_details: Vec<ListPastWebinarQaResponseQuestionsQuestionDetails>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPastWebinarQaResponse {
     /**
      * Webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON), also known as the webinar number.
@@ -30816,7 +34490,7 @@ pub struct ListPastWebinarQaResponse {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ClientSatisfaction {
     /**
      * Date of the report.
@@ -30862,7 +34536,7 @@ pub struct ClientSatisfaction {
     pub satisfaction_percent: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListMeetingSatisfactionResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub client_satisfaction: Vec<ClientSatisfaction>,
@@ -30925,7 +34599,7 @@ impl ListPhoneDevicesType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPhoneDevicesResponseAssignee {
     /**
      * Extension number of the Zoom Phone used by the user.
@@ -30994,7 +34668,7 @@ impl ListPhoneDevicesResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPhoneDevicesResponseSite {
     /**
      * The [site](https://support.zoom.us/hc/en-us/articles/360020809672) of the phone user.
@@ -31016,7 +34690,7 @@ pub struct ListPhoneDevicesResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPhoneDevicesResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<ListPhoneDevicesResponseAssignee>,
@@ -31065,7 +34739,7 @@ pub struct ListPhoneDevicesResponse {
     pub status: Option<ListPhoneDevicesResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPhoneDevicesResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub devices: Vec<ListPhoneDevicesResponse>,
@@ -31098,7 +34772,7 @@ pub struct ListPhoneDevicesResponseData {
     pub total_records: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddPhoneDeviceRequest {
     /**
      * User ID or email address of the user to whom this device is to be assigned. The User ID and the email of the user can be retrieved using the [List Users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API.
@@ -31150,7 +34824,7 @@ pub struct AddPhoneDeviceRequest {
 }
 
 /// User to whom the device has been assigned.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetDeviceResponseAssignee {
     /**
      * User to whom the device has been assigned.
@@ -31229,7 +34903,7 @@ impl GetDeviceResponseProvisionType {
 }
 
 /// Line subscription.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LineSubscription {
     /**
      * Line subscription.
@@ -31261,7 +34935,7 @@ pub struct LineSubscription {
 }
 
 /// Return additional provisioning information with generic device SIP credentials.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SharedLine {
     /**
      * Return additional provisioning information with generic device SIP credentials.
@@ -31288,7 +34962,7 @@ pub struct SharedLine {
     pub outbound_caller_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SipAccounts {
     /**
      * Authorization ID of the SIP account provided in the provisioning process.
@@ -31353,7 +35027,7 @@ pub struct SipAccounts {
 }
 
 /// Provisioning information of a device.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Provision {
     /**
      * Provisioning information of a device.
@@ -31376,7 +35050,7 @@ pub struct Provision {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetDeviceResponse {
     /**
      * User to whom the device has been assigned.
@@ -31433,7 +35107,7 @@ pub struct GetDeviceResponse {
     pub status: Option<ListPhoneDevicesResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateDeviceRequest {
     /**
      * User ID or email address of the user to whom this device is to be assigned. The User ID and the email of the user can be retrieved using the [List Users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API.
@@ -31465,7 +35139,7 @@ pub struct UpdateDeviceRequest {
     pub mac_address: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ExternalContacts {
     /**
      * The external contact's description.
@@ -31528,7 +35202,7 @@ pub struct ExternalContacts {
     pub phone_numbers: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListExternalContactsResponse {
     /**
      * External contacts information.
@@ -31555,7 +35229,7 @@ pub struct ListExternalContactsResponse {
     pub page_size: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddExternalContactRequest {
     /**
      * The external contact's description.
@@ -31620,7 +35294,7 @@ pub struct AddExternalContactRequest {
     pub routing_path: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateExternalContactRequest {
     /**
      * The external contact's description.
@@ -31685,7 +35359,7 @@ pub struct UpdateExternalContactRequest {
     pub routing_path: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChangeZrLocationRequest {
     /**
      * Location ID of the location where Zoom Room is to be assigned. This can be retrieved from the `id` property in the response of [List Zoom Rooms Locations](https://marketplace.zoom.us/docs/api-reference/zoom-api/rooms-location/listzrlocations) API.
@@ -31698,7 +35372,7 @@ pub struct ChangeZrLocationRequest {
     pub location_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChangeParentLocationRequest {
     /**
      * Location ID of the new Parent Location under which you the child location will be positioned. This can be retrieved from the [List Zoom Room Locations](https://marketplace.zoom.us/docs/api-reference/zoom-api/rooms-location/listzrlocations) API.
@@ -31749,7 +35423,7 @@ impl ListCallQueuesResponsePhoneNumbersSource {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCallQueuesResponsePhoneNumbers {
     /**
      * Unique Identifier of the Phone number assigned.
@@ -31814,7 +35488,7 @@ impl ListCallQueuesResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCallQueuesResponseSite {
     /**
      * Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites) where the Call Queue is assigned.
@@ -31836,7 +35510,7 @@ pub struct ListCallQueuesResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CallQueues {
     /**
      * Extension number assigned to the queue.
@@ -31879,7 +35553,7 @@ pub struct CallQueues {
     pub status: Option<ListCallQueuesResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCallQueuesResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub call_queues: Vec<CallQueues>,
@@ -31912,7 +35586,7 @@ pub struct ListCallQueuesResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateCallQueueRequestMembersUsers {
     /**
      * Email address of the user. This can be retrieved from the [List Users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API.
@@ -31935,7 +35609,7 @@ pub struct CreateCallQueueRequestMembersUsers {
 }
 
 /// A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateCallQueueRequestMembers {
     /**
      * A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
@@ -31949,7 +35623,7 @@ pub struct CreateCallQueueRequestMembers {
     pub users: Vec<CreateCallQueueRequestMembersUsers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateCallQueueRequest {
     /**
      * Description for the Call Queue.
@@ -31996,7 +35670,7 @@ pub struct CreateCallQueueRequest {
     pub site_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateCallQueueResponse {
     /**
      * Extension number assigned for the Call Queue.
@@ -32076,7 +35750,7 @@ impl GetCallQueueResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueResponseSite {
     /**
      * Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites) where the Call Queue is assigned.
@@ -32098,7 +35772,7 @@ pub struct GetCallQueueResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueResponsePhoneNumbers {
     /**
      * Unique Identifier of the number.
@@ -32165,7 +35839,7 @@ impl Level {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueResponseMembersUsers {
     /**
      * User ID: Unique Identifier of the user.
@@ -32202,7 +35876,7 @@ pub struct GetCallQueueResponseMembersUsers {
     pub receive_call: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommonAreaPhones {
     /**
      * Unique Identifier of the [Common Area Phone](https://support.zoom.us/hc/en-us/articles/360028516231-Managing-Common-Area-Phones).
@@ -32224,7 +35898,7 @@ pub struct CommonAreaPhones {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueResponseMembers {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub common_area_phones: Vec<CommonAreaPhones>,
@@ -32232,7 +35906,7 @@ pub struct GetCallQueueResponseMembers {
     pub users: Vec<GetCallQueueResponseMembersUsers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueResponse {
     /**
      * Extension number assigned to the Call Queue.
@@ -32314,7 +35988,7 @@ impl UpdateCallQueueRequestStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateCallQueueRequest {
     /**
      * Description for the Call Queue.
@@ -32372,7 +36046,7 @@ pub struct UpdateCallQueueRequest {
     pub timezone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneCallQueueRequestNumbers {
     /**
      * Unique Identifier of the phone number.
@@ -32394,7 +36068,7 @@ pub struct AssignPhoneCallQueueRequestNumbers {
     pub number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneCallQueueRequest {
     /**
      * Provide either the `id` or the `number` field. Only a max of 5 numbers can be assigned to a call queue at a time.
@@ -32403,7 +36077,7 @@ pub struct AssignPhoneCallQueueRequest {
     pub phone_numbers: Vec<AssignPhoneCallQueueRequestNumbers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddMembersCallQueueRequestUsers {
     /**
      * Email address of the user.
@@ -32426,7 +36100,7 @@ pub struct AddMembersCallQueueRequestUsers {
 }
 
 /// A maximum of 10 members can be added at a time.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddMembersCallQueueRequest {
     /**
      * A maximum of 10 members can be added at a time.
@@ -32440,7 +36114,7 @@ pub struct AddMembersCallQueueRequest {
     pub users: Vec<AddMembersCallQueueRequestUsers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddMembersCallQueueRequestData {
     /**
      * A maximum of 10 members can be added at a time.
@@ -32449,7 +36123,7 @@ pub struct AddMembersCallQueueRequestData {
     pub members: Option<AddMembersCallQueueRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChangeCallQueueManagerRequest {
     /**
      * Unique Identifier (userId) or email address of the user who will be the new call queue manager.
@@ -32508,7 +36182,7 @@ impl GetPhoneNumberDetailsResponseAssigneeType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPhoneNumberDetailsResponseAssignee {
     /**
      * Extension number of the Phone.
@@ -32546,7 +36220,7 @@ pub struct GetPhoneNumberDetailsResponseAssignee {
     pub type_: Option<GetPhoneNumberDetailsResponseAssigneeType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPhoneNumberDetailsResponseCarrier {
     /**
      * Carrier code.
@@ -32568,7 +36242,7 @@ pub struct GetPhoneNumberDetailsResponseCarrier {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPhoneNumberDetailsResponseSipGroup {
     /**
      * Sip group display name.
@@ -32590,7 +36264,7 @@ pub struct GetPhoneNumberDetailsResponseSipGroup {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetPhoneNumberDetailsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<GetPhoneNumberDetailsResponseAssignee>,
@@ -32659,7 +36333,7 @@ pub struct GetPhoneNumberDetailsResponse {
     pub status: Option<ListAccountPhoneNumbersResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdatePhoneNumberDetailsRequest {
     /**
      * Phone number capability. Values: `outgoing` or `incoming`. Add one or both.
@@ -32686,7 +36360,7 @@ pub struct UpdatePhoneNumberDetailsRequest {
     pub sip_group_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChangeMainCompanyNumberRequest {
     /**
      * Provide either the unique identifier of the phone number (id) or the phone number itself in e164 format (e.g: +199955500123).
@@ -32699,7 +36373,7 @@ pub struct ChangeMainCompanyNumberRequest {
     pub phone_number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCallingPlansResponse {
     /**
      * Total number of plan used.
@@ -32749,13 +36423,13 @@ pub struct ListCallingPlansResponse {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCallingPlansResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub calling_plans: Vec<ListCallingPlansResponse>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPhoneUsersResponseSite {
     /**
      * Unique Identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites).
@@ -32777,7 +36451,7 @@ pub struct ListPhoneUsersResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPhoneUsersResponseCallingPlans {
     /**
      * Name of the calling plan that user is enrolled in.
@@ -32800,7 +36474,7 @@ pub struct ListPhoneUsersResponseCallingPlans {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPhoneUsersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub calling_plans: Vec<ListPhoneUsersResponseCallingPlans>,
@@ -32864,7 +36538,7 @@ pub struct ListPhoneUsersResponse {
     pub status: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListPhoneUsersResponseData {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -32897,7 +36571,7 @@ pub struct ListPhoneUsersResponseData {
     pub users: Vec<ListPhoneUsersResponse>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateAutoReceptionistRequest {
     /**
      * Extension number to be assigned to the auto receptionist. If site code is enabled, provide the short extension number instead.
@@ -32919,7 +36593,7 @@ pub struct UpdateAutoReceptionistRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersAutoReceptionistRequest {
     /**
      * Unique Identifier of the Phone number.
@@ -32941,7 +36615,7 @@ pub struct AssignPhoneNumbersAutoReceptionistRequest {
     pub number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersAutoReceptionistRequestData {
     /**
      * Provide either the unique identifier of the Phone Number  in the `id` field or provide the phone number in the `number` field.
@@ -32950,7 +36624,7 @@ pub struct AssignPhoneNumbersAutoReceptionistRequestData {
     pub phone_numbers: Vec<AssignPhoneNumbersAutoReceptionistRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCommonAreaPhonesResponseCallingPlans {
     /**
      * Plan name.
@@ -33011,7 +36685,7 @@ impl ListCommonAreaPhonesResponsePhoneNumbersSource {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCommonAreaPhonesResponsePhoneNumbers {
     /**
      * Unique Identifier of the Phone number.
@@ -33038,7 +36712,7 @@ pub struct ListCommonAreaPhonesResponsePhoneNumbers {
     pub source: Option<ListCommonAreaPhonesResponsePhoneNumbersSource>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCommonAreaPhonesResponseSite {
     /**
      * Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites) to which the common area desk phone is assigned.
@@ -33060,7 +36734,7 @@ pub struct ListCommonAreaPhonesResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCommonAreaPhonesResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub calling_plans: Vec<ListCommonAreaPhonesResponseCallingPlans>,
@@ -33115,7 +36789,7 @@ pub struct ListCommonAreaPhonesResponse {
     pub status: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCommonAreaPhonesResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub common_area_phones: Vec<ListCommonAreaPhonesResponse>,
@@ -33148,7 +36822,7 @@ pub struct ListCommonAreaPhonesResponseData {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddCommonAreaPhoneRequest {
     /**
      * Description for the common area phone.
@@ -33234,7 +36908,7 @@ pub struct AddCommonAreaPhoneRequest {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddCommonAreaPhoneResponse {
     /**
      * Display name of the common area phone.
@@ -33256,7 +36930,7 @@ pub struct AddCommonAreaPhoneResponse {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponseProvisionSipAccounts {
     /**
      * Authorization ID of the SIP account provided in the provisioning process.
@@ -33316,7 +36990,7 @@ pub struct GetCommonAreaPhoneResponseProvisionSipAccounts {
 }
 
 /// Provisioning information of the common area phone.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponseProvision {
     /**
      * Provisioning information of the common area phone.
@@ -33339,7 +37013,7 @@ pub struct GetCommonAreaPhoneResponseProvision {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponseNumbers {
     /**
      * Phone number display name.
@@ -33375,7 +37049,7 @@ pub struct GetCommonAreaPhoneResponseNumbers {
     pub source: Option<ListCommonAreaPhonesResponsePhoneNumbersSource>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponseCallingPlans {
     /**
      * Calling plan name.
@@ -33398,7 +37072,7 @@ pub struct GetCommonAreaPhoneResponseCallingPlans {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProvisionTemplate {
     /**
      * Provision template id.
@@ -33429,7 +37103,7 @@ pub struct ProvisionTemplate {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SelectOutboundCallerId {
     /**
      *
@@ -33442,7 +37116,7 @@ pub struct SelectOutboundCallerId {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InternationalCall {
     /**
      *
@@ -33496,7 +37170,7 @@ impl GetCommonAreaPhoneResponsePolicyHotDeskingStatus {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct HotDesking {
     /**
      *
@@ -33505,7 +37179,7 @@ pub struct HotDesking {
     pub status: Option<GetCommonAreaPhoneResponsePolicyHotDeskingStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponsePolicy {
     /**
      *
@@ -33524,7 +37198,7 @@ pub struct GetCommonAreaPhoneResponsePolicy {
     pub select_outbound_caller_id: Option<SelectOutboundCallerId>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub calling_plans: Vec<GetCommonAreaPhoneResponseCallingPlans>,
@@ -33588,7 +37262,7 @@ pub struct GetCommonAreaPhoneResponse {
     pub status: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateCommonAreaPhoneRequestPolicySelectOutboundCallerId {
     /**
      * Allow current extension to change outbound caller ID when placing calls.
@@ -33600,7 +37274,7 @@ pub struct UpdateCommonAreaPhoneRequestPolicySelectOutboundCallerId {
     pub enable: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateCommonAreaPhoneRequestPolicyInternationalCall {
     /**
      * Allow current extension to place international calls outside of the calling plan.
@@ -33612,7 +37286,7 @@ pub struct UpdateCommonAreaPhoneRequestPolicyInternationalCall {
     pub enable: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateCommonAreaPhoneRequestPolicy {
     /**
      *
@@ -33625,7 +37299,7 @@ pub struct UpdateCommonAreaPhoneRequestPolicy {
     pub select_outbound_caller_id: Option<UpdateCommonAreaPhoneRequestPolicySelectOutboundCallerId>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateCommonAreaPhoneRequest {
     /**
      * Display name of the common area phone.
@@ -33676,7 +37350,7 @@ pub struct UpdateCommonAreaPhoneRequest {
     pub site_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersCommonAreaRequest {
     #[serde(
         default,
@@ -33692,13 +37366,13 @@ pub struct AssignPhoneNumbersCommonAreaRequest {
     pub number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersCommonAreaRequestData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub phone_numbers: Vec<AssignPhoneNumbersCommonAreaRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersCommonAreaResponse {
     #[serde(
         default,
@@ -33714,13 +37388,13 @@ pub struct AssignPhoneNumbersCommonAreaResponse {
     pub number: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersCommonAreaResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub phone_numbers: Vec<AssignPhoneNumbersCommonAreaResponse>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlansCommonAreaPhoneRequest {
     #[serde(
         default,
@@ -33731,13 +37405,13 @@ pub struct AssignCallingPlansCommonAreaPhoneRequest {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlansCommonAreaPhoneRequestData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub calling_plans: Vec<AssignCallingPlansCommonAreaPhoneRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlansCommonAreaPhoneResponse {
     #[serde(
         default,
@@ -33754,7 +37428,7 @@ pub struct AssignCallingPlansCommonAreaPhoneResponse {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlansCommonAreaPhoneResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub calling_plans: Vec<AssignCallingPlansCommonAreaPhoneResponse>,
@@ -33880,7 +37554,7 @@ impl ListBlockedResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BlockedList {
     /**
      * Block type.<br>
@@ -33932,7 +37606,7 @@ pub struct BlockedList {
     pub status: Option<ListBlockedResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListBlockedResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub blocked_list: Vec<BlockedList>,
@@ -34085,7 +37759,7 @@ impl AddAnumberBlockedListRequestStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateBlockedListRequest {
     /**
      * State whether you want the block type to be inbound or outbound.<br>
@@ -34128,7 +37802,7 @@ pub struct UpdateBlockedListRequest {
     pub status: Option<AddAnumberBlockedListRequestStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddAnumberBlockedListResponse {
     /**
      * Unique identifier of the blocked list.
@@ -34141,7 +37815,7 @@ pub struct AddAnumberBlockedListResponse {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetBlockedListResponse {
     /**
      * Block type.<br>
@@ -34193,7 +37867,7 @@ pub struct GetBlockedListResponse {
     pub status: Option<ListBlockedResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BillingReports {
     /**
      * End date of the billing period.
@@ -34248,7 +37922,7 @@ pub struct BillingReports {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetBillingReportResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub billing_reports: Vec<BillingReports>,
@@ -34263,7 +37937,7 @@ pub struct GetBillingReportResponse {
     pub currency: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Invoices {
     /**
      * End date of the invoice period.
@@ -34322,7 +37996,7 @@ pub struct Invoices {
     pub total_amount: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetBillingInvoicesReportsResponse {
     /**
      * Currency of the billed amount in the invoice.
@@ -34337,7 +38011,7 @@ pub struct GetBillingInvoicesReportsResponse {
     pub invoices: Vec<Invoices>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSharedLineGroupsResponsePhoneNumbers {
     /**
      * Unique identifier of the phone number.
@@ -34402,7 +38076,7 @@ impl ListSharedLineGroupsResponseStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSharedLineGroupsResponseSite {
     /**
      * Unique Identifier of the [Site](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone-site/getasite).
@@ -34424,7 +38098,7 @@ pub struct ListSharedLineGroupsResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SharedLineGroups {
     /**
      * Display Name of the Shared Line Group.
@@ -34467,7 +38141,7 @@ pub struct SharedLineGroups {
     pub status: Option<ListSharedLineGroupsResponseStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSharedLineGroupsResponse {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -34500,7 +38174,7 @@ pub struct ListSharedLineGroupsResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateSharedLineGroupRequest {
     /**
      * Provide a description for the shared line group.
@@ -34542,7 +38216,7 @@ pub struct CreateSharedLineGroupRequest {
     pub site_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSharedLineGroupResponsePhoneNumbers {
     /**
      * Unique identifier of the phone number.
@@ -34565,7 +38239,7 @@ pub struct GetSharedLineGroupResponsePhoneNumbers {
 }
 
 /// Site assigned to the Shared Line Group.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSharedLineGroupResponseSite {
     /**
      * Site assigned to the Shared Line Group.
@@ -34587,7 +38261,7 @@ pub struct GetSharedLineGroupResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSharedLineGroupResponseMembersUsers {
     /**
      * Unique identifier of the user.
@@ -34609,7 +38283,7 @@ pub struct GetSharedLineGroupResponseMembersUsers {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSharedLineGroupResponseMembersCommonAreaPhones {
     /**
      * Unique identifier of the [Common Area Phone](https://support.zoom.us/hc/en-us/articles/360028516231-Managing-Common-Area-Phones).
@@ -34632,7 +38306,7 @@ pub struct GetSharedLineGroupResponseMembersCommonAreaPhones {
 }
 
 /// View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSharedLineGroupResponseMembers {
     /**
      * View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
@@ -34646,7 +38320,7 @@ pub struct GetSharedLineGroupResponseMembers {
     pub users: Vec<GetSharedLineGroupResponseMembersUsers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetSharedLineGroupResponse {
     /**
      * Display Name of the Shared Line Group.
@@ -34716,7 +38390,7 @@ pub struct GetSharedLineGroupResponse {
 }
 
 /// If you have multiple direct phone numbers assigned to the shared line group, select a number from those numbers as the primary number. The primary number shares the same line as the extension number. This means if a caller is routed to the shared line group through an auto receptionist, the line associated with the primary number will be used. A pending number cannot be used as a Primary Number.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PrimaryNumber {
     /**
      * If you have multiple direct phone numbers assigned to the shared line group, select a number from those numbers as the primary number. The primary number shares the same line as the extension number. This means if a caller is routed to the shared line group through an auto receptionist, the line associated with the primary number will be used. A pending number cannot be used as a Primary Number.
@@ -34738,7 +38412,7 @@ pub struct PrimaryNumber {
     pub number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdateSharedLineGroupRequest {
     /**
      * Display Name of the Shared Line Group.
@@ -34779,7 +38453,7 @@ pub struct UpdateSharedLineGroupRequest {
     pub timezone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddMembersSharedLineGroupRequestUsers {
     /**
      * Email address of the user.
@@ -34802,7 +38476,7 @@ pub struct AddMembersSharedLineGroupRequestUsers {
 }
 
 /// Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddMembersSharedLineGroupRequest {
     /**
      * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
@@ -34816,7 +38490,7 @@ pub struct AddMembersSharedLineGroupRequest {
     pub users: Vec<AddMembersSharedLineGroupRequestUsers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddMembersSharedLineGroupRequestData {
     /**
      * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
@@ -34825,7 +38499,7 @@ pub struct AddMembersSharedLineGroupRequestData {
     pub members: Option<AddMembersSharedLineGroupRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersSlgRequest {
     /**
      * Phone number(s) to be assigned to the Shared Line Group.
@@ -34834,7 +38508,7 @@ pub struct AssignPhoneNumbersSlgRequest {
     pub phone_numbers: Vec<AssignPhoneCallQueueRequestNumbers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddAutoReceptionistRequest {
     /**
      * Provide a name to help identify the auto receptionist.
@@ -34856,7 +38530,7 @@ pub struct AddAutoReceptionistRequest {
     pub site_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddAutoReceptionistResponse {
     /**
      *  Extension number assigned to the auto receptionist.
@@ -34887,7 +38561,7 @@ pub struct AddAutoReceptionistResponse {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddBatchRegistrantsResponse {
     /**
      * Email address of the registrant.
@@ -34918,13 +38592,13 @@ pub struct AddBatchRegistrantsResponse {
     pub registrant_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddBatchRegistrantsResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub registrants: Vec<AddBatchRegistrantsResponse>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueRecordingsResponse {
     /**
      * Contact name of the callee.
@@ -35023,7 +38697,7 @@ pub struct GetCallQueueRecordingsResponse {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueRecordingsResponseData {
     /**
      * Start date.
@@ -35074,7 +38748,7 @@ pub struct GetCallQueueRecordingsResponseData {
     pub total_records: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Params {
     /**
      * This field is only required if Google Calendar is being used for the event associated with the Zoom Room. The value for this field can be retrieved by calling Google's [CalendarList:list API](https://developers.google.com/calendar/v3/reference/events/list) and referring to the "id" field included in the [calendarList resource](https://developers.google.com/calendar/v3/reference/calendarList#resource).
@@ -35118,7 +38792,7 @@ pub struct Params {
     pub resource_email: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CheckInRoomsRequest {
     /**
      * The value of this field can be one of the following:<br>
@@ -35135,7 +38809,7 @@ pub struct CheckInRoomsRequest {
     pub params: Option<Params>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InMeetingRecordingControlRequest {
     /**
      * The method that you would like to control. The value of this field can be one of the following:
@@ -35156,7 +38830,7 @@ pub struct InMeetingRecordingControlRequest {
     pub method: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSipTrunksResponse {
     /**
      * DNIS of the SIP trunk.
@@ -35214,7 +38888,7 @@ pub struct ListSipTrunksResponse {
     pub sip_server_address: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListSipTrunksResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub sip_trunks: Vec<ListSipTrunksResponse>,
@@ -35229,7 +38903,7 @@ pub struct ListSipTrunksResponseData {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunksRequest {
     /**
      * DNIS of the sub account. The prefix of the DNIS (i.e. the first five digits of the DNIS value) must match the DNIS prefix of the master account. To retrieve the DNIS prefix of a master account's SIP Trunk, use the List SIP Trunks API and refer to the first five digits in the `dnis` value.
@@ -35262,7 +38936,7 @@ pub struct AssignSipTrunksRequest {
     pub outbound_caller_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunksRequestData {
     /**
      * Array of one or more SIP Trunk objects.
@@ -35271,7 +38945,7 @@ pub struct AssignSipTrunksRequestData {
     pub sip_trunks: Vec<AssignSipTrunksRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunksResponse {
     /**
      * DNIS - identifier for the SIP trunk enabled account.
@@ -35320,13 +38994,13 @@ pub struct AssignSipTrunksResponse {
     pub sip_server_address: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunksResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub sip_trunks: Vec<AssignSipTrunksResponse>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CalloutCountries {
     /**
      * Country code.
@@ -35357,7 +39031,7 @@ pub struct CalloutCountries {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListInternalCalloutCountriesResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub callout_countries: Vec<CalloutCountries>,
@@ -35372,7 +39046,7 @@ pub struct ListInternalCalloutCountriesResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddCalloutCountriesRequest {
     /**
      * Two letter country code of the  call-out country.
@@ -35385,7 +39059,7 @@ pub struct AddCalloutCountriesRequest {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddCalloutCountriesRequestData {
     /**
      * List of callout countries.
@@ -35394,7 +39068,7 @@ pub struct AddCalloutCountriesRequestData {
     pub callout_countries: Vec<AddCalloutCountriesRequest>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddCalloutCountriesResponse {
     /**
      * Country code for Phone number.
@@ -35425,7 +39099,7 @@ pub struct AddCalloutCountriesResponse {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddCalloutCountriesResponseData {
     /**
      * List of Call-out countries.
@@ -35475,7 +39149,7 @@ impl Languages {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InternalNumbers {
     /**
      * Control whether the number can be used to attend 3rd party meetings.
@@ -35563,7 +39237,7 @@ pub struct InternalNumbers {
     pub visible: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListInternalNumbersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub internal_numbers: Vec<InternalNumbers>,
@@ -35596,13 +39270,13 @@ pub struct ListInternalNumbersResponse {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddInternalNumbersRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub internal_numbers: Vec<InternalNumbers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddInternalNumbersResponse {
     /**
      * Control whether the number can be used to attend 3rd party meetings.
@@ -35699,7 +39373,7 @@ pub struct AddInternalNumbersResponse {
     pub visible: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddInternalNumbersResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub internal_numbers: Vec<AddInternalNumbersResponse>,
@@ -35750,7 +39424,7 @@ impl ChangeZoomRoomsAppVersionRequestAction {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChangeZoomRoomsAppVersionRequest {
     /**
      * Specify one of the following values for this field:
@@ -35763,7 +39437,7 @@ pub struct ChangeZoomRoomsAppVersionRequest {
     pub action: Option<ChangeZoomRoomsAppVersionRequestAction>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Contents {
     /**
      * Unique identifier of the content or the folder.
@@ -35785,7 +39459,7 @@ pub struct Contents {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListDigitalSignageContentResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub contents: Vec<Contents>,
@@ -35809,7 +39483,7 @@ pub struct ListDigitalSignageContentResponse {
     pub page_size: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListWebinarTemplatesResponse {
     /**
      * Unique identifier of the template. If you would like to use this template while scheduling a webinar, you can provide the value of this field in `template_id` field of [Create a Webinar](https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarcreate) API.
@@ -35831,7 +39505,7 @@ pub struct ListWebinarTemplatesResponse {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListWebinarTemplatesResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub templates: Vec<ListWebinarTemplatesResponse>,
@@ -35846,7 +39520,7 @@ pub struct ListWebinarTemplatesResponseData {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetWebinarLiveStreamDetailsResponse {
     /**
      * Live streaming page URL. This is the URL using which anyone can view the live stream of the webinar.
@@ -35875,6 +39549,52 @@ pub struct GetWebinarLiveStreamDetailsResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub stream_url: String,
+}
+
+/// All of the following types:
+///
+/// - `InviteLink`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WebinarInviteLinksCreateRequestAllOf {
+    /**
+     * Invite Links
+     */
+    InviteLink(InviteLink),
+}
+
+impl WebinarInviteLinksCreateRequestAllOf {
+    pub fn invite_link(&self) -> Option<&InviteLink> {
+        if let WebinarInviteLinksCreateRequestAllOf::InviteLink(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
+///
+/// - `InviteLinks`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum WebinarInviteLinksCreateResponseAllOf {
+    /**
+     * Invite links response.
+     */
+    InviteLinks(InviteLinks),
+}
+
+impl WebinarInviteLinksCreateResponseAllOf {
+    pub fn invite_links(&self) -> Option<&InviteLinks> {
+        if let WebinarInviteLinksCreateResponseAllOf::InviteLinks(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -35947,7 +39667,7 @@ impl UpdatePresenceStatusRequest {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UpdatePresenceStatusRequestData {
     /**
      * If you're updating the status to `Do_Not_Disturb`, specify a duration in minutes for which the status should remain as `Do_Not_Disturb`.
@@ -35985,7 +39705,7 @@ pub struct UpdatePresenceStatusRequestData {
 }
 
 /// Caller object contains information of the caller.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Caller {
     /**
      * Caller object contains information of the caller.
@@ -36080,7 +39800,7 @@ pub struct Caller {
 }
 
 /// Callee object contains information of the callee.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Callee {
     /**
      * Callee object contains information of the callee.
@@ -36174,7 +39894,7 @@ pub struct Callee {
     pub site_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCallLogsMetricsResponse {
     /**
      * Unique identifier of the phone call.
@@ -36229,7 +39949,7 @@ pub struct ListCallLogsMetricsResponse {
     pub mos: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListCallLogsMetricsResponseData {
     /**
      * Call logs.
@@ -36283,7 +40003,7 @@ pub struct ListCallLogsMetricsResponseData {
     pub total_records: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Qos {
     /**
      * The average amount of packet loss, i.e., the percentage of packets that fail to arrive at their destination.
@@ -36341,7 +40061,7 @@ pub struct Qos {
     pub network_delay: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Sending {
     /**
      * Date and time at which the QoS was delivered.
@@ -36356,7 +40076,7 @@ pub struct Sending {
     pub qos: Option<Qos>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQoSResponseCallerQosReceiving {
     /**
      * The average amount of packet loss. For example, the percentage of packets that fail to arrive at their destination.
@@ -36416,7 +40136,7 @@ pub struct GetCallQoSResponseCallerQosReceiving {
     pub network_delay: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Receiving {
     /**
      * The date and time at which the QoS was received.
@@ -36432,7 +40152,7 @@ pub struct Receiving {
 }
 
 /// Quality of Service object that represents the call quality data of the caller.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CallerQos {
     /**
      * Quality of Service object that represents the call quality data of the caller.
@@ -36464,7 +40184,7 @@ pub struct CallerQos {
     pub sending: Vec<Sending>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQoSResponseCalleeQosSending {
     /**
      * The average amount of packet loss. For example, the percentage of packets that fail to arrive at their destination.
@@ -36524,7 +40244,7 @@ pub struct GetCallQoSResponseCalleeQosSending {
     pub network_delay: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQoSResponseCalleeQosSendingData {
     /**
      * The date and time at which the QoS was delivered.
@@ -36539,7 +40259,7 @@ pub struct GetCallQoSResponseCalleeQosSendingData {
     pub qos: Option<GetCallQoSResponseCalleeQosSending>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQoSResponseCalleeQosReceiving {
     /**
      * The date and time at which the QoS was received.
@@ -36554,7 +40274,7 @@ pub struct GetCallQoSResponseCalleeQosReceiving {
     pub qos: Option<GetCallQoSResponseCalleeQosSending>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CalleeQos {
     /**
      * Display the device's private IP address if the account has the `show_device_ip_for_call_log` parameter set to `enabled`.
@@ -36586,7 +40306,7 @@ pub struct CalleeQos {
     pub sending: Vec<GetCallQoSResponseCalleeQosSendingData>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallQoSResponse {
     /**
      * Unique identifier of the phone call.
@@ -36644,7 +40364,7 @@ impl CreateBatchPollsRequestQuestionsType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateBatchPollsRequestQuestions {
     /**
      * Possible answers for the question.
@@ -36667,7 +40387,7 @@ pub struct CreateBatchPollsRequestQuestions {
     pub type_: Option<CreateBatchPollsRequestQuestionsType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateBatchPollsRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub questions: Vec<CreateBatchPollsRequestQuestions>,
@@ -36720,7 +40440,7 @@ impl CreateBatchPollsResponseQuestionsType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateBatchPollsResponseQuestions {
     /**
      * Answers to questons
@@ -36743,7 +40463,7 @@ pub struct CreateBatchPollsResponseQuestions {
     pub type_: Option<CreateBatchPollsResponseQuestionsType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Polls {
     /**
      * Meeting Poll ID
@@ -36772,13 +40492,13 @@ pub struct Polls {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CreateBatchPollsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub polls: Vec<Polls>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ManageE911SignageResponse {
     /**
      * Unique identifier of the event related to the content being displayed. This field is only returned if you provided `zoomroom.emergency_alert_displayed` as the value of the `method` parameter.
@@ -36793,7 +40513,97 @@ pub struct ManageE911SignageResponse {
     pub event_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct GetPsOperationLogsResponse {
+    /**
+     * Action that was performed.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub action: String,
+    /**
+     * Category type of the operation.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub category_type: String,
+    /**
+     * Operation detail.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub operation_detail: String,
+    /**
+     * The user who performed the operation.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub operator: String,
+    /**
+     * The time at which the operation was performed.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub time: Option<chrono::DateTime<chrono::Utc>>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct GetPsOperationLogsResponseData {
+    /**
+     * Array of operation log objects
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub operation_logs: Vec<GetPsOperationLogsResponse>,
+}
+
+/// All of the following types:
+///
+/// - `PaginationToken4ImChat`
+/// - `GetPsOperationLogsResponseData`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum GetPsOperationLogsResponseAllOf {
+    GetPsOperationLogsResponseData(GetPsOperationLogsResponseData),
+    /**
+     * Pagination object.
+     */
+    PaginationToken4ImChat(PaginationToken4ImChat),
+}
+
+impl GetPsOperationLogsResponseAllOf {
+    pub fn get_ps_operation_logs_response_data(&self) -> Option<&GetPsOperationLogsResponseData> {
+        if let GetPsOperationLogsResponseAllOf::GetPsOperationLogsResponseData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn pagination_token_4_im_chat(&self) -> Option<&PaginationToken4ImChat> {
+        if let GetPsOperationLogsResponseAllOf::PaginationToken4ImChat(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountBillingInvoicesResponse {
     /**
      * The remaining balance of the invoice after all payments, adjustments, and refunds are applied.
@@ -36872,7 +40682,7 @@ pub struct AccountBillingInvoicesResponse {
     pub total_amount: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AccountBillingInvoicesResponseData {
     /**
      * Currency used in the invoice.
@@ -36887,7 +40697,7 @@ pub struct AccountBillingInvoicesResponseData {
     pub invoices: Vec<AccountBillingInvoicesResponse>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InvoiceItems {
     /**
      * Description for the charge.
@@ -36955,7 +40765,7 @@ pub struct InvoiceItems {
     pub total_amount: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetAccountBillingInvoiceResponse {
     /**
      * The remaining balance of the invoice after all payments, adjustments, and refunds are applied.
@@ -37086,7 +40896,7 @@ impl Quality {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ParticipantFeedbackResponseParticipants {
     /**
      * Date and time at which the feedback was submitted.
@@ -37125,7 +40935,7 @@ pub struct ParticipantFeedbackResponseParticipants {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ParticipantFeedbackResponse {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -37228,7 +41038,7 @@ impl Result {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallLogDetailsResponseSite {
     /**
      * Target [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites) where the phone number was assigned. Sites allow you to organize the phone users in your organization. For example, you can create sites based on different office locations.
@@ -37250,7 +41060,7 @@ pub struct GetCallLogDetailsResponseSite {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ForwardTo {
     /**
      * The extension number of the call to forward to.
@@ -37292,7 +41102,7 @@ pub struct ForwardTo {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LogDetails {
     /**
      * Start time of the call.
@@ -37355,7 +41165,7 @@ pub struct LogDetails {
     pub site: Option<GetCallLogDetailsResponseSite>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCallLogDetailsResponse {
     /**
      * Unique identifier of the phone call.
@@ -37512,7 +41322,7 @@ pub struct GetCallLogDetailsResponse {
     pub result: Option<Result>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddByocNumberRequest {
     /**
      * Name of the carrier.
@@ -37548,7 +41358,7 @@ pub struct AddByocNumberRequest {
     pub site_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddByocNumberResponsePhoneNumbers {
     /**
      * Unique identifier of the phone number.
@@ -37570,13 +41380,13 @@ pub struct AddByocNumberResponsePhoneNumbers {
     pub number: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddByocNumberResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub phone_numbers: Vec<AddByocNumberResponsePhoneNumbers>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UploadVBuserResponse {
     /**
      * Unique identifier of the file.
@@ -37625,7 +41435,7 @@ pub struct UploadVBuserResponse {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListMeetingTemplatesResponse {
     /**
      * Unique identifier of the template.
@@ -37659,7 +41469,7 @@ pub struct ListMeetingTemplatesResponse {
     pub type_: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListMeetingTemplatesResponseData {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub templates: Vec<ListMeetingTemplatesResponse>,
@@ -37763,7 +41573,7 @@ impl ListArchivedFilesResponseMeetingsArchiveFileType {
 }
 
 /// Information about the archived files.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListArchivedFilesResponseMeetingsArchive {
     /**
      * Information about the archived files.
@@ -37822,7 +41632,7 @@ pub struct ListArchivedFilesResponseMeetingsArchive {
     pub status: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListArchivedFilesResponseMeetings {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub archive_files: Vec<ListArchivedFilesResponseMeetingsArchive>,
@@ -37931,7 +41741,7 @@ pub struct ListArchivedFilesResponseMeetings {
     pub uuid: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ListArchivedFilesResponse {
     /**
      * The query start date, in `yyyy-MM-dd'T'HH:mm:ss'Z'` format. The duration for the query defined in the `from` and `to` parameters should \*\*not\*\* exceed 7 days because this API \*\*only\*\* provides one week's data.

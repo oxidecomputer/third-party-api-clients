@@ -41,7 +41,7 @@ impl PhoneReports {
         category_type: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::PaginationToken4ImChat> {
+    ) -> Result<crate::types::GetPsOperationLogsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !category_type.is_empty() {

@@ -140,7 +140,7 @@ impl Reports {
         page_size: i64,
         next_page_token: &str,
         type_: crate::types::ReportMeetingsType,
-    ) -> Result<crate::types::Pagination> {
+    ) -> Result<crate::types::ReportMeetingsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -229,7 +229,7 @@ impl Reports {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
-    ) -> Result<crate::types::PaginationToken> {
+    ) -> Result<crate::types::ReportMeetingParticipantsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
@@ -344,7 +344,7 @@ impl Reports {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
-    ) -> Result<crate::types::PaginationToken> {
+    ) -> Result<crate::types::ReportWebinarParticipantsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
@@ -515,7 +515,7 @@ impl Reports {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::ReportCloudRecordingResponse> {
+    ) -> Result<crate::types::ReportCloudRecordingResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -561,7 +561,7 @@ impl Reports {
         page_size: i64,
         next_page_token: &str,
         category_type: crate::types::CategoryType,
-    ) -> Result<crate::types::PaginationToken4ImChat> {
+    ) -> Result<crate::types::ReportOperationLogsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("category_type={}", category_type));

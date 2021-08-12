@@ -3,7 +3,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /// Simple User
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SimpleUser {
     #[serde(
         default,
@@ -133,8 +133,31 @@ pub struct SimpleUser {
     pub url: String,
 }
 
+/// All of the following types:
+///
+/// - `SimpleUser`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum OwnerAllOf {
+    /**
+     * Simple User
+     */
+    SimpleUser(SimpleUser),
+}
+
+impl OwnerAllOf {
+    pub fn simple_user(&self) -> Option<&SimpleUser> {
+        if let OwnerAllOf::SimpleUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// The set of permissions for the GitHub app
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Permissions {
     #[serde(
         default,
@@ -169,7 +192,7 @@ pub struct Permissions {
 }
 
 /// GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitHubApp {
     #[serde(
         default,
@@ -246,10 +269,15 @@ pub struct GitHubApp {
     )]
     pub node_id: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<SimpleUser>,
+    #[serde()]
+    pub owner: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -285,7 +313,7 @@ pub struct GitHubApp {
 }
 
 /// Basic Error
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BasicError {
     #[serde(
         default,
@@ -314,7 +342,7 @@ pub struct BasicError {
 }
 
 /// Validation Error Simple
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ValidationErrorSimple {
     #[serde(
         default,
@@ -392,7 +420,7 @@ impl From<WebhookConfigInsecureSslOneOf> for String {
 }
 
 /// Configuration object of the webhook
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WebhookConfig {
     /**
      * Configuration object of the webhook
@@ -429,7 +457,7 @@ pub struct WebhookConfig {
 }
 
 /// Delivery made by a webhook, without request and response information.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct HookDeliveryItem {
     /**
      * The type of activity for the event that triggered the delivery.
@@ -532,7 +560,7 @@ pub struct HookDeliveryItem {
 }
 
 /// Scim Error
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimError {
     #[serde(
         default,
@@ -648,7 +676,7 @@ impl From<ValueOneOf> for Vec<String> {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Errors {
     #[serde(
         default,
@@ -695,7 +723,7 @@ pub struct Errors {
 }
 
 /// Validation Error
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ValidationError {
     #[serde(
         default,
@@ -717,14 +745,14 @@ pub struct ValidationError {
 }
 
 /// The request headers sent with the webhook delivery.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Headers {}
 
 /// The webhook payload.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Payload {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Request {
     /**
      * The request headers sent with the webhook delivery.
@@ -739,10 +767,10 @@ pub struct Request {
 }
 
 /// The response headers received when the delivery was made.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct HookDeliveryResponseHeaders {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Response {
     /**
      * The response headers received when the delivery was made.
@@ -761,7 +789,7 @@ pub struct Response {
 }
 
 /// Delivery made by a webhook.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct HookDelivery {
     /**
      * The type of activity for the event that triggered the delivery.
@@ -868,7 +896,7 @@ pub struct HookDelivery {
 }
 
 /// An enterprise account
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Enterprise {
     #[serde(
         default,
@@ -2123,7 +2151,7 @@ impl TeamDiscussions {
 }
 
 /// The permissions granted to the user-to-server access token.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppPermissions {
     /**
      * The permissions granted to the user-to-server access token.
@@ -2282,6 +2310,41 @@ pub struct AppPermissions {
     pub workflows: Option<Workflows>,
 }
 
+/// Any of the following types:
+///
+/// - `SimpleUser`
+/// - `Enterprise`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum AccountAnyOf {
+    /**
+     * An enterprise account
+     */
+    Enterprise(Enterprise),
+    /**
+     * Simple User
+     */
+    SimpleUser(SimpleUser),
+}
+
+impl AccountAnyOf {
+    pub fn enterprise(&self) -> Option<&Enterprise> {
+        if let AccountAnyOf::Enterprise(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn simple_user(&self) -> Option<&SimpleUser> {
+        if let AccountAnyOf::SimpleUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /**
  * Describe whether all repositories have been selected or there's a selection involved
  */
@@ -2321,7 +2384,7 @@ impl RepositorySelection {
 }
 
 /// Installation
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Installation {
     #[serde(
         default,
@@ -2330,10 +2393,16 @@ pub struct Installation {
     )]
     pub access_tokens_url: String,
     /**
-     * Simple User
+     * Any of the following types:
+     *  
+     *  - `SimpleUser`
+     *  - `Enterprise`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub account: Option<SimpleUser>,
+    #[serde()]
+    pub account: AccountAnyOf,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -2417,10 +2486,15 @@ pub struct Installation {
     )]
     pub suspended_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub suspended_by: Option<SimpleUser>,
+    #[serde()]
+    pub suspended_by: OwnerAllOf,
     /**
      * The ID of the user or organization this token is being scoped to.
      */
@@ -2445,7 +2519,7 @@ pub struct Installation {
 }
 
 /// License Simple
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LicenseSimple {
     #[serde(
         default,
@@ -2485,7 +2559,30 @@ pub struct LicenseSimple {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/// All of the following types:
+///
+/// - `LicenseSimple`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum LicenseAllOf {
+    /**
+     * License Simple
+     */
+    LicenseSimple(LicenseSimple),
+}
+
+impl LicenseAllOf {
+    pub fn license_simple(&self) -> Option<&LicenseSimple> {
+        if let LicenseAllOf::LicenseSimple(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RepositoryPermissions {
     #[serde(
         default,
@@ -2514,8 +2611,8 @@ pub struct RepositoryPermissions {
     pub triage: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Users {
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct Owner {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2626,7 +2723,7 @@ pub struct Users {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RepositoryTemplatePermissions {
     #[serde(
         default,
@@ -2645,7 +2742,7 @@ pub struct RepositoryTemplatePermissions {
     pub push: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TemplateRepository {
     #[serde(
         default,
@@ -2976,7 +3073,7 @@ pub struct TemplateRepository {
     )]
     pub open_issues_count: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<Users>,
+    pub owner: Option<Owner>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permissions: Option<RepositoryTemplatePermissions>,
     #[serde(
@@ -3109,7 +3206,7 @@ pub struct TemplateRepository {
 }
 
 /// A git repository
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Repository {
     /**
      * A git repository
@@ -3440,10 +3537,15 @@ pub struct Repository {
     )]
     pub languages_url: String,
     /**
-     * License Simple
+     * All of the following types:
+     *  
+     *  - `LicenseSimple`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<LicenseSimple>,
+    #[serde()]
+    pub license: LicenseAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3511,10 +3613,10 @@ pub struct Repository {
     )]
     pub open_issues_count: i64,
     /**
-     * Simple User
+     * A git repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub organization: Option<SimpleUser>,
+    pub organization: Option<OwnerAllOf>,
     /**
      * Simple User
      */
@@ -3716,7 +3818,7 @@ impl InstallationTokenRepositorySelection {
 }
 
 /// Authentication token for a GitHub App installed on a user or org.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InstallationToken {
     #[serde(
         default,
@@ -3766,7 +3868,7 @@ pub struct InstallationToken {
     pub token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct App {
     #[serde(
         default,
@@ -3789,7 +3891,7 @@ pub struct App {
 }
 
 /// The authorization associated with an OAuth Access.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ApplicationGrant {
     #[serde()]
     pub app: App,
@@ -3820,13 +3922,13 @@ pub struct ApplicationGrant {
     )]
     pub url: String,
     /**
-     * Simple User
+     * The authorization associated with an OAuth Access.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    pub user: Option<OwnerAllOf>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScopedInstallation {
     /**
      * Simple User
@@ -3864,8 +3966,28 @@ pub struct ScopedInstallation {
     pub single_file_paths: Vec<String>,
 }
 
+/// All of the following types:
+///
+/// - `ScopedInstallation`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum InstallationAllOf {
+    ScopedInstallation(ScopedInstallation),
+}
+
+impl InstallationAllOf {
+    pub fn scoped_installation(&self) -> Option<&ScopedInstallation> {
+        if let InstallationAllOf::ScopedInstallation(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// The authorization for an OAuth app, GitHub App, or a Personal Access Token.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Authorization {
     #[serde()]
     pub app: App,
@@ -3897,7 +4019,7 @@ pub struct Authorization {
      * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub installation: Option<ScopedInstallation>,
+    pub installation: Option<InstallationAllOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3940,14 +4062,14 @@ pub struct Authorization {
     )]
     pub url: String,
     /**
-     * Simple User
+     * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    pub user: Option<OwnerAllOf>,
 }
 
 /// Code Of Conduct
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeOfConduct {
     #[serde(
         default,
@@ -4063,7 +4185,7 @@ impl AllowedActions {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsEnterprisePermissions {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -4096,7 +4218,7 @@ pub struct ActionsEnterprisePermissions {
 }
 
 /// Organization Simple
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrganizationSimple {
     #[serde(
         default,
@@ -4172,7 +4294,7 @@ pub struct OrganizationSimple {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SelectedActions {
     /**
      * Whether GitHub-owned actions are allowed. For example, this includes the actions in the `actions` organization.
@@ -4197,7 +4319,7 @@ pub struct SelectedActions {
     pub verified_allowed: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RunnerGroupsEnterprise {
     #[serde(
         default,
@@ -4279,7 +4401,7 @@ impl Type {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Labels {
     /**
      * Unique identifier of the label.
@@ -4307,7 +4429,7 @@ pub struct Labels {
 }
 
 /// A self hosted runner
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Runner {
     #[serde(
         default,
@@ -4355,7 +4477,7 @@ pub struct Runner {
 }
 
 /// Runner Application
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RunnerApplication {
     #[serde(
         default,
@@ -4398,11 +4520,11 @@ pub struct RunnerApplication {
     pub temp_download_token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Data {}
 
 /// Authentication Token
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AuthenticationToken {
     /**
      * The time this token expires
@@ -4445,7 +4567,7 @@ pub struct AuthenticationToken {
     pub token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActorLocation {
     #[serde(
         default,
@@ -4455,7 +4577,7 @@ pub struct ActorLocation {
     pub country_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AuditLogEvent {
     /**
      * The time the audit log event occurred, given as a [Unix timestamp](http://en.wikipedia.org/wiki/Unix_time).
@@ -4711,7 +4833,7 @@ pub struct AuditLogEvent {
     pub visibility: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MinutesUsedBreakdown {
     /**
      * Total minutes used on macOS runner machines.
@@ -4742,7 +4864,7 @@ pub struct MinutesUsedBreakdown {
     pub windows: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsBillingUsage {
     /**
      * The amount of free GitHub Actions minutes available.
@@ -4775,7 +4897,7 @@ pub struct ActionsBillingUsage {
     pub total_paid_minutes_used: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PackagesBillingUsage {
     /**
      * Free storage space (GB) for GitHub Packages.
@@ -4806,7 +4928,7 @@ pub struct PackagesBillingUsage {
     pub total_paid_gigabytes_bandwidth_used: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CombinedBillingUsage {
     /**
      * Numbers of days left in billing cycle.
@@ -4838,7 +4960,7 @@ pub struct CombinedBillingUsage {
 }
 
 /// Actor
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Actor {
     #[serde(
         default,
@@ -4879,7 +5001,7 @@ pub struct Actor {
 }
 
 /// Color-coded labels help you categorize and filter your issues (just like labels in Gmail).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Label {
     /**
      * 6-character hex code, without the leading #, identifying the color
@@ -4964,7 +5086,7 @@ impl Default for State {
 }
 
 /// A collection of related issues and pull requests.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Milestone {
     #[serde(
         default,
@@ -4985,10 +5107,15 @@ pub struct Milestone {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub creator: Option<SimpleUser>,
+    #[serde()]
+    pub creator: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5124,7 +5251,30 @@ impl AuthorAssociation {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/// All of the following types:
+///
+/// - `Milestone`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MilestoneAllOf {
+    /**
+     * A collection of related issues and pull requests.
+     */
+    Milestone(Milestone),
+}
+
+impl MilestoneAllOf {
+    pub fn milestone(&self) -> Option<&Milestone> {
+        if let MilestoneAllOf::Milestone(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequest {
     #[serde(
         default,
@@ -5158,8 +5308,31 @@ pub struct PullRequest {
     pub url: String,
 }
 
+/// All of the following types:
+///
+/// - `GitHubApp`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum PerformedViaGithubAppAllOf {
+    /**
+     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     */
+    GitHubApp(GitHubApp),
+}
+
+impl PerformedViaGithubAppAllOf {
+    pub fn git_hub_app(&self) -> Option<&GitHubApp> {
+        if let PerformedViaGithubAppAllOf::GitHubApp(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Issue Simple
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueSimple {
     #[serde(
         default,
@@ -5168,10 +5341,15 @@ pub struct IssueSimple {
     )]
     pub active_lock_reason: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assignee: Option<SimpleUser>,
+    #[serde()]
+    pub assignee: OwnerAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -5253,10 +5431,15 @@ pub struct IssueSimple {
     )]
     pub locked: bool,
     /**
-     * A collection of related issues and pull requests.
+     * All of the following types:
+     *  
+     *  - `Milestone`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub milestone: Option<Milestone>,
+    #[serde()]
+    pub milestone: MilestoneAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5270,10 +5453,10 @@ pub struct IssueSimple {
     )]
     pub number: i64,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * Issue Simple
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<GitHubApp>,
+    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
     /**
      * Issue Simple
      */
@@ -5321,13 +5504,18 @@ pub struct IssueSimple {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionRollup {
     #[serde(
         default,
@@ -5394,7 +5582,7 @@ pub struct ReactionRollup {
 }
 
 /// Comments provide a way for people to collaborate on an issue.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueComment {
     /**
      * How the author is associated with the repository.
@@ -5456,10 +5644,10 @@ pub struct IssueComment {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * Comments provide a way for people to collaborate on an issue.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<GitHubApp>,
+    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
     /**
      * Comments provide a way for people to collaborate on an issue.
      */
@@ -5481,13 +5669,18 @@ pub struct IssueComment {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Repo {
     #[serde(
         default,
@@ -5509,7 +5702,7 @@ pub struct Repo {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EventPayloadPages {
     #[serde(
         default,
@@ -5549,7 +5742,7 @@ pub struct EventPayloadPages {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EventPayload {
     #[serde(
         default,
@@ -5572,7 +5765,7 @@ pub struct EventPayload {
 }
 
 /// Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Event {
     /**
      * Actor
@@ -5615,7 +5808,7 @@ pub struct Event {
 }
 
 /// Hypermedia Link with Type
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LinkWithType {
     #[serde(
         default,
@@ -5632,7 +5825,7 @@ pub struct LinkWithType {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Links {
     /**
      * Hypermedia Link with Type
@@ -5674,7 +5867,7 @@ pub struct Links {
 }
 
 /// Feed
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Feed {
     #[serde(rename = "_links")]
     pub links: Links,
@@ -5728,7 +5921,7 @@ pub struct Feed {
 }
 
 /// Base Gist
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BaseGist {
     #[serde(
         default,
@@ -5809,10 +6002,10 @@ pub struct BaseGist {
     )]
     pub node_id: String,
     /**
-     * Simple User
+     * Base Gist
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<SimpleUser>,
+    pub owner: Option<OwnerAllOf>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -5839,13 +6032,18 @@ pub struct BaseGist {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Plan {
     #[serde(
         default,
@@ -5874,7 +6072,7 @@ pub struct Plan {
 }
 
 /// Public User
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PublicUser {
     #[serde(
         default,
@@ -6128,7 +6326,7 @@ pub struct PublicUser {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Stats {
     #[serde(
         default,
@@ -6151,7 +6349,7 @@ pub struct Stats {
 }
 
 /// Gist History
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistHistory {
     /**
      * Gist History
@@ -6186,7 +6384,7 @@ pub struct GistHistory {
     pub version: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Forks {
     #[serde(
         default,
@@ -6220,7 +6418,7 @@ pub struct Forks {
 }
 
 /// Gist
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Gist {
     #[serde(
         default,
@@ -6301,10 +6499,10 @@ pub struct Gist {
     )]
     pub node_id: String,
     /**
-     * Simple User
+     * Gist
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<SimpleUser>,
+    pub owner: Option<OwnerAllOf>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -6331,14 +6529,19 @@ pub struct Gist {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /// Gist Simple
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistSimple {
     /**
      * Gist Simple
@@ -6465,7 +6668,7 @@ pub struct GistSimple {
 }
 
 /// A comment made to a gist.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistComment {
     /**
      * How the author is associated with the repository.
@@ -6512,14 +6715,19 @@ pub struct GistComment {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /// Gist Commit
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistCommit {
     #[serde()]
     pub change_status: Stats,
@@ -6536,10 +6744,15 @@ pub struct GistCommit {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6549,7 +6762,7 @@ pub struct GistCommit {
 }
 
 /// Gitignore Template
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitignoreTemplate {
     #[serde(
         default,
@@ -6565,7 +6778,7 @@ pub struct GitignoreTemplate {
     pub source: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LabelsData {
     #[serde(
         default,
@@ -6639,21 +6852,9 @@ impl LabelsOneOf {
     }
 }
 
-impl From<LabelsData> for LabelsOneOf {
-    fn from(f: LabelsData) -> Self {
-        LabelsOneOf::LabelsData(f)
-    }
-}
-
 impl From<String> for LabelsOneOf {
     fn from(f: String) -> Self {
         LabelsOneOf::String(f)
-    }
-}
-
-impl From<LabelsOneOf> for LabelsData {
-    fn from(f: LabelsOneOf) -> Self {
-        f.labels_data().unwrap().clone()
     }
 }
 
@@ -6664,7 +6865,7 @@ impl From<LabelsOneOf> for String {
 }
 
 /// Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Issue {
     #[serde(
         default,
@@ -6673,10 +6874,15 @@ pub struct Issue {
     )]
     pub active_lock_reason: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assignee: Option<SimpleUser>,
+    #[serde()]
+    pub assignee: OwnerAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -6712,10 +6918,10 @@ pub struct Issue {
     )]
     pub closed_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub closed_by: Option<SimpleUser>,
+    pub closed_by: Option<OwnerAllOf>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -6769,10 +6975,15 @@ pub struct Issue {
     )]
     pub locked: bool,
     /**
-     * A collection of related issues and pull requests.
+     * All of the following types:
+     *  
+     *  - `Milestone`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub milestone: Option<Milestone>,
+    #[serde()]
+    pub milestone: MilestoneAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6789,10 +7000,10 @@ pub struct Issue {
     )]
     pub number: i64,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<GitHubApp>,
+    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
     /**
      * Issues are a great way to keep track of tasks, enhancements, and bugs for your projects.
      */
@@ -6854,15 +7065,20 @@ pub struct Issue {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /// License
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct LicenseData {
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct License {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -6931,7 +7147,7 @@ pub struct LicenseData {
 }
 
 /// Marketplace Listing Plan
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MarketplaceListingPlan {
     #[serde(
         default,
@@ -7008,7 +7224,7 @@ pub struct MarketplaceListingPlan {
     pub yearly_price_in_cents: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MarketplacePendingChange {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub effective_date: Option<chrono::NaiveDate>,
@@ -7033,7 +7249,7 @@ pub struct MarketplacePendingChange {
     pub unit_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MarketplacePurchase {
     #[serde(
         default,
@@ -7079,7 +7295,7 @@ pub struct MarketplacePurchase {
 }
 
 /// Marketplace Purchase
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MarketplacePurchaseData {
     #[serde(
         default,
@@ -7124,7 +7340,7 @@ pub struct MarketplacePurchaseData {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SshKeyFingerprints {
     #[serde(
         default,
@@ -7141,7 +7357,7 @@ pub struct SshKeyFingerprints {
 }
 
 /// Api Overview
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ApiOverview {
     /**
      * Api Overview
@@ -7200,7 +7416,7 @@ pub struct ApiOverview {
     pub web: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MinimalRepositoryPermissions {
     #[serde(
         default,
@@ -7229,8 +7445,8 @@ pub struct MinimalRepositoryPermissions {
     pub triage: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct License {
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct MinimalRepositoryLicense {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7264,7 +7480,7 @@ pub struct License {
 }
 
 /// Minimal Repository
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MinimalRepository {
     #[serde(
         default,
@@ -7574,7 +7790,7 @@ pub struct MinimalRepository {
     )]
     pub languages_url: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<License>,
+    pub license: Option<MinimalRepositoryLicense>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -7812,7 +8028,7 @@ pub struct MinimalRepository {
     pub watchers_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Subject {
     #[serde(
         default,
@@ -7842,7 +8058,7 @@ pub struct Subject {
 }
 
 /// Thread
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Thread {
     #[serde(
         default,
@@ -7895,7 +8111,7 @@ pub struct Thread {
 }
 
 /// Thread Subscription
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ThreadSubscription {
     #[serde(
         default,
@@ -7939,7 +8155,7 @@ pub struct ThreadSubscription {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrganizationFullPlan {
     #[serde(
         default,
@@ -7974,7 +8190,7 @@ pub struct OrganizationFullPlan {
 }
 
 /// Organization Full
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrganizationFull {
     #[serde(
         default,
@@ -8326,7 +8542,7 @@ impl EnabledRepositories {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsOrganizationPermissions {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -8358,7 +8574,7 @@ pub struct ActionsOrganizationPermissions {
     pub selected_repositories_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RunnerGroupsOrg {
     #[serde(
         default,
@@ -8457,7 +8673,7 @@ impl Visibility {
 }
 
 /// Secrets for GitHub Actions for an organization.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrganizationActionsSecret {
     #[serde(
         default,
@@ -8494,7 +8710,7 @@ pub struct OrganizationActionsSecret {
 }
 
 /// The public key used for setting Actions Secrets.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsPublicKey {
     #[serde(
         default,
@@ -8544,11 +8760,11 @@ pub struct ActionsPublicKey {
 }
 
 /// An object without any properties.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EmptyObject {}
 
 /// Credential Authorization
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CredentialAuthorization {
     /**
      * Credential Authorization
@@ -8648,7 +8864,7 @@ pub struct CredentialAuthorization {
 }
 
 /// Organization Invitation
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrganizationInvitation {
     #[serde(
         default,
@@ -8717,7 +8933,7 @@ pub struct OrganizationInvitation {
     pub team_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Config {
     #[serde(
         default,
@@ -8746,7 +8962,7 @@ pub struct Config {
 }
 
 /// Org Hook
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgHook {
     #[serde(
         default,
@@ -8850,7 +9066,7 @@ impl InteractionGroup {
 }
 
 /// Interaction limit settings.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InteractionLimits {
     #[serde(
         default,
@@ -8919,7 +9135,7 @@ impl InteractionExpiry {
 }
 
 /// Limit interactions to a specific type of user for a specified duration
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct InteractionLimit {
     /**
      * Limit interactions to a specific type of user for a specified duration
@@ -8934,7 +9150,7 @@ pub struct InteractionLimit {
 }
 
 /// Groups of organization members that gives permissions on specified repositories.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamSimple {
     /**
      * Description of the team
@@ -9031,7 +9247,7 @@ pub struct TeamSimple {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamPermissions {
     #[serde(
         default,
@@ -9060,8 +9276,31 @@ pub struct TeamPermissions {
     pub triage: bool,
 }
 
+/// All of the following types:
+///
+/// - `TeamSimple`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ParentAllOf {
+    /**
+     * Groups of organization members that gives permissions on specified repositories.
+     */
+    TeamSimple(TeamSimple),
+}
+
+impl ParentAllOf {
+    pub fn team_simple(&self) -> Option<&TeamSimple> {
+        if let ParentAllOf::TeamSimple(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Groups of organization members that gives permissions on specified repositories.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Team {
     #[serde(
         default,
@@ -9100,10 +9339,15 @@ pub struct Team {
     )]
     pub node_id: String,
     /**
-     * Groups of organization members that gives permissions on specified repositories.
+     * All of the following types:
+     *  
+     *  - `TeamSimple`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub parent: Option<TeamSimple>,
+    #[serde()]
+    pub parent: ParentAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9220,7 +9464,7 @@ impl Role {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgMembershipPermissions {
     #[serde(
         default,
@@ -9230,7 +9474,7 @@ pub struct OrgMembershipPermissions {
 }
 
 /// Org Membership
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgMembership {
     /**
      * Organization Simple
@@ -9265,14 +9509,19 @@ pub struct OrgMembership {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /// A migration.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Migration {
     #[serde(
         default,
@@ -9320,10 +9569,15 @@ pub struct Migration {
     )]
     pub node_id: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<SimpleUser>,
+    #[serde()]
+    pub owner: OwnerAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<Repository>,
     #[serde(
@@ -9428,8 +9682,31 @@ impl PackageVisibility {
     }
 }
 
+/// All of the following types:
+///
+/// - `MinimalRepository`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum RepositoryAllOf {
+    /**
+     * Minimal Repository
+     */
+    MinimalRepository(MinimalRepository),
+}
+
+impl RepositoryAllOf {
+    pub fn minimal_repository(&self) -> Option<&MinimalRepository> {
+        if let RepositoryAllOf::MinimalRepository(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// A software package
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Package {
     #[serde(
         default,
@@ -9462,17 +9739,17 @@ pub struct Package {
     )]
     pub name: String,
     /**
-     * Simple User
+     * A software package
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<SimpleUser>,
+    pub owner: Option<OwnerAllOf>,
     #[serde(default, skip_serializing_if = "PackageType::is_noop")]
     pub package_type: PackageType,
     /**
      * A software package
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub repository: Option<MinimalRepository>,
+    pub repository: Option<RepositoryAllOf>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -9498,19 +9775,19 @@ pub struct Package {
     pub visibility: PackageVisibility,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Container {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub tags: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Docker {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub tag: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PackageVersionMetadata {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub container: Option<Container>,
@@ -9521,7 +9798,7 @@ pub struct PackageVersionMetadata {
 }
 
 /// A version of a software package
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PackageVersion {
     #[serde(
         default,
@@ -9644,7 +9921,7 @@ impl OrganizationPermission {
 }
 
 /// Projects are a way to organize columns and cards of work.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Project {
     /**
      * Body of the project
@@ -9668,10 +9945,15 @@ pub struct Project {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub creator: Option<SimpleUser>,
+    #[serde()]
+    pub creator: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9747,7 +10029,7 @@ pub struct Project {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Groups {
     /**
      * a description of the group
@@ -9797,7 +10079,7 @@ pub struct Groups {
 }
 
 /// External Groups to be mapped to a team for membership
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GroupMapping {
     /**
      * External Groups to be mapped to a team for membership
@@ -9845,7 +10127,7 @@ impl Privacy {
 }
 
 /// Groups of organization members that gives permissions on specified repositories.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FullTeam {
     #[serde(
         default,
@@ -9919,7 +10201,7 @@ pub struct FullTeam {
      * Groups of organization members that gives permissions on specified repositories.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub parent: Option<TeamSimple>,
+    pub parent: Option<ParentAllOf>,
     /**
      * Permission that the team will have for its repositories
      */
@@ -9970,13 +10252,18 @@ pub struct FullTeam {
 }
 
 /// A team discussion is a persistent record of a free-form conversation within a team.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamDiscussion {
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub author: Option<SimpleUser>,
+    #[serde()]
+    pub author: OwnerAllOf,
     /**
      * The main text of the discussion.
      */
@@ -10097,13 +10384,18 @@ pub struct TeamDiscussion {
 }
 
 /// A reply to a discussion within a team.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamDiscussionComment {
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub author: Option<SimpleUser>,
+    #[serde()]
+    pub author: OwnerAllOf,
     /**
      * The main text of the comment.
      */
@@ -10243,7 +10535,7 @@ impl Content {
 }
 
 /// Reactions to conversations provide a way to help people express their feelings more simply and effectively.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Reaction {
     /**
      * The reaction to use
@@ -10269,10 +10561,15 @@ pub struct Reaction {
     )]
     pub node_id: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /**
@@ -10344,7 +10641,7 @@ impl TeamMembershipState {
 }
 
 /// Team Membership
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamMembership {
     /**
      * The role of the user in the team.
@@ -10364,7 +10661,7 @@ pub struct TeamMembership {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamProjectPermissions {
     #[serde(
         default,
@@ -10384,7 +10681,7 @@ pub struct TeamProjectPermissions {
 }
 
 /// A team's access to a project.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamProject {
     #[serde(
         default,
@@ -10485,7 +10782,7 @@ pub struct TeamProject {
 }
 
 /// A team's access to a repository.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamRepository {
     /**
      * A team's access to a repository.
@@ -10816,10 +11113,15 @@ pub struct TeamRepository {
     )]
     pub languages_url: String,
     /**
-     * License Simple
+     * All of the following types:
+     *  
+     *  - `LicenseSimple`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<LicenseSimple>,
+    #[serde()]
+    pub license: LicenseAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10887,10 +11189,15 @@ pub struct TeamRepository {
     )]
     pub open_issues_count: i64,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<SimpleUser>,
+    #[serde()]
+    pub owner: OwnerAllOf,
     /**
      * A team's access to a repository.
      */
@@ -11049,7 +11356,7 @@ pub struct TeamRepository {
 }
 
 /// Project cards represent a scope of work.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectCard {
     /**
      * Project cards represent a scope of work.
@@ -11084,10 +11391,15 @@ pub struct ProjectCard {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub creator: Option<SimpleUser>,
+    #[serde()]
+    pub creator: OwnerAllOf,
     /**
      * The project card's ID
      */
@@ -11136,7 +11448,7 @@ pub struct ProjectCard {
 }
 
 /// Project columns contain cards of work.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectColumn {
     #[serde(
         default,
@@ -11195,7 +11507,7 @@ pub struct ProjectColumn {
 }
 
 /// Repository Collaborator Permission
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RepositoryCollaboratorPermission {
     #[serde(
         default,
@@ -11204,13 +11516,18 @@ pub struct RepositoryCollaboratorPermission {
     )]
     pub permission: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RateLimit {
     #[serde(
         default,
@@ -11238,7 +11555,7 @@ pub struct RateLimit {
     pub used: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Resources {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub code_scanning_upload: Option<RateLimit>,
@@ -11255,7 +11572,7 @@ pub struct Resources {
 }
 
 /// Rate Limit Overview
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RateLimitOverview {
     #[serde()]
     pub rate: RateLimit,
@@ -11264,7 +11581,7 @@ pub struct RateLimitOverview {
 }
 
 /// Code of Conduct Simple
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeOfConductSimple {
     #[serde(
         default,
@@ -11292,7 +11609,7 @@ pub struct CodeOfConductSimple {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FullRepositoryPermissions {
     #[serde(
         default,
@@ -11346,13 +11663,13 @@ impl Status {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SecretScanning {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SecurityAnalysis {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub advanced_security: Option<SecretScanning>,
@@ -11361,7 +11678,7 @@ pub struct SecurityAnalysis {
 }
 
 /// Full Repository
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FullRepository {
     /**
      * Full Repository
@@ -11684,10 +12001,15 @@ pub struct FullRepository {
     )]
     pub languages_url: String,
     /**
-     * License Simple
+     * All of the following types:
+     *  
+     *  - `LicenseSimple`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<LicenseSimple>,
+    #[serde()]
+    pub license: LicenseAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -11749,10 +12071,10 @@ pub struct FullRepository {
     )]
     pub open_issues_count: i64,
     /**
-     * Simple User
+     * Full Repository
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub organization: Option<SimpleUser>,
+    pub organization: Option<OwnerAllOf>,
     /**
      * Simple User
      */
@@ -11922,7 +12244,7 @@ pub struct FullRepository {
 }
 
 /// An artifact
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Artifact {
     #[serde(
         default,
@@ -12035,7 +12357,7 @@ impl JobStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Steps {
     /**
      * The time that the job finished, in ISO 8601 format.
@@ -12087,7 +12409,7 @@ pub struct Steps {
 }
 
 /// Information of a job execution in a workflow run
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Job {
     #[serde(
         default,
@@ -12194,7 +12516,7 @@ pub struct Job {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsRepositoryPermissions {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -12220,7 +12542,7 @@ pub struct ActionsRepositoryPermissions {
     pub selected_actions_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Head {
     #[serde(
         default,
@@ -12239,7 +12561,7 @@ pub struct Head {
     pub sha: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestMinimal {
     #[serde()]
     pub base: Head,
@@ -12265,7 +12587,7 @@ pub struct PullRequestMinimal {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Author {
     #[serde(
         default,
@@ -12282,7 +12604,7 @@ pub struct Author {
 }
 
 /// Simple Commit
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SimpleCommit {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<Author>,
@@ -12314,8 +12636,31 @@ pub struct SimpleCommit {
     pub tree_id: String,
 }
 
+/// All of the following types:
+///
+/// - `SimpleCommit`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum HeadCommitAllOf {
+    /**
+     * Simple Commit
+     */
+    SimpleCommit(SimpleCommit),
+}
+
+impl HeadCommitAllOf {
+    pub fn simple_commit(&self) -> Option<&SimpleCommit> {
+        if let HeadCommitAllOf::SimpleCommit(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// An invocation of a workflow
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WorkflowRun {
     /**
      * The URL to the artifacts for the workflow run.
@@ -12387,10 +12732,15 @@ pub struct WorkflowRun {
     )]
     pub head_branch: String,
     /**
-     * Simple Commit
+     * All of the following types:
+     *  
+     *  - `SimpleCommit`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub head_commit: Option<SimpleCommit>,
+    #[serde()]
+    pub head_commit: HeadCommitAllOf,
     /**
      * Minimal Repository
      */
@@ -12528,7 +12878,7 @@ pub struct WorkflowRun {
     pub workflow_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnvironmentApprovalEnvironments {
     /**
      * The time that the environment was created, in ISO 8601 format.
@@ -12625,7 +12975,7 @@ impl EnvironmentApprovalState {
 }
 
 /// An entry in the reviews log for environment deployments
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnvironmentApproval {
     /**
      * The comment submitted with the deployment review
@@ -12691,7 +13041,7 @@ impl DeploymentReviewerType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Environment {
     #[serde(
         default,
@@ -12731,13 +13081,54 @@ pub struct Environment {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Reviewers {
+/// Any of the following types:
+///
+/// - `SimpleUser`
+/// - `Team`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ReviewerAnyOf {
     /**
      * Simple User
      */
+    SimpleUser(SimpleUser),
+    /**
+     * Groups of organization members that gives permissions on specified repositories.
+     */
+    Team(Team),
+}
+
+impl ReviewerAnyOf {
+    pub fn simple_user(&self) -> Option<&SimpleUser> {
+        if let ReviewerAnyOf::SimpleUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn team(&self) -> Option<&Team> {
+        if let ReviewerAnyOf::Team(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct Reviewers {
+    /**
+     * Any of the following types:
+     *  
+     *  - `SimpleUser`
+     *  - `Team`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
+     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub reviewer: Option<SimpleUser>,
+    pub reviewer: Option<ReviewerAnyOf>,
     /**
      * The type of reviewer. Must be one of: `User` or `Team`
      */
@@ -12746,7 +13137,7 @@ pub struct Reviewers {
 }
 
 /// Details of a deployment that is waiting for protection rules to pass
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PendingDeployment {
     /**
      * Whether the currently authenticated user can approve the deployment
@@ -12812,21 +13203,9 @@ impl PayloadOneOf {
     }
 }
 
-impl From<Data> for PayloadOneOf {
-    fn from(f: Data) -> Self {
-        PayloadOneOf::Data(f)
-    }
-}
-
 impl From<String> for PayloadOneOf {
     fn from(f: String) -> Self {
         PayloadOneOf::String(f)
-    }
-}
-
-impl From<PayloadOneOf> for Data {
-    fn from(f: PayloadOneOf) -> Self {
-        f.data().unwrap().clone()
     }
 }
 
@@ -12846,10 +13225,15 @@ pub struct Deployment {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub creator: Option<SimpleUser>,
+    #[serde()]
+    pub creator: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -12898,10 +13282,10 @@ pub struct Deployment {
     #[serde()]
     pub payload: PayloadOneOf,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * A request for a specific ref(branch,sha,tag) to be deployed
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<GitHubApp>,
+    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
     /**
      * A request for a specific ref(branch,sha,tag) to be deployed
      */
@@ -12969,7 +13353,7 @@ pub struct Deployment {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Macos {
     #[serde(
         default,
@@ -12985,7 +13369,7 @@ pub struct Macos {
     pub total_ms: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Billable {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub macos: Option<Macos>,
@@ -12996,7 +13380,7 @@ pub struct Billable {
 }
 
 /// Workflow Run Usage
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WorkflowRunUsage {
     #[serde()]
     pub billable: Billable,
@@ -13012,7 +13396,7 @@ pub struct WorkflowRunUsage {
 }
 
 /// Set secrets for GitHub Actions.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsSecret {
     #[serde(
         default,
@@ -13082,7 +13466,7 @@ impl WorkflowState {
 }
 
 /// A GitHub Actions workflow
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Workflow {
     #[serde(
         default,
@@ -13151,7 +13535,7 @@ pub struct Workflow {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Windows {
     #[serde(
         default,
@@ -13161,7 +13545,7 @@ pub struct Windows {
     pub total_ms: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WorkflowUsageBillable {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub macos: Option<Windows>,
@@ -13172,14 +13556,14 @@ pub struct WorkflowUsageBillable {
 }
 
 /// Workflow Usage
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct WorkflowUsage {
     #[serde()]
     pub billable: WorkflowUsageBillable,
 }
 
 /// An autolink reference.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Autolink {
     #[serde(
         default,
@@ -13208,7 +13592,7 @@ pub struct Autolink {
 }
 
 /// Protected Branch Admin Enforced
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProtectedBranchAdminEnforced {
     #[serde(
         default,
@@ -13223,7 +13607,7 @@ pub struct ProtectedBranchAdminEnforced {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DismissalRestrictions {
     /**
      * The list of teams with review dismissal access.
@@ -13256,7 +13640,7 @@ pub struct DismissalRestrictions {
 }
 
 /// Protected Branch Pull Request Review
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProtectedBranchPullRequestReview {
     #[serde(
         default,
@@ -13290,7 +13674,7 @@ pub struct ProtectedBranchPullRequestReview {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Teams {
     #[serde(
         default,
@@ -13366,7 +13750,7 @@ pub struct Teams {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BranchRestrictionPolicyAppsOwner {
     #[serde(
         default,
@@ -13508,7 +13892,7 @@ pub struct BranchRestrictionPolicyAppsOwner {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BranchRestrictionPolicyAppsPermissions {
     #[serde(
         default,
@@ -13536,7 +13920,7 @@ pub struct BranchRestrictionPolicyAppsPermissions {
     pub single_file: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Apps {
     #[serde(
         default,
@@ -13601,7 +13985,7 @@ pub struct Apps {
 }
 
 /// Branch Restriction Policy
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BranchRestrictionPolicy {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub apps: Vec<Apps>,
@@ -13626,7 +14010,7 @@ pub struct BranchRestrictionPolicy {
     )]
     pub url: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub users: Vec<Users>,
+    pub users: Vec<Owner>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13635,7 +14019,7 @@ pub struct BranchRestrictionPolicy {
     pub users_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RequiredStatusChecks {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub contexts: Vec<String>,
@@ -13664,7 +14048,7 @@ pub struct RequiredStatusChecks {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AllowDeletions {
     #[serde(
         default,
@@ -13673,7 +14057,7 @@ pub struct AllowDeletions {
     pub enabled: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnforceAdmins {
     #[serde(
         default,
@@ -13689,7 +14073,7 @@ pub struct EnforceAdmins {
 }
 
 /// Branch Protection
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BranchProtection {
     /**
      * Branch Protection
@@ -13764,7 +14148,7 @@ pub struct BranchProtection {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Tree {
     #[serde(
         default,
@@ -13781,7 +14165,7 @@ pub struct Tree {
 }
 
 /// Short Branch
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ShortBranch {
     #[serde()]
     pub commit: Tree,
@@ -13810,7 +14194,7 @@ pub struct ShortBranch {
 }
 
 /// Metaproperties for Git author/committer information.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitUser {
     #[serde(
         default,
@@ -13832,7 +14216,7 @@ pub struct GitUser {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Verification {
     #[serde(
         default,
@@ -13859,13 +14243,41 @@ pub struct Verification {
     pub verified: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct CommitData {
+/// All of the following types:
+///
+/// - `GitUser`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum AuthorAllOf {
     /**
      * Metaproperties for Git author/committer information.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub author: Option<GitUser>,
+    GitUser(GitUser),
+}
+
+impl AuthorAllOf {
+    pub fn git_user(&self) -> Option<&GitUser> {
+        if let AuthorAllOf::GitUser(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct CommitData {
+    /**
+     * All of the following types:
+     *  
+     *  - `GitUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
+     */
+    #[serde()]
+    pub author: AuthorAllOf,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -13873,10 +14285,15 @@ pub struct CommitData {
     )]
     pub comment_count: i64,
     /**
-     * Metaproperties for Git author/committer information.
+     * All of the following types:
+     *  
+     *  - `GitUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub committer: Option<GitUser>,
+    #[serde()]
+    pub committer: AuthorAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -13895,7 +14312,7 @@ pub struct CommitData {
     pub verification: Option<Verification>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Parents {
     #[serde(
         default,
@@ -13917,7 +14334,7 @@ pub struct Parents {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Files {
     #[serde(
         default,
@@ -13988,13 +14405,18 @@ pub struct Files {
 }
 
 /// Commit
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitDataType {
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub author: Option<SimpleUser>,
+    #[serde()]
+    pub author: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14004,10 +14426,15 @@ pub struct CommitDataType {
     #[serde()]
     pub commit: CommitData,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub committer: Option<SimpleUser>,
+    #[serde()]
+    pub committer: OwnerAllOf,
     /**
      * Commit
      */
@@ -14046,7 +14473,7 @@ pub struct CommitDataType {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BranchWithProtectionLinks {
     #[serde(
         default,
@@ -14064,7 +14491,7 @@ pub struct BranchWithProtectionLinks {
 }
 
 /// Branch With Protection
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BranchWithProtection {
     #[serde(rename = "_links")]
     pub links: BranchWithProtectionLinks,
@@ -14113,7 +14540,7 @@ pub struct BranchWithProtection {
 }
 
 /// Status Check Policy
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct StatusCheckPolicy {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub contexts: Vec<String>,
@@ -14136,7 +14563,7 @@ pub struct StatusCheckPolicy {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub teams: Vec<Team>,
@@ -14162,7 +14589,7 @@ pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
     pub users_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RequiredPullRequestReviews {
     #[serde(
         default,
@@ -14191,7 +14618,7 @@ pub struct RequiredPullRequestReviews {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProtectedBranchRequiredLinearHistory {
     #[serde(
         default,
@@ -14201,7 +14628,7 @@ pub struct ProtectedBranchRequiredLinearHistory {
 }
 
 /// Branch protections protect branches
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProtectedBranch {
     /**
      * Branch protections protect branches
@@ -14257,7 +14684,7 @@ pub struct ProtectedBranch {
 }
 
 /// A deployment created as the result of an Actions check run from a workflow that references an environment
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DeploymentSimple {
     #[serde(
         default,
@@ -14302,10 +14729,10 @@ pub struct DeploymentSimple {
     )]
     pub original_environment: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * A deployment created as the result of an Actions check run from a workflow that references an environment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<GitHubApp>,
+    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
     /**
      * A deployment created as the result of an Actions check run from a workflow that references an environment
      */
@@ -14448,7 +14875,7 @@ impl Conclusion {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Output {
     #[serde(
         default,
@@ -14482,7 +14909,7 @@ pub struct Output {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CheckSuite {
     #[serde(
         default,
@@ -14493,13 +14920,18 @@ pub struct CheckSuite {
 }
 
 /// A check performed on the code of a given code change
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CheckRun {
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * All of the following types:
+     *  
+     *  - `GitHubApp`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub app: Option<GitHubApp>,
+    #[serde()]
+    pub app: PerformedViaGithubAppAllOf,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub check_suite: Option<CheckSuite>,
     #[serde(
@@ -14590,7 +15022,7 @@ pub struct CheckRun {
 }
 
 /// Check Annotation
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CheckAnnotation {
     #[serde(
         default,
@@ -14693,7 +15125,7 @@ impl CheckSuiteStatus {
 }
 
 /// A suite of checks performed on the code of a given code change
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CheckSuiteData {
     #[serde(
         default,
@@ -14702,10 +15134,15 @@ pub struct CheckSuiteData {
     )]
     pub after: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * All of the following types:
+     *  
+     *  - `GitHubApp`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub app: Option<GitHubApp>,
+    #[serde()]
+    pub app: PerformedViaGithubAppAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14787,7 +15224,7 @@ pub struct CheckSuiteData {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AutoTriggerChecks {
     #[serde(
         default,
@@ -14802,14 +15239,14 @@ pub struct AutoTriggerChecks {
     pub setting: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Preferences {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub auto_trigger_checks: Vec<AutoTriggerChecks>,
 }
 
 /// Check suite configuration preferences for a repository.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CheckSuitePreference {
     #[serde()]
     pub preferences: Preferences,
@@ -14949,7 +15386,7 @@ impl Severity {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAlertRuleSummary {
     /**
      * A short description of the rule used to detect the alert.
@@ -14985,7 +15422,7 @@ pub struct CodeScanningAlertRuleSummary {
     pub severity: Option<Severity>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAnalysisTool {
     /**
      * The GUID of the tool used to generate the code scanning analysis, if provided in the uploaded SARIF data.
@@ -15017,7 +15454,7 @@ pub struct CodeScanningAnalysisTool {
 }
 
 /// Describe a region within a file for the alert.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAlertLocation {
     /**
      * Describe a region within a file for the alert.
@@ -15107,7 +15544,7 @@ impl CodeScanningAlertClassification {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Message {
     #[serde(
         default,
@@ -15117,7 +15554,7 @@ pub struct Message {
     pub text: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAlertInstance {
     /**
      * Identifies the configuration under which the analysis was executed. For example, in GitHub Actions this includes the workflow filename and job name.
@@ -15180,7 +15617,7 @@ pub struct CodeScanningAlertInstance {
     pub state: Option<CodeScanningAlertState>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAlertItems {
     /**
      * The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
@@ -15303,7 +15740,7 @@ impl SecuritySeverityLevel {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAlertRule {
     /**
      * A short description of the rule used to detect the alert.
@@ -15367,7 +15804,7 @@ pub struct CodeScanningAlertRule {
     pub tags: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAlert {
     /**
      * The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
@@ -15486,7 +15923,7 @@ impl CodeScanningAlertSetState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningAnalysis {
     /**
      * Identifies the configuration under which the analysis was executed. For example, in GitHub Actions this includes the workflow filename and job name.
@@ -15620,7 +16057,7 @@ pub struct CodeScanningAnalysis {
 }
 
 /// Successful deletion of a code scanning analysis
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AnalysisDeletion {
     /**
      * Next deletable analysis in chain, with last analysis deletion confirmation
@@ -15642,7 +16079,7 @@ pub struct AnalysisDeletion {
     pub next_analysis_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningSarifsReceipt {
     /**
      * An identifier for the upload.
@@ -15702,7 +16139,7 @@ impl ProcessingStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningSarifsStatus {
     /**
      * The REST API URL for getting the analyses associated with the upload.
@@ -15721,7 +16158,7 @@ pub struct CodeScanningSarifsStatus {
 }
 
 /// Collaborator
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Collaborator {
     #[serde(
         default,
@@ -15898,7 +16335,7 @@ impl RepositoryInvitationPermissions {
 }
 
 /// Repository invitations let you manage who you collaborate with.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RepositoryInvitation {
     #[serde(
         default,
@@ -15930,15 +16367,25 @@ pub struct RepositoryInvitation {
     )]
     pub id: i64,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub invitee: Option<SimpleUser>,
+    #[serde()]
+    pub invitee: OwnerAllOf,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub inviter: Option<SimpleUser>,
+    #[serde()]
+    pub inviter: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -15970,7 +16417,7 @@ pub struct RepositoryInvitation {
 }
 
 /// Commit Comment
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitComment {
     /**
      * How the author is associated with the repository.
@@ -16049,14 +16496,19 @@ pub struct CommitComment {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /// Branch Short
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct BranchShort {
     #[serde()]
     pub commit: Tree,
@@ -16074,7 +16526,7 @@ pub struct BranchShort {
 }
 
 /// Hypermedia Link
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Link {
     #[serde(
         default,
@@ -16126,7 +16578,7 @@ impl MergeMethod {
 }
 
 /// The status of auto merging a pull request.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AutoMerge {
     /**
      * Commit message for the merge commit.
@@ -16158,40 +16610,7 @@ pub struct AutoMerge {
     pub merge_method: MergeMethod,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PullRequestSimpleHead {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub label: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-        rename = "ref"
-    )]
-    pub ref_: String,
-    /**
-     * A git repository
-     */
-    #[serde()]
-    pub repo: Repository,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub sha: String,
-    /**
-     * Simple User
-     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Base {
     #[serde(
         default,
@@ -16218,13 +16637,18 @@ pub struct Base {
     )]
     pub sha: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestSimpleLinks {
     /**
      * Hypermedia Link
@@ -16269,7 +16693,7 @@ pub struct PullRequestSimpleLinks {
 }
 
 /// Pull Request Simple
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestSimple {
     #[serde(rename = "_links")]
     pub links: PullRequestSimpleLinks,
@@ -16280,10 +16704,15 @@ pub struct PullRequestSimple {
     )]
     pub active_lock_reason: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assignee: Option<SimpleUser>,
+    #[serde()]
+    pub assignee: OwnerAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -16343,7 +16772,7 @@ pub struct PullRequestSimple {
     )]
     pub draft: bool,
     #[serde()]
-    pub head: PullRequestSimpleHead,
+    pub head: Base,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -16382,10 +16811,15 @@ pub struct PullRequestSimple {
     )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * A collection of related issues and pull requests.
+     * All of the following types:
+     *  
+     *  - `Milestone`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub milestone: Option<Milestone>,
+    #[serde()]
+    pub milestone: MilestoneAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -16454,13 +16888,18 @@ pub struct PullRequestSimple {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SimpleCommitStatus {
     #[serde(
         default,
@@ -16530,7 +16969,7 @@ pub struct SimpleCommitStatus {
 }
 
 /// Combined Commit Status
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CombinedCommitStatus {
     #[serde(
         default,
@@ -16572,7 +17011,7 @@ pub struct CombinedCommitStatus {
 }
 
 /// The status of a commit.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct StatusData {
     #[serde(
         default,
@@ -16641,7 +17080,7 @@ pub struct StatusData {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommunityHealthFile {
     #[serde(
         default,
@@ -16657,32 +17096,125 @@ pub struct CommunityHealthFile {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct CommunityProfileFiles {
+/// All of the following types:
+///
+/// - `CodeOfConductSimple`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum CodeOfConductAll {
     /**
      * Code of Conduct Simple
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub code_of_conduct: Option<CodeOfConductSimple>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub code_of_conduct_file: Option<CommunityHealthFile>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub contributing: Option<CommunityHealthFile>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub issue_template: Option<CommunityHealthFile>,
+    CodeOfConductSimple(CodeOfConductSimple),
+}
+
+impl CodeOfConductAll {
+    pub fn code_of_conduct_simple(&self) -> Option<&CodeOfConductSimple> {
+        if let CodeOfConductAll::CodeOfConductSimple(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
+///
+/// - `CommunityHealthFile`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum CodeOfConductFileAll {
+    CommunityHealthFile(CommunityHealthFile),
+}
+
+impl CodeOfConductFileAll {
+    pub fn community_health_file(&self) -> Option<&CommunityHealthFile> {
+        if let CodeOfConductFileAll::CommunityHealthFile(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct CommunityProfileFiles {
     /**
-     * License Simple
+     * All of the following types:
+     *  
+     *  - `CodeOfConductSimple`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<LicenseSimple>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub pull_request_template: Option<CommunityHealthFile>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub readme: Option<CommunityHealthFile>,
+    #[serde()]
+    pub code_of_conduct: CodeOfConductAll,
+    /**
+     * All of the following types:
+     *  
+     *  - `CommunityHealthFile`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
+     */
+    #[serde()]
+    pub code_of_conduct_file: CodeOfConductFileAll,
+    /**
+     * All of the following types:
+     *  
+     *  - `CommunityHealthFile`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
+     */
+    #[serde()]
+    pub contributing: CodeOfConductFileAll,
+    /**
+     * All of the following types:
+     *  
+     *  - `CommunityHealthFile`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
+     */
+    #[serde()]
+    pub issue_template: CodeOfConductFileAll,
+    /**
+     * All of the following types:
+     *  
+     *  - `LicenseSimple`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
+     */
+    #[serde()]
+    pub license: LicenseAllOf,
+    /**
+     * All of the following types:
+     *  
+     *  - `CommunityHealthFile`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
+     */
+    #[serde()]
+    pub pull_request_template: CodeOfConductFileAll,
+    /**
+     * All of the following types:
+     *  
+     *  - `CommunityHealthFile`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
+     */
+    #[serde()]
+    pub readme: CodeOfConductFileAll,
 }
 
 /// Community Profile
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommunityProfile {
     /**
      * Community Profile
@@ -16721,7 +17253,7 @@ pub struct CommunityProfile {
 }
 
 /// Diff Entry
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DiffEntry {
     #[serde(
         default,
@@ -16833,7 +17365,7 @@ impl CommitComparisonStatus {
 }
 
 /// Commit Comparison
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitComparison {
     #[serde(
         default,
@@ -16905,7 +17437,7 @@ pub struct CommitComparison {
 }
 
 /// Content Reference attachments allow you to provide context around URLs posted in comments
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentReferenceAttachment {
     /**
      * The body of the attachment
@@ -16945,7 +17477,7 @@ pub struct ContentReferenceAttachment {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentTreeEntriesLinks {
     #[serde(
         default,
@@ -16968,7 +17500,7 @@ pub struct ContentTreeEntriesLinks {
     pub self_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Entries {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -17036,7 +17568,7 @@ pub struct Entries {
 }
 
 /// Content Tree
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentTree {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -17103,7 +17635,7 @@ pub struct ContentTree {
 }
 
 /// Content File
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentFile {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -17189,7 +17721,7 @@ pub struct ContentFile {
 }
 
 /// An object describing a symlink
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SymlinkContent {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -17257,7 +17789,7 @@ pub struct SymlinkContent {
 }
 
 /// An object describing a symlink
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentSubmodule {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -17324,7 +17856,7 @@ pub struct ContentSubmodule {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FileCommitContent {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_links")]
     pub links: Option<ContentTreeEntriesLinks>,
@@ -17385,7 +17917,7 @@ pub struct FileCommitContent {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Tagger {
     #[serde(
         default,
@@ -17407,7 +17939,7 @@ pub struct Tagger {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FileCommitVerification {
     #[serde(
         default,
@@ -17434,7 +17966,7 @@ pub struct FileCommitVerification {
     pub verified: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FileCommit {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub author: Option<Tagger>,
@@ -17479,7 +18011,7 @@ pub struct FileCommit {
 }
 
 /// File Commit
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FileCommitData {
     #[serde()]
     pub commit: FileCommit,
@@ -17488,7 +18020,7 @@ pub struct FileCommitData {
 }
 
 /// Contributor
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Contributor {
     #[serde(
         default,
@@ -17678,7 +18210,7 @@ impl DeploymentStatusState {
 }
 
 /// The status of a deployment.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DeploymentStatus {
     #[serde(
         default,
@@ -17687,10 +18219,15 @@ pub struct DeploymentStatus {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub creator: Option<SimpleUser>,
+    #[serde()]
+    pub creator: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17746,10 +18283,10 @@ pub struct DeploymentStatus {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * The status of a deployment.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<GitHubApp>,
+    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -17785,7 +18322,7 @@ pub struct DeploymentStatus {
 }
 
 /// The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DeploymentBranchPolicy {
     /**
      * Whether only branches that match the specified name patterns can deploy to this environment.  If `custom_branch_policies` is `true`, `protected_branches` must be `false`; if `custom_branch_policies` is `false`, `protected_branches` must be `true`.
@@ -17805,7 +18342,7 @@ pub struct DeploymentBranchPolicy {
     pub protected_branches: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProtectionRules {
     #[serde(
         default,
@@ -17837,8 +18374,97 @@ pub struct ProtectionRules {
     pub wait_timer: i64,
 }
 
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ProtectionRulesData {
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub id: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub node_id: String,
+    /**
+     * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
+     */
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub reviewers: Vec<Reviewers>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "type"
+    )]
+    pub type_: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct ProtectionRulesDataType {
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub id: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub node_id: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "type"
+    )]
+    pub type_: String,
+}
+
+/// Any of the following types:
+///
+/// - `ProtectionRules`
+/// - `ProtectionRulesData`
+/// - `ProtectionRulesDataType`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ProtectionRulesAnyOf {
+    ProtectionRules(ProtectionRules),
+    ProtectionRulesData(ProtectionRulesData),
+    ProtectionRulesDataType(ProtectionRulesDataType),
+}
+
+impl ProtectionRulesAnyOf {
+    pub fn protection_rules(&self) -> Option<&ProtectionRules> {
+        if let ProtectionRulesAnyOf::ProtectionRules(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn protection_rules_data(&self) -> Option<&ProtectionRulesData> {
+        if let ProtectionRulesAnyOf::ProtectionRulesData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn protection_rules_data_type(&self) -> Option<&ProtectionRulesDataType> {
+        if let ProtectionRulesAnyOf::ProtectionRulesDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Details of a deployment environment
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnvironmentData {
     /**
      * The time that the environment was created, in ISO 8601 format.
@@ -17888,7 +18514,7 @@ pub struct EnvironmentData {
      * Details of a deployment environment
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub protection_rules: Vec<ProtectionRules>,
+    pub protection_rules: Vec<ProtectionRulesAnyOf>,
     /**
      * The time that the environment was last updated, in ISO 8601 format.
      */
@@ -17907,7 +18533,7 @@ pub struct EnvironmentData {
 }
 
 /// Short Blob
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ShortBlob {
     #[serde(
         default,
@@ -17924,7 +18550,7 @@ pub struct ShortBlob {
 }
 
 /// Blob
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Blob {
     #[serde(
         default,
@@ -17971,7 +18597,7 @@ pub struct Blob {
 }
 
 /// Identifying information for the git-user
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCommitAuthor {
     /**
      * Timestamp of the commit
@@ -18002,7 +18628,7 @@ pub struct GitCommitAuthor {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCommitTree {
     /**
      * SHA for the commit
@@ -18021,7 +18647,7 @@ pub struct GitCommitTree {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCommitParents {
     #[serde(
         default,
@@ -18047,7 +18673,7 @@ pub struct GitCommitParents {
 }
 
 /// Low-level Git commit operations within a repository
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCommit {
     /**
      * Identifying information for the git-user
@@ -18103,7 +18729,7 @@ pub struct GitCommit {
     pub verification: Verification,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Object {
     /**
      * SHA for the reference
@@ -18130,7 +18756,7 @@ pub struct Object {
 }
 
 /// Git references within a repository
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitRef {
     #[serde(
         default,
@@ -18155,7 +18781,7 @@ pub struct GitRef {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitTagObject {
     #[serde(
         default,
@@ -18179,7 +18805,7 @@ pub struct GitTagObject {
 }
 
 /// Metadata for a Git tag
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitTag {
     /**
      * Message describing the purpose of the tag
@@ -18231,7 +18857,7 @@ pub struct GitTag {
     pub verification: Option<Verification>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitTree {
     #[serde(
         default,
@@ -18273,7 +18899,7 @@ pub struct GitTree {
 }
 
 /// The hierarchy between files in a Git repository.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitTreeData {
     #[serde(
         default,
@@ -18299,7 +18925,7 @@ pub struct GitTreeData {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct HookResponse {
     #[serde(
         default,
@@ -18321,7 +18947,7 @@ pub struct HookResponse {
     pub status: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct HookConfig {
     /**
      * The media type used to serialize the payloads. Supported values include `json` and `form`. The default is `form`.
@@ -18400,7 +19026,7 @@ pub struct HookConfig {
 }
 
 /// Webhooks for repositories.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Hook {
     /**
      * Determines whether the hook is actually triggered on pushes.
@@ -18559,7 +19185,7 @@ impl ImportStatus {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectChoices {
     #[serde(
         default,
@@ -18582,7 +19208,7 @@ pub struct ProjectChoices {
 }
 
 /// A repository import from an external source.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Import {
     /**
      * A repository import from an external source.
@@ -18745,7 +19371,7 @@ pub struct Import {
 }
 
 /// Porter Author
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PorterAuthor {
     #[serde(
         default,
@@ -18792,7 +19418,7 @@ pub struct PorterAuthor {
 }
 
 /// Porter Large File
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PorterLargeFile {
     #[serde(
         default,
@@ -18821,7 +19447,7 @@ pub struct PorterLargeFile {
 }
 
 /// Issue Event Label
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueEventLabel {
     #[serde(
         default,
@@ -18837,7 +19463,7 @@ pub struct IssueEventLabel {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DismissedReview {
     #[serde(
         default,
@@ -18866,7 +19492,7 @@ pub struct DismissedReview {
 }
 
 /// Issue Event Milestone
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueEventMilestone {
     #[serde(
         default,
@@ -18877,7 +19503,7 @@ pub struct IssueEventMilestone {
 }
 
 /// Issue Event Project Card
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueEventProjectCard {
     #[serde(
         default,
@@ -18918,7 +19544,7 @@ pub struct IssueEventProjectCard {
 }
 
 /// Issue Event Rename
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueEventRename {
     #[serde(
         default,
@@ -18935,23 +19561,28 @@ pub struct IssueEventRename {
 }
 
 /// Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueEvent {
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub actor: Option<SimpleUser>,
+    #[serde()]
+    pub actor: OwnerAllOf,
     /**
-     * Simple User
+     * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assignee: Option<SimpleUser>,
+    pub assignee: Option<OwnerAllOf>,
     /**
-     * Simple User
+     * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assigner: Option<SimpleUser>,
+    pub assigner: Option<OwnerAllOf>,
     /**
      * Issue Event
      */
@@ -19020,10 +19651,10 @@ pub struct IssueEvent {
     )]
     pub node_id: String,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<GitHubApp>,
+    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
     /**
      * Issue Event
      */
@@ -19035,20 +19666,20 @@ pub struct IssueEvent {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rename: Option<IssueEventRename>,
     /**
-     * Simple User
+     * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub requested_reviewer: Option<SimpleUser>,
+    pub requested_reviewer: Option<OwnerAllOf>,
     /**
      * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub requested_team: Option<Team>,
     /**
-     * Simple User
+     * Issue Event
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub review_requester: Option<SimpleUser>,
+    pub review_requester: Option<OwnerAllOf>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -19057,7 +19688,7 @@ pub struct IssueEvent {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LabeledIssueEventLabel {
     #[serde(
         default,
@@ -19074,7 +19705,7 @@ pub struct LabeledIssueEventLabel {
 }
 
 /// Labeled Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LabeledIssueEvent {
     /**
      * Simple User
@@ -19133,7 +19764,7 @@ pub struct LabeledIssueEvent {
 }
 
 /// Unlabeled Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UnlabeledIssueEvent {
     /**
      * Simple User
@@ -19192,7 +19823,7 @@ pub struct UnlabeledIssueEvent {
 }
 
 /// Assigned Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AssignedIssueEvent {
     /**
      * Simple User
@@ -19259,7 +19890,7 @@ pub struct AssignedIssueEvent {
 }
 
 /// Unassigned Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UnassignedIssueEvent {
     /**
      * Simple User
@@ -19325,7 +19956,7 @@ pub struct UnassignedIssueEvent {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MilestonedIssueEventMilestone {
     #[serde(
         default,
@@ -19336,7 +19967,7 @@ pub struct MilestonedIssueEventMilestone {
 }
 
 /// Milestoned Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MilestonedIssueEvent {
     /**
      * Simple User
@@ -19395,7 +20026,7 @@ pub struct MilestonedIssueEvent {
 }
 
 /// Demilestoned Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DemilestonedIssueEvent {
     /**
      * Simple User
@@ -19453,7 +20084,7 @@ pub struct DemilestonedIssueEvent {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Rename {
     #[serde(
         default,
@@ -19470,7 +20101,7 @@ pub struct Rename {
 }
 
 /// Renamed Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RenamedIssueEvent {
     /**
      * Simple User
@@ -19529,7 +20160,7 @@ pub struct RenamedIssueEvent {
 }
 
 /// Review Requested Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReviewRequestedIssueEvent {
     /**
      * Simple User
@@ -19601,7 +20232,7 @@ pub struct ReviewRequestedIssueEvent {
 }
 
 /// Review Request Removed Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReviewRequestRemovedIssueEvent {
     /**
      * Simple User
@@ -19673,7 +20304,7 @@ pub struct ReviewRequestRemovedIssueEvent {
 }
 
 /// Review Dismissed Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReviewDismissedIssueEvent {
     /**
      * Simple User
@@ -19732,7 +20363,7 @@ pub struct ReviewDismissedIssueEvent {
 }
 
 /// Locked Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LockedIssueEvent {
     /**
      * Simple User
@@ -19794,7 +20425,7 @@ pub struct LockedIssueEvent {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddedProjectIssueEventCard {
     #[serde(
         default,
@@ -19835,7 +20466,7 @@ pub struct AddedProjectIssueEventCard {
 }
 
 /// Added to Project Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AddedProjectIssueEvent {
     /**
      * Simple User
@@ -19897,7 +20528,7 @@ pub struct AddedProjectIssueEvent {
 }
 
 /// Moved Column in Project Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MovedColumnInProjectIssueEvent {
     /**
      * Simple User
@@ -19959,7 +20590,7 @@ pub struct MovedColumnInProjectIssueEvent {
 }
 
 /// Removed from Project Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RemovedFromProjectIssueEvent {
     /**
      * Simple User
@@ -20021,7 +20652,7 @@ pub struct RemovedFromProjectIssueEvent {
 }
 
 /// Converted Note to Issue Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ConvertedNoteIssueEvent {
     /**
      * Simple User
@@ -20082,8 +20713,199 @@ pub struct ConvertedNoteIssueEvent {
     pub url: String,
 }
 
+/// Any of the following types:
+///
+/// - `LabeledIssueEvent`
+/// - `UnlabeledIssueEvent`
+/// - `AssignedIssueEvent`
+/// - `UnassignedIssueEvent`
+/// - `MilestonedIssueEvent`
+/// - `DemilestonedIssueEvent`
+/// - `RenamedIssueEvent`
+/// - `ReviewRequestedIssueEvent`
+/// - `ReviewRequestRemovedIssueEvent`
+/// - `ReviewDismissedIssueEvent`
+/// - `LockedIssueEvent`
+/// - `AddedProjectIssueEvent`
+/// - `MovedColumnInProjectIssueEvent`
+/// - `RemovedFromProjectIssueEvent`
+/// - `ConvertedNoteIssueEvent`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum IssueEventAnyOf {
+    /**
+     * Added to Project Issue Event
+     */
+    AddedProjectIssueEvent(AddedProjectIssueEvent),
+    /**
+     * Assigned Issue Event
+     */
+    AssignedIssueEvent(AssignedIssueEvent),
+    /**
+     * Converted Note to Issue Issue Event
+     */
+    ConvertedNoteIssueEvent(ConvertedNoteIssueEvent),
+    /**
+     * Demilestoned Issue Event
+     */
+    DemilestonedIssueEvent(DemilestonedIssueEvent),
+    /**
+     * Labeled Issue Event
+     */
+    LabeledIssueEvent(LabeledIssueEvent),
+    /**
+     * Locked Issue Event
+     */
+    LockedIssueEvent(LockedIssueEvent),
+    /**
+     * Milestoned Issue Event
+     */
+    MilestonedIssueEvent(MilestonedIssueEvent),
+    /**
+     * Moved Column in Project Issue Event
+     */
+    MovedColumnInProjectIssueEvent(MovedColumnInProjectIssueEvent),
+    /**
+     * Removed from Project Issue Event
+     */
+    RemovedFromProjectIssueEvent(RemovedFromProjectIssueEvent),
+    /**
+     * Renamed Issue Event
+     */
+    RenamedIssueEvent(RenamedIssueEvent),
+    /**
+     * Review Dismissed Issue Event
+     */
+    ReviewDismissedIssueEvent(ReviewDismissedIssueEvent),
+    /**
+     * Review Request Removed Issue Event
+     */
+    ReviewRequestRemovedIssueEvent(ReviewRequestRemovedIssueEvent),
+    /**
+     * Review Requested Issue Event
+     */
+    ReviewRequestedIssueEvent(ReviewRequestedIssueEvent),
+    /**
+     * Unassigned Issue Event
+     */
+    UnassignedIssueEvent(UnassignedIssueEvent),
+    /**
+     * Unlabeled Issue Event
+     */
+    UnlabeledIssueEvent(UnlabeledIssueEvent),
+}
+
+impl IssueEventAnyOf {
+    pub fn added_project_issue_event(&self) -> Option<&AddedProjectIssueEvent> {
+        if let IssueEventAnyOf::AddedProjectIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn assigned_issue_event(&self) -> Option<&AssignedIssueEvent> {
+        if let IssueEventAnyOf::AssignedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn converted_note_issue_event(&self) -> Option<&ConvertedNoteIssueEvent> {
+        if let IssueEventAnyOf::ConvertedNoteIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn demilestoned_issue_event(&self) -> Option<&DemilestonedIssueEvent> {
+        if let IssueEventAnyOf::DemilestonedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn labeled_issue_event(&self) -> Option<&LabeledIssueEvent> {
+        if let IssueEventAnyOf::LabeledIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn locked_issue_event(&self) -> Option<&LockedIssueEvent> {
+        if let IssueEventAnyOf::LockedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn milestoned_issue_event(&self) -> Option<&MilestonedIssueEvent> {
+        if let IssueEventAnyOf::MilestonedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn moved_column_in_project_issue_event(&self) -> Option<&MovedColumnInProjectIssueEvent> {
+        if let IssueEventAnyOf::MovedColumnInProjectIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn removed_from_project_issue_event(&self) -> Option<&RemovedFromProjectIssueEvent> {
+        if let IssueEventAnyOf::RemovedFromProjectIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn renamed_issue_event(&self) -> Option<&RenamedIssueEvent> {
+        if let IssueEventAnyOf::RenamedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn review_dismissed_issue_event(&self) -> Option<&ReviewDismissedIssueEvent> {
+        if let IssueEventAnyOf::ReviewDismissedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn review_request_removed_issue_event(&self) -> Option<&ReviewRequestRemovedIssueEvent> {
+        if let IssueEventAnyOf::ReviewRequestRemovedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn review_requested_issue_event(&self) -> Option<&ReviewRequestedIssueEvent> {
+        if let IssueEventAnyOf::ReviewRequestedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn unassigned_issue_event(&self) -> Option<&UnassignedIssueEvent> {
+        if let IssueEventAnyOf::UnassignedIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn unlabeled_issue_event(&self) -> Option<&UnlabeledIssueEvent> {
+        if let IssueEventAnyOf::UnlabeledIssueEvent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
 /// Timeline Comment Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineCommentEvent {
     /**
      * Simple User
@@ -20187,7 +21009,7 @@ pub struct TimelineCommentEvent {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Source {
     /**
      * Issue Simple
@@ -20204,7 +21026,7 @@ pub struct Source {
 }
 
 /// Timeline Cross Referenced Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineCrossReferencedEvent {
     /**
      * Simple User
@@ -20234,7 +21056,7 @@ pub struct TimelineCrossReferencedEvent {
 }
 
 /// Timeline Committed Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineCommittedEvent {
     /**
      * Identifying information for the git-user
@@ -20296,7 +21118,7 @@ pub struct TimelineCommittedEvent {
     pub verification: Verification,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Html {
     #[serde(
         default,
@@ -20306,7 +21128,7 @@ pub struct Html {
     pub href: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineReviewedEventLinks {
     #[serde()]
     pub html: Html,
@@ -20315,7 +21137,7 @@ pub struct TimelineReviewedEventLinks {
 }
 
 /// Timeline Reviewed Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineReviewedEvent {
     #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
@@ -20409,7 +21231,7 @@ pub struct TimelineReviewedEvent {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestReviewCommentLinks {
     #[serde()]
     pub html: Html,
@@ -20480,7 +21302,7 @@ impl Default for Side {
 }
 
 /// Pull Request Review Comments are comments on a portion of the Pull Request's diff.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestReviewComment {
     #[serde(rename = "_links")]
     pub links: PullRequestReviewCommentLinks,
@@ -20698,7 +21520,7 @@ pub struct PullRequestReviewComment {
 }
 
 /// Timeline Line Commented Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineLineCommentedEvent {
     /**
      * Timeline Line Commented Event
@@ -20720,7 +21542,7 @@ pub struct TimelineLineCommentedEvent {
 }
 
 /// Timeline Commit Commented Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineCommitCommentedEvent {
     /**
      * Timeline Commit Commented Event
@@ -20748,7 +21570,7 @@ pub struct TimelineCommitCommentedEvent {
 }
 
 /// Timeline Assigned Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineAssignedIssueEvent {
     /**
      * Simple User
@@ -20810,7 +21632,7 @@ pub struct TimelineAssignedIssueEvent {
 }
 
 /// Timeline Unassigned Issue Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineUnassignedIssueEvent {
     /**
      * Simple User
@@ -20872,11 +21694,11 @@ pub struct TimelineUnassignedIssueEvent {
 }
 
 /// Timeline Event
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TimelineEvent {}
 
 /// An SSH key granting access to a single repository.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct DeployKey {
     #[serde(
         default,
@@ -20921,11 +21743,11 @@ pub struct DeployKey {
 }
 
 /// Language
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Language {}
 
 /// License Content
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LicenseContent {
     #[serde(rename = "_links")]
     pub links: ContentTreeEntriesLinks,
@@ -20960,10 +21782,15 @@ pub struct LicenseContent {
     )]
     pub html_url: String,
     /**
-     * License Simple
+     * All of the following types:
+     *  
+     *  - `LicenseSimple`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<LicenseSimple>,
+    #[serde()]
+    pub license: LicenseAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -21003,7 +21830,7 @@ pub struct LicenseContent {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PagesSourceHash {
     #[serde(
         default,
@@ -21084,7 +21911,7 @@ impl PagesHttpsCertificateState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PagesHttpsCertificate {
     #[serde(
         default,
@@ -21145,7 +21972,7 @@ impl PageStatus {
 }
 
 /// The configuration for GitHub Pages for a repository.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Page {
     /**
      * The Pages site's custom domain
@@ -21209,7 +22036,7 @@ pub struct Page {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Error {
     #[serde(
         default,
@@ -21220,7 +22047,7 @@ pub struct Error {
 }
 
 /// Page Build
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PageBuild {
     #[serde(
         default,
@@ -21243,10 +22070,15 @@ pub struct PageBuild {
     #[serde()]
     pub error: Error,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub pusher: Option<SimpleUser>,
+    #[serde()]
+    pub pusher: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -21268,7 +22100,7 @@ pub struct PageBuild {
 }
 
 /// Page Build Status
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PageBuildStatus {
     #[serde(
         default,
@@ -21284,7 +22116,7 @@ pub struct PageBuildStatus {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Domain {
     #[serde(
         default,
@@ -21434,7 +22266,7 @@ pub struct Domain {
     pub uri: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AltDomain {
     #[serde(
         default,
@@ -21585,7 +22417,7 @@ pub struct AltDomain {
 }
 
 /// Pages Health Check Status
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PagesHealthCheck {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub alt_domain: Option<AltDomain>,
@@ -21634,7 +22466,7 @@ impl PullRequestState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct User {
     #[serde(
         default,
@@ -21746,7 +22578,7 @@ pub struct User {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestHeadRepo {
     #[serde(
         default,
@@ -22020,7 +22852,7 @@ pub struct PullRequestHeadRepo {
     )]
     pub languages_url: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<License>,
+    pub license: Option<MinimalRepositoryLicense>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22202,7 +23034,7 @@ pub struct PullRequestHeadRepo {
     pub watchers_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestHead {
     #[serde(
         default,
@@ -22229,7 +23061,7 @@ pub struct PullRequestHead {
     pub user: User,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestBaseRepo {
     #[serde(
         default,
@@ -22503,10 +23335,15 @@ pub struct PullRequestBaseRepo {
     )]
     pub languages_url: String,
     /**
-     * License Simple
+     * All of the following types:
+     *  
+     *  - `LicenseSimple`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<LicenseSimple>,
+    #[serde()]
+    pub license: LicenseAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22688,7 +23525,7 @@ pub struct PullRequestBaseRepo {
     pub watchers_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestBase {
     #[serde(
         default,
@@ -22716,7 +23553,7 @@ pub struct PullRequestBase {
 }
 
 /// Pull requests let you tell others about changes you've pushed to a repository on GitHub. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestData {
     #[serde(rename = "_links")]
     pub links: PullRequestSimpleLinks,
@@ -22733,10 +23570,15 @@ pub struct PullRequestData {
     )]
     pub additions: i64,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assignee: Option<SimpleUser>,
+    #[serde()]
+    pub assignee: OwnerAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -22883,15 +23725,25 @@ pub struct PullRequestData {
     )]
     pub merged_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub merged_by: Option<SimpleUser>,
+    #[serde()]
+    pub merged_by: OwnerAllOf,
     /**
-     * A collection of related issues and pull requests.
+     * All of the following types:
+     *  
+     *  - `Milestone`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub milestone: Option<Milestone>,
+    #[serde()]
+    pub milestone: MilestoneAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -22976,14 +23828,19 @@ pub struct PullRequestData {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /// Pull Request Merge Result
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestMergeResult {
     #[serde(
         default,
@@ -23005,7 +23862,7 @@ pub struct PullRequestMergeResult {
 }
 
 /// Pull Request Review Request
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestReview {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub teams: Vec<Team>,
@@ -23014,7 +23871,7 @@ pub struct PullRequestReview {
 }
 
 /// Pull Request Reviews are reviews on pull requests.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullRequestReviewData {
     #[serde(rename = "_links")]
     pub links: TimelineReviewedEventLinks,
@@ -23096,13 +23953,18 @@ pub struct PullRequestReviewData {
     )]
     pub submitted_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReviewCommentLinks {
     /**
      * Hypermedia Link
@@ -23122,7 +23984,7 @@ pub struct ReviewCommentLinks {
 }
 
 /// Legacy Review Comment
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReviewComment {
     #[serde(rename = "_links")]
     pub links: ReviewCommentLinks,
@@ -23294,10 +24156,15 @@ pub struct ReviewComment {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /**
@@ -23339,7 +24206,7 @@ impl ReleaseAssetState {
 }
 
 /// Data related to a release.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReleaseAsset {
     #[serde(
         default,
@@ -23410,10 +24277,15 @@ pub struct ReleaseAsset {
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uploader: Option<SimpleUser>,
+    #[serde()]
+    pub uploader: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -23423,7 +24295,7 @@ pub struct ReleaseAsset {
 }
 
 /// A release.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Release {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assets: Vec<ReleaseAsset>,
@@ -23657,7 +24529,7 @@ impl SecretScanningAlertResolution {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SecretScanningAlert {
     /**
      * The time that the alert was created in ISO 8601 format: `YYYY-MM-DDTHH:MM:SSZ`.
@@ -23740,7 +24612,7 @@ pub struct SecretScanningAlert {
 }
 
 /// Stargazer
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Stargazer {
     #[serde(
         default,
@@ -23749,14 +24621,19 @@ pub struct Stargazer {
     )]
     pub starred_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /// Commit Activity
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitActivity {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub days: Vec<i64>,
@@ -23774,7 +24651,7 @@ pub struct CommitActivity {
     pub week: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Weeks {
     #[serde(
         default,
@@ -23803,13 +24680,18 @@ pub struct Weeks {
 }
 
 /// Contributor Activity
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContributorActivity {
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub author: Option<SimpleUser>,
+    #[serde()]
+    pub author: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -23820,7 +24702,7 @@ pub struct ContributorActivity {
     pub weeks: Vec<Weeks>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ParticipationStats {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub all: Vec<i64>,
@@ -23829,7 +24711,7 @@ pub struct ParticipationStats {
 }
 
 /// Repository invitations let you manage who you collaborate with.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RepositorySubscription {
     #[serde(
         default,
@@ -23874,7 +24756,7 @@ pub struct RepositorySubscription {
 }
 
 /// Tag
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Tag {
     #[serde()]
     pub commit: Tree,
@@ -23905,13 +24787,13 @@ pub struct Tag {
 }
 
 /// A topic aggregates entities that are related to a subject.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Topic {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub names: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Traffic {
     #[serde(
         default,
@@ -23934,7 +24816,7 @@ pub struct Traffic {
 }
 
 /// Clone Traffic
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CloneTraffic {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub clones: Vec<Traffic>,
@@ -23953,7 +24835,7 @@ pub struct CloneTraffic {
 }
 
 /// Content Traffic
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ContentTraffic {
     #[serde(
         default,
@@ -23982,7 +24864,7 @@ pub struct ContentTraffic {
 }
 
 /// Referrer Traffic
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReferrerTraffic {
     #[serde(
         default,
@@ -24005,7 +24887,7 @@ pub struct ReferrerTraffic {
 }
 
 /// View Traffic
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ViewTraffic {
     #[serde(
         default,
@@ -24023,7 +24905,7 @@ pub struct ViewTraffic {
     pub views: Vec<Traffic>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimGroupListEnterpriseResourcesMembers {
     #[serde(
         default,
@@ -24046,7 +24928,7 @@ pub struct ScimGroupListEnterpriseResourcesMembers {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Meta {
     #[serde(
         default,
@@ -24074,7 +24956,7 @@ pub struct Meta {
     pub resource_type: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimEnterpriseGroup {
     #[serde(
         default,
@@ -24102,7 +24984,7 @@ pub struct ScimEnterpriseGroup {
     pub schemas: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimGroupListEnterprise {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub resources: Vec<ScimEnterpriseGroup>,
@@ -24128,7 +25010,7 @@ pub struct ScimGroupListEnterprise {
     pub total_results: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Name {
     #[serde(
         default,
@@ -24144,7 +25026,7 @@ pub struct Name {
     pub given_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Emails {
     #[serde(
         default,
@@ -24166,7 +25048,7 @@ pub struct Emails {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUserListEnterpriseResourcesGroups {
     #[serde(
         default,
@@ -24176,7 +25058,7 @@ pub struct ScimUserListEnterpriseResourcesGroups {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimEnterpriseUser {
     #[serde(
         default,
@@ -24213,7 +25095,7 @@ pub struct ScimEnterpriseUser {
     pub user_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUserListEnterprise {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub resources: Vec<ScimEnterpriseUser>,
@@ -24239,7 +25121,7 @@ pub struct ScimUserListEnterprise {
     pub total_results: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUserName {
     #[serde(
         default,
@@ -24261,7 +25143,7 @@ pub struct ScimUserName {
     pub given_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUserEmails {
     #[serde(
         default,
@@ -24276,7 +25158,7 @@ pub struct ScimUserEmails {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUserMeta {
     #[serde(
         default,
@@ -24380,12 +25262,6 @@ impl ScimUserOperationsValueOneOf {
     }
 }
 
-impl From<Data> for ScimUserOperationsValueOneOf {
-    fn from(f: Data) -> Self {
-        ScimUserOperationsValueOneOf::Data(f)
-    }
-}
-
 impl From<String> for ScimUserOperationsValueOneOf {
     fn from(f: String) -> Self {
         ScimUserOperationsValueOneOf::String(f)
@@ -24395,12 +25271,6 @@ impl From<String> for ScimUserOperationsValueOneOf {
 impl From<Vec<String>> for ScimUserOperationsValueOneOf {
     fn from(f: Vec<String>) -> Self {
         ScimUserOperationsValueOneOf::StringVector(f)
-    }
-}
-
-impl From<ScimUserOperationsValueOneOf> for Data {
-    fn from(f: ScimUserOperationsValueOneOf) -> Self {
-        f.data().unwrap().clone()
     }
 }
 
@@ -24416,7 +25286,7 @@ impl From<ScimUserOperationsValueOneOf> for Vec<String> {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Operations {
     #[serde(default, skip_serializing_if = "Op::is_noop")]
     pub op: Op,
@@ -24441,7 +25311,7 @@ pub struct Operations {
 }
 
 /// SCIM /Users provisioning endpoints
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUser {
     /**
      * The active status of the User.
@@ -24523,7 +25393,7 @@ pub struct ScimUser {
 }
 
 /// SCIM User List
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUserList {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub resources: Vec<ScimUser>,
@@ -24552,7 +25422,7 @@ pub struct ScimUserList {
     pub total_results: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Matches {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub indices: Vec<i64>,
@@ -24564,7 +25434,7 @@ pub struct Matches {
     pub text: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchResultTextMatches {
     #[serde(
         default,
@@ -24595,7 +25465,7 @@ pub struct SearchResultTextMatches {
 }
 
 /// Code Search Result Item
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeSearchResultItem {
     /**
      * Code Search Result Item
@@ -24680,7 +25550,7 @@ pub struct CodeSearchResultItem {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitSearchResultItemAuthor {
     #[serde(
         default,
@@ -24702,7 +25572,7 @@ pub struct CommitSearchResultItemAuthor {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitSearchResultItem {
     #[serde()]
     pub author: CommitSearchResultItemAuthor,
@@ -24713,10 +25583,15 @@ pub struct CommitSearchResultItem {
     )]
     pub comment_count: i64,
     /**
-     * Metaproperties for Git author/committer information.
+     * All of the following types:
+     *  
+     *  - `GitUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub committer: Option<GitUser>,
+    #[serde()]
+    pub committer: AuthorAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24736,13 +25611,18 @@ pub struct CommitSearchResultItem {
 }
 
 /// Commit Search Result Item
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CommitSearchResultItemData {
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub author: Option<SimpleUser>,
+    #[serde()]
+    pub author: OwnerAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24752,10 +25632,15 @@ pub struct CommitSearchResultItemData {
     #[serde()]
     pub commit: CommitSearchResultItem,
     /**
-     * Metaproperties for Git author/committer information.
+     * All of the following types:
+     *  
+     *  - `GitUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub committer: Option<GitUser>,
+    #[serde()]
+    pub committer: AuthorAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24801,7 +25686,7 @@ pub struct CommitSearchResultItemData {
 }
 
 /// Issue Search Result Item
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssueSearchResultItem {
     #[serde(
         default,
@@ -24810,10 +25695,15 @@ pub struct IssueSearchResultItem {
     )]
     pub active_lock_reason: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assignee: Option<SimpleUser>,
+    #[serde()]
+    pub assignee: OwnerAllOf,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub assignees: Vec<SimpleUser>,
     /**
@@ -24903,10 +25793,15 @@ pub struct IssueSearchResultItem {
     )]
     pub locked: bool,
     /**
-     * A collection of related issues and pull requests.
+     * All of the following types:
+     *  
+     *  - `Milestone`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub milestone: Option<Milestone>,
+    #[serde()]
+    pub milestone: MilestoneAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24920,10 +25815,10 @@ pub struct IssueSearchResultItem {
     )]
     pub number: i64,
     /**
-     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     * Issue Search Result Item
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub performed_via_github_app: Option<GitHubApp>,
+    pub performed_via_github_app: Option<PerformedViaGithubAppAllOf>,
     /**
      * Issue Search Result Item
      */
@@ -24982,14 +25877,19 @@ pub struct IssueSearchResultItem {
     )]
     pub url: String,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user: Option<SimpleUser>,
+    #[serde()]
+    pub user: OwnerAllOf,
 }
 
 /// Label Search Result Item
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LabelSearchResultItem {
     #[serde(
         default,
@@ -25046,7 +25946,7 @@ pub struct LabelSearchResultItem {
 }
 
 /// Repo Search Result Item
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct RepoSearchResultItem {
     /**
      * Repo Search Result Item
@@ -25348,10 +26248,15 @@ pub struct RepoSearchResultItem {
     )]
     pub languages_url: String,
     /**
-     * License Simple
+     * All of the following types:
+     *  
+     *  - `LicenseSimple`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub license: Option<LicenseSimple>,
+    #[serde()]
+    pub license: LicenseAllOf,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -25407,10 +26312,15 @@ pub struct RepoSearchResultItem {
     )]
     pub open_issues_count: i64,
     /**
-     * Simple User
+     * All of the following types:
+     *  
+     *  - `SimpleUser`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<SimpleUser>,
+    #[serde()]
+    pub owner: OwnerAllOf,
     /**
      * Repo Search Result Item
      */
@@ -25553,7 +26463,7 @@ pub struct RepoSearchResultItem {
     pub watchers_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TopicRelation {
     #[serde(
         default,
@@ -25581,14 +26491,14 @@ pub struct TopicRelation {
     pub topic_id: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Related {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic_relation: Option<TopicRelation>,
 }
 
 /// Topic Search Result Item
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TopicSearchResultItem {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub aliases: Vec<Related>,
@@ -25681,7 +26591,7 @@ pub struct TopicSearchResultItem {
 }
 
 /// User Search Result Item
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserSearchResultItem {
     #[serde(
         default,
@@ -25912,7 +26822,7 @@ pub struct UserSearchResultItem {
 }
 
 /// Private User
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PrivateUser {
     #[serde(
         default,
@@ -26171,7 +27081,7 @@ pub struct PrivateUser {
 }
 
 /// Email
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Email {
     #[serde(
         default,
@@ -26197,7 +27107,7 @@ pub struct Email {
     pub visibility: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GpgKeyEmails {
     #[serde(
         default,
@@ -26212,7 +27122,7 @@ pub struct GpgKeyEmails {
     pub verified: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Subkeys {
     #[serde(
         default,
@@ -26283,7 +27193,7 @@ pub struct Subkeys {
 }
 
 /// A unique encryption key
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GpgKey {
     #[serde(
         default,
@@ -26354,7 +27264,7 @@ pub struct GpgKey {
 }
 
 /// Key
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Key {
     #[serde(
         default,
@@ -26398,7 +27308,7 @@ pub struct Key {
     pub verified: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MarketplaceAccount {
     #[serde(
         default,
@@ -26446,7 +27356,7 @@ pub struct MarketplaceAccount {
 }
 
 /// User Marketplace Purchase
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UserMarketplacePurchase {
     #[serde()]
     pub account: MarketplaceAccount,
@@ -26493,7 +27403,7 @@ pub struct UserMarketplacePurchase {
 }
 
 /// Starred Repository
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct StarredRepository {
     /**
      * A git repository
@@ -26508,7 +27418,7 @@ pub struct StarredRepository {
     pub starred_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Contexts {
     #[serde(
         default,
@@ -26525,14 +27435,14 @@ pub struct Contexts {
 }
 
 /// Hovercard
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Hovercard {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub contexts: Vec<Contexts>,
 }
 
 /// Key Simple
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct KeySimple {
     #[serde(
         default,
@@ -26976,7 +27886,7 @@ impl Default for OrderData {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsMergeResponse {
     #[serde(
         default,
@@ -26992,7 +27902,7 @@ pub struct PullsMergeResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ServiceUnavailableResponse {
     #[serde(
         default,
@@ -27014,7 +27924,7 @@ pub struct ServiceUnavailableResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Block {
     #[serde(
         default,
@@ -27036,7 +27946,7 @@ pub struct Block {
     pub reason: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ForbiddenGistResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub block: Option<Block>,
@@ -27054,7 +27964,7 @@ pub struct ForbiddenGistResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MetaRootResponse {
     #[serde(
         default,
@@ -27256,7 +28166,67 @@ pub struct MetaRootResponse {
     pub user_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct AppsCreateFromManifestResponse {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub client_id: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub client_secret: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub pem: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub webhook_secret: String,
+}
+
+/// All of the following types:
+///
+/// - `GitHubApp`
+/// - `AppsCreateFromManifestResponse`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum AppsCreateFromManifestResponseAllOf {
+    AppsCreateFromManifestResponse(AppsCreateFromManifestResponse),
+    /**
+     * GitHub apps are a new way to extend GitHub. They can be installed directly on organizations and user accounts and granted access to specific repositories. They come with granular permissions and built-in webhooks. GitHub apps are first class actors within GitHub.
+     */
+    GitHubApp(GitHubApp),
+}
+
+impl AppsCreateFromManifestResponseAllOf {
+    pub fn apps_create_from_manifest_response(&self) -> Option<&AppsCreateFromManifestResponse> {
+        if let AppsCreateFromManifestResponseAllOf::AppsCreateFromManifestResponse(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn git_hub_app(&self) -> Option<&GitHubApp> {
+        if let AppsCreateFromManifestResponseAllOf::GitHubApp(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsUpdateWebhookConfigAppRequest {
     #[serde(
         default,
@@ -27280,7 +28250,7 @@ pub struct AppsUpdateWebhookConfigAppRequest {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsCreateInstallationAccessTokenRequest {
     /**
      * The permissions granted to the user-to-server access token.
@@ -27299,7 +28269,7 @@ pub struct AppsCreateInstallationAccessTokenRequest {
     pub repository_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsDeleteAuthorizationRequest {
     /**
      * The OAuth access token used to authenticate to the GitHub API.
@@ -27312,7 +28282,7 @@ pub struct AppsDeleteAuthorizationRequest {
     pub access_token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsCheckTokenRequest {
     /**
      * The access_token of the OAuth application.
@@ -27325,7 +28295,7 @@ pub struct AppsCheckTokenRequest {
     pub access_token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsDeleteTokenRequest {
     /**
      * The OAuth access token used to authenticate to the GitHub API.
@@ -27338,7 +28308,7 @@ pub struct AppsDeleteTokenRequest {
     pub access_token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsScopeTokenRequest {
     /**
      * The OAuth access token used to authenticate to the GitHub API.
@@ -27384,7 +28354,30 @@ pub struct AppsScopeTokenRequest {
     pub target_id: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/// All of the following types:
+///
+/// - `Authorization`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum AppsCheckAuthorizationResponseAllOf {
+    /**
+     * The authorization for an OAuth app, GitHub App, or a Personal Access Token.
+     */
+    Authorization(Authorization),
+}
+
+impl AppsCheckAuthorizationResponseAllOf {
+    pub fn authorization(&self) -> Option<&Authorization> {
+        if let AppsCheckAuthorizationResponseAllOf::Authorization(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OauthAuthorizationsCreateAuthorizationRequest {
     /**
      * The OAuth app client key for which to create the token.
@@ -27438,7 +28431,7 @@ pub struct OauthAuthorizationsCreateAuthorizationRequest {
     pub scopes: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OauthAuthorizationsGetCreateAuthorizationAppRequest {
     /**
      * The OAuth app client secret for which to create the token.
@@ -27483,7 +28476,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppRequest {
     pub scopes: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
     /**
      * The OAuth app client secret for which to create the token.
@@ -27519,7 +28512,7 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
     pub scopes: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OauthAuthorizationsUpdateAuthorizationRequest {
     /**
      * A list of scopes to add to this authorization.
@@ -27565,7 +28558,7 @@ pub struct OauthAuthorizationsUpdateAuthorizationRequest {
     pub scopes: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -27579,7 +28572,7 @@ pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
     pub enabled_organizations: EnabledOrganizations,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub organizations: Vec<OrganizationSimple>,
@@ -27591,7 +28584,7 @@ pub struct EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsRequest {
     /**
      * List of organization IDs to enable for GitHub Actions.
@@ -27600,7 +28593,7 @@ pub struct EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsRequest {
     pub selected_organization_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminListSelfHostedRunnerGroupsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runner_groups: Vec<RunnerGroupsEnterprise>,
@@ -27653,7 +28646,7 @@ impl EnterpriseAdminCreateSelfHostedRunnerGroupRequestVisibility {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
     /**
      * Name of the runner group.
@@ -27711,7 +28704,7 @@ impl Default for EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateSelfHostedRunnerGroupRequest {
     /**
      * Name of the runner group.
@@ -27729,7 +28722,7 @@ pub struct EnterpriseAdminUpdateSelfHostedRunnerGroupRequest {
     pub visibility: Option<EnterpriseAdminUpdateSelfHostedRunnerGroupRequestVisibility>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
     /**
      * List of organization IDs that can access the runner group.
@@ -27738,7 +28731,7 @@ pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
     pub selected_organization_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelfHostedRunnersInGroupOrgResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runners: Vec<Runner>,
@@ -27750,7 +28743,7 @@ pub struct ActionsListSelfHostedRunnersInGroupOrgResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
     /**
      * List of runner IDs to add to the runner group.
@@ -27759,7 +28752,7 @@ pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
     pub runners: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminListSelfHostedRunnersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runners: Vec<Runner>,
@@ -27772,7 +28765,7 @@ pub struct EnterpriseAdminListSelfHostedRunnersResponse {
 }
 
 /// Names and content for the files that make up the gist
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistsCreateRequestFiles {}
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -27840,25 +28833,13 @@ impl From<bool> for PublicOneOf {
     }
 }
 
-impl From<Public> for PublicOneOf {
-    fn from(f: Public) -> Self {
-        PublicOneOf::Public(f)
-    }
-}
-
 impl From<PublicOneOf> for bool {
     fn from(f: PublicOneOf) -> Self {
         *f.bool().unwrap()
     }
 }
 
-impl From<PublicOneOf> for Public {
-    fn from(f: PublicOneOf) -> Self {
-        f.public().unwrap().clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistsCreateRequest {
     /**
      * Description of the gist
@@ -27888,10 +28869,10 @@ pub struct GistsCreateRequest {
 }
 
 /// Names of files to be updated
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistsUpdateRequestFiles {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistsUpdateRequest {
     #[serde(
         default,
@@ -27903,7 +28884,7 @@ pub struct GistsUpdateRequest {
     pub files: Option<GistsUpdateRequestFiles>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GistsCreateCommentRequest {
     /**
      * The comment text.
@@ -27916,7 +28897,7 @@ pub struct GistsCreateCommentRequest {
     pub body: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsListInstallationReposResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<Repository>,
@@ -28077,7 +29058,7 @@ impl Default for Mode {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MarkdownRenderRequest {
     /**
      * The repository context to use when creating references in `gfm` mode.
@@ -28142,7 +29123,7 @@ impl AppsListAccountsPlanDirection {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActivityMarkNotificationsAsReadRequest {
     /**
      * Describes the last point that notifications were checked.
@@ -28160,7 +29141,7 @@ pub struct ActivityMarkNotificationsAsReadRequest {
     pub read: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActivitySetThreadSubscriptionRequest {
     /**
      * Whether to block all notifications from a thread.
@@ -28254,7 +29235,7 @@ impl MembersAllowedRepositoryCreationType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgsUpdateRequest {
     /**
      * Billing email address. This address is not publicized.
@@ -28444,31 +29425,7 @@ impl OrgsUpdateResponseOneOf {
     }
 }
 
-impl From<ValidationError> for OrgsUpdateResponseOneOf {
-    fn from(f: ValidationError) -> Self {
-        OrgsUpdateResponseOneOf::ValidationError(f)
-    }
-}
-
-impl From<ValidationErrorSimple> for OrgsUpdateResponseOneOf {
-    fn from(f: ValidationErrorSimple) -> Self {
-        OrgsUpdateResponseOneOf::ValidationErrorSimple(f)
-    }
-}
-
-impl From<OrgsUpdateResponseOneOf> for ValidationError {
-    fn from(f: OrgsUpdateResponseOneOf) -> Self {
-        f.validation_error().unwrap().clone()
-    }
-}
-
-impl From<OrgsUpdateResponseOneOf> for ValidationErrorSimple {
-    fn from(f: OrgsUpdateResponseOneOf) -> Self {
-        f.validation_error_simple().unwrap().clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsSetGithubPermissionsOrganizationRequest {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -28482,7 +29439,7 @@ pub struct ActionsSetGithubPermissionsOrganizationRequest {
     pub enabled_repositories: EnabledRepositories,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<Repository>,
@@ -28494,7 +29451,7 @@ pub struct ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsSetSelectedRepositoriesEnabledGithubOrganizationRequest {
     /**
      * List of repository IDs to enable for GitHub Actions.
@@ -28503,7 +29460,7 @@ pub struct ActionsSetSelectedRepositoriesEnabledGithubOrganizationRequest {
     pub selected_repository_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelfHostedRunnerGroupsOrgResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runner_groups: Vec<RunnerGroupsOrg>,
@@ -28548,7 +29505,7 @@ impl Default for ActionsCreateSelfHostedRunnerGroupOrgRequestVisibility {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
     /**
      * Name of the runner group.
@@ -28620,7 +29577,7 @@ impl ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
     /**
      * Name of the runner group.
@@ -28638,7 +29595,7 @@ pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
     pub visibility: Option<ActionsUpdateSelfHostedRunnerGroupOrgRequestVisibility>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<MinimalRepository>,
@@ -28650,7 +29607,7 @@ pub struct ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse {
     pub total_count: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest {
     /**
      * List of repository IDs that can access the runner group.
@@ -28659,7 +29616,7 @@ pub struct ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest {
     pub selected_repository_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelfHostedRunnersOrgResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub runners: Vec<Runner>,
@@ -28671,7 +29628,7 @@ pub struct ActionsListSelfHostedRunnersOrgResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListOrgSecretsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub secrets: Vec<OrganizationActionsSecret>,
@@ -28727,7 +29684,7 @@ impl ActionsCreateUpdateOrgSecretRequestVisibility {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsCreateUpdateOrgSecretRequest {
     /**
      * Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an organization public key](https://docs.github.com/rest/reference/actions#get-an-organization-public-key) endpoint.
@@ -28765,7 +29722,7 @@ pub struct ActionsCreateUpdateOrgSecretRequest {
     pub visibility: ActionsCreateUpdateOrgSecretRequestVisibility,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelectedReposOrgSecretResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub repositories: Vec<MinimalRepository>,
@@ -28777,7 +29734,7 @@ pub struct ActionsListSelectedReposOrgSecretResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsSetSelectedReposOrgSecretRequest {
     /**
      * An array of repository ids that can access the organization secret. You can only provide a list of repository ids when the `visibility` is set to `selected`. You can add and remove individual repositories using the [Set selected repositories for an organization secret](https://docs.github.com/rest/reference/actions#set-selected-repositories-for-an-organization-secret) and [Remove selected repository from an organization secret](https://docs.github.com/rest/reference/actions#remove-selected-repository-from-an-organization-secret) endpoints.
@@ -28787,7 +29744,7 @@ pub struct ActionsSetSelectedReposOrgSecretRequest {
 }
 
 /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgsCreateWebhookRequestConfig {
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#create-hook-config-params).
@@ -28835,7 +29792,7 @@ pub struct OrgsCreateWebhookRequestConfig {
     pub username: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgsCreateWebhookRequest {
     /**
      * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
@@ -28864,7 +29821,7 @@ pub struct OrgsCreateWebhookRequest {
 }
 
 /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgsUpdateWebhookRequestConfig {
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/orgs#update-hook-config-params).
@@ -28900,7 +29857,7 @@ pub struct OrgsUpdateWebhookRequestConfig {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgsUpdateWebhookRequest {
     /**
      * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
@@ -28925,7 +29882,7 @@ pub struct OrgsUpdateWebhookRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsListInstallationsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub installations: Vec<Installation>,
@@ -28935,6 +29892,38 @@ pub struct AppsListInstallationsResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_count: i64,
+}
+
+/// Any of the following types:
+///
+/// - `InteractionLimits`
+/// - `Data`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum InteractionsGetRestrictionsOrgResponseAnyOf {
+    Data(Data),
+    /**
+     * Interaction limit settings.
+     */
+    InteractionLimits(InteractionLimits),
+}
+
+impl InteractionsGetRestrictionsOrgResponseAnyOf {
+    pub fn data(&self) -> Option<&Data> {
+        if let InteractionsGetRestrictionsOrgResponseAnyOf::Data(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn interaction_limits(&self) -> Option<&InteractionLimits> {
+        if let InteractionsGetRestrictionsOrgResponseAnyOf::InteractionLimits(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -28973,7 +29962,7 @@ impl Default for OrgsCreateInvitationRequestRole {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgsCreateInvitationRequest {
     /**
      * \*\*Required unless you provide `invitee_id`\*\*. Email address of the person you are inviting, which can be an existing GitHub user.
@@ -29108,7 +30097,7 @@ impl Default for OrgsSetMembershipUserRequestRole {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgsSetMembershipUserRequest {
     /**
      * The role to give the user in the organization. Can be one of:  
@@ -29186,7 +30175,7 @@ impl MigrationsStartOrgRequestExclude {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MigrationsStartOrgRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub exclude: Vec<MigrationsStartOrgRequestExclude>,
@@ -29302,7 +30291,7 @@ impl Default for ProjectsListOrgState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsCreateOrgRequest {
     /**
      * The description of the project.
@@ -29496,7 +30485,7 @@ impl ReposCreateInOrgRequestVisibility {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateInOrgRequest {
     /**
      * Either `true` to allow auto-merge on pull requests, or `false` to disallow auto-merge.
@@ -29696,7 +30685,7 @@ impl Default for Permission {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateRequest {
     /**
      * The description of the team.
@@ -29800,7 +30789,7 @@ impl TeamsUpdateInOrgRequestPrivacy {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsUpdateInOrgRequest {
     /**
      * The description of the team.
@@ -29849,7 +30838,7 @@ pub struct TeamsUpdateInOrgRequest {
     pub privacy: Option<TeamsUpdateInOrgRequestPrivacy>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateDiscussionInOrgRequest {
     /**
      * The discussion post's body text.
@@ -29876,7 +30865,7 @@ pub struct TeamsCreateDiscussionInOrgRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsUpdateDiscussionInOrgRequest {
     /**
      * The discussion post's body text.
@@ -29898,7 +30887,7 @@ pub struct TeamsUpdateDiscussionInOrgRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateDiscussionCommentInOrgRequest {
     /**
      * The discussion comment's body text.
@@ -30026,7 +31015,7 @@ impl ReactionsCreateTeamDiscussionCommentInOrgRequestContent {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateTeamDiscussionCommentInOrgRequest {
     /**
      * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion comment.
@@ -30150,7 +31139,7 @@ impl ReactionsCreateTeamDiscussionInOrgRequestContent {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateTeamDiscussionInOrgRequest {
     /**
      * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the team discussion.
@@ -30230,7 +31219,7 @@ impl Default for TeamsAddUpdateMembershipUserInOrgRequestRole {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateMembershipUserInOrgRequest {
     /**
      * The role that this user should have in the team. Can be one of:  
@@ -30289,7 +31278,7 @@ impl TeamsAddUpdateProjectPermissionsInOrgRequestPermission {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateProjectPermissionsInOrgRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<TeamsAddUpdateProjectPermissionsInOrgRequestPermission>,
@@ -30352,7 +31341,7 @@ impl TeamsAddUpdateRepoPermissionsInOrgRequestPermission {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateRepoPermissionsInOrgRequest {
     /**
      * The permission to grant the team on this repository. Can be one of:  
@@ -30368,7 +31357,7 @@ pub struct TeamsAddUpdateRepoPermissionsInOrgRequest {
     pub permission: Option<TeamsAddUpdateRepoPermissionsInOrgRequestPermission>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups {
     /**
      * Description of the IdP group.
@@ -30399,7 +31388,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups {
     pub group_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequest {
     /**
      * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
@@ -30408,7 +31397,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequest {
     pub groups: Vec<TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsDeleteResponse {
     #[serde(
         default,
@@ -30426,7 +31415,7 @@ pub struct ProjectsDeleteResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsUpdateCardRequest {
     /**
      * Whether or not the card is archived
@@ -30444,7 +31433,7 @@ pub struct ProjectsUpdateCardRequest {
     pub note: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsMoveCardRequest {
     /**
      * The unique identifier of the column the card should be moved to
@@ -30466,7 +31455,7 @@ pub struct ProjectsMoveCardRequest {
     pub position: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsMoveCardResponseErrors {
     #[serde(
         default,
@@ -30494,7 +31483,7 @@ pub struct ProjectsMoveCardResponseErrors {
     pub resource: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsMoveCardResponse {
     #[serde(
         default,
@@ -30512,7 +31501,7 @@ pub struct ProjectsMoveCardResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsMoveCardResponseErrorsData {
     #[serde(
         default,
@@ -30528,7 +31517,7 @@ pub struct ProjectsMoveCardResponseErrorsData {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsCreateCardResponse {
     #[serde(
         default,
@@ -30552,7 +31541,7 @@ pub struct ProjectsCreateCardResponse {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsUpdateColumnRequest {
     /**
      * Name of the project column
@@ -30598,7 +31587,7 @@ impl Default for ArchivedState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsCreateCardRequest {
     /**
      * The project card's note
@@ -30611,7 +31600,7 @@ pub struct ProjectsCreateCardRequest {
     pub note: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsCreateCardRequestData {
     /**
      * The unique identifier of the content associated with the card
@@ -30662,31 +31651,7 @@ impl ProjectsCreateCardRequestOneOf {
     }
 }
 
-impl From<ProjectsCreateCardRequest> for ProjectsCreateCardRequestOneOf {
-    fn from(f: ProjectsCreateCardRequest) -> Self {
-        ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequest(f)
-    }
-}
-
-impl From<ProjectsCreateCardRequestData> for ProjectsCreateCardRequestOneOf {
-    fn from(f: ProjectsCreateCardRequestData) -> Self {
-        ProjectsCreateCardRequestOneOf::ProjectsCreateCardRequestData(f)
-    }
-}
-
-impl From<ProjectsCreateCardRequestOneOf> for ProjectsCreateCardRequest {
-    fn from(f: ProjectsCreateCardRequestOneOf) -> Self {
-        f.projects_create_card_request().unwrap().clone()
-    }
-}
-
-impl From<ProjectsCreateCardRequestOneOf> for ProjectsCreateCardRequestData {
-    fn from(f: ProjectsCreateCardRequestOneOf) -> Self {
-        f.projects_create_card_request_data().unwrap().clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsMoveColumnRequest {
     /**
      * The position of the column in a project. Can be one of: `first`, `last`, or `after:<column_id>` to place after the specified column.
@@ -30743,7 +31708,7 @@ impl ProjectsUpdateRequestOrganizationPermission {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsUpdateRequest {
     /**
      * Body of the project
@@ -30853,7 +31818,7 @@ impl Default for ProjectsAddCollaboratorRequestPermission {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsAddCollaboratorRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub permission: Option<ProjectsAddCollaboratorRequestPermission>,
@@ -30904,7 +31869,7 @@ impl ReposUpdateRequestVisibility {
 }
 
 /// Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see "[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateRequestSecurityAnalysisAdvanced {
     /**
      * Use the `status` property to enable or disable GitHub Advanced Security for this repository. For more information, see "[About GitHub Advanced Security](/github/getting-started-with-github/learning-about-github/about-github-advanced-security)."
@@ -30918,7 +31883,7 @@ pub struct ReposUpdateRequestSecurityAnalysisAdvanced {
 }
 
 /// Use the `status` property to enable or disable secret scanning for this repository. For more information, see "[About secret scanning](/code-security/secret-security/about-secret-scanning)."
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateRequestSecurityAnalysisSecretScanning {
     /**
      * Use the `status` property to enable or disable secret scanning for this repository. For more information, see "[About secret scanning](/code-security/secret-security/about-secret-scanning)."
@@ -30932,7 +31897,7 @@ pub struct ReposUpdateRequestSecurityAnalysisSecretScanning {
 }
 
 /// Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateRequestSecurityAnalysis {
     /**
      * Specify which security and analysis features to enable or disable. For example, to enable GitHub Advanced Security, use this data in the body of the PATCH request: `{"security_and_analysis": {"advanced_security": {"status": "enabled"}}}`. If you have admin permissions for a private repository covered by an Advanced Security license, you can check which security and analysis features are currently enabled by using a `GET /repos/{owner}/{repo}` request.
@@ -30946,7 +31911,7 @@ pub struct ReposUpdateRequestSecurityAnalysis {
     pub secret_scanning: Option<ReposUpdateRequestSecurityAnalysisSecretScanning>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateRequest {
     /**
      * Either `true` to allow auto-merge on pull requests, or `false` to disallow auto-merge.
@@ -31052,7 +32017,7 @@ pub struct ReposUpdateRequest {
     pub visibility: Option<ReposUpdateRequestVisibility>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListArtifactsRepoResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub artifacts: Vec<Artifact>,
@@ -31064,7 +32029,7 @@ pub struct ActionsListArtifactsRepoResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsSetGithubPermissionsRepositoryRequest {
     /**
      * The permissions policy that controls the actions that are allowed to run. Can be one of: `all`, `local_only`, or `selected`.
@@ -31078,7 +32043,7 @@ pub struct ActionsSetGithubPermissionsRepositoryRequest {
     pub enabled: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListWorkflowRunsResponse {
     #[serde(
         default,
@@ -31122,7 +32087,7 @@ impl Default for ActionsListJobsWorkflowRunFilter {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListJobsWorkflowRunResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub jobs: Vec<Job>,
@@ -31172,7 +32137,7 @@ impl ActionsReviewPendingDeploymentsRunRequestState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsReviewPendingDeploymentsRunRequest {
     /**
      * A comment to accompany the deployment review
@@ -31198,7 +32163,7 @@ pub struct ActionsReviewPendingDeploymentsRunRequest {
     pub state: ActionsReviewPendingDeploymentsRunRequestState,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListRepoSecretsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub secrets: Vec<ActionsSecret>,
@@ -31210,7 +32175,7 @@ pub struct ActionsListRepoSecretsResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsCreateUpdateRepoSecretRequest {
     /**
      * Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get a repository public key](https://docs.github.com/rest/reference/actions#get-a-repository-public-key) endpoint.
@@ -31232,7 +32197,7 @@ pub struct ActionsCreateUpdateRepoSecretRequest {
     pub key_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsListRepoWorkflowsResponse {
     #[serde(
         default,
@@ -31245,10 +32210,10 @@ pub struct ActionsListRepoWorkflowsResponse {
 }
 
 /// Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Inputs {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsCreateWorkflowDispatchRequest {
     /**
      * Input keys and values configured in the workflow file. The maximum number of properties is 10. Any default properties configured in the workflow file will be used when `inputs` are omitted.
@@ -31267,7 +32232,7 @@ pub struct ActionsCreateWorkflowDispatchRequest {
     pub ref_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateAutolinkRequest {
     /**
      * The prefix appended by a number will generate a link any time it is found in an issue, pull request, or commit.
@@ -31290,7 +32255,7 @@ pub struct ReposCreateAutolinkRequest {
 }
 
 /// Require status checks to pass before merging. Set to `null` to disable.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
     /**
      * The list of status checks to require in order to merge into this branch
@@ -31308,7 +32273,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
 }
 
 /// Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestrictions {
     /**
      * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
@@ -31323,7 +32288,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestric
 }
 
 /// Require at least one approving review on a pull request, before merging. Set to `null` to disable.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
     /**
      * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
@@ -31359,7 +32324,7 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviews {
 }
 
 /// Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Restrictions {
     /**
      * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
@@ -31378,7 +32343,7 @@ pub struct Restrictions {
     pub users: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateBranchProtectionRequest {
     /**
      * Allows deletion of the protected branch by anyone with write access to the repository. Set to `false` to prevent deletion of the protected branch. Default: `false`. For more information, see "[Enabling force pushes to a protected branch](https://help.github.com/en/github/administering-a-repository/enabling-force-pushes-to-a-protected-branch)" in the GitHub Help documentation.
@@ -31423,7 +32388,7 @@ pub struct ReposUpdateBranchProtectionRequest {
     pub restrictions: Option<Restrictions>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdatePullRequestReviewProtection {
     /**
      * Set to `true` if you want to automatically dismiss approving reviews when someone pushes a new commit.
@@ -31458,7 +32423,7 @@ pub struct ReposUpdatePullRequestReviewProtection {
     pub required_approving_review_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateStatusCheckProtectionRequest {
     /**
      * The list of status checks to require in order to merge into this branch
@@ -31472,7 +32437,7 @@ pub struct ReposUpdateStatusCheckProtectionRequest {
     pub strict: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddStatusCheckContextsRequest {
     /**
      * contexts parameter
@@ -31517,21 +32482,9 @@ impl ReposAddStatusCheckContextsRequestOneOf {
     }
 }
 
-impl From<ReposAddStatusCheckContextsRequest> for ReposAddStatusCheckContextsRequestOneOf {
-    fn from(f: ReposAddStatusCheckContextsRequest) -> Self {
-        ReposAddStatusCheckContextsRequestOneOf::ReposAddStatusCheckContextsRequest(f)
-    }
-}
-
 impl From<Vec<String>> for ReposAddStatusCheckContextsRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         ReposAddStatusCheckContextsRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<ReposAddStatusCheckContextsRequestOneOf> for ReposAddStatusCheckContextsRequest {
-    fn from(f: ReposAddStatusCheckContextsRequestOneOf) -> Self {
-        f.repos_add_status_check_contexts_request().unwrap().clone()
     }
 }
 
@@ -31541,7 +32494,7 @@ impl From<ReposAddStatusCheckContextsRequestOneOf> for Vec<String> {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddAppAccessRestrictionsRequest {
     /**
      * apps parameter
@@ -31584,23 +32537,9 @@ impl ReposAddAppAccessRestrictionsRequestOneOf {
     }
 }
 
-impl From<ReposAddAppAccessRestrictionsRequest> for ReposAddAppAccessRestrictionsRequestOneOf {
-    fn from(f: ReposAddAppAccessRestrictionsRequest) -> Self {
-        ReposAddAppAccessRestrictionsRequestOneOf::ReposAddAppAccessRestrictionsRequest(f)
-    }
-}
-
 impl From<Vec<String>> for ReposAddAppAccessRestrictionsRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         ReposAddAppAccessRestrictionsRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<ReposAddAppAccessRestrictionsRequestOneOf> for ReposAddAppAccessRestrictionsRequest {
-    fn from(f: ReposAddAppAccessRestrictionsRequestOneOf) -> Self {
-        f.repos_add_app_access_restrictions_request()
-            .unwrap()
-            .clone()
     }
 }
 
@@ -31610,7 +32549,7 @@ impl From<ReposAddAppAccessRestrictionsRequestOneOf> for Vec<String> {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddTeamAccessRestrictionsRequest {
     /**
      * teams parameter
@@ -31656,23 +32595,9 @@ impl ReposAddTeamAccessRestrictionsRequestOneOf {
     }
 }
 
-impl From<ReposAddTeamAccessRestrictionsRequest> for ReposAddTeamAccessRestrictionsRequestOneOf {
-    fn from(f: ReposAddTeamAccessRestrictionsRequest) -> Self {
-        ReposAddTeamAccessRestrictionsRequestOneOf::ReposAddTeamAccessRestrictionsRequest(f)
-    }
-}
-
 impl From<Vec<String>> for ReposAddTeamAccessRestrictionsRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         ReposAddTeamAccessRestrictionsRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<ReposAddTeamAccessRestrictionsRequestOneOf> for ReposAddTeamAccessRestrictionsRequest {
-    fn from(f: ReposAddTeamAccessRestrictionsRequestOneOf) -> Self {
-        f.repos_add_team_access_restrictions_request()
-            .unwrap()
-            .clone()
     }
 }
 
@@ -31682,7 +32607,7 @@ impl From<ReposAddTeamAccessRestrictionsRequestOneOf> for Vec<String> {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddUserAccessRestrictionsRequest {
     /**
      * users parameter
@@ -31725,23 +32650,9 @@ impl ReposAddUserAccessRestrictionsRequestOneOf {
     }
 }
 
-impl From<ReposAddUserAccessRestrictionsRequest> for ReposAddUserAccessRestrictionsRequestOneOf {
-    fn from(f: ReposAddUserAccessRestrictionsRequest) -> Self {
-        ReposAddUserAccessRestrictionsRequestOneOf::ReposAddUserAccessRestrictionsRequest(f)
-    }
-}
-
 impl From<Vec<String>> for ReposAddUserAccessRestrictionsRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         ReposAddUserAccessRestrictionsRequestOneOf::StringVector(f)
-    }
-}
-
-impl From<ReposAddUserAccessRestrictionsRequestOneOf> for ReposAddUserAccessRestrictionsRequest {
-    fn from(f: ReposAddUserAccessRestrictionsRequestOneOf) -> Self {
-        f.repos_add_user_access_restrictions_request()
-            .unwrap()
-            .clone()
     }
 }
 
@@ -31751,7 +32662,7 @@ impl From<ReposAddUserAccessRestrictionsRequestOneOf> for Vec<String> {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposRenameBranchRequest {
     /**
      * The new name of the branch.
@@ -31895,7 +32806,7 @@ impl AnnotationLevel {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Annotations {
     /**
      * The level of the annotation. Can be one of `notice`, `warning`, or `failure`.
@@ -31976,7 +32887,7 @@ pub struct Annotations {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Images {
     /**
      * The alternative text for the image.
@@ -32008,7 +32919,7 @@ pub struct Images {
 }
 
 /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksCreateRequestOutput {
     /**
      * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
@@ -32049,7 +32960,7 @@ pub struct ChecksCreateRequestOutput {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksCreateRequestActions {
     /**
      * A short explanation of what this action would do. The maximum size is 40 characters.
@@ -32080,7 +32991,7 @@ pub struct ChecksCreateRequestActions {
     pub label: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksCreateRequest {
     /**
      * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
@@ -32217,7 +33128,7 @@ impl ChecksUpdateRequestConclusion {
 }
 
 /// Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksUpdateRequestOutput {
     /**
      * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
@@ -32258,7 +33169,7 @@ pub struct ChecksUpdateRequestOutput {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksUpdateRequest {
     /**
      * Possible further actions the integrator can perform, which a user may trigger. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
@@ -32328,7 +33239,7 @@ pub struct ChecksUpdateRequest {
     pub status: Option<ChecksCreateRequestStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksCreateSuiteRequest {
     /**
      * The sha of the head commit.
@@ -32341,7 +33252,7 @@ pub struct ChecksCreateSuiteRequest {
     pub head_sha: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksSetSuitesPreferencesRequestAutoTrigger {
     /**
      * The `id` of the GitHub App.
@@ -32362,7 +33273,7 @@ pub struct ChecksSetSuitesPreferencesRequestAutoTrigger {
     pub setting: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksSetSuitesPreferencesRequest {
     /**
      * Enables or disables automatic creation of CheckSuite events upon pushes to the repository. Enabled by default. See the [`auto_trigger_checks` object](https://docs.github.com/rest/reference/checks#auto_trigger_checks-object) description for details.
@@ -32401,7 +33312,7 @@ impl Default for ChecksListSuiteFilter {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksListRefResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub check_runs: Vec<CheckRun>,
@@ -32413,7 +33324,7 @@ pub struct ChecksListRefResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningUpdateAlertRequest {
     /**
      * \*\*Required when the state is dismissed.\*\* The reason for dismissing or closing the alert. Can be one of: `false positive`, `won't fix`, and `used in tests`.
@@ -32427,7 +33338,7 @@ pub struct CodeScanningUpdateAlertRequest {
     pub state: CodeScanningAlertSetState,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct CodeScanningUploadSarifRequest {
     /**
      * The base directory used in the analysis, as it appears in the SARIF file.
@@ -32568,7 +33479,7 @@ impl Default for ReposAddCollaboratorRequestPermission {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposAddCollaboratorRequest {
     /**
      * The permission to grant the collaborator. \*\*Only valid on organization-owned repositories.\*\* Can be one of:  
@@ -32588,7 +33499,7 @@ pub struct ReposAddCollaboratorRequest {
     pub permissions: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateCommitCommentRequest {
     /**
      * The contents of the comment
@@ -32713,7 +33624,7 @@ impl ReactionsCreateCommitCommentRequestContent {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateCommitCommentRequest {
     /**
      * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the commit comment.
@@ -32725,7 +33636,7 @@ pub struct ReactionsCreateCommitCommentRequest {
     pub content: ReactionsCreateCommitCommentRequestContent,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateCommitCommentRequest {
     /**
      * The contents of the comment.
@@ -32765,7 +33676,7 @@ pub struct ReposCreateCommitCommentRequest {
     pub position: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ChecksListSuitesRefResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub check_suites: Vec<CheckSuiteData>,
@@ -32777,7 +33688,7 @@ pub struct ChecksListSuitesRefResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct AppsCreateContentAttachmentRequest {
     /**
      * The body of the attachment
@@ -32858,39 +33769,9 @@ impl ReposGetContentResponseOneOf {
     }
 }
 
-impl From<ContentFile> for ReposGetContentResponseOneOf {
-    fn from(f: ContentFile) -> Self {
-        ReposGetContentResponseOneOf::ContentFile(f)
-    }
-}
-
-impl From<ContentSubmodule> for ReposGetContentResponseOneOf {
-    fn from(f: ContentSubmodule) -> Self {
-        ReposGetContentResponseOneOf::ContentSubmodule(f)
-    }
-}
-
 impl From<Vec<Entries>> for ReposGetContentResponseOneOf {
     fn from(f: Vec<Entries>) -> Self {
         ReposGetContentResponseOneOf::EntriesVector(f)
-    }
-}
-
-impl From<SymlinkContent> for ReposGetContentResponseOneOf {
-    fn from(f: SymlinkContent) -> Self {
-        ReposGetContentResponseOneOf::SymlinkContent(f)
-    }
-}
-
-impl From<ReposGetContentResponseOneOf> for ContentFile {
-    fn from(f: ReposGetContentResponseOneOf) -> Self {
-        f.content_file().unwrap().clone()
-    }
-}
-
-impl From<ReposGetContentResponseOneOf> for ContentSubmodule {
-    fn from(f: ReposGetContentResponseOneOf) -> Self {
-        f.content_submodule().unwrap().clone()
     }
 }
 
@@ -32900,14 +33781,8 @@ impl From<ReposGetContentResponseOneOf> for Vec<Entries> {
     }
 }
 
-impl From<ReposGetContentResponseOneOf> for SymlinkContent {
-    fn from(f: ReposGetContentResponseOneOf) -> Self {
-        f.symlink_content().unwrap().clone()
-    }
-}
-
 /// The person that committed the file. Default: the authenticated user.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUpdateFileContentsRequestCommitter {
     #[serde(
         default,
@@ -32936,7 +33811,7 @@ pub struct ReposCreateUpdateFileContentsRequestCommitter {
 }
 
 /// The author of the file. Default: The `committer` or the authenticated user if you omit `committer`.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUpdateFileContentsRequestAuthor {
     #[serde(
         default,
@@ -32964,7 +33839,7 @@ pub struct ReposCreateUpdateFileContentsRequestAuthor {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUpdateFileContentsRequest {
     /**
      * The author of the file. Default: The `committer` or the authenticated user if you omit `committer`.
@@ -33015,7 +33890,7 @@ pub struct ReposCreateUpdateFileContentsRequest {
 }
 
 /// object containing information about the committer.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposDeleteFileRequestCommitter {
     /**
      * object containing information about the committer.
@@ -33038,7 +33913,7 @@ pub struct ReposDeleteFileRequestCommitter {
 }
 
 /// object containing information about the author.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposDeleteFileRequestAuthor {
     /**
      * object containing information about the author.
@@ -33060,7 +33935,7 @@ pub struct ReposDeleteFileRequestAuthor {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposDeleteFileRequest {
     /**
      * object containing information about the author.
@@ -33133,21 +34008,9 @@ impl ReposCreateDeploymentRequestPayloadOneOf {
     }
 }
 
-impl From<Data> for ReposCreateDeploymentRequestPayloadOneOf {
-    fn from(f: Data) -> Self {
-        ReposCreateDeploymentRequestPayloadOneOf::Data(f)
-    }
-}
-
 impl From<String> for ReposCreateDeploymentRequestPayloadOneOf {
     fn from(f: String) -> Self {
         ReposCreateDeploymentRequestPayloadOneOf::String(f)
-    }
-}
-
-impl From<ReposCreateDeploymentRequestPayloadOneOf> for Data {
-    fn from(f: ReposCreateDeploymentRequestPayloadOneOf) -> Self {
-        f.data().unwrap().clone()
     }
 }
 
@@ -33157,7 +34020,7 @@ impl From<ReposCreateDeploymentRequestPayloadOneOf> for String {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateDeploymentRequest {
     /**
      * Attempts to automatically merge the default branch into the requested ref, if it's behind the default branch.
@@ -33325,7 +34188,7 @@ impl ReposCreateDeploymentStatusRequestEnvironment {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateDeploymentStatusRequest {
     /**
      * Adds a new `inactive` status to all prior non-transient, non-production environment deployments with the same repository and `environment` name as the created status's deployment. An `inactive` status is only added to deployments that had a `success` state. Default: `true`  
@@ -33388,10 +34251,10 @@ pub struct ReposCreateDeploymentStatusRequest {
 }
 
 /// JSON payload with extra information about the webhook event that your action or worklow may use.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ClientPayload {}
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateDispatchEventRequest {
     /**
      * JSON payload with extra information about the webhook event that your action or worklow may use.
@@ -33409,7 +34272,7 @@ pub struct ReposCreateDispatchEventRequest {
     pub event_type: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposGetAllEnvironmentsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub environments: Vec<EnvironmentData>,
@@ -33424,7 +34287,7 @@ pub struct ReposGetAllEnvironmentsResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUpdateEnvironmentRequestReviewers {
     /**
      * The id of the user or team who can review the deployment
@@ -33442,7 +34305,7 @@ pub struct ReposCreateUpdateEnvironmentRequestReviewers {
     pub type_: Option<DeploymentReviewerType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUpdateEnvironmentRequest {
     /**
      * The type of deployment branch policy for this environment. To allow all branches to deploy, set to `null`.
@@ -33498,7 +34361,7 @@ impl Default for ReposListForksSort {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateForkRequest {
     #[serde(
         default,
@@ -33508,7 +34371,7 @@ pub struct ReposCreateForkRequest {
     pub organization: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateBlobRequest {
     /**
      * The new blob's content.
@@ -33531,7 +34394,7 @@ pub struct GitCreateBlobRequest {
 }
 
 /// Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateCommitRequestAuthor {
     /**
      * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
@@ -33563,7 +34426,7 @@ pub struct GitCreateCommitRequestAuthor {
 }
 
 /// Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateCommitRequestCommitter {
     /**
      * Information about the person who is making the commit. By default, `committer` will use the information set in `author`. See the `author` and `committer` object below for details.
@@ -33594,7 +34457,7 @@ pub struct GitCreateCommitRequestCommitter {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateCommitRequest {
     /**
      * Information about the author of the commit. By default, the `author` will be the authenticated user and the current date. See the `author` and `committer` object below for details.
@@ -33640,7 +34503,7 @@ pub struct GitCreateCommitRequest {
     pub tree: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateRefRequest {
     #[serde(
         default,
@@ -33669,7 +34532,7 @@ pub struct GitCreateRefRequest {
     pub sha: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitUpdateRefRequest {
     /**
      * Indicates whether to force the update or to make sure the update is a fast-forward update. Leaving this out or setting it to `false` will make sure you're not overwriting work.
@@ -33729,7 +34592,7 @@ impl GitCreateTagRequestType {
 }
 
 /// An object with information about the individual creating the tag.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateTagRequestTagger {
     /**
      * An object with information about the individual creating the tag.
@@ -33760,7 +34623,7 @@ pub struct GitCreateTagRequestTagger {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateTagRequest {
     /**
      * The tag message.
@@ -33893,7 +34756,7 @@ impl GitCreateTreeRequestType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateTreeRequest {
     /**
      * The content you want this file to have. GitHub will write this blob out and use that SHA for this entry. Use either this, or `tree.sha`.  
@@ -33938,7 +34801,7 @@ pub struct GitCreateTreeRequest {
     pub type_: Option<GitCreateTreeRequestType>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GitCreateTreeRequestData {
     /**
      * The SHA1 of an existing Git tree object which will be used as the base for the new tree. If provided, a new Git tree object will be created from entries in the Git tree object pointed to by `base_tree` and entries defined in the `tree` parameter. Entries defined in the `tree` parameter will overwrite items from `base_tree` with the same `path`. If you're creating new changes on a branch, then normally you'd set `base_tree` to the SHA1 of the Git tree object of the current latest commit on the branch you're working on.
@@ -33959,7 +34822,7 @@ pub struct GitCreateTreeRequestData {
 }
 
 /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateWebhookRequestConfig {
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
@@ -34007,7 +34870,7 @@ pub struct ReposCreateWebhookRequestConfig {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateWebhookRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
@@ -34024,7 +34887,7 @@ pub struct ReposCreateWebhookRequest {
 }
 
 /// Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateWebhookRequestConfig {
     #[serde(
         default,
@@ -34072,7 +34935,7 @@ pub struct ReposUpdateWebhookRequestConfig {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateWebhookRequest {
     /**
      * Determines if notifications are sent when the webhook is triggered. Set to `true` to send notifications.
@@ -34145,7 +35008,7 @@ impl Vcs {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MigrationsStartImportRequest {
     /**
      * For a tfvc import, the name of the project that is being imported.
@@ -34190,7 +35053,7 @@ pub struct MigrationsStartImportRequest {
     pub vcs_username: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MigrationsUpdateImportRequest {
     #[serde(
         default,
@@ -34218,7 +35081,7 @@ pub struct MigrationsUpdateImportRequest {
     pub vcs_username: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MigrationsMapCommitAuthorRequest {
     /**
      * The new Git author email.
@@ -34278,7 +35141,7 @@ impl UseLfs {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MigrationsSetLfsPreferenceRequest {
     /**
      * Can be one of `opt_in` (large files will be stored using Git LFS) or `opt_out` (large files will be removed during the import).
@@ -34334,7 +35197,7 @@ impl ReposUpdateInvitationRequestPermissions {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateInvitationRequest {
     /**
      * The permissions that the associated user will have on the repository. Valid values are `read`, `write`, `maintain`, `triage`, and `admin`.
@@ -34452,7 +35315,7 @@ impl From<MilestoneOneOf> for String {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct LabelsDataType {
     #[serde(
         default,
@@ -34509,21 +35372,9 @@ impl IssuesCreateRequestLabelsOneOf {
     }
 }
 
-impl From<LabelsDataType> for IssuesCreateRequestLabelsOneOf {
-    fn from(f: LabelsDataType) -> Self {
-        IssuesCreateRequestLabelsOneOf::LabelsDataType(f)
-    }
-}
-
 impl From<String> for IssuesCreateRequestLabelsOneOf {
     fn from(f: String) -> Self {
         IssuesCreateRequestLabelsOneOf::String(f)
-    }
-}
-
-impl From<IssuesCreateRequestLabelsOneOf> for LabelsDataType {
-    fn from(f: IssuesCreateRequestLabelsOneOf) -> Self {
-        f.labels_data_type().unwrap().clone()
     }
 }
 
@@ -34625,7 +35476,7 @@ impl IssuesListCommentsRepoDirection {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesUpdateCommentRequest {
     /**
      * The contents of the comment.
@@ -34750,7 +35601,7 @@ impl ReactionsCreateIssueCommentRequestContent {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateIssueCommentRequest {
     /**
      * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue comment.
@@ -34856,7 +35707,7 @@ impl From<IssuesUpdateRequestMilestoneOneOf> for String {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesUpdateRequest {
     /**
      * Login for the user that this issue should be assigned to. \*\*This field is deprecated.\*\*
@@ -34915,7 +35766,7 @@ pub struct IssuesUpdateRequest {
     pub title: Option<TitleOneOf>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesAddAssigneesRequest {
     /**
      * Usernames of people to assign this issue to. _NOTE: Only users with push access can add assignees to an issue. Assignees are silently ignored otherwise._
@@ -34924,7 +35775,7 @@ pub struct IssuesAddAssigneesRequest {
     pub assignees: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesRemoveAssigneesRequest {
     /**
      * Usernames of assignees to remove from an issue. _NOTE: Only users with push access can remove assignees from an issue. Assignees are silently ignored otherwise._
@@ -34933,7 +35784,7 @@ pub struct IssuesRemoveAssigneesRequest {
     pub assignees: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesAddLabelsRequest {
     /**
      * The names of the labels to add to the issue. You can pass an empty array to remove all labels. \*\*Note:\*\* Alternatively, you can pass a single label as a `string` or an `array` of labels directly, but GitHub recommends passing an object with the `labels` key.
@@ -34942,7 +35793,7 @@ pub struct IssuesAddLabelsRequest {
     pub labels: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesAddLabelsRequestData {
     #[serde(
         default,
@@ -34952,8 +35803,8 @@ pub struct IssuesAddLabelsRequestData {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct IssuesAddLabelsRequestDataType {
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct IssuesSetLabelsRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub labels: Vec<IssuesAddLabelsRequestData>,
 }
@@ -35014,18 +35865,6 @@ impl IssuesAddLabelsRequestOneOf {
     }
 }
 
-impl From<IssuesAddLabelsRequest> for IssuesAddLabelsRequestOneOf {
-    fn from(f: IssuesAddLabelsRequest) -> Self {
-        IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequest(f)
-    }
-}
-
-impl From<IssuesAddLabelsRequestDataType> for IssuesAddLabelsRequestOneOf {
-    fn from(f: IssuesAddLabelsRequestDataType) -> Self {
-        IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataType(f)
-    }
-}
-
 impl From<Vec<IssuesAddLabelsRequestData>> for IssuesAddLabelsRequestOneOf {
     fn from(f: Vec<IssuesAddLabelsRequestData>) -> Self {
         IssuesAddLabelsRequestOneOf::IssuesAddLabelsRequestDataVector(f)
@@ -35044,18 +35883,6 @@ impl From<Vec<String>> for IssuesAddLabelsRequestOneOf {
     }
 }
 
-impl From<IssuesAddLabelsRequestOneOf> for IssuesAddLabelsRequest {
-    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
-        f.issues_add_labels_request().unwrap().clone()
-    }
-}
-
-impl From<IssuesAddLabelsRequestOneOf> for IssuesAddLabelsRequestDataType {
-    fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
-        f.issues_add_labels_request_data_type().unwrap().clone()
-    }
-}
-
 impl From<IssuesAddLabelsRequestOneOf> for Vec<IssuesAddLabelsRequestData> {
     fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
         f.vec_issues_add_labels_request_data().unwrap().clone()
@@ -35070,6 +35897,98 @@ impl From<IssuesAddLabelsRequestOneOf> for String {
 
 impl From<IssuesAddLabelsRequestOneOf> for Vec<String> {
     fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
+}
+
+/// Any of the following types:
+///
+/// - `IssuesAddLabelsRequest`
+/// - `Vec<String>`
+/// - `IssuesSetLabelsRequest`
+/// - `Vec<IssuesAddLabelsRequestData>`
+/// - `String`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum IssuesSetLabelsRequestAnyOf {
+    IssuesAddLabelsRequest(IssuesAddLabelsRequest),
+    IssuesSetLabelsRequest(IssuesSetLabelsRequest),
+    String(String),
+    IssuesAddLabelsRequestDataVector(Vec<IssuesAddLabelsRequestData>),
+    StringVector(Vec<String>),
+}
+
+impl IssuesSetLabelsRequestAnyOf {
+    pub fn issues_add_labels_request(&self) -> Option<&IssuesAddLabelsRequest> {
+        if let IssuesSetLabelsRequestAnyOf::IssuesAddLabelsRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_issues_add_labels_request_data(&self) -> Option<&Vec<IssuesAddLabelsRequestData>> {
+        if let IssuesSetLabelsRequestAnyOf::IssuesAddLabelsRequestDataVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn issues_set_labels_request(&self) -> Option<&IssuesSetLabelsRequest> {
+        if let IssuesSetLabelsRequestAnyOf::IssuesSetLabelsRequest(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let IssuesSetLabelsRequestAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let IssuesSetLabelsRequestAnyOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<IssuesAddLabelsRequestData>> for IssuesSetLabelsRequestAnyOf {
+    fn from(f: Vec<IssuesAddLabelsRequestData>) -> Self {
+        IssuesSetLabelsRequestAnyOf::IssuesAddLabelsRequestDataVector(f)
+    }
+}
+
+impl From<String> for IssuesSetLabelsRequestAnyOf {
+    fn from(f: String) -> Self {
+        IssuesSetLabelsRequestAnyOf::String(f)
+    }
+}
+
+impl From<Vec<String>> for IssuesSetLabelsRequestAnyOf {
+    fn from(f: Vec<String>) -> Self {
+        IssuesSetLabelsRequestAnyOf::StringVector(f)
+    }
+}
+
+impl From<IssuesSetLabelsRequestAnyOf> for Vec<IssuesAddLabelsRequestData> {
+    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
+        f.vec_issues_add_labels_request_data().unwrap().clone()
+    }
+}
+
+impl From<IssuesSetLabelsRequestAnyOf> for String {
+    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+impl From<IssuesSetLabelsRequestAnyOf> for Vec<String> {
+    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
         f.vec_string().unwrap().clone()
     }
 }
@@ -35122,7 +36041,7 @@ impl LockReason {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesLockRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lock_reason: Option<LockReason>,
@@ -35240,7 +36159,7 @@ impl ReactionsCreateIssueRequestContent {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateIssueRequest {
     /**
      * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the issue.
@@ -35252,7 +36171,7 @@ pub struct ReactionsCreateIssueRequest {
     pub content: ReactionsCreateIssueRequestContent,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateDeployKeyRequest {
     /**
      * The contents of the key.
@@ -35281,7 +36200,7 @@ pub struct ReposCreateDeployKeyRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesCreateLabelRequest {
     /**
      * The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`.
@@ -35312,7 +36231,7 @@ pub struct IssuesCreateLabelRequest {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesUpdateLabelRequest {
     /**
      * The [hexadecimal color code](http://www.color-hex.com/) for the label, without the leading `#`.
@@ -35343,7 +36262,7 @@ pub struct IssuesUpdateLabelRequest {
     pub new_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposMergeRequest {
     /**
      * The name of the base branch that the head will be merged into.
@@ -35497,7 +36416,7 @@ impl Default for IssuesCreateMilestoneRequestState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesCreateMilestoneRequest {
     /**
      * A description of the milestone.
@@ -35533,7 +36452,7 @@ pub struct IssuesCreateMilestoneRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct IssuesUpdateMilestoneRequest {
     /**
      * A description of the milestone.
@@ -35569,7 +36488,7 @@ pub struct IssuesUpdateMilestoneRequest {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActivityMarkRepoNotificationsAsReadRequest {
     /**
      * Describes the last point that notifications were checked. Anything updated since this time will not be marked as read. If you omit this parameter, all notifications are marked as read. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`. Default: The current timestamp.
@@ -35582,7 +36501,7 @@ pub struct ActivityMarkRepoNotificationsAsReadRequest {
     pub last_read_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsUpdateBranchResponse {
     #[serde(
         default,
@@ -35629,7 +36548,7 @@ impl Default for Path {
 }
 
 /// The source branch and directory used to publish your Pages site.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreatePagesSiteRequestSource {
     /**
      * The repository branch used to publish your site's source files.
@@ -35648,7 +36567,7 @@ pub struct ReposCreatePagesSiteRequestSource {
 }
 
 /// The source branch and directory used to publish your Pages site.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreatePagesSiteRequest {
     /**
      * The source branch and directory used to publish your Pages site.
@@ -35698,7 +36617,99 @@ impl SourceData {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+/**
+ * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum SourcePath {
+    #[serde(rename = "/")]
+    Root,
+    #[serde(rename = "/docs")]
+    Docs,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for SourcePath {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            SourcePath::Root => "/",
+            SourcePath::Docs => "/docs",
+            SourcePath::Noop => "",
+            SourcePath::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for SourcePath {
+    fn default() -> SourcePath {
+        SourcePath::Noop
+    }
+}
+impl SourcePath {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, SourcePath::Noop)
+    }
+}
+
+/// Update the source for the repository. Must include the branch name and path.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+pub struct SourceDataType {
+    /**
+     * The repository branch used to publish your site's source files.
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub branch: String,
+    /**
+     * The repository directory that includes the source files for the Pages site. Allowed paths are `/` or `/docs`.
+     */
+    #[serde(default, skip_serializing_if = "SourcePath::is_noop")]
+    pub path: SourcePath,
+}
+
+/// Any of the following types:
+///
+/// - `SourceData`
+/// - `SourceDataType`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum SourceAnyOf {
+    /**
+     * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
+     */
+    SourceData(SourceData),
+    /**
+     * Update the source for the repository. Must include the branch name and path.
+     */
+    SourceDataType(SourceDataType),
+}
+
+impl SourceAnyOf {
+    pub fn source_data(&self) -> Option<&SourceData> {
+        if let SourceAnyOf::SourceData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn source_data_type(&self) -> Option<&SourceDataType> {
+        if let SourceAnyOf::SourceDataType(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateInformationAboutPagesSiteRequest {
     /**
      * Specify a custom domain for the repository. Sending a `null` value will remove the custom domain. For more about custom domains, see "[Using a custom domain with GitHub Pages](https://help.github.com/articles/using-a-custom-domain-with-github-pages/)."
@@ -35720,10 +36731,16 @@ pub struct ReposUpdateInformationAboutPagesSiteRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub public: Option<bool>,
     /**
-     * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
+     * Any of the following types:
+     *  
+     *  - `SourceData`
+     *  - `SourceDataType`
+     *  
+     *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+     *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub source: Option<SourceData>,
+    pub source: Option<SourceAnyOf>,
 }
 
 /**
@@ -35833,7 +36850,7 @@ impl PullsListDirection {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsCreateRequest {
     /**
      * The name of the branch you want the changes pulled into. This should be an existing branch on the current repository. You cannot submit a pull request to one repository that requests a merge to a base of another repository.
@@ -35965,7 +36982,7 @@ impl PullsListReviewCommentsRepoDirection {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsUpdateReviewCommentRequest {
     /**
      * The text of the reply to the review comment.
@@ -36090,7 +37107,7 @@ impl ReactionsCreatePullRequestReviewCommentContent {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreatePullRequestReviewComment {
     /**
      * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the pull request review comment.
@@ -36102,7 +37119,7 @@ pub struct ReactionsCreatePullRequestReviewComment {
     pub content: ReactionsCreatePullRequestReviewCommentContent,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsUpdateRequest {
     /**
      * The name of the branch you want your changes pulled into. This should be an existing branch on the current repository. You cannot update the base branch on a pull request to point to another repository.
@@ -36222,7 +37239,7 @@ impl PullsCreateReviewCommentRequestStartSide {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsCreateReviewCommentRequest {
     /**
      * The text of the review comment.
@@ -36296,7 +37313,7 @@ pub struct PullsCreateReviewCommentRequest {
     pub start_side: Option<PullsCreateReviewCommentRequestStartSide>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsCreateReplyReviewCommentRequest {
     /**
      * The text of the review comment.
@@ -36350,7 +37367,7 @@ impl PullsMergeRequestMethod {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsMergeRequest {
     #[serde(
         default,
@@ -36374,7 +37391,7 @@ pub struct PullsMergeRequest {
     pub sha: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsRequestReviewers {
     /**
      * An array of user `login`s that will be requested.
@@ -36388,7 +37405,7 @@ pub struct PullsRequestReviewers {
     pub team_reviewers: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsRemoveRequestedReviewersRequest {
     /**
      * An array of user `login`s that will be removed.
@@ -36443,7 +37460,7 @@ impl PullsCreateReviewRequestEvent {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Comments {
     /**
      * Text of the review comment.
@@ -36498,7 +37515,7 @@ pub struct Comments {
     pub start_side: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsCreateReviewRequest {
     /**
      * \*\*Required\*\* when using `REQUEST_CHANGES` or `COMMENT` for the `event` parameter. The body text of the pull request review.
@@ -36530,7 +37547,7 @@ pub struct PullsCreateReviewRequest {
     pub event: Option<PullsCreateReviewRequestEvent>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsUpdateReviewRequest {
     /**
      * The body text of the pull request review.
@@ -36543,7 +37560,7 @@ pub struct PullsUpdateReviewRequest {
     pub body: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsDismissReviewRequest {
     #[serde(
         default,
@@ -36603,7 +37620,7 @@ impl PullsSubmitReviewRequestEvent {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsSubmitReviewRequest {
     /**
      * The body text of the pull request review
@@ -36624,7 +37641,7 @@ pub struct PullsSubmitReviewRequest {
     pub event: PullsSubmitReviewRequestEvent,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PullsUpdateBranchRequest {
     #[serde(
         default,
@@ -36634,7 +37651,7 @@ pub struct PullsUpdateBranchRequest {
     pub expected_head_sha: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateReleaseRequest {
     /**
      * Text describing the contents of the tag.
@@ -36693,7 +37710,7 @@ pub struct ReposCreateReleaseRequest {
     pub target_commitish: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateReleaseAssetRequest {
     /**
      * An alternate short description of the asset. Used in place of the filename.
@@ -36721,7 +37738,7 @@ pub struct ReposUpdateReleaseAssetRequest {
     pub state: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposUpdateReleaseRequest {
     /**
      * Text describing the contents of the tag.
@@ -36830,7 +37847,7 @@ impl ReactionsCreateReleaseRequestContent {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReactionsCreateReleaseRequest {
     /**
      * The [reaction type](https://docs.github.com/rest/reference/reactions#reaction-types) to add to the release.
@@ -36880,7 +37897,7 @@ impl SecretScanningListAlertsRepoState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SecretScanningUpdateAlertRequest {
     /**
      * \*\*Required when the `state` is `resolved`.\*\* The reason for resolving the alert. Can be one of `false_positive`, `wont_fix`, `revoked`, or `used_in_tests`.
@@ -36892,6 +37909,59 @@ pub struct SecretScanningUpdateAlertRequest {
      */
     #[serde()]
     pub state: SecretScanningAlertState,
+}
+
+/// Any of the following types:
+///
+/// - `Vec<SimpleUser>`
+/// - `Vec<Stargazer>`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ActivityListStargazersRepoResponseAnyOf {
+    SimpleUserVector(Vec<SimpleUser>),
+    StargazerVector(Vec<Stargazer>),
+}
+
+impl ActivityListStargazersRepoResponseAnyOf {
+    pub fn vec_simple_user(&self) -> Option<&Vec<SimpleUser>> {
+        if let ActivityListStargazersRepoResponseAnyOf::SimpleUserVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_stargazer(&self) -> Option<&Vec<Stargazer>> {
+        if let ActivityListStargazersRepoResponseAnyOf::StargazerVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<SimpleUser>> for ActivityListStargazersRepoResponseAnyOf {
+    fn from(f: Vec<SimpleUser>) -> Self {
+        ActivityListStargazersRepoResponseAnyOf::SimpleUserVector(f)
+    }
+}
+
+impl From<Vec<Stargazer>> for ActivityListStargazersRepoResponseAnyOf {
+    fn from(f: Vec<Stargazer>) -> Self {
+        ActivityListStargazersRepoResponseAnyOf::StargazerVector(f)
+    }
+}
+
+impl From<ActivityListStargazersRepoResponseAnyOf> for Vec<SimpleUser> {
+    fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
+        f.vec_simple_user().unwrap().clone()
+    }
+}
+
+impl From<ActivityListStargazersRepoResponseAnyOf> for Vec<Stargazer> {
+    fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
+        f.vec_stargazer().unwrap().clone()
+    }
 }
 
 /**
@@ -36938,7 +38008,7 @@ impl ReposCreateCommitStatusRequestState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateCommitStatusRequest {
     /**
      * A string label to differentiate this status from the status of other systems. This field is case-insensitive.
@@ -36979,7 +38049,7 @@ pub struct ReposCreateCommitStatusRequest {
     pub target_url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActivitySetRepoSubscriptionRequest {
     /**
      * Determines if all notifications should be blocked from this repository.
@@ -36993,7 +38063,7 @@ pub struct ActivitySetRepoSubscriptionRequest {
     pub subscribed: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposReplaceAllTopicsRequest {
     /**
      * An array of topics to add to the repository. Pass one or more topics to _replace_ the set of existing topics. Send an empty array (`[]`) to clear all topics from the repository. \*\*Note:\*\* Topic `names` cannot contain uppercase letters.
@@ -37002,7 +38072,7 @@ pub struct ReposReplaceAllTopicsRequest {
     pub names: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposTransferRequest {
     /**
      * The username or organization name the repository will be transferred to.
@@ -37020,7 +38090,7 @@ pub struct ReposTransferRequest {
     pub team_ids: Vec<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateUsingTemplateRequest {
     /**
      * A short description of the new repository.
@@ -37061,7 +38131,7 @@ pub struct ReposCreateUsingTemplateRequest {
     pub private: Option<bool>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ActionsCreateUpdateEnvironmentSecretRequest {
     /**
      * Value for your secret, encrypted with [LibSodium](https://libsodium.gitbook.io/doc/bindings_for_other_languages) using the public key retrieved from the [Get an environment public key](https://docs.github.com/rest/reference/actions#get-an-environment-public-key) endpoint.
@@ -37083,7 +38153,7 @@ pub struct ActionsCreateUpdateEnvironmentSecretRequest {
     pub key_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminProvisionInviteGroupRequestMembers {
     /**
      * The SCIM user ID for a user.
@@ -37096,7 +38166,7 @@ pub struct EnterpriseAdminProvisionInviteGroupRequestMembers {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminProvisionInviteGroupRequest {
     /**
      * The name of the SCIM group. This must match the GitHub organization that the group maps to.
@@ -37157,7 +38227,7 @@ impl EnterpriseAdminUpdateAttributeGroupRequestOperationsOp {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
     #[serde(
         default,
@@ -37184,7 +38254,7 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequestOperations {
     pub value: Option<ScimUserOperationsValueOneOf>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateAttributeGroupRequest {
     /**
      * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
@@ -37198,7 +38268,7 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequest {
     pub schemas: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminProvisionInviteUserRequestName {
     /**
      * The last name of the user.
@@ -37220,7 +38290,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequestName {
     pub given_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminProvisionInviteUserRequestEmails {
     /**
      * Whether this email address is the primary address.
@@ -37251,7 +38321,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequestEmails {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminProvisionInviteUserRequest {
     /**
      * List of user emails.
@@ -37281,7 +38351,7 @@ pub struct EnterpriseAdminProvisionInviteUserRequest {
     pub user_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminUpdateAttributeUserRequest {
     /**
      * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
@@ -37295,7 +38365,7 @@ pub struct EnterpriseAdminUpdateAttributeUserRequest {
     pub schemas: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimProvisionInviteUserRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
@@ -37336,7 +38406,7 @@ pub struct ScimProvisionInviteUserRequest {
     pub user_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Value {
     #[serde(
         default,
@@ -37420,12 +38490,6 @@ impl From<String> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
     }
 }
 
-impl From<Value> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
-    fn from(f: Value) -> Self {
-        ScimUpdateAttributeUserRequestOperationsValueOneOf::Value(f)
-    }
-}
-
 impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for Vec<ScimUserEmails> {
     fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
         f.vec_scim_user_emails().unwrap().clone()
@@ -37438,13 +38502,7 @@ impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for String {
     }
 }
 
-impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for Value {
-    fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
-        f.value().unwrap().clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUpdateAttributeUserRequestOperations {
     #[serde(default, skip_serializing_if = "Op::is_noop")]
     pub op: Op,
@@ -37468,7 +38526,7 @@ pub struct ScimUpdateAttributeUserRequestOperations {
     pub value: Option<ScimUpdateAttributeUserRequestOperationsValueOneOf>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ScimUpdateAttributeUserRequest {
     /**
      * Set of operations to be performed
@@ -37514,7 +38572,7 @@ impl SearchCodeSort {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchCodeResponse {
     #[serde(
         default,
@@ -37569,7 +38627,7 @@ impl SearchCommitsSort {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchCommitsResponse {
     #[serde(
         default,
@@ -37651,7 +38709,7 @@ impl SearchIssuesPullRequestsSort {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchIssuesPullRequestsResponse {
     #[serde(
         default,
@@ -37706,7 +38764,7 @@ impl SearchLabelsSort {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchLabelsResponse {
     #[serde(
         default,
@@ -37767,7 +38825,7 @@ impl SearchReposSort {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchReposResponse {
     #[serde(
         default,
@@ -37784,7 +38842,7 @@ pub struct SearchReposResponse {
     pub total_count: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchTopicsResponse {
     #[serde(
         default,
@@ -37842,7 +38900,7 @@ impl SearchUsersSort {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct SearchUsersResponse {
     #[serde(
         default,
@@ -37902,7 +38960,7 @@ impl TeamsUpdateLegacyRequestPrivacy {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsUpdateLegacyRequest {
     /**
      * The description of the team.
@@ -37951,7 +39009,7 @@ pub struct TeamsUpdateLegacyRequest {
     pub privacy: Option<TeamsUpdateLegacyRequestPrivacy>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateProjectPermissionsLegacyRequest {
     /**
      * The permission to grant to the team for this project. Can be one of:  
@@ -38013,7 +39071,7 @@ impl TeamsAddUpdateRepoPermissionsLegacyRequestPermission {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsAddUpdateRepoPermissionsLegacyRequest {
     /**
      * The permission to grant the team on this repository. Can be one of:  
@@ -38027,7 +39085,7 @@ pub struct TeamsAddUpdateRepoPermissionsLegacyRequest {
     pub permission: Option<TeamsAddUpdateRepoPermissionsLegacyRequestPermission>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequestGroups {
     #[serde(
         default,
@@ -38076,7 +39134,7 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequestGroups {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
     /**
      * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
@@ -38126,31 +39184,7 @@ impl UsersGetByUsernameResponseOneOf {
     }
 }
 
-impl From<PrivateUser> for UsersGetByUsernameResponseOneOf {
-    fn from(f: PrivateUser) -> Self {
-        UsersGetByUsernameResponseOneOf::PrivateUser(f)
-    }
-}
-
-impl From<PublicUser> for UsersGetByUsernameResponseOneOf {
-    fn from(f: PublicUser) -> Self {
-        UsersGetByUsernameResponseOneOf::PublicUser(f)
-    }
-}
-
-impl From<UsersGetByUsernameResponseOneOf> for PrivateUser {
-    fn from(f: UsersGetByUsernameResponseOneOf) -> Self {
-        f.private_user().unwrap().clone()
-    }
-}
-
-impl From<UsersGetByUsernameResponseOneOf> for PublicUser {
-    fn from(f: UsersGetByUsernameResponseOneOf) -> Self {
-        f.public_user().unwrap().clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersUpdateAuthenticatedRequest {
     /**
      * The new short biography of the user.
@@ -38263,7 +39297,7 @@ impl UsersSetPrimaryEmailVisibilityAuthenticatedRequest {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersSetPrimaryEmailVisibilityAuthenticatedRequestData {
     /**
      * Denotes whether an email is publicly visible.
@@ -38275,7 +39309,7 @@ pub struct UsersSetPrimaryEmailVisibilityAuthenticatedRequestData {
     pub visibility: UsersSetPrimaryEmailVisibilityAuthenticatedRequest,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersAddEmailAuthenticatedRequest {
     /**
      * Adds one or more email addresses to your GitHub account. Must contain at least one email address. \*\*Note:\*\* Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
@@ -38338,12 +39372,6 @@ impl From<Vec<String>> for UsersAddEmailAuthenticatedRequestOneOf {
     }
 }
 
-impl From<UsersAddEmailAuthenticatedRequest> for UsersAddEmailAuthenticatedRequestOneOf {
-    fn from(f: UsersAddEmailAuthenticatedRequest) -> Self {
-        UsersAddEmailAuthenticatedRequestOneOf::UsersAddEmailAuthenticatedRequest(f)
-    }
-}
-
 impl From<UsersAddEmailAuthenticatedRequestOneOf> for String {
     fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
         f.string().unwrap().clone()
@@ -38356,14 +39384,8 @@ impl From<UsersAddEmailAuthenticatedRequestOneOf> for Vec<String> {
     }
 }
 
-impl From<UsersAddEmailAuthenticatedRequestOneOf> for UsersAddEmailAuthenticatedRequest {
-    fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
-        f.users_add_email_authenticated_request().unwrap().clone()
-    }
-}
-
 /// Deletes one or more email addresses from your GitHub account. Must contain at least one email address. **Note:** Alternatively, you can pass a single email address or an `array` of emails addresses directly, but we recommend that you pass an object using the `emails` key.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersDeleteEmailAuthenticatedRequest {
     /**
      * Email addresses associated with the GitHub user account.
@@ -38430,12 +39452,6 @@ impl From<Vec<String>> for UsersDeleteEmailAuthenticatedRequestOneOf {
     }
 }
 
-impl From<UsersDeleteEmailAuthenticatedRequest> for UsersDeleteEmailAuthenticatedRequestOneOf {
-    fn from(f: UsersDeleteEmailAuthenticatedRequest) -> Self {
-        UsersDeleteEmailAuthenticatedRequestOneOf::UsersDeleteEmailAuthenticatedRequest(f)
-    }
-}
-
 impl From<UsersDeleteEmailAuthenticatedRequestOneOf> for String {
     fn from(f: UsersDeleteEmailAuthenticatedRequestOneOf) -> Self {
         f.string().unwrap().clone()
@@ -38448,15 +39464,7 @@ impl From<UsersDeleteEmailAuthenticatedRequestOneOf> for Vec<String> {
     }
 }
 
-impl From<UsersDeleteEmailAuthenticatedRequestOneOf> for UsersDeleteEmailAuthenticatedRequest {
-    fn from(f: UsersDeleteEmailAuthenticatedRequestOneOf) -> Self {
-        f.users_delete_email_authenticated_request()
-            .unwrap()
-            .clone()
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersCreateGpgKeyAuthenticatedRequest {
     /**
      * A GPG key in ASCII-armored format.
@@ -38469,7 +39477,7 @@ pub struct UsersCreateGpgKeyAuthenticatedRequest {
     pub armored_public_key: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct UsersCreatePublicSshKeyAuthenticatedRequest {
     /**
      * The public SSH key to add to your GitHub account.
@@ -38564,7 +39572,7 @@ impl OrgsUpdateMembershipRequestState {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct OrgsUpdateMembershipRequest {
     /**
      * The state that the membership should be in. Only `"active"` will be accepted.
@@ -38576,7 +39584,7 @@ pub struct OrgsUpdateMembershipRequest {
     pub state: OrgsUpdateMembershipRequestState,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct MigrationsStartRequest {
     /**
      * Exclude attributes from the API response to improve performance
@@ -38597,7 +39605,7 @@ pub struct MigrationsStartRequest {
     pub repositories: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ProjectsCreateRequest {
     /**
      * Body of the project
@@ -38731,7 +39739,7 @@ impl ReposListDirection {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ReposCreateRequest {
     /**
      * Whether to allow Auto-merge to be used on pull requests.
@@ -38923,5 +39931,58 @@ impl std::fmt::Display for ReposListUserType {
 impl Default for ReposListUserType {
     fn default() -> ReposListUserType {
         ReposListUserType::Owner
+    }
+}
+
+/// Any of the following types:
+///
+/// - `Vec<StarredRepository>`
+/// - `Vec<Repository>`
+///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum ActivityListReposStarredByUserResponseAnyOf {
+    RepositoryVector(Vec<Repository>),
+    StarredRepositoryVector(Vec<StarredRepository>),
+}
+
+impl ActivityListReposStarredByUserResponseAnyOf {
+    pub fn vec_repository(&self) -> Option<&Vec<Repository>> {
+        if let ActivityListReposStarredByUserResponseAnyOf::RepositoryVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_starred_repository(&self) -> Option<&Vec<StarredRepository>> {
+        if let ActivityListReposStarredByUserResponseAnyOf::StarredRepositoryVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl From<Vec<Repository>> for ActivityListReposStarredByUserResponseAnyOf {
+    fn from(f: Vec<Repository>) -> Self {
+        ActivityListReposStarredByUserResponseAnyOf::RepositoryVector(f)
+    }
+}
+
+impl From<Vec<StarredRepository>> for ActivityListReposStarredByUserResponseAnyOf {
+    fn from(f: Vec<StarredRepository>) -> Self {
+        ActivityListReposStarredByUserResponseAnyOf::StarredRepositoryVector(f)
+    }
+}
+
+impl From<ActivityListReposStarredByUserResponseAnyOf> for Vec<Repository> {
+    fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
+        f.vec_repository().unwrap().clone()
+    }
+}
+
+impl From<ActivityListReposStarredByUserResponseAnyOf> for Vec<StarredRepository> {
+    fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
+        f.vec_starred_repository().unwrap().clone()
     }
 }

@@ -84,7 +84,7 @@ impl Webinars {
     pub async fn webinar_create(
         &self,
         user_id: &str,
-    ) -> Result<crate::types::WebinarCreateResponse> {
+    ) -> Result<crate::types::WebinarCreateResponseAllOf> {
         let url = format!(
             "/users/{}/webinars",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -114,7 +114,7 @@ impl Webinars {
         webinar_id: i64,
         occurrence_id: &str,
         show_previous_occurrences: bool,
-    ) -> Result<crate::types::WebinarResponse> {
+    ) -> Result<crate::types::WebinarResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
@@ -262,7 +262,7 @@ impl Webinars {
         webinar_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::Participants>> {
+    ) -> Result<Vec<crate::types::ListWebinarParticipantsResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -283,7 +283,7 @@ impl Webinars {
             query
         );
 
-        let resp: crate::types::ListWebinarParticipantsResponse =
+        let resp: crate::types::ListWebinarParticipantsResponseData =
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
@@ -312,13 +312,13 @@ impl Webinars {
     pub async fn list_all_webinar_participants(
         &self,
         webinar_id: &str,
-    ) -> Result<Vec<crate::types::Participants>> {
+    ) -> Result<Vec<crate::types::ListWebinarParticipantsResponse>> {
         let url = format!(
             "/past_webinars/{}/participants",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
 
-        let mut resp: crate::types::ListWebinarParticipantsResponse =
+        let mut resp: crate::types::ListWebinarParticipantsResponseData =
             self.client.get(&url, None).await.unwrap();
 
         let mut participants = resp.participants;
@@ -778,8 +778,8 @@ impl Webinars {
     pub async fn webinar_poll_create(
         &self,
         webinar_id: i64,
-        body: &crate::types::Poll,
-    ) -> Result<crate::types::WebinarPollGetResponse> {
+        body: &crate::types::MeetingPollCreateRequestAllOf,
+    ) -> Result<crate::types::WebinarPollGetResponseAllOf> {
         let url = format!(
             "/webinars/{}/polls",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -814,7 +814,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         poll_id: &str,
-    ) -> Result<crate::types::WebinarPollGetResponse> {
+    ) -> Result<crate::types::WebinarPollGetResponseAllOf> {
         let url = format!(
             "/webinars/{}/polls/{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -845,7 +845,7 @@ impl Webinars {
         &self,
         webinar_id: i64,
         poll_id: &str,
-        body: &crate::types::Poll,
+        body: &crate::types::MeetingPollCreateRequestAllOf,
     ) -> Result<()> {
         let url = format!(
             "/webinars/{}/polls/{}",
@@ -909,7 +909,7 @@ impl Webinars {
     pub async fn webinar_registrants_questions_get(
         &self,
         webinar_id: i64,
-    ) -> Result<crate::types::WebinarRegistrantQuestions> {
+    ) -> Result<crate::types::WebinarRegistrantsQuestionsGetResponseAllOf> {
         let url = format!(
             "/webinars/{}/registrants/questions",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -940,7 +940,7 @@ impl Webinars {
     pub async fn webinar_registrant_question_update(
         &self,
         webinar_id: i64,
-        body: &crate::types::WebinarRegistrantQuestions,
+        body: &crate::types::WebinarRegistrantsQuestionsGetResponseAllOf,
     ) -> Result<()> {
         let url = format!(
             "/webinars/{}/registrants/questions",
@@ -1337,8 +1337,8 @@ impl Webinars {
     pub async fn webinar_invite_links_create(
         &self,
         webinar_id: i64,
-        body: &crate::types::InviteLink,
-    ) -> Result<crate::types::InviteLinks> {
+        body: &crate::types::WebinarInviteLinksCreateRequestAllOf,
+    ) -> Result<crate::types::WebinarInviteLinksCreateResponseAllOf> {
         let url = format!(
             "/webinars/{}/invite_links",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),

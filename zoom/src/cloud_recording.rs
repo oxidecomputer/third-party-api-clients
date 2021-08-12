@@ -116,7 +116,7 @@ impl CloudRecording {
         meeting_id: &str,
         include_fields: &str,
         ttl: u64,
-    ) -> Result<crate::types::RecordingMeeting> {
+    ) -> Result<crate::types::RecordingGetResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_fields.is_empty() {
@@ -556,7 +556,7 @@ impl CloudRecording {
     pub async fn recording_registrant_question_update(
         &self,
         meeting_id: &str,
-        body: &crate::types::RecordingRegistrantQuestionsData,
+        body: &crate::types::RecordingRegistrantQuestionUpdateRequestAllOf,
     ) -> Result<()> {
         let url = format!(
             "/meetings/{}/recordings/registrants/questions",
@@ -604,7 +604,7 @@ impl CloudRecording {
         next_page_token: &str,
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::Meetings>> {
+    ) -> Result<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = from {
@@ -663,7 +663,7 @@ impl CloudRecording {
         account_id: &str,
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
-    ) -> Result<Vec<crate::types::Meetings>> {
+    ) -> Result<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = from {

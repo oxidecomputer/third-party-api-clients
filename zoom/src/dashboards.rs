@@ -34,7 +34,7 @@ impl Dashboards {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `include_fields: crate::types::IncludeFields` -- Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
      */
-    pub async fn dashboard_meetings(
+    pub async fn dashboard_meeting(
         &self,
         type_: crate::types::DashboardMeetingsType,
         from: chrono::NaiveDate,
@@ -42,7 +42,7 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::IncludeFields,
-    ) -> Result<crate::types::DashboardMeetingsResponse> {
+    ) -> Result<crate::types::DashboardMeetingsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -136,7 +136,7 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
-    ) -> Result<crate::types::PaginationToken> {
+    ) -> Result<crate::types::DashboardMeetingParticipantsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
@@ -284,7 +284,7 @@ impl Dashboards {
         type_: crate::types::DashboardMeetingsType,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::PaginationToken> {
+    ) -> Result<crate::types::DashboardMeetingParticipantShareResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -331,14 +331,14 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_webinars(
+    pub async fn dashboard_webinar(
         &self,
         type_: crate::types::DashboardWebinarsType,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::DashboardMeetingsResponse> {
+    ) -> Result<crate::types::DashboardWebinarsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -385,7 +385,7 @@ impl Dashboards {
         &self,
         webinar_id: &str,
         type_: crate::types::DashboardWebinarsType,
-    ) -> Result<crate::types::WebinarMetric> {
+    ) -> Result<crate::types::Webinars> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("type={}", type_));
@@ -436,7 +436,7 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
-    ) -> Result<crate::types::PaginationToken> {
+    ) -> Result<crate::types::DashboardWebinarParticipantsResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
@@ -588,7 +588,7 @@ impl Dashboards {
         type_: crate::types::DashboardWebinarsType,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::PaginationToken> {
+    ) -> Result<crate::types::DashboardMeetingParticipantShareResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -784,7 +784,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::DashboardImResponse> {
+    ) -> Result<crate::types::DashboardImResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -836,7 +836,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::DashboardChatResponse> {
+    ) -> Result<crate::types::DashboardChatResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -958,7 +958,7 @@ impl Dashboards {
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::DashboardIssueZoomRoomResponse> {
+    ) -> Result<crate::types::DashboardIssueZoomRoomResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -1002,7 +1002,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ReportCloudRecordingResponse> {
+    ) -> Result<crate::types::DashboardIssueDetailZoomRoomResponseAllOfData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -1059,7 +1059,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ReportCloudRecordingResponse> {
+    ) -> Result<crate::types::DashboardClientFeedbackDetailResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
