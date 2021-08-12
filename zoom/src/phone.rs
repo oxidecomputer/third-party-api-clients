@@ -173,13 +173,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -194,7 +194,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(phone_numbers)
     }
 
     /**
@@ -426,13 +426,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -447,7 +447,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(templates)
     }
 
     /**
@@ -571,13 +571,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -592,7 +592,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(locations)
     }
 
     /**
@@ -781,13 +781,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -802,7 +802,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(sip_groups)
     }
 
     /**
@@ -1009,13 +1009,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -1030,7 +1030,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(call_logs)
     }
 
     /**
@@ -1140,13 +1140,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -1161,7 +1161,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(recordings)
     }
 
     /**
@@ -1276,13 +1276,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -1297,7 +1297,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(voice_mails)
     }
 
     /**
@@ -1571,13 +1571,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -1592,7 +1592,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(call_logs)
     }
 
     /**
@@ -1863,13 +1863,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -1884,7 +1884,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(recordings)
     }
 
     /**
@@ -1960,13 +1960,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -1981,7 +1981,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(byoc_sip_trunk)
     }
 
     /**
@@ -2130,13 +2130,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -2151,7 +2151,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(external_contacts)
     }
 
     /**
@@ -2474,13 +2474,13 @@ impl Phone {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -2495,7 +2495,7 @@ impl Phone {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(users)
     }
 
     /**

@@ -113,7 +113,7 @@ impl Cards {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(cards)
     }
 
     /**

@@ -1256,13 +1256,13 @@ impl Dashboards {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -1277,7 +1277,7 @@ impl Dashboards {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(call_logs)
     }
 
     /**
@@ -1449,13 +1449,13 @@ impl Dashboards {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -1470,7 +1470,7 @@ impl Dashboards {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(participants)
     }
 
     /**
@@ -1585,13 +1585,13 @@ impl Dashboards {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -1606,6 +1606,6 @@ impl Dashboards {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(participants)
     }
 }

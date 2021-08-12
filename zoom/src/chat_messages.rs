@@ -157,13 +157,13 @@ impl ChatMessages {
             if !url.contains("?") {
                 resp = self
                     .client
-                    .get(&format!("{}?next_page_token={}", page), None)
+                    .get(&format!("{}?next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             } else {
                 resp = self
                     .client
-                    .get(&format!("{}&next_page_token={}", page), None)
+                    .get(&format!("{}&next_page_token={}", url, page), None)
                     .await
                     .unwrap();
             }
@@ -178,7 +178,7 @@ impl ChatMessages {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(messages)
     }
 
     /**

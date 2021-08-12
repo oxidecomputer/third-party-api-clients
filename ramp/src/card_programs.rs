@@ -86,7 +86,7 @@ impl CardPrograms {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(card_programs)
     }
 
     /**

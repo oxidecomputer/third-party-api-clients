@@ -631,6 +631,8 @@ fn get_fn_params(
 /*
  * Perform the function.
  */
+// TODO: Fix this
+#[allow(clippy::too_many_arguments)]
 fn get_fn_inner(
     proper_name: &str,
     oid: &str,
@@ -675,7 +677,7 @@ fn get_fn_inner(
             }}
 
             // Return our response data.
-            Ok(data)"#,
+            Ok({})"#,
             response_type,
             m.to_lowercase(),
             body,
@@ -683,6 +685,7 @@ fn get_fn_inner(
             pagination_property,
             m.to_lowercase(),
             body,
+            pagination_property,
             pagination_property,
             pagination_property,
         );
@@ -700,9 +703,9 @@ fn get_fn_inner(
             while !page.is_empty() {{
                 // Check if we already have URL params and need to concat the token.
                 if !url.contains("?") {{
-                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", page), {}).await.unwrap();
+                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", url, page), {}).await.unwrap();
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", page), {}).await.unwrap();
+                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", url, page), {}).await.unwrap();
                 }}
 
                 {}.append(&mut resp.{});
@@ -715,7 +718,7 @@ fn get_fn_inner(
             }}
 
             // Return our response data.
-            Ok(data)"#,
+            Ok({})"#,
             response_type,
             m.to_lowercase(),
             body,
@@ -725,6 +728,7 @@ fn get_fn_inner(
             body,
             m.to_lowercase(),
             body,
+            pagination_property,
             pagination_property,
             pagination_property,
         );
