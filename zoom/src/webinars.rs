@@ -30,16 +30,17 @@ impl Webinars {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *  
-     *  The page number of the current page in the returned records.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
      */
     pub async fn get(
         &self,
         user_id: &str,
         page_size: i64,
         page_number: i64,
-    ) -> Result<crate::types::WebinarList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page_number > 0 {
@@ -105,9 +106,9 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `occurrence_id: &str` -- Unique Identifier that identifies an occurrence of a recurring webinar. [Recurring webinars](https://support.zoom.us/hc/en-us/articles/216354763-How-to-Schedule-A-Recurring-Webinar) can have a maximum of 50 occurrences. When you create a recurring Webinar using [Create a Webinar API](https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarcreate), you can retrieve the Occurrence ID from the response of the API call.
-     * * `show_previous_occurrences: bool` -- Set the value of this field to `true` if you would like to view Webinar details of all previous occurrences of a recurring Webinar.
+     * * `show_previous_occurrences: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     pub async fn webinar(
         &self,
@@ -155,13 +156,13 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `occurrence_id: &str` -- The meeting occurrence ID.
      * * `cancel_webinar_reminder: &str` -- `true`: Notify panelists and registrants about the webinar cancellation via email.
-     *  
-     *  `false`: Do not send any email notification to webinar registrants and panelists.
-     *  
-     *  The default value of this field is `false`.
+     *   
+     *   `false`: Do not send any email notification to webinar registrants and panelists.
+     *   
+     *   The default value of this field is `false`.
      */
     pub async fn webinar_delete(
         &self,
@@ -210,7 +211,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `occurrence_id: &str` -- Webinar occurrence id. Support change of agenda, start_time, duration, settings: {host_video, panelist_video, hd_video, watermark, auto_recording}.
      */
     pub async fn webinar_update(&self, webinar_id: i64, occurrence_id: &str) -> Result<()> {
@@ -262,7 +263,7 @@ impl Webinars {
         webinar_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::ListWebinarParticipantsResponse>> {
+    ) -> Result<Vec<crate::types::Participants>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -283,7 +284,7 @@ impl Webinars {
             query
         );
 
-        let resp: crate::types::ListWebinarParticipantsResponseData =
+        let resp: crate::types::ListWebinarParticipantsResponse =
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
@@ -312,13 +313,13 @@ impl Webinars {
     pub async fn list_all_webinar_participants(
         &self,
         webinar_id: &str,
-    ) -> Result<Vec<crate::types::ListWebinarParticipantsResponse>> {
+    ) -> Result<Vec<crate::types::Participants>> {
         let url = format!(
             "/past_webinars/{}/participants",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
 
-        let mut resp: crate::types::ListWebinarParticipantsResponseData =
+        let mut resp: crate::types::ListWebinarParticipantsResponse =
             self.client.get(&url, None).await.unwrap();
 
         let mut participants = resp.participants;
@@ -368,7 +369,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn webinar_status(
         &self,
@@ -404,12 +405,9 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
-    pub async fn webinar_panelist(
-        &self,
-        webinar_id: i64,
-    ) -> Result<crate::types::WebinarPanelistList> {
+    pub async fn webinar_panelist(&self, webinar_id: i64) -> Result<crate::types::Domains> {
         let url = format!(
             "/webinars/{}/panelists",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -433,7 +431,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn webinar_panelist_create(
         &self,
@@ -467,7 +465,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn webinar_panelists_delete(&self, webinar_id: i64) -> Result<()> {
         let url = format!(
@@ -494,7 +492,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `panelist_id: i64` -- The panelist ID or panelist email.
      */
     pub async fn webinar_panelist_delete(&self, webinar_id: i64, panelist_id: i64) -> Result<()> {
@@ -523,14 +521,15 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `occurrence_id: &str` -- The meeting occurrence ID.
      * * `status: crate::types::MeetingRegistrantsStatus` -- The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
      * * `tracking_source_id: &str` -- The tracking source ID for the registrants. Useful if you share the webinar registration page in multiple locations. See [Creating source tracking links for webinar registration](https://support.zoom.us/hc/en-us/articles/360000315683-Creating-source-tracking-links-for-webinar-registration) for details.
      * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *  
-     *  The page number of the current page in the returned records.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn webinar_registrant(
@@ -542,7 +541,7 @@ impl Webinars {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::UserList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -590,7 +589,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `occurrence_ids: &str` -- Occurrence ID. Get this value from the webinar get API. Multiple values separated by a comma.
      */
     pub async fn webinar_registrant_create(
@@ -647,7 +646,7 @@ impl Webinars {
         &self,
         webinar_id: &str,
         body: &crate::types::AddBatchRegistrantsRequest,
-    ) -> Result<crate::types::AddBatchWebinarRegistrantsResponseData> {
+    ) -> Result<crate::types::AddBatchRegistrantsResponse> {
         let url = format!(
             "/webinars/{}/batch_registrants",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -675,14 +674,14 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      * * `occurrence_id: &str` -- The meeting occurrence ID.
      */
     pub async fn webinar_registrant_status(
         &self,
         webinar_id: i64,
         occurrence_id: &str,
-        body: &crate::types::WebinarRegistrantStatusRequest,
+        body: &crate::types::RegistrantStatus,
     ) -> Result<()> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -723,9 +722,9 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
-    pub async fn past(&self, webinar_id: i64) -> Result<crate::types::WebinarList> {
+    pub async fn past(&self, webinar_id: i64) -> Result<crate::types::Domains> {
         let url = format!(
             "/past_webinars/{}/instances",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -748,9 +747,9 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
-    pub async fn webinar_poll(&self, webinar_id: i64) -> Result<crate::types::PollList> {
+    pub async fn webinar_poll(&self, webinar_id: i64) -> Result<crate::types::Domains> {
         let url = format!(
             "/webinars/{}/polls",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -773,13 +772,13 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn webinar_poll_create(
         &self,
         webinar_id: i64,
         body: &crate::types::MeetingPollCreateRequestAllOf,
-    ) -> Result<crate::types::WebinarPollGetResponseAllOf> {
+    ) -> Result<crate::types::MeetingPollGetResponseAllOf> {
         let url = format!(
             "/webinars/{}/polls",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -807,14 +806,14 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
-     * * `poll_id: &str` -- The poll ID.
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
+     * * `poll_id: &str` -- User's first name.
      */
     pub async fn webinar_poll_get(
         &self,
         webinar_id: i64,
         poll_id: &str,
-    ) -> Result<crate::types::WebinarPollGetResponseAllOf> {
+    ) -> Result<crate::types::MeetingPollGetResponseAllOf> {
         let url = format!(
             "/webinars/{}/polls/{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -838,8 +837,8 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
-     * * `poll_id: &str` -- The poll ID.
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
+     * * `poll_id: &str` -- User's first name.
      */
     pub async fn webinar_poll_update(
         &self,
@@ -875,8 +874,8 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
-     * * `poll_id: &str` -- The poll ID.
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
+     * * `poll_id: &str` -- User's first name.
      */
     pub async fn webinar_poll_delete(&self, webinar_id: i64, poll_id: &str) -> Result<()> {
         let url = format!(
@@ -904,7 +903,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn webinar_registrants_questions_get(
         &self,
@@ -935,7 +934,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn webinar_registrant_question_update(
         &self,
@@ -969,8 +968,8 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
-     * * `registrant_id: &str` -- The registrant ID.
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
+     * * `registrant_id: &str` -- User's first name.
      * * `occurrence_id: &str` -- The meeting occurrence ID.
      */
     pub async fn webinar_registrant_get(
@@ -1012,8 +1011,8 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID.
-     * * `registrant_id: &str` -- The registrant ID.
+     * * `webinar_id: i64` -- Account seats.
+     * * `registrant_id: &str` -- User's first name.
      * * `occurrence_id: &str` -- The webinar occurence ID.
      */
     pub async fn delete_webinar_registrant(
@@ -1065,7 +1064,7 @@ impl Webinars {
         page_size: i64,
         next_page_token: &str,
         webinar_uuid: &str,
-    ) -> Result<crate::types::UserList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -1108,7 +1107,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn get_tracking_sources(
         &self,
@@ -1139,13 +1138,13 @@ impl Webinars {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
     pub async fn list_past_webinar_poll_results(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ListPastWebinarPollResultsResponse> {
+    ) -> Result<crate::types::ReportMeetingPollsResponse> {
         let url = format!(
             "/past_webinars/{}/polls",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -1173,13 +1172,13 @@ impl Webinars {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
     pub async fn list_past_webinar_qa(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ListPastWebinarQaResponse> {
+    ) -> Result<crate::types::ReportWebinarQaResponse> {
         let url = format!(
             "/past_webinars/{}/qa",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -1200,10 +1199,10 @@ impl Webinars {
      * **Prerequisites:**
      * * Pro or a higher account with Webinar plan enabled.
      */
-    pub async fn list_webinar_template(
+    pub async fn list_webinar_templates(
         &self,
         user_id: &str,
-    ) -> Result<crate::types::ListWebinarTemplatesResponseData> {
+    ) -> Result<crate::types::ListWebinarTemplatesResponse> {
         let url = format!(
             "/users/{}/webinar_templates",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1235,7 +1234,7 @@ impl Webinars {
     pub async fn get_webinar_live_stream_details(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::GetWebinarLiveStreamDetailsResponse> {
+    ) -> Result<crate::types::GetLiveStreamDetailsResponse> {
         let url = format!(
             "/webinars/{}/livestream",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -1261,12 +1260,12 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn webinar_live_stream_update(
         &self,
         webinar_id: &str,
-        body: &crate::types::WebinarLiveStream,
+        body: &crate::types::MeetingLiveStream,
     ) -> Result<()> {
         let url = format!(
             "/webinars/{}/livestream",
@@ -1297,7 +1296,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn webinar_live_stream_status_update(
         &self,
@@ -1332,7 +1331,7 @@ impl Webinars {
      *
      * **Parameters:**
      *
-     * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
+     * * `webinar_id: i64` -- The webinar ID in "**long**" format(represented as int64 data type in JSON). .
      */
     pub async fn webinar_invite_links_create(
         &self,

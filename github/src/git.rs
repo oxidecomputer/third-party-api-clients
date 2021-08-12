@@ -31,7 +31,7 @@ impl Git {
         owner: &str,
         repo: &str,
         body: &crate::types::GitCreateBlobRequest,
-    ) -> Result<crate::types::ShortBlob> {
+    ) -> Result<crate::types::Tree> {
         let url = format!(
             "/repos/{}/{}/git/blobs",
             crate::progenitor_support::encode_path(&owner.to_string()),

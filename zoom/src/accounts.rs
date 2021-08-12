@@ -30,9 +30,10 @@ impl Accounts {
      * **Parameters:**
      *
      * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *  
-     *  The page number of the current page in the returned records.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn get(
@@ -40,7 +41,7 @@ impl Accounts {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::AccountList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -112,7 +113,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account(&self, account_id: &str) -> Result<crate::types::AccountResponse> {
         let url = format!(
@@ -143,7 +144,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_disassociate(&self, account_id: &str) -> Result<()> {
         let url = format!(
@@ -173,7 +174,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_options_update(
         &self,
@@ -209,17 +210,17 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
      *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
      *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      * * `custom_query_fields: &str` -- The name of the field by which to filter the response. For example, if you provide the `host_video` value for this field, you will get a response similar to the following:
-     *  
-     *  `{ "schedule_meeting": { "host_video": false    } }`
-     *  
-     *  To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
+     *   
+     *   `{ "schedule_meeting": { "host_video": false    } }`
+     *   
+     *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
     pub async fn account_settings(
         &self,
@@ -264,17 +265,17 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
      *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
      *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      * * `custom_query_fields: &str` -- The name of the field by which to filter the response. For example, if you provide the `host_video` value for this field, you will get a response similar to the following:
-     *  
-     *  `{ "schedule_meeting": { "host_video": false    } }`
-     *  
-     *  To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
+     *   
+     *   `{ "schedule_meeting": { "host_video": false    } }`
+     *   
+     *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
     pub async fn account_settings_domains(
         &self,
@@ -319,17 +320,17 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
      *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
      *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      * * `custom_query_fields: &str` -- The name of the field by which to filter the response. For example, if you provide the `host_video` value for this field, you will get a response similar to the following:
-     *  
-     *  `{ "schedule_meeting": { "host_video": false    } }`
-     *  
-     *  To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
+     *   
+     *   `{ "schedule_meeting": { "host_video": false    } }`
+     *   
+     *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
     pub async fn account_settings_meeting_security(
         &self,
@@ -374,17 +375,17 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
      *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
      *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      * * `custom_query_fields: &str` -- The name of the field by which to filter the response. For example, if you provide the `host_video` value for this field, you will get a response similar to the following:
-     *  
-     *  `{ "schedule_meeting": { "host_video": false    } }`
-     *  
-     *  To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
+     *   
+     *   `{ "schedule_meeting": { "host_video": false    } }`
+     *   
+     *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
     pub async fn account_settings_security(
         &self,
@@ -429,17 +430,17 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
      *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
      *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      * * `custom_query_fields: &str` -- The name of the field by which to filter the response. For example, if you provide the `host_video` value for this field, you will get a response similar to the following:
-     *  
-     *  `{ "schedule_meeting": { "host_video": false    } }`
-     *  
-     *  To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
+     *   
+     *   `{ "schedule_meeting": { "host_video": false    } }`
+     *   
+     *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
     pub async fn account_setting(
         &self,
@@ -482,7 +483,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      * * `option: crate::types::AccountSettingsUpdateOption`
      */
     pub async fn account_settings_update(
@@ -563,7 +564,7 @@ impl Accounts {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_trusted_domain(
         &self,
@@ -603,12 +604,12 @@ impl Accounts {
      * * `account_id: &str` -- Unique Identifier of the account. To retrieve locked settings of the master account or a regular account, provide "me" as the value of this field. <br> To retrieve locked settings of a sub account, provide the Account ID of the sub account in this field.
      * * `option: &str` -- `meeting_security`: Use this query parameter to view meeting security settings applied on the account.<br>.
      * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
-     *  {
-     *      "schedule_meeting": {
-     *          "host_video": false
-     *      }
-     *  }
-     *  <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
+     *   {
+     *       "schedule_meeting": {
+     *           "host_video": false
+     *       }
+     *   }
+     *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
     pub async fn get_account_lock_setting(
         &self,
@@ -691,7 +692,7 @@ impl Accounts {
     pub async fn update_account_owner(
         &self,
         account_id: &str,
-        body: &crate::types::UpdateAccountOwnerRequest,
+        body: &crate::types::Members,
     ) -> Result<()> {
         let url = format!(
             "/accounts/{}/owner",

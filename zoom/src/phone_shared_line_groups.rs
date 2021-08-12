@@ -365,7 +365,7 @@ impl PhoneSharedLineGroups {
     pub async fn assign_phone_numbers_slg(
         &self,
         shared_line_group_id: &str,
-        body: &crate::types::AssignPhoneNumbersSlgRequest,
+        body: &crate::types::AddByocNumberResponse,
     ) -> Result<()> {
         let url = format!(
             "/phone/shared_line_groups/{}/phone_numbers",

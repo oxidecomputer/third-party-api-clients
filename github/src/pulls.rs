@@ -25,11 +25,13 @@ impl Pulls {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `state: crate::types::IssuesListState` -- Either `open`, `closed`, or `all` to filter by state.
+     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `head: &str` -- Filter pulls by head user or head organization and branch name in the format of `user:ref-name` or `organization:ref-name`. For example: `github:new-script-format` or `octocat:test-branch`.
      * * `base: &str` -- Filter pulls by base branch name. Example: `gh-pages`.
      * * `sort: crate::types::PullsListSort` -- What to sort results by. Can be either `created`, `updated`, `popularity` (comment count) or `long-running` (age, filtering by pulls updated in the last month).
-     * * `direction: crate::types::Order` -- The direction of the sort. Can be either `asc` or `desc`. Default: `desc` when sort is `created` or sort is not specified, otherwise `asc`.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -180,7 +182,9 @@ impl Pulls {
      * * `owner: &str`
      * * `repo: &str`
      * * `sort: crate::types::PullsListReviewCommentsRepoSort`
-     * * `direction: crate::types::Order` -- Can be either `asc` or `desc`. Ignored without `sort` parameter.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -348,7 +352,7 @@ impl Pulls {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &crate::types::PullsUpdateReviewCommentRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::PullRequestReviewComment> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}",
@@ -464,7 +468,9 @@ impl Pulls {
      * * `repo: &str`
      * * `pull_number: i64`
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- Can be either `asc` or `desc`. Ignored without `sort` parameter.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -622,7 +628,7 @@ impl Pulls {
         repo: &str,
         pull_number: i64,
         comment_id: i64,
-        body: &crate::types::PullsCreateReplyReviewCommentRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::PullRequestReviewComment> {
         let url = format!(
             "/repos/{}/{}/pulls/{}/comments/{}/replies",

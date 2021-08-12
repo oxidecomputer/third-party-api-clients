@@ -262,7 +262,9 @@ impl Teams {
      *
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
-     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      * * `pinned: &str` -- Pinned discussions only filter.
@@ -505,7 +507,9 @@ impl Teams {
      * * `org: &str`
      * * `team_slug: &str` -- team_slug parameter.
      * * `discussion_number: i64`
-     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -608,7 +612,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        body: &crate::types::TeamsCreateDiscussionCommentInOrgRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::TeamDiscussionComment> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments",
@@ -721,7 +725,7 @@ impl Teams {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-        body: &crate::types::TeamsCreateDiscussionCommentInOrgRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::TeamDiscussionComment> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}",
@@ -1163,7 +1167,7 @@ impl Teams {
         org: &str,
         team_slug: &str,
         project_id: i64,
-        body: &crate::types::TeamsAddUpdateProjectPermissionsInOrgRequest,
+        body: &crate::types::ProjectsAddCollaboratorRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/projects/{}",
@@ -1623,7 +1627,7 @@ impl Teams {
     pub async fn update_legacy(
         &self,
         team_id: i64,
-        body: &crate::types::TeamsUpdateLegacyRequest,
+        body: &crate::types::TeamsUpdateInOrgRequest,
     ) -> Result<crate::types::FullTeam> {
         let url = format!(
             "/teams/{}",
@@ -1652,7 +1656,9 @@ impl Teams {
      * **Parameters:**
      *
      * * `team_id: i64`
-     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -1869,7 +1875,9 @@ impl Teams {
      *
      * * `team_id: i64`
      * * `discussion_number: i64`
-     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -1966,7 +1974,7 @@ impl Teams {
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &crate::types::TeamsCreateDiscussionCommentInOrgRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::TeamDiscussionComment> {
         let url = format!(
             "/teams/{}/discussions/{}/comments",
@@ -2070,7 +2078,7 @@ impl Teams {
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-        body: &crate::types::TeamsCreateDiscussionCommentInOrgRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::TeamDiscussionComment> {
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}",

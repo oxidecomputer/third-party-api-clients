@@ -70,7 +70,7 @@ impl Reports {
      *
      * * `type_: crate::types::ReportUsersType` -- Active or inactive hosts.<br>`active` - Active hosts. <br>`inactive` - Inactive hosts.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `page_number: i64` -- The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -127,7 +127,7 @@ impl Reports {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `type_: crate::types::ReportMeetingsType` -- The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.
@@ -183,8 +183,8 @@ impl Reports {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
     pub async fn report_meeting_details(
         &self,
@@ -215,13 +215,11 @@ impl Reports {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants).<br>
-     *  
-     *.
+     * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
      */
     pub async fn report_meeting_participant(
         &self,
@@ -270,8 +268,8 @@ impl Reports {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
     pub async fn report_meeting_polls(
         &self,
@@ -300,13 +298,13 @@ impl Reports {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
     pub async fn report_webinar_details(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ReportWebinarDetailsResponse> {
+    ) -> Result<crate::types::ReportMeetingDetailsResponse> {
         let url = format!(
             "/report/webinars/{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -330,13 +328,11 @@ impl Reports {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Enter 'registrant_id' as the value for this field if you would like to see the registrant ID attribute included in the response of this API call. A registrant ID is a unique identifier of a [webinar registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarregistrants).<br>
-     *  
-     *.
+     * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
      */
     pub async fn report_webinar_participant(
         &self,
@@ -384,13 +380,13 @@ impl Reports {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
     pub async fn report_webinar_polls(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ReportWebinarPollsResponse> {
+    ) -> Result<crate::types::ReportMeetingPollsResponse> {
         let url = format!(
             "/report/webinars/{}/polls",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -416,8 +412,8 @@ impl Reports {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
     pub async fn report_webinar_qa(
         &self,
@@ -449,11 +445,12 @@ impl Reports {
      *  `3` - SIP Connected Audio.
      * * `query_date_type: crate::types::QueryDateType` -- Date types:<br>`start_time` - Query by call start time.<br>`end_time` - Query by call end time.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *  
-     *  The page number of the current page in the returned records.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn report_telephone(
@@ -509,7 +506,7 @@ impl Reports {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      */
     pub async fn report_cloud_recording(
         &self,
@@ -547,7 +544,7 @@ impl Reports {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `category_type: crate::types::CategoryType` -- \*\*Optional\*\*<br>
@@ -738,9 +735,9 @@ impl Reports {
      *
      * **Parameters:**
      *
-     * * `billing_id: &str` -- Unique Identifier of the Billing Report. Retrieve this ID from the response of \*\*Get Billing Reports\*\* API request.
-     *  
-     *.
+     * * `billing_id: &str` -- Unique Identifier of the Billing Report. Retrieve this ID from the response of **Get Billing Reports** API request.
+     *   
+     *   .
      */
     pub async fn get_billing_invoices(
         &self,

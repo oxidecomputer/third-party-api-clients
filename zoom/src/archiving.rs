@@ -31,7 +31,7 @@ impl Archiving {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `from: &str` -- Start date for the query in "yyyy-MM-dd'T'HH:mm:ss'Z'" format. The duration for the query defined using the "from" and "to" parameters should not exceed 7 days as this API only provides a week's data at once.
-     * * `to: &str` -- End date for the query in "yyyy-MM-dd'T'HH:mm:ss'Z'" format.
+     * * `to: &str` -- End date for the query in "yyyy-MM-dd'T'HH:mm:ss'Z'" format. .
      * * `query_date_type: crate::types::ListArchivedFilesQueryDateType` -- The query date type for the `from` and `to` parameters.
      */
     pub async fn list_archived_files(
@@ -163,8 +163,8 @@ impl Archiving {
      * **Parameters:**
      *
      * * `meeting: &str` -- The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
-     *  
-     *  If the meeting UUID begins with a `/` character or contains a `//` character, you \*\*must\*\* double-encode the meeting UUID when using the meeting UUID for other API calls.
+     *   
+     *   If the meeting UUID begins with a `/` character or contains a `//` character, you **must** double-encode the meeting UUID when using the meeting UUID for other API calls.
      */
     pub async fn testget_record_archived_file(
         &self,

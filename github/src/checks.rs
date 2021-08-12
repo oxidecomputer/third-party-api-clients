@@ -253,7 +253,7 @@ impl Checks {
         &self,
         owner: &str,
         repo: &str,
-        body: &crate::types::ChecksSetSuitesPreferencesRequest,
+        body: &crate::types::Preferences,
     ) -> Result<crate::types::CheckSuitePreference> {
         let url = format!(
             "/repos/{}/{}/check-suites/preferences",
@@ -320,7 +320,9 @@ impl Checks {
      * * `check_suite_id: i64` -- check_suite_id parameter.
      * * `check_name: &str` -- Returns check runs with the specified `name`.
      * * `status: crate::types::JobStatus` -- Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
-     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
+     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters jobs by their `completed_at` timestamp. Can be one of:  
+     *  \\* `latest`: Returns jobs from the most recent execution of the workflow run.  
+     *  \\* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -416,7 +418,9 @@ impl Checks {
      * * `ref_: &str` -- ref parameter.
      * * `check_name: &str` -- Returns check runs with the specified `name`.
      * * `status: crate::types::JobStatus` -- Returns check runs with the specified `status`. Can be one of `queued`, `in_progress`, or `completed`.
-     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters check runs by their `completed_at` timestamp. Can be one of `latest` (returning the most recent check runs) or `all`.
+     * * `filter: crate::types::ActionsListJobsWorkflowRunFilter` -- Filters jobs by their `completed_at` timestamp. Can be one of:  
+     *  \\* `latest`: Returns jobs from the most recent execution of the workflow run.  
+     *  \\* `all`: Returns all jobs for a workflow run, including from old executions of the workflow run.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      * * `app_id: i64`

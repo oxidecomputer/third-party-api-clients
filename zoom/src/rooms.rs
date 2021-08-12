@@ -27,7 +27,7 @@ impl Rooms {
      *
      * * `status: crate::types::ListZoomRoomsStatus` -- The status of the Zoom Room.
      * * `type_: crate::types::ListZoomRoomsType` -- Type of the Zoom Rooms.
-     * * `unassigned_rooms: bool` -- Use this query parameter with a value of `true` if you would like to see Zoom Rooms in your account that have not been assigned to anyone yet.
+     * * `unassigned_rooms: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `location_id: &str` -- Parent location ID of the Zoom Room.
@@ -273,7 +273,7 @@ impl Rooms {
      * **Parameters:**
      *
      * * `setting_type: &str` -- The type of setting that you would like to retrieve.<br> `alert`: Alert Settings applied on the Zoom Rooms Account.<br>
-     *  `meeting`: Meeting settings of the Zoom Rooms Account.
+     *   `meeting`: Meeting settings of the Zoom Rooms Account.
      * * `room_id: &str` -- Unique identifier of the Zoom Room.
      */
     pub async fn get_zr_setting(
@@ -317,8 +317,8 @@ impl Rooms {
      *
      * * `room_id: &str` -- Unique Identifier of the Zoom Room.
      * * `setting_type: &str` -- The type of setting that you would like to update.<br> `alert`: Alert Settings applied on the Zoom Room.<br>
-     *  `meeting`: Meeting settings of the Zoom Room.<br>
-     *  `signage`: Digital signage settings applied on the Zoom Room.
+     *   `meeting`: Meeting settings of the Zoom Room.<br>
+     *   `signage`: Digital signage settings applied on the Zoom Room.
      */
     pub async fn update_zr_settings(&self, room_id: &str, setting_type: &str) -> Result<()> {
         let mut query = String::new();
@@ -419,7 +419,7 @@ impl Rooms {
      *
      * **Parameters:**
      *
-     * * `id: &str` -- Room ID.
+     * * `id: &str` -- User's first name.
      */
     pub async fn check_in(&self, id: &str, body: &crate::types::CheckInRoomsRequest) -> Result<()> {
         let url = format!(
@@ -452,8 +452,8 @@ impl Rooms {
      * **Parameters:**
      *
      * * `type_: &str` -- Specify the type of digital signane resource. The value can be one of the following:
-     *  \* `content`: Returns information about content files.
-     *  \* `folder`: Returns information about the folder where the content files are located.
+     *   * `content`: Returns information about content files.
+     *   * `folder`: Returns information about the folder where the content files are located.
      * * `folder_id: &str` -- Unique identifier of the folder where the content is located. Provide this field if you would like to filter the response by contents that are only available in a specific folder.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -464,7 +464,7 @@ impl Rooms {
         folder_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::Contents>> {
+    ) -> Result<Vec<crate::types::Site>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !folder_id.is_empty() {
@@ -514,7 +514,7 @@ impl Rooms {
         &self,
         type_: &str,
         folder_id: &str,
-    ) -> Result<Vec<crate::types::Contents>> {
+    ) -> Result<Vec<crate::types::Site>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !folder_id.is_empty() {

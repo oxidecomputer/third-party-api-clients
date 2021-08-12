@@ -24,7 +24,7 @@ impl Projects {
      * **Parameters:**
      *
      * * `org: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -109,7 +109,7 @@ impl Projects {
     pub async fn create_for_org(
         &self,
         org: &str,
-        body: &crate::types::ProjectsCreateOrgRequest,
+        body: &crate::types::ProjectsCreateRequest,
     ) -> Result<crate::types::Project> {
         let url = format!(
             "/orgs/{}/projects",
@@ -804,7 +804,7 @@ impl Projects {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -895,7 +895,7 @@ impl Projects {
         &self,
         owner: &str,
         repo: &str,
-        body: &crate::types::ProjectsCreateOrgRequest,
+        body: &crate::types::ProjectsCreateRequest,
     ) -> Result<crate::types::Project> {
         let url = format!(
             "/repos/{}/{}/projects",
@@ -945,7 +945,7 @@ impl Projects {
      * **Parameters:**
      *
      * * `username: &str`
-     * * `state: crate::types::IssuesListState` -- Indicates the state of the projects to return. Can be either `open`, `closed`, or `all`.
+     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */

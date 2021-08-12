@@ -24,7 +24,7 @@ impl TrackingField {
      * **Prerequisites:**
      * * Business, Education, API or higher plan
      */
-    pub async fn trackingfield_list(&self) -> Result<crate::types::TrackingFieldList> {
+    pub async fn trackingfield_list(&self) -> Result<crate::types::Domains> {
         let url = "/tracking_fields".to_string();
         self.client.get(&url, None).await
     }

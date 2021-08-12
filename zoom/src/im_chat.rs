@@ -29,7 +29,7 @@ impl ImChat {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -39,7 +39,7 @@ impl ImChat {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ImChatSessionsResponseAllOf> {
+    ) -> Result<crate::types::ImChatSessionsResponseAllOfData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -81,9 +81,9 @@ impl ImChat {
      *
      * **Parameters:**
      *
-     * * `session_id: &str` -- IM chat session ID.
+     * * `session_id: &str` -- User's first name.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -136,7 +136,7 @@ impl ImChat {
      *
      * * `user_id: &str` -- The user ID or email address.
      * * `chat_user: &str` -- Chat user's ID or email address.
-     * * `channel: &str` -- IM Channel's ID.
+     * * `channel: &str` -- User's first name.
      * * `date: &str` -- IM message's query date time, format as yyyy-MM-dd.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -282,7 +282,7 @@ impl ImChat {
         &self,
         chat_user: &str,
         body: &crate::types::SendimmessagesRequest,
-    ) -> Result<crate::types::SendimmessagesResponse> {
+    ) -> Result<crate::types::Groups> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !chat_user.is_empty() {

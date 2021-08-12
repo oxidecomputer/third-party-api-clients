@@ -26,7 +26,9 @@ impl Repos {
      * * `org: &str`
      * * `type_: crate::types::ReposListOrgType` -- Specifies the types of repositories you want returned. Can be one of `all`, `public`, `private`, `forks`, `sources`, `member`, `internal`. Note: For GitHub AE, can be one of `all`, `private`, `forks`, `sources`, `member`, `internal`. Default: `all`. If your organization is associated with an enterprise account using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+, `type` can also be `internal`. However, the `internal` value is not yet supported when a GitHub App calls this API with an installation access token.
      * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-     * * `direction: crate::types::Order` -- Can be one of `asc` or `desc`. Default: when using `full_name`: `asc`, otherwise `desc`.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -688,7 +690,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::ProtectedBranchAdminEnforced> {
+    ) -> Result<crate::types::EnforceAdmins> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/enforce_admins",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -721,7 +723,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::ProtectedBranchAdminEnforced> {
+    ) -> Result<crate::types::EnforceAdmins> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/enforce_admins",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -892,7 +894,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::ProtectedBranchAdminEnforced> {
+    ) -> Result<crate::types::EnforceAdmins> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_signatures",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -925,7 +927,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         branch: &str,
-    ) -> Result<crate::types::ProtectedBranchAdminEnforced> {
+    ) -> Result<crate::types::EnforceAdmins> {
         let url = format!(
             "/repos/{}/{}/branches/{}/protection/required_signatures",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1946,9 +1948,9 @@ impl Repos {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `affiliation: crate::types::Affiliation` -- Filter collaborators returned by their affiliation. Can be one of:  
-     *  \\* `outside`: All outside collaborators of an organization-owned repository.  
-     *  \\* `direct`: All collaborators with permissions to an organization-owned repository, regardless of organization membership status.  
+     * * `affiliation: crate::types::Affiliation` -- Filters the collaborators by their affiliation. Can be one of:  
+     *  \\* `outside`: Outside collaborators of a project that are not a member of the project's organization.  
+     *  \\* `direct`: Collaborators with permissions to a project, regardless of organization membership status.  
      *  \\* `all`: All collaborators the authenticated user can see.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -2314,7 +2316,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &crate::types::ReposUpdateCommitCommentRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::CommitComment> {
         let url = format!(
             "/repos/{}/{}/comments/{}",
@@ -5188,7 +5190,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn list_languages(&self, owner: &str, repo: &str) -> Result<crate::types::Language> {
+    pub async fn list_languages(&self, owner: &str, repo: &str) -> Result<crate::types::Data> {
         let url = format!(
             "/repos/{}/{}/languages",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -5976,7 +5978,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         release_id: i64,
-        body: &crate::types::ReposUpdateReleaseRequest,
+        body: &crate::types::ReposCreateReleaseRequest,
     ) -> Result<crate::types::Release> {
         let url = format!(
             "/repos/{}/{}/releases/{}",
@@ -6666,7 +6668,7 @@ impl Repos {
         &self,
         owner: &str,
         repo: &str,
-        body: &crate::types::ReposReplaceAllTopicsRequest,
+        body: &crate::types::Topic,
     ) -> Result<crate::types::Topic> {
         let url = format!(
             "/repos/{}/{}/topics",
@@ -7133,14 +7135,16 @@ impl Repos {
      *
      * * `visibility: crate::types::ReposListVisibility` -- Can be one of `all`, `public`, or `private`. Note: For GitHub AE, can be one of `all`, `internal`, or `private`.
      * * `affiliation: &str` -- Comma-separated list of values. Can include:  
-     *  \\* `owner`: Repositories that are owned by the authenticated user.  
-     *  \\* `collaborator`: Repositories that the user has been added to as a collaborator.  
-     *  \\* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
+     *   \* `owner`: Repositories that are owned by the authenticated user.  
+     *   \* `collaborator`: Repositories that the user has been added to as a collaborator.  
+     *   \* `organization_member`: Repositories that the user has access to through being a member of an organization. This includes every repository on every team that the user is on.
      * * `type_: crate::types::ReposListType` -- Can be one of `all`, `owner`, `public`, `private`, `member`. Note: For GitHub AE, can be one of `all`, `owner`, `internal`, `private`, `member`. Default: `all`  
      *    
      *  Will cause a `422` error if used in the same request as \*\*visibility\*\* or \*\*affiliation\*\*. Will cause a `422` error if used in the same request as \*\*visibility\*\* or \*\*affiliation\*\*.
      * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-     * * `direction: crate::types::Order` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
@@ -7382,7 +7386,9 @@ impl Repos {
      * * `username: &str`
      * * `type_: crate::types::ReposListUserType` -- Can be one of `all`, `owner`, `member`.
      * * `sort: crate::types::ReposListOrgSort` -- Can be one of `created`, `updated`, `pushed`, `full_name`.
-     * * `direction: crate::types::Order` -- Can be one of `asc` or `desc`. Default: `asc` when using `full_name`, otherwise `desc`.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */

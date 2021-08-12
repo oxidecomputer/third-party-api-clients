@@ -138,7 +138,7 @@ impl Departments {
     pub async fn patch_department(
         &self,
         id: &str,
-        body: &crate::types::PatchDepartmentRequest,
+        body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Department> {
         let url = format!(
             "/departments/{}",

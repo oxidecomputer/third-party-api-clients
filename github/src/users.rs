@@ -189,7 +189,7 @@ impl Users {
      */
     pub async fn set_primary_email_visibility_for_authenticated(
         &self,
-        body: &crate::types::UsersSetPrimaryEmailVisibilityAuthenticatedRequestData,
+        body: &crate::types::UsersSetPrimaryEmailVisibilityAuthenticatedRequest,
     ) -> Result<Vec<crate::types::Email>> {
         let url = "/user/email/visibility".to_string();
         self.client
@@ -287,7 +287,7 @@ impl Users {
      */
     pub async fn delete_email_for_authenticated(
         &self,
-        body: &crate::types::UsersDeleteEmailAuthenticatedRequestOneOf,
+        body: &crate::types::UsersAddEmailAuthenticatedRequestOneOf,
     ) -> Result<()> {
         let url = "/user/emails".to_string();
         self.client
@@ -1186,7 +1186,7 @@ impl Users {
      *
      * * `username: &str`
      * * `subject_type: crate::types::SubjectType` -- Identifies which additional information you'd like to receive about the person's hovercard. Can be `organization`, `repository`, `issue`, `pull_request`. \*\*Required\*\* when using `subject_id`.
-     * * `subject_id: &str` -- Uses the ID for the `subject_type` you specified. \*\*Required\*\* when using `subject_type`.
+     * * `subject_id: &str` -- Uses the ID for the `subject_type` you specified. **Required** when using `subject_type`.
      */
     pub async fn get_context_for_user(
         &self,

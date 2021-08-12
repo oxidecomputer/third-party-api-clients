@@ -136,7 +136,7 @@ impl Reactions {
         team_slug: &str,
         discussion_number: i64,
         comment_number: i64,
-        body: &crate::types::ReactionsCreateTeamDiscussionCommentInOrgRequest,
+        body: &crate::types::ReactionsCreateIssueRequest,
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
@@ -310,7 +310,7 @@ impl Reactions {
         org: &str,
         team_slug: &str,
         discussion_number: i64,
-        body: &crate::types::ReactionsCreateTeamDiscussionInOrgRequest,
+        body: &crate::types::ReactionsCreateIssueRequest,
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions",
@@ -498,7 +498,7 @@ impl Reactions {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &crate::types::ReactionsCreateCommitCommentRequest,
+        body: &crate::types::ReactionsCreateIssueRequest,
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions",
@@ -662,7 +662,7 @@ impl Reactions {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &crate::types::ReactionsCreateIssueCommentRequest,
+        body: &crate::types::ReactionsCreateIssueRequest,
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions",
@@ -990,7 +990,7 @@ impl Reactions {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &crate::types::ReactionsCreatePullRequestReviewComment,
+        body: &crate::types::ReactionsCreateIssueRequest,
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions",
@@ -1197,7 +1197,7 @@ impl Reactions {
         team_id: i64,
         discussion_number: i64,
         comment_number: i64,
-        body: &crate::types::ReactionsCreateTeamDiscussionCommentInOrgRequest,
+        body: &crate::types::ReactionsCreateIssueRequest,
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}/reactions",
@@ -1324,7 +1324,7 @@ impl Reactions {
         &self,
         team_id: i64,
         discussion_number: i64,
-        body: &crate::types::ReactionsCreateTeamDiscussionInOrgRequest,
+        body: &crate::types::ReactionsCreateIssueRequest,
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/teams/{}/discussions/{}/reactions",

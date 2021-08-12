@@ -456,7 +456,7 @@ impl Apps {
     pub async fn delete_authorization(
         &self,
         client_id: &str,
-        body: &crate::types::AppsDeleteAuthorizationRequest,
+        body: &crate::types::AppsCheckTokenRequest,
     ) -> Result<()> {
         let url = format!(
             "/applications/{}/grant",
@@ -550,7 +550,7 @@ impl Apps {
     pub async fn delete_token(
         &self,
         client_id: &str,
-        body: &crate::types::AppsDeleteTokenRequest,
+        body: &crate::types::AppsCheckTokenRequest,
     ) -> Result<()> {
         let url = format!(
             "/applications/{}/token",
@@ -899,7 +899,9 @@ impl Apps {
      *
      * * `plan_id: i64` -- plan_id parameter.
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -1076,7 +1078,9 @@ impl Apps {
      *
      * * `plan_id: i64` -- plan_id parameter.
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- To return the oldest accounts first, set to `asc`. Can be one of `asc` or `desc`. Ignored without the `sort` parameter.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -1199,7 +1203,7 @@ impl Apps {
         owner: &str,
         repo: &str,
         content_reference_id: i64,
-        body: &crate::types::AppsCreateContentAttachmentRequest,
+        body: &crate::types::TeamsUpdateDiscussionInOrgRequest,
     ) -> Result<crate::types::ContentReferenceAttachment> {
         let url = format!(
             "/repos/{}/{}/content_references/{}/attachments",

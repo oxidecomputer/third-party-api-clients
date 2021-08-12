@@ -31,16 +31,16 @@ impl ChatMessages {
      * **Parameters:**
      *
      * * `to_contact: &str` -- The email address of a chat contact with whom the current user chatted. Messages that were sent and/or received between the user and the contact is displayed.
-     *  
-     *  Note: You must provide either `contact` or `channel` as a query parameter to retrieve messages either from an individual or a chat channel.
+     *   
+     *   Note: You must provide either `contact` or `channel` as a query parameter to retrieve messages either from an individual or a chat channel. .
      * * `to_channel: &str` -- The channel Id of a channel inside which the current user had chat conversations. Messages that were sent and/or received between the user and the channel is displayed.
-     *  
-     *  Note: You must provide either `contact` or `channel` as a query parameter to retrieve messages either from an individual or a chat channel.
+     *   
+     *   Note: You must provide either `contact` or `channel` as a query parameter to retrieve messages either from an individual or a chat channel. .
      * * `date: chrono::NaiveDate` -- The query date for which you would like to get the chat messages. This value defaults to the current date.
-     * * `page_size: i64` -- The number of records returned with a single API call.
+     * * `page_size: i64` -- The number of records returned with a single API call. .
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `include_deleted_and_edited_message: &str` -- \*\*Optional\*\* <br>
-     *  Set the value of this field to `true` to include edited and deleted messages in the response.
+     * * `include_deleted_and_edited_message: &str` -- **Optional** <br>
+     *   Set the value of this field to `true` to include edited and deleted messages in the response.
      */
     pub async fn get_page(
         &self,
@@ -198,7 +198,7 @@ impl ChatMessages {
         &self,
         user_id: &str,
         body: &crate::types::SendaChatMessageRequest,
-    ) -> Result<crate::types::SendaChatMessageResponse> {
+    ) -> Result<crate::types::Groups> {
         let url = format!(
             "/chat/users/{}/messages",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -301,9 +301,9 @@ impl ChatMessages {
      *
      * **Parameters:**
      *
-     * * `message_id: &str` -- Message ID.
-     * * `to_contact: &str` -- The `userId` or email address of a Zoom Chat contact to whom you sent the message.\n\n\*\*Note:\*\* You must use this query parameter to delete a message sent to a Zoom Chat contact.
-     * * `to_channel: &str` -- The `channelId` of the Zoom Chat channel where sent the message.\n\n\*\*Note:\*\* You must use this query parameter to delete a message sent to Zoom Chat channel.
+     * * `message_id: &str` -- User's first name.
+     * * `to_contact: &str` -- The `userId` or email address of a Zoom Chat contact to whom you sent the message.\n\n**Note:** You must use this query parameter to delete a message sent to a Zoom Chat contact. .
+     * * `to_channel: &str` -- The `channelId` of the Zoom Chat channel where sent the message.\n\n**Note:** You must use this query parameter to delete a message sent to Zoom Chat channel.
      */
     pub async fn get_chat_message(
         &self,
@@ -394,13 +394,13 @@ impl ChatMessages {
      *
      * **Parameters:**
      *
-     * * `message_id: &str` -- Message ID.
+     * * `message_id: &str` -- User's first name.
      * * `to_contact: &str` -- The userId or email address of a chat contact to whom you previously sent the message.
-     *  
-     *  Note: You must provide either `to_contact` or `to_channel` as a query parameter to delete a message that was previously sent to either an individual or a chat channel respectively.
+     *   
+     *   Note: You must provide either `to_contact` or `to_channel` as a query parameter to delete a message that was previously sent to either an individual or a chat channel respectively. .
      * * `to_channel: &str` -- The channel Id of the channel where you would like to send the message.
-     *  
-     *  You must provide either `to_contact` or `to_channel` as a query parameter to delete a message that was previously sent to either an individual or a chat channel.
+     *   
+     *   You must provide either `to_contact` or `to_channel` as a query parameter to delete a message that was previously sent to either an individual or a chat channel .
      */
     pub async fn delete_chat_message(
         &self,

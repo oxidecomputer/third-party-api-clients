@@ -24,9 +24,9 @@ impl Acl {
      * * `page_token: &str` -- Token specifying which result page to return. Optional.
      * * `show_deleted: bool` -- Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.
      * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
-     *  If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
-     *  Learn more about incremental synchronization.
-     *  Optional. The default is to return all entries.
+     *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+     *   Learn more about incremental synchronization.
+     *   Optional. The default is to return all entries.
      */
     pub async fn calendar_list(
         &self,
@@ -99,7 +99,7 @@ impl Acl {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `send_notifications: bool` -- Whether to send notifications about the calendar sharing change. Optional. The default is True.
+     * * `send_notifications: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     pub async fn calendar_insert(
         &self,
@@ -170,9 +170,9 @@ impl Acl {
      * * `page_token: &str` -- Token specifying which result page to return. Optional.
      * * `show_deleted: bool` -- Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to "none". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.
      * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
-     *  If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
-     *  Learn more about incremental synchronization.
-     *  Optional. The default is to return all entries.
+     *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+     *   Learn more about incremental synchronization.
+     *   Optional. The default is to return all entries.
      */
     pub async fn calendar_watch(
         &self,
@@ -251,7 +251,7 @@ impl Acl {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `rule_id: &str` -- ACL rule identifier.
+     * * `rule_id: &str` -- ETag of the collection.
      */
     pub async fn calendar_get(
         &self,
@@ -310,7 +310,7 @@ impl Acl {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `rule_id: &str` -- ACL rule identifier.
+     * * `rule_id: &str` -- ETag of the collection.
      * * `send_notifications: bool` -- Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True.
      */
     pub async fn calendar_update(
@@ -380,7 +380,7 @@ impl Acl {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `rule_id: &str` -- ACL rule identifier.
+     * * `rule_id: &str` -- ETag of the collection.
      */
     pub async fn calendar_delete(
         &self,
@@ -439,7 +439,7 @@ impl Acl {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `rule_id: &str` -- ACL rule identifier.
+     * * `rule_id: &str` -- ETag of the collection.
      * * `send_notifications: bool` -- Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True.
      */
     pub async fn calendar_patch(

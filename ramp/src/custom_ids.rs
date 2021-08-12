@@ -35,7 +35,7 @@ impl CustomIds {
      *
      * **Parameters:**
      *
-     * * `authorization_bearer_111111111111: &str` -- OAuth Access token.
+     * * `authorization_bearer_111111111111: &str` -- The OAuth2 token header.
      */
     pub async fn postcustom_provider(&self) -> Result<crate::types::PostcustomProviderResponse> {
         let url = "/custom-id-provider".to_string();

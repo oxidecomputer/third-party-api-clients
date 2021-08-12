@@ -29,7 +29,7 @@ impl Dashboards {
      *  
      *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `include_fields: crate::types::IncludeFields` -- Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
@@ -42,7 +42,7 @@ impl Dashboards {
         page_size: i64,
         next_page_token: &str,
         include_fields: crate::types::IncludeFields,
-    ) -> Result<crate::types::DashboardMeetingsResponseAllOf> {
+    ) -> Result<crate::types::DashboardMeetingsResponseAllOfData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -80,9 +80,11 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
+     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
      *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
-     * * `type_: crate::types::DashboardMeetingsType` -- The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.<br>`live` - Live meetings.
+     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      */
     pub async fn dashboard_meeting_detail(
         &self,
@@ -122,9 +124,11 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
+     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
      *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
-     * * `type_: crate::types::DashboardMeetingsType` -- The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.<br>`live` - Live meetings.
+     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
@@ -177,10 +181,12 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
+     * * `participant_id: &str` -- User's first name.
+     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
      *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
-     * * `participant_id: &str` -- Participant ID.
-     * * `type_: crate::types::DashboardMeetingsType` -- The meeting types: <br>`past` - Past meetings.<br>`live` - Live Meetings.
+     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      */
     pub async fn dashboard_meeting_participant_qo(
         &self,
@@ -221,9 +227,11 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
+     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
      *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
-     * * `type_: crate::types::DashboardMeetingsType` -- The meeting types: <br>`past` - Past meetings.<br>`live` - Live Meetings.
+     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      * * `page_size: i64` -- The number of items returned per page.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -233,7 +241,7 @@ impl Dashboards {
         type_: crate::types::DashboardMeetingsType,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ParticipantQosList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -272,9 +280,11 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
+     * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
      *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
-     * * `type_: crate::types::DashboardMeetingsType` -- The meeting types: <br>`past` - Past meetings.<br>`live` - Live Meetings.
+     *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
      */
@@ -327,7 +337,7 @@ impl Dashboards {
      *
      * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -338,7 +348,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::DashboardWebinarsResponseAllOf> {
+    ) -> Result<crate::types::DashboardWebinarsResponseAllOfData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -377,8 +387,8 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
      */
     pub async fn dashboard_webinar_detail(
@@ -420,14 +430,12 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide 'registrant_id' as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [webinar registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarregistrants).<br>
-     *  
-     *.
+     * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
      */
     pub async fn dashboard_webinar_participant(
         &self,
@@ -477,9 +485,9 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
-     * * `participant_id: &str` -- Participant ID.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
+     * * `participant_id: &str` -- User's first name.
      * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
      */
     pub async fn dashboard_webinar_participant_qo(
@@ -523,8 +531,8 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
      * * `page_size: i64` -- The number of items returned per page.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -535,7 +543,7 @@ impl Dashboards {
         type_: crate::types::DashboardWebinarsType,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ParticipantQosList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -576,8 +584,8 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
@@ -639,7 +647,7 @@ impl Dashboards {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::ZoomRoomList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -678,9 +686,9 @@ impl Dashboards {
      *
      * **Parameters:**
      *
-     * * `zoomroom_id: &str` -- The Zoom room ID.
+     * * `zoomroom_id: &str` -- User's first name.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -734,7 +742,7 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      */
     pub async fn dashboard_crc(
         &self,
@@ -774,7 +782,7 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -826,7 +834,7 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -876,7 +884,7 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      */
     pub async fn dashboard_client_feedback(
         &self,
@@ -915,7 +923,7 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      */
     pub async fn dashboard_zoom_room_issue(
         &self,
@@ -952,7 +960,7 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      */
     pub async fn dashboard_issue_zoom_room(
         &self,
@@ -989,9 +997,9 @@ impl Dashboards {
      *
      * **Parameters:**
      *
-     * * `zoomroom_id: &str` -- The Zoom room ID.
+     * * `zoomroom_id: &str` -- User's first name.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -1002,7 +1010,7 @@ impl Dashboards {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::DashboardIssueDetailZoomRoomResponseAllOfData> {
+    ) -> Result<crate::types::DashboardIssueDetailZoomRoomResponseAllOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -1046,11 +1054,11 @@ impl Dashboards {
      *
      * **Parameters:**
      *
-     * * `feedback_id: &str` -- Feedback Detail Id.
-     * * `from: chrono::NaiveDate`
-     * * `to: chrono::NaiveDate`
-     * * `page_size: i64`
-     * * `next_page_token: &str`
+     * * `feedback_id: &str` -- User's first name.
+     * * `from: chrono::NaiveDate` -- Start Date.
+     * * `to: chrono::NaiveDate` -- Start Date.
+     * * `page_size: i64` -- Account seats.
+     * * `next_page_token: &str` -- User's first name.
      */
     pub async fn dashboard_client_feedback_detail(
         &self,
@@ -1098,8 +1106,8 @@ impl Dashboards {
      *
      * **Parameters:**
      *
-     * * `from: chrono::NaiveDate` -- The start date for the query in “yyyy-mm-dd” format.
-     * * `to: chrono::NaiveDate` -- The end date for the query in “yyyy-mm-dd” format.
+     * * `from: chrono::NaiveDate` -- The start date for the query in “yyyy-mm-dd” format. .
+     * * `to: chrono::NaiveDate` -- The end date for the query in “yyyy-mm-dd” format. .
      */
     pub async fn list_meeting_satisfaction(
         &self,
@@ -1143,13 +1151,13 @@ impl Dashboards {
      * * `to: &str` -- End date for the report in `yyyy-mm-dd` format.
      * * `site_id: &str` -- Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites). Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by call logs of a specific phone site.
      * * `quality_type: &str` -- Filter call logs by voice quality. Zoom uses MOS of 3.5 as a general baseline to categorize calls by call quality. A MOS greater than or equal to 3.5 means good quality, while below 3.5 means poor quality. <br><br>The value of this field can be one of the following:<br>
-     *  \* `good`: Retrieve call logs of the call(s) with good quality of voice.<br>
-     *  \* `bad`: Retrieve call logs of the call(s) with good quality of voice.<br>
-     *  \* `all`: Retrieve all call logs without filtering by voice quality.
-     *  
-     *  
-     *  
-     *.
+     *   * `good`: Retrieve call logs of the call(s) with good quality of voice.<br>
+     *   * `bad`: Retrieve call logs of the call(s) with good quality of voice.<br>
+     *   * `all`: Retrieve all call logs without filtering by voice quality.
+     *   
+     *   
+     *   
+     *   .
      * * `page_size: i64` -- The number of records returned within a single call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -1357,8 +1365,8 @@ impl Dashboards {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      * * `type_: crate::types::DashboardMeetingsType` -- Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
      *  
      *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
@@ -1497,8 +1505,8 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
     pub async fn participant_webinar_feedback(
         &self,

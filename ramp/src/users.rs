@@ -81,8 +81,8 @@ impl Users {
      * * `authorization: &str` -- The OAuth2 token header.
      * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `department_id: &str`
-     * * `location_id: &str`
+     * * `department_id: &str` -- The OAuth2 token header.
+     * * `location_id: &str` -- The OAuth2 token header.
      */
     pub async fn get_page(
         &self,

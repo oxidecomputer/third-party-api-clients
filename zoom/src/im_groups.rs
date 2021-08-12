@@ -22,7 +22,7 @@ impl ImGroups {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn get(&self) -> Result<crate::types::ImGroupList> {
+    pub async fn get(&self) -> Result<crate::types::Domains> {
         let url = "/im/groups".to_string();
         self.client.get(&url, None).await
     }
@@ -60,7 +60,7 @@ impl ImGroups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn im_group(&self, group_id: &str) -> Result<crate::types::ImGroupResponseAllOf> {
         let url = format!(
@@ -84,7 +84,7 @@ impl ImGroups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn im_group_delete(&self, group_id: &str) -> Result<()> {
         let url = format!(
@@ -108,12 +108,12 @@ impl ImGroups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn im_group_update(
         &self,
         group_id: &str,
-        body: &crate::types::ImGroupUpdateRequest,
+        body: &crate::types::ImGroupCreateRequest,
     ) -> Result<()> {
         let url = format!(
             "/im/groups/{}",
@@ -141,11 +141,12 @@ impl ImGroups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *  
-     *  The page number of the current page in the returned records.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn im_group_member(
@@ -154,7 +155,7 @@ impl ImGroups {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::GroupMemberList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -194,12 +195,12 @@ impl ImGroups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn im_group_members_create(
         &self,
         group_id: &str,
-        body: &crate::types::ImGroupMembersCreateRequestData,
+        body: &crate::types::AddRoleMembersRequest,
     ) -> Result<()> {
         let url = format!(
             "/im/groups/{}/members",
@@ -227,8 +228,8 @@ impl ImGroups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
-     * * `member_id: &str` -- The member ID.
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     * * `member_id: &str` -- User's first name.
      */
     pub async fn im_group_members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
         let url = format!(

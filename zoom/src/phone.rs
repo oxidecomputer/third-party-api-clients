@@ -74,7 +74,7 @@ impl Phone {
      *  `commonAreaPhone`.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `number_type: crate::types::Type` -- The type of phone number. The value can be either `toll` or `tollfree`.
-     * * `pending_numbers: bool` -- Include or exclude pending numbers in the response. The value can be either `true` or `false`.
+     * * `pending_numbers: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      * * `site_id: &str` -- Unique identifier of the site. Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by a specific phone site. See [Managing multiple sites](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites) or [Adding a site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites#h_05c88e35-1593-491f-b1a8-b7139a75dc15) for details.
      */
     pub async fn list_account_numbers(
@@ -611,7 +611,7 @@ impl Phone {
     pub async fn add_location(
         &self,
         body: &crate::types::AddLocationRequest,
-    ) -> Result<Vec<crate::types::AddLocationResponse>> {
+    ) -> Result<Vec<crate::types::Site>> {
         let url = "/phone/locations".to_string();
         self.client
             .post(
@@ -863,7 +863,7 @@ impl Phone {
      *
      * **Parameters:**
      *
-     * * `template_id: &str` -- The Template ID.
+     * * `template_id: &str` -- User's first name.
      */
     pub async fn update_setting_template(
         &self,
@@ -901,7 +901,7 @@ impl Phone {
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      * * `type_: crate::types::PhoneUserCallLogsType`
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `phone_number: &str` -- Filter API responses to include call logs of only the phone number defined in this field.
@@ -1052,7 +1052,7 @@ impl Phone {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `from: chrono::NaiveDate` -- Start date for the query in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the response includes only one month worth of recording data. The month defined should fall within the last six months.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      */
     pub async fn user_recordings(
         &self,
@@ -1184,7 +1184,7 @@ impl Phone {
      * * `status: crate::types::PhoneUserVoiceMailsStatus` -- Status of the voice mail.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `from: chrono::NaiveDate` -- Start date for the query in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the response includes only one month worth of voicemail data. The month defined should fall within the last six months.
-     * * `to: chrono::NaiveDate` -- End date.
+     * * `to: chrono::NaiveDate` -- Start Date.
      */
     pub async fn user_voice_mails(
         &self,
@@ -1447,14 +1447,14 @@ impl Phone {
      *
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `from: &str` -- Start date from which you would like to get the call logs. The start date should be within past six months. <br>
-     *  
-     *  The API only returns data pertaining to a month. Thus, the date range(defined using "from" and "to" fields) for which the call logs are to be returned must not exceed a month.
+     *   
+     *   The API only returns data pertaining to a month. Thus, the date range(defined using "from" and "to" fields) for which the call logs are to be returned must not exceed a month.
      * * `to: &str` -- The end date upto which you would like to get the call logs for. The end date should be within past six months.
      * * `type_: &str` -- The type of the call logs. The value can be either "all" or "missed".
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `path: &str` -- Filter the API response by [path](https://support.zoom.us/hc/en-us/articles/360021114452-Viewing-and-identifying-logs#h_646b46c6-0623-4ab1-8b8b-ea5b8bcef679) of the call. The value of this field can be one of the following: `voiceMail`, `message`, `forward`, `extension`, `callQueue`, `ivrMenu`, `companyDirectory`, `autoReceptionist`, `contactCenter`, `disconnected`, `commonAreaPhone`,
-     *  `pstn`, `transfer`, `sharedLines`, `sharedLineGroup`, `tollFreeBilling`, `meetingService`, `parkPickup`,
-     *  `parkTimeout`, `monitor`, `takeover`, `sipGroup`.
+     *   `pstn`, `transfer`, `sharedLines`, `sharedLineGroup`, `tollFreeBilling`, `meetingService`, `parkPickup`,
+     *   `parkTimeout`, `monitor`, `takeover`, `sipGroup`.
      * * `time_type: crate::types::TimeType` -- Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
      * * `site_id: &str` -- Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites). Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by call logs of a specific phone site.
      */
@@ -1611,8 +1611,8 @@ impl Phone {
     pub async fn assign_number(
         &self,
         user_id: &str,
-        body: &crate::types::AssignPhoneNumberRequest,
-    ) -> Result<crate::types::AssignPhoneNumberResponse> {
+        body: &crate::types::AddByocNumberResponse,
+    ) -> Result<crate::types::AddByocNumberResponse> {
         let url = format!(
             "/phone/users/{}/phone_numbers",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1645,7 +1645,7 @@ impl Phone {
      * **Parameters:**
      *
      * * `user_id: &str` -- Provide either userId or email address of the user.
-     * * `phone_number_id: &str` -- Provide either phone number or phoneNumberId of the user.
+     * * `phone_number_id: &str` -- Provide either phone number or phoneNumberId of the user. .
      */
     pub async fn unassign_number(&self, user_id: &str, phone_number_id: &str) -> Result<()> {
         let url = format!(
@@ -1704,7 +1704,7 @@ impl Phone {
      * **Parameters:**
      *
      * * `type_: &str` -- The [type](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) of the calling plan that was assigned to user. (e.g: The value of type would be "200" for Unlimited US/Canada calling plan.)
-     *.
+     *   .
      */
     pub async fn unassign_calling_plan(&self, user_id: &str, type_: &str) -> Result<()> {
         let url = format!(
@@ -1732,23 +1732,19 @@ impl Phone {
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- The number of records returned within a single API call. The default is \*\*30\*\*, and the maximum is \*\*100\*\*.
+     * * `page_size: i64` -- The number of records returned within a single API call. The default is **30**, and the maximum is **100**.
      * * `next_page_token: &str` -- The current page number of returned records.
-     * * `from: &str` -- Start date and time in \*\*yyyy-mm-dd\*\* format or \*\*yyyy-MM-dd’T’HH:mm:ss’Z’\*\* format. The date range defined by the from and to parameters should only be one month as the report includes only one month worth of data at once.
-     *.
-     * * `to: &str` -- End date and time in \*\*yyyy-mm-dd\*\* format or \*\*yyyy-MM-dd’T’HH:mm:ss’Z’\*\* format, the same formats supported by the `from` parameter.
-     *  
-     *.
+     * * `from: &str` -- Start date and time in **yyyy-mm-dd** format or **yyyy-MM-dd’T’HH:mm:ss’Z’** format. The date range defined by the from and to parameters should only be one month as the report includes only one month worth of data at once.
+     *   .
+     * * `to: &str` -- End date and time in **yyyy-mm-dd** format or **yyyy-MM-dd’T’HH:mm:ss’Z’** format, the same formats supported by the `from` parameter.
+     *   
+     *   .
      * * `owner_type: &str` -- The owner type. The allowed values are null, `user`, or `callQueue`. The default is null. If null, returns all owner types.
-     *.
+     *   .
      * * `recording_type: &str` -- The recording type. The allowed values are null, `OnDemand`, or `Automatic`. The default is null. If null, returns all recording types.
-     *.
+     *   .
      * * `site_id: &str` -- The site ID. The default is `All sites`.
-     * * `query_date_type: crate::types::QueryDateType` -- The query's date type:
-     *  \* `start_time`
-     *  \* `end_time`
-     *  
-     *  This value defaults to `start_time`.
+     * * `query_date_type: crate::types::QueryDateType` -- Date types:<br>`start_time` - Query by call start time.<br>`end_time` - Query by call end time.
      */
     pub async fn get_recordings(
         &self,
@@ -2004,7 +2000,7 @@ impl Phone {
         &self,
         account_id: &str,
         body: &crate::types::PostPhoneSipTrunkRequest,
-    ) -> Result<crate::types::PostPhoneSipTrunkResponse> {
+    ) -> Result<crate::types::PostPhoneSipTrunkRequest> {
         let url = format!(
             "/accounts/{}/phone/sip_trunk/trunks",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -2250,7 +2246,7 @@ impl Phone {
      *
      * **Parameters:**
      *
-     * * `external_contact_id: &str` -- External contact ID.
+     * * `external_contact_id: &str` -- User's first name.
      */
     pub async fn update_external_contact(
         &self,
@@ -2313,7 +2309,7 @@ impl Phone {
      *
      * **Parameters:**
      *
-     * * `number_id: &str` -- Phone number ID.
+     * * `number_id: &str` -- User's first name.
      */
     pub async fn update_number_details(
         &self,

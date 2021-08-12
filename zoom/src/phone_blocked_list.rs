@@ -126,7 +126,7 @@ impl PhoneBlockedList {
     pub async fn add_anumber_to_blocked_list(
         &self,
         body: &crate::types::UpdateBlockedListRequest,
-    ) -> Result<crate::types::AddAnumberBlockedListResponse> {
+    ) -> Result<crate::types::Groups> {
         let url = "/phone/blocked_list".to_string();
         self.client
             .post(
@@ -155,7 +155,7 @@ impl PhoneBlockedList {
     pub async fn get_a_blocked_list(
         &self,
         blocked_list_id: &str,
-    ) -> Result<crate::types::GetBlockedListResponse> {
+    ) -> Result<crate::types::BlockedList> {
         let url = format!(
             "/phone/blocked_list/{}",
             crate::progenitor_support::encode_path(&blocked_list_id.to_string()),

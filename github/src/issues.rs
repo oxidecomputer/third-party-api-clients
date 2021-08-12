@@ -40,7 +40,9 @@ impl Issues {
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `collab: bool`
      * * `orgs: bool`
@@ -198,7 +200,9 @@ impl Issues {
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -426,14 +430,16 @@ impl Issues {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `milestone: &str` -- If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `\*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
+     * * `milestone: &str` -- If an `integer` is passed, it should refer to a milestone by its `number` field. If the string `*` is passed, issues with any milestone are accepted. If the string `none` is passed, issues without milestones are returned.
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
-     * * `assignee: &str` -- Can be the name of a user. Pass in `none` for issues with no assigned user, and `\*` for issues assigned to any user.
+     * * `assignee: &str` -- Can be the name of a user. Pass in `none` for issues with no assigned user, and `*` for issues assigned to any user.
      * * `creator: &str` -- The user that created the issue.
      * * `mentioned: &str` -- A user that's mentioned in the issue.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -618,7 +624,9 @@ impl Issues {
      * * `owner: &str`
      * * `repo: &str`
      * * `sort: crate::types::Sort` -- One of `created` (when the repository was starred) or `updated` (when it was last pushed to).
-     * * `direction: crate::types::Order` -- Either `asc` or `desc`. Ignored without the `sort` parameter.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
@@ -781,7 +789,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         comment_id: i64,
-        body: &crate::types::IssuesUpdateCommentRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::IssueComment> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}",
@@ -1036,7 +1044,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &crate::types::IssuesRemoveAssigneesRequest,
+        body: &crate::types::IssuesAddAssigneesRequest,
     ) -> Result<crate::types::IssueSimple> {
         let url = format!(
             "/repos/{}/{}/issues/{}/assignees",
@@ -1168,7 +1176,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &crate::types::IssuesUpdateCommentRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::IssueComment> {
         let url = format!(
             "/repos/{}/{}/issues/{}/comments",
@@ -1396,7 +1404,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-        body: &crate::types::IssuesAddLabelsRequestOneOfData,
+        body: &crate::types::IssuesAddLabelsRequestOneOf,
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
@@ -1567,7 +1575,7 @@ impl Issues {
         issue_number: i64,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::TimelineEvent>> {
+    ) -> Result<Vec<crate::types::Data>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -1609,7 +1617,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         issue_number: i64,
-    ) -> Result<Vec<crate::types::TimelineEvent>> {
+    ) -> Result<Vec<crate::types::Data>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/timeline",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1833,9 +1841,11 @@ impl Issues {
      *
      * * `owner: &str`
      * * `repo: &str`
-     * * `state: crate::types::IssuesListState` -- The state of the milestone. Either `open`, `closed`, or `all`.
+     * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `sort: crate::types::IssuesListMilestonesSort` -- What to sort results by. Either `due_on` or `completeness`.
-     * * `direction: crate::types::Order` -- The direction of the sort. Either `asc` or `desc`.
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */
@@ -2032,7 +2042,7 @@ impl Issues {
         owner: &str,
         repo: &str,
         milestone_number: i64,
-        body: &crate::types::IssuesUpdateMilestoneRequest,
+        body: &crate::types::IssuesCreateMilestoneRequest,
     ) -> Result<crate::types::Milestone> {
         let url = format!(
             "/repos/{}/{}/milestones/{}",
@@ -2151,7 +2161,9 @@ impl Issues {
      * * `state: crate::types::IssuesListState` -- Indicates the state of the issues to return. Can be either `open`, `closed`, or `all`.
      * * `labels: &str` -- A list of comma separated label names. Example: `bug,ui,@high`.
      * * `sort: crate::types::IssuesListSort` -- What to sort results by. Can be either `created`, `updated`, `comments`.
-     * * `direction: crate::types::Order` -- One of `asc` (ascending) or `desc` (descending).
+     * * `direction: crate::types::Order` -- The order of audit log events. To list newest events first, specify `desc`. To list oldest events first, specify `asc`.
+     *  
+     *  The default is `desc`.
      * * `since: chrono::DateTime<chrono::Utc>` -- Only show notifications updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.

@@ -109,8 +109,8 @@ impl RoomsAccount {
      * **Parameters:**
      *
      * * `setting_type: &str` -- The type of setting that you would like to update.<br> `alert`: Alert Settings applied on the Zoom Rooms Account.<br>
-     *  `meeting`: Meeting settings of the Zoom Rooms Account.<br>
-     *  `signage`: View digital signage settings of the Zoom Rooms Account.
+     *   `meeting`: Meeting settings of the Zoom Rooms Account.<br>
+     *   `signage`: View digital signage settings of the Zoom Rooms Account.
      */
     pub async fn update_zoom_room_acc_settings(
         &self,

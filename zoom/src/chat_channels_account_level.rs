@@ -86,14 +86,14 @@ impl ChatChannelsAccountLevel {
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- Channel Id.
+     * * `channel_id: &str` -- User's first name.
      * * `user_id: &str` -- Unique Identifier of the Zoom user who is the owner of the channel.
      */
     pub async fn update_channel(
         &self,
         user_id: &str,
         channel_id: &str,
-        body: &crate::types::UpdateChannelBodyRequest,
+        body: &crate::types::Attendees,
     ) -> Result<()> {
         let url = format!(
             "/chat/users/{}/channels/{}",
@@ -122,7 +122,7 @@ impl ChatChannelsAccountLevel {
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- Channel Id.
+     * * `channel_id: &str` -- User's first name.
      * * `page_size: i64` -- The number of records returned with a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `user_id: &str` -- Unique identifier of the user who is the owner of this channel.
@@ -242,7 +242,7 @@ impl ChatChannelsAccountLevel {
         &self,
         user_id: &str,
         channel_id: &str,
-        body: &crate::types::InviteChannelMembersRequestData,
+        body: &crate::types::InviteChannelMembersRequest,
     ) -> Result<crate::types::InviteChannelMembersResponse> {
         let url = format!(
             "/chat/users/{}/channels/{}/members",

@@ -152,8 +152,8 @@ impl Contacts {
      * **Parameters:**
      *
      * * `type_: &str` -- The type of contact. The value can be one of the following:
-     *  `company`: Contacts from the user's organization.
-     *  `external`: External contacts.
+     *   `company`: Contacts from the user's organization.
+     *   `external`: External contacts. .
      * * `page_size: i64` -- The number of records returned with a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -273,8 +273,7 @@ impl Contacts {
      * **Parameters:**
      *
      * * `contact_id: &str` -- The user's contact Id or email address. The contact can be either a company contact or an external contact.
-     * * `query_presence_status: bool` -- The presence status of the contact.
-     *  Include this query parameter with a value of `true` to get the presence status of the contact in the response.
+     * * `query_presence_status: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     pub async fn get_user_contact(
         &self,

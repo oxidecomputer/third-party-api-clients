@@ -29,7 +29,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account(&self, account_id: &str) -> Result<crate::types::Contact> {
         let url = format!(
@@ -58,7 +58,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_update(
         &self,
@@ -92,7 +92,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_plans(
         &self,
@@ -117,7 +117,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_plan_create(
         &self,
@@ -153,7 +153,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_plan_base_update(
         &self,
@@ -193,12 +193,12 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_plan_addon_update(
         &self,
         account_id: &str,
-        body: &crate::types::AccountPlanRequired,
+        body: &crate::types::PlanBase,
     ) -> Result<()> {
         let url = format!(
             "/accounts/{}/plans/addons",
@@ -228,7 +228,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `account_id: &str` -- The account ID.
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_plan_addon_create(
         &self,
@@ -265,7 +265,7 @@ impl Billing {
      *
      * **Parameters:**
      *
-     * * `account_id: &str`
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn account_plan_base_delete(
         &self,
@@ -362,7 +362,7 @@ impl Billing {
      * **Parameters:**
      *
      * * `from: chrono::NaiveDate` -- Start date for the invoice query in `yyyy-mm-dd` format. The date range defined by the “from” and “to” parameters should not exceed one year. The range defined should fall within the past three years.
-     *.
+     *   .
      * * `to: chrono::NaiveDate` -- End date for the invoice query in `yyyy-mm-dd` format.
      */
     pub async fn account_invoice(

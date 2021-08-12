@@ -265,7 +265,7 @@ impl PhoneCallQueues {
     pub async fn assign_phone_to_call_queue(
         &self,
         call_queue_id: &str,
-        body: &crate::types::AssignPhoneCallQueueRequest,
+        body: &crate::types::AddByocNumberResponse,
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/phone/call_queues/{}/phone_numbers",
@@ -327,7 +327,7 @@ impl PhoneCallQueues {
      * **Parameters:**
      *
      * * `call_queue_id: &str` -- Unique Identifier of the Call Queue. This can be retrieved from the List Call Queues API.
-     * * `phone_number_id: &str` -- Unique Identifier of the Phone Number.
+     * * `phone_number_id: &str` -- Unique Identifier of the Phone Number. .
      */
     pub async fn un_assign_phone_num_call_queue(
         &self,
@@ -395,7 +395,7 @@ impl PhoneCallQueues {
      *
      * **Parameters:**
      *
-     * * `call_queue_id: &str`
+     * * `call_queue_id: &str` -- User's first name.
      */
     pub async fn unassign_all_members(&self, call_queue_id: &str) -> Result<()> {
         let url = format!(

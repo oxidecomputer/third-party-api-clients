@@ -417,7 +417,7 @@ impl Gists {
     pub async fn create_comment(
         &self,
         gist_id: &str,
-        body: &crate::types::GistsCreateCommentRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::GistComment> {
         let url = format!(
             "/gists/{}/comments",
@@ -502,7 +502,7 @@ impl Gists {
         &self,
         gist_id: &str,
         comment_id: i64,
-        body: &crate::types::GistsCreateCommentRequest,
+        body: &crate::types::PullsUpdateReviewRequest,
     ) -> Result<crate::types::GistComment> {
         let url = format!(
             "/gists/{}/comments/{}",

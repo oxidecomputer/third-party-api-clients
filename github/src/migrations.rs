@@ -113,7 +113,7 @@ impl Migrations {
     pub async fn start_for_org(
         &self,
         org: &str,
-        body: &crate::types::MigrationsStartOrgRequest,
+        body: &crate::types::MigrationsStartRequest,
     ) -> Result<crate::types::Migration> {
         let url = format!(
             "/orgs/{}/migrations",
@@ -582,7 +582,7 @@ impl Migrations {
         owner: &str,
         repo: &str,
         author_id: i64,
-        body: &crate::types::MigrationsMapCommitAuthorRequest,
+        body: &crate::types::Author,
     ) -> Result<crate::types::PorterAuthor> {
         let url = format!(
             "/repos/{}/{}/import/authors/{}",
@@ -781,7 +781,7 @@ impl Migrations {
      * **Parameters:**
      *
      * * `migration_id: i64` -- migration_id parameter.
-     * * `exclude: &[String]`
+     * * `exclude: &[String]` -- The list of events for the GitHub app.
      */
     pub async fn get_status_for_authenticated_user(
         &self,

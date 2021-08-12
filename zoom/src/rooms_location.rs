@@ -29,7 +29,7 @@ impl RoomsLocation {
      *
      * * `parent_location_id: &str` -- A unique identifier of the parent location. For instance, if a Zoom Room is located in Floor 1 of Building A, the location of Building A will be the parent location of Floor 1. Use this parameter to filter the response by a specific location hierarchy level.
      * * `type_: &str` -- Use this field to filter the response by the type of location. The value can be one of the following:
-     *  `country`, `states`, `city`, `campus`, `building`, `floor`.
+     *   `country`, `states`, `city`, `campus`, `building`, `floor`. .
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -39,7 +39,7 @@ impl RoomsLocation {
         type_: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::ListZrLocationsResponse>> {
+    ) -> Result<Vec<crate::types::AddAzrLocationResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -88,7 +88,7 @@ impl RoomsLocation {
         &self,
         parent_location_id: &str,
         type_: &str,
-    ) -> Result<Vec<crate::types::ListZrLocationsResponse>> {
+    ) -> Result<Vec<crate::types::AddAzrLocationResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !parent_location_id.is_empty() {
@@ -221,7 +221,7 @@ impl RoomsLocation {
     pub async fn update_zr_location_profile(
         &self,
         location_id: &str,
-        body: &crate::types::UpdateZrLocationProfileRequest,
+        body: &crate::types::GetZrLocationProfileResponse,
     ) -> Result<()> {
         let url = format!(
             "/rooms/locations/{}",
@@ -251,8 +251,8 @@ impl RoomsLocation {
      * **Parameters:**
      *
      * * `setting_type: &str` -- The type of setting that you would like to retrieve.<br> `alert`: Alert Settings applied on the Zoom Rooms Account.<br>
-     *  `meeting`: Meeting settings of the Zoom Rooms Account.<br>
-     *  `signage`: Digital signage settings of the Zoom Rooms Account.
+     *   `meeting`: Meeting settings of the Zoom Rooms Account.<br>
+     *   `signage`: Digital signage settings of the Zoom Rooms Account.
      * * `location_id: &str` -- Unique identifier of the location type. This can be retrieved using the [List Zoom Room Location API](https://marketplace.zoom.us/docs/api-reference/zoom-api/rooms-location/listzrlocations) (Id property in the response).
      */
     pub async fn get_zr_location_setting(
@@ -295,8 +295,8 @@ impl RoomsLocation {
      * **Parameters:**
      *
      * * `setting_type: &str` -- The type of setting that you would like to update.<br> `alert`: Alert Settings applied on the Zoom Rooms Account.<br>
-     *  `meeting`: Meeting settings of the Zoom Rooms Account.<br>
-     *  `signage`: Digital signage settings.
+     *   `meeting`: Meeting settings of the Zoom Rooms Account.<br>
+     *   `signage`: Digital signage settings.
      * * `location_id: &str` -- Unique identifier of the location type. This can be retrieved using the [List Zoom Room Location API](https://marketplace.zoom.us/docs/api-reference/zoom-api/rooms-location/listzrlocations) (Id property in the response).
      */
     pub async fn update_zr_location_settings(
@@ -357,7 +357,7 @@ impl RoomsLocation {
      */
     pub async fn update_zoom_structure(
         &self,
-        body: &crate::types::UpdateZoomRoomsLocationStructureRequest,
+        body: &crate::types::GetZrLocationStructureResponse,
     ) -> Result<()> {
         let url = "/rooms/locations/structure".to_string();
         self.client
@@ -382,7 +382,7 @@ impl RoomsLocation {
      *
      * **Parameters:**
      *
-     * * `location_id: &str`
+     * * `location_id: &str` -- User's first name.
      */
     pub async fn change_parent_location(
         &self,

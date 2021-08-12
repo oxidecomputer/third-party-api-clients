@@ -64,12 +64,12 @@ impl ContractorPayments {
      *
      * **Parameters:**
      *
-     * * `date: &str` -- The payment date.
+     * * `date: &str` -- A unique identifier of the employee in Gusto.
      * * `contractor_id: f64` -- The contractor receiving the payment.
      * * `wage: f64` -- If the contractor is on a fixed wage, this is the fixed wage payment for the contractor, regardless of hours worked.
      * * `hours: f64` -- If the contractor is on an hourly wage, this is the number of hours that the contractor worked for the payment.
      * * `bonus: f64` -- If the contractor is on an hourly wage, this is the bonus the contractor earned.
-     * * `reimbursement: f64` -- Reimbursed wages for the contractor.
+     * * `reimbursement: f64` -- Reimbursed wages for the contractor .
      */
     pub async fn post_company_contractor_payment(
         &self,

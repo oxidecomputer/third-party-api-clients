@@ -35,15 +35,14 @@ impl CloudRecording {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `mc: &str` -- Query Metadata of Recording if an On-Premise Meeting Connector was used for the meeting.
-     * * `trash: bool` -- Query trash.
-     *  `true`: List recordings from trash.<br> `false`: Do not list recordings from the trash.<br> The default value is `false`. If you set it to `true`, you can use the `trash_type` property to indicate the type of Cloud recording that you need to retrieve.
+     * * `trash: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      * * `from: chrono::NaiveDate` -- The start date in 'yyyy-mm-dd' UTC format for the date range for which you would like to retrieve recordings. The maximum range can be a month. If no value is provided for this field, the default will be current date. For example, if you make the API request on June 30, 2020, without providing the “from” and “to” parameters, by default the value of 'from' field will be “2020-06-30” and the value of the 'to' field will be “2020-07-01”.
-     *  
-     *  \*\*Note\*\*: The "trash" files cannot be filtered by date range and thus, the "from" and "to" fields should not be used for trash files.
-     * * `to: chrono::NaiveDate` -- End date in 'yyyy-mm-dd' 'yyyy-mm-dd' UTC format.
+     *   
+     *   **Note**: The "trash" files cannot be filtered by date range and thus, the "from" and "to" fields should not be used for trash files.
+     * * `to: chrono::NaiveDate` -- End date in 'yyyy-mm-dd' 'yyyy-mm-dd' UTC format. .
      * * `trash_type: &str` -- The type of Cloud recording that you would like to retrieve from the trash. The value can be one of the following:<br>
-     *      `meeting_recordings`: List all meeting recordings from the trash.<br>
-     *      `recording_file`: List all individual recording files from the trash.
+     *       `meeting_recordings`: List all meeting recordings from the trash.<br>
+     *       `recording_file`: List all individual recording files from the trash. .
      */
     pub async fn recordings_list(
         &self,
@@ -55,7 +54,7 @@ impl CloudRecording {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
         trash_type: &str,
-    ) -> Result<crate::types::RecordingMeetingList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -104,10 +103,10 @@ impl CloudRecording {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- To get Cloud Recordings of a meeting, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID,the response will be for the latest meeting instance.
-     *  
-     *  To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must **double encode** the UUID before making an API request. .
      * * `include_fields: &str` -- Get the `download_access_token` field for downloading meeting recordings.
      * * `ttl: u64` -- Time to live (TTL) of the `download_access_token`. This is only valid if the `include_fields` query parameter contains `download_access_token`. The range is between 0-604800.
      */
@@ -154,10 +153,10 @@ impl CloudRecording {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- To get Cloud Recordings of a meeting, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID,the response will be for the latest meeting instance.
-     *  
-     *  To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must **double encode** the UUID before making an API request. .
      * * `action: crate::types::RecordingDeleteAction` -- The recording delete actions:<br>`trash` - Move recording to trash.<br>`delete` - Delete recording permanently.
      */
     pub async fn recording_delete(
@@ -195,11 +194,11 @@ impl CloudRecording {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- To get Cloud Recordings of a meeting, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID,the response will be for the latest meeting instance.
-     *  
-     *  To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must \*\*double encode\*\* the UUID before making an API request.
-     * * `recording_id: &str` -- The recording ID.
+     *   
+     *   To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must **double encode** the UUID before making an API request. .
+     * * `recording_id: &str` -- User's first name.
      * * `action: crate::types::RecordingDeleteAction` -- The recording delete actions:<br>`trash` - Move recording to trash.<br>`delete` - Delete recording permanently.
      */
     pub async fn recording_delete_one(
@@ -242,10 +241,10 @@ impl CloudRecording {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- To get Cloud Recordings of a meeting, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID,the response will be for the latest meeting instance.
-     *  
-     *  To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must **double encode** the UUID before making an API request. .
      */
     pub async fn recording_status_update(
         &self,
@@ -279,11 +278,11 @@ impl CloudRecording {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- To get Cloud Recordings of a meeting, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID,the response will be for the latest meeting instance.
-     *  
-     *  To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must \*\*double encode\*\* the UUID before making an API request.
-     * * `recording_id: &str` -- The recording ID.
+     *   
+     *   To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must **double encode** the UUID before making an API request. .
+     * * `recording_id: &str` -- User's first name.
      */
     pub async fn recording_status_update_one(
         &self,
@@ -318,10 +317,10 @@ impl CloudRecording {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- To get Cloud Recordings of a meeting, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID,the response will be for the latest meeting instance.
-     *  
-     *  To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must **double encode** the UUID before making an API request. .
      */
     pub async fn recording_setting_update(
         &self,
@@ -348,10 +347,10 @@ impl CloudRecording {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- To get Cloud Recordings of a meeting, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID,the response will be for the latest meeting instance.
-     *  
-     *  To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must **double encode** the UUID before making an API request. .
      */
     pub async fn recording_settings_update(
         &self,
@@ -386,14 +385,15 @@ impl CloudRecording {
      *
      * **Parameters:**
      *
-     * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *  
-     *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
+     * * `meeting_id: i64` -- The meeting ID in **long** format. The data type of this field is "long"(represented as int64 in JSON).
+     *   
+     *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      * * `status: crate::types::MeetingRegistrantsStatus` -- The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
      * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *  
-     *  The page number of the current page in the returned records.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn meeting_recording_registrant(
@@ -403,7 +403,7 @@ impl CloudRecording {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::MeetingRecordingRegistrantList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -447,9 +447,9 @@ impl CloudRecording {
      *
      * **Parameters:**
      *
-     * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *  
-     *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
+     * * `meeting_id: i64` -- The meeting ID in **long** format. The data type of this field is "long"(represented as int64 in JSON).
+     *   
+     *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_recording_registrant_create(
         &self,
@@ -478,9 +478,9 @@ impl CloudRecording {
      *
      * **Parameters:**
      *
-     * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *  
-     *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
+     * * `meeting_id: i64` -- The meeting ID in **long** format. The data type of this field is "long"(represented as int64 in JSON).
+     *   
+     *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_recording_registrant_status(
         &self,
@@ -516,10 +516,10 @@ impl CloudRecording {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- To get Cloud Recordings of a meeting, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID,the response will be for the latest meeting instance.
-     *  
-     *  To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must **double encode** the UUID before making an API request. .
      */
     pub async fn recording_registrants_questions_get(
         &self,
@@ -548,10 +548,10 @@ impl CloudRecording {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- To get Cloud Recordings of a meeting, provide the meeting ID or meeting UUID. If the meeting ID is provided instead of UUID,the response will be for the latest meeting instance.
-     *  
-     *  To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
-     *  
-     *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must \*\*double encode\*\* the UUID before making an API request.
+     *   
+     *   To get Cloud Recordings of a webinar, provide the webinar ID or the webinar UUID. If the webinar ID is provided instead of UUID,the response will be for the latest webinar instance.
+     *   
+     *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875=="), you must **double encode** the UUID before making an API request. .
      */
     pub async fn recording_registrant_question_update(
         &self,

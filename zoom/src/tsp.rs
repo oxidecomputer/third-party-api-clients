@@ -123,7 +123,8 @@ impl Tsp {
      * **Parameters:**
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `tsp_id: &str` -- TSP account ID.
+     * * `tsp_id: &str` -- Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+     *  `3` - SIP Connected Audio.
      */
     pub async fn user(&self, user_id: &str, tsp_id: &str) -> Result<crate::types::TspAccount> {
         let url = format!(
@@ -149,7 +150,8 @@ impl Tsp {
      * **Parameters:**
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `tsp_id: &str` -- TSP account ID.
+     * * `tsp_id: &str` -- Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+     *  `3` - SIP Connected Audio.
      */
     pub async fn user_delete(&self, user_id: &str, tsp_id: &str) -> Result<()> {
         let url = format!(
@@ -175,7 +177,8 @@ impl Tsp {
      * **Parameters:**
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `tsp_id: &str` -- TSP account ID.
+     * * `tsp_id: &str` -- Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
+     *  `3` - SIP Connected Audio.
      */
     pub async fn user_update(
         &self,

@@ -255,7 +255,7 @@ impl Payroll {
      * **Parameters:**
      *
      * * `include: crate::types::GetCompanyPayrollsInclude` -- Include the requested attribute in the employee_compensations attribute in the response.
-     * * `show_calculation: &str` -- with `include`, shows the tax, and/or benefit, and/or deduction details for a calculated, unprocessed payroll.
+     * * `show_calculation: &str` -- with `include`, shows the tax, and/or benefit, and/or deduction details for a calculated, unprocessed payroll. .
      */
     pub async fn get_company_payroll(
         &self,

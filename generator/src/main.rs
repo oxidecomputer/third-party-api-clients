@@ -598,7 +598,11 @@ impl TypeDetails {
 
 impl PartialEq for TypeDetails {
     fn eq(&self, other: &Self) -> bool {
-        if self.description() != other.description() {
+        if self.description() != other.description()
+            && !self.is_one_of()
+            && !self.is_any_of()
+            && self.is_all_of()
+        {
             return false;
         }
 
@@ -635,17 +639,23 @@ impl PartialEq for TypeDetails {
             }
             TypeDetails::OneOf(s, _d) => {
                 if let TypeDetails::OneOf(os, _od) = other {
-                    return s == os;
+                    let t: Vec<TypeId> = s.values().cloned().collect();
+                    let r: Vec<TypeId> = os.values().cloned().collect();
+                    return t == r;
                 }
             }
             TypeDetails::AnyOf(s, _d) => {
                 if let TypeDetails::AnyOf(os, _od) = other {
-                    return s == os;
+                    let t: Vec<TypeId> = s.values().cloned().collect();
+                    let r: Vec<TypeId> = os.values().cloned().collect();
+                    return t == r;
                 }
             }
             TypeDetails::AllOf(s, _d) => {
                 if let TypeDetails::AllOf(os, _od) = other {
-                    return s == os;
+                    let t: Vec<TypeId> = s.values().cloned().collect();
+                    let r: Vec<TypeId> = os.values().cloned().collect();
+                    return t == r;
                 }
             }
             TypeDetails::Unknown => {

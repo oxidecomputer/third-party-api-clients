@@ -136,7 +136,7 @@ impl EnterpriseAdmin {
     pub async fn set_selected_organizations_enabled_github_actions_enterprise(
         &self,
         enterprise: &str,
-        body: &crate::types::EnterpriseAdminSetSelectedOrganizationsEnabledGithubActionsRequest,
+        body: &crate::types::EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest,
     ) -> Result<()> {
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations",

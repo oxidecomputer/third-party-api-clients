@@ -70,7 +70,7 @@ impl PhoneAutoReceptionists {
     pub async fn assign_phone_numbers_auto_receptionist(
         &self,
         auto_receptionist_id: &str,
-        body: &crate::types::AssignPhoneNumbersAutoReceptionistRequestData,
+        body: &crate::types::AddByocNumberResponse,
     ) -> Result<()> {
         let url = format!(
             "/phone/auto_receptionists/{}/phone_numbers",

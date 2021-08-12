@@ -27,9 +27,9 @@ impl DeprecatedApiEndpoints {
      *
      * **Parameters:**
      *
-     * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *  
-     *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
+     * * `meeting_id: i64` -- The meeting ID in **long** format. The data type of this field is "long"(represented as int64 in JSON).
+     *   
+     *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn list_past_meeting_files(
         &self,
@@ -60,7 +60,7 @@ impl DeprecatedApiEndpoints {
      *
      * **Parameters:**
      *
-     * * `webinar_id: &str`
+     * * `webinar_id: &str` -- User's first name.
      */
     pub async fn list_past_webinar_files(
         &self,

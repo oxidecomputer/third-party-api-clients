@@ -27,7 +27,7 @@ impl Roles {
      * *  For setting the initial role, you must be the Account Owner.
      * *  For subsequent role management, you must be the Account Owner or user with role management permissions.
      */
-    pub async fn get(&self) -> Result<crate::types::RoleList> {
+    pub async fn get(&self) -> Result<crate::types::Domains> {
         let url = "/roles".to_string();
         self.client.get(&url, None).await
     }
@@ -71,11 +71,12 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `role_id: &str` -- The role ID.
+     * * `role_id: &str` -- User's first name.
      * * `page_count: &str` -- The number of pages returned for this request.
-     * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *  
-     *  The page number of the current page in the returned records.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `page_size: i64` -- The number of records returned within a single API call.
      */
@@ -209,12 +210,12 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `role_id: &str` -- The role ID.
+     * * `role_id: &str` -- User's first name.
      */
     pub async fn add_role_members(
         &self,
         role_id: &str,
-        body: &crate::types::AddRoleMembersRequestData,
+        body: &crate::types::AddRoleMembersRequest,
     ) -> Result<crate::types::AddRoleMembersResponse> {
         let url = format!(
             "/roles/{}/members",
@@ -244,8 +245,8 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `role_id: &str` -- The role ID.
-     * * `member_id: &str` -- Member's ID.
+     * * `role_id: &str` -- User's first name.
+     * * `member_id: &str` -- User's first name.
      */
     pub async fn role_member_delete(&self, role_id: &str, member_id: &str) -> Result<()> {
         let url = format!(
@@ -275,7 +276,7 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `role_id: &str` -- Role Id.
+     * * `role_id: &str` -- User's first name.
      */
     pub async fn get_role_information(
         &self,
@@ -307,7 +308,7 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `role_id: &str` -- Role Id.
+     * * `role_id: &str` -- User's first name.
      */
     pub async fn delete_role(&self, role_id: &str) -> Result<()> {
         let url = format!(
@@ -334,7 +335,7 @@ impl Roles {
      *
      * **Parameters:**
      *
-     * * `role_id: &str` -- Role Id.
+     * * `role_id: &str` -- User's first name.
      */
     pub async fn update_role(
         &self,

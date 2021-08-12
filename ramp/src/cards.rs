@@ -24,8 +24,8 @@ impl Cards {
      * * `authorization: &str` -- The OAuth2 token header.
      * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `user_id: &str`
-     * * `card_program_id: &str`
+     * * `user_id: &str` -- The OAuth2 token header.
+     * * `card_program_id: &str` -- The OAuth2 token header.
      */
     pub async fn get_page(
         &self,

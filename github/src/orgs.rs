@@ -1426,9 +1426,9 @@ impl Orgs {
      * **Parameters:**
      *
      * * `org: &str`
-     * * `filter: crate::types::OrgsListMembersFilter` -- Filter the list of outside collaborators. Can be one of:  
-     *  \\* `2fa_disabled`: Outside collaborators without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled.  
-     *  \\* `all`: All outside collaborators.
+     * * `filter: crate::types::OrgsListMembersFilter` -- Filter members returned in the list. Can be one of:  
+     *  \\* `2fa_disabled` - Members without [two-factor authentication](https://github.com/blog/1614-two-factor-authentication) enabled. Available for organization owners.  
+     *  \\* `all` - All members the authenticated user can see.
      * * `per_page: i64` -- Results per page (max 100).
      * * `page: i64` -- Page number of the results to fetch.
      */

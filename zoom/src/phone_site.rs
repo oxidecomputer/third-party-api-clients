@@ -128,7 +128,7 @@ impl PhoneSite {
     pub async fn create(
         &self,
         body: &crate::types::CreatePhoneSiteRequest,
-    ) -> Result<crate::types::CreatePhoneSiteResponse> {
+    ) -> Result<crate::types::Site> {
         let url = "/phone/sites".to_string();
         self.client
             .post(

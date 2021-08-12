@@ -68,7 +68,7 @@ impl Groups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn group(&self, group_id: &str) -> Result<crate::types::GroupResponse> {
         let url = format!(
@@ -94,7 +94,7 @@ impl Groups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn group_delete(&self, group_id: &str) -> Result<()> {
         let url = format!(
@@ -120,12 +120,12 @@ impl Groups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn group_update(
         &self,
         group_id: &str,
-        body: &crate::types::GroupUpdateRequest,
+        body: &crate::types::GroupCreateRequest,
     ) -> Result<()> {
         let url = format!(
             "/groups/{}",
@@ -155,11 +155,12 @@ impl Groups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *  
-     *  The page number of the current page in the returned records.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn group_members(
@@ -168,7 +169,7 @@ impl Groups {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::GroupMembersResponse>> {
+    ) -> Result<Vec<crate::types::UserCreateResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -217,7 +218,7 @@ impl Groups {
         &self,
         group_id: &str,
         page_number: i64,
-    ) -> Result<Vec<crate::types::GroupMembersResponse>> {
+    ) -> Result<Vec<crate::types::UserCreateResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page_number > 0 {
@@ -286,12 +287,12 @@ impl Groups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
     pub async fn group_members_create(
         &self,
         group_id: &str,
-        body: &crate::types::GroupMembersCreateRequestData,
+        body: &crate::types::AddRoleMembersRequest,
     ) -> Result<()> {
         let url = format!(
             "/groups/{}/members",
@@ -321,8 +322,8 @@ impl Groups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group ID.<br>
-     *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
-     * * `member_id: &str` -- The member ID.
+     *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
+     * * `member_id: &str` -- User's first name.
      */
     pub async fn group_members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
         let url = format!(
@@ -353,8 +354,8 @@ impl Groups {
      * **Parameters:**
      *
      * * `group_id: &str` -- The group's unique ID. To get this value, use the [List Groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
-     *  \* To set a user's primary group, use the `target_group_id` value for this parameter's value.
-     *  \* To move a group member from one group to another, use the `groupId` of the designated group.
+     *   * To set a user's primary group, use the `target_group_id` value for this parameter's value.
+     *   * To move a group member from one group to another, use the `groupId` of the designated group.
      * * `member_id: &str` -- The group member's unique ID. To get this value, use the [List Group Members](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groupmembers) API.
      */
     pub async fn update_a_group_member(
@@ -390,8 +391,11 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
-     *  `meeting_security`: Use this query parameter to view meeting security settings applied on the group.<br>.
+     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
+     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *  \* `meeting_security` — View the account's meeting security settings.
      */
     pub async fn get_group_settings_domains(
         &self,
@@ -433,8 +437,11 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
-     *  `meeting_security`: Use this query parameter to view meeting security settings applied on the group.<br>.
+     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
+     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *  \* `meeting_security` — View the account's meeting security settings.
      */
     pub async fn get_group_settings_response(
         &self,
@@ -476,8 +483,11 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
-     *  `meeting_security`: Use this query parameter to view meeting security settings applied on the group.<br>.
+     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
+     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *  \* `meeting_security` — View the account's meeting security settings.
      */
     pub async fn get_group_settings_meeting_security(
         &self,
@@ -519,8 +529,11 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
-     *  `meeting_security`: Use this query parameter to view meeting security settings applied on the group.<br>.
+     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
+     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *  \* `meeting_security` — View the account's meeting security settings.
      */
     pub async fn get_group_setting(
         &self,
@@ -562,7 +575,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- Id of the group.
+     * * `group_id: &str` -- User's first name.
      * * `option: crate::types::UpdateGroupSettingsOption`
      */
     pub async fn update_group_settings(
@@ -612,7 +625,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- Id of the group.
+     * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
     pub async fn get_group_lock_settings_response(
@@ -658,7 +671,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- Id of the group.
+     * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
     pub async fn get_group_lock_settings_meeting_security(
@@ -704,7 +717,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- Id of the group.
+     * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
     pub async fn get_group_lock_setting(
@@ -750,7 +763,7 @@ impl Groups {
      *
      * **Parameters:**
      *
-     * * `group_id: &str` -- The Id of the group.
+     * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
     pub async fn group_locked_settings(
@@ -813,7 +826,7 @@ impl Groups {
         file_ids: &str,
         group_id: &str,
         body: &crate::types::UploadVbRequest,
-    ) -> Result<crate::types::UploadVBuserResponse> {
+    ) -> Result<crate::types::Files> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !file_ids.is_empty() {

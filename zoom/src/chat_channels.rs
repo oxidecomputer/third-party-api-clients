@@ -227,12 +227,12 @@ impl ChatChannels {
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- Channel Id.
+     * * `channel_id: &str` -- User's first name.
      */
     pub async fn update_user_level_channel(
         &self,
         channel_id: &str,
-        body: &crate::types::UpdateChannelBodyRequest,
+        body: &crate::types::Attendees,
     ) -> Result<()> {
         let url = format!(
             "/chat/channels/{}",
@@ -294,7 +294,7 @@ impl ChatChannels {
      *
      * **Parameters:**
      *
-     * * `channel_id: &str` -- Channel Id.
+     * * `channel_id: &str` -- User's first name.
      */
     pub async fn join_channel(
         &self,

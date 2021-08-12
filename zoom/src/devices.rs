@@ -25,9 +25,10 @@ impl Devices {
      * **Parameters:**
      *
      * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *  
-     *  The page number of the current page in the returned records.
+     * * `page_number: i64` --
+     *   **Deprecated** - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
+     *   
+     *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn device_list(
@@ -35,7 +36,7 @@ impl Devices {
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::DeviceList> {
+    ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -90,7 +91,7 @@ impl Devices {
      *
      * **Parameters:**
      *
-     * * `device_id: &str` -- The device ID.
+     * * `device_id: &str` -- User's first name.
      */
     pub async fn device_delete(&self, device_id: &str) -> Result<()> {
         let url = format!(
@@ -113,7 +114,7 @@ impl Devices {
      *
      * **Parameters:**
      *
-     * * `device_id: &str` -- The device ID.
+     * * `device_id: &str` -- User's first name.
      */
     pub async fn device_update(&self, device_id: &str, body: &crate::types::Device) -> Result<()> {
         let url = format!(

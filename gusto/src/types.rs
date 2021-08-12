@@ -31,7 +31,7 @@ pub struct Employee {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
-     * The employee's department in the company.
+     * The representation of an employee in Gusto.
      */
     #[serde(
         default,
@@ -45,7 +45,7 @@ pub struct Employee {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub eligible_paid_time_off: Vec<PaidTimeOff>,
     /**
-     * The email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+     * The representation of an employee in Gusto.
      */
     #[serde(
         default,
@@ -104,7 +104,7 @@ pub struct Employee {
     )]
     pub last_name: String,
     /**
-     * The ID of the employee's manager in Gusto.
+     * The representation of an employee in Gusto.
      */
     #[serde(
         default,
@@ -196,7 +196,7 @@ pub struct Employee {
     )]
     pub version: String,
     /**
-     * The work email address of the employee. This is provided to support syncing users between our system and yours. You may not use this email address for any other purpose (e.g. marketing).
+     * The representation of an employee in Gusto.
      */
     #[serde(
         default,
@@ -374,7 +374,7 @@ pub struct PaidTimeOff {
     )]
     pub accrual_unit: String,
     /**
-     * The maximum number of accrual units allowed. A null value signifies no maximum.
+     * The representation of paid time off in Gusto.
      */
     #[serde(
         default,
@@ -422,7 +422,7 @@ pub struct Garnishment {
     )]
     pub amount: f64,
     /**
-     * The maximum deduction per annum. A null value indicates no maximum. Represented as a float, e.g. "200.00".
+     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
     #[serde(
         default,
@@ -474,7 +474,7 @@ pub struct Garnishment {
     )]
     pub id: i64,
     /**
-     * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
+     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
     #[serde(
         default,
@@ -491,7 +491,7 @@ pub struct Garnishment {
     )]
     pub recurring: bool,
     /**
-     * The number of times to apply the garnisment. Ignored if recurring is true.
+     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
      */
     #[serde(
         default,
@@ -521,9 +521,6 @@ pub struct Termination {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub active: bool,
-    /**
-     * The representation of a termination in Gusto.
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub effective_date: Option<chrono::NaiveDate>,
     /**
@@ -657,9 +654,6 @@ impl FlsaStatus {
 /// The representation of compensation in Gusto.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Compensation {
-    /**
-     * The representation of compensation in Gusto.
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub effective_date: Option<chrono::NaiveDate>,
     /**
@@ -712,18 +706,27 @@ pub struct Compensation {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct JobLocation {
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub country: String,
+    /**
+     * The ID of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
@@ -731,31 +734,43 @@ pub struct JobLocation {
     )]
     pub id: f64,
     /**
-     * Whether the location of the job is active.
+     * Whether the employee is terminated.
      */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub inactive: bool,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub street_1: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub street_2: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -790,9 +805,6 @@ pub struct Job {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub employee_id: i64,
-    /**
-     * The representation of a job in Gusto.
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hire_date: Option<chrono::NaiveDate>,
     /**
@@ -1078,16 +1090,6 @@ pub struct Fixed {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct CompanyCompensationsPaidTimeOff {
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub name: String,
-}
-
 /// The available company-wide compensation rates for the company.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Compensations {
@@ -1105,7 +1107,7 @@ pub struct Compensations {
      * The available company-wide compensation rates for the company.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub paid_time_off: Vec<CompanyCompensationsPaidTimeOff>,
+    pub paid_time_off: Vec<Fixed>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -1481,7 +1483,7 @@ pub struct Contractor {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub address: Option<Address>,
     /**
-     * The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
+     * The representation of a contractor (individual or business) in Gusto.
      */
     #[serde(
         default,
@@ -1499,7 +1501,7 @@ pub struct Contractor {
     )]
     pub company_id: f64,
     /**
-     * The Federal Employer Identification Number of the contractor business. This attribute is optional for “Business” contractors and will be ignored for “Individual” contractors.
+     * The representation of a contractor (individual or business) in Gusto.
      */
     #[serde(
         default,
@@ -1508,7 +1510,7 @@ pub struct Contractor {
     )]
     pub ein: String,
     /**
-     * The contractor’s email address. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
+     * The representation of a contractor (individual or business) in Gusto.
      */
     #[serde(
         default,
@@ -1517,7 +1519,7 @@ pub struct Contractor {
     )]
     pub email: String,
     /**
-     * The contractor’s first name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+     * The representation of a contractor (individual or business) in Gusto.
      */
     #[serde(
         default,
@@ -1552,7 +1554,7 @@ pub struct Contractor {
     )]
     pub is_active: bool,
     /**
-     * The contractor’s last name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+     * The representation of a contractor (individual or business) in Gusto.
      */
     #[serde(
         default,
@@ -1561,7 +1563,7 @@ pub struct Contractor {
     )]
     pub last_name: String,
     /**
-     * The contractor’s middle initial. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
+     * The representation of a contractor (individual or business) in Gusto.
      */
     #[serde(
         default,
@@ -1631,44 +1633,6 @@ impl Default for PaymentMethod {
 impl PaymentMethod {
     pub fn is_noop(&self) -> bool {
         matches!(self, PaymentMethod::Noop)
-    }
-}
-
-/**
- * The wage type for the payment.
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ContractorPaymentWageType {
-    #[serde(rename = "Fixed")]
-    Fixed,
-    #[serde(rename = "Hourly")]
-    Hourly,
-    #[serde(rename = "")]
-    Noop,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for ContractorPaymentWageType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            ContractorPaymentWageType::Fixed => "Fixed",
-            ContractorPaymentWageType::Hourly => "Hourly",
-            ContractorPaymentWageType::Noop => "",
-            ContractorPaymentWageType::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for ContractorPaymentWageType {
-    fn default() -> ContractorPaymentWageType {
-        ContractorPaymentWageType::Noop
-    }
-}
-impl ContractorPaymentWageType {
-    pub fn is_noop(&self) -> bool {
-        matches!(self, ContractorPaymentWageType::Noop)
     }
 }
 
@@ -1765,7 +1729,7 @@ pub struct ContractorPayment {
      * The representation of a single contractor payment.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub wage_type: Option<ContractorPaymentWageType>,
+    pub wage_type: Option<WageType>,
 }
 
 /// The wage and reimbursement totals for all contractor payments within a given time period.
@@ -2169,9 +2133,6 @@ impl Frequency {
 /// The representation of a pay schedule.
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PaySchedule {
-    /**
-     * The representation of a pay schedule.
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub anchor_pay_date: Option<chrono::NaiveDate>,
     /**
@@ -2183,7 +2144,7 @@ pub struct PaySchedule {
     )]
     pub auto_pilot: bool,
     /**
-     * An integer between 1 and 31 indicating the first day of the month that employees are paid. This field is only relevant for pay schedules with the “Twice per month” and “Monthly” frequencies. It will be null for pay schedules with other frequencies.
+     * The representation of a pay schedule.
      */
     #[serde(
         default,
@@ -2192,7 +2153,7 @@ pub struct PaySchedule {
     )]
     pub day_1: i64,
     /**
-     * An integer between 1 and 31 indicating the second day of the month that employees are paid. This field is the second pay date for pay schedules with the “Twice per month” frequency. It will be null for pay schedules with other frequencies.
+     * The representation of a pay schedule.
      */
     #[serde(
         default,
@@ -2215,7 +2176,7 @@ pub struct PaySchedule {
     )]
     pub id: i64,
     /**
-     * Hourly when the pay schedule is for hourly employees. Salaried when the pay schedule is for salaried employees. It will be null when the pay schedule is for all employees.
+     * The representation of a pay schedule.
      */
     #[serde(
         default,
@@ -2626,7 +2587,7 @@ pub struct EmployeeBenefit {
     )]
     pub company_contribution: String,
     /**
-     * The maximum company contribution amount per year. A null value signifies no limit.
+     * The representation of an employee benefit.
      */
     #[serde(
         default,
@@ -2643,7 +2604,7 @@ pub struct EmployeeBenefit {
     )]
     pub contribute_as_percentage: bool,
     /**
-     * The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.
+     * The representation of an employee benefit.
      */
     #[serde(
         default,
@@ -2683,7 +2644,7 @@ pub struct EmployeeBenefit {
     )]
     pub employee_deduction: String,
     /**
-     * The maximum employee deduction amount per year. A null value signifies no limit.
+     * The representation of an employee benefit.
      */
     #[serde(
         default,
@@ -2710,7 +2671,7 @@ pub struct EmployeeBenefit {
     )]
     pub id: f64,
     /**
-     * Some benefits require additional information to determine their limit. For example, for an HSA benefit, the limit option should be either "Family" or "Individual". For a Dependent Care FSA benefit, the limit option should be either "Joint Filing or Single" or "Married and Filing Separately".
+     * The representation of an employee benefit.
      */
     #[serde(
         default,
@@ -2771,9 +2732,6 @@ pub struct PayPeriod {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub eligible_employees: Vec<EligibleEmployees>,
-    /**
-     * The representation of a pay period.
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub end_date: Option<chrono::NaiveDate>,
     /**
@@ -2799,9 +2757,6 @@ pub struct PayPeriod {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub payroll: Option<Payroll>,
-    /**
-     * The representation of a pay period.
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_date: Option<chrono::NaiveDate>,
 }
@@ -3052,7 +3007,7 @@ impl PayrollEmployeeCompensationsPaymentMethod {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct FixedCompensations {
     /**
-     * The amount of the compensation for the pay period.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3061,7 +3016,7 @@ pub struct FixedCompensations {
     )]
     pub amount: String,
     /**
-     * The ID of the job for the compensation.
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3070,7 +3025,7 @@ pub struct FixedCompensations {
     )]
     pub job_id: f64,
     /**
-     * The name of the compensation. This also serves as the unique, immutable identifier for this compensation.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3083,7 +3038,7 @@ pub struct FixedCompensations {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct HourlyCompensations {
     /**
-     * The amount multiplied by the base rate to calculate total compensation per hour worked.
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3092,7 +3047,7 @@ pub struct HourlyCompensations {
     )]
     pub compensation_multiplier: f64,
     /**
-     * The number of hours to be compensated for this pay period.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3101,7 +3056,7 @@ pub struct HourlyCompensations {
     )]
     pub hours: String,
     /**
-     * The ID of the job for the compensation.
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3110,7 +3065,7 @@ pub struct HourlyCompensations {
     )]
     pub job_id: f64,
     /**
-     * The name of the compensation. This also serves as the unique, immutable identifier for this compensation.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3123,7 +3078,7 @@ pub struct HourlyCompensations {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PayrollEmployeeCompensationsPaidTimeOff {
     /**
-     * The hours of this PTO taken during the pay period.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3132,7 +3087,7 @@ pub struct PayrollEmployeeCompensationsPaidTimeOff {
     )]
     pub hours: String,
     /**
-     * The name of the PTO. This also serves as the unique, immutable identifier for the PTO.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3187,17 +3142,26 @@ pub struct Deductions {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Taxes {
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub amount: String,
+    /**
+     * Whether the employee is terminated.
+     */
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub employer: bool,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3219,7 +3183,7 @@ pub struct EmployeeCompensations {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub deductions: Vec<Deductions>,
     /**
-     * The ID of the employee.
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3233,7 +3197,7 @@ pub struct EmployeeCompensations {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub fixed_compensations: Vec<FixedCompensations>,
     /**
-     * The employee's gross pay. This value is only available for processed payrolls.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3247,7 +3211,7 @@ pub struct EmployeeCompensations {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub hourly_compensations: Vec<HourlyCompensations>,
     /**
-     * The employee's net pay. This value is only available for processed payrolls.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3284,9 +3248,6 @@ pub struct PayrollData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub calculated_at: String,
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub check_date: Option<chrono::NaiveDate>,
     /**
@@ -3352,9 +3313,6 @@ pub struct PayrollData {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub processed: bool,
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub processed_date: Option<chrono::NaiveDate>,
     /**
@@ -3421,7 +3379,7 @@ impl CustomFieldType {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EmployeeCustomField {
     /**
-     * This is the id of the response object from when you get the company custom fields
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3438,12 +3396,18 @@ pub struct EmployeeCustomField {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3457,6 +3421,9 @@ pub struct EmployeeCustomField {
     pub selection_options: Vec<String>,
     #[serde(rename = "type")]
     pub type_: CustomFieldType,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3477,12 +3444,18 @@ pub struct CompanyCustomField {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3685,7 +3658,7 @@ pub struct FederalTaxDetails {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest {
     /**
-     * The id for the benefit got from the benefits api.
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3694,7 +3667,7 @@ pub struct PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest {
     )]
     pub benefit_id: f64,
     /**
-     * The tax year for which this amount applies.
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3703,7 +3676,7 @@ pub struct PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest {
     )]
     pub tax_year: f64,
     /**
-     * The year-to-date company contribution made outside the current company.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3712,7 +3685,7 @@ pub struct PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest {
     )]
     pub ytd_company_contribution_amount: String,
     /**
-     * The year-to-date employee deduction made outside the current company.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3725,7 +3698,7 @@ pub struct PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct EarningTypeListResponse {
     /**
-     * The custom earning types for the company.
+     * The default earning types for the company.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub custom: Vec<EarningType>,
@@ -3824,7 +3797,7 @@ pub struct PutEmployeesRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub two_percent_shareholder: Option<bool>,
     /**
-     * The current version of the object. See the versioning guide for information on how to use this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3833,9 +3806,6 @@ pub struct PutEmployeesRequest {
     )]
     pub version: String,
 }
-
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-pub struct GetCompanyEmployeesRequest {}
 
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3913,7 +3883,7 @@ pub struct PutJobRequest {
     )]
     pub title: String,
     /**
-     * The current version of the object. See the versioning guide for information on how to use this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -3951,6 +3921,9 @@ pub struct PostJobRequest {
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostCompanyLocationsRequest {
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3976,18 +3949,27 @@ pub struct PostCompanyLocationsRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub mailing_address: Option<bool>,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone_number: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4003,6 +3985,9 @@ pub struct PostCompanyLocationsRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub street_2: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4089,50 +4074,11 @@ pub struct PutLocationRequest {
     pub zip: String,
 }
 
-/**
- * The contractor’s wage type, either “Fixed” or “Hourly”.
- *   
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum PutComntractorRequestWageType {
-    #[serde(rename = "Fixed")]
-    Fixed,
-    #[serde(rename = "Hourly")]
-    Hourly,
-    #[serde(rename = "")]
-    Noop,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for PutComntractorRequestWageType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            PutComntractorRequestWageType::Fixed => "Fixed",
-            PutComntractorRequestWageType::Hourly => "Hourly",
-            PutComntractorRequestWageType::Noop => "",
-            PutComntractorRequestWageType::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for PutComntractorRequestWageType {
-    fn default() -> PutComntractorRequestWageType {
-        PutComntractorRequestWageType::Noop
-    }
-}
-impl PutComntractorRequestWageType {
-    pub fn is_noop(&self) -> bool {
-        matches!(self, PutComntractorRequestWageType::Noop)
-    }
-}
-
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PutComntractorRequest {
     /**
-     * The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
+     *
      */
     #[serde(
         default,
@@ -4150,7 +4096,7 @@ pub struct PutComntractorRequest {
     )]
     pub ein: String,
     /**
-     * The contractor’s first name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+     *
      */
     #[serde(
         default,
@@ -4168,7 +4114,7 @@ pub struct PutComntractorRequest {
     )]
     pub hourly_rate: String,
     /**
-     * The contractor’s last name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+     *
      */
     #[serde(
         default,
@@ -4185,9 +4131,6 @@ pub struct PutComntractorRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub middle_initial: String,
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_date: Option<chrono::NaiveDate>,
     /**
@@ -4203,53 +4146,14 @@ pub struct PutComntractorRequest {
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub wage_type: Option<PutComntractorRequestWageType>,
-}
-
-/**
- * The contractor type, either an “Individual” or a “Business”.
- *   
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum PostCompanyContractorsRequestType {
-    #[serde(rename = "Business")]
-    Business,
-    #[serde(rename = "Individual")]
-    Individual,
-    #[serde(rename = "")]
-    Noop,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for PostCompanyContractorsRequestType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            PostCompanyContractorsRequestType::Business => "Business",
-            PostCompanyContractorsRequestType::Individual => "Individual",
-            PostCompanyContractorsRequestType::Noop => "",
-            PostCompanyContractorsRequestType::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for PostCompanyContractorsRequestType {
-    fn default() -> PostCompanyContractorsRequestType {
-        PostCompanyContractorsRequestType::Noop
-    }
-}
-impl PostCompanyContractorsRequestType {
-    pub fn is_noop(&self) -> bool {
-        matches!(self, PostCompanyContractorsRequestType::Noop)
-    }
+    pub wage_type: Option<WageType>,
 }
 
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostCompanyContractorsRequest {
     /**
-     * The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
+     *
      */
     #[serde(
         default,
@@ -4276,7 +4180,7 @@ pub struct PostCompanyContractorsRequest {
     )]
     pub email: String,
     /**
-     * The contractor’s first name. This attribute is required for “Individual” contractors and will be ignored for “Business” contractors.
+     *
      */
     #[serde(
         default,
@@ -4294,7 +4198,7 @@ pub struct PostCompanyContractorsRequest {
     )]
     pub last_name: String,
     /**
-     * The contractor’s middle initial. This attribute is optional for “Individual” contractors and will be ignored for “Business” contractors.
+     *
      */
     #[serde(
         default,
@@ -4307,30 +4211,18 @@ pub struct PostCompanyContractorsRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub self_onboarding: Option<bool>,
-    /**
-     * The day when the contractor will start working for the company.
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_date: Option<chrono::NaiveDate>,
     /**
-     * The contractor type, either an “Individual” or a “Business”.
-     *
+     * The contractor's type, either "Individual" or "Business".
      */
-    #[serde(
-        default,
-        skip_serializing_if = "PostCompanyContractorsRequestType::is_noop",
-        rename = "type"
-    )]
-    pub type_: PostCompanyContractorsRequestType,
+    #[serde(default, skip_serializing_if = "Type::is_noop", rename = "type")]
+    pub type_: Type,
     /**
-     * The contractor’s wage type, either “Fixed” or “Hourly”.
-     *
+     * The contractor's wage type, either "Fixed" or "Hourly".
      */
-    #[serde(
-        default,
-        skip_serializing_if = "PutComntractorRequestWageType::is_noop"
-    )]
-    pub wage_type: PutComntractorRequestWageType,
+    #[serde(default, skip_serializing_if = "WageType::is_noop")]
+    pub wage_type: WageType,
 }
 
 ///
@@ -4356,7 +4248,7 @@ pub struct PutCompensationRequest {
     )]
     pub rate: String,
     /**
-     * The current version of the object. See the versioning guide for information on how to use this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4369,9 +4261,6 @@ pub struct PutCompensationRequest {
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostJobCompensationsRequest {
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub effective_date: Option<chrono::NaiveDate>,
     /**
@@ -4385,7 +4274,7 @@ pub struct PostJobCompensationsRequest {
     #[serde(default, skip_serializing_if = "PaymentUnit::is_noop")]
     pub payment_unit: PaymentUnit,
     /**
-     * The dollar amount paid per payment unit.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4404,7 +4293,7 @@ pub struct PostEmployeeGarnishmentsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
     /**
-     * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float, e.g. "8.00".
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4413,7 +4302,7 @@ pub struct PostEmployeeGarnishmentsRequest {
     )]
     pub amount: f64,
     /**
-     * The maximum deduction per annum. A null value indicates no maximum. Represented as a float, e.g. "200.00".
+     *
      */
     #[serde(
         default,
@@ -4422,7 +4311,7 @@ pub struct PostEmployeeGarnishmentsRequest {
     )]
     pub annual_maximum: f64,
     /**
-     * Whether the garnishment is court ordered.
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub court_ordered: Option<bool>,
@@ -4432,7 +4321,7 @@ pub struct PostEmployeeGarnishmentsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deduct_as_percentage: Option<bool>,
     /**
-     * The description of the garnishment.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4441,7 +4330,7 @@ pub struct PostEmployeeGarnishmentsRequest {
     )]
     pub description: String,
     /**
-     * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
+     *
      */
     #[serde(
         default,
@@ -4455,7 +4344,7 @@ pub struct PostEmployeeGarnishmentsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurring: Option<bool>,
     /**
-     * The number of times to apply the garnisment. Ignored if recurring is true.
+     *
      */
     #[serde(
         default,
@@ -4468,12 +4357,12 @@ pub struct PostEmployeeGarnishmentsRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PutGarnishmentRequest {
     /**
-     * Whether or not this garnishment is currently active.
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
     /**
-     * The amount of the garnishment. Either a percentage or a fixed dollar amount. Represented as a float, e.g. "8.00".
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4482,7 +4371,7 @@ pub struct PutGarnishmentRequest {
     )]
     pub amount: f64,
     /**
-     * The maximum deduction per annum. A null value indicates no maximum. Represented as a float, e.g. "200.00".
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4491,17 +4380,17 @@ pub struct PutGarnishmentRequest {
     )]
     pub annual_maximum: f64,
     /**
-     * Whether the garnishment is court ordered.
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub court_ordered: Option<bool>,
     /**
-     * Whether the amount should be treated as a percentage to be deducted per pay period.
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deduct_as_percentage: Option<bool>,
     /**
-     * The description of the garnishment.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4510,7 +4399,7 @@ pub struct PutGarnishmentRequest {
     )]
     pub description: String,
     /**
-     * The maximum deduction per pay period. A null value indicates no maximum. Represented as a float, e.g. "16.00".
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4519,12 +4408,12 @@ pub struct PutGarnishmentRequest {
     )]
     pub pay_period_maximum: f64,
     /**
-     * Whether the garnishment should recur indefinitely.
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recurring: Option<bool>,
     /**
-     * The number of times to apply the garnisment. Ignored if recurring is true.
+     * The unique identifier of the location in Gusto.
      */
     #[serde(
         default,
@@ -4533,7 +4422,7 @@ pub struct PutGarnishmentRequest {
     )]
     pub times: i64,
     /**
-     * The current version of the object. See the versioning guide for information on how to use this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4546,9 +4435,6 @@ pub struct PutGarnishmentRequest {
 ///
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostEmployeeTerminationsRequest {
-    /**
-     *
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub effective_date: Option<chrono::NaiveDate>,
     /**
@@ -4598,7 +4484,7 @@ pub struct PutEmployeeHomeAddressRequest {
     )]
     pub street_2: String,
     /**
-     * The current version of the object. See the versioning guide for information on how to use this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4626,7 +4512,7 @@ pub struct PutCompanyPaySchedulesScheduleRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_pilot: Option<bool>,
     /**
-     * The current version of the object. See the versioning guide for information on how to use this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4634,44 +4520,6 @@ pub struct PutCompanyPaySchedulesScheduleRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub version: String,
-}
-
-/**
- * The bank account type
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum PostCompanyBankAccountsRequestAccountType {
-    #[serde(rename = "Checking")]
-    Checking,
-    #[serde(rename = "Savings")]
-    Savings,
-    #[serde(rename = "")]
-    Noop,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for PostCompanyBankAccountsRequestAccountType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            PostCompanyBankAccountsRequestAccountType::Checking => "Checking",
-            PostCompanyBankAccountsRequestAccountType::Savings => "Savings",
-            PostCompanyBankAccountsRequestAccountType::Noop => "",
-            PostCompanyBankAccountsRequestAccountType::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for PostCompanyBankAccountsRequestAccountType {
-    fn default() -> PostCompanyBankAccountsRequestAccountType {
-        PostCompanyBankAccountsRequestAccountType::Noop
-    }
-}
-impl PostCompanyBankAccountsRequestAccountType {
-    pub fn is_noop(&self) -> bool {
-        matches!(self, PostCompanyBankAccountsRequestAccountType::Noop)
-    }
 }
 
 ///
@@ -4690,7 +4538,7 @@ pub struct PostCompanyBankAccountsRequest {
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub account_type: Option<PostCompanyBankAccountsRequestAccountType>,
+    pub account_type: Option<AccountType>,
     /**
      *
      */
@@ -4734,7 +4582,7 @@ pub struct PostCompanyBenefitsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
     /**
-     * The ID of the benefit to which the company benefit belongs.
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4743,7 +4591,7 @@ pub struct PostCompanyBenefitsRequest {
     )]
     pub benefit_id: f64,
     /**
-     * The description of the company benefit.For example, a company may offer multiple benefits with an ID of 1 (for Medical Insurance). The description would show something more specific like “Kaiser Permanente” or “Blue Cross/ Blue Shield”.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4781,7 +4629,7 @@ pub struct PutCompanyBenefitRequest {
     )]
     pub description: String,
     /**
-     * The current version of the object. See the versioning guide for information on how to use this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4794,7 +4642,7 @@ pub struct PutCompanyBenefitRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostCompanyEarningTypesRequest {
     /**
-     * The name of the custom earning type.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4807,7 +4655,7 @@ pub struct PostCompanyEarningTypesRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PutCompanyEarningTypeRequest {
     /**
-     * The name of the custom earning type.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4831,7 +4679,7 @@ pub struct PostEmployeeBenefitsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub catch_up: Option<bool>,
     /**
-     * The ID of the company to which the benefit belongs.
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4849,7 +4697,7 @@ pub struct PostEmployeeBenefitsRequest {
     )]
     pub company_contribution: String,
     /**
-     * The maximum company contribution amount per year. A null value signifies no limit.
+     *
      */
     #[serde(
         default,
@@ -4863,7 +4711,7 @@ pub struct PostEmployeeBenefitsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contribute_as_percentage: Option<bool>,
     /**
-     * The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.
+     *
      */
     #[serde(
         default,
@@ -4900,7 +4748,7 @@ pub struct PostEmployeeBenefitsRequest {
     )]
     pub employee_deduction: String,
     /**
-     * The maximum employee deduction amount per year. A null value signifies no limit.
+     *
      */
     #[serde(
         default,
@@ -4909,7 +4757,7 @@ pub struct PostEmployeeBenefitsRequest {
     )]
     pub employee_deduction_annual_maximum: String,
     /**
-     * Some benefits require additional information to determine their limit. For example, for an HSA benefit, the limit option should be either "Family" or "Individual". For a Dependent Care FSA benefit, the limit option should be either "Joint Filing or Single" or "Married and Filing Separately".
+     *
      */
     #[serde(
         default,
@@ -4922,17 +4770,17 @@ pub struct PostEmployeeBenefitsRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PutEmployeeBenefitRequest {
     /**
-     * Whether the employee benefit is active.
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
     /**
-     * Whether the employee should use a benefit’s "catch up" rate. Only Roth 401k and 401k benefits use this value for employees over 50.
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub catch_up: Option<bool>,
     /**
-     * The amount to be paid, per pay period, by the company.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4941,7 +4789,7 @@ pub struct PutEmployeeBenefitRequest {
     )]
     pub company_contribution: String,
     /**
-     * The maximum company contribution amount per year. A null value signifies no limit.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4950,12 +4798,12 @@ pub struct PutEmployeeBenefitRequest {
     )]
     pub company_contribution_annual_maximum: String,
     /**
-     * Whether the company contribution amount should be treated as a percentage to be deducted from each payroll.
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contribute_as_percentage: Option<bool>,
     /**
-     * The amount that the employee is insured for. Note: company contribution cannot be present if coverage amount is set.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4964,7 +4812,7 @@ pub struct PutEmployeeBenefitRequest {
     )]
     pub coverage_amount: String,
     /**
-     * The coverage amount as a multiple of the employee’s salary. Only applicable for Group Term Life benefits. Note: cannot be set if coverage amount is also set.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4973,7 +4821,7 @@ pub struct PutEmployeeBenefitRequest {
     )]
     pub coverage_salary_multiplier: String,
     /**
-     * Whether the employee deduction amount should be treated as a percentage to be deducted from each payroll.
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deduct_as_percentage: Option<bool>,
@@ -4983,7 +4831,7 @@ pub struct PutEmployeeBenefitRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub deduction_reduces_taxable_income: Option<DeductionReducesTaxableIncome>,
     /**
-     * The amount to be deducted, per pay period, from the employee's pay.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -4992,7 +4840,7 @@ pub struct PutEmployeeBenefitRequest {
     )]
     pub employee_deduction: String,
     /**
-     * The maximum employee deduction amount per year. A null value signifies no limit.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5001,7 +4849,7 @@ pub struct PutEmployeeBenefitRequest {
     )]
     pub employee_deduction_annual_maximum: String,
     /**
-     * Some benefits require additional information to determine their limit. For example, for an HSA benefit, the limit option should be either "Family" or "Individual". For a Dependent Care FSA benefit, the limit option should be either "Joint Filing or Single" or "Married and Filing Separately".
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5010,7 +4858,7 @@ pub struct PutEmployeeBenefitRequest {
     )]
     pub limit_option: String,
     /**
-     * The current version of the object. See the versioning guide for information on how to use this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5101,6 +4949,9 @@ pub struct PostCompanyPayrollsRequest {
     pub employee_ids: Vec<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub end_date: Option<chrono::NaiveDate>,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5111,47 +4962,6 @@ pub struct PostCompanyPayrollsRequest {
     pub off_cycle_reason: Option<OffCycleReason>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub start_date: Option<chrono::NaiveDate>,
-}
-
-/**
- * Include the requested attribute in the employee_compensations attribute in the response
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum GetCompanyPayrollInclude {
-    #[serde(rename = "benefits")]
-    Benefits,
-    #[serde(rename = "deductions")]
-    Deductions,
-    #[serde(rename = "taxes")]
-    Taxes,
-    #[serde(rename = "")]
-    Noop,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for GetCompanyPayrollInclude {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            GetCompanyPayrollInclude::Benefits => "benefits",
-            GetCompanyPayrollInclude::Deductions => "deductions",
-            GetCompanyPayrollInclude::Taxes => "taxes",
-            GetCompanyPayrollInclude::Noop => "",
-            GetCompanyPayrollInclude::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for GetCompanyPayrollInclude {
-    fn default() -> GetCompanyPayrollInclude {
-        GetCompanyPayrollInclude::Noop
-    }
-}
-impl GetCompanyPayrollInclude {
-    pub fn is_noop(&self) -> bool {
-        matches!(self, GetCompanyPayrollInclude::Noop)
-    }
 }
 
 /// An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
@@ -5222,7 +5032,7 @@ pub struct PutCompanyPayrollsRequestEmployeeCompensationsHourly {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PutCompanyPayrollsRequestEmployeeCompensations {
     /**
-     * The ID of the employee.
+     * The unique identifier of the location in Gusto.
      */
     #[serde(
         default,
@@ -5252,7 +5062,7 @@ pub struct PutCompanyPayrollsRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub employee_compensations: Vec<PutCompanyPayrollsRequestEmployeeCompensations>,
     /**
-     * The current version of the object. See the versioning guide for details using this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5266,7 +5076,7 @@ pub struct PutCompanyPayrollsRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
-     * The email of the user who will be the primary payroll admin.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5275,7 +5085,7 @@ pub struct User {
     )]
     pub email: String,
     /**
-     * The first name of the user who will be the primary payroll admin.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5284,7 +5094,7 @@ pub struct User {
     )]
     pub first_name: String,
     /**
-     * The last name of the user who will be the primary payroll admin.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5306,7 +5116,7 @@ pub struct User {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostPartnerManagedCompaniesRequestCompany {
     /**
-     * The employer identification number (EIN) of the company.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5315,7 +5125,7 @@ pub struct PostPartnerManagedCompaniesRequestCompany {
     )]
     pub ein: String,
     /**
-     * The legal name of the company.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5324,7 +5134,7 @@ pub struct PostPartnerManagedCompaniesRequestCompany {
     )]
     pub name: String,
     /**
-     * The name of the company.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5380,6 +5190,9 @@ pub struct PostPartnerManagedCompaniesResponse {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct Addresses {
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5387,7 +5200,7 @@ pub struct Addresses {
     )]
     pub city: String,
     /**
-     * Whether or not this is a primary address for the company. If set to true, the address will be used as the mailing and filing address for the company and will be added as a work location. If set to false or not included, the address will only be added as a work location for the company. If multiple addresses are included, only one should be marked as primary.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5395,30 +5208,45 @@ pub struct Addresses {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub is_primary: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub street_1: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub street_2: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5435,7 +5263,7 @@ pub struct PostProvisionRequestCompany {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub addresses: Vec<Addresses>,
     /**
-     * The employer identification number (EIN) of the company.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5444,7 +5272,7 @@ pub struct PostProvisionRequestCompany {
     )]
     pub ein: String,
     /**
-     * The legal name of the company.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5453,7 +5281,7 @@ pub struct PostProvisionRequestCompany {
     )]
     pub name: String,
     /**
-     * The number of employees in the company.
+     * The ID of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5462,12 +5290,12 @@ pub struct PostProvisionRequestCompany {
     )]
     pub number_employees: f64,
     /**
-     * The states in which the company operates. States should be included by their two letter code, i.e. NY for New York.
+     * An array of options for fields of type radio. Otherwise, null.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub states: Vec<String>,
     /**
-     * The name of the company.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5505,6 +5333,9 @@ pub struct PostProvisionResponse {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetEmployeeCustomFieldsResponse {
+    /**
+     * Custom fields are only included for the employee if the include param has the custom_fields value set
+     */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub custom_fields: Vec<EmployeeCustomField>,
 }
@@ -5558,12 +5389,18 @@ impl OnboardingPersonType {
 pub struct PostCompanyJobApplicantsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub email: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5579,6 +5416,9 @@ pub struct PostCompanyJobApplicantsRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub job_title: String,
+    /**
+     * A unique identifier of the employee in Gusto.
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5600,7 +5440,7 @@ pub struct PostCompanyJobApplicantsRequest {
     )]
     pub phone: String,
     /**
-     * Required if onboarding_person_type is set to "Employee".
+     *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub send_offer: Option<bool>,
@@ -5664,7 +5504,7 @@ pub struct PutCompanyJobApplicantRequest {
     )]
     pub phone: String,
     /**
-     * Required if onboarding_person_type is set to "Employee".
+     *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub send_offer: Option<bool>,
@@ -5675,7 +5515,7 @@ pub struct PutCompanyJobApplicantRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCompanyPayrollReversalsResponse {
     /**
-     * Timestamp of when the reversal was approved.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5684,7 +5524,7 @@ pub struct GetCompanyPayrollReversalsResponse {
     )]
     pub approved_at: String,
     /**
-     * Category chosen by the admin who requested the reversal.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5693,7 +5533,7 @@ pub struct GetCompanyPayrollReversalsResponse {
     )]
     pub category: String,
     /**
-     * A reason provided by the admin who created the reversal.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5702,7 +5542,7 @@ pub struct GetCompanyPayrollReversalsResponse {
     )]
     pub reason: String,
     /**
-     * The payroll where the reversal was applied.
+     * The unique identifier of the location in Gusto.
      */
     #[serde(
         default,
@@ -5710,13 +5550,10 @@ pub struct GetCompanyPayrollReversalsResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub reversal_payroll_id: i64,
-    /**
-     * Array of employee ids affected.
-     */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub reversed_employee_ids: Vec<i64>,
     /**
-     * The payroll run being reversed.
+     * The unique identifier of the location in Gusto.
      */
     #[serde(
         default,
@@ -5730,7 +5567,7 @@ pub struct GetCompanyPayrollReversalsResponse {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PostCompanyAdminsRequest {
     /**
-     * The last name of the admin.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5739,7 +5576,7 @@ pub struct PostCompanyAdminsRequest {
     )]
     pub email: String,
     /**
-     * The email of the admin. This will be used for the admin to log in to their account. If the email matches an existing user, this will create an admin account for them.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5748,7 +5585,7 @@ pub struct PostCompanyAdminsRequest {
     )]
     pub first_name: String,
     /**
-     * The first name of the admin.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5761,7 +5598,7 @@ pub struct PostCompanyAdminsRequest {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct GetCompanyFederalTaxDetailsResponse {
     /**
-     * The company's EIN
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5770,7 +5607,7 @@ pub struct GetCompanyFederalTaxDetailsResponse {
     )]
     pub ein: String,
     /**
-     * Whether the EIN was able to be verified as a valid EIN with the IRS.
+     * Whether the employee is terminated.
      */
     #[serde(
         default,
@@ -5778,9 +5615,7 @@ pub struct GetCompanyFederalTaxDetailsResponse {
     )]
     pub ein_verified: bool,
     /**
-     * The form used by the company for federal tax filing. One of:
-     *  - 941 (Quarterly federal tax return form)
-     *  - 944 (Annual federal tax return form)
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5789,7 +5624,7 @@ pub struct GetCompanyFederalTaxDetailsResponse {
     )]
     pub filing_form: String,
     /**
-     * The legal name of the company
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5798,19 +5633,7 @@ pub struct GetCompanyFederalTaxDetailsResponse {
     )]
     pub legal_name: String,
     /**
-     * What type of tax entity the company is. One of:
-     *  - C-Corporation
-     *  - S-Corporation
-     *  - Sole proprietor
-     *  - LLC
-     *  - LLP
-     *  - Limited partnership
-     *  - Co-ownership
-     *  - Association
-     *  - Trusteeship
-     *  - General partnership
-     *  - Joint venture
-     *  - Non-Profit
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5819,10 +5642,7 @@ pub struct GetCompanyFederalTaxDetailsResponse {
     )]
     pub tax_payer_type: String,
     /**
-     * Whether the company is taxed as an S-Corporation. Tax payer types that may be taxed as an S-Corporation include:
-     *  - S-Corporation
-     *  - C-Corporation
-     *  - LLC
+     * Whether the employee is terminated.
      */
     #[serde(
         default,
@@ -5830,7 +5650,7 @@ pub struct GetCompanyFederalTaxDetailsResponse {
     )]
     pub taxable_as_scorp: bool,
     /**
-     * The current version of the object. See the versioning guide for details using this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5843,7 +5663,7 @@ pub struct GetCompanyFederalTaxDetailsResponse {
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 pub struct PutCompanyFederalTaxDetailsRequest {
     /**
-     * The EIN of of the company
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5852,9 +5672,7 @@ pub struct PutCompanyFederalTaxDetailsRequest {
     )]
     pub ein: String,
     /**
-     * The form used by the company for federal tax filing. One of:
-     *  - 941 (Quarterly federal tax return)
-     *  - 944 (Annual federal tax return)
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5863,7 +5681,7 @@ pub struct PutCompanyFederalTaxDetailsRequest {
     )]
     pub filing_form: String,
     /**
-     * The legal name of the company
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5872,7 +5690,7 @@ pub struct PutCompanyFederalTaxDetailsRequest {
     )]
     pub legal_name: String,
     /**
-     * What type of tax entity the company is
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,
@@ -5881,12 +5699,12 @@ pub struct PutCompanyFederalTaxDetailsRequest {
     )]
     pub tax_payer_type: String,
     /**
-     * Whether this company should be taxed as an S-Corporation
+     * Whether the employee is terminated.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub taxable_as_scorp: Option<bool>,
     /**
-     * The current version of the object. See the versioning guide for details using this field.
+     * A unique identifier of the employee in Gusto.
      */
     #[serde(
         default,

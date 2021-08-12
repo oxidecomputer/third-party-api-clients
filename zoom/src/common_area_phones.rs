@@ -38,7 +38,7 @@ impl CommonAreaPhones {
         &self,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::ListCommonAreaPhonesResponse>> {
+    ) -> Result<Vec<crate::types::CommonAreaPhones>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -55,7 +55,7 @@ impl CommonAreaPhones {
         }
         let url = format!("/phone/common_area_phones?{}", query);
 
-        let resp: crate::types::ListCommonAreaPhonesResponseData =
+        let resp: crate::types::ListCommonAreaPhonesResponse =
             self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
@@ -81,9 +81,9 @@ impl CommonAreaPhones {
      * * Account owner or admin permissions.
      * * A [supported device](https://support.zoom.us/hc/en-us/articles/360001299063-Zoom-Voice-Supported-Devices)
      */
-    pub async fn list_all(&self) -> Result<Vec<crate::types::ListCommonAreaPhonesResponse>> {
+    pub async fn list_all(&self) -> Result<Vec<crate::types::CommonAreaPhones>> {
         let url = "/phone/common_area_phones".to_string();
-        let mut resp: crate::types::ListCommonAreaPhonesResponseData =
+        let mut resp: crate::types::ListCommonAreaPhonesResponse =
             self.client.get(&url, None).await.unwrap();
 
         let mut common_area_phones = resp.common_area_phones;
@@ -260,7 +260,7 @@ impl CommonAreaPhones {
     pub async fn assign_phone_numbers_to_common_area(
         &self,
         common_area_phone_id: &str,
-        body: &crate::types::AssignPhoneNumbersCommonAreaRequestData,
+        body: &crate::types::AssignPhoneNumbersCommonAreaRequest,
     ) -> Result<crate::types::AssignPhoneNumbersCommonAreaResponseData> {
         let url = format!(
             "/phone/common_area_phones/{}/phone_numbers",

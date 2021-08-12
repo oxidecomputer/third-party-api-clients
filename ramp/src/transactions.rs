@@ -22,19 +22,19 @@ impl Transactions {
      * **Parameters:**
      *
      * * `authorization: &str` -- The OAuth2 token header.
-     * * `department_id: &str`
-     * * `location_id: &str`
+     * * `department_id: &str` -- The OAuth2 token header.
+     * * `location_id: &str` -- The OAuth2 token header.
      * * `from_date: chrono::DateTime<chrono::Utc>`
      * * `to_date: chrono::DateTime<chrono::Utc>`
-     * * `merchant_id: &str`
-     * * `sk_category_id: &str`
+     * * `merchant_id: &str` -- The OAuth2 token header.
+     * * `sk_category_id: &str` -- The OAuth2 token header.
      * * `order_by_date_desc: bool`
      * * `order_by_date_asc: bool`
      * * `order_by_amount_desc: bool`
      * * `order_by_amount_asc: bool`
-     * * `state: &str`
-     * * `min_amount: f64`
-     * * `max_amount: f64`
+     * * `state: &str` -- The OAuth2 token header.
+     * * `min_amount: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     * * `max_amount: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      * * `requires_memo: bool` -- Filters for transactions which require a memo, but do not have one. This can only be set to true.

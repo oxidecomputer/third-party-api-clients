@@ -30,22 +30,22 @@ impl Events {
      * * `q: &str` -- Free text search terms to find events that match these terms in any field, except for extended properties. Optional.
      * * `shared_extended_property: &[String]` -- Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
      * * `show_deleted: bool` -- Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
-     * * `show_hidden_invitations: bool` -- Whether to include hidden invitations in the result. Optional. The default is False.
+     * * `show_hidden_invitations: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      * * `single_events: bool` -- Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.
      * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
-     *  There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
-     *  
-     *  These are:
-     *  - iCalUID
-     *  - orderBy
-     *  - privateExtendedProperty
-     *  - q
-     *  - sharedExtendedProperty
-     *  - timeMin
-     *  - timeMax
-     *  - updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
-     *  Learn more about incremental synchronization.
-     *  Optional. The default is to return all entries.
+     *   There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
+     *   
+     *   These are:
+     *   - iCalUID
+     *   - orderBy
+     *   - privateExtendedProperty
+     *   - q
+     *   - sharedExtendedProperty
+     *   - timeMin
+     *   - timeMax
+     *   - updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+     *   Learn more about incremental synchronization.
+     *   Optional. The default is to return all entries.
      * * `time_max: &str` -- Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.
      * * `time_min: &str` -- Lower bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.
      * * `time_zone: &str` -- Time zone used in the response. Optional. The default is the time zone of the calendar.
@@ -184,10 +184,10 @@ impl Events {
      * * `conference_data_version: u64` -- Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
      * * `max_attendees: i64` -- The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
      * * `send_notifications: bool` -- Deprecated. Please use sendUpdates instead.
-     *  
-     *  Whether to send notifications about the creation of the new event. Note that some emails might still be sent even if you set the value to false. The default is false.
+     *   
+     *   Whether to send notifications about the creation of the new event. Note that some emails might still be sent even if you set the value to false. The default is false.
      * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
-     * * `supports_attachments: bool` -- Whether API client performing operation supports event attachments. Optional. The default is False.
+     * * `supports_attachments: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     pub async fn calendar_insert(
         &self,
@@ -270,7 +270,7 @@ impl Events {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `conference_data_version: u64` -- Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
-     * * `supports_attachments: bool` -- Whether API client performing operation supports event attachments. Optional. The default is False.
+     * * `supports_attachments: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     pub async fn calendar_import(
         &self,
@@ -344,9 +344,9 @@ impl Events {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `text: &str` -- The text describing the event to be created.
      * * `send_notifications: bool` -- Deprecated. Please use sendUpdates instead.
-     *  
-     *  Whether to send notifications about the creation of the event. Note that some emails might still be sent even if you set the value to false. The default is false.
-     * * `send_updates: crate::types::SendUpdates` -- Guests who should receive notifications about the creation of the new event.
+     *   
+     *   Whether to send notifications about the creation of the event. Note that some emails might still be sent even if you set the value to false. The default is false.
+     * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
      */
     pub async fn calendar_quick_add(
         &self,
@@ -423,22 +423,22 @@ impl Events {
      * * `q: &str` -- Free text search terms to find events that match these terms in any field, except for extended properties. Optional.
      * * `shared_extended_property: &[String]` -- Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.
      * * `show_deleted: bool` -- Whether to include deleted events (with status equals "cancelled") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.
-     * * `show_hidden_invitations: bool` -- Whether to include hidden invitations in the result. Optional. The default is False.
+     * * `show_hidden_invitations: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      * * `single_events: bool` -- Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.
      * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
-     *  There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
-     *  
-     *  These are:
-     *  - iCalUID
-     *  - orderBy
-     *  - privateExtendedProperty
-     *  - q
-     *  - sharedExtendedProperty
-     *  - timeMin
-     *  - timeMax
-     *  - updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
-     *  Learn more about incremental synchronization.
-     *  Optional. The default is to return all entries.
+     *   There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
+     *   
+     *   These are:
+     *   - iCalUID
+     *   - orderBy
+     *   - privateExtendedProperty
+     *   - q
+     *   - sharedExtendedProperty
+     *   - timeMin
+     *   - timeMax
+     *   - updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+     *   Learn more about incremental synchronization.
+     *   Optional. The default is to return all entries.
      * * `time_max: &str` -- Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMin is set, timeMax must be greater than timeMin.
      * * `time_min: &str` -- Lower bound (exclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, for example, 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but are ignored. If timeMax is set, timeMin must be smaller than timeMax.
      * * `time_zone: &str` -- Time zone used in the response. Optional. The default is the time zone of the calendar.
@@ -580,7 +580,7 @@ impl Events {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `event_id: &str` -- Event identifier.
+     * * `event_id: &str` -- ETag of the collection.
      * * `always_include_email: bool` -- Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).
      * * `max_attendees: i64` -- The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
      * * `time_zone: &str` -- Time zone used in the response. Optional. The default is the time zone of the calendar.
@@ -654,15 +654,15 @@ impl Events {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `event_id: &str` -- Event identifier.
+     * * `event_id: &str` -- ETag of the collection.
      * * `always_include_email: bool` -- Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).
      * * `conference_data_version: u64` -- Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
      * * `max_attendees: i64` -- The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
      * * `send_notifications: bool` -- Deprecated. Please use sendUpdates instead.
-     *  
-     *  Whether to send notifications about the event update (for example, description changes, etc.). Note that some emails might still be sent even if you set the value to false. The default is false.
-     * * `send_updates: crate::types::SendUpdates` -- Guests who should receive notifications about the event update (for example, title changes, etc.).
-     * * `supports_attachments: bool` -- Whether API client performing operation supports event attachments. Optional. The default is False.
+     *   
+     *   Whether to send notifications about the event update (for example, description changes, etc.). Note that some emails might still be sent even if you set the value to false. The default is false.
+     * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
+     * * `supports_attachments: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     pub async fn calendar_update(
         &self,
@@ -750,11 +750,11 @@ impl Events {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `event_id: &str` -- Event identifier.
+     * * `event_id: &str` -- ETag of the collection.
      * * `send_notifications: bool` -- Deprecated. Please use sendUpdates instead.
-     *  
-     *  Whether to send notifications about the deletion of the event. Note that some emails might still be sent even if you set the value to false. The default is false.
-     * * `send_updates: crate::types::SendUpdates` -- Guests who should receive notifications about the deletion of the event.
+     *   
+     *   Whether to send notifications about the deletion of the event. Note that some emails might still be sent even if you set the value to false. The default is false.
+     * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
      */
     pub async fn calendar_delete(
         &self,
@@ -819,15 +819,15 @@ impl Events {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
-     * * `event_id: &str` -- Event identifier.
+     * * `event_id: &str` -- ETag of the collection.
      * * `always_include_email: bool` -- Deprecated and ignored. A value will always be returned in the email field for the organizer, creator and attendees, even if no real email address is available (i.e. a generated, non-working value will be provided).
      * * `conference_data_version: u64` -- Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
      * * `max_attendees: i64` -- The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
      * * `send_notifications: bool` -- Deprecated. Please use sendUpdates instead.
-     *  
-     *  Whether to send notifications about the event update (for example, description changes, etc.). Note that some emails might still be sent even if you set the value to false. The default is false.
-     * * `send_updates: crate::types::SendUpdates` -- Guests who should receive notifications about the event update (for example, title changes, etc.).
-     * * `supports_attachments: bool` -- Whether API client performing operation supports event attachments. Optional. The default is False.
+     *   
+     *   Whether to send notifications about the event update (for example, description changes, etc.). Note that some emails might still be sent even if you set the value to false. The default is false.
+     * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
+     * * `supports_attachments: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     pub async fn calendar_patch(
         &self,
@@ -1019,12 +1019,12 @@ impl Events {
      * **Parameters:**
      *
      * * `calendar_id: &str` -- Calendar identifier of the source calendar where the event currently is on.
-     * * `event_id: &str` -- Event identifier.
+     * * `event_id: &str` -- ETag of the collection.
      * * `destination: &str` -- Calendar identifier of the target calendar where the event is to be moved to.
      * * `send_notifications: bool` -- Deprecated. Please use sendUpdates instead.
-     *  
-     *  Whether to send notifications about the change of the event's organizer. Note that some emails might still be sent even if you set the value to false. The default is false.
-     * * `send_updates: crate::types::SendUpdates` -- Guests who should receive notifications about the change of the event's organizer.
+     *   
+     *   Whether to send notifications about the change of the event's organizer. Note that some emails might still be sent even if you set the value to false. The default is false.
+     * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
      */
     pub async fn calendar_move(
         &self,

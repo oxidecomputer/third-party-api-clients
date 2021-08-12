@@ -193,12 +193,7 @@ impl Users {
      *  The following login methods are only available in China:
      *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `encrypted_email: bool` -- Whether the email address passed for the `userId` value is an encrypted email address:
-     *  
-     *  \* `true` — The email address is encrypted.
-     *  \* `false` — The email address is not encrypted.
-     *  
-     *  If you do not query this parameter, this value defaults to null (`false`).
+     * * `encrypted_email: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     pub async fn user(
         &self,
@@ -244,10 +239,10 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `action: crate::types::UserDeleteAction` -- Delete action options:<br>`disassociate` - Disassociate a user.<br>`delete`-  Permanently delete a user.<br>Note: To delete pending user in the account, use `disassociate`.
-     * * `transfer_email: &str` -- Transfer email.
-     * * `transfer_meeting: bool` -- Transfer meeting.
-     * * `transfer_webinar: bool` -- Transfer webinar.
-     * * `transfer_recording: bool` -- Transfer recording.
+     * * `transfer_email: &str` -- User's first name.
+     * * `transfer_meeting: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+     * * `transfer_webinar: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
+     * * `transfer_recording: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
     pub async fn user_delete(
         &self,
@@ -405,7 +400,7 @@ impl Users {
         &self,
         user_id: &str,
         body: &crate::types::UserAssistantsList,
-    ) -> Result<crate::types::UserAssistantCreateResponse> {
+    ) -> Result<crate::types::AddRoleMembersResponse> {
         let url = format!(
             "/users/{}/assistants",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -465,7 +460,7 @@ impl Users {
      * **Parameters:**
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `assistant_id: &str` -- Assistant ID.
+     * * `assistant_id: &str` -- User's first name.
      */
     pub async fn user_assistant_delete(&self, user_id: &str, assistant_id: &str) -> Result<()> {
         let url = format!(
@@ -548,7 +543,7 @@ impl Users {
      * **Parameters:**
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `scheduler_id: &str` -- Scheduler's ID.
+     * * `scheduler_id: &str` -- User's first name.
      */
     pub async fn user_scheduler_delete(&self, user_id: &str, scheduler_id: &str) -> Result<()> {
         let url = format!(
@@ -603,15 +598,18 @@ impl Users {
      *  The following login methods are only available in China:
      *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
-     *  `meeting_security`: Use this query parameter to view meeting security settings applied on the user's account.<br>.
+     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
+     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *  \* `meeting_security` — View the account's meeting security settings.
      * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
-     *  {
-     *      "schedule_meeting": {
-     *          "host_video": false
-     *      }
-     *  }
-     *  <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
+     *   {
+     *       "schedule_meeting": {
+     *           "host_video": false
+     *       }
+     *   }
+     *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
     pub async fn user_settings_domains(
         &self,
@@ -661,15 +659,18 @@ impl Users {
      *  The following login methods are only available in China:
      *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
-     *  `meeting_security`: Use this query parameter to view meeting security settings applied on the user's account.<br>.
+     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
+     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *  \* `meeting_security` — View the account's meeting security settings.
      * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
-     *  {
-     *      "schedule_meeting": {
-     *          "host_video": false
-     *      }
-     *  }
-     *  <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
+     *   {
+     *       "schedule_meeting": {
+     *           "host_video": false
+     *       }
+     *   }
+     *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
     pub async fn user_settings_meeting_security(
         &self,
@@ -719,15 +720,18 @@ impl Users {
      *  The following login methods are only available in China:
      *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
-     *  `meeting_security`: Use this query parameter to view meeting security settings applied on the user's account.<br>.
+     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
+     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *  \* `meeting_security` — View the account's meeting security settings.
      * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
-     *  {
-     *      "schedule_meeting": {
-     *          "host_video": false
-     *      }
-     *  }
-     *  <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
+     *   {
+     *       "schedule_meeting": {
+     *           "host_video": false
+     *       }
+     *   }
+     *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
     pub async fn user_settings(
         &self,
@@ -777,15 +781,18 @@ impl Users {
      *  The following login methods are only available in China:
      *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
-     *  `meeting_security`: Use this query parameter to view meeting security settings applied on the user's account.<br>.
+     * * `option: crate::types::OptionData` -- Use the following options to filter the results of the account's information:
+     *  \* `meeting_authentication` — View the account's [meeting authentication settings](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars).
+     *  \* `recording_authentication` — View the account's [recording authentication settings](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings).
+     *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
+     *  \* `meeting_security` — View the account's meeting security settings.
      * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
-     *  {
-     *      "schedule_meeting": {
-     *          "host_video": false
-     *      }
-     *  }
-     *  <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
+     *   {
+     *       "schedule_meeting": {
+     *           "host_video": false
+     *       }
+     *   }
+     *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
     pub async fn user_setting(
         &self,
@@ -974,7 +981,7 @@ impl Users {
         user_id: &str,
         type_: crate::types::UserTokenType,
         ttl: i64,
-    ) -> Result<crate::types::UserTokenResponse> {
+    ) -> Result<crate::types::UserZakResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if ttl > 0 {
@@ -1078,7 +1085,7 @@ impl Users {
     pub async fn user_email_update(
         &self,
         user_id: &str,
-        body: &crate::types::UserEmailUpdateRequest,
+        body: &crate::types::Members,
     ) -> Result<()> {
         let url = format!(
             "/users/{}/email",
@@ -1150,7 +1157,7 @@ impl Users {
      *
      * **Parameters:**
      *
-     * * `account_id: &str`
+     * * `account_id: &str` -- User's first name.
      */
     pub async fn switch_user_account(
         &self,
@@ -1235,7 +1242,7 @@ impl Users {
         &self,
         user_id: &str,
         body: &crate::types::UploadVbRequest,
-    ) -> Result<crate::types::UploadVBuserResponse> {
+    ) -> Result<crate::types::Files> {
         let url = format!(
             "/users/{}/settings/virtual_backgrounds",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1264,7 +1271,7 @@ impl Users {
      * **Parameters:**
      *
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
-     * * `user_id: &str` -- Unique identifier of the user. Retrieve the value of this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API.
+     * * `user_id: &str` -- Unique identifier of the user. Retrieve the value of this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API. .
      */
     pub async fn del_user_vb(&self, user_id: &str, file_ids: &str) -> Result<()> {
         let mut query = String::new();

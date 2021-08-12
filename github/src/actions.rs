@@ -139,7 +139,7 @@ impl Actions {
     pub async fn set_selected_repositories_enabled_github_actions_organization(
         &self,
         org: &str,
-        body: &crate::types::ActionsSetSelectedRepositoriesEnabledGithubOrganizationRequest,
+        body: &crate::types::ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest,
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories",
@@ -1203,7 +1203,7 @@ impl Actions {
         org: &str,
         secret_name: &str,
         body: &crate::types::ActionsCreateUpdateOrgSecretRequest,
-    ) -> Result<crate::types::EmptyObject> {
+    ) -> Result<crate::types::Data> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -2187,7 +2187,7 @@ impl Actions {
         owner: &str,
         repo: &str,
         run_id: i64,
-    ) -> Result<crate::types::EmptyObject> {
+    ) -> Result<crate::types::Data> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/approve",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2874,8 +2874,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - `i64`
      *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -2913,8 +2913,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - `i64`
      *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -2949,8 +2949,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - `i64`
      *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -2994,8 +2994,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - `i64`
      *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -3028,8 +3028,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - `i64`
      *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -3109,8 +3109,8 @@ impl Actions {
      * * `repo: &str`
      * * `workflow_id: &str` -- One of the following types:
      *  
-     *  - `i64`
      *  - `String`
+     *  - `i64`
      *  
      *  You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
      *.
@@ -3331,8 +3331,8 @@ impl Actions {
         repository_id: i64,
         environment_name: &str,
         secret_name: &str,
-        body: &crate::types::ActionsCreateUpdateEnvironmentSecretRequest,
-    ) -> Result<crate::types::EmptyObject> {
+        body: &crate::types::ActionsCreateUpdateRepoSecretRequest,
+    ) -> Result<crate::types::Data> {
         let url = format!(
             "/repositories/{}/environments/{}/secrets/{}",
             crate::progenitor_support::encode_path(&repository_id.to_string()),

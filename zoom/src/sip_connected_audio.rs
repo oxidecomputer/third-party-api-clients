@@ -258,7 +258,7 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         body: &crate::types::AddCalloutCountriesRequestData,
-    ) -> Result<crate::types::AddCalloutCountriesResponseData> {
+    ) -> Result<crate::types::AddCalloutCountriesResponse> {
         let url = format!(
             "/accounts/{}/sip_trunk/callout_countries",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -285,7 +285,7 @@ impl SipConnectedAudio {
      * **Parameters:**
      *
      * * `account_id: &str` -- Unique Identifier of the Account.<br>
-     *  To remove Call-out country from a sub account, provide the account ID of the sub account in the `accountId` path parameter. To remove Call-out country from a master account, provide `me` as the value of the `accountId` path parameter.
+     *   To remove Call-out country from a sub account, provide the account ID of the sub account in the `accountId` path parameter. To remove Call-out country from a master account, provide `me` as the value of the `accountId` path parameter.
      * * `country_id: &str` -- Two lettered Id of the country.
      */
     pub async fn delete_internal_call_out_country(
