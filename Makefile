@@ -17,6 +17,11 @@ MAILCHIMP_SPEC_DIR = $(CURDIR)/specs/mailchimp
 MAILCHIMP_SPEC = $(MAILCHIMP_SPEC_DIR)/mailchimp.json
 MAILCHIMP_SPEC_REMOTE = https://api.mailchimp.com/schema/3.0/Swagger.json?expand
 
+OKTA_SPEC_DIR = $(CURDIR)/specs/okta
+OKTA_SPEC = $(OKTA_SPEC_DIR)/okta.json
+OKTA_SPEC_REPO = okta/okta-management-openapi-spec
+OKTA_SPEC_REMOTE = https://raw.githubusercontent.com/$(OKTA_SPEC_REPO)/master/dist/spec.json
+
 RAMP_SPEC_DIR = $(CURDIR)/specs/ramp
 RAMP_SPEC = $(RAMP_SPEC_DIR)/ramp.v1.json
 RAMP_SPEC_REPO = sumatokado/ramp-developer
@@ -43,8 +48,8 @@ run:
 update: update-specs
 
 update-specs:
-	$(RM) -r $(DOCUSIGN_SPEC_DIR) $(GITHUB_SPEC_DIR) $(GUSTO_SPEC_DIR) $(RAMP_SPEC_DIR) $(ZOOM_SPEC_DIR)
-	make $(DOCUSIGN_SPEC) $(GITHUB_SPEC) $(GUSTO_SPEC) $(RAMP_SPEC) $(ZOOM_SPEC)
+	$(RM) -r $(DOCUSIGN_SPEC_DIR) $(GITHUB_SPEC_DIR) $(GUSTO_SPEC_DIR) $(MAILCHIMP_SPEC_DIR) $(OKTA_SPEC_DIR) $(ZOOM_SPEC_DIR)
+	make $(DOCUSIGN_SPEC) $(GITHUB_SPEC) $(GUSTO_SPEC) $(MAILCHIMP_SPEC) $(OKTA_SPEC) $(ZOOM_SPEC)
 
 $(DOCUSIGN_SPEC_DIR):
 	mkdir -p $@
@@ -121,6 +126,27 @@ mailchimp: target/debug/generator $(MAILCHIMP_SPEC)
 		--token-endpoint "login.mailchimp.com/oauth2/token" \
 		--user-consent-endpoint "login.mailchimp.com/oauth2/authorize"
 	cargo fmt -p mailchimp-api
+
+$(OKTA_SPEC_DIR):
+	mkdir -p $@
+
+$(OKTA_SPEC): $(OKTA_SPEC_DIR)
+	npx swagger2openapi \
+		--outfile $@ \
+		--patch \
+		$(OKTA_SPEC_REMOTE)
+
+okta: target/debug/generator $(OKTA_SPEC)
+	./target/debug/generator -i $(OKTA_SPEC) -v 0.2.0 \
+		-o okta \
+		-n okta \
+		--proper-name Okta \
+		-d "A fully generated & opinionated API client for the Okta API." \
+		--spec-link "https://github.com/$(OKTA_SPEC_REPO)" \
+		--host "na4.okta.net" \
+		--token-endpoint "account.okta.com/oauth/token" \
+		--user-consent-endpoint "account.okta.com/oauth/auth"
+	cargo fmt -p okta
 
 $(RAMP_SPEC_REFERENCE):
 	git clone git@github.com:$(RAMP_SPEC_REPO).git $(RAMP_SPEC_DIR)
