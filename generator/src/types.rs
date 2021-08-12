@@ -63,7 +63,13 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                         a(&desc);
                     }
 
-                    if sn == "Page" || sn == "PagesSourceHash" || sn == "PagesHttpsCertificate" {
+                    // TODO: just make everything a default,
+                    // this is gated by the oneof types cooperating.
+                    if sn == "Page"
+                        || sn == "PagesSourceHash"
+                        || sn == "PagesHttpsCertificate"
+                        || sn == "ErrorDetails"
+                    {
                         a("#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]");
                     } else {
                         a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");

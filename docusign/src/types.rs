@@ -38717,7 +38717,7 @@ pub struct EnvelopesInformation {
 }
 
 /// This object describes errors that occur. It is only valid for responses and ignored in requests.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
 pub struct ErrorDetails {
     /**
      * This object describes errors that occur. It is only valid for responses and ignored in requests.
