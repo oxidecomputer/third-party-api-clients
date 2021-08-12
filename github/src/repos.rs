@@ -2935,7 +2935,7 @@ impl Repos {
         ref_: &str,
         per_page: i64,
         page: i64,
-    ) -> Result<Vec<crate::types::Status>> {
+    ) -> Result<Vec<crate::types::StatusData>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
@@ -2979,7 +2979,7 @@ impl Repos {
         owner: &str,
         repo: &str,
         ref_: &str,
-    ) -> Result<Vec<crate::types::Status>> {
+    ) -> Result<Vec<crate::types::StatusData>> {
         let url = format!(
             "/repos/{}/{}/commits/{}/statuses",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -6415,7 +6415,7 @@ impl Repos {
         repo: &str,
         sha: &str,
         body: &crate::types::ReposCreateCommitStatusRequest,
-    ) -> Result<crate::types::Status> {
+    ) -> Result<crate::types::StatusData> {
         let url = format!(
             "/repos/{}/{}/statuses/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),

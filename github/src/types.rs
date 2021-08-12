@@ -11313,7 +11313,7 @@ pub struct FullRepositoryPermissions {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum FullRepositorySecurityAnalysisAdvancedStatus {
+pub enum Status {
     #[serde(rename = "disabled")]
     Disabled,
     #[serde(rename = "enabled")]
@@ -11323,33 +11323,33 @@ pub enum FullRepositorySecurityAnalysisAdvancedStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for FullRepositorySecurityAnalysisAdvancedStatus {
+impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            FullRepositorySecurityAnalysisAdvancedStatus::Disabled => "disabled",
-            FullRepositorySecurityAnalysisAdvancedStatus::Enabled => "enabled",
-            FullRepositorySecurityAnalysisAdvancedStatus::Noop => "",
-            FullRepositorySecurityAnalysisAdvancedStatus::FallthroughString(s) => s,
+            Status::Disabled => "disabled",
+            Status::Enabled => "enabled",
+            Status::Noop => "",
+            Status::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for FullRepositorySecurityAnalysisAdvancedStatus {
-    fn default() -> FullRepositorySecurityAnalysisAdvancedStatus {
-        FullRepositorySecurityAnalysisAdvancedStatus::Noop
+impl Default for Status {
+    fn default() -> Status {
+        Status::Noop
     }
 }
-impl FullRepositorySecurityAnalysisAdvancedStatus {
+impl Status {
     pub fn is_noop(&self) -> bool {
-        matches!(self, FullRepositorySecurityAnalysisAdvancedStatus::Noop)
+        matches!(self, Status::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct SecretScanning {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<FullRepositorySecurityAnalysisAdvancedStatus>,
+    pub status: Option<Status>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -16573,7 +16573,7 @@ pub struct CombinedCommitStatus {
 
 /// The status of a commit.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Status {
+pub struct StatusData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -26880,7 +26880,7 @@ impl From<WorkflowOneOf> for String {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum StatusData {
+pub enum StatusDataType {
     #[serde(rename = "completed")]
     Completed,
     #[serde(rename = "in_progress")]
@@ -26892,27 +26892,27 @@ pub enum StatusData {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for StatusData {
+impl std::fmt::Display for StatusDataType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            StatusData::Completed => "completed",
-            StatusData::InProgress => "in_progress",
-            StatusData::Queued => "queued",
-            StatusData::Noop => "",
-            StatusData::FallthroughString(s) => s,
+            StatusDataType::Completed => "completed",
+            StatusDataType::InProgress => "in_progress",
+            StatusDataType::Queued => "queued",
+            StatusDataType::Noop => "",
+            StatusDataType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for StatusData {
-    fn default() -> StatusData {
-        StatusData::Noop
+impl Default for StatusDataType {
+    fn default() -> StatusDataType {
+        StatusDataType::Noop
     }
 }
-impl StatusData {
+impl StatusDataType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, StatusData::Noop)
+        matches!(self, StatusDataType::Noop)
     }
 }
 

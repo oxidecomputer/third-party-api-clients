@@ -141,7 +141,7 @@ impl ImChat {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn listimmessages(
+    pub async fn list_im_messages(
         &self,
         user_id: &str,
         chat_user: &str,
@@ -190,7 +190,7 @@ impl ImChat {
      *
      * This function performs a `GET` to the `/im/users/{userId}/chat/messages` endpoint.
      *
-     * As opposed to `listimmessages`, this function returns all the pages of the request at once.
+     * As opposed to `list_im_messages`, this function returns all the pages of the request at once.
      *
      * Get IM Chat messages for a specified period of time. This API only supports Oauth2.<br>
      * **Scopes:** `imchat:read`<br>
@@ -199,7 +199,7 @@ impl ImChat {
      *   <p style="background-color:#e1f5fe; color:#000000; padding:8px"><b>Deprecated:</b> By end of 2021, Zoom is deprecating this API in favor of a consolidated set of APIs. The API will still be available for you to use, though Zoom will no longer provide support for it. For further information, see <a href="https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#im-api-notice">Announcements: IM APIs Deprecation</a>.</p>
      *
      */
-    pub async fn listimmessages_im_chat(
+    pub async fn list_all_im_messages(
         &self,
         user_id: &str,
         chat_user: &str,
@@ -278,7 +278,7 @@ impl ImChat {
      *
      * * `chat_user: &str` -- The email address (registered with Zoom) or the userId of the chat user.
      */
-    pub async fn sendimmessages(
+    pub async fn send_im_messages(
         &self,
         chat_user: &str,
         body: &crate::types::SendimmessagesRequest,

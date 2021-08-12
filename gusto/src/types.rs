@@ -1848,7 +1848,7 @@ pub struct ContractorPaymentSummary {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum TimeOffRequestStatus {
+pub enum Status {
     #[serde(rename = "approved")]
     Approved,
     #[serde(rename = "denied")]
@@ -1860,27 +1860,27 @@ pub enum TimeOffRequestStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for TimeOffRequestStatus {
+impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            TimeOffRequestStatus::Approved => "approved",
-            TimeOffRequestStatus::Denied => "denied",
-            TimeOffRequestStatus::Pending => "pending",
-            TimeOffRequestStatus::Noop => "",
-            TimeOffRequestStatus::FallthroughString(s) => s,
+            Status::Approved => "approved",
+            Status::Denied => "denied",
+            Status::Pending => "pending",
+            Status::Noop => "",
+            Status::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for TimeOffRequestStatus {
-    fn default() -> TimeOffRequestStatus {
-        TimeOffRequestStatus::Noop
+impl Default for Status {
+    fn default() -> Status {
+        Status::Noop
     }
 }
-impl TimeOffRequestStatus {
+impl Status {
     pub fn is_noop(&self) -> bool {
-        matches!(self, TimeOffRequestStatus::Noop)
+        matches!(self, Status::Noop)
     }
 }
 
@@ -2054,7 +2054,7 @@ pub struct TimeOffRequest {
      * The representation of a time off request.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<TimeOffRequestStatus>,
+    pub status: Option<Status>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]

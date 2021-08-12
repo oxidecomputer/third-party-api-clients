@@ -182,12 +182,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
             n = self.name.to_string();
         }
 
-        let mut sn = clean_name(&n);
-        // TODO: have a more automated way of making sure there aren't
-        // duplicates of enums.
-        if sn == "status" {
-            sn = format!("{} data", sn);
-        }
+        let sn = clean_name(&n);
 
         Ok(match &self.format {
             openapiv3::ParameterSchemaOrContent::Schema(s) => {
@@ -1434,7 +1429,7 @@ impl TypeSpace {
                     // We have an enumeration.
                     if !st.enumeration.is_empty() {
                         // Enum types must have a consistent name.
-                        let mut name = clean_name(match (name, s.schema_data.title.as_deref()) {
+                        let name = clean_name(match (name, s.schema_data.title.as_deref()) {
                             (Some(n), None) => n,
                             (Some(n), Some("")) => n,
                             (None, Some(t)) => t,
@@ -1443,6 +1438,10 @@ impl TypeSpace {
                                 // Check if we already have a type with this name.
                                 if n == t {
                                     t
+                                } else if n.ends_with("response") || n.ends_with("request") {
+                                    t
+                                } else if t.ends_with("response") || t.ends_with("request") {
+                                    n
                                 } else if self.name_to_id.get(&clean_name(n)).is_some() {
                                     t
                                 } else if self.name_to_id.get(&clean_name(t)).is_some() {
@@ -1458,14 +1457,6 @@ impl TypeSpace {
                                 bail!("enumeration types need a name? {:?} {:?}", name, s)
                             }
                         });
-
-                        if name == "status" {
-                            // We can't have an enum named status, we know there will
-                            // be a struct named after this so it's best to just not
-                            // even attempt it.
-                            // */
-                            name = format!("{} {}", parent_name, name);
-                        }
 
                         let mut enums: Vec<String> = Default::default();
                         for v in st.enumeration.iter().flatten() {
@@ -2271,7 +2262,14 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         return to_snake_case(oid).trim_start_matches('_').to_string();
     }
 
-    let mut st = to_snake_case(oid)
+    let mut o = oid.to_string();
+    if o == "listimmessages" {
+        o = "list im messages".to_string();
+    } else if o == "sendimmessages" {
+        o = "send im messages".to_string();
+    }
+
+    let mut st = to_snake_case(&o)
         .replace("v_1_", "")
         .replace("s_uuid", "")
         .replace("_id_or_uuid", "")

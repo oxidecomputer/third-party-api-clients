@@ -25,7 +25,7 @@ impl Rooms {
      *
      * **Parameters:**
      *
-     * * `status: crate::types::Status` -- The status of the Zoom Room.
+     * * `status: crate::types::ListZoomRoomsStatus` -- The status of the Zoom Room.
      * * `type_: crate::types::ListZoomRoomsType` -- Type of the Zoom Rooms.
      * * `unassigned_rooms: bool` -- Use this query parameter with a value of `true` if you would like to see Zoom Rooms in your account that have not been assigned to anyone yet.
      * * `page_size: i64` -- The number of records returned within a single API call.
@@ -34,7 +34,7 @@ impl Rooms {
      */
     pub async fn list_zoom(
         &self,
-        status: crate::types::Status,
+        status: crate::types::ListZoomRoomsStatus,
         type_: crate::types::ListZoomRoomsType,
         unassigned_rooms: bool,
         page_size: i64,
@@ -87,7 +87,7 @@ impl Rooms {
      */
     pub async fn list_all_zoom(
         &self,
-        status: crate::types::Status,
+        status: crate::types::ListZoomRoomsStatus,
         type_: crate::types::ListZoomRoomsType,
         unassigned_rooms: bool,
         location_id: &str,

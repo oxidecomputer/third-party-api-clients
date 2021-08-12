@@ -3778,7 +3778,7 @@ pub struct MeetingInfo {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum MeetingInfoGetStatus {
+pub enum Status {
     #[serde(rename = "started")]
     Started,
     #[serde(rename = "waiting")]
@@ -3788,26 +3788,26 @@ pub enum MeetingInfoGetStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for MeetingInfoGetStatus {
+impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            MeetingInfoGetStatus::Started => "started",
-            MeetingInfoGetStatus::Waiting => "waiting",
-            MeetingInfoGetStatus::Noop => "",
-            MeetingInfoGetStatus::FallthroughString(s) => s,
+            Status::Started => "started",
+            Status::Waiting => "waiting",
+            Status::Noop => "",
+            Status::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for MeetingInfoGetStatus {
-    fn default() -> MeetingInfoGetStatus {
-        MeetingInfoGetStatus::Noop
+impl Default for Status {
+    fn default() -> Status {
+        Status::Noop
     }
 }
-impl MeetingInfoGetStatus {
+impl Status {
     pub fn is_noop(&self) -> bool {
-        matches!(self, MeetingInfoGetStatus::Noop)
+        matches!(self, Status::Noop)
     }
 }
 
@@ -3965,7 +3965,7 @@ pub struct MeetingInfoGet {
      * Meeting object.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<MeetingInfoGetStatus>,
+    pub status: Option<Status>,
     /**
      * Meeting object.
      */
@@ -11966,7 +11966,7 @@ impl Source {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetPhoneNumberDetailsResponseStatus {
+pub enum ListAccountPhoneNumbersResponseStatus {
     #[serde(rename = "available")]
     Available,
     #[serde(rename = "pending")]
@@ -11976,26 +11976,26 @@ pub enum GetPhoneNumberDetailsResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetPhoneNumberDetailsResponseStatus {
+impl std::fmt::Display for ListAccountPhoneNumbersResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetPhoneNumberDetailsResponseStatus::Available => "available",
-            GetPhoneNumberDetailsResponseStatus::Pending => "pending",
-            GetPhoneNumberDetailsResponseStatus::Noop => "",
-            GetPhoneNumberDetailsResponseStatus::FallthroughString(s) => s,
+            ListAccountPhoneNumbersResponseStatus::Available => "available",
+            ListAccountPhoneNumbersResponseStatus::Pending => "pending",
+            ListAccountPhoneNumbersResponseStatus::Noop => "",
+            ListAccountPhoneNumbersResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetPhoneNumberDetailsResponseStatus {
-    fn default() -> GetPhoneNumberDetailsResponseStatus {
-        GetPhoneNumberDetailsResponseStatus::Noop
+impl Default for ListAccountPhoneNumbersResponseStatus {
+    fn default() -> ListAccountPhoneNumbersResponseStatus {
+        ListAccountPhoneNumbersResponseStatus::Noop
     }
 }
-impl GetPhoneNumberDetailsResponseStatus {
+impl ListAccountPhoneNumbersResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetPhoneNumberDetailsResponseStatus::Noop)
+        matches!(self, ListAccountPhoneNumbersResponseStatus::Noop)
     }
 }
 
@@ -12262,7 +12262,7 @@ pub struct ListAccountPhoneNumbersResponse {
      * Status of the number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetPhoneNumberDetailsResponseStatus>,
+    pub status: Option<ListAccountPhoneNumbersResponseStatus>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -16823,7 +16823,7 @@ pub struct PastMeetingDetailsResponse {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum MeetingPollGetResponseStatus {
+pub enum MeetingPollCreateResponseStatus {
     #[serde(rename = "ended")]
     Ended,
     #[serde(rename = "notstart")]
@@ -16837,28 +16837,28 @@ pub enum MeetingPollGetResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for MeetingPollGetResponseStatus {
+impl std::fmt::Display for MeetingPollCreateResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            MeetingPollGetResponseStatus::Ended => "ended",
-            MeetingPollGetResponseStatus::Notstart => "notstart",
-            MeetingPollGetResponseStatus::Sharing => "sharing",
-            MeetingPollGetResponseStatus::Started => "started",
-            MeetingPollGetResponseStatus::Noop => "",
-            MeetingPollGetResponseStatus::FallthroughString(s) => s,
+            MeetingPollCreateResponseStatus::Ended => "ended",
+            MeetingPollCreateResponseStatus::Notstart => "notstart",
+            MeetingPollCreateResponseStatus::Sharing => "sharing",
+            MeetingPollCreateResponseStatus::Started => "started",
+            MeetingPollCreateResponseStatus::Noop => "",
+            MeetingPollCreateResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for MeetingPollGetResponseStatus {
-    fn default() -> MeetingPollGetResponseStatus {
-        MeetingPollGetResponseStatus::Noop
+impl Default for MeetingPollCreateResponseStatus {
+    fn default() -> MeetingPollCreateResponseStatus {
+        MeetingPollCreateResponseStatus::Noop
     }
 }
-impl MeetingPollGetResponseStatus {
+impl MeetingPollCreateResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, MeetingPollGetResponseStatus::Noop)
+        matches!(self, MeetingPollCreateResponseStatus::Noop)
     }
 }
 
@@ -16877,7 +16877,7 @@ pub struct MeetingPollGetResponse {
      * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<MeetingPollGetResponseStatus>,
+    pub status: Option<MeetingPollCreateResponseStatus>,
 }
 
 /**
@@ -20435,7 +20435,7 @@ pub struct WebinarRegistrantStatusRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum WebinarPollGetResponseStatus {
+pub enum WebinarPollCreateResponseStatus {
     #[serde(rename = "ended")]
     Ended,
     #[serde(rename = "notstart")]
@@ -20449,28 +20449,28 @@ pub enum WebinarPollGetResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for WebinarPollGetResponseStatus {
+impl std::fmt::Display for WebinarPollCreateResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            WebinarPollGetResponseStatus::Ended => "ended",
-            WebinarPollGetResponseStatus::Notstart => "notstart",
-            WebinarPollGetResponseStatus::Sharing => "sharing",
-            WebinarPollGetResponseStatus::Started => "started",
-            WebinarPollGetResponseStatus::Noop => "",
-            WebinarPollGetResponseStatus::FallthroughString(s) => s,
+            WebinarPollCreateResponseStatus::Ended => "ended",
+            WebinarPollCreateResponseStatus::Notstart => "notstart",
+            WebinarPollCreateResponseStatus::Sharing => "sharing",
+            WebinarPollCreateResponseStatus::Started => "started",
+            WebinarPollCreateResponseStatus::Noop => "",
+            WebinarPollCreateResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for WebinarPollGetResponseStatus {
-    fn default() -> WebinarPollGetResponseStatus {
-        WebinarPollGetResponseStatus::Noop
+impl Default for WebinarPollCreateResponseStatus {
+    fn default() -> WebinarPollCreateResponseStatus {
+        WebinarPollCreateResponseStatus::Noop
     }
 }
-impl WebinarPollGetResponseStatus {
+impl WebinarPollCreateResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, WebinarPollGetResponseStatus::Noop)
+        matches!(self, WebinarPollCreateResponseStatus::Noop)
     }
 }
 
@@ -20489,7 +20489,7 @@ pub struct WebinarPollGetResponse {
      * Status of the Webinar Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<WebinarPollGetResponseStatus>,
+    pub status: Option<WebinarPollCreateResponseStatus>,
 }
 
 /// JSON template describing how the message should be displayed for the user. For more information please see our ["Send Message" templates](https://marketplace.zoom.us/docs/guides/chatbots/sending-messages#example-request).
@@ -30961,7 +30961,7 @@ pub struct ListPhoneDevicesResponseAssignee {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetDeviceResponseStatus {
+pub enum ListPhoneDevicesResponseStatus {
     #[serde(rename = "offline")]
     Offline,
     #[serde(rename = "online")]
@@ -30971,26 +30971,26 @@ pub enum GetDeviceResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetDeviceResponseStatus {
+impl std::fmt::Display for ListPhoneDevicesResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetDeviceResponseStatus::Offline => "offline",
-            GetDeviceResponseStatus::Online => "online",
-            GetDeviceResponseStatus::Noop => "",
-            GetDeviceResponseStatus::FallthroughString(s) => s,
+            ListPhoneDevicesResponseStatus::Offline => "offline",
+            ListPhoneDevicesResponseStatus::Online => "online",
+            ListPhoneDevicesResponseStatus::Noop => "",
+            ListPhoneDevicesResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetDeviceResponseStatus {
-    fn default() -> GetDeviceResponseStatus {
-        GetDeviceResponseStatus::Noop
+impl Default for ListPhoneDevicesResponseStatus {
+    fn default() -> ListPhoneDevicesResponseStatus {
+        ListPhoneDevicesResponseStatus::Noop
     }
 }
-impl GetDeviceResponseStatus {
+impl ListPhoneDevicesResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetDeviceResponseStatus::Noop)
+        matches!(self, ListPhoneDevicesResponseStatus::Noop)
     }
 }
 
@@ -31062,7 +31062,7 @@ pub struct ListPhoneDevicesResponse {
      * Status of the device. The value is either `online` or `offline`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetDeviceResponseStatus>,
+    pub status: Option<ListPhoneDevicesResponseStatus>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -31430,7 +31430,7 @@ pub struct GetDeviceResponse {
      * Status of the device. The value is either `online` or `offline`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetDeviceResponseStatus>,
+    pub status: Option<ListPhoneDevicesResponseStatus>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -32656,7 +32656,7 @@ pub struct GetPhoneNumberDetailsResponse {
      * Status of the number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetPhoneNumberDetailsResponseStatus>,
+    pub status: Option<ListAccountPhoneNumbersResponseStatus>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -34052,7 +34052,7 @@ impl AddAnumberBlockedListRequestBlockType {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum UpdateBlockedListRequestStatus {
+pub enum AddAnumberBlockedListRequestStatus {
     #[serde(rename = "active")]
     Active,
     #[serde(rename = "inactive")]
@@ -34062,26 +34062,26 @@ pub enum UpdateBlockedListRequestStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for UpdateBlockedListRequestStatus {
+impl std::fmt::Display for AddAnumberBlockedListRequestStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            UpdateBlockedListRequestStatus::Active => "active",
-            UpdateBlockedListRequestStatus::Inactive => "inactive",
-            UpdateBlockedListRequestStatus::Noop => "",
-            UpdateBlockedListRequestStatus::FallthroughString(s) => s,
+            AddAnumberBlockedListRequestStatus::Active => "active",
+            AddAnumberBlockedListRequestStatus::Inactive => "inactive",
+            AddAnumberBlockedListRequestStatus::Noop => "",
+            AddAnumberBlockedListRequestStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for UpdateBlockedListRequestStatus {
-    fn default() -> UpdateBlockedListRequestStatus {
-        UpdateBlockedListRequestStatus::Noop
+impl Default for AddAnumberBlockedListRequestStatus {
+    fn default() -> AddAnumberBlockedListRequestStatus {
+        AddAnumberBlockedListRequestStatus::Noop
     }
 }
-impl UpdateBlockedListRequestStatus {
+impl AddAnumberBlockedListRequestStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, UpdateBlockedListRequestStatus::Noop)
+        matches!(self, AddAnumberBlockedListRequestStatus::Noop)
     }
 }
 
@@ -34125,7 +34125,7 @@ pub struct UpdateBlockedListRequest {
      *  `inactive`: Disable the blocking.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<UpdateBlockedListRequestStatus>,
+    pub status: Option<AddAnumberBlockedListRequestStatus>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -34361,7 +34361,7 @@ pub struct ListSharedLineGroupsResponsePhoneNumbers {
      * Status of the number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetPhoneNumberDetailsResponseStatus>,
+    pub status: Option<ListAccountPhoneNumbersResponseStatus>,
 }
 
 /**
@@ -34369,7 +34369,7 @@ pub struct ListSharedLineGroupsResponsePhoneNumbers {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetSharedLineGroupResponseStatus {
+pub enum ListSharedLineGroupsResponseStatus {
     #[serde(rename = "active")]
     Active,
     #[serde(rename = "inactive")]
@@ -34379,26 +34379,26 @@ pub enum GetSharedLineGroupResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetSharedLineGroupResponseStatus {
+impl std::fmt::Display for ListSharedLineGroupsResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetSharedLineGroupResponseStatus::Active => "active",
-            GetSharedLineGroupResponseStatus::Inactive => "inactive",
-            GetSharedLineGroupResponseStatus::Noop => "",
-            GetSharedLineGroupResponseStatus::FallthroughString(s) => s,
+            ListSharedLineGroupsResponseStatus::Active => "active",
+            ListSharedLineGroupsResponseStatus::Inactive => "inactive",
+            ListSharedLineGroupsResponseStatus::Noop => "",
+            ListSharedLineGroupsResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetSharedLineGroupResponseStatus {
-    fn default() -> GetSharedLineGroupResponseStatus {
-        GetSharedLineGroupResponseStatus::Noop
+impl Default for ListSharedLineGroupsResponseStatus {
+    fn default() -> ListSharedLineGroupsResponseStatus {
+        ListSharedLineGroupsResponseStatus::Noop
     }
 }
-impl GetSharedLineGroupResponseStatus {
+impl ListSharedLineGroupsResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetSharedLineGroupResponseStatus::Noop)
+        matches!(self, ListSharedLineGroupsResponseStatus::Noop)
     }
 }
 
@@ -34464,7 +34464,7 @@ pub struct SharedLineGroups {
      * Status of the Shared Line Group.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetSharedLineGroupResponseStatus>,
+    pub status: Option<ListSharedLineGroupsResponseStatus>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -34703,7 +34703,7 @@ pub struct GetSharedLineGroupResponse {
      * Status of the Shared Line Group.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetSharedLineGroupResponseStatus>,
+    pub status: Option<ListSharedLineGroupsResponseStatus>,
     /**
      * Timezone used for the Business Hours.
      */
@@ -34767,7 +34767,7 @@ pub struct UpdateSharedLineGroupRequest {
      * Status of the Shared Line Group.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetSharedLineGroupResponseStatus>,
+    pub status: Option<ListSharedLineGroupsResponseStatus>,
     /**
      * Timezone to be used for the Business Hours. A value should be provided from the IDs listed [here](https://marketplace.zoom.us/docs/api-reference/other-references/abbreviation-lists#timezones).
      */
@@ -36760,7 +36760,7 @@ pub struct Polls {
      * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<MeetingPollGetResponseStatus>,
+    pub status: Option<MeetingPollCreateResponseStatus>,
     /**
      * Title for the Poll
      */

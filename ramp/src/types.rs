@@ -1276,7 +1276,7 @@ pub struct GetResourcesCardsDeferredResponseData {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetResourcesCardsDeferredResponseStatus {
+pub enum Status {
     #[serde(rename = "ERROR")]
     Error,
     #[serde(rename = "IN_PROGRESS")]
@@ -1290,28 +1290,28 @@ pub enum GetResourcesCardsDeferredResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetResourcesCardsDeferredResponseStatus {
+impl std::fmt::Display for Status {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetResourcesCardsDeferredResponseStatus::Error => "ERROR",
-            GetResourcesCardsDeferredResponseStatus::InProgress => "IN_PROGRESS",
-            GetResourcesCardsDeferredResponseStatus::Started => "STARTED",
-            GetResourcesCardsDeferredResponseStatus::Success => "SUCCESS",
-            GetResourcesCardsDeferredResponseStatus::Noop => "",
-            GetResourcesCardsDeferredResponseStatus::FallthroughString(s) => s,
+            Status::Error => "ERROR",
+            Status::InProgress => "IN_PROGRESS",
+            Status::Started => "STARTED",
+            Status::Success => "SUCCESS",
+            Status::Noop => "",
+            Status::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetResourcesCardsDeferredResponseStatus {
-    fn default() -> GetResourcesCardsDeferredResponseStatus {
-        GetResourcesCardsDeferredResponseStatus::Noop
+impl Default for Status {
+    fn default() -> Status {
+        Status::Noop
     }
 }
-impl GetResourcesCardsDeferredResponseStatus {
+impl Status {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetResourcesCardsDeferredResponseStatus::Noop)
+        matches!(self, Status::Noop)
     }
 }
 
@@ -1326,7 +1326,7 @@ pub struct GetResourcesCardsDeferredResponse {
     )]
     pub id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetResourcesCardsDeferredResponseStatus>,
+    pub status: Option<Status>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
