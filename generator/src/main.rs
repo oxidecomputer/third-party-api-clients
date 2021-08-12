@@ -2280,7 +2280,6 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         .trim_end_matches('_')
         .trim_end_matches("_s")
         .replace("_s_", "_")
-        .to_string()
 }
 
 fn oid_to_object_name(s: &str) -> String {
