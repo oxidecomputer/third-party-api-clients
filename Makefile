@@ -3,6 +3,10 @@ DOCUSIGN_SPEC = $(DOCUSIGN_SPEC_DIR)/docusign.json
 DOCUSIGN_SPEC_REPO = docusign/OpenAPI-Specifications
 DOCUSIGN_SPEC_REMOTE = https://raw.githubusercontent.com/$(DOCUSIGN_SPEC_REPO)/master/esignature.rest.swagger-v2.1.json
 
+GIPHY_SPEC_DIR = $(CURDIR)/specs/giphy
+GIPHY_SPEC = $(GIPHY_SPEC_DIR)/giphy.yaml
+GIPHY_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/e12d4e5b76c0b3433337c1a3b9ce4b12e6fb7ce0/APIs/giphy.com/1.0/openapi.yaml
+
 GITHUB_SPEC_DIR = $(CURDIR)/specs/github
 GITHUB_SPEC = $(GITHUB_SPEC_DIR)/api.github.com.json
 GITHUB_SPEC_REPO = github/rest-api-description
@@ -77,6 +81,7 @@ update: update-specs
 
 update-specs:
 	$(RM) -r $(DOCUSIGN_SPEC_DIR) \
+		$(GIPHY_SPEC_DIR) \
 		$(GITHUB_SPEC_DIR) \
 		$(GOOGLE_ADMIN_SPEC_DIR) \
 		$(GOOGLE_CALENDAR_SPEC_DIR) \
@@ -89,6 +94,7 @@ update-specs:
 		$(SLACK_SPEC_DIR) \
 		$(ZOOM_SPEC_DIR)
 	make $(DOCUSIGN_SPEC) \
+		$(GIPHY_SPEC) \
 		$(GITHUB_SPEC) \
 		$(GOOGLE_ADMIN_SPEC) \
 		$(GOOGLE_CALENDAR_SPEC) \
@@ -121,6 +127,22 @@ docusign: target/debug/generator $(DOCUSIGN_SPEC)
 		--token-endpoint "account.docusign.com/oauth/token" \
 		--user-consent-endpoint "account.docusign.com/oauth/auth" $(EXTRA_ARGS)
 	cargo fmt -p docusign
+
+$(GIPHY_SPEC_DIR):
+	mkdir -p $@
+
+$(GIPHY_SPEC): $(GIPHY_SPEC_DIR)
+	curl -sSL $(GIPHY_SPEC_REMOTE) -o $@
+
+giphy: target/debug/generator $(GIPHY_SPEC)
+	./target/debug/generator -i $(GIPHY_SPEC) -v 0.2.0 \
+		-o giphy \
+		-n giphy-api \
+		--proper-name "Giphy" \
+		-d "A fully generated & opinionated API client for the Giphy API." \
+		--spec-link "https://github.com/APIs-guru/openapi-directory/tree/main/APIs/giphy.com" \
+		--host "api.giphy.com/v1"
+	cargo fmt -p giphy-api
 
 $(GITHUB_SPEC_DIR):
 	mkdir -p $@
