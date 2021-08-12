@@ -25,7 +25,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gusto_api = "0.2.8"
+//! gusto_api = "0.2.9"
 //! ```
 //!
 //! ## Basic example

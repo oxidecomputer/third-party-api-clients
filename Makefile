@@ -60,7 +60,7 @@ $(GUSTO_SPEC): $(GUSTO_SPEC_DIR)
 	curl -sSL $(GUSTO_SPEC_REMOTE) -o $@
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.8 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.9 \
 		-o gusto \
 		-n gusto-api \
 		--proper-name Gusto \
@@ -81,7 +81,7 @@ $(RAMP_SPEC): $(RAMP_SPEC_REFERENCE)
 		-o $@ $?
 
 ramp: target/debug/generator $(RAMP_SPEC)
-	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.2 \
+	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.3 \
 		-o ramp \
 		-n ramp-api \
 		--proper-name Ramp \
