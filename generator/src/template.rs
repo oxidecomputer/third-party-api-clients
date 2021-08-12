@@ -560,7 +560,7 @@ pub fn generate_docs_openapi_info(
         license = format!("### License\n//!\n//! \n{}", license);
     }
 
-    let api_version = format!("based on OpenAPI spec version `{}`", api.info.version);
+    let api_version = format!("based on API spec version `{}`", api.info.version);
 
     format!(
         r#"//! A fully generated, opinionated API client library for {}.

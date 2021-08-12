@@ -16,7 +16,7 @@ It provides the ability to automate card issuing and the ability to integrate fe
 ## Client Details
 
 This client is generated from the [Ramp OpenAPI
-specs](https://github.com/sumatokado/ramp-developer) based on OpenAPI spec version `1.0`. This way it will remain
+specs](https://github.com/sumatokado/ramp-developer) based on API spec version `1.0`. This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.
 To install the library, add the following to your `Cargo.toml` file.

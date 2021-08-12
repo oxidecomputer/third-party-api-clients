@@ -26,7 +26,7 @@ GitHub's v3 REST API.
 ## Client Details
 
 This client is generated from the [GitHub OpenAPI
-specs](https://github.com/github/rest-api-description) based on OpenAPI spec version `1.1.4`. This way it will remain
+specs](https://github.com/github/rest-api-description) based on API spec version `1.1.4`. This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.
 To install the library, add the following to your `Cargo.toml` file.

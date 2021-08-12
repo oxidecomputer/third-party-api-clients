@@ -29,7 +29,7 @@ For instance you can list all users on an account via `https://api.zoom.us/v2/us
 ## Client Details
 
 This client is generated from the [Zoom OpenAPI
-specs](https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json) based on OpenAPI spec version `2.0.0`. This way it will remain
+specs](https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json) based on API spec version `2.0.0`. This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.
 To install the library, add the following to your `Cargo.toml` file.
