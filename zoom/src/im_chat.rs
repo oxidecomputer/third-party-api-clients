@@ -39,7 +39,7 @@ impl ImChat {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::SessionsResponse> {
+    ) -> Result<crate::types::ImChatSessionsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -94,7 +94,7 @@ impl ImChat {
         to: chrono::NaiveDate,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<crate::types::MessagesResponse> {
+    ) -> Result<crate::types::ImChatMessagesResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));

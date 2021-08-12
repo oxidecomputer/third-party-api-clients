@@ -25,11 +25,7 @@ impl Departments {
      * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
-    pub async fn get_departments(
-        &self,
-        start: &str,
-        page_size: f64,
-    ) -> Result<Vec<crate::types::Department>> {
+    pub async fn gets(&self, start: &str, page_size: f64) -> Result<Vec<crate::types::Department>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("page_size={}", page_size));
@@ -55,11 +51,11 @@ impl Departments {
      *
      * This function performs a `GET` to the `/departments` endpoint.
      *
-     * As opposed to `get_departments`, this function returns all the pages of the request at once.
+     * As opposed to `get`, this function returns all the pages of the request at once.
      *
      * Retrieve all departments.
      */
-    pub async fn get_all_departments(&self) -> Result<Vec<crate::types::Department>> {
+    pub async fn get_all(&self) -> Result<Vec<crate::types::Department>> {
         let url = "/departments".to_string();
         let mut resp: crate::types::GetDepartmentsResponse =
             self.client.get(&url, None).await.unwrap();
@@ -138,7 +134,7 @@ impl Departments {
     pub async fn patch_department(
         &self,
         id: &str,
-        body: &crate::types::PatchDepartmentRequest,
+        body: &crate::types::PatchDepartmentIdRequest,
     ) -> Result<crate::types::Department> {
         let url = format!(
             "/departments/{}",

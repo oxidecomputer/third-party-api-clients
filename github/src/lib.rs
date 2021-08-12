@@ -11,14 +11,14 @@
 //!
 //! | name | url |
 //! |----|----|
-//! | Support | https://support.github.com/contact?tags=rest-api |
+//! | Support | <https://support.github.com/contact?tags=rest-api> |
 //!
 //! ### License
 //!
 //!
 //! | name | url |
 //! |----|----|
-//! | MIT | https://spdx.org/licenses/MIT |
+//! | MIT | <https://spdx.org/licenses/MIT> |
 //!
 //!
 //! ## Client Details
@@ -177,14 +177,8 @@ pub mod auth;
 pub mod billing;
 /// Rich interactions with checks run by your integrations.
 pub mod checks;
-/// Retrieve code scanning alerts from a repository.
-pub mod code_scanning;
-/// Insight into codes of conduct for your communities.
-pub mod codes_of_conduct;
 /// List emojis available to use on GitHub.
 pub mod emojis;
-/// Administer a GitHub enterprise.
-pub mod enterprise_admin;
 /// View, modify your gists.
 pub mod gists;
 /// Raw Git functionality.
@@ -206,8 +200,6 @@ pub mod markdown;
 pub mod meta;
 /// Move projects to or from GitHub.
 pub mod migrations;
-/// Manage access of OAuth applications.
-pub mod oauth_authorizations;
 /// Interact with GitHub Orgs.
 pub mod orgs;
 /// Manage packages for authenticated users and organizations.
@@ -216,8 +208,6 @@ pub mod packages;
 pub mod projects;
 /// Interact with GitHub Pull Requests.
 pub mod pulls;
-/// Check your current rate limit status.
-pub mod rate_limit;
 /// Interact with reactions to various GitHub entities.
 pub mod reactions;
 /// Interact with GitHub Repos.
@@ -226,8 +216,6 @@ pub mod repos;
 pub mod scim;
 /// Look for stuff on GitHub.
 pub mod search;
-/// Retrieve secret scanning alerts from a repository.
-pub mod secret_scanning;
 /// Interact with GitHub Teams.
 pub mod teams;
 #[cfg(test)]
@@ -810,24 +798,9 @@ impl Client {
         checks::Checks::new(self.clone())
     }
 
-    /// Retrieve code scanning alerts from a repository.
-    pub fn code_scanning(&self) -> code_scanning::CodeScanning {
-        code_scanning::CodeScanning::new(self.clone())
-    }
-
-    /// Insight into codes of conduct for your communities.
-    pub fn codes_of_conduct(&self) -> codes_of_conduct::CodesOfConduct {
-        codes_of_conduct::CodesOfConduct::new(self.clone())
-    }
-
     /// List emojis available to use on GitHub.
     pub fn emojis(&self) -> emojis::Emojis {
         emojis::Emojis::new(self.clone())
-    }
-
-    /// Administer a GitHub enterprise.
-    pub fn enterprise_admin(&self) -> enterprise_admin::EnterpriseAdmin {
-        enterprise_admin::EnterpriseAdmin::new(self.clone())
     }
 
     /// View, modify your gists.
@@ -875,11 +848,6 @@ impl Client {
         migrations::Migrations::new(self.clone())
     }
 
-    /// Manage access of OAuth applications.
-    pub fn oauth_authorizations(&self) -> oauth_authorizations::OauthAuthorizations {
-        oauth_authorizations::OauthAuthorizations::new(self.clone())
-    }
-
     /// Interact with GitHub Orgs.
     pub fn orgs(&self) -> orgs::Orgs {
         orgs::Orgs::new(self.clone())
@@ -900,11 +868,6 @@ impl Client {
         pulls::Pulls::new(self.clone())
     }
 
-    /// Check your current rate limit status.
-    pub fn rate_limit(&self) -> rate_limit::RateLimit {
-        rate_limit::RateLimit::new(self.clone())
-    }
-
     /// Interact with reactions to various GitHub entities.
     pub fn reactions(&self) -> reactions::Reactions {
         reactions::Reactions::new(self.clone())
@@ -923,11 +886,6 @@ impl Client {
     /// Look for stuff on GitHub.
     pub fn search(&self) -> search::Search {
         search::Search::new(self.clone())
-    }
-
-    /// Retrieve secret scanning alerts from a repository.
-    pub fn secret_scanning(&self) -> secret_scanning::SecretScanning {
-        secret_scanning::SecretScanning::new(self.clone())
     }
 
     /// Interact with GitHub Teams.

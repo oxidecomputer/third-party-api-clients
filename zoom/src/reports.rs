@@ -671,7 +671,7 @@ impl Reports {
      *  
      *.
      */
-    pub async fn get_billing_invoices_reports(
+    pub async fn get_billing_invoices(
         &self,
         billing_id: &str,
     ) -> Result<crate::types::GetBillingInvoicesReportsResponse> {

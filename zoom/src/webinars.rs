@@ -31,7 +31,7 @@ impl Webinars {
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *
+     *  
      *  The page number of the current page in the returned records.
      */
     pub async fn get(
@@ -148,7 +148,7 @@ impl Webinars {
      *
      * Delete a Webinar.<br><br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      * **Prerequisites:**<br>
      * * Pro or higher plan with a Webinar Add-on.
@@ -158,9 +158,9 @@ impl Webinars {
      * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
      * * `occurrence_id: &str` -- The meeting occurrence ID.
      * * `cancel_webinar_reminder: &str` -- `true`: Notify panelists and registrants about the webinar cancellation via email.
-     *
+     *  
      *  `false`: Do not send any email notification to webinar registrants and panelists.
-     *
+     *  
      *  The default value of this field is `false`.
      */
     pub async fn webinar_delete(
@@ -203,7 +203,7 @@ impl Webinars {
      * Zoom users with a [Webinar Plan](https://zoom.us/webinar) have access to creating and managing Webinars. Webinar allows a host to broadcast a Zoom meeting to up to 10,000 attendees.<br>
      * Use this API to make updates to a scheduled Webinar.<br><br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      * **Prerequisites:**<br>
      * * Pro or higher plan with a Webinar Add-on.
@@ -260,7 +260,6 @@ impl Webinars {
     pub async fn list_webinar_participants(
         &self,
         webinar_id: &str,
-        webinar_id: &str,
         page_size: i64,
         next_page_token: &str,
     ) -> Result<crate::types::ListWebinarParticipantsResponse> {
@@ -294,7 +293,7 @@ impl Webinars {
      *
      * Update a webinar's status. Use this API to end an ongoing webinar.<br><br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      * **Prerequisites:**<br>
      * * The account must hold a valid [Webinar plan](https://zoom.us/webinar).
@@ -330,7 +329,7 @@ impl Webinars {
      *
      * Use this API to list all the panelists of a Webinar.<br><br>
      * **Scopes:** `webinar:read:admin` `webinar:read`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      * **Prerequisites:**<br>
      * * Pro or a higher plan with [Webinar Add-on](https://zoom.us/webinar).<br>
@@ -393,7 +392,7 @@ impl Webinars {
      *
      * Remove all the panelists from a Webinar.<br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      * **Prerequisites:**<br>
      * * Pro or a higher plan with [Webinar Add-on](https://zoom.us/webinar).<br>
@@ -418,7 +417,7 @@ impl Webinars {
      *
      * [Remove](https://support.zoom.us/hc/en-us/articles/115005657826-Inviting-Panelists-to-a-Webinar#h_de31f237-a91c-4fb2-912b-ecfba8ec5ffb) a single panelist from a webinar.<br> You can retrieve the `panelistId` by calling **List Panelists API**.<br><br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      *
      *
@@ -458,20 +457,19 @@ impl Webinars {
      *
      * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
      * * `occurrence_id: &str` -- The meeting occurrence ID.
-     * * `status: crate::types::RegistrantStatusData` -- The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
+     * * `status: crate::types::MeetingRegistrantsStatus` -- The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
      * * `tracking_source_id: &str` -- The tracking source ID for the registrants. Useful if you share the webinar registration page in multiple locations. See [Creating source tracking links for webinar registration](https://support.zoom.us/hc/en-us/articles/360000315683-Creating-source-tracking-links-for-webinar-registration) for details.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *
+     *  
      *  The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
     pub async fn webinar_registrant(
         &self,
         webinar_id: &str,
-        webinar_id: i64,
         occurrence_id: &str,
-        status: crate::types::RegistrantStatusData,
+        status: crate::types::MeetingRegistrantsStatus,
         tracking_source_id: &str,
         page_size: i64,
         page_number: i64,
@@ -517,7 +515,7 @@ impl Webinars {
      *
      * Zoom users with a [Webinar Plan](https://zoom.us/webinar) have access to creating and managing Webinars. Webinar allows a host to broadcast a Zoom meeting to up to 10,000 attendees. Scheduling a [Webinar with registration](https://support.zoom.us/hc/en-us/articles/204619915-Scheduling-a-Webinar-with-Registration) requires your registrants to complete a brief form before receiving the link to join the Webinar.<br>Use this API to create and submit the registration of a user for a webinar.<br><br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      * **Prerequisites:**
      * * Pro or higher plan with a Webinar Add-on.
@@ -530,7 +528,6 @@ impl Webinars {
     pub async fn webinar_registrant_create(
         &self,
         webinar_id: &str,
-        webinar_id: i64,
         occurrence_ids: &str,
     ) -> Result<crate::types::WebinarRegistrantCreateResponse> {
         let mut query = String::new();
@@ -581,7 +578,6 @@ impl Webinars {
     pub async fn add_batch_webinar_registrants(
         &self,
         webinar_id: &str,
-        webinar_id: &str,
         body: &crate::types::AddBatchRegistrantsRequest,
     ) -> Result<crate::types::AddBatchWebinarRegistrantsResponseData> {
         let url = format!(
@@ -604,7 +600,7 @@ impl Webinars {
      *
      * Update a webinar registrant's status. Using this API, you can specify whether you want to approve a registration, deny a registration or cancel a previously approved registration.<br><br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      *
      *
@@ -661,7 +657,7 @@ impl Webinars {
      *
      * * `webinar_id: i64` -- The webinar ID in "\*\*long\*\*" format(represented as int64 data type in JSON).
      */
-    pub async fn past_webinar(&self, webinar_id: i64) -> Result<crate::types::WebinarList> {
+    pub async fn past(&self, webinar_id: i64) -> Result<crate::types::WebinarList> {
         let url = format!(
             "/past_webinars/{}/instances",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -677,7 +673,7 @@ impl Webinars {
      *
      * List all the [polls](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars) of a Webinar.<br><br>
      * **Scopes:** `webinar:read:admin` `webinar:read`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      *
      *
@@ -702,7 +698,7 @@ impl Webinars {
      *
      * Create a [poll](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars) for a webinar.<br><br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      *
      *
@@ -736,7 +732,7 @@ impl Webinars {
      *
      * Get a webinar's [poll](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars) details.<br><br>
      * **Scopes:** `webinar:read:admin` `webinar:read`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      *
      *
@@ -767,7 +763,7 @@ impl Webinars {
      *
      * Update a webinar's [poll](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars).<br><br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      *
      *
@@ -804,7 +800,7 @@ impl Webinars {
      *
      * Delete a webinar's [poll](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars).<br><br>
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      *
      *
@@ -830,10 +826,10 @@ impl Webinars {
      * This function performs a `GET` to the `/webinars/{webinarId}/registrants/questions` endpoint.
      *
      * Scheduling a [Webinar with registration](https://support.zoom.us/hc/en-us/articles/204619915-Scheduling-a-Webinar-with-Registration) requires your registrants to complete a brief form with fields and questions before they can receive the link to join the Webinar.<br>Use this API to list registration questions and fields that are to be answered by users while registering for a Webinar.<br>
-     * **Prerequisites:**<br>
+     * **Prerequisites:**<br>  
      * * Pro or higher plan with a Webinar Add-on.
      * **Scopes:** `webinar:read:admin` `webinar:read`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      *
      *
@@ -860,11 +856,11 @@ impl Webinars {
      * This function performs a `PATCH` to the `/webinars/{webinarId}/registrants/questions` endpoint.
      *
      * Scheduling a [Webinar with registration](https://support.zoom.us/hc/en-us/articles/204619915-Scheduling-a-Webinar-with-Registration) requires your registrants to complete a brief form with fields and questions before they can receive the link to join the Webinar.<br>Use this API to update registration questions and fields of a scheduled Webinar that are to be answered by users while registering for a Webinar.<br><br>
-     * **Prerequisites:**<br>
+     * **Prerequisites:**<br>  
      * * Pro or higher plan with a Webinar Add-on.
      * * Registration option for Webinar should be set as required to use this API.
      * **Scopes:** `webinar:write:admin` `webinar:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      *
@@ -898,7 +894,7 @@ impl Webinars {
      *
      * Zoom users with a [Webinar Plan](https://zoom.us/webinar) have access to creating and managing Webinars. Webinar allows a host to broadcast a Zoom meeting to up to 10,000 attendees. Scheduling a [Webinar with registration](https://support.zoom.us/hc/en-us/articles/204619915-Scheduling-a-Webinar-with-Registration) requires your registrants to complete a brief form before receiving the link to join the Webinar.<br>Use this API to get details on a specific user who has registered for the Webinar.<br><br>
      * **Scopes:** `webinar:read:admin` `webinar:read`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`<br>
      * **Prerequisites:**<br>
      * * The account must have a Webinar plan.
@@ -912,8 +908,6 @@ impl Webinars {
     pub async fn webinar_registrant_get(
         &self,
         webinar_id: &str,
-        registrant_id: &str,
-        webinar_id: i64,
         registrant_id: &str,
         occurrence_id: &str,
     ) -> Result<crate::types::Domains> {
@@ -957,8 +951,6 @@ impl Webinars {
     pub async fn delete_webinar_registrant(
         &self,
         webinar_id: &str,
-        registrant_id: &str,
-        webinar_id: i64,
         registrant_id: &str,
         occurrence_id: &str,
     ) -> Result<()> {
@@ -1039,7 +1031,7 @@ impl Webinars {
      *
      * [Webinar Registration Tracking Sources](https://support.zoom.us/hc/en-us/articles/360000315683-Webinar-Registration-Source-Tracking) allow you to see where your registrants are coming from if you share the webinar registration page in multiple platforms. You can then use the source tracking to see the number of registrants generated from each platform.<br> Use this API to list information on all the tracking sources of a Webinar.<br>
      * **Scopes:** `webinar:read:admin`, `webinar:read`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      * **Prerequisites**:<br>
      * * [Webinar license](https://zoom.us/webinar).
@@ -1053,7 +1045,6 @@ impl Webinars {
     pub async fn get_tracking_sources(
         &self,
         webinar_id: &str,
-        webinar_id: i64,
     ) -> Result<crate::types::GetTrackingSourcesResponse> {
         let url = format!(
             "/webinars/{}/tracking_sources",
@@ -1080,12 +1071,11 @@ impl Webinars {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *
+     *  
      *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
      */
     pub async fn list_past_webinar_poll_results(
         &self,
-        webinar_id: &str,
         webinar_id: &str,
     ) -> Result<crate::types::ListPastWebinarPollResultsResponse> {
         let url = format!(
@@ -1115,12 +1105,11 @@ impl Webinars {
      * **Parameters:**
      *
      * * `webinar_id: &str` -- The webinar ID or the webinar UUID.  If a webinar ID is provided in the request instead of a UUID, the response will be for the latest webinar instance.
-     *
+     *  
      *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
      */
     pub async fn list_past_webinar_qa(
         &self,
-        webinar_id: &str,
         webinar_id: &str,
     ) -> Result<crate::types::ListPastWebinarQaResponse> {
         let url = format!(
@@ -1178,7 +1167,6 @@ impl Webinars {
     pub async fn get_webinar_live_stream_details(
         &self,
         webinar_id: &str,
-        webinar_id: &str,
     ) -> Result<crate::types::GetWebinarLiveStreamDetailsResponse> {
         let url = format!(
             "/webinars/{}/livestream",
@@ -1210,7 +1198,6 @@ impl Webinars {
     pub async fn webinar_live_stream_update(
         &self,
         webinar_id: &str,
-        webinar_id: i64,
         body: &crate::types::WebinarLiveStream,
     ) -> Result<()> {
         let url = format!(

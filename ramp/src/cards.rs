@@ -27,7 +27,7 @@ impl Cards {
      * * `user_id: &str`
      * * `card_program_id: &str`
      */
-    pub async fn get_cards(
+    pub async fn get(
         &self,
         start: &str,
         page_size: f64,
@@ -91,7 +91,7 @@ impl Cards {
     pub async fn patch_resources_card(
         &self,
         id: &str,
-        body: &crate::types::PatchResourcesCardRequest,
+        body: &crate::types::PatchResourcesCardsCardIdRequest,
     ) -> Result<()> {
         let url = format!(
             "/cards/{}",
@@ -164,7 +164,7 @@ impl Cards {
     pub async fn post_resources_card_termination(
         &self,
         id: &str,
-        body: &crate::types::PostResourcesCardSuspensionRequest,
+        body: &crate::types::PostResourcesCardsCardIdSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
         let url = format!(
             "/cards/{}/deferred/termination",
@@ -189,7 +189,7 @@ impl Cards {
     pub async fn post_resources_card_suspension(
         &self,
         id: &str,
-        body: &crate::types::PostResourcesCardSuspensionRequest,
+        body: &crate::types::PostResourcesCardsCardIdSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
         let url = format!(
             "/cards/{}/deferred/suspension",
@@ -214,7 +214,7 @@ impl Cards {
     pub async fn post_resources_card_unsuspension(
         &self,
         id: &str,
-        body: &crate::types::PostResourcesCardSuspensionRequest,
+        body: &crate::types::PostResourcesCardsCardIdSuspensionRequest,
     ) -> Result<crate::types::TaskResponse> {
         let url = format!(
             "/cards/{}/deferred/unsuspension",
@@ -243,7 +243,7 @@ impl Cards {
     pub async fn get_resources_deferred(
         &self,
         id: &str,
-    ) -> Result<crate::types::GetResourcesDeferredResponse> {
+    ) -> Result<crate::types::GetResourcesCardsDeferredIdResponse> {
         let url = format!(
             "/cards/deferred/status/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

@@ -31,7 +31,7 @@ impl Billing {
      *
      * * `account_id: &str` -- The account ID.
      */
-    pub async fn account_billing(&self, account_id: &str) -> Result<crate::types::Contact> {
+    pub async fn account(&self, account_id: &str) -> Result<crate::types::Contact> {
         let url = format!(
             "/accounts/{}/billing",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -370,7 +370,7 @@ impl Billing {
         account_id: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::AccountInvoicesResponseData> {
+    ) -> Result<crate::types::AccountBillingInvoicesResponseData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -408,7 +408,7 @@ impl Billing {
         &self,
         account_id: &str,
         invoice_id: &str,
-    ) -> Result<crate::types::GetAccountInvoiceResponse> {
+    ) -> Result<crate::types::GetAccountBillingInvoiceResponse> {
         let url = format!(
             "/accounts/{}/billing/invoices/{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

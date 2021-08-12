@@ -21,7 +21,7 @@ impl CustomIds {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_custom_provider(&self) -> Result<crate::types::GetCustomProviderResponse> {
+    pub async fn get_custom_provider(&self) -> Result<crate::types::GetCustomIdProviderResponse> {
         let url = "/custom-id-provider".to_string();
         self.client.get(&url, None).await
     }
@@ -37,7 +37,7 @@ impl CustomIds {
      *
      * * `authorization_bearer_111111111111: &str` -- OAuth Access token.
      */
-    pub async fn postcustom_provider(&self) -> Result<crate::types::PostcustomProviderResponse> {
+    pub async fn postcustom_provider(&self) -> Result<crate::types::PostcustomIdProviderResponse> {
         let url = "/custom-id-provider".to_string();
         self.client.post(&url, None).await
     }
@@ -51,7 +51,7 @@ impl CustomIds {
      */
     pub async fn post_custom_provider_application_link(
         &self,
-        body: &crate::types::GetCustomProviderResponse,
+        body: &crate::types::GetCustomIdProviderResponse,
     ) -> Result<()> {
         let url = "/custom-id-provider/application-link".to_string();
         self.client
@@ -77,7 +77,7 @@ impl CustomIds {
         &self,
         entity_type: &str,
         custom_id: &str,
-    ) -> Result<crate::types::GetEntityTypeCustomRampResponse> {
+    ) -> Result<crate::types::GetEntityTypeCustomIdRampResponse> {
         let url = format!(
             "/custom-id-provider/{}/{}/ramp-id",
             crate::progenitor_support::encode_path(&entity_type.to_string()),
@@ -100,7 +100,7 @@ impl CustomIds {
         &self,
         entity_type: &str,
         ramp_id: &str,
-    ) -> Result<crate::types::GetEntityTypeRampCustomResponse> {
+    ) -> Result<crate::types::GetEntityTypeRampIdCustomResponse> {
         let url = format!(
             "/custom-id-provider/{}/{}/custom-id",
             crate::progenitor_support::encode_path(&entity_type.to_string()),
@@ -120,7 +120,7 @@ impl CustomIds {
     pub async fn post_custom_provider_entity_type_link(
         &self,
         entity_type: &str,
-        body: &crate::types::PostCustomProviderEntityTypeLinkRequest,
+        body: &crate::types::PostCustomIdProviderEntityTypeLinkRequest,
     ) -> Result<()> {
         let url = format!(
             "/custom-id-provider/{}/custom-id-link",

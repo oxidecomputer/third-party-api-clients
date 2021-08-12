@@ -99,7 +99,6 @@ impl PhoneBlockedList {
     pub async fn get_a_blocked_list(
         &self,
         blocked_list_id: &str,
-        blocked_list_id: &str,
     ) -> Result<crate::types::GetBlockedListResponse> {
         let url = format!(
             "/phone/blocked_list/{}",
@@ -127,11 +126,7 @@ impl PhoneBlockedList {
      *
      * * `blocked_list_id: &str` -- Unique Identifier of the blocked list. This can be retrieved from the List Blocked List API.
      */
-    pub async fn delete_a_blocked_list(
-        &self,
-        blocked_list_id: &str,
-        blocked_list_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_a_blocked_list(&self, blocked_list_id: &str) -> Result<()> {
         let url = format!(
             "/phone/blocked_list/{}",
             crate::progenitor_support::encode_path(&blocked_list_id.to_string()),
@@ -159,7 +154,6 @@ impl PhoneBlockedList {
      */
     pub async fn update_blocked_list(
         &self,
-        blocked_list_id: &str,
         blocked_list_id: &str,
         body: &crate::types::UpdateBlockedListRequest,
     ) -> Result<()> {

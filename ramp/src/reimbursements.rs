@@ -22,7 +22,7 @@ impl Reimbursements {
      * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
-    pub async fn get_reimbursements(
+    pub async fn gets(
         &self,
         start: &str,
         page_size: f64,
@@ -53,9 +53,9 @@ impl Reimbursements {
      *
      * This function performs a `GET` to the `/reimbursements` endpoint.
      *
-     * As opposed to `get_reimbursements`, this function returns all the pages of the request at once.
+     * As opposed to `get`, this function returns all the pages of the request at once.
      */
-    pub async fn get_all_reimbursements(&self) -> Result<Vec<crate::types::Reimbursement>> {
+    pub async fn get_all(&self) -> Result<Vec<crate::types::Reimbursement>> {
         let url = "/reimbursements".to_string();
         let mut resp: crate::types::GetReimbursementsResponse =
             self.client.get(&url, None).await.unwrap();

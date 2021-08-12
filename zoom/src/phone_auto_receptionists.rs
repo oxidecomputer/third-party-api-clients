@@ -33,7 +33,6 @@ impl PhoneAutoReceptionists {
     pub async fn update_auto_receptionist(
         &self,
         auto_receptionist_id: &str,
-        auto_receptionist_id: &str,
         body: &crate::types::UpdateAutoReceptionistRequest,
     ) -> Result<()> {
         let url = format!(
@@ -70,7 +69,6 @@ impl PhoneAutoReceptionists {
      */
     pub async fn assign_phone_numbers_auto_receptionist(
         &self,
-        auto_receptionist_id: &str,
         auto_receptionist_id: &str,
         body: &crate::types::AssignPhoneNumbersAutoReceptionistRequestData,
     ) -> Result<()> {
@@ -136,8 +134,6 @@ impl PhoneAutoReceptionists {
      */
     pub async fn unassign_a_phone_num_auto_receptionist(
         &self,
-        auto_receptionist_id: &str,
-        phone_number_id: &str,
         auto_receptionist_id: &str,
         phone_number_id: &str,
     ) -> Result<()> {

@@ -13,7 +13,9 @@ use std::{
 };
 
 use anyhow::{bail, Result};
-use inflector::cases::{snakecase::to_snake_case, titlecase::to_title_case};
+use inflector::cases::{
+    pascalcase::to_pascal_case, snakecase::to_snake_case, titlecase::to_title_case,
+};
 use openapiv3::OpenAPI;
 use serde::Deserialize;
 
@@ -133,7 +135,7 @@ where
                             }
 
                             if o.security.is_some() {
-                                println!("op {}: security, unsupported", oid);
+                                //println!("op {}: security, unsupported", oid);
                             }
 
                             if o.responses.default.is_some() {
@@ -1982,6 +1984,12 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
+        if !tags.contains(&tag.name) {
+            // Return early do nothing!
+            // This fixes Zoom where they list tags that have no associated functions.
+            continue;
+        }
+
         let mut docs = "".to_string();
         if let Some(d) = &tag.description {
             docs = format!("{}.", d.trim_end_matches('.'));
@@ -2002,8 +2010,7 @@ fn gen(
         // If the spec didn't call out tags explicitly, we need to use the
         // ones we found ourselves.
         for tag in tags.iter() {
-            // TODO: eventually fix hardcoding auth here for ramp
-            if !tag.is_empty() && tag != "auths" {
+            if !tag.is_empty() {
                 a(&format!("pub mod {};", to_snake_case(tag)));
             }
         }
@@ -2074,6 +2081,12 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
+        if !tags.contains(&tag.name) {
+            // Return early do nothing!
+            // This fixes Zoom where they list tags that have no associated functions.
+            continue;
+        }
+
         let mut docs = format!(
             "Return a reference to an interface that provides access to {} operations.",
             tag.name
@@ -2105,8 +2118,7 @@ fn gen(
         // If the spec didn't call out tags explicitly, we need to use the
         // ones we found ourselves.
         for tag in tags.iter() {
-            // TODO: eventually fix hardcoding auth here for ramp
-            if !tag.is_empty() && tag != "auths" {
+            if !tag.is_empty() {
                 a(&format!(
                     r#"pub fn {}(&self) -> {}::{} {{
                     {}::{}::new(self.clone())
@@ -2146,8 +2158,15 @@ pub fn make_plural(proper_name: &str, s: &str) -> String {
 
 fn struct_name(s: &str) -> String {
     let t = to_title_case(&clean_name(s)).replace(" ", "");
-    if t == "Self" {
-        "SelfData".to_string()
+
+    // Check if we actually have a number.
+    if let Ok(i) = t.parse::<i64>() {
+        // Change the number to words for the enum, etc.
+        // This fixes Zoom and hopefully does not break anyone else.
+        to_pascal_case(&english_numbers::convert_all_fmt(i))
+    } else if t == "Option" || t == "Self" {
+        // Fix any reserved words.
+        format!("{}Data", t)
     } else {
         t
     }
@@ -2202,11 +2221,8 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         return to_snake_case(oid).trim_start_matches('_').to_string();
     }
 
-    let t = tag.to_string() + "_";
-
     let mut st = to_snake_case(oid)
         .replace("v_1_", "")
-        .replace(&t, "")
         .replace("s_uuid", "")
         .replace("_id_or_uuid", "")
         .replace("_uuid", "")
@@ -2235,7 +2251,16 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         words.push(s.to_string());
     }
 
-    words.join("_")
+    let f = words.join("_");
+
+    if to_snake_case(tag) == f {
+        return "get".to_string();
+    }
+
+    f.replace(&tag, "")
+        .replace("__", "_")
+        .trim_end_matches('_')
+        .to_string()
 }
 
 fn oid_to_object_name(s: &str) -> String {
@@ -2388,7 +2413,7 @@ fn main() -> Result<()> {
 
             for (ct, mt) in content {
                 // TODO: have a better way of handling multipart/form-data
-                if ct == "application/json" || ct == "multipart/form-data" {
+                if ct == "application/json" || (ct == "multipart/form-data" && content.len() == 1) {
                     if let Some(s) = &mt.schema {
                         let object_name = format!("{} request", name);
                         let id = ts.select(Some(&clean_name(&object_name)), s, "")?;
@@ -2473,7 +2498,7 @@ fn main() -> Result<()> {
                     ts: &mut TypeSpace|
          -> Result<String> {
             if let Some(o) = o {
-                let od = o.operation_id.as_deref().unwrap();
+                let od = to_snake_case(o.operation_id.as_deref().unwrap());
 
                 // Make sure we have exactly 1 tag. This likely needs to change in the
                 // future but for now it seems fairly consistent.
@@ -2491,7 +2516,7 @@ fn main() -> Result<()> {
                 let tag = to_snake_case(&make_plural(&proper_name, tags.first().unwrap()))
                     .replace("_i_ds", "_ids");
 
-                let oid = clean_fn_name(&proper_name, od, &tag);
+                let oid = clean_fn_name(&proper_name, &od, &tag);
 
                 debug("");
                 debug(&oid);
@@ -2504,7 +2529,7 @@ fn main() -> Result<()> {
                     for (ct, mt) in &body.content {
                         if ct == "application/json" {
                             if let Some(s) = &mt.schema {
-                                let object_name = format!("{} request", oid_to_object_name(&oid));
+                                let object_name = format!("{} request", oid_to_object_name(&od));
                                 let id = ts.select(Some(&object_name), s, "")?;
                                 let rt = ts.render_type(&id, true)?;
                                 req.push(format!("{} {:?}", rt, id));
@@ -2533,7 +2558,7 @@ fn main() -> Result<()> {
                  */
                 for par in o.parameters.iter() {
                     // The name will be filled in by the parameter data.
-                    ts.select_param(Some(&oid_to_object_name(&oid)), par)?;
+                    ts.select_param(Some(&oid_to_object_name(&od)), par)?;
                 }
 
                 /*
@@ -2564,7 +2589,7 @@ fn main() -> Result<()> {
 
                                         // Otherwise we can parse the object.
                                         let object_name =
-                                            format!("{} response", oid_to_object_name(&oid));
+                                            format!("{} response", oid_to_object_name(&od));
                                         let id =
                                             ts.select(Some(&clean_name(&object_name)), s, "")?;
                                         let rt = ts.render_type(&id, false)?;

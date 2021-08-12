@@ -16,14 +16,14 @@ For instance you can list all users on an account via `https://api.zoom.us/v2/us
 
 | name | url | email |
 |----|----|----|
-| Zoom Developers | https://developer.zoom.us/ | developersupport@zoom.us |
+| Zoom Developers | <https://developer.zoom.us/> | developersupport@zoom.us |
 
 ### License
 
 
 | name | url |
 |----|----|
-| MIT for OAS 2.0 | https://opensource.org/licenses/MIT |
+| MIT for OAS 2.0 | <https://opensource.org/licenses/MIT> |
 
 
 ## Client Details

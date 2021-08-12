@@ -33,7 +33,7 @@ impl SipPhone {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn list_sip_phones(
+    pub async fn list_s(
         &self,
         page_number: i64,
         search_key: &str,
@@ -79,7 +79,7 @@ impl SipPhone {
      *
      *
      */
-    pub async fn create_sip_phone(&self, body: &crate::types::CreateSipPhoneRequest) -> Result<()> {
+    pub async fn create(&self, body: &crate::types::CreateSipPhoneRequest) -> Result<()> {
         let url = "/sip_phones".to_string();
         self.client
             .post(
@@ -105,7 +105,7 @@ impl SipPhone {
      *
      * * `phone_id: &str` -- Unique Identifier of the SIP Phone. It can be retrieved from the List SIP Phones API.
      */
-    pub async fn delete_sip_phone(&self, phone_id: &str, phone_id: &str) -> Result<()> {
+    pub async fn delete(&self, phone_id: &str) -> Result<()> {
         let url = format!(
             "/sip_phones/{}",
             crate::progenitor_support::encode_path(&phone_id.to_string()),
@@ -130,9 +130,8 @@ impl SipPhone {
      *
      * * `phone_id: &str` -- Unique Identifier of the SIP Phone. This can be retrieved from the List SIP Phones API.
      */
-    pub async fn update_sip_phone(
+    pub async fn update(
         &self,
-        phone_id: &str,
         phone_id: &str,
         body: &crate::types::UpdateSipPhoneRequest,
     ) -> Result<()> {

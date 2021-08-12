@@ -114,7 +114,6 @@ impl RoomsLocation {
     pub async fn get_zr_location_profile(
         &self,
         location_id: &str,
-        location_id: &str,
     ) -> Result<crate::types::GetZrLocationProfileResponse> {
         let url = format!(
             "/rooms/locations/{}",
@@ -145,7 +144,6 @@ impl RoomsLocation {
      */
     pub async fn update_zr_location_profile(
         &self,
-        location_id: &str,
         location_id: &str,
         body: &crate::types::UpdateZrLocationProfileRequest,
     ) -> Result<()> {
@@ -185,7 +183,6 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         setting_type: &str,
-        location_id: &str,
     ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -230,7 +227,6 @@ impl RoomsLocation {
         &self,
         location_id: &str,
         setting_type: &str,
-        location_id: &str,
     ) -> Result<()> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -285,7 +281,7 @@ impl RoomsLocation {
      */
     pub async fn update_zoom_structure(
         &self,
-        body: &crate::types::UpdateZoomStructureRequest,
+        body: &crate::types::UpdateZoomRoomsLocationStructureRequest,
     ) -> Result<()> {
         let url = "/rooms/locations/structure".to_string();
         self.client
@@ -314,7 +310,6 @@ impl RoomsLocation {
      */
     pub async fn change_parent_location(
         &self,
-        location_id: &str,
         location_id: &str,
         body: &crate::types::ChangeParentLocationRequest,
     ) -> Result<()> {

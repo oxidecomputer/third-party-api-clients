@@ -108,7 +108,6 @@ impl PhoneCallQueues {
     pub async fn get_a_call_queue(
         &self,
         call_queue_id: &str,
-        call_queue_id: &str,
     ) -> Result<crate::types::GetCallQueueResponse> {
         let url = format!(
             "/phone/call_queues/{}",
@@ -139,11 +138,7 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- Unique Identifier of the call queue.
      */
-    pub async fn delete_a_call_queue(
-        &self,
-        call_queue_id: &str,
-        call_queue_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_a_call_queue(&self, call_queue_id: &str) -> Result<()> {
         let url = format!(
             "/phone/call_queues/{}",
             crate::progenitor_support::encode_path(&call_queue_id.to_string()),
@@ -173,7 +168,6 @@ impl PhoneCallQueues {
      */
     pub async fn update_call_queue(
         &self,
-        call_queue_id: &str,
         call_queue_id: &str,
         body: &crate::types::UpdateCallQueueRequest,
     ) -> Result<()> {
@@ -212,7 +206,6 @@ impl PhoneCallQueues {
     pub async fn assign_phone_to_call_queue(
         &self,
         call_queue_id: &str,
-        call_queue_id: &str,
         body: &crate::types::AssignPhoneCallQueueRequest,
     ) -> Result<crate::types::Domains> {
         let url = format!(
@@ -249,7 +242,6 @@ impl PhoneCallQueues {
     pub async fn unassign_a_phone_num_call_queue(
         &self,
         call_queue_id: &str,
-        call_queue_id: &str,
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/phone/call_queues/{}/phone_numbers",
@@ -282,8 +274,6 @@ impl PhoneCallQueues {
         &self,
         call_queue_id: &str,
         phone_number_id: &str,
-        call_queue_id: &str,
-        phone_number_id: &str,
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/phone/call_queues/{}/phone_numbers/{}",
@@ -314,7 +304,6 @@ impl PhoneCallQueues {
      */
     pub async fn add_members_to_call_queue(
         &self,
-        call_queue_id: &str,
         call_queue_id: &str,
         body: &crate::types::AddMembersCallQueueRequestData,
     ) -> Result<crate::types::Domains> {
@@ -349,11 +338,7 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str`
      */
-    pub async fn unassign_all_members(
-        &self,
-        call_queue_id: &str,
-        call_queue_id: &str,
-    ) -> Result<()> {
+    pub async fn unassign_all_members(&self, call_queue_id: &str) -> Result<()> {
         let url = format!(
             "/phone/call_queues/{}/members",
             crate::progenitor_support::encode_path(&call_queue_id.to_string()),
@@ -383,8 +368,6 @@ impl PhoneCallQueues {
      */
     pub async fn unassign_member_from_call_queue(
         &self,
-        call_queue_id: &str,
-        member_id: &str,
         call_queue_id: &str,
         member_id: &str,
     ) -> Result<()> {
@@ -419,7 +402,6 @@ impl PhoneCallQueues {
      */
     pub async fn change_call_queue_manager(
         &self,
-        call_queue_id: &str,
         call_queue_id: &str,
         body: &crate::types::ChangeCallQueueManagerRequest,
     ) -> Result<()> {
@@ -460,7 +442,6 @@ impl PhoneCallQueues {
      */
     pub async fn get_call_queue_recording(
         &self,
-        call_queue_id: &str,
         call_queue_id: &str,
         page_size: i64,
         next_page_token: &str,

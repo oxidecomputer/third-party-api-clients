@@ -34,8 +34,6 @@ impl ChatChannelsAccountLevel {
         &self,
         user_id: &str,
         channel_id: &str,
-        channel_id: &str,
-        user_id: &str,
     ) -> Result<crate::types::Channel> {
         let url = format!(
             "/chat/users/{}/channels/{}",
@@ -63,12 +61,7 @@ impl ChatChannelsAccountLevel {
      *
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
-    pub async fn delete_channel(
-        &self,
-        user_id: &str,
-        channel_id: &str,
-        channel_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_channel(&self, user_id: &str, channel_id: &str) -> Result<()> {
         let url = format!(
             "/chat/users/{}/channels/{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -100,8 +93,6 @@ impl ChatChannelsAccountLevel {
         &self,
         user_id: &str,
         channel_id: &str,
-        channel_id: &str,
-        user_id: &str,
         body: &crate::types::UpdateChannelBodyRequest,
     ) -> Result<()> {
         let url = format!(
@@ -140,10 +131,8 @@ impl ChatChannelsAccountLevel {
         &self,
         user_id: &str,
         channel_id: &str,
-        channel_id: &str,
         page_size: i64,
         next_page_token: &str,
-        user_id: &str,
     ) -> Result<crate::types::ListChannelMembersResponseData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -189,8 +178,6 @@ impl ChatChannelsAccountLevel {
         &self,
         user_id: &str,
         channel_id: &str,
-        channel_id: &str,
-        user_id: &str,
         body: &crate::types::InviteChannelMembersRequestData,
     ) -> Result<crate::types::InviteChannelMembersResponse> {
         let url = format!(
@@ -231,9 +218,6 @@ impl ChatChannelsAccountLevel {
         user_id: &str,
         channel_id: &str,
         member_id: &str,
-        channel_id: &str,
-        member_id: &str,
-        user_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/chat/users/{}/channels/{}/members/{}",

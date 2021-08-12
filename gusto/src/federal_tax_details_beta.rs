@@ -27,7 +27,7 @@ impl FederalTaxDetailsBeta {
 pub async fn get_company_federal_tax_details(
 &self,
 company_id_or_uuid: &str,
-) -> Result<crate::types::GetCompanyFederalTaxDetailsResponse> {
+) -> Result<crate::types::GetV1CompaniesCompanyIdUuidFederalTaxDetailsResponse> {
 let url =
 format!("/v1/companies/{}/federal_tax_details",
 crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),);
@@ -47,8 +47,8 @@ self.client.get(&url, None).await
 pub async fn put_company_federal_tax_details(
 &self,
 company_id_or_uuid: &str,
-body: &crate::types::PutCompanyFederalTaxDetailsRequest
-) -> Result<crate::types::GetCompanyFederalTaxDetailsResponse> {
+body: &crate::types::PutV1CompaniesCompanyIdUuidFederalTaxDetailsRequest
+) -> Result<crate::types::GetV1CompaniesCompanyIdUuidFederalTaxDetailsResponse> {
 let url =
 format!("/v1/companies/{}/federal_tax_details",
 crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),);

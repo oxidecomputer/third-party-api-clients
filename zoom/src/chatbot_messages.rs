@@ -56,7 +56,6 @@ impl ChatbotMessages {
     pub async fn edit_chatbot_message(
         &self,
         message_id: &str,
-        message_id: &str,
         body: &crate::types::EditChatbotMessageRequest,
     ) -> Result<crate::types::EditChatbotMessageResponse> {
         let url = format!(

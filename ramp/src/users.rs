@@ -55,7 +55,7 @@ impl Users {
      *
      * Modify information about a user.
      */
-    pub async fn patch(&self, id: &str, body: &crate::types::PatchRequest) -> Result<()> {
+    pub async fn patch(&self, id: &str, body: &crate::types::PatchUsersIdRequest) -> Result<()> {
         let url = format!(
             "/users/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -84,7 +84,7 @@ impl Users {
      * * `department_id: &str`
      * * `location_id: &str`
      */
-    pub async fn get_users(
+    pub async fn gets(
         &self,
         start: &str,
         page_size: f64,
@@ -122,11 +122,11 @@ impl Users {
      *
      * This function performs a `GET` to the `/users` endpoint.
      *
-     * As opposed to `get_users`, this function returns all the pages of the request at once.
+     * As opposed to `get`, this function returns all the pages of the request at once.
      *
      * Retrieve all users of the business.
      */
-    pub async fn get_all_users(
+    pub async fn get_all(
         &self,
         department_id: &str,
         location_id: &str,
@@ -182,7 +182,7 @@ impl Users {
      */
     pub async fn post_deferred(
         &self,
-        body: &crate::types::PostDeferredRequest,
+        body: &crate::types::PostUsersDeferredRequest,
     ) -> Result<crate::types::User> {
         let url = "/users/deferred".to_string();
         self.client
@@ -203,7 +203,7 @@ impl Users {
     pub async fn get_deferred_status(
         &self,
         id: &str,
-    ) -> Result<crate::types::GetDeferredStatusResponse> {
+    ) -> Result<crate::types::GetUsersDeferredStatusIdResponse> {
         let url = format!(
             "/users/deferred/status/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

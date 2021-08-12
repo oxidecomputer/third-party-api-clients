@@ -30,7 +30,7 @@ impl PhoneSite {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn list_phone_sites(
+    pub async fn list_s(
         &self,
         page_size: i64,
         next_page_token: &str,
@@ -69,7 +69,7 @@ impl PhoneSite {
      *
      *
      */
-    pub async fn create_phone_site(
+    pub async fn create(
         &self,
         body: &crate::types::CreatePhoneSiteRequest,
     ) -> Result<crate::types::CreatePhoneSiteResponse> {
@@ -102,11 +102,7 @@ impl PhoneSite {
      *
      * * `site_id: &str` -- Unique Identifier of the Site.
      */
-    pub async fn get_a_site(
-        &self,
-        site_id: &str,
-        site_id: &str,
-    ) -> Result<crate::types::GetSiteResponse> {
+    pub async fn get_a_site(&self, site_id: &str) -> Result<crate::types::GetSiteResponse> {
         let url = format!(
             "/phone/sites/{}",
             crate::progenitor_support::encode_path(&site_id.to_string()),
@@ -136,12 +132,7 @@ impl PhoneSite {
      * * `site_id: &str` -- Unique Identifier of the Site.
      * * `transfer_site_id: &str` -- The Site ID of another site where the assets of the current site (users, numbers and phones) can be transferred to.
      */
-    pub async fn delete_phone_site(
-        &self,
-        site_id: &str,
-        site_id: &str,
-        transfer_site_id: &str,
-    ) -> Result<()> {
+    pub async fn delete(&self, site_id: &str, transfer_site_id: &str) -> Result<()> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !transfer_site_id.is_empty() {
@@ -183,7 +174,6 @@ impl PhoneSite {
      */
     pub async fn update_site_details(
         &self,
-        site_id: &str,
         site_id: &str,
         body: &crate::types::UpdateSiteDetailsRequest,
     ) -> Result<()> {

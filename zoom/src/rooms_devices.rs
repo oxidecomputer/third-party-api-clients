@@ -32,8 +32,6 @@ impl RoomsDevices {
         &self,
         room_id: &str,
         device_id: &str,
-        room_id: &str,
-        device_id: &str,
         body: &crate::types::ChangeZoomRoomsAppVersionRequest,
     ) -> Result<()> {
         let url = format!(

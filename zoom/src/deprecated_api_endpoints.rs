@@ -34,7 +34,6 @@ impl DeprecatedApiEndpoints {
     pub async fn list_past_meeting_files(
         &self,
         meeting_id: &str,
-        meeting_id: i64,
     ) -> Result<crate::types::ListPastMeetingFilesResponse> {
         let url = format!(
             "/past_meetings/{}/files",
@@ -65,7 +64,6 @@ impl DeprecatedApiEndpoints {
      */
     pub async fn list_past_webinar_files(
         &self,
-        webinar_id: &str,
         webinar_id: &str,
     ) -> Result<crate::types::ListPastMeetingFilesResponse> {
         let url = format!(

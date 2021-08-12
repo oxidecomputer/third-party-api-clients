@@ -87,7 +87,6 @@ impl SipConnectedAudio {
     pub async fn assign_sip_trunk_numbers(
         &self,
         account_id: &str,
-        account_id: &str,
         body: &crate::types::AssignSipTrunkNumbersRequest,
     ) -> Result<()> {
         let url = format!(
@@ -120,7 +119,7 @@ impl SipConnectedAudio {
      *
      * * `account_id: &str` -- Account ID of the sub account from which the numbers are to be deleted. This can be retrieved from [List sub accounts](https://marketplace.zoom.us/docs/api-reference/zoom-api/accounts/account) API.
      */
-    pub async fn delete_all_sip_numbers(&self, account_id: &str, account_id: &str) -> Result<()> {
+    pub async fn delete_all_sip_numbers(&self, account_id: &str) -> Result<()> {
         let url = format!(
             "/accounts/{}/sip_trunk/numbers",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -146,7 +145,6 @@ impl SipConnectedAudio {
     pub async fn list_sip_trunk(
         &self,
         account_id: &str,
-        account_id: &str,
     ) -> Result<crate::types::ListSipTrunksResponseData> {
         let url = format!(
             "/accounts/{}/sip_trunk/trunks",
@@ -171,7 +169,6 @@ impl SipConnectedAudio {
      */
     pub async fn assign_sip_trunks(
         &self,
-        account_id: &str,
         account_id: &str,
         body: &crate::types::AssignSipTrunksRequestData,
     ) -> Result<crate::types::AssignSipTrunksResponseData> {
@@ -207,8 +204,6 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         trunk_id: &str,
-        account_id: &str,
-        trunk_id: &str,
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/accounts/{}/sip_trunk/trunks/{}",
@@ -236,7 +231,6 @@ impl SipConnectedAudio {
     pub async fn list_internal_callout_countries(
         &self,
         account_id: &str,
-        account_id: &str,
     ) -> Result<crate::types::ListInternalCalloutCountriesResponse> {
         let url = format!(
             "/accounts/{}/sip_trunk/callout_countries",
@@ -262,7 +256,6 @@ impl SipConnectedAudio {
      */
     pub async fn add_callout_countries(
         &self,
-        account_id: &str,
         account_id: &str,
         body: &crate::types::AddCalloutCountriesRequestData,
     ) -> Result<crate::types::AddCalloutCountriesResponseData> {
@@ -299,8 +292,6 @@ impl SipConnectedAudio {
         &self,
         account_id: &str,
         country_id: &str,
-        account_id: &str,
-        country_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/accounts/{}/sip_trunk/callout_countries/{}",
@@ -332,7 +323,6 @@ impl SipConnectedAudio {
      */
     pub async fn list_internal_numbers(
         &self,
-        account_id: &str,
         account_id: &str,
         page_size: i64,
         next_page_token: &str,
@@ -379,7 +369,6 @@ impl SipConnectedAudio {
     pub async fn add_internal_numbers(
         &self,
         account_id: &str,
-        account_id: &str,
         body: &crate::types::AddInternalNumbersRequest,
     ) -> Result<crate::types::AddInternalNumbersResponseData> {
         let url = format!(
@@ -413,13 +402,7 @@ impl SipConnectedAudio {
      * * `account_id: &str` -- Unique Identifier of the account. To delete an internal number from a sub account, provide the account ID of the sub account in the `accountId` path parameter. To delete an internal number from a master account, provide `me` as the value of the `accountId` path parameter.
      * * `number_id: &str` -- Unique identifier of the phone number. This value can be retrieved by calling the List Internal Numbers API.
      */
-    pub async fn delete_internal_number(
-        &self,
-        account_id: &str,
-        number_id: &str,
-        account_id: &str,
-        number_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_internal_number(&self, account_id: &str, number_id: &str) -> Result<()> {
         let url = format!(
             "/accounts/{}/sip_trunk/internal_numbers/{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

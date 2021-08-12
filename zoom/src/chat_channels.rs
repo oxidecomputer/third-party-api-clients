@@ -36,7 +36,6 @@ impl ChatChannels {
         user_id: &str,
         page_size: i64,
         next_page_token: &str,
-        user_id: &str,
     ) -> Result<crate::types::GetChannelsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -81,7 +80,6 @@ impl ChatChannels {
     pub async fn create_channel(
         &self,
         user_id: &str,
-        user_id: &str,
         body: &crate::types::CreateChannelRequest,
     ) -> Result<crate::types::CreateChannelResponse> {
         let url = format!(
@@ -116,11 +114,7 @@ impl ChatChannels {
      *
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
-    pub async fn get_user_level_channel(
-        &self,
-        channel_id: &str,
-        channel_id: &str,
-    ) -> Result<crate::types::Channel> {
+    pub async fn get_user_level_channel(&self, channel_id: &str) -> Result<crate::types::Channel> {
         let url = format!(
             "/chat/channels/{}",
             crate::progenitor_support::encode_path(&channel_id.to_string()),
@@ -148,11 +142,7 @@ impl ChatChannels {
      *
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
-    pub async fn delete_user_level_channel(
-        &self,
-        channel_id: &str,
-        channel_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_user_level_channel(&self, channel_id: &str) -> Result<()> {
         let url = format!(
             "/chat/channels/{}",
             crate::progenitor_support::encode_path(&channel_id.to_string()),
@@ -181,7 +171,6 @@ impl ChatChannels {
      */
     pub async fn update_user_level_channel(
         &self,
-        channel_id: &str,
         channel_id: &str,
         body: &crate::types::UpdateChannelBodyRequest,
     ) -> Result<()> {
@@ -221,8 +210,6 @@ impl ChatChannels {
         &self,
         channel_id: &str,
         member_id: &str,
-        channel_id: &str,
-        member_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/chat/channels/{}/members/{}",
@@ -252,7 +239,6 @@ impl ChatChannels {
     pub async fn join_channel(
         &self,
         channel_id: &str,
-        channel_id: &str,
     ) -> Result<crate::types::JoinChannelResponse> {
         let url = format!(
             "/chat/channels/{}/members/me",
@@ -278,7 +264,7 @@ impl ChatChannels {
      *
      * * `channel_id: &str` -- Channel ID: Unique Identifier of a channel.
      */
-    pub async fn leave_channel(&self, channel_id: &str, channel_id: &str) -> Result<()> {
+    pub async fn leave_channel(&self, channel_id: &str) -> Result<()> {
         let url = format!(
             "/chat/channels/{}/members/me",
             crate::progenitor_support::encode_path(&channel_id.to_string()),

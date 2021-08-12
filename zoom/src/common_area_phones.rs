@@ -34,7 +34,7 @@ impl CommonAreaPhones {
      * * `page_size: i64` -- The total number of records returned from a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn list_common_area_phone(
+    pub async fn list(
         &self,
         page_size: i64,
         next_page_token: &str,
@@ -111,7 +111,6 @@ impl CommonAreaPhones {
     pub async fn get_a_common_area_phone(
         &self,
         common_area_phone_id: &str,
-        common_area_phone_id: &str,
     ) -> Result<crate::types::GetCommonAreaPhoneResponse> {
         let url = format!(
             "/phone/common_area_phones/{}",
@@ -139,11 +138,7 @@ impl CommonAreaPhones {
      *
      * * `common_area_phone_id: &str` -- Unique Identifier of the common area phone.
      */
-    pub async fn delete_common_area_phone(
-        &self,
-        common_area_phone_id: &str,
-        common_area_phone_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_common_area_phone(&self, common_area_phone_id: &str) -> Result<()> {
         let url = format!(
             "/phone/common_area_phones/{}",
             crate::progenitor_support::encode_path(&common_area_phone_id.to_string()),
@@ -203,6 +198,7 @@ impl CommonAreaPhones {
      */
     pub async fn assign_phone_numbers_to_common_area(
         &self,
+        common_area_phone_id: &str,
         body: &crate::types::AssignPhoneNumbersCommonAreaRequestData,
     ) -> Result<crate::types::AssignPhoneNumbersCommonAreaResponseData> {
         let url = format!(
@@ -266,6 +262,7 @@ impl CommonAreaPhones {
      */
     pub async fn assign_calling_plans_to_common_area_phone(
         &self,
+        common_area_phone_id: &str,
         body: &crate::types::AssignCallingPlansCommonAreaPhoneRequestData,
     ) -> Result<crate::types::AssignCallingPlansCommonAreaPhoneResponseData> {
         let url = format!(

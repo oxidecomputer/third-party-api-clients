@@ -26,7 +26,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
-     * * `type_: crate::types::MeetingType` -- The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
+     * * `type_: crate::types::MeetingsType` -- The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `page_number: &str` -- The page number of the current page in the returned records.
@@ -34,7 +34,7 @@ impl Meetings {
     pub async fn get(
         &self,
         user_id: &str,
-        type_: crate::types::MeetingType,
+        type_: crate::types::MeetingsType,
         page_size: i64,
         next_page_token: &str,
         page_number: &str,
@@ -81,7 +81,7 @@ impl Meetings {
      *
      * For security reasons, the recommended way to retrieve the updated value for the <code>start_url</code> field programmatically (after expiry) is by calling the [Retrieve a Meeting API](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meeting) and referring to the value of the <code>start_url</code> field in the response.</aside><br><br>
      * Scopes: `meeting:write:admin` `meeting:write`
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
@@ -121,7 +121,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      * * `occurrence_id: &str` -- Meeting Occurrence ID. Provide this field to view meeting details of a particular occurrence of the [recurring meeting](https://support.zoom.us/hc/en-us/articles/214973206-Scheduling-Recurring-Meetings).
      * * `show_previous_occurrences: bool` -- Set the value of this field to `true` if you would like to view meeting details of all previous occurrences of a [recurring meeting](https://support.zoom.us/hc/en-us/articles/214973206-Scheduling-Recurring-Meetings).
@@ -173,15 +173,15 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      * * `occurrence_id: &str` -- The meeting occurrence ID.
      * * `schedule_for_reminder: bool` -- `true`: Notify host and alternative host about the meeting cancellation via email.
      *  `false`: Do not send any email notification.
      * * `cancel_meeting_reminder: &str` -- `true`: Notify registrants about the meeting cancellation via email.
-     *
+     *  
      *  `false`: Do not send any email notification to meeting registrants.
-     *
+     *  
      *  The default value of this field is `false`.
      */
     pub async fn meeting_delete(
@@ -232,7 +232,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      * * `occurrence_id: &str` -- Meeting occurrence id. Support change of agenda, start_time, duration, settings: {host_video, participant_video, join_before_host, mute_upon_entry, waiting_room, watermark, auto_recording}.
      */
@@ -279,7 +279,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_status(
@@ -313,13 +313,13 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      * * `occurrence_id: &str` -- The meeting occurrence ID.
-     * * `status: crate::types::RegistrantStatusData` -- The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
+     * * `status: crate::types::MeetingRegistrantsStatus` -- The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *
+     *  
      *  The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -327,7 +327,7 @@ impl Meetings {
         &self,
         meeting_id: i64,
         occurrence_id: &str,
-        status: crate::types::RegistrantStatusData,
+        status: crate::types::MeetingRegistrantsStatus,
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
@@ -378,7 +378,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      * * `occurrence_ids: &str` -- Occurrence IDs. You can find these with the meeting get API. Multiple values separated by comma.
      */
@@ -462,7 +462,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      * * `occurrence_id: &str` -- The meeting occurrence ID.
      */
@@ -511,7 +511,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_uuid: &str` -- The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
-     *
+     *  
      *  If the meeting UUID begins with a `/` character or contains a `//` character, you \*\*must\*\* double-encode the meeting UUID when using the meeting UUID for other API calls.
      */
     pub async fn past_meeting_details(
@@ -544,7 +544,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_uuid: &str` -- The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. For example, after a meeting ends, a new UUID is generated for the next meeting instance.
-     *
+     *  
      *  If the meeting UUID begins with a `/` character or contains a `//` character, you \*\*must\*\* double-encode the meeting UUID when using the meeting UUID for other API calls.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
@@ -591,10 +591,10 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn past_meeting(&self, meeting_id: i64) -> Result<crate::types::MeetingInstances> {
+    pub async fn past(&self, meeting_id: i64) -> Result<crate::types::MeetingInstances> {
         let url = format!(
             "/past_meetings/{}/instances",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -619,7 +619,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_poll(&self, meeting_id: i64) -> Result<crate::types::PollList> {
@@ -648,7 +648,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_poll_create(
@@ -685,7 +685,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      * * `poll_id: &str` -- The poll ID.
      */
@@ -718,7 +718,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      * * `poll_id: &str` -- The poll ID.
      */
@@ -758,7 +758,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      * * `poll_id: &str` -- The poll ID.
      */
@@ -788,7 +788,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_registrants_questions_get(
@@ -811,14 +811,14 @@ impl Meetings {
      * Update registration questions that will be displayed to users while [registering for a meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).<br><br>
      * **Scopes:** `meeting:write`, `meeting:write:admin`<br>
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-     *
+     *  
      *
      *
      *
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_registrant_question_update(
@@ -854,7 +854,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_invitation(
@@ -892,7 +892,6 @@ impl Meetings {
     pub async fn get_live_stream_details(
         &self,
         meeting_id: &str,
-        meeting_id: &str,
     ) -> Result<crate::types::GetLiveStreamDetailsResponse> {
         let url = format!(
             "/meetings/{}/livestream",
@@ -917,13 +916,12 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_live_stream_update(
         &self,
         meeting_id: &str,
-        meeting_id: i64,
         body: &crate::types::MeetingLiveStream,
     ) -> Result<()> {
         let url = format!(
@@ -955,7 +953,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_live_stream_status_update(
@@ -992,12 +990,11 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: &str` -- The meeting ID or the meeting UUID.  If a meeting ID is provided in the request instead of a UUID, the response will be for the latest meeting instance.
-     *
+     *  
      *  If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must \*\*double encode\*\* the UUID before making an API request.
      */
     pub async fn list_past_meeting_polls(
         &self,
-        meeting_id: &str,
         meeting_id: &str,
     ) -> Result<crate::types::ListPastMeetingPollsResponse> {
         let url = format!(
@@ -1036,7 +1033,6 @@ impl Meetings {
     pub async fn add_batch_registrants(
         &self,
         meeting_id: &str,
-        meeting_id: &str,
         body: &crate::types::AddBatchRegistrantsRequest,
     ) -> Result<crate::types::AddBatchRegistrantsResponseData> {
         let url = format!(
@@ -1073,7 +1069,6 @@ impl Meetings {
      */
     pub async fn in_meeting_recording_control(
         &self,
-        meeting_id: &str,
         meeting_id: &str,
         body: &crate::types::InMeetingRecordingControlRequest,
     ) -> Result<()> {
@@ -1123,7 +1118,6 @@ impl Meetings {
     pub async fn create_batch_polls(
         &self,
         meeting_id: &str,
-        meeting_id: &str,
         body: &crate::types::CreateBatchPollsRequest,
     ) -> Result<crate::types::CreateBatchPollsResponse> {
         let url = format!(
@@ -1156,7 +1150,6 @@ impl Meetings {
     pub async fn list_meeting_template(
         &self,
         user_id: &str,
-        user_id: &str,
     ) -> Result<crate::types::ListMeetingTemplatesResponseData> {
         let url = format!(
             "/users/{}/meeting_templates",
@@ -1178,7 +1171,7 @@ impl Meetings {
      * **Parameters:**
      *
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
-     *
+     *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
      */
     pub async fn meeting_invite_links_create(

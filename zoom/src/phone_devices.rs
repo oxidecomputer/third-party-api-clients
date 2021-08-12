@@ -31,7 +31,7 @@ impl PhoneDevices {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `page_size: i64` -- The number of records returned within a single API call.
      */
-    pub async fn list_phone_device(
+    pub async fn list(
         &self,
         type_: crate::types::ListPhoneDevicesType,
         next_page_token: &str,
@@ -100,11 +100,7 @@ impl PhoneDevices {
      *
      * * `device_id: &str` -- Unique Identifier of the device.
      */
-    pub async fn get_a_device(
-        &self,
-        device_id: &str,
-        device_id: &str,
-    ) -> Result<crate::types::GetDeviceResponse> {
+    pub async fn get_a_device(&self, device_id: &str) -> Result<crate::types::GetDeviceResponse> {
         let url = format!(
             "/phone/devices/{}",
             crate::progenitor_support::encode_path(&device_id.to_string()),
@@ -132,7 +128,7 @@ impl PhoneDevices {
      *
      * * `device_id: &str` -- Unique Identifier of the device.
      */
-    pub async fn delete_a_device(&self, device_id: &str, device_id: &str) -> Result<()> {
+    pub async fn delete_a_device(&self, device_id: &str) -> Result<()> {
         let url = format!(
             "/phone/devices/{}",
             crate::progenitor_support::encode_path(&device_id.to_string()),
@@ -161,7 +157,6 @@ impl PhoneDevices {
      */
     pub async fn update_a_device(
         &self,
-        device_id: &str,
         device_id: &str,
         body: &crate::types::UpdateDeviceRequest,
     ) -> Result<()> {

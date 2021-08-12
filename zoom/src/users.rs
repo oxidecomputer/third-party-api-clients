@@ -27,7 +27,7 @@ impl Users {
      *  \* `active` — An active user.
      *  \* `inactive` — A deactivated user.
      *  \* `pending` — A pending user.
-     *
+     *  
      *  This value defaults to `active`.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `role_id: &str` -- The role's unique ID. Use this parameter to filter the response by a specific role. You can use the [List Roles](https://marketplace.zoom.us/docs/api-reference/zoom-api/roles/roles) API to get a role's unique ID value.
@@ -82,7 +82,7 @@ impl Users {
      * **Prerequisites:**<br>
      * * Pro or higher plan<br><br>
      * **Scopes:** `user:write:admin` `user:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn user_create(
@@ -113,17 +113,17 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `login_type: crate::types::LoginType` -- The user's login method:
-     *
+     *  
      *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *
+     *  
      *  The following login methods are only available in China:
-     *
+     *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
      * * `encrypted_email: bool` -- Whether the email address passed for the `userId` value is an encrypted email address:
-     *
+     *  
      *  \* `true` — The email address is encrypted.
      *  \* `false` — The email address is not encrypted.
-     *
+     *  
      *  If you do not query this parameter, this value defaults to null (`false`).
      */
     pub async fn user(
@@ -227,11 +227,11 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `login_type: crate::types::LoginType` -- The user's login method:
-     *
+     *  
      *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *
+     *  
      *  The following login methods are only available in China:
-     *
+     *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
      */
     pub async fn user_update(
@@ -523,13 +523,13 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `login_type: crate::types::LoginType` -- The user's login method:
-     *
+     *  
      *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *
+     *  
      *  The following login methods are only available in China:
-     *
+     *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::Option` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
+     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
      *  `meeting_security`: Use this query parameter to view meeting security settings applied on the user's account.<br>.
      * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
      *  {
@@ -543,7 +543,7 @@ impl Users {
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
-        option: crate::types::Option,
+        option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::Domains> {
         let mut query = String::new();
@@ -581,13 +581,13 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `login_type: crate::types::LoginType` -- The user's login method:
-     *
+     *  
      *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *
+     *  
      *  The following login methods are only available in China:
-     *
+     *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::Option` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
+     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
      *  `meeting_security`: Use this query parameter to view meeting security settings applied on the user's account.<br>.
      * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
      *  {
@@ -601,7 +601,7 @@ impl Users {
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
-        option: crate::types::Option,
+        option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::MeetingSecuritySettings> {
         let mut query = String::new();
@@ -639,13 +639,13 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `login_type: crate::types::LoginType` -- The user's login method:
-     *
+     *  
      *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *
+     *  
      *  The following login methods are only available in China:
-     *
+     *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::Option` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
+     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
      *  `meeting_security`: Use this query parameter to view meeting security settings applied on the user's account.<br>.
      * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
      *  {
@@ -659,7 +659,7 @@ impl Users {
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
-        option: crate::types::Option,
+        option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::UserSettings> {
         let mut query = String::new();
@@ -697,13 +697,13 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `login_type: crate::types::LoginType` -- The user's login method:
-     *
+     *  
      *  `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
-     *
+     *  
      *  The following login methods are only available in China:
-     *
+     *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
-     * * `option: crate::types::Option` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
+     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the user's account.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the user's account.<br>
      *  `meeting_security`: Use this query parameter to view meeting security settings applied on the user's account.<br>.
      * * `custom_query_fields: &str` -- Provide the name of the field by which you would like to filter the response. For example, if you provide "host_video" as the value of this field, you will get a response similar to the following:<br>
      *  {
@@ -717,7 +717,7 @@ impl Users {
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
-        option: crate::types::Option,
+        option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::UserSettingsResponseOneOf> {
         let mut query = String::new();
@@ -827,7 +827,7 @@ impl Users {
      *
      * After this request is processed successfully, an email notification will be sent to the user stating that the password was changed.<br>
      * **Scopes:** `user:write:admin` `user:write`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      * **Prerequisites:**<br>
      * * Owner or admin of the Zoom account.
@@ -956,7 +956,7 @@ impl Users {
      * <b>Note: </b>You can successfully check if a user is a registered Zoom user only if the user **signed up for Zoom via email and is within your account.** If you provide an email address of a user who is not in your account, the value of "existed_email" parameter will be "false" irrespective of whether or not the user is registered with Zoom. The response of this API call will not include users who joined Zoom using options such as "Sign in with SSO", "Sign in with Google" or "Sign in with Facebook" even if they are in the same account as yours.
      *
      * **Scopes:** `user:read:admin` `user:read`
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      *
@@ -1027,7 +1027,7 @@ impl Users {
      * A personal meeting room is a virtual meeting room that can be permanently assigned to a user.
      * Use this API to check if a personal meeting room with the given name exists or not.<br><br>
      * **Scopes:** `user:read:admin` `user:read`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
@@ -1082,7 +1082,6 @@ impl Users {
         &self,
         account_id: &str,
         user_id: &str,
-        account_id: &str,
         body: &crate::types::SwitchUserAccountRequest,
     ) -> Result<()> {
         let url = format!(
@@ -1161,7 +1160,6 @@ impl Users {
     pub async fn upload_v_buser(
         &self,
         user_id: &str,
-        user_id: &str,
         body: &crate::types::UploadVbRequest,
     ) -> Result<crate::types::UploadVBuserResponse> {
         let url = format!(
@@ -1194,7 +1192,7 @@ impl Users {
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      * * `user_id: &str` -- Unique identifier of the user. Retrieve the value of this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API.
      */
-    pub async fn del_user_vb(&self, user_id: &str, file_ids: &str, user_id: &str) -> Result<()> {
+    pub async fn del_user_vb(&self, user_id: &str, file_ids: &str) -> Result<()> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !file_ids.is_empty() {

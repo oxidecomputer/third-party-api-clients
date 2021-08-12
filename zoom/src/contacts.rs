@@ -30,7 +30,7 @@ impl Contacts {
      * * `page_size: i64` -- The number of records to be returned with a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn search_company_contacts(
+    pub async fn search_company(
         &self,
         search_key: &str,
         query_presence_status: &str,
@@ -83,7 +83,7 @@ impl Contacts {
      * * `page_size: i64` -- The number of records returned with a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn get_user_contact(
+    pub async fn get_user(
         &self,
         type_: &str,
         page_size: i64,
@@ -132,7 +132,6 @@ impl Contacts {
      */
     pub async fn get_user_contact(
         &self,
-        contact_id: &str,
         contact_id: &str,
         query_presence_status: bool,
     ) -> Result<crate::types::GetUserContactResponse> {

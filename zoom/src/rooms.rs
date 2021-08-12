@@ -32,7 +32,7 @@ impl Rooms {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `location_id: &str` -- Parent location ID of the Zoom Room.
      */
-    pub async fn list_zoom_room(
+    pub async fn list_zoom(
         &self,
         status: crate::types::Status,
         type_: crate::types::ListZoomRoomsType,
@@ -112,7 +112,6 @@ impl Rooms {
     pub async fn get_zr_profile(
         &self,
         room_id: &str,
-        room_id: &str,
     ) -> Result<crate::types::GetZrProfileResponse> {
         let url = format!(
             "/rooms/{}",
@@ -137,11 +136,7 @@ impl Rooms {
      *
      * * `room_id: &str` -- Unique Identifier of a Zoom Room.
      */
-    pub async fn delete_a_zoom_room(
-        &self,
-        room_id: &str,
-        room_id: &str,
-    ) -> Result<crate::types::Domains> {
+    pub async fn delete_a_zoom_room(&self, room_id: &str) -> Result<crate::types::Domains> {
         let url = format!(
             "/rooms/{}",
             crate::progenitor_support::encode_path(&room_id.to_string()),
@@ -168,7 +163,6 @@ impl Rooms {
      */
     pub async fn update_room_profile(
         &self,
-        room_id: &str,
         room_id: &str,
         body: &crate::types::UpdateRoomProfileRequest,
     ) -> Result<crate::types::Domains> {
@@ -208,7 +202,6 @@ impl Rooms {
         &self,
         room_id: &str,
         setting_type: &str,
-        room_id: &str,
     ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -249,12 +242,7 @@ impl Rooms {
      *  `meeting`: Meeting settings of the Zoom Room.<br>
      *  `signage`: Digital signage settings applied on the Zoom Room.
      */
-    pub async fn update_zr_settings(
-        &self,
-        room_id: &str,
-        room_id: &str,
-        setting_type: &str,
-    ) -> Result<()> {
+    pub async fn update_zr_settings(&self, room_id: &str, setting_type: &str) -> Result<()> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !setting_type.is_empty() {
@@ -295,7 +283,6 @@ impl Rooms {
     pub async fn list_zr_devices(
         &self,
         room_id: &str,
-        room_id: &str,
     ) -> Result<crate::types::ListZrDevicesResponse> {
         let url = format!(
             "/rooms/{}/devices",
@@ -323,7 +310,6 @@ impl Rooms {
      */
     pub async fn change_zr_location(
         &self,
-        room_id: &str,
         room_id: &str,
         body: &crate::types::ChangeZrLocationRequest,
     ) -> Result<()> {
@@ -357,12 +343,7 @@ impl Rooms {
      *
      * * `id: &str` -- Room ID.
      */
-    pub async fn check_in_rooms(
-        &self,
-        id: &str,
-        id: &str,
-        body: &crate::types::CheckInRoomsRequest,
-    ) -> Result<()> {
+    pub async fn check_in(&self, id: &str, body: &crate::types::CheckInRoomsRequest) -> Result<()> {
         let url = format!(
             "/rooms/{}/events",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -445,7 +426,7 @@ impl Rooms {
      * * Zoom Rooms digital signage must be [enabled](https://support.zoom.us/hc/en-us/articles/360000030683-Zoom-Rooms-Digital-Signage#h_767fbb33-82a8-45a8-8392-a1bfa9687edd)
      *
      */
-    pub async fn manage_e91_1signage(&self) -> Result<crate::types::ManageE911SignageResponse> {
+    pub async fn manage_e_91_1signage(&self) -> Result<crate::types::ManageE911SignageResponse> {
         let url = "/rooms/events".to_string();
         self.client.patch(&url, None).await
     }

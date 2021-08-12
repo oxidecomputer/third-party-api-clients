@@ -108,7 +108,6 @@ impl PhoneSharedLineGroups {
     pub async fn get_a_shared_line_group(
         &self,
         shared_line_group_id: &str,
-        shared_line_group_id: &str,
     ) -> Result<crate::types::GetSharedLineGroupResponse> {
         let url = format!(
             "/phone/shared_line_groups/{}",
@@ -137,11 +136,7 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group that you would like to delete.
      */
-    pub async fn delete_a_shared_line_group(
-        &self,
-        shared_line_group_id: &str,
-        shared_line_group_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_a_shared_line_group(&self, shared_line_group_id: &str) -> Result<()> {
         let url = format!(
             "/phone/shared_line_groups/{}",
             crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
@@ -170,7 +165,6 @@ impl PhoneSharedLineGroups {
      */
     pub async fn update_a_shared_line_group(
         &self,
-        shared_line_group_id: &str,
         shared_line_group_id: &str,
         body: &crate::types::UpdateSharedLineGroupRequest,
     ) -> Result<()> {
@@ -211,7 +205,6 @@ impl PhoneSharedLineGroups {
     pub async fn add_members_to_shared_line_group(
         &self,
         shared_line_group_id: &str,
-        shared_line_group_id: &str,
         body: &crate::types::AddMembersSharedLineGroupRequestData,
     ) -> Result<()> {
         let url = format!(
@@ -247,11 +240,7 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique identifier of the Shared Line Group that you would like to delete.
      */
-    pub async fn delete_members_of_slg(
-        &self,
-        shared_line_group_id: &str,
-        shared_line_group_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_members_of_slg(&self, shared_line_group_id: &str) -> Result<()> {
         let url = format!(
             "/phone/shared_line_groups/{}/members",
             crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
@@ -285,8 +274,6 @@ impl PhoneSharedLineGroups {
         &self,
         shared_line_group_id: &str,
         member_id: &str,
-        shared_line_group_id: &str,
-        member_id: &str,
     ) -> Result<()> {
         let url = format!(
             "/phone/shared_line_groups/{}/members/{}",
@@ -317,7 +304,6 @@ impl PhoneSharedLineGroups {
      */
     pub async fn assign_phone_numbers_slg(
         &self,
-        shared_line_group_id: &str,
         shared_line_group_id: &str,
         body: &crate::types::AssignPhoneNumbersSlgRequest,
     ) -> Result<()> {
@@ -352,11 +338,7 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique Identifier of the Shared Line Group.
      */
-    pub async fn delete_phone_numbers_slg(
-        &self,
-        shared_line_group_id: &str,
-        shared_line_group_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_phone_numbers_slg(&self, shared_line_group_id: &str) -> Result<()> {
         let url = format!(
             "/phone/shared_line_groups/{}/phone_numbers",
             crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
@@ -386,8 +368,6 @@ impl PhoneSharedLineGroups {
      */
     pub async fn delete_a_phone_number_slg(
         &self,
-        shared_line_group_id: &str,
-        phone_number_id: &str,
         shared_line_group_id: &str,
         phone_number_id: &str,
     ) -> Result<()> {

@@ -13,14 +13,14 @@ GitHub's v3 REST API.
 
 | name | url |
 |----|----|
-| Support | https://support.github.com/contact?tags=rest-api |
+| Support | <https://support.github.com/contact?tags=rest-api> |
 
 ### License
 
 
 | name | url |
 |----|----|
-| MIT | https://spdx.org/licenses/MIT |
+| MIT | <https://spdx.org/licenses/MIT> |
 
 
 ## Client Details

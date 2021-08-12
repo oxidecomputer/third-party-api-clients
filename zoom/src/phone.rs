@@ -64,7 +64,7 @@ impl Phone {
      * **Parameters:**
      *
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-     * * `type_: crate::types::ListAccountNumbersType` -- Query response by number assignment. The value can be one of the following:
+     * * `type_: crate::types::ListAccountPhoneNumbersType` -- Query response by number assignment. The value can be one of the following:
      *  <br>
      *  `assigned`: The number has been assigned to either a user, a call queue, an auto-receptionist or a common area phone in an account. <br>`unassigned`: The number is not assigned to anyone.<br>
      *  `all`: Include both assigned and unassigned numbers in the response.<br>
@@ -77,16 +77,16 @@ impl Phone {
      * * `pending_numbers: bool` -- Include or exclude pending numbers in the response. The value can be either `true` or `false`.
      * * `site_id: &str` -- Unique identifier of the site. Use this query parameter if you have enabled multiple sites and would like to filter the response of this API call by a specific phone site. See [Managing multiple sites](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites) or [Adding a site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites#h_05c88e35-1593-491f-b1a8-b7139a75dc15) for details.
      */
-    pub async fn list_account_numbers(
+    pub async fn list_account_number(
         &self,
         next_page_token: &str,
-        type_: crate::types::ListAccountNumbersType,
+        type_: crate::types::ListAccountPhoneNumbersType,
         extension_type: crate::types::ExtensionType,
         page_size: i64,
         number_type: crate::types::Type,
         pending_numbers: bool,
         site_id: &str,
-    ) -> Result<crate::types::ListAccountNumbersResponse> {
+    ) -> Result<crate::types::ListAccountPhoneNumbersResponseData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("extension_type={}", extension_type));
@@ -132,11 +132,7 @@ impl Phone {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user(
-        &self,
-        user_id: &str,
-        user_id: &str,
-    ) -> Result<crate::types::UserResponseData> {
+    pub async fn user(&self, user_id: &str) -> Result<crate::types::PhoneUserResponse> {
         let url = format!(
             "/phone/users/{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -189,7 +185,7 @@ impl Phone {
      * * A Business or Enterprise account
      * * A Zoom Phone license
      */
-    pub async fn setting(&self, account_id: &str) -> Result<crate::types::SettingResponse> {
+    pub async fn setting(&self, account_id: &str) -> Result<crate::types::PhoneSettingResponse> {
         let url = "/phone/settings".to_string();
         self.client.get(&url, None).await
     }
@@ -213,8 +209,7 @@ impl Phone {
     pub async fn update_settings(
         &self,
         account_id: &str,
-        account_id: &str,
-        body: &crate::types::UpdateSettingsRequest,
+        body: &crate::types::UpdatePhoneSettingsRequest,
     ) -> Result<()> {
         let url = "/phone/settings".to_string();
         self.client
@@ -242,7 +237,10 @@ impl Phone {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_settings(&self, user_id: &str) -> Result<crate::types::UserSettingsResponse> {
+    pub async fn user_settings(
+        &self,
+        user_id: &str,
+    ) -> Result<crate::types::PhoneUserSettingsResponse> {
         let url = format!(
             "/phone/users/{}/settings",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -432,7 +430,6 @@ impl Phone {
     pub async fn get_location(
         &self,
         location_id: &str,
-        location_id: &str,
     ) -> Result<crate::types::GetLocationResponse> {
         let url = format!(
             "/phone/locations/{}",
@@ -459,7 +456,7 @@ impl Phone {
      *
      * * `location_id: &str` -- The emergency service location's ID.
      */
-    pub async fn delete_location(&self, location_id: &str, location_id: &str) -> Result<()> {
+    pub async fn delete_location(&self, location_id: &str) -> Result<()> {
         let url = format!(
             "/phone/locations/{}",
             crate::progenitor_support::encode_path(&location_id.to_string()),
@@ -562,7 +559,6 @@ impl Phone {
     pub async fn get_setting_template(
         &self,
         template_id: &str,
-        template_id: &str,
         custom_query_fields: &str,
     ) -> Result<crate::types::GetSettingTemplateResponse> {
         let mut query = String::new();
@@ -605,7 +601,6 @@ impl Phone {
     pub async fn update_setting_template(
         &self,
         template_id: &str,
-        template_id: &str,
         body: &crate::types::UpdateSettingTemplateRequest,
     ) -> Result<()> {
         let url = format!(
@@ -640,7 +635,7 @@ impl Phone {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
      * * `to: chrono::NaiveDate` -- End date.
-     * * `type_: crate::types::UserCallLogsType`
+     * * `type_: crate::types::PhoneUserCallLogsType`
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `phone_number: &str` -- Filter API responses to include call logs of only the phone number defined in this field.
      * * `time_type: crate::types::TimeType` -- Enables you to sort call logs by start or end time. Choose the sort time value. Values include `startTime` or `endTime`.
@@ -651,11 +646,11 @@ impl Phone {
         page_size: i64,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-        type_: crate::types::UserCallLogsType,
+        type_: crate::types::PhoneUserCallLogsType,
         next_page_token: &str,
         phone_number: &str,
         time_type: crate::types::TimeType,
-    ) -> Result<crate::types::UserCallLogsResponse> {
+    ) -> Result<crate::types::PhoneUserCallLogsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -714,7 +709,7 @@ impl Phone {
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::UserRecordingsResponse> {
+    ) -> Result<crate::types::PhoneUserRecordingsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -757,7 +752,7 @@ impl Phone {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `page_size: i64` -- The number of records returned within a single API call.
-     * * `status: crate::types::UserVoiceMailsStatus` -- Status of the voice mail.
+     * * `status: crate::types::PhoneUserVoiceMailsStatus` -- Status of the voice mail.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `from: chrono::NaiveDate` -- Start date for the query in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the response includes only one month worth of voicemail data. The month defined should fall within the last six months.
      * * `to: chrono::NaiveDate` -- End date.
@@ -766,11 +761,11 @@ impl Phone {
         &self,
         user_id: &str,
         page_size: i64,
-        status: crate::types::UserVoiceMailsStatus,
+        status: crate::types::PhoneUserVoiceMailsStatus,
         next_page_token: &str,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
-    ) -> Result<crate::types::UserVoiceMailsResponse> {
+    ) -> Result<crate::types::PhoneUserVoiceMailsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
@@ -1017,8 +1012,8 @@ impl Phone {
     pub async fn assign_number(
         &self,
         user_id: &str,
-        body: &crate::types::AssignNumberRequest,
-    ) -> Result<crate::types::AssignNumberResponse> {
+        body: &crate::types::AssignPhoneNumberRequest,
+    ) -> Result<crate::types::AssignPhoneNumberResponse> {
         let url = format!(
             "/phone/users/{}/phone_numbers",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1053,13 +1048,7 @@ impl Phone {
      * * `user_id: &str` -- Provide either userId or email address of the user.
      * * `phone_number_id: &str` -- Provide either phone number or phoneNumberId of the user.
      */
-    pub async fn unassign_number(
-        &self,
-        user_id: &str,
-        phone_number_id: &str,
-        user_id: &str,
-        phone_number_id: &str,
-    ) -> Result<()> {
+    pub async fn unassign_number(&self, user_id: &str, phone_number_id: &str) -> Result<()> {
         let url = format!(
             "/phone/users/{}/phone_numbers/{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1118,12 +1107,7 @@ impl Phone {
      * * `type_: &str` -- The [type](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) of the calling plan that was assigned to user. (e.g: The value of type would be "200" for Unlimited US/Canada calling plan.)
      *.
      */
-    pub async fn unassign_calling_plan(
-        &self,
-        user_id: &str,
-        type_: &str,
-        type_: &str,
-    ) -> Result<()> {
+    pub async fn unassign_calling_plan(&self, user_id: &str, type_: &str) -> Result<()> {
         let url = format!(
             "/phone/users/{}/calling_plans/{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1177,7 +1161,7 @@ impl Phone {
         recording_type: &str,
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
-    ) -> Result<crate::types::GetRecordingsResponseData> {
+    ) -> Result<crate::types::GetPhoneRecordingsResponseData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
@@ -1273,8 +1257,8 @@ impl Phone {
     pub async fn post_sip_trunk(
         &self,
         account_id: &str,
-        body: &crate::types::PostSipTrunkRequest,
-    ) -> Result<crate::types::PostSipTrunkResponse> {
+        body: &crate::types::PostPhoneSipTrunkRequest,
+    ) -> Result<crate::types::PostPhoneSipTrunkResponse> {
         let url = format!(
             "/accounts/{}/phone/sip_trunk/trunks",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -1309,7 +1293,7 @@ impl Phone {
         &self,
         sip_trunk_id: &str,
         account_id: &str,
-        body: &crate::types::UpdateSipTrunkRequest,
+        body: &crate::types::UpdatePhoneSipTrunkRequest,
     ) -> Result<()> {
         let url = format!(
             "/accounts/{}/phone/sip_trunk/trunks/{}",
@@ -1413,7 +1397,6 @@ impl Phone {
     pub async fn get_a_external_contact(
         &self,
         external_contact_id: &str,
-        external_contact_id: &str,
     ) -> Result<crate::types::ExternalContacts> {
         let url = format!(
             "/phone/external_contacts/{}",
@@ -1440,11 +1423,7 @@ impl Phone {
      *
      * * `external_contact_id: &str` -- The external contact's ID.
      */
-    pub async fn delete_a_external_contact(
-        &self,
-        external_contact_id: &str,
-        external_contact_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_a_external_contact(&self, external_contact_id: &str) -> Result<()> {
         let url = format!(
             "/phone/external_contacts/{}",
             crate::progenitor_support::encode_path(&external_contact_id.to_string()),
@@ -1472,7 +1451,6 @@ impl Phone {
      */
     pub async fn update_external_contact(
         &self,
-        external_contact_id: &str,
         external_contact_id: &str,
         body: &crate::types::UpdateExternalContactRequest,
     ) -> Result<()> {
@@ -1509,8 +1487,7 @@ impl Phone {
     pub async fn get_number_details(
         &self,
         number_id: &str,
-        number_id: &str,
-    ) -> Result<crate::types::GetNumberDetailsResponse> {
+    ) -> Result<crate::types::GetPhoneNumberDetailsResponse> {
         let url = format!(
             "/phone/numbers/{}",
             crate::progenitor_support::encode_path(&number_id.to_string()),
@@ -1538,8 +1515,7 @@ impl Phone {
     pub async fn update_number_details(
         &self,
         number_id: &str,
-        number_id: &str,
-        body: &crate::types::UpdateNumberDetailsRequest,
+        body: &crate::types::UpdatePhoneNumberDetailsRequest,
     ) -> Result<()> {
         let url = format!(
             "/phone/numbers/{}",
@@ -1624,7 +1600,7 @@ impl Phone {
         page_size: i64,
         next_page_token: &str,
         site_id: &str,
-    ) -> Result<crate::types::ListUsersResponseData> {
+    ) -> Result<crate::types::ListPhoneUsersResponseData> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
@@ -1667,7 +1643,6 @@ impl Phone {
     pub async fn get_call_log_details(
         &self,
         call_log_id: &str,
-        call_log_id: &str,
     ) -> Result<crate::types::GetCallLogDetailsResponse> {
         let url = format!(
             "/phone/call_logs/{}",
@@ -1695,13 +1670,7 @@ impl Phone {
      * * `user_id: &str` -- The user ID or email address of the user.
      * * `call_log_id: &str` -- Unique identifier of the call log. The value for this field can be retrieved from [account's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/accountcalllogs) or [user's call logs](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneusercalllogs).
      */
-    pub async fn delete_call_log(
-        &self,
-        user_id: &str,
-        call_log_id: &str,
-        user_id: &str,
-        call_log_id: &str,
-    ) -> Result<()> {
+    pub async fn delete_call_log(&self, user_id: &str, call_log_id: &str) -> Result<()> {
         let url = format!(
             "/phone/users/{}/call_logs/{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1753,7 +1722,7 @@ impl Phone {
      *
      * * `voicemail_id: &str` -- Unique identifier of the voicemail. Retrieve the value for this field by calling the [Get voicemails](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone/phoneuservoicemails) API.
      */
-    pub async fn delete_voicemail(&self, voicemail_id: &str, voicemail_id: &str) -> Result<()> {
+    pub async fn delete_voicemail(&self, voicemail_id: &str) -> Result<()> {
         let url = format!(
             "/phone/voice_mails/{}",
             crate::progenitor_support::encode_path(&voicemail_id.to_string()),

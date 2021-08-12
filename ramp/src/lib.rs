@@ -89,6 +89,7 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+pub mod auths;
 pub mod businesses;
 pub mod card_programs;
 pub mod cards;
@@ -502,6 +503,10 @@ impl Client {
             message,
         )
         .await
+    }
+
+    pub fn auths(&self) -> auths::Auths {
+        auths::Auths::new(self.clone())
     }
 
     pub fn businesses(&self) -> businesses::Businesses {

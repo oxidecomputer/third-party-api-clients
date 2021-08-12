@@ -42,7 +42,7 @@ impl ChatMessages {
      * * `include_deleted_and_edited_message: &str` -- \*\*Optional\*\* <br>
      *  Set the value of this field to `true` to include edited and deleted messages in the response.
      */
-    pub async fn get_chat_messages(
+    pub async fn get(
         &self,
         user_id: &str,
         to_contact: &str,
@@ -216,7 +216,6 @@ impl ChatMessages {
         &self,
         user_id: &str,
         message_id: &str,
-        message_id: &str,
         to_contact: &str,
         to_channel: &str,
     ) -> Result<crate::types::GetChatMessageResponse> {
@@ -266,7 +265,6 @@ impl ChatMessages {
         &self,
         user_id: &str,
         message_id: &str,
-        message_id: &str,
         body: &crate::types::EditMessageRequest,
     ) -> Result<()> {
         let url = format!(
@@ -314,7 +312,6 @@ impl ChatMessages {
     pub async fn delete_chat_message(
         &self,
         user_id: &str,
-        message_id: &str,
         message_id: &str,
         to_contact: &str,
         to_channel: &str,

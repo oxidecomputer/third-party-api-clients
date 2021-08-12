@@ -389,7 +389,7 @@ impl CloudRecording {
      * * `meeting_id: i64` -- The meeting ID in \*\*long\*\* format. The data type of this field is "long"(represented as int64 in JSON).
      *  
      *  While storing it in your database, store it as a \*\*long\*\* data type and \*\*not as an integer\*\*, as the Meeting IDs can be longer than 10 digits.
-     * * `status: crate::types::RegistrantStatusData` -- The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
+     * * `status: crate::types::MeetingRegistrantsStatus` -- The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
      *  
@@ -399,7 +399,7 @@ impl CloudRecording {
     pub async fn meeting_recording_registrant(
         &self,
         meeting_id: i64,
-        status: crate::types::RegistrantStatusData,
+        status: crate::types::MeetingRegistrantsStatus,
         page_size: i64,
         page_number: i64,
         next_page_token: &str,
@@ -597,14 +597,13 @@ impl CloudRecording {
      * * `to: chrono::DateTime<chrono::Utc>` -- The end date for the monthly range for which you would like to retrieve recordings. The maximum range can be a month.
      * * `account_id: &str` -- Unique identifier of the account.
      */
-    pub async fn get_account_cloud_recording(
+    pub async fn get_account(
         &self,
         account_id: &str,
         page_size: i64,
         next_page_token: &str,
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
-        account_id: &str,
     ) -> Result<crate::types::GetAccountCloudRecordingResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();

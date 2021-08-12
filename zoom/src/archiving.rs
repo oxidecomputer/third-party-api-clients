@@ -75,11 +75,11 @@ impl Archiving {
      *
      * List the archived recording files of the specific meeting instance. For more information, read our [Managing archiving of meeting and webinar data](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data) documentation.
      *
-     * **Scopes:** `recording:read`<br>**[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     * **Scopes:** `recording:read``24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
      *
-     * **Prerequisites:**
-     * * Enable cloud recording
-     * * Follow the [enablement process](https://support.zoom.us/hc/en-us/articles/360050431572-Archiving-Meeting-and-Webinar-data#h_01ENPBD3WR68D7FAKTBY92SG45) to access the archiving feature
+     * The following login methods are only available in China:
+     *
+     * `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
      *
      * **Parameters:**
      *

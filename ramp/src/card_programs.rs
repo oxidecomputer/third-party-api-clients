@@ -25,7 +25,7 @@ impl CardPrograms {
      * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
-    pub async fn get_card_programs(
+    pub async fn get(
         &self,
         start: &str,
         page_size: f64,
@@ -82,7 +82,7 @@ impl CardPrograms {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_card_program(&self, id: &str) -> Result<crate::types::CardProgram> {
+    pub async fn get_program(&self, id: &str) -> Result<crate::types::CardProgram> {
         let url = format!(
             "/card-programs/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

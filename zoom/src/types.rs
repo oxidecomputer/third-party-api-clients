@@ -524,7 +524,7 @@ impl Default for AudioType {
 
 /**
  * Require a password for a meeting held using Personal Meeting ID (PMI) This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
- *
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -905,7 +905,7 @@ pub struct VirtualBackgroundSettings {
  * Indicates who can share their screen or content during meetings. The value can be one of the following: <br>
  *   `host`: Only host can share the screen.<br>
  *   `all`: Both hosts and attendees can share their screen during meetings. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
- *
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -946,7 +946,7 @@ impl WhoCanShareScreen {
  * Indicates who is allowed to start sharing screen when someone else in the meeting is sharing their screen. The value can be one of the following:<br>
  *   `host`: Only a host can share the screen when someone else is sharing.<br>
  *   `all`: Anyone in the meeting is allowed to start sharing their screen when someone else is sharing. For Webinar, the hosts and panelists can start screen sharing, but not the attendees.
- *
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -1585,7 +1585,7 @@ pub struct PasswordRequirement {
  *   `group`: Two factor authentication will be enabled for users belonging to specific groups. If 2FA is enabled for certain groups, the group IDs of the group(s) will be provided in the `sign_in_with_two_factor_auth_groups` field.<br>
  *   `role`: Two factor authentication will be enabled only for users assigned with specific roles in the account. If 2FA is enabled for specific roles, the role IDs will be provided in the
  *   `sign_in_with_two_factor_auth_roles` field.
- *
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -2204,7 +2204,7 @@ pub struct Tsp {
 pub struct RecordingStorageLocation {
     /**
      * Users can choose the country to store their recorded content. Content can include meeting, webinar, and phone recordings, as well as voicemail, transcripts, and custom greeting prompts. See [Managing the Communications Content storage location](https://support.zoom.us/hc/en-us/articles/360050781131) for details.
-     *
+     *  
      *  Provide abbreviated country codes as the value for this field. See the [Countries abbreviation list](https://marketplace.zoom.us/docs/api-reference/other-references/abbreviation-lists#countries) for details.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -2829,9 +2829,9 @@ pub struct TrackingFields {
     pub value: String,
     /**
      * Indicates whether the [tracking field](https://support.zoom.us/hc/en-us/articles/115000293426-Scheduling-Tracking-Fields) is visible in the meeting scheduling options in the Zoom Web Portal or not.
-     *
+     *  
      *  `true`: Tracking field is visible. <br>
-     *
+     *  
      *  `false`: Tracking field is not visible to the users in the meeting options in the Zoom Web Portal but the field was used while scheduling this meeting via API. An invisible tracking field can be used by users while scheduling meetings via API only.
      */
     #[serde(
@@ -3001,7 +3001,7 @@ pub struct GlobalDialInNumbers {
 /**
  * Choose between enhanced encryption and [end-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871) when starting or a meeting. When using end-to-end encryption, several features (e.g. cloud recording, phone/SIP/H.323 dial-in) will be **automatically disabled**. <br><br>The value of this field can be one of the following:<br>
  *   `enhanced_encryption`: Enhanced encryption. Encryption is stored in the cloud if you enable this option. <br>
- *
+ *   
  *   `e2ee`: [End-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871). The encryption key is stored in your local device and can not be obtained by anyone else. Enabling this setting also **disables** the following features: join before host, cloud recording, streaming, live transcription, breakout rooms, polling, 1:1 private chat, and meeting reactions.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -3182,7 +3182,7 @@ pub struct Interpreters {
     pub email: String,
     /**
      * Languages for interpretation. The string must contain two [country Ids](https://marketplace.zoom.us/docs/api-reference/other-references/abbreviation-lists#countries) separated by a comma.
-     *
+     *  
      *  For example, if the language is to be interpreted from English to Chinese, the value of this field should be "US,CN".
      */
     #[serde(
@@ -3512,18 +3512,39 @@ pub struct MeetingSettings {
 
 /**
  * This field is required **if you're scheduling a recurring meeting of type** `2` to state which day(s) of the week the meeting should repeat. <br> <br> The value for this field could be a number between `1` to `7` in string format. For instance, if the meeting should recur on Sunday, provide `"1"` as the value of this field.<br><br> **Note:** If you would like the meeting to occur on multiple days of a week, you should provide comma separated values for this field. For instance, if the meeting should recur on Sundays and Tuesdays provide `"1,3"` as the value of this field.
- *
+ *   
  *    <br>`1`  - Sunday. <br>`2` - Monday.<br>`3` - Tuesday.<br>`4` -  Wednesday.<br>`5` -  Thursday.<br>`6` - Friday.<br>`7` - Saturday.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
 pub enum WeeklyDays {
+    #[serde(rename = "1")]
+    One,
+    #[serde(rename = "2")]
+    Two,
+    #[serde(rename = "3")]
+    Three,
+    #[serde(rename = "4")]
+    Four,
+    #[serde(rename = "5")]
+    Five,
+    #[serde(rename = "6")]
+    Six,
+    #[serde(rename = "7")]
+    Seven,
     FallthroughString(String),
 }
 
 impl std::fmt::Display for WeeklyDays {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
+            WeeklyDays::One => "1",
+            WeeklyDays::Two => "2",
+            WeeklyDays::Three => "3",
+            WeeklyDays::Four => "4",
+            WeeklyDays::Five => "5",
+            WeeklyDays::Six => "6",
+            WeeklyDays::Seven => "7",
             WeeklyDays::FallthroughString(s) => s,
         }
         .fmt(f)
@@ -3532,7 +3553,7 @@ impl std::fmt::Display for WeeklyDays {
 
 impl Default for WeeklyDays {
     fn default() -> WeeklyDays {
-        WeeklyDays::FallthroughString
+        WeeklyDays::One
     }
 }
 
@@ -3812,9 +3833,9 @@ pub struct MeetingInfoGetTrackingFields {
     pub value: String,
     /**
      * Indicates whether the [tracking field](https://support.zoom.us/hc/en-us/articles/115000293426-Scheduling-Tracking-Fields) is visible in the meeting scheduling options in the Zoom Web Portal or not.
-     *
+     *  
      *  `true`: Tracking field is visible. <br>
-     *
+     *  
      *  `false`: Tracking field is not visible to the users when they look at the meeting details in the Zoom Web Portal but the field was used while scheduling this meeting via API. An invisible tracking field can be used by users while scheduling meetings via API only.
      */
     #[serde(
@@ -4240,7 +4261,7 @@ pub struct MeetingLiveStream {
 
 /**
  * Update the status of a livestream.
- *
+ *   
  *   The value can be one of the following:<br>
  *   `start`: Start a live stream. <br>
  *   `stop`: Stop an ongoing live stream.
@@ -4351,9 +4372,9 @@ pub struct WebinarLiveStream {
 
 /**
  * Update the status of a livestream. This value can be one of the following:
- *
+ *   
  *   * `start` — Start a webinar live stream.
- *
+ *   
  *   * `stop` — Stop an ongoing webinar live stream.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -5738,9 +5759,9 @@ impl Default for SessionWebinarSettingsAudio {
 
 /**
  * Indicate whether you want attendees to be able to view answered questions only or view all questions.
- *
+ *   
  *   * `only`: Attendees are able to view answered questions only.
- *
+ *   
  *   *  `all`: Attendees are able to view all questions submitted in the Q&A.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -6687,7 +6708,7 @@ pub struct CustomAttributes {
 
 /**
  * The label to add to the user's phone number. You can only add one label to the user's phone number:
- *
+ *   
  *   * `Mobile`
  *   * `Office`
  *   * `Home`
@@ -6756,7 +6777,7 @@ pub struct PhoneNumbers {
     pub country: String,
     /**
      * The label to add to the user's phone number. You can only add one label to the user's phone number:
-     *
+     *  
      *  \* `Mobile`
      *  \* `Office`
      *  \* `Home`
@@ -7063,7 +7084,7 @@ impl Default for UserSettingsMeetingAudioType {
 
 /**
  * Require a passcode for Personal Meeting ID (PMI). This setting is always enabled for free accounts and Pro accounts with a single host and cannot be modified for these accounts.
- *
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -9461,7 +9482,7 @@ pub struct MeetingCreateTrackingFields {
 pub struct MeetingCreateSettingsLanguageInterpretation {
     /**
      * Language interpretation [settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars#h_01EGGQFD3Q4BST3378SA762MJ1) for meetings.
-     *
+     *  
      *  \*\*Note:\*\* This feature is only available on certain Webinar add-on, Education, Business and higher plans. If this feature is not enabled on the host's account, this setting will not be applied for the meeting.
      */
     #[serde(
@@ -9471,7 +9492,7 @@ pub struct MeetingCreateSettingsLanguageInterpretation {
     pub enable: bool,
     /**
      * Language interpretation [settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars#h_01EGGQFD3Q4BST3378SA762MJ1) for meetings.
-     *
+     *  
      *  \*\*Note:\*\* This feature is only available on certain Webinar add-on, Education, Business and higher plans. If this feature is not enabled on the host's account, this setting will not be applied for the meeting.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -10884,7 +10905,7 @@ pub struct WaitingRoomSettings {
 pub struct MeetingSecurity {
     /**
      * `true`: Require that all meetings are secured with at least one security option.
-     *
+     *  
      *  This setting can only be disabled by Enterprise, ISV, Business (with more than 100 licenses), and Education accounts. [Learn more](https://marketplace.zoom.us/docs/guides/stay-up-to-date/announcements#meeting-security).
      */
     #[serde(
@@ -10917,7 +10938,7 @@ pub struct MeetingSecurity {
     /**
      * Choose between enhanced encryption and [end-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871) when starting or a meeting. When using end-to-end encryption, several features (e.g. cloud recording, phone/SIP/H.323 dial-in) will be \*\*automatically disabled\*\*. <br><br>The value of this field can be one of the following:<br>
      *  `enhanced_encryption`: Enhanced encryption. Encryption is stored in the cloud if you enable this option. <br>
-     *
+     *  
      *  `e2ee`: [End-to-end encryption](https://support.zoom.us/hc/en-us/articles/360048660871). The encryption key is stored in your local device and can not be obtained by anyone else. Enabling this setting also \*\*disables\*\* the following features: join before host, cloud recording, streaming, live transcription, breakout rooms, polling, 1:1 private chat, and meeting reactions.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -11240,7 +11261,7 @@ pub struct Metrics {
  *   * `CHAT` — A TXT file containing chat messages that were sent during the meeting.
  *   * `CC` — A file containing the recording's closed captions, in VTT file format.
  *   * `CSV` — A file containing polling data in, in CSV format.
- *
+ *   
  *   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -11303,7 +11324,7 @@ impl FileType {
  *   * `chat_file`
  *   * `active_speaker`
  *   * `host_video`
- *
+ *   
  *   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -11372,13 +11393,13 @@ impl RecordingType {
 pub struct ArchiveFiles {
     /**
      * The URL from which to download the archived file.
-     *
+     *  
      *  To download the archived file of a meeting or a webinar hosted in your account, create a [Zoom JWT App Type](https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-jwt-app). Use the generated JWT token as the value of the `access_token` query parameter and include this query parameter at the end of the URL. For example:
-     *
+     *  
      *  `https://{{base-domain}}/rec/archive/download/xxx?access_token={{Your-JWT}}`
-     *
+     *  
      *  If a user has authorized and installed your OAuth app that supports archiving, use the user’s [OAuth access token](https://marketplace.zoom.us/docs/guides/auth/oauth) to download the file. For example:
-     *
+     *  
      *  `https://{{base-domain}}/rec/archive/download/xxx?access_token={{OAuth-Access-Token}}`
      */
     #[serde(
@@ -11413,7 +11434,7 @@ pub struct ArchiveFiles {
      *  \* `CHAT` — A TXT file containing chat messages that were sent during the meeting.
      *  \* `CC` — A file containing the recording's closed captions, in VTT file format.
      *  \* `CSV` — A file containing polling data in, in CSV format.
-     *
+     *  
      *  For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
      */
     #[serde(default, skip_serializing_if = "FileType::is_noop")]
@@ -11440,7 +11461,7 @@ pub struct ArchiveFiles {
      *  \* `chat_file`
      *  \* `active_speaker`
      *  \* `host_video`
-     *
+     *  
      *  For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
      */
     #[serde(default, skip_serializing_if = "RecordingType::is_noop")]
@@ -11537,15 +11558,15 @@ pub struct CloudArchivedFiles {
     pub total_size: i64,
     /**
      * The meeting or webinar's type:
-     *
+     *  
      *  Meeting type values:
      *  \* `1` — Instant meeting.
      *  \* `2` — Scheduled meeting.
      *  \* `3` — Recurring meeting with no fixed time.
      *  \* `8` — Recurring meeting with a fixed time.
-     *
+     *  
      *  Webinar type values:
-     *
+     *  
      *  \* `5` — A webinar.
      *  \* `6` — Recurring webinar with no fixed time.
      *  \* `9` — Recurring webinar with a fixed time.
@@ -11630,271 +11651,6 @@ pub struct InviteLinks {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub attendees: Vec<InviteLinksAttendees>,
-}
-
-/**
- * The user's login method:
- *
- *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
- *
- *   The following login methods are only available in China:
- *
- *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum LoginType {
-    #[serde(rename = "")]
-    Noop,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for LoginType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            LoginType::Noop => "",
-            LoginType::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for LoginType {
-    fn default() -> LoginType {
-        LoginType::Noop
-    }
-}
-impl LoginType {
-    pub fn is_noop(&self) -> bool {
-        matches!(self, LoginType::Noop)
-    }
-}
-
-/**
- * The recording delete actions:<br>`trash` - Move recording to trash.<br>`delete` - Delete recording permanently.
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum RecordingDeleteAction {
-    #[serde(rename = "delete")]
-    Delete,
-    #[serde(rename = "trash")]
-    Trash,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for RecordingDeleteAction {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            RecordingDeleteAction::Delete => "delete",
-            RecordingDeleteAction::Trash => "trash",
-            RecordingDeleteAction::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for RecordingDeleteAction {
-    fn default() -> RecordingDeleteAction {
-        RecordingDeleteAction::Trash
-    }
-}
-
-/**
- * The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingType {
-    #[serde(rename = "live")]
-    Live,
-    #[serde(rename = "scheduled")]
-    Scheduled,
-    #[serde(rename = "upcoming")]
-    Upcoming,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for MeetingType {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            MeetingType::Live => "live",
-            MeetingType::Scheduled => "scheduled",
-            MeetingType::Upcoming => "upcoming",
-            MeetingType::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for MeetingType {
-    fn default() -> MeetingType {
-        MeetingType::Live
-    }
-}
-
-/**
- * Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
- *
- *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingTypePast {
-    #[serde(rename = "live")]
-    Live,
-    #[serde(rename = "past")]
-    Past,
-    #[serde(rename = "pastOne")]
-    PastOne,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for MeetingTypePast {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            MeetingTypePast::Live => "live",
-            MeetingTypePast::Past => "past",
-            MeetingTypePast::PastOne => "pastOne",
-            MeetingTypePast::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for MeetingTypePast {
-    fn default() -> MeetingTypePast {
-        MeetingTypePast::Live
-    }
-}
-
-/**
- * The meeting types: <br>`past` - Past meetings.<br>`live` - Live Meetings.
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingTypePast2 {
-    #[serde(rename = "live")]
-    Live,
-    #[serde(rename = "past")]
-    Past,
-    #[serde(rename = "pastOne")]
-    PastOne,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for MeetingTypePast2 {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            MeetingTypePast2::Live => "live",
-            MeetingTypePast2::Past => "past",
-            MeetingTypePast2::PastOne => "pastOne",
-            MeetingTypePast2::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for MeetingTypePast2 {
-    fn default() -> MeetingTypePast2 {
-        MeetingTypePast2::Live
-    }
-}
-
-/**
- * The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.<br>`live` - Live meetings.
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum MeetingTypePast3 {
-    #[serde(rename = "live")]
-    Live,
-    #[serde(rename = "past")]
-    Past,
-    #[serde(rename = "pastOne")]
-    PastOne,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for MeetingTypePast3 {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            MeetingTypePast3::Live => "live",
-            MeetingTypePast3::Past => "past",
-            MeetingTypePast3::PastOne => "pastOne",
-            MeetingTypePast3::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for MeetingTypePast3 {
-    fn default() -> MeetingTypePast3 {
-        MeetingTypePast3::Live
-    }
-}
-
-/**
- * The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum RegistrantStatusData {
-    #[serde(rename = "approved")]
-    Approved,
-    #[serde(rename = "denied")]
-    Denied,
-    #[serde(rename = "pending")]
-    Pending,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for RegistrantStatusData {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            RegistrantStatusData::Approved => "approved",
-            RegistrantStatusData::Denied => "denied",
-            RegistrantStatusData::Pending => "pending",
-            RegistrantStatusData::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for RegistrantStatusData {
-    fn default() -> RegistrantStatusData {
-        RegistrantStatusData::Approved
-    }
-}
-
-/**
- * The webinar type.
- */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum WebinarTypePast {
-    #[serde(rename = "live")]
-    Live,
-    #[serde(rename = "past")]
-    Past,
-    FallthroughString(String),
-}
-
-impl std::fmt::Display for WebinarTypePast {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match &*self {
-            WebinarTypePast::Live => "live",
-            WebinarTypePast::Past => "past",
-            WebinarTypePast::FallthroughString(s) => s,
-        }
-        .fmt(f)
-    }
-}
-
-impl Default for WebinarTypePast {
-    fn default() -> WebinarTypePast {
-        WebinarTypePast::Live
-    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -12047,7 +11803,7 @@ pub struct SetUpAccountRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum ListAccountNumbersType {
+pub enum ListAccountPhoneNumbersType {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "assigned")]
@@ -12059,27 +11815,27 @@ pub enum ListAccountNumbersType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for ListAccountNumbersType {
+impl std::fmt::Display for ListAccountPhoneNumbersType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ListAccountNumbersType::All => "all",
-            ListAccountNumbersType::Assigned => "assigned",
-            ListAccountNumbersType::Unassigned => "unassigned",
-            ListAccountNumbersType::Noop => "",
-            ListAccountNumbersType::FallthroughString(s) => s,
+            ListAccountPhoneNumbersType::All => "all",
+            ListAccountPhoneNumbersType::Assigned => "assigned",
+            ListAccountPhoneNumbersType::Unassigned => "unassigned",
+            ListAccountPhoneNumbersType::Noop => "",
+            ListAccountPhoneNumbersType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for ListAccountNumbersType {
-    fn default() -> ListAccountNumbersType {
-        ListAccountNumbersType::Noop
+impl Default for ListAccountPhoneNumbersType {
+    fn default() -> ListAccountPhoneNumbersType {
+        ListAccountPhoneNumbersType::Noop
     }
 }
-impl ListAccountNumbersType {
+impl ListAccountPhoneNumbersType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ListAccountNumbersType::Noop)
+        matches!(self, ListAccountPhoneNumbersType::Noop)
     }
 }
 
@@ -12210,7 +11966,7 @@ impl Source {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetNumberDetailsResponseStatus {
+pub enum GetPhoneNumberDetailsResponseStatus {
     #[serde(rename = "available")]
     Available,
     #[serde(rename = "pending")]
@@ -12220,26 +11976,26 @@ pub enum GetNumberDetailsResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetNumberDetailsResponseStatus {
+impl std::fmt::Display for GetPhoneNumberDetailsResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetNumberDetailsResponseStatus::Available => "available",
-            GetNumberDetailsResponseStatus::Pending => "pending",
-            GetNumberDetailsResponseStatus::Noop => "",
-            GetNumberDetailsResponseStatus::FallthroughString(s) => s,
+            GetPhoneNumberDetailsResponseStatus::Available => "available",
+            GetPhoneNumberDetailsResponseStatus::Pending => "pending",
+            GetPhoneNumberDetailsResponseStatus::Noop => "",
+            GetPhoneNumberDetailsResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetNumberDetailsResponseStatus {
-    fn default() -> GetNumberDetailsResponseStatus {
-        GetNumberDetailsResponseStatus::Noop
+impl Default for GetPhoneNumberDetailsResponseStatus {
+    fn default() -> GetPhoneNumberDetailsResponseStatus {
+        GetPhoneNumberDetailsResponseStatus::Noop
     }
 }
-impl GetNumberDetailsResponseStatus {
+impl GetPhoneNumberDetailsResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetNumberDetailsResponseStatus::Noop)
+        matches!(self, GetPhoneNumberDetailsResponseStatus::Noop)
     }
 }
 
@@ -12249,7 +12005,7 @@ impl GetNumberDetailsResponseStatus {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum ListAccountNumbersResponsePhoneNumberType {
+pub enum ListAccountPhoneNumbersResponseNumberType {
     #[serde(rename = "toll")]
     Toll,
     #[serde(rename = "tollfree")]
@@ -12259,26 +12015,26 @@ pub enum ListAccountNumbersResponsePhoneNumberType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for ListAccountNumbersResponsePhoneNumberType {
+impl std::fmt::Display for ListAccountPhoneNumbersResponseNumberType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ListAccountNumbersResponsePhoneNumberType::Toll => "toll",
-            ListAccountNumbersResponsePhoneNumberType::Tollfree => "tollfree",
-            ListAccountNumbersResponsePhoneNumberType::Noop => "",
-            ListAccountNumbersResponsePhoneNumberType::FallthroughString(s) => s,
+            ListAccountPhoneNumbersResponseNumberType::Toll => "toll",
+            ListAccountPhoneNumbersResponseNumberType::Tollfree => "tollfree",
+            ListAccountPhoneNumbersResponseNumberType::Noop => "",
+            ListAccountPhoneNumbersResponseNumberType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for ListAccountNumbersResponsePhoneNumberType {
-    fn default() -> ListAccountNumbersResponsePhoneNumberType {
-        ListAccountNumbersResponsePhoneNumberType::Noop
+impl Default for ListAccountPhoneNumbersResponseNumberType {
+    fn default() -> ListAccountPhoneNumbersResponseNumberType {
+        ListAccountPhoneNumbersResponseNumberType::Noop
     }
 }
-impl ListAccountNumbersResponsePhoneNumberType {
+impl ListAccountPhoneNumbersResponseNumberType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ListAccountNumbersResponsePhoneNumberType::Noop)
+        matches!(self, ListAccountPhoneNumbersResponseNumberType::Noop)
     }
 }
 
@@ -12289,7 +12045,7 @@ impl ListAccountNumbersResponsePhoneNumberType {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum ListAccountNumbersResponsePhoneAssigneeType {
+pub enum ListAccountPhoneNumbersResponseAssigneeType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
     #[serde(rename = "callQueue")]
@@ -12303,28 +12059,28 @@ pub enum ListAccountNumbersResponsePhoneAssigneeType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for ListAccountNumbersResponsePhoneAssigneeType {
+impl std::fmt::Display for ListAccountPhoneNumbersResponseAssigneeType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ListAccountNumbersResponsePhoneAssigneeType::AutoReceptionist => "autoReceptionist",
-            ListAccountNumbersResponsePhoneAssigneeType::CallQueue => "callQueue",
-            ListAccountNumbersResponsePhoneAssigneeType::CommonAreaPhone => "commonAreaPhone",
-            ListAccountNumbersResponsePhoneAssigneeType::User => "user",
-            ListAccountNumbersResponsePhoneAssigneeType::Noop => "",
-            ListAccountNumbersResponsePhoneAssigneeType::FallthroughString(s) => s,
+            ListAccountPhoneNumbersResponseAssigneeType::AutoReceptionist => "autoReceptionist",
+            ListAccountPhoneNumbersResponseAssigneeType::CallQueue => "callQueue",
+            ListAccountPhoneNumbersResponseAssigneeType::CommonAreaPhone => "commonAreaPhone",
+            ListAccountPhoneNumbersResponseAssigneeType::User => "user",
+            ListAccountPhoneNumbersResponseAssigneeType::Noop => "",
+            ListAccountPhoneNumbersResponseAssigneeType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for ListAccountNumbersResponsePhoneAssigneeType {
-    fn default() -> ListAccountNumbersResponsePhoneAssigneeType {
-        ListAccountNumbersResponsePhoneAssigneeType::Noop
+impl Default for ListAccountPhoneNumbersResponseAssigneeType {
+    fn default() -> ListAccountPhoneNumbersResponseAssigneeType {
+        ListAccountPhoneNumbersResponseAssigneeType::Noop
     }
 }
-impl ListAccountNumbersResponsePhoneAssigneeType {
+impl ListAccountPhoneNumbersResponseAssigneeType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ListAccountNumbersResponsePhoneAssigneeType::Noop)
+        matches!(self, ListAccountPhoneNumbersResponseAssigneeType::Noop)
     }
 }
 
@@ -12363,7 +12119,7 @@ pub struct Assignee {
      *  `autoReceptionist`: Phone number has been assigned to an [auto receptionist](https://support.zoom.us/hc/en-us/articles/360021121312-Managing-Auto-Receptionists-and-Integrated-Voice-Response-IVR-).<br>
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
-    pub type_: Option<ListAccountNumbersResponsePhoneAssigneeType>,
+    pub type_: Option<ListAccountPhoneNumbersResponseAssigneeType>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -12435,7 +12191,7 @@ pub struct SipGroup {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ListAccountNumbersResponsePhone {
+pub struct ListAccountPhoneNumbersResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<Assignee>,
     /**
@@ -12489,7 +12245,7 @@ pub struct ListAccountNumbersResponsePhone {
      *  `toll`, `tollfree`
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub number_type: Option<ListAccountNumbersResponsePhoneNumberType>,
+    pub number_type: Option<ListAccountPhoneNumbersResponseNumberType>,
     /**
      * Displayed when the `type` request parameter is `byoc`.
      */
@@ -12506,11 +12262,11 @@ pub struct ListAccountNumbersResponsePhone {
      * Status of the number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetNumberDetailsResponseStatus>,
+    pub status: Option<GetPhoneNumberDetailsResponseStatus>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ListAccountNumbersResponse {
+pub struct ListAccountPhoneNumbersResponseData {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.)
      */
@@ -12530,7 +12286,7 @@ pub struct ListAccountNumbersResponse {
     )]
     pub page_size: i64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub phone_numbers: Vec<ListAccountNumbersResponsePhone>,
+    pub phone_numbers: Vec<ListAccountPhoneNumbersResponse>,
     /**
      * The total number of records returned.
      */
@@ -13301,7 +13057,7 @@ impl AddRoomRequestType {
 pub struct AddRoomRequest {
     /**
      * \*\*Optional\*\*<br>Location ID of the lowest level location in the [location hierarchy](https://support.zoom.us/hc/en-us/articles/115000342983-Zoom-Rooms-Location-Hierarchy) where the Zoom Room is to be added. For instance if the structure of the location hierarchy is set up as “country, states, city, campus, building, floor”, a room can only be added under the floor level location.
-     *
+     *  
      *  This ID can be retrieved from the [List Zoom Room Locations](https://marketplace.zoom.us/docs/api-reference/zoom-api/rooms-location/listzrlocations) API.
      */
     #[serde(
@@ -13658,7 +13414,7 @@ pub struct CreatePhoneSiteRequest {
     pub short_extension: Option<ShortExtension>,
     /**
      * Identifier for a site. If site code is enabled, this field is required.
-     *
+     *  
      *
      */
     #[serde(
@@ -14008,7 +13764,7 @@ pub struct SearchCompanyContactsResponse {
 
 /**
  * This field indicates whether a message is an original message(unedited), an edited message or a deleted message.
- *
+ *   
  *   This field is only returned if you set the value of `for include_deleted_and_edited_message` query parameter to `true`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -14130,7 +13886,7 @@ pub struct Messages {
     pub reply_main_message_id: String,
     /**
      * Timestamp of when the reply message was sent. This field will only be returned if the message is a reply message.
-     *
+     *  
      *  The value of this field will be in \*\*long\*\* format(int64).
      */
     #[serde(
@@ -14150,7 +13906,7 @@ pub struct Messages {
     pub sender: String,
     /**
      * This field indicates whether a message is an original message(unedited), an edited message or a deleted message.
-     *
+     *  
      *  This field is only returned if you set the value of `for include_deleted_and_edited_message` query parameter to `true`.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -14203,9 +13959,9 @@ pub struct GetChatMessagesResponse {
 pub struct AtItems {
     /**
      * This field is required if the value of `at_type` field is set to 1.
-     *
+     *  
      *  Email address of the contact.
-     *
+     *  
      *
      */
     #[serde(
@@ -14217,7 +13973,7 @@ pub struct AtItems {
     /**
      * Type of mention. You can use one of the following values:<br>
      *  \* `1`: Mention a contact.
-     *
+     *  
      *  \* `2`: Mention "all" to notify everyone in the channel.
      */
     #[serde(
@@ -14228,7 +13984,7 @@ pub struct AtItems {
     pub at_type: i64,
     /**
      * End position of the mention.
-     *
+     *  
      *  Example message: "@Shrijana How are you?"
      *  In this case, the end position of the mention "@Shrijana" is 8. Hence, the value of this field will be 8.
      */
@@ -14240,11 +13996,11 @@ pub struct AtItems {
     pub end_position: i64,
     /**
      * Start position of the mention("@") in the message string.
-     *
+     *  
      *  For example if you want to include the mention at the beginning of the message, the value for this field will be 0.
-     *
+     *  
      *  Example message: "@Shrijana How are you?"
-     *
+     *  
      *
      */
     #[serde(
@@ -14406,7 +14162,7 @@ pub struct ReactMessageRequest {
     pub emoji: String,
     /**
      * The channel's ID where you sent the message. You must provide either the `to_contact` or the `to_channel` parameter in the API request.
-     *
+     *  
      *  To get a channel's ID, use the [List User's Channels API](https://marketplace.zoom.us/docs/api-reference/zoom-api/chat-channels/getchannels).
      */
     #[serde(
@@ -14417,7 +14173,7 @@ pub struct ReactMessageRequest {
     pub to_channel: String,
     /**
      * The email address of the contact to whom the message was sent. You must provide either the `to_contact` or the `to_channel` parameter in the API request.
-     *
+     *  
      *  To get a channel's ID, use the [List User's Channels API](https://marketplace.zoom.us/docs/api-reference/zoom-api/chat-channels/getchannels).
      */
     #[serde(
@@ -15195,7 +14951,7 @@ pub struct AccountCreateRequest {
     pub options: Option<Options>,
     /**
      * User's password.
-     *
+     *  
      *  \*\*Note:\*\* If the account owner or admin has enabled [enhanced password requirements](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_fa9186e4-6818-4f7a-915c-2e25c19f0acd), the value provided in this field must meet those requirements. These requirements can be retrieved by calling the [Get Account Settings API](https://marketplace.zoom.us/docs/api-reference/zoom-api/accounts/accountsettings) and referring to the `password_requirement` field present in the `security` object.
      */
     #[serde(
@@ -15309,7 +15065,7 @@ pub struct AccountResponse {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum Option {
+pub enum OptionData {
     #[serde(rename = "meeting_authentication")]
     MeetingAuthentication,
     #[serde(rename = "recording_authentication")]
@@ -15319,26 +15075,26 @@ pub enum Option {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for Option {
+impl std::fmt::Display for OptionData {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            Option::MeetingAuthentication => "meeting_authentication",
-            Option::RecordingAuthentication => "recording_authentication",
-            Option::Noop => "",
-            Option::FallthroughString(s) => s,
+            OptionData::MeetingAuthentication => "meeting_authentication",
+            OptionData::RecordingAuthentication => "recording_authentication",
+            OptionData::Noop => "",
+            OptionData::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for Option {
-    fn default() -> Option {
-        Option::Noop
+impl Default for OptionData {
+    fn default() -> OptionData {
+        OptionData::Noop
     }
 }
-impl Option {
+impl OptionData {
     pub fn is_noop(&self) -> bool {
-        matches!(self, Option::Noop)
+        matches!(self, OptionData::Noop)
     }
 }
 
@@ -16643,7 +16399,7 @@ pub struct ImGroupMembersCreateRequestData {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct SessionsResponse {
+pub struct ImChatSessionsResponse {
     /**
      * Start date.
      */
@@ -16657,7 +16413,7 @@ pub struct SessionsResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct MessagesResponse {
+pub struct ImChatMessagesResponse {
     /**
      * Start date.
      */
@@ -16677,6 +16433,39 @@ pub struct MessagesResponse {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub to: Option<chrono::NaiveDate>,
+}
+
+/**
+ * The meeting types: <br>`scheduled` - This includes all valid past meetings (unexpired), live meetings and upcoming scheduled meetings. It is equivalent to the combined list of "Previous Meetings" and "Upcoming Meetings" displayed in the user's [Meetings page](https://zoom.us/meeting) on the Zoom Web Portal.<br>`live` - All the ongoing meetings.<br>`upcoming` - All upcoming meetings including live meetings.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MeetingsType {
+    #[serde(rename = "live")]
+    Live,
+    #[serde(rename = "scheduled")]
+    Scheduled,
+    #[serde(rename = "upcoming")]
+    Upcoming,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for MeetingsType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            MeetingsType::Live => "live",
+            MeetingsType::Scheduled => "scheduled",
+            MeetingsType::Upcoming => "upcoming",
+            MeetingsType::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for MeetingsType {
+    fn default() -> MeetingsType {
+        MeetingsType::Live
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -16785,7 +16574,7 @@ pub struct MeetingUpdateRequest {
 /**
  * `end` - End a meeting.<br>
  *   `recover` - [Recover](https://support.zoom.us/hc/en-us/articles/360038297111-Recover-a-deleted-meeting) a deleted meeting.
- *
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -16831,6 +16620,39 @@ pub struct MeetingStatusRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<MeetingStatusRequestAction>,
+}
+
+/**
+ * The registrant status:<br>`pending` - Registrant's status is pending.<br>`approved` - Registrant's status is approved.<br>`denied` - Registrant's status is denied.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum MeetingRegistrantsStatus {
+    #[serde(rename = "approved")]
+    Approved,
+    #[serde(rename = "denied")]
+    Denied,
+    #[serde(rename = "pending")]
+    Pending,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for MeetingRegistrantsStatus {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            MeetingRegistrantsStatus::Approved => "approved",
+            MeetingRegistrantsStatus::Denied => "denied",
+            MeetingRegistrantsStatus::Pending => "pending",
+            MeetingRegistrantsStatus::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for MeetingRegistrantsStatus {
+    fn default() -> MeetingRegistrantsStatus {
+        MeetingRegistrantsStatus::Approved
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -17058,6 +16880,36 @@ pub struct MeetingPollGetResponse {
     pub status: Option<MeetingPollGetResponseStatus>,
 }
 
+/**
+ * The recording delete actions:<br>`trash` - Move recording to trash.<br>`delete` - Delete recording permanently.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum RecordingDeleteAction {
+    #[serde(rename = "delete")]
+    Delete,
+    #[serde(rename = "trash")]
+    Trash,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for RecordingDeleteAction {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            RecordingDeleteAction::Delete => "delete",
+            RecordingDeleteAction::Trash => "trash",
+            RecordingDeleteAction::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for RecordingDeleteAction {
+    fn default() -> RecordingDeleteAction {
+        RecordingDeleteAction::Trash
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
 pub struct MeetingRecordingRegistrantCreateResponse {
     /**
@@ -17096,6 +16948,41 @@ pub struct MeetingRecordingRegistrantCreateResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub topic: String,
+}
+
+/**
+ * Specify a value to get the response for the corresponding meeting type. The value of this field can be one of the following:<br> <br>`past` - Meeting that already occurred in the specified date range.<br>`pastOne` - Past meetings that were attended by only one user. <br>`live` - Live meetings.<br><br>
+ *   
+ *   If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardMeetingsType {
+    #[serde(rename = "live")]
+    Live,
+    #[serde(rename = "past")]
+    Past,
+    #[serde(rename = "pastOne")]
+    PastOne,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for DashboardMeetingsType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            DashboardMeetingsType::Live => "live",
+            DashboardMeetingsType::Past => "past",
+            DashboardMeetingsType::PastOne => "pastOne",
+            DashboardMeetingsType::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for DashboardMeetingsType {
+    fn default() -> DashboardMeetingsType {
+        DashboardMeetingsType::Live
+    }
 }
 
 /**
@@ -17148,6 +17035,39 @@ pub struct DashboardMeetingsResponse {
 }
 
 /**
+ * The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.<br>`live` - Live meetings.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardMeetingDetailType {
+    #[serde(rename = "live")]
+    Live,
+    #[serde(rename = "past")]
+    Past,
+    #[serde(rename = "pastOne")]
+    PastOne,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for DashboardMeetingDetailType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            DashboardMeetingDetailType::Live => "live",
+            DashboardMeetingDetailType::Past => "past",
+            DashboardMeetingDetailType::PastOne => "pastOne",
+            DashboardMeetingDetailType::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for DashboardMeetingDetailType {
+    fn default() -> DashboardMeetingDetailType {
+        DashboardMeetingDetailType::Live
+    }
+}
+
+/**
  * Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -17183,9 +17103,72 @@ impl DashboardMeetingParticipantsIncludeFields {
 }
 
 /**
+ * The meeting types: <br>`past` - Past meetings.<br>`live` - Live Meetings.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardMeetingParticipantQosType {
+    #[serde(rename = "live")]
+    Live,
+    #[serde(rename = "past")]
+    Past,
+    #[serde(rename = "pastOne")]
+    PastOne,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for DashboardMeetingParticipantQosType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            DashboardMeetingParticipantQosType::Live => "live",
+            DashboardMeetingParticipantQosType::Past => "past",
+            DashboardMeetingParticipantQosType::PastOne => "pastOne",
+            DashboardMeetingParticipantQosType::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for DashboardMeetingParticipantQosType {
+    fn default() -> DashboardMeetingParticipantQosType {
+        DashboardMeetingParticipantQosType::Live
+    }
+}
+
+/**
+ * The webinar type.
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum DashboardWebinarsType {
+    #[serde(rename = "live")]
+    Live,
+    #[serde(rename = "past")]
+    Past,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for DashboardWebinarsType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            DashboardWebinarsType::Live => "live",
+            DashboardWebinarsType::Past => "past",
+            DashboardWebinarsType::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for DashboardWebinarsType {
+    fn default() -> DashboardWebinarsType {
+        DashboardWebinarsType::Live
+    }
+}
+
+/**
  * Provide 'registrant_id' as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [webinar registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarregistrants).<br>
- *
- *
+ *   
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -17592,7 +17575,7 @@ pub struct ReportMeetingDetailsResponse {
     pub topic: String,
     /**
      * Number of meeting minutes. This represents the total amount of meeting minutes attended by each participant including the host, for meetings hosted by the user. For instance if there were one host(named A) and one participant(named B) in a meeting, the value of total_minutes would be calculated as below:
-     *
+     *  
      *  \*\*total_minutes\*\* = Total Meeting Attendance Minutes of A + Total Meeting Attendance Minutes of B
      */
     #[serde(
@@ -17647,8 +17630,8 @@ pub struct ReportMeetingDetailsResponse {
 
 /**
  * Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants).<br>
- *
- *
+ *   
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -17857,7 +17840,7 @@ pub struct ReportWebinarDetailsResponse {
     pub topic: String,
     /**
      * Number of Webinar minutes. This represents the total amount of Webinar minutes attended by each participant including the host, for a Webinar hosted by the user. For instance if there were one host(named A) and one participant(named B) in a Webinar, the value of total_minutes would be calculated as below:
-     *
+     *  
      *  \*\*total_minutes\*\* = Total Webinar Attendance Minutes of A + Total Webinar Attendance Minutes of B
      */
     #[serde(
@@ -17912,8 +17895,8 @@ pub struct ReportWebinarDetailsResponse {
 
 /**
  * Enter 'registrant_id' as the value for this field if you would like to see the registrant ID attribute included in the response of this API call. A registrant ID is a unique identifier of a [webinar registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/webinarregistrants).<br>
- *
- *
+ *   
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -18045,7 +18028,7 @@ pub struct ReportWebinarQaResponseQuestions {
     pub email: String,
     /**
      * Participant display name.<br>
-     *
+     *  
      *  If anonymous [Q&A](https://support.zoom.us/hc/en-us/articles/203686015-Getting-Started-with-Question-Answer) option is enabled and if a participant submits the Q&A without providing their name, the value of the `name` field will be "Anonymous Attendee".
      */
     #[serde(
@@ -18453,7 +18436,7 @@ pub struct TspResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UpdateRequest {
+pub struct TspUpdateRequest {
     /**
      * Control restriction on account users adding a TSP number outside of account's dial in numbers.
      */
@@ -18500,7 +18483,7 @@ pub struct UpdateRequest {
  *   * `active` — An active user.
  *   * `inactive` — A deactivated user.
  *   * `pending` — A pending user.
- *
+ *   
  *   This value defaults to `active`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -18661,7 +18644,7 @@ pub struct Users {
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Information about the user's custom attributes.
-     *
+     *  
      *  This field is \*\*only\*\* returned if users are assigned custom attributes and you provided the `custom_attributes` value for the `include_fields` query parameter in the API request.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -18700,7 +18683,7 @@ pub struct Users {
     pub group_ids: Vec<String>,
     /**
      * The user's [host key](https://support.zoom.us/hc/en-us/articles/205172555-Using-your-host-key).
-     *
+     *  
      *  This field is \*\*only\*\* returned if users are assigned a host key and you provided the `host_key` value for the `include_fields` query parameter in the API request.
      */
     #[serde(
@@ -18711,7 +18694,7 @@ pub struct Users {
     pub host_key: String,
     /**
      * The user's ID.
-     *
+     *  
      *  The API does \*\*not\*\* return this value for users with the `pending` status.
      */
     #[serde(
@@ -18736,7 +18719,7 @@ pub struct Users {
     pub last_client_version: String,
     /**
      * The user's last login time. This field has a three-day buffer period.
-     *
+     *  
      *  For example, if user first logged in on `2020-01-01` and then logged out and logged in on `2020-01-02`, this value will still reflect the login time of `2020-01-01`. However, if the user logs in on `2020-01-04`, the value of this field will reflect the corresponding login time since it exceeds the three-day buffer period.
      */
     #[serde(
@@ -18954,7 +18937,7 @@ pub struct UserInfo {
     pub last_name: String,
     /**
      * User password. Only used for the "autoCreate" function. The password has to have a minimum of 8 characters and maximum of 32 characters. By default (basic requirement), password must have at least one letter (a, b, c..), at least one number (1, 2, 3...) and include both uppercase and lowercase letters. It should not contain only one identical character repeatedly ('11111111' or 'aaaaaaaa') and it cannot contain consecutive characters ('12345678' or 'abcdefgh').
-     *
+     *  
      *  \*\*Note:\*\* If the account owner or admin has enabled [enhanced password requirements](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_fa9186e4-6818-4f7a-915c-2e25c19f0acd), the value provided in this field must meet those requirements. These requirements can be retrieved by calling the [Get Account Settings API](https://marketplace.zoom.us/docs/api-reference/zoom-api/accounts/accountsettings) and referring to the `password_requirement` field present in the `security` object.
      */
     #[serde(
@@ -19035,6 +19018,80 @@ pub struct UserCreateResponse {
         rename = "type"
     )]
     pub type_: i64,
+}
+
+/**
+ * The user's login method:
+ *   
+ *   `0` — Facebook OAuth</br>`1` — Google OAuth</br>`24` — Apple OAuth</br>`27` — Microsoft OAuth</br>`97` — Mobile device</br>`98` — RingCentral OAuth</br>`99` — API user</br>`100` — Zoom Work email</br>`101` — Single Sign-On (SSO)
+ *   
+ *   The following login methods are only available in China:
+ *   
+ *   `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay
+ */
+#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[serde(untagged)]
+pub enum LoginType {
+    #[serde(rename = "0")]
+    Zero,
+    #[serde(rename = "1")]
+    One,
+    #[serde(rename = "100")]
+    OneHundred,
+    #[serde(rename = "101")]
+    OneHundredAndOne,
+    #[serde(rename = "11")]
+    Eleven,
+    #[serde(rename = "21")]
+    TwentyOne,
+    #[serde(rename = "23")]
+    TwentyThree,
+    #[serde(rename = "24")]
+    TwentyFour,
+    #[serde(rename = "27")]
+    TwentySeven,
+    #[serde(rename = "97")]
+    NinetySeven,
+    #[serde(rename = "98")]
+    NinetyEight,
+    #[serde(rename = "99")]
+    NinetyNine,
+    #[serde(rename = "")]
+    Noop,
+    FallthroughString(String),
+}
+
+impl std::fmt::Display for LoginType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            LoginType::Zero => "0",
+            LoginType::One => "1",
+            LoginType::OneHundred => "100",
+            LoginType::OneHundredAndOne => "101",
+            LoginType::Eleven => "11",
+            LoginType::TwentyOne => "21",
+            LoginType::TwentyThree => "23",
+            LoginType::TwentyFour => "24",
+            LoginType::TwentySeven => "27",
+            LoginType::NinetySeven => "97",
+            LoginType::NinetyEight => "98",
+            LoginType::NinetyNine => "99",
+            LoginType::Noop => "",
+            LoginType::FallthroughString(s) => s,
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for LoginType {
+    fn default() -> LoginType {
+        LoginType::Noop
+    }
+}
+impl LoginType {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, LoginType::Noop)
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -19389,7 +19446,7 @@ pub struct UserStatusRequest {
 pub struct UserPasswordRequest {
     /**
      * User password. Should be less than 32 characters.
-     *
+     *  
      *  \*\*Note:\*\* If the account owner or admin has enabled [enhanced password requirements](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_fa9186e4-6818-4f7a-915c-2e25c19f0acd), the value provided in this field must meet those requirements. These requirements can be retrieved by calling the [Get Account Settings API](https://marketplace.zoom.us/docs/api-reference/zoom-api/accounts/accountsettings) and referring to the `password_requirement` field present in the `security` object.
      */
     #[serde(
@@ -19528,7 +19585,7 @@ pub struct UserTsPsResponseTspAccountsDialInNumbers {
 
 /**
  * Telephony bridge
- *
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -20019,7 +20076,7 @@ pub struct WebinarResponse {
     pub id: i64,
     /**
      * Unique Webinar ID. Each Webinar instance will generate its own Webinar UUID (i.e., after a Webinar ends, a new UUID will be generated for the next instance of the Webinar). You can retrieve a list of UUIDs from past Webinar instances using [this API](https://marketplace.zoom.us/docs/api-reference/zoom-api/webinars/pastwebinars). Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
-     *
+     *  
      *
      */
     #[serde(
@@ -20247,7 +20304,7 @@ pub struct AddBatchWebinarRegistrantsRequest {
 pub struct AddBatchRegistrantsRequest {
     /**
      * If a meeting was scheduled with approval_type `1` (manual approval), but you would like to automatically approve the registrants that are added via this API, you can set the value of this field to `true`.
-     *
+     *  
      *  You \*\*cannot\*\* use this field to change approval setting for a meeting  that was originally scheduled with approval_type `0` (automatic approval).
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -20833,7 +20890,7 @@ pub struct CallingPlan {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserResponsePhoneNumbers {
+pub struct PhoneUserResponseNumbers {
     /**
      * Phone Number Id
      */
@@ -20861,7 +20918,7 @@ pub struct UserResponsePhoneNumbers {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum UserResponseStatus {
+pub enum PhoneUserResponseStatus {
     #[serde(rename = "activate")]
     Activate,
     #[serde(rename = "deactivate")]
@@ -20871,26 +20928,26 @@ pub enum UserResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for UserResponseStatus {
+impl std::fmt::Display for PhoneUserResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            UserResponseStatus::Activate => "activate",
-            UserResponseStatus::Deactivate => "deactivate",
-            UserResponseStatus::Noop => "",
-            UserResponseStatus::FallthroughString(s) => s,
+            PhoneUserResponseStatus::Activate => "activate",
+            PhoneUserResponseStatus::Deactivate => "deactivate",
+            PhoneUserResponseStatus::Noop => "",
+            PhoneUserResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for UserResponseStatus {
-    fn default() -> UserResponseStatus {
-        UserResponseStatus::Noop
+impl Default for PhoneUserResponseStatus {
+    fn default() -> PhoneUserResponseStatus {
+        PhoneUserResponseStatus::Noop
     }
 }
-impl UserResponseStatus {
+impl PhoneUserResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, UserResponseStatus::Noop)
+        matches!(self, PhoneUserResponseStatus::Noop)
     }
 }
 
@@ -20909,7 +20966,7 @@ pub struct Policy {
 
 /// Zoom User Profile
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserResponseData {
+pub struct PhoneUserResponse {
     /**
      * Zoom User Profile
      */
@@ -20946,7 +21003,7 @@ pub struct UserResponseData {
      * Zoom User Profile
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub phone_numbers: Vec<UserResponsePhoneNumbers>,
+    pub phone_numbers: Vec<PhoneUserResponseNumbers>,
     /**
      * Zoom User Profile
      */
@@ -20982,7 +21039,7 @@ pub struct UserResponseData {
      * Zoom User Profile
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<UserResponseStatus>,
+    pub status: Option<PhoneUserResponseStatus>,
 }
 
 /// A list of the user's policies.
@@ -21027,7 +21084,7 @@ pub struct UpdateUserProfileRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct SettingResponseCountry {
+pub struct PhoneSettingResponseCountry {
     /**
      *
      */
@@ -21097,7 +21154,7 @@ pub struct ShowDeviceIpCallLog {
 
 /// Zoom Account Setting
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct SettingResponse {
+pub struct PhoneSettingResponse {
     /**
      * Zoom Account Setting
      */
@@ -21107,7 +21164,7 @@ pub struct SettingResponse {
      * Zoom Account Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub country: Option<SettingResponseCountry>,
+    pub country: Option<PhoneSettingResponseCountry>,
     /**
      * Zoom Account Setting
      */
@@ -21128,13 +21185,13 @@ pub struct SettingResponse {
 /// **Prerequisites**: <br>
 /// * Business or enterprise Account.<br>
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UpdateSettingsRequestByoc {
+pub struct UpdatePhoneSettingsRequestByoc {
     /**
      * Only [master account owners](https://marketplace.zoom.us/docs/api-reference/master-account-apis) can use this MA API to enable BYOC(Bring your own carrier) option for a sub account.<br>
-     *
+     *  
      *  \*\*Scope\*\*:<br>
      *  \* `phone:master` <br>
-     *
+     *  
      *  \*\*Prerequisites\*\*: <br>
      *  \* Business or enterprise Account.<br>
      */
@@ -21146,7 +21203,7 @@ pub struct UpdateSettingsRequestByoc {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UpdateSettingsRequestShowDeviceIpCallLog {
+pub struct UpdatePhoneSettingsRequestShowDeviceIpCallLog {
     /**
      * Set the value of this field to `true` to allow `/phone/call_logs` and `/phone/call_logs/{callLogId}` APIs show `device_public_ip` and `device_private_ip` in response.
      */
@@ -21158,20 +21215,20 @@ pub struct UpdateSettingsRequestShowDeviceIpCallLog {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UpdateSettingsRequest {
+pub struct UpdatePhoneSettingsRequest {
     /**
      * Only [master account owners](https://marketplace.zoom.us/docs/api-reference/master-account-apis) can use this MA API to enable BYOC(Bring your own carrier) option for a sub account.<br>
-     *
+     *  
      *  \*\*Scope\*\*:<br>
      *  \* `phone:master` <br>
-     *
+     *  
      *  \*\*Prerequisites\*\*: <br>
      *  \* Business or enterprise Account.<br>
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub byoc: Option<UpdateSettingsRequestByoc>,
+    pub byoc: Option<UpdatePhoneSettingsRequestByoc>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub show_device_ip_for_call_log: Option<UpdateSettingsRequestShowDeviceIpCallLog>,
+    pub show_device_ip_for_call_log: Option<UpdatePhoneSettingsRequestShowDeviceIpCallLog>,
 }
 
 /// Outbound Caller Info
@@ -21282,7 +21339,7 @@ pub struct OutboundCallerIds {
 
 /// The site's country.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserSettingsResponseCountry {
+pub struct PhoneUserSettingsResponseCountry {
     /**
      * The site's country.
      */
@@ -21314,7 +21371,7 @@ pub struct UserSettingsResponseCountry {
 
 /// Phone User Setting
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserSettingsResponse {
+pub struct PhoneUserSettingsResponse {
     /**
      * Phone User Setting
      */
@@ -21337,7 +21394,7 @@ pub struct UserSettingsResponse {
      * Phone User Setting
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub country: Option<UserSettingsResponseCountry>,
+    pub country: Option<PhoneUserSettingsResponseCountry>,
     /**
      * Phone User Setting
      */
@@ -21679,7 +21736,7 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     pub state_code: String,
     /**
      * The location's VAT/NIF/CIF number. This number is used to get a new phone number online.
-     *
+     *  
      *  \*\*Note:\*\* For Belgium, Netherlands, Portugal, Spain, and Switzerland, this field is required.
      */
     #[serde(
@@ -21721,7 +21778,7 @@ pub struct NetworkSwitches {
     pub port: String,
     /**
      * The location's port prefix. The prefix value \*\*cannot\*\* end with a digit.
-     *
+     *  
      *  This parameter passes with the `port_range_from` and `port_range_to` parameters.
      */
     #[serde(
@@ -21732,7 +21789,7 @@ pub struct NetworkSwitches {
     pub port_prefix: String,
     /**
      * The location's port starting range number. This can be a non-negative integer value.
-     *
+     *  
      *  This value \*\*must\*\* be less than or equal to the `port_range_to` value.
      */
     #[serde(
@@ -21743,7 +21800,7 @@ pub struct NetworkSwitches {
     pub port_range_from: String,
     /**
      * The location's port ending range number. This can be a non-negative integer value.
-     *
+     *  
      *  This value \*\*cannot\*\* be less than the `port_range_from` value.
      */
     #[serde(
@@ -21825,7 +21882,7 @@ pub struct Locations {
     pub public_ip: String,
     /**
      * The location's assigned SIP routing group for outgoing calls. The system routes the call to the defined [SIP trunk](https://en.wikipedia.org/wiki/SIP_trunking) in the SIP groups when location-based routing is enabled.
-     *
+     *  
      *  This only affects top locations and ignores all other locations.
      */
     #[serde(
@@ -22497,7 +22554,7 @@ pub struct UpdateLocationRequestNetworkSwitches {
     pub port: String,
     /**
      * The emergency location's port prefix. The prefix value \*\*cannot\*\* end with a digit.
-     *
+     *  
      *  This parameter passes with the `port_range_from` and `port_range_to` parameters.
      */
     #[serde(
@@ -22508,7 +22565,7 @@ pub struct UpdateLocationRequestNetworkSwitches {
     pub port_prefix: String,
     /**
      * The emergency location's port starting range number. This can be a non-negative integer value.
-     *
+     *  
      *  This value \*\*must\*\* be less than or equal to the `port_range_to` value.
      */
     #[serde(
@@ -22519,7 +22576,7 @@ pub struct UpdateLocationRequestNetworkSwitches {
     pub port_range_from: String,
     /**
      * The emergency location's port ending range number. This can be a non-negative integer value.
-     *
+     *  
      *  This value \*\*cannot\*\* be less than the `port_range_from` value.
      */
     #[serde(
@@ -23137,9 +23194,9 @@ pub struct GetSettingTemplateResponseUserSettingsDeskPhone {
 
 /**
  * The value of this field can be either `default` or `disable`.
- *
+ *   
  *   * `default`: This means that the hold music can be set using the [audio library](https://support.zoom.us/hc/en-us/articles/360028212652-Using-the-audio-library-to-customize-greetings-and-hold-music).
- *
+ *   
  *   * `disable`: This means that the hold music is disabled.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -23217,9 +23274,9 @@ pub struct GetSettingTemplateResponseUserSettings {
     pub desk_phone: Option<GetSettingTemplateResponseUserSettingsDeskPhone>,
     /**
      * The value of this field can be either `default` or `disable`.
-     *
+     *  
      *  \* `default`: This means that the hold music can be set using the [audio library](https://support.zoom.us/hc/en-us/articles/360028212652-Using-the-audio-library-to-customize-greetings-and-hold-music).
-     *
+     *  
      *  \* `disable`: This means that the hold music is disabled.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -23532,9 +23589,9 @@ pub struct UpdateSettingTemplateRequestUserSettings {
     pub desk_phone: Option<GetSettingTemplateResponseUserSettingsDeskPhone>,
     /**
      * The value of this field can be either `default` or `disable`.
-     *
+     *  
      *  \* `default`: This means that the hold music can be set using the [audio library](https://support.zoom.us/hc/en-us/articles/360028212652-Using-the-audio-library-to-customize-greetings-and-hold-music).
-     *
+     *  
      *  \* `disable`: This means that the hold music is disabled.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -23571,7 +23628,7 @@ pub struct UpdateSettingTemplateRequest {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum UserCallLogsType {
+pub enum PhoneUserCallLogsType {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "missed")]
@@ -23581,26 +23638,26 @@ pub enum UserCallLogsType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for UserCallLogsType {
+impl std::fmt::Display for PhoneUserCallLogsType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            UserCallLogsType::All => "all",
-            UserCallLogsType::Missed => "missed",
-            UserCallLogsType::Noop => "",
-            UserCallLogsType::FallthroughString(s) => s,
+            PhoneUserCallLogsType::All => "all",
+            PhoneUserCallLogsType::Missed => "missed",
+            PhoneUserCallLogsType::Noop => "",
+            PhoneUserCallLogsType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for UserCallLogsType {
-    fn default() -> UserCallLogsType {
-        UserCallLogsType::Noop
+impl Default for PhoneUserCallLogsType {
+    fn default() -> PhoneUserCallLogsType {
+        PhoneUserCallLogsType::Noop
     }
 }
-impl UserCallLogsType {
+impl PhoneUserCallLogsType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, UserCallLogsType::Noop)
+        matches!(self, PhoneUserCallLogsType::Noop)
     }
 }
 
@@ -23686,7 +23743,7 @@ pub struct ForwardedTo {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum UserCallLogsResponseForwardedByExtensionType {
+pub enum PhoneUserCallLogsResponseForwardedByExtensionType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
     #[serde(rename = "callQueue")]
@@ -23702,29 +23759,34 @@ pub enum UserCallLogsResponseForwardedByExtensionType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for UserCallLogsResponseForwardedByExtensionType {
+impl std::fmt::Display for PhoneUserCallLogsResponseForwardedByExtensionType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            UserCallLogsResponseForwardedByExtensionType::AutoReceptionist => "autoReceptionist",
-            UserCallLogsResponseForwardedByExtensionType::CallQueue => "callQueue",
-            UserCallLogsResponseForwardedByExtensionType::CommonAreaPhone => "commonAreaPhone",
-            UserCallLogsResponseForwardedByExtensionType::SharedLineGroup => "sharedLineGroup",
-            UserCallLogsResponseForwardedByExtensionType::User => "user",
-            UserCallLogsResponseForwardedByExtensionType::Noop => "",
-            UserCallLogsResponseForwardedByExtensionType::FallthroughString(s) => s,
+            PhoneUserCallLogsResponseForwardedByExtensionType::AutoReceptionist => {
+                "autoReceptionist"
+            }
+            PhoneUserCallLogsResponseForwardedByExtensionType::CallQueue => "callQueue",
+            PhoneUserCallLogsResponseForwardedByExtensionType::CommonAreaPhone => "commonAreaPhone",
+            PhoneUserCallLogsResponseForwardedByExtensionType::SharedLineGroup => "sharedLineGroup",
+            PhoneUserCallLogsResponseForwardedByExtensionType::User => "user",
+            PhoneUserCallLogsResponseForwardedByExtensionType::Noop => "",
+            PhoneUserCallLogsResponseForwardedByExtensionType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for UserCallLogsResponseForwardedByExtensionType {
-    fn default() -> UserCallLogsResponseForwardedByExtensionType {
-        UserCallLogsResponseForwardedByExtensionType::Noop
+impl Default for PhoneUserCallLogsResponseForwardedByExtensionType {
+    fn default() -> PhoneUserCallLogsResponseForwardedByExtensionType {
+        PhoneUserCallLogsResponseForwardedByExtensionType::Noop
     }
 }
-impl UserCallLogsResponseForwardedByExtensionType {
+impl PhoneUserCallLogsResponseForwardedByExtensionType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, UserCallLogsResponseForwardedByExtensionType::Noop)
+        matches!(
+            self,
+            PhoneUserCallLogsResponseForwardedByExtensionType::Noop
+        )
     }
 }
 
@@ -23744,7 +23806,7 @@ pub struct ForwardedBy {
      * Indicates where the call was forwarded from.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub extension_type: Option<UserCallLogsResponseForwardedByExtensionType>,
+    pub extension_type: Option<PhoneUserCallLogsResponseForwardedByExtensionType>,
     /**
      * Indicates where the call was forwarded from.
      */
@@ -24094,7 +24156,7 @@ pub struct CallLogs {
 
 /// Phone User Call Logs
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserCallLogsResponse {
+pub struct PhoneUserCallLogsResponse {
     /**
      * Phone User Call Logs
      */
@@ -24246,7 +24308,7 @@ pub struct Recordings {
     pub direction: String,
     /**
      * Download url for the recording. For security purposes, you must provide an OAuth access token in the auth header to download the recording file using this url. <br>
-     *
+     *  
      *  Example request:<br>
      *  ```
      *  curl --request GET \
@@ -24284,7 +24346,7 @@ pub struct Recordings {
 
 /// Phone User Recordings
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserRecordingsResponse {
+pub struct PhoneUserRecordingsResponse {
     /**
      * Phone User Recordings
      */
@@ -24343,7 +24405,7 @@ pub struct UserRecordingsResponse {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum UserVoiceMailsStatus {
+pub enum PhoneUserVoiceMailsStatus {
     #[serde(rename = "all")]
     All,
     #[serde(rename = "read")]
@@ -24353,21 +24415,21 @@ pub enum UserVoiceMailsStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for UserVoiceMailsStatus {
+impl std::fmt::Display for PhoneUserVoiceMailsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            UserVoiceMailsStatus::All => "all",
-            UserVoiceMailsStatus::Read => "read",
-            UserVoiceMailsStatus::Unread => "unread",
-            UserVoiceMailsStatus::FallthroughString(s) => s,
+            PhoneUserVoiceMailsStatus::All => "all",
+            PhoneUserVoiceMailsStatus::Read => "read",
+            PhoneUserVoiceMailsStatus::Unread => "unread",
+            PhoneUserVoiceMailsStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for UserVoiceMailsStatus {
-    fn default() -> UserVoiceMailsStatus {
-        UserVoiceMailsStatus::All
+impl Default for PhoneUserVoiceMailsStatus {
+    fn default() -> PhoneUserVoiceMailsStatus {
+        PhoneUserVoiceMailsStatus::All
     }
 }
 
@@ -24376,7 +24438,7 @@ impl Default for UserVoiceMailsStatus {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum UserVoiceMailsResponseStatus {
+pub enum PhoneUserVoiceMailsResponseStatus {
     #[serde(rename = "read")]
     Read,
     #[serde(rename = "unread")]
@@ -24386,26 +24448,26 @@ pub enum UserVoiceMailsResponseStatus {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for UserVoiceMailsResponseStatus {
+impl std::fmt::Display for PhoneUserVoiceMailsResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            UserVoiceMailsResponseStatus::Read => "read",
-            UserVoiceMailsResponseStatus::Unread => "unread",
-            UserVoiceMailsResponseStatus::Noop => "",
-            UserVoiceMailsResponseStatus::FallthroughString(s) => s,
+            PhoneUserVoiceMailsResponseStatus::Read => "read",
+            PhoneUserVoiceMailsResponseStatus::Unread => "unread",
+            PhoneUserVoiceMailsResponseStatus::Noop => "",
+            PhoneUserVoiceMailsResponseStatus::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for UserVoiceMailsResponseStatus {
-    fn default() -> UserVoiceMailsResponseStatus {
-        UserVoiceMailsResponseStatus::Noop
+impl Default for PhoneUserVoiceMailsResponseStatus {
+    fn default() -> PhoneUserVoiceMailsResponseStatus {
+        PhoneUserVoiceMailsResponseStatus::Noop
     }
 }
-impl UserVoiceMailsResponseStatus {
+impl PhoneUserVoiceMailsResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, UserVoiceMailsResponseStatus::Noop)
+        matches!(self, PhoneUserVoiceMailsResponseStatus::Noop)
     }
 }
 
@@ -24501,12 +24563,12 @@ pub struct VoiceMails {
      * Status of the voice mail. Can be either 'read' or 'unread'
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<UserVoiceMailsResponseStatus>,
+    pub status: Option<PhoneUserVoiceMailsResponseStatus>,
 }
 
 /// Phone User Voice Mails
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UserVoiceMailsResponse {
+pub struct PhoneUserVoiceMailsResponse {
     /**
      * Phone User Voice Mails
      */
@@ -25121,7 +25183,7 @@ pub struct AccountCallLogsResponseData {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct AssignNumberRequestPhoneNumbers {
+pub struct AssignPhoneNumberRequestNumbers {
     /**
      * ID for phone number
      */
@@ -25143,13 +25205,13 @@ pub struct AssignNumberRequestPhoneNumbers {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct AssignNumberRequest {
+pub struct AssignPhoneNumberRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub phone_numbers: Vec<AssignNumberRequestPhoneNumbers>,
+    pub phone_numbers: Vec<AssignPhoneNumberRequestNumbers>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct AssignNumberResponsePhoneNumbers {
+pub struct AssignPhoneNumberResponseNumbers {
     /**
      * ID of the phone number
      */
@@ -25171,12 +25233,12 @@ pub struct AssignNumberResponsePhoneNumbers {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct AssignNumberResponse {
+pub struct AssignPhoneNumberResponse {
     /**
      * Assigned phone number
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub phone_numbers: Vec<AssignNumberResponsePhoneNumbers>,
+    pub phone_numbers: Vec<AssignPhoneNumberResponseNumbers>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -25203,12 +25265,12 @@ pub struct AssignCallingPlanRequest {
  * The query's date type:
  *   * `start_time`
  *   * `end_time`
- *
+ *   
  *   This value defaults to `start_time`.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetRecordingsQueryDateType {
+pub enum GetPhoneRecordingsQueryDateType {
     #[serde(rename = "end_time")]
     EndTime,
     #[serde(rename = "start_time")]
@@ -25216,20 +25278,20 @@ pub enum GetRecordingsQueryDateType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetRecordingsQueryDateType {
+impl std::fmt::Display for GetPhoneRecordingsQueryDateType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetRecordingsQueryDateType::EndTime => "end_time",
-            GetRecordingsQueryDateType::StartTime => "start_time",
-            GetRecordingsQueryDateType::FallthroughString(s) => s,
+            GetPhoneRecordingsQueryDateType::EndTime => "end_time",
+            GetPhoneRecordingsQueryDateType::StartTime => "start_time",
+            GetPhoneRecordingsQueryDateType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetRecordingsQueryDateType {
-    fn default() -> GetRecordingsQueryDateType {
-        GetRecordingsQueryDateType::StartTime
+impl Default for GetPhoneRecordingsQueryDateType {
+    fn default() -> GetPhoneRecordingsQueryDateType {
+        GetPhoneRecordingsQueryDateType::StartTime
     }
 }
 
@@ -25238,7 +25300,7 @@ impl Default for GetRecordingsQueryDateType {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetRecordingsResponseOwnerType {
+pub enum GetPhoneRecordingsResponseOwnerType {
     #[serde(rename = "call queue")]
     CallQueue,
     #[serde(rename = "user")]
@@ -25248,32 +25310,32 @@ pub enum GetRecordingsResponseOwnerType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetRecordingsResponseOwnerType {
+impl std::fmt::Display for GetPhoneRecordingsResponseOwnerType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetRecordingsResponseOwnerType::CallQueue => "call queue",
-            GetRecordingsResponseOwnerType::User => "user",
-            GetRecordingsResponseOwnerType::Noop => "",
-            GetRecordingsResponseOwnerType::FallthroughString(s) => s,
+            GetPhoneRecordingsResponseOwnerType::CallQueue => "call queue",
+            GetPhoneRecordingsResponseOwnerType::User => "user",
+            GetPhoneRecordingsResponseOwnerType::Noop => "",
+            GetPhoneRecordingsResponseOwnerType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetRecordingsResponseOwnerType {
-    fn default() -> GetRecordingsResponseOwnerType {
-        GetRecordingsResponseOwnerType::Noop
+impl Default for GetPhoneRecordingsResponseOwnerType {
+    fn default() -> GetPhoneRecordingsResponseOwnerType {
+        GetPhoneRecordingsResponseOwnerType::Noop
     }
 }
-impl GetRecordingsResponseOwnerType {
+impl GetPhoneRecordingsResponseOwnerType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetRecordingsResponseOwnerType::Noop)
+        matches!(self, GetPhoneRecordingsResponseOwnerType::Noop)
     }
 }
 
 /// The owner of the recording.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetRecordingsResponseOwner {
+pub struct GetPhoneRecordingsResponseOwner {
     /**
      * The owner of the recording.
      */
@@ -25305,11 +25367,11 @@ pub struct GetRecordingsResponseOwner {
      * The owner of the recording.
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
-    pub type_: Option<GetRecordingsResponseOwnerType>,
+    pub type_: Option<GetPhoneRecordingsResponseOwnerType>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetRecordingsResponseSite {
+pub struct GetPhoneRecordingsResponseSite {
     /**
      * The site ID.
      */
@@ -25369,7 +25431,7 @@ impl Direction {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetRecordingsResponse {
+pub struct GetPhoneRecordingsResponse {
     /**
      * The phone call's unique ID.
      */
@@ -25433,7 +25495,7 @@ pub struct GetRecordingsResponse {
     pub caller_number: String,
     /**
      * Specifies the type of the caller number.<br>
-     *
+     *  
      *  `1` - internal<br>
      *  `2` - external<br>
      */
@@ -25493,7 +25555,7 @@ pub struct GetRecordingsResponse {
      * The owner of the recording.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub owner: Option<GetRecordingsResponseOwner>,
+    pub owner: Option<GetPhoneRecordingsResponseOwner>,
     /**
      * The recording type. The allowed values are `OnDemand` or `Automatic`.
      */
@@ -25504,11 +25566,11 @@ pub struct GetRecordingsResponse {
     )]
     pub recording_type: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub site: Option<GetRecordingsResponseSite>,
+    pub site: Option<GetPhoneRecordingsResponseSite>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetRecordingsResponseData {
+pub struct GetPhoneRecordingsResponseData {
     /**
      * The current page number of returned records.
      */
@@ -25528,7 +25590,7 @@ pub struct GetRecordingsResponseData {
     )]
     pub page_size: i64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub recordings: Vec<GetRecordingsResponse>,
+    pub recordings: Vec<GetPhoneRecordingsResponse>,
     /**
      * Total number of records returned.
      */
@@ -25655,7 +25717,7 @@ pub struct SipTrunks {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostSipTrunkRequest {
+pub struct PostPhoneSipTrunkRequest {
     /**
      * SIP trunk configurations.
      */
@@ -25664,7 +25726,7 @@ pub struct PostSipTrunkRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostSipTrunkResponseTrunks {
+pub struct PostPhoneSipTrunkResponseTrunks {
     /**
      * Carrier account.
      */
@@ -25695,13 +25757,13 @@ pub struct PostSipTrunkResponseTrunks {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostSipTrunkResponse {
+pub struct PostPhoneSipTrunkResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub sip_trunks: Vec<PostSipTrunkResponseTrunks>,
+    pub sip_trunks: Vec<PostPhoneSipTrunkResponseTrunks>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UpdateSipTrunkRequest {
+pub struct UpdatePhoneSipTrunkRequest {
     /**
      * Account associated with the carrier.
      */
@@ -26038,10 +26100,10 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
     pub embed_password_in_join_link: bool,
     /**
      * If join before host option is enabled for a personal meeting, then enforce password requirement.
-     *
-     *
+     *  
+     *  
      *  \*\*This field will be deprecated in near future.\*\* If you would like to enable this setting, we highly encourage you to use the `require_password_for_pmi_meetings` field.
-     *
+     *  
      *
      */
     #[serde(
@@ -26086,8 +26148,8 @@ pub struct GetGroupSettingsResponseScheduleMeeting {
      *  `true`: Indicates that the \*\*"Enable Personal Meeting ID"\*\* setting is turned on. Users can choose to use personal meeting ID for their meetings. <br><br>
      *  `false`: Indicates that the \*\*"Enable Personal Meeting ID"\*\* setting is [turned off](https://support.zoom.us/hc/en-us/articles/201362843-Personal-meeting-ID-PMI-and-personal-link#h_aa0335c8-3b06-41bc-bc1f-a8b84ef17f2a). If this setting is disabled, meetings that were scheduled with PMI will be invalid. Scheduled meetings will need to be manually updated.
      *  For Zoom Phone only:If a user has been assigned a desk phone, \*\*"Elevate to Zoom Meeting"\*\* on desk phone will be disabled.
-     *
-     *
+     *  
+     *  
      *
      */
     #[serde(
@@ -26190,7 +26252,7 @@ pub struct GetGroupSettingsResponseInMeeting {
     pub annotation: bool,
     /**
      * Allow host to put attendee on hold.
-     *
+     *  
      *  \*\*This field has been deprecated and is no longer supported.\*\*
      */
     #[serde(
@@ -26660,7 +26722,7 @@ pub struct GetGroupSettingsResponseRecording {
     pub local_recording: bool,
     /**
      * If set to `true`, meeting hosts cannot view their meeting cloud recordings. Only the admins who have recording management privilege can access them.
-     *
+     *  
      *
      */
     #[serde(
@@ -26986,7 +27048,7 @@ pub struct UpdateGroupSettingsRequestInMeeting {
     pub annotation: bool,
     /**
      * Allow host to put attendee on hold.
-     *
+     *  
      *  \*\*This field has been deprecated and is no longer supported.\*\*
      */
     #[serde(
@@ -27379,7 +27441,7 @@ pub struct UpdateGroupSettingsRequestRecording {
     pub local_recording: bool,
     /**
      * If set to `true`, meeting hosts cannot view their meeting cloud recordings. Only the admins who have recording management privilege can access them.
-     *
+     *  
      *
      */
     #[serde(
@@ -27728,7 +27790,7 @@ pub struct GetGroupLockSettingsResponseInMeeting {
     pub annotation: bool,
     /**
      * Allow host to put attendee on hold.
-     *
+     *  
      *  \*\*This field has been deprecated and is no longer supported.\*\*
      */
     #[serde(
@@ -28054,7 +28116,7 @@ pub struct GetGroupLockSettingsResponseRecording {
     pub local_recording: bool,
     /**
      * If set to `true`, meeting hosts cannot view their meeting cloud recordings. Only the admins who have recording management privilege can access them.
-     *
+     *  
      *
      */
     #[serde(
@@ -28228,8 +28290,8 @@ pub struct GroupLockedSettingsRequestScheduleMeeting {
      *  `true`: Turn the \*\*"Enable Personal Meeting ID"\*\* setting \*\*on\*\* for all users in the group. Users can choose to use personal meeting ID for their meetings. <br><br>
      *  `false`: Turn \*\*off\*\* the \*\*"Enable Personal Meeting ID"\*\* setting. \*\*If this setting is [disabled](https://support.zoom.us/hc/en-us/articles/201362843-Personal-meeting-ID-PMI-and-personal-link?flash_digest=eb7ac62d8c7fb4daf285916e3e15d87537806133#h_aa0335c8-3b06-41bc-bc1f-a8b84ef17f2a), meetings that were scheduled with PMI by this group members will be invalid. Users will have to update previously scheduled PMI meetings.\*\*<br><br>
      *  For Zoom Phone only:If a user has been assigned a desk phone, \*\*"Elevate to Zoom Meeting"\*\* on desk phone will be disabled.
-     *
-     *
+     *  
+     *  
      *
      */
     #[serde(
@@ -28307,7 +28369,7 @@ pub struct GroupLockedSettingsRequestInMeeting {
     pub annotation: bool,
     /**
      * Allow host to put attendee on hold.
-     *
+     *  
      *  \*\*This field has been deprecated and is no longer supported.\*\*
      */
     #[serde(
@@ -29135,7 +29197,7 @@ pub struct SwitchUserAccountRequest {
  *   * `CHAT`: A TXT file containing in-meeting chat messages that were sent during the meeting.<br>
  *   * `CC`: File containing closed captions of the recording in VTT file format.<br>
  *   * `CSV`: File containing polling data in csv format.
- *
+ *   
  *   A recording file object with file type of either `CC` or `TB` **does not have** the following properties:<br>
  *   	`id`, `status`, `file_size`, `recording_type`, and `play_url`.
  */
@@ -29249,7 +29311,7 @@ impl GetAccountCloudRecordingResponseMeetingsFilesStatus {
  *   * `poll`
  *   * `timeline`
  *   * `thumbnail`
- *
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -29362,7 +29424,7 @@ pub struct RecordingFiles {
      *  \* `CHAT`: A TXT file containing in-meeting chat messages that were sent during the meeting.<br>
      *  \* `CC`: File containing closed captions of the recording in VTT file format.<br>
      *  \* `CSV`: File containing polling data in csv format.
-     *
+     *  
      *  A recording file object with file type of either `CC` or `TB` \*\*does not have\*\* the following properties:<br>
      *  	`id`, `status`, `file_size`, `recording_type`, and `play_url`.
      */
@@ -30121,7 +30183,7 @@ pub struct GetZrLocationStructureResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UpdateZoomStructureRequest {
+pub struct UpdateZoomRoomsLocationStructureRequest {
     /**
      * Location Structure. The value can be either one or a combination of the following strings separated by comma:
      *  `country`, `state`, `city`, `campus`, `building`, `floor`
@@ -30449,10 +30511,10 @@ pub struct ListSipTrunkNumbersResponse {
 pub struct AssignSipConfigRequest {
     /**
      * Assign or delete the SIP configuration:
-     *
+     *  
      *  \* `true` — Assign the Master account's SIP configuration information to the subaccount.
      *  \* `false` — Delete the subaccount's assigned SIP configuration.
-     *
+     *  
      *  If you do \*\*not\*\* query this parameter, the API will \*\*not\*\* modify the subaccount's configuration.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -30464,9 +30526,9 @@ pub struct AssignSipConfigRequest {
     pub show_callout_internal_number: Option<bool>,
     /**
      * If the value of this option is set to `0`, the call-out countries list provided by Zoom will be [displayed](https://support.zoom.us/hc/en-us/articles/200942859-Using-telephone-call-out) in the account's list of available call-out countries.
-     *
+     *  
      *  If the value of this option is set to `1`, the Zoom provided call-out countries will be hidden from the user's account.<br>
-     *
+     *  
      *  If the value of this option is set to `2`, all Zoom provided countries will be deleted and only internal countries (provided by carrier partners) will be used.
      */
     #[serde(
@@ -30477,9 +30539,9 @@ pub struct AssignSipConfigRequest {
     pub show_zoom_provided_callout_countries: i64,
     /**
      * If the value of this option is set to `0`, the numbers provided by Zoom will be displayed in the account's list of available call-out and call-in numbers in the Zoom Web Portal and Zoom Client.
-     *
+     *  
      *  If the value of this option is set to `1`, the Zoom provided numbers will be shown in the Zoom Web Portal but will not be used unless specified by the user.<br>
-     *
+     *  
      *  If the value of this option is set to `2`, all Zoom provided numbers will be deleted and only internal numbers (provided by carrier partners) will be used.
      */
     #[serde(
@@ -31121,12 +31183,12 @@ pub struct GetDeviceResponseAssignee {
 
 /**
  * [Provisioning type](https://support.zoom.us/hc/en-us/articles/360033223411). The value can be one of the following:
- *
+ *   
  *   * `ztp` : Zero touch provisioning.
  *   * `assisted`: Assisted provisioning.
  *   * `manual`: Manual provisioning.
- *
- *
+ *   
+ *   
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
@@ -31524,7 +31586,7 @@ pub struct AddExternalContactRequest {
     pub extension_number: String,
     /**
      * The external contact's custom unique ID. It is recommended that you use a primary key from the original phone system.
-     *
+     *  
      *  If you do \*\*not\*\* use this parameter, the API automatically generates a contact ID.
      */
     #[serde(
@@ -31589,7 +31651,7 @@ pub struct UpdateExternalContactRequest {
     pub extension_number: String,
     /**
      * The external contact's custom unique ID. It is recommended that you use a primary key from the original phone system.
-     *
+     *  
      *  If you do \*\*not\*\* use this parameter, the API automatically generates a contact ID.
      */
     #[serde(
@@ -31900,7 +31962,7 @@ pub struct CreateCallQueueRequest {
     pub description: String,
     /**
      * Phone extension number for the site.<br>
-     *
+     *  
      *  If a site code has been [assigned](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites#h_79ca9c8f-c97b-4486-aa59-d0d9d31a525b) to the site, provide the short extension number instead of the original extension number.
      */
     #[serde(
@@ -32265,7 +32327,7 @@ pub struct UpdateCallQueueRequest {
     pub description: String,
     /**
      * Phone extension number for the site.<br>
-     *
+     *  
      *  If a site code has been [assigned](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites#h_79ca9c8f-c97b-4486-aa59-d0d9d31a525b) to the site, provide the short extension number instead of the original extension number.
      */
     #[serde(
@@ -32407,7 +32469,7 @@ pub struct ChangeCallQueueManagerRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetNumberDetailsResponseAssigneeType {
+pub enum GetPhoneNumberDetailsResponseAssigneeType {
     #[serde(rename = "autoReceptionist")]
     AutoReceptionist,
     #[serde(rename = "callQueue")]
@@ -32421,33 +32483,33 @@ pub enum GetNumberDetailsResponseAssigneeType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetNumberDetailsResponseAssigneeType {
+impl std::fmt::Display for GetPhoneNumberDetailsResponseAssigneeType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetNumberDetailsResponseAssigneeType::AutoReceptionist => "autoReceptionist",
-            GetNumberDetailsResponseAssigneeType::CallQueue => "callQueue",
-            GetNumberDetailsResponseAssigneeType::CommonAreaPhone => "commonAreaPhone",
-            GetNumberDetailsResponseAssigneeType::User => "user",
-            GetNumberDetailsResponseAssigneeType::Noop => "",
-            GetNumberDetailsResponseAssigneeType::FallthroughString(s) => s,
+            GetPhoneNumberDetailsResponseAssigneeType::AutoReceptionist => "autoReceptionist",
+            GetPhoneNumberDetailsResponseAssigneeType::CallQueue => "callQueue",
+            GetPhoneNumberDetailsResponseAssigneeType::CommonAreaPhone => "commonAreaPhone",
+            GetPhoneNumberDetailsResponseAssigneeType::User => "user",
+            GetPhoneNumberDetailsResponseAssigneeType::Noop => "",
+            GetPhoneNumberDetailsResponseAssigneeType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetNumberDetailsResponseAssigneeType {
-    fn default() -> GetNumberDetailsResponseAssigneeType {
-        GetNumberDetailsResponseAssigneeType::Noop
+impl Default for GetPhoneNumberDetailsResponseAssigneeType {
+    fn default() -> GetPhoneNumberDetailsResponseAssigneeType {
+        GetPhoneNumberDetailsResponseAssigneeType::Noop
     }
 }
-impl GetNumberDetailsResponseAssigneeType {
+impl GetPhoneNumberDetailsResponseAssigneeType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetNumberDetailsResponseAssigneeType::Noop)
+        matches!(self, GetPhoneNumberDetailsResponseAssigneeType::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetNumberDetailsResponseAssignee {
+pub struct GetPhoneNumberDetailsResponseAssignee {
     /**
      * Extension number of the Phone.
      */
@@ -32481,11 +32543,11 @@ pub struct GetNumberDetailsResponseAssignee {
      *  `autoReceptionist`: Phone number has been assigned to an [auto receptionist](https://support.zoom.us/hc/en-us/articles/360021121312-Managing-Auto-Receptionists-and-Integrated-Voice-Response-IVR-).<br>
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
-    pub type_: Option<GetNumberDetailsResponseAssigneeType>,
+    pub type_: Option<GetPhoneNumberDetailsResponseAssigneeType>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetNumberDetailsResponseCarrier {
+pub struct GetPhoneNumberDetailsResponseCarrier {
     /**
      * Carrier code.
      */
@@ -32507,7 +32569,7 @@ pub struct GetNumberDetailsResponseCarrier {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetNumberDetailsResponseSipGroup {
+pub struct GetPhoneNumberDetailsResponseSipGroup {
     /**
      * Sip group display name.
      */
@@ -32529,16 +32591,16 @@ pub struct GetNumberDetailsResponseSipGroup {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetNumberDetailsResponse {
+pub struct GetPhoneNumberDetailsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub assignee: Option<GetNumberDetailsResponseAssignee>,
+    pub assignee: Option<GetPhoneNumberDetailsResponseAssignee>,
     /**
      * The capability for the phone number, whether it can take incoming calls, make outgoing calls, or both. Values include `incoming`, `outgoing`, or both of these values.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub capability: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub carrier: Option<GetNumberDetailsResponseCarrier>,
+    pub carrier: Option<GetPhoneNumberDetailsResponseCarrier>,
     /**
      * The display name for the phone number.
      */
@@ -32580,9 +32642,9 @@ pub struct GetNumberDetailsResponse {
      *  `toll`, `tollfree`
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub number_type: Option<ListAccountNumbersResponsePhoneNumberType>,
+    pub number_type: Option<ListAccountPhoneNumbersResponseNumberType>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub sip_group: Option<GetNumberDetailsResponseSipGroup>,
+    pub sip_group: Option<GetPhoneNumberDetailsResponseSipGroup>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
     /**
@@ -32594,11 +32656,11 @@ pub struct GetNumberDetailsResponse {
      * Status of the number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetNumberDetailsResponseStatus>,
+    pub status: Option<GetPhoneNumberDetailsResponseStatus>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct UpdateNumberDetailsRequest {
+pub struct UpdatePhoneNumberDetailsRequest {
     /**
      * Phone number capability. Values: `outgoing` or `incoming`. Add one or both.
      */
@@ -32694,7 +32756,7 @@ pub struct ListCallingPlansResponseData {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ListUsersResponseSite {
+pub struct ListPhoneUsersResponseSite {
     /**
      * Unique Identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-Multiple-Sites).
      */
@@ -32716,7 +32778,7 @@ pub struct ListUsersResponseSite {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ListUsersResponseCallingPlans {
+pub struct ListPhoneUsersResponseCallingPlans {
     /**
      * Name of the calling plan that user is enrolled in.
      */
@@ -32739,9 +32801,9 @@ pub struct ListUsersResponseCallingPlans {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ListUsersResponse {
+pub struct ListPhoneUsersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub calling_plans: Vec<ListUsersResponseCallingPlans>,
+    pub calling_plans: Vec<ListPhoneUsersResponseCallingPlans>,
     /**
      * Email address of the user.
      */
@@ -32788,7 +32850,7 @@ pub struct ListUsersResponse {
     )]
     pub phone_user_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub site: Option<ListUsersResponseSite>,
+    pub site: Option<ListPhoneUsersResponseSite>,
     /**
      * Displays the status of the user's Zoom Phone license. The value can be either of the following:<br>
      *  `activate`: Active Zoom phone user.<br>
@@ -32803,7 +32865,7 @@ pub struct ListUsersResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ListUsersResponseData {
+pub struct ListPhoneUsersResponseData {
     /**
      * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -32832,7 +32894,7 @@ pub struct ListUsersResponseData {
     )]
     pub total_records: i64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub users: Vec<ListUsersResponse>,
+    pub users: Vec<ListPhoneUsersResponse>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -34140,7 +34202,7 @@ pub struct BillingReports {
     pub end_date: Option<chrono::NaiveDate>,
     /**
      * Unique Identifier of the report. Use this ID to retrieve billing invoice via the "Get Billing Invoices API".
-     *
+     *  
      *  You can also use this ID to export a CSV file of the billing report from this URL: `https://zoom.us/account/report/billing/export?id={id}`.
      */
     #[serde(
@@ -34299,7 +34361,7 @@ pub struct ListSharedLineGroupsResponsePhoneNumbers {
      * Status of the number.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<GetNumberDetailsResponseStatus>,
+    pub status: Option<GetPhoneNumberDetailsResponseStatus>,
 }
 
 /**
@@ -34469,7 +34531,7 @@ pub struct CreateSharedLineGroupRequest {
     pub extension_number: i64,
     /**
      * Unique identifier of the [site](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites) that you would like to use for the shared line group. You will only be able to add members that belong to this site to the shared line group.
-     *
+     *  
      *  This field is required only if the [multiple sites](https://support.zoom.us/hc/en-us/articles/360020809672-Managing-multiple-sites) option has been enabled for the account.
      */
     #[serde(
@@ -35016,7 +35078,7 @@ pub struct GetCallQueueRecordingsResponseData {
 pub struct Params {
     /**
      * This field is only required if Google Calendar is being used for the event associated with the Zoom Room. The value for this field can be retrieved by calling Google's [CalendarList:list API](https://developers.google.com/calendar/v3/reference/events/list) and referring to the "id" field included in the [calendarList resource](https://developers.google.com/calendar/v3/reference/calendarList#resource).
-     *
+     *  
      *
      */
     #[serde(
@@ -35036,7 +35098,7 @@ pub struct Params {
     pub change_key: String,
     /**
      * Unique Identifier of the calendar event associated with the Zoom Room.<br><br>If the calendar integration being used is Microsoft Exchange, the value for this field can be retrieved by using Microsoft's [FindItem Operation](https://docs.microsoft.com/en-us/exchange/client-developer/web-service-reference/finditem-operation) and referring to the Id field of the ItemId Element included in the operation response.<br><br>If the Google calendar integration was used for this event, the event_id can be retrieved by calling Google's [Events:list API](https://developers.google.com/calendar/v3/reference/events/list) and referring to the "id" field included in the [events resource](https://developers.google.com/calendar/v3/reference/events#resource).
-     *
+     *  
      *
      */
     #[serde(
@@ -35081,9 +35143,9 @@ pub struct InMeetingRecordingControlRequest {
      *  \* `recording.stop`: Provide this value if you would like to stop the recording.<br><br>
      *  \* `recording.pause`: Provide this value if you would like to pause the recording.<br><br>
      *  \* `recording.resume`: Provide this value if you would like to resume the recording that was previously paused.
-     *
-     *
-     *
+     *  
+     *  
+     *  
      *
      */
     #[serde(
@@ -35171,7 +35233,7 @@ pub struct ListSipTrunksResponseData {
 pub struct AssignSipTrunksRequest {
     /**
      * DNIS of the sub account. The prefix of the DNIS (i.e. the first five digits of the DNIS value) must match the DNIS prefix of the master account. To retrieve the DNIS prefix of a master account's SIP Trunk, use the List SIP Trunks API and refer to the first five digits in the `dnis` value.
-     *
+     *  
      *  For example, if the DNIS of the master account is 1888812345, the DNIS of the sub account must comprise of "18888" + "random_number". The maximum allowed length of the DNIS is 8.
      */
     #[serde(
@@ -35427,7 +35489,7 @@ pub struct InternalNumbers {
      * Specify whether this number can be used by users to join a meeting or not. <br>
      *  \* `true` : This number can be used to join a meeting. <br>
      *  \*  `false`: This number can not be used to join a meeting.
-     *
+     *  
      *  Note that if the value of `visible` field is set to `true`, the value of this field will always be `true`.
      */
     #[serde(
@@ -35554,7 +35616,7 @@ pub struct AddInternalNumbersResponse {
      * Specify whether this number can be used by users to join a meeting or not. <br>
      *  \* `true` : This number can be used to join a meeting. <br>
      *  \*  `false`: This number can not be used to join a meeting.
-     *
+     *  
      *  Note that if the value of `visible` field is set to `true`, the value of this field will always be `true`.
      */
     #[serde(
@@ -35645,7 +35707,7 @@ pub struct AddInternalNumbersResponseData {
 
 /**
  * Specify one of the following values for this field:
- *
+ *   
  *   `upgrade`: Upgrade to the latest Zoom Rooms App Version.<br>
  *   `downgrade`: Downgrade the Zoom Rooms App Version.<br>
  *   `cancel`: Cancel an ongoing upgrade or downgrade process.
@@ -35692,7 +35754,7 @@ impl ChangeZoomRoomsAppVersionRequestAction {
 pub struct ChangeZoomRoomsAppVersionRequest {
     /**
      * Specify one of the following values for this field:
-     *
+     *  
      *  `upgrade`: Upgrade to the latest Zoom Rooms App Version.<br>
      *  `downgrade`: Downgrade the Zoom Rooms App Version.<br>
      *  `cancel`: Cancel an ongoing upgrade or downgrade process.
@@ -35824,11 +35886,11 @@ pub struct GetWebinarLiveStreamDetailsResponse {
  *   * `Presenting`
  *   * `In_A_Zoom_Meeting`
  *   * `On_A_Call`
- *
+ *   
  *   Users who are on Zoom Client with a version **lower than 5.3.0** can update the status from:
  *   * `Away` to `Do_Not_Disturb`
  *   * `Available` to `Do_Not_Disturb`
- *
+ *   
  *   Users who are on **Zoom Client 5.3.0** or higher can update the status from:
  *   * `Do_Not_Disturb` to `Away`
  *   * `Do_Not_Disturb` to `Available`
@@ -35889,7 +35951,7 @@ impl UpdatePresenceStatusRequest {
 pub struct UpdatePresenceStatusRequestData {
     /**
      * If you're updating the status to `Do_Not_Disturb`, specify a duration in minutes for which the status should remain as `Do_Not_Disturb`.
-     *
+     *  
      *  The default value is 20 minutes and the maximum allowed value is 1440 minutes.
      */
     #[serde(
@@ -35907,11 +35969,11 @@ pub struct UpdatePresenceStatusRequestData {
      *  \* `Presenting`
      *  \* `In_A_Zoom_Meeting`
      *  \* `On_A_Call`
-     *
+     *  
      *  Users who are on Zoom Client with a version \*\*lower than 5.3.0\*\* can update the status from:
      *  \* `Away` to `Do_Not_Disturb`
      *  \* `Available` to `Do_Not_Disturb`
-     *
+     *  
      *  Users who are on \*\*Zoom Client 5.3.0\*\* or higher can update the status from:
      *  \* `Do_Not_Disturb` to `Away`
      *  \* `Do_Not_Disturb` to `Available`
@@ -36334,7 +36396,7 @@ pub struct GetCallQoSResponseCallerQosReceiving {
     pub max_loss: String,
     /**
      * The MOS (Mean Opinion Score).
-     *
+     *  
      *  MOS measures voice quality on a scale of 1 to 5. A score than or equal to 3.5 means good quality, while below 3.5 means poor quality.
      */
     #[serde(
@@ -36442,7 +36504,7 @@ pub struct GetCallQoSResponseCalleeQosSending {
     pub max_loss: String,
     /**
      * The MOS (Mean Opinion Score).
-     *
+     *  
      *  MOS measures voice quality on a scale of 1 to 5. A score than or equal to 3.5 means good quality, while below 3.5 means poor quality.
      */
     #[serde(
@@ -36720,7 +36782,7 @@ pub struct CreateBatchPollsResponse {
 pub struct ManageE911SignageResponse {
     /**
      * Unique identifier of the event related to the content being displayed. This field is only returned if you provided `zoomroom.emergency_alert_displayed` as the value of the `method` parameter.
-     *
+     *  
      *  Save this response value and provide it as the value of the `event_id` request parameter when you need to remove the alert content using `zoomroom.emergency_alert_removed` method.
      */
     #[serde(
@@ -36732,10 +36794,10 @@ pub struct ManageE911SignageResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct AccountInvoicesResponse {
+pub struct AccountBillingInvoicesResponse {
     /**
      * The remaining balance of the invoice after all payments, adjustments, and refunds are applied.
-     *
+     *  
      *
      */
     #[serde(
@@ -36746,7 +36808,7 @@ pub struct AccountInvoicesResponse {
     pub balance: f64,
     /**
      * The date by which the payment for this invoice is due.
-     *
+     *  
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -36811,7 +36873,7 @@ pub struct AccountInvoicesResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct AccountInvoicesResponseData {
+pub struct AccountBillingInvoicesResponseData {
     /**
      * Currency used in the invoice.
      */
@@ -36822,7 +36884,7 @@ pub struct AccountInvoicesResponseData {
     )]
     pub currency: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub invoices: Vec<AccountInvoicesResponse>,
+    pub invoices: Vec<AccountBillingInvoicesResponse>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
@@ -36894,10 +36956,10 @@ pub struct InvoiceItems {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetAccountInvoiceResponse {
+pub struct GetAccountBillingInvoiceResponse {
     /**
      * The remaining balance of the invoice after all payments, adjustments, and refunds are applied.
-     *
+     *  
      *
      */
     #[serde(
@@ -36917,7 +36979,7 @@ pub struct GetAccountInvoiceResponse {
     pub currency: String,
     /**
      * The date by which the payment for this invoice is due.
-     *
+     *  
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -36985,7 +37047,7 @@ pub struct GetAccountInvoiceResponse {
 
 /**
  * Feedback submitted by the participant.
- *
+ *   
  *   * `GOOD`: Thumbs up.
  *   * `NOT GOOD`: Thumbs down.
  */
@@ -37046,7 +37108,7 @@ pub struct ParticipantFeedbackResponseParticipants {
     pub email: String,
     /**
      * Feedback submitted by the participant.
-     *
+     *  
      *  \* `GOOD`: Thumbs up.
      *  \* `NOT GOOD`: Thumbs down.
      */
@@ -37650,7 +37712,7 @@ impl Default for ListArchivedFilesQueryDateType {
  *   * `CHAT` — A TXT file containing chat messages that were sent during the meeting.
  *   * `CC` — A file containing the recording's closed captions, in VTT file format.
  *   * `CSV` — A file containing polling data in, in CSV format.
- *
+ *   
  *   For more information, read our [Managing and sharing cloud recordings](https://support.zoom.us/hc/en-us/articles/205347605-Managing-and-sharing-cloud-recordings#h_9898497b-e736-4980-a749-d55608f10773) documentation.
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
@@ -37838,15 +37900,15 @@ pub struct ListArchivedFilesResponseMeetings {
     pub total_size: i64,
     /**
      * The meeting or webinar's type:
-     *
+     *  
      *  Meeting type values:
      *  \* `1` — Instant meeting.
      *  \* `2` — Scheduled meeting.
      *  \* `3` — Recurring meeting with no fixed time.
      *  \* `8` — Recurring meeting with a fixed time.
-     *
+     *  
      *  Webinar type values:
-     *
+     *  
      *  \* `5` — A webinar.
      *  \* `6` — Recurring webinar with no fixed time.
      *  \* `9` — Recurring webinar with a fixed time.

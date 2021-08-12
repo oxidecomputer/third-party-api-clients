@@ -19,7 +19,7 @@ impl ImGroups {
      *
      * List [IM directory groups](https://support.zoom.us/hc/en-us/articles/203749815-IM-Management).<br><br>
      * **Scopes**: `imgroup:read:admin`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
     pub async fn get(&self) -> Result<crate::types::ImGroupList> {
@@ -34,7 +34,7 @@ impl ImGroups {
      *
      * Create an [IM directory group](https://support.zoom.us/hc/en-us/articles/203749815-IM-Management) under your account.<br><br>
      * **Scopes**: `imgroup:write:admin`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn im_group_create(&self, body: &crate::types::ImGroupCreateRequest) -> Result<()> {
@@ -78,7 +78,7 @@ impl ImGroups {
      *
      * Delete an [IM directory group](https://support.zoom.us/hc/en-us/articles/203749815-IM-Management) under your account.<br><br>
      * Scopes: `imgroup:write:admin`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**
@@ -144,7 +144,7 @@ impl ImGroups {
      *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *
+     *  
      *  The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -221,7 +221,7 @@ impl ImGroups {
      *
      * Delete a member from an [IM directory group](https://support.zoom.us/hc/en-us/articles/203749815-IM-Management) under an account.<br><br>
      * Scopes: `imgroup:write:admin`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      *
      * **Parameters:**

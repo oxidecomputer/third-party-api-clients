@@ -3770,7 +3770,7 @@ impl Include {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutEmployeesRequest {
+pub struct PutV1EmployeesRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
@@ -3835,11 +3835,11 @@ pub struct PutEmployeesRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetCompanyEmployeesRequest {}
+pub struct GetV1CompaniesCompanyIdEmployeesRequest {}
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostEmployeeRequest {
+pub struct PostV1EmployeesRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
@@ -3891,7 +3891,7 @@ pub struct PostEmployeeRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutJobRequest {
+pub struct PutV1JobsJobIdRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hire_date: Option<chrono::NaiveDate>,
     /**
@@ -3925,7 +3925,7 @@ pub struct PutJobRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostJobRequest {
+pub struct PostV1JobsJobIdRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub hire_date: Option<chrono::NaiveDate>,
     /**
@@ -3950,7 +3950,7 @@ pub struct PostJobRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostCompanyLocationRequest {
+pub struct PostV1CompaniesCompanyIdLocationsRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4013,7 +4013,7 @@ pub struct PostCompanyLocationRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutLocationRequest {
+pub struct PutV1LocationsLocationIdRequest {
     /**
      *
      */
@@ -4095,7 +4095,7 @@ pub struct PutLocationRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum PutContractorRequestWageType {
+pub enum PutV1ContractorsContractorIdRequestWageType {
     #[serde(rename = "Fixed")]
     Fixed,
     #[serde(rename = "Hourly")]
@@ -4105,32 +4105,32 @@ pub enum PutContractorRequestWageType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for PutContractorRequestWageType {
+impl std::fmt::Display for PutV1ContractorsContractorIdRequestWageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            PutContractorRequestWageType::Fixed => "Fixed",
-            PutContractorRequestWageType::Hourly => "Hourly",
-            PutContractorRequestWageType::Noop => "",
-            PutContractorRequestWageType::FallthroughString(s) => s,
+            PutV1ContractorsContractorIdRequestWageType::Fixed => "Fixed",
+            PutV1ContractorsContractorIdRequestWageType::Hourly => "Hourly",
+            PutV1ContractorsContractorIdRequestWageType::Noop => "",
+            PutV1ContractorsContractorIdRequestWageType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for PutContractorRequestWageType {
-    fn default() -> PutContractorRequestWageType {
-        PutContractorRequestWageType::Noop
+impl Default for PutV1ContractorsContractorIdRequestWageType {
+    fn default() -> PutV1ContractorsContractorIdRequestWageType {
+        PutV1ContractorsContractorIdRequestWageType::Noop
     }
 }
-impl PutContractorRequestWageType {
+impl PutV1ContractorsContractorIdRequestWageType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, PutContractorRequestWageType::Noop)
+        matches!(self, PutV1ContractorsContractorIdRequestWageType::Noop)
     }
 }
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutContractorRequest {
+pub struct PutV1ContractorsContractorIdRequest {
     /**
      * The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
      */
@@ -4203,7 +4203,7 @@ pub struct PutContractorRequest {
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub wage_type: Option<PutContractorRequestWageType>,
+    pub wage_type: Option<PutV1ContractorsContractorIdRequestWageType>,
 }
 
 /**
@@ -4212,7 +4212,7 @@ pub struct PutContractorRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum PostCompanyContractorRequestType {
+pub enum PostV1CompaniesCompanyIdContractorsRequestType {
     #[serde(rename = "Business")]
     Business,
     #[serde(rename = "Individual")]
@@ -4222,32 +4222,32 @@ pub enum PostCompanyContractorRequestType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for PostCompanyContractorRequestType {
+impl std::fmt::Display for PostV1CompaniesCompanyIdContractorsRequestType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            PostCompanyContractorRequestType::Business => "Business",
-            PostCompanyContractorRequestType::Individual => "Individual",
-            PostCompanyContractorRequestType::Noop => "",
-            PostCompanyContractorRequestType::FallthroughString(s) => s,
+            PostV1CompaniesCompanyIdContractorsRequestType::Business => "Business",
+            PostV1CompaniesCompanyIdContractorsRequestType::Individual => "Individual",
+            PostV1CompaniesCompanyIdContractorsRequestType::Noop => "",
+            PostV1CompaniesCompanyIdContractorsRequestType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for PostCompanyContractorRequestType {
-    fn default() -> PostCompanyContractorRequestType {
-        PostCompanyContractorRequestType::Noop
+impl Default for PostV1CompaniesCompanyIdContractorsRequestType {
+    fn default() -> PostV1CompaniesCompanyIdContractorsRequestType {
+        PostV1CompaniesCompanyIdContractorsRequestType::Noop
     }
 }
-impl PostCompanyContractorRequestType {
+impl PostV1CompaniesCompanyIdContractorsRequestType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, PostCompanyContractorRequestType::Noop)
+        matches!(self, PostV1CompaniesCompanyIdContractorsRequestType::Noop)
     }
 }
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostCompanyContractorRequest {
+pub struct PostV1CompaniesCompanyIdContractorsRequest {
     /**
      * The name of the contractor business. This attribute is required for “Business” contractors and will be ignored for “Individual” contractors.
      */
@@ -4318,21 +4318,24 @@ pub struct PostCompanyContractorRequest {
      */
     #[serde(
         default,
-        skip_serializing_if = "PostCompanyContractorRequestType::is_noop",
+        skip_serializing_if = "PostV1CompaniesCompanyIdContractorsRequestType::is_noop",
         rename = "type"
     )]
-    pub type_: PostCompanyContractorRequestType,
+    pub type_: PostV1CompaniesCompanyIdContractorsRequestType,
     /**
      * The contractor’s wage type, either “Fixed” or “Hourly”.
      *
      */
-    #[serde(default, skip_serializing_if = "PutContractorRequestWageType::is_noop")]
-    pub wage_type: PutContractorRequestWageType,
+    #[serde(
+        default,
+        skip_serializing_if = "PutV1ContractorsContractorIdRequestWageType::is_noop"
+    )]
+    pub wage_type: PutV1ContractorsContractorIdRequestWageType,
 }
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompensationRequest {
+pub struct PutV1CompensationsCompensationIdRequest {
     /**
      *
      */
@@ -4365,7 +4368,7 @@ pub struct PutCompensationRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostJobCompensationRequest {
+pub struct PostV1JobsJobIdCompensationsRequest {
     /**
      *
      */
@@ -4394,7 +4397,7 @@ pub struct PostJobCompensationRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostEmployeeGarnishmentRequest {
+pub struct PostV1EmployeesEmployeeIdGarnishmentsRequest {
     /**
      *
      */
@@ -4463,7 +4466,7 @@ pub struct PostEmployeeGarnishmentRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutGarnishmentRequest {
+pub struct PutV1GarnishmentsGarnishmentIdRequest {
     /**
      * Whether or not this garnishment is currently active.
      */
@@ -4542,7 +4545,7 @@ pub struct PutGarnishmentRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostEmployeeTerminationRequest {
+pub struct PostV1EmployeesEmployeeIdTerminationsRequest {
     /**
      *
      */
@@ -4557,7 +4560,7 @@ pub struct PostEmployeeTerminationRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutEmployeeHomeAddressRequest {
+pub struct PutV1EmployeesEmployeeIdHomeAddressRequest {
     /**
      *
      */
@@ -4616,7 +4619,7 @@ pub struct PutEmployeeHomeAddressRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyPayScheduleRequest {
+pub struct PutV1CompaniesCompanyIdPaySchedulesScheduleRequest {
     /**
      *
      */
@@ -4638,7 +4641,7 @@ pub struct PutCompanyPayScheduleRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum PostCompanyBankAccountRequestType {
+pub enum PostV1CompaniesCompanyIdBankAccountsRequestAccountType {
     #[serde(rename = "Checking")]
     Checking,
     #[serde(rename = "Savings")]
@@ -4648,32 +4651,35 @@ pub enum PostCompanyBankAccountRequestType {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for PostCompanyBankAccountRequestType {
+impl std::fmt::Display for PostV1CompaniesCompanyIdBankAccountsRequestAccountType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            PostCompanyBankAccountRequestType::Checking => "Checking",
-            PostCompanyBankAccountRequestType::Savings => "Savings",
-            PostCompanyBankAccountRequestType::Noop => "",
-            PostCompanyBankAccountRequestType::FallthroughString(s) => s,
+            PostV1CompaniesCompanyIdBankAccountsRequestAccountType::Checking => "Checking",
+            PostV1CompaniesCompanyIdBankAccountsRequestAccountType::Savings => "Savings",
+            PostV1CompaniesCompanyIdBankAccountsRequestAccountType::Noop => "",
+            PostV1CompaniesCompanyIdBankAccountsRequestAccountType::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for PostCompanyBankAccountRequestType {
-    fn default() -> PostCompanyBankAccountRequestType {
-        PostCompanyBankAccountRequestType::Noop
+impl Default for PostV1CompaniesCompanyIdBankAccountsRequestAccountType {
+    fn default() -> PostV1CompaniesCompanyIdBankAccountsRequestAccountType {
+        PostV1CompaniesCompanyIdBankAccountsRequestAccountType::Noop
     }
 }
-impl PostCompanyBankAccountRequestType {
+impl PostV1CompaniesCompanyIdBankAccountsRequestAccountType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, PostCompanyBankAccountRequestType::Noop)
+        matches!(
+            self,
+            PostV1CompaniesCompanyIdBankAccountsRequestAccountType::Noop
+        )
     }
 }
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostCompanyBankAccountRequest {
+pub struct PostV1CompaniesCompanyIdBankAccountsRequest {
     /**
      *
      */
@@ -4687,7 +4693,7 @@ pub struct PostCompanyBankAccountRequest {
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub account_type: Option<PostCompanyBankAccountRequestType>,
+    pub account_type: Option<PostV1CompaniesCompanyIdBankAccountsRequestAccountType>,
     /**
      *
      */
@@ -4701,7 +4707,7 @@ pub struct PostCompanyBankAccountRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyBankAccountsVerifyRequest {
+pub struct PutV1CompaniesCompanyIdBankAccountsVerifyRequest {
     /**
      *
      */
@@ -4724,7 +4730,7 @@ pub struct PutCompanyBankAccountsVerifyRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostCompanyBenefitRequest {
+pub struct PostV1CompaniesCompanyIdBenefitsRequest {
     /**
      *
      */
@@ -4762,7 +4768,7 @@ pub struct PostCompanyBenefitRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyBenefitRequest {
+pub struct PutV1CompanyBenefitsBenefitIdRequest {
     /**
      *
      */
@@ -4789,7 +4795,7 @@ pub struct PutCompanyBenefitRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostCompanyEarningTypeRequest {
+pub struct PostV1CompaniesCompanyIdEarningTypesRequest {
     /**
      * The name of the custom earning type.
      */
@@ -4802,7 +4808,7 @@ pub struct PostCompanyEarningTypeRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyEarningTypeRequest {
+pub struct PutV1CompaniesCompanyIdEarningTypesTypeUuidRequest {
     /**
      * The name of the custom earning type.
      */
@@ -4816,7 +4822,7 @@ pub struct PutCompanyEarningTypeRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostEmployeeBenefitRequest {
+pub struct PostV1EmployeesEmployeeIdBenefitsRequest {
     /**
      *
      */
@@ -4917,7 +4923,7 @@ pub struct PostEmployeeBenefitRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutEmployeeBenefitRequest {
+pub struct PutV1EmployeeBenefitsBenefitIdRequest {
     /**
      * Whether the employee benefit is active.
      */
@@ -5019,7 +5025,7 @@ pub struct PutEmployeeBenefitRequest {
 
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetCompanyPayrollsInclude {
+pub enum GetV1CompaniesCompanyIdPayrollsInclude {
     #[serde(rename = "benefits")]
     Benefits,
     #[serde(rename = "deductions")]
@@ -5031,27 +5037,27 @@ pub enum GetCompanyPayrollsInclude {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetCompanyPayrollsInclude {
+impl std::fmt::Display for GetV1CompaniesCompanyIdPayrollsInclude {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetCompanyPayrollsInclude::Benefits => "benefits",
-            GetCompanyPayrollsInclude::Deductions => "deductions",
-            GetCompanyPayrollsInclude::Taxes => "taxes",
-            GetCompanyPayrollsInclude::Noop => "",
-            GetCompanyPayrollsInclude::FallthroughString(s) => s,
+            GetV1CompaniesCompanyIdPayrollsInclude::Benefits => "benefits",
+            GetV1CompaniesCompanyIdPayrollsInclude::Deductions => "deductions",
+            GetV1CompaniesCompanyIdPayrollsInclude::Taxes => "taxes",
+            GetV1CompaniesCompanyIdPayrollsInclude::Noop => "",
+            GetV1CompaniesCompanyIdPayrollsInclude::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetCompanyPayrollsInclude {
-    fn default() -> GetCompanyPayrollsInclude {
-        GetCompanyPayrollsInclude::Noop
+impl Default for GetV1CompaniesCompanyIdPayrollsInclude {
+    fn default() -> GetV1CompaniesCompanyIdPayrollsInclude {
+        GetV1CompaniesCompanyIdPayrollsInclude::Noop
     }
 }
-impl GetCompanyPayrollsInclude {
+impl GetV1CompaniesCompanyIdPayrollsInclude {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetCompanyPayrollsInclude::Noop)
+        matches!(self, GetV1CompaniesCompanyIdPayrollsInclude::Noop)
     }
 }
 
@@ -5091,7 +5097,7 @@ impl OffCycleReason {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostCompanyPayrollRequest {
+pub struct PostV1CompaniesCompanyIdPayrollsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub check_date: Option<chrono::NaiveDate>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -5115,7 +5121,7 @@ pub struct PostCompanyPayrollRequest {
  */
 #[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum GetCompanyPayrollsIncludeData {
+pub enum GetV1CompaniesCompanyIdPayrollsPayrollInclude {
     #[serde(rename = "benefits")]
     Benefits,
     #[serde(rename = "deductions")]
@@ -5127,33 +5133,33 @@ pub enum GetCompanyPayrollsIncludeData {
     FallthroughString(String),
 }
 
-impl std::fmt::Display for GetCompanyPayrollsIncludeData {
+impl std::fmt::Display for GetV1CompaniesCompanyIdPayrollsPayrollInclude {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            GetCompanyPayrollsIncludeData::Benefits => "benefits",
-            GetCompanyPayrollsIncludeData::Deductions => "deductions",
-            GetCompanyPayrollsIncludeData::Taxes => "taxes",
-            GetCompanyPayrollsIncludeData::Noop => "",
-            GetCompanyPayrollsIncludeData::FallthroughString(s) => s,
+            GetV1CompaniesCompanyIdPayrollsPayrollInclude::Benefits => "benefits",
+            GetV1CompaniesCompanyIdPayrollsPayrollInclude::Deductions => "deductions",
+            GetV1CompaniesCompanyIdPayrollsPayrollInclude::Taxes => "taxes",
+            GetV1CompaniesCompanyIdPayrollsPayrollInclude::Noop => "",
+            GetV1CompaniesCompanyIdPayrollsPayrollInclude::FallthroughString(s) => s,
         }
         .fmt(f)
     }
 }
 
-impl Default for GetCompanyPayrollsIncludeData {
-    fn default() -> GetCompanyPayrollsIncludeData {
-        GetCompanyPayrollsIncludeData::Noop
+impl Default for GetV1CompaniesCompanyIdPayrollsPayrollInclude {
+    fn default() -> GetV1CompaniesCompanyIdPayrollsPayrollInclude {
+        GetV1CompaniesCompanyIdPayrollsPayrollInclude::Noop
     }
 }
-impl GetCompanyPayrollsIncludeData {
+impl GetV1CompaniesCompanyIdPayrollsPayrollInclude {
     pub fn is_noop(&self) -> bool {
-        matches!(self, GetCompanyPayrollsIncludeData::Noop)
+        matches!(self, GetV1CompaniesCompanyIdPayrollsPayrollInclude::Noop)
     }
 }
 
 /// An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyPayrollsRequestEmployeeCompensationsFixed {
+pub struct PutV1CompaniesCompanyIdPayrollsRequestEmployeeCompensationsFixed {
     /**
      * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements.
      */
@@ -5185,7 +5191,7 @@ pub struct PutCompanyPayrollsRequestEmployeeCompensationsFixed {
 
 /// An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyPayrollsRequestEmployeeCompensationsHourly {
+pub struct PutV1CompaniesCompanyIdPayrollsRequestEmployeeCompensationsHourly {
     /**
      * An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours.
      */
@@ -5217,7 +5223,7 @@ pub struct PutCompanyPayrollsRequestEmployeeCompensationsHourly {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyPayrollsRequestEmployeeCompensations {
+pub struct PutV1CompaniesCompanyIdPayrollsRequestEmployeeCompensations {
     /**
      * The ID of the employee.
      */
@@ -5231,12 +5237,13 @@ pub struct PutCompanyPayrollsRequestEmployeeCompensations {
      *
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub fixed_compensations: Vec<PutCompanyPayrollsRequestEmployeeCompensationsFixed>,
+    pub fixed_compensations: Vec<PutV1CompaniesCompanyIdPayrollsRequestEmployeeCompensationsFixed>,
     /**
      *
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub hourly_compensations: Vec<PutCompanyPayrollsRequestEmployeeCompensationsHourly>,
+    pub hourly_compensations:
+        Vec<PutV1CompaniesCompanyIdPayrollsRequestEmployeeCompensationsHourly>,
     /**
      *
      */
@@ -5245,9 +5252,9 @@ pub struct PutCompanyPayrollsRequestEmployeeCompensations {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyPayrollsRequest {
+pub struct PutV1CompaniesCompanyIdPayrollsRequest {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub employee_compensations: Vec<PutCompanyPayrollsRequestEmployeeCompensations>,
+    pub employee_compensations: Vec<PutV1CompaniesCompanyIdPayrollsRequestEmployeeCompensations>,
     /**
      * The current version of the object. See the versioning guide for details using this field.
      */
@@ -5301,7 +5308,7 @@ pub struct User {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostPartnerManagedCompanieRequestCompany {
+pub struct PostV1PartnerManagedCompaniesRequestCompany {
     /**
      * The employer identification number (EIN) of the company.
      */
@@ -5333,9 +5340,9 @@ pub struct PostPartnerManagedCompanieRequestCompany {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostPartnerManagedCompanieRequest {
+pub struct PostV1PartnerManagedCompaniesRequest {
     #[serde()]
-    pub company: PostPartnerManagedCompanieRequestCompany,
+    pub company: PostV1PartnerManagedCompaniesRequestCompany,
     /**
      * Information for the user who will be the primary payroll administrator for the new company.
      */
@@ -5345,7 +5352,7 @@ pub struct PostPartnerManagedCompanieRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostPartnerManagedCompanieResponse {
+pub struct PostV1PartnerManagedCompaniesResponse {
     /**
      *
      */
@@ -5425,7 +5432,7 @@ pub struct Addresses {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostProvisionRequestCompany {
+pub struct PostV1ProvisionRequestCompany {
     /**
      * The locations for the company. This includes mailing, work, and filing addresses.
      */
@@ -5476,9 +5483,9 @@ pub struct PostProvisionRequestCompany {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostProvisionRequest {
+pub struct PostV1ProvisionRequest {
     #[serde()]
-    pub company: PostProvisionRequestCompany,
+    pub company: PostV1ProvisionRequestCompany,
     /**
      * Information for the user who will be the primary payroll administrator for the new company.
      */
@@ -5488,7 +5495,7 @@ pub struct PostProvisionRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostProvisionResponse {
+pub struct PostV1ProvisionResponse {
     /**
      *
      */
@@ -5501,13 +5508,13 @@ pub struct PostProvisionResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetEmployeeCustomFieldsResponse {
+pub struct GetV1EmployeesEmployeeIdCustomFieldsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub custom_fields: Vec<EmployeeCustomField>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetCompanyCustomFieldsResponse {
+pub struct GetV1CompaniesCompanyIdCustomFieldsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub custom_fields: Vec<CompanyCustomField>,
 }
@@ -5552,7 +5559,7 @@ impl OnboardingPersonType {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostCompanyJobApplicantRequest {
+pub struct PostV1CompaniesCompanyIdJobApplicantsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
     #[serde(
@@ -5607,7 +5614,7 @@ pub struct PostCompanyJobApplicantRequest {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyJobApplicantsApplicantRequest {
+pub struct PutV1CompaniesCompanyIdJobApplicantsApplicantUuidRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
@@ -5670,7 +5677,7 @@ pub struct PutCompanyJobApplicantsApplicantRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetCompanyReversalsResponse {
+pub struct GetV1CompaniesCompanyIdUuidPayrollReversalsResponse {
     /**
      * Timestamp of when the reversal was approved.
      */
@@ -5725,7 +5732,7 @@ pub struct GetCompanyReversalsResponse {
 
 ///
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PostCompanyAdminRequest {
+pub struct PostV1CompaniesCompanyIdAdminsRequest {
     /**
      * The last name of the admin.
      */
@@ -5756,7 +5763,7 @@ pub struct PostCompanyAdminRequest {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct GetCompanyFederalTaxDetailsResponse {
+pub struct GetV1CompaniesCompanyIdUuidFederalTaxDetailsResponse {
     /**
      * The company's EIN
      */
@@ -5838,7 +5845,7 @@ pub struct GetCompanyFederalTaxDetailsResponse {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct PutCompanyFederalTaxDetailsRequest {
+pub struct PutV1CompaniesCompanyIdUuidFederalTaxDetailsRequest {
     /**
      * The EIN of of the company
      */

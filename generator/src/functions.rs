@@ -29,13 +29,7 @@ pub fn generate_files(
                 return Ok(());
             };
 
-            let od = o.operation_id.as_deref().unwrap();
-
-            // For Gusto we don't need to generate the functions for getting a token.
-            // TODO: actually make this work.
-            if od == "post-token" {
-                return Ok(());
-            }
+            let od = to_snake_case(o.operation_id.as_deref().unwrap());
 
             // Make sure we have exactly 1 tag. This likely needs to change in the
             // future but for now it seems fairly consistent.
@@ -53,7 +47,7 @@ pub fn generate_files(
             let tag = to_snake_case(&make_plural(proper_name, tags.first().unwrap()))
                 .replace("_i_ds", "_ids");
 
-            let oid = clean_fn_name(proper_name, od, &tag);
+            let oid = clean_fn_name(proper_name, &od, &tag);
 
             let mut out = String::new();
             if let Some(o) = tag_files.get(&tag) {
@@ -120,7 +114,7 @@ pub fn generate_files(
                         let (ct, mt) = b.content.first().unwrap();
                         if ct == "application/json" {
                             if let Some(s) = &mt.schema {
-                                let object_name = format!("{} request", oid_to_object_name(&oid));
+                                let object_name = format!("{} request", oid_to_object_name(&od));
                                 let id = ts.select(Some(&object_name), s, "")?;
                                 let et = ts.id_to_entry.get(&id).unwrap();
                                 if let crate::TypeDetails::Object(p, _) = &et.details {
@@ -144,6 +138,11 @@ pub fn generate_files(
                             // Skip it for now.
                             // TODO: fix this later.
                             (None, None)
+                        } else if ct == "application/x-www-form-urlencoded" {
+                            println!("got application/x-www-form-urlencoded for {}", oid);
+                            // Skip it for now.
+                            // TODO: fix this later.
+                            (None, None)
                         } else if let Some(s) = &mt.schema {
                             let tid = ts.select(None, s, "")?;
                             let rt = ts.render_type(&tid, false)?;
@@ -159,7 +158,7 @@ pub fn generate_files(
                     }
                 } else if let openapiv3::ReferenceOr::Reference { reference } = b {
                     // We must have had a reference.
-                    let object_name = format!("{} request", oid_to_object_name(&oid));
+                    let object_name = format!("{} request", oid_to_object_name(&od));
                     let id = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
                     let rt = ts.render_type(&id, false)?;
                     (Some(format!("&{}", rt)), Some("json".to_string()))
@@ -185,7 +184,7 @@ pub fn generate_files(
             /*
              * Get the response type.
              */
-            let (mut response_type, tid, inner_response_type) = get_response_type(&oid, ts, o)?;
+            let (mut response_type, tid, inner_response_type) = get_response_type(&od, ts, o)?;
             // We shouldn't ever have an optional response type, thats just annoying.
             if response_type.starts_with("Option<") {
                 response_type = response_type
@@ -344,7 +343,7 @@ pub fn generate_files(
 }
 
 fn get_response_type(
-    oid: &str,
+    od: &str,
     ts: &mut TypeSpace,
     o: &openapiv3::Operation,
 ) -> Result<(String, crate::TypeId, String)> {
@@ -375,7 +374,7 @@ fn get_response_type(
                     }
                 }
 
-                let object_name = format!("{} response", oid_to_object_name(oid));
+                let object_name = format!("{} response", oid_to_object_name(od));
                 let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
                 let og_rt = ts.render_type(&tid, false)?;
                 let et = ts.id_to_entry.get(&tid).unwrap();
@@ -417,7 +416,7 @@ fn get_response_type(
             }
 
             if let Some(s) = &mt.schema {
-                let object_name = format!("{} response", oid_to_object_name(oid));
+                let object_name = format!("{} response", oid_to_object_name(od));
                 let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
                 let rt = ts.render_type(&tid, false)?;
                 return Ok((rt, tid, "".to_string()));
@@ -425,7 +424,7 @@ fn get_response_type(
         }
     } else if let openapiv3::ReferenceOr::Reference { reference } = first.1 {
         // We must have had a reference.
-        let object_name = format!("{} response", oid_to_object_name(oid));
+        let object_name = format!("{} response", oid_to_object_name(od));
         let id = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
         let og_rt = ts.render_type(&id, false)?;
         let et = ts.id_to_entry.get(&id).unwrap();
@@ -464,6 +463,7 @@ fn get_fn_params(
      * order in the generated code.
      */
     let mut fn_params_str: Vec<String> = Default::default();
+    let mut fn_params: Vec<String> = Default::default();
     let mut query_params: BTreeMap<String, String> = Default::default();
     let mut gp = global_params;
     let mut op = o.parameters.clone();
@@ -488,6 +488,7 @@ fn get_fn_params(
         let typ = parameter_data.render_type(&param_name, ts)?;
         if nam == "ref" || nam == "type" {
             fn_params_str.push(format!("{}_: {},", nam, typ));
+            fn_params.push(nam.to_string() + "_");
         } else if (!all_pages
             || (nam != "page"
                 && nam != "per_page"
@@ -499,8 +500,13 @@ fn get_fn_params(
         {
             if typ == "chrono::DateTime<chrono::Utc>" {
                 fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
+                fn_params.push(nam.to_string());
             } else {
-                fn_params_str.push(format!("{}: {},", nam, typ));
+                let p = format!("{}: {},", nam, typ);
+                if !fn_params.contains(nam) {
+                    fn_params_str.push(p);
+                    fn_params.push(nam.to_string());
+                }
             }
         }
 
@@ -535,6 +541,10 @@ fn get_fn_params(
             }
         }
     }
+
+    // If we sort here, likely everything will get messed up since
+    // we already have code consuming this library.
+    fn_params_str.dedup();
 
     Ok((fn_params_str, query_params))
 }

@@ -517,7 +517,7 @@ pub fn generate_docs_openapi_info(
             contact.push_str(&format!("| {} ", name));
         }
         if !url.is_empty() {
-            contact.push_str(&format!("| {} ", url));
+            contact.push_str(&format!("| <{}> ", url));
         }
         if !email.is_empty() {
             contact.push_str(&format!("| {} ", email));
@@ -553,7 +553,7 @@ pub fn generate_docs_openapi_info(
 
         license.push_str(&format!("| {} ", l.name));
         if !url.is_empty() {
-            license.push_str(&format!("| {} ", url));
+            license.push_str(&format!("| <{}> ", url));
         }
         license.push_str("|\n//! ");
 

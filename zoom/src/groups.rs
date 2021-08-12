@@ -40,7 +40,7 @@ impl Groups {
      *
      * **Prerequisite**: Pro or higher account.<br>
      * **Scopes**: `group:write:admin`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
     pub async fn group_create(&self, body: &crate::types::GroupCreateRequest) -> Result<()> {
@@ -158,7 +158,7 @@ impl Groups {
      *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `page_number: i64` -- *  \*\*Deprecated\*\* - This field has been deprecated and we will stop supporting it completely in a future release. Please use "next_page_token" for pagination instead of this field.
-     *
+     *  
      *  The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
@@ -248,13 +248,7 @@ impl Groups {
      *  Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      * * `member_id: &str` -- The member ID.
      */
-    pub async fn group_members_delete(
-        &self,
-        group_id: &str,
-        member_id: &str,
-        group_id: &str,
-        member_id: &str,
-    ) -> Result<()> {
+    pub async fn group_members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
         let url = format!(
             "/groups/{}/members/{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -291,8 +285,6 @@ impl Groups {
         &self,
         group_id: &str,
         member_id: &str,
-        group_id: &str,
-        member_id: &str,
         body: &crate::types::UpdateGroupMemberRequest,
     ) -> Result<()> {
         let url = format!(
@@ -317,19 +309,19 @@ impl Groups {
      * Get settings for a [group](https://support.zoom.us/hc/en-us/articles/204519819-Group-Management-).
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `option: crate::types::Option` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
+     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
      *  `meeting_security`: Use this query parameter to view meeting security settings applied on the group.<br>.
      */
     pub async fn get_group_settings_domains(
         &self,
         group_id: &str,
         custom_query_fields: &str,
-        option: crate::types::Option,
+        option: crate::types::OptionData,
     ) -> Result<crate::types::Domains> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -360,19 +352,19 @@ impl Groups {
      * Get settings for a [group](https://support.zoom.us/hc/en-us/articles/204519819-Group-Management-).
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `option: crate::types::Option` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
+     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
      *  `meeting_security`: Use this query parameter to view meeting security settings applied on the group.<br>.
      */
     pub async fn get_group_settings_response(
         &self,
         group_id: &str,
         custom_query_fields: &str,
-        option: crate::types::Option,
+        option: crate::types::OptionData,
     ) -> Result<crate::types::GetGroupSettingsResponse> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -403,19 +395,19 @@ impl Groups {
      * Get settings for a [group](https://support.zoom.us/hc/en-us/articles/204519819-Group-Management-).
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `option: crate::types::Option` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
+     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
      *  `meeting_security`: Use this query parameter to view meeting security settings applied on the group.<br>.
      */
     pub async fn get_group_settings_meeting_security(
         &self,
         group_id: &str,
         custom_query_fields: &str,
-        option: crate::types::Option,
+        option: crate::types::OptionData,
     ) -> Result<crate::types::MeetingSecuritySettings> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -446,19 +438,19 @@ impl Groups {
      * Get settings for a [group](https://support.zoom.us/hc/en-us/articles/204519819-Group-Management-).
      * **Prerequisite**: Pro, Business, or Education account<br>
      * **Scopes**: `group:read:admin`<br>
-     *
+     *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      *
      * **Parameters:**
      *
-     * * `option: crate::types::Option` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
+     * * `option: crate::types::OptionData` -- `meeting_authentication`: Use this query parameter to view [meeting authentication configuration](https://support.zoom.us/hc/en-us/articles/360037117472-Authentication-Profiles-for-Meetings-and-Webinars) applied on the group.<br>`recording_authentication`: Use this query parameter to view [recording authentication configuration](https://support.zoom.us/hc/en-us/articles/360037756671-Authentication-Profiles-for-Cloud-Recordings) applied on the group.<br>
      *  `meeting_security`: Use this query parameter to view meeting security settings applied on the group.<br>.
      */
     pub async fn get_group_setting(
         &self,
         group_id: &str,
         custom_query_fields: &str,
-        option: crate::types::Option,
+        option: crate::types::OptionData,
     ) -> Result<crate::types::GetGroupSettingsResponseOneOf> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
@@ -501,7 +493,6 @@ impl Groups {
         &self,
         group_id: &str,
         custom_query_fields: &str,
-        group_id: &str,
         option: crate::types::UpdateGroupSettingsOption,
         body: &crate::types::UpdateGroupSettingsRequestOneOf,
     ) -> Result<()> {
@@ -552,7 +543,6 @@ impl Groups {
         &self,
         group_id: &str,
         custom_query_fields: &str,
-        group_id: &str,
         option: &str,
     ) -> Result<crate::types::GetGroupLockSettingsResponse> {
         let mut query = String::new();
@@ -599,7 +589,6 @@ impl Groups {
         &self,
         group_id: &str,
         custom_query_fields: &str,
-        group_id: &str,
         option: &str,
     ) -> Result<crate::types::MeetingSecuritySettings> {
         let mut query = String::new();
@@ -646,7 +635,6 @@ impl Groups {
         &self,
         group_id: &str,
         custom_query_fields: &str,
-        group_id: &str,
         option: &str,
     ) -> Result<crate::types::GetGroupLockSettingsResponseOneOf> {
         let mut query = String::new();
@@ -693,7 +681,6 @@ impl Groups {
         &self,
         group_id: &str,
         custom_query_fields: &str,
-        group_id: &str,
         option: &str,
         body: &crate::types::GroupLockedSettingsRequestOneOf,
     ) -> Result<()> {
@@ -749,7 +736,6 @@ impl Groups {
         &self,
         file_ids: &str,
         group_id: &str,
-        group_id: &str,
         body: &crate::types::UploadVbRequest,
     ) -> Result<crate::types::UploadVBuserResponse> {
         let mut query = String::new();
@@ -796,13 +782,7 @@ impl Groups {
      * * `group_id: &str` -- Unique identifier of the group. Retrieve the value for this field by calling the [List groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      */
-    pub async fn del_group_vb(
-        &self,
-        file_ids: &str,
-        group_id: &str,
-        group_id: &str,
-        file_ids: &str,
-    ) -> Result<()> {
+    pub async fn del_group_vb(&self, file_ids: &str, group_id: &str) -> Result<()> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !file_ids.is_empty() {
