@@ -1,3 +1,4 @@
 /target
 specs/ramp/*
+specs/ramp/.git
 !specs/ramp/ramp.v1.json
