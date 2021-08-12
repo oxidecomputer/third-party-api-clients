@@ -4,7 +4,7 @@ use std::env;
 use octorust::http_cache::FileBasedCache;
 use octorust::{
     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
-    types::{Direction, ReposListOrgSort, ReposListOrgType},
+    types::{Order, ReposListOrgSort, ReposListOrgType},
     Client,
 };
 
@@ -59,7 +59,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             "oxidecomputer",
             ReposListOrgType::All,
             ReposListOrgSort::Created,
-            Direction::Desc,
+            Order::Desc,
         )
         .await
         .unwrap();
