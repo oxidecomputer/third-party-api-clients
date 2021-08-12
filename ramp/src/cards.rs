@@ -27,13 +27,13 @@ impl Cards {
      * * `user_id: &str`
      * * `card_program_id: &str`
      */
-    pub async fn get(
+    pub async fn get_page(
         &self,
         start: &str,
         page_size: f64,
         user_id: &str,
         card_program_id: &str,
-    ) -> Result<crate::types::GetCardsResponse> {
+    ) -> Result<Vec<crate::types::Card>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !card_program_id.is_empty() {
@@ -54,7 +54,66 @@ impl Cards {
         }
         let url = format!("/cards?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List cards.
+     *
+     * This function performs a `GET` to the `/cards` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Retrieve all cards.
+     */
+    pub async fn get_all(
+        &self,
+        user_id: &str,
+        card_program_id: &str,
+    ) -> Result<Vec<crate::types::Card>> {
+        let mut query = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        if !card_program_id.is_empty() {
+            query_args.push(format!("card_program_id={}", card_program_id));
+        }
+        if !user_id.is_empty() {
+            query_args.push(format!("user_id={}", user_id));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query.push('&');
+            }
+            query.push_str(n);
+        }
+        let url = format!("/cards?{}", query);
+
+        let mut resp: crate::types::GetCardsResponse = self.client.get(&url, None).await.unwrap();
+
+        let mut cards = resp.cards;
+        let mut page = resp.page.next;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            resp = self
+                .client
+                .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
+                .await
+                .unwrap();
+
+            cards.append(&mut resp.cards);
+
+            if !resp.page.next.is_empty() && resp.page.next != page {
+                page = resp.page.next.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

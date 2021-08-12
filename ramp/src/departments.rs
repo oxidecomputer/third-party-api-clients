@@ -25,7 +25,11 @@ impl Departments {
      * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
-    pub async fn get(&self, start: &str, page_size: f64) -> Result<Vec<crate::types::Department>> {
+    pub async fn get_page(
+        &self,
+        start: &str,
+        page_size: f64,
+    ) -> Result<Vec<crate::types::Department>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("page_size={}", page_size));

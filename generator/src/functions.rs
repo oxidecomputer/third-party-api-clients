@@ -251,6 +251,8 @@ pub fn generate_files(
                 fn_name = fn_name.trim_end_matches('s').to_string();
             } else if frt.starts_with("Vec<") && fn_name != "get" && fn_name != "list" {
                 fn_name = make_plural(proper_name, &fn_name);
+            } else if frt.starts_with("Vec<") && fn_name == "get" {
+                fn_name = "get_page".to_string()
             }
 
             // Print our standard function.
@@ -416,7 +418,7 @@ fn get_response_type(
                                 for (n, id) in p {
                                     let rt = ts.render_type(id, false)?;
                                     if rt.starts_with("Vec<") {
-                                        return Ok((og_rt, id.clone(), rt, n.to_string()));
+                                        return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
                                     }
                                 }
                             }
@@ -432,7 +434,7 @@ fn get_response_type(
                                 // Now we must find the property with the vector for this struct.
                                 let rt = ts.render_type(id, false)?;
                                 if rt.starts_with("Vec<") {
-                                    return Ok((og_rt, id.clone(), rt, n.to_string()));
+                                    return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
                                 }
                             }
                         }
@@ -491,7 +493,7 @@ fn get_response_type(
                         for (n, id) in p {
                             let rt = ts.render_type(id, false)?;
                             if rt.starts_with("Vec<") {
-                                return Ok((og_rt, id.clone(), rt, n.to_string()));
+                                return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
                             }
                         }
                     }
@@ -507,7 +509,7 @@ fn get_response_type(
                         // Now we must find the property with the vector for this struct.
                         let rt = ts.render_type(id, false)?;
                         if rt.starts_with("Vec<") {
-                            return Ok((og_rt, id.clone(), rt, n.to_string()));
+                            return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
                         }
                     }
                 }

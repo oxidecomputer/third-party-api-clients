@@ -84,7 +84,7 @@ impl Users {
      * * `department_id: &str`
      * * `location_id: &str`
      */
-    pub async fn get(
+    pub async fn get_page(
         &self,
         start: &str,
         page_size: f64,

@@ -42,7 +42,7 @@ impl ChatMessages {
      * * `include_deleted_and_edited_message: &str` -- \*\*Optional\*\* <br>
      *  Set the value of this field to `true` to include edited and deleted messages in the response.
      */
-    pub async fn get(
+    pub async fn get_page(
         &self,
         user_id: &str,
         to_contact: &str,

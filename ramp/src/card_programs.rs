@@ -25,11 +25,11 @@ impl CardPrograms {
      * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
-    pub async fn get(
+    pub async fn get_page(
         &self,
         start: &str,
         page_size: f64,
-    ) -> Result<crate::types::GetCardProgramsResponse> {
+    ) -> Result<Vec<crate::types::CardProgram>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("page_size={}", page_size));
@@ -44,7 +44,49 @@ impl CardPrograms {
         }
         let url = format!("/card-programs?{}", query);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetCardProgramsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * List card programs.
+     *
+     * This function performs a `GET` to the `/card-programs` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Retrieve all card programs.
+     */
+    pub async fn get_all(&self) -> Result<Vec<crate::types::CardProgram>> {
+        let url = "/card-programs".to_string();
+        let mut resp: crate::types::GetCardProgramsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut card_programs = resp.card_programs;
+        let mut page = resp.page.next;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            resp = self
+                .client
+                .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
+                .await
+                .unwrap();
+
+            card_programs.append(&mut resp.card_programs);
+
+            if !resp.page.next.is_empty() && resp.page.next != page {
+                page = resp.page.next.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

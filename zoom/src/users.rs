@@ -37,7 +37,7 @@ impl Users {
      *  \* `host_key` — Return the user's [host key](https://support.zoom.us/hc/en-us/articles/205172555-Using-your-host-key).
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn get(
+    pub async fn get_page(
         &self,
         status: crate::types::UsersStatus,
         page_size: i64,
