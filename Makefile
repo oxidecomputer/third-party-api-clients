@@ -18,6 +18,10 @@ GOOGLE_CALENDAR_SPEC_DIR = $(GOOGLE_SPEC_DIR)/calendar
 GOOGLE_CALENDAR_SPEC = $(GOOGLE_CALENDAR_SPEC_DIR)/calendar.yaml
 GOOGLE_CALENDAR_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/calendar/v3/openapi.yaml
 
+GOOGLE_DRIVE_SPEC_DIR = $(GOOGLE_SPEC_DIR)/drive
+GOOGLE_DRIVE_SPEC = $(GOOGLE_DRIVE_SPEC_DIR)/drive.yaml
+GOOGLE_DRIVE_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/drive/v3/openapi.yaml
+
 GUSTO_SPEC_DIR = $(CURDIR)/specs/gusto
 GUSTO_SPEC = $(GUSTO_SPEC_DIR)/gusto.v1.yaml
 GUSTO_SPEC_REPO = Gusto-API/api.gusto.dev
@@ -72,6 +76,7 @@ update-specs:
 		$(GITHUB_SPEC_DIR) \
 		$(GOOGLE_ADMIN_SPEC_DIR) \
 		$(GOOGLE_CALENDAR_SPEC_DIR) \
+		$(GOOGLE_DRIVE_SPEC_DIR) \
 		$(GUSTO_SPEC_DIR) \
 		$(MAILCHIMP_SPEC_DIR) \
 		$(OKTA_SPEC_DIR) \
@@ -82,6 +87,7 @@ update-specs:
 		$(GITHUB_SPEC) \
 		$(GOOGLE_ADMIN_SPEC) \
 		$(GOOGLE_CALENDAR_SPEC) \
+		$(GOOGLE_DRIVE_SPEC) \
 		$(GUSTO_SPEC) \
 		$(MAILCHIMP_SPEC) \
 		$(OKTA_SPEC) \
@@ -157,6 +163,22 @@ google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
 		--spec-link "https://calendar-json.googleapis.com/$discovery/rest?version=v3" \
 		--host "www.googleapis.com/calendar/directory/v1"
 	cargo fmt -p google-calendar
+
+$(GOOGLE_DRIVE_SPEC_DIR):
+	mkdir -p $@
+
+$(GOOGLE_DRIVE_SPEC): $(GOOGLE_DRIVE_SPEC_DIR)
+	curl -sSL $(GOOGLE_DRIVE_SPEC_REMOTE) -o $@
+
+google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
+	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.1.0 \
+		-o google/drive \
+		-n google-drive \
+		--proper-name "Google Drive" \
+		-d "A fully generated & opinionated API client for the Google Drive API." \
+		--spec-link "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest" \
+		--host "www.googleapis.com/drive/directory/v1"
+	cargo fmt -p google-drive
 
 $(GUSTO_SPEC_DIR):
 	mkdir -p $@
