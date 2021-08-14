@@ -23,6 +23,8 @@ This client is generated from the [Giphy OpenAPI
 specs](https://github.com/APIs-guru/openapi-directory/tree/main/APIs/giphy.com) based on API spec version `1.0`. This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.
+
+
 To install the library, add the following to your `Cargo.toml` file.
 
 ```toml

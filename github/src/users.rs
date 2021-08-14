@@ -23,9 +23,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
      */
-    pub async fn get_authenticated_crate_types_public_user(
-        &self,
-    ) -> Result<crate::types::PublicUser> {
+    pub async fn get_authenticated_public_user(&self) -> Result<crate::types::PublicUser> {
         let url = "/user".to_string();
         self.client.get(&url, None).await
     }
@@ -41,9 +39,7 @@ impl Users {
      *
      * FROM: <https://docs.github.com/rest/reference/users#get-the-authenticated-user>
      */
-    pub async fn get_authenticated_crate_types_private_user(
-        &self,
-    ) -> Result<crate::types::PrivateUser> {
+    pub async fn get_authenticated_private_user(&self) -> Result<crate::types::PrivateUser> {
         let url = "/user".to_string();
         self.client.get(&url, None).await
     }
@@ -871,7 +867,7 @@ impl Users {
      *
      * * `username: &str`
      */
-    pub async fn get_by_username_crate_types_public_user(
+    pub async fn get_by_username_public_user(
         &self,
         username: &str,
     ) -> Result<crate::types::PublicUser> {
@@ -902,7 +898,7 @@ impl Users {
      *
      * * `username: &str`
      */
-    pub async fn get_by_username_crate_types_private_user(
+    pub async fn get_by_username_private_user(
         &self,
         username: &str,
     ) -> Result<crate::types::PrivateUser> {

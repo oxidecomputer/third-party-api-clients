@@ -611,7 +611,7 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_settings_crate_types_domains(
+    pub async fn user_settings_domains(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
@@ -672,7 +672,7 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_settings_crate_types(
+    pub async fn user_settings(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
@@ -733,7 +733,7 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_settings_crate_types_meeting_security(
+    pub async fn user_settings_meeting_security(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,

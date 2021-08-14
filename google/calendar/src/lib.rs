@@ -27,7 +27,9 @@
 //! specs](https://calendar-json.googleapis.com/iscovery/rest?version=v3) based on API spec version `v3`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
-//! //! To install the library, add the following to your `Cargo.toml` file.
+//!
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]

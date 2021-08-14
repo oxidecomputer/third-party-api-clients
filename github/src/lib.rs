@@ -27,11 +27,13 @@
 //! specs](https://github.com/github/rest-api-description) based on API spec version `1.1.4`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
-//! //! To install the library, add the following to your `Cargo.toml` file.
+//!
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.1.22"
+//! octorust = "0.1.23"
 //! ```
 //!
 //! ## Basic example
@@ -49,7 +51,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.1.22/octorust/struct.Client.html#method.host) method.
+//! [Client#host](https://docs.rs/octorust/0.1.23/octorust/struct.Client.html#method.host) method.
 //!
 //! ## Feature flags
 //!
@@ -63,7 +65,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.1.22", features = ["httpcache"] }
+//! octorust = { version = "0.1.23", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.

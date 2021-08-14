@@ -222,7 +222,7 @@ impl Accounts {
      *   
      *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
-    pub async fn account_settings_crate_types_domains(
+    pub async fn account_settings_domains(
         &self,
         account_id: &str,
         option: crate::types::OptionData,
@@ -277,7 +277,7 @@ impl Accounts {
      *   
      *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
-    pub async fn account_settings_crate_types_security(
+    pub async fn account_settings_security(
         &self,
         account_id: &str,
         option: crate::types::OptionData,
@@ -332,7 +332,7 @@ impl Accounts {
      *   
      *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
-    pub async fn account_settings_crate_types(
+    pub async fn account_settings(
         &self,
         account_id: &str,
         option: crate::types::OptionData,
@@ -387,7 +387,7 @@ impl Accounts {
      *   
      *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
-    pub async fn account_settings_crate_types_meeting_security(
+    pub async fn account_settings_meeting_security(
         &self,
         account_id: &str,
         option: crate::types::OptionData,

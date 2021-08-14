@@ -3243,7 +3243,7 @@ impl Repos {
      * * `path: &str` -- path parameter.
      * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
-    pub async fn get_content_crate_types_file(
+    pub async fn get_content_file(
         &self,
         owner: &str,
         repo: &str,
@@ -3319,7 +3319,7 @@ impl Repos {
      * * `path: &str` -- path parameter.
      * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
-    pub async fn get_content_crate_types_symlink(
+    pub async fn get_content_symlink(
         &self,
         owner: &str,
         repo: &str,
@@ -3395,7 +3395,7 @@ impl Repos {
      * * `path: &str` -- path parameter.
      * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
-    pub async fn get_content_crate_types_submodule(
+    pub async fn get_content_submodule(
         &self,
         owner: &str,
         repo: &str,
