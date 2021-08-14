@@ -3,7 +3,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /// The AccountBrands resource enables you to use account-level brands to customize the styles and text that recipients see.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountBrands {
     /**
      * The AccountBrands resource enables you to use account-level brands to customize the styles and text that recipients see.
@@ -31,7 +31,7 @@ pub struct AccountBrands {
 }
 
 /// Details about account consumer disclosures.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountConsumerDisclosures {
     /**
      * Details about account consumer disclosures.
@@ -316,7 +316,7 @@ pub struct AccountConsumerDisclosures {
 }
 
 /// An `accountCustomField` is an envelope custom field that you set at the account level. Applying custom fields enables account administators to group and manage envelopes.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountCustomFields {
     /**
      * An `accountCustomField` is an envelope custom field that you set at the account level. Applying custom fields enables account administators to group and manage envelopes.
@@ -331,7 +331,7 @@ pub struct AccountCustomFields {
 }
 
 /// Contains details about the password rules for an account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPasswordRules {
     /**
      * Contains details about the password rules for an account.
@@ -488,7 +488,7 @@ pub struct AccountPasswordRules {
 }
 
 /// The AccountPermissionProfiles resource provides methods that allow you to manage permission profiles for groups of account users.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPermissionProfiles {
     /**
      * The AccountPermissionProfiles resource provides methods that allow you to manage permission profiles for groups of account users.
@@ -548,7 +548,7 @@ pub struct AccountPermissionProfiles {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSeals {
     /**
      *
@@ -558,7 +558,7 @@ pub struct AccountSeals {
 }
 
 /// This resource provides information on the Standards Based Signature providers that have been provisioned for an account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSignatureProviders {
     /**
      * This resource provides information on the Standards Based Signature providers that have been provisioned for an account.
@@ -569,7 +569,7 @@ pub struct AccountSignatureProviders {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSignature {
     /**
      *
@@ -846,7 +846,7 @@ pub struct AccountSignature {
 }
 
 /// Tab settings determine the tab types and tab functionality that are enabled for an account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountTabSettings {
     /**
      * Tab settings determine the tab types and tab functionality that are enabled for an account.
@@ -1145,7 +1145,7 @@ pub struct AccountTabSettings {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Watermark {
     /**
      *
@@ -1231,11 +1231,11 @@ pub struct Watermark {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DssValues {}
 
 /// Account management
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Accounts {
     /**
      * Account management
@@ -1536,7 +1536,7 @@ pub struct Accounts {
 }
 
 /// The `EmailArchive` resource provides methods for managing your email archive configuration, which consists of the BCC email address or addresses that you want to use to archive DocuSign emails. Each account can use up to five BCC email addresses for archiving purposes.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BccEmailArchive {
     /**
      * The `EmailArchive` resource provides methods for managing your email archive configuration, which consists of the BCC email address or addresses that you want to use to archive DocuSign emails. Each account can use up to five BCC email addresses for archiving purposes.
@@ -1607,7 +1607,7 @@ pub struct BccEmailArchive {
 }
 
 /// Billing plans
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPlans {
     /**
      * Billing plans
@@ -1672,7 +1672,7 @@ pub struct BillingPlans {
 /// The bulk send list resource provides methods that enable you to create and manage bulk sending lists, which you can use to send multiple copies of an envelope in a single batch.
 ///
 /// **Note**: The Bulk Send feature is only available on Business Pro plans that are using EasySign.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSend {
     /**
      * The bulk send list resource provides methods that enable you to create and manage bulk sending lists, which you can use to send multiple copies of an envelope in a single batch.
@@ -1706,7 +1706,7 @@ pub struct BulkSend {
 }
 
 /// The ChunkedUploads resource provides methods to complete integrity checks, and to add, commit, retrieve, initiate and delete chunked uploads.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChunkedUploads {
     /**
      * The ChunkedUploads resource provides methods to complete integrity checks, and to add, commit, retrieve, initiate and delete chunked uploads.
@@ -1788,7 +1788,7 @@ pub struct ChunkedUploads {
 }
 
 /// Cloud storage
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CloudStorage {
     /**
      * Cloud storage
@@ -1875,7 +1875,7 @@ pub struct CloudStorage {
 }
 
 /// The CloudStorageProviders resource provides methods that allow you to manage the cloud storage providers associate with an account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CloudStorageProviders {
     /**
      * The CloudStorageProviders resource provides methods that allow you to manage the cloud storage providers associate with an account.
@@ -1885,7 +1885,7 @@ pub struct CloudStorageProviders {
 }
 
 /// Details about envelope comments.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Comments {
     /**
      * Details about envelope comments.
@@ -2070,7 +2070,7 @@ pub struct Comments {
 }
 
 /// Contains information about a DocuSign Connect configuration.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectConfigurations {
     /**
      * Contains information about a DocuSign Connect configuration.
@@ -2375,7 +2375,7 @@ pub struct ConnectConfigurations {
 }
 
 /// Connect event logging information. This object contains sections for regular Connect logs and for Connect failures.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectEvents {
     /**
      * Connect event logging information. This object contains sections for regular Connect logs and for Connect failures.
@@ -2409,7 +2409,7 @@ pub struct ConnectEvents {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectLogs {
     /**
      *
@@ -2443,7 +2443,7 @@ pub struct ConnectLogs {
 }
 
 /// The `Contacts` resource enables you to manage the contact in an account's address book.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Contacts {
     /**
      * The `Contacts` resource enables you to manage the contact in an account's address book.
@@ -2552,7 +2552,7 @@ pub struct Contacts {
 }
 
 /// Custom tabs
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomTabs {
     /**
      * Custom tabs
@@ -2978,7 +2978,7 @@ pub struct CustomTabs {
 }
 
 /// This resource is used to create a responsive preview of a specific document.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentResponsiveHtmlPreview {
     /**
      * This resource is used to create a responsive preview of a specific document.
@@ -2988,7 +2988,7 @@ pub struct DocumentResponsiveHtmlPreview {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ENoteConfigurations {
     /**
      *
@@ -3047,7 +3047,7 @@ pub struct ENoteConfigurations {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeAttachment {
     /**
      *
@@ -3102,7 +3102,7 @@ pub struct EnvelopeAttachment {
 }
 
 /// Details about envelope consumer disclosures.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeConsumerDisclosures {
     /**
      * Details about envelope consumer disclosures.
@@ -3389,7 +3389,7 @@ pub struct EnvelopeConsumerDisclosures {
 /// An envelope custom field enables you to collect custom data about envelopes on a per-envelope basis. You can then use the custom data for sorting, organizing, searching, and other downstream processes. For example, you can use custom fields to copy envelopes or data to multiple areas in Salesforce. eOriginal customers can eVault their documents from the web app on a per-envelope basis by setting an envelope custom field with a name like "eVault with eOriginal?" to "Yes" or "No".
 ///
 /// When a user creates an envelope, the envelope custom fields display in the **Envelope Settings** section of the DocuSign console. Envelope recipients do not see the envelope custom fields. For more information, see [Envelope Custom Fields](https://support.docusign.com/en/guides/ndse-admin-guide-document-labels).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeCustomFields {
     /**
      * An envelope custom field enables you to collect custom data about envelopes on a per-envelope basis. You can then use the custom data for sorting, organizing, searching, and other downstream processes. For example, you can use custom fields to copy envelopes or data to multiple areas in Salesforce. eOriginal customers can eVault their documents from the web app on a per-envelope basis by setting an envelope custom field with a name like "eVault with eOriginal?" to "Yes" or "No".
@@ -3408,7 +3408,7 @@ pub struct EnvelopeCustomFields {
 }
 
 /// Envelope document fields
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeDocumentFields {
     /**
      * Envelope document fields
@@ -3418,7 +3418,7 @@ pub struct EnvelopeDocumentFields {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeHtmlDefinitions {
     /**
      *
@@ -3428,7 +3428,7 @@ pub struct EnvelopeHtmlDefinitions {
 }
 
 /// Envelope Document Tabs resource
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeDocumentTabs {
     /**
      * Envelope Document Tabs resource
@@ -3637,7 +3637,7 @@ pub struct EnvelopeDocumentTabs {
 /// - Carbon Copy, Certified Delivery (Needs to Sign), Editor, and Agent recipients can always see all of the documents associated with the envelope or template.
 ///
 /// The Document Visibility feature has multiple settings that specify the options that senders have when sending documents. For more information, see [Use Document Visibility to Control Recipient Access](https://support.docusign.com/en/guides/ndse-user-guide-document-visibility).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeDocumentVisibility {
     /**
      * Document Visibility enables senders to control the visibility of the documents in an envelope at the recipient level. For example, if the parties associated with a legal proceeding should have access to different documents, the Document Visibility feature enables you to keep all of the documents in the same envelope and set view permissions for the documents by recipient. This functionality is enabled for envelopes and templates. It is not available for PowerForms.
@@ -3656,7 +3656,7 @@ pub struct EnvelopeDocumentVisibility {
 }
 
 /// Envelope documents
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeDocuments {
     /**
      * Envelope documents
@@ -3675,7 +3675,7 @@ pub struct EnvelopeDocuments {
 }
 
 /// Envelope email settings
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeEmailSettings {
     /**
      * Envelope email settings
@@ -3703,7 +3703,7 @@ pub struct EnvelopeEmailSettings {
 }
 
 /// This object contains the data that recipients have entered into the form fields associated with an envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeFormData {
     /**
      * This object contains the data that recipients have entered into the form fields associated with an envelope.
@@ -3759,7 +3759,7 @@ pub struct EnvelopeFormData {
 }
 
 /// This section provides information about envelope locks.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeLocks {
     /**
      * This section provides information about envelope locks.
@@ -3828,7 +3828,7 @@ pub struct EnvelopeLocks {
 }
 
 /// All of the tabs associated with a recipient. Each property is a list of a type of tab.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeRecipientTabs {
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
@@ -4067,7 +4067,7 @@ pub struct EnvelopeRecipientTabs {
 }
 
 /// Envelope recipients
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeRecipients {
     /**
      * Envelope recipients
@@ -4145,7 +4145,7 @@ pub struct EnvelopeRecipients {
 }
 
 /// Envelope templates
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeTemplates {
     /**
      * Envelope templates
@@ -4155,7 +4155,7 @@ pub struct EnvelopeTemplates {
 }
 
 /// This resource provides methods that enable account administrators to create and manage envelope transfer rules.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeTransferRules {
     /**
      * This resource provides methods that enable account administrators to create and manage envelope transfer rules.
@@ -4219,7 +4219,7 @@ pub struct EnvelopeTransferRules {
 }
 
 /// Embedding Envelope views
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeViews {
     /**
      * Embedding Envelope views
@@ -4233,7 +4233,7 @@ pub struct EnvelopeViews {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeWorkflowDefinition {
     /**
      *
@@ -4261,7 +4261,7 @@ pub struct EnvelopeWorkflowDefinition {
 }
 
 /// Envelope creation, management
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Envelopes {
     /**
      * Envelope creation, management
@@ -4894,7 +4894,7 @@ pub struct Envelopes {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FavoriteTemplates {
     /**
      *
@@ -4918,7 +4918,7 @@ pub struct FavoriteTemplates {
 }
 
 /// Folder management
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Folders {
     /**
      * Folder management
@@ -4987,7 +4987,7 @@ pub struct Folders {
 }
 
 /// If your account includes multiple signing brands, you can use the groups functionality to assign different brands to different groups. This resource enables you to manage group brands.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupBrands {
     /**
      * If your account includes multiple signing brands, you can use the groups functionality to assign different brands to different groups. This resource enables you to manage group brands.
@@ -5015,7 +5015,7 @@ pub struct GroupBrands {
 }
 
 /// Groups' users
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupUsers {
     /**
      * Groups' users
@@ -5079,7 +5079,7 @@ pub struct GroupUsers {
 }
 
 /// Group information
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Groups {
     /**
      * Group information
@@ -5143,7 +5143,7 @@ pub struct Groups {
 }
 
 /// Identity Verification enables you to verify a signer's identity before they can access a document. The `IdentityVerifications` resource provides a method that enables you to list the workflows that are available to an account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IdentityVerifications {
     /**
      * Identity Verification enables you to verify a signer's identity before they can access a document. The `IdentityVerifications` resource provides a method that enables you to list the workflows that are available to an account.
@@ -5153,7 +5153,7 @@ pub struct IdentityVerifications {
 }
 
 /// Invoices
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Invoices {
     /**
      * Invoices
@@ -5242,7 +5242,7 @@ pub struct Invoices {
 /// Use DocuSign eNotary to notarize documents digitally.
 /// Check the [DocuSign eNotary support documentation](https://support.docusign.com/en/guides/ndse-user-guide-enotary-resources)
 /// to see which jurisdictions are supported.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Notary {
     /**
      * Use DocuSign eNotary to notarize documents digitally.
@@ -5287,7 +5287,7 @@ pub struct Notary {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryJournal {
     /**
      *
@@ -5334,7 +5334,7 @@ pub struct NotaryJournal {
 }
 
 /// Creating, updating, and deleting notary jurisdiction objects.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryJurisdiction {
     /**
      * Creating, updating, and deleting notary jurisdiction objects.
@@ -5394,7 +5394,7 @@ pub struct NotaryJurisdiction {
 }
 
 /// The `NotificationDefaults` resource provides methods that enable you to manage the default notifications for envelopes.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotificationDefaults {
     /**
      * The `NotificationDefaults` resource provides methods that enable you to manage the default notifications for envelopes.
@@ -5409,7 +5409,7 @@ pub struct NotificationDefaults {
 }
 
 /// Information about a connected payment gateway account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentGatewayAccounts {
     /**
      * Information about a connected payment gateway account.
@@ -5515,7 +5515,7 @@ pub struct PaymentGatewayAccounts {
 }
 
 /// Payments
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Payments {
     /**
      * Payments
@@ -5561,7 +5561,7 @@ pub struct Payments {
 }
 
 /// Data that recipients have entered in PowerForm fields.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerFormData {
     /**
      * Data that recipients have entered in PowerForm fields.
@@ -5580,7 +5580,7 @@ pub struct PowerFormData {
 }
 
 /// The PowerForms resource enables you to create fillable forms that you can email or make available for self service on the web.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerForms {
     /**
      * The PowerForms resource enables you to create fillable forms that you can email or make available for self service on the web.
@@ -5798,7 +5798,7 @@ pub struct PowerForms {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reports {
     /**
      *
@@ -5808,7 +5808,7 @@ pub struct Reports {
 }
 
 /// Request logs
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RequestLogs {
     /**
      * Request logs
@@ -5840,7 +5840,7 @@ pub struct RequestLogs {
 }
 
 /// API resource information
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Resources {
     /**
      * API resource information
@@ -5850,7 +5850,7 @@ pub struct Resources {
 }
 
 /// This resource is used to create a responsive preview of all of the documents in an envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ResponsiveHtmlPreview {
     /**
      * This resource is used to create a responsive preview of all of the documents in an envelope.
@@ -5860,7 +5860,7 @@ pub struct ResponsiveHtmlPreview {
 }
 
 /// API service information
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Services {
     /**
      * API service information
@@ -5911,7 +5911,7 @@ pub struct Services {
 }
 
 /// Signing groups' users
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SigningGroupUsers {
     /**
      * Signing groups' users
@@ -5921,7 +5921,7 @@ pub struct SigningGroupUsers {
 }
 
 /// Signing groups
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SigningGroups {
     /**
      * Signing groups
@@ -6008,7 +6008,7 @@ pub struct SigningGroups {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TabsBlob {
     /**
      *
@@ -6307,7 +6307,7 @@ pub struct TabsBlob {
 }
 
 /// Template bulk recipients
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateBulkRecipients {
     /**
      * Template bulk recipients
@@ -6371,7 +6371,7 @@ pub struct TemplateBulkRecipients {
 }
 
 /// A template custom field enables you to prepopulate custom metadata for all new envelopes that are created by using a specific template. You can then use the custom data for sorting, organizing, searching, and other downstream processes.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateCustomFields {
     /**
      * A template custom field enables you to prepopulate custom metadata for all new envelopes that are created by using a specific template. You can then use the custom data for sorting, organizing, searching, and other downstream processes.
@@ -6386,7 +6386,7 @@ pub struct TemplateCustomFields {
 }
 
 /// Template document fields
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateDocumentFields {
     /**
      * Template document fields
@@ -6396,7 +6396,7 @@ pub struct TemplateDocumentFields {
 }
 
 /// This resource is used to create a responsive preview of a specific template document.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateDocumentResponsiveHtmlPreview {
     /**
      * This resource is used to create a responsive preview of a specific template document.
@@ -6406,7 +6406,7 @@ pub struct TemplateDocumentResponsiveHtmlPreview {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateTabs {
     /**
      *
@@ -6606,7 +6606,7 @@ pub struct TemplateTabs {
 }
 
 /// Template documents
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateDocuments {
     /**
      * Template documents
@@ -6625,7 +6625,7 @@ pub struct TemplateDocuments {
 }
 
 /// This section provides information about template locks. You use template locks to prevent others from making changes to a template while you are modifying it.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateLocks {
     /**
      * This section provides information about template locks. You use template locks to prevent others from making changes to a template while you are modifying it.
@@ -6694,7 +6694,7 @@ pub struct TemplateLocks {
 }
 
 /// Template tabs
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateRecipientTabs {
     /**
      * Template tabs
@@ -6894,7 +6894,7 @@ pub struct TemplateRecipientTabs {
 }
 
 /// Template recipients
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateRecipients {
     /**
      * Template recipients
@@ -6972,7 +6972,7 @@ pub struct TemplateRecipients {
 }
 
 /// This resource is used to create a responsive preview of all of the documents associated with a template.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateResponsiveHtmlPreview {
     /**
      * This resource is used to create a responsive preview of all of the documents associated with a template.
@@ -6982,7 +6982,7 @@ pub struct TemplateResponsiveHtmlPreview {
 }
 
 /// A TemplateView contains a URL that you can embed in your application to generate a template view that uses the DocuSign user interface (UI).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateViews {
     /**
      * A TemplateView contains a URL that you can embed in your application to generate a template view that uses the DocuSign user interface (UI).
@@ -6996,7 +6996,7 @@ pub struct TemplateViews {
 }
 
 /// Template management
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Templates {
     /**
      * Template management
@@ -7807,7 +7807,7 @@ pub struct Templates {
 }
 
 /// Users' custom settings
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserCustomSettings {
     /**
      * Users' custom settings
@@ -7817,7 +7817,7 @@ pub struct UserCustomSettings {
 }
 
 /// Users' profiles
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserProfiles {
     /**
      * Users' profiles
@@ -7910,7 +7910,7 @@ pub struct UserProfiles {
 }
 
 /// Users' signatures
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSignatures {
     /**
      * Users' signatures
@@ -8177,7 +8177,7 @@ pub struct UserSignatures {
 }
 
 /// The Users resource enables you to create and manage account users.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Users {
     /**
      * The Users resource enables you to create and manage account users.
@@ -8523,7 +8523,7 @@ pub struct Users {
 }
 
 /// This object contains information about a file or folder in a workspace.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkspaceItems {
     /**
      * This object contains information about a file or folder in a workspace.
@@ -8725,7 +8725,7 @@ pub struct WorkspaceItems {
 }
 
 /// A DocuSign workspace is a collaboration area for sharing files and data.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Workspace {
     /**
      * A DocuSign workspace is a collaboration area for sharing files and data.
@@ -8831,7 +8831,7 @@ pub struct Workspace {
 }
 
 /// Object specifying the format of the string provided to a recipient in order to access an envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccessCodeFormat {
     /**
      * Object specifying the format of the string provided to a recipient in order to access an envelope.
@@ -8906,7 +8906,7 @@ pub struct AccessCodeFormat {
 }
 
 /// Contains information about the address associated with the account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountAddress {
     /**
      * Contains information about the address associated with the account.
@@ -9015,7 +9015,7 @@ pub struct AccountAddress {
 }
 
 /// Contains information about an account billing plan.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountBillingPlan {
     /**
      * Contains information about an account billing plan.
@@ -9212,7 +9212,7 @@ pub struct AccountBillingPlan {
 }
 
 /// Defines an account billing plan response object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountBillingPlanResponse {
     /**
      * Defines an account billing plan response object.
@@ -9275,7 +9275,7 @@ pub struct AccountBillingPlanResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountIdentityInputOption {
     /**
      *
@@ -9306,7 +9306,7 @@ pub struct AccountIdentityInputOption {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountIdentityVerificationResponse {
     /**
      *
@@ -9316,7 +9316,7 @@ pub struct AccountIdentityVerificationResponse {
 }
 
 /// Information about a specific step in an Identity Verification workflow.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountIdentityVerificationStep {
     /**
      * Information about a specific step in an Identity Verification workflow.
@@ -9340,7 +9340,7 @@ pub struct AccountIdentityVerificationStep {
 }
 
 /// Specifies an Identity Verification workflow.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountIdentityVerificationWorkflow {
     /**
      * Specifies an Identity Verification workflow.
@@ -9391,7 +9391,7 @@ pub struct AccountIdentityVerificationWorkflow {
 }
 
 /// Contains account Information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountInformation {
     /**
      * Contains account Information.
@@ -9692,7 +9692,7 @@ pub struct AccountInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountMinimumPasswordLength {
     /**
      *
@@ -9715,7 +9715,7 @@ pub struct AccountMinimumPasswordLength {
 }
 
 /// A complex element that specifies notifications (expirations and reminders) for the envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountNotification {
     /**
      * A complex element that specifies notifications (expirations and reminders) for the envelope.
@@ -9739,7 +9739,7 @@ pub struct AccountNotification {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPasswordExpireDays {
     /**
      *
@@ -9762,7 +9762,7 @@ pub struct AccountPasswordExpireDays {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPasswordLockoutDurationMinutes {
     /**
      *
@@ -9785,7 +9785,7 @@ pub struct AccountPasswordLockoutDurationMinutes {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPasswordLockoutDurationType {
     /**
      *
@@ -9795,7 +9795,7 @@ pub struct AccountPasswordLockoutDurationType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPasswordMinimumAgeDays {
     /**
      *
@@ -9818,7 +9818,7 @@ pub struct AccountPasswordMinimumAgeDays {
 }
 
 /// Information about the number of password questions required (0 to 4) to confirm a user's identity when a user needs to reset their password.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPasswordQuestionsRequired {
     /**
      * Information about the number of password questions required (0 to 4) to confirm a user's identity when a user needs to reset their password.
@@ -9841,7 +9841,7 @@ pub struct AccountPasswordQuestionsRequired {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPasswordRulesData {
     /**
      *
@@ -9998,7 +9998,7 @@ pub struct AccountPasswordRulesData {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPasswordStrengthType {
     /**
      *
@@ -10008,7 +10008,7 @@ pub struct AccountPasswordStrengthType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountPasswordStrengthTypeOption {
     /**
      *
@@ -10076,7 +10076,7 @@ pub struct AccountPasswordStrengthTypeOption {
 }
 
 /// This object defines account permissions for users who are associated with the account permission profile.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountRoleSettings {
     /**
      * This object defines account permissions for users who are associated with the account permission profile.
@@ -10591,7 +10591,7 @@ pub struct AccountRoleSettings {
 }
 
 /// Contains account settings information. Used in requests to set property values. Used in responses to report property values.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSettingsInformation {
     /**
      * Contains account settings information. Used in requests to set property values. Used in responses to report property values.
@@ -14357,7 +14357,7 @@ pub struct AccountSettingsInformation {
 }
 
 /// Contains shared access information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSharedAccess {
     /**
      * Contains shared access information.
@@ -14435,7 +14435,7 @@ pub struct AccountSharedAccess {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSignatureDefinition {
     /**
      *
@@ -14573,7 +14573,7 @@ pub struct AccountSignatureDefinition {
 
 /// Contains information abotu the signature provider associated with the Identity Verification workflow.
 /// If empty, then this specific workflow is not intended for signers.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSignatureProvider {
     /**
      * Contains information abotu the signature provider associated with the Identity Verification workflow.
@@ -14647,7 +14647,7 @@ pub struct AccountSignatureProvider {
 }
 
 /// Reserved for DocuSign.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSignatureProviderOption {
     /**
      * Reserved for DocuSign.
@@ -14679,7 +14679,7 @@ pub struct AccountSignatureProviderOption {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSignatureProvidersData {
     /**
      *
@@ -14689,7 +14689,7 @@ pub struct AccountSignatureProvidersData {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountSignaturesInformation {
     /**
      *
@@ -14699,7 +14699,7 @@ pub struct AccountSignaturesInformation {
 }
 
 /// An object that defines the options that are available to non-administrators in the UI.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountUiSettings {
     /**
      * An object that defines the options that are available to non-administrators in the UI.
@@ -14891,7 +14891,7 @@ pub struct AccountUiSettings {
 }
 
 /// Contains information about add ons.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddOn {
     /**
      * Contains information about add ons.
@@ -14932,7 +14932,7 @@ pub struct AddOn {
 }
 
 /// Contains address information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddressInformation {
     /**
      * Contains address information.
@@ -15018,7 +15018,7 @@ pub struct AddressInformation {
 }
 
 /// Contains address input information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddressInformationInput {
     /**
      * Contains address input information.
@@ -15046,7 +15046,7 @@ pub struct AddressInformationInput {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AdminMessage {
     /**
      *
@@ -15069,7 +15069,7 @@ pub struct AdminMessage {
 }
 
 /// Contains information about an agent recipient. An agent is a recipient who can add name and email information for recipients that appear after the agent in routing order.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Agent {
     /**
      * Contains information about an agent recipient. An agent is a recipient who can add name and email information for recipients that appear after the agent in routing order.
@@ -15579,7 +15579,7 @@ pub struct Agent {
 }
 
 /// Contains API request log information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiRequestLog {
     /**
      * Contains API request log information.
@@ -15620,7 +15620,7 @@ pub struct ApiRequestLog {
 }
 
 /// Contains information about mutiple API request logs.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiRequestLogsResult {
     /**
      * Contains information about mutiple API request logs.
@@ -15630,7 +15630,7 @@ pub struct ApiRequestLogsResult {
 }
 
 /// Contains information about an APP store product.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppStoreProduct {
     /**
      * Contains information about an APP store product.
@@ -15653,7 +15653,7 @@ pub struct AppStoreProduct {
 }
 
 /// Contains information about an APP store receipt.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppStoreReceipt {
     /**
      * Contains information about an APP store receipt.
@@ -15678,7 +15678,7 @@ pub struct AppStoreReceipt {
 /// A tab that allows the recipient to approve documents
 /// without placing a signature or initials on the
 /// document.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Approve {
     /**
      * A tab that allows the recipient to approve documents
@@ -16523,7 +16523,7 @@ pub struct Approve {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AskAdmin {
     /**
      *
@@ -16564,7 +16564,7 @@ pub struct AskAdmin {
 }
 
 /// Contains information about an attachment.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Attachment {
     /**
      * Contains information about an attachment.
@@ -16632,7 +16632,7 @@ pub struct Attachment {
 }
 
 /// Contains information about the method used for authentication.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AuthenticationMethod {
     /**
      * Contains information about the method used for authentication.
@@ -16673,7 +16673,7 @@ pub struct AuthenticationMethod {
 }
 
 /// A complex element that contains information about a user's authentication status.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AuthenticationStatus {
     /**
      * A complex element that contains information about a user's authentication status.
@@ -16773,7 +16773,7 @@ pub struct AuthenticationStatus {
 }
 
 /// Contains information about the BCC email address.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BccEmailAddress {
     /**
      * Contains information about the BCC email address.
@@ -16796,7 +16796,7 @@ pub struct BccEmailAddress {
 }
 
 /// This object contains information abut a BCC email archive configuration (a BCC email address used to archive DocuSign-generated emails).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BccEmailArchiveData {
     /**
      * This object contains information abut a BCC email archive configuration (a BCC email address used to archive DocuSign-generated emails).
@@ -16883,7 +16883,7 @@ pub struct BccEmailArchiveData {
 }
 
 /// Contains details about the history of the BCC email archive configuration.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BccEmailArchiveHistory {
     /**
      * Contains details about the history of the BCC email archive configuration.
@@ -16938,7 +16938,7 @@ pub struct BccEmailArchiveHistory {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BccEmailArchiveHistoryList {
     /**
      *
@@ -17002,7 +17002,7 @@ pub struct BccEmailArchiveHistoryList {
 }
 
 /// Contains a list of BCC email archive configurations.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BccEmailArchiveList {
     /**
      * Contains a list of BCC email archive configurations.
@@ -17066,7 +17066,7 @@ pub struct BccEmailArchiveList {
 }
 
 /// Contains information about a billing charge.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingCharge {
     /**
      * Contains information about a billing charge.
@@ -17172,7 +17172,7 @@ pub struct BillingCharge {
 }
 
 /// Defines a billing charge response object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingChargeResponse {
     /**
      * Defines a billing charge response object.
@@ -17182,7 +17182,7 @@ pub struct BillingChargeResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingDiscount {
     /**
      *
@@ -17214,7 +17214,7 @@ pub struct BillingDiscount {
 }
 
 /// Contains information about a billing invoice.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingInvoice {
     /**
      * Contains information about a billing invoice.
@@ -17301,7 +17301,7 @@ pub struct BillingInvoice {
 }
 
 /// Contains information about an item on a billing invoice.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingInvoiceItem {
     /**
      * Contains information about an item on a billing invoice.
@@ -17351,7 +17351,7 @@ pub struct BillingInvoiceItem {
 }
 
 /// Defines a billing invoice response object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingInvoicesResponse {
     /**
      * Defines a billing invoice response object.
@@ -17379,7 +17379,7 @@ pub struct BillingInvoicesResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingInvoicesSummary {
     /**
      *
@@ -17407,7 +17407,7 @@ pub struct BillingInvoicesSummary {
 }
 
 /// Contains information on a billing plan.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPayment {
     /**
      * Contains information on a billing plan.
@@ -17439,7 +17439,7 @@ pub struct BillingPayment {
 }
 
 /// Defines a billing payment request object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPaymentItem {
     /**
      * Defines a billing payment request object.
@@ -17485,7 +17485,7 @@ pub struct BillingPaymentItem {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPaymentRequest {
     /**
      *
@@ -17499,7 +17499,7 @@ pub struct BillingPaymentRequest {
 }
 
 /// Defines an billing payment response object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPaymentResponse {
     /**
      * Defines an billing payment response object.
@@ -17509,7 +17509,7 @@ pub struct BillingPaymentResponse {
 }
 
 /// Defines a billing payments response object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPaymentsResponse {
     /**
      * Defines a billing payments response object.
@@ -17537,7 +17537,7 @@ pub struct BillingPaymentsResponse {
 }
 
 /// Contains information about a billing plan.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPlan {
     /**
      * Contains information about a billing plan.
@@ -17661,7 +17661,7 @@ pub struct BillingPlan {
 }
 
 /// This object contains details about a billing plan.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPlanInformation {
     /**
      * This object contains details about a billing plan.
@@ -17800,7 +17800,7 @@ pub struct BillingPlanInformation {
 }
 
 /// Information used to provide a preview of a billing plan.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPlanPreview {
     /**
      * Information used to provide a preview of a billing plan.
@@ -17855,7 +17855,7 @@ pub struct BillingPlanPreview {
 }
 
 /// Defines a billing plan response object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPlanResponse {
     /**
      * Defines a billing plan response object.
@@ -17870,7 +17870,7 @@ pub struct BillingPlanResponse {
 }
 
 /// Defines a billing plan update response object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPlanUpdateResponse {
     /**
      * Defines a billing plan update response object.
@@ -17943,7 +17943,7 @@ pub struct BillingPlanUpdateResponse {
 }
 
 /// Defines a billing plans response object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPlansResponse {
     /**
      * Defines a billing plans response object.
@@ -17953,7 +17953,7 @@ pub struct BillingPlansResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingPrice {
     /**
      *
@@ -17985,7 +17985,7 @@ pub struct BillingPrice {
 }
 
 /// Information about a brand that is associated with an account. A brand applies custom styles and text to an envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Brand {
     /**
      * Information about a brand that is associated with an account. A brand applies custom styles and text to an envelope.
@@ -18090,7 +18090,7 @@ pub struct Brand {
 }
 
 /// Deprecated.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BrandEmailContent {
     /**
      * Deprecated.
@@ -18131,7 +18131,7 @@ pub struct BrandEmailContent {
 }
 
 /// Information about a link that a brand uses.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BrandLink {
     /**
      * Information about a link that a brand uses.
@@ -18172,7 +18172,7 @@ pub struct BrandLink {
 }
 
 /// Information about the logos associated with the brand.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BrandLogos {
     /**
      * Information about the logos associated with the brand.
@@ -18204,7 +18204,7 @@ pub struct BrandLogos {
 }
 
 /// This request object contains information about a specific brand.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BrandRequest {
     /**
      * This request object contains information about a specific brand.
@@ -18225,7 +18225,7 @@ pub struct BrandRequest {
 /// - Captive (embedded) signing
 ///
 /// You can modify these resource files to customize these experiences.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BrandResourceUrls {
     /**
      * Brands use resource files to style the following experiences:
@@ -18294,7 +18294,7 @@ pub struct BrandResourceUrls {
 }
 
 /// Information about the resource files that the brand uses for the email, signing, sending, and captive (embedded) signing experiences.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BrandResources {
     /**
      * Information about the resource files that the brand uses for the email, signing, sending, and captive (embedded) signing experiences.
@@ -18347,7 +18347,7 @@ pub struct BrandResources {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BrandResourcesList {
     /**
      *
@@ -18357,7 +18357,7 @@ pub struct BrandResourcesList {
 }
 
 /// Details about one or more brands.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BrandsRequest {
     /**
      * Details about one or more brands.
@@ -18367,7 +18367,7 @@ pub struct BrandsRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BrandsResponse {
     /**
      *
@@ -18395,7 +18395,7 @@ pub struct BrandsResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkEnvelope {
     /**
      *
@@ -18477,7 +18477,7 @@ pub struct BulkEnvelope {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkEnvelopeStatus {
     /**
      *
@@ -18600,7 +18600,7 @@ pub struct BulkEnvelopeStatus {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkRecipient {
     /**
      *
@@ -18683,7 +18683,7 @@ pub struct BulkRecipient {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkRecipientTabLabel {
     /**
      *
@@ -18706,7 +18706,7 @@ pub struct BulkRecipientTabLabel {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkRecipientsRequest {
     /**
      *
@@ -18716,7 +18716,7 @@ pub struct BulkRecipientsRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkRecipientsResponse {
     /**
      *
@@ -18780,7 +18780,7 @@ pub struct BulkRecipientsResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkRecipientsSummaryResponse {
     /**
      *
@@ -18813,7 +18813,7 @@ pub struct BulkRecipientsSummaryResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkRecipientsUpdateResponse {
     /**
      *
@@ -18823,7 +18823,7 @@ pub struct BulkRecipientsUpdateResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendBatchRequest {
     /**
      *
@@ -18837,7 +18837,7 @@ pub struct BulkSendBatchRequest {
 }
 
 /// Result of `getBulkSendBatchStatus`
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendBatchStatus {
     /**
      * Result of `getBulkSendBatchStatus`
@@ -18951,7 +18951,7 @@ pub struct BulkSendBatchStatus {
 }
 
 /// A list of bulk send batch summaries.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendBatchSummaries {
     /**
      * A list of bulk send batch summaries.
@@ -19042,7 +19042,7 @@ pub struct BulkSendBatchSummaries {
 }
 
 /// Summary status of a single batch.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendBatchSummary {
     /**
      * Summary status of a single batch.
@@ -19115,7 +19115,7 @@ pub struct BulkSendBatchSummary {
 }
 
 /// A single bulk send error report.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendErrorStatus {
     /**
      * A single bulk send error report.
@@ -19143,7 +19143,7 @@ pub struct BulkSendErrorStatus {
 }
 
 /// This object contains information about the envelope or template that you want to send in bulk.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendRequest {
     /**
      * This object contains information about the envelope or template that you want to send in bulk.
@@ -19166,7 +19166,7 @@ pub struct BulkSendRequest {
 }
 
 /// The object contains the response to a bulk send request.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendResponse {
     /**
      * The object contains the response to a bulk send request.
@@ -19235,7 +19235,7 @@ pub struct BulkSendResponse {
 }
 
 /// This object contains the results of a bulk send test.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendTestResponse {
     /**
      * This object contains the results of a bulk send test.
@@ -19258,7 +19258,7 @@ pub struct BulkSendTestResponse {
 }
 
 /// This object contains the details to use for a specific copy, or instance, of the envelope. When you send an envelope by using a bulk send list, you can customize these properties for each instance.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendingCopy {
     /**
      * This object contains the details to use for a specific copy, or instance, of the envelope. When you send an envelope by using a bulk send list, you can customize these properties for each instance.
@@ -19291,7 +19291,7 @@ pub struct BulkSendingCopy {
 }
 
 /// This object contains details about a custom field for a bulk send copy. In a bulk send request, each custom field in the bulk send list must match a custom field in the envelope or template that you want to send.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendingCopyCustomField {
     /**
      * This object contains details about a custom field for a bulk send copy. In a bulk send request, each custom field in the bulk send list must match a custom field in the envelope or template that you want to send.
@@ -19314,7 +19314,7 @@ pub struct BulkSendingCopyCustomField {
 }
 
 /// This object contains details about a bulk send recipient.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendingCopyRecipient {
     /**
      * This object contains details about a bulk send recipient.
@@ -19505,7 +19505,7 @@ pub struct BulkSendingCopyRecipient {
 /// A tab associated with the bulk send recipient. In a bulk send request, each recipient tab must match a recipient tab on the envelope or template that you want to send. To match up, the `tabLabel` for this tab and the `tabLabel` for the corresponding tab on the envelope or template must be the same.
 ///
 /// For example, if the envelope has a placeholder text tab with the `tabLabel` `childName`, you must assign the same `tabLabel` `childName` to the tab here that you are populating with that information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendingCopyTab {
     /**
      * A tab associated with the bulk send recipient. In a bulk send request, each recipient tab must match a recipient tab on the envelope or template that you want to send. To match up, the `tabLabel` for this tab and the `tabLabel` for the corresponding tab on the envelope or template must be the same.
@@ -19532,7 +19532,7 @@ pub struct BulkSendingCopyTab {
 }
 
 /// This object contains the details for the bulk send list.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendingList {
     /**
      * This object contains the details for the bulk send list.
@@ -19560,7 +19560,7 @@ pub struct BulkSendingList {
 }
 
 /// This complex type contains summaries that provide basic information about the bulk send lists that belong to the current user.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendingListSummaries {
     /**
      * This complex type contains summaries that provide basic information about the bulk send lists that belong to the current user.
@@ -19570,7 +19570,7 @@ pub struct BulkSendingListSummaries {
 }
 
 /// This object contains basic information about a bulk send list.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BulkSendingListSummary {
     /**
      * This object contains basic information about a bulk send list.
@@ -19607,7 +19607,7 @@ pub struct BulkSendingListSummary {
 }
 
 /// This object contains details about a captive (embedded) recipient.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CaptiveRecipient {
     /**
      * This object contains details about a captive (embedded) recipient.
@@ -19644,7 +19644,7 @@ pub struct CaptiveRecipient {
 }
 
 /// Contains information about captive (embedded) recipients.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CaptiveRecipientInformation {
     /**
      * Contains information about captive (embedded) recipients.
@@ -19654,7 +19654,7 @@ pub struct CaptiveRecipientInformation {
 }
 
 /// Contains information about a carbon copy recipient. Carbon copy recipients get a copy of the envelope but don't need to sign, initial, date or add information to any of the documents.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CarbonCopy {
     /**
      * Contains information about a carbon copy recipient. Carbon copy recipients get a copy of the envelope but don't need to sign, initial, date or add information to any of the documents.
@@ -20192,7 +20192,7 @@ pub struct CarbonCopy {
 }
 
 /// Contains information about a certified delivery recipient. Certified delivery recipients must receive the completed documents for the envelope to be completed. However, they don't need to sign, initial, date or add information to any of the documents.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CertifiedDelivery {
     /**
      * Contains information about a certified delivery recipient. Certified delivery recipients must receive the completed documents for the envelope to be completed. However, they don't need to sign, initial, date or add information to any of the documents.
@@ -20725,7 +20725,7 @@ pub struct CertifiedDelivery {
 }
 
 /// A tab that allows the recipient to select a yes/no (on/off) option.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Checkbox {
     /**
      * A tab that allows the recipient to select a yes/no (on/off) option.
@@ -21474,7 +21474,7 @@ pub struct Checkbox {
 }
 
 /// An object that contains information about the chunked upload part.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChunkedUploadPart {
     /**
      * An object that contains information about the chunked upload part.
@@ -21497,7 +21497,7 @@ pub struct ChunkedUploadPart {
 }
 
 /// This is the request object for uploading a chunked upload.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChunkedUploadRequest {
     /**
      * This is the request object for uploading a chunked upload.
@@ -21520,7 +21520,7 @@ pub struct ChunkedUploadRequest {
 }
 
 /// This response object is returned after you upload a chunked upload.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChunkedUploadResponse {
     /**
      * This response object is returned after you upload a chunked upload.
@@ -21602,7 +21602,7 @@ pub struct ChunkedUploadResponse {
 }
 
 /// Contains details about a specific cloud storage provider.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CloudStorageProvider {
     /**
      * Contains details about a specific cloud storage provider.
@@ -21648,7 +21648,7 @@ pub struct CloudStorageProvider {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CloudStorageProvidersData {
     /**
      *
@@ -21658,7 +21658,7 @@ pub struct CloudStorageProvidersData {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Comment {
     /**
      *
@@ -21843,7 +21843,7 @@ pub struct Comment {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommentHistoryResult {
     /**
      *
@@ -21880,7 +21880,7 @@ pub struct CommentHistoryResult {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommentPublish {
     /**
      *
@@ -21927,7 +21927,7 @@ pub struct CommentPublish {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommentThread {
     /**
      *
@@ -22517,7 +22517,7 @@ pub struct CommentThread {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommentsPublish {
     /**
      *
@@ -22527,7 +22527,7 @@ pub struct CommentsPublish {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PhoneNumber {
     /**
      *
@@ -23215,7 +23215,7 @@ pub struct PhoneNumber {
 }
 
 /// A tab that displays the recipient's company name.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Company {
     /**
      * A tab that displays the recipient's company name.
@@ -24002,7 +24002,7 @@ pub struct Company {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CompleteSignHashResponse {
     /**
      *
@@ -24032,7 +24032,7 @@ pub struct CompleteSignHashResponse {
 /// This object contains information about a [composite template][composite], which you can use to to apply multiple templates to a single envelope, combine templates with PDF forms, and combine templates with documents from cloud sources.
 ///
 /// [composite]: https://developers.docusign.com/esign-rest-api/guides/features/templates#composite-templates
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CompositeTemplate {
     /**
      * This object contains information about a [composite template][composite], which you can use to to apply multiple templates to a single envelope, combine templates with PDF forms, and combine templates with documents from cloud sources.
@@ -24080,7 +24080,7 @@ pub struct CompositeTemplate {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConditionalRecipientRule {
     /**
      *
@@ -24113,7 +24113,7 @@ pub struct ConditionalRecipientRule {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConditionalRecipientRuleCondition {
     /**
      *
@@ -24141,7 +24141,7 @@ pub struct ConditionalRecipientRuleCondition {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConditionalRecipientRuleFilter {
     /**
      *
@@ -24200,7 +24200,7 @@ pub struct ConditionalRecipientRuleFilter {
 }
 
 /// This object contains the results of a ConnectConfigurations::GET method.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectConfigResults {
     /**
      * This object contains the results of a ConnectConfigurations::GET method.
@@ -24219,7 +24219,7 @@ pub struct ConnectConfigResults {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectCustomConfiguration {
     /**
      *
@@ -24524,7 +24524,7 @@ pub struct ConnectCustomConfiguration {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectDebugLog {
     /**
      *
@@ -24571,7 +24571,7 @@ pub struct ConnectDebugLog {
 
 /// This object lets you choose the data format of your Connect response.
 /// For  more information about using this object, see [Connect webhooks with JSON notifications](https://www.docusign.com/blog/developers/connect-webhooks-json-notifications).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectEventData {
     /**
      * This object lets you choose the data format of your Connect response.
@@ -24602,7 +24602,7 @@ pub struct ConnectEventData {
 }
 
 /// A list of failed envelope IDs to retry.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectFailureFilter {
     /**
      * A list of failed envelope IDs to retry.
@@ -24621,7 +24621,7 @@ pub struct ConnectFailureFilter {
 }
 
 /// This object contains details about a Connect failure result.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectFailureResult {
     /**
      * This object contains details about a Connect failure result.
@@ -24671,7 +24671,7 @@ pub struct ConnectFailureResult {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectFailureResults {
     /**
      *
@@ -24681,7 +24681,7 @@ pub struct ConnectFailureResults {
 }
 
 /// Contains information about a Connect log entry.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectLog {
     /**
      * Contains information about a Connect log entry.
@@ -24844,7 +24844,7 @@ pub struct ConnectLog {
 }
 
 /// This object is used to match a DocuSign field to a Salesforce field so that Docusign can send information to your Salesforce account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectSalesforceField {
     /**
      * This object is used to match a DocuSign field to a Salesforce field so that Docusign can send information to your Salesforce account.
@@ -24924,7 +24924,7 @@ pub struct ConnectSalesforceField {
 ///
 /// When you install DocuSign Connect for Salesforce, the service automatically sets up two Connect objects: one that updates envelope status and documents and one that updates recipient status. You can also customize DocuSign Connect for Salesforce by associating DocuSign objects with Salesforce objects so that DocuSign Connect for Salesforce updates or inserts the information into the Salesforce object. For more information, see
 /// [DocuSign for Salesforce - Adding Completed Documents to the Notes and Attachments](https://support.docusign.com/articles/DocuSign-for-Salesforce-Adding-Completed-Documents-to-the-Notes-and-Attachments-New).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectSalesforceObject {
     /**
      * A `connectSalesforceObject` is an object that updates envelope and document status or recipient status in your Salesforce account.
@@ -25029,7 +25029,7 @@ pub struct ConnectSalesforceObject {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConnectUserObject {
     /**
      *
@@ -25075,7 +25075,7 @@ pub struct ConnectUserObject {
 }
 
 /// The request object for the EnvelopeViews::createConsole method.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConsoleViewRequest {
     /**
      * The request object for the EnvelopeViews::createConsole method.
@@ -25098,7 +25098,7 @@ pub struct ConsoleViewRequest {
 }
 
 /// Details about consumer disclosures.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConsumerDisclosure {
     /**
      * Details about consumer disclosures.
@@ -25383,7 +25383,7 @@ pub struct ConsumerDisclosure {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Contact {
     /**
      *
@@ -25492,7 +25492,7 @@ pub struct Contact {
 }
 
 /// This response object contains information about the contacts associated with an account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactGetResponse {
     /**
      * This response object contains information about the contacts associated with an account.
@@ -25556,7 +25556,7 @@ pub struct ContactGetResponse {
 }
 
 /// The request object containing the new information for the contacts.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactModRequest {
     /**
      * The request object containing the new information for the contacts.
@@ -25566,7 +25566,7 @@ pub struct ContactModRequest {
 }
 
 /// Details about the phone numbers associated with a specific contact.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactPhoneNumber {
     /**
      * Details about the phone numbers associated with a specific contact.
@@ -25589,7 +25589,7 @@ pub struct ContactPhoneNumber {
 }
 
 /// This response objects shows the updated details for the contacts.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactUpdateResponse {
     /**
      * This response objects shows the updated details for the contacts.
@@ -25599,7 +25599,7 @@ pub struct ContactUpdateResponse {
 }
 
 /// The request body for the EnvelopeViews::createCorrect method.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CorrectViewRequest {
     /**
      * The request body for the EnvelopeViews::createCorrect method.
@@ -25631,7 +25631,7 @@ pub struct CorrectViewRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Country {
     /**
      *
@@ -25668,7 +25668,7 @@ pub struct Country {
 }
 
 /// This object contains information about a credit card that is associated with an account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreditCardInformation {
     /**
      * This object contains information about a credit card that is associated with an account.
@@ -25732,7 +25732,7 @@ pub struct CreditCardInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreditCardTypes {
     /**
      *
@@ -25742,7 +25742,7 @@ pub struct CreditCardTypes {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Currency {
     /**
      *
@@ -26495,7 +26495,7 @@ pub struct Currency {
 }
 
 /// Information about the price and currency associated with the feature set. Reserved for internal DocuSign use only.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CurrencyFeatureSetPrice {
     /**
      * Information about the price and currency associated with the feature set. Reserved for internal DocuSign use only.
@@ -26545,7 +26545,7 @@ pub struct CurrencyFeatureSetPrice {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CurrencyPlanPrice {
     /**
      *
@@ -26600,7 +26600,7 @@ pub struct CurrencyPlanPrice {
 }
 
 /// This object provides details about a custom field.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomField {
     /**
      * This object provides details about a custom field.
@@ -26669,7 +26669,7 @@ pub struct CustomField {
 }
 
 /// Contains information about custom fields.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomFields {
     /**
      * Contains information about custom fields.
@@ -26684,7 +26684,7 @@ pub struct CustomFields {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomFieldsEnvelope {
     /**
      *
@@ -26699,7 +26699,7 @@ pub struct CustomFieldsEnvelope {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CustomSettingsInformation {
     /**
      *
@@ -26716,7 +26716,7 @@ pub struct CustomSettingsInformation {
 /// particular date format enforced, DocuSign recommends using a
 /// Text tab with a validation pattern and a validation message
 /// to enforce the format.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Date {
     /**
      * A tab that allows the recipient to enter a date. Date tabs
@@ -28377,7 +28377,7 @@ pub struct Date {
 
 /// A tab that displays the date that the recipient signed the
 /// document.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DateSigned {
     /**
      * A tab that displays the date that the recipient signed the
@@ -29162,7 +29162,7 @@ pub struct DateSigned {
 /// - `DateAreaY`: The Y axis position of the top-left corner.
 /// - `DateAreaWidth`: The width of the rectangle.
 /// - `DateAreaHeight`: The height of the rectangle.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DateStampProperties {
     /**
      * Specifies the area in which a date stamp is placed. This parameter uses pixel positioning to draw a rectangle at the center of the stamp area. The stamp is superimposed on top of this central area.
@@ -29217,7 +29217,7 @@ pub struct DateStampProperties {
 /// A tab that allows the recipient the option of declining an
 /// envelope. If the recipient clicks the tab during the signing
 /// process, the envelope is voided.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Decline {
     /**
      * A tab that allows the recipient the option of declining an
@@ -30082,7 +30082,7 @@ pub struct Decline {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DiagnosticsSettingsInformation {
     /**
      *
@@ -30114,7 +30114,7 @@ pub struct DiagnosticsSettingsInformation {
 }
 
 /// Contains information about a bank that processes a customer's direct debit payments.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DirectDebitProcessorInformation {
     /**
      * Contains information about a bank that processes a customer's direct debit payments.
@@ -30227,7 +30227,7 @@ pub struct DirectDebitProcessorInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DisplayApplianceAccount {
     /**
      *
@@ -30278,7 +30278,7 @@ pub struct DisplayApplianceAccount {
 /// * dateOfBirth
 /// * displayLevelCode
 /// * receiveInResponse
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DobInformationInput {
     /**
      * Complex type containing:
@@ -30318,7 +30318,7 @@ pub struct DobInformationInput {
 }
 
 /// A document object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Document {
     /**
      * A document object.
@@ -30531,7 +30531,7 @@ pub struct Document {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentFieldsInformation {
     /**
      *
@@ -30541,7 +30541,7 @@ pub struct DocumentFieldsInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentHtmlCollapsibleDisplaySettings {
     /**
      *
@@ -30635,7 +30635,7 @@ pub struct DocumentHtmlCollapsibleDisplaySettings {
 }
 
 /// Holds the properties that define how to generate the responsive-formatted HTML for the document.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentHtmlDefinition {
     /**
      * Holds the properties that define how to generate the responsive-formatted HTML for the document.
@@ -30735,7 +30735,7 @@ pub struct DocumentHtmlDefinition {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentHtmlDefinitionOriginal {
     /**
      *
@@ -30763,7 +30763,7 @@ pub struct DocumentHtmlDefinitionOriginal {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentHtmlDefinitions {
     /**
      *
@@ -30773,7 +30773,7 @@ pub struct DocumentHtmlDefinitions {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentHtmlDisplayAnchor {
     /**
      *
@@ -30825,7 +30825,7 @@ pub struct DocumentHtmlDisplayAnchor {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentHtmlDisplaySettings {
     /**
      *
@@ -30932,7 +30932,7 @@ pub struct DocumentHtmlDisplaySettings {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentTemplate {
     /**
      *
@@ -30978,7 +30978,7 @@ pub struct DocumentTemplate {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentTemplateList {
     /**
      *
@@ -30988,7 +30988,7 @@ pub struct DocumentTemplateList {
 }
 
 /// This object configures a recipient's read/write access to a document.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentVisibility {
     /**
      * This object configures a recipient's read/write access to a document.
@@ -31034,7 +31034,7 @@ pub struct DocumentVisibility {
 }
 
 /// A list of `documentVisibility` objects that specify whether documents are visible to recipients.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentVisibilityList {
     /**
      * A list of `documentVisibility` objects that specify whether documents are visible to recipients.
@@ -31044,7 +31044,7 @@ pub struct DocumentVisibilityList {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DowngradRequestBillingInfoResponse {
     /**
      *
@@ -31063,7 +31063,7 @@ pub struct DowngradRequestBillingInfoResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DowngradeBillingPlanInformation {
     /**
      *
@@ -31082,7 +31082,7 @@ pub struct DowngradeBillingPlanInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DowngradePlanUpdateResponse {
     /**
      *
@@ -31146,7 +31146,7 @@ pub struct DowngradePlanUpdateResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Draw {
     /**
      *
@@ -31684,7 +31684,7 @@ pub struct Draw {
 }
 
 /// This object contains information used to configure [eNote](https://www.docusign.com/products/enote) functionality. To use eNote, the Allow eNote for eOriginal account plan item must be on, and the Connect configuration for eOriginal must be set correctly.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ENoteConfiguration {
     /**
      * This object contains information used to configure [eNote](https://www.docusign.com/products/enote) functionality. To use eNote, the Allow eNote for eOriginal account plan item must be on, and the Connect configuration for eOriginal must be set correctly.
@@ -31743,7 +31743,7 @@ pub struct ENoteConfiguration {
 }
 
 /// A complex type defining the management and access rights of a recipient assigned as an editor on the envelope. Editors have the same management and access rights for the envelope as the sender. They can make changes to the envelope as if they were using the Correct feature. This recipient can add name and email information, add or change the routing order and set authentication options for the remaining recipients. Additionally, this recipient can edit signature/initial tabs and text tabs for the remaining recipients.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Editor {
     /**
      * A complex type defining the management and access rights of a recipient assigned as an editor on the envelope. Editors have the same management and access rights for the envelope as the sender. They can make changes to the envelope as if they were using the Correct feature. This recipient can add name and email information, add or change the routing order and set authentication options for the remaining recipients. Additionally, this recipient can edit signature/initial tabs and text tabs for the remaining recipients.
@@ -32256,7 +32256,7 @@ pub struct Editor {
 /// When getting information that includes
 /// this tab type, the original value of the tab when the
 /// associated envelope was sent is included in the response.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Email {
     /**
      * A tab that allows the recipient to enter an email address.
@@ -34028,7 +34028,7 @@ pub struct Email {
 
 /// A tab that displays the recipient's email as entered in the
 /// recipient information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailAddress {
     /**
      * A tab that displays the recipient's email as entered in the
@@ -34818,7 +34818,7 @@ pub struct EmailAddress {
 /// * bccEmailAddresses - An array of up to five email addresses to which the envelope is sent to as a BCC email. Only users with canManageAccount setting set to true can use this option.
 /// DocuSign verifies that the email format is correct, but does not verify that the email is active. Using this overrides the BCC for Email Archive information setting for this envelope. Maximum Length: 100 characters.
 /// *Example*: if your account has BCC for Email Archive set up for the email address 'archive@mycompany.com' and you send an envelope using the BCC Email Override to send a BCC email to 'salesarchive@mycompany.com', then a copy of the envelope is only sent to the 'salesarchive@mycompany.com' email address.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailSettings {
     /**
      * A complex element that allows  the sender to override some envelope email setting information. This can be used to override the Reply To email address and name associated with the envelope and to override the BCC email addresses to which an envelope is sent.
@@ -34882,7 +34882,7 @@ pub struct EmailSettings {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Envelope {
     /**
      *
@@ -35515,7 +35515,7 @@ pub struct Envelope {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeAttachmentsRequest {
     /**
      *
@@ -35525,7 +35525,7 @@ pub struct EnvelopeAttachmentsRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeAttachmentsResult {
     /**
      *
@@ -35535,7 +35535,7 @@ pub struct EnvelopeAttachmentsResult {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeAuditEvent {
     /**
      *
@@ -35545,7 +35545,7 @@ pub struct EnvelopeAuditEvent {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeAuditEventResponse {
     /**
      *
@@ -35555,7 +35555,7 @@ pub struct EnvelopeAuditEventResponse {
 }
 
 /// Envelope object definition.
-#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeDefinition {
     /**
      * Envelope object definition.
@@ -36249,7 +36249,7 @@ pub struct EnvelopeDefinition {
 }
 
 /// This object contains details about the envelope document.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeDocument {
     /**
      * This object contains details about the envelope document.
@@ -36440,7 +36440,7 @@ pub struct EnvelopeDocument {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeDocumentsResult {
     /**
      *
@@ -36459,7 +36459,7 @@ pub struct EnvelopeDocumentsResult {
 }
 
 /// For which envelope events should your webhook be called?
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeEvent {
     /**
      * For which envelope events should your webhook be called?
@@ -36482,7 +36482,7 @@ pub struct EnvelopeEvent {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeFormDataType {
     /**
      *
@@ -36539,7 +36539,7 @@ pub struct EnvelopeFormDataType {
 
 /// A tab that displays the envelope ID. Recipients cannot enter
 /// or change the information in this tab.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeId {
     /**
      * A tab that displays the envelope ID. Recipients cannot enter
@@ -37299,7 +37299,7 @@ pub struct EnvelopeId {
 }
 
 /// Lists of envelope and transaction IDs to use in the results.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeIdsRequest {
     /**
      * Lists of envelope and transaction IDs to use in the results.
@@ -37314,7 +37314,7 @@ pub struct EnvelopeIdsRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeMetadata {
     /**
      *
@@ -37346,7 +37346,7 @@ pub struct EnvelopeMetadata {
 }
 
 /// A complex element that specifies the notification settings for the envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Notification {
     /**
      * A complex element that specifies the notification settings for the envelope.
@@ -37370,7 +37370,7 @@ pub struct Notification {
 }
 
 /// Contains information about the current envelope purge configuration for an account, which enables account administrators to purge documents from completed and voided envelopes after a set number of days (`retentionDays`).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopePurgeConfiguration {
     /**
      * Contains information about the current envelope purge configuration for an account, which enables account administrators to purge documents from completed and voided envelopes after a set number of days (`retentionDays`).
@@ -37411,7 +37411,7 @@ pub struct EnvelopePurgeConfiguration {
 }
 
 ///  This object describes an envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeSummary {
     /**
      *  This object describes an envelope.
@@ -37462,7 +37462,7 @@ pub struct EnvelopeSummary {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeTemplate {
     /**
      *
@@ -38273,7 +38273,7 @@ pub struct EnvelopeTemplate {
 }
 
 /// Information about templates.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeTemplateResults {
     /**
      * Information about templates.
@@ -38342,7 +38342,7 @@ pub struct EnvelopeTemplateResults {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeTransactionStatus {
     /**
      *
@@ -38379,7 +38379,7 @@ pub struct EnvelopeTransactionStatus {
 }
 
 /// This object contains details about an envelope transfer rule.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeTransferRule {
     /**
      * This object contains details about an envelope transfer rule.
@@ -38450,7 +38450,7 @@ pub struct EnvelopeTransferRule {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeTransferRuleInformation {
     /**
      *
@@ -38514,7 +38514,7 @@ pub struct EnvelopeTransferRuleInformation {
 }
 
 /// This object contains details about the envelope transfer rule that you want to create.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeTransferRuleRequest {
     /**
      * This object contains details about the envelope transfer rule that you want to create.
@@ -38585,7 +38585,7 @@ pub struct EnvelopeTransferRuleRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeUpdateSummary {
     /**
      *
@@ -38643,7 +38643,7 @@ pub struct EnvelopeUpdateSummary {
 }
 
 /// Result set for the Envelopes: listStatusChanges method
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopesInformation {
     /**
      * Result set for the Envelopes: listStatusChanges method
@@ -38717,7 +38717,7 @@ pub struct EnvelopesInformation {
 }
 
 /// This object describes errors that occur. It is only valid for responses and ignored in requests.
-#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ErrorDetails {
     /**
      * This object describes errors that occur. It is only valid for responses and ignored in requests.
@@ -38740,7 +38740,7 @@ pub struct ErrorDetails {
 }
 
 /// Use this object to configure a [DocuSign Connect webhook](https://developers.docusign.com/platform/webhooks/connect/).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventNotification {
     /**
      * Use this object to configure a [DocuSign Connect webhook](https://developers.docusign.com/platform/webhooks/connect/).
@@ -38886,7 +38886,7 @@ pub struct EventNotification {
 }
 
 /// Information about the result of an event.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventResult {
     /**
      * Information about the result of an event.
@@ -38927,7 +38927,7 @@ pub struct EventResult {
 }
 
 /// A complex element that specifies the expiration settings for the envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Expirations {
     /**
      * A complex element that specifies the expiration settings for the envelope.
@@ -38959,7 +38959,7 @@ pub struct Expirations {
 }
 
 ///  Claims about the user from an external provider. This object is reserved for DocuSign internal use.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExternalClaim {
     /**
      *  Claims about the user from an external provider. This object is reserved for DocuSign internal use.
@@ -39000,7 +39000,7 @@ pub struct ExternalClaim {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExternalDocServiceErrorDetails {
     /**
      *
@@ -39032,7 +39032,7 @@ pub struct ExternalDocServiceErrorDetails {
 }
 
 /// A complex object specifying the external document sources.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExternalDocumentSources {
     /**
      * A complex object specifying the external document sources.
@@ -39107,7 +39107,7 @@ pub struct ExternalDocumentSources {
 }
 
 /// This object contains information about a file or folder in cloud storage.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExternalFile {
     /**
      * This object contains information about a file or folder in cloud storage.
@@ -39185,7 +39185,7 @@ pub struct ExternalFile {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExternalFolder {
     /**
      *
@@ -39272,7 +39272,7 @@ pub struct ExternalFolder {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FavoriteTemplatesContentItem {
     /**
      *
@@ -39296,7 +39296,7 @@ pub struct FavoriteTemplatesContentItem {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FeatureAvailableMetadata {
     /**
      *
@@ -39319,7 +39319,7 @@ pub struct FeatureAvailableMetadata {
 }
 
 /// This object provides details about a feature set, or add-on product that is associated with an account. It is reserved for DocuSign internal use only.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FeatureSet {
     /**
      * This object provides details about a feature set, or add-on product that is associated with an account. It is reserved for DocuSign internal use only.
@@ -39401,7 +39401,7 @@ pub struct FeatureSet {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileType {
     /**
      *
@@ -39424,7 +39424,7 @@ pub struct FileType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileTypeList {
     /**
      *
@@ -39434,7 +39434,7 @@ pub struct FileTypeList {
 }
 
 /// Use this object to create a filtered view of the items in a folder.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Filter {
     /**
      * Use this object to create a filtered view of the items in a folder.
@@ -39541,7 +39541,7 @@ pub struct Filter {
 /// takes the recipient's name as entered in the recipient
 /// information, splits it into sections based on spaces and
 /// uses the first section as the first name.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FirstName {
     /**
      * A tab that displays the recipient's first name. This tab
@@ -40493,7 +40493,7 @@ pub struct FirstName {
 }
 
 /// This object contains details about a folder.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Folder {
     /**
      * This object contains details about a folder.
@@ -40614,7 +40614,7 @@ pub struct Folder {
 }
 
 /// Results from a folder item request.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FolderItemResponse {
     /**
      * Results from a folder item request.
@@ -40678,7 +40678,7 @@ pub struct FolderItemResponse {
 }
 
 /// Information about folder item results.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FolderItemV2 {
     /**
      * Information about folder item results.
@@ -40859,7 +40859,7 @@ pub struct FolderItemV2 {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FoldersResponse {
     /**
      *
@@ -40928,7 +40928,7 @@ pub struct FoldersResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FolderSharedItem {
     /**
      *
@@ -41012,7 +41012,7 @@ pub struct FolderSharedItem {
 }
 
 /// Information for a folder request.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FoldersRequest {
     /**
      * Information for a folder request.
@@ -41036,7 +41036,7 @@ pub struct FoldersRequest {
 }
 
 /// A complex element that has up to four Question/Answer pairs for forgotten password information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ForgottenPasswordInformation {
     /**
      * A complex element that has up to four Question/Answer pairs for forgotten password information.
@@ -41113,7 +41113,7 @@ pub struct ForgottenPasswordInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FormDataItem {
     /**
      *
@@ -41180,7 +41180,7 @@ pub struct FormDataItem {
 ///
 /// [calculatedfields]: https://support.docusign.com/en/guides/ndse-user-guide-calculated-fields
 /// [paymentguide]:     https://support.docusign.com/en/guides/requesting-payments-along-with-signatures
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FormulaTab {
     /**
      * The value of a formula tab is calculated
@@ -44622,7 +44622,7 @@ pub struct FormulaTab {
 }
 
 /// A tab that displays the recipient's full name.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FullName {
     /**
      * A tab that displays the recipient's full name.
@@ -45313,7 +45313,7 @@ pub struct FullName {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GraphicsContext {
     /**
      *
@@ -45345,7 +45345,7 @@ pub struct GraphicsContext {
 }
 
 /// This object contains information about a group.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Group {
     /**
      * This object contains information about a group.
@@ -45405,7 +45405,7 @@ pub struct Group {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupInformation {
     /**
      *
@@ -45469,7 +45469,7 @@ pub struct GroupInformation {
 }
 
 /// A complex object specifying ID check configuration.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IdCheckConfiguration {
     /**
      * A complex object specifying ID check configuration.
@@ -45497,7 +45497,7 @@ pub struct IdCheckConfiguration {
 }
 
 /// A complex element that contains input information related to a recipient ID check.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IdCheckInformationInput {
     /**
      * A complex element that contains input information related to a recipient ID check.
@@ -45522,7 +45522,7 @@ pub struct IdCheckInformationInput {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IdCheckSecurityStep {
     /**
      *
@@ -45543,7 +45543,7 @@ pub struct IdCheckSecurityStep {
 /// see the [EnvelopeRecipients resource][resource].
 ///
 /// [resource]: https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipients#in-person-signer-recipient
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InPersonSigner {
     /**
      * Contains information about an in-person recipient. This is a DocuSign user,
@@ -46948,7 +46948,7 @@ pub struct InPersonSigner {
 
 /// A tab that allows the recipient to initial the document. May
 /// be optional.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InitialHere {
     /**
      * A tab that allows the recipient to initial the document. May
@@ -47629,7 +47629,7 @@ pub struct InitialHere {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InlineTemplate {
     /**
      *
@@ -47663,7 +47663,7 @@ pub struct InlineTemplate {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IntegratedUserInfoList {
     /**
      *
@@ -47736,7 +47736,7 @@ pub struct IntegratedUserInfoList {
 }
 
 /// Contains information about an intermediary recipient. An intermediary is a recipient who can, but is not required to, add name and email information for recipients at the same or subsequent level in the routing order, unless subsequent agents, editors or intermediaries are added.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Intermediary {
     /**
      * Contains information about an intermediary recipient. An intermediary is a recipient who can, but is not required to, add name and email information for recipients at the same or subsequent level in the routing order, unless subsequent agents, editors or intermediaries are added.
@@ -48247,7 +48247,7 @@ pub struct Intermediary {
 
 /// Describes the jurisdiction of a notary.
 /// This is read-only object.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Jurisdiction {
     /**
      * Describes the jurisdiction of a notary.
@@ -48355,7 +48355,7 @@ pub struct Jurisdiction {
 /// takes the recipient's name as entered in the recipient
 /// information, splits it into sections based on spaces and
 /// uses the last section as the last name.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LastName {
     /**
      * A tab that displays the recipient's last name. This tab
@@ -49311,7 +49311,7 @@ pub struct LastName {
 /// property contains a list of
 /// [`listItem`](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipientTabs/create/)
 /// objects to specify the selectable options.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct List {
     /**
      * This tab offers a list of options to choose from.
@@ -50504,7 +50504,7 @@ pub struct List {
 }
 
 /// This object represents a list custom field from which envelope creators and senders can select custom data.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListCustomField {
     /**
      * This object represents a list custom field from which envelope creators and senders can select custom data.
@@ -50575,7 +50575,7 @@ pub struct ListCustomField {
 /// One of the selectable items
 /// in the `listItems` property
 /// of a [`list`](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipientTabs/create/) tab.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListItem {
     /**
      * One of the selectable items
@@ -50634,7 +50634,7 @@ pub struct ListItem {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LocalePolicy {
     /**
      *
@@ -50970,7 +50970,7 @@ pub struct LocalePolicy {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LocalePolicyTab {
     /**
      *
@@ -51088,7 +51088,7 @@ pub struct LocalePolicyTab {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LockInformation {
     /**
      *
@@ -51157,7 +51157,7 @@ pub struct LockInformation {
 }
 
 /// This request object contains information about the lock that you want to create or update.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LockRequest {
     /**
      * This request object contains information about the lock that you want to create or update.
@@ -51207,7 +51207,7 @@ pub struct LockRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LoginAccount {
     /**
      *
@@ -51303,7 +51303,7 @@ pub struct LoginAccount {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LoginInformation {
     /**
      *
@@ -51322,7 +51322,7 @@ pub struct LoginInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MatchBox {
     /**
      *
@@ -51372,7 +51372,7 @@ pub struct MatchBox {
 }
 
 /// Information about items shared among groups.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberGroupSharedItem {
     /**
      * Information about items shared among groups.
@@ -51396,7 +51396,7 @@ pub struct MemberGroupSharedItem {
 }
 
 /// Information about shared items.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MemberSharedItems {
     /**
      * Information about shared items.
@@ -51426,7 +51426,7 @@ pub struct MemberSharedItems {
 }
 
 /// Contains information for transfering values between Salesforce data fields and DocuSign Tabs.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MergeField {
     /**
      * Contains information for transfering values between Salesforce data fields and DocuSign Tabs.
@@ -51511,7 +51511,7 @@ pub struct MergeField {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MobileNotifierConfiguration {
     /**
      *
@@ -51539,7 +51539,7 @@ pub struct MobileNotifierConfiguration {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MobileNotifierConfigurationInformation {
     /**
      *
@@ -51550,7 +51550,7 @@ pub struct MobileNotifierConfigurationInformation {
 
 /// Describes information
 /// about the `total` of a payment.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Money {
     /**
      * Describes information
@@ -51588,7 +51588,7 @@ pub struct Money {
 }
 
 /// A name-value pair that describes an item and provides a value for the item.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NameValue {
     /**
      * A name-value pair that describes an item and provides a value for the item.
@@ -51625,7 +51625,7 @@ pub struct NameValue {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NewAccountDefinition {
     /**
      *
@@ -51720,7 +51720,7 @@ pub struct NewAccountDefinition {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NewAccountSummary {
     /**
      *
@@ -51784,7 +51784,7 @@ pub struct NewAccountSummary {
 }
 
 /// Object representing a new user.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NewUser {
     /**
      * Object representing a new user.
@@ -51884,7 +51884,7 @@ pub struct NewUser {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NewUsersDefinition {
     /**
      *
@@ -51894,7 +51894,7 @@ pub struct NewUsersDefinition {
 }
 
 /// Object representing a summary of data for new users.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NewUsersSummary {
     /**
      * Object representing a summary of data for new users.
@@ -51906,7 +51906,7 @@ pub struct NewUsersSummary {
 /// A tab that alerts notary recipients that
 /// they must take action on the page.
 /// Only one notarize tab can appear on a page.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Notarize {
     /**
      * A tab that alerts notary recipients that
@@ -52551,7 +52551,7 @@ pub struct Notarize {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryData {
     /**
      *
@@ -52592,7 +52592,7 @@ pub struct NotaryData {
 /// * `name`: Specifies the notary's full legal name.
 /// * `email`: Specifies the notary's email address.
 /// * `recipientId`: A unique ID number for the notary signing host.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryHost {
     /**
      * This object is used only when `inPersonSigningType` in the `inPersonSigner` object is `notary`.
@@ -53631,7 +53631,7 @@ pub struct NotaryHost {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryJournalCredibleWitness {
     /**
      *
@@ -53663,7 +53663,7 @@ pub struct NotaryJournalCredibleWitness {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryJournalList {
     /**
      *
@@ -53727,7 +53727,7 @@ pub struct NotaryJournalList {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryJournalMetaData {
     /**
      *
@@ -53764,7 +53764,7 @@ pub struct NotaryJournalMetaData {
 }
 
 /// A notary jurisdiction.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryJurisdictionData {
     /**
      * A notary jurisdiction.
@@ -53824,7 +53824,7 @@ pub struct NotaryJurisdictionData {
 }
 
 /// A paged list of jurisdictions.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryJurisdictionList {
     /**
      * A paged list of jurisdictions.
@@ -53888,7 +53888,7 @@ pub struct NotaryJurisdictionList {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryRecipient {
     /**
      *
@@ -54582,7 +54582,7 @@ pub struct NotaryRecipient {
 }
 
 /// Describes a single notary jurisdiction.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryResult {
     /**
      * Describes a single notary jurisdiction.
@@ -54597,7 +54597,7 @@ pub struct NotaryResult {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotarySeal {
     /**
      *
@@ -55113,7 +55113,7 @@ pub struct NotarySeal {
 
 /// A tab that displays additional information, in the form of a
 /// note, for the recipient.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Note {
     /**
      * A tab that displays additional information, in the form of a
@@ -55909,7 +55909,7 @@ pub struct Note {
 }
 
 /// Contains details about the default notification settings for the envelope notifications that senders and signers receive.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotificationDefaultSettings {
     /**
      * Contains details about the default notification settings for the envelope notifications that senders and signers receive.
@@ -55924,7 +55924,7 @@ pub struct NotificationDefaultSettings {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotificationDefaultsData {
     /**
      *
@@ -55940,7 +55940,7 @@ pub struct NotificationDefaultsData {
 
 /// A tab that allows the recipient to enter numbers and decimal
 /// (.) points.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Number {
     /**
      * A tab that allows the recipient to enter numbers and decimal
@@ -56952,7 +56952,7 @@ pub struct Number {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OauthAccess {
     /**
      *
@@ -57007,7 +57007,7 @@ pub struct OauthAccess {
 }
 
 /// Description of a page of a document.
-#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Page {
     /**
      * The brand that envelope recipients see when a brand is not explicitly set.
@@ -57080,7 +57080,7 @@ pub struct Page {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PageImages {
     /**
      *
@@ -57144,7 +57144,7 @@ pub struct PageImages {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PageRequest {
     /**
      *
@@ -57167,7 +57167,7 @@ pub struct PageRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PathExtendedElement {
     /**
      *
@@ -57200,7 +57200,7 @@ pub struct PathExtendedElement {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PayPalLegacySettings {
     /**
      *
@@ -57258,7 +57258,7 @@ pub struct PayPalLegacySettings {
 /// to learn more about payments.
 ///
 /// [paymentguide]:     https://support.docusign.com/en/guides/requesting-payments-along-with-signatures
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentDetails {
     /**
      * When a formula tab
@@ -57544,7 +57544,7 @@ pub struct PaymentDetails {
 }
 
 /// This object contains details about a payment gateway account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentGatewayAccount {
     /**
      * This object contains details about a payment gateway account.
@@ -57650,7 +57650,7 @@ pub struct PaymentGatewayAccount {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentGatewayAccountSetting {
     /**
      *
@@ -57691,7 +57691,7 @@ pub struct PaymentGatewayAccountSetting {
 }
 
 /// Holds information about connected payment accounts.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentGatewayAccountsInfo {
     /**
      * Holds information about connected payment accounts.
@@ -57704,7 +57704,7 @@ pub struct PaymentGatewayAccountsInfo {
 /// about an individual line item
 /// in a payment request.
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentLineItem {
     /**
      * A line item describes details
@@ -57761,7 +57761,7 @@ pub struct PaymentLineItem {
 }
 
 /// This object contains information about a payment method that the gateway accepts and the payment options that are compatible with it.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentMethodWithOptions {
     /**
      * This object contains information about a payment method that the gateway accepts and the payment options that are compatible with it.
@@ -57781,7 +57781,7 @@ pub struct PaymentMethodWithOptions {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentProcessorInformation {
     /**
      *
@@ -57809,7 +57809,7 @@ pub struct PaymentProcessorInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentSignerValues {
     /**
      *
@@ -57823,7 +57823,7 @@ pub struct PaymentSignerValues {
 }
 
 /// This object defines the account permissions for a profile that you can apply to a group of users.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PermissionProfile {
     /**
      * This object defines the account permissions for a profile that you can apply to a group of users.
@@ -57883,7 +57883,7 @@ pub struct PermissionProfile {
 }
 
 /// Contains details about the permission profiles associated with an account.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PermissionProfileInformation {
     /**
      * Contains details about the permission profiles associated with an account.
@@ -57893,7 +57893,7 @@ pub struct PermissionProfileInformation {
 }
 
 /// An object used to identify the features and attributes of the account being created.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlanInformation {
     /**
      * An object used to identify the features and attributes of the account being created.
@@ -57940,7 +57940,7 @@ pub struct PlanInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PolyLine {
     /**
      *
@@ -57981,7 +57981,7 @@ pub struct PolyLine {
 }
 
 /// This tab enables users to strike through the text of a document. The tab is implemented as a line represented as a pair of x and y coordinates.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PolyLineOverlay {
     /**
      * This tab enables users to strike through the text of a document. The tab is implemented as a line represented as a pair of x and y coordinates.
@@ -58515,7 +58515,7 @@ pub struct PolyLineOverlay {
 }
 
 /// Contains details about a PowerForm.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerForm {
     /**
      * Contains details about a PowerForm.
@@ -58733,7 +58733,7 @@ pub struct PowerForm {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerFormDataEnvelope {
     /**
      *
@@ -58752,7 +58752,7 @@ pub struct PowerFormDataEnvelope {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerFormDataRecipient {
     /**
      *
@@ -58789,7 +58789,7 @@ pub struct PowerFormDataRecipient {
 }
 
 /// **Note**: For a self-service PowerForm on a website, you can specify the intended recipients generically (for example, use `Member` as the `Name`), and omit personal details such as `email`.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerFormRecipient {
     /**
      * \*\*Note\*\*: For a self-service PowerForm on a website, you can specify the intended recipients generically (for example, use `Member` as the `Name`), and omit personal details such as `email`.
@@ -58911,7 +58911,7 @@ pub struct PowerFormRecipient {
 }
 
 /// This object includes information about the users who have sent PowerForms.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerFormSendersResponse {
     /**
      * This object includes information about the users who have sent PowerForms.
@@ -58975,7 +58975,7 @@ pub struct PowerFormSendersResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerFormsFormDataResponse {
     /**
      *
@@ -58985,7 +58985,7 @@ pub struct PowerFormsFormDataResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerFormsRequest {
     /**
      *
@@ -58995,7 +58995,7 @@ pub struct PowerFormsRequest {
 }
 
 /// A list of PowerForms.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PowerFormsResponse {
     /**
      * A list of PowerForms.
@@ -59059,7 +59059,7 @@ pub struct PowerFormsResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PrefillTabs {
     /**
      *
@@ -59084,7 +59084,7 @@ pub struct PrefillTabs {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProofServiceResourceToken {
     /**
      *
@@ -59107,7 +59107,7 @@ pub struct ProofServiceResourceToken {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProofServiceViewLink {
     /**
      *
@@ -59121,7 +59121,7 @@ pub struct ProofServiceViewLink {
 }
 
 /// Metadata about a property.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PropertyMetadata {
     /**
      * Metadata about a property.
@@ -59140,7 +59140,7 @@ pub struct PropertyMetadata {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Province {
     /**
      *
@@ -59163,7 +59163,7 @@ pub struct Province {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ProvisioningInformation {
     /**
      *
@@ -59231,7 +59231,7 @@ pub struct ProvisioningInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PurchasedEnvelopesInformation {
     /**
      *
@@ -59319,7 +59319,7 @@ pub struct PurchasedEnvelopesInformation {
 /// One of the selectable radio buttons
 /// in the `radios` property
 /// of a [`radioGroup`](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipientTabs/) tab.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Radio {
     /**
      * One of the selectable radio buttons
@@ -59857,7 +59857,7 @@ pub struct Radio {
 /// [`radio`](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipientTabs/)
 /// objects  associated with the group. Only one radio button can
 /// be selected in a group.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RadioGroup {
     /**
      * This group tab is used to place radio buttons on a document.
@@ -60211,7 +60211,7 @@ pub struct RadioGroup {
 }
 
 /// Describes an additional notification method.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientAdditionalNotification {
     /**
      * Describes an additional notification method.
@@ -60244,7 +60244,7 @@ pub struct RecipientAdditionalNotification {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientAttachment {
     /**
      *
@@ -60303,7 +60303,7 @@ pub struct RecipientAttachment {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientDomain {
     /**
      *
@@ -60344,7 +60344,7 @@ pub struct RecipientDomain {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientEmailNotification {
     /**
      *
@@ -60391,7 +60391,7 @@ pub struct RecipientEmailNotification {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientEvent {
     /**
      *
@@ -60414,7 +60414,7 @@ pub struct RecipientEvent {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientFormData {
     /**
      *
@@ -60487,7 +60487,7 @@ pub struct RecipientFormData {
 }
 
 /// Describes a group of recipients.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientGroup {
     /**
      * Describes a group of recipients.
@@ -60515,7 +60515,7 @@ pub struct RecipientGroup {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientIdentityInputOption {
     /**
      *
@@ -60543,7 +60543,7 @@ pub struct RecipientIdentityInputOption {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientIdentityPhoneNumber {
     /**
      *
@@ -60570,7 +60570,7 @@ pub struct RecipientIdentityPhoneNumber {
 /// method in the [IdentityVerifications](https://developers.docusign.com/docs/esign-rest-api/reference/Accounts/IdentityVerifications) resource
 /// for more information on how to retrieve workflow IDs available for an account.
 /// This can be used in addition to other [recipient authentication](https://support.docusign.com/en/guides/ndse-user-guide-recipient-authentication) methods.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientIdentityVerification {
     /**
      * Specifies ID Verification applied on an envelope by workflow ID.
@@ -60597,7 +60597,7 @@ pub struct RecipientIdentityVerification {
 }
 
 /// This response object contains a list of recipients.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientNamesResponse {
     /**
      * This response object contains a list of recipients.
@@ -60625,7 +60625,7 @@ pub struct RecipientNamesResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientOption {
     /**
      *
@@ -60680,7 +60680,7 @@ pub struct RecipientOption {
 /// * `senderProvidedNumbers`: A list of phone numbers that the recipient can use.
 /// * `recordVoicePrint`: Reserved for DocuSign.
 /// * `validateRecipProvidedNumber`: Reserved for DocuSign.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientPhoneAuthentication {
     /**
      * A complex type that contains the elements:
@@ -60777,7 +60777,7 @@ pub struct RecipientPhoneAuthentication {
 }
 
 /// Describes the recipient phone number.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientPhoneNumber {
     /**
      * Describes the recipient phone number.
@@ -60810,7 +60810,7 @@ pub struct RecipientPhoneNumber {
 }
 
 /// This request object contains the information necessary to create a recipient preview.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientPreviewRequest {
     /**
      * This request object contains the information necessary to create a recipient preview.
@@ -60905,7 +60905,7 @@ pub struct RecipientPreviewRequest {
 }
 
 /// The proof file of the recipient. [ID Evidence](https://developers.docusign.com/idevidence-api) uses proof files to store the identification data that recipients submit when verifying their ID with [ID Verification](https://developers.docusign.com/docs/esign-rest-api/reference/Accounts/IdentityVerifications)
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientProofFile {
     /**
      * The proof file of the recipient. [ID Evidence](https://developers.docusign.com/idevidence-api) uses proof files to store the identification data that recipients submit when verifying their ID with [ID Verification](https://developers.docusign.com/docs/esign-rest-api/reference/Accounts/IdentityVerifications)
@@ -60919,7 +60919,7 @@ pub struct RecipientProofFile {
 }
 
 /// Describes the recipient routing rules.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientRouting {
     /**
      * Describes the recipient routing rules.
@@ -60929,7 +60929,7 @@ pub struct RecipientRouting {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientRules {
     /**
      *
@@ -60939,7 +60939,7 @@ pub struct RecipientRules {
 }
 
 /// Contains the element senderProvidedNumbers which is an Array  of phone numbers the recipient can use for SMS text authentication.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientSmsAuthentication {
     /**
      * Contains the element senderProvidedNumbers which is an Array  of phone numbers the recipient can use for SMS text authentication.
@@ -60956,7 +60956,7 @@ pub struct RecipientSmsAuthentication {
 /// Allows the sender to pre-specify the signature name, signature initials and signature font used in the signature stamp for the recipient.
 ///
 /// Used only with recipient types In Person Signers and Signers.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientSignatureInformation {
     /**
      * Allows the sender to pre-specify the signature name, signature initials and signature font used in the signature stamp for the recipient.
@@ -60994,7 +60994,7 @@ pub struct RecipientSignatureInformation {
 }
 
 /// An Electronic or Standards Based Signature (digital signature) provider for the signer to use. [More information](https://developers.docusign.com/esign-rest-api/guides/standards-based-signatures).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientSignatureProvider {
     /**
      * An Electronic or Standards Based Signature (digital signature) provider for the signer to use. [More information](https://developers.docusign.com/esign-rest-api/guides/standards-based-signatures).
@@ -61041,7 +61041,7 @@ pub struct RecipientSignatureProvider {
 }
 
 /// Option settings for the signature provider. Different providers require or use different options. [The current provider list and the options they require.](https://developers.docusign.com/esign-rest-api/guides/standards-based-signatures)
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientSignatureProviderOptions {
     /**
      * Option settings for the signature provider. Different providers require or use different options. [The current provider list and the options they require.](https://developers.docusign.com/esign-rest-api/guides/standards-based-signatures)
@@ -61102,7 +61102,7 @@ pub struct RecipientSignatureProviderOptions {
 }
 
 /// The recipient details that are returned after you update the recipient.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientUpdateResponse {
     /**
      * The recipient details that are returned after you update the recipient.
@@ -61144,7 +61144,7 @@ pub struct RecipientUpdateResponse {
 }
 
 /// The request body for the EnvelopeViews::createRecipient and EnvelopeViews::createSharedRecipient methods.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientViewRequest {
     /**
      * The request body for the EnvelopeViews::createRecipient and EnvelopeViews::createSharedRecipient methods.
@@ -61285,7 +61285,7 @@ pub struct RecipientViewRequest {
 }
 
 /// Specifies the envelope recipients.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Recipients {
     /**
      * Specifies the envelope recipients.
@@ -61363,7 +61363,7 @@ pub struct Recipients {
 }
 
 /// This is the response that the API returns after you update recipients.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientsUpdateSummary {
     /**
      * This is the response that the API returns after you update recipients.
@@ -61375,7 +61375,7 @@ pub struct RecipientsUpdateSummary {
 /// A complex type that contains the following information for entering referral and discount information. The following items are included in the referral information (all string content): enableSupport, includedSeats, saleDiscountPercent, saleDiscountAmount, saleDiscountFixedAmount, saleDiscountPeriods, saleDiscountSeatPriceOverride, planStartMonth, referralCode, referrerName, advertisementId, publisherId, shopperId, promoCode, groupMemberId, idType, and industry
 ///
 /// **Note**: saleDiscountPercent, saleDiscountAmount, saleDiscountFixedAmount, saleDiscountPeriods, and saleDiscountSeatPriceOverride are reserved for DoucSign use only.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReferralInformation {
     /**
      * A complex type that contains the following information for entering referral and discount information. The following items are included in the referral information (all string content): enableSupport, includedSeats, saleDiscountPercent, saleDiscountAmount, saleDiscountFixedAmount, saleDiscountPeriods, saleDiscountSeatPriceOverride, planStartMonth, referralCode, referrerName, advertisementId, publisherId, shopperId, promoCode, groupMemberId, idType, and industry
@@ -61578,7 +61578,7 @@ pub struct ReferralInformation {
 }
 
 /// A complex element that specifies reminder settings for the envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reminders {
     /**
      * A complex element that specifies reminder settings for the envelope.
@@ -61610,7 +61610,7 @@ pub struct Reminders {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductCsvRunRequest {
     /**
      *
@@ -61833,7 +61833,7 @@ pub struct ReportInProductCsvRunRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductField {
     /**
      *
@@ -61874,7 +61874,7 @@ pub struct ReportInProductField {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductGet {
     /**
      *
@@ -62112,7 +62112,7 @@ pub struct ReportInProductGet {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductListItem {
     /**
      *
@@ -62227,7 +62227,7 @@ pub struct ReportInProductListItem {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductRunRequest {
     /**
      *
@@ -62414,7 +62414,7 @@ pub struct ReportInProductRunRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductRunResponse {
     /**
      *
@@ -62478,7 +62478,7 @@ pub struct ReportInProductRunResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductRunResponseRow {
     /**
      *
@@ -62497,7 +62497,7 @@ pub struct ReportInProductRunResponseRow {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductRunResponseRowFields {
     /**
      *
@@ -63552,7 +63552,7 @@ pub struct ReportInProductRunResponseRowFields {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductSaveResponse {
     /**
      *
@@ -63566,7 +63566,7 @@ pub struct ReportInProductSaveResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReportInProductSentByDetails {
     /**
      *
@@ -63581,7 +63581,7 @@ pub struct ReportInProductSentByDetails {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ResourceInformation {
     /**
      *
@@ -63591,7 +63591,7 @@ pub struct ResourceInformation {
 }
 
 /// The request body for the EnvelopeViews::createSender method.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReturnUrlRequest {
     /**
      * The request body for the EnvelopeViews::createSender method.
@@ -63605,7 +63605,7 @@ pub struct ReturnUrlRequest {
 }
 
 /// Set of information related to the electronic seal used by the Trust Service Provider (TSP).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Seal {
     /**
      * Set of information related to the electronic seal used by the Trust Service Provider (TSP).
@@ -63624,7 +63624,7 @@ pub struct Seal {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SealIdentifier {
     /**
      *
@@ -63669,7 +63669,7 @@ pub struct SealIdentifier {
 ///     .
 /// ```
 /// For more information about Electronic Seals, see [Apply Electronic Seals to Your Documents](https://support.docusign.com/en/guides/ndse-user-guide-apply-electronic-seals).
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SealSign {
     /**
      * Specifies one or more electronic seals to apply on documents. An electronic seal recipient is a legal entity rather than an actual person. Electronic Seals can be used by organizations and governments to show evidence of origin and integrity of documents. Even though electronic seals can be represented by a tab in a document, they do not require user interaction and apply automatically in the order specified by the sender. The sender is therefore the person authorizing usage of the electronic seal in the flow.
@@ -65378,7 +65378,7 @@ pub struct SealSign {
 }
 
 /// This object contains information about a seat discount.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SeatDiscount {
     /**
      * This object contains information about a seat discount.
@@ -65410,7 +65410,7 @@ pub struct SeatDiscount {
 }
 
 /// Contains the settings for the email notifications that senders receive about the envelopes that they send.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SenderEmailNotifications {
     /**
      * Contains the settings for the email notifications that senders receive about the envelopes that they send.
@@ -65514,7 +65514,7 @@ pub struct SenderEmailNotifications {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ServerTemplate {
     /**
      *
@@ -65537,7 +65537,7 @@ pub struct ServerTemplate {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ServiceInformation {
     /**
      *
@@ -65588,7 +65588,7 @@ pub struct ServiceInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ServiceVersion {
     /**
      *
@@ -65611,7 +65611,7 @@ pub struct ServiceVersion {
 }
 
 /// Metadata that indicates whether a property is editable and describes setting-specific options.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SettingsMetadata {
     /**
      * Metadata that indicates whether a property is editable and describes setting-specific options.
@@ -65666,7 +65666,7 @@ pub struct SettingsMetadata {
 }
 
 /// Information about the shared item.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SharedItem {
     /**
      * Information about the shared item.
@@ -65691,7 +65691,7 @@ pub struct SharedItem {
 
 /// A tab that allows the recipient to sign a document. May be
 /// optional.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignHere {
     /**
      * A tab that allows the recipient to sign a document. May be
@@ -66408,7 +66408,7 @@ pub struct SignHere {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignatureGroup {
     /**
      *
@@ -66440,7 +66440,7 @@ pub struct SignatureGroup {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignatureGroupDef {
     /**
      *
@@ -66463,7 +66463,7 @@ pub struct SignatureGroupDef {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignatureProperties {
     /**
      *
@@ -66486,7 +66486,7 @@ pub struct SignatureProperties {
 }
 
 /// Contains additional information that a specific signature provider requires.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignatureProviderRequiredOption {
     /**
      * Contains additional information that a specific signature provider requires.
@@ -66505,7 +66505,7 @@ pub struct SignatureProviderRequiredOption {
 }
 
 /// This object contains information about the type of signature.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignatureType {
     /**
      * This object contains information about the type of signature.
@@ -66529,7 +66529,7 @@ pub struct SignatureType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignatureUser {
     /**
      *
@@ -66570,7 +66570,7 @@ pub struct SignatureUser {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignatureUserDef {
     /**
      *
@@ -66602,7 +66602,7 @@ pub struct SignatureUserDef {
 }
 
 /// A complex type containing information about a signer recipient. A signer is a recipient who must take action on a document, such as sign, initial, date, or add data to form fields on a document.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Signer {
     /**
      * A complex type containing information about a signer recipient. A signer is a recipient who must take action on a document, such as sign, initial, date, or add data to form fields on a document.
@@ -67269,7 +67269,7 @@ pub struct Signer {
 
 /// A tab that allows the recipient to attach supporting
 /// documents to an envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignerAttachment {
     /**
      * A tab that allows the recipient to attach supporting
@@ -67950,7 +67950,7 @@ pub struct SignerAttachment {
 }
 
 /// An array of email notifications that specifies the email the user receives when they are a sender. When the specific email notification is set to true, the user receives those types of email notifications from DocuSign. The user inherits the default account sender email notification settings when the user is created.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SignerEmailNotifications {
     /**
      * An array of email notifications that specifies the email the user receives when they are a sender. When the specific email notification is set to true, the user receives those types of email notifications from DocuSign. The user inherits the default account sender email notification settings when the user is created.
@@ -68099,7 +68099,7 @@ pub struct SignerEmailNotifications {
 }
 
 /// Contains details about a signing group. Signing groups enable you to send an envelope to a predefined group of recipients and have any one member of the group sign your documents. When you send an envelope to a signing group, anyone in the group can open it and sign it with their own signature.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SigningGroup {
     /**
      * Contains details about a signing group. Signing groups enable you to send an envelope to a predefined group of recipients and have any one member of the group sign your documents. When you send an envelope to a signing group, anyone in the group can open it and sign it with their own signature.
@@ -68186,7 +68186,7 @@ pub struct SigningGroup {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SigningGroupInformation {
     /**
      *
@@ -68196,7 +68196,7 @@ pub struct SigningGroupInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SigningGroupUser {
     /**
      *
@@ -68224,7 +68224,7 @@ pub struct SigningGroupUser {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SigningGroupUsersData {
     /**
      *
@@ -68234,7 +68234,7 @@ pub struct SigningGroupUsersData {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SmartContractInformation {
     /**
      *
@@ -68257,7 +68257,7 @@ pub struct SmartContractInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SmartSection {
     /**
      *
@@ -68838,7 +68838,7 @@ pub struct SmartSection {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SmartSectionAnchorPosition {
     /**
      *
@@ -68870,7 +68870,7 @@ pub struct SmartSectionAnchorPosition {
 }
 
 /// These properties define how a Smart Section displays. A Smart Section is a type of display section.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SmartSectionDisplaySettings {
     /**
      * These properties define how a Smart Section displays. A Smart Section is a type of display section.
@@ -68977,7 +68977,7 @@ pub struct SmartSectionDisplaySettings {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialAccountInformation {
     /**
      *
@@ -69023,7 +69023,7 @@ pub struct SocialAccountInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SocialAuthentication {
     /**
      *
@@ -69040,7 +69040,7 @@ pub struct SocialAuthentication {
 /// Security Number. The SSN can be typed with or without
 /// dashes. It uses the same parameters as a Text tab, with the
 /// validation message and pattern set for SSN information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Ssn {
     /**
      * A one-line field that allows the recipient to enter a Social
@@ -70256,7 +70256,7 @@ pub struct Ssn {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Ssn4InformationInput {
     /**
      *
@@ -70288,7 +70288,7 @@ pub struct Ssn4InformationInput {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Ssn9InformationInput {
     /**
      *
@@ -70311,7 +70311,7 @@ pub struct Ssn9InformationInput {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Stamp {
     /**
      *
@@ -70452,7 +70452,7 @@ pub struct Stamp {
 }
 
 /// A list of supported languages.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SupportedLanguages {
     /**
      * A list of supported languages.
@@ -70462,7 +70462,7 @@ pub struct SupportedLanguages {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TabGroup {
     /**
      *
@@ -71019,7 +71019,7 @@ pub struct TabGroup {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TabMetadata {
     /**
      *
@@ -71445,7 +71445,7 @@ pub struct TabMetadata {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TabMetadataList {
     /**
      *
@@ -71455,7 +71455,7 @@ pub struct TabMetadataList {
 }
 
 /// Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tabs {
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
@@ -71655,7 +71655,7 @@ pub struct Tabs {
 }
 
 /// A list of `documentVisibility` objects that specify whether the documents associated with a template are visible to recipients.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateDocumentVisibilityList {
     /**
      * A list of `documentVisibility` objects that specify whether the documents associated with a template are visible to recipients.
@@ -71665,7 +71665,7 @@ pub struct TemplateDocumentVisibilityList {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateDocumentsResult {
     /**
      *
@@ -71684,7 +71684,7 @@ pub struct TemplateDocumentsResult {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateInformation {
     /**
      *
@@ -71694,7 +71694,7 @@ pub struct TemplateInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateMatch {
     /**
      *
@@ -71726,7 +71726,7 @@ pub struct TemplateMatch {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateNotificationRequest {
     /**
      *
@@ -71759,7 +71759,7 @@ pub struct TemplateNotificationRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateRecipientsData {
     /**
      *
@@ -71837,7 +71837,7 @@ pub struct TemplateRecipientsData {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateRole {
     /**
      *
@@ -71947,7 +71947,7 @@ pub struct TemplateRole {
 }
 
 /// Information about shared templates.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateSharedItem {
     /**
      * Information about shared templates.
@@ -72008,7 +72008,7 @@ pub struct TemplateSharedItem {
 }
 
 /// Summary of a template request.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateSummary {
     /**
      * Summary of a template request.
@@ -72077,7 +72077,7 @@ pub struct TemplateSummary {
 }
 
 /// A tab that allows the recipient to enter any type of text.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Text {
     /**
      * A tab that allows the recipient to enter any type of text.
@@ -72976,7 +72976,7 @@ pub struct Text {
 }
 
 /// This object represents a free text custom field where envelope creators and senders can enter custom data.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TextCustomField {
     /**
      * This object represents a free text custom field where envelope creators and senders can enter custom data.
@@ -73040,7 +73040,7 @@ pub struct TextCustomField {
 }
 
 /// A tab that displays the recipient's title.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Title {
     /**
      * A tab that displays the recipient's title.
@@ -73832,7 +73832,7 @@ pub struct Title {
 /// * lastSignedDateTime - the date and time the user last signed an envelope.
 /// * sentCount - the number of envelopes the user has sent.
 /// * signedCount - the number of envelopes the user has signed.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsageHistory {
     /**
      * A complex element consisting of:
@@ -73893,7 +73893,7 @@ pub struct UsageHistory {
 }
 
 /// Describes which account management capabilities a user has.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserAccountManagementGranularInformation {
     /**
      * Describes which account management capabilities a user has.
@@ -74019,7 +74019,7 @@ pub struct UserAccountManagementGranularInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserInfo {
     /**
      *
@@ -74137,7 +74137,7 @@ pub struct UserInfo {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserInfoList {
     /**
      *
@@ -74147,7 +74147,7 @@ pub struct UserInfoList {
 }
 
 /// User information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserInformation {
     /**
      * User information.
@@ -74502,7 +74502,7 @@ pub struct UserInformation {
 }
 
 /// Contains a list of account users.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserInformationList {
     /**
      * Contains a list of account users.
@@ -74566,7 +74566,7 @@ pub struct UserInformationList {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserPasswordInformation {
     /**
      *
@@ -74603,7 +74603,7 @@ pub struct UserPasswordInformation {
 }
 
 /// Contains details about the password rules for a user.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserPasswordRules {
     /**
      * Contains details about the password rules for a user.
@@ -74622,7 +74622,7 @@ pub struct UserPasswordRules {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserProfile {
     /**
      *
@@ -74718,7 +74718,7 @@ pub struct UserProfile {
 /// - `rights`: The calling users permissions to edit this setting (can be `editable` or `read_only`)
 /// - `uiHint`: Internally used to build UIs (can be `available` or `hidden`)
 /// - `options`: The values supported for this setting (not all settings have this element)
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSettingsInformation {
     /**
      * Properties that configure the settings for a user. Some elements of this object have a `metadata` property, which includes the following:
@@ -75908,7 +75908,7 @@ pub struct UserSettingsInformation {
 }
 
 /// Information about a shared item.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSharedItem {
     /**
      * Information about a shared item.
@@ -75932,7 +75932,7 @@ pub struct UserSharedItem {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSignature {
     /**
      *
@@ -76199,7 +76199,7 @@ pub struct UserSignature {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSignatureDefinition {
     /**
      *
@@ -76326,7 +76326,7 @@ pub struct UserSignatureDefinition {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSignaturesInformation {
     /**
      *
@@ -76336,7 +76336,7 @@ pub struct UserSignaturesInformation {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserSocialResult {
     /**
      *
@@ -76355,7 +76355,7 @@ pub struct UserSocialResult {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UsersResponse {
     /**
      *
@@ -76419,7 +76419,7 @@ pub struct UsersResponse {
 }
 
 /// This tab is used with the Approve tab to handle supplemental documents.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct View {
     /**
      * This tab is used with the Approve tab to handle supplemental documents.
@@ -77032,7 +77032,7 @@ pub struct View {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ViewUrl {
     /**
      *
@@ -77046,7 +77046,7 @@ pub struct ViewUrl {
 }
 
 /// A complex type containing information about a witness recipient. Witnesses are recipients whose signatures affirm that the identified signers have signed the documents in the envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Witness {
     /**
      * A complex type containing information about a witness recipient. Witnesses are recipients whose signatures affirm that the identified signers have signed the documents in the envelope.
@@ -77735,7 +77735,7 @@ pub struct Witness {
 }
 
 /// Describes the workflow for an envelope.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Workflow {
     /**
      * Describes the workflow for an envelope.
@@ -77763,7 +77763,7 @@ pub struct Workflow {
 }
 
 /// Describes a single step in a workflow.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkflowStep {
     /**
      * Describes a single step in a workflow.
@@ -77828,7 +77828,7 @@ pub struct WorkflowStep {
 }
 
 /// This object's properties describe the contents of a workspace folder.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkspaceFolderContents {
     /**
      * This object's properties describe the contents of a workspace folder.
@@ -77893,7 +77893,7 @@ pub struct WorkspaceFolderContents {
 }
 
 /// This object represents an item in a workspace, which can be either a file or folder.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkspaceItem {
     /**
      * This object represents an item in a workspace, which can be either a file or folder.
@@ -78095,7 +78095,7 @@ pub struct WorkspaceItem {
 }
 
 /// An array of objects that describe the items in a workspace.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkspaceItemList {
     /**
      * An array of objects that describe the items in a workspace.
@@ -78105,7 +78105,7 @@ pub struct WorkspaceItemList {
 }
 
 /// This object contains a list of available workspaces.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkspaceList {
     /**
      * This object contains a list of available workspaces.
@@ -78151,7 +78151,7 @@ pub struct WorkspaceList {
 }
 
 /// This object provides information about the settings for the workspace.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkspaceSettings {
     /**
      * This object provides information about the settings for the workspace.
@@ -78165,7 +78165,7 @@ pub struct WorkspaceSettings {
 }
 
 /// This object represents the workspace user. This property is only returned in response to user specific GET call.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkspaceUser {
     /**
      * This object represents the workspace user. This property is only returned in response to user specific GET call.
@@ -78338,7 +78338,7 @@ pub struct WorkspaceUser {
 }
 
 /// Provides properties that describe user authorization to a workspace.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkspaceUserAuthorization {
     /**
      * Provides properties that describe user authorization to a workspace.
@@ -78438,7 +78438,7 @@ pub struct WorkspaceUserAuthorization {
 /// The zip code can be typed with or without dashes. It uses
 /// the same parameters as a Text tab, with the validation
 /// message and pattern set for ZIP code information.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Zip {
     /**
      * A tab that allows the recipient to enter a ZIP code. The ZIP

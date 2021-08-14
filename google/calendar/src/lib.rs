@@ -102,6 +102,7 @@
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
+#![allow(clippy::tabs_in_doc_comments)]
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 

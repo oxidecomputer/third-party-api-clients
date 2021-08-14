@@ -2018,8 +2018,7 @@ fn render_param(
         a("*/");
     }
 
-    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
-    a("#[serde(untagged)]");
+    a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
 
     a(&format!("pub enum {} {{", sn));
     for e in &enums {
@@ -2036,7 +2035,8 @@ fn render_param(
     }
 
     // Let's add the wildcard.
-    a("FallthroughString(String),");
+    a("#[serde(other)]");
+    a("FallthroughString");
 
     a("}");
     a("");
@@ -2056,7 +2056,7 @@ fn render_param(
     }
 
     // Let's add the display format for the wildcard.
-    a(&format!(r#"{}::FallthroughString(s) => s,"#, sn));
+    a(&format!(r#"{}::FallthroughString => "*","#, sn));
 
     a("}");
     a(".fmt(f)");
@@ -2126,6 +2126,7 @@ fn gen(
     a("#![allow(clippy::too_many_arguments)]");
     a("#![allow(clippy::nonstandard_macro_braces)]");
     a("#![allow(clippy::large_enum_variant)]");
+    a("#![allow(clippy::tabs_in_doc_comments)]");
     a("#![allow(missing_docs)]"); // TODO: Make this a deny.
     a("#![cfg_attr(docsrs, feature(doc_cfg))]");
     a("");

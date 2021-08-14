@@ -28,7 +28,22 @@ const REIMBURSEMENT: &str = r#"{
 fn test_deserialize() {
     let deserialized: crate::types::User = serde_json::from_str(USER).unwrap();
     println!("user = {:?}", deserialized);
+    assert_eq!(deserialized.role, crate::types::Role::BusinessUser);
 
     let deserialized: crate::types::Reimbursement = serde_json::from_str(REIMBURSEMENT).unwrap();
     println!("reimbursement = {:?}", deserialized);
+
+    let t = crate::types::PostUsersDeferredRequest {
+        department_id: "1".to_string(),
+        direct_manager_id: "2".to_string(),
+        email: "3".to_string(),
+        first_name: "Joe".to_string(),
+        last_name: "Smith".to_string(),
+        location_id: "4".to_string(),
+        phone: "5553245132".to_string(),
+        role: crate::types::Role::BusinessUser,
+    };
+    let s = serde_json::to_string_pretty(&t).unwrap();
+    println!("string_user_request = {}", s);
+    assert_eq!(true, s.contains("BUSINESS_USER"));
 }

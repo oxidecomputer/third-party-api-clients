@@ -33,7 +33,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.1.23"
+//! octorust = "0.1.24"
 //! ```
 //!
 //! ## Basic example
@@ -51,7 +51,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.1.23/octorust/struct.Client.html#method.host) method.
+//! [Client#host](https://docs.rs/octorust/0.1.24/octorust/struct.Client.html#method.host) method.
 //!
 //! ## Feature flags
 //!
@@ -65,7 +65,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.1.23", features = ["httpcache"] }
+//! octorust = { version = "0.1.24", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -166,6 +166,7 @@
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
+#![allow(clippy::tabs_in_doc_comments)]
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 

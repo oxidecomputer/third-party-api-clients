@@ -2,7 +2,7 @@
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Acl {
     /**
      * ETag of the collection.
@@ -48,7 +48,7 @@ pub struct Acl {
 }
 
 /// The extent to which calendar access is granted by this ACL rule.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Scope {
     /**
      * The extent to which calendar access is granted by this ACL rule.
@@ -71,7 +71,7 @@ pub struct Scope {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AclRule {
     /**
      * ETag of the collection.
@@ -116,7 +116,7 @@ pub struct AclRule {
     pub scope: Option<Scope>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Calendar {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conference_properties: Option<ConferenceProperties>,
@@ -185,7 +185,7 @@ pub struct Calendar {
     pub time_zone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarList {
     /**
      * ETag of the collection.
@@ -231,7 +231,7 @@ pub struct CalendarList {
 }
 
 /// The notifications that the authenticated user is receiving for this calendar.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotificationSettings {
     /**
      * The notifications that the authenticated user is receiving for this calendar.
@@ -240,7 +240,7 @@ pub struct NotificationSettings {
     pub notifications: Vec<CalendarNotification>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarListEntry {
     /**
      * ETag of the collection.
@@ -396,7 +396,7 @@ pub struct CalendarListEntry {
     pub time_zone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CalendarNotification {
     /**
      * ETag of the collection.
@@ -420,10 +420,10 @@ pub struct CalendarNotification {
 }
 
 /// A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {}
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
      * ETag of the collection.
@@ -513,7 +513,7 @@ pub struct Channel {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ColorDefinition {
     /**
      * ETag of the collection.
@@ -535,7 +535,7 @@ pub struct ColorDefinition {
     pub foreground: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Colors {
     /**
      * A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
@@ -567,7 +567,7 @@ pub struct Colors {
     pub updated: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceData {
     /**
      * ETag of the collection.
@@ -611,13 +611,13 @@ pub struct ConferenceData {
     pub signature: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceParameters {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub add_on_parameters: Option<ConferenceParametersAddOn>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceParametersAddOn {
     /**
      * A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
@@ -626,7 +626,7 @@ pub struct ConferenceParametersAddOn {
     pub parameters: Option<Event>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceProperties {
     /**
      * The types of conference solutions that are supported for this calendar.
@@ -639,7 +639,7 @@ pub struct ConferenceProperties {
     pub allowed_conference_solution_types: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceRequestStatus {
     /**
      * ETag of the collection.
@@ -652,7 +652,7 @@ pub struct ConferenceRequestStatus {
     pub status_code: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceSolution {
     /**
      * ETag of the collection.
@@ -676,7 +676,7 @@ pub struct ConferenceSolution {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceSolutionKey {
     /**
      * ETag of the collection.
@@ -690,7 +690,7 @@ pub struct ConferenceSolutionKey {
     pub type_: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateConferenceRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub conference_solution_key: Option<ConferenceSolutionKey>,
@@ -707,7 +707,7 @@ pub struct CreateConferenceRequest {
     pub status: Option<ConferenceRequestStatus>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EntryPoint {
     /**
      * ETag of the collection.
@@ -801,7 +801,7 @@ pub struct EntryPoint {
     pub uri: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Error {
     /**
      * ETag of the collection.
@@ -824,7 +824,7 @@ pub struct Error {
 }
 
 /// The creator of the event. Read-only.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Creator {
     /**
      * The creator of the event. Read-only.
@@ -865,7 +865,7 @@ pub struct Creator {
 }
 
 /// Extended properties of the event.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExtendedProperties {
     /**
      * Extended properties of the event.
@@ -880,7 +880,7 @@ pub struct ExtendedProperties {
 }
 
 /// A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Gadget {
     /**
      * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
@@ -954,7 +954,7 @@ pub struct Gadget {
 }
 
 /// The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Organizer {
     /**
      * The organizer of the event. If the organizer is also an attendee, this is indicated with a separate entry in attendees with the organizer field set to True. To change the organizer, use the move operation. Read-only, except when importing an event.
@@ -995,7 +995,7 @@ pub struct Organizer {
 }
 
 /// Information about the event's reminders for the authenticated user.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reminders {
     /**
      * Information about the event's reminders for the authenticated user.
@@ -1013,7 +1013,7 @@ pub struct Reminders {
 }
 
 /// Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Source {
     /**
      * Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.
@@ -1035,7 +1035,7 @@ pub struct Source {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventData {
     /**
      * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
@@ -1324,7 +1324,7 @@ pub struct EventData {
     pub visibility: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventAttachment {
     /**
      * ETag of the collection.
@@ -1373,7 +1373,7 @@ pub struct EventAttachment {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventAttendee {
     /**
      * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
@@ -1464,7 +1464,7 @@ pub struct EventAttendee {
     pub self_: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventDateTime {
     /**
      * The date, in the format "yyyy-mm-dd", if this is an all-day event.
@@ -1491,7 +1491,7 @@ pub struct EventDateTime {
     pub time_zone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EventReminder {
     /**
      * ETag of the collection.
@@ -1513,7 +1513,7 @@ pub struct EventReminder {
     pub minutes: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Events {
     /**
      * ETag of the collection.
@@ -1608,7 +1608,7 @@ pub struct Events {
     pub updated: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyCalendar {
     /**
      * List of time ranges during which this calendar should be regarded as busy.
@@ -1622,7 +1622,7 @@ pub struct FreeBusyCalendar {
     pub errors: Vec<Error>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyGroup {
     /**
      * The types of conference solutions that are supported for this calendar.
@@ -1640,7 +1640,7 @@ pub struct FreeBusyGroup {
     pub errors: Vec<Error>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyRequest {
     /**
      * Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.
@@ -1694,7 +1694,7 @@ pub struct FreeBusyRequest {
     pub time_zone: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyRequestItem {
     /**
      * ETag of the collection.
@@ -1707,7 +1707,7 @@ pub struct FreeBusyRequestItem {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyResponse {
     /**
      * A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
@@ -1748,7 +1748,7 @@ pub struct FreeBusyResponse {
     pub time_min: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Setting {
     /**
      * ETag of the collection.
@@ -1788,7 +1788,7 @@ pub struct Setting {
     pub value: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Settings {
     /**
      * ETag of the collection.
@@ -1833,7 +1833,7 @@ pub struct Settings {
     pub next_sync_token: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TimePeriod {
     /**
      * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
@@ -1858,14 +1858,14 @@ pub struct TimePeriod {
 /**
  * Data format for the response.
  */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Alt {
     #[serde(rename = "json")]
     Json,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for Alt {
@@ -1873,7 +1873,7 @@ impl std::fmt::Display for Alt {
         match &*self {
             Alt::Json => "json",
             Alt::Noop => "",
-            Alt::FallthroughString(s) => s,
+            Alt::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -1893,8 +1893,7 @@ impl Alt {
 /**
  * The order of the events returned in the result. Optional. The default is an unspecified, stable order.
  */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum OrderBy {
     #[serde(rename = "startTime")]
     StartTime,
@@ -1902,7 +1901,8 @@ pub enum OrderBy {
     Updated,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for OrderBy {
@@ -1911,7 +1911,7 @@ impl std::fmt::Display for OrderBy {
             OrderBy::StartTime => "startTime",
             OrderBy::Updated => "updated",
             OrderBy::Noop => "",
-            OrderBy::FallthroughString(s) => s,
+            OrderBy::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -1931,8 +1931,7 @@ impl OrderBy {
 /**
  * Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
  */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum SendUpdates {
     #[serde(rename = "all")]
     All,
@@ -1942,7 +1941,8 @@ pub enum SendUpdates {
     None,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for SendUpdates {
@@ -1952,7 +1952,7 @@ impl std::fmt::Display for SendUpdates {
             SendUpdates::ExternalOnly => "externalOnly",
             SendUpdates::None => "none",
             SendUpdates::Noop => "",
-            SendUpdates::FallthroughString(s) => s,
+            SendUpdates::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -1972,8 +1972,7 @@ impl SendUpdates {
 /**
  * The minimum access role for the user in the returned entries. Optional. The default is no restriction.
  */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum MinAccessRole {
     #[serde(rename = "freeBusyReader")]
     FreeBusyReader,
@@ -1985,7 +1984,8 @@ pub enum MinAccessRole {
     Writer,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for MinAccessRole {
@@ -1996,7 +1996,7 @@ impl std::fmt::Display for MinAccessRole {
             MinAccessRole::Reader => "reader",
             MinAccessRole::Writer => "writer",
             MinAccessRole::Noop => "",
-            MinAccessRole::FallthroughString(s) => s,
+            MinAccessRole::FallthroughString => "*",
         }
         .fmt(f)
     }

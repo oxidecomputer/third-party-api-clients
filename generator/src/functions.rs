@@ -223,7 +223,7 @@ pub fn generate_files(
                             &to_snake_case(&struct_name(&format!(
                                 "{}_{}",
                                 oid.trim_start_matches(&tag).trim_start_matches('_'),
-                                to_snake_case(rt.trim_start_matches("crate::types::"))
+                                to_snake_case(&rt.replace("crate::types::", ""))
                             ))),
                         );
                     }

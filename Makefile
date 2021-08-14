@@ -64,6 +64,7 @@ ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
 generate: docusign giphy github google-calendar google-groups-settings gusto ramp zoom
+	cargo test
 
 target/debug/generator: generator/src/*.rs generator/Cargo.toml
 	cargo build --bin generator
@@ -148,7 +149,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.23 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.24 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \

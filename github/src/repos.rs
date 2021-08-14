@@ -3167,7 +3167,7 @@ impl Repos {
      * * `path: &str` -- path parameter.
      * * `ref_: &str` -- The name of the commit/branch/tag. Default: the repository’s default branch (usually `master`).
      */
-    pub async fn get_content_vec_crate_types_entries(
+    pub async fn get_content_vec_entries(
         &self,
         owner: &str,
         repo: &str,

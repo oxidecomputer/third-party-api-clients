@@ -801,7 +801,7 @@ dependencies = [
 
 [[package]]
 name = "octorust"
-version = "0.1.23"
+version = "0.1.24"
 dependencies = [
  "anyhow",
  "async-recursion",

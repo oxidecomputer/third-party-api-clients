@@ -6,7 +6,7 @@ use serde::{Deserialize, Serialize};
 ///
 /// - `Image`
 /// - `serde_json::Value`
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LoopingAllOf {
     #[serde(flatten)]
     pub image: Image,
@@ -18,7 +18,7 @@ pub struct LoopingAllOf {
 }
 
 /// An object containing data for various available formats and sizes of this GIF.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Images {
     /**
      * An object containing data for various available formats and sizes of this GIF.
@@ -125,19 +125,19 @@ pub struct Images {
 /**
  * Type of the gif. By default, this is almost always gif
  */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "gif")]
     Gif,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for Type {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
             Type::Gif => "gif",
-            Type::FallthroughString(s) => s,
+            Type::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -149,7 +149,7 @@ impl Default for Type {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Gif {
     /**
      * The unique bit.ly URL for this GIF
@@ -315,7 +315,7 @@ pub struct Gif {
     pub username: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Image {
     /**
      * The unique bit.ly URL for this GIF
@@ -401,7 +401,7 @@ pub struct Image {
 }
 
 /// The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Meta {
     /**
      * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.
@@ -436,7 +436,7 @@ pub struct Meta {
 }
 
 /// The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Pagination {
     /**
      * The Pagination Object contains information relating to the number of total results available as well as the number of results fetched and their relative positions.
@@ -471,7 +471,7 @@ pub struct Pagination {
 }
 
 /// The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
      * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
@@ -529,7 +529,7 @@ pub struct User {
     pub username: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGifsByResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Gif>,
@@ -547,7 +547,7 @@ pub struct GetGifsByResponse {
     pub pagination: Option<Pagination>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RandomGifResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<Gif>,

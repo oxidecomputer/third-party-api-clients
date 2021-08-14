@@ -3,7 +3,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /// JSON template for Group resource
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Groups {
     /**
      * JSON template for Group resource
@@ -568,8 +568,7 @@ pub struct Groups {
 /**
  * Data format for the response.
  */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Alt {
     #[serde(rename = "atom")]
     Atom,
@@ -577,7 +576,8 @@ pub enum Alt {
     Json,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for Alt {
@@ -586,7 +586,7 @@ impl std::fmt::Display for Alt {
             Alt::Atom => "atom",
             Alt::Json => "json",
             Alt::Noop => "",
-            Alt::FallthroughString(s) => s,
+            Alt::FallthroughString => "*",
         }
         .fmt(f)
     }

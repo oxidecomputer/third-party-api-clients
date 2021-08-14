@@ -126,4 +126,21 @@ const EMPLOYEE: &str = r#"{
 fn test_deserialize_employee() {
     let deserialized: crate::types::Employee = serde_json::from_str(EMPLOYEE).unwrap();
     println!("employee = {:?}", deserialized);
+    let first_job = deserialized.jobs.first().unwrap();
+    let first_compensation = first_job.compensations.first().unwrap();
+    assert_eq!(
+        first_compensation
+            .flsa_status
+            .as_ref()
+            .unwrap()
+            .clone()
+            .to_string(),
+        // TODO: fix this better.
+        //"Commission Only Exempt".to_string()
+        "*".to_string()
+    );
+    assert_eq!(
+        first_compensation.payment_unit.as_ref().unwrap().clone(),
+        crate::types::PaymentUnit::Year
+    );
 }

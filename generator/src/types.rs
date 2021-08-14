@@ -71,9 +71,15 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                         || sn == "ErrorDetails"
                         || sn == "EnvelopeDefinition"
                     {
-                        a("#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]");
+                        a(
+                            "#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, \
+                             JsonSchema)]",
+                        );
                     } else {
-                        a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+                        a(
+                            "#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, \
+                             JsonSchema)]",
+                        );
                     }
                     a(&format!("pub struct {} {{", sn));
                     for (name, tid) in omap.iter() {
@@ -214,7 +220,7 @@ fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String 
     description = format!("/// {}", description.replace('\n', "\n/// "));
     a(&description);
 
-    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+    a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
     a("#[serde(untagged)]");
     a(&format!("pub enum {} {{", sn));
     let mut name_map: BTreeMap<String, String> = Default::default();
@@ -377,7 +383,7 @@ fn do_all_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
     description = format!("/// {}", description.replace('\n', "\n/// "));
     a(&description);
 
-    a("#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]");
+    a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
     a(&format!("pub struct {} {{", sn));
     let mut name_map: BTreeMap<String, String> = Default::default();
     // Becasue we have so many defaults set on our serde types these enums

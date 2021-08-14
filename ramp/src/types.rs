@@ -3,10 +3,10 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 /// Extra metadata about the error, may be empty. Usually depends on the error type.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Details {}
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Error {
     /**
      * Extra metadata about the error, may be empty. Usually depends on the error type.
@@ -24,13 +24,13 @@ pub struct Error {
     pub message: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ErrorResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub error: Option<Error>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TaskResponse {
     /**
      * The OAuth2 token header
@@ -43,8 +43,7 @@ pub struct TaskResponse {
     pub id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Role {
     #[serde(rename = "BUSINESS_ADMIN")]
     BusinessAdmin,
@@ -56,7 +55,8 @@ pub enum Role {
     BusinessUser,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for Role {
@@ -67,7 +67,7 @@ impl std::fmt::Display for Role {
             Role::BusinessOwner => "BUSINESS_OWNER",
             Role::BusinessUser => "BUSINESS_USER",
             Role::Noop => "",
-            Role::FallthroughString(s) => s,
+            Role::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -85,7 +85,7 @@ impl Role {
 }
 
 /// Ramp User
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
      * The OAuth2 token header
@@ -181,7 +181,7 @@ pub struct User {
     pub role: Role,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchUsersRequest {
     /**
      * The OAuth2 token header
@@ -214,7 +214,7 @@ pub struct PatchUsersRequest {
     pub role: Option<Role>,
 }
 
-#[derive(Serialize, Default, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Page {
     /**
      * The OAuth2 token header
@@ -227,7 +227,7 @@ pub struct Page {
     pub next: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CardHolder {
     /**
      * The OAuth2 token header
@@ -285,7 +285,7 @@ pub struct CardHolder {
     pub location_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AccountingCategories {
     /**
      * The OAuth2 token header
@@ -307,8 +307,7 @@ pub struct AccountingCategories {
     pub category_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Type {
     #[serde(rename = "POLICY_VIOLATION_FROM_ADMIN")]
     PolicyViolationFromAdmin,
@@ -316,7 +315,8 @@ pub enum Type {
     PolicyViolationFromUser,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for Type {
@@ -325,7 +325,7 @@ impl std::fmt::Display for Type {
             Type::PolicyViolationFromAdmin => "POLICY_VIOLATION_FROM_ADMIN",
             Type::PolicyViolationFromUser => "POLICY_VIOLATION_FROM_USER",
             Type::Noop => "",
-            Type::FallthroughString(s) => s,
+            Type::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -342,7 +342,7 @@ impl Type {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PolicyViolations {
     #[serde(
         default,
@@ -372,8 +372,7 @@ pub struct PolicyViolations {
     pub type_: Option<Type>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum GetTransactionResponseDataDisputesType {
     #[serde(rename = "DISPUTE_CANCELLED")]
     DisputeCancelled,
@@ -385,7 +384,8 @@ pub enum GetTransactionResponseDataDisputesType {
     UnrecognizedCharge,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for GetTransactionResponseDataDisputesType {
@@ -396,7 +396,7 @@ impl std::fmt::Display for GetTransactionResponseDataDisputesType {
             GetTransactionResponseDataDisputesType::Unknown => "UNKNOWN",
             GetTransactionResponseDataDisputesType::UnrecognizedCharge => "UNRECOGNIZED_CHARGE",
             GetTransactionResponseDataDisputesType::Noop => "",
-            GetTransactionResponseDataDisputesType::FallthroughString(s) => s,
+            GetTransactionResponseDataDisputesType::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -413,7 +413,7 @@ impl GetTransactionResponseDataDisputesType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Disputes {
     #[serde(
         default,
@@ -444,7 +444,7 @@ pub struct Disputes {
 }
 
 /// Ramp transaction
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Data {
     /**
      * Ramp transaction
@@ -557,7 +557,7 @@ pub struct Data {
     pub user_transaction_time: Option<chrono::DateTime<chrono::Utc>>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTransactionResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Data>,
@@ -566,7 +566,7 @@ pub struct GetTransactionResponse {
 }
 
 /// Ramp location
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
     /**
      * Ramp location
@@ -588,7 +588,7 @@ pub struct Location {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Location>,
@@ -597,7 +597,7 @@ pub struct GetLocationResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostLocationRequest {
     /**
      * The OAuth2 token header
@@ -611,7 +611,7 @@ pub struct PostLocationRequest {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<User>,
@@ -620,7 +620,7 @@ pub struct GetUsersResponse {
 }
 
 /// Ramp Department
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Department {
     /**
      * Ramp Department
@@ -642,7 +642,7 @@ pub struct Department {
     pub name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetDepartmentsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Department>,
@@ -650,7 +650,7 @@ pub struct GetDepartmentsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RecipientAddress {
     /**
      * The OAuth2 token header
@@ -717,14 +717,14 @@ pub struct RecipientAddress {
     pub state: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Shipping {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recipient_address: Option<RecipientAddress>,
 }
 
 /// Details for shipping physical cards
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Fulfillment {
     /**
      * Details for shipping physical cards
@@ -736,8 +736,7 @@ pub struct Fulfillment {
 /**
  * Time interval to apply limit to.
  */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Interval {
     #[serde(rename = "DAILY")]
     Daily,
@@ -749,7 +748,8 @@ pub enum Interval {
     Yearly,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for Interval {
@@ -760,7 +760,7 @@ impl std::fmt::Display for Interval {
             Interval::Total => "TOTAL",
             Interval::Yearly => "YEARLY",
             Interval::Noop => "",
-            Interval::FallthroughString(s) => s,
+            Interval::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -778,7 +778,7 @@ impl Interval {
 }
 
 /// Specifies the spend restrictions on a Ramp card.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SpendingRestrictions {
     /**
      * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
@@ -833,7 +833,7 @@ pub struct SpendingRestrictions {
 }
 
 /// Card data that holds mostly static information about a card.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Card {
     /**
      * Card data that holds mostly static information about a card.
@@ -909,7 +909,7 @@ pub struct Card {
     pub spending_restrictions: Option<SpendingRestrictions>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCardsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub cards: Vec<Card>,
@@ -917,7 +917,7 @@ pub struct GetCardsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchResourcesCardsCardRequest {
     /**
      * The OAuth2 token header
@@ -946,7 +946,7 @@ pub struct PatchResourcesCardsCardRequest {
     pub spending_restrictions: Option<SpendingRestrictions>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCustomProviderResponse {
     /**
      * The OAuth2 token header
@@ -959,7 +959,7 @@ pub struct GetCustomProviderResponse {
     pub custom_id_provider: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostcustomProviderResponse {
     /**
      * The OAuth2 token header
@@ -972,7 +972,7 @@ pub struct PostcustomProviderResponse {
     pub provider_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BillingAddress {
     /**
      * The OAuth2 token header
@@ -1022,7 +1022,7 @@ pub struct BillingAddress {
 }
 
 /// Mostly static information about a business that doesn't change often.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Business {
     #[serde(
         default,
@@ -1134,7 +1134,7 @@ pub struct Business {
     pub website: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardPhysicalRequest {
     /**
      * The OAuth2 token header
@@ -1184,7 +1184,7 @@ pub struct PostResourcesCardPhysicalRequest {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardVirtualRequest {
     /**
      * The OAuth2 token header
@@ -1229,14 +1229,14 @@ pub struct PostResourcesCardVirtualRequest {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum TokenType {
     #[serde(rename = "Bearer")]
     Bearer,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for TokenType {
@@ -1244,7 +1244,7 @@ impl std::fmt::Display for TokenType {
         match &*self {
             TokenType::Bearer => "Bearer",
             TokenType::Noop => "",
-            TokenType::FallthroughString(s) => s,
+            TokenType::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -1262,7 +1262,7 @@ impl TokenType {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct OAuth2Token {
     /**
      * The OAuth2 token header
@@ -1314,7 +1314,7 @@ pub struct OAuth2Token {
 }
 
 /// Current data about the business.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BusinessCurrentStatus {
     /**
      * Current data about the business.
@@ -1355,7 +1355,7 @@ pub struct BusinessCurrentStatus {
     pub statement_balance: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardsCardSuspensionRequest {
     /**
      * The OAuth2 token header
@@ -1368,7 +1368,7 @@ pub struct PostResourcesCardsCardSuspensionRequest {
     pub idempotency_key: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetEntityTypeCustomRampResponse {
     /**
      * The OAuth2 token header
@@ -1381,7 +1381,7 @@ pub struct GetEntityTypeCustomRampResponse {
     pub ramp_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetEntityTypeRampCustomResponse {
     /**
      * The OAuth2 token header
@@ -1394,7 +1394,7 @@ pub struct GetEntityTypeRampCustomResponse {
     pub custom_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetResourcesCardsDeferredResponseData {
     /**
      * The OAuth2 token header
@@ -1434,8 +1434,7 @@ pub struct GetResourcesCardsDeferredResponseData {
     pub misc: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Status {
     #[serde(rename = "ERROR")]
     Error,
@@ -1447,7 +1446,8 @@ pub enum Status {
     Success,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for Status {
@@ -1458,7 +1458,7 @@ impl std::fmt::Display for Status {
             Status::Started => "STARTED",
             Status::Success => "SUCCESS",
             Status::Noop => "",
-            Status::FallthroughString(s) => s,
+            Status::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -1475,7 +1475,7 @@ impl Status {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetResourcesCardsDeferredResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<GetResourcesCardsDeferredResponseData>,
@@ -1492,8 +1492,7 @@ pub struct GetResourcesCardsDeferredResponse {
     pub status: Option<Status>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Icon {
     #[serde(rename = "AdvertisingIcon")]
     AdvertisingIcon,
@@ -1517,7 +1516,8 @@ pub enum Icon {
     WellnessIcon,
     #[serde(rename = "")]
     Noop,
-    FallthroughString(String),
+    #[serde(other)]
+    FallthroughString,
 }
 
 impl std::fmt::Display for Icon {
@@ -1534,7 +1534,7 @@ impl std::fmt::Display for Icon {
             Icon::TravelExpensesIcon => "TravelExpensesIcon",
             Icon::WellnessIcon => "WellnessIcon",
             Icon::Noop => "",
-            Icon::FallthroughString(s) => s,
+            Icon::FallthroughString => "*",
         }
         .fmt(f)
     }
@@ -1552,7 +1552,7 @@ impl Icon {
 }
 
 /// Card Program data that serves as a template for creating new cards.
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CardProgram {
     /**
      * Card Program data that serves as a template for creating new cards.
@@ -1609,7 +1609,7 @@ pub struct CardProgram {
     pub spending_restrictions: Option<SpendingRestrictions>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCardProgramsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub card_programs: Vec<CardProgram>,
@@ -1617,7 +1617,7 @@ pub struct GetCardProgramsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardProgramRequest {
     /**
      * The OAuth2 token header
@@ -1650,7 +1650,7 @@ pub struct PostResourcesCardProgramRequest {
     pub spending_restrictions: SpendingRestrictions,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostUsersDeferredRequest {
     /**
      * The OAuth2 token header
@@ -1719,7 +1719,7 @@ pub struct PostUsersDeferredRequest {
     pub role: Role,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponseData {
     /**
      * The OAuth2 token header
@@ -1760,7 +1760,7 @@ pub struct GetUsersDeferredStatusResponseData {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponse {
     /**
      *
@@ -1788,7 +1788,7 @@ pub struct GetUsersDeferredStatusResponse {
 }
 
 ///
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersDeferredStatusResponseDataType {
     /**
      *
@@ -1797,7 +1797,7 @@ pub struct GetUsersDeferredStatusResponseDataType {
     pub error: Option<Error>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Receipt {
     #[serde(
         default,
@@ -1831,7 +1831,7 @@ pub struct Receipt {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReceiptsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Receipt>,
@@ -1839,7 +1839,7 @@ pub struct GetReceiptsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reimbursement {
     #[serde(
         default,
@@ -1883,7 +1883,7 @@ pub struct Reimbursement {
     pub user_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReimbursementsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub data: Vec<Reimbursement>,
@@ -1891,7 +1891,7 @@ pub struct GetReimbursementsResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostCustomProviderEntityTypeLinkRequest {
     /**
      * The OAuth2 token header
