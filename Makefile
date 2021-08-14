@@ -66,7 +66,6 @@ ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%
 generate: docusign giphy github google-calendar google-groups-settings gusto ramp zoom
 	cargo test tests
 	cargo clippy
-	cargo doc
 
 target/debug/generator: generator/src/*.rs generator/Cargo.toml
 	cargo build --bin generator
@@ -79,6 +78,7 @@ examples: generate github/examples/*.rs
 
 run:
 	cargo run --example list_repos_for_org --features="httpcache"
+	cargo run --example get_repo_in_org --features="httpcache"
 
 update: update-specs
 

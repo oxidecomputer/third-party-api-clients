@@ -99,7 +99,7 @@ impl Licenses {
      *
      * * `license: &str`
      */
-    pub async fn get(&self, license: &str) -> Result<crate::types::License> {
+    pub async fn get(&self, license: &str) -> Result<crate::types::LicenseData> {
         let url = format!(
             "/licenses/{}",
             crate::progenitor_support::encode_path(&license.to_string()),

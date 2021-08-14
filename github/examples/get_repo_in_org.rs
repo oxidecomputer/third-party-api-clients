@@ -4,7 +4,6 @@ use std::env;
 use octorust::http_cache::FileBasedCache;
 use octorust::{
     auth::{Credentials, InstallationTokenGenerator, JWTCredentials},
-    types::{Order, ReposListOrgSort, ReposListOrgType},
     Client,
 };
 
@@ -52,18 +51,23 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         http_cache,
     );
 
-    // List the repos for an org.
-    let repos = github
+    // Get this repo.
+    let repo = github
         .repos()
-        .list_all_for_org(
-            "oxidecomputer",
-            ReposListOrgType::All,
-            ReposListOrgSort::Created,
-            Order::Desc,
-        )
+        .get("oxidecomputer", "third-party-api-clients")
         .await
         .unwrap();
-    println!("length: {}", repos.len());
+
+    println!("{}", serde_json::to_string_pretty(&repo).unwrap());
+
+    // Get a repo without a license.
+    let repo = github
+        .repos()
+        .get("oxidecomputer", "configs")
+        .await
+        .unwrap();
+
+    println!("{}", serde_json::to_string_pretty(&repo).unwrap());
 
     Ok(())
 }

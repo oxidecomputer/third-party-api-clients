@@ -1702,10 +1702,17 @@ impl TypeSpace {
                     // value.
                     if all_of.len() == 1 {
                         if let Some(et) = self.id_to_entry.get(&itid) {
-                            return Ok((
-                                Some(all_of_name.trim_end_matches("all of").trim().to_string()),
-                                et.details.clone(),
-                            ));
+                            if s.schema_data.nullable {
+                                return Ok((
+                                    Some(all_of_name.trim_end_matches("all of").trim().to_string()),
+                                    TypeDetails::Optional(itid, s.schema_data.clone()),
+                                ));
+                            } else {
+                                return Ok((
+                                    Some(all_of_name.trim_end_matches("all of").trim().to_string()),
+                                    et.details.clone(),
+                                ));
+                            }
                         }
                     }
 
@@ -1743,10 +1750,17 @@ impl TypeSpace {
                     // value.
                     if one_of.len() == 1 {
                         if let Some(et) = self.id_to_entry.get(&itid) {
-                            return Ok((
-                                Some(one_of_name.trim_end_matches("one of").trim().to_string()),
-                                et.details.clone(),
-                            ));
+                            if s.schema_data.nullable {
+                                return Ok((
+                                    Some(one_of_name.trim_end_matches("one of").trim().to_string()),
+                                    TypeDetails::Optional(itid, s.schema_data.clone()),
+                                ));
+                            } else {
+                                return Ok((
+                                    Some(one_of_name.trim_end_matches("one of").trim().to_string()),
+                                    et.details.clone(),
+                                ));
+                            }
                         }
                     }
 
@@ -1786,10 +1800,17 @@ impl TypeSpace {
                     // value.
                     if any_of.len() == 1 {
                         if let Some(et) = self.id_to_entry.get(&itid) {
-                            return Ok((
-                                Some(any_of_name.trim_end_matches("any of").trim().to_string()),
-                                et.details.clone(),
-                            ));
+                            if s.schema_data.nullable {
+                                return Ok((
+                                    Some(any_of_name.trim_end_matches("any of").trim().to_string()),
+                                    TypeDetails::Optional(itid, s.schema_data.clone()),
+                                ));
+                            } else {
+                                return Ok((
+                                    Some(any_of_name.trim_end_matches("any of").trim().to_string()),
+                                    et.details.clone(),
+                                ));
+                            }
                         }
                     }
 
