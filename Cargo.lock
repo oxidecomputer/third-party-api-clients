@@ -403,7 +403,7 @@ dependencies = [
 
 [[package]]
 name = "gusto-api"
-version = "0.2.10"
+version = "0.2.11"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -801,7 +801,7 @@ dependencies = [
 
 [[package]]
 name = "octorust"
-version = "0.1.24"
+version = "0.1.25"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -977,7 +977,7 @@ dependencies = [
 
 [[package]]
 name = "ramp-api"
-version = "0.2.3"
+version = "0.2.4"
 dependencies = [
  "anyhow",
  "async-recursion",

@@ -29,7 +29,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-gusto_api = "0.2.10"
+gusto_api = "0.2.11"
 ```
 
 ## Basic example
