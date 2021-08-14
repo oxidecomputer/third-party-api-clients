@@ -217,23 +217,10 @@ impl Groups {
     pub async fn get_all_group_members(
         &self,
         group_id: &str,
-        page_number: i64,
     ) -> Result<Vec<crate::types::UserCreateResponse>> {
-        let mut query = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query.push('&');
-            }
-            query.push_str(n);
-        }
         let url = format!(
-            "/groups/{}/members?{}",
+            "/groups/{}/members",
             crate::progenitor_support::encode_path(&group_id.to_string()),
-            query
         );
 
         let mut resp: crate::types::GroupMembersResponseData =

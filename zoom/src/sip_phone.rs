@@ -83,16 +83,9 @@ impl SipPhone {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>
      *
      */
-    pub async fn list_all(
-        &self,
-        page_number: i64,
-        search_key: &str,
-    ) -> Result<Vec<crate::types::Phones>> {
+    pub async fn list_all(&self, search_key: &str) -> Result<Vec<crate::types::Phones>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
-        }
         if !search_key.is_empty() {
             query_args.push(format!("search_key={}", search_key));
         }

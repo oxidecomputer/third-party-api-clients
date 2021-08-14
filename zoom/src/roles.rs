@@ -138,15 +138,11 @@ impl Roles {
         &self,
         role_id: &str,
         page_count: &str,
-        page_number: i64,
     ) -> Result<Vec<crate::types::Domains>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !page_count.is_empty() {
             query_args.push(format!("page_count={}", page_count));
-        }
-        if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {

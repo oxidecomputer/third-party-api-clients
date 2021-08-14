@@ -91,15 +91,11 @@ impl Users {
         &self,
         status: crate::types::UsersStatus,
         role_id: &str,
-        page_number: &str,
         include_fields: crate::types::UsersIncludeFields,
     ) -> Result<Vec<crate::types::UsersResponse>> {
         let mut query = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
-        if !page_number.is_empty() {
-            query_args.push(format!("page_number={}", page_number));
-        }
         if !role_id.is_empty() {
             query_args.push(format!("role_id={}", role_id));
         }

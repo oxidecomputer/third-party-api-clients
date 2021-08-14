@@ -594,6 +594,7 @@ fn get_fn_params(
                 && nam != "per"
                 && nam != "page_size"
                 && nam != "next_page_token"
+                && nam != "page_number"
                 && nam != "start"))
             && nam != "authorization"
             && !nam.starts_with("authorization_bearer")
@@ -630,6 +631,7 @@ fn get_fn_params(
                     && nam != "per"
                     && nam != "page_size"
                     && nam != "next_page_token"
+                    && nam != "page_number"
                     && nam != "start"))
                 && nam != "authorization"
                 && !nam.starts_with("authorization_bearer")
