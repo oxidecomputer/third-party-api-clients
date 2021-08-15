@@ -357,7 +357,7 @@ $(ZOOM_SPEC): $(ZOOM_SPEC_DIR)
 		$(ZOOM_SPEC_REMOTE)
 
 zoom: target/debug/generator $(ZOOM_SPEC)
-	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.3 \
+	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.4 \
 		-o zoom \
 		-n zoom-api \
 		--proper-name Zoom \
