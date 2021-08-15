@@ -67,7 +67,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: docusign giphy github google-calendar google-drive google-groups-settings gusto ramp tripactions zoom
+generate: docusign giphy github google-admin google-calendar google-drive google-groups-settings gusto ramp tripactions zoom
 	cargo test tests
 	cargo clippy
 
