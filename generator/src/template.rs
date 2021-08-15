@@ -216,9 +216,7 @@ fn parse_inner(t: &str) -> Result<Template> {
                 }
             }
             State::ParameterSlash => {
-                if c == '/' {
-                    s = State::ConstantOrParameter;
-                } else if c == ':' {
+                if c == '/' || c == ':' {
                     // Google Admin API has ":issueCommand" so we want to allow that!
                     s = State::ConstantOrParameter;
                 } else {
