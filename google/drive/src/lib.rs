@@ -24,10 +24,12 @@
 //! ## Client Details
 //!
 //! This client is generated from the [Google Drive OpenAPI
-//! specs](https://www.googleapis.com/discovery/v1/apis/drive/v3/rest) based on OpenAPI spec version `v3`. This way it will remain
+//! specs](https://www.googleapis.com/discovery/v1/apis/drive/v3/rest) based on API spec version `v3`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
-//! //! To install the library, add the following to your `Cargo.toml` file.
+//! 
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
 //!
 //! ```toml
 //! [dependencies]
@@ -100,6 +102,8 @@
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
+#![allow(clippy::large_enum_variant)]
+#![allow(clippy::tabs_in_doc_comments)]
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 

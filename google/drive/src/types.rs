@@ -2,7 +2,7 @@
     use schemars::JsonSchema;
     use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DriveThemes {
 /**
 * A link to this theme's background image.
@@ -13,7 +13,7 @@ skip_serializing_if = "String::is_empty",
 )]
 pub background_image_link: String,
 /**
-* The color of this theme as an RGB hex string.
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -21,7 +21,7 @@ skip_serializing_if = "String::is_empty",
 )]
 pub color_rgb: String,
 /**
-* The ID of the theme.
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -30,23 +30,13 @@ skip_serializing_if = "String::is_empty",
 pub id: String,
 }
 
-/// A map of source MIME type to possible targets for all supported exports.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ExportFormats {
-}
-
-/// A map of source MIME type to possible targets for all supported imports.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ImportFormats {
-}
-
-/// A map of maximum import sizes by MIME type, in bytes.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct MaxImportSizes {
+/// Additional parameters controlling delivery channel behavior. Optional.
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct Params {
 }
 
 /// The user's storage quota limits and usage. All fields are measured in bytes.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StorageQuota {
 /**
 * The user's storage quota limits and usage. All fields are measured in bytes.
@@ -82,36 +72,8 @@ pub usage_in_drive: i64,
 pub usage_in_drive_trash: i64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct TeamDriveThemes {
-/**
-* Deprecated - use driveThemes/backgroundImageLink instead.
-*/
-#[serde(default,
-skip_serializing_if = "String::is_empty",
-                                        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-)]
-pub background_image_link: String,
-/**
-* Deprecated - use driveThemes/colorRgb instead.
-*/
-#[serde(default,
-skip_serializing_if = "String::is_empty",
-                                        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-)]
-pub color_rgb: String,
-/**
-* Deprecated - use driveThemes/id instead.
-*/
-#[serde(default,
-skip_serializing_if = "String::is_empty",
-                                        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-)]
-pub id: String,
-}
-
 /// Information about the user, the user's Drive, and system capabilities.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct About {
 /**
 * Information about the user, the user's Drive, and system capabilities.
@@ -147,7 +109,7 @@ pub drive_themes: Vec<DriveThemes>,
 #[serde(default,
 skip_serializing_if = "Option::is_none",
 )]
-pub export_formats: Option<ExportFormats>,
+pub export_formats: Option<Params>,
 /**
 * Information about the user, the user's Drive, and system capabilities.
 */
@@ -161,7 +123,7 @@ pub folder_color_palette: Vec<String>,
 #[serde(default,
 skip_serializing_if = "Option::is_none",
 )]
-pub import_formats: Option<ImportFormats>,
+pub import_formats: Option<Params>,
 /**
 * Information about the user, the user's Drive, and system capabilities.
 */
@@ -176,7 +138,7 @@ pub kind: String,
 #[serde(default,
 skip_serializing_if = "Option::is_none",
 )]
-pub max_import_sizes: Option<MaxImportSizes>,
+pub max_import_sizes: Option<Params>,
 /**
 * Information about the user, the user's Drive, and system capabilities.
 */
@@ -198,7 +160,7 @@ pub storage_quota: Option<StorageQuota>,
 #[serde(default,
 skip_serializing_if = "Vec::is_empty",
 )]
-pub team_drive_themes: Vec<TeamDriveThemes>,
+pub team_drive_themes: Vec<DriveThemes>,
 /**
 * Information about the user, the user's Drive, and system capabilities.
 */
@@ -209,7 +171,7 @@ pub user: Option<User>,
 }
 
 /// A change to a file or shared drive.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Change {
 /**
 * A change to a file or shared drive.
@@ -298,7 +260,7 @@ pub type_: String,
 }
 
 /// A list of changes for a user.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChangeList {
 /**
 * A list of changes for a user.
@@ -333,13 +295,8 @@ skip_serializing_if = "String::is_empty",
 pub next_page_token: String,
 }
 
-/// Additional parameters controlling delivery channel behavior. Optional.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Params {
-}
-
 /// An notification channel used to watch for resource changes.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
 /**
 * An notification channel used to watch for resource changes.
@@ -422,7 +379,7 @@ pub type_: String,
 }
 
 /// The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct QuotedFileContent {
 /**
 * The file content to which the comment refers, typically within the anchor region. For a text file, for example, this would be the text at the location of the comment.
@@ -443,7 +400,7 @@ pub value: String,
 }
 
 /// A comment on a file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Comment {
 /**
 * A comment on a file.
@@ -539,7 +496,7 @@ pub resolved: bool,
 }
 
 /// A list of comments on a file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommentList {
 /**
 * A list of comments on a file.
@@ -567,7 +524,7 @@ pub next_page_token: String,
 }
 
 /// A restriction for accessing the content of the file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContentRestriction {
 /**
 * A restriction for accessing the content of the file.
@@ -610,7 +567,7 @@ pub type_: String,
 }
 
 /// An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BackgroundImageFile {
 /**
 * An image file and cropping parameters from which a background image for this shared drive is set. This is a write only field; it can only be set on drive.drives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
@@ -647,7 +604,7 @@ pub y_coordinate: f64,
 }
 
 /// Capabilities the current user has on this shared drive.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Capabilities {
 /**
 * Capabilities the current user has on this shared drive.
@@ -778,7 +735,7 @@ pub can_trash_children: bool,
 }
 
 /// A set of restrictions that apply to this shared drive or items inside this shared drive.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Restrictions {
 /**
 * A set of restrictions that apply to this shared drive or items inside this shared drive.
@@ -811,7 +768,7 @@ pub drive_members_only: bool,
 }
 
 /// Representation of a shared drive.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Drive {
 /**
 * Representation of a shared drive.
@@ -900,7 +857,7 @@ pub theme_id: String,
 }
 
 /// A list of shared drives.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DriveList {
 /**
 * A list of shared drives.
@@ -927,14 +884,8 @@ skip_serializing_if = "String::is_empty",
 pub next_page_token: String,
 }
 
-/// A collection of arbitrary key-value pairs which are private to the requesting app.
-/// Entries with null values are cleared in update and copy requests. These properties can only be retrieved using an authenticated request. An authenticated request uses an access token obtained with a OAuth 2 client ID. You cannot use an API key to retrieve private properties.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct AppProperties {
-}
-
 /// Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileCapabilities {
 /**
 * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
@@ -1184,7 +1135,7 @@ pub can_untrash: bool,
 }
 
 /// A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Thumbnail {
 /**
 * A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
@@ -1205,7 +1156,7 @@ pub mime_type: String,
 }
 
 /// Additional information about the content of the file. These fields are never populated in responses.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContentHints {
 /**
 * Additional information about the content of the file. These fields are never populated in responses.
@@ -1224,13 +1175,8 @@ skip_serializing_if = "Option::is_none",
 pub thumbnail: Option<Thumbnail>,
 }
 
-/// Links for exporting Docs Editors files to specific formats.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct ExportLinks {
-}
-
 /// Geographic location information stored in the image.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
 /**
 * Geographic location information stored in the image.
@@ -1259,7 +1205,7 @@ pub longitude: f64,
 }
 
 /// Additional metadata about image media, if available.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ImageMediaMetadata {
 /**
 * Additional metadata about image media, if available.
@@ -1430,7 +1376,7 @@ pub width: i64,
 }
 
 /// Contains details about the link URLs that clients are using to refer to this item.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LinkShareMetadata {
 /**
 * Contains details about the link URLs that clients are using to refer to this item.
@@ -1448,14 +1394,8 @@ pub security_update_eligible: bool,
 pub security_update_enabled: bool,
 }
 
-/// A collection of arbitrary key-value pairs which are visible to all apps.
-/// Entries with null values are cleared in update and copy requests.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
-pub struct Properties {
-}
-
 /// Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ShortcutDetails {
 /**
 * Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
@@ -1484,7 +1424,7 @@ pub target_resource_key: String,
 }
 
 /// Additional metadata about video media. This may not be available immediately upon upload.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct VideoMediaMetadata {
 /**
 * Additional metadata about video media. This may not be available immediately upon upload.
@@ -1513,7 +1453,7 @@ pub width: i64,
 }
 
 /// The metadata for a file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct File {
 /**
 * The metadata for a file.
@@ -1521,7 +1461,7 @@ pub struct File {
 #[serde(default,
 skip_serializing_if = "Option::is_none",
 )]
-pub app_properties: Option<AppProperties>,
+pub app_properties: Option<Params>,
 /**
 * The metadata for a file.
 */
@@ -1587,7 +1527,7 @@ pub explicitly_trashed: bool,
 #[serde(default,
 skip_serializing_if = "Option::is_none",
 )]
-pub export_links: Option<ExportLinks>,
+pub export_links: Option<Params>,
 /**
 * The metadata for a file.
 */
@@ -1782,7 +1722,7 @@ pub permissions: Vec<Permission>,
 #[serde(default,
 skip_serializing_if = "Option::is_none",
 )]
-pub properties: Option<Properties>,
+pub properties: Option<Params>,
 /**
 * The metadata for a file.
 */
@@ -1959,7 +1899,7 @@ pub writers_can_share: bool,
 }
 
 /// A list of files.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FileList {
 /**
 * A list of files.
@@ -1994,7 +1934,7 @@ pub next_page_token: String,
 }
 
 /// A list of generated file IDs which can be provided in create requests.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GeneratedIds {
 /**
 * A list of generated file IDs which can be provided in create requests.
@@ -2021,17 +1961,17 @@ skip_serializing_if = "String::is_empty",
 pub space: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PermissionDetails {
 /**
-* Whether this permission is inherited. This field is always populated. This is an output-only field.
+* Whether the user has installed the requesting app.
 */
 #[serde(default,
                                     deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
 )]
 pub inherited: bool,
 /**
-* The ID of the item from which this permission is inherited. This is an output-only field.
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -2039,9 +1979,7 @@ skip_serializing_if = "String::is_empty",
 )]
 pub inherited_from: String,
 /**
-* The permission type for this user. While new values may be added in future, the following are currently possible:  
-*  - file 
-*  - member
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -2049,12 +1987,7 @@ skip_serializing_if = "String::is_empty",
 )]
 pub permission_type: String,
 /**
-* The primary role for this user. While new values may be added in the future, the following are currently possible:  
-*  - organizer 
-*  - fileOrganizer 
-*  - writer 
-*  - commenter 
-*  - reader
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -2063,17 +1996,17 @@ skip_serializing_if = "String::is_empty",
 pub role: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDrivePermissionDetails {
 /**
-* Deprecated - use permissionDetails/inherited instead.
+* Whether the user has installed the requesting app.
 */
 #[serde(default,
                                     deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
 )]
 pub inherited: bool,
 /**
-* Deprecated - use permissionDetails/inheritedFrom instead.
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -2081,7 +2014,7 @@ skip_serializing_if = "String::is_empty",
 )]
 pub inherited_from: String,
 /**
-* Deprecated - use permissionDetails/role instead.
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -2089,7 +2022,7 @@ skip_serializing_if = "String::is_empty",
 )]
 pub role: String,
 /**
-* Deprecated - use permissionDetails/permissionType instead.
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -2099,7 +2032,7 @@ pub team_drive_permission_type: String,
 }
 
 /// A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Permission {
 /**
 * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
@@ -2212,7 +2145,7 @@ pub view: String,
 }
 
 /// A list of permissions for a file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PermissionList {
 /**
 * A list of permissions for a file.
@@ -2240,7 +2173,7 @@ pub permissions: Vec<Permission>,
 }
 
 /// A reply to a comment on a file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Reply {
 /**
 * A reply to a comment on a file.
@@ -2315,7 +2248,7 @@ pub modified_time: Option<chrono::DateTime<chrono::Utc>>,
 }
 
 /// A list of replies to a comment on a file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReplyList {
 /**
 * A list of replies to a comment on a file.
@@ -2343,7 +2276,7 @@ pub replies: Vec<Reply>,
 }
 
 /// The metadata for a revision to a file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Revision {
 /**
 * The metadata for a revision to a file.
@@ -2351,7 +2284,7 @@ pub struct Revision {
 #[serde(default,
 skip_serializing_if = "Option::is_none",
 )]
-pub export_links: Option<ExportLinks>,
+pub export_links: Option<Params>,
 /**
 * The metadata for a revision to a file.
 */
@@ -2454,7 +2387,7 @@ pub size: i64,
 }
 
 /// A list of revisions of a file.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct RevisionList {
 /**
 * A list of revisions of a file.
@@ -2481,10 +2414,10 @@ skip_serializing_if = "Vec::is_empty",
 pub revisions: Vec<Revision>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StartPageToken {
 /**
-* Identifies what kind of resource this is. Value: the fixed string "drive#startPageToken".
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -2492,7 +2425,7 @@ skip_serializing_if = "String::is_empty",
 )]
 pub kind: String,
 /**
-* The starting page token for listing changes.
+* A link to this theme's background image.
 */
 #[serde(default,
 skip_serializing_if = "String::is_empty",
@@ -2502,7 +2435,7 @@ pub start_page_token: String,
 }
 
 /// An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDriveBackgroundImageFile {
 /**
 * An image file and cropping parameters from which a background image for this Team Drive is set. This is a write only field; it can only be set on drive.teamdrives.update requests that don't set themeId. When specified, all fields of the backgroundImageFile must be set.
@@ -2539,7 +2472,7 @@ pub y_coordinate: f64,
 }
 
 /// Capabilities the current user has on this Team Drive.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDriveCapabilities {
 /**
 * Capabilities the current user has on this Team Drive.
@@ -2677,7 +2610,7 @@ pub can_trash_children: bool,
 }
 
 /// A set of restrictions that apply to this Team Drive or items inside this Team Drive.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDriveRestrictions {
 /**
 * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
@@ -2710,7 +2643,7 @@ pub team_members_only: bool,
 }
 
 /// Deprecated: use the drive collection instead.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDrive {
 /**
 * Deprecated: use the drive collection instead.
@@ -2792,7 +2725,7 @@ pub theme_id: String,
 }
 
 /// A list of Team Drives.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TeamDriveList {
 /**
 * A list of Team Drives.
@@ -2820,7 +2753,7 @@ pub team_drives: Vec<TeamDrive>,
 }
 
 /// Information about a Drive user.
-#[derive(Serialize, Deserialize, Debug, Default, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
 /**
 * Information about a Drive user.
@@ -2874,14 +2807,14 @@ pub photo_link: String,
 /**
 * Data format for the response.
 */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Alt {
 #[serde(rename = "json")]
 Json,
 #[serde(rename = "")]
 Noop,
-FallthroughString(String),
+#[serde(other)]
+FallthroughString
 }
 
 impl std::fmt::Display for Alt {
@@ -2889,7 +2822,7 @@ fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
 match &*self {
 Alt::Json => "json",
 Alt::Noop => "",
-Alt::FallthroughString(s) => s,
+Alt::FallthroughString => "*",
 }
 .fmt(f)
 }
@@ -2910,8 +2843,7 @@ impl Alt {
 /**
 * The source of files to list. Deprecated: use 'corpora' instead.
 */
-#[derive(Serialize, Deserialize, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Corpus {
 #[serde(rename = "domain")]
 Domain,
@@ -2919,7 +2851,8 @@ Domain,
 User,
 #[serde(rename = "")]
 Noop,
-FallthroughString(String),
+#[serde(other)]
+FallthroughString
 }
 
 impl std::fmt::Display for Corpus {
@@ -2928,7 +2861,7 @@ match &*self {
 Corpus::Domain => "domain",
 Corpus::User => "user",
 Corpus::Noop => "",
-Corpus::FallthroughString(s) => s,
+Corpus::FallthroughString => "*",
 }
 .fmt(f)
 }

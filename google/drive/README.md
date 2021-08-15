@@ -26,9 +26,11 @@ Manages files in Drive including uploading, downloading, searching, detecting ch
 ## Client Details
 
 This client is generated from the [Google Drive OpenAPI
-specs](https://www.googleapis.com/discovery/v1/apis/drive/v3/rest) based on OpenAPI spec version `v3`. This way it will remain
+specs](https://www.googleapis.com/discovery/v1/apis/drive/v3/rest) based on API spec version `v3`. This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.
+
+
 To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
