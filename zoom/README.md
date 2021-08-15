@@ -38,7 +38,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-zoom_api = "0.2.2"
+zoom_api = "0.2.3"
 ```
 
 ## Basic example
