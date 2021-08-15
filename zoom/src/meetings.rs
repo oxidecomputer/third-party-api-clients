@@ -39,7 +39,7 @@ impl Meetings {
         next_page_token: &str,
         page_number: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -53,14 +53,14 @@ impl Meetings {
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/meetings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -132,7 +132,7 @@ impl Meetings {
         occurrence_id: &str,
         show_previous_occurrences: bool,
     ) -> Result<crate::types::MeetingResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(format!("occurrence_id={}", occurrence_id));
@@ -145,14 +145,14 @@ impl Meetings {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -190,7 +190,7 @@ impl Meetings {
         schedule_for_reminder: bool,
         cancel_meeting_reminder: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !cancel_meeting_reminder.is_empty() {
             query_args.push(format!(
@@ -206,14 +206,14 @@ impl Meetings {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -241,21 +241,21 @@ impl Meetings {
         occurrence_id: &str,
         body: &crate::types::MeetingUpdateRequestAllOf,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(format!("occurrence_id={}", occurrence_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -332,7 +332,7 @@ impl Meetings {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -349,14 +349,14 @@ impl Meetings {
         query_args.push(format!("status={}", status));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}/registrants?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -387,21 +387,21 @@ impl Meetings {
         meeting_id: i64,
         occurrence_ids: &str,
     ) -> Result<crate::types::MeetingRegistrantCreateResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_ids.is_empty() {
             query_args.push(format!("occurrence_ids={}", occurrence_ids));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}/registrants?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await
@@ -429,22 +429,22 @@ impl Meetings {
         meeting_id: i64,
         registrant_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(format!("occurrence_id={}", occurrence_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}/registrants/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
             crate::progenitor_support::encode_path(&registrant_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -472,21 +472,21 @@ impl Meetings {
         occurrence_id: &str,
         body: &crate::types::RegistrantStatus,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(format!("occurrence_id={}", occurrence_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}/registrants/status?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -555,7 +555,7 @@ impl Meetings {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<crate::types::PastMeetingParticipantsResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -565,14 +565,14 @@ impl Meetings {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/past_meetings/{}/participants?{}",
             crate::progenitor_support::encode_path(&meeting_uuid.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

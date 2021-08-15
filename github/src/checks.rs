@@ -147,7 +147,7 @@ impl Checks {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::CheckAnnotation>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -157,16 +157,16 @@ impl Checks {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/check-runs/{}/annotations?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -337,7 +337,7 @@ impl Checks {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ChecksListRefResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !check_name.is_empty() {
             query_args.push(format!("check_name={}", check_name));
@@ -352,16 +352,16 @@ impl Checks {
         query_args.push(format!("status={}", status));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/check-suites/{}/check-runs?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_suite_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -437,7 +437,7 @@ impl Checks {
         page: i64,
         app_id: i64,
     ) -> Result<crate::types::ChecksListRefResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if app_id > 0 {
             query_args.push(format!("app_id={}", app_id));
@@ -455,16 +455,16 @@ impl Checks {
         query_args.push(format!("status={}", status));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/commits/{}/check-runs?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&ref_.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -501,7 +501,7 @@ impl Checks {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ChecksListSuitesRefResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if app_id > 0 {
             query_args.push(format!("app_id={}", app_id));
@@ -517,16 +517,16 @@ impl Checks {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/commits/{}/check-suites?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&ref_.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

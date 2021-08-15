@@ -46,7 +46,7 @@ impl CalendarList {
         show_hidden: bool,
         sync_token: &str,
     ) -> Result<crate::types::CalendarList> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -85,11 +85,11 @@ impl CalendarList {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/users/me/calendarList?{}", query);
+        let url = format!("/users/me/calendarList?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -115,7 +115,7 @@ impl CalendarList {
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
     ) -> Result<crate::types::CalendarListEntry> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if color_rgb_format {
@@ -141,11 +141,11 @@ impl CalendarList {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/users/me/calendarList?{}", query);
+        let url = format!("/users/me/calendarList?{}", query_);
 
         self.client
             .post(
@@ -190,7 +190,7 @@ impl CalendarList {
         sync_token: &str,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -229,11 +229,11 @@ impl CalendarList {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/users/me/calendarList/watch?{}", query);
+        let url = format!("/users/me/calendarList/watch?{}", query_);
 
         self.client
             .post(
@@ -263,7 +263,7 @@ impl CalendarList {
         user_ip: &str,
         calendar_id: &str,
     ) -> Result<crate::types::CalendarListEntry> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -286,14 +286,14 @@ impl CalendarList {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/me/calendarList/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -322,7 +322,7 @@ impl CalendarList {
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
     ) -> Result<crate::types::CalendarListEntry> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if color_rgb_format {
@@ -348,14 +348,14 @@ impl CalendarList {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/me/calendarList/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -386,7 +386,7 @@ impl CalendarList {
         user_ip: &str,
         calendar_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -409,14 +409,14 @@ impl CalendarList {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/me/calendarList/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -445,7 +445,7 @@ impl CalendarList {
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
     ) -> Result<crate::types::CalendarListEntry> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if color_rgb_format {
@@ -471,14 +471,14 @@ impl CalendarList {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/me/calendarList/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client

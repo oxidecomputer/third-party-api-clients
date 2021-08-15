@@ -33,7 +33,7 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -46,11 +46,11 @@ impl Gists {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gists?{}", query);
+        let url = format!("/gists?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -70,18 +70,18 @@ impl Gists {
         &self,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gists?{}", query);
+        let url = format!("/gists?{}", query_);
 
         self.client.get_all_pages(&url, None).await
     }
@@ -133,7 +133,7 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -146,11 +146,11 @@ impl Gists {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gists/public?{}", query);
+        let url = format!("/gists/public?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -172,18 +172,18 @@ impl Gists {
         &self,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gists/public?{}", query);
+        let url = format!("/gists/public?{}", query_);
 
         self.client.get_all_pages(&url, None).await
     }
@@ -209,7 +209,7 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -222,11 +222,11 @@ impl Gists {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gists/starred?{}", query);
+        let url = format!("/gists/starred?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -246,18 +246,18 @@ impl Gists {
         &self,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gists/starred?{}", query);
+        let url = format!("/gists/starred?{}", query_);
 
         self.client.get_all_pages(&url, None).await
     }
@@ -358,7 +358,7 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::GistComment>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -368,14 +368,14 @@ impl Gists {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/gists/{}/comments?{}",
             crate::progenitor_support::encode_path(&gist_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -539,7 +539,7 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::GistCommit>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -549,14 +549,14 @@ impl Gists {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/gists/{}/commits?{}",
             crate::progenitor_support::encode_path(&gist_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -603,7 +603,7 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::GistSimple>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -613,14 +613,14 @@ impl Gists {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/gists/{}/forks?{}",
             crate::progenitor_support::encode_path(&gist_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -781,7 +781,7 @@ impl Gists {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -794,14 +794,14 @@ impl Gists {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/gists?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -823,21 +823,21 @@ impl Gists {
         username: &str,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::BaseGist>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/gists?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await

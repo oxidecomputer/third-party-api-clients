@@ -41,7 +41,7 @@ impl SecretScanning {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<crate::types::SecretScanningAlert>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -55,15 +55,15 @@ impl SecretScanning {
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/secret-scanning/alerts?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -89,7 +89,7 @@ impl SecretScanning {
         state: crate::types::SecretScanningAlertState,
         secret_type: &str,
     ) -> Result<Vec<crate::types::SecretScanningAlert>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !secret_type.is_empty() {
             query_args.push(format!("secret_type={}", secret_type));
@@ -97,15 +97,15 @@ impl SecretScanning {
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/secret-scanning/alerts?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await

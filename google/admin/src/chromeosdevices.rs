@@ -50,7 +50,7 @@ impl Chromeosdevices {
         query: &str,
         sort_order: crate::types::SortOrder,
     ) -> Result<crate::types::ChromeOsDevices> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -98,14 +98,14 @@ impl Chromeosdevices {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -138,7 +138,7 @@ impl Chromeosdevices {
         org_unit_path: &str,
         body: &crate::types::ChromeOsMoveDevicesOu,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -174,14 +174,14 @@ impl Chromeosdevices {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/moveDevicesToOu?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -220,7 +220,7 @@ impl Chromeosdevices {
         device_id: &str,
         projection: crate::types::Projection,
     ) -> Result<crate::types::ChromeOsDevice> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -254,15 +254,15 @@ impl Chromeosdevices {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&device_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -297,7 +297,7 @@ impl Chromeosdevices {
         projection: crate::types::Projection,
         body: &crate::types::ChromeOsDevice,
     ) -> Result<crate::types::ChromeOsDevice> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -331,15 +331,15 @@ impl Chromeosdevices {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&device_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -379,7 +379,7 @@ impl Chromeosdevices {
         projection: crate::types::Projection,
         body: &crate::types::ChromeOsDevice,
     ) -> Result<crate::types::ChromeOsDevice> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -413,15 +413,15 @@ impl Chromeosdevices {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&device_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -459,7 +459,7 @@ impl Chromeosdevices {
         resource_id: &str,
         body: &crate::types::ChromeOsDeviceAction,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -492,15 +492,15 @@ impl Chromeosdevices {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}/action?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&resource_id.to_string()),
-            query
+            query_
         );
 
         self.client

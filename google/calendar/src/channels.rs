@@ -28,7 +28,7 @@ impl Channels {
         user_ip: &str,
         body: &crate::types::Channel,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -51,11 +51,11 @@ impl Channels {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/channels/stop?{}", query);
+        let url = format!("/channels/stop?{}", query_);
 
         self.client
             .post(

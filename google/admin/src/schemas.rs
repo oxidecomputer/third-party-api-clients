@@ -36,7 +36,7 @@ impl Schemas {
         upload_type: &str,
         customer_id: &str,
     ) -> Result<crate::types::Schemas> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -69,14 +69,14 @@ impl Schemas {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -107,7 +107,7 @@ impl Schemas {
         customer_id: &str,
         body: &crate::types::Schema,
     ) -> Result<crate::types::Schema> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -140,14 +140,14 @@ impl Schemas {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -184,7 +184,7 @@ impl Schemas {
         customer_id: &str,
         schema_key: &str,
     ) -> Result<crate::types::Schema> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -217,15 +217,15 @@ impl Schemas {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&schema_key.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -258,7 +258,7 @@ impl Schemas {
         schema_key: &str,
         body: &crate::types::Schema,
     ) -> Result<crate::types::Schema> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -291,15 +291,15 @@ impl Schemas {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&schema_key.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -336,7 +336,7 @@ impl Schemas {
         customer_id: &str,
         schema_key: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -369,15 +369,15 @@ impl Schemas {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&schema_key.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -410,7 +410,7 @@ impl Schemas {
         schema_key: &str,
         body: &crate::types::Schema,
     ) -> Result<crate::types::Schema> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -443,15 +443,15 @@ impl Schemas {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&schema_key.to_string()),
-            query
+            query_
         );
 
         self.client

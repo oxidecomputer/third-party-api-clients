@@ -42,7 +42,7 @@ impl Archiving {
         to: &str,
         query_date_type: crate::types::ListArchivedFilesQueryDateType,
     ) -> Result<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
@@ -59,11 +59,11 @@ impl Archiving {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/archive_files?{}", query);
+        let url = format!("/archive_files?{}", query_);
 
         let resp: crate::types::ListArchivedFilesResponse =
             self.client.get(&url, None).await.unwrap();
@@ -94,7 +94,7 @@ impl Archiving {
         to: &str,
         query_date_type: crate::types::ListArchivedFilesQueryDateType,
     ) -> Result<Vec<crate::types::ListArchivedFilesResponseMeetings>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
@@ -105,11 +105,11 @@ impl Archiving {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/archive_files?{}", query);
+        let url = format!("/archive_files?{}", query_);
 
         let mut resp: crate::types::ListArchivedFilesResponse =
             self.client.get(&url, None).await.unwrap();

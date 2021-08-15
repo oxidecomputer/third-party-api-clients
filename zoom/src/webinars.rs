@@ -41,7 +41,7 @@ impl Webinars {
         page_size: i64,
         page_number: i64,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page_number > 0 {
             query_args.push(format!("page_number={}", page_number));
@@ -51,14 +51,14 @@ impl Webinars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/webinars?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -116,7 +116,7 @@ impl Webinars {
         occurrence_id: &str,
         show_previous_occurrences: bool,
     ) -> Result<crate::types::WebinarResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(format!("occurrence_id={}", occurrence_id));
@@ -129,14 +129,14 @@ impl Webinars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/webinars/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -170,7 +170,7 @@ impl Webinars {
         occurrence_id: &str,
         cancel_webinar_reminder: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !cancel_webinar_reminder.is_empty() {
             query_args.push(format!(
@@ -183,14 +183,14 @@ impl Webinars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/webinars/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -215,21 +215,21 @@ impl Webinars {
      * * `occurrence_id: &str` -- Webinar occurrence id. Support change of agenda, start_time, duration, settings: {host_video, panelist_video, hd_video, watermark, auto_recording}.
      */
     pub async fn webinar_update(&self, webinar_id: i64, occurrence_id: &str) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(format!("occurrence_id={}", occurrence_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/webinars/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query
+            query_
         );
 
         self.client.patch(&url, None).await
@@ -264,7 +264,7 @@ impl Webinars {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::Participants>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -274,14 +274,14 @@ impl Webinars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/past_webinars/{}/participants?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query
+            query_
         );
 
         let resp: crate::types::ListWebinarParticipantsResponse =
@@ -542,7 +542,7 @@ impl Webinars {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -562,14 +562,14 @@ impl Webinars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/webinars/{}/registrants?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -597,21 +597,21 @@ impl Webinars {
         webinar_id: &str,
         occurrence_ids: &str,
     ) -> Result<crate::types::WebinarRegistrantCreateResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_ids.is_empty() {
             query_args.push(format!("occurrence_ids={}", occurrence_ids));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/webinars/{}/registrants?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await
@@ -683,21 +683,21 @@ impl Webinars {
         occurrence_id: &str,
         body: &crate::types::RegistrantStatus,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(format!("occurrence_id={}", occurrence_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/webinars/{}/registrants/status?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -978,22 +978,22 @@ impl Webinars {
         registrant_id: &str,
         occurrence_id: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(format!("occurrence_id={}", occurrence_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/webinars/{}/registrants/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             crate::progenitor_support::encode_path(&registrant_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1021,22 +1021,22 @@ impl Webinars {
         registrant_id: &str,
         occurrence_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !occurrence_id.is_empty() {
             query_args.push(format!("occurrence_id={}", occurrence_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/webinars/{}/registrants/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
             crate::progenitor_support::encode_path(&registrant_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -1065,7 +1065,7 @@ impl Webinars {
         next_page_token: &str,
         webinar_uuid: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -1078,14 +1078,14 @@ impl Webinars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/past_webinars/{}/absentees?{}",
             crate::progenitor_support::encode_path(&webinar_uuid.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

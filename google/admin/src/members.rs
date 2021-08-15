@@ -38,7 +38,7 @@ impl Members {
         group_key: &str,
         member_key: &str,
     ) -> Result<crate::types::MembersHasMember> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -71,15 +71,15 @@ impl Members {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/groups/{}/hasMember/{}?{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -117,7 +117,7 @@ impl Members {
         page_token: &str,
         roles: &str,
     ) -> Result<crate::types::Members> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -165,14 +165,14 @@ impl Members {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/groups/{}/members?{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -203,7 +203,7 @@ impl Members {
         group_key: &str,
         body: &crate::types::Member,
     ) -> Result<crate::types::Member> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -236,14 +236,14 @@ impl Members {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/groups/{}/members?{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -280,7 +280,7 @@ impl Members {
         group_key: &str,
         member_key: &str,
     ) -> Result<crate::types::Member> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -313,15 +313,15 @@ impl Members {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}?{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -354,7 +354,7 @@ impl Members {
         member_key: &str,
         body: &crate::types::Member,
     ) -> Result<crate::types::Member> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -387,15 +387,15 @@ impl Members {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}?{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -432,7 +432,7 @@ impl Members {
         group_key: &str,
         member_key: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -465,15 +465,15 @@ impl Members {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}?{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -506,7 +506,7 @@ impl Members {
         member_key: &str,
         body: &crate::types::Member,
     ) -> Result<crate::types::Member> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -539,15 +539,15 @@ impl Members {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}?{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query
+            query_
         );
 
         self.client

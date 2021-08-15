@@ -37,21 +37,21 @@ impl AccountPermissionProfiles {
         account_id: &str,
         include: &str,
     ) -> Result<crate::types::PermissionProfileInformation> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include.is_empty() {
             query_args.push(format!("include={}", include));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/permission_profiles?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -75,21 +75,21 @@ impl AccountPermissionProfiles {
         include: &str,
         body: &crate::types::PermissionProfile,
     ) -> Result<crate::types::PermissionProfile> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include.is_empty() {
             query_args.push(format!("include={}", include));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/permission_profiles?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -125,22 +125,22 @@ impl AccountPermissionProfiles {
         permission_profile_id: &str,
         include: &str,
     ) -> Result<crate::types::PermissionProfile> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include.is_empty() {
             query_args.push(format!("include={}", include));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/permission_profiles/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&permission_profile_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -172,22 +172,22 @@ impl AccountPermissionProfiles {
         include: &str,
         body: &crate::types::PermissionProfile,
     ) -> Result<crate::types::PermissionProfile> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include.is_empty() {
             query_args.push(format!("include={}", include));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/permission_profiles/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&permission_profile_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -225,22 +225,22 @@ impl AccountPermissionProfiles {
         permission_profile_id: &str,
         move_users_to: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !move_users_to.is_empty() {
             query_args.push(format!("move_users_to={}", move_users_to));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/permission_profiles/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&permission_profile_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await

@@ -83,23 +83,23 @@ impl EnvelopeConsumerDisclosures {
         recipient_id: &str,
         lang_code: &str,
     ) -> Result<crate::types::ConsumerDisclosure> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !lang_code.is_empty() {
             query_args.push(format!("lang_code={}", lang_code));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
             crate::progenitor_support::encode_path(&recipient_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -221,16 +221,16 @@ impl EnvelopeConsumerDisclosures {
         lang_code: &str,
         recipient_id: &str,
     ) -> Result<crate::types::ConsumerDisclosure> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !lang_code.is_empty() {
             query_args.push(format!("lang_code={}", lang_code));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure/{}?{}",
@@ -238,7 +238,7 @@ impl EnvelopeConsumerDisclosures {
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
             crate::progenitor_support::encode_path(&recipient_id.to_string()),
             crate::progenitor_support::encode_path(&lang_code.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

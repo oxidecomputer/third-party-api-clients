@@ -30,7 +30,7 @@ impl Stickers {
         tag: &str,
         rating: &str,
     ) -> Result<crate::types::RandomGifResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !rating.is_empty() {
             query_args.push(format!("rating={}", rating));
@@ -40,11 +40,11 @@ impl Stickers {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/stickers/random?{}", query);
+        let url = format!("/stickers/random?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -73,7 +73,7 @@ impl Stickers {
         rating: &str,
         lang: &str,
     ) -> Result<crate::types::GetGifsByResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !lang.is_empty() {
             query_args.push(format!("lang={}", lang));
@@ -92,11 +92,11 @@ impl Stickers {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/stickers/search?{}", query);
+        let url = format!("/stickers/search?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -114,18 +114,18 @@ impl Stickers {
      * * `s: &str` -- The unique bit.ly URL for this GIF.
      */
     pub async fn translate_sticker(&self, s: &str) -> Result<crate::types::RandomGifResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !s.is_empty() {
             query_args.push(format!("s={}", s));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/stickers/translate?{}", query);
+        let url = format!("/stickers/translate?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -150,7 +150,7 @@ impl Stickers {
         offset: i64,
         rating: &str,
     ) -> Result<crate::types::GetGifsByResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if limit > 0 {
             query_args.push(format!("limit={}", limit));
@@ -163,11 +163,11 @@ impl Stickers {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/stickers/trending?{}", query);
+        let url = format!("/stickers/trending?{}", query_);
 
         self.client.get(&url, None).await
     }

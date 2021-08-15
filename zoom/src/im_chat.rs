@@ -40,7 +40,7 @@ impl ImChat {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<crate::types::ImChatSessionsResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -52,11 +52,11 @@ impl ImChat {
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/im/chat/sessions?{}", query);
+        let url = format!("/im/chat/sessions?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -95,7 +95,7 @@ impl ImChat {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<crate::types::ImChatMessagesResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -107,14 +107,14 @@ impl ImChat {
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/im/chat/sessions/{}?{}",
             crate::progenitor_support::encode_path(&session_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -150,7 +150,7 @@ impl ImChat {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::ListimmessagesResponseMessages>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !channel.is_empty() {
             query_args.push(format!("channel={}", channel));
@@ -169,14 +169,14 @@ impl ImChat {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/im/users/{}/chat/messages?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let resp: crate::types::ListimmessagesResponse = self.client.get(&url, None).await.unwrap();
@@ -206,7 +206,7 @@ impl ImChat {
         channel: &str,
         date: &str,
     ) -> Result<Vec<crate::types::ListimmessagesResponseMessages>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !channel.is_empty() {
             query_args.push(format!("channel={}", channel));
@@ -219,14 +219,14 @@ impl ImChat {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/im/users/{}/chat/messages?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let mut resp: crate::types::ListimmessagesResponse =
@@ -283,18 +283,18 @@ impl ImChat {
         chat_user: &str,
         body: &crate::types::SendimmessagesRequest,
     ) -> Result<crate::types::Groups> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !chat_user.is_empty() {
             query_args.push(format!("chat_user={}", chat_user));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/im/users/me/chat/messages?{}", query);
+        let url = format!("/im/users/me/chat/messages?{}", query_);
 
         self.client
             .post(

@@ -25,18 +25,18 @@ impl Gifs {
      * * `ids: &str` -- Filters results by specified GIF IDs, separated by commas.
      */
     pub async fn get_by(&self, ids: &str) -> Result<crate::types::GetGifsByResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !ids.is_empty() {
             query_args.push(format!("ids={}", ids));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gifs?{}", query);
+        let url = format!("/gifs?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -59,7 +59,7 @@ impl Gifs {
         tag: &str,
         rating: &str,
     ) -> Result<crate::types::RandomGifResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !rating.is_empty() {
             query_args.push(format!("rating={}", rating));
@@ -69,11 +69,11 @@ impl Gifs {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gifs/random?{}", query);
+        let url = format!("/gifs/random?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -102,7 +102,7 @@ impl Gifs {
         rating: &str,
         lang: &str,
     ) -> Result<crate::types::GetGifsByResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !lang.is_empty() {
             query_args.push(format!("lang={}", lang));
@@ -121,11 +121,11 @@ impl Gifs {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gifs/search?{}", query);
+        let url = format!("/gifs/search?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -143,18 +143,18 @@ impl Gifs {
      * * `s: &str` -- The unique bit.ly URL for this GIF.
      */
     pub async fn translate_gif(&self, s: &str) -> Result<crate::types::RandomGifResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !s.is_empty() {
             query_args.push(format!("s={}", s));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gifs/translate?{}", query);
+        let url = format!("/gifs/translate?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -179,7 +179,7 @@ impl Gifs {
         offset: i64,
         rating: &str,
     ) -> Result<crate::types::GetGifsByResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if limit > 0 {
             query_args.push(format!("limit={}", limit));
@@ -192,11 +192,11 @@ impl Gifs {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/gifs/trending?{}", query);
+        let url = format!("/gifs/trending?{}", query_);
 
         self.client.get(&url, None).await
     }

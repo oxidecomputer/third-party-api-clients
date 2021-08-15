@@ -58,7 +58,7 @@ impl Transactions {
         page_size: f64,
         requires_memo: bool,
     ) -> Result<Vec<crate::types::Data>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !department_id.is_empty() {
             query_args.push(format!("department_id={}", department_id));
@@ -104,11 +104,11 @@ impl Transactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/transactions?{}", query);
+        let url = format!("/transactions?{}", query_);
 
         let resp: crate::types::GetTransactionResponse = self.client.get(&url, None).await.unwrap();
 
@@ -142,7 +142,7 @@ impl Transactions {
         max_amount: f64,
         requires_memo: bool,
     ) -> Result<Vec<crate::types::Data>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !department_id.is_empty() {
             query_args.push(format!("department_id={}", department_id));
@@ -184,11 +184,11 @@ impl Transactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/transactions?{}", query);
+        let url = format!("/transactions?{}", query_);
 
         let mut resp: crate::types::GetTransactionResponse =
             self.client.get(&url, None).await.unwrap();

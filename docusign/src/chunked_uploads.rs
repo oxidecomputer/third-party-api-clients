@@ -62,22 +62,22 @@ impl ChunkedUploads {
         chunked_upload_id: &str,
         include: &str,
     ) -> Result<crate::types::ChunkedUploadResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include.is_empty() {
             query_args.push(format!("include={}", include));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/chunked_uploads/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -106,22 +106,22 @@ impl ChunkedUploads {
         chunked_upload_id: &str,
         action: &str,
     ) -> Result<crate::types::ChunkedUploadResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !action.is_empty() {
             query_args.push(format!("action={}", action));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/chunked_uploads/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
-            query
+            query_
         );
 
         self.client.put(&url, None).await

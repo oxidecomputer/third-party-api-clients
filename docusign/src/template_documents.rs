@@ -31,22 +31,22 @@ impl TemplateDocuments {
         template_id: &str,
         include_tabs: &str,
     ) -> Result<crate::types::TemplateDocumentsResult> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_tabs.is_empty() {
             query_args.push(format!("include_tabs={}", include_tabs));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&template_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -155,7 +155,7 @@ impl TemplateDocuments {
         encrypt: &str,
         show_changes: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !encrypt.is_empty() {
             query_args.push(format!("encrypt={}", encrypt));
@@ -165,16 +165,16 @@ impl TemplateDocuments {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&template_id.to_string()),
             crate::progenitor_support::encode_path(&document_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -202,23 +202,23 @@ impl TemplateDocuments {
         is_envelope_definition: &str,
         body: &crate::types::EnvelopeDefinition,
     ) -> Result<crate::types::EnvelopeDocument> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !is_envelope_definition.is_empty() {
             query_args.push(format!("is_envelope_definition={}", is_envelope_definition));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&template_id.to_string()),
             crate::progenitor_support::encode_path(&document_id.to_string()),
-            query
+            query_
         );
 
         self.client

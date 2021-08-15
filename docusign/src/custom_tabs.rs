@@ -29,21 +29,21 @@ impl CustomTabs {
         account_id: &str,
         custom_tab_only: &str,
     ) -> Result<crate::types::TabMetadataList> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_tab_only.is_empty() {
             query_args.push(format!("custom_tab_only={}", custom_tab_only));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

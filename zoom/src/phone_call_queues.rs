@@ -38,7 +38,7 @@ impl PhoneCallQueues {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::CallQueues>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -48,11 +48,11 @@ impl PhoneCallQueues {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/call_queues?{}", query);
+        let url = format!("/phone/call_queues?{}", query_);
 
         let resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None).await.unwrap();
 
@@ -507,7 +507,7 @@ impl PhoneCallQueues {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::GetCallQueueRecordingsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -519,14 +519,14 @@ impl PhoneCallQueues {
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/call_queues/{}/recordings?{}",
             crate::progenitor_support::encode_path(&call_queue_id.to_string()),
-            query
+            query_
         );
 
         let resp: crate::types::GetCallQueueRecordingsResponseData =
@@ -558,20 +558,20 @@ impl PhoneCallQueues {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::GetCallQueueRecordingsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/call_queues/{}/recordings?{}",
             crate::progenitor_support::encode_path(&call_queue_id.to_string()),
-            query
+            query_
         );
 
         let mut resp: crate::types::GetCallQueueRecordingsResponseData =

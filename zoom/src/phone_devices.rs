@@ -37,7 +37,7 @@ impl PhoneDevices {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::ListPhoneDevicesResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -48,11 +48,11 @@ impl PhoneDevices {
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/devices?{}", query);
+        let url = format!("/phone/devices?{}", query_);
 
         let resp: crate::types::ListPhoneDevicesResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -80,16 +80,16 @@ impl PhoneDevices {
         &self,
         type_: crate::types::ListPhoneDevicesType,
     ) -> Result<Vec<crate::types::ListPhoneDevicesResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/devices?{}", query);
+        let url = format!("/phone/devices?{}", query_);
 
         let mut resp: crate::types::ListPhoneDevicesResponseData =
             self.client.get(&url, None).await.unwrap();

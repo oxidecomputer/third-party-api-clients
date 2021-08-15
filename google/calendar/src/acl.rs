@@ -43,7 +43,7 @@ impl Acl {
         show_deleted: bool,
         sync_token: &str,
     ) -> Result<crate::types::Acl> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -78,14 +78,14 @@ impl Acl {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/acl?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -114,7 +114,7 @@ impl Acl {
         send_notifications: bool,
         body: &crate::types::AclRule,
     ) -> Result<crate::types::AclRule> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -140,14 +140,14 @@ impl Acl {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/acl?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -190,7 +190,7 @@ impl Acl {
         sync_token: &str,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -225,14 +225,14 @@ impl Acl {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/acl/watch?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -265,7 +265,7 @@ impl Acl {
         calendar_id: &str,
         rule_id: &str,
     ) -> Result<crate::types::AclRule> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -288,15 +288,15 @@ impl Acl {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/acl/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&rule_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -327,7 +327,7 @@ impl Acl {
         send_notifications: bool,
         body: &crate::types::AclRule,
     ) -> Result<crate::types::AclRule> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -353,15 +353,15 @@ impl Acl {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/acl/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&rule_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -394,7 +394,7 @@ impl Acl {
         calendar_id: &str,
         rule_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -417,15 +417,15 @@ impl Acl {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/acl/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&rule_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -456,7 +456,7 @@ impl Acl {
         send_notifications: bool,
         body: &crate::types::AclRule,
     ) -> Result<crate::types::AclRule> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -482,15 +482,15 @@ impl Acl {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/acl/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&rule_id.to_string()),
-            query
+            query_
         );
 
         self.client

@@ -98,7 +98,7 @@ impl Actions {
         page: i64,
     ) -> Result<crate::types::ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse>
     {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -108,14 +108,14 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/actions/permissions/repositories?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -303,7 +303,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListSelfHostedRunnerGroupsOrgResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -313,14 +313,14 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/actions/runner-groups?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -490,7 +490,7 @@ impl Actions {
         page: i64,
         per_page: i64,
     ) -> Result<crate::types::ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -500,15 +500,15 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -652,7 +652,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListSelfHostedRunnersInGroupOrgResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -662,15 +662,15 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -810,7 +810,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListSelfHostedRunnersOrgResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -820,14 +820,14 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/actions/runners?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1037,7 +1037,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListOrgSecretsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1047,14 +1047,14 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/actions/secrets?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1265,7 +1265,7 @@ impl Actions {
         page: i64,
         per_page: i64,
     ) -> Result<crate::types::ActionsListSelectedReposOrgSecretResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1275,15 +1275,15 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&secret_name.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1408,7 +1408,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListArtifactsRepoResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1418,15 +1418,15 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/actions/artifacts?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1753,7 +1753,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListSelfHostedRunnersOrgResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1763,15 +1763,15 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/actions/runners?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -2011,7 +2011,7 @@ impl Actions {
         page: i64,
         created: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<crate::types::ActionsListWorkflowRunsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !actor.is_empty() {
             query_args.push(format!("actor={}", actor));
@@ -2034,15 +2034,15 @@ impl Actions {
         query_args.push(format!("status={}", status));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/actions/runs?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -2223,7 +2223,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListArtifactsRepoResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -2233,16 +2233,16 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/artifacts?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -2308,7 +2308,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListJobsWorkflowRunResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("filter={}", filter));
         if page > 0 {
@@ -2319,16 +2319,16 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/jobs?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -2587,7 +2587,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListRepoSecretsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -2597,15 +2597,15 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/actions/secrets?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -2835,7 +2835,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListRepoWorkflowsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -2845,15 +2845,15 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/actions/workflows?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -3024,7 +3024,7 @@ impl Actions {
         page: i64,
         created: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<crate::types::ActionsListWorkflowRunsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !actor.is_empty() {
             query_args.push(format!("actor={}", actor));
@@ -3047,16 +3047,16 @@ impl Actions {
         query_args.push(format!("status={}", status));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/runs?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&workflow_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -3118,7 +3118,7 @@ impl Actions {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListRepoSecretsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -3128,15 +3128,15 @@ impl Actions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repositories/{}/environments/{}/secrets?{}",
             crate::progenitor_support::encode_path(&repository_id.to_string()),
             crate::progenitor_support::encode_path(&environment_name.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

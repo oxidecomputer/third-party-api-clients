@@ -303,7 +303,7 @@ impl Envelopes {
         user_id: &str,
         user_name: &str,
     ) -> Result<crate::types::EnvelopesInformation> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !ac_status.is_empty() {
             query_args.push(format!("ac_status={}", ac_status));
@@ -403,14 +403,14 @@ impl Envelopes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -511,7 +511,7 @@ impl Envelopes {
         merge_roles_on_draft: &str,
         body: &crate::types::EnvelopeDefinition,
     ) -> Result<crate::types::EnvelopeSummary> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !cdse_mode.is_empty() {
             query_args.push(format!("cdse_mode={}", cdse_mode));
@@ -530,14 +530,14 @@ impl Envelopes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -678,7 +678,7 @@ impl Envelopes {
         user_name: &str,
         body: &crate::types::EnvelopeIdsRequest,
     ) -> Result<crate::types::EnvelopesInformation> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !ac_status.is_empty() {
             query_args.push(format!("ac_status={}", ac_status));
@@ -718,14 +718,14 @@ impl Envelopes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/status?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -770,7 +770,7 @@ impl Envelopes {
         advanced_update: &str,
         include: &str,
     ) -> Result<crate::types::Envelope> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !advanced_update.is_empty() {
             query_args.push(format!("advanced_update={}", advanced_update));
@@ -780,15 +780,15 @@ impl Envelopes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -980,7 +980,7 @@ impl Envelopes {
         resend_envelope: &str,
         body: &crate::types::Envelope,
     ) -> Result<crate::types::EnvelopeUpdateSummary> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !advanced_update.is_empty() {
             query_args.push(format!("advanced_update={}", advanced_update));
@@ -990,15 +990,15 @@ impl Envelopes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -1068,7 +1068,7 @@ impl Envelopes {
         show_changes: &str,
         start_position: &str,
     ) -> Result<crate::types::PageImages> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !count.is_empty() {
             query_args.push(format!("count={}", count));
@@ -1093,16 +1093,16 @@ impl Envelopes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
             crate::progenitor_support::encode_path(&document_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1169,7 +1169,7 @@ impl Envelopes {
         max_width: &str,
         show_changes: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !dpi.is_empty() {
             query_args.push(format!("dpi={}", dpi));
@@ -1185,9 +1185,9 @@ impl Envelopes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/page_image?{}",
@@ -1195,7 +1195,7 @@ impl Envelopes {
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
             crate::progenitor_support::encode_path(&document_id.to_string()),
             crate::progenitor_support::encode_path(&page_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1328,23 +1328,23 @@ impl Envelopes {
         recipient_id: &str,
         include_chrome: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_chrome.is_empty() {
             query_args.push(format!("include_chrome={}", include_chrome));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/initials_image?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
             crate::progenitor_support::encode_path(&recipient_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1439,23 +1439,23 @@ impl Envelopes {
         recipient_id: &str,
         include_chrome: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_chrome.is_empty() {
             query_args.push(format!("include_chrome={}", include_chrome));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature_image?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
             crate::progenitor_support::encode_path(&recipient_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

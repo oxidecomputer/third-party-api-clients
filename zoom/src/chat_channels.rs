@@ -37,7 +37,7 @@ impl ChatChannels {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::Channels>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -47,14 +47,14 @@ impl ChatChannels {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/chat/users/{}/channels?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await.unwrap();

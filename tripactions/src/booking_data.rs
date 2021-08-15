@@ -41,7 +41,7 @@ impl BookingData {
         size: i64,
         booking_type: crate::types::BookingType,
     ) -> Result<crate::types::BookingReportResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("booking_status={}", booking_status));
         query_args.push(format!("booking_type={}", booking_type));
@@ -63,11 +63,11 @@ impl BookingData {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/v1/bookings?{}", query);
+        let url = format!("/v1/bookings?{}", query_);
 
         self.client.get(&url, None).await
     }

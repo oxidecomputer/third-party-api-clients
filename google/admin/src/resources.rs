@@ -40,7 +40,7 @@ impl Resources {
         max_results: i64,
         page_token: &str,
     ) -> Result<crate::types::Buildings> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -79,14 +79,14 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -119,7 +119,7 @@ impl Resources {
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
     ) -> Result<crate::types::Building> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -153,14 +153,14 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -197,7 +197,7 @@ impl Resources {
         customer: &str,
         building_id: &str,
     ) -> Result<crate::types::Building> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -230,15 +230,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&building_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -273,7 +273,7 @@ impl Resources {
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
     ) -> Result<crate::types::Building> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -307,15 +307,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&building_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -352,7 +352,7 @@ impl Resources {
         customer: &str,
         building_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -385,15 +385,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&building_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -428,7 +428,7 @@ impl Resources {
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
     ) -> Result<crate::types::Building> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -462,15 +462,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&building_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -513,7 +513,7 @@ impl Resources {
         page_token: &str,
         query: &str,
     ) -> Result<crate::types::CalendarResources> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -558,14 +558,14 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -596,7 +596,7 @@ impl Resources {
         customer: &str,
         body: &crate::types::CalendarResource,
     ) -> Result<crate::types::CalendarResource> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -629,14 +629,14 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -673,7 +673,7 @@ impl Resources {
         customer: &str,
         calendar_resource_id: &str,
     ) -> Result<crate::types::CalendarResource> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -706,15 +706,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -747,7 +747,7 @@ impl Resources {
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
     ) -> Result<crate::types::CalendarResource> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -780,15 +780,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -825,7 +825,7 @@ impl Resources {
         customer: &str,
         calendar_resource_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -858,15 +858,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -899,7 +899,7 @@ impl Resources {
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
     ) -> Result<crate::types::CalendarResource> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -932,15 +932,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -979,7 +979,7 @@ impl Resources {
         max_results: i64,
         page_token: &str,
     ) -> Result<crate::types::Features> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -1018,14 +1018,14 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1056,7 +1056,7 @@ impl Resources {
         customer: &str,
         body: &crate::types::Feature,
     ) -> Result<crate::types::Feature> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -1089,14 +1089,14 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -1133,7 +1133,7 @@ impl Resources {
         customer: &str,
         feature_key: &str,
     ) -> Result<crate::types::Feature> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -1166,15 +1166,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&feature_key.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1207,7 +1207,7 @@ impl Resources {
         feature_key: &str,
         body: &crate::types::Feature,
     ) -> Result<crate::types::Feature> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -1240,15 +1240,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&feature_key.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -1285,7 +1285,7 @@ impl Resources {
         customer: &str,
         feature_key: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -1318,15 +1318,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&feature_key.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -1359,7 +1359,7 @@ impl Resources {
         feature_key: &str,
         body: &crate::types::Feature,
     ) -> Result<crate::types::Feature> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -1392,15 +1392,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&feature_key.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -1438,7 +1438,7 @@ impl Resources {
         old_name: &str,
         body: &crate::types::FeatureRename,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -1471,15 +1471,15 @@ impl Resources {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}/rename?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&old_name.to_string()),
-            query
+            query_
         );
 
         self.client

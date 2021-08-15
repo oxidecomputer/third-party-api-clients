@@ -38,7 +38,7 @@ impl Drives {
         q: &str,
         use_domain_admin_access: bool,
     ) -> Result<crate::types::DriveList> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -76,11 +76,11 @@ impl Drives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/drives?{}", query);
+        let url = format!("/drives?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -106,7 +106,7 @@ impl Drives {
         request_id: &str,
         body: &crate::types::Drive,
     ) -> Result<crate::types::Drive> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -132,11 +132,11 @@ impl Drives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/drives?{}", query);
+        let url = format!("/drives?{}", query_);
 
         self.client
             .post(
@@ -168,7 +168,7 @@ impl Drives {
         drive_id: &str,
         use_domain_admin_access: bool,
     ) -> Result<crate::types::Drive> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -197,14 +197,14 @@ impl Drives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/drives/{}?{}",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -230,7 +230,7 @@ impl Drives {
         user_ip: &str,
         drive_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -253,14 +253,14 @@ impl Drives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/drives/{}?{}",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -289,7 +289,7 @@ impl Drives {
         use_domain_admin_access: bool,
         body: &crate::types::Drive,
     ) -> Result<crate::types::Drive> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -318,14 +318,14 @@ impl Drives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/drives/{}?{}",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -356,7 +356,7 @@ impl Drives {
         user_ip: &str,
         drive_id: &str,
     ) -> Result<crate::types::Drive> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -379,14 +379,14 @@ impl Drives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/drives/{}/hide?{}",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await
@@ -412,7 +412,7 @@ impl Drives {
         user_ip: &str,
         drive_id: &str,
     ) -> Result<crate::types::Drive> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -435,14 +435,14 @@ impl Drives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/drives/{}/unhide?{}",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await

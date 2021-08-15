@@ -25,18 +25,18 @@ impl Notary {
      * * `include_jurisdictions: &str` -- If **true**, the response will include a `jurisdiction` property that contains an array of all supported jurisdictions for the current user.
      */
     pub async fn get(&self, include_jurisdictions: &str) -> Result<crate::types::NotaryResult> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_jurisdictions.is_empty() {
             query_args.push(format!("include_jurisdictions={}", include_jurisdictions));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/v2.1/current_user/notary?{}", query);
+        let url = format!("/v2.1/current_user/notary?{}", query_);
 
         self.client.get(&url, None).await
     }

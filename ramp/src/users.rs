@@ -91,7 +91,7 @@ impl Users {
         department_id: &str,
         location_id: &str,
     ) -> Result<Vec<crate::types::User>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !department_id.is_empty() {
             query_args.push(format!("department_id={}", department_id));
@@ -105,11 +105,11 @@ impl Users {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/users?{}", query);
+        let url = format!("/users?{}", query_);
 
         let resp: crate::types::GetUsersResponse = self.client.get(&url, None).await.unwrap();
 
@@ -131,7 +131,7 @@ impl Users {
         department_id: &str,
         location_id: &str,
     ) -> Result<Vec<crate::types::User>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !department_id.is_empty() {
             query_args.push(format!("department_id={}", department_id));
@@ -141,11 +141,11 @@ impl Users {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/users?{}", query);
+        let url = format!("/users?{}", query_);
 
         let mut resp: crate::types::GetUsersResponse = self.client.get(&url, None).await.unwrap();
 

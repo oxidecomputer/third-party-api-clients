@@ -64,7 +64,7 @@ impl Users {
         status: &str,
         user_name_substring: &str,
     ) -> Result<crate::types::UserInformationList> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !additional_info.is_empty() {
             query_args.push(format!("additional_info={}", additional_info));
@@ -104,14 +104,14 @@ impl Users {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -253,21 +253,21 @@ impl Users {
         delete: &str,
         body: &crate::types::UserInfoList,
     ) -> Result<crate::types::UsersResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !delete.is_empty() {
             query_args.push(format!("delete={}", delete));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -302,7 +302,7 @@ impl Users {
         additional_info: &str,
         email: &str,
     ) -> Result<crate::types::UserInformation> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !additional_info.is_empty() {
             query_args.push(format!("additional_info={}", additional_info));
@@ -312,15 +312,15 @@ impl Users {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -383,22 +383,22 @@ impl Users {
         user_id: &str,
         encoding: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !encoding.is_empty() {
             query_args.push(format!("encoding={}", encoding));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile/image?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

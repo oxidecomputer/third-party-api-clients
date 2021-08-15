@@ -35,7 +35,7 @@ impl PhoneSite {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::Sites>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -45,11 +45,11 @@ impl PhoneSite {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/sites?{}", query);
+        let url = format!("/phone/sites?{}", query_);
 
         let resp: crate::types::ListPhoneSitesResponse = self.client.get(&url, None).await.unwrap();
 
@@ -189,21 +189,21 @@ impl PhoneSite {
      * * `transfer_site_id: &str` -- The Site ID of another site where the assets of the current site (users, numbers and phones) can be transferred to.
      */
     pub async fn delete(&self, site_id: &str, transfer_site_id: &str) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !transfer_site_id.is_empty() {
             query_args.push(format!("transfer_site_id={}", transfer_site_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/sites/{}?{}",
             crate::progenitor_support::encode_path(&site_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await

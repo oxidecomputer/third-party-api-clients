@@ -41,7 +41,7 @@ impl EnvelopeDocuments {
         recipient_id: &str,
         shared_user_id: &str,
     ) -> Result<crate::types::EnvelopeDocumentsResult> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !documents_by_userid.is_empty() {
             query_args.push(format!("documents_by_userid={}", documents_by_userid));
@@ -63,15 +63,15 @@ impl EnvelopeDocuments {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -214,7 +214,7 @@ impl EnvelopeDocuments {
         show_changes: &str,
         watermark: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !certificate.is_empty() {
             query_args.push(format!("certificate={}", certificate));
@@ -245,16 +245,16 @@ impl EnvelopeDocuments {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
             crate::progenitor_support::encode_path(&document_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

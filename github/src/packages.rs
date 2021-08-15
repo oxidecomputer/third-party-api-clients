@@ -112,23 +112,23 @@ impl Packages {
         org: &str,
         token: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !token.is_empty() {
             query_args.push(format!("token={}", token));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/packages/{}/{}/restore?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(&package_name.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await
@@ -164,7 +164,7 @@ impl Packages {
         per_page: i64,
         state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<crate::types::PackageVersion>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -175,16 +175,16 @@ impl Packages {
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(&package_name.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -211,21 +211,21 @@ impl Packages {
         org: &str,
         state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<crate::types::PackageVersion>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(&package_name.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -437,22 +437,22 @@ impl Packages {
         package_name: &str,
         token: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !token.is_empty() {
             query_args.push(format!("token={}", token));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/user/packages/{}/{}/restore?{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(&package_name.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await
@@ -486,7 +486,7 @@ impl Packages {
         per_page: i64,
         state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<crate::types::PackageVersion>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -497,15 +497,15 @@ impl Packages {
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/user/packages/{}/{}/versions?{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(&package_name.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -531,20 +531,20 @@ impl Packages {
         package_name: &str,
         state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState,
     ) -> Result<Vec<crate::types::PackageVersion>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/user/packages/{}/{}/versions?{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
             crate::progenitor_support::encode_path(&package_name.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await

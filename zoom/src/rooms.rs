@@ -41,7 +41,7 @@ impl Rooms {
         next_page_token: &str,
         location_id: &str,
     ) -> Result<Vec<crate::types::ListZoomRoomsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !location_id.is_empty() {
             query_args.push(format!("location_id={}", location_id));
@@ -59,11 +59,11 @@ impl Rooms {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/rooms?{}", query);
+        let url = format!("/rooms?{}", query_);
 
         let resp: crate::types::ListZoomRoomsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -92,7 +92,7 @@ impl Rooms {
         unassigned_rooms: bool,
         location_id: &str,
     ) -> Result<Vec<crate::types::ListZoomRoomsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !location_id.is_empty() {
             query_args.push(format!("location_id={}", location_id));
@@ -104,11 +104,11 @@ impl Rooms {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/rooms?{}", query);
+        let url = format!("/rooms?{}", query_);
 
         let mut resp: crate::types::ListZoomRoomsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -281,21 +281,21 @@ impl Rooms {
         room_id: &str,
         setting_type: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(format!("setting_type={}", setting_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/rooms/{}/settings?{}",
             crate::progenitor_support::encode_path(&room_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -321,21 +321,21 @@ impl Rooms {
      *   `signage`: Digital signage settings applied on the Zoom Room.
      */
     pub async fn update_zr_settings(&self, room_id: &str, setting_type: &str) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(format!("setting_type={}", setting_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/rooms/{}/settings?{}",
             crate::progenitor_support::encode_path(&room_id.to_string()),
-            query
+            query_
         );
 
         self.client.patch(&url, None).await
@@ -465,7 +465,7 @@ impl Rooms {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::Site>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !folder_id.is_empty() {
             query_args.push(format!("folder_id={}", folder_id));
@@ -481,11 +481,11 @@ impl Rooms {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/rooms/digital_signage?{}", query);
+        let url = format!("/rooms/digital_signage?{}", query_);
 
         let resp: crate::types::ListDigitalSignageContentResponse =
             self.client.get(&url, None).await.unwrap();
@@ -515,7 +515,7 @@ impl Rooms {
         type_: &str,
         folder_id: &str,
     ) -> Result<Vec<crate::types::Site>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !folder_id.is_empty() {
             query_args.push(format!("folder_id={}", folder_id));
@@ -525,11 +525,11 @@ impl Rooms {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/rooms/digital_signage?{}", query);
+        let url = format!("/rooms/digital_signage?{}", query_);
 
         let mut resp: crate::types::ListDigitalSignageContentResponse =
             self.client.get(&url, None).await.unwrap();

@@ -34,7 +34,7 @@ impl Reports {
         year: i64,
         month: i64,
     ) -> Result<crate::types::ReportDailyResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if month > 0 {
             query_args.push(format!("month={}", month));
@@ -44,11 +44,11 @@ impl Reports {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/report/daily?{}", query);
+        let url = format!("/report/daily?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -84,7 +84,7 @@ impl Reports {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -100,11 +100,11 @@ impl Reports {
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/report/users?{}", query);
+        let url = format!("/report/users?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -141,7 +141,7 @@ impl Reports {
         next_page_token: &str,
         type_: crate::types::ReportMeetingsType,
     ) -> Result<crate::types::ReportMeetingsResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -154,14 +154,14 @@ impl Reports {
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/report/users/{}/meetings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -228,7 +228,7 @@ impl Reports {
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
     ) -> Result<crate::types::ReportMeetingParticipantsResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
         if !next_page_token.is_empty() {
@@ -239,14 +239,14 @@ impl Reports {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/report/meetings/{}/participants?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -341,7 +341,7 @@ impl Reports {
         next_page_token: &str,
         include_fields: crate::types::DashboardMeetingParticipantsIncludeFields,
     ) -> Result<crate::types::ReportWebinarParticipantsResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
         if !next_page_token.is_empty() {
@@ -352,14 +352,14 @@ impl Reports {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/report/webinars/{}/participants?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -463,7 +463,7 @@ impl Reports {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -482,11 +482,11 @@ impl Reports {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/report/telephone?{}", query);
+        let url = format!("/report/telephone?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -513,17 +513,17 @@ impl Reports {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<crate::types::ReportCloudRecordingResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/report/cloud_recording?{}", query);
+        let url = format!("/report/cloud_recording?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -559,7 +559,7 @@ impl Reports {
         next_page_token: &str,
         category_type: crate::types::CategoryType,
     ) -> Result<crate::types::ReportOperationLogsResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("category_type={}", category_type));
         query_args.push(format!("from={}", from));
@@ -572,11 +572,11 @@ impl Reports {
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/report/operationlogs?{}", query);
+        let url = format!("/report/operationlogs?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -607,7 +607,7 @@ impl Reports {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::ActivityLogs>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -619,11 +619,11 @@ impl Reports {
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/report/activities?{}", query);
+        let url = format!("/report/activities?{}", query_);
 
         let resp: crate::types::ReportSignInOutActivitiesResponse =
             self.client.get(&url, None).await.unwrap();
@@ -651,17 +651,17 @@ impl Reports {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::ActivityLogs>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/report/activities?{}", query);
+        let url = format!("/report/activities?{}", query_);
 
         let mut resp: crate::types::ReportSignInOutActivitiesResponse =
             self.client.get(&url, None).await.unwrap();
@@ -743,18 +743,18 @@ impl Reports {
         &self,
         billing_id: &str,
     ) -> Result<crate::types::GetBillingInvoicesReportsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !billing_id.is_empty() {
             query_args.push(format!("billing_id={}", billing_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/report/billing/invoices?{}", query);
+        let url = format!("/report/billing/invoices?{}", query_);
 
         self.client.get(&url, None).await
     }

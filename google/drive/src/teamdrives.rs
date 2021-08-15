@@ -38,7 +38,7 @@ impl Teamdrives {
         q: &str,
         use_domain_admin_access: bool,
     ) -> Result<crate::types::TeamDriveList> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -76,11 +76,11 @@ impl Teamdrives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/teamdrives?{}", query);
+        let url = format!("/teamdrives?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -106,7 +106,7 @@ impl Teamdrives {
         request_id: &str,
         body: &crate::types::TeamDrive,
     ) -> Result<crate::types::TeamDrive> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -132,11 +132,11 @@ impl Teamdrives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/teamdrives?{}", query);
+        let url = format!("/teamdrives?{}", query_);
 
         self.client
             .post(
@@ -168,7 +168,7 @@ impl Teamdrives {
         team_drive_id: &str,
         use_domain_admin_access: bool,
     ) -> Result<crate::types::TeamDrive> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -197,14 +197,14 @@ impl Teamdrives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/teamdrives/{}?{}",
             crate::progenitor_support::encode_path(&team_drive_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -230,7 +230,7 @@ impl Teamdrives {
         user_ip: &str,
         team_drive_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -253,14 +253,14 @@ impl Teamdrives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/teamdrives/{}?{}",
             crate::progenitor_support::encode_path(&team_drive_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -289,7 +289,7 @@ impl Teamdrives {
         use_domain_admin_access: bool,
         body: &crate::types::TeamDrive,
     ) -> Result<crate::types::TeamDrive> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -318,14 +318,14 @@ impl Teamdrives {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/teamdrives/{}?{}",
             crate::progenitor_support::encode_path(&team_drive_id.to_string()),
-            query
+            query_
         );
 
         self.client

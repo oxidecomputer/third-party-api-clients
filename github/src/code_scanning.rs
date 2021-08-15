@@ -51,7 +51,7 @@ impl CodeScanning {
         ref_: &str,
         state: crate::types::CodeScanningAlertState,
     ) -> Result<Vec<crate::types::CodeScanningAlertItems>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -71,15 +71,15 @@ impl CodeScanning {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -113,7 +113,7 @@ impl CodeScanning {
         ref_: &str,
         state: crate::types::CodeScanningAlertState,
     ) -> Result<Vec<crate::types::CodeScanningAlertItems>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !ref_.is_empty() {
             query_args.push(format!("ref={}", ref_));
@@ -127,15 +127,15 @@ impl CodeScanning {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -239,7 +239,7 @@ impl CodeScanning {
         per_page: i64,
         ref_: &str,
     ) -> Result<Vec<crate::types::CodeScanningAlertInstance>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -252,16 +252,16 @@ impl CodeScanning {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&alert_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -285,23 +285,23 @@ impl CodeScanning {
         alert_number: i64,
         ref_: &str,
     ) -> Result<Vec<crate::types::CodeScanningAlertInstance>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !ref_.is_empty() {
             query_args.push(format!("ref={}", ref_));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&alert_number.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -353,7 +353,7 @@ impl CodeScanning {
         ref_: &str,
         sarif_id: &str,
     ) -> Result<Vec<crate::types::CodeScanningAnalysis>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -375,15 +375,15 @@ impl CodeScanning {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/code-scanning/analyses?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -424,7 +424,7 @@ impl CodeScanning {
         ref_: &str,
         sarif_id: &str,
     ) -> Result<Vec<crate::types::CodeScanningAnalysis>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !ref_.is_empty() {
             query_args.push(format!("ref={}", ref_));
@@ -440,15 +440,15 @@ impl CodeScanning {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/code-scanning/analyses?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -591,23 +591,23 @@ impl CodeScanning {
         analysis_id: i64,
         confirm_delete: &str,
     ) -> Result<crate::types::AnalysisDeletion> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !confirm_delete.is_empty() {
             query_args.push(format!("confirm_delete={}", confirm_delete));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/code-scanning/analyses/{}?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&analysis_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await

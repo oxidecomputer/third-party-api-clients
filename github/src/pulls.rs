@@ -47,7 +47,7 @@ impl Pulls {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestSimple>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !base.is_empty() {
             query_args.push(format!("base={}", base));
@@ -66,15 +66,15 @@ impl Pulls {
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -101,7 +101,7 @@ impl Pulls {
         sort: crate::types::PullsListSort,
         direction: crate::types::Order,
     ) -> Result<Vec<crate::types::PullRequestSimple>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !base.is_empty() {
             query_args.push(format!("base={}", base));
@@ -114,15 +114,15 @@ impl Pulls {
         query_args.push(format!("state={}", state));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -199,7 +199,7 @@ impl Pulls {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
         if page > 0 {
@@ -214,15 +214,15 @@ impl Pulls {
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -247,7 +247,7 @@ impl Pulls {
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
         if let Some(date) = since {
@@ -256,15 +256,15 @@ impl Pulls {
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -486,7 +486,7 @@ impl Pulls {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
         if page > 0 {
@@ -501,16 +501,16 @@ impl Pulls {
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/{}/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -536,7 +536,7 @@ impl Pulls {
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
         if let Some(date) = since {
@@ -545,16 +545,16 @@ impl Pulls {
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/{}/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -671,7 +671,7 @@ impl Pulls {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::CommitDataType>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -681,16 +681,16 @@ impl Pulls {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/{}/commits?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -748,7 +748,7 @@ impl Pulls {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::DiffEntry>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -758,16 +758,16 @@ impl Pulls {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/{}/files?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -888,7 +888,7 @@ impl Pulls {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::PullRequestReview> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -898,16 +898,16 @@ impl Pulls {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/{}/requested_reviewers?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1012,7 +1012,7 @@ impl Pulls {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::PullRequestReviewData>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1022,16 +1022,16 @@ impl Pulls {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1242,7 +1242,7 @@ impl Pulls {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::ReviewComment>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1252,9 +1252,9 @@ impl Pulls {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/{}/reviews/{}/comments?{}",
@@ -1262,7 +1262,7 @@ impl Pulls {
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&pull_number.to_string()),
             crate::progenitor_support::encode_path(&review_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

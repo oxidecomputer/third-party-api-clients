@@ -25,7 +25,7 @@ impl Template {
 
         if !query_params.is_empty() {
             // Format the query params if they exist.
-            a("let mut query = String::new();");
+            a("let mut query_ = String::new();");
             a("let mut query_args: Vec<String> = Default::default();");
 
             for (nam, value) in &query_params {
@@ -77,9 +77,9 @@ impl Template {
 
             a(r#"for (i, n) in query_args.iter().enumerate() {
                     if i > 0 {
-                        query.push('&');
+                        query_.push('&');
                     }
-                    query.push_str(n);
+                    query_.push_str(n);
                 }"#);
         }
 
@@ -148,7 +148,7 @@ impl Template {
         }
 
         if !query_params.is_empty() {
-            out.push_str("query");
+            out.push_str("query_");
         }
 
         out.push_str(");\n");

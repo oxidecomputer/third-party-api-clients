@@ -36,7 +36,7 @@ impl Revisions {
         page_size: i64,
         page_token: &str,
     ) -> Result<crate::types::RevisionList> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -65,14 +65,14 @@ impl Revisions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/revisions?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -102,7 +102,7 @@ impl Revisions {
         revision_id: &str,
         acknowledge_abuse: bool,
     ) -> Result<crate::types::Revision> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if acknowledge_abuse {
             query_args.push(format!("acknowledge_abuse={}", acknowledge_abuse));
@@ -128,15 +128,15 @@ impl Revisions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/revisions/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
             crate::progenitor_support::encode_path(&revision_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -164,7 +164,7 @@ impl Revisions {
         file_id: &str,
         revision_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -187,15 +187,15 @@ impl Revisions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/revisions/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
             crate::progenitor_support::encode_path(&revision_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -224,7 +224,7 @@ impl Revisions {
         revision_id: &str,
         body: &crate::types::Revision,
     ) -> Result<crate::types::Revision> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -247,15 +247,15 @@ impl Revisions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/revisions/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
             crate::progenitor_support::encode_path(&revision_id.to_string()),
-            query
+            query_
         );
 
         self.client

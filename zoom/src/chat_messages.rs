@@ -52,7 +52,7 @@ impl ChatMessages {
         next_page_token: &str,
         include_deleted_and_edited_message: &str,
     ) -> Result<Vec<crate::types::Messages>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("date={}", date));
         if !include_deleted_and_edited_message.is_empty() {
@@ -75,14 +75,14 @@ impl ChatMessages {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/chat/users/{}/messages?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let resp: crate::types::GetChatMessagesResponse =
@@ -118,7 +118,7 @@ impl ChatMessages {
         date: chrono::NaiveDate,
         include_deleted_and_edited_message: &str,
     ) -> Result<Vec<crate::types::Messages>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("date={}", date));
         if !include_deleted_and_edited_message.is_empty() {
@@ -135,14 +135,14 @@ impl ChatMessages {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/chat/users/{}/messages?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let mut resp: crate::types::GetChatMessagesResponse =
@@ -312,7 +312,7 @@ impl ChatMessages {
         to_contact: &str,
         to_channel: &str,
     ) -> Result<crate::types::GetChatMessageResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !to_channel.is_empty() {
             query_args.push(format!("to_channel={}", to_channel));
@@ -322,15 +322,15 @@ impl ChatMessages {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/chat/users/{}/messages/{}?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&message_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -409,7 +409,7 @@ impl ChatMessages {
         to_contact: &str,
         to_channel: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !to_channel.is_empty() {
             query_args.push(format!("to_channel={}", to_channel));
@@ -419,15 +419,15 @@ impl ChatMessages {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/chat/users/{}/messages/{}?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&message_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await

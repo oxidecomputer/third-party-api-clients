@@ -71,7 +71,7 @@ impl EnvelopeDocumentTabs {
         include_metadata: &str,
         page_numbers: &str,
     ) -> Result<crate::types::EnvelopeDocumentTabs> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_metadata.is_empty() {
             query_args.push(format!("include_metadata={}", include_metadata));
@@ -81,16 +81,16 @@ impl EnvelopeDocumentTabs {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
             crate::progenitor_support::encode_path(&document_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

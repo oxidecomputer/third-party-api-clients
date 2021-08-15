@@ -46,7 +46,7 @@ impl Users {
         include_fields: crate::types::UsersIncludeFields,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::UsersResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
         if !next_page_token.is_empty() {
@@ -64,11 +64,11 @@ impl Users {
         query_args.push(format!("status={}", status));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/users?{}", query);
+        let url = format!("/users?{}", query_);
 
         let resp: crate::types::UsersResponseData = self.client.get(&url, None).await.unwrap();
 
@@ -93,7 +93,7 @@ impl Users {
         role_id: &str,
         include_fields: crate::types::UsersIncludeFields,
     ) -> Result<Vec<crate::types::UsersResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include_fields={}", include_fields));
         if !role_id.is_empty() {
@@ -102,11 +102,11 @@ impl Users {
         query_args.push(format!("status={}", status));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/users?{}", query);
+        let url = format!("/users?{}", query_);
 
         let mut resp: crate::types::UsersResponseData = self.client.get(&url, None).await.unwrap();
 
@@ -197,7 +197,7 @@ impl Users {
         login_type: crate::types::LoginType,
         encrypted_email: bool,
     ) -> Result<crate::types::UserResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if encrypted_email {
             query_args.push(format!("encrypted_email={}", encrypted_email));
@@ -205,14 +205,14 @@ impl Users {
         query_args.push(format!("login_type={}", login_type));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -249,7 +249,7 @@ impl Users {
         transfer_webinar: bool,
         transfer_recording: bool,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("action={}", action));
         if !transfer_email.is_empty() {
@@ -266,14 +266,14 @@ impl Users {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -305,19 +305,19 @@ impl Users {
         login_type: crate::types::LoginType,
         body: &crate::types::UserUpdate,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("login_type={}", login_type));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -614,7 +614,7 @@ impl Users {
         option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
@@ -623,14 +623,14 @@ impl Users {
         query_args.push(format!("option={}", option));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/settings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -675,7 +675,7 @@ impl Users {
         option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::UserSettings> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
@@ -684,14 +684,14 @@ impl Users {
         query_args.push(format!("option={}", option));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/settings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -736,7 +736,7 @@ impl Users {
         option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::MeetingSecuritySettings> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
@@ -745,14 +745,14 @@ impl Users {
         query_args.push(format!("option={}", option));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/settings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -797,7 +797,7 @@ impl Users {
         option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::UserSettingsResponseOneOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
@@ -806,14 +806,14 @@ impl Users {
         query_args.push(format!("option={}", option));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/settings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -839,19 +839,19 @@ impl Users {
         user_id: &str,
         body: &crate::types::UserSettingsUpdateRequestOneOf,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("option={}", option));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/settings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -978,7 +978,7 @@ impl Users {
         type_: crate::types::UserTokenType,
         ttl: i64,
     ) -> Result<crate::types::UserZakResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if ttl > 0 {
             query_args.push(format!("ttl={}", ttl));
@@ -986,14 +986,14 @@ impl Users {
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/token?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1042,18 +1042,18 @@ impl Users {
      * * `email: &str` -- The email address to be verified.
      */
     pub async fn user_email(&self, email: &str) -> Result<crate::types::UserEmailResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !email.is_empty() {
             query_args.push(format!("email={}", email));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/users/email?{}", query);
+        let url = format!("/users/email?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -1115,18 +1115,18 @@ impl Users {
         &self,
         vanity_name: &str,
     ) -> Result<crate::types::UserVanityNameResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !vanity_name.is_empty() {
             query_args.push(format!("vanity_name={}", vanity_name));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/users/vanity_name?{}", query);
+        let url = format!("/users/vanity_name?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -1270,21 +1270,21 @@ impl Users {
      * * `user_id: &str` -- Unique identifier of the user. Retrieve the value of this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API. .
      */
     pub async fn del_user_vb(&self, user_id: &str, file_ids: &str) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !file_ids.is_empty() {
             query_args.push(format!("file_ids={}", file_ids));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/settings/virtual_backgrounds?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await

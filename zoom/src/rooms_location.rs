@@ -40,7 +40,7 @@ impl RoomsLocation {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::AddAzrLocationResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -56,11 +56,11 @@ impl RoomsLocation {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/rooms/locations?{}", query);
+        let url = format!("/rooms/locations?{}", query_);
 
         let resp: crate::types::ListZrLocationsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -89,7 +89,7 @@ impl RoomsLocation {
         parent_location_id: &str,
         type_: &str,
     ) -> Result<Vec<crate::types::AddAzrLocationResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !parent_location_id.is_empty() {
             query_args.push(format!("parent_location_id={}", parent_location_id));
@@ -99,11 +99,11 @@ impl RoomsLocation {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/rooms/locations?{}", query);
+        let url = format!("/rooms/locations?{}", query_);
 
         let mut resp: crate::types::ListZrLocationsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -260,21 +260,21 @@ impl RoomsLocation {
         location_id: &str,
         setting_type: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(format!("setting_type={}", setting_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/rooms/locations/{}/settings?{}",
             crate::progenitor_support::encode_path(&location_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -304,21 +304,21 @@ impl RoomsLocation {
         location_id: &str,
         setting_type: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !setting_type.is_empty() {
             query_args.push(format!("setting_type={}", setting_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/rooms/locations/{}/settings?{}",
             crate::progenitor_support::encode_path(&location_id.to_string()),
-            query
+            query_
         );
 
         self.client.patch(&url, None).await

@@ -87,7 +87,7 @@ impl Phone {
         pending_numbers: bool,
         site_id: &str,
     ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("extension_type={}", extension_type));
         if !next_page_token.is_empty() {
@@ -106,11 +106,11 @@ impl Phone {
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/numbers?{}", query);
+        let url = format!("/phone/numbers?{}", query_);
 
         let resp: crate::types::ListAccountPhoneNumbersResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -142,7 +142,7 @@ impl Phone {
         pending_numbers: bool,
         site_id: &str,
     ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("extension_type={}", extension_type));
         query_args.push(format!("number_type={}", number_type));
@@ -155,11 +155,11 @@ impl Phone {
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/numbers?{}", query);
+        let url = format!("/phone/numbers?{}", query_);
 
         let mut resp: crate::types::ListAccountPhoneNumbersResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -356,7 +356,7 @@ impl Phone {
         next_page_token: &str,
         site_id: &str,
     ) -> Result<Vec<crate::types::Templates>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -369,11 +369,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/setting_templates?{}", query);
+        let url = format!("/phone/setting_templates?{}", query_);
 
         let resp: crate::types::ListSettingTemplatesResponse =
             self.client.get(&url, None).await.unwrap();
@@ -401,18 +401,18 @@ impl Phone {
         &self,
         site_id: &str,
     ) -> Result<Vec<crate::types::Templates>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !site_id.is_empty() {
             query_args.push(format!("site_id={}", site_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/setting_templates?{}", query);
+        let url = format!("/phone/setting_templates?{}", query_);
 
         let mut resp: crate::types::ListSettingTemplatesResponse =
             self.client.get(&url, None).await.unwrap();
@@ -519,7 +519,7 @@ impl Phone {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::ListLocationsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -529,11 +529,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/locations?{}", query);
+        let url = format!("/phone/locations?{}", query_);
 
         let resp: crate::types::ListLocationsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -730,7 +730,7 @@ impl Phone {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::SipGroups>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -740,11 +740,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/sip_groups?{}", query);
+        let url = format!("/phone/sip_groups?{}", query_);
 
         let resp: crate::types::ListSipGroupsResponse = self.client.get(&url, None).await.unwrap();
 
@@ -828,21 +828,21 @@ impl Phone {
         template_id: &str,
         custom_query_fields: &str,
     ) -> Result<crate::types::GetSettingTemplateResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/setting_templates/{}?{}",
             crate::progenitor_support::encode_path(&template_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -918,7 +918,7 @@ impl Phone {
         phone_number: &str,
         time_type: crate::types::TimeType,
     ) -> Result<Vec<crate::types::CallLogs>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -935,14 +935,14 @@ impl Phone {
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/users/{}/call_logs?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let resp: crate::types::PhoneUserCallLogsResponse =
@@ -976,7 +976,7 @@ impl Phone {
         phone_number: &str,
         time_type: crate::types::TimeType,
     ) -> Result<Vec<crate::types::CallLogs>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !phone_number.is_empty() {
@@ -987,14 +987,14 @@ impl Phone {
         query_args.push(format!("type={}", type_));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/users/{}/call_logs?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let mut resp: crate::types::PhoneUserCallLogsResponse =
@@ -1062,7 +1062,7 @@ impl Phone {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::Recordings>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -1074,14 +1074,14 @@ impl Phone {
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/users/{}/recordings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let resp: crate::types::PhoneUserRecordingsResponse =
@@ -1112,20 +1112,20 @@ impl Phone {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::Recordings>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/users/{}/recordings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let mut resp: crate::types::PhoneUserRecordingsResponse =
@@ -1195,7 +1195,7 @@ impl Phone {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::VoiceMails>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !next_page_token.is_empty() {
@@ -1208,14 +1208,14 @@ impl Phone {
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/users/{}/voice_mails?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let resp: crate::types::PhoneUserVoiceMailsResponse =
@@ -1247,21 +1247,21 @@ impl Phone {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::VoiceMails>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         query_args.push(format!("status={}", status));
         query_args.push(format!("to={}", to));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/users/{}/voice_mails?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         let mut resp: crate::types::PhoneUserVoiceMailsResponse =
@@ -1367,22 +1367,22 @@ impl Phone {
         setting_type: &str,
         shared_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !shared_id.is_empty() {
             query_args.push(format!("shared_id={}", shared_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/phone/users/{}/settings/{}?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&setting_type.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -1469,7 +1469,7 @@ impl Phone {
         time_type: crate::types::TimeType,
         site_id: &str,
     ) -> Result<Vec<crate::types::AccountCallLogsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
@@ -1495,11 +1495,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/call_logs?{}", query);
+        let url = format!("/phone/call_logs?{}", query_);
 
         let resp: crate::types::AccountCallLogsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -1533,7 +1533,7 @@ impl Phone {
         time_type: crate::types::TimeType,
         site_id: &str,
     ) -> Result<Vec<crate::types::AccountCallLogsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
@@ -1553,11 +1553,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/call_logs?{}", query);
+        let url = format!("/phone/call_logs?{}", query_);
 
         let mut resp: crate::types::AccountCallLogsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -1757,7 +1757,7 @@ impl Phone {
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
     ) -> Result<Vec<crate::types::GetPhoneRecordingsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
@@ -1783,11 +1783,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/recordings?{}", query);
+        let url = format!("/phone/recordings?{}", query_);
 
         let resp: crate::types::GetPhoneRecordingsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -1821,7 +1821,7 @@ impl Phone {
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
     ) -> Result<Vec<crate::types::GetPhoneRecordingsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
@@ -1841,11 +1841,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/recordings?{}", query);
+        let url = format!("/phone/recordings?{}", query_);
 
         let mut resp: crate::types::GetPhoneRecordingsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -1905,7 +1905,7 @@ impl Phone {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::ByocSipTrunk>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -1915,11 +1915,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/sip_trunk/trunks?{}", query);
+        let url = format!("/phone/sip_trunk/trunks?{}", query_);
 
         let resp: crate::types::ListByocsipTrunkResponse =
             self.client.get(&url, None).await.unwrap();
@@ -2074,7 +2074,7 @@ impl Phone {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::ExternalContacts>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -2084,11 +2084,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/external_contacts?{}", query);
+        let url = format!("/phone/external_contacts?{}", query_);
 
         let resp: crate::types::ListExternalContactsResponse =
             self.client.get(&url, None).await.unwrap();
@@ -2400,7 +2400,7 @@ impl Phone {
         next_page_token: &str,
         site_id: &str,
     ) -> Result<Vec<crate::types::ListPhoneUsersResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -2413,11 +2413,11 @@ impl Phone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/users?{}", query);
+        let url = format!("/phone/users?{}", query_);
 
         let resp: crate::types::ListPhoneUsersResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -2445,18 +2445,18 @@ impl Phone {
         &self,
         site_id: &str,
     ) -> Result<Vec<crate::types::ListPhoneUsersResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !site_id.is_empty() {
             query_args.push(format!("site_id={}", site_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/users?{}", query);
+        let url = format!("/phone/users?{}", query_);
 
         let mut resp: crate::types::ListPhoneUsersResponseData =
             self.client.get(&url, None).await.unwrap();

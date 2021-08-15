@@ -118,7 +118,7 @@ impl Templates {
         user_filter: &str,
         user_id: &str,
     ) -> Result<crate::types::EnvelopeTemplateResults> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !count.is_empty() {
             query_args.push(format!("count={}", count));
@@ -194,14 +194,14 @@ impl Templates {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/templates?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -313,22 +313,22 @@ impl Templates {
         template_id: &str,
         include: &str,
     ) -> Result<crate::types::EnvelopeTemplate> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include.is_empty() {
             query_args.push(format!("include={}", include));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/templates/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&template_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -399,7 +399,7 @@ impl Templates {
         show_changes: &str,
         start_position: &str,
     ) -> Result<crate::types::PageImages> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !count.is_empty() {
             query_args.push(format!("count={}", count));
@@ -424,16 +424,16 @@ impl Templates {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/pages?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&template_id.to_string()),
             crate::progenitor_support::encode_path(&document_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -506,7 +506,7 @@ impl Templates {
         max_width: &str,
         show_changes: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !dpi.is_empty() {
             query_args.push(format!("dpi={}", dpi));
@@ -522,9 +522,9 @@ impl Templates {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}/page_image?{}",
@@ -532,7 +532,7 @@ impl Templates {
             crate::progenitor_support::encode_path(&template_id.to_string()),
             crate::progenitor_support::encode_path(&document_id.to_string()),
             crate::progenitor_support::encode_path(&page_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

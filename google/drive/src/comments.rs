@@ -40,7 +40,7 @@ impl Comments {
         page_token: &str,
         start_modified_time: &str,
     ) -> Result<crate::types::CommentList> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -75,14 +75,14 @@ impl Comments {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/comments?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -109,7 +109,7 @@ impl Comments {
         file_id: &str,
         body: &crate::types::Comment,
     ) -> Result<crate::types::Comment> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -132,14 +132,14 @@ impl Comments {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/comments?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -174,7 +174,7 @@ impl Comments {
         comment_id: &str,
         include_deleted: bool,
     ) -> Result<crate::types::Comment> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -200,15 +200,15 @@ impl Comments {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/comments/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -236,7 +236,7 @@ impl Comments {
         file_id: &str,
         comment_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -259,15 +259,15 @@ impl Comments {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/comments/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -296,7 +296,7 @@ impl Comments {
         comment_id: &str,
         body: &crate::types::Comment,
     ) -> Result<crate::types::Comment> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -319,15 +319,15 @@ impl Comments {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/comments/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
-            query
+            query_
         );
 
         self.client

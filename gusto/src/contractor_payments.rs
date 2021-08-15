@@ -30,7 +30,7 @@ impl ContractorPayments {
         start_date: &str,
         end_date: &str,
     ) -> Result<crate::types::ContractorPaymentSummary> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !end_date.is_empty() {
             query_args.push(format!("end_date={}", end_date));
@@ -40,14 +40,14 @@ impl ContractorPayments {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v1/companies/{}/contractor_payments?{}",
             crate::progenitor_support::encode_path(&company_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -81,7 +81,7 @@ impl ContractorPayments {
         bonus: f64,
         reimbursement: f64,
     ) -> Result<crate::types::ContractorPayment> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("bonus={}", bonus));
         query_args.push(format!("contractor_id={}", contractor_id));
@@ -93,14 +93,14 @@ impl ContractorPayments {
         query_args.push(format!("wage={}", wage));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v1/companies/{}/contractor_payments?{}",
             crate::progenitor_support::encode_path(&company_id.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await

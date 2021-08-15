@@ -37,7 +37,7 @@ impl Contacts {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::Contacts>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -53,11 +53,11 @@ impl Contacts {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/contacts?{}", query);
+        let url = format!("/contacts?{}", query_);
 
         let resp: crate::types::SearchCompanyContactsResponse =
             self.client.get(&url, None).await.unwrap();
@@ -84,7 +84,7 @@ impl Contacts {
         search_key: &str,
         query_presence_status: &str,
     ) -> Result<Vec<crate::types::Contacts>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !query_presence_status.is_empty() {
             query_args.push(format!("query_presence_status={}", query_presence_status));
@@ -94,11 +94,11 @@ impl Contacts {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/contacts?{}", query);
+        let url = format!("/contacts?{}", query_);
 
         let mut resp: crate::types::SearchCompanyContactsResponse =
             self.client.get(&url, None).await.unwrap();
@@ -163,7 +163,7 @@ impl Contacts {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::GetUserContactsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -176,11 +176,11 @@ impl Contacts {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/chat/users/me/contacts?{}", query);
+        let url = format!("/chat/users/me/contacts?{}", query_);
 
         let resp: crate::types::GetUserContactsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -208,18 +208,18 @@ impl Contacts {
         &self,
         type_: &str,
     ) -> Result<Vec<crate::types::GetUserContactsResponse>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !type_.is_empty() {
             query_args.push(format!("type={}", type_));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/chat/users/me/contacts?{}", query);
+        let url = format!("/chat/users/me/contacts?{}", query_);
 
         let mut resp: crate::types::GetUserContactsResponseData =
             self.client.get(&url, None).await.unwrap();
@@ -280,21 +280,21 @@ impl Contacts {
         contact_id: &str,
         query_presence_status: bool,
     ) -> Result<crate::types::GetUserContactResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if query_presence_status {
             query_args.push(format!("query_presence_status={}", query_presence_status));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/chat/users/me/contacts/{}?{}",
             crate::progenitor_support::encode_path(&contact_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

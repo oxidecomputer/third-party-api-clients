@@ -79,7 +79,7 @@ impl Events {
         time_zone: &str,
         updated_min: &str,
     ) -> Result<crate::types::Events> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if always_include_email {
@@ -160,14 +160,14 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -206,7 +206,7 @@ impl Events {
         supports_attachments: bool,
         body: &crate::types::EventData,
     ) -> Result<crate::types::EventData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         query_args.push(format!(
@@ -243,14 +243,14 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -286,7 +286,7 @@ impl Events {
         supports_attachments: bool,
         body: &crate::types::EventData,
     ) -> Result<crate::types::EventData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         query_args.push(format!(
@@ -316,14 +316,14 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events/import?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -362,7 +362,7 @@ impl Events {
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
     ) -> Result<crate::types::EventData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -392,14 +392,14 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events/quickAdd?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await
@@ -473,7 +473,7 @@ impl Events {
         updated_min: &str,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if always_include_email {
@@ -554,14 +554,14 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events/watch?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -600,7 +600,7 @@ impl Events {
         max_attendees: i64,
         time_zone: &str,
     ) -> Result<crate::types::EventData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if always_include_email {
@@ -632,15 +632,15 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&event_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -683,7 +683,7 @@ impl Events {
         supports_attachments: bool,
         body: &crate::types::EventData,
     ) -> Result<crate::types::EventData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if always_include_email {
@@ -723,15 +723,15 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&event_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -770,7 +770,7 @@ impl Events {
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -797,15 +797,15 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&event_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -848,7 +848,7 @@ impl Events {
         supports_attachments: bool,
         body: &crate::types::EventData,
     ) -> Result<crate::types::EventData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if always_include_email {
@@ -888,15 +888,15 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&event_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -947,7 +947,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
     ) -> Result<crate::types::Events> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if always_include_email {
@@ -997,15 +997,15 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events/{}/instances?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&event_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1041,7 +1041,7 @@ impl Events {
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
     ) -> Result<crate::types::EventData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !destination.is_empty() {
@@ -1071,15 +1071,15 @@ impl Events {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/events/{}/move?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
             crate::progenitor_support::encode_path(&event_id.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await

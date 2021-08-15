@@ -55,7 +55,7 @@ impl CloudRecording {
         to: chrono::NaiveDate,
         trash_type: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("from={}", from));
         if !mc.is_empty() {
@@ -76,14 +76,14 @@ impl CloudRecording {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/users/{}/recordings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -116,7 +116,7 @@ impl CloudRecording {
         include_fields: &str,
         ttl: u64,
     ) -> Result<crate::types::RecordingGetResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_fields.is_empty() {
             query_args.push(format!("include_fields={}", include_fields));
@@ -124,14 +124,14 @@ impl CloudRecording {
         query_args.push(format!("ttl={}", ttl));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}/recordings?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -164,19 +164,19 @@ impl CloudRecording {
         meeting_id: &str,
         action: crate::types::RecordingDeleteAction,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("action={}", action));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}/recordings?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -207,20 +207,20 @@ impl CloudRecording {
         recording_id: &str,
         action: crate::types::RecordingDeleteAction,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("action={}", action));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}/recordings/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
             crate::progenitor_support::encode_path(&recording_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -404,7 +404,7 @@ impl CloudRecording {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -418,14 +418,14 @@ impl CloudRecording {
         query_args.push(format!("status={}", status));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/meetings/{}/recordings/registrants?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -605,7 +605,7 @@ impl CloudRecording {
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = from {
             query_args.push(format!("from={}", &date.to_rfc3339()));
@@ -621,14 +621,14 @@ impl CloudRecording {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/accounts/{}/recordings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         let resp: crate::types::GetAccountCloudRecordingResponse =
@@ -664,7 +664,7 @@ impl CloudRecording {
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if let Some(date) = from {
             query_args.push(format!("from={}", &date.to_rfc3339()));
@@ -674,14 +674,14 @@ impl CloudRecording {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/accounts/{}/recordings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         let mut resp: crate::types::GetAccountCloudRecordingResponse =

@@ -56,7 +56,7 @@ impl Changes {
         supports_team_drives: bool,
         team_drive_id: &str,
     ) -> Result<crate::types::ChangeList> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !drive_id.is_empty() {
@@ -130,11 +130,11 @@ impl Changes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/changes?{}", query);
+        let url = format!("/changes?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -165,7 +165,7 @@ impl Changes {
         supports_team_drives: bool,
         team_drive_id: &str,
     ) -> Result<crate::types::StartPageToken> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !drive_id.is_empty() {
@@ -200,11 +200,11 @@ impl Changes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/changes/startPageToken?{}", query);
+        let url = format!("/changes/startPageToken?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -254,7 +254,7 @@ impl Changes {
         team_drive_id: &str,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !drive_id.is_empty() {
@@ -328,11 +328,11 @@ impl Changes {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/changes/watch?{}", query);
+        let url = format!("/changes/watch?{}", query_);
 
         self.client
             .post(

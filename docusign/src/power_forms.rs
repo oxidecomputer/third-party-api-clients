@@ -50,7 +50,7 @@ impl PowerForms {
         order_by: &str,
         to_date: &str,
     ) -> Result<crate::types::PowerFormsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !from_date.is_empty() {
             query_args.push(format!("from_date={}", from_date));
@@ -66,14 +66,14 @@ impl PowerForms {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/powerforms?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -193,21 +193,21 @@ impl PowerForms {
         account_id: &str,
         start_position: &str,
     ) -> Result<crate::types::PowerFormSendersResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !start_position.is_empty() {
             query_args.push(format!("start_position={}", start_position));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/powerforms/senders?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

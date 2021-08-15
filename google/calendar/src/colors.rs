@@ -27,7 +27,7 @@ impl Colors {
         quota_user: &str,
         user_ip: &str,
     ) -> Result<crate::types::Colors> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -50,11 +50,11 @@ impl Colors {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/colors?{}", query);
+        let url = format!("/colors?{}", query_);
 
         self.client.get(&url, None).await
     }

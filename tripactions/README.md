@@ -1,6 +1,6 @@
 # `tripactions`
 
-A fully generated, opinionated API client library for tripactions.
+A fully generated, opinionated API client library for TripActions.
 
 ## API Details
 
@@ -15,7 +15,7 @@ A fully generated, opinionated API client library for tripactions.
 
 ## Client Details
 
-This client is generated from the [tripactions OpenAPI
+This client is generated from the [TripActions OpenAPI
 specs](https://app.tripactions.com/api/public/documentation/swagger-ui/index.html?configUrl=/api/public/documentation/api-docs/swagger-config) based on API spec version `1`. This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.

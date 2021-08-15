@@ -42,22 +42,22 @@ impl UserSignatures {
         user_id: &str,
         stamp_type: &str,
     ) -> Result<crate::types::UserSignaturesInformation> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !stamp_type.is_empty() {
             query_args.push(format!("stamp_type={}", stamp_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -214,7 +214,7 @@ impl UserSignatures {
         close_existing_signature: &str,
         body: &crate::types::UserSignatureDefinition,
     ) -> Result<crate::types::UserSignature> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !close_existing_signature.is_empty() {
             query_args.push(format!(
@@ -224,16 +224,16 @@ impl UserSignatures {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&signature_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -315,16 +315,16 @@ impl UserSignatures {
         user_id: &str,
         include_chrome: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_chrome.is_empty() {
             query_args.push(format!("include_chrome={}", include_chrome));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}/{}?{}",
@@ -332,7 +332,7 @@ impl UserSignatures {
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&signature_id.to_string()),
             crate::progenitor_support::encode_path(&image_type.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -372,16 +372,16 @@ impl UserSignatures {
         user_id: &str,
         transparent_png: &str,
     ) -> Result<crate::types::UserSignature> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !transparent_png.is_empty() {
             query_args.push(format!("transparent_png={}", transparent_png));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}/{}?{}",
@@ -389,7 +389,7 @@ impl UserSignatures {
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&signature_id.to_string()),
             crate::progenitor_support::encode_path(&image_type.to_string()),
-            query
+            query_
         );
 
         self.client.put(&url, None).await

@@ -40,7 +40,7 @@ impl Customer {
         device_id: &str,
         command_id: &str,
     ) -> Result<crate::types::DirectoryChromeosdevicesCommand> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -73,16 +73,16 @@ impl Customer {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}/commands/{}?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&device_id.to_string()),
             crate::progenitor_support::encode_path(&command_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -115,7 +115,7 @@ impl Customer {
         device_id: &str,
         body: &crate::types::DirectoryChromeosdevicesIssueCommandRequest,
     ) -> Result<crate::types::DirectoryChromeosdevicesIssueCommandResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -148,15 +148,15 @@ impl Customer {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}/issueCommand?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&device_id.to_string()),
-            query
+            query_
         );
 
         self.client

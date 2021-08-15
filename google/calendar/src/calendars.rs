@@ -28,7 +28,7 @@ impl Calendars {
         user_ip: &str,
         body: &crate::types::Calendar,
     ) -> Result<crate::types::Calendar> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -51,11 +51,11 @@ impl Calendars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/calendars?{}", query);
+        let url = format!("/calendars?{}", query_);
 
         self.client
             .post(
@@ -85,7 +85,7 @@ impl Calendars {
         user_ip: &str,
         calendar_id: &str,
     ) -> Result<crate::types::Calendar> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -108,14 +108,14 @@ impl Calendars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -142,7 +142,7 @@ impl Calendars {
         calendar_id: &str,
         body: &crate::types::Calendar,
     ) -> Result<crate::types::Calendar> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -165,14 +165,14 @@ impl Calendars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -203,7 +203,7 @@ impl Calendars {
         user_ip: &str,
         calendar_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -226,14 +226,14 @@ impl Calendars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -260,7 +260,7 @@ impl Calendars {
         calendar_id: &str,
         body: &crate::types::Calendar,
     ) -> Result<crate::types::Calendar> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -283,14 +283,14 @@ impl Calendars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -321,7 +321,7 @@ impl Calendars {
         user_ip: &str,
         calendar_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -344,14 +344,14 @@ impl Calendars {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/calendars/{}/clear?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query
+            query_
         );
 
         self.client.post(&url, None).await

@@ -95,7 +95,7 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -105,14 +105,14 @@ impl EnterpriseAdmin {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -294,7 +294,7 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::EnterpriseAdminListSelfHostedRunnerGroupsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -304,14 +304,14 @@ impl EnterpriseAdmin {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/enterprises/{}/actions/runner-groups?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -471,7 +471,7 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -481,15 +481,15 @@ impl EnterpriseAdmin {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -622,7 +622,7 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListSelfHostedRunnersInGroupOrgResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -632,15 +632,15 @@ impl EnterpriseAdmin {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -772,7 +772,7 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::EnterpriseAdminListSelfHostedRunnersResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -782,14 +782,14 @@ impl EnterpriseAdmin {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/enterprises/{}/actions/runners?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1017,7 +1017,7 @@ impl EnterpriseAdmin {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<crate::types::AuditLogEvent>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !after.is_empty() {
             query_args.push(format!("after={}", after));
@@ -1038,14 +1038,14 @@ impl EnterpriseAdmin {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/enterprises/{}/audit-log?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1071,7 +1071,7 @@ impl EnterpriseAdmin {
         before: &str,
         order: crate::types::Order,
     ) -> Result<Vec<crate::types::AuditLogEvent>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !after.is_empty() {
             query_args.push(format!("after={}", after));
@@ -1086,14 +1086,14 @@ impl EnterpriseAdmin {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/enterprises/{}/audit-log?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1124,7 +1124,7 @@ impl EnterpriseAdmin {
         filter: &str,
         excluded_attributes: &str,
     ) -> Result<crate::types::ScimGroupListEnterprise> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if count > 0 {
             query_args.push(format!("count={}", count));
@@ -1140,14 +1140,14 @@ impl EnterpriseAdmin {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/scim/v2/enterprises/{}/Groups?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1207,22 +1207,22 @@ impl EnterpriseAdmin {
         scim_group_id: &str,
         excluded_attributes: &str,
     ) -> Result<crate::types::ScimEnterpriseGroup> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !excluded_attributes.is_empty() {
             query_args.push(format!("excluded_attributes={}", excluded_attributes));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/scim/v2/enterprises/{}/Groups/{}?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
             crate::progenitor_support::encode_path(&scim_group_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1368,7 +1368,7 @@ impl EnterpriseAdmin {
         count: i64,
         filter: &str,
     ) -> Result<crate::types::ScimUserListEnterprise> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if count > 0 {
             query_args.push(format!("count={}", count));
@@ -1381,14 +1381,14 @@ impl EnterpriseAdmin {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/scim/v2/enterprises/{}/Users?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

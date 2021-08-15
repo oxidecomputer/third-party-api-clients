@@ -45,7 +45,7 @@ impl WorkspaceItems {
         start_position: &str,
         workspace_user_id: &str,
     ) -> Result<crate::types::WorkspaceFolderContents> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !count.is_empty() {
             query_args.push(format!("count={}", count));
@@ -70,16 +70,16 @@ impl WorkspaceItems {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&workspace_id.to_string()),
             crate::progenitor_support::encode_path(&folder_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -176,7 +176,7 @@ impl WorkspaceItems {
         is_download: &str,
         pdf_version: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !is_download.is_empty() {
             query_args.push(format!("is_download={}", is_download));
@@ -186,9 +186,9 @@ impl WorkspaceItems {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}?{}",
@@ -196,7 +196,7 @@ impl WorkspaceItems {
             crate::progenitor_support::encode_path(&workspace_id.to_string()),
             crate::progenitor_support::encode_path(&folder_id.to_string()),
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -265,7 +265,7 @@ impl WorkspaceItems {
         max_width: &str,
         start_position: &str,
     ) -> Result<crate::types::PageImages> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !count.is_empty() {
             query_args.push(format!("count={}", count));
@@ -284,9 +284,9 @@ impl WorkspaceItems {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}/pages?{}",
@@ -294,7 +294,7 @@ impl WorkspaceItems {
             crate::progenitor_support::encode_path(&workspace_id.to_string()),
             crate::progenitor_support::encode_path(&folder_id.to_string()),
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

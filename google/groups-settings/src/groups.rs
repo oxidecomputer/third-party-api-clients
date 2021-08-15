@@ -34,7 +34,7 @@ impl Groups {
         user_ip: &str,
         group_unique_id: &str,
     ) -> Result<crate::types::Groups> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -57,14 +57,14 @@ impl Groups {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/{}?{}",
             crate::progenitor_support::encode_path(&group_unique_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -93,7 +93,7 @@ impl Groups {
         group_unique_id: &str,
         body: &crate::types::Groups,
     ) -> Result<crate::types::Groups> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -116,14 +116,14 @@ impl Groups {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/{}?{}",
             crate::progenitor_support::encode_path(&group_unique_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -157,7 +157,7 @@ impl Groups {
         group_unique_id: &str,
         body: &crate::types::Groups,
     ) -> Result<crate::types::Groups> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -180,14 +180,14 @@ impl Groups {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/{}?{}",
             crate::progenitor_support::encode_path(&group_unique_id.to_string()),
-            query
+            query_
         );
 
         self.client

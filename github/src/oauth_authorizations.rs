@@ -35,7 +35,7 @@ impl OauthAuthorizations {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<crate::types::ApplicationGrant>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !client_id.is_empty() {
             query_args.push(format!("client_id={}", client_id));
@@ -48,11 +48,11 @@ impl OauthAuthorizations {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/applications/grants?{}", query);
+        let url = format!("/applications/grants?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -74,18 +74,18 @@ impl OauthAuthorizations {
         &self,
         client_id: &str,
     ) -> Result<Vec<crate::types::ApplicationGrant>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !client_id.is_empty() {
             query_args.push(format!("client_id={}", client_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/applications/grants?{}", query);
+        let url = format!("/applications/grants?{}", query_);
 
         self.client.get_all_pages(&url, None).await
     }
@@ -157,7 +157,7 @@ impl OauthAuthorizations {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<crate::types::Authorization>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !client_id.is_empty() {
             query_args.push(format!("client_id={}", client_id));
@@ -170,11 +170,11 @@ impl OauthAuthorizations {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/authorizations?{}", query);
+        let url = format!("/authorizations?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -194,18 +194,18 @@ impl OauthAuthorizations {
         &self,
         client_id: &str,
     ) -> Result<Vec<crate::types::Authorization>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !client_id.is_empty() {
             query_args.push(format!("client_id={}", client_id));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/authorizations?{}", query);
+        let url = format!("/authorizations?{}", query_);
 
         self.client.get_all_pages(&url, None).await
     }

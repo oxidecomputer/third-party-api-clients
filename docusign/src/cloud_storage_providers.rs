@@ -36,22 +36,22 @@ impl CloudStorageProviders {
         user_id: &str,
         redirect_url: &str,
     ) -> Result<crate::types::CloudStorageProvidersData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !redirect_url.is_empty() {
             query_args.push(format!("redirect_url={}", redirect_url));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&user_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -150,23 +150,23 @@ impl CloudStorageProviders {
         user_id: &str,
         redirect_url: &str,
     ) -> Result<crate::types::CloudStorageProvidersData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !redirect_url.is_empty() {
             query_args.push(format!("redirect_url={}", redirect_url));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&service_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

@@ -188,7 +188,7 @@ impl Accounts {
         account_id: &str,
         include_account_settings: &str,
     ) -> Result<crate::types::AccountInformation> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_account_settings.is_empty() {
             query_args.push(format!(
@@ -198,14 +198,14 @@ impl Accounts {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -255,21 +255,21 @@ impl Accounts {
         account_id: &str,
         include_charges: &str,
     ) -> Result<crate::types::BillingChargeResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_charges.is_empty() {
             query_args.push(format!("include_charges={}", include_charges));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/billing_charges?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -324,21 +324,21 @@ impl Accounts {
         account_id: &str,
         email: &str,
     ) -> Result<crate::types::RecipientNamesResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !email.is_empty() {
             query_args.push(format!("email={}", email));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/recipient_names?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -559,7 +559,7 @@ impl Accounts {
         start_position: &str,
         user_ids: &str,
     ) -> Result<crate::types::AccountSharedAccess> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !count.is_empty() {
             query_args.push(format!("count={}", count));
@@ -590,14 +590,14 @@ impl Accounts {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/shared_access?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -641,7 +641,7 @@ impl Accounts {
         user_ids: &str,
         body: &crate::types::AccountSharedAccess,
     ) -> Result<crate::types::AccountSharedAccess> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !item_type.is_empty() {
             query_args.push(format!("item_type={}", item_type));
@@ -657,14 +657,14 @@ impl Accounts {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/shared_access?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client

@@ -36,7 +36,7 @@ impl Customers {
         upload_type: &str,
         customer_key: &str,
     ) -> Result<crate::types::Customer> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -69,14 +69,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customers/{}?{}",
             crate::progenitor_support::encode_path(&customer_key.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -107,7 +107,7 @@ impl Customers {
         customer_key: &str,
         body: &crate::types::Customer,
     ) -> Result<crate::types::Customer> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -140,14 +140,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customers/{}?{}",
             crate::progenitor_support::encode_path(&customer_key.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -183,7 +183,7 @@ impl Customers {
         customer_key: &str,
         body: &crate::types::Customer,
     ) -> Result<crate::types::Customer> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -216,14 +216,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customers/{}?{}",
             crate::progenitor_support::encode_path(&customer_key.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -258,7 +258,7 @@ impl Customers {
         upload_type: &str,
         name: &str,
     ) -> Result<crate::types::Printer> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -291,14 +291,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/{}?{}",
             crate::progenitor_support::encode_path(&name.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -328,7 +328,7 @@ impl Customers {
         upload_type: &str,
         name: &str,
     ) -> Result<crate::types::Empty> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -361,14 +361,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/{}?{}",
             crate::progenitor_support::encode_path(&name.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -403,7 +403,7 @@ impl Customers {
         update_mask: &str,
         body: &crate::types::Printer,
     ) -> Result<crate::types::Printer> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -442,14 +442,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/{}?{}",
             crate::progenitor_support::encode_path(&name.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -492,7 +492,7 @@ impl Customers {
         page_size: i64,
         page_token: &str,
     ) -> Result<crate::types::ListPrintersResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -537,14 +537,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers?{}",
             crate::progenitor_support::encode_path(&parent.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -575,7 +575,7 @@ impl Customers {
         parent: &str,
         body: &crate::types::Printer,
     ) -> Result<crate::types::Printer> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -608,14 +608,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers?{}",
             crate::progenitor_support::encode_path(&parent.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -651,7 +651,7 @@ impl Customers {
         parent: &str,
         body: &crate::types::BatchCreatePrintersRequest,
     ) -> Result<crate::types::BatchCreatePrintersResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -684,14 +684,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers:batchCreatePrinters?{}",
             crate::progenitor_support::encode_path(&parent.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -727,7 +727,7 @@ impl Customers {
         parent: &str,
         body: &crate::types::BatchDeletePrintersRequest,
     ) -> Result<crate::types::BatchDeletePrintersResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -760,14 +760,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers:batchDeletePrinters?{}",
             crate::progenitor_support::encode_path(&parent.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -808,7 +808,7 @@ impl Customers {
         page_size: i64,
         page_token: &str,
     ) -> Result<crate::types::ListPrinterModelsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -850,14 +850,14 @@ impl Customers {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers:listPrinterModels?{}",
             crate::progenitor_support::encode_path(&parent.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

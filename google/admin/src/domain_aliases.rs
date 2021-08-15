@@ -38,7 +38,7 @@ impl DomainAliases {
         customer: &str,
         parent_domain_name: &str,
     ) -> Result<crate::types::DomainAliases> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -74,14 +74,14 @@ impl DomainAliases {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -112,7 +112,7 @@ impl DomainAliases {
         customer: &str,
         body: &crate::types::DomainAlias,
     ) -> Result<crate::types::DomainAlias> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -145,14 +145,14 @@ impl DomainAliases {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -189,7 +189,7 @@ impl DomainAliases {
         customer: &str,
         domain_alias_name: &str,
     ) -> Result<crate::types::DomainAlias> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -222,15 +222,15 @@ impl DomainAliases {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&domain_alias_name.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -262,7 +262,7 @@ impl DomainAliases {
         customer: &str,
         domain_alias_name: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -295,15 +295,15 @@ impl DomainAliases {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&domain_alias_name.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await

@@ -42,7 +42,7 @@ impl PhoneReports {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<crate::types::ReportOperationLogsResponseAllOf> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !category_type.is_empty() {
             query_args.push(format!("category_type={}", category_type));
@@ -61,11 +61,11 @@ impl PhoneReports {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/phone/reports/operationlogs?{}", query);
+        let url = format!("/phone/reports/operationlogs?{}", query_);
 
         self.client.get(&url, None).await
     }

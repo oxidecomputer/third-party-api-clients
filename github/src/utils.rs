@@ -92,7 +92,6 @@ impl From<MediaType> for mime::Mime {
     }
 }
 
-
 use std::{fmt, str::FromStr};
 
 use serde::de::{self, Visitor};
@@ -121,28 +120,22 @@ pub mod date_time_format {
                 Ok(t) => Ok(Some(t)),
                 Err(_) => {
                     match chrono::NaiveDate::parse_from_str(&s, "%Y-%m-%d") {
-                        Ok(d) => Ok(Some(
-                            DateTime::<Utc>::from_utc(
-                                chrono::NaiveDateTime::new(
-                                    d,
-                                    chrono::NaiveTime::from_hms(0,0,0),
-                                ),
-                                Utc,
-                            )
-                        )),
+                        Ok(d) => Ok(Some(DateTime::<Utc>::from_utc(
+                            chrono::NaiveDateTime::new(d, chrono::NaiveTime::from_hms(0, 0, 0)),
+                            Utc,
+                        ))),
                         Err(_) => {
                             s = format!("{}+00:00", s);
                             // Try both ways to parse the date.
                             match Utc.datetime_from_str(&s, FORMAT) {
                                 Ok(r) => Ok(Some(r)),
-                                Err(_) => {
-                                    match Utc.datetime_from_str(&s, "%+") {
-                                        Ok(d) => Ok(Some(d)),
-                                        Err(e) => {
-                                            Err(serde::de::Error::custom(format!("deserializing {} as DateTime<Utc> failed: {}", s, e)))
-                                        }
-                                    }
-                                }
+                                Err(_) => match Utc.datetime_from_str(&s, "%+") {
+                                    Ok(d) => Ok(Some(d)),
+                                    Err(e) => Err(serde::de::Error::custom(format!(
+                                        "deserializing {} as DateTime<Utc> failed: {}",
+                                        s, e
+                                    ))),
+                                },
                             }
                         }
                     }

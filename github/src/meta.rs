@@ -57,18 +57,18 @@ impl Meta {
      * * `s: &str` -- The words to show in Octocat's speech bubble.
      */
     pub async fn get_octocat(&self, s: &str) -> Result<String> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !s.is_empty() {
             query_args.push(format!("s={}", s));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/octocat?{}", query);
+        let url = format!("/octocat?{}", query_);
 
         self.client.get(&url, None).await
     }

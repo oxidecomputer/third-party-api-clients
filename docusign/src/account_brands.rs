@@ -33,7 +33,7 @@ impl AccountBrands {
         exclude_distributor_brand: &str,
         include_logos: &str,
     ) -> Result<crate::types::AccountBrands> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !exclude_distributor_brand.is_empty() {
             query_args.push(format!(
@@ -46,14 +46,14 @@ impl AccountBrands {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/brands?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -148,7 +148,7 @@ impl AccountBrands {
         include_external_references: &str,
         include_logos: &str,
     ) -> Result<crate::types::Brand> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !include_external_references.is_empty() {
             query_args.push(format!(
@@ -161,15 +161,15 @@ impl AccountBrands {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/brands/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&brand_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -417,7 +417,7 @@ impl AccountBrands {
         langcode: &str,
         return_master: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !langcode.is_empty() {
             query_args.push(format!("langcode={}", langcode));
@@ -427,16 +427,16 @@ impl AccountBrands {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v2.1/accounts/{}/brands/{}/resources/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&brand_id.to_string()),
             crate::progenitor_support::encode_path(&resource_content_type.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

@@ -44,7 +44,7 @@ impl RoleAssignments {
         role_id: &str,
         user_key: &str,
     ) -> Result<crate::types::RoleAssignments> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -89,14 +89,14 @@ impl RoleAssignments {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/roleassignments?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -127,7 +127,7 @@ impl RoleAssignments {
         customer: &str,
         body: &crate::types::RoleAssignment,
     ) -> Result<crate::types::RoleAssignment> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -160,14 +160,14 @@ impl RoleAssignments {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/roleassignments?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -204,7 +204,7 @@ impl RoleAssignments {
         customer: &str,
         role_assignment_id: &str,
     ) -> Result<crate::types::RoleAssignment> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -237,15 +237,15 @@ impl RoleAssignments {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/roleassignments/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&role_assignment_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -277,7 +277,7 @@ impl RoleAssignments {
         customer: &str,
         role_assignment_id: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !access_token.is_empty() {
             query_args.push(format!("access_token={}", access_token));
@@ -310,15 +310,15 @@ impl RoleAssignments {
         query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/admin/directory/v1/customer/{}/roleassignments/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&role_assignment_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await

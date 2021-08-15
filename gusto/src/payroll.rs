@@ -33,7 +33,7 @@ impl Payroll {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::PayPeriod>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !end_date.is_empty() {
             query_args.push(format!("end_date={}", end_date));
@@ -43,14 +43,14 @@ impl Payroll {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v1/companies/{}/pay_periods?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -74,7 +74,7 @@ impl Payroll {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::PayPeriod>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !end_date.is_empty() {
             query_args.push(format!("end_date={}", end_date));
@@ -84,14 +84,14 @@ impl Payroll {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v1/companies/{}/pay_periods?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -126,7 +126,7 @@ impl Payroll {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::PayrollData>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !end_date.is_empty() {
             query_args.push(format!("end_date={}", end_date));
@@ -145,14 +145,14 @@ impl Payroll {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v1/companies/{}/payrolls?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -181,7 +181,7 @@ impl Payroll {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::PayrollData>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !end_date.is_empty() {
             query_args.push(format!("end_date={}", end_date));
@@ -200,14 +200,14 @@ impl Payroll {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v1/companies/{}/payrolls?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -264,7 +264,7 @@ impl Payroll {
         include: crate::types::GetCompanyPayrollsInclude,
         show_calculation: &str,
     ) -> Result<crate::types::PayrollData> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("include={}", include));
         if !show_calculation.is_empty() {
@@ -272,15 +272,15 @@ impl Payroll {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/v1/companies/{}/payrolls/{}?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
             crate::progenitor_support::encode_path(&payroll_id_or_uuid.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await

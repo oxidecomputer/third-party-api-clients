@@ -43,7 +43,7 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         if page > 0 {
@@ -54,9 +54,9 @@ impl Reactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?{}",
@@ -64,7 +64,7 @@ impl Reactions {
             crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -91,14 +91,14 @@ impl Reactions {
         comment_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?{}",
@@ -106,7 +106,7 @@ impl Reactions {
             crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -222,7 +222,7 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         if page > 0 {
@@ -233,16 +233,16 @@ impl Reactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -268,21 +268,21 @@ impl Reactions {
         discussion_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -414,7 +414,7 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         if page > 0 {
@@ -425,16 +425,16 @@ impl Reactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -458,21 +458,21 @@ impl Reactions {
         comment_id: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -578,7 +578,7 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         if page > 0 {
@@ -589,16 +589,16 @@ impl Reactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -622,21 +622,21 @@ impl Reactions {
         comment_id: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -742,7 +742,7 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         if page > 0 {
@@ -753,16 +753,16 @@ impl Reactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -786,21 +786,21 @@ impl Reactions {
         issue_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -906,7 +906,7 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         if page > 0 {
@@ -917,16 +917,16 @@ impl Reactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -950,21 +950,21 @@ impl Reactions {
         comment_id: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
             crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1109,7 +1109,7 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         if page > 0 {
@@ -1120,16 +1120,16 @@ impl Reactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1155,21 +1155,21 @@ impl Reactions {
         comment_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1241,7 +1241,7 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         if page > 0 {
@@ -1252,15 +1252,15 @@ impl Reactions {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/teams/{}/discussions/{}/reactions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1285,20 +1285,20 @@ impl Reactions {
         discussion_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("content={}", content));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/teams/{}/discussions/{}/reactions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await

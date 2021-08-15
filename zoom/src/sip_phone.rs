@@ -41,7 +41,7 @@ impl SipPhone {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::Phones>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
@@ -57,11 +57,11 @@ impl SipPhone {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/sip_phones?{}", query);
+        let url = format!("/sip_phones?{}", query_);
 
         let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await.unwrap();
 
@@ -84,18 +84,18 @@ impl SipPhone {
      *
      */
     pub async fn list_all(&self, search_key: &str) -> Result<Vec<crate::types::Phones>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !search_key.is_empty() {
             query_args.push(format!("search_key={}", search_key));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/sip_phones?{}", query);
+        let url = format!("/sip_phones?{}", query_);
 
         let mut resp: crate::types::ListSipPhonesResponse =
             self.client.get(&url, None).await.unwrap();

@@ -58,7 +58,7 @@ impl Files {
         supports_team_drives: bool,
         team_drive_id: &str,
     ) -> Result<crate::types::FileList> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !corpora.is_empty() {
@@ -130,11 +130,11 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/files?{}", query);
+        let url = format!("/files?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -174,7 +174,7 @@ impl Files {
         use_content_as_indexable_text: bool,
         body: &crate::types::File,
     ) -> Result<crate::types::File> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if enforce_single_parent {
@@ -230,11 +230,11 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/files?{}", query);
+        let url = format!("/files?{}", query_);
 
         self.client
             .post(
@@ -268,7 +268,7 @@ impl Files {
         space: &str,
         type_: &str,
     ) -> Result<crate::types::GeneratedIds> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if count > 0 {
@@ -300,11 +300,11 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/files/generateIds?{}", query);
+        let url = format!("/files/generateIds?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -329,7 +329,7 @@ impl Files {
         user_ip: &str,
         enforce_single_parent: bool,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if enforce_single_parent {
@@ -355,11 +355,11 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/files/trash?{}", query);
+        let url = format!("/files/trash?{}", query_);
 
         self.client.delete(&url, None).await
     }
@@ -392,7 +392,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
     ) -> Result<crate::types::File> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if acknowledge_abuse {
             query_args.push(format!("acknowledge_abuse={}", acknowledge_abuse));
@@ -430,14 +430,14 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -469,7 +469,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if enforce_single_parent {
@@ -501,14 +501,14 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client.delete(&url, None).await
@@ -553,7 +553,7 @@ impl Files {
         use_content_as_indexable_text: bool,
         body: &crate::types::File,
     ) -> Result<crate::types::File> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !add_parents.is_empty() {
             query_args.push(format!("add_parents={}", add_parents));
@@ -609,14 +609,14 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -662,7 +662,7 @@ impl Files {
         supports_team_drives: bool,
         body: &crate::types::File,
     ) -> Result<crate::types::File> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if enforce_single_parent {
@@ -712,14 +712,14 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/copy?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client
@@ -752,7 +752,7 @@ impl Files {
         file_id: &str,
         mime_type: &str,
     ) -> Result<()> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
         if !fields.is_empty() {
@@ -778,14 +778,14 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/export?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -820,7 +820,7 @@ impl Files {
         supports_team_drives: bool,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if acknowledge_abuse {
             query_args.push(format!("acknowledge_abuse={}", acknowledge_abuse));
@@ -858,14 +858,14 @@ impl Files {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/files/{}/watch?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
-            query
+            query_
         );
 
         self.client

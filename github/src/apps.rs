@@ -114,7 +114,7 @@ impl Apps {
         per_page: i64,
         cursor: &str,
     ) -> Result<Vec<crate::types::HookDeliveryItem>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !cursor.is_empty() {
             query_args.push(format!("cursor={}", cursor));
@@ -124,11 +124,11 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/app/hook/deliveries?{}", query);
+        let url = format!("/app/hook/deliveries?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -150,18 +150,18 @@ impl Apps {
         &self,
         cursor: &str,
     ) -> Result<Vec<crate::types::HookDeliveryItem>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !cursor.is_empty() {
             query_args.push(format!("cursor={}", cursor));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/app/hook/deliveries?{}", query);
+        let url = format!("/app/hook/deliveries?{}", query_);
 
         self.client.get_all_pages(&url, None).await
     }
@@ -242,7 +242,7 @@ impl Apps {
         since: Option<chrono::DateTime<chrono::Utc>>,
         outdated: &str,
     ) -> Result<Vec<crate::types::Installation>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !outdated.is_empty() {
             query_args.push(format!("outdated={}", outdated));
@@ -258,11 +258,11 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/app/installations?{}", query);
+        let url = format!("/app/installations?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -285,7 +285,7 @@ impl Apps {
         since: Option<chrono::DateTime<chrono::Utc>>,
         outdated: &str,
     ) -> Result<Vec<crate::types::Installation>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !outdated.is_empty() {
             query_args.push(format!("outdated={}", outdated));
@@ -295,11 +295,11 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/app/installations?{}", query);
+        let url = format!("/app/installations?{}", query_);
 
         self.client.get_all_pages(&url, None).await
     }
@@ -762,7 +762,7 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::AppsListInstallationReposResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -772,11 +772,11 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/installation/repositories?{}", query);
+        let url = format!("/installation/repositories?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -847,7 +847,7 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -857,11 +857,11 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/marketplace_listing/plans?{}", query);
+        let url = format!("/marketplace_listing/plans?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -913,7 +913,7 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
         if page > 0 {
@@ -925,14 +925,14 @@ impl Apps {
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/marketplace_listing/plans/{}/accounts?{}",
             crate::progenitor_support::encode_path(&plan_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -957,20 +957,20 @@ impl Apps {
         sort: crate::types::Sort,
         direction: crate::types::Order,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/marketplace_listing/plans/{}/accounts?{}",
             crate::progenitor_support::encode_path(&plan_id.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1024,7 +1024,7 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1034,11 +1034,11 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/marketplace_listing/stubbed/plans?{}", query);
+        let url = format!("/marketplace_listing/stubbed/plans?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -1092,7 +1092,7 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
         if page > 0 {
@@ -1104,14 +1104,14 @@ impl Apps {
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/marketplace_listing/stubbed/plans/{}/accounts?{}",
             crate::progenitor_support::encode_path(&plan_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1136,20 +1136,20 @@ impl Apps {
         sort: crate::types::Sort,
         direction: crate::types::Order,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("direction={}", direction));
         query_args.push(format!("sort={}", sort));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/marketplace_listing/stubbed/plans/{}/accounts?{}",
             crate::progenitor_support::encode_path(&plan_id.to_string()),
-            query
+            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1275,7 +1275,7 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::AppsListInstallationsResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1285,11 +1285,11 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/user/installations?{}", query);
+        let url = format!("/user/installations?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -1321,7 +1321,7 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::AppsListInstallationReposResponse> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1331,14 +1331,14 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
         let url = format!(
             "/user/installations/{}/repositories?{}",
             crate::progenitor_support::encode_path(&installation_id.to_string()),
-            query
+            query_
         );
 
         self.client.get(&url, None).await
@@ -1423,7 +1423,7 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::UserMarketplacePurchase>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1433,11 +1433,11 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/user/marketplace_purchases?{}", query);
+        let url = format!("/user/marketplace_purchases?{}", query_);
 
         self.client.get(&url, None).await
     }
@@ -1479,7 +1479,7 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::UserMarketplacePurchase>> {
-        let mut query = String::new();
+        let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if page > 0 {
             query_args.push(format!("page={}", page));
@@ -1489,11 +1489,11 @@ impl Apps {
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
-                query.push('&');
+                query_.push('&');
             }
-            query.push_str(n);
+            query_.push_str(n);
         }
-        let url = format!("/user/marketplace_purchases/stubbed?{}", query);
+        let url = format!("/user/marketplace_purchases/stubbed?{}", query_);
 
         self.client.get(&url, None).await
     }
