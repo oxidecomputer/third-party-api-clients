@@ -379,6 +379,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "google-drive"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-recursion",
+ "base64 0.12.3",
+ "chrono",
+ "dirs",
+ "http",
+ "hyperx",
+ "jsonwebtoken",
+ "mime",
+ "nom_pem",
+ "percent-encoding",
+ "reqwest",
+ "schemars",
+ "serde",
+ "serde_json",
+ "tokio",
+ "uuid",
+]
+
+[[package]]
 name = "google-groups-settings"
 version = "0.1.0"
 dependencies = [
@@ -1453,6 +1476,29 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a9ff14f98b1a4b289c6248a023c1c2fa1491062964e9fed67ab29c4e4da4a052"
 dependencies = [
  "lazy_static",
+]
+
+[[package]]
+name = "tripactions"
+version = "0.2.0"
+dependencies = [
+ "anyhow",
+ "async-recursion",
+ "base64 0.12.3",
+ "chrono",
+ "dirs",
+ "http",
+ "hyperx",
+ "jsonwebtoken",
+ "mime",
+ "nom_pem",
+ "percent-encoding",
+ "reqwest",
+ "schemars",
+ "serde",
+ "serde_json",
+ "tokio",
+ "uuid",
 ]
 
 [[package]]

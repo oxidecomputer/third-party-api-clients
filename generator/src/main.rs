@@ -384,35 +384,38 @@ impl ExtractJsonMediaType for openapiv3::Response {
             if let Some(s) = &mt.schema {
                 use openapiv3::{SchemaKind, StringFormat, Type, VariantOrUnknownOrEmpty::Item};
 
-                let s = s.item()?;
-                if s.schema_data.nullable {
-                    bail!("XXX nullable binary?");
-                }
-                if s.schema_data.default.is_some() {
-                    bail!("XXX default binary?");
-                }
-                if s.schema_data.discriminator.is_some() {
-                    bail!("XXX binary discriminator?");
-                }
-                match &s.schema_kind {
-                    SchemaKind::Type(Type::String(st)) => {
-                        if st.min_length.is_some() || st.max_length.is_some() {
-                            bail!("binary min/max length");
-                        }
-                        if !matches!(st.format, Item(StringFormat::Binary)) {
-                            bail!("expected binary format string, got {:?}", st.format);
-                        }
-                        if st.pattern.is_some() {
-                            bail!("XXX pattern");
-                        }
-                        if !st.enumeration.is_empty() {
-                            bail!("XXX binary enumeration {:?}", st);
-                        }
-                        return Ok(true);
+                if let Ok(s) = s.item() {
+                    if s.schema_data.nullable {
+                        bail!("XXX nullable binary?");
                     }
-                    x => {
-                        bail!("XXX schemakind type {:?}", x);
+                    if s.schema_data.default.is_some() {
+                        bail!("XXX default binary?");
                     }
+                    if s.schema_data.discriminator.is_some() {
+                        bail!("XXX binary discriminator?");
+                    }
+                    match &s.schema_kind {
+                        SchemaKind::Type(Type::String(st)) => {
+                            if st.min_length.is_some() || st.max_length.is_some() {
+                                bail!("binary min/max length");
+                            }
+                            if !matches!(st.format, Item(StringFormat::Binary)) {
+                                bail!("expected binary format string, got {:?}", st.format);
+                            }
+                            if st.pattern.is_some() {
+                                bail!("XXX pattern");
+                            }
+                            if !st.enumeration.is_empty() {
+                                bail!("XXX binary enumeration {:?}", st);
+                            }
+                            return Ok(true);
+                        }
+                        x => {
+                            bail!("XXX schemakind type {:?}", x);
+                        }
+                    }
+                } else {
+                    return Ok(false);
                 }
             } else {
                 bail!("binary thing had no schema?");
@@ -455,35 +458,38 @@ impl ExtractJsonMediaType for openapiv3::RequestBody {
             if let Some(s) = &mt.schema {
                 use openapiv3::{SchemaKind, StringFormat, Type, VariantOrUnknownOrEmpty::Item};
 
-                let s = s.item()?;
-                if s.schema_data.nullable {
-                    bail!("XXX nullable binary?");
-                }
-                if s.schema_data.default.is_some() {
-                    bail!("XXX default binary?");
-                }
-                if s.schema_data.discriminator.is_some() {
-                    bail!("XXX binary discriminator?");
-                }
-                match &s.schema_kind {
-                    SchemaKind::Type(Type::String(st)) => {
-                        if st.min_length.is_some() || st.max_length.is_some() {
-                            bail!("binary min/max length");
-                        }
-                        if !matches!(st.format, Item(StringFormat::Binary)) {
-                            bail!("expected binary format string, got {:?}", st.format);
-                        }
-                        if st.pattern.is_some() {
-                            bail!("XXX pattern");
-                        }
-                        if !st.enumeration.is_empty() {
-                            bail!("XXX enumeration");
-                        }
-                        return Ok(true);
+                if let Ok(s) = s.item() {
+                    if s.schema_data.nullable {
+                        bail!("XXX nullable binary?");
                     }
-                    x => {
-                        bail!("XXX schemakind type {:?}", x);
+                    if s.schema_data.default.is_some() {
+                        bail!("XXX default binary?");
                     }
+                    if s.schema_data.discriminator.is_some() {
+                        bail!("XXX binary discriminator?");
+                    }
+                    match &s.schema_kind {
+                        SchemaKind::Type(Type::String(st)) => {
+                            if st.min_length.is_some() || st.max_length.is_some() {
+                                bail!("binary min/max length");
+                            }
+                            if !matches!(st.format, Item(StringFormat::Binary)) {
+                                bail!("expected binary format string, got {:?}", st.format);
+                            }
+                            if st.pattern.is_some() {
+                                bail!("XXX pattern");
+                            }
+                            if !st.enumeration.is_empty() {
+                                bail!("XXX enumeration");
+                            }
+                            return Ok(true);
+                        }
+                        x => {
+                            bail!("XXX schemakind type {:?}", x);
+                        }
+                    }
+                } else {
+                    return Ok(false);
                 }
             } else {
                 bail!("binary thing had no schema?");

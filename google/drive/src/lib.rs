@@ -8,18 +8,18 @@
 //!
 //! ### Contact
 //!
-//! 
+//!
 //! | name | url |
 //! |----|----|
 //! | Google | <https://google.com> |
-//! 
+//!
 //! ### License
 //!
-//! 
+//!
 //! | name | url |
 //! |----|----|
 //! | Creative Commons Attribution 3.0 | <http://creativecommons.org/licenses/by/3.0/> |
-//! 
+//!
 //!
 //! ## Client Details
 //!
@@ -27,7 +27,7 @@
 //! specs](https://www.googleapis.com/discovery/v1/apis/drive/v3/rest) based on API spec version `v3`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
-//! 
+//!
 //!
 //! To install the library, add the following to your `Cargo.toml` file.
 //!
@@ -98,7 +98,6 @@
 //!     access_token = google drive.refresh_access_token().await.unwrap();
 //! }
 //! ```
-//!
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
@@ -107,11 +106,6 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-#[cfg(test)]
-mod tests;
-pub mod types;
-#[doc(hidden)]
-pub mod utils;
 pub mod about;
 pub mod changes;
 pub mod channels;
@@ -122,13 +116,18 @@ pub mod permissions;
 pub mod replies;
 pub mod revisions;
 pub mod teamdrives;
+#[cfg(test)]
+mod tests;
+pub mod types;
+#[doc(hidden)]
+pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
 pub const DEFAULT_HOST: &str = "https://www.googleapis.com/drive/directory/v1";
 
 mod progenitor_support {
-    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
+    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')
@@ -146,7 +145,6 @@ mod progenitor_support {
         utf8_percent_encode(pc, PATH_SET).to_string()
     }
 }
-
 
 use std::env;
 
@@ -260,19 +258,10 @@ impl Client {
         let client_secret = env::var("GOOGLE DRIVE_CLIENT_SECRET").unwrap();
         let redirect_uri = env::var("GOOGLE DRIVE_REDIRECT_URI").unwrap();
 
-        Client::new(
-            client_id,
-            client_secret,
-            redirect_uri,
-            token,
-            refresh_token,
-        )
+        Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
     }
 
-    async fn url_and_auth(
-        &self,
-        uri: &str,
-    ) -> Result<(reqwest::Url, Option<String>)> {
+    async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
         let parsed_url = uri.parse::<reqwest::Url>();
 
         let auth = format!("Bearer {}", self.token);
@@ -285,7 +274,7 @@ impl Client {
         uri: &str,
         body: Option<reqwest::Body>,
     ) -> Result<Out>
-        where
+    where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         let (url, auth) = self.url_and_auth(uri).await?;
@@ -356,9 +345,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let r = self
-            .request(method, uri, body)
-            .await?;
+        let r = self.request(method, uri, body).await?;
         Ok(r)
     }
 
@@ -456,7 +443,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -464,11 +451,12 @@ impl Client {
             http::Method::GET,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
-    async fn get_all_pages<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -477,7 +465,8 @@ impl Client {
             http::Method::GET,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -489,7 +478,8 @@ impl Client {
             http::Method::POST,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -501,7 +491,8 @@ impl Client {
             http::Method::PATCH,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -513,7 +504,8 @@ impl Client {
             http::Method::PUT,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -525,57 +517,57 @@ impl Client {
             http::Method::DELETE,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
-/// Return a reference to an interface that provides access to about operations.
-               pub fn about(&self) -> about::About {
-                    about::About::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to about operations.
+    pub fn about(&self) -> about::About {
+        about::About::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to changes operations.
-               pub fn changes(&self) -> changes::Changes {
-                    changes::Changes::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to changes operations.
+    pub fn changes(&self) -> changes::Changes {
+        changes::Changes::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to channels operations.
-               pub fn channels(&self) -> channels::Channels {
-                    channels::Channels::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to channels operations.
+    pub fn channels(&self) -> channels::Channels {
+        channels::Channels::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to comments operations.
-               pub fn comments(&self) -> comments::Comments {
-                    comments::Comments::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to comments operations.
+    pub fn comments(&self) -> comments::Comments {
+        comments::Comments::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to drives operations.
-               pub fn drives(&self) -> drives::Drives {
-                    drives::Drives::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to drives operations.
+    pub fn drives(&self) -> drives::Drives {
+        drives::Drives::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to files operations.
-               pub fn files(&self) -> files::Files {
-                    files::Files::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to files operations.
+    pub fn files(&self) -> files::Files {
+        files::Files::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to permissions operations.
-               pub fn permissions(&self) -> permissions::Permissions {
-                    permissions::Permissions::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to permissions operations.
+    pub fn permissions(&self) -> permissions::Permissions {
+        permissions::Permissions::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to replies operations.
-               pub fn replies(&self) -> replies::Replies {
-                    replies::Replies::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to replies operations.
+    pub fn replies(&self) -> replies::Replies {
+        replies::Replies::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to revisions operations.
-               pub fn revisions(&self) -> revisions::Revisions {
-                    revisions::Revisions::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to revisions operations.
+    pub fn revisions(&self) -> revisions::Revisions {
+        revisions::Revisions::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to teamdrives operations.
-               pub fn teamdrives(&self) -> teamdrives::Teamdrives {
-                    teamdrives::Teamdrives::new(self.clone())
-               }
-
+    /// Return a reference to an interface that provides access to teamdrives operations.
+    pub fn teamdrives(&self) -> teamdrives::Teamdrives {
+        teamdrives::Teamdrives::new(self.clone())
+    }
 }

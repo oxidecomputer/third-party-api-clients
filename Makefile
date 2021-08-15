@@ -67,7 +67,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: docusign giphy github google-calendar google-groups-settings gusto ramp zoom
+generate: docusign giphy github google-calendar google-drive google-groups-settings gusto ramp tripactions zoom
 	cargo test tests
 	cargo clippy
 
@@ -147,7 +147,7 @@ giphy: target/debug/generator $(GIPHY_SPEC)
 		--proper-name "Giphy" \
 		-d "A fully generated & opinionated API client for the Giphy API." \
 		--spec-link "https://github.com/APIs-guru/openapi-directory/tree/main/APIs/giphy.com" \
-		--host "api.giphy.com/v1"
+		--host "api.giphy.com/v1" $(EXTRA_ARGS)
 	cargo fmt -p giphy-api
 
 $(GITHUB_SPEC_DIR):
@@ -179,7 +179,7 @@ google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
 		--proper-name "Google Admin" \
 		-d "A fully generated & opinionated API client for the Google Admin API." \
 		--spec-link "https://admin.googleapis.com/$discovery/rest?version=directory_v1" \
-		--host "www.googleapis.com/admin/directory/v1"
+		--host "www.googleapis.com/admin/directory/v1" $(EXTRA_ARGS)
 	cargo fmt -p gsuite-api
 
 $(GOOGLE_CALENDAR_SPEC_DIR):
@@ -195,7 +195,7 @@ google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
 		--proper-name "Google Calendar" \
 		-d "A fully generated & opinionated API client for the Google Calendar API." \
 		--spec-link "https://calendar-json.googleapis.com/$discovery/rest?version=v3" \
-		--host "www.googleapis.com/calendar/directory/v1"
+		--host "www.googleapis.com/calendar/directory/v1" $(EXTRA_ARGS)
 	cargo fmt -p google-calendar
 
 $(GOOGLE_DRIVE_SPEC_DIR):
@@ -211,7 +211,7 @@ google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
 		--proper-name "Google Drive" \
 		-d "A fully generated & opinionated API client for the Google Drive API." \
 		--spec-link "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest" \
-		--host "www.googleapis.com/drive/directory/v1"
+		--host "www.googleapis.com/drive/directory/v1" $(EXTRA_ARGS)
 	cargo fmt -p google-drive
 
 $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR):
@@ -227,7 +227,7 @@ google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
 		--proper-name "Google Groups Settings" \
 		-d "A fully generated & opinionated API client for the Google Groups Settings API." \
 		--spec-link "https://groupssettings.googleapis.com/$discovery/rest?version=v1" \
-		--host "www.googleapis.com/groupssettings/directory/v1"
+		--host "www.googleapis.com/groupssettings/directory/v1" $(EXTRA_ARGS)
 	cargo fmt -p google-groups-settings
 
 $(GUSTO_SPEC_DIR):
@@ -363,11 +363,11 @@ tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
 	./target/debug/generator -i $(TRIPACTIONS_SPEC) -v 0.2.0 \
 		-o tripactions \
 		-n tripactions \
-		--proper-name "tripactions" \
+		--proper-name "TripActions" \
 		-d "A fully generated & opinionated API client for the TripActions API." \
 		--spec-link "https://app.tripactions.com/api/public/documentation/swagger-ui/index.html?configUrl=/api/public/documentation/api-docs/swagger-config" \
 		--host "api.tripactions.com/v1" \
-		--token-endpoint "api.tripactions.com/ta-auth/oauth/token"
+		--token-endpoint "api.tripactions.com/ta-auth/oauth/token" $(EXTRA_ARGS)
 	cargo fmt -p tripactions
 
 $(ZOOM_SPEC_DIR):

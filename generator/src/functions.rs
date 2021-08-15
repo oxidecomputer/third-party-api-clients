@@ -21,7 +21,7 @@ pub fn generate_files(
 
     let mut fn_names: Vec<String> = Default::default();
     for (pn, p) in api.paths.iter() {
-        let op = p.item()?;
+        let op = p.item().unwrap_or_else(|e| panic!("bad path: {}", e));
 
         let mut gen = |p: &str, m: &str, o: Option<&openapiv3::Operation>| -> Result<()> {
             let o = if let Some(o) = o {
@@ -113,7 +113,7 @@ pub fn generate_files(
                         (Some("B".to_string()), Some("body".to_string()))
                     } else {
                         let (ct, mt) = b.content.first().unwrap();
-                        if ct == "application/json" {
+                        if ct == "application/json" || ct == "application/octet-stream" {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!("{} request", oid_to_object_name(&od));
                                 let id = ts.select(Some(&object_name), s, "")?;

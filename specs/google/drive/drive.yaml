@@ -3573,10 +3573,10 @@ components:
           type: boolean
         displayName:
           description: |-
-            The "pretty" name of the value of the permission. The following is a list of examples for each type of permission:  
-            - user - User's full name, as defined for their Google account, such as "Joe Smith." 
-            - group - Name of the Google Group, such as "The Company Administrators." 
-            - domain - String domain name, such as "thecompany.com." 
+            The "pretty" name of the value of the permission. The following is a list of examples for each type of permission:
+            - user - User's full name, as defined for their Google account, such as "Joe Smith."
+            - group - Name of the Google Group, such as "The Company Administrators."
+            - domain - String domain name, such as "thecompany.com."
             - anyone - No displayName is present.
           type: string
         domain:
@@ -3587,9 +3587,9 @@ components:
           type: string
         expirationTime:
           description: |-
-            The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:  
-            - They can only be set on user and group permissions 
-            - The time must be in the future 
+            The time at which this permission will expire (RFC 3339 date-time). Expiration times have the following restrictions:
+            - They can only be set on user and group permissions
+            - The time must be in the future
             - The time cannot be more than a year in the future
           format: date-time
           type: string
@@ -3612,17 +3612,17 @@ components:
                 type: string
               permissionType:
                 description: |-
-                  The permission type for this user. While new values may be added in future, the following are currently possible:  
-                  - file 
+                  The permission type for this user. While new values may be added in future, the following are currently possible:
+                  - file
                   - member
                 type: string
               role:
                 description: |-
-                  The primary role for this user. While new values may be added in the future, the following are currently possible:  
-                  - organizer 
-                  - fileOrganizer 
-                  - writer 
-                  - commenter 
+                  The primary role for this user. While new values may be added in the future, the following are currently possible:
+                  - organizer
+                  - fileOrganizer
+                  - writer
+                  - commenter
                   - reader
                 type: string
             type: object
@@ -3633,12 +3633,12 @@ components:
           type: string
         role:
           description: |-
-            The role granted by this permission. While new values may be supported in the future, the following are currently allowed:  
-            - owner 
-            - organizer 
-            - fileOrganizer 
-            - writer 
-            - commenter 
+            The role granted by this permission. While new values may be supported in the future, the following are currently allowed:
+            - owner
+            - organizer
+            - fileOrganizer
+            - writer
+            - commenter
             - reader
           type: string
         teamDrivePermissionDetails:
@@ -3662,10 +3662,10 @@ components:
           type: array
         type:
           description: |-
-            The type of the grantee. Valid values are:  
-            - user 
-            - group 
-            - domain 
+            The type of the grantee. Valid values are:
+            - user
+            - group
+            - domain
             - anyone  When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for a anyone type.
           type: string
         view:
@@ -3693,8 +3693,8 @@ components:
       properties:
         action:
           description: |-
-            The action the reply performed to the parent comment. Valid values are:  
-            - resolve 
+            The action the reply performed to the parent comment. Valid values are:
+            - resolve
             - reopen
           type: string
         author:
