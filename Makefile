@@ -59,6 +59,10 @@ SLACK_SPEC = $(SLACK_SPEC_DIR)/slack.json
 SLACK_SPEC_REPO = slackapi/slack-api-specs
 SLACK_SPEC_REMOTE = https://raw.githubusercontent.com/$(SLACK_SPEC_REPO)/master/web-api/slack_web_openapi_v2.json
 
+TRIPACTIONS_SPEC_DIR = $(CURDIR)/specs/tripactions
+TRIPACTIONS_SPEC = $(TRIPACTIONS_SPEC_DIR)/tripactions.yaml
+TRIPACTIONS_SPEC_REMOTE = https://app.tripactions.com/api/public-api.yml
+
 ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
@@ -95,6 +99,7 @@ update-specs:
 		$(OKTA_SPEC_DIR) \
 		$(SENDGRID_SPEC_DIR) \
 		$(SLACK_SPEC_DIR) \
+		$(TRIPACTIONS_SPEC_DIR) \
 		$(ZOOM_SPEC_DIR)
 	make $(DOCUSIGN_SPEC) \
 		$(GIPHY_SPEC) \
@@ -108,6 +113,7 @@ update-specs:
 		$(OKTA_SPEC) \
 		$(SENDGRID_SPEC) \
 		$(SLACK_SPEC) \
+		$(TRIPACTIONS_SPEC) \
 		$(ZOOM_SPEC)
 
 $(DOCUSIGN_SPEC_DIR):
@@ -346,6 +352,23 @@ slack: target/debug/generator $(SLACK_SPEC)
 		--token-endpoint "slack.com/api/oauth.v2.access" \
 		--user-consent-endpoint "slack.com/oauth/v2/authorize" $(EXTRA_ARGS)
 	cargo fmt -p slack-chat-api
+
+$(TRIPACTIONS_SPEC_DIR):
+	mkdir -p $@
+
+$(TRIPACTIONS_SPEC): $(TRIPACTIONS_SPEC_DIR)
+	curl -sSL $(TRIPACTIONS_SPEC_REMOTE) -o $@
+
+tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
+	./target/debug/generator -i $(TRIPACTIONS_SPEC) -v 0.2.0 \
+		-o tripactions \
+		-n tripactions \
+		--proper-name "tripactions" \
+		-d "A fully generated & opinionated API client for the TripActions API." \
+		--spec-link "https://app.tripactions.com/api/public/documentation/swagger-ui/index.html?configUrl=/api/public/documentation/api-docs/swagger-config" \
+		--host "api.tripactions.com/v1" \
+		--token-endpoint "api.tripactions.com/ta-auth/oauth/token"
+	cargo fmt -p tripactions
 
 $(ZOOM_SPEC_DIR):
 	mkdir -p $@

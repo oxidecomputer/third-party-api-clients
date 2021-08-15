@@ -1,0 +1,448 @@
+openapi: "3.0.0"
+info:
+  version: "1"
+  title: Booking Data API
+  description: <p>Welcome to the TripActions Booking Data API reference documentation.</p>
+    <p>You can use this API to retrieve your booking data from TripActions.</p>
+    <p>To access the API, your company admin needs to supply you with a client id and a secret key. They can generate this in the TripActions Admin Dashboard, in the Integrations section of the Settings page.<p>
+    </br>
+
+    <p>To generate a token make a request to the token API with your credentials:</p>
+    <code>
+    curl --request POST --url 'https://api.tripactions.com/ta-auth/oauth/token' \</br>
+    --header 'content-type:application/x-www-form-urlencoded' \</br>
+    --data grant_type=client_credentials \</br>
+    --data client_id=YOURCLIENTIDHERE \</br>
+    --data client_secret=YOURSECRETHERE
+    </code>
+
+    <p>Once the token was generated you can call the Booking Data API:</p>
+    <code>
+    curl --request GET --url https://api.tripactions.com/v1/bookings\?createdFrom\=1609459200\&createdTo\=1623229202\&page\=0\&size\=10 --header 'Authorization:Bearer YOURTOKENHERE'
+    </code>
+paths:
+  /v1/bookings:
+    get:
+      tags:
+        - Booking Data
+      summary: Your company's bookings
+      security:
+        - OAuth2: []
+      description: 'Return booking rows filtered by the parameters you select.'
+      operationId: getBookingReport
+      parameters:
+        - in: query
+          name: createdFrom
+          schema:
+            type: long
+          required: true
+          description: Filter based on booking created date in epoch seconds
+        - in: query
+          name: createdTo
+          schema:
+            type: long
+          required: true
+          description: Filter based on booking created date in epoch seconds
+        - in: query
+          name: startDateFrom
+          schema:
+            type: long
+          required: false
+          description: Filter based on travel start date in epoch seconds
+        - in: query
+          name: startDateTo
+          schema:
+            type: long
+          required: false
+          description: Filter based on travel end date in epoch seconds
+        - in: query
+          name: bookingStatus
+          schema:
+            $ref: '#/components/schemas/BookingStatus'
+          required: false
+          description: Filter based on booking status
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+          description: Page cursor for use in pagination
+        - in: query
+          name: size
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
+            maximum: 100
+          description: Number of records returned per page
+        - in: query
+          name: bookingType
+          schema:
+            $ref: '#/components/schemas/BookingType'
+          required: false
+          description: Filter based on Booking type
+          example: HOTEL, FLIGHT, CAR, RAIL, TRANSPORTATION, BLACK_CAR
+      responses:
+        '200':
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookingReportResponse'
+        '400':
+          description: Bad Request
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://app.tripactions.com/ta-auth/oauth/token
+          scopes:
+            bookings:read: Grants read access
+  schemas:
+    TravelerType:
+      type: string
+      enum:
+        - PASSENGER
+        - GUEST
+    BookingStatus:
+      type: string
+      enum:
+        - CANCELED
+        - VOIDED
+        - CONFIRMED
+        - TICKETED
+        - ACCEPTED
+    BookingType:
+      type: string
+      enum:
+        - HOTEL
+        - FLIGHT
+        - CAR
+        - RAIL
+        - TRANSPORTATION
+        - BLACK_CAR
+    PaymentSchedule:
+      type: string
+      enum:
+        - NOW
+        - LATER
+        - PARTIAL
+        - UNKNOWN
+    PassengerStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    Location:
+      properties:
+        country:
+          type: string
+        state:
+          type: string
+        city:
+          type: string
+        airportCode:
+          type: String
+          description: 'Nearest airport code to this location'
+    Segment:
+      properties:
+        startTimestamp:
+          type: long
+        endTimestamp:
+          type: long
+        departure:
+          $ref: '#/components/schemas/Location'
+        arrival:
+          $ref: '#/components/schemas/Location'
+        providerCode:
+          type: string
+        providerName:
+          type: string
+        flightNumber:
+          type: string
+        airlineAlliance:
+          type: string
+        hotelChain:
+          type: string
+    Person:
+      properties:
+        uuid:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        employeedId:
+          type: string
+        managerUuid:
+          type: string
+        managerName:
+          type: string
+        managerEmail:
+          type: string
+        department:
+          type: string
+        costCenter:
+          type: string
+        region:
+          type: string
+        subsidiary:
+          type: string
+        billableEntity:
+          type: string
+    Passenger:
+      properties:
+        travelerType:
+          $ref: '#/components/schemas/TravelerType'
+        status:
+          $ref: '#/components/schemas/PassengerStatus'
+        person:
+          $ref: '#/components/schemas/Person'
+    Property:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    BookingReportResponse:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookingReport'
+        page:
+          $ref: '#/components/schemas/Page'
+    Page:
+      properties:
+        totalPages:
+          type: long
+          example: 2
+        currentPage:
+          type: int
+          example: 1
+        pageSize:
+          type: int
+          example: 10
+        totalElements:
+          type: long
+          example: 20
+    Cnr:
+      properties:
+        publishedPrice:
+          type: number
+          example: 110
+        cnrCodes:
+          type: array
+          items:
+            type: string
+    BookingReport:
+      properties:
+        uuid:
+          type: string
+        created:
+          type: instant
+          description: "Time at which the object was created."
+          example: "2021-02-03T11:25:30.00Z"
+        lastModified:
+          type: instant
+          description: "Time at which the object was last modified."
+          example: "2021-02-03T11:25:30.00Z"
+        pcc:
+          type: string
+        bookingType:
+          $ref: '#/components/schemas/BookingType'
+        flight:
+          type: string
+        bookingId:
+          type: string
+          description: "Booking PNR."
+        vendor:
+          type: string
+        preferredVendor:
+          type: string
+        corporateDiscountUsed:
+          type: string
+        cabin:
+          type: string
+        bookingStatus:
+          type: string
+        cancelledAt:
+          type: instant
+          description: "Time at which the booking was cancelled."
+          example: "2021-02-03T11:25:30.00Z"
+        cancellationReason:
+          type: string
+        leadTimeInDays:
+          type: integer
+        startDate:
+          type: string
+          format: date
+          description: "Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight"
+        endDate:
+          type: string
+          format: date
+        bookingDuration:
+          type: integer
+          description: "Duration in days"
+        passengers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Passenger'
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        booker:
+          $ref: '#/components/schemas/Person'
+        tripUuids:
+          type: array
+          items:
+            type: string
+        currency:
+          type: string
+        currencyExhangeRateFromUsd:
+          type: number
+        optimalPrice:
+          type: number
+        paymentSchedule:
+          $ref: '#/components/schemas/PaymentSchedule'
+        basePrice:
+          type: number
+        unitaryPrice:
+          type: number
+        saving:
+          type: number
+        savingMissed:
+          type: number
+        tax:
+          type: number
+        resortFee:
+          type: number
+        tripFee:
+          type: number
+        bookingFee:
+          type: number
+        vipFee:
+          type: number
+        seatsFee:
+          type: number
+        extrasFees:
+          type: number
+        airlineCreditCardSurcharge:
+          type: number
+        grandTotal:
+          type: number
+        usdGrandTotal:
+          type: number
+        vat:
+          type: number
+        exchangeAmount:
+          type: number
+        exchangeFee:
+          type: number
+        netCharge:
+          type: number
+        gst:
+          type: number
+        hst:
+          type: number
+        qst:
+          type: number
+        travelSpend:
+          type: number
+        paymentMethod:
+          type: string
+        nameOnCreditCard:
+          type: string
+        paymentMethodUsed:
+          type: string
+        paymentCreditCardTypeName:
+          type: string
+        companyPaymentMethod:
+          type: string
+        statementDescription:
+          type: string
+        expensed:
+          type: boolean
+        bookingMethod:
+          type: string
+        outOfPolicy:
+          type: boolean
+        outOfPolicyDescription:
+          type: string
+        outOfPolicyViolations:
+          type: string
+        outOfPolicyViolationTypes:
+          type: array
+          items:
+            type: string
+        tripBucksEarned:
+          type: number
+        tripBucksEarnedUsd:
+          type: number
+        origin:
+          $ref: '#/components/schemas/Location'
+        destination:
+          $ref: '#/components/schemas/Location'
+        tripLength:
+          type: string
+        tripDescription:
+          type: string
+        approverReason:
+          type: string
+        approverEmail:
+          type: string
+        approvalChangedAt:
+          type: instant
+          example: "2021-02-03T11:25:30.00Z"
+        etickets:
+          type: array
+          items:
+            type: string
+        invoice:
+          type: string
+        pdf:
+          type: string
+        inventory:
+          type: string
+        flightMiles:
+          type: double
+          example: 60
+        trainMiles:
+          type: double
+          example: 35
+        carbonEmissions:
+          type: double
+          example: 87
+        carbonOffsetCost:
+          type: double
+          example: 13.67
+        fareClass:
+          type: string
+        purpose:
+          type: string
+        companyOffice:
+            type: string
+        tripName:
+          type: string
+        projects:
+          type: string
+        billToClient:
+          type: string
+        reason:
+          type: string
+        cnr:
+          $ref: '#/components/schemas/Cnr'
+        confirmationNumber:
+          description: Carrier id/Airline confirmation number
+        seats:
+          type: array
+          items:
+            type: string
+        customFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/Property'

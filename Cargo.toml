@@ -8,5 +8,6 @@ members = [
 	"google/groups-settings",
 	"gusto",
 	"ramp",
+	"tripactions",
 	"zoom"
 ]
