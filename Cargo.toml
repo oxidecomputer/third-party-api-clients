@@ -4,6 +4,7 @@ members = [
 	"generator",
 	"giphy",
 	"github",
+	"google/admin",
 	"google/calendar",
 	"google/drive",
 	"google/groups-settings",

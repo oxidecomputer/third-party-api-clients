@@ -8,18 +8,18 @@
 //!
 //! ### Contact
 //!
-//! 
+//!
 //! | name | url |
 //! |----|----|
 //! | Google | <https://google.com> |
-//! 
+//!
 //! ### License
 //!
-//! 
+//!
 //! | name | url |
 //! |----|----|
 //! | Creative Commons Attribution 3.0 | <http://creativecommons.org/licenses/by/3.0/> |
-//! 
+//!
 //!
 //! ## Client Details
 //!
@@ -27,7 +27,7 @@
 //! specs](https://admin.googleapis.com/iscovery/rest?version=directory_v1) based on API spec version `directory_v1`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
-//! 
+//!
 //!
 //! To install the library, add the following to your `Cargo.toml` file.
 //!
@@ -98,7 +98,6 @@
 //!     access_token = google admin.refresh_access_token().await.unwrap();
 //! }
 //! ```
-//!
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
@@ -107,11 +106,6 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-#[cfg(test)]
-mod tests;
-pub mod types;
-#[doc(hidden)]
-pub mod utils;
 pub mod asps;
 pub mod channels;
 pub mod chromeosdevices;
@@ -128,9 +122,14 @@ pub mod resources;
 pub mod role_assignments;
 pub mod roles;
 pub mod schemas;
+#[cfg(test)]
+mod tests;
 pub mod tokens;
 pub mod two_step_verification;
+pub mod types;
 pub mod users;
+#[doc(hidden)]
+pub mod utils;
 pub mod verification_codes;
 
 use anyhow::{anyhow, Error, Result};
@@ -138,7 +137,7 @@ use anyhow::{anyhow, Error, Result};
 pub const DEFAULT_HOST: &str = "https://www.googleapis.com/admin/directory/v1";
 
 mod progenitor_support {
-    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
+    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')
@@ -156,7 +155,6 @@ mod progenitor_support {
         utf8_percent_encode(pc, PATH_SET).to_string()
     }
 }
-
 
 use std::env;
 
@@ -270,19 +268,10 @@ impl Client {
         let client_secret = env::var("GOOGLE ADMIN_CLIENT_SECRET").unwrap();
         let redirect_uri = env::var("GOOGLE ADMIN_REDIRECT_URI").unwrap();
 
-        Client::new(
-            client_id,
-            client_secret,
-            redirect_uri,
-            token,
-            refresh_token,
-        )
+        Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
     }
 
-    async fn url_and_auth(
-        &self,
-        uri: &str,
-    ) -> Result<(reqwest::Url, Option<String>)> {
+    async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
         let parsed_url = uri.parse::<reqwest::Url>();
 
         let auth = format!("Bearer {}", self.token);
@@ -295,7 +284,7 @@ impl Client {
         uri: &str,
         body: Option<reqwest::Body>,
     ) -> Result<Out>
-        where
+    where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         let (url, auth) = self.url_and_auth(uri).await?;
@@ -366,9 +355,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let r = self
-            .request(method, uri, body)
-            .await?;
+        let r = self.request(method, uri, body).await?;
         Ok(r)
     }
 
@@ -466,7 +453,7 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -474,11 +461,12 @@ impl Client {
             http::Method::GET,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
-    async fn get_all_pages<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -487,7 +475,8 @@ impl Client {
             http::Method::GET,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -499,7 +488,8 @@ impl Client {
             http::Method::POST,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -511,7 +501,8 @@ impl Client {
             http::Method::PATCH,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -523,7 +514,8 @@ impl Client {
             http::Method::PUT,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -535,107 +527,107 @@ impl Client {
             http::Method::DELETE,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
-/// Return a reference to an interface that provides access to asps operations.
-               pub fn asps(&self) -> asps::Asps {
-                    asps::Asps::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to asps operations.
+    pub fn asps(&self) -> asps::Asps {
+        asps::Asps::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to channels operations.
-               pub fn channels(&self) -> channels::Channels {
-                    channels::Channels::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to channels operations.
+    pub fn channels(&self) -> channels::Channels {
+        channels::Channels::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to chromeosdevices operations.
-               pub fn chromeosdevices(&self) -> chromeosdevices::Chromeosdevices {
-                    chromeosdevices::Chromeosdevices::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to chromeosdevices operations.
+    pub fn chromeosdevices(&self) -> chromeosdevices::Chromeosdevices {
+        chromeosdevices::Chromeosdevices::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to customer operations.
-               pub fn customer(&self) -> customer::Customer {
-                    customer::Customer::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to customer operations.
+    pub fn customer(&self) -> customer::Customer {
+        customer::Customer::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to customers operations.
-               pub fn customers(&self) -> customers::Customers {
-                    customers::Customers::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to customers operations.
+    pub fn customers(&self) -> customers::Customers {
+        customers::Customers::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to domainAliases operations.
-               pub fn domain_aliases(&self) -> domain_aliases::DomainAliases {
-                    domain_aliases::DomainAliases::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to domainAliases operations.
+    pub fn domain_aliases(&self) -> domain_aliases::DomainAliases {
+        domain_aliases::DomainAliases::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to domains operations.
-               pub fn domains(&self) -> domains::Domains {
-                    domains::Domains::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to domains operations.
+    pub fn domains(&self) -> domains::Domains {
+        domains::Domains::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to groups operations.
-               pub fn groups(&self) -> groups::Groups {
-                    groups::Groups::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to groups operations.
+    pub fn groups(&self) -> groups::Groups {
+        groups::Groups::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to members operations.
-               pub fn members(&self) -> members::Members {
-                    members::Members::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to members operations.
+    pub fn members(&self) -> members::Members {
+        members::Members::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to mobiledevices operations.
-               pub fn mobiledevices(&self) -> mobiledevices::Mobiledevices {
-                    mobiledevices::Mobiledevices::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to mobiledevices operations.
+    pub fn mobiledevices(&self) -> mobiledevices::Mobiledevices {
+        mobiledevices::Mobiledevices::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to orgunits operations.
-               pub fn orgunits(&self) -> orgunits::Orgunits {
-                    orgunits::Orgunits::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to orgunits operations.
+    pub fn orgunits(&self) -> orgunits::Orgunits {
+        orgunits::Orgunits::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to privileges operations.
-               pub fn privileges(&self) -> privileges::Privileges {
-                    privileges::Privileges::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to privileges operations.
+    pub fn privileges(&self) -> privileges::Privileges {
+        privileges::Privileges::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to resources operations.
-               pub fn resources(&self) -> resources::Resources {
-                    resources::Resources::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to resources operations.
+    pub fn resources(&self) -> resources::Resources {
+        resources::Resources::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to roleAssignments operations.
-               pub fn role_assignments(&self) -> role_assignments::RoleAssignments {
-                    role_assignments::RoleAssignments::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to roleAssignments operations.
+    pub fn role_assignments(&self) -> role_assignments::RoleAssignments {
+        role_assignments::RoleAssignments::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to roles operations.
-               pub fn roles(&self) -> roles::Roles {
-                    roles::Roles::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to roles operations.
+    pub fn roles(&self) -> roles::Roles {
+        roles::Roles::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to schemas operations.
-               pub fn schemas(&self) -> schemas::Schemas {
-                    schemas::Schemas::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to schemas operations.
+    pub fn schemas(&self) -> schemas::Schemas {
+        schemas::Schemas::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to tokens operations.
-               pub fn tokens(&self) -> tokens::Tokens {
-                    tokens::Tokens::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to tokens operations.
+    pub fn tokens(&self) -> tokens::Tokens {
+        tokens::Tokens::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to twoStepVerification operations.
-               pub fn two_step_verification(&self) -> two_step_verification::TwoStepVerification {
-                    two_step_verification::TwoStepVerification::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to twoStepVerification operations.
+    pub fn two_step_verification(&self) -> two_step_verification::TwoStepVerification {
+        two_step_verification::TwoStepVerification::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to users operations.
-               pub fn users(&self) -> users::Users {
-                    users::Users::new(self.clone())
-               }
+    /// Return a reference to an interface that provides access to users operations.
+    pub fn users(&self) -> users::Users {
+        users::Users::new(self.clone())
+    }
 
-/// Return a reference to an interface that provides access to verificationCodes operations.
-               pub fn verification_codes(&self) -> verification_codes::VerificationCodes {
-                    verification_codes::VerificationCodes::new(self.clone())
-               }
-
+    /// Return a reference to an interface that provides access to verificationCodes operations.
+    pub fn verification_codes(&self) -> verification_codes::VerificationCodes {
+        verification_codes::VerificationCodes::new(self.clone())
+    }
 }
