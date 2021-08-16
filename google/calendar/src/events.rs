@@ -70,7 +70,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
         updated_min: &str,
-    ) -> Result<Vec<crate::types::EventReminder>> {
+    ) -> Result<Vec<crate::types::EventData>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -143,7 +143,7 @@ impl Events {
         let resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.default_reminders)
+        Ok(resp.items)
     }
 
     /**
@@ -170,7 +170,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
         updated_min: &str,
-    ) -> Result<Vec<crate::types::EventReminder>> {
+    ) -> Result<Vec<crate::types::EventData>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -236,7 +236,7 @@ impl Events {
 
         let mut resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
 
-        let mut default_reminders = resp.default_reminders;
+        let mut items = resp.items;
         let mut page = resp.next_page_token;
 
         // Paginate if we should.
@@ -255,7 +255,7 @@ impl Events {
                     .unwrap();
             }
 
-            default_reminders.append(&mut resp.default_reminders);
+            items.append(&mut resp.items);
 
             if !resp.next_page_token.is_empty() && resp.next_page_token != page {
                 page = resp.next_page_token.to_string();
@@ -265,7 +265,7 @@ impl Events {
         }
 
         // Return our response data.
-        Ok(default_reminders)
+        Ok(items)
     }
 
     /**
@@ -822,7 +822,7 @@ impl Events {
         time_max: &str,
         time_min: &str,
         time_zone: &str,
-    ) -> Result<Vec<crate::types::EventReminder>> {
+    ) -> Result<Vec<crate::types::EventData>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -868,7 +868,7 @@ impl Events {
         let resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
 
         // Return our response data.
-        Ok(resp.default_reminders)
+        Ok(resp.items)
     }
 
     /**
@@ -889,7 +889,7 @@ impl Events {
         time_max: &str,
         time_min: &str,
         time_zone: &str,
-    ) -> Result<Vec<crate::types::EventReminder>> {
+    ) -> Result<Vec<crate::types::EventData>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -928,7 +928,7 @@ impl Events {
 
         let mut resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
 
-        let mut default_reminders = resp.default_reminders;
+        let mut items = resp.items;
         let mut page = resp.next_page_token;
 
         // Paginate if we should.
@@ -947,7 +947,7 @@ impl Events {
                     .unwrap();
             }
 
-            default_reminders.append(&mut resp.default_reminders);
+            items.append(&mut resp.items);
 
             if !resp.next_page_token.is_empty() && resp.next_page_token != page {
                 page = resp.next_page_token.to_string();
@@ -957,7 +957,7 @@ impl Events {
         }
 
         // Return our response data.
-        Ok(default_reminders)
+        Ok(items)
     }
 
     /**

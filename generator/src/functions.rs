@@ -453,16 +453,22 @@ fn get_response_type_from_object(
         if let Some(pid) = p.get("nextPageToken") {
             let rt = ts.render_type(pid, false)?;
             if rt == "String" {
-                for (n, id) in p {
-                    // Now we must find the property with the vector for this struct.
-                    let rt = ts.render_type(id, false)?;
-                    if rt.starts_with("Vec<") {
-                        return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
+                if let Some(did) = p.get("items") {
+                    let rt = ts.render_type(did, false)?;
+                    return Ok((og_rt, did.clone(), rt, "items".to_string()));
+                } else {
+                    for (n, id) in p {
+                        // Now we must find the property with the vector for this struct.
+                        let rt = ts.render_type(id, false)?;
+                        if rt.starts_with("Vec<") {
+                            return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
+                        }
                     }
                 }
             }
         }
     }
+
     Ok((og_rt, tid, "".to_string(), "".to_string()))
 }
 
