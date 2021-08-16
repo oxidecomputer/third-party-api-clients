@@ -54908,7 +54908,7 @@ pub struct GraphicsContext {
 }
 
 /// This object contains information about a group.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Group {
     /**
      * This object contains information about a group.

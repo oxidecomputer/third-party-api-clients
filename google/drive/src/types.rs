@@ -3236,7 +3236,7 @@ pub struct TeamDriveList {
 }
 
 /// Information about a Drive user.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
      * Information about a Drive user.

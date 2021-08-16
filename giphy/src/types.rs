@@ -473,7 +473,7 @@ pub struct Pagination {
 }
 
 /// The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
      * The User Object contains information about the user associated with a GIF and URLs to assets such as that user's avatar image, profile, and more.

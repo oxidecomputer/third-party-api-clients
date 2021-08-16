@@ -1116,7 +1116,7 @@ pub struct Source {
     pub url: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {
     /**
      * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.

@@ -85,7 +85,7 @@ impl Role {
 }
 
 /// Ramp User
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
      * The OAuth2 token header

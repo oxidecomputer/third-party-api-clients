@@ -2596,7 +2596,7 @@ pub struct Device {
 }
 
 /// Group object.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Group {
     /**
      * Group object.
@@ -6215,7 +6215,7 @@ pub struct Pac {
 }
 
 /// The user object represents a specific user on Zoom.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
      * The user object represents a specific user on Zoom.

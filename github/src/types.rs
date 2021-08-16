@@ -3534,7 +3534,7 @@ pub struct CombinedBillingUsage {
 }
 
 /// Actor
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Actor {
     #[serde(
         default,
@@ -4138,7 +4138,7 @@ pub struct IssueComment {
     pub user: Option<SimpleUser>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Repo {
     #[serde(
         default,
@@ -4200,7 +4200,7 @@ pub struct EventPayloadPages {
     pub title: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Payload {
     #[serde(
         default,
@@ -4223,7 +4223,7 @@ pub struct Payload {
 }
 
 /// Event
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {
     /**
      * Actor
@@ -19089,7 +19089,7 @@ pub struct PagesHealthCheck {
     pub domain: Option<Domain>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     #[serde(
         default,

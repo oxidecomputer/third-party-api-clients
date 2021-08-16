@@ -5078,7 +5078,7 @@ pub struct PutCompanyPayrollsRequest {
 }
 
 /// Information for the user who will be the primary payroll administrator for the new company.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct User {
     /**
      * A unique identifier of the employee in Gusto.

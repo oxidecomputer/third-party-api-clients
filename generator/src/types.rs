@@ -70,6 +70,14 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                         || sn == "PagesHttpsCertificate"
                         || sn == "ErrorDetails"
                         || sn == "EnvelopeDefinition"
+                        || sn == "Event"
+                        || sn == "User"
+                        || sn == "Group"
+                        || sn == "CalendarResource"
+                        || sn == "Building"
+                        || sn == "Repo"
+                        || sn == "Payload"
+                        || sn == "Actor"
                     {
                         a(
                             "#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, \
