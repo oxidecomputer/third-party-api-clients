@@ -40,7 +40,7 @@ impl BookingData {
         page: u64,
         size: i64,
         booking_type: crate::types::BookingType,
-    ) -> Result<crate::types::BookingReportResponse> {
+    ) -> Result<Vec<crate::types::BookingReport>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("booking_status={}", booking_status));
@@ -69,6 +69,54 @@ impl BookingData {
         }
         let url = format!("/v1/bookings?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::BookingReportResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+     * Your company's bookings.
+     *
+     * This function performs a `GET` to the `/v1/bookings` endpoint.
+     *
+     * As opposed to `get_booking_report`, this function returns all the pages of the request at once.
+     *
+     * Return booking rows filtered by the parameters you select.
+     */
+    pub async fn get_all_booking_report(
+        &self,
+        created_from: &str,
+        created_to: &str,
+        start_date_from: &str,
+        start_date_to: &str,
+        booking_status: crate::types::BookingStatus,
+        booking_type: crate::types::BookingType,
+    ) -> Result<Vec<crate::types::BookingReport>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("booking_status={}", booking_status));
+        query_args.push(format!("booking_type={}", booking_type));
+        if !created_from.is_empty() {
+            query_args.push(format!("created_from={}", created_from));
+        }
+        if !created_to.is_empty() {
+            query_args.push(format!("created_to={}", created_to));
+        }
+        if !start_date_from.is_empty() {
+            query_args.push(format!("start_date_from={}", start_date_from));
+        }
+        if !start_date_to.is_empty() {
+            query_args.push(format!("start_date_to={}", start_date_to));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!("/v1/bookings?{}", query_);
+
+        self.client.get_all_pages(&url, None).await
     }
 }

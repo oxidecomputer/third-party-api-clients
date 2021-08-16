@@ -23,14 +23,10 @@ impl Privileges {
      */
     pub async fn directory_list(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -38,9 +34,6 @@ impl Privileges {
     ) -> Result<crate::types::Privileges> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -51,12 +44,6 @@ impl Privileges {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -66,7 +53,6 @@ impl Privileges {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

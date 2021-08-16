@@ -23,14 +23,10 @@ impl Customers {
      */
     pub async fn directory_get(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -38,9 +34,6 @@ impl Customers {
     ) -> Result<crate::types::Customer> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -51,12 +44,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -66,7 +53,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -93,14 +79,10 @@ impl Customers {
      */
     pub async fn directory_update(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -109,9 +91,6 @@ impl Customers {
     ) -> Result<crate::types::Customer> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -122,12 +101,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -137,7 +110,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -169,14 +141,10 @@ impl Customers {
      */
     pub async fn directory_patch(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -185,9 +153,6 @@ impl Customers {
     ) -> Result<crate::types::Customer> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -198,12 +163,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -213,7 +172,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -245,14 +203,10 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_get(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -260,9 +214,6 @@ impl Customers {
     ) -> Result<crate::types::Printer> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -273,12 +224,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -288,7 +233,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -315,14 +259,10 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_delete(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -330,9 +270,6 @@ impl Customers {
     ) -> Result<crate::types::Empty> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -343,12 +280,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -358,7 +289,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -387,14 +317,10 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_patch(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -405,9 +331,6 @@ impl Customers {
     ) -> Result<crate::types::Printer> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -421,12 +344,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -439,7 +356,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -475,14 +391,10 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_list(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -491,12 +403,9 @@ impl Customers {
         org_unit_id: &str,
         page_size: i64,
         page_token: &str,
-    ) -> Result<crate::types::ListPrintersResponse> {
+    ) -> Result<Vec<crate::types::Printer>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -510,9 +419,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !org_unit_id.is_empty() {
             query_args.push(format!("org_unit_id={}", org_unit_id));
         }
@@ -521,9 +427,6 @@ impl Customers {
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -534,7 +437,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -547,7 +449,104 @@ impl Customers {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListPrintersResponse = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.printers)
+    }
+
+    /**
+     * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers` endpoint.
+     *
+     * As opposed to `admin_chrome_printers_list`, this function returns all the pages of the request at once.
+     *
+     * List printers configs.
+     */
+    pub async fn admin_chrome_printers_list_customers(
+        &self,
+        alt: crate::types::Alt,
+        callback: &str,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        upload_protocol: &str,
+        upload_type: &str,
+        parent: &str,
+        filter: &str,
+        org_unit_id: &str,
+    ) -> Result<Vec<crate::types::Printer>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if !callback.is_empty() {
+            query_args.push(format!("callback={}", callback));
+        }
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if !filter.is_empty() {
+            query_args.push(format!("filter={}", filter));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        if !org_unit_id.is_empty() {
+            query_args.push(format!("org_unit_id={}", org_unit_id));
+        }
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        if !upload_protocol.is_empty() {
+            query_args.push(format!("upload_protocol={}", upload_protocol));
+        }
+        if !upload_type.is_empty() {
+            query_args.push(format!("upload_type={}", upload_type));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!(
+            "/admin/directory/v1/{}/chrome/printers?{}",
+            crate::progenitor_support::encode_path(&parent.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::ListPrintersResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut printers = resp.printers;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            printers.append(&mut resp.printers);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(printers)
     }
 
     /**
@@ -561,14 +560,10 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_create(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -577,9 +572,6 @@ impl Customers {
     ) -> Result<crate::types::Printer> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -590,12 +582,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -605,7 +591,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -637,14 +622,10 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_batch_create(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -653,9 +634,6 @@ impl Customers {
     ) -> Result<crate::types::BatchCreatePrintersResponse> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -666,12 +644,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -681,7 +653,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -713,14 +684,10 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_batch_delete(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -729,9 +696,6 @@ impl Customers {
     ) -> Result<crate::types::BatchDeletePrintersResponse> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -742,12 +706,6 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -757,7 +715,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -792,14 +749,10 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_list_printer_models(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -807,12 +760,9 @@ impl Customers {
         filter: &str,
         page_size: i64,
         page_token: &str,
-    ) -> Result<crate::types::ListPrinterModelsResponse> {
+    ) -> Result<Vec<crate::types::PrinterModel>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -826,17 +776,11 @@ impl Customers {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -847,7 +791,6 @@ impl Customers {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -860,6 +803,100 @@ impl Customers {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListPrinterModelsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.printer_models)
+    }
+
+    /**
+     * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers:listPrinterModels` endpoint.
+     *
+     * As opposed to `admin_chrome_printers_list_printer_models`, this function returns all the pages of the request at once.
+     *
+     * Lists the supported printer models.
+     */
+    pub async fn admin_chrome_printers_list_all_printer_models(
+        &self,
+        alt: crate::types::Alt,
+        callback: &str,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        upload_protocol: &str,
+        upload_type: &str,
+        parent: &str,
+        filter: &str,
+    ) -> Result<Vec<crate::types::PrinterModel>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if !callback.is_empty() {
+            query_args.push(format!("callback={}", callback));
+        }
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if !filter.is_empty() {
+            query_args.push(format!("filter={}", filter));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        if !upload_protocol.is_empty() {
+            query_args.push(format!("upload_protocol={}", upload_protocol));
+        }
+        if !upload_type.is_empty() {
+            query_args.push(format!("upload_type={}", upload_type));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!(
+            "/admin/directory/v1/{}/chrome/printers:listPrinterModels?{}",
+            crate::progenitor_support::encode_path(&parent.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::ListPrinterModelsResponse =
+            self.client.get(&url, None).await.unwrap();
+
+        let mut printer_models = resp.printer_models;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            printer_models.append(&mut resp.printer_models);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(printer_models)
     }
 }

@@ -32,8 +32,6 @@ impl Permissions {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -43,7 +41,7 @@ impl Permissions {
         supports_all_drives: bool,
         supports_team_drives: bool,
         use_domain_admin_access: bool,
-    ) -> Result<crate::types::PermissionList> {
+    ) -> Result<Vec<crate::types::Permission>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
@@ -59,17 +57,11 @@ impl Permissions {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -101,7 +93,109 @@ impl Permissions {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PermissionList = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.permissions)
+    }
+
+    /**
+     * This function performs a `GET` to the `/files/{fileId}/permissions` endpoint.
+     *
+     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     *
+     * Lists a file's or shared drive's permissions.
+     */
+    pub async fn drive_list_permissions(
+        &self,
+        alt: crate::types::Alt,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        user_ip: &str,
+        file_id: &str,
+        include_permissions_for_view: &str,
+        supports_all_drives: bool,
+        supports_team_drives: bool,
+        use_domain_admin_access: bool,
+    ) -> Result<Vec<crate::types::Permission>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if !include_permissions_for_view.is_empty() {
+            query_args.push(format!(
+                "include_permissions_for_view={}",
+                include_permissions_for_view
+            ));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        if supports_all_drives {
+            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+        }
+        if supports_team_drives {
+            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+        }
+        if use_domain_admin_access {
+            query_args.push(format!(
+                "use_domain_admin_access={}",
+                use_domain_admin_access
+            ));
+        }
+        if !user_ip.is_empty() {
+            query_args.push(format!("user_ip={}", user_ip));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!(
+            "/files/{}/permissions?{}",
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::PermissionList = self.client.get(&url, None).await.unwrap();
+
+        let mut permissions = resp.permissions;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            permissions.append(&mut resp.permissions);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(permissions)
     }
 
     /**
@@ -126,8 +220,6 @@ impl Permissions {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -161,12 +253,6 @@ impl Permissions {
                 "move_to_new_owners_root={}",
                 move_to_new_owners_root
             ));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -233,8 +319,6 @@ impl Permissions {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -251,12 +335,6 @@ impl Permissions {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -310,8 +388,6 @@ impl Permissions {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -328,12 +404,6 @@ impl Permissions {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -389,8 +459,6 @@ impl Permissions {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -410,12 +478,6 @@ impl Permissions {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));

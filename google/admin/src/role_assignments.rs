@@ -27,14 +27,10 @@ impl RoleAssignments {
      */
     pub async fn directory_list(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -43,12 +39,9 @@ impl RoleAssignments {
         page_token: &str,
         role_id: &str,
         user_key: &str,
-    ) -> Result<crate::types::RoleAssignments> {
+    ) -> Result<Vec<crate::types::RoleAssignment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -62,14 +55,8 @@ impl RoleAssignments {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -86,7 +73,6 @@ impl RoleAssignments {
         if !user_key.is_empty() {
             query_args.push(format!("user_key={}", user_key));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -99,7 +85,103 @@ impl RoleAssignments {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::RoleAssignments = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.items)
+    }
+
+    /**
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
+     *
+     * As opposed to `directory_list`, this function returns all the pages of the request at once.
+     *
+     * Retrieves a paginated list of all roleAssignments.
+     */
+    pub async fn directory_list_role_assignments(
+        &self,
+        alt: crate::types::Alt,
+        callback: &str,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        upload_protocol: &str,
+        upload_type: &str,
+        customer: &str,
+        role_id: &str,
+        user_key: &str,
+    ) -> Result<Vec<crate::types::RoleAssignment>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if !callback.is_empty() {
+            query_args.push(format!("callback={}", callback));
+        }
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        if !role_id.is_empty() {
+            query_args.push(format!("role_id={}", role_id));
+        }
+        if !upload_protocol.is_empty() {
+            query_args.push(format!("upload_protocol={}", upload_protocol));
+        }
+        if !upload_type.is_empty() {
+            query_args.push(format!("upload_type={}", upload_type));
+        }
+        if !user_key.is_empty() {
+            query_args.push(format!("user_key={}", user_key));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!(
+            "/admin/directory/v1/customer/{}/roleassignments?{}",
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::RoleAssignments = self.client.get(&url, None).await.unwrap();
+
+        let mut items = resp.items;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            items.append(&mut resp.items);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(items)
     }
 
     /**
@@ -113,14 +195,10 @@ impl RoleAssignments {
      */
     pub async fn directory_insert(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -129,9 +207,6 @@ impl RoleAssignments {
     ) -> Result<crate::types::RoleAssignment> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -142,12 +217,6 @@ impl RoleAssignments {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -157,7 +226,6 @@ impl RoleAssignments {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -190,14 +258,10 @@ impl RoleAssignments {
      */
     pub async fn directory_get(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -206,9 +270,6 @@ impl RoleAssignments {
     ) -> Result<crate::types::RoleAssignment> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -219,12 +280,6 @@ impl RoleAssignments {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -234,7 +289,6 @@ impl RoleAssignments {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -263,14 +317,10 @@ impl RoleAssignments {
      */
     pub async fn directory_delete(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -279,9 +329,6 @@ impl RoleAssignments {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -292,12 +339,6 @@ impl RoleAssignments {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -307,7 +348,6 @@ impl RoleAssignments {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

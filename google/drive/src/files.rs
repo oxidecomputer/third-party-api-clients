@@ -39,8 +39,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         corpora: &str,
@@ -57,7 +55,7 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
         team_drive_id: &str,
-    ) -> Result<crate::types::FileList> {
+    ) -> Result<Vec<crate::types::File>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
@@ -92,9 +90,6 @@ impl Files {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !order_by.is_empty() {
             query_args.push(format!("order_by={}", order_by));
         }
@@ -103,9 +98,6 @@ impl Files {
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
@@ -136,7 +128,137 @@ impl Files {
         }
         let url = format!("/files?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::FileList = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.files)
+    }
+
+    /**
+     * This function performs a `GET` to the `/files` endpoint.
+     *
+     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     *
+     * Lists or searches files.
+     */
+    pub async fn drive_list_files(
+        &self,
+        alt: crate::types::Alt,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        user_ip: &str,
+        corpora: &str,
+        corpus: crate::types::Corpus,
+        drive_id: &str,
+        include_items_from_all_drives: bool,
+        include_permissions_for_view: &str,
+        include_team_drive_items: bool,
+        order_by: &str,
+        q: &str,
+        spaces: &str,
+        supports_all_drives: bool,
+        supports_team_drives: bool,
+        team_drive_id: &str,
+    ) -> Result<Vec<crate::types::File>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if !corpora.is_empty() {
+            query_args.push(format!("corpora={}", corpora));
+        }
+        query_args.push(format!("corpus={}", corpus));
+        if !drive_id.is_empty() {
+            query_args.push(format!("drive_id={}", drive_id));
+        }
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if include_items_from_all_drives {
+            query_args.push(format!(
+                "include_items_from_all_drives={}",
+                include_items_from_all_drives
+            ));
+        }
+        if !include_permissions_for_view.is_empty() {
+            query_args.push(format!(
+                "include_permissions_for_view={}",
+                include_permissions_for_view
+            ));
+        }
+        if include_team_drive_items {
+            query_args.push(format!(
+                "include_team_drive_items={}",
+                include_team_drive_items
+            ));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        if !order_by.is_empty() {
+            query_args.push(format!("order_by={}", order_by));
+        }
+        if !q.is_empty() {
+            query_args.push(format!("q={}", q));
+        }
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        if !spaces.is_empty() {
+            query_args.push(format!("spaces={}", spaces));
+        }
+        if supports_all_drives {
+            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+        }
+        if supports_team_drives {
+            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+        }
+        if !team_drive_id.is_empty() {
+            query_args.push(format!("team_drive_id={}", team_drive_id));
+        }
+        if !user_ip.is_empty() {
+            query_args.push(format!("user_ip={}", user_ip));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!("/files?{}", query_);
+
+        let mut resp: crate::types::FileList = self.client.get(&url, None).await.unwrap();
+
+        let mut files = resp.files;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            files.append(&mut resp.files);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(files)
     }
 
     /**
@@ -160,8 +282,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         enforce_single_parent: bool,
@@ -201,14 +321,8 @@ impl Files {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !ocr_language.is_empty() {
             query_args.push(format!("ocr_language={}", ocr_language));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -260,8 +374,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         count: i64,
@@ -279,12 +391,6 @@ impl Files {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -323,8 +429,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         enforce_single_parent: bool,
@@ -340,12 +444,6 @@ impl Files {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -382,8 +480,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -409,12 +505,6 @@ impl Files {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -460,8 +550,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -480,12 +568,6 @@ impl Files {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -537,8 +619,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -577,14 +657,8 @@ impl Files {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !ocr_language.is_empty() {
             query_args.push(format!("ocr_language={}", ocr_language));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -648,8 +722,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -689,14 +761,8 @@ impl Files {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !ocr_language.is_empty() {
             query_args.push(format!("ocr_language={}", ocr_language));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -745,8 +811,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -763,12 +827,6 @@ impl Files {
         }
         if !mime_type.is_empty() {
             query_args.push(format!("mime_type={}", mime_type));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -809,8 +867,6 @@ impl Files {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         file_id: &str,
@@ -837,12 +893,6 @@ impl Files {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));

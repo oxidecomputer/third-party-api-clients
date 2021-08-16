@@ -29,14 +29,10 @@ impl Mobiledevices {
      */
     pub async fn directory_list(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -47,12 +43,9 @@ impl Mobiledevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> Result<crate::types::MobileDevices> {
+    ) -> Result<Vec<crate::types::MobileDevice>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -66,15 +59,9 @@ impl Mobiledevices {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         query_args.push(format!("order_by={}", order_by));
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         query_args.push(format!("projection={}", projection));
         if !query.is_empty() {
@@ -90,7 +77,6 @@ impl Mobiledevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -103,7 +89,105 @@ impl Mobiledevices {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::MobileDevices = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.mobiledevices)
+    }
+
+    /**
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile` endpoint.
+     *
+     * As opposed to `directory_list`, this function returns all the pages of the request at once.
+     *
+     * Retrieves a paginated list of all mobile devices for an account.
+     */
+    pub async fn directory_list_mobiledevices(
+        &self,
+        alt: crate::types::Alt,
+        callback: &str,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        upload_protocol: &str,
+        upload_type: &str,
+        customer_id: &str,
+        order_by: crate::types::DirectoryMobiledevicesListOrderBy,
+        projection: crate::types::Projection,
+        query: &str,
+        sort_order: crate::types::SortOrder,
+    ) -> Result<Vec<crate::types::MobileDevice>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if !callback.is_empty() {
+            query_args.push(format!("callback={}", callback));
+        }
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        query_args.push(format!("order_by={}", order_by));
+        query_args.push(format!("projection={}", projection));
+        if !query.is_empty() {
+            query_args.push(format!("query={}", query));
+        }
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        query_args.push(format!("sort_order={}", sort_order));
+        if !upload_protocol.is_empty() {
+            query_args.push(format!("upload_protocol={}", upload_protocol));
+        }
+        if !upload_type.is_empty() {
+            query_args.push(format!("upload_type={}", upload_type));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!(
+            "/admin/directory/v1/customer/{}/devices/mobile?{}",
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::MobileDevices = self.client.get(&url, None).await.unwrap();
+
+        let mut mobiledevices = resp.mobiledevices;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            mobiledevices.append(&mut resp.mobiledevices);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(mobiledevices)
     }
 
     /**
@@ -119,14 +203,10 @@ impl Mobiledevices {
      */
     pub async fn directory_get(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -136,9 +216,6 @@ impl Mobiledevices {
     ) -> Result<crate::types::MobileDevice> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -148,12 +225,6 @@ impl Mobiledevices {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         query_args.push(format!("projection={}", projection));
         if !quota_user.is_empty() {
@@ -165,7 +236,6 @@ impl Mobiledevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -194,14 +264,10 @@ impl Mobiledevices {
      */
     pub async fn directory_delete(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -210,9 +276,6 @@ impl Mobiledevices {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -223,12 +286,6 @@ impl Mobiledevices {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -238,7 +295,6 @@ impl Mobiledevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -267,14 +323,10 @@ impl Mobiledevices {
      */
     pub async fn directory_action(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -284,9 +336,6 @@ impl Mobiledevices {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -297,12 +346,6 @@ impl Mobiledevices {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -312,7 +355,6 @@ impl Mobiledevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

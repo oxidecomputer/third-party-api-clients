@@ -30,14 +30,10 @@ impl Chromeosdevices {
      */
     pub async fn directory_list(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -49,12 +45,9 @@ impl Chromeosdevices {
         projection: crate::types::Projection,
         query: &str,
         sort_order: crate::types::SortOrder,
-    ) -> Result<crate::types::ChromeOsDevices> {
+    ) -> Result<Vec<crate::types::ChromeOsDevice>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -68,18 +61,12 @@ impl Chromeosdevices {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         query_args.push(format!("order_by={}", order_by));
         if !org_unit_path.is_empty() {
             query_args.push(format!("org_unit_path={}", org_unit_path));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         query_args.push(format!("projection={}", projection));
         if !query.is_empty() {
@@ -95,7 +82,6 @@ impl Chromeosdevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -108,7 +94,109 @@ impl Chromeosdevices {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ChromeOsDevices = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.chromeosdevices)
+    }
+
+    /**
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos` endpoint.
+     *
+     * As opposed to `directory_list`, this function returns all the pages of the request at once.
+     *
+     * Retrieves a paginated list of Chrome OS devices within an account.
+     */
+    pub async fn directory_list_chromeosdevices(
+        &self,
+        alt: crate::types::Alt,
+        callback: &str,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        upload_protocol: &str,
+        upload_type: &str,
+        customer_id: &str,
+        order_by: crate::types::OrderBy,
+        org_unit_path: &str,
+        projection: crate::types::Projection,
+        query: &str,
+        sort_order: crate::types::SortOrder,
+    ) -> Result<Vec<crate::types::ChromeOsDevice>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if !callback.is_empty() {
+            query_args.push(format!("callback={}", callback));
+        }
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        query_args.push(format!("order_by={}", order_by));
+        if !org_unit_path.is_empty() {
+            query_args.push(format!("org_unit_path={}", org_unit_path));
+        }
+        query_args.push(format!("projection={}", projection));
+        if !query.is_empty() {
+            query_args.push(format!("query={}", query));
+        }
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        query_args.push(format!("sort_order={}", sort_order));
+        if !upload_protocol.is_empty() {
+            query_args.push(format!("upload_protocol={}", upload_protocol));
+        }
+        if !upload_type.is_empty() {
+            query_args.push(format!("upload_type={}", upload_type));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!(
+            "/admin/directory/v1/customer/{}/devices/chromeos?{}",
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::ChromeOsDevices = self.client.get(&url, None).await.unwrap();
+
+        let mut chromeosdevices = resp.chromeosdevices;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            chromeosdevices.append(&mut resp.chromeosdevices);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(chromeosdevices)
     }
 
     /**
@@ -123,14 +211,10 @@ impl Chromeosdevices {
      */
     pub async fn directory_move_devices_to_ou(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -140,9 +224,6 @@ impl Chromeosdevices {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -153,14 +234,8 @@ impl Chromeosdevices {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !org_unit_path.is_empty() {
             query_args.push(format!("org_unit_path={}", org_unit_path));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -171,7 +246,6 @@ impl Chromeosdevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -205,14 +279,10 @@ impl Chromeosdevices {
      */
     pub async fn directory_get(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -222,9 +292,6 @@ impl Chromeosdevices {
     ) -> Result<crate::types::ChromeOsDevice> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -234,12 +301,6 @@ impl Chromeosdevices {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         query_args.push(format!("projection={}", projection));
         if !quota_user.is_empty() {
@@ -251,7 +312,6 @@ impl Chromeosdevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -281,14 +341,10 @@ impl Chromeosdevices {
      */
     pub async fn directory_update(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -299,9 +355,6 @@ impl Chromeosdevices {
     ) -> Result<crate::types::ChromeOsDevice> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -311,12 +364,6 @@ impl Chromeosdevices {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         query_args.push(format!("projection={}", projection));
         if !quota_user.is_empty() {
@@ -328,7 +375,6 @@ impl Chromeosdevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -363,14 +409,10 @@ impl Chromeosdevices {
      */
     pub async fn directory_patch(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -381,9 +423,6 @@ impl Chromeosdevices {
     ) -> Result<crate::types::ChromeOsDevice> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -393,12 +432,6 @@ impl Chromeosdevices {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         query_args.push(format!("projection={}", projection));
         if !quota_user.is_empty() {
@@ -410,7 +443,6 @@ impl Chromeosdevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -444,14 +476,10 @@ impl Chromeosdevices {
      */
     pub async fn directory_action(
         &self,
-        xgafv: crate::types::Xgafv,
-        access_token: &str,
         alt: crate::types::Alt,
         callback: &str,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         upload_protocol: &str,
         upload_type: &str,
@@ -461,9 +489,6 @@ impl Chromeosdevices {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if !access_token.is_empty() {
-            query_args.push(format!("access_token={}", access_token));
-        }
         query_args.push(format!("alt={}", alt));
         if !callback.is_empty() {
             query_args.push(format!("callback={}", callback));
@@ -474,12 +499,6 @@ impl Chromeosdevices {
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
-        }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
         }
@@ -489,7 +508,6 @@ impl Chromeosdevices {
         if !upload_type.is_empty() {
             query_args.push(format!("upload_type={}", upload_type));
         }
-        query_args.push(format!("xgafv={}", xgafv));
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

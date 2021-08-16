@@ -56,8 +56,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -78,7 +76,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
         updated_min: &str,
-    ) -> Result<crate::types::Events> {
+    ) -> Result<Vec<crate::types::EventReminder>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
@@ -100,15 +98,9 @@ impl Events {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         query_args.push(format!("order_by={}", order_by));
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !private_extended_property.is_empty() {
             query_args.push(format!(
@@ -170,7 +162,150 @@ impl Events {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.default_reminders)
+    }
+
+    /**
+     * This function performs a `GET` to the `/calendars/{calendarId}/events` endpoint.
+     *
+     * As opposed to `calendar_list`, this function returns all the pages of the request at once.
+     *
+     * Returns events on the specified calendar.
+     */
+    pub async fn calendar_list_events(
+        &self,
+        alt: crate::types::Alt,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        user_ip: &str,
+        calendar_id: &str,
+        always_include_email: bool,
+        i_cal_uid: &str,
+        max_attendees: i64,
+        order_by: crate::types::OrderBy,
+        private_extended_property: &[String],
+        q: &str,
+        shared_extended_property: &[String],
+        show_deleted: bool,
+        show_hidden_invitations: bool,
+        single_events: bool,
+        time_max: &str,
+        time_min: &str,
+        time_zone: &str,
+        updated_min: &str,
+    ) -> Result<Vec<crate::types::EventReminder>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if always_include_email {
+            query_args.push(format!("always_include_email={}", always_include_email));
+        }
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if !i_cal_uid.is_empty() {
+            query_args.push(format!("i_cal_uid={}", i_cal_uid));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        if max_attendees > 0 {
+            query_args.push(format!("max_attendees={}", max_attendees));
+        }
+        query_args.push(format!("order_by={}", order_by));
+        if !private_extended_property.is_empty() {
+            query_args.push(format!(
+                "private_extended_property={}",
+                private_extended_property.join(" ")
+            ));
+        }
+        if !q.is_empty() {
+            query_args.push(format!("q={}", q));
+        }
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        if !shared_extended_property.is_empty() {
+            query_args.push(format!(
+                "shared_extended_property={}",
+                shared_extended_property.join(" ")
+            ));
+        }
+        if show_deleted {
+            query_args.push(format!("show_deleted={}", show_deleted));
+        }
+        if show_hidden_invitations {
+            query_args.push(format!(
+                "show_hidden_invitations={}",
+                show_hidden_invitations
+            ));
+        }
+        if single_events {
+            query_args.push(format!("single_events={}", single_events));
+        }
+        if !time_max.is_empty() {
+            query_args.push(format!("time_max={}", time_max));
+        }
+        if !time_min.is_empty() {
+            query_args.push(format!("time_min={}", time_min));
+        }
+        if !time_zone.is_empty() {
+            query_args.push(format!("time_zone={}", time_zone));
+        }
+        if !updated_min.is_empty() {
+            query_args.push(format!("updated_min={}", updated_min));
+        }
+        if !user_ip.is_empty() {
+            query_args.push(format!("user_ip={}", user_ip));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!(
+            "/calendars/{}/events?{}",
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
+
+        let mut default_reminders = resp.default_reminders;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            default_reminders.append(&mut resp.default_reminders);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(default_reminders)
     }
 
     /**
@@ -194,8 +329,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -221,12 +354,6 @@ impl Events {
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -277,8 +404,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -298,12 +423,6 @@ impl Events {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -353,8 +472,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -370,12 +487,6 @@ impl Events {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -449,8 +560,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -494,15 +603,9 @@ impl Events {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         query_args.push(format!("order_by={}", order_by));
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !private_extended_property.is_empty() {
             query_args.push(format!(
@@ -590,8 +693,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -614,12 +715,6 @@ impl Events {
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -669,8 +764,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -701,12 +794,6 @@ impl Events {
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -761,8 +848,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -778,12 +863,6 @@ impl Events {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -834,8 +913,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -866,12 +943,6 @@ impl Events {
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -926,13 +997,11 @@ impl Events {
      * * `time_min: &str` -- Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset.
      * * `time_zone: &str` -- Time zone used in the response. Optional. The default is the time zone of the calendar.
      */
-    pub async fn calendar_instance(
+    pub async fn calendar_instances(
         &self,
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -946,7 +1015,7 @@ impl Events {
         time_max: &str,
         time_min: &str,
         time_zone: &str,
-    ) -> Result<crate::types::Events> {
+    ) -> Result<Vec<crate::types::EventReminder>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
@@ -965,17 +1034,11 @@ impl Events {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !original_start.is_empty() {
             query_args.push(format!("original_start={}", original_start));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -1008,7 +1071,117 @@ impl Events {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.default_reminders)
+    }
+
+    /**
+     * This function performs a `GET` to the `/calendars/{calendarId}/events/{eventId}/instances` endpoint.
+     *
+     * As opposed to `calendar_instances`, this function returns all the pages of the request at once.
+     *
+     * Returns instances of the specified recurring event.
+     */
+    pub async fn get_all_calendar_instances(
+        &self,
+        alt: crate::types::Alt,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        user_ip: &str,
+        calendar_id: &str,
+        event_id: &str,
+        always_include_email: bool,
+        max_attendees: i64,
+        original_start: &str,
+        show_deleted: bool,
+        time_max: &str,
+        time_min: &str,
+        time_zone: &str,
+    ) -> Result<Vec<crate::types::EventReminder>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if always_include_email {
+            query_args.push(format!("always_include_email={}", always_include_email));
+        }
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        if max_attendees > 0 {
+            query_args.push(format!("max_attendees={}", max_attendees));
+        }
+        if !original_start.is_empty() {
+            query_args.push(format!("original_start={}", original_start));
+        }
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        if show_deleted {
+            query_args.push(format!("show_deleted={}", show_deleted));
+        }
+        if !time_max.is_empty() {
+            query_args.push(format!("time_max={}", time_max));
+        }
+        if !time_min.is_empty() {
+            query_args.push(format!("time_min={}", time_min));
+        }
+        if !time_zone.is_empty() {
+            query_args.push(format!("time_zone={}", time_zone));
+        }
+        if !user_ip.is_empty() {
+            query_args.push(format!("user_ip={}", user_ip));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!(
+            "/calendars/{}/events/{}/instances?{}",
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&event_id.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
+
+        let mut default_reminders = resp.default_reminders;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            default_reminders.append(&mut resp.default_reminders);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(default_reminders)
     }
 
     /**
@@ -1031,8 +1204,6 @@ impl Events {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -1052,12 +1223,6 @@ impl Events {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));

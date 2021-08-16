@@ -605,14 +605,14 @@ paths:
             Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
             There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
 
-            These are: 
-            - iCalUID 
-            - orderBy 
-            - privateExtendedProperty 
-            - q 
-            - sharedExtendedProperty 
-            - timeMin 
-            - timeMax 
+            These are:
+            - iCalUID
+            - orderBy
+            - privateExtendedProperty
+            - q
+            - sharedExtendedProperty
+            - timeMin
+            - timeMax
             - updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
             Learn more about incremental synchronization.
             Optional. The default is to return all entries.
@@ -952,14 +952,14 @@ paths:
             Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.
             There are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.
 
-            These are: 
-            - iCalUID 
-            - orderBy 
-            - privateExtendedProperty 
-            - q 
-            - sharedExtendedProperty 
-            - timeMin 
-            - timeMax 
+            These are:
+            - iCalUID
+            - orderBy
+            - privateExtendedProperty
+            - q
+            - sharedExtendedProperty
+            - timeMin
+            - timeMax
             - updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
             Learn more about incremental synchronization.
             Optional. The default is to return all entries.
@@ -2102,11 +2102,11 @@ components:
           type: string
         role:
           description: |-
-            The role assigned to the scope. Possible values are:  
-            - "none" - Provides no access. 
-            - "freeBusyReader" - Provides read access to free/busy information. 
-            - "reader" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. 
-            - "writer" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. 
+            The role assigned to the scope. Possible values are:
+            - "none" - Provides no access.
+            - "freeBusyReader" - Provides read access to free/busy information.
+            - "reader" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden.
+            - "writer" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible.
             - "owner" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
           type: string
         scope:
@@ -2114,10 +2114,10 @@ components:
           properties:
             type:
               description: |-
-                The type of the scope. Possible values are:  
-                - "default" - The public scope. This is the default value. 
-                - "user" - Limits the scope to a single user. 
-                - "group" - Limits the scope to a group. 
+                The type of the scope. Possible values are:
+                - "default" - The public scope. This is the default value.
+                - "user" - Limits the scope to a single user.
+                - "group" - Limits the scope to a group.
                 - "domain" - Limits the scope to a domain.  Note: The permissions granted to the "default", or public, scope apply to any user, authenticated or not.
               type: string
             value:
@@ -2178,10 +2178,10 @@ components:
       properties:
         accessRole:
           description: |-
-            The effective access role that the authenticated user has on the calendar. Read-only. Possible values are:  
-            - "freeBusyReader" - Provides read access to free/busy information. 
-            - "reader" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. 
-            - "writer" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. 
+            The effective access role that the authenticated user has on the calendar. Read-only. Possible values are:
+            - "freeBusyReader" - Provides read access to free/busy information.
+            - "reader" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden.
+            - "writer" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible.
             - "owner" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
           type: string
         backgroundColor:
@@ -2256,18 +2256,18 @@ components:
       properties:
         method:
           description: |-
-            The method used to deliver the notification. The possible value is:  
-            - "email" - Notifications are sent via email.  
+            The method used to deliver the notification. The possible value is:
+            - "email" - Notifications are sent via email.
             Required when adding a notification.
           type: string
         type:
           description: |-
-            The type of notification. Possible values are:  
-            - "eventCreation" - Notification sent when a new event is put on the calendar. 
-            - "eventChange" - Notification sent when an event is changed. 
-            - "eventCancellation" - Notification sent when an event is cancelled. 
-            - "eventResponse" - Notification sent when an attendee responds to the event invitation. 
-            - "agenda" - An agenda with the events of the day (sent out in the morning).  
+            The type of notification. Possible values are:
+            - "eventCreation" - Notification sent when a new event is put on the calendar.
+            - "eventChange" - Notification sent when an event is changed.
+            - "eventCancellation" - Notification sent when an event is cancelled.
+            - "eventResponse" - Notification sent when an attendee responds to the event invitation.
+            - "agenda" - An agenda with the events of the day (sent out in the morning).
             Required when adding a notification.
           type: string
       type: object
@@ -2347,7 +2347,7 @@ components:
           description: |-
             The ID of the conference.
             Can be used by developers to keep track of conferences, should not be displayed to users.
-            The ID value is formed differently for each conference solution type:  
+            The ID value is formed differently for each conference solution type:
             - eventHangout: ID is not set. (This conference type is deprecated.)
             - eventNamedHangout: ID is the name of the Hangout. (This conference type is deprecated.)
             - hangoutsMeet: ID is the 10-letter meeting code, for example aaa-bbbb-ccc.
@@ -2404,9 +2404,9 @@ components:
         allowedConferenceSolutionTypes:
           description: |-
             The types of conference solutions that are supported for this calendar.
-            The possible values are:  
-            - "eventHangout" 
-            - "eventNamedHangout" 
+            The possible values are:
+            - "eventHangout"
+            - "eventNamedHangout"
             - "hangoutsMeet"  Optional.
           items:
             type: string
@@ -2417,7 +2417,7 @@ components:
         statusCode:
           description: |-
             The current status of the conference create request. Read-only.
-            The possible values are:  
+            The possible values are:
             - "pending": the conference create request is still being processed.
             - "success": the conference create request succeeded, the entry points are populated.
             - "failure": the conference create request failed, there are no entry points.
@@ -2441,7 +2441,7 @@ components:
           description: |-
             The conference solution type.
             If a client encounters an unfamiliar or empty type, it should still be able to display the entry points. However, it should disallow modifications.
-            The possible values are:  
+            The possible values are:
             - "eventHangout" for Hangouts for consumers (deprecated; existing events may show this conference solution type but new conferences cannot be created)
             - "eventNamedHangout" for classic Hangouts for Google Workspace users (deprecated; existing events may show this conference solution type but new conferences cannot be created)
             - "hangoutsMeet" for Google Meet (http://meet.google.com)
@@ -2478,7 +2478,7 @@ components:
         entryPointType:
           description: |-
             The type of the conference entry point.
-            Possible values are:  
+            Possible values are:
             - "video" - joining a conference over HTTP. A conference can have zero or one video entry point.
             - "phone" - joining a conference by dialing a phone number. A conference can have zero or more phone entry points.
             - "sip" - joining a conference over SIP. A conference can have zero or one sip entry point.
@@ -2487,11 +2487,11 @@ components:
         label:
           description: |-
             The label for the URI. Visible to end users. Not localized. The maximum length is 512 characters.
-            Examples:  
+            Examples:
             - for video: meet.google.com/aaa-bbbb-ccc
             - for phone: +1 123 268 2601
             - for sip: 12345678@altostrat.com
-            - for more: should not be filled  
+            - for more: should not be filled
             Optional.
           type: string
         meetingCode:
@@ -2525,7 +2525,7 @@ components:
         uri:
           description: |-
             The URI of the entry point. The maximum length is 1300 characters.
-            Format:  
+            Format:
             - for video, http: or https: schema is required.
             - for phone, tel: schema is required. The URI should include the entire dial sequence (e.g., tel:+12345678900,,,123456789;1234).
             - for sip, sip: schema is required, e.g., sip:12345678@myprovider.com.
@@ -2539,10 +2539,10 @@ components:
           type: string
         reason:
           description: |-
-            Specific reason for the error. Some of the possible values are:  
-            - "groupTooBig" - The group of users requested is too large for a single query. 
-            - "tooManyCalendarsRequested" - The number of calendars requested is too large for a single query. 
-            - "notFound" - The requested resource was not found. 
+            Specific reason for the error. Some of the possible values are:
+            - "groupTooBig" - The group of users requested is too large for a single query.
+            - "tooManyCalendarsRequested" - The number of calendars requested is too large for a single query.
+            - "notFound" - The requested resource was not found.
             - "internalError" - The API service has encountered an internal error.  Additional error types may be added in the future, so clients should gracefully handle additional error statuses not included in this list.
           type: string
       type: object
@@ -2612,8 +2612,8 @@ components:
         eventType:
           default: default
           description: |-
-            Specific type of the event. Read-only. Possible values are:  
-            - "default" - A regular event or not further specified. 
+            Specific type of the event. Read-only. Possible values are:
+            - "default" - A regular event or not further specified.
             - "outOfOffice" - An out-of-office event.
           type: string
         extendedProperties:
@@ -2637,8 +2637,8 @@ components:
           properties:
             display:
               description: |-
-                The gadget's display mode. Deprecated. Possible values are:  
-                - "icon" - The gadget displays next to the event's title in the calendar view. 
+                The gadget's display mode. Deprecated. Possible values are:
+                - "icon" - The gadget displays next to the event's title in the calendar view.
                 - "chip" - The gadget displays when the event is clicked.
               type: string
             height:
@@ -2693,9 +2693,9 @@ components:
           type: string
         id:
           description: |-
-            Opaque identifier of the event. When creating new single or recurring events, you can specify their IDs. Provided IDs must follow these rules:  
-            - characters allowed in the ID are those used in base32hex encoding, i.e. lowercase letters a-v and digits 0-9, see section 3.1.2 in RFC2938 
-            - the length of the ID must be between 5 and 1024 characters 
+            Opaque identifier of the event. When creating new single or recurring events, you can specify their IDs. Provided IDs must follow these rules:
+            - characters allowed in the ID are those used in base32hex encoding, i.e. lowercase letters a-v and digits 0-9, see section 3.1.2 in RFC2938
+            - the length of the ID must be between 5 and 1024 characters
             - the ID must be unique per calendar  Due to the globally distributed nature of the system, we cannot guarantee that ID collisions will be detected at event creation time. To minimize the risk of collisions we recommend using an established UUID algorithm such as one described in RFC4122.
             If you do not specify an ID, it will be automatically generated by the server.
             Note that the icalUID and the id are not identical and only one of them should be supplied at event creation time. One difference in their semantics is that in recurring events, all occurrences of one event have different ids while they all share the same icalUIDs.
@@ -2774,13 +2774,13 @@ components:
           description: The (inclusive) start time of the event. For a recurring event, this is the start time of the first instance.
         status:
           description: |-
-            Status of the event. Optional. Possible values are:  
-            - "confirmed" - The event is confirmed. This is the default status. 
-            - "tentative" - The event is tentatively confirmed. 
+            Status of the event. Optional. Possible values are:
+            - "confirmed" - The event is confirmed. This is the default status.
+            - "tentative" - The event is tentatively confirmed.
             - "cancelled" - The event is cancelled (deleted). The list method returns cancelled events only on incremental sync (when syncToken or updatedMin are specified) or if the showDeleted flag is set to true. The get method always returns them.
-            A cancelled status represents two different states depending on the event type:  
+            A cancelled status represents two different states depending on the event type:
             - Cancelled exceptions of an uncancelled recurring event indicate that this instance should no longer be presented to the user. Clients should store these events for the lifetime of the parent recurring event.
-            Cancelled exceptions are only guaranteed to have values for the id, recurringEventId and originalStartTime fields populated. The other fields might be empty.  
+            Cancelled exceptions are only guaranteed to have values for the id, recurringEventId and originalStartTime fields populated. The other fields might be empty.
             - All other cancelled events represent deleted events. Clients should remove their locally synced copies. Such cancelled events will eventually disappear, so do not rely on them being available indefinitely.
             Deleted events are only guaranteed to have the id field populated.   On the organizer's calendar, cancelled events continue to expose event details (summary, location, etc.) so that they can be restored (undeleted). Similarly, the events to which the user was invited and that they manually removed continue to provide details. However, incremental sync requests with showDeleted set to false will not return these details.
             If an event changes its organizer (for example via the move operation) and the original organizer is not on the attendee list, it will leave behind a cancelled event where only the id field is guaranteed to be populated.
@@ -2791,8 +2791,8 @@ components:
         transparency:
           default: opaque
           description: |-
-            Whether the event blocks time on the calendar. Optional. Possible values are:  
-            - "opaque" - Default value. The event does block time on the calendar. This is equivalent to setting Show me as to Busy in the Calendar UI. 
+            Whether the event blocks time on the calendar. Optional. Possible values are:
+            - "opaque" - Default value. The event does block time on the calendar. This is equivalent to setting Show me as to Busy in the Calendar UI.
             - "transparent" - The event does not block time on the calendar. This is equivalent to setting Show me as to Available in the Calendar UI.
           type: string
         updated:
@@ -2802,10 +2802,10 @@ components:
         visibility:
           default: default
           description: |-
-            Visibility of the event. Optional. Possible values are:  
-            - "default" - Uses the default visibility for events on the calendar. This is the default value. 
-            - "public" - The event is public and event details are visible to all readers of the calendar. 
-            - "private" - The event is private and only event attendees may view event details. 
+            Visibility of the event. Optional. Possible values are:
+            - "default" - Uses the default visibility for events on the calendar. This is the default value.
+            - "public" - The event is public and event details are visible to all readers of the calendar.
+            - "private" - The event is private and only event attendees may view event details.
             - "confidential" - The event is private. This value is provided for compatibility reasons.
           type: string
       type: object
@@ -2866,10 +2866,10 @@ components:
           type: boolean
         responseStatus:
           description: |-
-            The attendee's response status. Possible values are:  
-            - "needsAction" - The attendee has not responded to the invitation. 
-            - "declined" - The attendee has declined the invitation. 
-            - "tentative" - The attendee has tentatively accepted the invitation. 
+            The attendee's response status. Possible values are:
+            - "needsAction" - The attendee has not responded to the invitation.
+            - "declined" - The attendee has declined the invitation.
+            - "tentative" - The attendee has tentatively accepted the invitation.
             - "accepted" - The attendee has accepted the invitation.
           type: string
         self:
@@ -2895,9 +2895,9 @@ components:
       properties:
         method:
           description: |-
-            The method used by this reminder. Possible values are:  
-            - "email" - Reminders are sent via email. 
-            - "popup" - Reminders are sent via a UI popup.  
+            The method used by this reminder. Possible values are:
+            - "email" - Reminders are sent via email.
+            - "popup" - Reminders are sent via a UI popup.
             Required when adding a reminder.
           type: string
         minutes:
@@ -2911,11 +2911,11 @@ components:
       properties:
         accessRole:
           description: |-
-            The user's access role for this calendar. Read-only. Possible values are:  
-            - "none" - The user has no access. 
-            - "freeBusyReader" - The user has read access to free/busy information. 
-            - "reader" - The user has read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. 
-            - "writer" - The user has read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. 
+            The user's access role for this calendar. Read-only. Possible values are:
+            - "none" - The user has no access.
+            - "freeBusyReader" - The user has read access to free/busy information.
+            - "reader" - The user has read access to the calendar. Private events will appear to users with reader access, but event details will be hidden.
+            - "writer" - The user has read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible.
             - "owner" - The user has ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.
           type: string
         defaultReminders:

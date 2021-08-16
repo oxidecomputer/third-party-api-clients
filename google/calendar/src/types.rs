@@ -672,7 +672,7 @@ pub struct ConferenceParametersAddOn {
 pub struct ConferenceProperties {
     /**
      * The types of conference solutions that are supported for this calendar.
-     *  The possible values are:  
+     *  The possible values are:
      *  - "eventHangout"
      *  - "eventNamedHangout"
      *  - "hangoutsMeet"  Optional.
@@ -774,7 +774,7 @@ pub struct EntryPoint {
     pub access_code: String,
     /**
      * The types of conference solutions that are supported for this calendar.
-     *  The possible values are:  
+     *  The possible values are:
      *  - "eventHangout"
      *  - "eventNamedHangout"
      *  - "hangoutsMeet"  Optional.
@@ -1329,7 +1329,7 @@ pub struct EventData {
     pub private_copy: bool,
     /**
      * The types of conference solutions that are supported for this calendar.
-     *  The possible values are:  
+     *  The possible values are:
      *  - "eventHangout"
      *  - "eventNamedHangout"
      *  - "hangoutsMeet"  Optional.
@@ -1733,7 +1733,7 @@ pub struct FreeBusyCalendar {
 pub struct FreeBusyGroup {
     /**
      * The types of conference solutions that are supported for this calendar.
-     *  The possible values are:  
+     *  The possible values are:
      *  - "eventHangout"
      *  - "eventNamedHangout"
      *  - "hangoutsMeet"  Optional.

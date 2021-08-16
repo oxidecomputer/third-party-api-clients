@@ -30,13 +30,11 @@ impl CalendarList {
      *   Learn more about incremental synchronization.
      *   Optional. The default is to return all entries.
      */
-    pub async fn get(
+    pub async fn get_page(
         &self,
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         max_results: i64,
@@ -45,7 +43,7 @@ impl CalendarList {
         show_deleted: bool,
         show_hidden: bool,
         sync_token: &str,
-    ) -> Result<crate::types::CalendarList> {
+    ) -> Result<Vec<crate::types::CalendarListEntry>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!("alt={}", alt));
@@ -59,14 +57,8 @@ impl CalendarList {
             query_args.push(format!("max_results={}", max_results));
         }
         query_args.push(format!("min_access_role={}", min_access_role));
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -91,7 +83,92 @@ impl CalendarList {
         }
         let url = format!("/users/me/calendarList?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::CalendarList = self.client.get(&url, None).await.unwrap();
+
+        // Return our response data.
+        Ok(resp.items)
+    }
+
+    /**
+     * This function performs a `GET` to the `/users/me/calendarList` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Returns the calendars on the user's calendar list.
+     */
+    pub async fn get_all(
+        &self,
+        alt: crate::types::Alt,
+        fields: &str,
+        key: &str,
+        quota_user: &str,
+        user_ip: &str,
+        min_access_role: crate::types::MinAccessRole,
+        show_deleted: bool,
+        show_hidden: bool,
+    ) -> Result<Vec<crate::types::CalendarListEntry>> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        if !fields.is_empty() {
+            query_args.push(format!("fields={}", fields));
+        }
+        if !key.is_empty() {
+            query_args.push(format!("key={}", key));
+        }
+        query_args.push(format!("min_access_role={}", min_access_role));
+        if !quota_user.is_empty() {
+            query_args.push(format!("quota_user={}", quota_user));
+        }
+        if show_deleted {
+            query_args.push(format!("show_deleted={}", show_deleted));
+        }
+        if show_hidden {
+            query_args.push(format!("show_hidden={}", show_hidden));
+        }
+        if !user_ip.is_empty() {
+            query_args.push(format!("user_ip={}", user_ip));
+        }
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!("/users/me/calendarList?{}", query_);
+
+        let mut resp: crate::types::CalendarList = self.client.get(&url, None).await.unwrap();
+
+        let mut items = resp.items;
+        let mut page = resp.next_page_token;
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&pageToken={}", url, page), None)
+                    .await
+                    .unwrap();
+            }
+
+            items.append(&mut resp.items);
+
+            if !resp.next_page_token.is_empty() && resp.next_page_token != page {
+                page = resp.next_page_token.to_string();
+            } else {
+                page = "".to_string();
+            }
+        }
+
+        // Return our response data.
+        Ok(items)
     }
 
     /**
@@ -108,8 +185,6 @@ impl CalendarList {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         color_rgb_format: bool,
@@ -126,12 +201,6 @@ impl CalendarList {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -178,8 +247,6 @@ impl CalendarList {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         max_results: i64,
@@ -203,14 +270,8 @@ impl CalendarList {
             query_args.push(format!("max_results={}", max_results));
         }
         query_args.push(format!("min_access_role={}", min_access_role));
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -252,13 +313,11 @@ impl CalendarList {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn get_calendar_list(
+    pub async fn get(
         &self,
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -271,12 +330,6 @@ impl CalendarList {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -314,8 +367,6 @@ impl CalendarList {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -333,12 +384,6 @@ impl CalendarList {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -380,8 +425,6 @@ impl CalendarList {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -394,12 +437,6 @@ impl CalendarList {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));
@@ -437,8 +474,6 @@ impl CalendarList {
         alt: crate::types::Alt,
         fields: &str,
         key: &str,
-        oauth_token: &str,
-        pretty_print: bool,
         quota_user: &str,
         user_ip: &str,
         calendar_id: &str,
@@ -456,12 +491,6 @@ impl CalendarList {
         }
         if !key.is_empty() {
             query_args.push(format!("key={}", key));
-        }
-        if !oauth_token.is_empty() {
-            query_args.push(format!("oauth_token={}", oauth_token));
-        }
-        if pretty_print {
-            query_args.push(format!("pretty_print={}", pretty_print));
         }
         if !quota_user.is_empty() {
             query_args.push(format!("quota_user={}", quota_user));

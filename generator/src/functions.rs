@@ -5,7 +5,7 @@ use inflector::cases::snakecase::to_snake_case;
 
 use crate::{
     clean_fn_name, clean_name, get_parameter_data, make_plural, oid_to_object_name, struct_name,
-    template::parse, ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeSpace,
+    template::parse, ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace,
 };
 
 /*
@@ -174,7 +174,7 @@ pub fn generate_files(
              * Get the function parameters.
              */
             let (fn_params_str, query_params) =
-                get_fn_params(ts, o, parameters, false, op.parameters.clone())?;
+                get_fn_params(ts, o, parameters, false, op.parameters.clone(), proper_name)?;
 
             /*
              * Generate the URL for the request.
@@ -287,7 +287,7 @@ pub fn generate_files(
                 )?;
 
                 let (fn_params_str, query_params) =
-                    get_fn_params(ts, o, parameters, true, op.parameters.clone())?;
+                    get_fn_params(ts, o, parameters, true, op.parameters.clone(), proper_name)?;
 
                 let tmp = parse(p)?;
                 let template = tmp.compile(query_params);
@@ -373,6 +373,99 @@ pub fn generate_files(
     Ok(tag_files)
 }
 
+fn get_response_type_from_object(
+    od: &str,
+    ts: &mut TypeSpace,
+    s: Option<&openapiv3::ReferenceOr<openapiv3::Schema>>,
+    r: Option<&openapiv3::ReferenceOr<openapiv3::Response>>,
+) -> Result<(
+    String,        // original response type
+    crate::TypeId, // type id
+    String,        // optional vec response type if this struct paginates
+    String,        // optional name of vec response property if this struct paginates
+)> {
+    let object_name = format!("{} response", oid_to_object_name(od));
+    let mut tid = TypeId(0);
+
+    if let Some(s) = s {
+        tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
+
+        if let openapiv3::ReferenceOr::Reference { reference } = s {
+            tid = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
+        }
+    }
+
+    if let Some(openapiv3::ReferenceOr::Reference { reference }) = r {
+        tid = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
+    }
+
+    if tid == TypeId(0) {
+        bail!("should have gotten type id for {}", od);
+    }
+
+    let og_rt = ts.render_type(&tid, false)?;
+    let mut et = ts.id_to_entry.get(&tid).unwrap();
+
+    if let crate::TypeDetails::NamedType(id, _) = &et.details {
+        et = ts.id_to_entry.get(id).unwrap();
+    }
+
+    if let crate::TypeDetails::Object(p, _) = &et.details {
+        // For Ramp, the pagination values are passed _in_ the resulting
+        // struct, so we want to ignore them and just get the data.
+        if let Some(pid) = p.get("page") {
+            let rt = ts.render_type(pid, false)?;
+            if rt == "crate::types::Page" {
+                if let Some(did) = p.get("data") {
+                    let rt = ts.render_type(did, false)?;
+                    return Ok((og_rt, did.clone(), rt, "data".to_string()));
+                } else if p.len() == 2 {
+                    // We know for the Ramp API there will only be two fields in
+                    // these structs. This should help prevent errors.
+                    // Let's find the value of the struct that is the vec!
+                    for (n, id) in p {
+                        let rt = ts.render_type(id, false)?;
+                        if rt.starts_with("Vec<") {
+                            return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
+                        }
+                    }
+                }
+            }
+        }
+
+        // For Zoom, the pagination values are passed _in_ the resulting
+        // struct, so we want to ignore them and just get the data.
+        if let Some(pid) = p.get("next_page_token") {
+            let rt = ts.render_type(pid, false)?;
+            if rt == "String" {
+                for (n, id) in p {
+                    // Now we must find the property with the vector for this struct.
+                    let rt = ts.render_type(id, false)?;
+                    if rt.starts_with("Vec<") {
+                        return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
+                    }
+                }
+            }
+        }
+
+        // For Google, the pagination values are passed _in_ the resulting
+        // struct, so we want to ignore them and just get the data.
+        if let Some(pid) = p.get("nextPageToken") {
+            let rt = ts.render_type(pid, false)?;
+            if rt == "String" {
+                for (n, id) in p {
+                    // Now we must find the property with the vector for this struct.
+                    let rt = ts.render_type(id, false)?;
+                    if rt.starts_with("Vec<") {
+                        return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
+                    }
+                }
+            }
+        }
+    }
+    Ok((og_rt, tid, "".to_string(), "".to_string()))
+}
+
 fn get_response_type(
     od: &str,
     ts: &mut TypeSpace,
@@ -420,65 +513,8 @@ fn get_response_type(
                     }
                 }
 
-                let object_name = format!("{} response", oid_to_object_name(od));
-                let tid = ts.select(Some(&clean_name(&object_name)), s, "")?;
-                let og_rt = ts.render_type(&tid, false)?;
-                let et = ts.id_to_entry.get(&tid).unwrap();
-                if let crate::TypeDetails::Object(p, _) = &et.details {
-                    // For Ramp, the pagination values are passed _in_ the resulting
-                    // struct, so we want to ignore them and just get the data.
-                    if let Some(pid) = p.get("page") {
-                        let rt = ts.render_type(pid, false)?;
-                        if rt == "crate::types::Page" {
-                            if let Some(did) = p.get("data") {
-                                let rt = ts.render_type(did, false)?;
-                                return Ok((og_rt, did.clone(), rt, "data".to_string()));
-                            } else if p.len() == 2 {
-                                // We know for the Ramp API there will only be two fields in
-                                // these structs. This should help prevent errors.
-                                // Let's find the value of the struct that is the vec!
-                                for (n, id) in p {
-                                    let rt = ts.render_type(id, false)?;
-                                    if rt.starts_with("Vec<") {
-                                        return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    // For Zoom, the pagination values are passed _in_ the resulting
-                    // struct, so we want to ignore them and just get the data.
-                    if let Some(pid) = p.get("next_page_token") {
-                        let rt = ts.render_type(pid, false)?;
-                        if rt == "String" {
-                            for (n, id) in p {
-                                // Now we must find the property with the vector for this struct.
-                                let rt = ts.render_type(id, false)?;
-                                if rt.starts_with("Vec<") {
-                                    return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
-                                }
-                            }
-                        }
-                    }
-
-                    // For Google, the pagination values are passed _in_ the resulting
-                    // struct, so we want to ignore them and just get the data.
-                    if let Some(pid) = p.get("nextPageToken") {
-                        let rt = ts.render_type(pid, false)?;
-                        if rt == "String" {
-                            for (n, id) in p {
-                                // Now we must find the property with the vector for this struct.
-                                let rt = ts.render_type(id, false)?;
-                                if rt.starts_with("Vec<") {
-                                    return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
-                                }
-                            }
-                        }
-                    }
-                }
-
-                return Ok((og_rt, tid, "".to_string(), "".to_string()));
+                // Get response type from object.
+                return get_response_type_from_object(od, ts, Some(s), None);
             }
         }
 
@@ -506,68 +542,9 @@ fn get_response_type(
                 return Ok((rt, tid, "".to_string(), "".to_string()));
             }
         }
-    } else if let openapiv3::ReferenceOr::Reference { reference } = first.1 {
-        // We must have had a reference.
-        let object_name = format!("{} response", oid_to_object_name(od));
-        let id = ts.select_ref(Some(&clean_name(&object_name)), reference)?;
-        let og_rt = ts.render_type(&id, false)?;
-        let et = ts.id_to_entry.get(&id).unwrap();
-        if let crate::TypeDetails::Object(p, _) = &et.details {
-            // TODO: make this DRY with the above its the same code.
-
-            // For Ramp, the pagination values are passed _in_ the resulting
-            // struct, so we want to ignore them and just get the data.
-            if let Some(pid) = p.get("page") {
-                let rt = ts.render_type(pid, false)?;
-                if rt == "crate::types::Page" {
-                    if let Some(did) = p.get("data") {
-                        let rt = ts.render_type(did, false)?;
-                        return Ok((og_rt, did.clone(), rt, "data".to_string()));
-                    } else if p.len() == 2 {
-                        // We know for the Ramp API there will only be two fields in
-                        // these structs. This should help prevent errors.
-                        // Let's find the value of the struct that is the vec!
-                        for (n, id) in p {
-                            let rt = ts.render_type(id, false)?;
-                            if rt.starts_with("Vec<") {
-                                return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
-                            }
-                        }
-                    }
-                }
-            }
-
-            // For Zoom, the pagination values are passed _in_ the resulting
-            // struct, so we want to ignore them and just get the data.
-            if let Some(pid) = p.get("next_page_token") {
-                let rt = ts.render_type(pid, false)?;
-                if rt == "String" {
-                    for (n, id) in p {
-                        // Now we must find the property with the vector for this struct.
-                        let rt = ts.render_type(id, false)?;
-                        if rt.starts_with("Vec<") {
-                            return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
-                        }
-                    }
-                }
-            }
-
-            // For Google, the pagination values are passed _in_ the resulting
-            // struct, so we want to ignore them and just get the data.
-            if let Some(pid) = p.get("nextPageToken") {
-                let rt = ts.render_type(pid, false)?;
-                if rt == "String" {
-                    for (n, id) in p {
-                        // Now we must find the property with the vector for this struct.
-                        let rt = ts.render_type(id, false)?;
-                        if rt.starts_with("Vec<") {
-                            return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
-                        }
-                    }
-                }
-            }
-        }
-        return Ok((og_rt, id, "".to_string(), "".to_string()));
+    } else if let openapiv3::ReferenceOr::Reference { reference: _ } = first.1 {
+        // Get response type from object.
+        return get_response_type_from_object(od, ts, None, Some(first.1));
     }
 
     // Basically if we get here, likely its just an empty struct or something.
@@ -586,6 +563,7 @@ fn get_fn_params(
     parameters: &BTreeMap<String, &openapiv3::Parameter>,
     all_pages: bool,
     global_params: Vec<openapiv3::ReferenceOr<openapiv3::Parameter>>,
+    proper_name: &str,
 ) -> Result<(Vec<String>, BTreeMap<String, String>)> {
     /*
      * Query parameters are sorted lexicographically to ensure a stable
@@ -618,18 +596,10 @@ fn get_fn_params(
         if nam == "ref" || nam == "type" {
             fn_params_str.push(format!("{}_: {},", nam, typ));
             fn_params.push(nam.to_string() + "_");
-        } else if (!all_pages
-            || (nam != "page"
-                && nam != "per_page"
-                && nam != "per"
-                && nam != "page_size"
-                && nam != "next_page_token"
-                && nam != "page_token"
-                && nam != "max_results"
-                && nam != "page_number"
-                && nam != "start"))
+        } else if (!all_pages || !is_page_param(nam))
             && nam != "authorization"
             && !nam.starts_with("authorization_bearer")
+            && (!proper_name.starts_with("Google") || !is_google_unnecessary_param(nam))
         {
             if typ == "chrono::DateTime<chrono::Utc>" {
                 fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
@@ -657,18 +627,10 @@ fn get_fn_params(
         {
             if nam == "ref" || nam == "type" {
                 query_params.insert(format!("{}_", nam), typ.to_string());
-            } else if (!all_pages
-                || (nam != "page"
-                    && nam != "per_page"
-                    && nam != "per"
-                    && nam != "page_size"
-                    && nam != "next_page_token"
-                    && nam != "page_token"
-                    && nam != "max_results"
-                    && nam != "page_number"
-                    && nam != "start"))
+            } else if (!all_pages || !is_page_param(nam))
                 && nam != "authorization"
                 && !nam.starts_with("authorization_bearer")
+                && (!proper_name.starts_with("Google") || !is_google_unnecessary_param(nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
                     query_params.insert(nam.to_string(), format!("Option<{}>", typ));
@@ -1001,4 +963,26 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) ->
     a("*/");
 
     Ok(out.trim().to_string())
+}
+
+fn is_page_param(s: &str) -> bool {
+    s == "page"
+        || s == "per_page"
+        || s == "per"
+        || s == "page_size"
+        || s == "size"
+        || s == "next_page_token"
+        || s == "page_token"
+        || s == "max_results"
+        || s == "page_number"
+        || s == "start"
+        || s == "sync_token"
+}
+
+fn is_google_unnecessary_param(s: &str) -> bool {
+    s == "access_token"
+        || s == "oauth_token"
+        || s == "pretty_print"
+        || s == "xgafv"
+        || s == "custom_field_mask"
 }
