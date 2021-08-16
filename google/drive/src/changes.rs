@@ -26,7 +26,7 @@ impl Changes {
      * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
      * * `include_removed: bool` -- Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
      * * `include_team_drive_items: bool` -- Whether the user has installed the requesting app.
-     * * `page_size: i64` -- The maximum number of changes to return per page.
+     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
      * * `restrict_to_my_drive: bool` -- Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
      * * `spaces: &str` -- A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
      * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
@@ -284,7 +284,7 @@ impl Changes {
      * * `include_permissions_for_view: &str` -- Specifies which additional view's permissions to include in the response. Only 'published' is supported.
      * * `include_removed: bool` -- Whether to include changes indicating that items have been removed from the list of changes, for example by deletion or loss of access.
      * * `include_team_drive_items: bool` -- Whether the user has installed the requesting app.
-     * * `page_size: i64` -- The maximum number of changes to return per page.
+     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
      * * `restrict_to_my_drive: bool` -- Whether to restrict the results to changes inside the My Drive hierarchy. This omits changes to files such as those in the Application Data folder or shared files which have not been added to My Drive.
      * * `spaces: &str` -- A comma-separated list of spaces to query within the user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
      * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.

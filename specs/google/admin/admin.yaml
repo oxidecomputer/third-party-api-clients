@@ -6702,6 +6702,22 @@ components:
           type: string
         ims:
           description: The user's Instant Messenger (IM) accounts. A user account can have multiple ims properties. But, only one of these ims properties can be the primary IM contact. The maximum allowed data size for this field is 2Kb.
+          type: array
+          items:
+            type: object
+            properties:
+              customProtocol:
+                type: string
+              customType:
+                type: string
+              im:
+                type: string
+              primary:
+                type: boolean
+              protocol:
+                type: string
+              type:
+                type: string
         includeInGlobalAddressList:
           description: Indicates if the user's profile is visible in the Google Workspace global address list when the contact sharing feature is enabled for the domain. For more information about excluding user profiles, see the [administration help center](https://support.google.com/a/answer/1285988).
           type: boolean

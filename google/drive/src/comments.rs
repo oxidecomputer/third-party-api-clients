@@ -21,7 +21,7 @@ impl Comments {
      *
      * * `file_id: &str` -- A link to this theme's background image.
      * * `include_deleted: bool` -- Whether to include deleted comments. Deleted comments will not include their original content.
-     * * `page_size: i64` -- The maximum number of comments to return per page.
+     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
      * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
      * * `start_modified_time: &str` -- The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).
      */

@@ -22,7 +22,7 @@ impl Replies {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `comment_id: &str` -- A link to this theme's background image.
      * * `include_deleted: bool` -- Whether to include deleted replies. Deleted replies will not include their original content.
-     * * `page_size: i64` -- The maximum number of replies to return per page.
+     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
      * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
      */
     pub async fn drive_list(

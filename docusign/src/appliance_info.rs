@@ -26,7 +26,7 @@ impl ApplianceInfo {
     pub async fn envelope_get_dynamic_system_setting(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/display_appliance_info/dynamicsystemsettings",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -46,7 +46,10 @@ impl ApplianceInfo {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn envelope_get_template(&self, account_id: &str) -> Result<crate::types::DssValues> {
+    pub async fn envelope_get_template(
+        &self,
+        account_id: &str,
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/display_appliance_info/templateInfo",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -71,7 +74,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -123,7 +126,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/custom_fields",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -175,7 +178,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/date_signed",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -259,7 +262,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/document_page_list",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -285,7 +288,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/image",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -314,7 +317,7 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
         user_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/localepolicy/{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -407,7 +410,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -437,7 +440,7 @@ impl ApplianceInfo {
         account_id: &str,
         envelope_id: &str,
         pdf_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf/{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -464,7 +467,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -512,7 +515,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/pdf_blobs",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -590,7 +593,7 @@ impl ApplianceInfo {
         &self,
         account_id: &str,
         envelope_id: &str,
-    ) -> Result<crate::types::DssValues> {
+    ) -> Result<crate::types::ApplianceInfo> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/display_appliance_info/signer_attachment_info",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -645,7 +648,7 @@ impl ApplianceInfo {
      *
      *
      */
-    pub async fn envelope_post_redeem(&self) -> Result<crate::types::DssValues> {
+    pub async fn envelope_post_redeem(&self) -> Result<crate::types::ApplianceInfo> {
         let url = "/v2.1/display_appliance_info/redeem".to_string();
         self.client.post(&url, None).await
     }

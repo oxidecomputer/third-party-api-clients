@@ -35,10 +35,6 @@ pub struct DriveThemes {
     pub id: String,
 }
 
-/// Additional parameters controlling delivery channel behavior. Optional.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct Params {}
-
 /// The user's storage quota limits and usage. All fields are measured in bytes.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct StorageQuota {
@@ -122,10 +118,10 @@ pub struct About {
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
+        skip_serializing_if = "Vec::is_empty",
         rename = "exportFormats"
     )]
-    pub export_formats: Option<Params>,
+    pub export_formats: Vec<String>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
@@ -140,10 +136,10 @@ pub struct About {
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
+        skip_serializing_if = "Vec::is_empty",
         rename = "importFormats"
     )]
-    pub import_formats: Option<Params>,
+    pub import_formats: Vec<String>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
@@ -158,10 +154,11 @@ pub struct About {
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
         rename = "maxImportSizes"
     )]
-    pub max_import_sizes: Option<Params>,
+    pub max_import_sizes: i64,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
@@ -374,8 +371,12 @@ pub struct Channel {
     /**
      * An notification channel used to watch for resource changes.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub params: Option<Params>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub params: String,
     /**
      * An notification channel used to watch for resource changes.
      */
@@ -1712,10 +1713,11 @@ pub struct File {
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
         rename = "appProperties"
     )]
-    pub app_properties: Option<Params>,
+    pub app_properties: String,
     /**
      * The metadata for a file.
      */
@@ -1791,10 +1793,11 @@ pub struct File {
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
         rename = "exportLinks"
     )]
-    pub export_links: Option<Params>,
+    pub export_links: String,
     /**
      * The metadata for a file.
      */
@@ -2021,8 +2024,12 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub properties: Option<Params>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub properties: String,
     /**
      * The metadata for a file.
      */
@@ -2668,10 +2675,11 @@ pub struct Revision {
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
         rename = "exportLinks"
     )]
-    pub export_links: Option<Params>,
+    pub export_links: String,
     /**
      * The metadata for a revision to a file.
      */

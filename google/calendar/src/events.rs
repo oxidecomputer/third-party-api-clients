@@ -70,7 +70,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
         updated_min: &str,
-    ) -> Result<Vec<crate::types::EventData>> {
+    ) -> Result<Vec<crate::types::Event>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -170,7 +170,7 @@ impl Events {
         time_min: &str,
         time_zone: &str,
         updated_min: &str,
-    ) -> Result<Vec<crate::types::EventData>> {
+    ) -> Result<Vec<crate::types::Event>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -292,8 +292,8 @@ impl Events {
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
         supports_attachments: bool,
-        body: &crate::types::EventData,
-    ) -> Result<crate::types::EventData> {
+        body: &crate::types::Event,
+    ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!(
@@ -346,8 +346,8 @@ impl Events {
         calendar_id: &str,
         conference_data_version: u64,
         supports_attachments: bool,
-        body: &crate::types::EventData,
-    ) -> Result<crate::types::EventData> {
+        body: &crate::types::Event,
+    ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         query_args.push(format!(
@@ -397,7 +397,7 @@ impl Events {
         text: &str,
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
-    ) -> Result<crate::types::EventData> {
+    ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if send_notifications {
@@ -579,7 +579,7 @@ impl Events {
         always_include_email: bool,
         max_attendees: i64,
         time_zone: &str,
-    ) -> Result<crate::types::EventData> {
+    ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -635,8 +635,8 @@ impl Events {
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
         supports_attachments: bool,
-        body: &crate::types::EventData,
-    ) -> Result<crate::types::EventData> {
+        body: &crate::types::Event,
+    ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -748,8 +748,8 @@ impl Events {
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
         supports_attachments: bool,
-        body: &crate::types::EventData,
-    ) -> Result<crate::types::EventData> {
+        body: &crate::types::Event,
+    ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -822,7 +822,7 @@ impl Events {
         time_max: &str,
         time_min: &str,
         time_zone: &str,
-    ) -> Result<Vec<crate::types::EventData>> {
+    ) -> Result<Vec<crate::types::Event>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -889,7 +889,7 @@ impl Events {
         time_max: &str,
         time_min: &str,
         time_zone: &str,
-    ) -> Result<Vec<crate::types::EventData>> {
+    ) -> Result<Vec<crate::types::Event>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if always_include_email {
@@ -982,7 +982,7 @@ impl Events {
         destination: &str,
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
-    ) -> Result<crate::types::EventData> {
+    ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
         if !destination.is_empty() {

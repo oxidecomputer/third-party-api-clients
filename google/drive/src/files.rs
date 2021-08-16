@@ -311,7 +311,7 @@ impl Files {
      *
      * **Parameters:**
      *
-     * * `count: i64` -- The maximum upload size in bytes.
+     * * `count: i64` -- A map of maximum import sizes by MIME type, in bytes.
      * * `space: &str` -- The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive').
      * * `type_: &str` -- The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files').
      */

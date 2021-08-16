@@ -446,10 +446,6 @@ pub struct CalendarNotification {
     pub type_: String,
 }
 
-/// A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct Event {}
-
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Channel {
     /**
@@ -489,10 +485,14 @@ pub struct Channel {
     )]
     pub kind: String,
     /**
-     * A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
+     * Additional parameters controlling delivery channel behavior. Optional.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub params: Option<Event>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub params: String,
     /**
      * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
@@ -567,15 +567,15 @@ pub struct ColorDefinition {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Colors {
     /**
-     * A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
+     * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub calendar: Option<Event>,
+    pub calendar: Option<ColorDefinition>,
     /**
-     * A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
+     * A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its colorId field. Read-only.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub event: Option<Event>,
+    pub event: Option<ColorDefinition>,
     /**
      * ETag of the collection.
      */
@@ -662,10 +662,14 @@ pub struct ConferenceParameters {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceParametersAddOn {
     /**
-     * A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
+     * Additional parameters controlling delivery channel behavior. Optional.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub parameters: Option<Event>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub parameters: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -932,13 +936,21 @@ pub struct ExtendedProperties {
     /**
      * Extended properties of the event.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub private: Option<Event>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub private: String,
     /**
      * Extended properties of the event.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub shared: Option<Event>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub shared: String,
 }
 
 /// A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
@@ -984,8 +996,12 @@ pub struct Gadget {
     /**
      * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub preferences: Option<Event>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub preferences: String,
     /**
      * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
      */
@@ -1101,7 +1117,7 @@ pub struct Source {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct EventData {
+pub struct Event {
     /**
      * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
@@ -1655,7 +1671,7 @@ pub struct Events {
      * List of events on the calendar.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub items: Vec<EventData>,
+    pub items: Vec<Event>,
     /**
      * ETag of the collection.
      */
@@ -1822,15 +1838,15 @@ pub struct FreeBusyRequestItem {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FreeBusyResponse {
     /**
-     * A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
+     * List of free/busy information for calendars.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub calendars: Option<Event>,
+    pub calendars: Option<FreeBusyCalendar>,
     /**
-     * A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its colorId field. Read-only.
+     * Expansion of groups.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub groups: Option<Event>,
+    pub groups: Option<FreeBusyGroup>,
     /**
      * ETag of the collection.
      */

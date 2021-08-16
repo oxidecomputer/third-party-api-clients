@@ -1480,10 +1480,6 @@ pub struct Watermark {
     pub watermark_text: String,
 }
 
-///
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DssValues {}
-
 /// Account management
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Accounts {
@@ -1676,8 +1672,13 @@ pub struct Accounts {
     /**
      * Account management
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "dssValues")]
-    pub dss_values: Option<DssValues>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "dssValues"
+    )]
+    pub dss_values: String,
     /**
      * Account management
      */
@@ -1844,6 +1845,10 @@ pub struct Accounts {
     )]
     pub use_display_appliance: bool,
 }
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct ApplianceInfo {}
 
 /// The `EmailArchive` resource provides methods for managing your email archive configuration, which consists of the BCC email address or addresses that you want to use to archive DocuSign emails. Each account can use up to five BCC email addresses for archiving purposes.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -11400,8 +11405,13 @@ pub struct AccountInformation {
     /**
      * Contains account Information.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "dssValues")]
-    pub dss_values: Option<DssValues>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "dssValues"
+    )]
+    pub dss_values: String,
     /**
      * Contains account Information.
      */
@@ -27001,10 +27011,11 @@ pub struct CommentPublish {
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
         rename = "threadAnchorKeys"
     )]
-    pub thread_anchor_keys: Option<DssValues>,
+    pub thread_anchor_keys: String,
     /**
      *
      */
@@ -76783,8 +76794,12 @@ pub struct Seal {
     /**
      * Set of information related to the electronic seal used by the Trust Service Provider (TSP).
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub configuration: Option<DssValues>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub configuration: String,
     /**
      * Set of information related to the electronic seal used by the Trust Service Provider (TSP).
      */

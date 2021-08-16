@@ -960,6 +960,7 @@ impl TypeSpace {
                     // custom deserializers.
                     if rt == "String"
                         || rt.starts_with("Vec<")
+                        || rt.starts_with("HashMap<")
                         || rt == "bool"
                         || rt == "i32"
                         || rt == "i64"
@@ -1467,6 +1468,39 @@ impl TypeSpace {
                         }
                     });
 
+                    // TODO: this is a horrible fix just for google!
+                    if name == "user custom properties" {
+                        return Ok((
+                            Some(name.to_string()),
+                            TypeDetails::Basic(
+                                "std::collections::HashMap<String, \
+                                 std::collections::HashMap<String, serde_json::Value>>"
+                                    .to_string(),
+                                s.schema_data.clone(),
+                            ),
+                        ));
+                    }
+
+                    if o.properties.is_empty() {
+                        // TODO: make this work for when there is both.
+                        if let Some(openapiv3::AdditionalProperties::Schema(ad)) =
+                            &o.additional_properties
+                        {
+                            let desc = if let Some(ref d) = s.schema_data.description {
+                                d.to_string()
+                            } else {
+                                "".to_string()
+                            };
+
+                            let id = self.select(Some(&name), ad, &desc)?;
+
+                            return Ok((
+                                Some(name.to_string()),
+                                TypeDetails::NamedType(id, s.schema_data.clone()),
+                            ));
+                        }
+                    }
+
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
                         let itid = self.select_box(
@@ -1474,6 +1508,7 @@ impl TypeSpace {
                             rb,
                             &clean_name(&format!("{} {}", &parent_name, name)),
                         )?;
+
                         if let Some(sd) = &self.get_schema_data_for_id(&itid) {
                             let schema_data = &(*sd).clone();
                             // TODO: "page" is specific to ramp

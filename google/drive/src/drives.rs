@@ -19,7 +19,7 @@ impl Drives {
      *
      * **Parameters:**
      *
-     * * `page_size: i64` -- Maximum number of shared drives to return per page.
+     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
      * * `page_token: &str` -- A link to this theme's background image.
      * * `q: &str` -- A link to this theme's background image.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then all shared drives of the domain in which the requester is an administrator are returned.
