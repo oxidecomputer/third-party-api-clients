@@ -960,7 +960,7 @@ impl TypeSpace {
                     // custom deserializers.
                     if rt == "String"
                         || rt.starts_with("Vec<")
-                        || rt.starts_with("HashMap<")
+                        || rt.starts_with("std::collections::HashMap<")
                         || rt == "bool"
                         || rt == "i32"
                         || rt == "i64"

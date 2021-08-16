@@ -118,8 +118,10 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                                         deserialize_with = "crate::utils::deserialize_null_string::deserialize","#);
                                 } else if rt.starts_with("Vec<") {
                                     a(r#"skip_serializing_if = "Vec::is_empty","#);
-                                } else if rt.starts_with("HashMap<") {
-                                    a(r#"skip_serializing_if = "HashMap::is_empty","#);
+                                } else if rt.starts_with("std::collections::HashMap<") {
+                                    a(
+                                        r#"skip_serializing_if = "std::collections::HashMap::is_empty","#,
+                                    );
                                 } else if rt.starts_with("Option<chrono::DateTime") {
                                     a(r#"skip_serializing_if = "Option::is_none",
                                       deserialize_with = "crate::utils::date_time_format::deserialize","#);
