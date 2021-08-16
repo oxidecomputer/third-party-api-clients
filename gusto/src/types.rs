@@ -2461,7 +2461,8 @@ pub struct CompanyBenefit {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "responsible_for_employee_w2"
     )]
     pub responsible_for_employee_w_2: bool,
     /**
@@ -4602,7 +4603,11 @@ pub struct PostCompanyBenefitsRequest {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "responsible_for_employee_w2"
+    )]
     pub responsible_for_employee_w_2: Option<bool>,
     /**
      *

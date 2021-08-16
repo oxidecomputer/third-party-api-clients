@@ -47,7 +47,8 @@ pub struct Alias {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "primaryEmail"
     )]
     pub primary_email: String,
 }
@@ -89,7 +90,8 @@ pub struct Asp {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "codeId"
     )]
     pub code_id: i64,
     /**
@@ -98,7 +100,8 @@ pub struct Asp {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "creationTime"
     )]
     pub creation_time: i64,
     /**
@@ -125,7 +128,8 @@ pub struct Asp {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "lastTimeUsed"
     )]
     pub last_time_used: i64,
     /**
@@ -143,7 +147,8 @@ pub struct Asp {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userKey"
     )]
     pub user_key: String,
 }
@@ -222,7 +227,8 @@ pub struct AuxiliaryMessage {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "auxiliaryMessage"
     )]
     pub auxiliary_message: String,
     /**
@@ -231,7 +237,8 @@ pub struct AuxiliaryMessage {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fieldMask"
     )]
     pub field_mask: String,
     /**
@@ -272,7 +279,7 @@ pub struct BatchDeletePrintersRequest {
     /**
      * Request for deleting existing printers in batch.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "printerIds")]
     pub printer_ids: Vec<String>,
 }
 
@@ -282,12 +289,16 @@ pub struct BatchDeletePrintersResponse {
     /**
      * Response for deleting existing printers in batch.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "failedPrinters"
+    )]
     pub failed_printers: Vec<FailureInfo>,
     /**
      * Response for deleting existing printers in batch.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "printerIds")]
     pub printer_ids: Vec<String>,
 }
 
@@ -305,7 +316,8 @@ pub struct Building {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "buildingId"
     )]
     pub building_id: String,
     /**
@@ -314,7 +326,8 @@ pub struct Building {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "buildingName"
     )]
     pub building_name: String,
     /**
@@ -343,7 +356,7 @@ pub struct Building {
     /**
      * Public API: Resources.buildings
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "floorNames")]
     pub floor_names: Vec<String>,
     /**
      * Public API: Resources.buildings
@@ -362,7 +375,11 @@ pub struct BuildingAddress {
     /**
      * Public API: Resources.buildings
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "addressLines"
+    )]
     pub address_lines: Vec<String>,
     /**
      * Public API: Resources.buildings
@@ -370,7 +387,8 @@ pub struct BuildingAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "administrativeArea"
     )]
     pub administrative_area: String,
     /**
@@ -379,7 +397,8 @@ pub struct BuildingAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "languageCode"
     )]
     pub language_code: String,
     /**
@@ -397,7 +416,8 @@ pub struct BuildingAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "postalCode"
     )]
     pub postal_code: String,
     /**
@@ -406,7 +426,8 @@ pub struct BuildingAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "regionCode"
     )]
     pub region_code: String,
     /**
@@ -475,7 +496,8 @@ pub struct Buildings {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -489,7 +511,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "buildingId"
     )]
     pub building_id: String,
     /**
@@ -513,7 +536,11 @@ pub struct CalendarResource {
     /**
      * Public API: Resources.calendars
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "featureInstances"
+    )]
     pub feature_instances: Option<serde_json::Value>,
     /**
      * Public API: Resources.calendars
@@ -521,7 +548,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "floorName"
     )]
     pub floor_name: String,
     /**
@@ -530,7 +558,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "floorSection"
     )]
     pub floor_section: String,
     /**
@@ -539,7 +568,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "generatedResourceName"
     )]
     pub generated_resource_name: String,
     /**
@@ -557,7 +587,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceCategory"
     )]
     pub resource_category: String,
     /**
@@ -566,7 +597,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceDescription"
     )]
     pub resource_description: String,
     /**
@@ -575,7 +607,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceEmail"
     )]
     pub resource_email: String,
     /**
@@ -584,7 +617,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceId"
     )]
     pub resource_id: String,
     /**
@@ -593,7 +627,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceName"
     )]
     pub resource_name: String,
     /**
@@ -602,7 +637,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceType"
     )]
     pub resource_type: String,
     /**
@@ -611,7 +647,8 @@ pub struct CalendarResource {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userVisibleDescription"
     )]
     pub user_visible_description: String,
 }
@@ -648,7 +685,8 @@ pub struct CalendarResources {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -715,7 +753,8 @@ pub struct Channel {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceId"
     )]
     pub resource_id: String,
     /**
@@ -724,7 +763,8 @@ pub struct Channel {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceUri"
     )]
     pub resource_uri: String,
     /**
@@ -756,7 +796,8 @@ pub struct ActiveTimeRanges {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "activeTime"
     )]
     pub active_time: i64,
     /**
@@ -790,9 +831,17 @@ pub struct CpuStatusReports {
     /**
      * List of CPU temperature samples.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "cpuTemperatureInfo"
+    )]
     pub cpu_temperature_info: Vec<CpuTemperatureInfo>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "cpuUtilizationPercentageInfo"
+    )]
     pub cpu_utilization_percentage_info: Vec<i64>,
     /**
      * Date and time the report was received.
@@ -800,7 +849,8 @@ pub struct CpuStatusReports {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "reportTime"
     )]
     pub report_time: Option<chrono::DateTime<chrono::Utc>>,
 }
@@ -813,13 +863,15 @@ pub struct DeviceFiles {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "createTime"
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "downloadUrl"
     )]
     pub download_url: String,
     #[serde(
@@ -845,7 +897,8 @@ pub struct VolumeInfo {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "storageFree"
     )]
     pub storage_free: i64,
     /**
@@ -854,13 +907,15 @@ pub struct VolumeInfo {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "storageTotal"
     )]
     pub storage_total: i64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "volumeId"
     )]
     pub volume_id: String,
 }
@@ -870,7 +925,7 @@ pub struct DiskVolumeReports {
     /**
      * Disk volumes
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "volumeInfo")]
     pub volume_info: Vec<VolumeInfo>,
 }
 
@@ -883,7 +938,8 @@ pub struct LastKnownNetwork {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "ipAddress"
     )]
     pub ip_address: String,
     /**
@@ -892,7 +948,8 @@ pub struct LastKnownNetwork {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "wanIpAddress"
     )]
     pub wan_ip_address: String,
 }
@@ -929,10 +986,15 @@ pub struct SystemRamFreeReports {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "reportTime"
     )]
     pub report_time: Option<chrono::DateTime<chrono::Utc>>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "systemRamFreeInfo"
+    )]
     pub system_ram_free_info: Vec<i64>,
 }
 
@@ -954,7 +1016,8 @@ pub struct TpmVersionInfo {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "firmwareVersion"
     )]
     pub firmware_version: String,
     /**
@@ -972,7 +1035,8 @@ pub struct TpmVersionInfo {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "specLevel"
     )]
     pub spec_level: String,
     /**
@@ -981,7 +1045,8 @@ pub struct TpmVersionInfo {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tpmModel"
     )]
     pub tpm_model: String,
     /**
@@ -990,7 +1055,8 @@ pub struct TpmVersionInfo {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "vendorSpecific"
     )]
     pub vendor_specific: String,
 }
@@ -1001,7 +1067,11 @@ pub struct ChromeOsDevice {
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "activeTimeRanges"
+    )]
     pub active_time_ranges: Vec<ActiveTimeRanges>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
@@ -1009,7 +1079,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "annotatedAssetId"
     )]
     pub annotated_asset_id: String,
     /**
@@ -1018,7 +1089,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "annotatedLocation"
     )]
     pub annotated_location: String,
     /**
@@ -1027,7 +1099,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "annotatedUser"
     )]
     pub annotated_user: String,
     /**
@@ -1036,7 +1109,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "autoUpdateExpiration"
     )]
     pub auto_update_expiration: i64,
     /**
@@ -1045,18 +1119,23 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "bootMode"
     )]
     pub boot_mode: String,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "cpuStatusReports"
+    )]
     pub cpu_status_reports: Vec<CpuStatusReports>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "deviceFiles")]
     pub device_files: Vec<DeviceFiles>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
@@ -1064,13 +1143,18 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "deviceId"
     )]
     pub device_id: String,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "diskVolumeReports"
+    )]
     pub disk_volume_reports: Vec<DiskVolumeReports>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
@@ -1078,7 +1162,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "dockMacAddress"
     )]
     pub dock_mac_address: String,
     /**
@@ -1096,7 +1181,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "ethernetMacAddress"
     )]
     pub ethernet_mac_address: String,
     /**
@@ -1105,7 +1191,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "ethernetMacAddress0"
     )]
     pub ethernet_mac_address_0: String,
     /**
@@ -1114,7 +1201,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "firmwareVersion"
     )]
     pub firmware_version: String,
     /**
@@ -1132,13 +1220,18 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "lastEnrollmentTime"
     )]
     pub last_enrollment_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "lastKnownNetwork"
+    )]
     pub last_known_network: Vec<LastKnownNetwork>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
@@ -1146,7 +1239,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "lastSync"
     )]
     pub last_sync: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1155,13 +1249,18 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "macAddress"
     )]
     pub mac_address: String,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "manufactureDate"
+    )]
     pub manufacture_date: Option<chrono::NaiveDate>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
@@ -1196,7 +1295,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "orderNumber"
     )]
     pub order_number: String,
     /**
@@ -1205,7 +1305,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "orgUnitPath"
     )]
     pub org_unit_path: String,
     /**
@@ -1214,7 +1315,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "osVersion"
     )]
     pub os_version: String,
     /**
@@ -1223,18 +1325,23 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "platformVersion"
     )]
     pub platform_version: String,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "recentUsers")]
     pub recent_users: Vec<RecentUsers>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "screenshotFiles"
+    )]
     pub screenshot_files: Vec<DeviceFiles>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
@@ -1242,7 +1349,8 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "serialNumber"
     )]
     pub serial_number: String,
     /**
@@ -1260,13 +1368,18 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "supportEndDate"
     )]
     pub support_end_date: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "systemRamFreeReports"
+    )]
     pub system_ram_free_reports: Vec<SystemRamFreeReports>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
@@ -1274,20 +1387,26 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "systemRamTotal"
     )]
     pub system_ram_total: i64,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tpmVersionInfo"
+    )]
     pub tpm_version_info: Option<TpmVersionInfo>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "willAutoRenew"
     )]
     pub will_auto_renew: bool,
 }
@@ -1303,7 +1422,8 @@ pub struct ChromeOsDeviceAction {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "deprovisionReason"
     )]
     pub deprovision_reason: String,
 }
@@ -1330,14 +1450,15 @@ pub struct ChromeOsDevices {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChromeOsMoveDevicesOu {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "deviceIds")]
     pub device_ids: Vec<String>,
 }
 
@@ -1365,7 +1486,8 @@ pub struct Customer {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "alternateEmail"
     )]
     pub alternate_email: String,
     /**
@@ -1374,13 +1496,15 @@ pub struct Customer {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "customerCreationTime"
     )]
     pub customer_creation_time: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customerDomain"
     )]
     pub customer_domain: String,
     #[serde(
@@ -1410,10 +1534,15 @@ pub struct Customer {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "phoneNumber"
     )]
     pub phone_number: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "postalAddress"
+    )]
     pub postal_address: Option<CustomerPostalAddress>,
 }
 
@@ -1422,31 +1551,36 @@ pub struct CustomerPostalAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "addressLine1"
     )]
     pub address_line_1: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "addressLine2"
     )]
     pub address_line_2: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "addressLine3"
     )]
     pub address_line_3: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "contactName"
     )]
     pub contact_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "countryCode"
     )]
     pub country_code: String,
     #[serde(
@@ -1458,13 +1592,15 @@ pub struct CustomerPostalAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "organizationName"
     )]
     pub organization_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "postalCode"
     )]
     pub postal_code: String,
     #[serde(
@@ -1587,7 +1723,8 @@ pub struct DirectoryChromeosdevicesCommand {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "commandExpireTime"
     )]
     pub command_expire_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1596,13 +1733,18 @@ pub struct DirectoryChromeosdevicesCommand {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "commandId"
     )]
     pub command_id: i64,
     /**
      * Information regarding a command that was issued to a device.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "commandResult"
+    )]
     pub command_result: Option<DirectoryChromeosdevicesCommandResult>,
     /**
      * Information regarding a command that was issued to a device.
@@ -1610,7 +1752,8 @@ pub struct DirectoryChromeosdevicesCommand {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "issueTime"
     )]
     pub issue_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1687,7 +1830,8 @@ pub struct DirectoryChromeosdevicesCommandResult {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "errorMessage"
     )]
     pub error_message: String,
     /**
@@ -1696,7 +1840,8 @@ pub struct DirectoryChromeosdevicesCommandResult {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "executeTime"
     )]
     pub execute_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1712,7 +1857,11 @@ pub struct DirectoryChromeosdevicesIssueCommandRequest {
     /**
      * A request for issuing a command.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "commandType"
+    )]
     pub command_type: Option<Type>,
     /**
      * A request for issuing a command.
@@ -1734,7 +1883,8 @@ pub struct DirectoryChromeosdevicesIssueCommandResponse {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "commandId"
     )]
     pub command_id: i64,
 }
@@ -1747,13 +1897,15 @@ pub struct DomainAlias {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "creationTime"
     )]
     pub creation_time: i64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "domainAliasName"
     )]
     pub domain_alias_name: String,
     #[serde(
@@ -1771,7 +1923,8 @@ pub struct DomainAlias {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "parentDomainName"
     )]
     pub parent_domain_name: String,
     /**
@@ -1789,7 +1942,11 @@ pub struct DomainAliases {
     /**
      * List of domain alias objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "domainAliases"
+    )]
     pub domain_aliases: Vec<DomainAlias>,
     #[serde(
         default,
@@ -1813,18 +1970,24 @@ pub struct Domains {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "creationTime"
     )]
     pub creation_time: i64,
     /**
      * List of domain alias objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "domainAliases"
+    )]
     pub domain_aliases: Vec<DomainAlias>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "domainName"
     )]
     pub domain_name: String,
     #[serde(
@@ -1838,7 +2001,8 @@ pub struct Domains {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isPrimary"
     )]
     pub is_primary: bool,
     #[serde(
@@ -1967,7 +2131,7 @@ pub struct FailureInfo {
     /**
      * Info about failures
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "errorCode")]
     pub error_code: Option<ErrorCode>,
     /**
      * Info about failures
@@ -1975,7 +2139,8 @@ pub struct FailureInfo {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "errorMessage"
     )]
     pub error_message: String,
     /**
@@ -1989,7 +2154,8 @@ pub struct FailureInfo {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "printerId"
     )]
     pub printer_id: String,
 }
@@ -2041,7 +2207,8 @@ pub struct FeatureRename {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "newName"
     )]
     pub new_name: String,
 }
@@ -2078,7 +2245,8 @@ pub struct Features {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -2091,7 +2259,8 @@ pub struct Group {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "adminCreated"
     )]
     pub admin_created: bool,
     /**
@@ -2114,7 +2283,8 @@ pub struct Group {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "directMembersCount"
     )]
     pub direct_members_count: i64,
     /**
@@ -2165,7 +2335,11 @@ pub struct Group {
     /**
      * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "nonEditableAliases"
+    )]
     pub non_editable_aliases: Vec<String>,
 }
 
@@ -2191,7 +2365,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -2205,13 +2380,18 @@ pub struct ListPrinterModelsResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
      * Response for listing allowed printer models.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "printerModels"
+    )]
     pub printer_models: Vec<PrinterModel>,
 }
 
@@ -2224,7 +2404,8 @@ pub struct ListPrintersResponse {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
@@ -2334,7 +2515,8 @@ pub struct Members {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -2347,7 +2529,8 @@ pub struct MembersHasMember {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isMember"
     )]
     pub is_member: bool,
 }
@@ -2357,13 +2540,15 @@ pub struct Applications {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "packageName"
     )]
     pub package_name: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -2374,13 +2559,15 @@ pub struct Applications {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "versionCode"
     )]
     pub version_code: i64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "versionName"
     )]
     pub version_name: String,
 }
@@ -2393,7 +2580,8 @@ pub struct MobileDevice {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "adbStatus"
     )]
     pub adb_status: bool,
     /**
@@ -2407,7 +2595,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "basebandVersion"
     )]
     pub baseband_version: String,
     /**
@@ -2416,7 +2605,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "bootloaderVersion"
     )]
     pub bootloader_version: String,
     /**
@@ -2434,7 +2624,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "buildNumber"
     )]
     pub build_number: String,
     /**
@@ -2443,7 +2634,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "defaultLanguage"
     )]
     pub default_language: String,
     /**
@@ -2451,7 +2643,8 @@ pub struct MobileDevice {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "developerOptionsStatus"
     )]
     pub developer_options_status: bool,
     /**
@@ -2460,7 +2653,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "deviceCompromisedStatus"
     )]
     pub device_compromised_status: String,
     /**
@@ -2469,7 +2663,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "deviceId"
     )]
     pub device_id: String,
     /**
@@ -2478,7 +2673,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "devicePasswordStatus"
     )]
     pub device_password_status: String,
     /**
@@ -2492,7 +2688,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "encryptionStatus"
     )]
     pub encryption_status: String,
     /**
@@ -2510,7 +2707,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "firstSync"
     )]
     pub first_sync: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -2528,7 +2726,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "hardwareId"
     )]
     pub hardware_id: String,
     /**
@@ -2546,7 +2745,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "kernelVersion"
     )]
     pub kernel_version: String,
     /**
@@ -2564,7 +2764,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "lastSync"
     )]
     pub last_sync: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -2572,7 +2773,8 @@ pub struct MobileDevice {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "managedAccountIsOnOwnerProfile"
     )]
     pub managed_account_is_on_owner_profile: bool,
     /**
@@ -2613,7 +2815,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "networkOperator"
     )]
     pub network_operator: String,
     /**
@@ -2628,7 +2831,11 @@ pub struct MobileDevice {
     /**
      * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "otherAccountsInfo"
+    )]
     pub other_accounts_info: Vec<String>,
     /**
      * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
@@ -2645,7 +2852,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "releaseVersion"
     )]
     pub release_version: String,
     /**
@@ -2654,7 +2862,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceId"
     )]
     pub resource_id: String,
     /**
@@ -2663,7 +2872,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "securityPatchLevel"
     )]
     pub security_patch_level: i64,
     /**
@@ -2672,7 +2882,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "serialNumber"
     )]
     pub serial_number: String,
     /**
@@ -2689,7 +2900,8 @@ pub struct MobileDevice {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "supportsWorkProfile"
     )]
     pub supports_work_profile: bool,
     /**
@@ -2707,7 +2919,8 @@ pub struct MobileDevice {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "unknownSourcesStatus"
     )]
     pub unknown_sources_status: bool,
     /**
@@ -2716,7 +2929,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userAgent"
     )]
     pub user_agent: String,
     /**
@@ -2725,7 +2939,8 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "wifiMacAddress"
     )]
     pub wifi_mac_address: String,
 }
@@ -2762,7 +2977,8 @@ pub struct MobileDevices {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -2775,7 +2991,8 @@ pub struct OrgUnit {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "blockInheritance"
     )]
     pub block_inheritance: bool,
     /**
@@ -2820,7 +3037,8 @@ pub struct OrgUnit {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "orgUnitId"
     )]
     pub org_unit_id: String,
     /**
@@ -2829,7 +3047,8 @@ pub struct OrgUnit {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "orgUnitPath"
     )]
     pub org_unit_path: String,
     /**
@@ -2838,7 +3057,8 @@ pub struct OrgUnit {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "parentOrgUnitId"
     )]
     pub parent_org_unit_id: String,
     /**
@@ -2847,7 +3067,8 @@ pub struct OrgUnit {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "parentOrgUnitPath"
     )]
     pub parent_org_unit_path: String,
 }
@@ -2869,7 +3090,11 @@ pub struct OrgUnits {
     /**
      * List of organizational unit objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "organizationUnits"
+    )]
     pub organization_units: Vec<OrgUnit>,
 }
 
@@ -2879,7 +3104,11 @@ pub struct Printer {
     /**
      * Printer configuration.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "auxiliaryMessages"
+    )]
     pub auxiliary_messages: Vec<AuxiliaryMessage>,
     /**
      * Printer configuration.
@@ -2887,7 +3116,8 @@ pub struct Printer {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "createTime"
     )]
     pub create_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -2905,7 +3135,8 @@ pub struct Printer {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -2923,7 +3154,8 @@ pub struct Printer {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "makeAndModel"
     )]
     pub make_and_model: String,
     /**
@@ -2941,7 +3173,8 @@ pub struct Printer {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "orgUnitId"
     )]
     pub org_unit_id: String,
     /**
@@ -2958,7 +3191,8 @@ pub struct Printer {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "useDriverlessConfig"
     )]
     pub use_driverless_config: bool,
 }
@@ -2972,7 +3206,8 @@ pub struct PrinterModel {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -2981,7 +3216,8 @@ pub struct PrinterModel {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "makeAndModel"
     )]
     pub make_and_model: String,
     /**
@@ -3000,7 +3236,11 @@ pub struct Privilege {
     /**
      * A list of child privileges. Privileges for a service form a tree. Each privilege can have a list of child privileges; this list is empty for a leaf privilege.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "childPrivileges"
+    )]
     pub child_privileges: Vec<Privilege>,
     #[serde(
         default,
@@ -3013,7 +3253,8 @@ pub struct Privilege {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isOuScopable"
     )]
     pub is_ou_scopable: bool,
     #[serde(
@@ -3025,19 +3266,22 @@ pub struct Privilege {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "privilegeName"
     )]
     pub privilege_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "serviceId"
     )]
     pub service_id: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "serviceName"
     )]
     pub service_name: String,
 }
@@ -3068,13 +3312,15 @@ pub struct RolePrivileges {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "privilegeName"
     )]
     pub privilege_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "serviceId"
     )]
     pub service_id: String,
 }
@@ -3092,7 +3338,8 @@ pub struct Role {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isSuperAdminRole"
     )]
     pub is_super_admin_role: bool,
     /**
@@ -3100,7 +3347,8 @@ pub struct Role {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isSystemRole"
     )]
     pub is_system_role: bool,
     #[serde(
@@ -3112,7 +3360,8 @@ pub struct Role {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "roleDescription"
     )]
     pub role_description: String,
     /**
@@ -3121,19 +3370,25 @@ pub struct Role {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "roleId"
     )]
     pub role_id: i64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "roleName"
     )]
     pub role_name: String,
     /**
      * The set of privileges that are granted to this role.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "rolePrivileges"
+    )]
     pub role_privileges: Vec<RolePrivileges>,
 }
 
@@ -3146,7 +3401,8 @@ pub struct RoleAssignment {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "assignedTo"
     )]
     pub assigned_to: String,
     /**
@@ -3173,7 +3429,8 @@ pub struct RoleAssignment {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "orgUnitId"
     )]
     pub org_unit_id: String,
     /**
@@ -3182,7 +3439,8 @@ pub struct RoleAssignment {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "roleAssignmentId"
     )]
     pub role_assignment_id: i64,
     /**
@@ -3191,7 +3449,8 @@ pub struct RoleAssignment {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "roleId"
     )]
     pub role_id: i64,
     /**
@@ -3200,7 +3459,8 @@ pub struct RoleAssignment {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "scopeType"
     )]
     pub scope_type: String,
 }
@@ -3227,7 +3487,8 @@ pub struct RoleAssignments {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -3254,7 +3515,8 @@ pub struct Roles {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -3268,7 +3530,8 @@ pub struct Schema {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -3300,7 +3563,8 @@ pub struct Schema {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "schemaId"
     )]
     pub schema_id: String,
     /**
@@ -3309,7 +3573,8 @@ pub struct Schema {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "schemaName"
     )]
     pub schema_name: String,
 }
@@ -3323,7 +3588,8 @@ pub struct NumericIndexingSpec {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "maxValue"
     )]
     pub max_value: f64,
     /**
@@ -3332,7 +3598,8 @@ pub struct NumericIndexingSpec {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "minValue"
     )]
     pub min_value: f64,
 }
@@ -3346,7 +3613,8 @@ pub struct SchemaFieldSpec {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -3364,7 +3632,8 @@ pub struct SchemaFieldSpec {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fieldId"
     )]
     pub field_id: String,
     /**
@@ -3373,7 +3642,8 @@ pub struct SchemaFieldSpec {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fieldName"
     )]
     pub field_name: String,
     /**
@@ -3382,7 +3652,8 @@ pub struct SchemaFieldSpec {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fieldType"
     )]
     pub field_type: String,
     /**
@@ -3407,13 +3678,18 @@ pub struct SchemaFieldSpec {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "multiValued"
     )]
     pub multi_valued: bool,
     /**
      * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "numericIndexingSpec"
+    )]
     pub numeric_indexing_spec: Option<NumericIndexingSpec>,
     /**
      * You can use schemas to add custom fields to user profiles. You can use these fields to store information such as the projects your users work on, their physical locations, their hire dates, or whatever else fits your business needs. For more information, see [Custom User Fields](/admin-sdk/directory/v1/guides/manage-schemas).
@@ -3421,7 +3697,8 @@ pub struct SchemaFieldSpec {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "readAccessType"
     )]
     pub read_access_type: String,
 }
@@ -3471,7 +3748,8 @@ pub struct Token {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "clientId"
     )]
     pub client_id: String,
     /**
@@ -3480,7 +3758,8 @@ pub struct Token {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayText"
     )]
     pub display_text: String,
     /**
@@ -3506,7 +3785,8 @@ pub struct Token {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "nativeApp"
     )]
     pub native_app: bool,
     /**
@@ -3520,7 +3800,8 @@ pub struct Token {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userKey"
     )]
     pub user_key: String,
 }
@@ -3566,7 +3847,8 @@ pub struct User {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "agreedToTerms"
     )]
     pub agreed_to_terms: bool,
     /**
@@ -3587,7 +3869,8 @@ pub struct User {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "changePasswordAtNextLogin"
     )]
     pub change_password_at_next_login: bool,
     /**
@@ -3596,13 +3879,18 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "creationTime"
     )]
     pub creation_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "customSchemas"
+    )]
     pub custom_schemas: Option<Empty>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -3610,7 +3898,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customerId"
     )]
     pub customer_id: String,
     /**
@@ -3619,7 +3908,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "deletionTime"
     )]
     pub deletion_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -3639,7 +3929,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "externalIds"
+    )]
     pub external_ids: Option<serde_json::Value>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -3652,7 +3946,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "hashFunction"
     )]
     pub hash_function: String,
     /**
@@ -3674,7 +3969,8 @@ pub struct User {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "includeInGlobalAddressList"
     )]
     pub include_in_global_address_list: bool,
     /**
@@ -3682,7 +3978,8 @@ pub struct User {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "ipWhitelisted"
     )]
     pub ip_whitelisted: bool,
     /**
@@ -3690,7 +3987,8 @@ pub struct User {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isAdmin"
     )]
     pub is_admin: bool,
     /**
@@ -3698,7 +3996,8 @@ pub struct User {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isDelegatedAdmin"
     )]
     pub is_delegated_admin: bool,
     /**
@@ -3706,7 +4005,8 @@ pub struct User {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isEnforcedIn2Sv"
     )]
     pub is_enforced_in_2_sv: bool,
     /**
@@ -3714,7 +4014,8 @@ pub struct User {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isEnrolledIn2Sv"
     )]
     pub is_enrolled_in_2_sv: bool,
     /**
@@ -3722,7 +4023,8 @@ pub struct User {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isMailboxSetup"
     )]
     pub is_mailbox_setup: bool,
     /**
@@ -3750,7 +4052,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "lastLoginTime"
     )]
     pub last_login_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -3766,7 +4069,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "nonEditableAliases"
+    )]
     pub non_editable_aliases: Vec<String>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -3779,7 +4086,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "orgUnitPath"
     )]
     pub org_unit_path: String,
     /**
@@ -3804,7 +4112,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "posixAccounts"
+    )]
     pub posix_accounts: Option<serde_json::Value>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -3812,7 +4124,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "primaryEmail"
     )]
     pub primary_email: String,
     /**
@@ -3821,7 +4134,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recoveryEmail"
     )]
     pub recovery_email: String,
     /**
@@ -3830,7 +4144,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recoveryPhone"
     )]
     pub recovery_phone: String,
     /**
@@ -3841,7 +4156,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "sshPublicKeys"
+    )]
     pub ssh_public_keys: Option<serde_json::Value>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -3857,7 +4176,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "suspensionReason"
     )]
     pub suspension_reason: String,
     /**
@@ -3866,7 +4186,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "thumbnailPhotoEtag"
     )]
     pub thumbnail_photo_etag: String,
     /**
@@ -3875,7 +4196,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "thumbnailPhotoUrl"
     )]
     pub thumbnail_photo_url: String,
     /**
@@ -3894,7 +4216,8 @@ pub struct UserAbout {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "contentType"
     )]
     pub content_type: String,
     /**
@@ -3926,7 +4249,8 @@ pub struct UserAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "countryCode"
     )]
     pub country_code: String,
     /**
@@ -3935,7 +4259,8 @@ pub struct UserAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -3944,7 +4269,8 @@ pub struct UserAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "extendedAddress"
     )]
     pub extended_address: String,
     /**
@@ -3971,7 +4297,8 @@ pub struct UserAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "poBox"
     )]
     pub po_box: String,
     /**
@@ -3980,7 +4307,8 @@ pub struct UserAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "postalCode"
     )]
     pub postal_code: String,
     /**
@@ -4005,7 +4333,8 @@ pub struct UserAddress {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "sourceIsStructured"
     )]
     pub source_is_structured: bool,
     /**
@@ -4014,7 +4343,8 @@ pub struct UserAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "streetAddress"
     )]
     pub street_address: String,
     /**
@@ -4047,7 +4377,8 @@ pub struct UserEmail {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -4079,7 +4410,8 @@ pub struct UserExternalId {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -4108,13 +4440,15 @@ pub struct UserGender {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "addressMeAs"
     )]
     pub address_me_as: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customGender"
     )]
     pub custom_gender: String,
     #[serde(
@@ -4135,7 +4469,8 @@ pub struct UserIm {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customProtocol"
     )]
     pub custom_protocol: String,
     /**
@@ -4144,7 +4479,8 @@ pub struct UserIm {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -4194,7 +4530,8 @@ pub struct UserKeyword {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -4227,7 +4564,8 @@ pub struct UserLanguage {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customLanguage"
     )]
     pub custom_language: String,
     /**
@@ -4236,7 +4574,8 @@ pub struct UserLanguage {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "languageCode"
     )]
     pub language_code: String,
 }
@@ -4259,7 +4598,8 @@ pub struct UserLocation {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "buildingId"
     )]
     pub building_id: String,
     /**
@@ -4268,7 +4608,8 @@ pub struct UserLocation {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -4277,7 +4618,8 @@ pub struct UserLocation {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "deskCode"
     )]
     pub desk_code: String,
     /**
@@ -4286,7 +4628,8 @@ pub struct UserLocation {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "floorName"
     )]
     pub floor_name: String,
     /**
@@ -4295,7 +4638,8 @@ pub struct UserLocation {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "floorSection"
     )]
     pub floor_section: String,
     /**
@@ -4327,19 +4671,22 @@ pub struct UserName {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "familyName"
     )]
     pub family_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fullName"
     )]
     pub full_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "givenName"
     )]
     pub given_name: String,
 }
@@ -4353,7 +4700,8 @@ pub struct UserOrganization {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "costCenter"
     )]
     pub cost_center: String,
     /**
@@ -4362,7 +4710,8 @@ pub struct UserOrganization {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -4398,7 +4747,8 @@ pub struct UserOrganization {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "fullTimeEquivalent"
     )]
     pub full_time_equivalent: i64,
     /**
@@ -4466,7 +4816,8 @@ pub struct UserPhone {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -4530,19 +4881,22 @@ pub struct UserPhoto {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mimeType"
     )]
     pub mime_type: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "photoData"
     )]
     pub photo_data: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "primaryEmail"
     )]
     pub primary_email: String,
     /**
@@ -4565,7 +4919,8 @@ pub struct UserPosixAccount {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "accountId"
     )]
     pub account_id: String,
     /**
@@ -4588,7 +4943,8 @@ pub struct UserPosixAccount {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "homeDirectory"
     )]
     pub home_directory: String,
     /**
@@ -4597,7 +4953,8 @@ pub struct UserPosixAccount {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "operatingSystemType"
     )]
     pub operating_system_type: String,
     /**
@@ -4623,7 +4980,8 @@ pub struct UserPosixAccount {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "systemId"
     )]
     pub system_id: String,
     /**
@@ -4651,7 +5009,8 @@ pub struct UserRelation {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -4684,7 +5043,8 @@ pub struct UserSshPublicKey {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "expirationTimeUsec"
     )]
     pub expiration_time_usec: i64,
     /**
@@ -4712,7 +5072,8 @@ pub struct UserUndelete {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "orgUnitPath"
     )]
     pub org_unit_path: String,
 }
@@ -4726,7 +5087,8 @@ pub struct UserWebsite {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customType"
     )]
     pub custom_type: String,
     /**
@@ -4775,7 +5137,8 @@ pub struct Users {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     #[serde(
@@ -4818,7 +5181,8 @@ pub struct VerificationCode {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userId"
     )]
     pub user_id: String,
     /**
@@ -4827,7 +5191,8 @@ pub struct VerificationCode {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "verificationCode"
     )]
     pub verification_code: String,
 }

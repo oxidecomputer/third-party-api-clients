@@ -33,7 +33,8 @@ pub struct Acl {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
@@ -42,7 +43,8 @@ pub struct Acl {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextSyncToken"
     )]
     pub next_sync_token: String,
 }
@@ -118,7 +120,11 @@ pub struct AclRule {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Calendar {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conferenceProperties"
+    )]
     pub conference_properties: Option<ConferenceProperties>,
     /**
      * ETag of the collection.
@@ -180,7 +186,8 @@ pub struct Calendar {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "timeZone"
     )]
     pub time_zone: String,
 }
@@ -216,7 +223,8 @@ pub struct CalendarList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
@@ -225,7 +233,8 @@ pub struct CalendarList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextSyncToken"
     )]
     pub next_sync_token: String,
 }
@@ -248,7 +257,8 @@ pub struct CalendarListEntry {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "accessRole"
     )]
     pub access_role: String,
     /**
@@ -257,7 +267,8 @@ pub struct CalendarListEntry {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "backgroundColor"
     )]
     pub background_color: String,
     /**
@@ -266,15 +277,24 @@ pub struct CalendarListEntry {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "colorId"
     )]
     pub color_id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conferenceProperties"
+    )]
     pub conference_properties: Option<ConferenceProperties>,
     /**
      * The default reminders that the authenticated user has for this calendar.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "defaultReminders"
+    )]
     pub default_reminders: Vec<EventReminder>,
     /**
      * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
@@ -308,7 +328,8 @@ pub struct CalendarListEntry {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "foregroundColor"
     )]
     pub foreground_color: String,
     /**
@@ -349,7 +370,11 @@ pub struct CalendarListEntry {
     /**
      * The notifications that the authenticated user is receiving for this calendar.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "notificationSettings"
+    )]
     pub notification_settings: Option<NotificationSettings>,
     /**
      * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
@@ -382,7 +407,8 @@ pub struct CalendarListEntry {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "summaryOverride"
     )]
     pub summary_override: String,
     /**
@@ -391,7 +417,8 @@ pub struct CalendarListEntry {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "timeZone"
     )]
     pub time_zone: String,
 }
@@ -480,7 +507,8 @@ pub struct Channel {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceId"
     )]
     pub resource_id: String,
     /**
@@ -489,7 +517,8 @@ pub struct Channel {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceUri"
     )]
     pub resource_uri: String,
     /**
@@ -575,19 +604,28 @@ pub struct ConferenceData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "conferenceId"
     )]
     pub conference_id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conferenceSolution"
+    )]
     pub conference_solution: Option<ConferenceSolution>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "createRequest"
+    )]
     pub create_request: Option<CreateConferenceRequest>,
     /**
      * Information about individual conference entry points, such as URLs or phone numbers.
      *  All of them must belong to the same conference.
      *  Either conferenceSolution and at least one entryPoint, or createRequest is required.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "entryPoints")]
     pub entry_points: Vec<EntryPoint>,
     /**
      * ETag of the collection.
@@ -613,7 +651,11 @@ pub struct ConferenceData {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceParameters {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "addOnParameters"
+    )]
     pub add_on_parameters: Option<ConferenceParametersAddOn>,
 }
 
@@ -635,7 +677,11 @@ pub struct ConferenceProperties {
      *  - "eventNamedHangout"
      *  - "hangoutsMeet"  Optional.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "allowedConferenceSolutionTypes"
+    )]
     pub allowed_conference_solution_types: Vec<String>,
 }
 
@@ -647,7 +693,8 @@ pub struct ConferenceRequestStatus {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "statusCode"
     )]
     pub status_code: String,
 }
@@ -660,7 +707,8 @@ pub struct ConferenceSolution {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "iconUri"
     )]
     pub icon_uri: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -692,7 +740,11 @@ pub struct ConferenceSolutionKey {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateConferenceRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conferenceSolutionKey"
+    )]
     pub conference_solution_key: Option<ConferenceSolutionKey>,
     /**
      * ETag of the collection.
@@ -700,7 +752,8 @@ pub struct CreateConferenceRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "requestId"
     )]
     pub request_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -715,7 +768,8 @@ pub struct EntryPoint {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "accessCode"
     )]
     pub access_code: String,
     /**
@@ -725,7 +779,11 @@ pub struct EntryPoint {
      *  - "eventNamedHangout"
      *  - "hangoutsMeet"  Optional.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "entryPointFeatures"
+    )]
     pub entry_point_features: Vec<String>,
     /**
      * ETag of the collection.
@@ -733,7 +791,8 @@ pub struct EntryPoint {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "entryPointType"
     )]
     pub entry_point_type: String,
     /**
@@ -751,7 +810,8 @@ pub struct EntryPoint {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "meetingCode"
     )]
     pub meeting_code: String,
     /**
@@ -787,7 +847,8 @@ pub struct EntryPoint {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "regionCode"
     )]
     pub region_code: String,
     /**
@@ -832,7 +893,8 @@ pub struct Creator {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -906,7 +968,8 @@ pub struct Gadget {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "iconLink"
     )]
     pub icon_link: String,
     /**
@@ -962,7 +1025,8 @@ pub struct Organizer {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -1007,7 +1071,8 @@ pub struct Reminders {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "useDefault"
     )]
     pub use_default: bool,
 }
@@ -1042,7 +1107,8 @@ pub struct EventData {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "anyoneCanAddSelf"
     )]
     pub anyone_can_add_self: bool,
     /**
@@ -1062,7 +1128,8 @@ pub struct EventData {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "attendeesOmitted"
     )]
     pub attendees_omitted: bool,
     /**
@@ -1071,10 +1138,15 @@ pub struct EventData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "colorId"
     )]
     pub color_id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conferenceData"
+    )]
     pub conference_data: Option<ConferenceData>,
     /**
      * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
@@ -1106,7 +1178,8 @@ pub struct EventData {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "endTimeUnspecified"
     )]
     pub end_time_unspecified: bool,
     /**
@@ -1124,13 +1197,18 @@ pub struct EventData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "eventType"
     )]
     pub event_type: String,
     /**
      * Extended properties of the event.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "extendedProperties"
+    )]
     pub extended_properties: Option<ExtendedProperties>,
     /**
      * A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.
@@ -1142,7 +1220,8 @@ pub struct EventData {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "guestsCanInviteOthers"
     )]
     pub guests_can_invite_others: bool,
     /**
@@ -1150,7 +1229,8 @@ pub struct EventData {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "guestsCanModify"
     )]
     pub guests_can_modify: bool,
     /**
@@ -1158,7 +1238,8 @@ pub struct EventData {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "guestsCanSeeOtherGuests"
     )]
     pub guests_can_see_other_guests: bool,
     /**
@@ -1167,7 +1248,8 @@ pub struct EventData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "hangoutLink"
     )]
     pub hangout_link: String,
     /**
@@ -1176,7 +1258,8 @@ pub struct EventData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "htmlLink"
     )]
     pub html_link: String,
     /**
@@ -1185,7 +1268,8 @@ pub struct EventData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "iCalUID"
     )]
     pub i_cal_uid: String,
     /**
@@ -1228,14 +1312,19 @@ pub struct EventData {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub organizer: Option<Organizer>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "originalStartTime"
+    )]
     pub original_start_time: Option<EventDateTime>,
     /**
      * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "privateCopy"
     )]
     pub private_copy: bool,
     /**
@@ -1253,7 +1342,8 @@ pub struct EventData {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recurringEventId"
     )]
     pub recurring_event_id: String,
     /**
@@ -1332,7 +1422,8 @@ pub struct EventAttachment {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fileId"
     )]
     pub file_id: String,
     /**
@@ -1341,7 +1432,8 @@ pub struct EventAttachment {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fileUrl"
     )]
     pub file_url: String,
     /**
@@ -1350,7 +1442,8 @@ pub struct EventAttachment {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "iconLink"
     )]
     pub icon_link: String,
     /**
@@ -1359,7 +1452,8 @@ pub struct EventAttachment {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mimeType"
     )]
     pub mime_type: String,
     /**
@@ -1381,7 +1475,8 @@ pub struct EventAttendee {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "additionalGuests"
     )]
     pub additional_guests: i64,
     /**
@@ -1399,7 +1494,8 @@ pub struct EventAttendee {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -1450,7 +1546,8 @@ pub struct EventAttendee {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "responseStatus"
     )]
     pub response_status: String,
     /**
@@ -1477,7 +1574,8 @@ pub struct EventDateTime {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "dateTime"
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1486,7 +1584,8 @@ pub struct EventDateTime {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "timeZone"
     )]
     pub time_zone: String,
 }
@@ -1521,13 +1620,18 @@ pub struct Events {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "accessRole"
     )]
     pub access_role: String,
     /**
      * The default reminders that the authenticated user has for this calendar.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "defaultReminders"
+    )]
     pub default_reminders: Vec<EventReminder>,
     /**
      * ETag of the collection.
@@ -1567,7 +1671,8 @@ pub struct Events {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
@@ -1576,7 +1681,8 @@ pub struct Events {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextSyncToken"
     )]
     pub next_sync_token: String,
     /**
@@ -1594,7 +1700,8 @@ pub struct Events {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "timeZone"
     )]
     pub time_zone: String,
     /**
@@ -1648,7 +1755,8 @@ pub struct FreeBusyRequest {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "calendarExpansionMax"
     )]
     pub calendar_expansion_max: i64,
     /**
@@ -1657,7 +1765,8 @@ pub struct FreeBusyRequest {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "groupExpansionMax"
     )]
     pub group_expansion_max: i64,
     /**
@@ -1671,7 +1780,8 @@ pub struct FreeBusyRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "timeMax"
     )]
     pub time_max: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1680,7 +1790,8 @@ pub struct FreeBusyRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "timeMin"
     )]
     pub time_min: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1689,7 +1800,8 @@ pub struct FreeBusyRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "timeZone"
     )]
     pub time_zone: String,
 }
@@ -1734,7 +1846,8 @@ pub struct FreeBusyResponse {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "timeMax"
     )]
     pub time_max: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1743,7 +1856,8 @@ pub struct FreeBusyResponse {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "timeMin"
     )]
     pub time_min: Option<chrono::DateTime<chrono::Utc>>,
 }
@@ -1819,7 +1933,8 @@ pub struct Settings {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
@@ -1828,7 +1943,8 @@ pub struct Settings {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextSyncToken"
     )]
     pub next_sync_token: String,
 }

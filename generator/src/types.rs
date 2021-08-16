@@ -166,6 +166,10 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                                 a(r#"#[serde("#);
                             }
 
+                            if !prop.ends_with('_') {
+                                prop = to_snake_case(&prop);
+                            }
+
                             // Close the serde string.
                             if *name != prop {
                                 a(&format!(r#"rename = "{}")]"#, name));
@@ -175,9 +179,6 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                                 a(r#")]"#);
                             }
 
-                            if !prop.ends_with('_') {
-                                prop = to_snake_case(&prop);
-                            }
                             a(&format!("pub {}: {},", prop, rt));
                         } else {
                             bail!("rendering type {} {:?} failed", name, tid);

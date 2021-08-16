@@ -209,7 +209,11 @@ pub struct Location {
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "airportCode"
+    )]
     pub airport_code: Option<serde_json::Value>,
     #[serde(
         default,
@@ -236,7 +240,8 @@ pub struct Segment {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "airlineAlliance"
     )]
     pub airline_alliance: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -246,36 +251,48 @@ pub struct Segment {
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "endTimestamp"
+    )]
     pub end_timestamp: Option<serde_json::Value>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "flightNumber"
     )]
     pub flight_number: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "hotelChain"
     )]
     pub hotel_chain: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "providerCode"
     )]
     pub provider_code: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "providerName"
     )]
     pub provider_name: String,
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "startTimestamp"
+    )]
     pub start_timestamp: Option<serde_json::Value>,
 }
 
@@ -284,13 +301,15 @@ pub struct Person {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "billableEntity"
     )]
     pub billable_entity: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "costCenter"
     )]
     pub cost_center: String,
     #[serde(
@@ -308,25 +327,29 @@ pub struct Person {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "employeedId"
     )]
     pub employeed_id: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "managerEmail"
     )]
     pub manager_email: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "managerName"
     )]
     pub manager_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "managerUuid"
     )]
     pub manager_uuid: String,
     #[serde(
@@ -361,7 +384,11 @@ pub struct Passenger {
     pub person: Option<Person>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<PassengerStatus>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "travelerType"
+    )]
     pub traveler_type: Option<TravelerType>,
 }
 
@@ -394,33 +421,34 @@ pub struct Page {
     /**
      * Nearest airport code to this location
      */
-    #[serde()]
+    #[serde(rename = "currentPage")]
     pub current_page: serde_json::Value,
     /**
      * Nearest airport code to this location
      */
-    #[serde()]
+    #[serde(rename = "pageSize")]
     pub page_size: serde_json::Value,
     /**
      * Nearest airport code to this location
      */
-    #[serde()]
+    #[serde(rename = "totalElements")]
     pub total_elements: serde_json::Value,
     /**
      * Nearest airport code to this location
      */
-    #[serde()]
+    #[serde(rename = "totalPages")]
     pub total_pages: serde_json::Value,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Cnr {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "cnrCodes")]
     pub cnr_codes: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "publishedPrice"
     )]
     pub published_price: f64,
 }
@@ -430,36 +458,45 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "airlineCreditCardSurcharge"
     )]
     pub airline_credit_card_surcharge: f64,
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "approvalChangedAt"
+    )]
     pub approval_changed_at: Option<serde_json::Value>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "approverEmail"
     )]
     pub approver_email: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "approverReason"
     )]
     pub approver_reason: String,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "basePrice"
     )]
     pub base_price: f64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "billToClient"
     )]
     pub bill_to_client: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -467,34 +504,43 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "bookingDuration"
     )]
     pub booking_duration: i64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "bookingFee"
     )]
     pub booking_fee: f64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "bookingId"
     )]
     pub booking_id: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "bookingMethod"
     )]
     pub booking_method: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "bookingStatus"
     )]
     pub booking_status: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "bookingType"
+    )]
     pub booking_type: Option<BookingType>,
     #[serde(
         default,
@@ -505,47 +551,67 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "cancellationReason"
     )]
     pub cancellation_reason: String,
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "cancelledAt"
+    )]
     pub cancelled_at: Option<serde_json::Value>,
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "carbonEmissions"
+    )]
     pub carbon_emissions: Option<serde_json::Value>,
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "carbonOffsetCost"
+    )]
     pub carbon_offset_cost: Option<serde_json::Value>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub cnr: Option<Cnr>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "companyOffice"
     )]
     pub company_office: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "companyPaymentMethod"
     )]
     pub company_payment_method: String,
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "confirmationNumber"
+    )]
     pub confirmation_number: Option<serde_json::Value>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "corporateDiscountUsed"
     )]
     pub corporate_discount_used: String,
     /**
@@ -562,30 +628,37 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "currencyExhangeRateFromUsd"
     )]
     pub currency_exhange_rate_from_usd: f64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "customFields"
+    )]
     pub custom_fields: Vec<Property>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub destination: Option<Location>,
     /**
      * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "endDate")]
     pub end_date: Option<chrono::NaiveDate>,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub etickets: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "exchangeAmount"
     )]
     pub exchange_amount: f64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "exchangeFee"
     )]
     pub exchange_fee: f64,
     #[serde(
@@ -596,13 +669,15 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "extrasFees"
     )]
     pub extras_fees: f64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fareClass"
     )]
     pub fare_class: String,
     #[serde(
@@ -614,12 +689,17 @@ pub struct BookingReport {
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "flightMiles"
+    )]
     pub flight_miles: Option<serde_json::Value>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "grandTotal"
     )]
     pub grand_total: f64,
     #[serde(
@@ -649,51 +729,66 @@ pub struct BookingReport {
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "lastModified"
+    )]
     pub last_modified: Option<serde_json::Value>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "leadTimeInDays"
     )]
     pub lead_time_in_days: i64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nameOnCreditCard"
     )]
     pub name_on_credit_card: String,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "netCharge"
     )]
     pub net_charge: f64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "optimalPrice"
     )]
     pub optimal_price: f64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub origin: Option<Location>,
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "outOfPolicy"
     )]
     pub out_of_policy: bool,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "outOfPolicyDescription"
     )]
     pub out_of_policy_description: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "outOfPolicyViolationTypes"
+    )]
     pub out_of_policy_violation_types: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "outOfPolicyViolations"
     )]
     pub out_of_policy_violations: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -701,22 +796,29 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "paymentCreditCardTypeName"
     )]
     pub payment_credit_card_type_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "paymentMethod"
     )]
     pub payment_method: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "paymentMethodUsed"
     )]
     pub payment_method_used: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "paymentSchedule"
+    )]
     pub payment_schedule: Option<PaymentSchedule>,
     #[serde(
         default,
@@ -733,7 +835,8 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "preferredVendor"
     )]
     pub preferred_vendor: String,
     #[serde(
@@ -763,7 +866,8 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "resortFee"
     )]
     pub resort_fee: f64,
     #[serde(
@@ -775,7 +879,8 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "savingMissed"
     )]
     pub saving_missed: f64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -783,7 +888,8 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "seatsFee"
     )]
     pub seats_fee: f64,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -791,12 +897,13 @@ pub struct BookingReport {
     /**
      * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "startDate")]
     pub start_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "statementDescription"
     )]
     pub statement_description: String,
     #[serde(
@@ -808,62 +915,75 @@ pub struct BookingReport {
     /**
      * Nearest airport code to this location
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "trainMiles"
+    )]
     pub train_miles: Option<serde_json::Value>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "travelSpend"
     )]
     pub travel_spend: f64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "tripBucksEarned"
     )]
     pub trip_bucks_earned: f64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "tripBucksEarnedUsd"
     )]
     pub trip_bucks_earned_usd: f64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tripDescription"
     )]
     pub trip_description: String,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "tripFee"
     )]
     pub trip_fee: f64,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tripLength"
     )]
     pub trip_length: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tripName"
     )]
     pub trip_name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "tripUuids")]
     pub trip_uuids: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "unitaryPrice"
     )]
     pub unitary_price: f64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "usdGrandTotal"
     )]
     pub usd_grand_total: f64,
     #[serde(
@@ -887,7 +1007,8 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "vipFee"
     )]
     pub vip_fee: f64,
 }

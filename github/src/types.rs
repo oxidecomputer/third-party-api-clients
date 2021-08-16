@@ -503,7 +503,8 @@ pub struct ScimError {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "scimType"
     )]
     pub scim_type: String,
     /**
@@ -3150,7 +3151,8 @@ pub struct RunnerApplication {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "sha256_checksum"
     )]
     pub sha_256_checksum: String,
     #[serde(
@@ -3443,19 +3445,22 @@ pub struct MinutesUsedBreakdown {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "MACOS"
     )]
     pub macos: i64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "UBUNTU"
     )]
     pub ubuntu: i64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "WINDOWS"
     )]
     pub windows: i64,
 }
@@ -5724,13 +5729,15 @@ pub struct SshKeyFingerprints {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "SHA256_DSA"
     )]
     pub sha256_dsa: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "SHA256_RSA"
     )]
     pub sha256_rsa: String,
 }
@@ -11132,11 +11139,11 @@ pub struct Macos {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Billable {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "MACOS")]
     pub macos: Option<Macos>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "UBUNTU")]
     pub ubuntu: Option<Macos>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "WINDOWS")]
     pub windows: Option<Macos>,
 }
 
@@ -11305,11 +11312,11 @@ pub struct Windows {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WorkflowUsageBillable {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "MACOS")]
     pub macos: Option<Windows>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "UBUNTU")]
     pub ubuntu: Option<Windows>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "WINDOWS")]
     pub windows: Option<Windows>,
 }
 
@@ -21352,7 +21359,8 @@ pub struct Meta {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "lastModified"
     )]
     pub last_modified: String,
     #[serde(
@@ -21364,7 +21372,8 @@ pub struct Meta {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceType"
     )]
     pub resource_type: String,
 }
@@ -21374,13 +21383,15 @@ pub struct ScimEnterpriseGroup {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "externalId"
     )]
     pub external_id: String,
     #[serde(
@@ -21402,12 +21413,13 @@ pub struct ScimEnterpriseGroup {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScimGroupListEnterprise {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Resources")]
     pub resources: Vec<ScimEnterpriseGroup>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "itemsPerPage"
     )]
     pub items_per_page: f64,
     /**
@@ -21418,13 +21430,15 @@ pub struct ScimGroupListEnterprise {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "startIndex"
     )]
     pub start_index: f64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "totalResults"
     )]
     pub total_results: f64,
 }
@@ -21434,13 +21448,15 @@ pub struct Name {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "familyName"
     )]
     pub family_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "givenName"
     )]
     pub given_name: String,
 }
@@ -21489,7 +21505,8 @@ pub struct ScimEnterpriseUser {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "externalId"
     )]
     pub external_id: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -21512,19 +21529,21 @@ pub struct ScimEnterpriseUser {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userName"
     )]
     pub user_name: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScimUserListEnterprise {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Resources")]
     pub resources: Vec<ScimEnterpriseUser>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "itemsPerPage"
     )]
     pub items_per_page: f64,
     /**
@@ -21535,13 +21554,15 @@ pub struct ScimUserListEnterprise {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "startIndex"
     )]
     pub start_index: f64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "totalResults"
     )]
     pub total_results: f64,
 }
@@ -21551,7 +21572,8 @@ pub struct ScimUserName {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "familyName"
     )]
     pub family_name: String,
     #[serde(
@@ -21563,7 +21585,8 @@ pub struct ScimUserName {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "givenName"
     )]
     pub given_name: String,
 }
@@ -21594,7 +21617,8 @@ pub struct ScimUserMeta {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "lastModified"
     )]
     pub last_modified: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
@@ -21606,7 +21630,8 @@ pub struct ScimUserMeta {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceType"
     )]
     pub resource_type: String,
 }
@@ -21739,7 +21764,8 @@ pub struct ScimUser {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -21750,7 +21776,8 @@ pub struct ScimUser {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "externalId"
     )]
     pub external_id: String,
     /**
@@ -21790,7 +21817,8 @@ pub struct ScimUser {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userName"
     )]
     pub user_name: String,
 }
@@ -21798,12 +21826,13 @@ pub struct ScimUser {
 /// SCIM User List
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScimUserList {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Resources")]
     pub resources: Vec<ScimUser>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "itemsPerPage"
     )]
     pub items_per_page: i64,
     /**
@@ -21814,13 +21843,15 @@ pub struct ScimUserList {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "startIndex"
     )]
     pub start_index: i64,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "totalResults"
     )]
     pub total_results: i64,
 }
@@ -30254,7 +30285,8 @@ pub struct EnterpriseAdminProvisionInviteGroupRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -30329,7 +30361,7 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequest {
     /**
      * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Operations")]
     pub operations: Vec<EnterpriseAdminUpdateAttributeGroupRequestOperations>,
     /**
      * The list of events for the GitHub app
@@ -30379,7 +30411,8 @@ pub struct EnterpriseAdminProvisionInviteUserRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userName"
     )]
     pub user_name: String,
 }
@@ -30389,7 +30422,7 @@ pub struct EnterpriseAdminUpdateAttributeUserRequest {
     /**
      * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Operations")]
     pub operations: Vec<Data>,
     /**
      * The list of events for the GitHub app
@@ -30405,7 +30438,8 @@ pub struct ScimProvisionInviteUserRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -30413,7 +30447,8 @@ pub struct ScimProvisionInviteUserRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "externalId"
     )]
     pub external_id: String,
     /**
@@ -30431,7 +30466,8 @@ pub struct ScimProvisionInviteUserRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userName"
     )]
     pub user_name: String,
 }
@@ -30446,25 +30482,29 @@ pub struct Value {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "externalId"
     )]
     pub external_id: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "familyName"
     )]
     pub family_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "givenName"
     )]
     pub given_name: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "userName"
     )]
     pub user_name: String,
 }
@@ -30554,7 +30594,7 @@ pub struct ScimUpdateAttributeUserRequest {
     /**
      * Set of operations to be performed
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Operations")]
     pub operations: Vec<ScimUpdateAttributeUserRequestOperations>,
     /**
      * The list of events for the GitHub app

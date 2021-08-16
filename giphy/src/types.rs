@@ -341,7 +341,8 @@ pub struct Image {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mp4"
     )]
     pub mp_4: String,
     /**
@@ -350,7 +351,8 @@ pub struct Image {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mp4_size"
     )]
     pub mp_4_size: String,
     /**

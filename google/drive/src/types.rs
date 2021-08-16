@@ -10,7 +10,8 @@ pub struct DriveThemes {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "backgroundImageLink"
     )]
     pub background_image_link: String,
     /**
@@ -19,7 +20,8 @@ pub struct DriveThemes {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "colorRgb"
     )]
     pub color_rgb: String,
     /**
@@ -64,7 +66,8 @@ pub struct StorageQuota {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "usageInDrive"
     )]
     pub usage_in_drive: i64,
     /**
@@ -73,7 +76,8 @@ pub struct StorageQuota {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "usageInDriveTrash"
     )]
     pub usage_in_drive_trash: i64,
 }
@@ -86,7 +90,8 @@ pub struct About {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "appInstalled"
     )]
     pub app_installed: bool,
     /**
@@ -94,7 +99,8 @@ pub struct About {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canCreateDrives"
     )]
     pub can_create_drives: bool,
     /**
@@ -102,28 +108,41 @@ pub struct About {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canCreateTeamDrives"
     )]
     pub can_create_team_drives: bool,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "driveThemes")]
     pub drive_themes: Vec<DriveThemes>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "exportFormats"
+    )]
     pub export_formats: Option<Params>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "folderColorPalette"
+    )]
     pub folder_color_palette: Vec<String>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "importFormats"
+    )]
     pub import_formats: Option<Params>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
@@ -137,7 +156,11 @@ pub struct About {
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "maxImportSizes"
+    )]
     pub max_import_sizes: Option<Params>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
@@ -145,18 +168,27 @@ pub struct About {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "maxUploadSize"
     )]
     pub max_upload_size: i64,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "storageQuota"
+    )]
     pub storage_quota: Option<StorageQuota>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "teamDriveThemes"
+    )]
     pub team_drive_themes: Vec<DriveThemes>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
@@ -174,7 +206,8 @@ pub struct Change {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "changeType"
     )]
     pub change_type: String,
     /**
@@ -188,7 +221,8 @@ pub struct Change {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "driveId"
     )]
     pub drive_id: String,
     /**
@@ -202,7 +236,8 @@ pub struct Change {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fileId"
     )]
     pub file_id: String,
     /**
@@ -225,7 +260,7 @@ pub struct Change {
     /**
      * A change to a file or shared drive.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "teamDrive")]
     pub team_drive: Option<TeamDrive>,
     /**
      * A change to a file or shared drive.
@@ -233,7 +268,8 @@ pub struct Change {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "teamDriveId"
     )]
     pub team_drive_id: String,
     /**
@@ -280,7 +316,8 @@ pub struct ChangeList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "newStartPageToken"
     )]
     pub new_start_page_token: String,
     /**
@@ -289,7 +326,8 @@ pub struct ChangeList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -352,7 +390,8 @@ pub struct Channel {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceId"
     )]
     pub resource_id: String,
     /**
@@ -361,7 +400,8 @@ pub struct Channel {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceUri"
     )]
     pub resource_uri: String,
     /**
@@ -394,7 +434,8 @@ pub struct QuotedFileContent {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mimeType"
     )]
     pub mime_type: String,
     /**
@@ -440,7 +481,8 @@ pub struct Comment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "createdTime"
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -457,7 +499,8 @@ pub struct Comment {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "htmlContent"
     )]
     pub html_content: String,
     /**
@@ -484,13 +527,18 @@ pub struct Comment {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "modifiedTime"
     )]
     pub modified_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * A comment on a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "quotedFileContent"
+    )]
     pub quoted_file_content: Option<QuotedFileContent>,
     /**
      * A comment on a file.
@@ -530,7 +578,8 @@ pub struct CommentList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -543,7 +592,8 @@ pub struct ContentRestriction {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "readOnly"
     )]
     pub read_only: bool,
     /**
@@ -558,7 +608,11 @@ pub struct ContentRestriction {
     /**
      * A restriction for accessing the content of the file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "restrictingUser"
+    )]
     pub restricting_user: Option<User>,
     /**
      * A restriction for accessing the content of the file.
@@ -566,7 +620,8 @@ pub struct ContentRestriction {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "restrictionTime"
     )]
     pub restriction_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -608,7 +663,8 @@ pub struct BackgroundImageFile {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "xCoordinate"
     )]
     pub x_coordinate: f64,
     /**
@@ -617,7 +673,8 @@ pub struct BackgroundImageFile {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "yCoordinate"
     )]
     pub y_coordinate: f64,
 }
@@ -630,7 +687,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canAddChildren"
     )]
     pub can_add_children: bool,
     /**
@@ -638,7 +696,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeCopyRequiresWriterPermissionRestriction"
     )]
     pub can_change_copy_requires_writer_permission_restriction: bool,
     /**
@@ -646,7 +705,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeDomainUsersOnlyRestriction"
     )]
     pub can_change_domain_users_only_restriction: bool,
     /**
@@ -654,7 +714,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeDriveBackground"
     )]
     pub can_change_drive_background: bool,
     /**
@@ -662,7 +723,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeDriveMembersOnlyRestriction"
     )]
     pub can_change_drive_members_only_restriction: bool,
     /**
@@ -670,7 +732,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canComment"
     )]
     pub can_comment: bool,
     /**
@@ -678,7 +741,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canCopy"
     )]
     pub can_copy: bool,
     /**
@@ -686,7 +750,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canDeleteChildren"
     )]
     pub can_delete_children: bool,
     /**
@@ -694,7 +759,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canDeleteDrive"
     )]
     pub can_delete_drive: bool,
     /**
@@ -702,7 +768,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canDownload"
     )]
     pub can_download: bool,
     /**
@@ -710,7 +777,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canEdit"
     )]
     pub can_edit: bool,
     /**
@@ -718,7 +786,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canListChildren"
     )]
     pub can_list_children: bool,
     /**
@@ -726,7 +795,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canManageMembers"
     )]
     pub can_manage_members: bool,
     /**
@@ -734,7 +804,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canReadRevisions"
     )]
     pub can_read_revisions: bool,
     /**
@@ -742,7 +813,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canRename"
     )]
     pub can_rename: bool,
     /**
@@ -750,7 +822,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canRenameDrive"
     )]
     pub can_rename_drive: bool,
     /**
@@ -758,7 +831,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canShare"
     )]
     pub can_share: bool,
     /**
@@ -766,7 +840,8 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canTrashChildren"
     )]
     pub can_trash_children: bool,
 }
@@ -779,7 +854,8 @@ pub struct Restrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "adminManagedRestrictions"
     )]
     pub admin_managed_restrictions: bool,
     /**
@@ -787,7 +863,8 @@ pub struct Restrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "copyRequiresWriterPermission"
     )]
     pub copy_requires_writer_permission: bool,
     /**
@@ -795,7 +872,8 @@ pub struct Restrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "domainUsersOnly"
     )]
     pub domain_users_only: bool,
     /**
@@ -803,7 +881,8 @@ pub struct Restrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "driveMembersOnly"
     )]
     pub drive_members_only: bool,
 }
@@ -814,7 +893,11 @@ pub struct Drive {
     /**
      * Representation of a shared drive.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "backgroundImageFile"
+    )]
     pub background_image_file: Option<BackgroundImageFile>,
     /**
      * Representation of a shared drive.
@@ -822,7 +905,8 @@ pub struct Drive {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "backgroundImageLink"
     )]
     pub background_image_link: String,
     /**
@@ -836,7 +920,8 @@ pub struct Drive {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "colorRgb"
     )]
     pub color_rgb: String,
     /**
@@ -845,7 +930,8 @@ pub struct Drive {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "createdTime"
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -894,7 +980,8 @@ pub struct Drive {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "themeId"
     )]
     pub theme_id: String,
 }
@@ -922,7 +1009,8 @@ pub struct DriveList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -935,7 +1023,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canAddChildren"
     )]
     pub can_add_children: bool,
     /**
@@ -943,7 +1032,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canAddFolderFromAnotherDrive"
     )]
     pub can_add_folder_from_another_drive: bool,
     /**
@@ -951,7 +1041,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canAddMyDriveParent"
     )]
     pub can_add_my_drive_parent: bool,
     /**
@@ -959,7 +1050,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeCopyRequiresWriterPermission"
     )]
     pub can_change_copy_requires_writer_permission: bool,
     /**
@@ -967,7 +1059,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeSecurityUpdateEnabled"
     )]
     pub can_change_security_update_enabled: bool,
     /**
@@ -975,7 +1068,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeViewersCanCopyContent"
     )]
     pub can_change_viewers_can_copy_content: bool,
     /**
@@ -983,7 +1077,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canComment"
     )]
     pub can_comment: bool,
     /**
@@ -991,7 +1086,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canCopy"
     )]
     pub can_copy: bool,
     /**
@@ -999,7 +1095,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canDelete"
     )]
     pub can_delete: bool,
     /**
@@ -1007,7 +1104,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canDeleteChildren"
     )]
     pub can_delete_children: bool,
     /**
@@ -1015,7 +1113,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canDownload"
     )]
     pub can_download: bool,
     /**
@@ -1023,7 +1122,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canEdit"
     )]
     pub can_edit: bool,
     /**
@@ -1031,7 +1131,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canListChildren"
     )]
     pub can_list_children: bool,
     /**
@@ -1039,7 +1140,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canModifyContent"
     )]
     pub can_modify_content: bool,
     /**
@@ -1047,7 +1149,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canModifyContentRestriction"
     )]
     pub can_modify_content_restriction: bool,
     /**
@@ -1055,7 +1158,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveChildrenOutOfDrive"
     )]
     pub can_move_children_out_of_drive: bool,
     /**
@@ -1063,7 +1167,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveChildrenOutOfTeamDrive"
     )]
     pub can_move_children_out_of_team_drive: bool,
     /**
@@ -1071,7 +1176,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveChildrenWithinDrive"
     )]
     pub can_move_children_within_drive: bool,
     /**
@@ -1079,7 +1185,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveChildrenWithinTeamDrive"
     )]
     pub can_move_children_within_team_drive: bool,
     /**
@@ -1087,7 +1194,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveItemIntoTeamDrive"
     )]
     pub can_move_item_into_team_drive: bool,
     /**
@@ -1095,7 +1203,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveItemOutOfDrive"
     )]
     pub can_move_item_out_of_drive: bool,
     /**
@@ -1103,7 +1212,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveItemOutOfTeamDrive"
     )]
     pub can_move_item_out_of_team_drive: bool,
     /**
@@ -1111,7 +1221,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveItemWithinDrive"
     )]
     pub can_move_item_within_drive: bool,
     /**
@@ -1119,7 +1230,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveItemWithinTeamDrive"
     )]
     pub can_move_item_within_team_drive: bool,
     /**
@@ -1127,7 +1239,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canMoveTeamDriveItem"
     )]
     pub can_move_team_drive_item: bool,
     /**
@@ -1135,7 +1248,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canReadDrive"
     )]
     pub can_read_drive: bool,
     /**
@@ -1143,7 +1257,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canReadRevisions"
     )]
     pub can_read_revisions: bool,
     /**
@@ -1151,7 +1266,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canReadTeamDrive"
     )]
     pub can_read_team_drive: bool,
     /**
@@ -1159,7 +1275,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canRemoveChildren"
     )]
     pub can_remove_children: bool,
     /**
@@ -1167,7 +1284,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canRemoveMyDriveParent"
     )]
     pub can_remove_my_drive_parent: bool,
     /**
@@ -1175,7 +1293,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canRename"
     )]
     pub can_rename: bool,
     /**
@@ -1183,7 +1302,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canShare"
     )]
     pub can_share: bool,
     /**
@@ -1191,7 +1311,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canTrash"
     )]
     pub can_trash: bool,
     /**
@@ -1199,7 +1320,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canTrashChildren"
     )]
     pub can_trash_children: bool,
     /**
@@ -1207,7 +1329,8 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canUntrash"
     )]
     pub can_untrash: bool,
 }
@@ -1230,7 +1353,8 @@ pub struct Thumbnail {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mimeType"
     )]
     pub mime_type: String,
 }
@@ -1244,7 +1368,8 @@ pub struct ContentHints {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "indexableText"
     )]
     pub indexable_text: String,
     /**
@@ -1304,7 +1429,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "cameraMake"
     )]
     pub camera_make: String,
     /**
@@ -1313,7 +1439,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "cameraModel"
     )]
     pub camera_model: String,
     /**
@@ -1322,7 +1449,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "colorSpace"
     )]
     pub color_space: String,
     /**
@@ -1331,7 +1459,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "exposureBias"
     )]
     pub exposure_bias: f64,
     /**
@@ -1340,7 +1469,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "exposureMode"
     )]
     pub exposure_mode: String,
     /**
@@ -1349,7 +1479,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "exposureTime"
     )]
     pub exposure_time: f64,
     /**
@@ -1357,7 +1488,8 @@ pub struct ImageMediaMetadata {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "flashUsed"
     )]
     pub flash_used: bool,
     /**
@@ -1366,7 +1498,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "focalLength"
     )]
     pub focal_length: f64,
     /**
@@ -1384,7 +1517,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "isoSpeed"
     )]
     pub iso_speed: i64,
     /**
@@ -1407,7 +1541,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "maxApertureValue"
     )]
     pub max_aperture_value: f64,
     /**
@@ -1416,7 +1551,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "meteringMode"
     )]
     pub metering_mode: String,
     /**
@@ -1443,7 +1579,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "subjectDistance"
     )]
     pub subject_distance: i64,
     /**
@@ -1461,7 +1598,8 @@ pub struct ImageMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whiteBalance"
     )]
     pub white_balance: String,
     /**
@@ -1483,7 +1621,8 @@ pub struct LinkShareMetadata {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "securityUpdateEligible"
     )]
     pub security_update_eligible: bool,
     /**
@@ -1491,7 +1630,8 @@ pub struct LinkShareMetadata {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "securityUpdateEnabled"
     )]
     pub security_update_enabled: bool,
 }
@@ -1505,7 +1645,8 @@ pub struct ShortcutDetails {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "targetId"
     )]
     pub target_id: String,
     /**
@@ -1514,7 +1655,8 @@ pub struct ShortcutDetails {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "targetMimeType"
     )]
     pub target_mime_type: String,
     /**
@@ -1523,7 +1665,8 @@ pub struct ShortcutDetails {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "targetResourceKey"
     )]
     pub target_resource_key: String,
 }
@@ -1537,7 +1680,8 @@ pub struct VideoMediaMetadata {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "durationMillis"
     )]
     pub duration_millis: i64,
     /**
@@ -1566,7 +1710,11 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "appProperties"
+    )]
     pub app_properties: Option<Params>,
     /**
      * The metadata for a file.
@@ -1576,19 +1724,28 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "contentHints"
+    )]
     pub content_hints: Option<ContentHints>,
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "contentRestrictions"
+    )]
     pub content_restrictions: Vec<ContentRestriction>,
     /**
      * The metadata for a file.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "copyRequiresWriterPermission"
     )]
     pub copy_requires_writer_permission: bool,
     /**
@@ -1597,7 +1754,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "createdTime"
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1615,7 +1773,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "driveId"
     )]
     pub drive_id: String,
     /**
@@ -1623,13 +1782,18 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "explicitlyTrashed"
     )]
     pub explicitly_trashed: bool,
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "exportLinks"
+    )]
     pub export_links: Option<Params>,
     /**
      * The metadata for a file.
@@ -1637,7 +1801,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fileExtension"
     )]
     pub file_extension: String,
     /**
@@ -1646,7 +1811,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "folderColorRgb"
     )]
     pub folder_color_rgb: String,
     /**
@@ -1655,7 +1821,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fullFileExtension"
     )]
     pub full_file_extension: String,
     /**
@@ -1663,7 +1830,8 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "hasAugmentedPermissions"
     )]
     pub has_augmented_permissions: bool,
     /**
@@ -1671,7 +1839,8 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "hasThumbnail"
     )]
     pub has_thumbnail: bool,
     /**
@@ -1680,7 +1849,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "headRevisionId"
     )]
     pub head_revision_id: String,
     /**
@@ -1689,7 +1859,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "iconLink"
     )]
     pub icon_link: String,
     /**
@@ -1704,14 +1875,19 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "imageMediaMetadata"
+    )]
     pub image_media_metadata: Option<ImageMediaMetadata>,
     /**
      * The metadata for a file.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "isAppAuthorized"
     )]
     pub is_app_authorized: bool,
     /**
@@ -1726,12 +1902,20 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "lastModifyingUser"
+    )]
     pub last_modifying_user: Option<User>,
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "linkShareMetadata"
+    )]
     pub link_share_metadata: Option<LinkShareMetadata>,
     /**
      * The metadata for a file.
@@ -1739,7 +1923,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "md5Checksum"
     )]
     pub md_5_checksum: String,
     /**
@@ -1748,7 +1933,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mimeType"
     )]
     pub mime_type: String,
     /**
@@ -1756,7 +1942,8 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "modifiedByMe"
     )]
     pub modified_by_me: bool,
     /**
@@ -1765,7 +1952,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "modifiedByMeTime"
     )]
     pub modified_by_me_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1774,7 +1962,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "modifiedTime"
     )]
     pub modified_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1792,7 +1981,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "originalFilename"
     )]
     pub original_filename: String,
     /**
@@ -1800,7 +1990,8 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "ownedByMe"
     )]
     pub owned_by_me: bool,
     /**
@@ -1816,7 +2007,11 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "permissionIds"
+    )]
     pub permission_ids: Vec<String>,
     /**
      * The metadata for a file.
@@ -1834,7 +2029,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "quotaBytesUsed"
     )]
     pub quota_bytes_used: i64,
     /**
@@ -1843,7 +2039,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resourceKey"
     )]
     pub resource_key: String,
     /**
@@ -1860,18 +2057,27 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "sharedWithMeTime"
     )]
     pub shared_with_me_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "sharingUser"
+    )]
     pub sharing_user: Option<User>,
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "shortcutDetails"
+    )]
     pub shortcut_details: Option<ShortcutDetails>,
     /**
      * The metadata for a file.
@@ -1901,7 +2107,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "teamDriveId"
     )]
     pub team_drive_id: String,
     /**
@@ -1910,7 +2117,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "thumbnailLink"
     )]
     pub thumbnail_link: String,
     /**
@@ -1919,7 +2127,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "thumbnailVersion"
     )]
     pub thumbnail_version: i64,
     /**
@@ -1936,13 +2145,18 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "trashedTime"
     )]
     pub trashed_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "trashingUser"
+    )]
     pub trashing_user: Option<User>,
     /**
      * The metadata for a file.
@@ -1956,14 +2170,19 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "videoMediaMetadata"
+    )]
     pub video_media_metadata: Option<VideoMediaMetadata>,
     /**
      * The metadata for a file.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "viewedByMe"
     )]
     pub viewed_by_me: bool,
     /**
@@ -1972,7 +2191,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "viewedByMeTime"
     )]
     pub viewed_by_me_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1980,7 +2200,8 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "viewersCanCopyContent"
     )]
     pub viewers_can_copy_content: bool,
     /**
@@ -1989,7 +2210,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "webContentLink"
     )]
     pub web_content_link: String,
     /**
@@ -1998,7 +2220,8 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "webViewLink"
     )]
     pub web_view_link: String,
     /**
@@ -2006,7 +2229,8 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "writersCanShare"
     )]
     pub writers_can_share: bool,
 }
@@ -2024,7 +2248,8 @@ pub struct FileList {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "incompleteSearch"
     )]
     pub incomplete_search: bool,
     /**
@@ -2042,7 +2267,8 @@ pub struct FileList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
 }
@@ -2091,7 +2317,8 @@ pub struct PermissionDetails {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "inheritedFrom"
     )]
     pub inherited_from: String,
     /**
@@ -2100,7 +2327,8 @@ pub struct PermissionDetails {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "permissionType"
     )]
     pub permission_type: String,
     /**
@@ -2130,7 +2358,8 @@ pub struct TeamDrivePermissionDetails {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "inheritedFrom"
     )]
     pub inherited_from: String,
     /**
@@ -2148,7 +2377,8 @@ pub struct TeamDrivePermissionDetails {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "teamDrivePermissionType"
     )]
     pub team_drive_permission_type: String,
 }
@@ -2161,7 +2391,8 @@ pub struct Permission {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "allowFileDiscovery"
     )]
     pub allow_file_discovery: bool,
     /**
@@ -2178,7 +2409,8 @@ pub struct Permission {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -2196,7 +2428,8 @@ pub struct Permission {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "emailAddress"
     )]
     pub email_address: String,
     /**
@@ -2205,7 +2438,8 @@ pub struct Permission {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "expirationTime"
     )]
     pub expiration_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -2229,7 +2463,11 @@ pub struct Permission {
     /**
      * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "permissionDetails"
+    )]
     pub permission_details: Vec<PermissionDetails>,
     /**
      * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
@@ -2237,7 +2475,8 @@ pub struct Permission {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "photoLink"
     )]
     pub photo_link: String,
     /**
@@ -2252,7 +2491,11 @@ pub struct Permission {
     /**
      * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "teamDrivePermissionDetails"
+    )]
     pub team_drive_permission_details: Vec<TeamDrivePermissionDetails>,
     /**
      * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
@@ -2293,7 +2536,8 @@ pub struct PermissionList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
@@ -2335,7 +2579,8 @@ pub struct Reply {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "createdTime"
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -2352,7 +2597,8 @@ pub struct Reply {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "htmlContent"
     )]
     pub html_content: String,
     /**
@@ -2379,7 +2625,8 @@ pub struct Reply {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "modifiedTime"
     )]
     pub modified_time: Option<chrono::DateTime<chrono::Utc>>,
 }
@@ -2402,7 +2649,8 @@ pub struct ReplyList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
@@ -2418,7 +2666,11 @@ pub struct Revision {
     /**
      * The metadata for a revision to a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "exportLinks"
+    )]
     pub export_links: Option<Params>,
     /**
      * The metadata for a revision to a file.
@@ -2434,7 +2686,8 @@ pub struct Revision {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "keepForever"
     )]
     pub keep_forever: bool,
     /**
@@ -2449,7 +2702,11 @@ pub struct Revision {
     /**
      * The metadata for a revision to a file.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "lastModifyingUser"
+    )]
     pub last_modifying_user: Option<User>,
     /**
      * The metadata for a revision to a file.
@@ -2457,7 +2714,8 @@ pub struct Revision {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "md5Checksum"
     )]
     pub md_5_checksum: String,
     /**
@@ -2466,7 +2724,8 @@ pub struct Revision {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mimeType"
     )]
     pub mime_type: String,
     /**
@@ -2475,7 +2734,8 @@ pub struct Revision {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "modifiedTime"
     )]
     pub modified_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -2484,7 +2744,8 @@ pub struct Revision {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "originalFilename"
     )]
     pub original_filename: String,
     /**
@@ -2492,7 +2753,8 @@ pub struct Revision {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "publishAuto"
     )]
     pub publish_auto: bool,
     /**
@@ -2509,7 +2771,8 @@ pub struct Revision {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "publishedLink"
     )]
     pub published_link: String,
     /**
@@ -2517,7 +2780,8 @@ pub struct Revision {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "publishedOutsideDomain"
     )]
     pub published_outside_domain: bool,
     /**
@@ -2549,7 +2813,8 @@ pub struct RevisionList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
@@ -2576,7 +2841,8 @@ pub struct StartPageToken {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "startPageToken"
     )]
     pub start_page_token: String,
 }
@@ -2608,7 +2874,8 @@ pub struct TeamDriveBackgroundImageFile {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "xCoordinate"
     )]
     pub x_coordinate: f64,
     /**
@@ -2617,7 +2884,8 @@ pub struct TeamDriveBackgroundImageFile {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_f64",
-        deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_f64::deserialize",
+        rename = "yCoordinate"
     )]
     pub y_coordinate: f64,
 }
@@ -2630,7 +2898,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canAddChildren"
     )]
     pub can_add_children: bool,
     /**
@@ -2638,7 +2907,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeCopyRequiresWriterPermissionRestriction"
     )]
     pub can_change_copy_requires_writer_permission_restriction: bool,
     /**
@@ -2646,7 +2916,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeDomainUsersOnlyRestriction"
     )]
     pub can_change_domain_users_only_restriction: bool,
     /**
@@ -2654,7 +2925,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeTeamDriveBackground"
     )]
     pub can_change_team_drive_background: bool,
     /**
@@ -2662,7 +2934,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canChangeTeamMembersOnlyRestriction"
     )]
     pub can_change_team_members_only_restriction: bool,
     /**
@@ -2670,7 +2943,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canComment"
     )]
     pub can_comment: bool,
     /**
@@ -2678,7 +2952,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canCopy"
     )]
     pub can_copy: bool,
     /**
@@ -2686,7 +2961,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canDeleteChildren"
     )]
     pub can_delete_children: bool,
     /**
@@ -2694,7 +2970,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canDeleteTeamDrive"
     )]
     pub can_delete_team_drive: bool,
     /**
@@ -2702,7 +2979,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canDownload"
     )]
     pub can_download: bool,
     /**
@@ -2710,7 +2988,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canEdit"
     )]
     pub can_edit: bool,
     /**
@@ -2718,7 +2997,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canListChildren"
     )]
     pub can_list_children: bool,
     /**
@@ -2726,7 +3006,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canManageMembers"
     )]
     pub can_manage_members: bool,
     /**
@@ -2734,7 +3015,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canReadRevisions"
     )]
     pub can_read_revisions: bool,
     /**
@@ -2742,7 +3024,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canRemoveChildren"
     )]
     pub can_remove_children: bool,
     /**
@@ -2750,7 +3033,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canRename"
     )]
     pub can_rename: bool,
     /**
@@ -2758,7 +3042,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canRenameTeamDrive"
     )]
     pub can_rename_team_drive: bool,
     /**
@@ -2766,7 +3051,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canShare"
     )]
     pub can_share: bool,
     /**
@@ -2774,7 +3060,8 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "canTrashChildren"
     )]
     pub can_trash_children: bool,
 }
@@ -2787,7 +3074,8 @@ pub struct TeamDriveRestrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "adminManagedRestrictions"
     )]
     pub admin_managed_restrictions: bool,
     /**
@@ -2795,7 +3083,8 @@ pub struct TeamDriveRestrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "copyRequiresWriterPermission"
     )]
     pub copy_requires_writer_permission: bool,
     /**
@@ -2803,7 +3092,8 @@ pub struct TeamDriveRestrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "domainUsersOnly"
     )]
     pub domain_users_only: bool,
     /**
@@ -2811,7 +3101,8 @@ pub struct TeamDriveRestrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "teamMembersOnly"
     )]
     pub team_members_only: bool,
 }
@@ -2822,7 +3113,11 @@ pub struct TeamDrive {
     /**
      * Deprecated: use the drive collection instead.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "backgroundImageFile"
+    )]
     pub background_image_file: Option<TeamDriveBackgroundImageFile>,
     /**
      * Deprecated: use the drive collection instead.
@@ -2830,7 +3125,8 @@ pub struct TeamDrive {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "backgroundImageLink"
     )]
     pub background_image_link: String,
     /**
@@ -2844,7 +3140,8 @@ pub struct TeamDrive {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "colorRgb"
     )]
     pub color_rgb: String,
     /**
@@ -2853,7 +3150,8 @@ pub struct TeamDrive {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "createdTime"
     )]
     pub created_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -2894,7 +3192,8 @@ pub struct TeamDrive {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "themeId"
     )]
     pub theme_id: String,
 }
@@ -2917,13 +3216,14 @@ pub struct TeamDriveList {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextPageToken"
     )]
     pub next_page_token: String,
     /**
      * A list of Team Drives.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "teamDrives")]
     pub team_drives: Vec<TeamDrive>,
 }
 
@@ -2936,7 +3236,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayName"
     )]
     pub display_name: String,
     /**
@@ -2945,7 +3246,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "emailAddress"
     )]
     pub email_address: String,
     /**
@@ -2971,7 +3273,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "permissionId"
     )]
     pub permission_id: String,
     /**
@@ -2980,7 +3283,8 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "photoLink"
     )]
     pub photo_link: String,
 }

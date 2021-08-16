@@ -166,6 +166,11 @@ github: target/debug/generator $(GITHUB_SPEC)
 		--host "api.github.com" $(EXTRA_ARGS)
 	cargo fmt -p octorust
 
+.PHONY: google
+google: google-admin google-calendar google-drive google-groups-settings
+	cargo test tests
+	cargo clippy
+
 $(GOOGLE_ADMIN_SPEC_DIR):
 	mkdir -p $@
 

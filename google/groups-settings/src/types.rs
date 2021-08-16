@@ -11,7 +11,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "allowExternalMembers"
     )]
     pub allow_external_members: String,
     /**
@@ -20,7 +21,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "allowGoogleCommunication"
     )]
     pub allow_google_communication: String,
     /**
@@ -29,7 +31,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "allowWebPosting"
     )]
     pub allow_web_posting: String,
     /**
@@ -38,7 +41,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "archiveOnly"
     )]
     pub archive_only: String,
     /**
@@ -47,7 +51,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customFooterText"
     )]
     pub custom_footer_text: String,
     /**
@@ -56,7 +61,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customReplyTo"
     )]
     pub custom_reply_to: String,
     /**
@@ -65,7 +71,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customRolesEnabledForSettingsToBeMerged"
     )]
     pub custom_roles_enabled_for_settings_to_be_merged: String,
     /**
@@ -74,7 +81,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "defaultMessageDenyNotificationText"
     )]
     pub default_message_deny_notification_text: String,
     /**
@@ -110,7 +118,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "enableCollaborativeInbox"
     )]
     pub enable_collaborative_inbox: String,
     /**
@@ -119,7 +128,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "favoriteRepliesOnTop"
     )]
     pub favorite_replies_on_top: String,
     /**
@@ -128,7 +138,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "includeCustomFooter"
     )]
     pub include_custom_footer: String,
     /**
@@ -137,7 +148,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "includeInGlobalAddressList"
     )]
     pub include_in_global_address_list: String,
     /**
@@ -146,7 +158,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "isArchived"
     )]
     pub is_archived: String,
     /**
@@ -164,7 +177,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "maxMessageBytes"
     )]
     pub max_message_bytes: i64,
     /**
@@ -173,7 +187,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "membersCanPostAsTheGroup"
     )]
     pub members_can_post_as_the_group: String,
     /**
@@ -182,7 +197,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "messageDisplayFont"
     )]
     pub message_display_font: String,
     /**
@@ -191,7 +207,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "messageModerationLevel"
     )]
     pub message_moderation_level: String,
     /**
@@ -209,7 +226,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "primaryLanguage"
     )]
     pub primary_language: String,
     /**
@@ -218,7 +236,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "replyTo"
     )]
     pub reply_to: String,
     /**
@@ -227,7 +246,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "sendMessageDenyNotification"
     )]
     pub send_message_deny_notification: String,
     /**
@@ -236,7 +256,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "showInGroupDirectory"
     )]
     pub show_in_group_directory: String,
     /**
@@ -245,7 +266,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "spamModerationLevel"
     )]
     pub spam_moderation_level: String,
     /**
@@ -254,7 +276,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanAdd"
     )]
     pub who_can_add: String,
     /**
@@ -263,7 +286,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanAddReferences"
     )]
     pub who_can_add_references: String,
     /**
@@ -272,7 +296,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanApproveMembers"
     )]
     pub who_can_approve_members: String,
     /**
@@ -281,7 +306,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanApproveMessages"
     )]
     pub who_can_approve_messages: String,
     /**
@@ -290,7 +316,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanAssignTopics"
     )]
     pub who_can_assign_topics: String,
     /**
@@ -299,7 +326,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanAssistContent"
     )]
     pub who_can_assist_content: String,
     /**
@@ -308,7 +336,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanBanUsers"
     )]
     pub who_can_ban_users: String,
     /**
@@ -317,7 +346,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanContactOwner"
     )]
     pub who_can_contact_owner: String,
     /**
@@ -326,7 +356,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanDeleteAnyPost"
     )]
     pub who_can_delete_any_post: String,
     /**
@@ -335,7 +366,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanDeleteTopics"
     )]
     pub who_can_delete_topics: String,
     /**
@@ -344,7 +376,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanDiscoverGroup"
     )]
     pub who_can_discover_group: String,
     /**
@@ -353,7 +386,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanEnterFreeFormTags"
     )]
     pub who_can_enter_free_form_tags: String,
     /**
@@ -362,7 +396,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanHideAbuse"
     )]
     pub who_can_hide_abuse: String,
     /**
@@ -371,7 +406,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanInvite"
     )]
     pub who_can_invite: String,
     /**
@@ -380,7 +416,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanJoin"
     )]
     pub who_can_join: String,
     /**
@@ -389,7 +426,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanLeaveGroup"
     )]
     pub who_can_leave_group: String,
     /**
@@ -398,7 +436,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanLockTopics"
     )]
     pub who_can_lock_topics: String,
     /**
@@ -407,7 +446,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanMakeTopicsSticky"
     )]
     pub who_can_make_topics_sticky: String,
     /**
@@ -416,7 +456,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanMarkDuplicate"
     )]
     pub who_can_mark_duplicate: String,
     /**
@@ -425,7 +466,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanMarkFavoriteReplyOnAnyTopic"
     )]
     pub who_can_mark_favorite_reply_on_any_topic: String,
     /**
@@ -434,7 +476,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanMarkFavoriteReplyOnOwnTopic"
     )]
     pub who_can_mark_favorite_reply_on_own_topic: String,
     /**
@@ -443,7 +486,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanMarkNoResponseNeeded"
     )]
     pub who_can_mark_no_response_needed: String,
     /**
@@ -452,7 +496,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanModerateContent"
     )]
     pub who_can_moderate_content: String,
     /**
@@ -461,7 +506,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanModerateMembers"
     )]
     pub who_can_moderate_members: String,
     /**
@@ -470,7 +516,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanModifyMembers"
     )]
     pub who_can_modify_members: String,
     /**
@@ -479,7 +526,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanModifyTagsAndCategories"
     )]
     pub who_can_modify_tags_and_categories: String,
     /**
@@ -488,7 +536,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanMoveTopicsIn"
     )]
     pub who_can_move_topics_in: String,
     /**
@@ -497,7 +546,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanMoveTopicsOut"
     )]
     pub who_can_move_topics_out: String,
     /**
@@ -506,7 +556,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanPostAnnouncements"
     )]
     pub who_can_post_announcements: String,
     /**
@@ -515,7 +566,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanPostMessage"
     )]
     pub who_can_post_message: String,
     /**
@@ -524,7 +576,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanTakeTopics"
     )]
     pub who_can_take_topics: String,
     /**
@@ -533,7 +586,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanUnassignTopic"
     )]
     pub who_can_unassign_topic: String,
     /**
@@ -542,7 +596,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanUnmarkFavoriteReplyOnAnyTopic"
     )]
     pub who_can_unmark_favorite_reply_on_any_topic: String,
     /**
@@ -551,7 +606,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanViewGroup"
     )]
     pub who_can_view_group: String,
     /**
@@ -560,7 +616,8 @@ pub struct Groups {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "whoCanViewMembership"
     )]
     pub who_can_view_membership: String,
 }

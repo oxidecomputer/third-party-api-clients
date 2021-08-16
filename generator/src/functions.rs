@@ -461,6 +461,21 @@ fn get_response_type(
                             }
                         }
                     }
+
+                    // For Google, the pagination values are passed _in_ the resulting
+                    // struct, so we want to ignore them and just get the data.
+                    if let Some(pid) = p.get("nextPageToken") {
+                        let rt = ts.render_type(pid, false)?;
+                        if rt == "String" {
+                            for (n, id) in p {
+                                // Now we must find the property with the vector for this struct.
+                                let rt = ts.render_type(id, false)?;
+                                if rt.starts_with("Vec<") {
+                                    return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
+                                }
+                            }
+                        }
+                    }
                 }
 
                 return Ok((og_rt, tid, "".to_string(), "".to_string()));
@@ -536,6 +551,21 @@ fn get_response_type(
                     }
                 }
             }
+
+            // For Google, the pagination values are passed _in_ the resulting
+            // struct, so we want to ignore them and just get the data.
+            if let Some(pid) = p.get("nextPageToken") {
+                let rt = ts.render_type(pid, false)?;
+                if rt == "String" {
+                    for (n, id) in p {
+                        // Now we must find the property with the vector for this struct.
+                        let rt = ts.render_type(id, false)?;
+                        if rt.starts_with("Vec<") {
+                            return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
+                        }
+                    }
+                }
+            }
         }
         return Ok((og_rt, id, "".to_string(), "".to_string()));
     }
@@ -594,6 +624,8 @@ fn get_fn_params(
                 && nam != "per"
                 && nam != "page_size"
                 && nam != "next_page_token"
+                && nam != "page_token"
+                && nam != "max_results"
                 && nam != "page_number"
                 && nam != "start"))
             && nam != "authorization"
@@ -631,6 +663,8 @@ fn get_fn_params(
                     && nam != "per"
                     && nam != "page_size"
                     && nam != "next_page_token"
+                    && nam != "page_token"
+                    && nam != "max_results"
                     && nam != "page_number"
                     && nam != "start"))
                 && nam != "authorization"
@@ -677,8 +711,55 @@ fn get_fn_inner(
         "None"
     };
 
-    if all_pages && proper_name != "Ramp" && proper_name != "Zoom" {
+    if all_pages
+        && proper_name != "Ramp"
+        && proper_name != "Zoom"
+        && !proper_name.starts_with("Google")
+    {
         return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
+    } else if all_pages && proper_name.starts_with("Google") {
+        // We will do a custom function here.
+        let inner = format!(
+            r#"let mut resp: {} = self.client.{}(&url, {}).await.unwrap();
+
+            let mut {} = resp.{};
+            let mut page = resp.next_page_token;
+
+            // Paginate if we should.
+            while !page.is_empty() {{
+                if !url.contains('?') {{
+                    resp = self.client.{}(&format!("{{}}?pageToken={{}}", url, page), {}).await.unwrap();
+                }} else {{
+                    resp = self.client.{}(&format!("{{}}&pageToken={{}}", url, page), {}).await.unwrap();
+                }}
+
+
+                {}.append(&mut resp.{});
+
+                if !resp.next_page_token.is_empty() && resp.next_page_token != page {{
+                    page = resp.next_page_token.to_string();
+                }} else {{
+                    page = "".to_string();
+                }}
+            }}
+
+            // Return our response data.
+            Ok({})"#,
+            response_type,
+            m.to_lowercase(),
+            body,
+            pagination_property,
+            pagination_property,
+            m.to_lowercase(),
+            body,
+            m.to_lowercase(),
+            body,
+            pagination_property,
+            pagination_property,
+            pagination_property,
+        );
+
+        return Ok(inner);
     } else if all_pages && proper_name == "Ramp" {
         // We will do a custom function here.
         let inner = format!(

@@ -1068,7 +1068,8 @@ pub struct InMeeting {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "e2e_encryption"
     )]
     pub e_2e_encryption: bool,
     /**
@@ -1145,7 +1146,8 @@ pub struct InMeeting {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "p2p_connetion"
     )]
     pub p_2p_connetion: bool,
     /**
@@ -1153,7 +1155,8 @@ pub struct InMeeting {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "p2p_ports"
     )]
     pub p_2p_ports: bool,
     /**
@@ -3573,7 +3576,8 @@ pub struct MeetingInfo {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "h323_password"
     )]
     pub h_323_password: String,
     /**
@@ -3762,7 +3766,8 @@ pub struct MeetingInfoGet {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "h323_password"
     )]
     pub h_323_password: String,
     /**
@@ -6979,7 +6984,8 @@ pub struct UserSettingsInMeeting {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "e2e_encryption"
     )]
     pub e_2e_encryption: bool,
     /**
@@ -10980,7 +10986,8 @@ pub struct EmergencyAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address_line1"
     )]
     pub address_line_1: String,
     /**
@@ -10989,7 +10996,8 @@ pub struct EmergencyAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address_line2"
     )]
     pub address_line_2: String,
     /**
@@ -11528,7 +11536,8 @@ pub struct Phones {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "proxy_server2"
     )]
     pub proxy_server_2: String,
     /**
@@ -11537,7 +11546,8 @@ pub struct Phones {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "proxy_server3"
     )]
     pub proxy_server_3: String,
     /**
@@ -11555,7 +11565,8 @@ pub struct Phones {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "register_server2"
     )]
     pub register_server_2: String,
     /**
@@ -11564,7 +11575,8 @@ pub struct Phones {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "register_server3"
     )]
     pub register_server_3: String,
     /**
@@ -11584,12 +11596,20 @@ pub struct Phones {
     /**
      * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "transport_protocol2"
+    )]
     pub transport_protocol_2: Option<TransportProtocol>,
     /**
      * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "transport_protocol3"
+    )]
     pub transport_protocol_3: Option<TransportProtocol>,
     /**
      * User's first name.
@@ -11718,7 +11738,8 @@ pub struct CreateSipPhoneRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "proxy_server2"
     )]
     pub proxy_server_2: String,
     /**
@@ -11727,7 +11748,8 @@ pub struct CreateSipPhoneRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "proxy_server3"
     )]
     pub proxy_server_3: String,
     /**
@@ -11745,7 +11767,8 @@ pub struct CreateSipPhoneRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "register_server2"
     )]
     pub register_server_2: String,
     /**
@@ -11754,7 +11777,8 @@ pub struct CreateSipPhoneRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "register_server3"
     )]
     pub register_server_3: String,
     /**
@@ -11774,12 +11798,20 @@ pub struct CreateSipPhoneRequest {
     /**
      * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "transport_protocol2"
+    )]
     pub transport_protocol_2: Option<TransportProtocol>,
     /**
      * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "transport_protocol3"
+    )]
     pub transport_protocol_3: Option<TransportProtocol>,
     /**
      * User's first name.
@@ -11854,7 +11886,8 @@ pub struct UpdateSipPhoneRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "proxy_server2"
     )]
     pub proxy_server_2: String,
     /**
@@ -11863,7 +11896,8 @@ pub struct UpdateSipPhoneRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "proxy_server3"
     )]
     pub proxy_server_3: String,
     /**
@@ -11881,7 +11915,8 @@ pub struct UpdateSipPhoneRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "register_server2"
     )]
     pub register_server_2: String,
     /**
@@ -11890,7 +11925,8 @@ pub struct UpdateSipPhoneRequest {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "register_server3"
     )]
     pub register_server_3: String,
     /**
@@ -11910,12 +11946,20 @@ pub struct UpdateSipPhoneRequest {
     /**
      * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "transport_protocol2"
+    )]
     pub transport_protocol_2: Option<TransportProtocol>,
     /**
      * Protocols supported by the SIP provider.<br> The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "transport_protocol3"
+    )]
     pub transport_protocol_3: Option<TransportProtocol>,
     /**
      * User's first name.
@@ -12328,7 +12372,8 @@ pub struct DefaultEmergencyAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address_line1"
     )]
     pub address_line_1: String,
     /**
@@ -12337,7 +12382,8 @@ pub struct DefaultEmergencyAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address_line2"
     )]
     pub address_line_2: String,
     /**
@@ -17126,7 +17172,8 @@ pub struct DashboardChatResponseUsers {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "p2p_sent"
     )]
     pub p_2p_sent: i64,
     /**
@@ -21440,7 +21487,8 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address_line1"
     )]
     pub address_line_1: String,
     /**
@@ -21449,7 +21497,8 @@ pub struct BatchAddLocationsRequestEmergencyAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address_line2"
     )]
     pub address_line_2: String,
     /**
@@ -21962,7 +22011,8 @@ pub struct GetLocationResponseEmergencyAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address_line1"
     )]
     pub address_line_1: String,
     /**
@@ -21971,7 +22021,8 @@ pub struct GetLocationResponseEmergencyAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address_line2"
     )]
     pub address_line_2: String,
     /**
@@ -25330,7 +25381,8 @@ pub struct GetGroupSettingsResponseInMeeting {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "e2e_encryption"
     )]
     pub e_2e_encryption: bool,
     /**
@@ -26087,7 +26139,8 @@ pub struct UpdateGroupSettingsRequestInMeeting {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "e2e_encryption"
     )]
     pub e_2e_encryption: bool,
     /**
@@ -26649,7 +26702,8 @@ pub struct GetGroupLockSettingsResponseInMeeting {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "e2e_encryption"
     )]
     pub e_2e_encryption: bool,
     /**
@@ -28279,7 +28333,8 @@ pub struct GetZrLocationProfileResponseBasic {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "description "
     )]
     pub description: String,
     /**

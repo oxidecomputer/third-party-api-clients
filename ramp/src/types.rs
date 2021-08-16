@@ -658,7 +658,8 @@ pub struct RecipientAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address1"
     )]
     pub address_1: String,
     /**
@@ -980,7 +981,8 @@ pub struct BillingAddress {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "address1"
     )]
     pub address_1: String,
     /**
@@ -1611,7 +1613,11 @@ pub struct CardProgram {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCardProgramsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        rename = "card-programs"
+    )]
     pub card_programs: Vec<CardProgram>,
     #[serde(default)]
     pub page: Page,
