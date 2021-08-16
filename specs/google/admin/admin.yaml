@@ -6650,6 +6650,9 @@ components:
       properties:
         addresses:
           description: A list of the user's addresses. The maximum allowed data size for this field is 10Kb.
+          type: array
+          items:
+            $ref: "#/components/schemas/UserAddress"
         agreedToTerms:
           description: Output only. This property is `true` if the user has completed an initial login and accepted the Terms of Service agreement.
           readOnly: true
@@ -6686,6 +6689,9 @@ components:
           type: string
         emails:
           description: A list of the user's email addresses. The maximum allowed data size for this field is 10Kb.
+          type: array
+          items:
+            $ref: "#/components/schemas/UserEmail"
         etag:
           description: Output only. ETag of the resource.
           readOnly: true
@@ -6694,6 +6700,7 @@ components:
           description: A list of external IDs for the user, such as an employee or network ID. The maximum allowed data size for this field is 2Kb.
         gender:
           description: The user's gender. The maximum allowed data size for this field is 1Kb.
+          $ref: "#/components/schemas/UserGender"
         hashFunction:
           description: Stores the hash format of the password property. We recommend sending the `password` property value as a base 16 bit hexadecimal-encoded hash value. Set the `hashFunction` values as either the [SHA-1](https://wikipedia.org/wiki/SHA-1), [MD5](https://wikipedia.org/wiki/MD5), or [crypt](https://en.wikipedia.org/wiki/Crypt_\(C\)) hash format.
           type: string
@@ -6760,6 +6767,9 @@ components:
           type: string
         locations:
           description: The user's locations. The maximum allowed data size for this field is 10Kb.
+          type: array
+          items:
+            $ref: "#/components/schemas/UserLocation"
         name:
           $ref: "#/components/schemas/UserName"
           description: Holds the given and family names of the user, and the read-only `fullName` value. The maximum number of characters in the `givenName` and in the `familyName` values is 60. In addition, name values support unicode/UTF-8 characters, and can contain spaces, letters (a-z), numbers (0-9), dashes (-), forward slashes (/), and periods (.). For more information about character usage rules, see the [administration help center](https://support.google.com/a/answer/9193374). Maximum allowed data size for this field is 1Kb.
@@ -6796,6 +6806,9 @@ components:
           description: A list of the user's relationships to other users. The maximum allowed data size for this field is 2Kb.
         sshPublicKeys:
           description: A list of SSH public keys.
+          type: array
+          items:
+            $ref: '#/components/schemas/UserSshPublicKey'
         suspended:
           description: Indicates if user is suspended.
           type: boolean
