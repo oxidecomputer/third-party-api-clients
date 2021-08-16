@@ -122,6 +122,8 @@ pub mod types;
 #[doc(hidden)]
 pub mod utils;
 
+use std::io::Write;
+
 use anyhow::{anyhow, Error, Result};
 
 pub const DEFAULT_HOST: &str = "https://www.googleapis.com/drive/directory/v1";
@@ -151,7 +153,7 @@ use std::env;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-const TOKEN_ENDPOINT: &str = "https://";
+const TOKEN_ENDPOINT: &str = "https://oauth2.googleapis.com/token";
 const USER_CONSENT_ENDPOINT: &str = "https://";
 
 /// Entrypoint for interacting with the API client.
@@ -249,16 +251,46 @@ impl Client {
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
-    pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
+    pub async fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
     where
         T: ToString,
         R: ToString,
     {
-        let client_id = env::var("GOOGLE DRIVE_CLIENT_ID").unwrap();
-        let client_secret = env::var("GOOGLE DRIVE_CLIENT_SECRET").unwrap();
-        let redirect_uri = env::var("GOOGLE DRIVE_REDIRECT_URI").unwrap();
+        let google_key = env::var("GOOGLE_KEY_ENCODED").unwrap_or_default();
+        let b = base64::decode(google_key).unwrap();
+        // Save the google key to a tmp file.
+        let mut file_path = env::temp_dir();
+        file_path.push("google_key.json");
+        // Create the file and write to it.
+        let mut file = std::fs::File::create(file_path.clone()).unwrap();
+        file.write_all(&b).unwrap();
+        // Set the Google credential file to the temp path.
+        let google_credential_file = file_path.to_str().unwrap().to_string();
 
-        Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
+        let secret = yup_oauth2::read_application_secret(google_credential_file)
+            .await
+            .expect("failed to read google credential file");
+
+        let client = reqwest::Client::builder().build();
+        match client {
+            Ok(c) => {
+                // We do not refresh the access token here since we leave that up to the
+                // user to do so they can re-save it to their database.
+                // TODO: But in the future we should save the expires in date and refresh it
+                // if it needs to be refreshed.
+                //
+                Client {
+                    client_id: secret.client_id.to_string(),
+                    client_secret: secret.client_secret.to_string(),
+                    redirect_uri: secret.redirect_uris[0].to_string(),
+                    token: token.to_string(),
+                    refresh_token: refresh_token.to_string(),
+
+                    client: c,
+                }
+            }
+            Err(e) => panic!("creating reqwest client failed: {:?}", e),
+        }
     }
 
     async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {

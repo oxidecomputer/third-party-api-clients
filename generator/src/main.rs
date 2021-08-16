@@ -2248,6 +2248,10 @@ fn gen(
     }
 
     a("");
+    if proper_name.starts_with("Google") {
+        a("use std::io::Write;");
+        a("");
+    }
 
     a("use anyhow::{anyhow, Error, Result};");
     a("");
@@ -2930,11 +2934,20 @@ fn main() -> Result<()> {
              * Write the Cargo.toml file:
              */
             let mut uuid_lib = "".to_string();
+            let mut yup_oauth2_lib = "".to_string();
             if proper_name != "GitHub" {
                 uuid_lib = r#"
 uuid = { version = "0.8", features = ["serde", "v4"] }"#
                     .to_string();
             }
+
+            if proper_name.starts_with("Google") {
+                yup_oauth2_lib = r#"
+base64 = "^0.12"
+yup-oauth2 = "^5""#
+                    .to_string();
+            }
+
             let mut toml = root.clone();
             toml.push("Cargo.toml");
             let tomlout = format!(
@@ -2961,7 +2974,7 @@ percent-encoding = "2.1"
 reqwest = {{ version = "0.11", features = ["json"] }}
 schemars = {{ version = "0.8", features = ["chrono", "uuid"] }}
 serde = {{ version = "1", features = ["derive"] }}
-serde_json = "1"{}
+serde_json = "1"{}{}
 
 [dev-dependencies]
 base64 = "^0.12"
@@ -2977,7 +2990,7 @@ httpcache = ["dirs"]
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 "#,
-                name, description, version, name, output_dir, uuid_lib
+                name, description, version, name, output_dir, uuid_lib, yup_oauth2_lib
             );
             save(&toml, tomlout.as_str())?;
 

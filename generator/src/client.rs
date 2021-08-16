@@ -470,6 +470,10 @@ pub fn generate_client_generic_token(
     token_endpoint: &str,
     user_consent_endpoint: &str,
 ) -> String {
+    let mut new_from_env = basic_new_from_env(proper_name);
+    if proper_name.starts_with("Google") {
+        new_from_env = GOOGLE_NEW_FROM_ENV_TEMPLATE.to_string();
+    }
     format!(
         r#"use std::env;
 
@@ -568,29 +572,7 @@ impl Client {{
         }}
     }}
 
-    /// Create a new Client struct from environment variables. It
-    /// takes a type that can convert into
-    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
-    /// given a valid API key and your requests will work.
-    /// We pass in the token and refresh token to the client so if you are storing
-    /// it in a database, you can get it first.
-    pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
-    where
-        T: ToString,
-        R: ToString,
-    {{
-        let client_id = env::var("{}_CLIENT_ID").unwrap();
-        let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
-        let redirect_uri = env::var("{}_REDIRECT_URI").unwrap();
-
-        Client::new(
-            client_id,
-            client_secret,
-            redirect_uri,
-            token,
-            refresh_token,
-        )
-    }}
+    {}
 
     async fn url_and_auth(
         &self,
@@ -852,8 +834,88 @@ impl Client {{
     }}"#,
         token_endpoint.trim_start_matches("https://"),
         user_consent_endpoint.trim_start_matches("https://"),
+        new_from_env
+    )
+}
+
+fn basic_new_from_env(proper_name: &str) -> String {
+    format!(
+        r#"
+/// Create a new Client struct from environment variables. It
+/// takes a type that can convert into
+/// an &str (`String` or `Vec<u8>` for example). As long as the function is
+/// given a valid API key and your requests will work.
+/// We pass in the token and refresh token to the client so if you are storing
+/// it in a database, you can get it first.
+pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
+where
+    T: ToString,
+    R: ToString,
+{{
+    let client_id = env::var("{}_CLIENT_ID").unwrap();
+    let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
+    let redirect_uri = env::var("{}_REDIRECT_URI").unwrap();
+
+    Client::new(
+        client_id,
+        client_secret,
+        redirect_uri,
+        token,
+        refresh_token,
+    )
+}}"#,
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
     )
 }
+
+const GOOGLE_NEW_FROM_ENV_TEMPLATE: &str = r#"
+/// Create a new Client struct from environment variables. It
+/// takes a type that can convert into
+/// an &str (`String` or `Vec<u8>` for example). As long as the function is
+/// given a valid API key and your requests will work.
+/// We pass in the token and refresh token to the client so if you are storing
+/// it in a database, you can get it first.
+pub async fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
+where
+    T: ToString,
+    R: ToString,
+{
+    let google_key = env::var("GOOGLE_KEY_ENCODED").unwrap_or_default();
+    let b = base64::decode(google_key).unwrap();
+    // Save the google key to a tmp file.
+    let mut file_path = env::temp_dir();
+    file_path.push("google_key.json");
+    // Create the file and write to it.
+    let mut file = std::fs::File::create(file_path.clone()).unwrap();
+    file.write_all(&b).unwrap();
+    // Set the Google credential file to the temp path.
+    let google_credential_file = file_path.to_str().unwrap().to_string();
+
+    let secret = yup_oauth2::read_application_secret(google_credential_file)
+        .await
+        .expect("failed to read google credential file");
+
+    let client = reqwest::Client::builder().build();
+    match client {
+        Ok(c) => {
+            // We do not refresh the access token here since we leave that up to the
+            // user to do so they can re-save it to their database.
+            // TODO: But in the future we should save the expires in date and refresh it
+            // if it needs to be refreshed.
+            //
+            Client {
+                client_id: secret.client_id.to_string(),
+                client_secret: secret.client_secret.to_string(),
+                redirect_uri: secret.redirect_uris[0].to_string(),
+                token: token.to_string(),
+                refresh_token: refresh_token.to_string(),
+
+                client: c,
+            }
+        },
+        Err(e) => panic!("creating reqwest client failed: {:?}", e),
+    }
+}
+"#;
