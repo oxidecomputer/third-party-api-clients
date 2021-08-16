@@ -54,7 +54,6 @@ impl Events {
     pub async fn calendar_list(
         &self,
         calendar_id: &str,
-        always_include_email: bool,
         i_cal_uid: &str,
         max_attendees: i64,
         max_results: i64,
@@ -73,9 +72,6 @@ impl Events {
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if always_include_email {
-            query_args.push(format!("always_include_email={}", always_include_email));
-        }
         if !i_cal_uid.is_empty() {
             query_args.push(format!("i_cal_uid={}", i_cal_uid));
         }
@@ -156,7 +152,6 @@ impl Events {
     pub async fn calendar_list_events(
         &self,
         calendar_id: &str,
-        always_include_email: bool,
         i_cal_uid: &str,
         max_attendees: i64,
         order_by: crate::types::OrderBy,
@@ -173,9 +168,6 @@ impl Events {
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if always_include_email {
-            query_args.push(format!("always_include_email={}", always_include_email));
-        }
         if !i_cal_uid.is_empty() {
             query_args.push(format!("i_cal_uid={}", i_cal_uid));
         }
@@ -464,7 +456,6 @@ impl Events {
     pub async fn calendar_watch(
         &self,
         calendar_id: &str,
-        always_include_email: bool,
         i_cal_uid: &str,
         max_attendees: i64,
         max_results: i64,
@@ -484,9 +475,6 @@ impl Events {
     ) -> Result<crate::types::Channel> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if always_include_email {
-            query_args.push(format!("always_include_email={}", always_include_email));
-        }
         if !i_cal_uid.is_empty() {
             query_args.push(format!("i_cal_uid={}", i_cal_uid));
         }
@@ -576,15 +564,11 @@ impl Events {
         &self,
         calendar_id: &str,
         event_id: &str,
-        always_include_email: bool,
         max_attendees: i64,
         time_zone: &str,
     ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if always_include_email {
-            query_args.push(format!("always_include_email={}", always_include_email));
-        }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
         }
@@ -629,7 +613,6 @@ impl Events {
         &self,
         calendar_id: &str,
         event_id: &str,
-        always_include_email: bool,
         conference_data_version: u64,
         max_attendees: i64,
         send_notifications: bool,
@@ -639,9 +622,6 @@ impl Events {
     ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if always_include_email {
-            query_args.push(format!("always_include_email={}", always_include_email));
-        }
         query_args.push(format!(
             "conference_data_version={}",
             conference_data_version
@@ -742,7 +722,6 @@ impl Events {
         &self,
         calendar_id: &str,
         event_id: &str,
-        always_include_email: bool,
         conference_data_version: u64,
         max_attendees: i64,
         send_notifications: bool,
@@ -752,9 +731,6 @@ impl Events {
     ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if always_include_email {
-            query_args.push(format!("always_include_email={}", always_include_email));
-        }
         query_args.push(format!(
             "conference_data_version={}",
             conference_data_version
@@ -813,7 +789,6 @@ impl Events {
         &self,
         calendar_id: &str,
         event_id: &str,
-        always_include_email: bool,
         max_attendees: i64,
         max_results: i64,
         original_start: &str,
@@ -825,9 +800,6 @@ impl Events {
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if always_include_email {
-            query_args.push(format!("always_include_email={}", always_include_email));
-        }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
         }
@@ -882,7 +854,6 @@ impl Events {
         &self,
         calendar_id: &str,
         event_id: &str,
-        always_include_email: bool,
         max_attendees: i64,
         original_start: &str,
         show_deleted: bool,
@@ -892,9 +863,6 @@ impl Events {
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if always_include_email {
-            query_args.push(format!("always_include_email={}", always_include_email));
-        }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
         }

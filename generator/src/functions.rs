@@ -1000,4 +1000,5 @@ fn is_google_unnecessary_param(s: &str) -> bool {
         || s == "callback"
         || s == "upload_protocol"
         || s == "upload_type"
+        || s == "always_include_email"
 }
