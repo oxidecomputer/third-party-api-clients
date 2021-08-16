@@ -26,11 +26,6 @@ impl Drives {
      */
     pub async fn drive_list(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         page_size: i64,
         page_token: &str,
         q: &str,
@@ -38,13 +33,6 @@ impl Drives {
     ) -> Result<Vec<crate::types::Drive>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
@@ -54,17 +42,11 @@ impl Drives {
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if use_domain_admin_access {
             query_args.push(format!(
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -89,37 +71,19 @@ impl Drives {
      */
     pub async fn drive_list_drives(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         q: &str,
         use_domain_admin_access: bool,
     ) -> Result<Vec<crate::types::Drive>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if use_domain_admin_access {
             query_args.push(format!(
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -174,31 +138,13 @@ impl Drives {
      */
     pub async fn drive_create(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         request_id: &str,
         body: &crate::types::Drive,
     ) -> Result<crate::types::Drive> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if !request_id.is_empty() {
             query_args.push(format!("request_id={}", request_id));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -228,34 +174,16 @@ impl Drives {
      */
     pub async fn drive_get(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         drive_id: &str,
         use_domain_admin_access: bool,
     ) -> Result<crate::types::Drive> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if use_domain_admin_access {
             query_args.push(format!(
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -281,40 +209,10 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_delete(
-        &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
-        drive_id: &str,
-    ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn drive_delete(&self, drive_id: &str) -> Result<()> {
         let url = format!(
-            "/drives/{}?{}",
+            "/drives/{}",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await
@@ -332,35 +230,17 @@ impl Drives {
      */
     pub async fn drive_update(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         drive_id: &str,
         use_domain_admin_access: bool,
         body: &crate::types::Drive,
     ) -> Result<crate::types::Drive> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if use_domain_admin_access {
             query_args.push(format!(
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -391,40 +271,10 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_hide(
-        &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
-        drive_id: &str,
-    ) -> Result<crate::types::Drive> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn drive_hide(&self, drive_id: &str) -> Result<crate::types::Drive> {
         let url = format!(
-            "/drives/{}/hide?{}",
+            "/drives/{}/hide",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
-            query_
         );
 
         self.client.post(&url, None).await
@@ -439,40 +289,10 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_unhide(
-        &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
-        drive_id: &str,
-    ) -> Result<crate::types::Drive> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn drive_unhide(&self, drive_id: &str) -> Result<crate::types::Drive> {
         let url = format!(
-            "/drives/{}/unhide?{}",
+            "/drives/{}/unhide",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
-            query_
         );
 
         self.client.post(&url, None).await

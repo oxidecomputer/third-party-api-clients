@@ -30,13 +30,6 @@ impl Groups {
      */
     pub async fn directory_list(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         domain: &str,
         max_results: i64,
@@ -48,21 +41,11 @@ impl Groups {
     ) -> Result<Vec<crate::types::Group>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
         if !customer.is_empty() {
             query_args.push(format!("customer={}", customer));
         }
         if !domain.is_empty() {
             query_args.push(format!("domain={}", domain));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
@@ -74,16 +57,7 @@ impl Groups {
         if !query.is_empty() {
             query_args.push(format!("query={}", query));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         query_args.push(format!("sort_order={}", sort_order));
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
         if !user_key.is_empty() {
             query_args.push(format!("user_key={}", user_key));
         }
@@ -110,13 +84,6 @@ impl Groups {
      */
     pub async fn directory_list_groups(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         domain: &str,
         order_by: crate::types::DirectoryGroupsListOrderBy,
@@ -126,36 +93,17 @@ impl Groups {
     ) -> Result<Vec<crate::types::Group>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
         if !customer.is_empty() {
             query_args.push(format!("customer={}", customer));
         }
         if !domain.is_empty() {
             query_args.push(format!("domain={}", domain));
         }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         query_args.push(format!("order_by={}", order_by));
         if !query.is_empty() {
             query_args.push(format!("query={}", query));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         query_args.push(format!("sort_order={}", sort_order));
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
         if !user_key.is_empty() {
             query_args.push(format!("user_key={}", user_key));
         }
@@ -208,44 +156,9 @@ impl Groups {
      */
     pub async fn directory_insert(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         body: &crate::types::Group,
     ) -> Result<crate::types::Group> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
-        let url = format!("/admin/directory/v1/groups?{}", query_);
-
+        let url = "/admin/directory/v1/groups".to_string();
         self.client
             .post(
                 &url,
@@ -263,48 +176,10 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_get(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        group_key: &str,
-    ) -> Result<crate::types::Group> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn directory_get(&self, group_key: &str) -> Result<crate::types::Group> {
         let url = format!(
-            "/admin/directory/v1/groups/{}?{}",
+            "/admin/directory/v1/groups/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -321,47 +196,12 @@ impl Groups {
      */
     pub async fn directory_update(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         body: &crate::types::Group,
     ) -> Result<crate::types::Group> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/groups/{}?{}",
+            "/admin/directory/v1/groups/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
-            query_
         );
 
         self.client
@@ -381,48 +221,10 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_delete(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        group_key: &str,
-    ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn directory_delete(&self, group_key: &str) -> Result<()> {
         let url = format!(
-            "/admin/directory/v1/groups/{}?{}",
+            "/admin/directory/v1/groups/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await
@@ -439,47 +241,12 @@ impl Groups {
      */
     pub async fn directory_patch(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         body: &crate::types::Group,
     ) -> Result<crate::types::Group> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/groups/{}?{}",
+            "/admin/directory/v1/groups/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
-            query_
         );
 
         self.client
@@ -499,48 +266,10 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_aliases_list(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        group_key: &str,
-    ) -> Result<crate::types::Aliases> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn directory_aliases_list(&self, group_key: &str) -> Result<crate::types::Aliases> {
         let url = format!(
-            "/admin/directory/v1/groups/{}/aliases?{}",
+            "/admin/directory/v1/groups/{}/aliases",
             crate::progenitor_support::encode_path(&group_key.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -557,47 +286,12 @@ impl Groups {
      */
     pub async fn directory_aliases_insert(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         body: &crate::types::Alias,
     ) -> Result<crate::types::Alias> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/groups/{}/aliases?{}",
+            "/admin/directory/v1/groups/{}/aliases",
             crate::progenitor_support::encode_path(&group_key.to_string()),
-            query_
         );
 
         self.client
@@ -618,50 +312,11 @@ impl Groups {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `alias: &str` -- The alias to be removed.
      */
-    pub async fn directory_aliases_delete(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        group_key: &str,
-        alias: &str,
-    ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn directory_aliases_delete(&self, group_key: &str, alias: &str) -> Result<()> {
         let url = format!(
-            "/admin/directory/v1/groups/{}/aliases/{}?{}",
+            "/admin/directory/v1/groups/{}/aliases/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&alias.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await

@@ -29,11 +29,6 @@ impl Permissions {
      */
     pub async fn drive_list(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         include_permissions_for_view: &str,
         page_size: i64,
@@ -44,27 +39,17 @@ impl Permissions {
     ) -> Result<Vec<crate::types::Permission>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !include_permissions_for_view.is_empty() {
             query_args.push(format!(
                 "include_permissions_for_view={}",
                 include_permissions_for_view
             ));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
@@ -77,9 +62,6 @@ impl Permissions {
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -108,11 +90,6 @@ impl Permissions {
      */
     pub async fn drive_list_permissions(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         include_permissions_for_view: &str,
         supports_all_drives: bool,
@@ -121,21 +98,11 @@ impl Permissions {
     ) -> Result<Vec<crate::types::Permission>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !include_permissions_for_view.is_empty() {
             query_args.push(format!(
                 "include_permissions_for_view={}",
                 include_permissions_for_view
             ));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
@@ -148,9 +115,6 @@ impl Permissions {
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -217,11 +181,6 @@ impl Permissions {
      */
     pub async fn drive_create(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         email_message: &str,
         enforce_single_parent: bool,
@@ -235,27 +194,17 @@ impl Permissions {
     ) -> Result<crate::types::Permission> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if !email_message.is_empty() {
             query_args.push(format!("email_message={}", email_message));
         }
         if enforce_single_parent {
             query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
         }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if move_to_new_owners_root {
             query_args.push(format!(
                 "move_to_new_owners_root={}",
                 move_to_new_owners_root
             ));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if send_notification_email {
             query_args.push(format!(
@@ -277,9 +226,6 @@ impl Permissions {
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -316,11 +262,6 @@ impl Permissions {
      */
     pub async fn drive_get(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         permission_id: &str,
         supports_all_drives: bool,
@@ -329,16 +270,6 @@ impl Permissions {
     ) -> Result<crate::types::Permission> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
         }
@@ -350,9 +281,6 @@ impl Permissions {
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -385,11 +313,6 @@ impl Permissions {
      */
     pub async fn drive_delete(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         permission_id: &str,
         supports_all_drives: bool,
@@ -398,16 +321,6 @@ impl Permissions {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
         }
@@ -419,9 +332,6 @@ impl Permissions {
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -456,11 +366,6 @@ impl Permissions {
      */
     pub async fn drive_update(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         permission_id: &str,
         remove_expiration: bool,
@@ -472,16 +377,6 @@ impl Permissions {
     ) -> Result<crate::types::Permission> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if remove_expiration {
             query_args.push(format!("remove_expiration={}", remove_expiration));
         }
@@ -499,9 +394,6 @@ impl Permissions {
                 "use_domain_admin_access={}",
                 use_domain_admin_access
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {

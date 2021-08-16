@@ -25,43 +25,17 @@ impl Resources {
      */
     pub async fn directory_buildings_list(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         max_results: i64,
         page_token: &str,
     ) -> Result<Vec<crate::types::Building>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -90,46 +64,11 @@ impl Resources {
      */
     pub async fn directory_buildings_list_resources(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
     ) -> Result<Vec<crate::types::Building>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings?{}",
+            "/admin/directory/v1/customer/{}/resources/buildings",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query_
         );
 
         let mut resp: crate::types::Buildings = self.client.get(&url, None).await.unwrap();
@@ -178,39 +117,13 @@ impl Resources {
      */
     pub async fn directory_buildings_insert(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
     ) -> Result<crate::types::Building> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
         query_args.push(format!("coordinates_source={}", coordinates_source));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -243,48 +156,13 @@ impl Resources {
      */
     pub async fn directory_buildings_get(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         building_id: &str,
     ) -> Result<crate::types::Building> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/buildings/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&building_id.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -303,13 +181,6 @@ impl Resources {
      */
     pub async fn directory_buildings_update(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         building_id: &str,
         coordinates_source: crate::types::CoordinatesSource,
@@ -317,26 +188,7 @@ impl Resources {
     ) -> Result<crate::types::Building> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
         query_args.push(format!("coordinates_source={}", coordinates_source));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -370,48 +222,13 @@ impl Resources {
      */
     pub async fn directory_buildings_delete(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         building_id: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/buildings/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&building_id.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await
@@ -430,13 +247,6 @@ impl Resources {
      */
     pub async fn directory_buildings_patch(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         building_id: &str,
         coordinates_source: crate::types::CoordinatesSource,
@@ -444,26 +254,7 @@ impl Resources {
     ) -> Result<crate::types::Building> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
         query_args.push(format!("coordinates_source={}", coordinates_source));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -500,13 +291,6 @@ impl Resources {
      */
     pub async fn directory_calendars_list(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         max_results: i64,
         order_by: &str,
@@ -515,16 +299,6 @@ impl Resources {
     ) -> Result<Vec<crate::types::CalendarResource>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
@@ -536,15 +310,6 @@ impl Resources {
         }
         if !query.is_empty() {
             query_args.push(format!("query={}", query));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -573,43 +338,17 @@ impl Resources {
      */
     pub async fn directory_calendars_list_resources(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         order_by: &str,
         query: &str,
     ) -> Result<Vec<crate::types::CalendarResource>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !order_by.is_empty() {
             query_args.push(format!("order_by={}", order_by));
         }
         if !query.is_empty() {
             query_args.push(format!("query={}", query));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -668,47 +407,12 @@ impl Resources {
      */
     pub async fn directory_calendars_insert(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         body: &crate::types::CalendarResource,
     ) -> Result<crate::types::CalendarResource> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars?{}",
+            "/admin/directory/v1/customer/{}/resources/calendars",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query_
         );
 
         self.client
@@ -731,48 +435,13 @@ impl Resources {
      */
     pub async fn directory_calendars_get(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         calendar_resource_id: &str,
     ) -> Result<crate::types::CalendarResource> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/calendars/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -790,49 +459,14 @@ impl Resources {
      */
     pub async fn directory_calendars_update(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
     ) -> Result<crate::types::CalendarResource> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/calendars/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
-            query_
         );
 
         self.client
@@ -855,48 +489,13 @@ impl Resources {
      */
     pub async fn directory_calendars_delete(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         calendar_resource_id: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/calendars/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await
@@ -914,49 +513,14 @@ impl Resources {
      */
     pub async fn directory_calendars_patch(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         calendar_resource_id: &str,
         body: &crate::types::CalendarResource,
     ) -> Result<crate::types::CalendarResource> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/calendars/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/calendars/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
-            query_
         );
 
         self.client
@@ -980,43 +544,17 @@ impl Resources {
      */
     pub async fn directory_features_list(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         max_results: i64,
         page_token: &str,
     ) -> Result<Vec<crate::types::Feature>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -1045,46 +583,11 @@ impl Resources {
      */
     pub async fn directory_features_list_resources(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
     ) -> Result<Vec<crate::types::Feature>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features?{}",
+            "/admin/directory/v1/customer/{}/resources/features",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query_
         );
 
         let mut resp: crate::types::Features = self.client.get(&url, None).await.unwrap();
@@ -1132,47 +635,12 @@ impl Resources {
      */
     pub async fn directory_features_insert(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         body: &crate::types::Feature,
     ) -> Result<crate::types::Feature> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features?{}",
+            "/admin/directory/v1/customer/{}/resources/features",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query_
         );
 
         self.client
@@ -1195,48 +663,13 @@ impl Resources {
      */
     pub async fn directory_features_get(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         feature_key: &str,
     ) -> Result<crate::types::Feature> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/features/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&feature_key.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -1254,49 +687,14 @@ impl Resources {
      */
     pub async fn directory_features_update(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         feature_key: &str,
         body: &crate::types::Feature,
     ) -> Result<crate::types::Feature> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/features/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&feature_key.to_string()),
-            query_
         );
 
         self.client
@@ -1317,50 +715,11 @@ impl Resources {
      * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
      * * `feature_key: &str` -- The unique ID of the feature to delete.
      */
-    pub async fn directory_features_delete(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        customer: &str,
-        feature_key: &str,
-    ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn directory_features_delete(&self, customer: &str, feature_key: &str) -> Result<()> {
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/features/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&feature_key.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await
@@ -1378,49 +737,14 @@ impl Resources {
      */
     pub async fn directory_features_patch(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         feature_key: &str,
         body: &crate::types::Feature,
     ) -> Result<crate::types::Feature> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}?{}",
+            "/admin/directory/v1/customer/{}/resources/features/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&feature_key.to_string()),
-            query_
         );
 
         self.client
@@ -1443,49 +767,14 @@ impl Resources {
      */
     pub async fn directory_features_rename(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         old_name: &str,
         body: &crate::types::FeatureRename,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/resources/features/{}/rename?{}",
+            "/admin/directory/v1/customer/{}/resources/features/{}/rename",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&old_name.to_string()),
-            query_
         );
 
         self.client

@@ -53,11 +53,6 @@ impl Events {
      */
     pub async fn calendar_list(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         always_include_email: bool,
         i_cal_uid: &str,
@@ -71,7 +66,6 @@ impl Events {
         show_deleted: bool,
         show_hidden_invitations: bool,
         single_events: bool,
-        sync_token: &str,
         time_max: &str,
         time_min: &str,
         time_zone: &str,
@@ -79,18 +73,11 @@ impl Events {
     ) -> Result<Vec<crate::types::EventReminder>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if always_include_email {
             query_args.push(format!("always_include_email={}", always_include_email));
         }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !i_cal_uid.is_empty() {
             query_args.push(format!("i_cal_uid={}", i_cal_uid));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
@@ -111,9 +98,6 @@ impl Events {
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if !shared_extended_property.is_empty() {
             query_args.push(format!(
                 "shared_extended_property={}",
@@ -132,9 +116,6 @@ impl Events {
         if single_events {
             query_args.push(format!("single_events={}", single_events));
         }
-        if !sync_token.is_empty() {
-            query_args.push(format!("sync_token={}", sync_token));
-        }
         if !time_max.is_empty() {
             query_args.push(format!("time_max={}", time_max));
         }
@@ -146,9 +127,6 @@ impl Events {
         }
         if !updated_min.is_empty() {
             query_args.push(format!("updated_min={}", updated_min));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -177,11 +155,6 @@ impl Events {
      */
     pub async fn calendar_list_events(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         always_include_email: bool,
         i_cal_uid: &str,
@@ -200,18 +173,11 @@ impl Events {
     ) -> Result<Vec<crate::types::EventReminder>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if always_include_email {
             query_args.push(format!("always_include_email={}", always_include_email));
         }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !i_cal_uid.is_empty() {
             query_args.push(format!("i_cal_uid={}", i_cal_uid));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
@@ -225,9 +191,6 @@ impl Events {
         }
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if !shared_extended_property.is_empty() {
             query_args.push(format!(
@@ -258,9 +221,6 @@ impl Events {
         }
         if !updated_min.is_empty() {
             query_args.push(format!("updated_min={}", updated_min));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -326,11 +286,6 @@ impl Events {
      */
     pub async fn calendar_insert(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         conference_data_version: u64,
         max_attendees: i64,
@@ -341,22 +296,12 @@ impl Events {
     ) -> Result<crate::types::EventData> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         query_args.push(format!(
             "conference_data_version={}",
             conference_data_version
         ));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
@@ -364,9 +309,6 @@ impl Events {
         query_args.push(format!("send_updates={}", send_updates));
         if supports_attachments {
             query_args.push(format!("supports_attachments={}", supports_attachments));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -401,11 +343,6 @@ impl Events {
      */
     pub async fn calendar_import(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         conference_data_version: u64,
         supports_attachments: bool,
@@ -413,25 +350,12 @@ impl Events {
     ) -> Result<crate::types::EventData> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         query_args.push(format!(
             "conference_data_version={}",
             conference_data_version
         ));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if supports_attachments {
             query_args.push(format!("supports_attachments={}", supports_attachments));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -469,11 +393,6 @@ impl Events {
      */
     pub async fn calendar_quick_add(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         text: &str,
         send_notifications: bool,
@@ -481,25 +400,12 @@ impl Events {
     ) -> Result<crate::types::EventData> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
         }
         query_args.push(format!("send_updates={}", send_updates));
         if !text.is_empty() {
             query_args.push(format!("text={}", text));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -557,11 +463,6 @@ impl Events {
      */
     pub async fn calendar_watch(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         always_include_email: bool,
         i_cal_uid: &str,
@@ -575,7 +476,6 @@ impl Events {
         show_deleted: bool,
         show_hidden_invitations: bool,
         single_events: bool,
-        sync_token: &str,
         time_max: &str,
         time_min: &str,
         time_zone: &str,
@@ -584,18 +484,11 @@ impl Events {
     ) -> Result<crate::types::Channel> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if always_include_email {
             query_args.push(format!("always_include_email={}", always_include_email));
         }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !i_cal_uid.is_empty() {
             query_args.push(format!("i_cal_uid={}", i_cal_uid));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
@@ -616,9 +509,6 @@ impl Events {
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if !shared_extended_property.is_empty() {
             query_args.push(format!(
                 "shared_extended_property={}",
@@ -637,9 +527,6 @@ impl Events {
         if single_events {
             query_args.push(format!("single_events={}", single_events));
         }
-        if !sync_token.is_empty() {
-            query_args.push(format!("sync_token={}", sync_token));
-        }
         if !time_max.is_empty() {
             query_args.push(format!("time_max={}", time_max));
         }
@@ -651,9 +538,6 @@ impl Events {
         }
         if !updated_min.is_empty() {
             query_args.push(format!("updated_min={}", updated_min));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -690,11 +574,6 @@ impl Events {
      */
     pub async fn calendar_get(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         event_id: &str,
         always_include_email: bool,
@@ -703,27 +582,14 @@ impl Events {
     ) -> Result<crate::types::EventData> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if always_include_email {
             query_args.push(format!("always_include_email={}", always_include_email));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if !time_zone.is_empty() {
             query_args.push(format!("time_zone={}", time_zone));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -761,11 +627,6 @@ impl Events {
      */
     pub async fn calendar_update(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         event_id: &str,
         always_include_email: bool,
@@ -778,7 +639,6 @@ impl Events {
     ) -> Result<crate::types::EventData> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if always_include_email {
             query_args.push(format!("always_include_email={}", always_include_email));
         }
@@ -786,17 +646,8 @@ impl Events {
             "conference_data_version={}",
             conference_data_version
         ));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
@@ -804,9 +655,6 @@ impl Events {
         query_args.push(format!("send_updates={}", send_updates));
         if supports_attachments {
             query_args.push(format!("supports_attachments={}", supports_attachments));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -845,11 +693,6 @@ impl Events {
      */
     pub async fn calendar_delete(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         event_id: &str,
         send_notifications: bool,
@@ -857,23 +700,10 @@ impl Events {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
         }
         query_args.push(format!("send_updates={}", send_updates));
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
-        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -910,11 +740,6 @@ impl Events {
      */
     pub async fn calendar_patch(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         event_id: &str,
         always_include_email: bool,
@@ -927,7 +752,6 @@ impl Events {
     ) -> Result<crate::types::EventData> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if always_include_email {
             query_args.push(format!("always_include_email={}", always_include_email));
         }
@@ -935,17 +759,8 @@ impl Events {
             "conference_data_version={}",
             conference_data_version
         ));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
@@ -953,9 +768,6 @@ impl Events {
         query_args.push(format!("send_updates={}", send_updates));
         if supports_attachments {
             query_args.push(format!("supports_attachments={}", supports_attachments));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -999,11 +811,6 @@ impl Events {
      */
     pub async fn calendar_instances(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         event_id: &str,
         always_include_email: bool,
@@ -1018,15 +825,8 @@ impl Events {
     ) -> Result<Vec<crate::types::EventReminder>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if always_include_email {
             query_args.push(format!("always_include_email={}", always_include_email));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
@@ -1040,9 +840,6 @@ impl Events {
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if show_deleted {
             query_args.push(format!("show_deleted={}", show_deleted));
         }
@@ -1054,9 +851,6 @@ impl Events {
         }
         if !time_zone.is_empty() {
             query_args.push(format!("time_zone={}", time_zone));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -1086,11 +880,6 @@ impl Events {
      */
     pub async fn get_all_calendar_instances(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         event_id: &str,
         always_include_email: bool,
@@ -1103,24 +892,14 @@ impl Events {
     ) -> Result<Vec<crate::types::EventReminder>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if always_include_email {
             query_args.push(format!("always_include_email={}", always_include_email));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
         }
         if !original_start.is_empty() {
             query_args.push(format!("original_start={}", original_start));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if show_deleted {
             query_args.push(format!("show_deleted={}", show_deleted));
@@ -1133,9 +912,6 @@ impl Events {
         }
         if !time_zone.is_empty() {
             query_args.push(format!("time_zone={}", time_zone));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -1201,11 +977,6 @@ impl Events {
      */
     pub async fn calendar_move(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         event_id: &str,
         destination: &str,
@@ -1214,26 +985,13 @@ impl Events {
     ) -> Result<crate::types::EventData> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if !destination.is_empty() {
             query_args.push(format!("destination={}", destination));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
         }
         query_args.push(format!("send_updates={}", send_updates));
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
-        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

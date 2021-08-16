@@ -24,39 +24,13 @@ impl DomainAliases {
      */
     pub async fn directory_list(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         parent_domain_name: &str,
     ) -> Result<crate::types::DomainAliases> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !parent_domain_name.is_empty() {
             query_args.push(format!("parent_domain_name={}", parent_domain_name));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -84,47 +58,12 @@ impl DomainAliases {
      */
     pub async fn directory_insert(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         body: &crate::types::DomainAlias,
     ) -> Result<crate::types::DomainAlias> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases?{}",
+            "/admin/directory/v1/customer/{}/domainaliases",
             crate::progenitor_support::encode_path(&customer.to_string()),
-            query_
         );
 
         self.client
@@ -147,48 +86,13 @@ impl DomainAliases {
      */
     pub async fn directory_get(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer: &str,
         domain_alias_name: &str,
     ) -> Result<crate::types::DomainAlias> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases/{}?{}",
+            "/admin/directory/v1/customer/{}/domainaliases/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&domain_alias_name.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -204,50 +108,11 @@ impl DomainAliases {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
      */
-    pub async fn directory_delete(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        customer: &str,
-        domain_alias_name: &str,
-    ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn directory_delete(&self, customer: &str, domain_alias_name: &str) -> Result<()> {
         let url = format!(
-            "/admin/directory/v1/customer/{}/domainaliases/{}?{}",
+            "/admin/directory/v1/customer/{}/domainaliases/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
             crate::progenitor_support::encode_path(&domain_alias_name.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await

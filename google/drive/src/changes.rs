@@ -35,11 +35,6 @@ impl Changes {
      */
     pub async fn drive_list(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         page_token: &str,
         drive_id: &str,
         include_corpus_removals: bool,
@@ -56,12 +51,8 @@ impl Changes {
     ) -> Result<Vec<crate::types::Change>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if !drive_id.is_empty() {
             query_args.push(format!("drive_id={}", drive_id));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
         }
         if include_corpus_removals {
             query_args.push(format!(
@@ -90,17 +81,11 @@ impl Changes {
                 include_team_drive_items
             ));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if restrict_to_my_drive {
             query_args.push(format!("restrict_to_my_drive={}", restrict_to_my_drive));
@@ -116,9 +101,6 @@ impl Changes {
         }
         if !team_drive_id.is_empty() {
             query_args.push(format!("team_drive_id={}", team_drive_id));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -143,11 +125,6 @@ impl Changes {
      */
     pub async fn drive_list_changes(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         drive_id: &str,
         include_corpus_removals: bool,
         include_items_from_all_drives: bool,
@@ -162,12 +139,8 @@ impl Changes {
     ) -> Result<Vec<crate::types::Change>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if !drive_id.is_empty() {
             query_args.push(format!("drive_id={}", drive_id));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
         }
         if include_corpus_removals {
             query_args.push(format!(
@@ -196,12 +169,6 @@ impl Changes {
                 include_team_drive_items
             ));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if restrict_to_my_drive {
             query_args.push(format!("restrict_to_my_drive={}", restrict_to_my_drive));
         }
@@ -216,9 +183,6 @@ impl Changes {
         }
         if !team_drive_id.is_empty() {
             query_args.push(format!("team_drive_id={}", team_drive_id));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -276,11 +240,6 @@ impl Changes {
      */
     pub async fn drive_get_start_page_token(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         drive_id: &str,
         supports_all_drives: bool,
         supports_team_drives: bool,
@@ -288,18 +247,8 @@ impl Changes {
     ) -> Result<crate::types::StartPageToken> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if !drive_id.is_empty() {
             query_args.push(format!("drive_id={}", drive_id));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
@@ -309,9 +258,6 @@ impl Changes {
         }
         if !team_drive_id.is_empty() {
             query_args.push(format!("team_drive_id={}", team_drive_id));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -347,11 +293,6 @@ impl Changes {
      */
     pub async fn drive_watch(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         page_token: &str,
         drive_id: &str,
         include_corpus_removals: bool,
@@ -369,12 +310,8 @@ impl Changes {
     ) -> Result<crate::types::Channel> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if !drive_id.is_empty() {
             query_args.push(format!("drive_id={}", drive_id));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
         }
         if include_corpus_removals {
             query_args.push(format!(
@@ -403,17 +340,11 @@ impl Changes {
                 include_team_drive_items
             ));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if restrict_to_my_drive {
             query_args.push(format!("restrict_to_my_drive={}", restrict_to_my_drive));
@@ -429,9 +360,6 @@ impl Changes {
         }
         if !team_drive_id.is_empty() {
             query_args.push(format!("team_drive_id={}", team_drive_id));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {

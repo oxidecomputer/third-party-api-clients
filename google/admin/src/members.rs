@@ -24,48 +24,13 @@ impl Members {
      */
     pub async fn directory_has_member(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         member_key: &str,
     ) -> Result<crate::types::MembersHasMember> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/groups/{}/hasMember/{}?{}",
+            "/admin/directory/v1/groups/{}/hasMember/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -86,13 +51,6 @@ impl Members {
      */
     pub async fn directory_list(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         include_derived_membership: bool,
         max_results: i64,
@@ -101,21 +59,11 @@ impl Members {
     ) -> Result<Vec<crate::types::Member>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if include_derived_membership {
             query_args.push(format!(
                 "include_derived_membership={}",
                 include_derived_membership
             ));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
@@ -123,17 +71,8 @@ impl Members {
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if !roles.is_empty() {
             query_args.push(format!("roles={}", roles));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -162,46 +101,20 @@ impl Members {
      */
     pub async fn directory_list_members(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         include_derived_membership: bool,
         roles: &str,
     ) -> Result<Vec<crate::types::Member>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if include_derived_membership {
             query_args.push(format!(
                 "include_derived_membership={}",
                 include_derived_membership
             ));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if !roles.is_empty() {
             query_args.push(format!("roles={}", roles));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -260,47 +173,12 @@ impl Members {
      */
     pub async fn directory_insert(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         body: &crate::types::Member,
     ) -> Result<crate::types::Member> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/groups/{}/members?{}",
+            "/admin/directory/v1/groups/{}/members",
             crate::progenitor_support::encode_path(&group_key.to_string()),
-            query_
         );
 
         self.client
@@ -323,48 +201,13 @@ impl Members {
      */
     pub async fn directory_get(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         member_key: &str,
     ) -> Result<crate::types::Member> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/groups/{}/members/{}?{}",
+            "/admin/directory/v1/groups/{}/members/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -382,49 +225,14 @@ impl Members {
      */
     pub async fn directory_update(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         member_key: &str,
         body: &crate::types::Member,
     ) -> Result<crate::types::Member> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/groups/{}/members/{}?{}",
+            "/admin/directory/v1/groups/{}/members/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query_
         );
 
         self.client
@@ -445,50 +253,11 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
-    pub async fn directory_delete(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        group_key: &str,
-        member_key: &str,
-    ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn directory_delete(&self, group_key: &str, member_key: &str) -> Result<()> {
         let url = format!(
-            "/admin/directory/v1/groups/{}/members/{}?{}",
+            "/admin/directory/v1/groups/{}/members/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await
@@ -506,49 +275,14 @@ impl Members {
      */
     pub async fn directory_patch(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         group_key: &str,
         member_key: &str,
         body: &crate::types::Member,
     ) -> Result<crate::types::Member> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/groups/{}/members/{}?{}",
+            "/admin/directory/v1/groups/{}/members/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
             crate::progenitor_support::encode_path(&member_key.to_string()),
-            query_
         );
 
         self.client

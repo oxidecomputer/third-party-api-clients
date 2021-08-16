@@ -25,42 +25,16 @@ impl Orgunits {
      */
     pub async fn directory_list(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer_id: &str,
         org_unit_path: &str,
         type_: crate::types::DirectoryOrgunitsListType,
     ) -> Result<crate::types::OrgUnits> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !org_unit_path.is_empty() {
             query_args.push(format!("org_unit_path={}", org_unit_path));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         query_args.push(format!("type={}", type_));
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -87,47 +61,12 @@ impl Orgunits {
      */
     pub async fn directory_insert(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer_id: &str,
         body: &crate::types::OrgUnit,
     ) -> Result<crate::types::OrgUnit> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits?{}",
+            "/admin/directory/v1/customer/{}/orgunits",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
-            query_
         );
 
         self.client
@@ -150,48 +89,13 @@ impl Orgunits {
      */
     pub async fn directory_get(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer_id: &str,
         org_unit_path: &str,
     ) -> Result<crate::types::OrgUnit> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits/{}?{}",
+            "/admin/directory/v1/customer/{}/orgunits/{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&org_unit_path.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -209,49 +113,14 @@ impl Orgunits {
      */
     pub async fn directory_update(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer_id: &str,
         org_unit_path: &str,
         body: &crate::types::OrgUnit,
     ) -> Result<crate::types::OrgUnit> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits/{}?{}",
+            "/admin/directory/v1/customer/{}/orgunits/{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&org_unit_path.to_string()),
-            query_
         );
 
         self.client
@@ -272,50 +141,11 @@ impl Orgunits {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `org_unit_path: &str` -- The full path of the organizational unit or its unique ID.
      */
-    pub async fn directory_delete(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        customer_id: &str,
-        org_unit_path: &str,
-    ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn directory_delete(&self, customer_id: &str, org_unit_path: &str) -> Result<()> {
         let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits/{}?{}",
+            "/admin/directory/v1/customer/{}/orgunits/{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&org_unit_path.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await
@@ -333,49 +163,14 @@ impl Orgunits {
      */
     pub async fn directory_patch(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer_id: &str,
         org_unit_path: &str,
         body: &crate::types::OrgUnit,
     ) -> Result<crate::types::OrgUnit> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/orgunits/{}?{}",
+            "/admin/directory/v1/customer/{}/orgunits/{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&org_unit_path.to_string()),
-            query_
         );
 
         self.client

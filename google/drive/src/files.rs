@@ -36,11 +36,6 @@ impl Files {
      */
     pub async fn drive_list(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         corpora: &str,
         corpus: crate::types::Corpus,
         drive_id: &str,
@@ -58,16 +53,12 @@ impl Files {
     ) -> Result<Vec<crate::types::File>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if !corpora.is_empty() {
             query_args.push(format!("corpora={}", corpora));
         }
         query_args.push(format!("corpus={}", corpus));
         if !drive_id.is_empty() {
             query_args.push(format!("drive_id={}", drive_id));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
         }
         if include_items_from_all_drives {
             query_args.push(format!(
@@ -87,9 +78,6 @@ impl Files {
                 include_team_drive_items
             ));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !order_by.is_empty() {
             query_args.push(format!("order_by={}", order_by));
         }
@@ -102,9 +90,6 @@ impl Files {
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if !spaces.is_empty() {
             query_args.push(format!("spaces={}", spaces));
         }
@@ -116,9 +101,6 @@ impl Files {
         }
         if !team_drive_id.is_empty() {
             query_args.push(format!("team_drive_id={}", team_drive_id));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -143,11 +125,6 @@ impl Files {
      */
     pub async fn drive_list_files(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         corpora: &str,
         corpus: crate::types::Corpus,
         drive_id: &str,
@@ -163,16 +140,12 @@ impl Files {
     ) -> Result<Vec<crate::types::File>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if !corpora.is_empty() {
             query_args.push(format!("corpora={}", corpora));
         }
         query_args.push(format!("corpus={}", corpus));
         if !drive_id.is_empty() {
             query_args.push(format!("drive_id={}", drive_id));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
         }
         if include_items_from_all_drives {
             query_args.push(format!(
@@ -192,17 +165,11 @@ impl Files {
                 include_team_drive_items
             ));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !order_by.is_empty() {
             query_args.push(format!("order_by={}", order_by));
         }
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if !spaces.is_empty() {
             query_args.push(format!("spaces={}", spaces));
@@ -215,9 +182,6 @@ impl Files {
         }
         if !team_drive_id.is_empty() {
             query_args.push(format!("team_drive_id={}", team_drive_id));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -279,11 +243,6 @@ impl Files {
      */
     pub async fn drive_create(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         enforce_single_parent: bool,
         ignore_default_visibility: bool,
         include_permissions_for_view: &str,
@@ -296,12 +255,8 @@ impl Files {
     ) -> Result<crate::types::File> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if enforce_single_parent {
             query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
         }
         if ignore_default_visibility {
             query_args.push(format!(
@@ -318,14 +273,8 @@ impl Files {
         if keep_revision_forever {
             query_args.push(format!("keep_revision_forever={}", keep_revision_forever));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !ocr_language.is_empty() {
             query_args.push(format!("ocr_language={}", ocr_language));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
@@ -338,9 +287,6 @@ impl Files {
                 "use_content_as_indexable_text={}",
                 use_content_as_indexable_text
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -371,38 +317,20 @@ impl Files {
      */
     pub async fn drive_generate_id(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         count: i64,
         space: &str,
         type_: &str,
     ) -> Result<crate::types::GeneratedIds> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if count > 0 {
             query_args.push(format!("count={}", count));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if !space.is_empty() {
             query_args.push(format!("space={}", space));
         }
         if !type_.is_empty() {
             query_args.push(format!("type={}", type_));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -424,32 +352,11 @@ impl Files {
      *
      * * `enforce_single_parent: bool` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
      */
-    pub async fn drive_empty_trash(
-        &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
-        enforce_single_parent: bool,
-    ) -> Result<()> {
+    pub async fn drive_empty_trash(&self, enforce_single_parent: bool) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if enforce_single_parent {
             query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -477,11 +384,6 @@ impl Files {
      */
     pub async fn drive_get(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         acknowledge_abuse: bool,
         include_permissions_for_view: &str,
@@ -493,30 +395,17 @@ impl Files {
         if acknowledge_abuse {
             query_args.push(format!("acknowledge_abuse={}", acknowledge_abuse));
         }
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !include_permissions_for_view.is_empty() {
             query_args.push(format!(
                 "include_permissions_for_view={}",
                 include_permissions_for_view
             ));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
         }
         if supports_team_drives {
             query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -547,11 +436,6 @@ impl Files {
      */
     pub async fn drive_delete(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         enforce_single_parent: bool,
         supports_all_drives: bool,
@@ -559,27 +443,14 @@ impl Files {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if enforce_single_parent {
             query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
         }
         if supports_team_drives {
             query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -616,11 +487,6 @@ impl Files {
      */
     pub async fn drive_update(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         add_parents: &str,
         enforce_single_parent: bool,
@@ -638,12 +504,8 @@ impl Files {
         if !add_parents.is_empty() {
             query_args.push(format!("add_parents={}", add_parents));
         }
-        query_args.push(format!("alt={}", alt));
         if enforce_single_parent {
             query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push(format!(
@@ -654,14 +516,8 @@ impl Files {
         if keep_revision_forever {
             query_args.push(format!("keep_revision_forever={}", keep_revision_forever));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !ocr_language.is_empty() {
             query_args.push(format!("ocr_language={}", ocr_language));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if !remove_parents.is_empty() {
             query_args.push(format!("remove_parents={}", remove_parents));
@@ -677,9 +533,6 @@ impl Files {
                 "use_content_as_indexable_text={}",
                 use_content_as_indexable_text
             ));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -719,11 +572,6 @@ impl Files {
      */
     pub async fn drive_copy(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         enforce_single_parent: bool,
         ignore_default_visibility: bool,
@@ -736,12 +584,8 @@ impl Files {
     ) -> Result<crate::types::File> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if enforce_single_parent {
             query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
         }
         if ignore_default_visibility {
             query_args.push(format!(
@@ -758,23 +602,14 @@ impl Files {
         if keep_revision_forever {
             query_args.push(format!("keep_revision_forever={}", keep_revision_forever));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !ocr_language.is_empty() {
             query_args.push(format!("ocr_language={}", ocr_language));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
         }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
         }
         if supports_team_drives {
             query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -806,33 +641,11 @@ impl Files {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `mime_type: &str` -- The MIME type of the format requested for this export.
      */
-    pub async fn drive_export(
-        &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
-        file_id: &str,
-        mime_type: &str,
-    ) -> Result<()> {
+    pub async fn drive_export(&self, file_id: &str, mime_type: &str) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !mime_type.is_empty() {
             query_args.push(format!("mime_type={}", mime_type));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -864,11 +677,6 @@ impl Files {
      */
     pub async fn drive_watch(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         file_id: &str,
         acknowledge_abuse: bool,
         include_permissions_for_view: &str,
@@ -881,30 +689,17 @@ impl Files {
         if acknowledge_abuse {
             query_args.push(format!("acknowledge_abuse={}", acknowledge_abuse));
         }
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !include_permissions_for_view.is_empty() {
             query_args.push(format!(
                 "include_permissions_for_view={}",
                 include_permissions_for_view
             ));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
         }
         if supports_team_drives {
             query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {

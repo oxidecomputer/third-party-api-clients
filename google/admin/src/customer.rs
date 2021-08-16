@@ -25,50 +25,15 @@ impl Customer {
      */
     pub async fn admin_devices_chromeos_commands_get(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer_id: &str,
         device_id: &str,
         command_id: &str,
     ) -> Result<crate::types::DirectoryChromeosdevicesCommand> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/devices/chromeos/{}/commands/{}?{}",
+            "/admin/directory/v1/customer/{}/devices/chromeos/{}/commands/{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&device_id.to_string()),
             crate::progenitor_support::encode_path(&command_id.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -86,49 +51,14 @@ impl Customer {
      */
     pub async fn admin_devices_chromeos_issue_command(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer_id: &str,
         device_id: &str,
         body: &crate::types::DirectoryChromeosdevicesIssueCommandRequest,
     ) -> Result<crate::types::DirectoryChromeosdevicesIssueCommandResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customer/{}/devices/chromeos/{}/issueCommand?{}",
+            "/admin/directory/v1/customer/{}/devices/chromeos/{}/issueCommand",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
             crate::progenitor_support::encode_path(&device_id.to_string()),
-            query_
         );
 
         self.client

@@ -28,38 +28,16 @@ impl Settings {
      */
     pub async fn calendar_list(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         max_results: i64,
         page_token: &str,
-        sync_token: &str,
     ) -> Result<Vec<crate::types::Setting>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !sync_token.is_empty() {
-            query_args.push(format!("sync_token={}", sync_token));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -82,37 +60,8 @@ impl Settings {
      *
      * Returns all user settings for the authenticated user.
      */
-    pub async fn calendar_list_settings(
-        &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
-    ) -> Result<Vec<crate::types::Setting>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
-        let url = format!("/users/me/settings?{}", query_);
-
+    pub async fn calendar_list_settings(&self) -> Result<Vec<crate::types::Setting>> {
+        let url = "/users/me/settings".to_string();
         let mut resp: crate::types::Settings = self.client.get(&url, None).await.unwrap();
 
         let mut items = resp.items;
@@ -163,39 +112,17 @@ impl Settings {
      */
     pub async fn calendar_watch(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         max_results: i64,
         page_token: &str,
-        sync_token: &str,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !sync_token.is_empty() {
-            query_args.push(format!("sync_token={}", sync_token));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -222,40 +149,10 @@ impl Settings {
      *
      * * `setting: &str` -- The id of the user setting.
      */
-    pub async fn calendar_get(
-        &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
-        setting: &str,
-    ) -> Result<crate::types::Setting> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn calendar_get(&self, setting: &str) -> Result<crate::types::Setting> {
         let url = format!(
-            "/users/me/settings/{}?{}",
+            "/users/me/settings/{}",
             crate::progenitor_support::encode_path(&setting.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await

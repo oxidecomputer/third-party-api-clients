@@ -985,4 +985,13 @@ fn is_google_unnecessary_param(s: &str) -> bool {
         || s == "pretty_print"
         || s == "xgafv"
         || s == "custom_field_mask"
+        || s == "sync_token"
+        || s == "user_ip"
+        || s == "quota_user"
+        || s == "key"
+        || s == "fields"
+        || s == "alt"
+        || s == "callback"
+        || s == "upload_protocol"
+        || s == "upload_type"
 }

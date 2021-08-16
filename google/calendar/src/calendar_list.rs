@@ -32,27 +32,14 @@ impl CalendarList {
      */
     pub async fn get_page(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         max_results: i64,
         min_access_role: crate::types::MinAccessRole,
         page_token: &str,
         show_deleted: bool,
         show_hidden: bool,
-        sync_token: &str,
     ) -> Result<Vec<crate::types::CalendarListEntry>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
@@ -60,20 +47,11 @@ impl CalendarList {
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if show_deleted {
             query_args.push(format!("show_deleted={}", show_deleted));
         }
         if show_hidden {
             query_args.push(format!("show_hidden={}", show_hidden));
-        }
-        if !sync_token.is_empty() {
-            query_args.push(format!("sync_token={}", sync_token));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -98,36 +76,18 @@ impl CalendarList {
      */
     pub async fn get_all(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         min_access_role: crate::types::MinAccessRole,
         show_deleted: bool,
         show_hidden: bool,
     ) -> Result<Vec<crate::types::CalendarListEntry>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         query_args.push(format!("min_access_role={}", min_access_role));
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if show_deleted {
             query_args.push(format!("show_deleted={}", show_deleted));
         }
         if show_hidden {
             query_args.push(format!("show_hidden={}", show_hidden));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -182,31 +142,13 @@ impl CalendarList {
      */
     pub async fn insert(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
     ) -> Result<crate::types::CalendarListEntry> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if color_rgb_format {
             query_args.push(format!("color_rgb_format={}", color_rgb_format));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -244,28 +186,15 @@ impl CalendarList {
      */
     pub async fn watch(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         max_results: i64,
         min_access_role: crate::types::MinAccessRole,
         page_token: &str,
         show_deleted: bool,
         show_hidden: bool,
-        sync_token: &str,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
@@ -273,20 +202,11 @@ impl CalendarList {
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if show_deleted {
             query_args.push(format!("show_deleted={}", show_deleted));
         }
         if show_hidden {
             query_args.push(format!("show_hidden={}", show_hidden));
-        }
-        if !sync_token.is_empty() {
-            query_args.push(format!("sync_token={}", sync_token));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -313,40 +233,10 @@ impl CalendarList {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn get(
-        &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
-        calendar_id: &str,
-    ) -> Result<crate::types::CalendarListEntry> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn get(&self, calendar_id: &str) -> Result<crate::types::CalendarListEntry> {
         let url = format!(
-            "/users/me/calendarList/{}?{}",
+            "/users/me/calendarList/{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -364,32 +254,14 @@ impl CalendarList {
      */
     pub async fn update(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
     ) -> Result<crate::types::CalendarListEntry> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if color_rgb_format {
             query_args.push(format!("color_rgb_format={}", color_rgb_format));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -420,40 +292,10 @@ impl CalendarList {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn delete(
-        &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
-        calendar_id: &str,
-    ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn delete(&self, calendar_id: &str) -> Result<()> {
         let url = format!(
-            "/users/me/calendarList/{}?{}",
+            "/users/me/calendarList/{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await
@@ -471,32 +313,14 @@ impl CalendarList {
      */
     pub async fn patch(
         &self,
-        alt: crate::types::Alt,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        user_ip: &str,
         calendar_id: &str,
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
     ) -> Result<crate::types::CalendarListEntry> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
         if color_rgb_format {
             query_args.push(format!("color_rgb_format={}", color_rgb_format));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !user_ip.is_empty() {
-            query_args.push(format!("user_ip={}", user_ip));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {

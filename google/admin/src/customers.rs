@@ -21,48 +21,10 @@ impl Customers {
      *
      * * `customer_key: &str` -- Id of the customer to be retrieved.
      */
-    pub async fn directory_get(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        customer_key: &str,
-    ) -> Result<crate::types::Customer> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn directory_get(&self, customer_key: &str) -> Result<crate::types::Customer> {
         let url = format!(
-            "/admin/directory/v1/customers/{}?{}",
+            "/admin/directory/v1/customers/{}",
             crate::progenitor_support::encode_path(&customer_key.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -79,47 +41,12 @@ impl Customers {
      */
     pub async fn directory_update(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer_key: &str,
         body: &crate::types::Customer,
     ) -> Result<crate::types::Customer> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customers/{}?{}",
+            "/admin/directory/v1/customers/{}",
             crate::progenitor_support::encode_path(&customer_key.to_string()),
-            query_
         );
 
         self.client
@@ -141,47 +68,12 @@ impl Customers {
      */
     pub async fn directory_patch(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         customer_key: &str,
         body: &crate::types::Customer,
     ) -> Result<crate::types::Customer> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/customers/{}?{}",
+            "/admin/directory/v1/customers/{}",
             crate::progenitor_support::encode_path(&customer_key.to_string()),
-            query_
         );
 
         self.client
@@ -201,48 +93,10 @@ impl Customers {
      *
      * * `name: &str` -- Required. The name of the printer to retrieve. Format: customers/{customer_id}/chrome/printers/{printer_id}.
      */
-    pub async fn admin_chrome_printers_get(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        name: &str,
-    ) -> Result<crate::types::Printer> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn admin_chrome_printers_get(&self, name: &str) -> Result<crate::types::Printer> {
         let url = format!(
-            "/admin/directory/v1/{}?{}",
+            "/admin/directory/v1/{}",
             crate::progenitor_support::encode_path(&name.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -257,48 +111,10 @@ impl Customers {
      *
      * * `name: &str` -- Required. The name of the printer to be updated. Format: customers/{customer_id}/chrome/printers/{printer_id}.
      */
-    pub async fn admin_chrome_printers_delete(
-        &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
-        name: &str,
-    ) -> Result<crate::types::Empty> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+    pub async fn admin_chrome_printers_delete(&self, name: &str) -> Result<crate::types::Empty> {
         let url = format!(
-            "/admin/directory/v1/{}?{}",
+            "/admin/directory/v1/{}",
             crate::progenitor_support::encode_path(&name.to_string()),
-            query_
         );
 
         self.client.delete(&url, None).await
@@ -317,13 +133,6 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_patch(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         name: &str,
         clear_mask: &str,
         update_mask: &str,
@@ -331,30 +140,11 @@ impl Customers {
     ) -> Result<crate::types::Printer> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
         if !clear_mask.is_empty() {
             query_args.push(format!("clear_mask={}", clear_mask));
         }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
         if !update_mask.is_empty() {
             query_args.push(format!("update_mask={}", update_mask));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -391,13 +181,6 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_list(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         parent: &str,
         filter: &str,
         org_unit_id: &str,
@@ -406,18 +189,8 @@ impl Customers {
     ) -> Result<Vec<crate::types::Printer>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !filter.is_empty() {
             query_args.push(format!("filter={}", filter));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if !org_unit_id.is_empty() {
             query_args.push(format!("org_unit_id={}", org_unit_id));
@@ -427,15 +200,6 @@ impl Customers {
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -464,43 +228,17 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_list_customers(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         parent: &str,
         filter: &str,
         org_unit_id: &str,
     ) -> Result<Vec<crate::types::Printer>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !filter.is_empty() {
             query_args.push(format!("filter={}", filter));
         }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
         if !org_unit_id.is_empty() {
             query_args.push(format!("org_unit_id={}", org_unit_id));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -560,47 +298,12 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_create(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         parent: &str,
         body: &crate::types::Printer,
     ) -> Result<crate::types::Printer> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/{}/chrome/printers?{}",
+            "/admin/directory/v1/{}/chrome/printers",
             crate::progenitor_support::encode_path(&parent.to_string()),
-            query_
         );
 
         self.client
@@ -622,47 +325,12 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_batch_create(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         parent: &str,
         body: &crate::types::BatchCreatePrintersRequest,
     ) -> Result<crate::types::BatchCreatePrintersResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/{}/chrome/printers:batchCreatePrinters?{}",
+            "/admin/directory/v1/{}/chrome/printers:batchCreatePrinters",
             crate::progenitor_support::encode_path(&parent.to_string()),
-            query_
         );
 
         self.client
@@ -684,47 +352,12 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_batch_delete(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         parent: &str,
         body: &crate::types::BatchDeletePrintersRequest,
     ) -> Result<crate::types::BatchDeletePrintersResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
         let url = format!(
-            "/admin/directory/v1/{}/chrome/printers:batchDeletePrinters?{}",
+            "/admin/directory/v1/{}/chrome/printers:batchDeletePrinters",
             crate::progenitor_support::encode_path(&parent.to_string()),
-            query_
         );
 
         self.client
@@ -749,13 +382,6 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_list_printer_models(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         parent: &str,
         filter: &str,
         page_size: i64,
@@ -763,33 +389,14 @@ impl Customers {
     ) -> Result<Vec<crate::types::PrinterModel>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !filter.is_empty() {
             query_args.push(format!("filter={}", filter));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
         }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
@@ -819,39 +426,13 @@ impl Customers {
      */
     pub async fn admin_chrome_printers_list_all_printer_models(
         &self,
-        alt: crate::types::Alt,
-        callback: &str,
-        fields: &str,
-        key: &str,
-        quota_user: &str,
-        upload_protocol: &str,
-        upload_type: &str,
         parent: &str,
         filter: &str,
     ) -> Result<Vec<crate::types::PrinterModel>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
-        if !callback.is_empty() {
-            query_args.push(format!("callback={}", callback));
-        }
-        if !fields.is_empty() {
-            query_args.push(format!("fields={}", fields));
-        }
         if !filter.is_empty() {
             query_args.push(format!("filter={}", filter));
-        }
-        if !key.is_empty() {
-            query_args.push(format!("key={}", key));
-        }
-        if !quota_user.is_empty() {
-            query_args.push(format!("quota_user={}", quota_user));
-        }
-        if !upload_protocol.is_empty() {
-            query_args.push(format!("upload_protocol={}", upload_protocol));
-        }
-        if !upload_type.is_empty() {
-            query_args.push(format!("upload_type={}", upload_type));
         }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
