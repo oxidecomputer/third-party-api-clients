@@ -5190,7 +5190,7 @@ impl Repos {
      * * `owner: &str`
      * * `repo: &str`
      */
-    pub async fn list_languages(&self, owner: &str, repo: &str) -> Result<crate::types::Data> {
+    pub async fn list_languages(&self, owner: &str, repo: &str) -> Result<i64> {
         let url = format!(
             "/repos/{}/{}/languages",
             crate::progenitor_support::encode_path(&owner.to_string()),

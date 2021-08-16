@@ -1436,7 +1436,7 @@ impl TypeSpace {
                 }
                 openapiv3::Type::Object(o) => {
                     // Object types must have a consistent name.
-                    let name = clean_name(match (name, s.schema_data.title.as_deref()) {
+                    let mut name = clean_name(match (name, s.schema_data.title.as_deref()) {
                         (Some(n), None) => n,
                         (Some(n), Some("")) => n,
                         (None, Some(t)) => t,
@@ -1492,8 +1492,11 @@ impl TypeSpace {
                                 "".to_string()
                             };
 
+                            // If this name already exists add additional properties to it.
+                            if self.name_to_id.get(&clean_name(&name)).is_some() {
+                                name = format!("{} additional properties", name);
+                            }
                             let id = self.select(Some(&name), ad, &desc)?;
-
                             return Ok((
                                 Some(name.to_string()),
                                 TypeDetails::NamedType(id, s.schema_data.clone()),

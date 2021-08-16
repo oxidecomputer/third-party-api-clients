@@ -4378,6 +4378,41 @@ pub struct Feed {
     pub user_url: String,
 }
 
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct Files {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub filename: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub language: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub raw_url: String,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub size: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "type"
+    )]
+    pub type_: String,
+}
+
 /// Base Gist
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BaseGist {
@@ -4412,7 +4447,7 @@ pub struct BaseGist {
     )]
     pub description: String,
     #[serde()]
-    pub files: Data,
+    pub files: Files,
     /**
      * Base Gist
      */
@@ -4898,7 +4933,7 @@ pub struct Gist {
     )]
     pub description: String,
     #[serde()]
-    pub files: Data,
+    pub files: Files,
     /**
      * Gist
      */
@@ -4976,6 +5011,52 @@ pub struct Gist {
     pub user: Option<SimpleUser>,
 }
 
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct FilesAdditionalProperties {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub content: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub filename: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub language: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub raw_url: String,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub size: i64,
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub truncated: bool,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "type"
+    )]
+    pub type_: String,
+}
+
 /// Gist Simple
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GistSimple {
@@ -5012,11 +5093,8 @@ pub struct GistSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
-    /**
-     * Gist Simple
-     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub files: Option<Data>,
+    pub files: Option<FilesAdditionalProperties>,
     /**
      * Gist
      */
@@ -12041,7 +12119,7 @@ pub struct Parents {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct Files {
+pub struct CommitFiles {
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12129,7 +12207,7 @@ pub struct CommitDataType {
      * Commit
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub files: Vec<Files>,
+    pub files: Vec<CommitFiles>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24752,6 +24830,17 @@ pub struct EnterpriseAdminListSelfHostedRunnersResponse {
     pub total_count: f64,
 }
 
+/// Names and content for the files that make up the gist
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct FilesAdditionalPropertiesData {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub content: String,
+}
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Public {
     #[serde(rename = "false")]
@@ -24828,10 +24917,30 @@ pub struct GistsCreateRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub description: String,
+    /**
+     * Names and content for the files that make up the gist
+     */
     #[serde()]
-    pub files: Data,
+    pub files: FilesAdditionalPropertiesData,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub public: Option<PublicOneOf>,
+}
+
+/// Names of files to be updated
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct FilesAdditionalPropertiesDataType {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub content: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub filename: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -24843,7 +24952,7 @@ pub struct GistsUpdateRequest {
     )]
     pub description: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub files: Option<Data>,
+    pub files: Option<FilesAdditionalPropertiesDataType>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -26873,8 +26982,12 @@ pub struct ActionsListRepoWorkflowsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsCreateWorkflowDispatchRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub inputs: Option<Data>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub inputs: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
