@@ -31,6 +31,9 @@ pub trait FileOps {
 
     /// Get a file's contents by it's ID. Only works for Google Docs.
     async fn get_contents_by_id(&self, id: &str) -> Result<String>;
+
+    /// Delete a file by its name.
+    async fn delete_file_by_name(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<()>;
 }
 
 #[async_trait::async_trait]
@@ -228,6 +231,27 @@ impl FileOps for crate::files::Files {
             .unwrap();
 
         Ok(resp.text().await.unwrap())
+    }
+
+    /// Delete a file by its name.
+    async fn delete_file_by_name(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<()> {
+        // Check if the file exists.
+        let files = self
+            .get_by_name(drive_id, parent_id, name)
+            .await
+            .unwrap_or_default();
+        if files.is_empty() {
+            // The file does not exist.
+            return Ok(());
+        }
+
+        // Delete the file.
+        self.drive_delete(
+            &files.get(0).unwrap().id,
+            true, // supports all drives
+            true, // supports team drives
+        )
+        .await
     }
 }
 
