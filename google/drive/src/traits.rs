@@ -23,6 +23,9 @@ pub trait FileOps {
 
     /// Create a folder, if it doesn't exist.
     async fn create_folder(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<String>;
+
+    /// Get a file's contents by it's ID. Only works for Google Docs.
+    async fn get_contents_by_id(&self, id: &str) -> Result<String>;
 }
 
 #[async_trait::async_trait]
@@ -182,6 +185,32 @@ impl FileOps for crate::files::Files {
             .unwrap();
 
         Ok(folder.id)
+    }
+
+    /// Get a file's contents by it's ID. Only works for Google Docs.
+    // TODO: make binary content work in the actual library.
+    async fn get_contents_by_id(&self, id: &str) -> Result<String> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push("mime_type=text/plain".to_string());
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
+        let url = format!(
+            "/files/{}/export?{}",
+            crate::progenitor_support::encode_path(&id.to_string()),
+            query_
+        );
+        let resp = self
+            .client
+            .request_raw(reqwest::Method::GET, &url, None)
+            .await
+            .unwrap();
+
+        Ok(resp.text().await.unwrap())
     }
 }
 
