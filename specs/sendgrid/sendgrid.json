@@ -13051,7 +13051,7 @@
                 }
             ],
             "post": {
-                "operationId": "POST-design",
+                "operationId": "POST-duplicate-design",
                 "summary": "Duplicate Design",
                 "tags": [
                     "Designs API"
@@ -30554,6 +30554,7 @@
                     "description": "Specifies the type of client to retrieve stats for. Must be either \"phone\", \"tablet\", \"webmail\", or \"desktop\".",
                     "required": true,
                     "schema": {
+                      "title": "client_type",
                         "type": "string",
                         "enum": [
                             "phone",

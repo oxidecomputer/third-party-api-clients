@@ -11,6 +11,7 @@ members = [
 	"google/sheets",
 	"gusto",
 	"ramp",
+	"sendgrid",
 	"tripactions",
 	"zoom"
 ]

@@ -42,11 +42,10 @@ pub fn generate_files(
                     tags = xtags;
                 }
             }
-            if tags.len() != 1 {
-                bail!("invalid number of tags for op {}: {}", od, o.tags.len());
-            }
-            let tag = to_snake_case(&make_plural(proper_name, tags.first().unwrap()))
-                .replace("_i_ds", "_ids");
+            let tag = to_snake_case(&clean_name(&make_plural(
+                proper_name,
+                tags.first().unwrap(),
+            )));
 
             let oid = clean_fn_name(proper_name, &od, &tag);
 

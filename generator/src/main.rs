@@ -242,16 +242,12 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         }
                                     }
 
-                                    bail!(
-                                        "parameter {} that enumerates should have a pre-defined \
-                                         type: {:?}",
-                                        name,
-                                        s
-                                    );
+                                    let id = ts.select_schema(None, s, "", "").unwrap();
+                                    return ts.render_type(&id, false);
                                 }
 
                                 if st.min_length.is_some() || st.max_length.is_some() {
-                                    bail!("XXX min/max length");
+                                    println!("XXX min/max length");
                                 }
 
                                 match &st.format {
@@ -270,10 +266,15 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         "google-datetime" => {
                                             "chrono::DateTime<chrono::Utc>".to_string()
                                         }
+                                        "ISO 8601 date-time" => {
+                                            "chrono::DateTime<chrono::Utc>".to_string()
+                                        }
+                                        "ipv4" => "std::net::Ipv4Addr".to_string(),
                                         "uri" => "&str".to_string(),
                                         "uri-template" => "&str".to_string(),
                                         "email" => "&str".to_string(),
                                         "uuid" => "&str".to_string(),
+                                        "hostname" => "&str".to_string(),
                                         "time" => "chrono::NaiveTime".to_string(),
                                         f => {
                                             bail!("XXX unknown string format {}", f)
@@ -1506,6 +1507,11 @@ impl TypeSpace {
 
                     let mut omap = BTreeMap::new();
                     for (n, rb) in o.properties.iter() {
+                        if n.is_empty() {
+                            println!("XXX n cannot be empty for {}", name);
+                            continue;
+                        }
+
                         let itid = self.select_box(
                             Some(n),
                             rb,
@@ -1681,6 +1687,20 @@ impl TypeSpace {
                                     s.schema_data.clone(),
                                 ),
                             )),
+                            "ISO 8601 date-time" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic(
+                                    "Option<chrono::DateTime<chrono::Utc>>".to_string(),
+                                    s.schema_data.clone(),
+                                ),
+                            )),
+                            "ipv4" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic(
+                                    "Option<std::net::Ipv4Addr>".to_string(),
+                                    s.schema_data.clone(),
+                                ),
+                            )),
                             "uri" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
@@ -1694,6 +1714,10 @@ impl TypeSpace {
                                 TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
                             )),
                             "uuid" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            )),
+                            "hostname" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
                             )),
@@ -2216,7 +2240,7 @@ fn gen(
      * Tags are how functions are grouped.
      */
     for tag in api.tags.iter() {
-        if !tags.contains(&to_snake_case(&tag.name))
+        if !tags.contains(&to_snake_case(&clean_name(&tag.name)))
             && (proper_name == "Zoom" || proper_name == "DocuSign")
         {
             // Return early do nothing!
@@ -2238,7 +2262,10 @@ fn gen(
         if !docs.is_empty() {
             a(&format!("/// {}", docs.replace("\n", "\n///"),));
         }
-        a(&format!("pub mod {};", to_snake_case(&tag.name)));
+        a(&format!(
+            "pub mod {};",
+            to_snake_case(&clean_name(&tag.name))
+        ));
     }
     if api.tags.is_empty() {
         // If the spec didn't call out tags explicitly, we need to use the
@@ -2346,10 +2373,10 @@ fn gen(
                     {}::{}::new(self.clone())
                }}"#,
             docs.replace("\n", "\n///"),
-            to_snake_case(&tag.name),
-            to_snake_case(&tag.name),
+            to_snake_case(&clean_name(&tag.name)),
+            to_snake_case(&clean_name(&tag.name)),
             struct_name(&tag.name),
-            to_snake_case(&tag.name),
+            to_snake_case(&clean_name(&tag.name)),
             struct_name(&tag.name),
         ));
         a("");
@@ -2439,7 +2466,9 @@ fn clean_name(t: &str) -> String {
             .replace("/", " ")
             .replace("-", " "),
     )
+    .replace("_i_ds", "_ids")
     .replace("v_1_", "")
+    .replace("_v_2_", "_")
     .replace("s_uuid", "")
     .replace("_id_or_uuid", "")
     .replace("_uuid", "")
@@ -2501,6 +2530,7 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
 
     let mut st = to_snake_case(&o)
         .replace("v_1_", "")
+        .replace("_v_2_", "_")
         .replace("s_uuid", "")
         .replace("_id_or_uuid", "")
         .replace("_uuid", "")
@@ -2798,11 +2828,10 @@ fn main() -> Result<()> {
                         tags = xtags;
                     }
                 }
-                if tags.len() != 1 {
-                    bail!("invalid number of tags for op {}: {}", od, o.tags.len());
-                }
-                let tag = to_snake_case(&make_plural(&proper_name, tags.first().unwrap()))
-                    .replace("_i_ds", "_ids");
+                let tag = to_snake_case(&clean_name(&make_plural(
+                    &proper_name,
+                    tags.first().unwrap(),
+                )));
 
                 let oid = clean_fn_name(&proper_name, &od, &tag);
 
