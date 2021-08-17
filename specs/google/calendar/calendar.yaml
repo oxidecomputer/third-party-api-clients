@@ -2395,8 +2395,6 @@ components:
     ConferenceParametersAddOnParameters:
       properties:
         parameters:
-          additionalProperties:
-            type: string
           type: object
       type: object
     ConferenceProperties:

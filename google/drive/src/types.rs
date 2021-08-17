@@ -86,28 +86,28 @@ pub struct About {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "appInstalled"
     )]
-    pub app_installed: bool,
+    pub app_installed: Option<bool>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canCreateDrives"
     )]
-    pub can_create_drives: bool,
+    pub can_create_drives: Option<bool>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canCreateTeamDrives"
     )]
-    pub can_create_team_drives: bool,
+    pub can_create_team_drives: Option<bool>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
@@ -249,11 +249,8 @@ pub struct Change {
     /**
      * A change to a file or shared drive.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub removed: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub removed: Option<bool>,
     /**
      * A change to a file or shared drive.
      */
@@ -380,11 +377,8 @@ pub struct Channel {
     /**
      * An notification channel used to watch for resource changes.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub payload: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub payload: Option<bool>,
     /**
      * An notification channel used to watch for resource changes.
      */
@@ -489,11 +483,8 @@ pub struct Comment {
     /**
      * A comment on a file.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub deleted: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub deleted: Option<bool>,
     /**
      * A comment on a file.
      */
@@ -549,11 +540,8 @@ pub struct Comment {
     /**
      * A comment on a file.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub resolved: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub resolved: Option<bool>,
 }
 
 /// A list of comments on a file.
@@ -591,12 +579,8 @@ pub struct ContentRestriction {
     /**
      * A restriction for accessing the content of the file.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "readOnly"
-    )]
-    pub read_only: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "readOnly")]
+    pub read_only: Option<bool>,
     /**
      * A restriction for accessing the content of the file.
      */
@@ -688,163 +672,147 @@ pub struct Capabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canAddChildren"
     )]
-    pub can_add_children: bool,
+    pub can_add_children: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeCopyRequiresWriterPermissionRestriction"
     )]
-    pub can_change_copy_requires_writer_permission_restriction: bool,
+    pub can_change_copy_requires_writer_permission_restriction: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeDomainUsersOnlyRestriction"
     )]
-    pub can_change_domain_users_only_restriction: bool,
+    pub can_change_domain_users_only_restriction: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeDriveBackground"
     )]
-    pub can_change_drive_background: bool,
+    pub can_change_drive_background: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeDriveMembersOnlyRestriction"
     )]
-    pub can_change_drive_members_only_restriction: bool,
+    pub can_change_drive_members_only_restriction: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canComment"
     )]
-    pub can_comment: bool,
+    pub can_comment: Option<bool>,
+    /**
+     * Capabilities the current user has on this shared drive.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canCopy")]
+    pub can_copy: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canCopy"
-    )]
-    pub can_copy: bool,
-    /**
-     * Capabilities the current user has on this shared drive.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canDeleteChildren"
     )]
-    pub can_delete_children: bool,
+    pub can_delete_children: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canDeleteDrive"
     )]
-    pub can_delete_drive: bool,
+    pub can_delete_drive: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canDownload"
     )]
-    pub can_download: bool,
+    pub can_download: Option<bool>,
+    /**
+     * Capabilities the current user has on this shared drive.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canEdit")]
+    pub can_edit: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canEdit"
-    )]
-    pub can_edit: bool,
-    /**
-     * Capabilities the current user has on this shared drive.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canListChildren"
     )]
-    pub can_list_children: bool,
+    pub can_list_children: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canManageMembers"
     )]
-    pub can_manage_members: bool,
+    pub can_manage_members: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canReadRevisions"
     )]
-    pub can_read_revisions: bool,
+    pub can_read_revisions: Option<bool>,
+    /**
+     * Capabilities the current user has on this shared drive.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canRename")]
+    pub can_rename: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canRename"
-    )]
-    pub can_rename: bool,
-    /**
-     * Capabilities the current user has on this shared drive.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canRenameDrive"
     )]
-    pub can_rename_drive: bool,
+    pub can_rename_drive: Option<bool>,
+    /**
+     * Capabilities the current user has on this shared drive.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canShare")]
+    pub can_share: Option<bool>,
     /**
      * Capabilities the current user has on this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canShare"
-    )]
-    pub can_share: bool,
-    /**
-     * Capabilities the current user has on this shared drive.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canTrashChildren"
     )]
-    pub can_trash_children: bool,
+    pub can_trash_children: Option<bool>,
 }
 
 /// A set of restrictions that apply to this shared drive or items inside this shared drive.
@@ -855,37 +823,37 @@ pub struct Restrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "adminManagedRestrictions"
     )]
-    pub admin_managed_restrictions: bool,
+    pub admin_managed_restrictions: Option<bool>,
     /**
      * A set of restrictions that apply to this shared drive or items inside this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "copyRequiresWriterPermission"
     )]
-    pub copy_requires_writer_permission: bool,
+    pub copy_requires_writer_permission: Option<bool>,
     /**
      * A set of restrictions that apply to this shared drive or items inside this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "domainUsersOnly"
     )]
-    pub domain_users_only: bool,
+    pub domain_users_only: Option<bool>,
     /**
      * A set of restrictions that apply to this shared drive or items inside this shared drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "driveMembersOnly"
     )]
-    pub drive_members_only: bool,
+    pub drive_members_only: Option<bool>,
 }
 
 /// Representation of a shared drive.
@@ -938,11 +906,8 @@ pub struct Drive {
     /**
      * Representation of a shared drive.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub hidden: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub hidden: Option<bool>,
     /**
      * Representation of a shared drive.
      */
@@ -1024,316 +989,292 @@ pub struct FileCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canAddChildren"
     )]
-    pub can_add_children: bool,
+    pub can_add_children: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canAddFolderFromAnotherDrive"
     )]
-    pub can_add_folder_from_another_drive: bool,
+    pub can_add_folder_from_another_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canAddMyDriveParent"
     )]
-    pub can_add_my_drive_parent: bool,
+    pub can_add_my_drive_parent: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeCopyRequiresWriterPermission"
     )]
-    pub can_change_copy_requires_writer_permission: bool,
+    pub can_change_copy_requires_writer_permission: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeSecurityUpdateEnabled"
     )]
-    pub can_change_security_update_enabled: bool,
+    pub can_change_security_update_enabled: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeViewersCanCopyContent"
     )]
-    pub can_change_viewers_can_copy_content: bool,
+    pub can_change_viewers_can_copy_content: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canComment"
     )]
-    pub can_comment: bool,
+    pub can_comment: Option<bool>,
+    /**
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canCopy")]
+    pub can_copy: Option<bool>,
+    /**
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canDelete")]
+    pub can_delete: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canCopy"
-    )]
-    pub can_copy: bool,
-    /**
-     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canDelete"
-    )]
-    pub can_delete: bool,
-    /**
-     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canDeleteChildren"
     )]
-    pub can_delete_children: bool,
+    pub can_delete_children: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canDownload"
     )]
-    pub can_download: bool,
+    pub can_download: Option<bool>,
+    /**
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canEdit")]
+    pub can_edit: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canEdit"
-    )]
-    pub can_edit: bool,
-    /**
-     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canListChildren"
     )]
-    pub can_list_children: bool,
+    pub can_list_children: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canModifyContent"
     )]
-    pub can_modify_content: bool,
+    pub can_modify_content: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canModifyContentRestriction"
     )]
-    pub can_modify_content_restriction: bool,
+    pub can_modify_content_restriction: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveChildrenOutOfDrive"
     )]
-    pub can_move_children_out_of_drive: bool,
+    pub can_move_children_out_of_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveChildrenOutOfTeamDrive"
     )]
-    pub can_move_children_out_of_team_drive: bool,
+    pub can_move_children_out_of_team_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveChildrenWithinDrive"
     )]
-    pub can_move_children_within_drive: bool,
+    pub can_move_children_within_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveChildrenWithinTeamDrive"
     )]
-    pub can_move_children_within_team_drive: bool,
+    pub can_move_children_within_team_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveItemIntoTeamDrive"
     )]
-    pub can_move_item_into_team_drive: bool,
+    pub can_move_item_into_team_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveItemOutOfDrive"
     )]
-    pub can_move_item_out_of_drive: bool,
+    pub can_move_item_out_of_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveItemOutOfTeamDrive"
     )]
-    pub can_move_item_out_of_team_drive: bool,
+    pub can_move_item_out_of_team_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveItemWithinDrive"
     )]
-    pub can_move_item_within_drive: bool,
+    pub can_move_item_within_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveItemWithinTeamDrive"
     )]
-    pub can_move_item_within_team_drive: bool,
+    pub can_move_item_within_team_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canMoveTeamDriveItem"
     )]
-    pub can_move_team_drive_item: bool,
+    pub can_move_team_drive_item: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canReadDrive"
     )]
-    pub can_read_drive: bool,
+    pub can_read_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canReadRevisions"
     )]
-    pub can_read_revisions: bool,
+    pub can_read_revisions: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canReadTeamDrive"
     )]
-    pub can_read_team_drive: bool,
+    pub can_read_team_drive: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canRemoveChildren"
     )]
-    pub can_remove_children: bool,
+    pub can_remove_children: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canRemoveMyDriveParent"
     )]
-    pub can_remove_my_drive_parent: bool,
+    pub can_remove_my_drive_parent: Option<bool>,
+    /**
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canRename")]
+    pub can_rename: Option<bool>,
+    /**
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canShare")]
+    pub can_share: Option<bool>,
+    /**
+     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canTrash")]
+    pub can_trash: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canRename"
-    )]
-    pub can_rename: bool,
-    /**
-     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canShare"
-    )]
-    pub can_share: bool,
-    /**
-     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canTrash"
-    )]
-    pub can_trash: bool,
-    /**
-     * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canTrashChildren"
     )]
-    pub can_trash_children: bool,
+    pub can_trash_children: Option<bool>,
     /**
      * Capabilities the current user has on this file. Each capability corresponds to a fine-grained action that a user may take.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canUntrash"
     )]
-    pub can_untrash: bool,
+    pub can_untrash: Option<bool>,
 }
 
 /// A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
@@ -1487,12 +1428,8 @@ pub struct ImageMediaMetadata {
     /**
      * Additional metadata about image media, if available.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "flashUsed"
-    )]
-    pub flash_used: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "flashUsed")]
+    pub flash_used: Option<bool>,
     /**
      * Additional metadata about image media, if available.
      */
@@ -1622,19 +1559,19 @@ pub struct LinkShareMetadata {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "securityUpdateEligible"
     )]
-    pub security_update_eligible: bool,
+    pub security_update_eligible: Option<bool>,
     /**
      * Contains details about the link URLs that clients are using to refer to this item.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "securityUpdateEnabled"
     )]
-    pub security_update_enabled: bool,
+    pub security_update_enabled: Option<bool>,
 }
 
 /// Shortcut file details. Only populated for shortcut files, which have the mimeType field set to application/vnd.google-apps.shortcut.
@@ -1746,10 +1683,10 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "copyRequiresWriterPermission"
     )]
-    pub copy_requires_writer_permission: bool,
+    pub copy_requires_writer_permission: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -1784,10 +1721,10 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "explicitlyTrashed"
     )]
-    pub explicitly_trashed: bool,
+    pub explicitly_trashed: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -1833,19 +1770,19 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "hasAugmentedPermissions"
     )]
-    pub has_augmented_permissions: bool,
+    pub has_augmented_permissions: Option<bool>,
     /**
      * The metadata for a file.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "hasThumbnail"
     )]
-    pub has_thumbnail: bool,
+    pub has_thumbnail: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -1889,10 +1826,10 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "isAppAuthorized"
     )]
-    pub is_app_authorized: bool,
+    pub is_app_authorized: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -1945,10 +1882,10 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "modifiedByMe"
     )]
-    pub modified_by_me: bool,
+    pub modified_by_me: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -1991,12 +1928,8 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "ownedByMe"
-    )]
-    pub owned_by_me: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "ownedByMe")]
+    pub owned_by_me: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -2053,11 +1986,8 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub shared: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub shared: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -2103,11 +2033,8 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub starred: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub starred: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -2141,11 +2068,8 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub trashed: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub trashed: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -2188,10 +2112,10 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "viewedByMe"
     )]
-    pub viewed_by_me: bool,
+    pub viewed_by_me: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -2207,10 +2131,10 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "viewersCanCopyContent"
     )]
-    pub viewers_can_copy_content: bool,
+    pub viewers_can_copy_content: Option<bool>,
     /**
      * The metadata for a file.
      */
@@ -2236,10 +2160,10 @@ pub struct File {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "writersCanShare"
     )]
-    pub writers_can_share: bool,
+    pub writers_can_share: Option<bool>,
 }
 
 /// A list of files.
@@ -2255,10 +2179,10 @@ pub struct FileList {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "incompleteSearch"
     )]
-    pub incomplete_search: bool,
+    pub incomplete_search: Option<bool>,
     /**
      * A list of files.
      */
@@ -2313,11 +2237,8 @@ pub struct PermissionDetails {
     /**
      * Whether the user has installed the requesting app.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub inherited: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub inherited: Option<bool>,
     /**
      * A link to this theme's background image.
      */
@@ -2354,11 +2275,8 @@ pub struct TeamDrivePermissionDetails {
     /**
      * Whether the user has installed the requesting app.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub inherited: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub inherited: Option<bool>,
     /**
      * A link to this theme's background image.
      */
@@ -2398,18 +2316,15 @@ pub struct Permission {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "allowFileDiscovery"
     )]
-    pub allow_file_discovery: bool,
+    pub allow_file_discovery: Option<bool>,
     /**
      * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub deleted: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub deleted: Option<bool>,
     /**
      * A permission for a file. A permission grants a user, group, domain or the world access to a file or a folder hierarchy.
      */
@@ -2593,11 +2508,8 @@ pub struct Reply {
     /**
      * A reply to a comment on a file.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub deleted: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub deleted: Option<bool>,
     /**
      * A reply to a comment on a file.
      */
@@ -2694,10 +2606,10 @@ pub struct Revision {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "keepForever"
     )]
-    pub keep_forever: bool,
+    pub keep_forever: Option<bool>,
     /**
      * The metadata for a revision to a file.
      */
@@ -2761,18 +2673,15 @@ pub struct Revision {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "publishAuto"
     )]
-    pub publish_auto: bool,
+    pub publish_auto: Option<bool>,
     /**
      * The metadata for a revision to a file.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub published: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub published: Option<bool>,
     /**
      * The metadata for a revision to a file.
      */
@@ -2788,10 +2697,10 @@ pub struct Revision {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "publishedOutsideDomain"
     )]
-    pub published_outside_domain: bool,
+    pub published_outside_domain: Option<bool>,
     /**
      * The metadata for a revision to a file.
      */
@@ -2906,172 +2815,156 @@ pub struct TeamDriveCapabilities {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canAddChildren"
     )]
-    pub can_add_children: bool,
+    pub can_add_children: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeCopyRequiresWriterPermissionRestriction"
     )]
-    pub can_change_copy_requires_writer_permission_restriction: bool,
+    pub can_change_copy_requires_writer_permission_restriction: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeDomainUsersOnlyRestriction"
     )]
-    pub can_change_domain_users_only_restriction: bool,
+    pub can_change_domain_users_only_restriction: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeTeamDriveBackground"
     )]
-    pub can_change_team_drive_background: bool,
+    pub can_change_team_drive_background: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canChangeTeamMembersOnlyRestriction"
     )]
-    pub can_change_team_members_only_restriction: bool,
+    pub can_change_team_members_only_restriction: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canComment"
     )]
-    pub can_comment: bool,
+    pub can_comment: Option<bool>,
+    /**
+     * Capabilities the current user has on this Team Drive.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canCopy")]
+    pub can_copy: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canCopy"
-    )]
-    pub can_copy: bool,
-    /**
-     * Capabilities the current user has on this Team Drive.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canDeleteChildren"
     )]
-    pub can_delete_children: bool,
+    pub can_delete_children: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canDeleteTeamDrive"
     )]
-    pub can_delete_team_drive: bool,
+    pub can_delete_team_drive: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canDownload"
     )]
-    pub can_download: bool,
+    pub can_download: Option<bool>,
+    /**
+     * Capabilities the current user has on this Team Drive.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canEdit")]
+    pub can_edit: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canEdit"
-    )]
-    pub can_edit: bool,
-    /**
-     * Capabilities the current user has on this Team Drive.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canListChildren"
     )]
-    pub can_list_children: bool,
+    pub can_list_children: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canManageMembers"
     )]
-    pub can_manage_members: bool,
+    pub can_manage_members: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canReadRevisions"
     )]
-    pub can_read_revisions: bool,
+    pub can_read_revisions: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canRemoveChildren"
     )]
-    pub can_remove_children: bool,
+    pub can_remove_children: Option<bool>,
+    /**
+     * Capabilities the current user has on this Team Drive.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canRename")]
+    pub can_rename: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canRename"
-    )]
-    pub can_rename: bool,
-    /**
-     * Capabilities the current user has on this Team Drive.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canRenameTeamDrive"
     )]
-    pub can_rename_team_drive: bool,
+    pub can_rename_team_drive: Option<bool>,
+    /**
+     * Capabilities the current user has on this Team Drive.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "canShare")]
+    pub can_share: Option<bool>,
     /**
      * Capabilities the current user has on this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
-        rename = "canShare"
-    )]
-    pub can_share: bool,
-    /**
-     * Capabilities the current user has on this Team Drive.
-     */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "canTrashChildren"
     )]
-    pub can_trash_children: bool,
+    pub can_trash_children: Option<bool>,
 }
 
 /// A set of restrictions that apply to this Team Drive or items inside this Team Drive.
@@ -3082,37 +2975,37 @@ pub struct TeamDriveRestrictions {
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "adminManagedRestrictions"
     )]
-    pub admin_managed_restrictions: bool,
+    pub admin_managed_restrictions: Option<bool>,
     /**
      * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "copyRequiresWriterPermission"
     )]
-    pub copy_requires_writer_permission: bool,
+    pub copy_requires_writer_permission: Option<bool>,
     /**
      * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "domainUsersOnly"
     )]
-    pub domain_users_only: bool,
+    pub domain_users_only: Option<bool>,
     /**
      * A set of restrictions that apply to this Team Drive or items inside this Team Drive.
      */
     #[serde(
         default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        skip_serializing_if = "Option::is_none",
         rename = "teamMembersOnly"
     )]
-    pub team_members_only: bool,
+    pub team_members_only: Option<bool>,
 }
 
 /// Deprecated: use the drive collection instead.
@@ -3270,11 +3163,8 @@ pub struct User {
     /**
      * Information about a Drive user.
      */
-    #[serde(
-        default,
-        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
-    )]
-    pub me: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub me: Option<bool>,
     /**
      * Information about a Drive user.
      */

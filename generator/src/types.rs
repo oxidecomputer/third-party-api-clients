@@ -146,7 +146,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                     a(r#"skip_serializing_if = "Option::is_none","#);
                                 }
                             } else if rt == "bool" {
-                                if sn.ends_with("Request") {
+                                if sn.ends_with("Request") || proper_name == "Google Drive" {
                                     // We have a request, we want to make sure our bools are
                                     // options so we don't have to always provide them.
                                     a(

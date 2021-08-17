@@ -155,7 +155,6 @@ impl FileOps for crate::files::Files {
     /// Create a folder, if it doesn't exist, returns the ID of the folder.
     async fn create_folder(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<String> {
         let folder_mime_type = "application/vnd.google-apps.folder";
-        let mut uri = "https://www.googleapis.com/upload/drive/v3/files".to_string();
         let mut file: crate::types::File = Default::default();
         // Set the name,
         file.name = name.to_string();
@@ -196,15 +195,13 @@ impl FileOps for crate::files::Files {
             return Ok(f.id);
         }
 
-        uri += "?supportsAllDrives=true&includeItemsFromAllDrives=true";
         // Make the request and return the ID.
         let folder: crate::types::File = self
             .client
-            .request_with_mime(
+            .request(
                 reqwest::Method::POST,
-                &uri,
-                serde_json::to_string(&file).unwrap().as_bytes(),
-                folder_mime_type,
+                "/files",
+                Some(reqwest::Body::from(serde_json::to_vec(&file).unwrap())),
             )
             .await
             .unwrap();

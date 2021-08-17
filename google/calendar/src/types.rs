@@ -660,17 +660,17 @@ pub struct ConferenceParameters {
     pub add_on_parameters: Option<ConferenceParametersAddOn>,
 }
 
+/// Properties that are shared between copies of the event on other attendees' calendars.
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct Shared {}
+
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ConferenceParametersAddOn {
     /**
-     * Additional parameters controlling delivery channel behavior. Optional.
+     * Properties that are shared between copies of the event on other attendees' calendars.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub parameters: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub parameters: Option<Shared>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -930,10 +930,6 @@ pub struct Creator {
     )]
     pub self_: bool,
 }
-
-/// Properties that are shared between copies of the event on other attendees' calendars.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct Shared {}
 
 /// Extended properties of the event.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
