@@ -26,31 +26,31 @@ impl Template {
         if !query_params.is_empty() {
             // Format the query params if they exist.
             a("let mut query_ = String::new();");
-            a("let mut query_args: Vec<String> = Default::default();");
+            a("let mut query_args: Vec<(String, String)> = Default::default();");
 
             for (nam, value) in &query_params {
                 if value == "Option<chrono::DateTime<chrono::Utc>>" {
                     a(&format!(
-                        r#"if let Some(date) = {} {{ query_args.push(format!("{}={{}}", &date.to_rfc3339())); }}"#,
+                        r#"if let Some(date) = {} {{ query_args.push(("{}", &date.to_rfc3339())); }}"#,
                         nam, nam
                     ));
                 } else if value == "i64" || value == "i32" {
                     a(&format!(
-                        r#"if {} > 0 {{ query_args.push(format!("{}={{}}", {})); }}"#,
+                        r#"if {} > 0 {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
                         nam,
                         nam.trim_end_matches('_'),
                         nam
                     ));
                 } else if value == "bool" {
                     a(&format!(
-                        r#"if {} {{ query_args.push(format!("{}={{}}", {})); }}"#,
+                        r#"if {} {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
                         nam,
                         nam.trim_end_matches('_'),
                         nam
                     ));
                 } else if value == "&str" {
                     a(&format!(
-                        r#"if !{}.is_empty() {{ query_args.push(format!("{}={{}}", {})); }}"#,
+                        r#"if !{}.is_empty() {{ query_args.push(("{}", {}.to_string())); }}"#,
                         nam,
                         nam.trim_end_matches('_'),
                         nam
@@ -61,14 +61,14 @@ impl Template {
                     // params.
                     // https://docs.github.com/en/rest/reference/migrations
                     a(&format!(
-                        r#"if !{}.is_empty() {{ query_args.push(format!("{}={{}}", {}.join(" "))); }}"#,
+                        r#"if !{}.is_empty() {{ query_args.push(("{}".to_string(), {}.join(" "))); }}"#,
                         nam,
                         nam.trim_end_matches('_'),
                         nam
                     ));
                 } else {
                     a(&format!(
-                        r#"if !{}.to_string().is_empty() {{  query_args.push(format!("{}={{}}", {}.to_string())); }}"#,
+                        r#"if !{}.to_string().is_empty() {{  query_args.push(("{}".to_string(), {}.to_string())); }}"#,
                         nam,
                         nam.trim_end_matches('_'),
                         nam
@@ -76,12 +76,7 @@ impl Template {
                 }
             }
 
-            a(r#"for (i, n) in query_args.iter().enumerate() {
-                    if i > 0 {
-                        query_.push('&');
-                    }
-                    query_.push_str(n);
-                }"#);
+            a("query_ = serde_urlencoded::to_string(&query_args).unwrap();");
         }
 
         a("let url =");
