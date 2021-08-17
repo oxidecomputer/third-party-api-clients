@@ -54,23 +54,33 @@ impl Users {
         if !domain.is_empty() {
             query_args.push(format!("domain={}", domain));
         }
-        query_args.push(format!("event={}", event));
+        if !event.to_string().is_empty() {
+            query_args.push(format!("event={}", event.to_string()));
+        }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        query_args.push(format!("order_by={}", order_by));
+        if !order_by.to_string().is_empty() {
+            query_args.push(format!("order_by={}", order_by.to_string()));
+        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
-        query_args.push(format!("projection={}", projection));
+        if !projection.to_string().is_empty() {
+            query_args.push(format!("projection={}", projection.to_string()));
+        }
         if !query.is_empty() {
             query_args.push(format!("query={}", query));
         }
         if !show_deleted.is_empty() {
             query_args.push(format!("show_deleted={}", show_deleted));
         }
-        query_args.push(format!("sort_order={}", sort_order));
-        query_args.push(format!("view_type={}", view_type));
+        if !sort_order.to_string().is_empty() {
+            query_args.push(format!("sort_order={}", sort_order.to_string()));
+        }
+        if !view_type.to_string().is_empty() {
+            query_args.push(format!("view_type={}", view_type.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -112,17 +122,27 @@ impl Users {
         if !domain.is_empty() {
             query_args.push(format!("domain={}", domain));
         }
-        query_args.push(format!("event={}", event));
-        query_args.push(format!("order_by={}", order_by));
-        query_args.push(format!("projection={}", projection));
+        if !event.to_string().is_empty() {
+            query_args.push(format!("event={}", event.to_string()));
+        }
+        if !order_by.to_string().is_empty() {
+            query_args.push(format!("order_by={}", order_by.to_string()));
+        }
+        if !projection.to_string().is_empty() {
+            query_args.push(format!("projection={}", projection.to_string()));
+        }
         if !query.is_empty() {
             query_args.push(format!("query={}", query));
         }
         if !show_deleted.is_empty() {
             query_args.push(format!("show_deleted={}", show_deleted));
         }
-        query_args.push(format!("sort_order={}", sort_order));
-        query_args.push(format!("view_type={}", view_type));
+        if !sort_order.to_string().is_empty() {
+            query_args.push(format!("sort_order={}", sort_order.to_string()));
+        }
+        if !view_type.to_string().is_empty() {
+            query_args.push(format!("view_type={}", view_type.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -223,23 +243,33 @@ impl Users {
         if !domain.is_empty() {
             query_args.push(format!("domain={}", domain));
         }
-        query_args.push(format!("event={}", event));
+        if !event.to_string().is_empty() {
+            query_args.push(format!("event={}", event.to_string()));
+        }
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        query_args.push(format!("order_by={}", order_by));
+        if !order_by.to_string().is_empty() {
+            query_args.push(format!("order_by={}", order_by.to_string()));
+        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
-        query_args.push(format!("projection={}", projection));
+        if !projection.to_string().is_empty() {
+            query_args.push(format!("projection={}", projection.to_string()));
+        }
         if !query.is_empty() {
             query_args.push(format!("query={}", query));
         }
         if !show_deleted.is_empty() {
             query_args.push(format!("show_deleted={}", show_deleted));
         }
-        query_args.push(format!("sort_order={}", sort_order));
-        query_args.push(format!("view_type={}", view_type));
+        if !sort_order.to_string().is_empty() {
+            query_args.push(format!("sort_order={}", sort_order.to_string()));
+        }
+        if !view_type.to_string().is_empty() {
+            query_args.push(format!("view_type={}", view_type.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -276,8 +306,12 @@ impl Users {
     ) -> Result<crate::types::User> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("projection={}", projection));
-        query_args.push(format!("view_type={}", view_type));
+        if !projection.to_string().is_empty() {
+            query_args.push(format!("projection={}", projection.to_string()));
+        }
+        if !view_type.to_string().is_empty() {
+            query_args.push(format!("view_type={}", view_type.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -382,7 +416,9 @@ impl Users {
     ) -> Result<crate::types::Aliases> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("event={}", event));
+        if !event.to_string().is_empty() {
+            query_args.push(format!("event={}", event.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -443,7 +479,9 @@ impl Users {
     ) -> Result<crate::types::Channel> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("event={}", event));
+        if !event.to_string().is_empty() {
+            query_args.push(format!("event={}", event.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

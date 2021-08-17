@@ -50,14 +50,18 @@ impl Groups {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        query_args.push(format!("order_by={}", order_by));
+        if !order_by.to_string().is_empty() {
+            query_args.push(format!("order_by={}", order_by.to_string()));
+        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
         if !query.is_empty() {
             query_args.push(format!("query={}", query));
         }
-        query_args.push(format!("sort_order={}", sort_order));
+        if !sort_order.to_string().is_empty() {
+            query_args.push(format!("sort_order={}", sort_order.to_string()));
+        }
         if !user_key.is_empty() {
             query_args.push(format!("user_key={}", user_key));
         }
@@ -99,11 +103,15 @@ impl Groups {
         if !domain.is_empty() {
             query_args.push(format!("domain={}", domain));
         }
-        query_args.push(format!("order_by={}", order_by));
+        if !order_by.to_string().is_empty() {
+            query_args.push(format!("order_by={}", order_by.to_string()));
+        }
         if !query.is_empty() {
             query_args.push(format!("query={}", query));
         }
-        query_args.push(format!("sort_order={}", sort_order));
+        if !sort_order.to_string().is_empty() {
+            query_args.push(format!("sort_order={}", sort_order.to_string()));
+        }
         if !user_key.is_empty() {
             query_args.push(format!("user_key={}", user_key));
         }

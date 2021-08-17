@@ -39,7 +39,9 @@ impl Cards {
         if !card_program_id.is_empty() {
             query_args.push(format!("card_program_id={}", card_program_id));
         }
-        query_args.push(format!("page_size={}", page_size));
+        if !page_size.to_string().is_empty() {
+            query_args.push(format!("page_size={}", page_size.to_string()));
+        }
         if !start.is_empty() {
             query_args.push(format!("start={}", start));
         }

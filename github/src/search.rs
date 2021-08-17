@@ -56,7 +56,9 @@ impl Search {
     ) -> Result<crate::types::SearchCodeResponse> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("order={}", order));
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -66,7 +68,9 @@ impl Search {
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -112,7 +116,9 @@ impl Search {
     ) -> Result<crate::types::SearchCommitsResponse> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("order={}", order));
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -122,7 +128,9 @@ impl Search {
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -172,7 +180,9 @@ impl Search {
     ) -> Result<crate::types::SearchIssuesPullRequestsResponse> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("order={}", order));
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -182,7 +192,9 @@ impl Search {
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -231,7 +243,9 @@ impl Search {
     ) -> Result<crate::types::SearchLabelsResponse> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("order={}", order));
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -244,7 +258,9 @@ impl Search {
         if repository_id > 0 {
             query_args.push(format!("repository_id={}", repository_id));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -295,7 +311,9 @@ impl Search {
     ) -> Result<crate::types::SearchReposResponse> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("order={}", order));
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -305,7 +323,9 @@ impl Search {
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -403,7 +423,9 @@ impl Search {
     ) -> Result<crate::types::SearchUsersResponse> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("order={}", order));
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -413,7 +435,9 @@ impl Search {
         if !q.is_empty() {
             query_args.push(format!("q={}", q));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

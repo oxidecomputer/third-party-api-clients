@@ -172,7 +172,9 @@ impl Packages {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -213,7 +215,9 @@ impl Packages {
     ) -> Result<Vec<crate::types::PackageVersion>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -494,7 +498,9 @@ impl Packages {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -533,7 +539,9 @@ impl Packages {
     ) -> Result<Vec<crate::types::PackageVersion>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

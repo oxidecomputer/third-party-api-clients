@@ -54,7 +54,9 @@ impl ChatMessages {
     ) -> Result<Vec<crate::types::Messages>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("date={}", date));
+        if !date.to_string().is_empty() {
+            query_args.push(format!("date={}", date.to_string()));
+        }
         if !include_deleted_and_edited_message.is_empty() {
             query_args.push(format!(
                 "include_deleted_and_edited_message={}",
@@ -120,7 +122,9 @@ impl ChatMessages {
     ) -> Result<Vec<crate::types::Messages>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("date={}", date));
+        if !date.to_string().is_empty() {
+            query_args.push(format!("date={}", date.to_string()));
+        }
         if !include_deleted_and_edited_message.is_empty() {
             query_args.push(format!(
                 "include_deleted_and_edited_message={}",

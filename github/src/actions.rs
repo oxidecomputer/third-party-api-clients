@@ -2031,7 +2031,9 @@ impl Actions {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("status={}", status));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -2310,7 +2312,9 @@ impl Actions {
     ) -> Result<crate::types::ActionsListJobsWorkflowRunResponse> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("filter={}", filter));
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -3044,7 +3048,9 @@ impl Actions {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("status={}", status));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

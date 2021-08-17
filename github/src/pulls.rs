@@ -52,7 +52,9 @@ impl Pulls {
         if !base.is_empty() {
             query_args.push(format!("base={}", base));
         }
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if !head.is_empty() {
             query_args.push(format!("head={}", head));
         }
@@ -62,8 +64,12 @@ impl Pulls {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -106,12 +112,18 @@ impl Pulls {
         if !base.is_empty() {
             query_args.push(format!("base={}", base));
         }
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if !head.is_empty() {
             query_args.push(format!("head={}", head));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -201,7 +213,9 @@ impl Pulls {
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -211,7 +225,9 @@ impl Pulls {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -249,11 +265,15 @@ impl Pulls {
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -488,7 +508,9 @@ impl Pulls {
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -498,7 +520,9 @@ impl Pulls {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -538,11 +562,15 @@ impl Pulls {
     ) -> Result<Vec<crate::types::PullRequestReviewComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

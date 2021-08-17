@@ -233,7 +233,9 @@ impl Accounts {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -288,7 +290,9 @@ impl Accounts {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -343,7 +347,9 @@ impl Accounts {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -398,7 +404,9 @@ impl Accounts {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -453,7 +461,9 @@ impl Accounts {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -494,7 +504,9 @@ impl Accounts {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

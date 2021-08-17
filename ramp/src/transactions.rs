@@ -69,11 +69,15 @@ impl Transactions {
         if !location_id.is_empty() {
             query_args.push(format!("location_id={}", location_id));
         }
-        query_args.push(format!("max_amount={}", max_amount));
+        if !max_amount.to_string().is_empty() {
+            query_args.push(format!("max_amount={}", max_amount.to_string()));
+        }
         if !merchant_id.is_empty() {
             query_args.push(format!("merchant_id={}", merchant_id));
         }
-        query_args.push(format!("min_amount={}", min_amount));
+        if !min_amount.to_string().is_empty() {
+            query_args.push(format!("min_amount={}", min_amount.to_string()));
+        }
         if order_by_amount_asc {
             query_args.push(format!("order_by_amount_asc={}", order_by_amount_asc));
         }
@@ -86,7 +90,9 @@ impl Transactions {
         if order_by_date_desc {
             query_args.push(format!("order_by_date_desc={}", order_by_date_desc));
         }
-        query_args.push(format!("page_size={}", page_size));
+        if !page_size.to_string().is_empty() {
+            query_args.push(format!("page_size={}", page_size.to_string()));
+        }
         if requires_memo {
             query_args.push(format!("requires_memo={}", requires_memo));
         }
@@ -153,11 +159,15 @@ impl Transactions {
         if !location_id.is_empty() {
             query_args.push(format!("location_id={}", location_id));
         }
-        query_args.push(format!("max_amount={}", max_amount));
+        if !max_amount.to_string().is_empty() {
+            query_args.push(format!("max_amount={}", max_amount.to_string()));
+        }
         if !merchant_id.is_empty() {
             query_args.push(format!("merchant_id={}", merchant_id));
         }
-        query_args.push(format!("min_amount={}", min_amount));
+        if !min_amount.to_string().is_empty() {
+            query_args.push(format!("min_amount={}", min_amount.to_string()));
+        }
         if order_by_amount_asc {
             query_args.push(format!("order_by_amount_asc={}", order_by_amount_asc));
         }

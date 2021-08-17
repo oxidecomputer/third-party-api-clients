@@ -32,7 +32,9 @@ impl Locations {
     ) -> Result<Vec<crate::types::Location>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("page_size={}", page_size));
+        if !page_size.to_string().is_empty() {
+            query_args.push(format!("page_size={}", page_size.to_string()));
+        }
         if !start.is_empty() {
             query_args.push(format!("start={}", start));
         }

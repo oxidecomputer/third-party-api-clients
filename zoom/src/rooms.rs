@@ -52,8 +52,12 @@ impl Rooms {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("status={}", status));
-        query_args.push(format!("type={}", type_));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         if unassigned_rooms {
             query_args.push(format!("unassigned_rooms={}", unassigned_rooms));
         }
@@ -97,8 +101,12 @@ impl Rooms {
         if !location_id.is_empty() {
             query_args.push(format!("location_id={}", location_id));
         }
-        query_args.push(format!("status={}", status));
-        query_args.push(format!("type={}", type_));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         if unassigned_rooms {
             query_args.push(format!("unassigned_rooms={}", unassigned_rooms));
         }

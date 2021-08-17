@@ -556,7 +556,9 @@ impl Webinars {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("status={}", status));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
         if !tracking_source_id.is_empty() {
             query_args.push(format!("tracking_source_id={}", tracking_source_id));
         }

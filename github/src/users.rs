@@ -1199,7 +1199,9 @@ impl Users {
         if !subject_id.is_empty() {
             query_args.push(format!("subject_id={}", subject_id));
         }
-        query_args.push(format!("subject_type={}", subject_type));
+        if !subject_type.to_string().is_empty() {
+            query_args.push(format!("subject_type={}", subject_type.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

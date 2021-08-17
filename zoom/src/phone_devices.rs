@@ -45,7 +45,9 @@ impl PhoneDevices {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("type={}", type_));
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -82,7 +84,9 @@ impl PhoneDevices {
     ) -> Result<Vec<crate::types::ListPhoneDevicesResponse>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("type={}", type_));
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

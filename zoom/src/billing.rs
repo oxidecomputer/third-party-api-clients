@@ -373,8 +373,12 @@ impl Billing {
     ) -> Result<crate::types::AccountBillingInvoicesResponseData> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
-        query_args.push(format!("to={}", to));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

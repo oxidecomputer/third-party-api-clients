@@ -43,7 +43,9 @@ impl Projects {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -77,7 +79,9 @@ impl Projects {
     ) -> Result<Vec<crate::types::Project>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -330,7 +334,9 @@ impl Projects {
     ) -> Result<Vec<crate::types::ProjectCard>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("archived_state={}", archived_state));
+        if !archived_state.to_string().is_empty() {
+            query_args.push(format!("archived_state={}", archived_state.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -370,7 +376,9 @@ impl Projects {
     ) -> Result<Vec<crate::types::ProjectCard>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("archived_state={}", archived_state));
+        if !archived_state.to_string().is_empty() {
+            query_args.push(format!("archived_state={}", archived_state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -551,7 +559,9 @@ impl Projects {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("affiliation={}", affiliation));
+        if !affiliation.to_string().is_empty() {
+            query_args.push(format!("affiliation={}", affiliation.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -591,7 +601,9 @@ impl Projects {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("affiliation={}", affiliation));
+        if !affiliation.to_string().is_empty() {
+            query_args.push(format!("affiliation={}", affiliation.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -824,7 +836,9 @@ impl Projects {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -860,7 +874,9 @@ impl Projects {
     ) -> Result<Vec<crate::types::Project>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -964,7 +980,9 @@ impl Projects {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -998,7 +1016,9 @@ impl Projects {
     ) -> Result<Vec<crate::types::Project>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

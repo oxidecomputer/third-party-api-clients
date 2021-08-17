@@ -266,7 +266,9 @@ impl Payroll {
     ) -> Result<crate::types::PayrollData> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("include={}", include));
+        if !include.to_string().is_empty() {
+            query_args.push(format!("include={}", include.to_string()));
+        }
         if !show_calculation.is_empty() {
             query_args.push(format!("show_calculation={}", show_calculation));
         }

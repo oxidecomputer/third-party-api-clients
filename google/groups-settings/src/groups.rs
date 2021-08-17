@@ -30,7 +30,9 @@ impl Groups {
     ) -> Result<crate::types::Groups> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
+        if !alt.to_string().is_empty() {
+            query_args.push(format!("alt={}", alt.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -65,7 +67,9 @@ impl Groups {
     ) -> Result<crate::types::Groups> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
+        if !alt.to_string().is_empty() {
+            query_args.push(format!("alt={}", alt.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -105,7 +109,9 @@ impl Groups {
     ) -> Result<crate::types::Groups> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("alt={}", alt));
+        if !alt.to_string().is_empty() {
+            query_args.push(format!("alt={}", alt.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

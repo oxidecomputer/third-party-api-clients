@@ -48,7 +48,9 @@ impl Users {
     ) -> Result<Vec<crate::types::UsersResponse>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("include_fields={}", include_fields));
+        if !include_fields.to_string().is_empty() {
+            query_args.push(format!("include_fields={}", include_fields.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
@@ -61,7 +63,9 @@ impl Users {
         if !role_id.is_empty() {
             query_args.push(format!("role_id={}", role_id));
         }
-        query_args.push(format!("status={}", status));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -95,11 +99,15 @@ impl Users {
     ) -> Result<Vec<crate::types::UsersResponse>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("include_fields={}", include_fields));
+        if !include_fields.to_string().is_empty() {
+            query_args.push(format!("include_fields={}", include_fields.to_string()));
+        }
         if !role_id.is_empty() {
             query_args.push(format!("role_id={}", role_id));
         }
-        query_args.push(format!("status={}", status));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -202,7 +210,9 @@ impl Users {
         if encrypted_email {
             query_args.push(format!("encrypted_email={}", encrypted_email));
         }
-        query_args.push(format!("login_type={}", login_type));
+        if !login_type.to_string().is_empty() {
+            query_args.push(format!("login_type={}", login_type.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -251,7 +261,9 @@ impl Users {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("action={}", action));
+        if !action.to_string().is_empty() {
+            query_args.push(format!("action={}", action.to_string()));
+        }
         if !transfer_email.is_empty() {
             query_args.push(format!("transfer_email={}", transfer_email));
         }
@@ -307,7 +319,9 @@ impl Users {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("login_type={}", login_type));
+        if !login_type.to_string().is_empty() {
+            query_args.push(format!("login_type={}", login_type.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -619,8 +633,12 @@ impl Users {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("login_type={}", login_type));
-        query_args.push(format!("option={}", option));
+        if !login_type.to_string().is_empty() {
+            query_args.push(format!("login_type={}", login_type.to_string()));
+        }
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -680,8 +698,12 @@ impl Users {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("login_type={}", login_type));
-        query_args.push(format!("option={}", option));
+        if !login_type.to_string().is_empty() {
+            query_args.push(format!("login_type={}", login_type.to_string()));
+        }
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -741,8 +763,12 @@ impl Users {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("login_type={}", login_type));
-        query_args.push(format!("option={}", option));
+        if !login_type.to_string().is_empty() {
+            query_args.push(format!("login_type={}", login_type.to_string()));
+        }
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -802,8 +828,12 @@ impl Users {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("login_type={}", login_type));
-        query_args.push(format!("option={}", option));
+        if !login_type.to_string().is_empty() {
+            query_args.push(format!("login_type={}", login_type.to_string()));
+        }
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -841,7 +871,9 @@ impl Users {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -983,7 +1015,9 @@ impl Users {
         if ttl > 0 {
             query_args.push(format!("ttl={}", ttl));
         }
-        query_args.push(format!("type={}", type_));
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

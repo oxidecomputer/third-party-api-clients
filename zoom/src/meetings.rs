@@ -50,7 +50,9 @@ impl Meetings {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("type={}", type_));
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -346,7 +348,9 @@ impl Meetings {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("status={}", status));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

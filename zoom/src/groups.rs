@@ -395,7 +395,9 @@ impl Groups {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -441,7 +443,9 @@ impl Groups {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -487,7 +491,9 @@ impl Groups {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -533,7 +539,9 @@ impl Groups {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -577,7 +585,9 @@ impl Groups {
         if !custom_query_fields.is_empty() {
             query_args.push(format!("custom_query_fields={}", custom_query_fields));
         }
-        query_args.push(format!("option={}", option));
+        if !option.to_string().is_empty() {
+            query_args.push(format!("option={}", option.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

@@ -62,7 +62,9 @@ impl CodeScanning {
         if !ref_.is_empty() {
             query_args.push(format!("ref={}", ref_));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         if !tool_guid.is_empty() {
             query_args.push(format!("tool_guid={}", tool_guid));
         }
@@ -118,7 +120,9 @@ impl CodeScanning {
         if !ref_.is_empty() {
             query_args.push(format!("ref={}", ref_));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         if !tool_guid.is_empty() {
             query_args.push(format!("tool_guid={}", tool_guid));
         }

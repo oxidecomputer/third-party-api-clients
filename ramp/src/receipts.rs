@@ -48,7 +48,9 @@ impl Receipts {
         if let Some(date) = from_date {
             query_args.push(format!("from_date={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("page_size={}", page_size));
+        if !page_size.to_string().is_empty() {
+            query_args.push(format!("page_size={}", page_size.to_string()));
+        }
         if !start.is_empty() {
             query_args.push(format!("start={}", start));
         }

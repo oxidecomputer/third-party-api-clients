@@ -43,7 +43,9 @@ impl CalendarList {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        query_args.push(format!("min_access_role={}", min_access_role));
+        if !min_access_role.to_string().is_empty() {
+            query_args.push(format!("min_access_role={}", min_access_role.to_string()));
+        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
@@ -82,7 +84,9 @@ impl CalendarList {
     ) -> Result<Vec<crate::types::CalendarListEntry>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("min_access_role={}", min_access_role));
+        if !min_access_role.to_string().is_empty() {
+            query_args.push(format!("min_access_role={}", min_access_role.to_string()));
+        }
         if show_deleted {
             query_args.push(format!("show_deleted={}", show_deleted));
         }
@@ -198,7 +202,9 @@ impl CalendarList {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        query_args.push(format!("min_access_role={}", min_access_role));
+        if !min_access_role.to_string().is_empty() {
+            query_args.push(format!("min_access_role={}", min_access_role.to_string()));
+        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }

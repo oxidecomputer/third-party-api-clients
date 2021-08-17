@@ -43,15 +43,21 @@ impl Repos {
     ) -> Result<Vec<crate::types::MinimalRepository>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("type={}", type_));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -87,9 +93,15 @@ impl Repos {
     ) -> Result<Vec<crate::types::MinimalRepository>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("type={}", type_));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1965,7 +1977,9 @@ impl Repos {
     ) -> Result<Vec<crate::types::Collaborator>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("affiliation={}", affiliation));
+        if !affiliation.to_string().is_empty() {
+            query_args.push(format!("affiliation={}", affiliation.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -2009,7 +2023,9 @@ impl Repos {
     ) -> Result<Vec<crate::types::Collaborator>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("affiliation={}", affiliation));
+        if !affiliation.to_string().is_empty() {
+            query_args.push(format!("affiliation={}", affiliation.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -4299,7 +4315,9 @@ impl Repos {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -4335,7 +4353,9 @@ impl Repos {
     ) -> Result<Vec<crate::types::MinimalRepository>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -6707,7 +6727,9 @@ impl Repos {
     ) -> Result<crate::types::CloneTraffic> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("per={}", per));
+        if !per.to_string().is_empty() {
+            query_args.push(format!("per={}", per.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -6853,7 +6875,9 @@ impl Repos {
     ) -> Result<crate::types::ViewTraffic> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("per={}", per));
+        if !per.to_string().is_empty() {
+            query_args.push(format!("per={}", per.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -7170,7 +7194,9 @@ impl Repos {
         if let Some(date) = before {
             query_args.push(format!("before={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -7180,9 +7206,15 @@ impl Repos {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("type={}", type_));
-        query_args.push(format!("visibility={}", visibility));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
+        if !visibility.to_string().is_empty() {
+            query_args.push(format!("visibility={}", visibility.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -7225,13 +7257,21 @@ impl Repos {
         if let Some(date) = before {
             query_args.push(format!("before={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("type={}", type_));
-        query_args.push(format!("visibility={}", visibility));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
+        if !visibility.to_string().is_empty() {
+            query_args.push(format!("visibility={}", visibility.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -7403,15 +7443,21 @@ impl Repos {
     ) -> Result<Vec<crate::types::MinimalRepository>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("type={}", type_));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -7447,9 +7493,15 @@ impl Repos {
     ) -> Result<Vec<crate::types::MinimalRepository>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("type={}", type_));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

@@ -99,7 +99,9 @@ impl Users {
         if !location_id.is_empty() {
             query_args.push(format!("location_id={}", location_id));
         }
-        query_args.push(format!("page_size={}", page_size));
+        if !page_size.to_string().is_empty() {
+            query_args.push(format!("page_size={}", page_size.to_string()));
+        }
         if !start.is_empty() {
             query_args.push(format!("start={}", start));
         }

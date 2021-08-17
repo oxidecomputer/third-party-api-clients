@@ -52,7 +52,9 @@ impl SecretScanning {
         if !secret_type.is_empty() {
             query_args.push(format!("secret_type={}", secret_type));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -94,7 +96,9 @@ impl SecretScanning {
         if !secret_type.is_empty() {
             query_args.push(format!("secret_type={}", secret_type));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

@@ -43,15 +43,21 @@ impl BookingData {
     ) -> Result<Vec<crate::types::BookingReport>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("booking_status={}", booking_status));
-        query_args.push(format!("booking_type={}", booking_type));
+        if !booking_status.to_string().is_empty() {
+            query_args.push(format!("booking_status={}", booking_status.to_string()));
+        }
+        if !booking_type.to_string().is_empty() {
+            query_args.push(format!("booking_type={}", booking_type.to_string()));
+        }
         if !created_from.is_empty() {
             query_args.push(format!("created_from={}", created_from));
         }
         if !created_to.is_empty() {
             query_args.push(format!("created_to={}", created_to));
         }
-        query_args.push(format!("page={}", page));
+        if !page.to_string().is_empty() {
+            query_args.push(format!("page={}", page.to_string()));
+        }
         if size > 0 {
             query_args.push(format!("size={}", size));
         }
@@ -95,8 +101,12 @@ impl BookingData {
     ) -> Result<Vec<crate::types::BookingReport>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("booking_status={}", booking_status));
-        query_args.push(format!("booking_type={}", booking_type));
+        if !booking_status.to_string().is_empty() {
+            query_args.push(format!("booking_status={}", booking_status.to_string()));
+        }
+        if !booking_type.to_string().is_empty() {
+            query_args.push(format!("booking_type={}", booking_type.to_string()));
+        }
         if !created_from.is_empty() {
             query_args.push(format!("created_from={}", created_from));
         }

@@ -42,14 +42,18 @@ impl ImChat {
     ) -> Result<crate::types::ImChatSessionsResponseAllOf> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("to={}", to));
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -97,14 +101,18 @@ impl ImChat {
     ) -> Result<crate::types::ImChatMessagesResponseAllOf> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("to={}", to));
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

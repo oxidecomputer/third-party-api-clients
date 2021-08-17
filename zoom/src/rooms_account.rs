@@ -81,7 +81,9 @@ impl RoomsAccount {
     ) -> Result<crate::types::Domains> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("setting_type={}", setting_type));
+        if !setting_type.to_string().is_empty() {
+            query_args.push(format!("setting_type={}", setting_type.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

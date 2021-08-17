@@ -53,7 +53,9 @@ impl Archiving {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("query_date_type={}", query_date_type));
+        if !query_date_type.to_string().is_empty() {
+            query_args.push(format!("query_date_type={}", query_date_type.to_string()));
+        }
         if !to.is_empty() {
             query_args.push(format!("to={}", to));
         }
@@ -99,7 +101,9 @@ impl Archiving {
         if !from.is_empty() {
             query_args.push(format!("from={}", from));
         }
-        query_args.push(format!("query_date_type={}", query_date_type));
+        if !query_date_type.to_string().is_empty() {
+            query_args.push(format!("query_date_type={}", query_date_type.to_string()));
+        }
         if !to.is_empty() {
             query_args.push(format!("to={}", to));
         }

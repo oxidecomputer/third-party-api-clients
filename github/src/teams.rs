@@ -280,7 +280,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -328,7 +330,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if !pinned.is_empty() {
             query_args.push(format!("pinned={}", pinned));
         }
@@ -524,7 +528,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -570,7 +576,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -857,7 +865,9 @@ impl Teams {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("role={}", role));
+        if !role.to_string().is_empty() {
+            query_args.push(format!("role={}", role.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -895,7 +905,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("role={}", role));
+        if !role.to_string().is_empty() {
+            query_args.push(format!("role={}", role.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1671,7 +1683,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -1713,7 +1727,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::TeamDiscussion>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1891,7 +1907,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -1935,7 +1953,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::TeamDiscussionComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -2202,7 +2222,9 @@ impl Teams {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("role={}", role));
+        if !role.to_string().is_empty() {
+            query_args.push(format!("role={}", role.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -2238,7 +2260,9 @@ impl Teams {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("role={}", role));
+        if !role.to_string().is_empty() {
+            query_args.push(format!("role={}", role.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

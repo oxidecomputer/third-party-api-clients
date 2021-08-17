@@ -68,7 +68,8 @@ impl Template {
                     ));
                 } else {
                     a(&format!(
-                        r#"query_args.push(format!("{}={{}}", {}));"#,
+                        r#"if !{}.to_string().is_empty() {{  query_args.push(format!("{}={{}}", {}.to_string())); }}"#,
+                        nam,
                         nam.trim_end_matches('_'),
                         nam
                     ));

@@ -89,11 +89,15 @@ impl Phone {
     ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("extension_type={}", extension_type));
+        if !extension_type.to_string().is_empty() {
+            query_args.push(format!("extension_type={}", extension_type.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
-        query_args.push(format!("number_type={}", number_type));
+        if !number_type.to_string().is_empty() {
+            query_args.push(format!("number_type={}", number_type.to_string()));
+        }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
@@ -103,7 +107,9 @@ impl Phone {
         if !site_id.is_empty() {
             query_args.push(format!("site_id={}", site_id));
         }
-        query_args.push(format!("type={}", type_));
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -144,15 +150,21 @@ impl Phone {
     ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("extension_type={}", extension_type));
-        query_args.push(format!("number_type={}", number_type));
+        if !extension_type.to_string().is_empty() {
+            query_args.push(format!("extension_type={}", extension_type.to_string()));
+        }
+        if !number_type.to_string().is_empty() {
+            query_args.push(format!("number_type={}", number_type.to_string()));
+        }
         if pending_numbers {
             query_args.push(format!("pending_numbers={}", pending_numbers));
         }
         if !site_id.is_empty() {
             query_args.push(format!("site_id={}", site_id));
         }
-        query_args.push(format!("type={}", type_));
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -920,7 +932,9 @@ impl Phone {
     ) -> Result<Vec<crate::types::CallLogs>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
@@ -930,9 +944,15 @@ impl Phone {
         if !phone_number.is_empty() {
             query_args.push(format!("phone_number={}", phone_number));
         }
-        query_args.push(format!("time_type={}", time_type));
-        query_args.push(format!("to={}", to));
-        query_args.push(format!("type={}", type_));
+        if !time_type.to_string().is_empty() {
+            query_args.push(format!("time_type={}", time_type.to_string()));
+        }
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -978,13 +998,21 @@ impl Phone {
     ) -> Result<Vec<crate::types::CallLogs>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !phone_number.is_empty() {
             query_args.push(format!("phone_number={}", phone_number));
         }
-        query_args.push(format!("time_type={}", time_type));
-        query_args.push(format!("to={}", to));
-        query_args.push(format!("type={}", type_));
+        if !time_type.to_string().is_empty() {
+            query_args.push(format!("time_type={}", time_type.to_string()));
+        }
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1064,14 +1092,18 @@ impl Phone {
     ) -> Result<Vec<crate::types::Recordings>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("to={}", to));
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1114,8 +1146,12 @@ impl Phone {
     ) -> Result<Vec<crate::types::Recordings>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
-        query_args.push(format!("to={}", to));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1197,15 +1233,21 @@ impl Phone {
     ) -> Result<Vec<crate::types::VoiceMails>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("status={}", status));
-        query_args.push(format!("to={}", to));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1249,9 +1291,15 @@ impl Phone {
     ) -> Result<Vec<crate::types::VoiceMails>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
-        query_args.push(format!("status={}", status));
-        query_args.push(format!("to={}", to));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1486,7 +1534,9 @@ impl Phone {
         if !site_id.is_empty() {
             query_args.push(format!("site_id={}", site_id));
         }
-        query_args.push(format!("time_type={}", time_type));
+        if !time_type.to_string().is_empty() {
+            query_args.push(format!("time_type={}", time_type.to_string()));
+        }
         if !to.is_empty() {
             query_args.push(format!("to={}", to));
         }
@@ -1544,7 +1594,9 @@ impl Phone {
         if !site_id.is_empty() {
             query_args.push(format!("site_id={}", site_id));
         }
-        query_args.push(format!("time_type={}", time_type));
+        if !time_type.to_string().is_empty() {
+            query_args.push(format!("time_type={}", time_type.to_string()));
+        }
         if !to.is_empty() {
             query_args.push(format!("to={}", to));
         }
@@ -1771,7 +1823,9 @@ impl Phone {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("query_date_type={}", query_date_type));
+        if !query_date_type.to_string().is_empty() {
+            query_args.push(format!("query_date_type={}", query_date_type.to_string()));
+        }
         if !recording_type.is_empty() {
             query_args.push(format!("recording_type={}", recording_type));
         }
@@ -1829,7 +1883,9 @@ impl Phone {
         if !owner_type.is_empty() {
             query_args.push(format!("owner_type={}", owner_type));
         }
-        query_args.push(format!("query_date_type={}", query_date_type));
+        if !query_date_type.to_string().is_empty() {
+            query_args.push(format!("query_date_type={}", query_date_type.to_string()));
+        }
         if !recording_type.is_empty() {
             query_args.push(format!("recording_type={}", recording_type));
         }

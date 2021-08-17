@@ -188,8 +188,12 @@ impl Orgs {
         if !before.is_empty() {
             query_args.push(format!("before={}", before));
         }
-        query_args.push(format!("include={}", include));
-        query_args.push(format!("order={}", order));
+        if !include.to_string().is_empty() {
+            query_args.push(format!("include={}", include.to_string()));
+        }
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -244,8 +248,12 @@ impl Orgs {
         if !before.is_empty() {
             query_args.push(format!("before={}", before));
         }
-        query_args.push(format!("include={}", include));
-        query_args.push(format!("order={}", order));
+        if !include.to_string().is_empty() {
+            query_args.push(format!("include={}", include.to_string()));
+        }
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if !phrase.is_empty() {
             query_args.push(format!("phrase={}", phrase));
         }
@@ -1211,14 +1219,18 @@ impl Orgs {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("filter={}", filter));
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("role={}", role));
+        if !role.to_string().is_empty() {
+            query_args.push(format!("role={}", role.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1253,8 +1265,12 @@ impl Orgs {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("filter={}", filter));
-        query_args.push(format!("role={}", role));
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
+        if !role.to_string().is_empty() {
+            query_args.push(format!("role={}", role.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1441,7 +1457,9 @@ impl Orgs {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("filter={}", filter));
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -1481,7 +1499,9 @@ impl Orgs {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("filter={}", filter));
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1727,7 +1747,9 @@ impl Orgs {
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1756,7 +1778,9 @@ impl Orgs {
     ) -> Result<Vec<crate::types::OrgMembership>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("state={}", state));
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

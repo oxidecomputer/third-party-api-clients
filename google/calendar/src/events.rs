@@ -81,7 +81,9 @@ impl Events {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        query_args.push(format!("order_by={}", order_by));
+        if !order_by.to_string().is_empty() {
+            query_args.push(format!("order_by={}", order_by.to_string()));
+        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
@@ -174,7 +176,9 @@ impl Events {
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
         }
-        query_args.push(format!("order_by={}", order_by));
+        if !order_by.to_string().is_empty() {
+            query_args.push(format!("order_by={}", order_by.to_string()));
+        }
         if !private_extended_property.is_empty() {
             query_args.push(format!(
                 "private_extended_property={}",
@@ -288,17 +292,21 @@ impl Events {
     ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!(
-            "conference_data_version={}",
-            conference_data_version
-        ));
+        if !conference_data_version.to_string().is_empty() {
+            query_args.push(format!(
+                "conference_data_version={}",
+                conference_data_version.to_string()
+            ));
+        }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
         }
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
         }
-        query_args.push(format!("send_updates={}", send_updates));
+        if !send_updates.to_string().is_empty() {
+            query_args.push(format!("send_updates={}", send_updates.to_string()));
+        }
         if supports_attachments {
             query_args.push(format!("supports_attachments={}", supports_attachments));
         }
@@ -342,10 +350,12 @@ impl Events {
     ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!(
-            "conference_data_version={}",
-            conference_data_version
-        ));
+        if !conference_data_version.to_string().is_empty() {
+            query_args.push(format!(
+                "conference_data_version={}",
+                conference_data_version.to_string()
+            ));
+        }
         if supports_attachments {
             query_args.push(format!("supports_attachments={}", supports_attachments));
         }
@@ -395,7 +405,9 @@ impl Events {
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
         }
-        query_args.push(format!("send_updates={}", send_updates));
+        if !send_updates.to_string().is_empty() {
+            query_args.push(format!("send_updates={}", send_updates.to_string()));
+        }
         if !text.is_empty() {
             query_args.push(format!("text={}", text));
         }
@@ -484,7 +496,9 @@ impl Events {
         if max_results > 0 {
             query_args.push(format!("max_results={}", max_results));
         }
-        query_args.push(format!("order_by={}", order_by));
+        if !order_by.to_string().is_empty() {
+            query_args.push(format!("order_by={}", order_by.to_string()));
+        }
         if !page_token.is_empty() {
             query_args.push(format!("page_token={}", page_token));
         }
@@ -622,17 +636,21 @@ impl Events {
     ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!(
-            "conference_data_version={}",
-            conference_data_version
-        ));
+        if !conference_data_version.to_string().is_empty() {
+            query_args.push(format!(
+                "conference_data_version={}",
+                conference_data_version.to_string()
+            ));
+        }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
         }
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
         }
-        query_args.push(format!("send_updates={}", send_updates));
+        if !send_updates.to_string().is_empty() {
+            query_args.push(format!("send_updates={}", send_updates.to_string()));
+        }
         if supports_attachments {
             query_args.push(format!("supports_attachments={}", supports_attachments));
         }
@@ -683,7 +701,9 @@ impl Events {
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
         }
-        query_args.push(format!("send_updates={}", send_updates));
+        if !send_updates.to_string().is_empty() {
+            query_args.push(format!("send_updates={}", send_updates.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -731,17 +751,21 @@ impl Events {
     ) -> Result<crate::types::Event> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!(
-            "conference_data_version={}",
-            conference_data_version
-        ));
+        if !conference_data_version.to_string().is_empty() {
+            query_args.push(format!(
+                "conference_data_version={}",
+                conference_data_version.to_string()
+            ));
+        }
         if max_attendees > 0 {
             query_args.push(format!("max_attendees={}", max_attendees));
         }
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
         }
-        query_args.push(format!("send_updates={}", send_updates));
+        if !send_updates.to_string().is_empty() {
+            query_args.push(format!("send_updates={}", send_updates.to_string()));
+        }
         if supports_attachments {
             query_args.push(format!("supports_attachments={}", supports_attachments));
         }
@@ -959,7 +983,9 @@ impl Events {
         if send_notifications {
             query_args.push(format!("send_notifications={}", send_notifications));
         }
-        query_args.push(format!("send_updates={}", send_updates));
+        if !send_updates.to_string().is_empty() {
+            query_args.push(format!("send_updates={}", send_updates.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

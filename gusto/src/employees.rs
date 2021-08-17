@@ -100,8 +100,12 @@ impl Employees {
         if !include.is_empty() {
             query_args.push(format!("include={}", include.join(" ")));
         }
-        query_args.push(format!("page={}", page));
-        query_args.push(format!("per={}", per));
+        if !page.to_string().is_empty() {
+            query_args.push(format!("page={}", page.to_string()));
+        }
+        if !per.to_string().is_empty() {
+            query_args.push(format!("per={}", per.to_string()));
+        }
         if terminated {
             query_args.push(format!("terminated={}", terminated));
         }

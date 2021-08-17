@@ -34,7 +34,9 @@ impl Orgunits {
         if !org_unit_path.is_empty() {
             query_args.push(format!("org_unit_path={}", org_unit_path));
         }
-        query_args.push(format!("type={}", type_));
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

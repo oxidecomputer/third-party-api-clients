@@ -57,7 +57,9 @@ impl CloudRecording {
     ) -> Result<crate::types::Domains> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !mc.is_empty() {
             query_args.push(format!("mc={}", mc));
         }
@@ -67,7 +69,9 @@ impl CloudRecording {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("to={}", to));
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         if trash {
             query_args.push(format!("trash={}", trash));
         }
@@ -121,7 +125,9 @@ impl CloudRecording {
         if !include_fields.is_empty() {
             query_args.push(format!("include_fields={}", include_fields));
         }
-        query_args.push(format!("ttl={}", ttl));
+        if !ttl.to_string().is_empty() {
+            query_args.push(format!("ttl={}", ttl.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -166,7 +172,9 @@ impl CloudRecording {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("action={}", action));
+        if !action.to_string().is_empty() {
+            query_args.push(format!("action={}", action.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -209,7 +217,9 @@ impl CloudRecording {
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("action={}", action));
+        if !action.to_string().is_empty() {
+            query_args.push(format!("action={}", action.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -415,7 +425,9 @@ impl CloudRecording {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("status={}", status));
+        if !status.to_string().is_empty() {
+            query_args.push(format!("status={}", status.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

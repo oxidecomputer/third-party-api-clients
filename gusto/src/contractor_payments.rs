@@ -83,14 +83,24 @@ impl ContractorPayments {
     ) -> Result<crate::types::ContractorPayment> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("bonus={}", bonus));
-        query_args.push(format!("contractor_id={}", contractor_id));
+        if !bonus.to_string().is_empty() {
+            query_args.push(format!("bonus={}", bonus.to_string()));
+        }
+        if !contractor_id.to_string().is_empty() {
+            query_args.push(format!("contractor_id={}", contractor_id.to_string()));
+        }
         if !date.is_empty() {
             query_args.push(format!("date={}", date));
         }
-        query_args.push(format!("hours={}", hours));
-        query_args.push(format!("reimbursement={}", reimbursement));
-        query_args.push(format!("wage={}", wage));
+        if !hours.to_string().is_empty() {
+            query_args.push(format!("hours={}", hours.to_string()));
+        }
+        if !reimbursement.to_string().is_empty() {
+            query_args.push(format!("reimbursement={}", reimbursement.to_string()));
+        }
+        if !wage.to_string().is_empty() {
+            query_args.push(format!("wage={}", wage.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

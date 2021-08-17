@@ -71,8 +71,12 @@ impl Issues {
         if collab {
             query_args.push(format!("collab={}", collab));
         }
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("filter={}", filter));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
@@ -94,8 +98,12 @@ impl Issues {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -144,8 +152,12 @@ impl Issues {
         if collab {
             query_args.push(format!("collab={}", collab));
         }
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("filter={}", filter));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
@@ -161,8 +173,12 @@ impl Issues {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -221,8 +237,12 @@ impl Issues {
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("filter={}", filter));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
@@ -235,8 +255,12 @@ impl Issues {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -280,16 +304,24 @@ impl Issues {
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("filter={}", filter));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -468,7 +500,9 @@ impl Issues {
         if !creator.is_empty() {
             query_args.push(format!("creator={}", creator));
         }
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
@@ -487,8 +521,12 @@ impl Issues {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -543,7 +581,9 @@ impl Issues {
         if !creator.is_empty() {
             query_args.push(format!("creator={}", creator));
         }
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
@@ -556,8 +596,12 @@ impl Issues {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -643,7 +687,9 @@ impl Issues {
     ) -> Result<Vec<crate::types::IssueComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -653,7 +699,9 @@ impl Issues {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -691,11 +739,15 @@ impl Issues {
     ) -> Result<Vec<crate::types::IssueComment>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1861,15 +1913,21 @@ impl Issues {
     ) -> Result<Vec<crate::types::Milestone>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
         if per_page > 0 {
             query_args.push(format!("per_page={}", per_page));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -1907,9 +1965,15 @@ impl Issues {
     ) -> Result<Vec<crate::types::Milestone>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -2181,8 +2245,12 @@ impl Issues {
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("filter={}", filter));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
@@ -2195,8 +2263,12 @@ impl Issues {
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -2235,16 +2307,24 @@ impl Issues {
     ) -> Result<Vec<crate::types::Issue>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("direction={}", direction));
-        query_args.push(format!("filter={}", filter));
+        if !direction.to_string().is_empty() {
+            query_args.push(format!("direction={}", direction.to_string()));
+        }
+        if !filter.to_string().is_empty() {
+            query_args.push(format!("filter={}", filter.to_string()));
+        }
         if !labels.is_empty() {
             query_args.push(format!("labels={}", labels));
         }
         if let Some(date) = since {
             query_args.push(format!("since={}", &date.to_rfc3339()));
         }
-        query_args.push(format!("sort={}", sort));
-        query_args.push(format!("state={}", state));
+        if !sort.to_string().is_empty() {
+            query_args.push(format!("sort={}", sort.to_string()));
+        }
+        if !state.to_string().is_empty() {
+            query_args.push(format!("state={}", state.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');

@@ -1025,8 +1025,12 @@ impl EnterpriseAdmin {
         if !before.is_empty() {
             query_args.push(format!("before={}", before));
         }
-        query_args.push(format!("include={}", include));
-        query_args.push(format!("order={}", order));
+        if !include.to_string().is_empty() {
+            query_args.push(format!("include={}", include.to_string()));
+        }
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if page > 0 {
             query_args.push(format!("page={}", page));
         }
@@ -1079,8 +1083,12 @@ impl EnterpriseAdmin {
         if !before.is_empty() {
             query_args.push(format!("before={}", before));
         }
-        query_args.push(format!("include={}", include));
-        query_args.push(format!("order={}", order));
+        if !include.to_string().is_empty() {
+            query_args.push(format!("include={}", include.to_string()));
+        }
+        if !order.to_string().is_empty() {
+            query_args.push(format!("order={}", order.to_string()));
+        }
         if !phrase.is_empty() {
             query_args.push(format!("phrase={}", phrase));
         }

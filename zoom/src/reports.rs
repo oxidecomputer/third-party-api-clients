@@ -86,7 +86,9 @@ impl Reports {
     ) -> Result<crate::types::Domains> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
@@ -96,8 +98,12 @@ impl Reports {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("to={}", to));
-        query_args.push(format!("type={}", type_));
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -143,15 +149,21 @@ impl Reports {
     ) -> Result<crate::types::ReportMeetingsResponseAllOf> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("to={}", to));
-        query_args.push(format!("type={}", type_));
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(format!("type={}", type_.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -230,7 +242,9 @@ impl Reports {
     ) -> Result<crate::types::ReportMeetingParticipantsResponseAllOf> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("include_fields={}", include_fields));
+        if !include_fields.to_string().is_empty() {
+            query_args.push(format!("include_fields={}", include_fields.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
@@ -343,7 +357,9 @@ impl Reports {
     ) -> Result<crate::types::ReportWebinarParticipantsResponseAllOf> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("include_fields={}", include_fields));
+        if !include_fields.to_string().is_empty() {
+            query_args.push(format!("include_fields={}", include_fields.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
@@ -465,7 +481,9 @@ impl Reports {
     ) -> Result<crate::types::Domains> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
@@ -475,8 +493,12 @@ impl Reports {
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("query_date_type={}", query_date_type));
-        query_args.push(format!("to={}", to));
+        if !query_date_type.to_string().is_empty() {
+            query_args.push(format!("query_date_type={}", query_date_type.to_string()));
+        }
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         if !type_.is_empty() {
             query_args.push(format!("type={}", type_));
         }
@@ -515,8 +537,12 @@ impl Reports {
     ) -> Result<crate::types::ReportCloudRecordingResponseAllOf> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
-        query_args.push(format!("to={}", to));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -561,15 +587,21 @@ impl Reports {
     ) -> Result<crate::types::ReportOperationLogsResponseAllOf> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("category_type={}", category_type));
-        query_args.push(format!("from={}", from));
+        if !category_type.to_string().is_empty() {
+            query_args.push(format!("category_type={}", category_type.to_string()));
+        }
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("to={}", to));
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -609,14 +641,18 @@ impl Reports {
     ) -> Result<Vec<crate::types::ActivityLogs>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
         if !next_page_token.is_empty() {
             query_args.push(format!("next_page_token={}", next_page_token));
         }
         if page_size > 0 {
             query_args.push(format!("page_size={}", page_size));
         }
-        query_args.push(format!("to={}", to));
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
@@ -653,8 +689,12 @@ impl Reports {
     ) -> Result<Vec<crate::types::ActivityLogs>> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        query_args.push(format!("from={}", from));
-        query_args.push(format!("to={}", to));
+        if !from.to_string().is_empty() {
+            query_args.push(format!("from={}", from.to_string()));
+        }
+        if !to.to_string().is_empty() {
+            query_args.push(format!("to={}", to.to_string()));
+        }
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
