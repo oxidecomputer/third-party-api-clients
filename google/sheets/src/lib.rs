@@ -109,6 +109,7 @@
 pub mod spreadsheets;
 #[cfg(test)]
 mod tests;
+pub mod traits;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;
