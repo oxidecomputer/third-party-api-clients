@@ -196,7 +196,7 @@ impl FileOps for crate::files::Files {
             return Ok(f.id);
         }
 
-        uri += "?uploadType=resumable&supportsAllDrives=true&includeItemsFromAllDrives=true";
+        uri += "?supportsAllDrives=true&includeItemsFromAllDrives=true";
         // Make the request and return the ID.
         let folder: crate::types::File = self
             .client
