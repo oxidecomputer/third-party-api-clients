@@ -27,7 +27,7 @@ impl Mobiledevices {
      * * `query: &str` -- Search string in the format given at https://developers.google.com/admin-sdk/directory/v1/search-operators.
      * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
      */
-    pub async fn directory_list(
+    pub async fn list(
         &self,
         customer_id: &str,
         max_results: i64,
@@ -72,11 +72,11 @@ impl Mobiledevices {
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile` endpoint.
      *
-     * As opposed to `directory_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Retrieves a paginated list of all mobile devices for an account.
      */
-    pub async fn directory_list_all(
+    pub async fn list_all(
         &self,
         customer_id: &str,
         order_by: crate::types::DirectoryMobiledevicesListOrderBy,
@@ -149,7 +149,7 @@ impl Mobiledevices {
      * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
      * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
      */
-    pub async fn directory_get(
+    pub async fn get(
         &self,
         customer_id: &str,
         resource_id: &str,
@@ -180,7 +180,7 @@ impl Mobiledevices {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
      */
-    pub async fn directory_delete(&self, customer_id: &str, resource_id: &str) -> Result<()> {
+    pub async fn delete(&self, customer_id: &str, resource_id: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/mobile/{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
@@ -200,7 +200,7 @@ impl Mobiledevices {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
      */
-    pub async fn directory_action(
+    pub async fn action(
         &self,
         customer_id: &str,
         resource_id: &str,

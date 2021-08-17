@@ -23,7 +23,7 @@ impl Orgunits {
      * * `org_unit_path: &str` -- The full path to the organizational unit or its unique ID. Returns the children of the specified organizational unit.
      * * `type_: crate::types::DirectoryOrgunitsListType` -- Whether to return all sub-organizations or just immediate children.
      */
-    pub async fn directory_list(
+    pub async fn list(
         &self,
         customer_id: &str,
         org_unit_path: &str,
@@ -55,7 +55,7 @@ impl Orgunits {
      *
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      */
-    pub async fn directory_insert(
+    pub async fn insert(
         &self,
         customer_id: &str,
         body: &crate::types::OrgUnit,
@@ -83,7 +83,7 @@ impl Orgunits {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `org_unit_path: &str` -- The full path of the organizational unit or its unique ID.
      */
-    pub async fn directory_get(
+    pub async fn get(
         &self,
         customer_id: &str,
         org_unit_path: &str,
@@ -107,7 +107,7 @@ impl Orgunits {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `org_unit_path: &str` -- The full path of the organizational unit or its unique ID.
      */
-    pub async fn directory_update(
+    pub async fn update(
         &self,
         customer_id: &str,
         org_unit_path: &str,
@@ -137,7 +137,7 @@ impl Orgunits {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `org_unit_path: &str` -- The full path of the organizational unit or its unique ID.
      */
-    pub async fn directory_delete(&self, customer_id: &str, org_unit_path: &str) -> Result<()> {
+    pub async fn delete(&self, customer_id: &str, org_unit_path: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/orgunits/{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
@@ -157,7 +157,7 @@ impl Orgunits {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `org_unit_path: &str` -- The full path of the organizational unit or its unique ID.
      */
-    pub async fn directory_patch(
+    pub async fn patch(
         &self,
         customer_id: &str,
         org_unit_path: &str,

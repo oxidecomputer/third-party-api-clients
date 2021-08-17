@@ -2483,7 +2483,12 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
     if proper_name.starts_with("Google") {
         clean_name = format!(
             "{}_",
-            proper_name.replace("Google", "").trim().to_lowercase()
+            to_snake_case(
+                proper_name
+                    .replace("Google", "")
+                    .replace("Admin", "Directory")
+                    .trim()
+            )
         );
     }
 

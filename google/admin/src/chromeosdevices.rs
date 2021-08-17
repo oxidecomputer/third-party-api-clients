@@ -28,7 +28,7 @@ impl Chromeosdevices {
      * * `query: &str` -- Search string in the format given at http://support.google.com/chromeos/a/bin/answer.py?answer=1698333.
      * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
      */
-    pub async fn directory_list(
+    pub async fn list(
         &self,
         customer_id: &str,
         max_results: i64,
@@ -77,11 +77,11 @@ impl Chromeosdevices {
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos` endpoint.
      *
-     * As opposed to `directory_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Retrieves a paginated list of Chrome OS devices within an account.
      */
-    pub async fn directory_list_all(
+    pub async fn list_all(
         &self,
         customer_id: &str,
         order_by: crate::types::OrderBy,
@@ -157,7 +157,7 @@ impl Chromeosdevices {
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      * * `org_unit_path: &str` -- Full path of the target organizational unit or its ID.
      */
-    pub async fn directory_move_devices_to_ou(
+    pub async fn move_devices_to_ou(
         &self,
         customer_id: &str,
         org_unit_path: &str,
@@ -193,7 +193,7 @@ impl Chromeosdevices {
      * * `device_id: &str` -- The unique ID of the device. The `deviceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/directory/v1/reference/chromeosdevices/list) method.
      * * `projection: crate::types::Projection` -- Determines whether the response contains the full list of properties or only a subset.
      */
-    pub async fn directory_get(
+    pub async fn get(
         &self,
         customer_id: &str,
         device_id: &str,
@@ -225,7 +225,7 @@ impl Chromeosdevices {
      * * `device_id: &str` -- The unique ID of the device. The `deviceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/v1/reference/chromeosdevices/list) method.
      * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
      */
-    pub async fn directory_update(
+    pub async fn update(
         &self,
         customer_id: &str,
         device_id: &str,
@@ -263,7 +263,7 @@ impl Chromeosdevices {
      * * `device_id: &str` -- The unique ID of the device. The `deviceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/v1/reference/chromeosdevices/list) method.
      * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
      */
-    pub async fn directory_patch(
+    pub async fn patch(
         &self,
         customer_id: &str,
         device_id: &str,
@@ -300,7 +300,7 @@ impl Chromeosdevices {
      * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
      * * `resource_id: &str` -- The unique ID of the device. The `resourceId`s are returned in the response from the [chromeosdevices.list](/admin-sdk/directory/v1/reference/chromeosdevices/list) method.
      */
-    pub async fn directory_action(
+    pub async fn action(
         &self,
         customer_id: &str,
         resource_id: &str,

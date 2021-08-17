@@ -32,7 +32,7 @@ impl Users {
      * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
      * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
      */
-    pub async fn directory_list(
+    pub async fn list(
         &self,
         customer: &str,
         domain: &str,
@@ -92,11 +92,11 @@ impl Users {
     /**
      * This function performs a `GET` to the `/admin/directory/v1/users` endpoint.
      *
-     * As opposed to `directory_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Retrieves a paginated list of either deleted users or all users in a domain.
      */
-    pub async fn directory_list_all(
+    pub async fn list_all(
         &self,
         customer: &str,
         domain: &str,
@@ -178,7 +178,7 @@ impl Users {
      *
      * Creates a user.
      */
-    pub async fn directory_insert(&self, body: &crate::types::User) -> Result<crate::types::User> {
+    pub async fn insert(&self, body: &crate::types::User) -> Result<crate::types::User> {
         let url = "/admin/directory/v1/users".to_string();
         self.client
             .post(
@@ -208,7 +208,7 @@ impl Users {
      * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
      * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
      */
-    pub async fn directory_watch(
+    pub async fn watch(
         &self,
         customer: &str,
         domain: &str,
@@ -280,7 +280,7 @@ impl Users {
      * * `projection: crate::types::DirectoryUsersListProjection` -- What subset of fields to fetch for this user.
      * * `view_type: crate::types::ViewType` -- Whether to fetch the administrator-only or domain-wide public view of the user. For more information, see [Retrieve a user as a non-administrator](/admin-sdk/directory/v1/guides/manage-users#retrieve_users_non_admin).
      */
-    pub async fn directory_get(
+    pub async fn get(
         &self,
         user_key: &str,
         projection: crate::types::DirectoryUsersListProjection,
@@ -312,7 +312,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_update(
+    pub async fn update(
         &self,
         user_key: &str,
         body: &crate::types::User,
@@ -339,7 +339,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_delete(&self, user_key: &str) -> Result<()> {
+    pub async fn delete(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}",
             crate::progenitor_support::encode_path(&user_key.to_string()),
@@ -357,7 +357,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_patch(
+    pub async fn patch(
         &self,
         user_key: &str,
         body: &crate::types::User,
@@ -385,7 +385,7 @@ impl Users {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      * * `event: crate::types::DirectoryUsersAliasesListEvent` -- Events to watch for.
      */
-    pub async fn directory_aliases_list(
+    pub async fn aliases_list(
         &self,
         user_key: &str,
         event: crate::types::DirectoryUsersAliasesListEvent,
@@ -413,7 +413,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_aliases_insert(
+    pub async fn aliases_insert(
         &self,
         user_key: &str,
         body: &crate::types::Alias,
@@ -441,7 +441,7 @@ impl Users {
      * * `user_key: &str` -- Email or immutable ID of the user.
      * * `event: crate::types::DirectoryUsersAliasesListEvent` -- Events to watch for.
      */
-    pub async fn directory_aliases_watch(
+    pub async fn aliases_watch(
         &self,
         user_key: &str,
         event: crate::types::DirectoryUsersAliasesListEvent,
@@ -476,7 +476,7 @@ impl Users {
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      * * `alias: &str` -- The alias to be removed.
      */
-    pub async fn directory_aliases_delete(&self, user_key: &str, alias: &str) -> Result<()> {
+    pub async fn aliases_delete(&self, user_key: &str, alias: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/aliases/{}",
             crate::progenitor_support::encode_path(&user_key.to_string()),
@@ -495,7 +495,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_make_admin(
+    pub async fn make_admin(
         &self,
         user_key: &str,
         body: &crate::types::UserMakeAdmin,
@@ -522,7 +522,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_photos_get(&self, user_key: &str) -> Result<crate::types::UserPhoto> {
+    pub async fn photos_get(&self, user_key: &str) -> Result<crate::types::UserPhoto> {
         let url = format!(
             "/admin/directory/v1/users/{}/photos/thumbnail",
             crate::progenitor_support::encode_path(&user_key.to_string()),
@@ -540,7 +540,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_photos_update(
+    pub async fn photos_update(
         &self,
         user_key: &str,
         body: &crate::types::UserPhoto,
@@ -567,7 +567,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_photos_delete(&self, user_key: &str) -> Result<()> {
+    pub async fn photos_delete(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/photos/thumbnail",
             crate::progenitor_support::encode_path(&user_key.to_string()),
@@ -585,7 +585,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_photos_patch(
+    pub async fn photos_patch(
         &self,
         user_key: &str,
         body: &crate::types::UserPhoto,
@@ -612,7 +612,7 @@ impl Users {
      *
      * * `user_key: &str` -- Identifies the target user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_sign_out(&self, user_key: &str) -> Result<()> {
+    pub async fn sign_out(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/signOut",
             crate::progenitor_support::encode_path(&user_key.to_string()),
@@ -630,11 +630,7 @@ impl Users {
      *
      * * `user_key: &str` -- The immutable id of the user.
      */
-    pub async fn directory_undelete(
-        &self,
-        user_key: &str,
-        body: &crate::types::UserUndelete,
-    ) -> Result<()> {
+    pub async fn undelete(&self, user_key: &str, body: &crate::types::UserUndelete) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/undelete",
             crate::progenitor_support::encode_path(&user_key.to_string()),

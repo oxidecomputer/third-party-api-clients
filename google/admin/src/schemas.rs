@@ -21,7 +21,7 @@ impl Schemas {
      *
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      */
-    pub async fn directory_list(&self, customer_id: &str) -> Result<crate::types::Schemas> {
+    pub async fn list(&self, customer_id: &str) -> Result<crate::types::Schemas> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
@@ -39,7 +39,7 @@ impl Schemas {
      *
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      */
-    pub async fn directory_insert(
+    pub async fn insert(
         &self,
         customer_id: &str,
         body: &crate::types::Schema,
@@ -67,11 +67,7 @@ impl Schemas {
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      * * `schema_key: &str` -- Name or immutable ID of the schema.
      */
-    pub async fn directory_get(
-        &self,
-        customer_id: &str,
-        schema_key: &str,
-    ) -> Result<crate::types::Schema> {
+    pub async fn get(&self, customer_id: &str, schema_key: &str) -> Result<crate::types::Schema> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
@@ -91,7 +87,7 @@ impl Schemas {
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      * * `schema_key: &str` -- Name or immutable ID of the schema.
      */
-    pub async fn directory_update(
+    pub async fn update(
         &self,
         customer_id: &str,
         schema_key: &str,
@@ -121,7 +117,7 @@ impl Schemas {
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      * * `schema_key: &str` -- Name or immutable ID of the schema.
      */
-    pub async fn directory_delete(&self, customer_id: &str, schema_key: &str) -> Result<()> {
+    pub async fn delete(&self, customer_id: &str, schema_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
@@ -141,7 +137,7 @@ impl Schemas {
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      * * `schema_key: &str` -- Name or immutable ID of the schema.
      */
-    pub async fn directory_patch(
+    pub async fn patch(
         &self,
         customer_id: &str,
         schema_key: &str,

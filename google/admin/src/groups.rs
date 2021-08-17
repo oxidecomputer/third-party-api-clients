@@ -28,7 +28,7 @@ impl Groups {
      * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
      * * `user_key: &str` -- Email or immutable ID of the user if only those groups are to be listed, the given user is a member of. If it's an ID, it should match with the ID of the user object.
      */
-    pub async fn directory_list(
+    pub async fn list(
         &self,
         customer: &str,
         domain: &str,
@@ -76,11 +76,11 @@ impl Groups {
     /**
      * This function performs a `GET` to the `/admin/directory/v1/groups` endpoint.
      *
-     * As opposed to `directory_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Retrieves all groups of a domain or of a user given a userKey (paginated).
      */
-    pub async fn directory_list_all(
+    pub async fn list_all(
         &self,
         customer: &str,
         domain: &str,
@@ -150,10 +150,7 @@ impl Groups {
      *
      * Creates a group.
      */
-    pub async fn directory_insert(
-        &self,
-        body: &crate::types::Group,
-    ) -> Result<crate::types::Group> {
+    pub async fn insert(&self, body: &crate::types::Group) -> Result<crate::types::Group> {
         let url = "/admin/directory/v1/groups".to_string();
         self.client
             .post(
@@ -172,7 +169,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_get(&self, group_key: &str) -> Result<crate::types::Group> {
+    pub async fn get(&self, group_key: &str) -> Result<crate::types::Group> {
         let url = format!(
             "/admin/directory/v1/groups/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
@@ -190,7 +187,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_update(
+    pub async fn update(
         &self,
         group_key: &str,
         body: &crate::types::Group,
@@ -217,7 +214,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_delete(&self, group_key: &str) -> Result<()> {
+    pub async fn delete(&self, group_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/groups/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
@@ -235,7 +232,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_patch(
+    pub async fn patch(
         &self,
         group_key: &str,
         body: &crate::types::Group,
@@ -262,7 +259,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_aliases_list(&self, group_key: &str) -> Result<crate::types::Aliases> {
+    pub async fn aliases_list(&self, group_key: &str) -> Result<crate::types::Aliases> {
         let url = format!(
             "/admin/directory/v1/groups/{}/aliases",
             crate::progenitor_support::encode_path(&group_key.to_string()),
@@ -280,7 +277,7 @@ impl Groups {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_aliases_insert(
+    pub async fn aliases_insert(
         &self,
         group_key: &str,
         body: &crate::types::Alias,
@@ -308,7 +305,7 @@ impl Groups {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `alias: &str` -- The alias to be removed.
      */
-    pub async fn directory_aliases_delete(&self, group_key: &str, alias: &str) -> Result<()> {
+    pub async fn aliases_delete(&self, group_key: &str, alias: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/groups/{}/aliases/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),

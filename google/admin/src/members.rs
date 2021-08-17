@@ -22,7 +22,7 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the user member in the API request. The value can be the user's primary email address, alias, or unique ID.
      */
-    pub async fn directory_has_member(
+    pub async fn has_member(
         &self,
         group_key: &str,
         member_key: &str,
@@ -49,7 +49,7 @@ impl Members {
      * * `page_token: &str` -- Token to specify next page in the list.
      * * `roles: &str` -- The `roles` query parameter allows you to retrieve group members by role. Allowed values are `OWNER`, `MANAGER`, and `MEMBER`.
      */
-    pub async fn directory_list(
+    pub async fn list(
         &self,
         group_key: &str,
         include_derived_membership: bool,
@@ -89,11 +89,11 @@ impl Members {
     /**
      * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
      *
-     * As opposed to `directory_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Retrieves a paginated list of all members in a group.
      */
-    pub async fn directory_list_all(
+    pub async fn list_all(
         &self,
         group_key: &str,
         include_derived_membership: bool,
@@ -159,7 +159,7 @@ impl Members {
      *
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      */
-    pub async fn directory_insert(
+    pub async fn insert(
         &self,
         group_key: &str,
         body: &crate::types::Member,
@@ -187,11 +187,7 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
-    pub async fn directory_get(
-        &self,
-        group_key: &str,
-        member_key: &str,
-    ) -> Result<crate::types::Member> {
+    pub async fn get(&self, group_key: &str, member_key: &str) -> Result<crate::types::Member> {
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
@@ -211,7 +207,7 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
-    pub async fn directory_update(
+    pub async fn update(
         &self,
         group_key: &str,
         member_key: &str,
@@ -241,7 +237,7 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
-    pub async fn directory_delete(&self, group_key: &str, member_key: &str) -> Result<()> {
+    pub async fn delete(&self, group_key: &str, member_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
@@ -261,7 +257,7 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
      */
-    pub async fn directory_patch(
+    pub async fn patch(
         &self,
         group_key: &str,
         member_key: &str,

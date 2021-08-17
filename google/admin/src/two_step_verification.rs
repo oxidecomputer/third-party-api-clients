@@ -21,7 +21,7 @@ impl TwoStepVerification {
      *
      * * `user_key: &str` -- Identifies the user in the API request. The value can be the user's primary email address, alias email address, or unique user ID.
      */
-    pub async fn directory_turn_off(&self, user_key: &str) -> Result<()> {
+    pub async fn turn_off(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/twoStepVerification/turnOff",
             crate::progenitor_support::encode_path(&user_key.to_string()),

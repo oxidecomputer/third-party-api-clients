@@ -23,7 +23,7 @@ impl Roles {
      * * `max_results: i64` -- Maximum number of results to return.
      * * `page_token: &str` -- Token to specify the next page in the list.
      */
-    pub async fn directory_list(
+    pub async fn list(
         &self,
         customer: &str,
         max_results: i64,
@@ -52,11 +52,11 @@ impl Roles {
     /**
      * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles` endpoint.
      *
-     * As opposed to `directory_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Retrieves a paginated list of all the roles in a domain.
      */
-    pub async fn directory_list_all(&self, customer: &str) -> Result<Vec<crate::types::Role>> {
+    pub async fn list_all(&self, customer: &str) -> Result<Vec<crate::types::Role>> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -105,7 +105,7 @@ impl Roles {
      *
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      */
-    pub async fn directory_insert(
+    pub async fn insert(
         &self,
         customer: &str,
         body: &crate::types::Role,
@@ -133,7 +133,7 @@ impl Roles {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `role_id: &str` -- Immutable ID of the role.
      */
-    pub async fn directory_get(&self, customer: &str, role_id: &str) -> Result<crate::types::Role> {
+    pub async fn get(&self, customer: &str, role_id: &str) -> Result<crate::types::Role> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -153,7 +153,7 @@ impl Roles {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `role_id: &str` -- Immutable ID of the role.
      */
-    pub async fn directory_update(
+    pub async fn update(
         &self,
         customer: &str,
         role_id: &str,
@@ -183,7 +183,7 @@ impl Roles {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `role_id: &str` -- Immutable ID of the role.
      */
-    pub async fn directory_delete(&self, customer: &str, role_id: &str) -> Result<()> {
+    pub async fn delete(&self, customer: &str, role_id: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -203,7 +203,7 @@ impl Roles {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `role_id: &str` -- Immutable ID of the role.
      */
-    pub async fn directory_patch(
+    pub async fn patch(
         &self,
         customer: &str,
         role_id: &str,

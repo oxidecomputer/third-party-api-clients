@@ -21,7 +21,7 @@ impl Privileges {
      *
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      */
-    pub async fn directory_list(&self, customer: &str) -> Result<crate::types::Privileges> {
+    pub async fn list(&self, customer: &str) -> Result<crate::types::Privileges> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/ALL/privileges",
             crate::progenitor_support::encode_path(&customer.to_string()),

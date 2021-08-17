@@ -21,7 +21,7 @@ impl Customers {
      *
      * * `customer_key: &str` -- Id of the customer to be retrieved.
      */
-    pub async fn directory_get(&self, customer_key: &str) -> Result<crate::types::Customer> {
+    pub async fn get(&self, customer_key: &str) -> Result<crate::types::Customer> {
         let url = format!(
             "/admin/directory/v1/customers/{}",
             crate::progenitor_support::encode_path(&customer_key.to_string()),
@@ -39,7 +39,7 @@ impl Customers {
      *
      * * `customer_key: &str` -- Id of the customer to be updated.
      */
-    pub async fn directory_update(
+    pub async fn update(
         &self,
         customer_key: &str,
         body: &crate::types::Customer,
@@ -66,7 +66,7 @@ impl Customers {
      *
      * * `customer_key: &str` -- Id of the customer to be updated.
      */
-    pub async fn directory_patch(
+    pub async fn patch(
         &self,
         customer_key: &str,
         body: &crate::types::Customer,
@@ -93,7 +93,7 @@ impl Customers {
      *
      * * `name: &str` -- Required. The name of the printer to retrieve. Format: customers/{customer_id}/chrome/printers/{printer_id}.
      */
-    pub async fn chrome_printers_get(&self, name: &str) -> Result<crate::types::Printer> {
+    pub async fn admin_chrome_printers_get(&self, name: &str) -> Result<crate::types::Printer> {
         let url = format!(
             "/admin/directory/v1/{}",
             crate::progenitor_support::encode_path(&name.to_string()),
@@ -111,7 +111,7 @@ impl Customers {
      *
      * * `name: &str` -- Required. The name of the printer to be updated. Format: customers/{customer_id}/chrome/printers/{printer_id}.
      */
-    pub async fn chrome_printers_delete(&self, name: &str) -> Result<crate::types::Empty> {
+    pub async fn admin_chrome_printers_delete(&self, name: &str) -> Result<crate::types::Empty> {
         let url = format!(
             "/admin/directory/v1/{}",
             crate::progenitor_support::encode_path(&name.to_string()),
@@ -131,7 +131,7 @@ impl Customers {
      * * `clear_mask: &str` -- The list of fields to be cleared. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
      * * `update_mask: &str` -- The list of fields to be updated. Note, some of the fields are read only and cannot be updated. Values for not specified fields will be patched.
      */
-    pub async fn chrome_printers_patch(
+    pub async fn admin_chrome_printers_patch(
         &self,
         name: &str,
         clear_mask: &str,
@@ -173,7 +173,7 @@ impl Customers {
      * * `page_size: i64` -- The maximum number of objects to return. The service may return fewer than this value.
      * * `page_token: &str` -- A page token, received from a previous call.
      */
-    pub async fn chrome_printers_list(
+    pub async fn admin_chrome_printers_list(
         &self,
         parent: &str,
         filter: &str,
@@ -210,11 +210,11 @@ impl Customers {
     /**
      * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers` endpoint.
      *
-     * As opposed to `chrome_printers_list`, this function returns all the pages of the request at once.
+     * As opposed to `admin_chrome_printers_list`, this function returns all the pages of the request at once.
      *
      * List printers configs.
      */
-    pub async fn chrome_printers_list_all(
+    pub async fn admin_chrome_printers_list_all(
         &self,
         parent: &str,
         filter: &str,
@@ -278,7 +278,7 @@ impl Customers {
      *
      * * `parent: &str` -- Required. The name of the customer. Format: customers/{customer_id}.
      */
-    pub async fn chrome_printers_create(
+    pub async fn admin_chrome_printers_create(
         &self,
         parent: &str,
         body: &crate::types::Printer,
@@ -305,7 +305,7 @@ impl Customers {
      *
      * * `parent: &str` -- Required. The name of the customer. Format: customers/{customer_id}.
      */
-    pub async fn chrome_printers_batch_create(
+    pub async fn admin_chrome_printers_batch_create(
         &self,
         parent: &str,
         body: &crate::types::BatchCreatePrintersRequest,
@@ -332,7 +332,7 @@ impl Customers {
      *
      * * `parent: &str` -- Required. The name of the customer. Format: customers/{customer_id}.
      */
-    pub async fn chrome_printers_batch_delete(
+    pub async fn admin_chrome_printers_batch_delete(
         &self,
         parent: &str,
         body: &crate::types::BatchDeletePrintersRequest,
@@ -362,7 +362,7 @@ impl Customers {
      * * `page_size: i64` -- The maximum number of objects to return. The service may return fewer than this value.
      * * `page_token: &str` -- A page token, received from a previous call.
      */
-    pub async fn chrome_printers_list_printer_models(
+    pub async fn admin_chrome_printers_list_printer_models(
         &self,
         parent: &str,
         filter: &str,
@@ -396,11 +396,11 @@ impl Customers {
     /**
      * This function performs a `GET` to the `/admin/directory/v1/{parent}/chrome/printers:listPrinterModels` endpoint.
      *
-     * As opposed to `chrome_printers_list_printer_models`, this function returns all the pages of the request at once.
+     * As opposed to `admin_chrome_printers_list_printer_models`, this function returns all the pages of the request at once.
      *
      * Lists the supported printer models.
      */
-    pub async fn chrome_printers_list_all_printer_models(
+    pub async fn admin_chrome_printers_list_all_printer_models(
         &self,
         parent: &str,
         filter: &str,

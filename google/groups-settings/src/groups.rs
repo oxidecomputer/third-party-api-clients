@@ -23,7 +23,7 @@ impl Groups {
      *  - true: G Suite users external to your organization can become members of this group.
      *  - false: Users not belonging to the organization are not allowed to become members of this group.
      */
-    pub async fn settings_get(
+    pub async fn get(
         &self,
         alt: crate::types::Alt,
         group_unique_id: &str,
@@ -53,7 +53,7 @@ impl Groups {
      *  - true: G Suite users external to your organization can become members of this group.
      *  - false: Users not belonging to the organization are not allowed to become members of this group.
      */
-    pub async fn settings_update(
+    pub async fn update(
         &self,
         alt: crate::types::Alt,
         group_unique_id: &str,
@@ -89,7 +89,7 @@ impl Groups {
      *  - true: G Suite users external to your organization can become members of this group.
      *  - false: Users not belonging to the organization are not allowed to become members of this group.
      */
-    pub async fn settings_patch(
+    pub async fn patch(
         &self,
         alt: crate::types::Alt,
         group_unique_id: &str,

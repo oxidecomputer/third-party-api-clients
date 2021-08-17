@@ -22,7 +22,7 @@ impl DomainAliases {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `parent_domain_name: &str` -- Name of the parent domain for which domain aliases are to be fetched.
      */
-    pub async fn directory_list(
+    pub async fn list(
         &self,
         customer: &str,
         parent_domain_name: &str,
@@ -53,7 +53,7 @@ impl DomainAliases {
      *
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      */
-    pub async fn directory_insert(
+    pub async fn insert(
         &self,
         customer: &str,
         body: &crate::types::DomainAlias,
@@ -81,7 +81,7 @@ impl DomainAliases {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
      */
-    pub async fn directory_get(
+    pub async fn get(
         &self,
         customer: &str,
         domain_alias_name: &str,
@@ -105,7 +105,7 @@ impl DomainAliases {
      * * `customer: &str` -- Immutable ID of the Google Workspace account.
      * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
      */
-    pub async fn directory_delete(&self, customer: &str, domain_alias_name: &str) -> Result<()> {
+    pub async fn delete(&self, customer: &str, domain_alias_name: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
