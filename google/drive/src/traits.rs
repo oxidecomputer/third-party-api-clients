@@ -4,7 +4,12 @@ use anyhow::{anyhow, Result};
 #[async_trait::async_trait]
 pub trait FileOps {
     /// Get a file by it's name.
-    async fn get_by_name(&self, drive_id: &str, name: &str) -> Result<Vec<crate::types::File>>;
+    async fn get_by_name(
+        &self,
+        drive_id: &str,
+        parent_id: &str,
+        name: &str,
+    ) -> Result<Vec<crate::types::File>>;
 
     /// Create or update a file in a drive.
     /// If the file already exists, it will update it.
@@ -31,19 +36,29 @@ pub trait FileOps {
 #[async_trait::async_trait]
 impl FileOps for crate::files::Files {
     /// Get a file by it's name.
-    async fn get_by_name(&self, drive_id: &str, name: &str) -> Result<Vec<crate::types::File>> {
+    async fn get_by_name(
+        &self,
+        drive_id: &str,
+        parent_id: &str,
+        name: &str,
+    ) -> Result<Vec<crate::types::File>> {
+        let mut query = format!("name = '{}'", name);
+        if !parent_id.is_empty() {
+            query = format!("{} and '{}' in parents", query, parent_id);
+        }
+
         self.drive_list_files(
-            "drive",                       // corpora
-            drive_id,                      // drive id
-            true,                          // include_items_from_all_drives
-            "",                            // include_permissions_for_view
-            false,                         // include_team_drive_items
-            "",                            // order_by
-            &format!("name = '{}'", name), // query
-            "",                            // spaces
-            true,                          // supports_all_drives
-            false,                         // supports_team_drives
-            "",                            // team_drive_id
+            "drive",  // corpora
+            drive_id, // drive id
+            true,     // include_items_from_all_drives
+            "",       // include_permissions_for_view
+            false,    // include_team_drive_items
+            "",       // order_by
+            &query,   // query
+            "",       // spaces
+            true,     // supports_all_drives
+            false,    // supports_team_drives
+            "",       // team_drive_id
         )
         .await
     }
@@ -65,7 +80,10 @@ impl FileOps for crate::files::Files {
         let mut uri = "https://www.googleapis.com/upload/drive/v3/files".to_string();
 
         // Check if the file exists.
-        let files = self.get_by_name(drive_id, name).await.unwrap_or_default();
+        let files = self
+            .get_by_name(drive_id, parent_id, name)
+            .await
+            .unwrap_or_default();
         if files.is_empty() {
             // Set the name,
             f.name = name.to_string();
