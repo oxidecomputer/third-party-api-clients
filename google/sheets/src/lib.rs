@@ -118,7 +118,7 @@ use std::io::Write;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://sheets.googleapis.com/v4";
+pub const DEFAULT_HOST: &str = "https://sheets.googleapis.com";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
