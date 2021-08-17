@@ -33,7 +33,7 @@ pub trait FileOps {
     async fn get_contents_by_id(&self, id: &str) -> Result<String>;
 
     /// Delete a file by its name.
-    async fn delete_file_by_name(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<()>;
+    async fn delete_by_name(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<()>;
 }
 
 #[async_trait::async_trait]
@@ -234,7 +234,7 @@ impl FileOps for crate::files::Files {
     }
 
     /// Delete a file by its name.
-    async fn delete_file_by_name(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<()> {
+    async fn delete_by_name(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<()> {
         // Check if the file exists.
         let files = self
             .get_by_name(drive_id, parent_id, name)
