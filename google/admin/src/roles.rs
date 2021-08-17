@@ -29,20 +29,14 @@ impl Roles {
         max_results: i64,
         page_token: &str,
     ) -> Result<Vec<crate::types::Role>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/roles?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),

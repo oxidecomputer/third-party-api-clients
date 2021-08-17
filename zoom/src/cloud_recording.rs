@@ -55,35 +55,29 @@ impl CloudRecording {
         to: chrono::NaiveDate,
         trash_type: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !mc.is_empty() {
-            query_args.push(format!("mc={}", mc));
+            query_args.push(("mc".to_string(), mc.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
         if trash {
-            query_args.push(format!("trash={}", trash));
+            query_args.push(("trash".to_string(), trash.to_string()));
         }
         if !trash_type.is_empty() {
-            query_args.push(format!("trash_type={}", trash_type));
+            query_args.push(("trash_type".to_string(), trash_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/recordings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -120,20 +114,14 @@ impl CloudRecording {
         include_fields: &str,
         ttl: u64,
     ) -> Result<crate::types::RecordingGetResponseAllOf> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_fields.is_empty() {
-            query_args.push(format!("include_fields={}", include_fields));
+            query_args.push(("include_fields".to_string(), include_fields.to_string()));
         }
         if !ttl.to_string().is_empty() {
-            query_args.push(format!("ttl={}", ttl.to_string()));
+            query_args.push(("ttl".to_string(), ttl.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}/recordings?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -170,17 +158,11 @@ impl CloudRecording {
         meeting_id: &str,
         action: crate::types::RecordingDeleteAction,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !action.to_string().is_empty() {
-            query_args.push(format!("action={}", action.to_string()));
+            query_args.push(("action".to_string(), action.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}/recordings?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -215,17 +197,11 @@ impl CloudRecording {
         recording_id: &str,
         action: crate::types::RecordingDeleteAction,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !action.to_string().is_empty() {
-            query_args.push(format!("action={}", action.to_string()));
+            query_args.push(("action".to_string(), action.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}/recordings/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -414,26 +390,20 @@ impl CloudRecording {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
+            query_args.push(("page_number".to_string(), page_number.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !status.to_string().is_empty() {
-            query_args.push(format!("status={}", status.to_string()));
+            query_args.push(("status".to_string(), status.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}/recordings/registrants?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -617,26 +587,20 @@ impl CloudRecording {
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = from {
-            query_args.push(format!("from={}", &date.to_rfc3339()));
+            query_args.push(("from".to_string(), date.to_rfc3339()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if let Some(date) = to {
-            query_args.push(format!("to={}", &date.to_rfc3339()));
+            query_args.push(("to".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/recordings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -676,20 +640,14 @@ impl CloudRecording {
         from: Option<chrono::DateTime<chrono::Utc>>,
         to: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::GetAccountCloudRecordingResponseMeetings>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = from {
-            query_args.push(format!("from={}", &date.to_rfc3339()));
+            query_args.push(("from".to_string(), date.to_rfc3339()));
         }
         if let Some(date) = to {
-            query_args.push(format!("to={}", &date.to_rfc3339()));
+            query_args.push(("to".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/recordings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

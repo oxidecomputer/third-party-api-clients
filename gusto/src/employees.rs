@@ -28,17 +28,11 @@ impl Employees {
         employee_id_or_uuid: &str,
         include: &[String],
     ) -> Result<crate::types::Employee> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
-            query_args.push(format!("include={}", include.join(" ")));
+            query_args.push(("include".to_string(), include.join(" ")));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/employees/{}?{}",
             crate::progenitor_support::encode_path(&employee_id_or_uuid.to_string()),
@@ -95,26 +89,20 @@ impl Employees {
         per: f64,
         include: &[String],
     ) -> Result<Vec<crate::types::Employee>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
-            query_args.push(format!("include={}", include.join(" ")));
+            query_args.push(("include".to_string(), include.join(" ")));
         }
         if !page.to_string().is_empty() {
-            query_args.push(format!("page={}", page.to_string()));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if !per.to_string().is_empty() {
-            query_args.push(format!("per={}", per.to_string()));
+            query_args.push(("per".to_string(), per.to_string()));
         }
         if terminated {
-            query_args.push(format!("terminated={}", terminated));
+            query_args.push(("terminated".to_string(), terminated.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/employees?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
@@ -139,20 +127,14 @@ impl Employees {
         terminated: bool,
         include: &[String],
     ) -> Result<Vec<crate::types::Employee>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
-            query_args.push(format!("include={}", include.join(" ")));
+            query_args.push(("include".to_string(), include.join(" ")));
         }
         if terminated {
-            query_args.push(format!("terminated={}", terminated));
+            query_args.push(("terminated".to_string(), terminated.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/employees?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),

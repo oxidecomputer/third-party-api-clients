@@ -48,29 +48,23 @@ impl Folders {
         template: &str,
         user_filter: &str,
     ) -> Result<crate::types::FoldersResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
-            query_args.push(format!("include={}", include));
+            query_args.push(("include".to_string(), include.to_string()));
         }
         if !include_items.is_empty() {
-            query_args.push(format!("include_items={}", include_items));
+            query_args.push(("include_items".to_string(), include_items.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         if !template.is_empty() {
-            query_args.push(format!("template={}", template));
+            query_args.push(("template".to_string(), template.to_string()));
         }
         if !user_filter.is_empty() {
-            query_args.push(format!("user_filter={}", user_filter));
+            query_args.push(("user_filter".to_string(), user_filter.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/folders?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -113,38 +107,32 @@ impl Folders {
         status: &str,
         to_date: &str,
     ) -> Result<crate::types::FoldersResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
-            query_args.push(format!("from_date={}", from_date));
+            query_args.push(("from_date".to_string(), from_date.to_string()));
         }
         if !include_items.is_empty() {
-            query_args.push(format!("include_items={}", include_items));
+            query_args.push(("include_items".to_string(), include_items.to_string()));
         }
         if !owner_email.is_empty() {
-            query_args.push(format!("owner_email={}", owner_email));
+            query_args.push(("owner_email".to_string(), owner_email.to_string()));
         }
         if !owner_name.is_empty() {
-            query_args.push(format!("owner_name={}", owner_name));
+            query_args.push(("owner_name".to_string(), owner_name.to_string()));
         }
         if !search_text.is_empty() {
-            query_args.push(format!("search_text={}", search_text));
+            query_args.push(("search_text".to_string(), search_text.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         if !status.is_empty() {
-            query_args.push(format!("status={}", status));
+            query_args.push(("status".to_string(), status.to_string()));
         }
         if !to_date.is_empty() {
-            query_args.push(format!("to_date={}", to_date));
+            query_args.push(("to_date".to_string(), to_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/folders/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -231,38 +219,35 @@ impl Folders {
         start_position: &str,
         to_date: &str,
     ) -> Result<crate::types::FolderItemResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !all.is_empty() {
-            query_args.push(format!("all={}", all));
+            query_args.push(("all".to_string(), all.to_string()));
         }
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !from_date.is_empty() {
-            query_args.push(format!("from_date={}", from_date));
+            query_args.push(("from_date".to_string(), from_date.to_string()));
         }
         if !include_recipients.is_empty() {
-            query_args.push(format!("include_recipients={}", include_recipients));
+            query_args.push((
+                "include_recipients".to_string(),
+                include_recipients.to_string(),
+            ));
         }
         if !order.is_empty() {
-            query_args.push(format!("order={}", order));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         if !to_date.is_empty() {
-            query_args.push(format!("to_date={}", to_date));
+            query_args.push(("to_date".to_string(), to_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/search_folders/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

@@ -46,47 +46,41 @@ impl Users {
         sort_order: crate::types::SortOrder,
         view_type: crate::types::ViewType,
     ) -> Result<Vec<crate::types::User>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
-            query_args.push(format!("customer={}", customer));
+            query_args.push(("customer".to_string(), customer.to_string()));
         }
         if !domain.is_empty() {
-            query_args.push(format!("domain={}", domain));
+            query_args.push(("domain".to_string(), domain.to_string()));
         }
         if !event.to_string().is_empty() {
-            query_args.push(format!("event={}", event.to_string()));
+            query_args.push(("event".to_string(), event.to_string()));
         }
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !projection.to_string().is_empty() {
-            query_args.push(format!("projection={}", projection.to_string()));
+            query_args.push(("projection".to_string(), projection.to_string()));
         }
         if !query.is_empty() {
-            query_args.push(format!("query={}", query));
+            query_args.push(("query".to_string(), query.to_string()));
         }
         if !show_deleted.is_empty() {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
         if !sort_order.to_string().is_empty() {
-            query_args.push(format!("sort_order={}", sort_order.to_string()));
+            query_args.push(("sort_order".to_string(), sort_order.to_string()));
         }
         if !view_type.to_string().is_empty() {
-            query_args.push(format!("view_type={}", view_type.to_string()));
+            query_args.push(("view_type".to_string(), view_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/users?{}", query_);
 
         let resp: crate::types::Users = self.client.get(&url, None).await.unwrap();
@@ -114,41 +108,35 @@ impl Users {
         sort_order: crate::types::SortOrder,
         view_type: crate::types::ViewType,
     ) -> Result<Vec<crate::types::User>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
-            query_args.push(format!("customer={}", customer));
+            query_args.push(("customer".to_string(), customer.to_string()));
         }
         if !domain.is_empty() {
-            query_args.push(format!("domain={}", domain));
+            query_args.push(("domain".to_string(), domain.to_string()));
         }
         if !event.to_string().is_empty() {
-            query_args.push(format!("event={}", event.to_string()));
+            query_args.push(("event".to_string(), event.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !projection.to_string().is_empty() {
-            query_args.push(format!("projection={}", projection.to_string()));
+            query_args.push(("projection".to_string(), projection.to_string()));
         }
         if !query.is_empty() {
-            query_args.push(format!("query={}", query));
+            query_args.push(("query".to_string(), query.to_string()));
         }
         if !show_deleted.is_empty() {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
         if !sort_order.to_string().is_empty() {
-            query_args.push(format!("sort_order={}", sort_order.to_string()));
+            query_args.push(("sort_order".to_string(), sort_order.to_string()));
         }
         if !view_type.to_string().is_empty() {
-            query_args.push(format!("view_type={}", view_type.to_string()));
+            query_args.push(("view_type".to_string(), view_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/users?{}", query_);
 
         let mut resp: crate::types::Users = self.client.get(&url, None).await.unwrap();
@@ -235,47 +223,41 @@ impl Users {
         view_type: crate::types::ViewType,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
-            query_args.push(format!("customer={}", customer));
+            query_args.push(("customer".to_string(), customer.to_string()));
         }
         if !domain.is_empty() {
-            query_args.push(format!("domain={}", domain));
+            query_args.push(("domain".to_string(), domain.to_string()));
         }
         if !event.to_string().is_empty() {
-            query_args.push(format!("event={}", event.to_string()));
+            query_args.push(("event".to_string(), event.to_string()));
         }
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !projection.to_string().is_empty() {
-            query_args.push(format!("projection={}", projection.to_string()));
+            query_args.push(("projection".to_string(), projection.to_string()));
         }
         if !query.is_empty() {
-            query_args.push(format!("query={}", query));
+            query_args.push(("query".to_string(), query.to_string()));
         }
         if !show_deleted.is_empty() {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
         if !sort_order.to_string().is_empty() {
-            query_args.push(format!("sort_order={}", sort_order.to_string()));
+            query_args.push(("sort_order".to_string(), sort_order.to_string()));
         }
         if !view_type.to_string().is_empty() {
-            query_args.push(format!("view_type={}", view_type.to_string()));
+            query_args.push(("view_type".to_string(), view_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/users/watch?{}", query_);
 
         self.client
@@ -304,20 +286,14 @@ impl Users {
         projection: crate::types::DirectoryUsersListProjection,
         view_type: crate::types::ViewType,
     ) -> Result<crate::types::User> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
-            query_args.push(format!("projection={}", projection.to_string()));
+            query_args.push(("projection".to_string(), projection.to_string()));
         }
         if !view_type.to_string().is_empty() {
-            query_args.push(format!("view_type={}", view_type.to_string()));
+            query_args.push(("view_type".to_string(), view_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/users/{}?{}",
             crate::progenitor_support::encode_path(&user_key.to_string()),
@@ -414,17 +390,11 @@ impl Users {
         user_key: &str,
         event: crate::types::DirectoryUsersAliasesListEvent,
     ) -> Result<crate::types::Aliases> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !event.to_string().is_empty() {
-            query_args.push(format!("event={}", event.to_string()));
+            query_args.push(("event".to_string(), event.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/users/{}/aliases?{}",
             crate::progenitor_support::encode_path(&user_key.to_string()),
@@ -477,17 +447,11 @@ impl Users {
         event: crate::types::DirectoryUsersAliasesListEvent,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !event.to_string().is_empty() {
-            query_args.push(format!("event={}", event.to_string()));
+            query_args.push(("event".to_string(), event.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/users/{}/aliases/watch?{}",
             crate::progenitor_support::encode_path(&user_key.to_string()),

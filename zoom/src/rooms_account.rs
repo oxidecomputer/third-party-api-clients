@@ -79,17 +79,11 @@ impl RoomsAccount {
         &self,
         setting_type: crate::types::SettingType,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.to_string().is_empty() {
-            query_args.push(format!("setting_type={}", setting_type.to_string()));
+            query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/account_settings?{}", query_);
 
         self.client.get(&url, None).await
@@ -118,17 +112,11 @@ impl RoomsAccount {
         &self,
         setting_type: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
-            query_args.push(format!("setting_type={}", setting_type));
+            query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/account_settings?{}", query_);
 
         self.client.patch(&url, None).await

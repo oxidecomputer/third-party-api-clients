@@ -59,35 +59,29 @@ impl CloudStorage {
         search_text: &str,
         start_position: &str,
     ) -> Result<crate::types::ExternalFolder> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !cloud_storage_folder_path.is_empty() {
-            query_args.push(format!(
-                "cloud_storage_folder_path={}",
-                cloud_storage_folder_path
+            query_args.push((
+                "cloud_storage_folder_path".to_string(),
+                cloud_storage_folder_path.to_string(),
             ));
         }
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !order.is_empty() {
-            query_args.push(format!("order={}", order));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !search_text.is_empty() {
-            query_args.push(format!("search_text={}", search_text));
+            query_args.push(("search_text".to_string(), search_text.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage/{}/folders?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -152,41 +146,35 @@ impl CloudStorage {
         search_text: &str,
         start_position: &str,
     ) -> Result<crate::types::ExternalFolder> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !cloud_storage_folder_path.is_empty() {
-            query_args.push(format!(
-                "cloud_storage_folder_path={}",
-                cloud_storage_folder_path
+            query_args.push((
+                "cloud_storage_folder_path".to_string(),
+                cloud_storage_folder_path.to_string(),
             ));
         }
         if !cloud_storage_folderid_plain.is_empty() {
-            query_args.push(format!(
-                "cloud_storage_folderid_plain={}",
-                cloud_storage_folderid_plain
+            query_args.push((
+                "cloud_storage_folderid_plain".to_string(),
+                cloud_storage_folderid_plain.to_string(),
             ));
         }
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !order.is_empty() {
-            query_args.push(format!("order={}", order));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !search_text.is_empty() {
-            query_args.push(format!("search_text={}", search_text));
+            query_args.push(("search_text".to_string(), search_text.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage/{}/folders/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

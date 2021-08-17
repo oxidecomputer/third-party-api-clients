@@ -37,32 +37,26 @@ impl Receipts {
         start: &str,
         page_size: f64,
     ) -> Result<Vec<crate::types::Receipt>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = created_after {
-            query_args.push(format!("created_after={}", &date.to_rfc3339()));
+            query_args.push(("created_after".to_string(), date.to_rfc3339()));
         }
         if let Some(date) = created_before {
-            query_args.push(format!("created_before={}", &date.to_rfc3339()));
+            query_args.push(("created_before".to_string(), date.to_rfc3339()));
         }
         if let Some(date) = from_date {
-            query_args.push(format!("from_date={}", &date.to_rfc3339()));
+            query_args.push(("from_date".to_string(), date.to_rfc3339()));
         }
         if !page_size.to_string().is_empty() {
-            query_args.push(format!("page_size={}", page_size.to_string()));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !start.is_empty() {
-            query_args.push(format!("start={}", start));
+            query_args.push(("start".to_string(), start.to_string()));
         }
         if let Some(date) = to_date {
-            query_args.push(format!("to_date={}", &date.to_rfc3339()));
+            query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/receipts?{}", query_);
 
         let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await.unwrap();
@@ -87,26 +81,20 @@ impl Receipts {
         created_after: Option<chrono::DateTime<chrono::Utc>>,
         created_before: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Receipt>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = created_after {
-            query_args.push(format!("created_after={}", &date.to_rfc3339()));
+            query_args.push(("created_after".to_string(), date.to_rfc3339()));
         }
         if let Some(date) = created_before {
-            query_args.push(format!("created_before={}", &date.to_rfc3339()));
+            query_args.push(("created_before".to_string(), date.to_rfc3339()));
         }
         if let Some(date) = from_date {
-            query_args.push(format!("from_date={}", &date.to_rfc3339()));
+            query_args.push(("from_date".to_string(), date.to_rfc3339()));
         }
         if let Some(date) = to_date {
-            query_args.push(format!("to_date={}", &date.to_rfc3339()));
+            query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/receipts?{}", query_);
 
         let mut resp: crate::types::GetReceiptsResponse =

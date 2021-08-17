@@ -29,20 +29,14 @@ impl Revisions {
         page_size: i64,
         page_token: &str,
     ) -> Result<Vec<crate::types::Revision>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/revisions?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -119,17 +113,14 @@ impl Revisions {
         revision_id: &str,
         acknowledge_abuse: bool,
     ) -> Result<crate::types::Revision> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
-            query_args.push(format!("acknowledge_abuse={}", acknowledge_abuse));
+            query_args.push((
+                "acknowledge_abuse".to_string(),
+                acknowledge_abuse.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/revisions/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),

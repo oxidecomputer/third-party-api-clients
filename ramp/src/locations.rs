@@ -30,20 +30,14 @@ impl Locations {
         start: &str,
         page_size: f64,
     ) -> Result<Vec<crate::types::Location>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
-            query_args.push(format!("page_size={}", page_size.to_string()));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !start.is_empty() {
-            query_args.push(format!("start={}", start));
+            query_args.push(("start".to_string(), start.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/locations?{}", query_);
 
         let resp: crate::types::GetLocationResponse = self.client.get(&url, None).await.unwrap();

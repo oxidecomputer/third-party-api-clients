@@ -37,29 +37,26 @@ impl Groups {
         search_text: &str,
         start_position: &str,
     ) -> Result<crate::types::GroupInformation> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !group_type.is_empty() {
-            query_args.push(format!("group_type={}", group_type));
+            query_args.push(("group_type".to_string(), group_type.to_string()));
         }
         if !include_usercount.is_empty() {
-            query_args.push(format!("include_usercount={}", include_usercount));
+            query_args.push((
+                "include_usercount".to_string(),
+                include_usercount.to_string(),
+            ));
         }
         if !search_text.is_empty() {
-            query_args.push(format!("search_text={}", search_text));
+            query_args.push(("search_text".to_string(), search_text.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/groups?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

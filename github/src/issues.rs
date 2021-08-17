@@ -66,50 +66,44 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Issue>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if collab {
-            query_args.push(format!("collab={}", collab));
+            query_args.push(("collab".to_string(), collab.to_string()));
         }
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !filter.to_string().is_empty() {
-            query_args.push(format!("filter={}", filter.to_string()));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !labels.is_empty() {
-            query_args.push(format!("labels={}", labels));
+            query_args.push(("labels".to_string(), labels.to_string()));
         }
         if orgs {
-            query_args.push(format!("orgs={}", orgs));
+            query_args.push(("orgs".to_string(), orgs.to_string()));
         }
         if owned {
-            query_args.push(format!("owned={}", owned));
+            query_args.push(("owned".to_string(), owned.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if pulls {
-            query_args.push(format!("pulls={}", pulls));
+            query_args.push(("pulls".to_string(), pulls.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/issues?{}", query_);
 
         self.client.get(&url, None).await
@@ -147,44 +141,38 @@ impl Issues {
         owned: bool,
         pulls: bool,
     ) -> Result<Vec<crate::types::Issue>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if collab {
-            query_args.push(format!("collab={}", collab));
+            query_args.push(("collab".to_string(), collab.to_string()));
         }
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !filter.to_string().is_empty() {
-            query_args.push(format!("filter={}", filter.to_string()));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !labels.is_empty() {
-            query_args.push(format!("labels={}", labels));
+            query_args.push(("labels".to_string(), labels.to_string()));
         }
         if orgs {
-            query_args.push(format!("orgs={}", orgs));
+            query_args.push(("orgs".to_string(), orgs.to_string()));
         }
         if owned {
-            query_args.push(format!("owned={}", owned));
+            query_args.push(("owned".to_string(), owned.to_string()));
         }
         if pulls {
-            query_args.push(format!("pulls={}", pulls));
+            query_args.push(("pulls".to_string(), pulls.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/issues?{}", query_);
 
         self.client.get_all_pages(&url, None).await
@@ -235,38 +223,32 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Issue>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !filter.to_string().is_empty() {
-            query_args.push(format!("filter={}", filter.to_string()));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !labels.is_empty() {
-            query_args.push(format!("labels={}", labels));
+            query_args.push(("labels".to_string(), labels.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/issues?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -302,32 +284,26 @@ impl Issues {
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Issue>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !filter.to_string().is_empty() {
-            query_args.push(format!("filter={}", filter.to_string()));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !labels.is_empty() {
-            query_args.push(format!("labels={}", labels));
+            query_args.push(("labels".to_string(), labels.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/issues?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -360,20 +336,14 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::SimpleUser>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/assignees?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -492,47 +462,41 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueSimple>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !assignee.is_empty() {
-            query_args.push(format!("assignee={}", assignee));
+            query_args.push(("assignee".to_string(), assignee.to_string()));
         }
         if !creator.is_empty() {
-            query_args.push(format!("creator={}", creator));
+            query_args.push(("creator".to_string(), creator.to_string()));
         }
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !labels.is_empty() {
-            query_args.push(format!("labels={}", labels));
+            query_args.push(("labels".to_string(), labels.to_string()));
         }
         if !mentioned.is_empty() {
-            query_args.push(format!("mentioned={}", mentioned));
+            query_args.push(("mentioned".to_string(), mentioned.to_string()));
         }
         if !milestone.is_empty() {
-            query_args.push(format!("milestone={}", milestone));
+            query_args.push(("milestone".to_string(), milestone.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -573,41 +537,35 @@ impl Issues {
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::IssueSimple>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !assignee.is_empty() {
-            query_args.push(format!("assignee={}", assignee));
+            query_args.push(("assignee".to_string(), assignee.to_string()));
         }
         if !creator.is_empty() {
-            query_args.push(format!("creator={}", creator));
+            query_args.push(("creator".to_string(), creator.to_string()));
         }
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !labels.is_empty() {
-            query_args.push(format!("labels={}", labels));
+            query_args.push(("labels".to_string(), labels.to_string()));
         }
         if !mentioned.is_empty() {
-            query_args.push(format!("mentioned={}", mentioned));
+            query_args.push(("mentioned".to_string(), mentioned.to_string()));
         }
         if !milestone.is_empty() {
-            query_args.push(format!("milestone={}", milestone));
+            query_args.push(("milestone".to_string(), milestone.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -685,29 +643,23 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueComment>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -737,23 +689,17 @@ impl Issues {
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::IssueComment>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -881,20 +827,14 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueEvent>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/events?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1140,23 +1080,17 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueComment>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1186,17 +1120,11 @@ impl Issues {
         issue_number: i64,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::IssueComment>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/comments?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1270,20 +1198,14 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::IssueEventAnyOf>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/events?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1347,20 +1269,14 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Label>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/labels?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1628,20 +1544,14 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Data>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/timeline?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1703,20 +1613,14 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Label>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/labels?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1911,29 +1815,23 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Milestone>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/milestones?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1963,23 +1861,17 @@ impl Issues {
         sort: crate::types::IssuesListMilestonesSort,
         direction: crate::types::Order,
     ) -> Result<Vec<crate::types::Milestone>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/milestones?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2148,20 +2040,14 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Label>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/milestones/{}/labels?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2243,38 +2129,32 @@ impl Issues {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Issue>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !filter.to_string().is_empty() {
-            query_args.push(format!("filter={}", filter.to_string()));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !labels.is_empty() {
-            query_args.push(format!("labels={}", labels));
+            query_args.push(("labels".to_string(), labels.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/issues?{}", query_);
 
         self.client.get(&url, None).await
@@ -2305,32 +2185,26 @@ impl Issues {
         direction: crate::types::Order,
         since: Option<chrono::DateTime<chrono::Utc>>,
     ) -> Result<Vec<crate::types::Issue>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !filter.to_string().is_empty() {
-            query_args.push(format!("filter={}", filter.to_string()));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !labels.is_empty() {
-            query_args.push(format!("labels={}", labels));
+            query_args.push(("labels".to_string(), labels.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/issues?{}", query_);
 
         self.client.get_all_pages(&url, None).await

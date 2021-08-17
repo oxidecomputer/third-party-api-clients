@@ -41,26 +41,20 @@ impl SipPhone {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::Phones>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
+            query_args.push(("page_number".to_string(), page_number.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !search_key.is_empty() {
-            query_args.push(format!("search_key={}", search_key));
+            query_args.push(("search_key".to_string(), search_key.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/sip_phones?{}", query_);
 
         let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await.unwrap();
@@ -84,17 +78,11 @@ impl SipPhone {
      *
      */
     pub async fn list_all(&self, search_key: &str) -> Result<Vec<crate::types::Phones>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !search_key.is_empty() {
-            query_args.push(format!("search_key={}", search_key));
+            query_args.push(("search_key".to_string(), search_key.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/sip_phones?{}", query_);
 
         let mut resp: crate::types::ListSipPhonesResponse =

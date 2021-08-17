@@ -35,23 +35,17 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Project>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/projects?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -77,17 +71,11 @@ impl Projects {
         org: &str,
         state: crate::types::IssuesListState,
     ) -> Result<Vec<crate::types::Project>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/projects?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -332,23 +320,17 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::ProjectCard>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !archived_state.to_string().is_empty() {
-            query_args.push(format!("archived_state={}", archived_state.to_string()));
+            query_args.push(("archived_state".to_string(), archived_state.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/projects/columns/{}/cards?{}",
             crate::progenitor_support::encode_path(&column_id.to_string()),
@@ -374,17 +356,11 @@ impl Projects {
         column_id: i64,
         archived_state: crate::types::ArchivedState,
     ) -> Result<Vec<crate::types::ProjectCard>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !archived_state.to_string().is_empty() {
-            query_args.push(format!("archived_state={}", archived_state.to_string()));
+            query_args.push(("archived_state".to_string(), archived_state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/projects/columns/{}/cards?{}",
             crate::progenitor_support::encode_path(&column_id.to_string()),
@@ -557,23 +533,17 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::SimpleUser>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !affiliation.to_string().is_empty() {
-            query_args.push(format!("affiliation={}", affiliation.to_string()));
+            query_args.push(("affiliation".to_string(), affiliation.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/projects/{}/collaborators?{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
@@ -599,17 +569,11 @@ impl Projects {
         project_id: i64,
         affiliation: crate::types::Affiliation,
     ) -> Result<Vec<crate::types::SimpleUser>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !affiliation.to_string().is_empty() {
-            query_args.push(format!("affiliation={}", affiliation.to_string()));
+            query_args.push(("affiliation".to_string(), affiliation.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/projects/{}/collaborators?{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
@@ -726,20 +690,14 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::ProjectColumn>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/projects/{}/columns?{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
@@ -828,23 +786,17 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Project>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/projects?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -872,17 +824,11 @@ impl Projects {
         repo: &str,
         state: crate::types::IssuesListState,
     ) -> Result<Vec<crate::types::Project>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/projects?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -972,23 +918,17 @@ impl Projects {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Project>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/projects?{}",
             crate::progenitor_support::encode_path(&username.to_string()),
@@ -1014,17 +954,11 @@ impl Projects {
         username: &str,
         state: crate::types::IssuesListState,
     ) -> Result<Vec<crate::types::Project>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !state.to_string().is_empty() {
-            query_args.push(format!("state={}", state.to_string()));
+            query_args.push(("state".to_string(), state.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/projects?{}",
             crate::progenitor_support::encode_path(&username.to_string()),

@@ -35,26 +35,20 @@ impl TemplateRecipients {
         include_extended: &str,
         include_tabs: &str,
     ) -> Result<crate::types::Recipients> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_anchor_tab_locations.is_empty() {
-            query_args.push(format!(
-                "include_anchor_tab_locations={}",
-                include_anchor_tab_locations
+            query_args.push((
+                "include_anchor_tab_locations".to_string(),
+                include_anchor_tab_locations.to_string(),
             ));
         }
         if !include_extended.is_empty() {
-            query_args.push(format!("include_extended={}", include_extended));
+            query_args.push(("include_extended".to_string(), include_extended.to_string()));
         }
         if !include_tabs.is_empty() {
-            query_args.push(format!("include_tabs={}", include_tabs));
+            query_args.push(("include_tabs".to_string(), include_tabs.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -89,17 +83,11 @@ impl TemplateRecipients {
         resend_envelope: &str,
         body: &crate::types::TemplateRecipientsData,
     ) -> Result<crate::types::RecipientsUpdateSummary> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !resend_envelope.is_empty() {
-            query_args.push(format!("resend_envelope={}", resend_envelope));
+            query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -137,17 +125,11 @@ impl TemplateRecipients {
         resend_envelope: &str,
         body: &crate::types::TemplateRecipientsData,
     ) -> Result<crate::types::Recipients> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !resend_envelope.is_empty() {
-            query_args.push(format!("resend_envelope={}", resend_envelope));
+            query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

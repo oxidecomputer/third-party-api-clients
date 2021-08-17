@@ -31,20 +31,14 @@ impl SigningGroups {
         group_type: &str,
         include_users: &str,
     ) -> Result<crate::types::SigningGroupInformation> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !group_type.is_empty() {
-            query_args.push(format!("group_type={}", group_type));
+            query_args.push(("group_type".to_string(), group_type.to_string()));
         }
         if !include_users.is_empty() {
-            query_args.push(format!("include_users={}", include_users));
+            query_args.push(("include_users".to_string(), include_users.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/signing_groups?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

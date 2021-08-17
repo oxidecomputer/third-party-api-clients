@@ -31,29 +31,23 @@ impl Drives {
         q: &str,
         use_domain_admin_access: bool,
     ) -> Result<Vec<crate::types::Drive>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/drives?{}", query_);
 
         let resp: crate::types::DriveList = self.client.get(&url, None).await.unwrap();
@@ -74,23 +68,17 @@ impl Drives {
         q: &str,
         use_domain_admin_access: bool,
     ) -> Result<Vec<crate::types::Drive>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/drives?{}", query_);
 
         let mut resp: crate::types::DriveList = self.client.get(&url, None).await.unwrap();
@@ -141,17 +129,11 @@ impl Drives {
         request_id: &str,
         body: &crate::types::Drive,
     ) -> Result<crate::types::Drive> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !request_id.is_empty() {
-            query_args.push(format!("request_id={}", request_id));
+            query_args.push(("request_id".to_string(), request_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/drives?{}", query_);
 
         self.client
@@ -177,20 +159,14 @@ impl Drives {
         drive_id: &str,
         use_domain_admin_access: bool,
     ) -> Result<crate::types::Drive> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/drives/{}?{}",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
@@ -234,20 +210,14 @@ impl Drives {
         use_domain_admin_access: bool,
         body: &crate::types::Drive,
     ) -> Result<crate::types::Drive> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/drives/{}?{}",
             crate::progenitor_support::encode_path(&drive_id.to_string()),

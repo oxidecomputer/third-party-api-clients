@@ -40,26 +40,23 @@ impl RoomsLocation {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::AddAzrLocationResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !parent_location_id.is_empty() {
-            query_args.push(format!("parent_location_id={}", parent_location_id));
+            query_args.push((
+                "parent_location_id".to_string(),
+                parent_location_id.to_string(),
+            ));
         }
         if !type_.is_empty() {
-            query_args.push(format!("type={}", type_));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/locations?{}", query_);
 
         let resp: crate::types::ListZrLocationsResponseData =
@@ -89,20 +86,17 @@ impl RoomsLocation {
         parent_location_id: &str,
         type_: &str,
     ) -> Result<Vec<crate::types::AddAzrLocationResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !parent_location_id.is_empty() {
-            query_args.push(format!("parent_location_id={}", parent_location_id));
+            query_args.push((
+                "parent_location_id".to_string(),
+                parent_location_id.to_string(),
+            ));
         }
         if !type_.is_empty() {
-            query_args.push(format!("type={}", type_));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/locations?{}", query_);
 
         let mut resp: crate::types::ListZrLocationsResponseData =
@@ -260,17 +254,11 @@ impl RoomsLocation {
         location_id: &str,
         setting_type: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
-            query_args.push(format!("setting_type={}", setting_type));
+            query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/rooms/locations/{}/settings?{}",
             crate::progenitor_support::encode_path(&location_id.to_string()),
@@ -304,17 +292,11 @@ impl RoomsLocation {
         location_id: &str,
         setting_type: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !setting_type.is_empty() {
-            query_args.push(format!("setting_type={}", setting_type));
+            query_args.push(("setting_type".to_string(), setting_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/rooms/locations/{}/settings?{}",
             crate::progenitor_support::encode_path(&location_id.to_string()),

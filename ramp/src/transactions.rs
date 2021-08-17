@@ -58,62 +58,68 @@ impl Transactions {
         page_size: f64,
         requires_memo: bool,
     ) -> Result<Vec<crate::types::Data>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
-            query_args.push(format!("department_id={}", department_id));
+            query_args.push(("department_id".to_string(), department_id.to_string()));
         }
         if let Some(date) = from_date {
-            query_args.push(format!("from_date={}", &date.to_rfc3339()));
+            query_args.push(("from_date".to_string(), date.to_rfc3339()));
         }
         if !location_id.is_empty() {
-            query_args.push(format!("location_id={}", location_id));
+            query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         if !max_amount.to_string().is_empty() {
-            query_args.push(format!("max_amount={}", max_amount.to_string()));
+            query_args.push(("max_amount".to_string(), max_amount.to_string()));
         }
         if !merchant_id.is_empty() {
-            query_args.push(format!("merchant_id={}", merchant_id));
+            query_args.push(("merchant_id".to_string(), merchant_id.to_string()));
         }
         if !min_amount.to_string().is_empty() {
-            query_args.push(format!("min_amount={}", min_amount.to_string()));
+            query_args.push(("min_amount".to_string(), min_amount.to_string()));
         }
         if order_by_amount_asc {
-            query_args.push(format!("order_by_amount_asc={}", order_by_amount_asc));
+            query_args.push((
+                "order_by_amount_asc".to_string(),
+                order_by_amount_asc.to_string(),
+            ));
         }
         if order_by_amount_desc {
-            query_args.push(format!("order_by_amount_desc={}", order_by_amount_desc));
+            query_args.push((
+                "order_by_amount_desc".to_string(),
+                order_by_amount_desc.to_string(),
+            ));
         }
         if order_by_date_asc {
-            query_args.push(format!("order_by_date_asc={}", order_by_date_asc));
+            query_args.push((
+                "order_by_date_asc".to_string(),
+                order_by_date_asc.to_string(),
+            ));
         }
         if order_by_date_desc {
-            query_args.push(format!("order_by_date_desc={}", order_by_date_desc));
+            query_args.push((
+                "order_by_date_desc".to_string(),
+                order_by_date_desc.to_string(),
+            ));
         }
         if !page_size.to_string().is_empty() {
-            query_args.push(format!("page_size={}", page_size.to_string()));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if requires_memo {
-            query_args.push(format!("requires_memo={}", requires_memo));
+            query_args.push(("requires_memo".to_string(), requires_memo.to_string()));
         }
         if !sk_category_id.is_empty() {
-            query_args.push(format!("sk_category_id={}", sk_category_id));
+            query_args.push(("sk_category_id".to_string(), sk_category_id.to_string()));
         }
         if !start.is_empty() {
-            query_args.push(format!("start={}", start));
+            query_args.push(("start".to_string(), start.to_string()));
         }
         if !state.is_empty() {
-            query_args.push(format!("state={}", state));
+            query_args.push(("state".to_string(), state.to_string()));
         }
         if let Some(date) = to_date {
-            query_args.push(format!("to_date={}", &date.to_rfc3339()));
+            query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/transactions?{}", query_);
 
         let resp: crate::types::GetTransactionResponse = self.client.get(&url, None).await.unwrap();
@@ -148,56 +154,62 @@ impl Transactions {
         max_amount: f64,
         requires_memo: bool,
     ) -> Result<Vec<crate::types::Data>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
-            query_args.push(format!("department_id={}", department_id));
+            query_args.push(("department_id".to_string(), department_id.to_string()));
         }
         if let Some(date) = from_date {
-            query_args.push(format!("from_date={}", &date.to_rfc3339()));
+            query_args.push(("from_date".to_string(), date.to_rfc3339()));
         }
         if !location_id.is_empty() {
-            query_args.push(format!("location_id={}", location_id));
+            query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         if !max_amount.to_string().is_empty() {
-            query_args.push(format!("max_amount={}", max_amount.to_string()));
+            query_args.push(("max_amount".to_string(), max_amount.to_string()));
         }
         if !merchant_id.is_empty() {
-            query_args.push(format!("merchant_id={}", merchant_id));
+            query_args.push(("merchant_id".to_string(), merchant_id.to_string()));
         }
         if !min_amount.to_string().is_empty() {
-            query_args.push(format!("min_amount={}", min_amount.to_string()));
+            query_args.push(("min_amount".to_string(), min_amount.to_string()));
         }
         if order_by_amount_asc {
-            query_args.push(format!("order_by_amount_asc={}", order_by_amount_asc));
+            query_args.push((
+                "order_by_amount_asc".to_string(),
+                order_by_amount_asc.to_string(),
+            ));
         }
         if order_by_amount_desc {
-            query_args.push(format!("order_by_amount_desc={}", order_by_amount_desc));
+            query_args.push((
+                "order_by_amount_desc".to_string(),
+                order_by_amount_desc.to_string(),
+            ));
         }
         if order_by_date_asc {
-            query_args.push(format!("order_by_date_asc={}", order_by_date_asc));
+            query_args.push((
+                "order_by_date_asc".to_string(),
+                order_by_date_asc.to_string(),
+            ));
         }
         if order_by_date_desc {
-            query_args.push(format!("order_by_date_desc={}", order_by_date_desc));
+            query_args.push((
+                "order_by_date_desc".to_string(),
+                order_by_date_desc.to_string(),
+            ));
         }
         if requires_memo {
-            query_args.push(format!("requires_memo={}", requires_memo));
+            query_args.push(("requires_memo".to_string(), requires_memo.to_string()));
         }
         if !sk_category_id.is_empty() {
-            query_args.push(format!("sk_category_id={}", sk_category_id));
+            query_args.push(("sk_category_id".to_string(), sk_category_id.to_string()));
         }
         if !state.is_empty() {
-            query_args.push(format!("state={}", state));
+            query_args.push(("state".to_string(), state.to_string()));
         }
         if let Some(date) = to_date {
-            query_args.push(format!("to_date={}", &date.to_rfc3339()));
+            query_args.push(("to_date".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/transactions?{}", query_);
 
         let mut resp: crate::types::GetTransactionResponse =

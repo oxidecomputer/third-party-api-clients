@@ -40,26 +40,20 @@ impl ImChat {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<crate::types::ImChatSessionsResponseAllOf> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/im/chat/sessions?{}", query_);
 
         self.client.get(&url, None).await
@@ -99,26 +93,20 @@ impl ImChat {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<crate::types::ImChatMessagesResponseAllOf> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/im/chat/sessions/{}?{}",
             crate::progenitor_support::encode_path(&session_id.to_string()),
@@ -158,29 +146,23 @@ impl ImChat {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::ListimmessagesResponseMessages>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
-            query_args.push(format!("channel={}", channel));
+            query_args.push(("channel".to_string(), channel.to_string()));
         }
         if !chat_user.is_empty() {
-            query_args.push(format!("chat_user={}", chat_user));
+            query_args.push(("chat_user".to_string(), chat_user.to_string()));
         }
         if !date.is_empty() {
-            query_args.push(format!("date={}", date));
+            query_args.push(("date".to_string(), date.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/im/users/{}/chat/messages?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -214,23 +196,17 @@ impl ImChat {
         channel: &str,
         date: &str,
     ) -> Result<Vec<crate::types::ListimmessagesResponseMessages>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
-            query_args.push(format!("channel={}", channel));
+            query_args.push(("channel".to_string(), channel.to_string()));
         }
         if !chat_user.is_empty() {
-            query_args.push(format!("chat_user={}", chat_user));
+            query_args.push(("chat_user".to_string(), chat_user.to_string()));
         }
         if !date.is_empty() {
-            query_args.push(format!("date={}", date));
+            query_args.push(("date".to_string(), date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/im/users/{}/chat/messages?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -291,17 +267,11 @@ impl ImChat {
         chat_user: &str,
         body: &crate::types::SendimmessagesRequest,
     ) -> Result<crate::types::Groups> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !chat_user.is_empty() {
-            query_args.push(format!("chat_user={}", chat_user));
+            query_args.push(("chat_user".to_string(), chat_user.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/im/users/me/chat/messages?{}", query_);
 
         self.client

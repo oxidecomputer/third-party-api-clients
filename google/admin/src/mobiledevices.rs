@@ -37,32 +37,26 @@ impl Mobiledevices {
         query: &str,
         sort_order: crate::types::SortOrder,
     ) -> Result<Vec<crate::types::MobileDevice>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !projection.to_string().is_empty() {
-            query_args.push(format!("projection={}", projection.to_string()));
+            query_args.push(("projection".to_string(), projection.to_string()));
         }
         if !query.is_empty() {
-            query_args.push(format!("query={}", query));
+            query_args.push(("query".to_string(), query.to_string()));
         }
         if !sort_order.to_string().is_empty() {
-            query_args.push(format!("sort_order={}", sort_order.to_string()));
+            query_args.push(("sort_order".to_string(), sort_order.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/mobile?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
@@ -90,26 +84,20 @@ impl Mobiledevices {
         query: &str,
         sort_order: crate::types::SortOrder,
     ) -> Result<Vec<crate::types::MobileDevice>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !projection.to_string().is_empty() {
-            query_args.push(format!("projection={}", projection.to_string()));
+            query_args.push(("projection".to_string(), projection.to_string()));
         }
         if !query.is_empty() {
-            query_args.push(format!("query={}", query));
+            query_args.push(("query".to_string(), query.to_string()));
         }
         if !sort_order.to_string().is_empty() {
-            query_args.push(format!("sort_order={}", sort_order.to_string()));
+            query_args.push(("sort_order".to_string(), sort_order.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/mobile?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),
@@ -167,17 +155,11 @@ impl Mobiledevices {
         resource_id: &str,
         projection: crate::types::Projection,
     ) -> Result<crate::types::MobileDevice> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !projection.to_string().is_empty() {
-            query_args.push(format!("projection={}", projection.to_string()));
+            query_args.push(("projection".to_string(), projection.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/mobile/{}?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),

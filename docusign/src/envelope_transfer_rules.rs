@@ -33,20 +33,14 @@ impl EnvelopeTransferRules {
         count: &str,
         start_position: &str,
     ) -> Result<crate::types::EnvelopeTransferRuleInformation> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

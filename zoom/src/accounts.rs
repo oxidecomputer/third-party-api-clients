@@ -42,23 +42,17 @@ impl Accounts {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
+            query_args.push(("page_number".to_string(), page_number.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/accounts?{}", query_);
 
         self.client.get(&url, None).await
@@ -228,20 +222,17 @@ impl Accounts {
         option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -285,20 +276,17 @@ impl Accounts {
         option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::Security> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -342,20 +330,17 @@ impl Accounts {
         option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::AccountSettings> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -399,20 +384,17 @@ impl Accounts {
         option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::MeetingSecuritySettings> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -456,20 +438,17 @@ impl Accounts {
         option: crate::types::OptionData,
         custom_query_fields: &str,
     ) -> Result<crate::types::AccountSettingsResponseOneOf> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -502,17 +481,11 @@ impl Accounts {
         option: crate::types::AccountSettingsUpdateOption,
         body: &crate::types::AccountSettingsUpdateRequestOneOf,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -629,20 +602,17 @@ impl Accounts {
         option: &str,
         custom_query_fields: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.is_empty() {
-            query_args.push(format!("option={}", option));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/lock_settings?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -775,17 +745,11 @@ impl Accounts {
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      */
     pub async fn del_vb(&self, account_id: &str, file_ids: &str) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !file_ids.is_empty() {
-            query_args.push(format!("file_ids={}", file_ids));
+            query_args.push(("file_ids".to_string(), file_ids.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings/virtual_backgrounds?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

@@ -50,17 +50,14 @@ impl AccountCustomFields {
         apply_to_templates: &str,
         body: &crate::types::CustomField,
     ) -> Result<crate::types::AccountCustomFields> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !apply_to_templates.is_empty() {
-            query_args.push(format!("apply_to_templates={}", apply_to_templates));
+            query_args.push((
+                "apply_to_templates".to_string(),
+                apply_to_templates.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/custom_fields?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -95,17 +92,14 @@ impl AccountCustomFields {
         apply_to_templates: &str,
         body: &crate::types::CustomField,
     ) -> Result<crate::types::AccountCustomFields> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !apply_to_templates.is_empty() {
-            query_args.push(format!("apply_to_templates={}", apply_to_templates));
+            query_args.push((
+                "apply_to_templates".to_string(),
+                apply_to_templates.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/custom_fields/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -140,17 +134,14 @@ impl AccountCustomFields {
         custom_field_id: &str,
         apply_to_templates: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !apply_to_templates.is_empty() {
-            query_args.push(format!("apply_to_templates={}", apply_to_templates));
+            query_args.push((
+                "apply_to_templates".to_string(),
+                apply_to_templates.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/custom_fields/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

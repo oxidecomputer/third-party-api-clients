@@ -50,62 +50,62 @@ impl Files {
         supports_team_drives: bool,
         team_drive_id: &str,
     ) -> Result<Vec<crate::types::File>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !corpora.is_empty() {
-            query_args.push(format!("corpora={}", corpora));
+            query_args.push(("corpora".to_string(), corpora.to_string()));
         }
         if !drive_id.is_empty() {
-            query_args.push(format!("drive_id={}", drive_id));
+            query_args.push(("drive_id".to_string(), drive_id.to_string()));
         }
         if include_items_from_all_drives {
-            query_args.push(format!(
-                "include_items_from_all_drives={}",
-                include_items_from_all_drives
+            query_args.push((
+                "include_items_from_all_drives".to_string(),
+                include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if include_team_drive_items {
-            query_args.push(format!(
-                "include_team_drive_items={}",
-                include_team_drive_items
+            query_args.push((
+                "include_team_drive_items".to_string(),
+                include_team_drive_items.to_string(),
             ));
         }
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !spaces.is_empty() {
-            query_args.push(format!("spaces={}", spaces));
+            query_args.push(("spaces".to_string(), spaces.to_string()));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(format!("team_drive_id={}", team_drive_id));
+            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
 
         let resp: crate::types::FileList = self.client.get(&url, None).await.unwrap();
@@ -135,56 +135,56 @@ impl Files {
         supports_team_drives: bool,
         team_drive_id: &str,
     ) -> Result<Vec<crate::types::File>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !corpora.is_empty() {
-            query_args.push(format!("corpora={}", corpora));
+            query_args.push(("corpora".to_string(), corpora.to_string()));
         }
         if !drive_id.is_empty() {
-            query_args.push(format!("drive_id={}", drive_id));
+            query_args.push(("drive_id".to_string(), drive_id.to_string()));
         }
         if include_items_from_all_drives {
-            query_args.push(format!(
-                "include_items_from_all_drives={}",
-                include_items_from_all_drives
+            query_args.push((
+                "include_items_from_all_drives".to_string(),
+                include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if include_team_drive_items {
-            query_args.push(format!(
-                "include_team_drive_items={}",
-                include_team_drive_items
+            query_args.push((
+                "include_team_drive_items".to_string(),
+                include_team_drive_items.to_string(),
             ));
         }
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !spaces.is_empty() {
-            query_args.push(format!("spaces={}", spaces));
+            query_args.push(("spaces".to_string(), spaces.to_string()));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(format!("team_drive_id={}", team_drive_id));
+            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
 
         let mut resp: crate::types::FileList = self.client.get(&url, None).await.unwrap();
@@ -248,44 +248,47 @@ impl Files {
         use_content_as_indexable_text: bool,
         body: &crate::types::File,
     ) -> Result<crate::types::File> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if ignore_default_visibility {
-            query_args.push(format!(
-                "ignore_default_visibility={}",
-                ignore_default_visibility
+            query_args.push((
+                "ignore_default_visibility".to_string(),
+                ignore_default_visibility.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if keep_revision_forever {
-            query_args.push(format!("keep_revision_forever={}", keep_revision_forever));
-        }
-        if !ocr_language.is_empty() {
-            query_args.push(format!("ocr_language={}", ocr_language));
-        }
-        if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
-        }
-        if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if use_content_as_indexable_text {
-            query_args.push(format!(
-                "use_content_as_indexable_text={}",
-                use_content_as_indexable_text
+            query_args.push((
+                "keep_revision_forever".to_string(),
+                keep_revision_forever.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
+        if !ocr_language.is_empty() {
+            query_args.push(("ocr_language".to_string(), ocr_language.to_string()));
         }
+        if supports_all_drives {
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
+        }
+        if supports_team_drives {
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
+        }
+        if use_content_as_indexable_text {
+            query_args.push((
+                "use_content_as_indexable_text".to_string(),
+                use_content_as_indexable_text.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
 
         self.client
@@ -313,23 +316,17 @@ impl Files {
         space: &str,
         type_: &str,
     ) -> Result<crate::types::GeneratedIds> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !space.is_empty() {
-            query_args.push(format!("space={}", space));
+            query_args.push(("space".to_string(), space.to_string()));
         }
         if !type_.is_empty() {
-            query_args.push(format!("type={}", type_));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files/generateIds?{}", query_);
 
         self.client.get(&url, None).await
@@ -370,29 +367,32 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
     ) -> Result<crate::types::File> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
-            query_args.push(format!("acknowledge_abuse={}", acknowledge_abuse));
+            query_args.push((
+                "acknowledge_abuse".to_string(),
+                acknowledge_abuse.to_string(),
+            ));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -420,20 +420,20 @@ impl Files {
         supports_all_drives: bool,
         supports_team_drives: bool,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -474,44 +474,47 @@ impl Files {
         use_content_as_indexable_text: bool,
         body: &crate::types::File,
     ) -> Result<crate::types::File> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !add_parents.is_empty() {
-            query_args.push(format!("add_parents={}", add_parents));
+            query_args.push(("add_parents".to_string(), add_parents.to_string()));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if keep_revision_forever {
-            query_args.push(format!("keep_revision_forever={}", keep_revision_forever));
-        }
-        if !ocr_language.is_empty() {
-            query_args.push(format!("ocr_language={}", ocr_language));
-        }
-        if !remove_parents.is_empty() {
-            query_args.push(format!("remove_parents={}", remove_parents));
-        }
-        if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
-        }
-        if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if use_content_as_indexable_text {
-            query_args.push(format!(
-                "use_content_as_indexable_text={}",
-                use_content_as_indexable_text
+            query_args.push((
+                "keep_revision_forever".to_string(),
+                keep_revision_forever.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
+        if !ocr_language.is_empty() {
+            query_args.push(("ocr_language".to_string(), ocr_language.to_string()));
         }
+        if !remove_parents.is_empty() {
+            query_args.push(("remove_parents".to_string(), remove_parents.to_string()));
+        }
+        if supports_all_drives {
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
+        }
+        if supports_team_drives {
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
+        }
+        if use_content_as_indexable_text {
+            query_args.push((
+                "use_content_as_indexable_text".to_string(),
+                use_content_as_indexable_text.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -553,38 +556,41 @@ impl Files {
         supports_team_drives: bool,
         body: &crate::types::File,
     ) -> Result<crate::types::File> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if ignore_default_visibility {
-            query_args.push(format!(
-                "ignore_default_visibility={}",
-                ignore_default_visibility
+            query_args.push((
+                "ignore_default_visibility".to_string(),
+                ignore_default_visibility.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if keep_revision_forever {
-            query_args.push(format!("keep_revision_forever={}", keep_revision_forever));
+            query_args.push((
+                "keep_revision_forever".to_string(),
+                keep_revision_forever.to_string(),
+            ));
         }
         if !ocr_language.is_empty() {
-            query_args.push(format!("ocr_language={}", ocr_language));
+            query_args.push(("ocr_language".to_string(), ocr_language.to_string()));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/copy?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -610,17 +616,11 @@ impl Files {
      * * `mime_type: &str` -- The MIME type of the format requested for this export.
      */
     pub async fn drive_export(&self, file_id: &str, mime_type: &str) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !mime_type.is_empty() {
-            query_args.push(format!("mime_type={}", mime_type));
+            query_args.push(("mime_type".to_string(), mime_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/export?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -652,29 +652,32 @@ impl Files {
         supports_team_drives: bool,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
-            query_args.push(format!("acknowledge_abuse={}", acknowledge_abuse));
+            query_args.push((
+                "acknowledge_abuse".to_string(),
+                acknowledge_abuse.to_string(),
+            ));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/watch?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),

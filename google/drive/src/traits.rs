@@ -26,7 +26,7 @@ pub trait FileOps {
     /// Download a file by it's ID.
     async fn download_by_id(&self, id: &str) -> Result<bytes::Bytes>;
 
-    /// Create a folder, if it doesn't exist.
+    /// Create a folder, if it doesn't exist, returns the ID of the folder.
     async fn create_folder(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<String>;
 
     /// Get a file's contents by it's ID. Only works for Google Docs.
@@ -51,17 +51,17 @@ impl FileOps for crate::files::Files {
         }
 
         self.drive_list_files(
-            "drive",  // corpora
-            drive_id, // drive id
-            true,     // include_items_from_all_drives
-            "",       // include_permissions_for_view
-            false,    // include_team_drive_items
-            "",       // order_by
-            &query,   // query
-            "",       // spaces
-            true,     // supports_all_drives
-            false,    // supports_team_drives
-            "",       // team_drive_id
+            "drive",              // corpora
+            drive_id,             // drive id
+            true,                 // include_items_from_all_drives
+            "",                   // include_permissions_for_view
+            false,                // include_team_drive_items
+            "",                   // order_by
+            &clean_query(&query), // query
+            "",                   // spaces
+            true,                 // supports_all_drives
+            false,                // supports_team_drives
+            "",                   // team_drive_id
         )
         .await
     }
@@ -150,7 +150,7 @@ impl FileOps for crate::files::Files {
         Ok(resp.bytes().await.unwrap())
     }
 
-    /// Create a folder, if it doesn't exist.
+    /// Create a folder, if it doesn't exist, returns the ID of the folder.
     async fn create_folder(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<String> {
         let folder_mime_type = "application/vnd.google-apps.folder";
         let mut file: crate::types::File = Default::default();
@@ -174,17 +174,17 @@ impl FileOps for crate::files::Files {
         // Check if the folder exists.
         let folders = self
             .drive_list_files(
-                "drive",  // corpora
-                drive_id, // drive id
-                true,     // include_items_from_all_drives
-                "",       // include_permissions_for_view
-                false,    // include_team_drive_items
-                "",       // order_by
-                &query,   // query
-                "",       // spaces
-                true,     // supports_all_drives
-                false,    // supports_team_drives
-                "",       // team_drive_id
+                "drive",              // corpora
+                drive_id,             // drive id
+                true,                 // include_items_from_all_drives
+                "",                   // include_permissions_for_view
+                false,                // include_team_drive_items
+                "",                   // order_by
+                &clean_query(&query), // query
+                "",                   // spaces
+                true,                 // supports_all_drives
+                false,                // supports_team_drives
+                "",                   // team_drive_id
             )
             .await
             .unwrap_or_default();
@@ -267,8 +267,8 @@ impl DriveOps for crate::drives::Drives {
     async fn get_by_name(&self, name: &str) -> Result<crate::types::Drive> {
         let drives = self
             .drive_list_drives(
-                &format!("name = '{}'", name), // query
-                true,                          // use domain admin access
+                &clean_query(&format!("name = '{}'", name)), // query
+                true,                                        // use domain admin access
             )
             .await
             .unwrap();
@@ -281,4 +281,8 @@ impl DriveOps for crate::drives::Drives {
 
         Err(anyhow!("could not find drive with name: {:?}", name))
     }
+}
+
+fn clean_query(q: &str) -> String {
+    q.replace(" ", "+").replace("=", "%3d")
 }

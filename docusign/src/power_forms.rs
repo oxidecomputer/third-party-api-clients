@@ -50,26 +50,20 @@ impl PowerForms {
         order_by: &str,
         to_date: &str,
     ) -> Result<crate::types::PowerFormsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
-            query_args.push(format!("from_date={}", from_date));
+            query_args.push(("from_date".to_string(), from_date.to_string()));
         }
         if !order.is_empty() {
-            query_args.push(format!("order={}", order));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !to_date.is_empty() {
-            query_args.push(format!("to_date={}", to_date));
+            query_args.push(("to_date".to_string(), to_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/powerforms?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -193,17 +187,11 @@ impl PowerForms {
         account_id: &str,
         start_position: &str,
     ) -> Result<crate::types::PowerFormSendersResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/powerforms/senders?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

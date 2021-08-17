@@ -52,35 +52,29 @@ impl ChatMessages {
         next_page_token: &str,
         include_deleted_and_edited_message: &str,
     ) -> Result<Vec<crate::types::Messages>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !date.to_string().is_empty() {
-            query_args.push(format!("date={}", date.to_string()));
+            query_args.push(("date".to_string(), date.to_string()));
         }
         if !include_deleted_and_edited_message.is_empty() {
-            query_args.push(format!(
-                "include_deleted_and_edited_message={}",
-                include_deleted_and_edited_message
+            query_args.push((
+                "include_deleted_and_edited_message".to_string(),
+                include_deleted_and_edited_message.to_string(),
             ));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !to_channel.is_empty() {
-            query_args.push(format!("to_channel={}", to_channel));
+            query_args.push(("to_channel".to_string(), to_channel.to_string()));
         }
         if !to_contact.is_empty() {
-            query_args.push(format!("to_contact={}", to_contact));
+            query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/chat/users/{}/messages?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -120,29 +114,23 @@ impl ChatMessages {
         date: chrono::NaiveDate,
         include_deleted_and_edited_message: &str,
     ) -> Result<Vec<crate::types::Messages>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !date.to_string().is_empty() {
-            query_args.push(format!("date={}", date.to_string()));
+            query_args.push(("date".to_string(), date.to_string()));
         }
         if !include_deleted_and_edited_message.is_empty() {
-            query_args.push(format!(
-                "include_deleted_and_edited_message={}",
-                include_deleted_and_edited_message
+            query_args.push((
+                "include_deleted_and_edited_message".to_string(),
+                include_deleted_and_edited_message.to_string(),
             ));
         }
         if !to_channel.is_empty() {
-            query_args.push(format!("to_channel={}", to_channel));
+            query_args.push(("to_channel".to_string(), to_channel.to_string()));
         }
         if !to_contact.is_empty() {
-            query_args.push(format!("to_contact={}", to_contact));
+            query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/chat/users/{}/messages?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -316,20 +304,14 @@ impl ChatMessages {
         to_contact: &str,
         to_channel: &str,
     ) -> Result<crate::types::GetChatMessageResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !to_channel.is_empty() {
-            query_args.push(format!("to_channel={}", to_channel));
+            query_args.push(("to_channel".to_string(), to_channel.to_string()));
         }
         if !to_contact.is_empty() {
-            query_args.push(format!("to_contact={}", to_contact));
+            query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/chat/users/{}/messages/{}?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -413,20 +395,14 @@ impl ChatMessages {
         to_contact: &str,
         to_channel: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !to_channel.is_empty() {
-            query_args.push(format!("to_channel={}", to_channel));
+            query_args.push(("to_channel".to_string(), to_channel.to_string()));
         }
         if !to_contact.is_empty() {
-            query_args.push(format!("to_contact={}", to_contact));
+            query_args.push(("to_contact".to_string(), to_contact.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/chat/users/{}/messages/{}?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),

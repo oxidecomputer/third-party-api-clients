@@ -45,35 +45,41 @@ impl WorkspaceItems {
         start_position: &str,
         workspace_user_id: &str,
     ) -> Result<crate::types::WorkspaceFolderContents> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !include_files.is_empty() {
-            query_args.push(format!("include_files={}", include_files));
+            query_args.push(("include_files".to_string(), include_files.to_string()));
         }
         if !include_sub_folders.is_empty() {
-            query_args.push(format!("include_sub_folders={}", include_sub_folders));
+            query_args.push((
+                "include_sub_folders".to_string(),
+                include_sub_folders.to_string(),
+            ));
         }
         if !include_thumbnails.is_empty() {
-            query_args.push(format!("include_thumbnails={}", include_thumbnails));
+            query_args.push((
+                "include_thumbnails".to_string(),
+                include_thumbnails.to_string(),
+            ));
         }
         if !include_user_detail.is_empty() {
-            query_args.push(format!("include_user_detail={}", include_user_detail));
+            query_args.push((
+                "include_user_detail".to_string(),
+                include_user_detail.to_string(),
+            ));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         if !workspace_user_id.is_empty() {
-            query_args.push(format!("workspace_user_id={}", workspace_user_id));
+            query_args.push((
+                "workspace_user_id".to_string(),
+                workspace_user_id.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -176,20 +182,14 @@ impl WorkspaceItems {
         is_download: &str,
         pdf_version: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !is_download.is_empty() {
-            query_args.push(format!("is_download={}", is_download));
+            query_args.push(("is_download".to_string(), is_download.to_string()));
         }
         if !pdf_version.is_empty() {
-            query_args.push(format!("pdf_version={}", pdf_version));
+            query_args.push(("pdf_version".to_string(), pdf_version.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -265,29 +265,23 @@ impl WorkspaceItems {
         max_width: &str,
         start_position: &str,
     ) -> Result<crate::types::PageImages> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !dpi.is_empty() {
-            query_args.push(format!("dpi={}", dpi));
+            query_args.push(("dpi".to_string(), dpi.to_string()));
         }
         if !max_height.is_empty() {
-            query_args.push(format!("max_height={}", max_height));
+            query_args.push(("max_height".to_string(), max_height.to_string()));
         }
         if !max_width.is_empty() {
-            query_args.push(format!("max_width={}", max_width));
+            query_args.push(("max_width".to_string(), max_width.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}/folders/{}/files/{}/pages?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

@@ -33,23 +33,17 @@ impl AccountBrands {
         exclude_distributor_brand: &str,
         include_logos: &str,
     ) -> Result<crate::types::AccountBrands> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !exclude_distributor_brand.is_empty() {
-            query_args.push(format!(
-                "exclude_distributor_brand={}",
-                exclude_distributor_brand
+            query_args.push((
+                "exclude_distributor_brand".to_string(),
+                exclude_distributor_brand.to_string(),
             ));
         }
         if !include_logos.is_empty() {
-            query_args.push(format!("include_logos={}", include_logos));
+            query_args.push(("include_logos".to_string(), include_logos.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/brands?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -148,23 +142,17 @@ impl AccountBrands {
         include_external_references: &str,
         include_logos: &str,
     ) -> Result<crate::types::Brand> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_external_references.is_empty() {
-            query_args.push(format!(
-                "include_external_references={}",
-                include_external_references
+            query_args.push((
+                "include_external_references".to_string(),
+                include_external_references.to_string(),
             ));
         }
         if !include_logos.is_empty() {
-            query_args.push(format!("include_logos={}", include_logos));
+            query_args.push(("include_logos".to_string(), include_logos.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/brands/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -417,20 +405,14 @@ impl AccountBrands {
         langcode: &str,
         return_master: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !langcode.is_empty() {
-            query_args.push(format!("langcode={}", langcode));
+            query_args.push(("langcode".to_string(), langcode.to_string()));
         }
         if !return_master.is_empty() {
-            query_args.push(format!("return_master={}", return_master));
+            query_args.push(("return_master".to_string(), return_master.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/brands/{}/resources/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

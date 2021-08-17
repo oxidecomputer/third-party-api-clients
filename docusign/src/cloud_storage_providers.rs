@@ -36,17 +36,11 @@ impl CloudStorageProviders {
         user_id: &str,
         redirect_url: &str,
     ) -> Result<crate::types::CloudStorageProvidersData> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !redirect_url.is_empty() {
-            query_args.push(format!("redirect_url={}", redirect_url));
+            query_args.push(("redirect_url".to_string(), redirect_url.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -150,17 +144,11 @@ impl CloudStorageProviders {
         user_id: &str,
         redirect_url: &str,
     ) -> Result<crate::types::CloudStorageProvidersData> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !redirect_url.is_empty() {
-            query_args.push(format!("redirect_url={}", redirect_url));
+            query_args.push(("redirect_url".to_string(), redirect_url.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

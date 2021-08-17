@@ -114,20 +114,14 @@ impl Apps {
         per_page: i64,
         cursor: &str,
     ) -> Result<Vec<crate::types::HookDeliveryItem>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
-            query_args.push(format!("cursor={}", cursor));
+            query_args.push(("cursor".to_string(), cursor.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/app/hook/deliveries?{}", query_);
 
         self.client.get(&url, None).await
@@ -150,17 +144,11 @@ impl Apps {
         &self,
         cursor: &str,
     ) -> Result<Vec<crate::types::HookDeliveryItem>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
-            query_args.push(format!("cursor={}", cursor));
+            query_args.push(("cursor".to_string(), cursor.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/app/hook/deliveries?{}", query_);
 
         self.client.get_all_pages(&url, None).await
@@ -242,26 +230,20 @@ impl Apps {
         since: Option<chrono::DateTime<chrono::Utc>>,
         outdated: &str,
     ) -> Result<Vec<crate::types::Installation>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !outdated.is_empty() {
-            query_args.push(format!("outdated={}", outdated));
+            query_args.push(("outdated".to_string(), outdated.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/app/installations?{}", query_);
 
         self.client.get(&url, None).await
@@ -285,20 +267,14 @@ impl Apps {
         since: Option<chrono::DateTime<chrono::Utc>>,
         outdated: &str,
     ) -> Result<Vec<crate::types::Installation>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !outdated.is_empty() {
-            query_args.push(format!("outdated={}", outdated));
+            query_args.push(("outdated".to_string(), outdated.to_string()));
         }
         if let Some(date) = since {
-            query_args.push(format!("since={}", &date.to_rfc3339()));
+            query_args.push(("since".to_string(), date.to_rfc3339()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/app/installations?{}", query_);
 
         self.client.get_all_pages(&url, None).await
@@ -762,20 +738,14 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::AppsListInstallationReposResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/installation/repositories?{}", query_);
 
         self.client.get(&url, None).await
@@ -847,20 +817,14 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketplace_listing/plans?{}", query_);
 
         self.client.get(&url, None).await
@@ -913,26 +877,20 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketplace_listing/plans/{}/accounts?{}",
             crate::progenitor_support::encode_path(&plan_id.to_string()),
@@ -961,20 +919,14 @@ impl Apps {
         sort: crate::types::Sort,
         direction: crate::types::Order,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketplace_listing/plans/{}/accounts?{}",
             crate::progenitor_support::encode_path(&plan_id.to_string()),
@@ -1032,20 +984,14 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplaceListingPlan>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/marketplace_listing/stubbed/plans?{}", query_);
 
         self.client.get(&url, None).await
@@ -1100,26 +1046,20 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketplace_listing/stubbed/plans/{}/accounts?{}",
             crate::progenitor_support::encode_path(&plan_id.to_string()),
@@ -1148,20 +1088,14 @@ impl Apps {
         sort: crate::types::Sort,
         direction: crate::types::Order,
     ) -> Result<Vec<crate::types::MarketplacePurchaseData>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !direction.to_string().is_empty() {
-            query_args.push(format!("direction={}", direction.to_string()));
+            query_args.push(("direction".to_string(), direction.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketplace_listing/stubbed/plans/{}/accounts?{}",
             crate::progenitor_support::encode_path(&plan_id.to_string()),
@@ -1291,20 +1225,14 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::AppsListInstallationsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/installations?{}", query_);
 
         self.client.get(&url, None).await
@@ -1337,20 +1265,14 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::AppsListInstallationReposResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/user/installations/{}/repositories?{}",
             crate::progenitor_support::encode_path(&installation_id.to_string()),
@@ -1439,20 +1361,14 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::UserMarketplacePurchase>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/marketplace_purchases?{}", query_);
 
         self.client.get(&url, None).await
@@ -1495,20 +1411,14 @@ impl Apps {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::UserMarketplacePurchase>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/user/marketplace_purchases/stubbed?{}", query_);
 
         self.client.get(&url, None).await

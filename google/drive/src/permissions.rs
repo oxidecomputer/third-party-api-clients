@@ -37,38 +37,38 @@ impl Permissions {
         supports_team_drives: bool,
         use_domain_admin_access: bool,
     ) -> Result<Vec<crate::types::Permission>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
-        }
-        if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
+        if supports_team_drives {
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
+        if use_domain_admin_access {
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/permissions?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -96,32 +96,32 @@ impl Permissions {
         supports_team_drives: bool,
         use_domain_admin_access: bool,
     ) -> Result<Vec<crate::types::Permission>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
-        }
-        if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
+        if supports_team_drives {
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
+        if use_domain_admin_access {
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/permissions?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -191,44 +191,47 @@ impl Permissions {
         use_domain_admin_access: bool,
         body: &crate::types::Permission,
     ) -> Result<crate::types::Permission> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !email_message.is_empty() {
-            query_args.push(format!("email_message={}", email_message));
+            query_args.push(("email_message".to_string(), email_message.to_string()));
         }
         if move_to_new_owners_root {
-            query_args.push(format!(
-                "move_to_new_owners_root={}",
-                move_to_new_owners_root
+            query_args.push((
+                "move_to_new_owners_root".to_string(),
+                move_to_new_owners_root.to_string(),
             ));
         }
         if send_notification_email {
-            query_args.push(format!(
-                "send_notification_email={}",
-                send_notification_email
+            query_args.push((
+                "send_notification_email".to_string(),
+                send_notification_email.to_string(),
             ));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
-        }
-        if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if transfer_ownership {
-            query_args.push(format!("transfer_ownership={}", transfer_ownership));
-        }
-        if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
+        if supports_team_drives {
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
+        if transfer_ownership {
+            query_args.push((
+                "transfer_ownership".to_string(),
+                transfer_ownership.to_string(),
+            ));
+        }
+        if use_domain_admin_access {
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/permissions?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -264,26 +267,26 @@ impl Permissions {
         supports_team_drives: bool,
         use_domain_admin_access: bool,
     ) -> Result<crate::types::Permission> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
-        }
-        if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
+        if supports_team_drives {
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
+        if use_domain_admin_access {
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/permissions/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -315,26 +318,26 @@ impl Permissions {
         supports_team_drives: bool,
         use_domain_admin_access: bool,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
-        }
-        if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
+        if supports_team_drives {
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
+        if use_domain_admin_access {
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/permissions/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -371,32 +374,38 @@ impl Permissions {
         use_domain_admin_access: bool,
         body: &crate::types::Permission,
     ) -> Result<crate::types::Permission> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if remove_expiration {
-            query_args.push(format!("remove_expiration={}", remove_expiration));
-        }
-        if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
-        }
-        if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
-        }
-        if transfer_ownership {
-            query_args.push(format!("transfer_ownership={}", transfer_ownership));
-        }
-        if use_domain_admin_access {
-            query_args.push(format!(
-                "use_domain_admin_access={}",
-                use_domain_admin_access
+            query_args.push((
+                "remove_expiration".to_string(),
+                remove_expiration.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
+        if supports_all_drives {
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
+        if supports_team_drives {
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
+        }
+        if transfer_ownership {
+            query_args.push((
+                "transfer_ownership".to_string(),
+                transfer_ownership.to_string(),
+            ));
+        }
+        if use_domain_admin_access {
+            query_args.push((
+                "use_domain_admin_access".to_string(),
+                use_domain_admin_access.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/permissions/{}?{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),

@@ -43,23 +43,17 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -93,17 +87,11 @@ impl Reactions {
         comment_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -226,23 +214,17 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -274,17 +256,11 @@ impl Reactions {
         discussion_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions?{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -422,23 +398,17 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -468,17 +438,11 @@ impl Reactions {
         comment_id: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -590,23 +554,17 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -636,17 +594,11 @@ impl Reactions {
         comment_id: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -758,23 +710,17 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -804,17 +750,11 @@ impl Reactions {
         issue_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -926,23 +866,17 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -972,17 +906,11 @@ impl Reactions {
         comment_id: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -1133,23 +1061,17 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
@@ -1181,17 +1103,11 @@ impl Reactions {
         comment_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/teams/{}/discussions/{}/comments/{}/reactions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
@@ -1269,23 +1185,17 @@ impl Reactions {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/teams/{}/discussions/{}/reactions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),
@@ -1315,17 +1225,11 @@ impl Reactions {
         discussion_number: i64,
         content: crate::types::Content,
     ) -> Result<Vec<crate::types::Reaction>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !content.to_string().is_empty() {
-            query_args.push(format!("content={}", content.to_string()));
+            query_args.push(("content".to_string(), content.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/teams/{}/discussions/{}/reactions?{}",
             crate::progenitor_support::encode_path(&team_id.to_string()),

@@ -95,20 +95,14 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/enterprises/{}/actions/permissions/organizations?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -294,20 +288,14 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::EnterpriseAdminListSelfHostedRunnerGroupsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/enterprises/{}/actions/runner-groups?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -471,20 +459,14 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/organizations?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -622,20 +604,14 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ActionsListSelfHostedRunnersInGroupOrgResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/enterprises/{}/actions/runner-groups/{}/runners?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -772,20 +748,14 @@ impl EnterpriseAdmin {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::EnterpriseAdminListSelfHostedRunnersResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/enterprises/{}/actions/runners?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -1017,35 +987,29 @@ impl EnterpriseAdmin {
         page: i64,
         per_page: i64,
     ) -> Result<Vec<crate::types::AuditLogEvent>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
-            query_args.push(format!("after={}", after));
+            query_args.push(("after".to_string(), after.to_string()));
         }
         if !before.is_empty() {
-            query_args.push(format!("before={}", before));
+            query_args.push(("before".to_string(), before.to_string()));
         }
         if !include.to_string().is_empty() {
-            query_args.push(format!("include={}", include.to_string()));
+            query_args.push(("include".to_string(), include.to_string()));
         }
         if !order.to_string().is_empty() {
-            query_args.push(format!("order={}", order.to_string()));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !phrase.is_empty() {
-            query_args.push(format!("phrase={}", phrase));
+            query_args.push(("phrase".to_string(), phrase.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/enterprises/{}/audit-log?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -1075,29 +1039,23 @@ impl EnterpriseAdmin {
         before: &str,
         order: crate::types::Order,
     ) -> Result<Vec<crate::types::AuditLogEvent>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !after.is_empty() {
-            query_args.push(format!("after={}", after));
+            query_args.push(("after".to_string(), after.to_string()));
         }
         if !before.is_empty() {
-            query_args.push(format!("before={}", before));
+            query_args.push(("before".to_string(), before.to_string()));
         }
         if !include.to_string().is_empty() {
-            query_args.push(format!("include={}", include.to_string()));
+            query_args.push(("include".to_string(), include.to_string()));
         }
         if !order.to_string().is_empty() {
-            query_args.push(format!("order={}", order.to_string()));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if !phrase.is_empty() {
-            query_args.push(format!("phrase={}", phrase));
+            query_args.push(("phrase".to_string(), phrase.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/enterprises/{}/audit-log?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -1132,26 +1090,23 @@ impl EnterpriseAdmin {
         filter: &str,
         excluded_attributes: &str,
     ) -> Result<crate::types::ScimGroupListEnterprise> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !excluded_attributes.is_empty() {
-            query_args.push(format!("excluded_attributes={}", excluded_attributes));
+            query_args.push((
+                "excluded_attributes".to_string(),
+                excluded_attributes.to_string(),
+            ));
         }
         if !filter.is_empty() {
-            query_args.push(format!("filter={}", filter));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if start_index > 0 {
-            query_args.push(format!("start_index={}", start_index));
+            query_args.push(("start_index".to_string(), start_index.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/scim/v2/enterprises/{}/Groups?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -1215,17 +1170,14 @@ impl EnterpriseAdmin {
         scim_group_id: &str,
         excluded_attributes: &str,
     ) -> Result<crate::types::ScimEnterpriseGroup> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !excluded_attributes.is_empty() {
-            query_args.push(format!("excluded_attributes={}", excluded_attributes));
+            query_args.push((
+                "excluded_attributes".to_string(),
+                excluded_attributes.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/scim/v2/enterprises/{}/Groups/{}?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),
@@ -1376,23 +1328,17 @@ impl EnterpriseAdmin {
         count: i64,
         filter: &str,
     ) -> Result<crate::types::ScimUserListEnterprise> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !filter.is_empty() {
-            query_args.push(format!("filter={}", filter));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if start_index > 0 {
-            query_args.push(format!("start_index={}", start_index));
+            query_args.push(("start_index".to_string(), start_index.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/scim/v2/enterprises/{}/Users?{}",
             crate::progenitor_support::encode_path(&enterprise.to_string()),

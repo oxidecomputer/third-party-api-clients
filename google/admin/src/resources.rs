@@ -29,20 +29,14 @@ impl Resources {
         max_results: i64,
         page_token: &str,
     ) -> Result<Vec<crate::types::Building>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -121,20 +115,14 @@ impl Resources {
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
     ) -> Result<crate::types::Building> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
-            query_args.push(format!(
-                "coordinates_source={}",
-                coordinates_source.to_string()
+            query_args.push((
+                "coordinates_source".to_string(),
+                coordinates_source.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -191,20 +179,14 @@ impl Resources {
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
     ) -> Result<crate::types::Building> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
-            query_args.push(format!(
-                "coordinates_source={}",
-                coordinates_source.to_string()
+            query_args.push((
+                "coordinates_source".to_string(),
+                coordinates_source.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -262,20 +244,14 @@ impl Resources {
         coordinates_source: crate::types::CoordinatesSource,
         body: &crate::types::Building,
     ) -> Result<crate::types::Building> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
-            query_args.push(format!(
-                "coordinates_source={}",
-                coordinates_source.to_string()
+            query_args.push((
+                "coordinates_source".to_string(),
+                coordinates_source.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -312,26 +288,20 @@ impl Resources {
         page_token: &str,
         query: &str,
     ) -> Result<Vec<crate::types::CalendarResource>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !query.is_empty() {
-            query_args.push(format!("query={}", query));
+            query_args.push(("query".to_string(), query.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -357,20 +327,14 @@ impl Resources {
         order_by: &str,
         query: &str,
     ) -> Result<Vec<crate::types::CalendarResource>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !query.is_empty() {
-            query_args.push(format!("query={}", query));
+            query_args.push(("query".to_string(), query.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -563,20 +527,14 @@ impl Resources {
         max_results: i64,
         page_token: &str,
     ) -> Result<Vec<crate::types::Feature>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),

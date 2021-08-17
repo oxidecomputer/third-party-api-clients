@@ -54,29 +54,23 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchCodeResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
-            query_args.push(format!("order={}", order.to_string()));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/code?{}", query_);
 
         self.client.get(&url, None).await
@@ -114,29 +108,23 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchCommitsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
-            query_args.push(format!("order={}", order.to_string()));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/commits?{}", query_);
 
         self.client.get(&url, None).await
@@ -178,29 +166,23 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchIssuesPullRequestsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
-            query_args.push(format!("order={}", order.to_string()));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/issues?{}", query_);
 
         self.client.get(&url, None).await
@@ -241,32 +223,26 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchLabelsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
-            query_args.push(format!("order={}", order.to_string()));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if repository_id > 0 {
-            query_args.push(format!("repository_id={}", repository_id));
+            query_args.push(("repository_id".to_string(), repository_id.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/labels?{}", query_);
 
         self.client.get(&url, None).await
@@ -309,29 +285,23 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchReposResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
-            query_args.push(format!("order={}", order.to_string()));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/repositories?{}", query_);
 
         self.client.get(&url, None).await
@@ -366,23 +336,17 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchTopicsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/topics?{}", query_);
 
         self.client.get(&url, None).await
@@ -421,29 +385,23 @@ impl Search {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::SearchUsersResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !order.to_string().is_empty() {
-            query_args.push(format!("order={}", order.to_string()));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !sort.to_string().is_empty() {
-            query_args.push(format!("sort={}", sort.to_string()));
+            query_args.push(("sort".to_string(), sort.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search/users?{}", query_);
 
         self.client.get(&url, None).await

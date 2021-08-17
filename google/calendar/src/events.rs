@@ -70,68 +70,62 @@ impl Events {
         time_zone: &str,
         updated_min: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
-            query_args.push(format!("i_cal_uid={}", i_cal_uid));
+            query_args.push(("i_cal_uid".to_string(), i_cal_uid.to_string()));
         }
         if max_attendees > 0 {
-            query_args.push(format!("max_attendees={}", max_attendees));
+            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
         }
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !private_extended_property.is_empty() {
-            query_args.push(format!(
-                "private_extended_property={}",
-                private_extended_property.join(" ")
+            query_args.push((
+                "private_extended_property".to_string(),
+                private_extended_property.join(" "),
             ));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !shared_extended_property.is_empty() {
-            query_args.push(format!(
-                "shared_extended_property={}",
-                shared_extended_property.join(" ")
+            query_args.push((
+                "shared_extended_property".to_string(),
+                shared_extended_property.join(" "),
             ));
         }
         if show_deleted {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
         if show_hidden_invitations {
-            query_args.push(format!(
-                "show_hidden_invitations={}",
-                show_hidden_invitations
+            query_args.push((
+                "show_hidden_invitations".to_string(),
+                show_hidden_invitations.to_string(),
             ));
         }
         if single_events {
-            query_args.push(format!("single_events={}", single_events));
+            query_args.push(("single_events".to_string(), single_events.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(format!("time_max={}", time_max));
+            query_args.push(("time_max".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(format!("time_min={}", time_min));
+            query_args.push(("time_min".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(format!("time_zone={}", time_zone));
+            query_args.push(("time_zone".to_string(), time_zone.to_string()));
         }
         if !updated_min.is_empty() {
-            query_args.push(format!("updated_min={}", updated_min));
+            query_args.push(("updated_min".to_string(), updated_min.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -168,62 +162,56 @@ impl Events {
         time_zone: &str,
         updated_min: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
-            query_args.push(format!("i_cal_uid={}", i_cal_uid));
+            query_args.push(("i_cal_uid".to_string(), i_cal_uid.to_string()));
         }
         if max_attendees > 0 {
-            query_args.push(format!("max_attendees={}", max_attendees));
+            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !private_extended_property.is_empty() {
-            query_args.push(format!(
-                "private_extended_property={}",
-                private_extended_property.join(" ")
+            query_args.push((
+                "private_extended_property".to_string(),
+                private_extended_property.join(" "),
             ));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !shared_extended_property.is_empty() {
-            query_args.push(format!(
-                "shared_extended_property={}",
-                shared_extended_property.join(" ")
+            query_args.push((
+                "shared_extended_property".to_string(),
+                shared_extended_property.join(" "),
             ));
         }
         if show_deleted {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
         if show_hidden_invitations {
-            query_args.push(format!(
-                "show_hidden_invitations={}",
-                show_hidden_invitations
+            query_args.push((
+                "show_hidden_invitations".to_string(),
+                show_hidden_invitations.to_string(),
             ));
         }
         if single_events {
-            query_args.push(format!("single_events={}", single_events));
+            query_args.push(("single_events".to_string(), single_events.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(format!("time_max={}", time_max));
+            query_args.push(("time_max".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(format!("time_min={}", time_min));
+            query_args.push(("time_min".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(format!("time_zone={}", time_zone));
+            query_args.push(("time_zone".to_string(), time_zone.to_string()));
         }
         if !updated_min.is_empty() {
-            query_args.push(format!("updated_min={}", updated_min));
+            query_args.push(("updated_min".to_string(), updated_min.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -290,32 +278,32 @@ impl Events {
         supports_attachments: bool,
         body: &crate::types::Event,
     ) -> Result<crate::types::Event> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
-            query_args.push(format!(
-                "conference_data_version={}",
-                conference_data_version.to_string()
+            query_args.push((
+                "conference_data_version".to_string(),
+                conference_data_version.to_string(),
             ));
         }
         if max_attendees > 0 {
-            query_args.push(format!("max_attendees={}", max_attendees));
+            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
         }
         if send_notifications {
-            query_args.push(format!("send_notifications={}", send_notifications));
+            query_args.push((
+                "send_notifications".to_string(),
+                send_notifications.to_string(),
+            ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(format!("send_updates={}", send_updates.to_string()));
+            query_args.push(("send_updates".to_string(), send_updates.to_string()));
         }
         if supports_attachments {
-            query_args.push(format!("supports_attachments={}", supports_attachments));
+            query_args.push((
+                "supports_attachments".to_string(),
+                supports_attachments.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -348,23 +336,20 @@ impl Events {
         supports_attachments: bool,
         body: &crate::types::Event,
     ) -> Result<crate::types::Event> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
-            query_args.push(format!(
-                "conference_data_version={}",
-                conference_data_version.to_string()
+            query_args.push((
+                "conference_data_version".to_string(),
+                conference_data_version.to_string(),
             ));
         }
         if supports_attachments {
-            query_args.push(format!("supports_attachments={}", supports_attachments));
+            query_args.push((
+                "supports_attachments".to_string(),
+                supports_attachments.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/import?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -400,23 +385,20 @@ impl Events {
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
     ) -> Result<crate::types::Event> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
-            query_args.push(format!("send_notifications={}", send_notifications));
+            query_args.push((
+                "send_notifications".to_string(),
+                send_notifications.to_string(),
+            ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(format!("send_updates={}", send_updates.to_string()));
+            query_args.push(("send_updates".to_string(), send_updates.to_string()));
         }
         if !text.is_empty() {
-            query_args.push(format!("text={}", text));
+            query_args.push(("text".to_string(), text.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/quickAdd?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -485,68 +467,62 @@ impl Events {
         updated_min: &str,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
-            query_args.push(format!("i_cal_uid={}", i_cal_uid));
+            query_args.push(("i_cal_uid".to_string(), i_cal_uid.to_string()));
         }
         if max_attendees > 0 {
-            query_args.push(format!("max_attendees={}", max_attendees));
+            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
         }
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !private_extended_property.is_empty() {
-            query_args.push(format!(
-                "private_extended_property={}",
-                private_extended_property.join(" ")
+            query_args.push((
+                "private_extended_property".to_string(),
+                private_extended_property.join(" "),
             ));
         }
         if !q.is_empty() {
-            query_args.push(format!("q={}", q));
+            query_args.push(("q".to_string(), q.to_string()));
         }
         if !shared_extended_property.is_empty() {
-            query_args.push(format!(
-                "shared_extended_property={}",
-                shared_extended_property.join(" ")
+            query_args.push((
+                "shared_extended_property".to_string(),
+                shared_extended_property.join(" "),
             ));
         }
         if show_deleted {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
         if show_hidden_invitations {
-            query_args.push(format!(
-                "show_hidden_invitations={}",
-                show_hidden_invitations
+            query_args.push((
+                "show_hidden_invitations".to_string(),
+                show_hidden_invitations.to_string(),
             ));
         }
         if single_events {
-            query_args.push(format!("single_events={}", single_events));
+            query_args.push(("single_events".to_string(), single_events.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(format!("time_max={}", time_max));
+            query_args.push(("time_max".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(format!("time_min={}", time_min));
+            query_args.push(("time_min".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(format!("time_zone={}", time_zone));
+            query_args.push(("time_zone".to_string(), time_zone.to_string()));
         }
         if !updated_min.is_empty() {
-            query_args.push(format!("updated_min={}", updated_min));
+            query_args.push(("updated_min".to_string(), updated_min.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/watch?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -581,20 +557,14 @@ impl Events {
         max_attendees: i64,
         time_zone: &str,
     ) -> Result<crate::types::Event> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
-            query_args.push(format!("max_attendees={}", max_attendees));
+            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(format!("time_zone={}", time_zone));
+            query_args.push(("time_zone".to_string(), time_zone.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -634,32 +604,32 @@ impl Events {
         supports_attachments: bool,
         body: &crate::types::Event,
     ) -> Result<crate::types::Event> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
-            query_args.push(format!(
-                "conference_data_version={}",
-                conference_data_version.to_string()
+            query_args.push((
+                "conference_data_version".to_string(),
+                conference_data_version.to_string(),
             ));
         }
         if max_attendees > 0 {
-            query_args.push(format!("max_attendees={}", max_attendees));
+            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
         }
         if send_notifications {
-            query_args.push(format!("send_notifications={}", send_notifications));
+            query_args.push((
+                "send_notifications".to_string(),
+                send_notifications.to_string(),
+            ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(format!("send_updates={}", send_updates.to_string()));
+            query_args.push(("send_updates".to_string(), send_updates.to_string()));
         }
         if supports_attachments {
-            query_args.push(format!("supports_attachments={}", supports_attachments));
+            query_args.push((
+                "supports_attachments".to_string(),
+                supports_attachments.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -696,20 +666,17 @@ impl Events {
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
-            query_args.push(format!("send_notifications={}", send_notifications));
+            query_args.push((
+                "send_notifications".to_string(),
+                send_notifications.to_string(),
+            ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(format!("send_updates={}", send_updates.to_string()));
+            query_args.push(("send_updates".to_string(), send_updates.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -749,32 +716,32 @@ impl Events {
         supports_attachments: bool,
         body: &crate::types::Event,
     ) -> Result<crate::types::Event> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
-            query_args.push(format!(
-                "conference_data_version={}",
-                conference_data_version.to_string()
+            query_args.push((
+                "conference_data_version".to_string(),
+                conference_data_version.to_string(),
             ));
         }
         if max_attendees > 0 {
-            query_args.push(format!("max_attendees={}", max_attendees));
+            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
         }
         if send_notifications {
-            query_args.push(format!("send_notifications={}", send_notifications));
+            query_args.push((
+                "send_notifications".to_string(),
+                send_notifications.to_string(),
+            ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(format!("send_updates={}", send_updates.to_string()));
+            query_args.push(("send_updates".to_string(), send_updates.to_string()));
         }
         if supports_attachments {
-            query_args.push(format!("supports_attachments={}", supports_attachments));
+            query_args.push((
+                "supports_attachments".to_string(),
+                supports_attachments.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -822,38 +789,32 @@ impl Events {
         time_min: &str,
         time_zone: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
-            query_args.push(format!("max_attendees={}", max_attendees));
+            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
         }
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !original_start.is_empty() {
-            query_args.push(format!("original_start={}", original_start));
+            query_args.push(("original_start".to_string(), original_start.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if show_deleted {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(format!("time_max={}", time_max));
+            query_args.push(("time_max".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(format!("time_min={}", time_min));
+            query_args.push(("time_min".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(format!("time_zone={}", time_zone));
+            query_args.push(("time_zone".to_string(), time_zone.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}/instances?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -885,32 +846,26 @@ impl Events {
         time_min: &str,
         time_zone: &str,
     ) -> Result<Vec<crate::types::Event>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
-            query_args.push(format!("max_attendees={}", max_attendees));
+            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
         }
         if !original_start.is_empty() {
-            query_args.push(format!("original_start={}", original_start));
+            query_args.push(("original_start".to_string(), original_start.to_string()));
         }
         if show_deleted {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(format!("time_max={}", time_max));
+            query_args.push(("time_max".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(format!("time_min={}", time_min));
+            query_args.push(("time_min".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(format!("time_zone={}", time_zone));
+            query_args.push(("time_zone".to_string(), time_zone.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}/instances?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -975,23 +930,20 @@ impl Events {
         send_notifications: bool,
         send_updates: crate::types::SendUpdates,
     ) -> Result<crate::types::Event> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
-            query_args.push(format!("destination={}", destination));
+            query_args.push(("destination".to_string(), destination.to_string()));
         }
         if send_notifications {
-            query_args.push(format!("send_notifications={}", send_notifications));
+            query_args.push((
+                "send_notifications".to_string(),
+                send_notifications.to_string(),
+            ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(format!("send_updates={}", send_updates.to_string()));
+            query_args.push(("send_updates".to_string(), send_updates.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}/move?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),

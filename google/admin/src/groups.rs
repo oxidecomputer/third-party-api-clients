@@ -39,38 +39,32 @@ impl Groups {
         sort_order: crate::types::SortOrder,
         user_key: &str,
     ) -> Result<Vec<crate::types::Group>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
-            query_args.push(format!("customer={}", customer));
+            query_args.push(("customer".to_string(), customer.to_string()));
         }
         if !domain.is_empty() {
-            query_args.push(format!("domain={}", domain));
+            query_args.push(("domain".to_string(), domain.to_string()));
         }
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !query.is_empty() {
-            query_args.push(format!("query={}", query));
+            query_args.push(("query".to_string(), query.to_string()));
         }
         if !sort_order.to_string().is_empty() {
-            query_args.push(format!("sort_order={}", sort_order.to_string()));
+            query_args.push(("sort_order".to_string(), sort_order.to_string()));
         }
         if !user_key.is_empty() {
-            query_args.push(format!("user_key={}", user_key));
+            query_args.push(("user_key".to_string(), user_key.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/groups?{}", query_);
 
         let resp: crate::types::Groups = self.client.get(&url, None).await.unwrap();
@@ -95,32 +89,26 @@ impl Groups {
         sort_order: crate::types::SortOrder,
         user_key: &str,
     ) -> Result<Vec<crate::types::Group>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
-            query_args.push(format!("customer={}", customer));
+            query_args.push(("customer".to_string(), customer.to_string()));
         }
         if !domain.is_empty() {
-            query_args.push(format!("domain={}", domain));
+            query_args.push(("domain".to_string(), domain.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(format!("order_by={}", order_by.to_string()));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !query.is_empty() {
-            query_args.push(format!("query={}", query));
+            query_args.push(("query".to_string(), query.to_string()));
         }
         if !sort_order.to_string().is_empty() {
-            query_args.push(format!("sort_order={}", sort_order.to_string()));
+            query_args.push(("sort_order".to_string(), sort_order.to_string()));
         }
         if !user_key.is_empty() {
-            query_args.push(format!("user_key={}", user_key));
+            query_args.push(("user_key".to_string(), user_key.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin/directory/v1/groups?{}", query_);
 
         let mut resp: crate::types::Groups = self.client.get(&url, None).await.unwrap();

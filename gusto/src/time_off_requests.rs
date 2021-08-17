@@ -47,20 +47,14 @@ impl TimeOffRequests {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::TimeOffRequest>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
-            query_args.push(format!("end_date={}", end_date));
+            query_args.push(("end_date".to_string(), end_date.to_string()));
         }
         if !start_date.is_empty() {
-            query_args.push(format!("start_date={}", start_date));
+            query_args.push(("start_date".to_string(), start_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/time_off_requests?{}",
             crate::progenitor_support::encode_path(&company_id.to_string()),
@@ -102,20 +96,14 @@ impl TimeOffRequests {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::TimeOffRequest>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
-            query_args.push(format!("end_date={}", end_date));
+            query_args.push(("end_date".to_string(), end_date.to_string()));
         }
         if !start_date.is_empty() {
-            query_args.push(format!("start_date={}", start_date));
+            query_args.push(("start_date".to_string(), start_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/time_off_requests?{}",
             crate::progenitor_support::encode_path(&company_id.to_string()),

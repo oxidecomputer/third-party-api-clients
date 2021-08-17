@@ -56,23 +56,17 @@ impl Scim {
         count: i64,
         filter: &str,
     ) -> Result<crate::types::ScimUserList> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if count > 0 {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !filter.is_empty() {
-            query_args.push(format!("filter={}", filter));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if start_index > 0 {
-            query_args.push(format!("start_index={}", start_index));
+            query_args.push(("start_index".to_string(), start_index.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/scim/v2/organizations/{}/Users?{}",
             crate::progenitor_support::encode_path(&org.to_string()),

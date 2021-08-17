@@ -39,26 +39,20 @@ impl Meetings {
         next_page_token: &str,
         page_number: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if !page_number.is_empty() {
-            query_args.push(format!("page_number={}", page_number));
+            query_args.push(("page_number".to_string(), page_number.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !type_.to_string().is_empty() {
-            query_args.push(format!("type={}", type_.to_string()));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/meetings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -134,23 +128,17 @@ impl Meetings {
         occurrence_id: &str,
         show_previous_occurrences: bool,
     ) -> Result<crate::types::MeetingResponseAllOf> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         if show_previous_occurrences {
-            query_args.push(format!(
-                "show_previous_occurrences={}",
-                show_previous_occurrences
+            query_args.push((
+                "show_previous_occurrences".to_string(),
+                show_previous_occurrences.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -192,26 +180,23 @@ impl Meetings {
         schedule_for_reminder: bool,
         cancel_meeting_reminder: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !cancel_meeting_reminder.is_empty() {
-            query_args.push(format!(
-                "cancel_meeting_reminder={}",
-                cancel_meeting_reminder
+            query_args.push((
+                "cancel_meeting_reminder".to_string(),
+                cancel_meeting_reminder.to_string(),
             ));
         }
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         if schedule_for_reminder {
-            query_args.push(format!("schedule_for_reminder={}", schedule_for_reminder));
+            query_args.push((
+                "schedule_for_reminder".to_string(),
+                schedule_for_reminder.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -243,17 +228,11 @@ impl Meetings {
         occurrence_id: &str,
         body: &crate::types::MeetingUpdateRequestAllOf,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -334,29 +313,23 @@ impl Meetings {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
+            query_args.push(("page_number".to_string(), page_number.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !status.to_string().is_empty() {
-            query_args.push(format!("status={}", status.to_string()));
+            query_args.push(("status".to_string(), status.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}/registrants?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -391,17 +364,11 @@ impl Meetings {
         meeting_id: i64,
         occurrence_ids: &str,
     ) -> Result<crate::types::MeetingRegistrantCreateResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_ids.is_empty() {
-            query_args.push(format!("occurrence_ids={}", occurrence_ids));
+            query_args.push(("occurrence_ids".to_string(), occurrence_ids.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}/registrants?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -433,17 +400,11 @@ impl Meetings {
         meeting_id: i64,
         registrant_id: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}/registrants/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -476,17 +437,11 @@ impl Meetings {
         occurrence_id: &str,
         body: &crate::types::RegistrantStatus,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/meetings/{}/registrants/status?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -559,20 +514,14 @@ impl Meetings {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<crate::types::PastMeetingParticipantsResponseAllOf> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/past_meetings/{}/participants?{}",
             crate::progenitor_support::encode_path(&meeting_uuid.to_string()),

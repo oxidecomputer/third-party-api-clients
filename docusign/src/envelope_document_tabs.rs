@@ -71,20 +71,14 @@ impl EnvelopeDocumentTabs {
         include_metadata: &str,
         page_numbers: &str,
     ) -> Result<crate::types::EnvelopeDocumentTabs> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_metadata.is_empty() {
-            query_args.push(format!("include_metadata={}", include_metadata));
+            query_args.push(("include_metadata".to_string(), include_metadata.to_string()));
         }
         if !page_numbers.is_empty() {
-            query_args.push(format!("page_numbers={}", page_numbers));
+            query_args.push(("page_numbers".to_string(), page_numbers.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/tabs?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

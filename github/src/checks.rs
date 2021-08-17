@@ -147,20 +147,14 @@ impl Checks {
         per_page: i64,
         page: i64,
     ) -> Result<Vec<crate::types::CheckAnnotation>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/check-runs/{}/annotations?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -337,29 +331,23 @@ impl Checks {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ChecksListRefResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !check_name.is_empty() {
-            query_args.push(format!("check_name={}", check_name));
+            query_args.push(("check_name".to_string(), check_name.to_string()));
         }
         if !filter.to_string().is_empty() {
-            query_args.push(format!("filter={}", filter.to_string()));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !status.to_string().is_empty() {
-            query_args.push(format!("status={}", status.to_string()));
+            query_args.push(("status".to_string(), status.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/check-suites/{}/check-runs?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -441,32 +429,26 @@ impl Checks {
         page: i64,
         app_id: i64,
     ) -> Result<crate::types::ChecksListRefResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if app_id > 0 {
-            query_args.push(format!("app_id={}", app_id));
+            query_args.push(("app_id".to_string(), app_id.to_string()));
         }
         if !check_name.is_empty() {
-            query_args.push(format!("check_name={}", check_name));
+            query_args.push(("check_name".to_string(), check_name.to_string()));
         }
         if !filter.to_string().is_empty() {
-            query_args.push(format!("filter={}", filter.to_string()));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
         if !status.to_string().is_empty() {
-            query_args.push(format!("status={}", status.to_string()));
+            query_args.push(("status".to_string(), status.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/commits/{}/check-runs?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -509,26 +491,20 @@ impl Checks {
         per_page: i64,
         page: i64,
     ) -> Result<crate::types::ChecksListSuitesRefResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if app_id > 0 {
-            query_args.push(format!("app_id={}", app_id));
+            query_args.push(("app_id".to_string(), app_id.to_string()));
         }
         if !check_name.is_empty() {
-            query_args.push(format!("check_name={}", check_name));
+            query_args.push(("check_name".to_string(), check_name.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/commits/{}/check-suites?{}",
             crate::progenitor_support::encode_path(&owner.to_string()),

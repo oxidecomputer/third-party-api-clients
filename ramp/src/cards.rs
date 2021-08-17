@@ -34,26 +34,20 @@ impl Cards {
         user_id: &str,
         card_program_id: &str,
     ) -> Result<Vec<crate::types::Card>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !card_program_id.is_empty() {
-            query_args.push(format!("card_program_id={}", card_program_id));
+            query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
         }
         if !page_size.to_string().is_empty() {
-            query_args.push(format!("page_size={}", page_size.to_string()));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !start.is_empty() {
-            query_args.push(format!("start={}", start));
+            query_args.push(("start".to_string(), start.to_string()));
         }
         if !user_id.is_empty() {
-            query_args.push(format!("user_id={}", user_id));
+            query_args.push(("user_id".to_string(), user_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
 
         let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await.unwrap();
@@ -76,20 +70,14 @@ impl Cards {
         user_id: &str,
         card_program_id: &str,
     ) -> Result<Vec<crate::types::Card>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !card_program_id.is_empty() {
-            query_args.push(format!("card_program_id={}", card_program_id));
+            query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
         }
         if !user_id.is_empty() {
-            query_args.push(format!("user_id={}", user_id));
+            query_args.push(("user_id".to_string(), user_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
 
         let mut resp: crate::types::GetCardsResponse = self.client.get(&url, None).await.unwrap();

@@ -28,17 +28,11 @@ impl Groups {
         alt: crate::types::Alt,
         group_unique_id: &str,
     ) -> Result<crate::types::Groups> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !alt.to_string().is_empty() {
-            query_args.push(format!("alt={}", alt.to_string()));
+            query_args.push(("alt".to_string(), alt.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/{}?{}",
             crate::progenitor_support::encode_path(&group_unique_id.to_string()),
@@ -65,17 +59,11 @@ impl Groups {
         group_unique_id: &str,
         body: &crate::types::Groups,
     ) -> Result<crate::types::Groups> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !alt.to_string().is_empty() {
-            query_args.push(format!("alt={}", alt.to_string()));
+            query_args.push(("alt".to_string(), alt.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/{}?{}",
             crate::progenitor_support::encode_path(&group_unique_id.to_string()),
@@ -107,17 +95,11 @@ impl Groups {
         group_unique_id: &str,
         body: &crate::types::Groups,
     ) -> Result<crate::types::Groups> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !alt.to_string().is_empty() {
-            query_args.push(format!("alt={}", alt.to_string()));
+            query_args.push(("alt".to_string(), alt.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/{}?{}",
             crate::progenitor_support::encode_path(&group_unique_id.to_string()),

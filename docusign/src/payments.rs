@@ -33,20 +33,14 @@ impl Payments {
         from_date: &str,
         to_date: &str,
     ) -> Result<crate::types::BillingPaymentsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
-            query_args.push(format!("from_date={}", from_date));
+            query_args.push(("from_date".to_string(), from_date.to_string()));
         }
         if !to_date.is_empty() {
-            query_args.push(format!("to_date={}", to_date));
+            query_args.push(("to_date".to_string(), to_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/billing_payments?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

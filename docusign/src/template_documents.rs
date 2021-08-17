@@ -31,17 +31,11 @@ impl TemplateDocuments {
         template_id: &str,
         include_tabs: &str,
     ) -> Result<crate::types::TemplateDocumentsResult> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_tabs.is_empty() {
-            query_args.push(format!("include_tabs={}", include_tabs));
+            query_args.push(("include_tabs".to_string(), include_tabs.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -155,20 +149,14 @@ impl TemplateDocuments {
         encrypt: &str,
         show_changes: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !encrypt.is_empty() {
-            query_args.push(format!("encrypt={}", encrypt));
+            query_args.push(("encrypt".to_string(), encrypt.to_string()));
         }
         if !show_changes.is_empty() {
-            query_args.push(format!("show_changes={}", show_changes));
+            query_args.push(("show_changes".to_string(), show_changes.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -202,17 +190,14 @@ impl TemplateDocuments {
         is_envelope_definition: &str,
         body: &crate::types::EnvelopeDefinition,
     ) -> Result<crate::types::EnvelopeDocument> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !is_envelope_definition.is_empty() {
-            query_args.push(format!("is_envelope_definition={}", is_envelope_definition));
+            query_args.push((
+                "is_envelope_definition".to_string(),
+                is_envelope_definition.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

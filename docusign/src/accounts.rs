@@ -188,20 +188,14 @@ impl Accounts {
         account_id: &str,
         include_account_settings: &str,
     ) -> Result<crate::types::AccountInformation> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_account_settings.is_empty() {
-            query_args.push(format!(
-                "include_account_settings={}",
-                include_account_settings
+            query_args.push((
+                "include_account_settings".to_string(),
+                include_account_settings.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -255,17 +249,11 @@ impl Accounts {
         account_id: &str,
         include_charges: &str,
     ) -> Result<crate::types::BillingChargeResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_charges.is_empty() {
-            query_args.push(format!("include_charges={}", include_charges));
+            query_args.push(("include_charges".to_string(), include_charges.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/billing_charges?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -324,17 +312,11 @@ impl Accounts {
         account_id: &str,
         email: &str,
     ) -> Result<crate::types::RecipientNamesResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
-            query_args.push(format!("email={}", email));
+            query_args.push(("email".to_string(), email.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/recipient_names?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -559,41 +541,35 @@ impl Accounts {
         start_position: &str,
         user_ids: &str,
     ) -> Result<crate::types::AccountSharedAccess> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !envelopes_not_shared_user_status.is_empty() {
-            query_args.push(format!(
-                "envelopes_not_shared_user_status={}",
-                envelopes_not_shared_user_status
+            query_args.push((
+                "envelopes_not_shared_user_status".to_string(),
+                envelopes_not_shared_user_status.to_string(),
             ));
         }
         if !folder_ids.is_empty() {
-            query_args.push(format!("folder_ids={}", folder_ids));
+            query_args.push(("folder_ids".to_string(), folder_ids.to_string()));
         }
         if !item_type.is_empty() {
-            query_args.push(format!("item_type={}", item_type));
+            query_args.push(("item_type".to_string(), item_type.to_string()));
         }
         if !search_text.is_empty() {
-            query_args.push(format!("search_text={}", search_text));
+            query_args.push(("search_text".to_string(), search_text.to_string()));
         }
         if !shared.is_empty() {
-            query_args.push(format!("shared={}", shared));
+            query_args.push(("shared".to_string(), shared.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         if !user_ids.is_empty() {
-            query_args.push(format!("user_ids={}", user_ids));
+            query_args.push(("user_ids".to_string(), user_ids.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/shared_access?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -641,26 +617,20 @@ impl Accounts {
         user_ids: &str,
         body: &crate::types::AccountSharedAccess,
     ) -> Result<crate::types::AccountSharedAccess> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !item_type.is_empty() {
-            query_args.push(format!("item_type={}", item_type));
+            query_args.push(("item_type".to_string(), item_type.to_string()));
         }
         if !preserve_existing_shared_access.is_empty() {
-            query_args.push(format!(
-                "preserve_existing_shared_access={}",
-                preserve_existing_shared_access
+            query_args.push((
+                "preserve_existing_shared_access".to_string(),
+                preserve_existing_shared_access.to_string(),
             ));
         }
         if !user_ids.is_empty() {
-            query_args.push(format!("user_ids={}", user_ids));
+            query_args.push(("user_ids".to_string(), user_ids.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/shared_access?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

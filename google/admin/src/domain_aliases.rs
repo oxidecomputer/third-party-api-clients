@@ -27,17 +27,14 @@ impl DomainAliases {
         customer: &str,
         parent_domain_name: &str,
     ) -> Result<crate::types::DomainAliases> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !parent_domain_name.is_empty() {
-            query_args.push(format!("parent_domain_name={}", parent_domain_name));
+            query_args.push((
+                "parent_domain_name".to_string(),
+                parent_domain_name.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases?{}",
             crate::progenitor_support::encode_path(&customer.to_string()),

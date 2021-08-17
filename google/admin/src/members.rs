@@ -57,29 +57,23 @@ impl Members {
         page_token: &str,
         roles: &str,
     ) -> Result<Vec<crate::types::Member>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if include_derived_membership {
-            query_args.push(format!(
-                "include_derived_membership={}",
-                include_derived_membership
+            query_args.push((
+                "include_derived_membership".to_string(),
+                include_derived_membership.to_string(),
             ));
         }
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if !roles.is_empty() {
-            query_args.push(format!("roles={}", roles));
+            query_args.push(("roles".to_string(), roles.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/groups/{}/members?{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),
@@ -105,23 +99,17 @@ impl Members {
         include_derived_membership: bool,
         roles: &str,
     ) -> Result<Vec<crate::types::Member>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if include_derived_membership {
-            query_args.push(format!(
-                "include_derived_membership={}",
-                include_derived_membership
+            query_args.push((
+                "include_derived_membership".to_string(),
+                include_derived_membership.to_string(),
             ));
         }
         if !roles.is_empty() {
-            query_args.push(format!("roles={}", roles));
+            query_args.push(("roles".to_string(), roles.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/groups/{}/members?{}",
             crate::progenitor_support::encode_path(&group_key.to_string()),

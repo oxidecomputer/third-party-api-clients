@@ -42,29 +42,23 @@ impl BillingPlans {
         include_metadata: &str,
         include_successor_plans: &str,
     ) -> Result<crate::types::AccountBillingPlanResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_credit_card_information.is_empty() {
-            query_args.push(format!(
-                "include_credit_card_information={}",
-                include_credit_card_information
+            query_args.push((
+                "include_credit_card_information".to_string(),
+                include_credit_card_information.to_string(),
             ));
         }
         if !include_metadata.is_empty() {
-            query_args.push(format!("include_metadata={}", include_metadata));
+            query_args.push(("include_metadata".to_string(), include_metadata.to_string()));
         }
         if !include_successor_plans.is_empty() {
-            query_args.push(format!(
-                "include_successor_plans={}",
-                include_successor_plans
+            query_args.push((
+                "include_successor_plans".to_string(),
+                include_successor_plans.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/billing_plan?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -92,17 +86,14 @@ impl BillingPlans {
         preview_billing_plan: &str,
         body: &crate::types::BillingPlanInformation,
     ) -> Result<crate::types::BillingPlanUpdateResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !preview_billing_plan.is_empty() {
-            query_args.push(format!("preview_billing_plan={}", preview_billing_plan));
+            query_args.push((
+                "preview_billing_plan".to_string(),
+                preview_billing_plan.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/billing_plan?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

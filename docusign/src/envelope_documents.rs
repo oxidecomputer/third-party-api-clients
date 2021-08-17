@@ -41,32 +41,32 @@ impl EnvelopeDocuments {
         recipient_id: &str,
         shared_user_id: &str,
     ) -> Result<crate::types::EnvelopeDocumentsResult> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !documents_by_userid.is_empty() {
-            query_args.push(format!("documents_by_userid={}", documents_by_userid));
+            query_args.push((
+                "documents_by_userid".to_string(),
+                documents_by_userid.to_string(),
+            ));
         }
         if !include_document_size.is_empty() {
-            query_args.push(format!("include_document_size={}", include_document_size));
+            query_args.push((
+                "include_document_size".to_string(),
+                include_document_size.to_string(),
+            ));
         }
         if !include_metadata.is_empty() {
-            query_args.push(format!("include_metadata={}", include_metadata));
+            query_args.push(("include_metadata".to_string(), include_metadata.to_string()));
         }
         if !include_tabs.is_empty() {
-            query_args.push(format!("include_tabs={}", include_tabs));
+            query_args.push(("include_tabs".to_string(), include_tabs.to_string()));
         }
         if !recipient_id.is_empty() {
-            query_args.push(format!("recipient_id={}", recipient_id));
+            query_args.push(("recipient_id".to_string(), recipient_id.to_string()));
         }
         if !shared_user_id.is_empty() {
-            query_args.push(format!("shared_user_id={}", shared_user_id));
+            query_args.push(("shared_user_id".to_string(), shared_user_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -214,41 +214,38 @@ impl EnvelopeDocuments {
         show_changes: &str,
         watermark: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !certificate.is_empty() {
-            query_args.push(format!("certificate={}", certificate));
+            query_args.push(("certificate".to_string(), certificate.to_string()));
         }
         if !documents_by_userid.is_empty() {
-            query_args.push(format!("documents_by_userid={}", documents_by_userid));
+            query_args.push((
+                "documents_by_userid".to_string(),
+                documents_by_userid.to_string(),
+            ));
         }
         if !encoding.is_empty() {
-            query_args.push(format!("encoding={}", encoding));
+            query_args.push(("encoding".to_string(), encoding.to_string()));
         }
         if !encrypt.is_empty() {
-            query_args.push(format!("encrypt={}", encrypt));
+            query_args.push(("encrypt".to_string(), encrypt.to_string()));
         }
         if !language.is_empty() {
-            query_args.push(format!("language={}", language));
+            query_args.push(("language".to_string(), language.to_string()));
         }
         if !recipient_id.is_empty() {
-            query_args.push(format!("recipient_id={}", recipient_id));
+            query_args.push(("recipient_id".to_string(), recipient_id.to_string()));
         }
         if !shared_user_id.is_empty() {
-            query_args.push(format!("shared_user_id={}", shared_user_id));
+            query_args.push(("shared_user_id".to_string(), shared_user_id.to_string()));
         }
         if !show_changes.is_empty() {
-            query_args.push(format!("show_changes={}", show_changes));
+            query_args.push(("show_changes".to_string(), show_changes.to_string()));
         }
         if !watermark.is_empty() {
-            query_args.push(format!("watermark={}", watermark));
+            query_args.push(("watermark".to_string(), watermark.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

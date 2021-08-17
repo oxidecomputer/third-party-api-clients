@@ -118,86 +118,86 @@ impl Templates {
         user_filter: &str,
         user_id: &str,
     ) -> Result<crate::types::EnvelopeTemplateResults> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !created_from_date.is_empty() {
-            query_args.push(format!("created_from_date={}", created_from_date));
+            query_args.push((
+                "created_from_date".to_string(),
+                created_from_date.to_string(),
+            ));
         }
         if !created_to_date.is_empty() {
-            query_args.push(format!("created_to_date={}", created_to_date));
+            query_args.push(("created_to_date".to_string(), created_to_date.to_string()));
         }
         if !folder_ids.is_empty() {
-            query_args.push(format!("folder_ids={}", folder_ids));
+            query_args.push(("folder_ids".to_string(), folder_ids.to_string()));
         }
         if !folder_types.is_empty() {
-            query_args.push(format!("folder_types={}", folder_types));
+            query_args.push(("folder_types".to_string(), folder_types.to_string()));
         }
         if !from_date.is_empty() {
-            query_args.push(format!("from_date={}", from_date));
+            query_args.push(("from_date".to_string(), from_date.to_string()));
         }
         if !include.is_empty() {
-            query_args.push(format!("include={}", include));
+            query_args.push(("include".to_string(), include.to_string()));
         }
         if !is_deleted_template_only.is_empty() {
-            query_args.push(format!(
-                "is_deleted_template_only={}",
-                is_deleted_template_only
+            query_args.push((
+                "is_deleted_template_only".to_string(),
+                is_deleted_template_only.to_string(),
             ));
         }
         if !is_download.is_empty() {
-            query_args.push(format!("is_download={}", is_download));
+            query_args.push(("is_download".to_string(), is_download.to_string()));
         }
         if !modified_from_date.is_empty() {
-            query_args.push(format!("modified_from_date={}", modified_from_date));
+            query_args.push((
+                "modified_from_date".to_string(),
+                modified_from_date.to_string(),
+            ));
         }
         if !modified_to_date.is_empty() {
-            query_args.push(format!("modified_to_date={}", modified_to_date));
+            query_args.push(("modified_to_date".to_string(), modified_to_date.to_string()));
         }
         if !order.is_empty() {
-            query_args.push(format!("order={}", order));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !search_fields.is_empty() {
-            query_args.push(format!("search_fields={}", search_fields));
+            query_args.push(("search_fields".to_string(), search_fields.to_string()));
         }
         if !search_text.is_empty() {
-            query_args.push(format!("search_text={}", search_text));
+            query_args.push(("search_text".to_string(), search_text.to_string()));
         }
         if !shared_by_me.is_empty() {
-            query_args.push(format!("shared_by_me={}", shared_by_me));
+            query_args.push(("shared_by_me".to_string(), shared_by_me.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         if !template_ids.is_empty() {
-            query_args.push(format!("template_ids={}", template_ids));
+            query_args.push(("template_ids".to_string(), template_ids.to_string()));
         }
         if !to_date.is_empty() {
-            query_args.push(format!("to_date={}", to_date));
+            query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         if !used_from_date.is_empty() {
-            query_args.push(format!("used_from_date={}", used_from_date));
+            query_args.push(("used_from_date".to_string(), used_from_date.to_string()));
         }
         if !used_to_date.is_empty() {
-            query_args.push(format!("used_to_date={}", used_to_date));
+            query_args.push(("used_to_date".to_string(), used_to_date.to_string()));
         }
         if !user_filter.is_empty() {
-            query_args.push(format!("user_filter={}", user_filter));
+            query_args.push(("user_filter".to_string(), user_filter.to_string()));
         }
         if !user_id.is_empty() {
-            query_args.push(format!("user_id={}", user_id));
+            query_args.push(("user_id".to_string(), user_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -313,17 +313,11 @@ impl Templates {
         template_id: &str,
         include: &str,
     ) -> Result<crate::types::EnvelopeTemplate> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
-            query_args.push(format!("include={}", include));
+            query_args.push(("include".to_string(), include.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -399,35 +393,29 @@ impl Templates {
         show_changes: &str,
         start_position: &str,
     ) -> Result<crate::types::PageImages> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !dpi.is_empty() {
-            query_args.push(format!("dpi={}", dpi));
+            query_args.push(("dpi".to_string(), dpi.to_string()));
         }
         if !max_height.is_empty() {
-            query_args.push(format!("max_height={}", max_height));
+            query_args.push(("max_height".to_string(), max_height.to_string()));
         }
         if !max_width.is_empty() {
-            query_args.push(format!("max_width={}", max_width));
+            query_args.push(("max_width".to_string(), max_width.to_string()));
         }
         if !nocache.is_empty() {
-            query_args.push(format!("nocache={}", nocache));
+            query_args.push(("nocache".to_string(), nocache.to_string()));
         }
         if !show_changes.is_empty() {
-            query_args.push(format!("show_changes={}", show_changes));
+            query_args.push(("show_changes".to_string(), show_changes.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/pages?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -506,26 +494,20 @@ impl Templates {
         max_width: &str,
         show_changes: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !dpi.is_empty() {
-            query_args.push(format!("dpi={}", dpi));
+            query_args.push(("dpi".to_string(), dpi.to_string()));
         }
         if !max_height.is_empty() {
-            query_args.push(format!("max_height={}", max_height));
+            query_args.push(("max_height".to_string(), max_height.to_string()));
         }
         if !max_width.is_empty() {
-            query_args.push(format!("max_width={}", max_width));
+            query_args.push(("max_width".to_string(), max_width.to_string()));
         }
         if !show_changes.is_empty() {
-            query_args.push(format!("show_changes={}", show_changes));
+            query_args.push(("show_changes".to_string(), show_changes.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}/page_image?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

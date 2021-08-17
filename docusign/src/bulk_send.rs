@@ -44,26 +44,20 @@ impl BulkSend {
         start_position: &str,
         status: &str,
     ) -> Result<crate::types::BulkSendBatchSummaries> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !batch_ids.is_empty() {
-            query_args.push(format!("batch_ids={}", batch_ids));
+            query_args.push(("batch_ids".to_string(), batch_ids.to_string()));
         }
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         if !status.is_empty() {
-            query_args.push(format!("status={}", status));
+            query_args.push(("status".to_string(), status.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/bulk_send_batch?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

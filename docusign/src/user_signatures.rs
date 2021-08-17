@@ -42,17 +42,11 @@ impl UserSignatures {
         user_id: &str,
         stamp_type: &str,
     ) -> Result<crate::types::UserSignaturesInformation> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !stamp_type.is_empty() {
-            query_args.push(format!("stamp_type={}", stamp_type));
+            query_args.push(("stamp_type".to_string(), stamp_type.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -214,20 +208,14 @@ impl UserSignatures {
         close_existing_signature: &str,
         body: &crate::types::UserSignatureDefinition,
     ) -> Result<crate::types::UserSignature> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !close_existing_signature.is_empty() {
-            query_args.push(format!(
-                "close_existing_signature={}",
-                close_existing_signature
+            query_args.push((
+                "close_existing_signature".to_string(),
+                close_existing_signature.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -315,17 +303,11 @@ impl UserSignatures {
         user_id: &str,
         include_chrome: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_chrome.is_empty() {
-            query_args.push(format!("include_chrome={}", include_chrome));
+            query_args.push(("include_chrome".to_string(), include_chrome.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -372,17 +354,11 @@ impl UserSignatures {
         user_id: &str,
         transparent_png: &str,
     ) -> Result<crate::types::UserSignature> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !transparent_png.is_empty() {
-            query_args.push(format!("transparent_png={}", transparent_png));
+            query_args.push(("transparent_png".to_string(), transparent_png.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/signatures/{}/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

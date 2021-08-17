@@ -35,23 +35,17 @@ impl Acl {
         page_token: &str,
         show_deleted: bool,
     ) -> Result<Vec<crate::types::AclRule>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if show_deleted {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -76,17 +70,11 @@ impl Acl {
         calendar_id: &str,
         show_deleted: bool,
     ) -> Result<Vec<crate::types::AclRule>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if show_deleted {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -143,17 +131,14 @@ impl Acl {
         send_notifications: bool,
         body: &crate::types::AclRule,
     ) -> Result<crate::types::AclRule> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
-            query_args.push(format!("send_notifications={}", send_notifications));
+            query_args.push((
+                "send_notifications".to_string(),
+                send_notifications.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -192,23 +177,17 @@ impl Acl {
         show_deleted: bool,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(format!("max_results={}", max_results));
+            query_args.push(("max_results".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if show_deleted {
-            query_args.push(format!("show_deleted={}", show_deleted));
+            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl/watch?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -265,17 +244,14 @@ impl Acl {
         send_notifications: bool,
         body: &crate::types::AclRule,
     ) -> Result<crate::types::AclRule> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
-            query_args.push(format!("send_notifications={}", send_notifications));
+            query_args.push((
+                "send_notifications".to_string(),
+                send_notifications.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -329,17 +305,14 @@ impl Acl {
         send_notifications: bool,
         body: &crate::types::AclRule,
     ) -> Result<crate::types::AclRule> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
-            query_args.push(format!("send_notifications={}", send_notifications));
+            query_args.push((
+                "send_notifications".to_string(),
+                send_notifications.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl/{}?{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),

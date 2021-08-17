@@ -29,20 +29,14 @@ impl Orgunits {
         org_unit_path: &str,
         type_: crate::types::DirectoryOrgunitsListType,
     ) -> Result<crate::types::OrgUnits> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !org_unit_path.is_empty() {
-            query_args.push(format!("org_unit_path={}", org_unit_path));
+            query_args.push(("org_unit_path".to_string(), org_unit_path.to_string()));
         }
         if !type_.to_string().is_empty() {
-            query_args.push(format!("type={}", type_.to_string()));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/orgunits?{}",
             crate::progenitor_support::encode_path(&customer_id.to_string()),

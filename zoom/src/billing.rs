@@ -371,20 +371,14 @@ impl Billing {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<crate::types::AccountBillingInvoicesResponseData> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/billing/invoices?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

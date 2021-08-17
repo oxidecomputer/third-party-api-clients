@@ -41,38 +41,32 @@ impl BookingData {
         size: i64,
         booking_type: crate::types::BookingType,
     ) -> Result<Vec<crate::types::BookingReport>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !booking_status.to_string().is_empty() {
-            query_args.push(format!("booking_status={}", booking_status.to_string()));
+            query_args.push(("booking_status".to_string(), booking_status.to_string()));
         }
         if !booking_type.to_string().is_empty() {
-            query_args.push(format!("booking_type={}", booking_type.to_string()));
+            query_args.push(("booking_type".to_string(), booking_type.to_string()));
         }
         if !created_from.is_empty() {
-            query_args.push(format!("created_from={}", created_from));
+            query_args.push(("created_from".to_string(), created_from.to_string()));
         }
         if !created_to.is_empty() {
-            query_args.push(format!("created_to={}", created_to));
+            query_args.push(("created_to".to_string(), created_to.to_string()));
         }
         if !page.to_string().is_empty() {
-            query_args.push(format!("page={}", page.to_string()));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if size > 0 {
-            query_args.push(format!("size={}", size));
+            query_args.push(("size".to_string(), size.to_string()));
         }
         if !start_date_from.is_empty() {
-            query_args.push(format!("start_date_from={}", start_date_from));
+            query_args.push(("start_date_from".to_string(), start_date_from.to_string()));
         }
         if !start_date_to.is_empty() {
-            query_args.push(format!("start_date_to={}", start_date_to));
+            query_args.push(("start_date_to".to_string(), start_date_to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bookings?{}", query_);
 
         let resp: crate::types::BookingReportResponse = self.client.get(&url, None).await.unwrap();
@@ -99,32 +93,26 @@ impl BookingData {
         booking_status: crate::types::BookingStatus,
         booking_type: crate::types::BookingType,
     ) -> Result<Vec<crate::types::BookingReport>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !booking_status.to_string().is_empty() {
-            query_args.push(format!("booking_status={}", booking_status.to_string()));
+            query_args.push(("booking_status".to_string(), booking_status.to_string()));
         }
         if !booking_type.to_string().is_empty() {
-            query_args.push(format!("booking_type={}", booking_type.to_string()));
+            query_args.push(("booking_type".to_string(), booking_type.to_string()));
         }
         if !created_from.is_empty() {
-            query_args.push(format!("created_from={}", created_from));
+            query_args.push(("created_from".to_string(), created_from.to_string()));
         }
         if !created_to.is_empty() {
-            query_args.push(format!("created_to={}", created_to));
+            query_args.push(("created_to".to_string(), created_to.to_string()));
         }
         if !start_date_from.is_empty() {
-            query_args.push(format!("start_date_from={}", start_date_from));
+            query_args.push(("start_date_from".to_string(), start_date_from.to_string()));
         }
         if !start_date_to.is_empty() {
-            query_args.push(format!("start_date_to={}", start_date_to));
+            query_args.push(("start_date_to".to_string(), start_date_to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bookings?{}", query_);
 
         self.client.get_all_pages(&url, None).await

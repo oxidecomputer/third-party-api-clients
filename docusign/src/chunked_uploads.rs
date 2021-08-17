@@ -62,17 +62,11 @@ impl ChunkedUploads {
         chunked_upload_id: &str,
         include: &str,
     ) -> Result<crate::types::ChunkedUploadResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include.is_empty() {
-            query_args.push(format!("include={}", include));
+            query_args.push(("include".to_string(), include.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/chunked_uploads/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -106,17 +100,11 @@ impl ChunkedUploads {
         chunked_upload_id: &str,
         action: &str,
     ) -> Result<crate::types::ChunkedUploadResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !action.is_empty() {
-            query_args.push(format!("action={}", action));
+            query_args.push(("action".to_string(), action.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/chunked_uploads/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

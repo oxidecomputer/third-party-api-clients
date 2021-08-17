@@ -35,23 +35,17 @@ impl TemplateRecipientTabs {
         include_anchor_tab_locations: &str,
         include_metadata: &str,
     ) -> Result<crate::types::Tabs> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_anchor_tab_locations.is_empty() {
-            query_args.push(format!(
-                "include_anchor_tab_locations={}",
-                include_anchor_tab_locations
+            query_args.push((
+                "include_anchor_tab_locations".to_string(),
+                include_anchor_tab_locations.to_string(),
             ));
         }
         if !include_metadata.is_empty() {
-            query_args.push(format!("include_metadata={}", include_metadata));
+            query_args.push(("include_metadata".to_string(), include_metadata.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}/tabs?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

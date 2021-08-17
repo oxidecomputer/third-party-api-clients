@@ -303,110 +303,113 @@ impl Envelopes {
         user_id: &str,
         user_name: &str,
     ) -> Result<crate::types::EnvelopesInformation> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !ac_status.is_empty() {
-            query_args.push(format!("ac_status={}", ac_status));
+            query_args.push(("ac_status".to_string(), ac_status.to_string()));
         }
         if !block.is_empty() {
-            query_args.push(format!("block={}", block));
+            query_args.push(("block".to_string(), block.to_string()));
         }
         if !cdse_mode.is_empty() {
-            query_args.push(format!("cdse_mode={}", cdse_mode));
+            query_args.push(("cdse_mode".to_string(), cdse_mode.to_string()));
         }
         if !continuation_token.is_empty() {
-            query_args.push(format!("continuation_token={}", continuation_token));
+            query_args.push((
+                "continuation_token".to_string(),
+                continuation_token.to_string(),
+            ));
         }
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !custom_field.is_empty() {
-            query_args.push(format!("custom_field={}", custom_field));
+            query_args.push(("custom_field".to_string(), custom_field.to_string()));
         }
         if !email.is_empty() {
-            query_args.push(format!("email={}", email));
+            query_args.push(("email".to_string(), email.to_string()));
         }
         if !envelope_ids.is_empty() {
-            query_args.push(format!("envelope_ids={}", envelope_ids));
+            query_args.push(("envelope_ids".to_string(), envelope_ids.to_string()));
         }
         if !exclude.is_empty() {
-            query_args.push(format!("exclude={}", exclude));
+            query_args.push(("exclude".to_string(), exclude.to_string()));
         }
         if !folder_ids.is_empty() {
-            query_args.push(format!("folder_ids={}", folder_ids));
+            query_args.push(("folder_ids".to_string(), folder_ids.to_string()));
         }
         if !folder_types.is_empty() {
-            query_args.push(format!("folder_types={}", folder_types));
+            query_args.push(("folder_types".to_string(), folder_types.to_string()));
         }
         if !from_date.is_empty() {
-            query_args.push(format!("from_date={}", from_date));
+            query_args.push(("from_date".to_string(), from_date.to_string()));
         }
         if !from_to_status.is_empty() {
-            query_args.push(format!("from_to_status={}", from_to_status));
+            query_args.push(("from_to_status".to_string(), from_to_status.to_string()));
         }
         if !include.is_empty() {
-            query_args.push(format!("include={}", include));
+            query_args.push(("include".to_string(), include.to_string()));
         }
         if !include_purge_information.is_empty() {
-            query_args.push(format!(
-                "include_purge_information={}",
-                include_purge_information
+            query_args.push((
+                "include_purge_information".to_string(),
+                include_purge_information.to_string(),
             ));
         }
         if !intersecting_folder_ids.is_empty() {
-            query_args.push(format!(
-                "intersecting_folder_ids={}",
-                intersecting_folder_ids
+            query_args.push((
+                "intersecting_folder_ids".to_string(),
+                intersecting_folder_ids.to_string(),
             ));
         }
         if !last_queried_date.is_empty() {
-            query_args.push(format!("last_queried_date={}", last_queried_date));
+            query_args.push((
+                "last_queried_date".to_string(),
+                last_queried_date.to_string(),
+            ));
         }
         if !order.is_empty() {
-            query_args.push(format!("order={}", order));
+            query_args.push(("order".to_string(), order.to_string()));
         }
         if !order_by.is_empty() {
-            query_args.push(format!("order_by={}", order_by));
+            query_args.push(("order_by".to_string(), order_by.to_string()));
         }
         if !powerformids.is_empty() {
-            query_args.push(format!("powerformids={}", powerformids));
+            query_args.push(("powerformids".to_string(), powerformids.to_string()));
         }
         if !query_budget.is_empty() {
-            query_args.push(format!("query_budget={}", query_budget));
+            query_args.push(("query_budget".to_string(), query_budget.to_string()));
         }
         if !requester_date_format.is_empty() {
-            query_args.push(format!("requester_date_format={}", requester_date_format));
+            query_args.push((
+                "requester_date_format".to_string(),
+                requester_date_format.to_string(),
+            ));
         }
         if !search_text.is_empty() {
-            query_args.push(format!("search_text={}", search_text));
+            query_args.push(("search_text".to_string(), search_text.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         if !status.is_empty() {
-            query_args.push(format!("status={}", status));
+            query_args.push(("status".to_string(), status.to_string()));
         }
         if !to_date.is_empty() {
-            query_args.push(format!("to_date={}", to_date));
+            query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         if !transaction_ids.is_empty() {
-            query_args.push(format!("transaction_ids={}", transaction_ids));
+            query_args.push(("transaction_ids".to_string(), transaction_ids.to_string()));
         }
         if !user_filter.is_empty() {
-            query_args.push(format!("user_filter={}", user_filter));
+            query_args.push(("user_filter".to_string(), user_filter.to_string()));
         }
         if !user_id.is_empty() {
-            query_args.push(format!("user_id={}", user_id));
+            query_args.push(("user_id".to_string(), user_id.to_string()));
         }
         if !user_name.is_empty() {
-            query_args.push(format!("user_name={}", user_name));
+            query_args.push(("user_name".to_string(), user_name.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -511,29 +514,29 @@ impl Envelopes {
         merge_roles_on_draft: &str,
         body: &crate::types::EnvelopeDefinition,
     ) -> Result<crate::types::EnvelopeSummary> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !cdse_mode.is_empty() {
-            query_args.push(format!("cdse_mode={}", cdse_mode));
+            query_args.push(("cdse_mode".to_string(), cdse_mode.to_string()));
         }
         if !change_routing_order.is_empty() {
-            query_args.push(format!("change_routing_order={}", change_routing_order));
+            query_args.push((
+                "change_routing_order".to_string(),
+                change_routing_order.to_string(),
+            ));
         }
         if !completed_documents_only.is_empty() {
-            query_args.push(format!(
-                "completed_documents_only={}",
-                completed_documents_only
+            query_args.push((
+                "completed_documents_only".to_string(),
+                completed_documents_only.to_string(),
             ));
         }
         if !merge_roles_on_draft.is_empty() {
-            query_args.push(format!("merge_roles_on_draft={}", merge_roles_on_draft));
+            query_args.push((
+                "merge_roles_on_draft".to_string(),
+                merge_roles_on_draft.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -678,50 +681,44 @@ impl Envelopes {
         user_name: &str,
         body: &crate::types::EnvelopeIdsRequest,
     ) -> Result<crate::types::EnvelopesInformation> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !ac_status.is_empty() {
-            query_args.push(format!("ac_status={}", ac_status));
+            query_args.push(("ac_status".to_string(), ac_status.to_string()));
         }
         if !block.is_empty() {
-            query_args.push(format!("block={}", block));
+            query_args.push(("block".to_string(), block.to_string()));
         }
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !email.is_empty() {
-            query_args.push(format!("email={}", email));
+            query_args.push(("email".to_string(), email.to_string()));
         }
         if !envelope_ids.is_empty() {
-            query_args.push(format!("envelope_ids={}", envelope_ids));
+            query_args.push(("envelope_ids".to_string(), envelope_ids.to_string()));
         }
         if !from_date.is_empty() {
-            query_args.push(format!("from_date={}", from_date));
+            query_args.push(("from_date".to_string(), from_date.to_string()));
         }
         if !from_to_status.is_empty() {
-            query_args.push(format!("from_to_status={}", from_to_status));
+            query_args.push(("from_to_status".to_string(), from_to_status.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
         if !status.is_empty() {
-            query_args.push(format!("status={}", status));
+            query_args.push(("status".to_string(), status.to_string()));
         }
         if !to_date.is_empty() {
-            query_args.push(format!("to_date={}", to_date));
+            query_args.push(("to_date".to_string(), to_date.to_string()));
         }
         if !transaction_ids.is_empty() {
-            query_args.push(format!("transaction_ids={}", transaction_ids));
+            query_args.push(("transaction_ids".to_string(), transaction_ids.to_string()));
         }
         if !user_name.is_empty() {
-            query_args.push(format!("user_name={}", user_name));
+            query_args.push(("user_name".to_string(), user_name.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/status?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -770,20 +767,14 @@ impl Envelopes {
         advanced_update: &str,
         include: &str,
     ) -> Result<crate::types::Envelope> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !advanced_update.is_empty() {
-            query_args.push(format!("advanced_update={}", advanced_update));
+            query_args.push(("advanced_update".to_string(), advanced_update.to_string()));
         }
         if !include.is_empty() {
-            query_args.push(format!("include={}", include));
+            query_args.push(("include".to_string(), include.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -980,20 +971,14 @@ impl Envelopes {
         resend_envelope: &str,
         body: &crate::types::Envelope,
     ) -> Result<crate::types::EnvelopeUpdateSummary> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !advanced_update.is_empty() {
-            query_args.push(format!("advanced_update={}", advanced_update));
+            query_args.push(("advanced_update".to_string(), advanced_update.to_string()));
         }
         if !resend_envelope.is_empty() {
-            query_args.push(format!("resend_envelope={}", resend_envelope));
+            query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -1068,35 +1053,29 @@ impl Envelopes {
         show_changes: &str,
         start_position: &str,
     ) -> Result<crate::types::PageImages> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !count.is_empty() {
-            query_args.push(format!("count={}", count));
+            query_args.push(("count".to_string(), count.to_string()));
         }
         if !dpi.is_empty() {
-            query_args.push(format!("dpi={}", dpi));
+            query_args.push(("dpi".to_string(), dpi.to_string()));
         }
         if !max_height.is_empty() {
-            query_args.push(format!("max_height={}", max_height));
+            query_args.push(("max_height".to_string(), max_height.to_string()));
         }
         if !max_width.is_empty() {
-            query_args.push(format!("max_width={}", max_width));
+            query_args.push(("max_width".to_string(), max_width.to_string()));
         }
         if !nocache.is_empty() {
-            query_args.push(format!("nocache={}", nocache));
+            query_args.push(("nocache".to_string(), nocache.to_string()));
         }
         if !show_changes.is_empty() {
-            query_args.push(format!("show_changes={}", show_changes));
+            query_args.push(("show_changes".to_string(), show_changes.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -1169,26 +1148,20 @@ impl Envelopes {
         max_width: &str,
         show_changes: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !dpi.is_empty() {
-            query_args.push(format!("dpi={}", dpi));
+            query_args.push(("dpi".to_string(), dpi.to_string()));
         }
         if !max_height.is_empty() {
-            query_args.push(format!("max_height={}", max_height));
+            query_args.push(("max_height".to_string(), max_height.to_string()));
         }
         if !max_width.is_empty() {
-            query_args.push(format!("max_width={}", max_width));
+            query_args.push(("max_width".to_string(), max_width.to_string()));
         }
         if !show_changes.is_empty() {
-            query_args.push(format!("show_changes={}", show_changes));
+            query_args.push(("show_changes".to_string(), show_changes.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/page_image?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -1328,17 +1301,11 @@ impl Envelopes {
         recipient_id: &str,
         include_chrome: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_chrome.is_empty() {
-            query_args.push(format!("include_chrome={}", include_chrome));
+            query_args.push(("include_chrome".to_string(), include_chrome.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/initials_image?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -1439,17 +1406,11 @@ impl Envelopes {
         recipient_id: &str,
         include_chrome: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_chrome.is_empty() {
-            query_args.push(format!("include_chrome={}", include_chrome));
+            query_args.push(("include_chrome".to_string(), include_chrome.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature_image?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

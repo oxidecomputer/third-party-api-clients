@@ -35,23 +35,17 @@ impl OauthAuthorizations {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<crate::types::ApplicationGrant>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
-            query_args.push(format!("client_id={}", client_id));
+            query_args.push(("client_id".to_string(), client_id.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/applications/grants?{}", query_);
 
         self.client.get(&url, None).await
@@ -74,17 +68,11 @@ impl OauthAuthorizations {
         &self,
         client_id: &str,
     ) -> Result<Vec<crate::types::ApplicationGrant>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
-            query_args.push(format!("client_id={}", client_id));
+            query_args.push(("client_id".to_string(), client_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/applications/grants?{}", query_);
 
         self.client.get_all_pages(&url, None).await
@@ -157,23 +145,17 @@ impl OauthAuthorizations {
         page: i64,
         client_id: &str,
     ) -> Result<Vec<crate::types::Authorization>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
-            query_args.push(format!("client_id={}", client_id));
+            query_args.push(("client_id".to_string(), client_id.to_string()));
         }
         if page > 0 {
-            query_args.push(format!("page={}", page));
+            query_args.push(("page".to_string(), page.to_string()));
         }
         if per_page > 0 {
-            query_args.push(format!("per_page={}", per_page));
+            query_args.push(("per_page".to_string(), per_page.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/authorizations?{}", query_);
 
         self.client.get(&url, None).await
@@ -194,17 +176,11 @@ impl OauthAuthorizations {
         &self,
         client_id: &str,
     ) -> Result<Vec<crate::types::Authorization>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !client_id.is_empty() {
-            query_args.push(format!("client_id={}", client_id));
+            query_args.push(("client_id".to_string(), client_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/authorizations?{}", query_);
 
         self.client.get_all_pages(&url, None).await

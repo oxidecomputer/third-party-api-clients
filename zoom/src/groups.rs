@@ -170,23 +170,17 @@ impl Groups {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::UserCreateResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
+            query_args.push(("page_number".to_string(), page_number.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/members?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -390,20 +384,17 @@ impl Groups {
         custom_query_fields: &str,
         option: crate::types::OptionData,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -438,20 +429,17 @@ impl Groups {
         custom_query_fields: &str,
         option: crate::types::OptionData,
     ) -> Result<crate::types::MeetingSecuritySettings> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -486,20 +474,17 @@ impl Groups {
         custom_query_fields: &str,
         option: crate::types::OptionData,
     ) -> Result<crate::types::GetGroupSettingsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -534,20 +519,17 @@ impl Groups {
         custom_query_fields: &str,
         option: crate::types::OptionData,
     ) -> Result<crate::types::GetGroupSettingsResponseOneOf> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -580,20 +562,17 @@ impl Groups {
         option: crate::types::UpdateGroupSettingsOption,
         body: &crate::types::UpdateGroupSettingsRequestOneOf,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.to_string().is_empty() {
-            query_args.push(format!("option={}", option.to_string()));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -631,20 +610,17 @@ impl Groups {
         custom_query_fields: &str,
         option: &str,
     ) -> Result<crate::types::MeetingSecuritySettings> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.is_empty() {
-            query_args.push(format!("option={}", option));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/lock_settings?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -677,20 +653,17 @@ impl Groups {
         custom_query_fields: &str,
         option: &str,
     ) -> Result<crate::types::GetGroupLockSettingsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.is_empty() {
-            query_args.push(format!("option={}", option));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/lock_settings?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -723,20 +696,17 @@ impl Groups {
         custom_query_fields: &str,
         option: &str,
     ) -> Result<crate::types::GetGroupLockSettingsResponseOneOf> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.is_empty() {
-            query_args.push(format!("option={}", option));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/lock_settings?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -770,20 +740,17 @@ impl Groups {
         option: &str,
         body: &crate::types::GroupLockedSettingsRequestOneOf,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
         if !option.is_empty() {
-            query_args.push(format!("option={}", option));
+            query_args.push(("option".to_string(), option.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/lock_settings?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -824,17 +791,11 @@ impl Groups {
         group_id: &str,
         body: &crate::types::UploadVbRequest,
     ) -> Result<crate::types::Files> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !file_ids.is_empty() {
-            query_args.push(format!("file_ids={}", file_ids));
+            query_args.push(("file_ids".to_string(), file_ids.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings/virtual_backgrounds?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -869,17 +830,11 @@ impl Groups {
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      */
     pub async fn del_group_vb(&self, file_ids: &str, group_id: &str) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !file_ids.is_empty() {
-            query_args.push(format!("file_ids={}", file_ids));
+            query_args.push(("file_ids".to_string(), file_ids.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings/virtual_backgrounds?{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),

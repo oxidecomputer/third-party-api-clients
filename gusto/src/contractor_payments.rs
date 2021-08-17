@@ -30,20 +30,14 @@ impl ContractorPayments {
         start_date: &str,
         end_date: &str,
     ) -> Result<crate::types::ContractorPaymentSummary> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
-            query_args.push(format!("end_date={}", end_date));
+            query_args.push(("end_date".to_string(), end_date.to_string()));
         }
         if !start_date.is_empty() {
-            query_args.push(format!("start_date={}", start_date));
+            query_args.push(("start_date".to_string(), start_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/contractor_payments?{}",
             crate::progenitor_support::encode_path(&company_id.to_string()),
@@ -81,32 +75,26 @@ impl ContractorPayments {
         bonus: f64,
         reimbursement: f64,
     ) -> Result<crate::types::ContractorPayment> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !bonus.to_string().is_empty() {
-            query_args.push(format!("bonus={}", bonus.to_string()));
+            query_args.push(("bonus".to_string(), bonus.to_string()));
         }
         if !contractor_id.to_string().is_empty() {
-            query_args.push(format!("contractor_id={}", contractor_id.to_string()));
+            query_args.push(("contractor_id".to_string(), contractor_id.to_string()));
         }
         if !date.is_empty() {
-            query_args.push(format!("date={}", date));
+            query_args.push(("date".to_string(), date.to_string()));
         }
         if !hours.to_string().is_empty() {
-            query_args.push(format!("hours={}", hours.to_string()));
+            query_args.push(("hours".to_string(), hours.to_string()));
         }
         if !reimbursement.to_string().is_empty() {
-            query_args.push(format!("reimbursement={}", reimbursement.to_string()));
+            query_args.push(("reimbursement".to_string(), reimbursement.to_string()));
         }
         if !wage.to_string().is_empty() {
-            query_args.push(format!("wage={}", wage.to_string()));
+            query_args.push(("wage".to_string(), wage.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/contractor_payments?{}",
             crate::progenitor_support::encode_path(&company_id.to_string()),

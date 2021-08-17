@@ -91,26 +91,20 @@ impl Users {
         department_id: &str,
         location_id: &str,
     ) -> Result<Vec<crate::types::User>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
-            query_args.push(format!("department_id={}", department_id));
+            query_args.push(("department_id".to_string(), department_id.to_string()));
         }
         if !location_id.is_empty() {
-            query_args.push(format!("location_id={}", location_id));
+            query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         if !page_size.to_string().is_empty() {
-            query_args.push(format!("page_size={}", page_size.to_string()));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !start.is_empty() {
-            query_args.push(format!("start={}", start));
+            query_args.push(("start".to_string(), start.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
 
         let resp: crate::types::GetUsersResponse = self.client.get(&url, None).await.unwrap();
@@ -133,20 +127,14 @@ impl Users {
         department_id: &str,
         location_id: &str,
     ) -> Result<Vec<crate::types::User>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !department_id.is_empty() {
-            query_args.push(format!("department_id={}", department_id));
+            query_args.push(("department_id".to_string(), department_id.to_string()));
         }
         if !location_id.is_empty() {
-            query_args.push(format!("location_id={}", location_id));
+            query_args.push(("location_id".to_string(), location_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
 
         let mut resp: crate::types::GetUsersResponse = self.client.get(&url, None).await.unwrap();

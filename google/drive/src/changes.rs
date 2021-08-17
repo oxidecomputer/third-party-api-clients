@@ -49,65 +49,68 @@ impl Changes {
         supports_team_drives: bool,
         team_drive_id: &str,
     ) -> Result<Vec<crate::types::Change>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
-            query_args.push(format!("drive_id={}", drive_id));
+            query_args.push(("drive_id".to_string(), drive_id.to_string()));
         }
         if include_corpus_removals {
-            query_args.push(format!(
-                "include_corpus_removals={}",
-                include_corpus_removals
+            query_args.push((
+                "include_corpus_removals".to_string(),
+                include_corpus_removals.to_string(),
             ));
         }
         if include_items_from_all_drives {
-            query_args.push(format!(
-                "include_items_from_all_drives={}",
-                include_items_from_all_drives
+            query_args.push((
+                "include_items_from_all_drives".to_string(),
+                include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if include_removed {
-            query_args.push(format!("include_removed={}", include_removed));
+            query_args.push(("include_removed".to_string(), include_removed.to_string()));
         }
         if include_team_drive_items {
-            query_args.push(format!(
-                "include_team_drive_items={}",
-                include_team_drive_items
+            query_args.push((
+                "include_team_drive_items".to_string(),
+                include_team_drive_items.to_string(),
             ));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if restrict_to_my_drive {
-            query_args.push(format!("restrict_to_my_drive={}", restrict_to_my_drive));
+            query_args.push((
+                "restrict_to_my_drive".to_string(),
+                restrict_to_my_drive.to_string(),
+            ));
         }
         if !spaces.is_empty() {
-            query_args.push(format!("spaces={}", spaces));
+            query_args.push(("spaces".to_string(), spaces.to_string()));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(format!("team_drive_id={}", team_drive_id));
+            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes?{}", query_);
 
         let resp: crate::types::ChangeList = self.client.get(&url, None).await.unwrap();
@@ -137,59 +140,62 @@ impl Changes {
         supports_team_drives: bool,
         team_drive_id: &str,
     ) -> Result<Vec<crate::types::Change>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
-            query_args.push(format!("drive_id={}", drive_id));
+            query_args.push(("drive_id".to_string(), drive_id.to_string()));
         }
         if include_corpus_removals {
-            query_args.push(format!(
-                "include_corpus_removals={}",
-                include_corpus_removals
+            query_args.push((
+                "include_corpus_removals".to_string(),
+                include_corpus_removals.to_string(),
             ));
         }
         if include_items_from_all_drives {
-            query_args.push(format!(
-                "include_items_from_all_drives={}",
-                include_items_from_all_drives
+            query_args.push((
+                "include_items_from_all_drives".to_string(),
+                include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if include_removed {
-            query_args.push(format!("include_removed={}", include_removed));
+            query_args.push(("include_removed".to_string(), include_removed.to_string()));
         }
         if include_team_drive_items {
-            query_args.push(format!(
-                "include_team_drive_items={}",
-                include_team_drive_items
+            query_args.push((
+                "include_team_drive_items".to_string(),
+                include_team_drive_items.to_string(),
             ));
         }
         if restrict_to_my_drive {
-            query_args.push(format!("restrict_to_my_drive={}", restrict_to_my_drive));
+            query_args.push((
+                "restrict_to_my_drive".to_string(),
+                restrict_to_my_drive.to_string(),
+            ));
         }
         if !spaces.is_empty() {
-            query_args.push(format!("spaces={}", spaces));
+            query_args.push(("spaces".to_string(), spaces.to_string()));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(format!("team_drive_id={}", team_drive_id));
+            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes?{}", query_);
 
         let mut resp: crate::types::ChangeList = self.client.get(&url, None).await.unwrap();
@@ -245,26 +251,26 @@ impl Changes {
         supports_team_drives: bool,
         team_drive_id: &str,
     ) -> Result<crate::types::StartPageToken> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
-            query_args.push(format!("drive_id={}", drive_id));
+            query_args.push(("drive_id".to_string(), drive_id.to_string()));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(format!("team_drive_id={}", team_drive_id));
+            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes/startPageToken?{}", query_);
 
         self.client.get(&url, None).await
@@ -308,65 +314,68 @@ impl Changes {
         team_drive_id: &str,
         body: &crate::types::Channel,
     ) -> Result<crate::types::Channel> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
-            query_args.push(format!("drive_id={}", drive_id));
+            query_args.push(("drive_id".to_string(), drive_id.to_string()));
         }
         if include_corpus_removals {
-            query_args.push(format!(
-                "include_corpus_removals={}",
-                include_corpus_removals
+            query_args.push((
+                "include_corpus_removals".to_string(),
+                include_corpus_removals.to_string(),
             ));
         }
         if include_items_from_all_drives {
-            query_args.push(format!(
-                "include_items_from_all_drives={}",
-                include_items_from_all_drives
+            query_args.push((
+                "include_items_from_all_drives".to_string(),
+                include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
-            query_args.push(format!(
-                "include_permissions_for_view={}",
-                include_permissions_for_view
+            query_args.push((
+                "include_permissions_for_view".to_string(),
+                include_permissions_for_view.to_string(),
             ));
         }
         if include_removed {
-            query_args.push(format!("include_removed={}", include_removed));
+            query_args.push(("include_removed".to_string(), include_removed.to_string()));
         }
         if include_team_drive_items {
-            query_args.push(format!(
-                "include_team_drive_items={}",
-                include_team_drive_items
+            query_args.push((
+                "include_team_drive_items".to_string(),
+                include_team_drive_items.to_string(),
             ));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
         if restrict_to_my_drive {
-            query_args.push(format!("restrict_to_my_drive={}", restrict_to_my_drive));
+            query_args.push((
+                "restrict_to_my_drive".to_string(),
+                restrict_to_my_drive.to_string(),
+            ));
         }
         if !spaces.is_empty() {
-            query_args.push(format!("spaces={}", spaces));
+            query_args.push(("spaces".to_string(), spaces.to_string()));
         }
         if supports_all_drives {
-            query_args.push(format!("supports_all_drives={}", supports_all_drives));
+            query_args.push((
+                "supports_all_drives".to_string(),
+                supports_all_drives.to_string(),
+            ));
         }
         if supports_team_drives {
-            query_args.push(format!("supports_team_drives={}", supports_team_drives));
+            query_args.push((
+                "supports_team_drives".to_string(),
+                supports_team_drives.to_string(),
+            ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(format!("team_drive_id={}", team_drive_id));
+            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes/watch?{}", query_);
 
         self.client

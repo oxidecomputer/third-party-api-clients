@@ -33,20 +33,14 @@ impl Payroll {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::PayPeriod>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
-            query_args.push(format!("end_date={}", end_date));
+            query_args.push(("end_date".to_string(), end_date.to_string()));
         }
         if !start_date.is_empty() {
-            query_args.push(format!("start_date={}", start_date));
+            query_args.push(("start_date".to_string(), start_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/pay_periods?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
@@ -74,20 +68,14 @@ impl Payroll {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::PayPeriod>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
-            query_args.push(format!("end_date={}", end_date));
+            query_args.push(("end_date".to_string(), end_date.to_string()));
         }
         if !start_date.is_empty() {
-            query_args.push(format!("start_date={}", start_date));
+            query_args.push(("start_date".to_string(), start_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/pay_periods?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
@@ -126,29 +114,26 @@ impl Payroll {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::PayrollData>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
-            query_args.push(format!("end_date={}", end_date));
+            query_args.push(("end_date".to_string(), end_date.to_string()));
         }
         if !include.is_empty() {
-            query_args.push(format!("include={}", include.join(" ")));
+            query_args.push(("include".to_string(), include.join(" ")));
         }
         if include_off_cycle {
-            query_args.push(format!("include_off_cycle={}", include_off_cycle));
+            query_args.push((
+                "include_off_cycle".to_string(),
+                include_off_cycle.to_string(),
+            ));
         }
         if processed {
-            query_args.push(format!("processed={}", processed));
+            query_args.push(("processed".to_string(), processed.to_string()));
         }
         if !start_date.is_empty() {
-            query_args.push(format!("start_date={}", start_date));
+            query_args.push(("start_date".to_string(), start_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/payrolls?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
@@ -181,29 +166,26 @@ impl Payroll {
         start_date: &str,
         end_date: &str,
     ) -> Result<Vec<crate::types::PayrollData>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !end_date.is_empty() {
-            query_args.push(format!("end_date={}", end_date));
+            query_args.push(("end_date".to_string(), end_date.to_string()));
         }
         if !include.is_empty() {
-            query_args.push(format!("include={}", include.join(" ")));
+            query_args.push(("include".to_string(), include.join(" ")));
         }
         if include_off_cycle {
-            query_args.push(format!("include_off_cycle={}", include_off_cycle));
+            query_args.push((
+                "include_off_cycle".to_string(),
+                include_off_cycle.to_string(),
+            ));
         }
         if processed {
-            query_args.push(format!("processed={}", processed));
+            query_args.push(("processed".to_string(), processed.to_string()));
         }
         if !start_date.is_empty() {
-            query_args.push(format!("start_date={}", start_date));
+            query_args.push(("start_date".to_string(), start_date.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/payrolls?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
@@ -264,20 +246,14 @@ impl Payroll {
         include: crate::types::GetCompanyPayrollsInclude,
         show_calculation: &str,
     ) -> Result<crate::types::PayrollData> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include.to_string().is_empty() {
-            query_args.push(format!("include={}", include.to_string()));
+            query_args.push(("include".to_string(), include.to_string()));
         }
         if !show_calculation.is_empty() {
-            query_args.push(format!("show_calculation={}", show_calculation));
+            query_args.push(("show_calculation".to_string(), show_calculation.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/payrolls/{}?{}",
             crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),

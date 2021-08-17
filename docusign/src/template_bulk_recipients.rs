@@ -35,20 +35,14 @@ impl TemplateBulkRecipients {
         include_tabs: &str,
         start_position: &str,
     ) -> Result<crate::types::BulkRecipientsResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_tabs.is_empty() {
-            query_args.push(format!("include_tabs={}", include_tabs));
+            query_args.push(("include_tabs".to_string(), include_tabs.to_string()));
         }
         if !start_position.is_empty() {
-            query_args.push(format!("start_position={}", start_position));
+            query_args.push(("start_position".to_string(), start_position.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

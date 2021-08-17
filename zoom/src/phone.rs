@@ -87,35 +87,29 @@ impl Phone {
         pending_numbers: bool,
         site_id: &str,
     ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !extension_type.to_string().is_empty() {
-            query_args.push(format!("extension_type={}", extension_type.to_string()));
+            query_args.push(("extension_type".to_string(), extension_type.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if !number_type.to_string().is_empty() {
-            query_args.push(format!("number_type={}", number_type.to_string()));
+            query_args.push(("number_type".to_string(), number_type.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if pending_numbers {
-            query_args.push(format!("pending_numbers={}", pending_numbers));
+            query_args.push(("pending_numbers".to_string(), pending_numbers.to_string()));
         }
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
         if !type_.to_string().is_empty() {
-            query_args.push(format!("type={}", type_.to_string()));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/numbers?{}", query_);
 
         let resp: crate::types::ListAccountPhoneNumbersResponseData =
@@ -148,29 +142,23 @@ impl Phone {
         pending_numbers: bool,
         site_id: &str,
     ) -> Result<Vec<crate::types::ListAccountPhoneNumbersResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !extension_type.to_string().is_empty() {
-            query_args.push(format!("extension_type={}", extension_type.to_string()));
+            query_args.push(("extension_type".to_string(), extension_type.to_string()));
         }
         if !number_type.to_string().is_empty() {
-            query_args.push(format!("number_type={}", number_type.to_string()));
+            query_args.push(("number_type".to_string(), number_type.to_string()));
         }
         if pending_numbers {
-            query_args.push(format!("pending_numbers={}", pending_numbers));
+            query_args.push(("pending_numbers".to_string(), pending_numbers.to_string()));
         }
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
         if !type_.to_string().is_empty() {
-            query_args.push(format!("type={}", type_.to_string()));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/numbers?{}", query_);
 
         let mut resp: crate::types::ListAccountPhoneNumbersResponseData =
@@ -368,23 +356,17 @@ impl Phone {
         next_page_token: &str,
         site_id: &str,
     ) -> Result<Vec<crate::types::Templates>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/setting_templates?{}", query_);
 
         let resp: crate::types::ListSettingTemplatesResponse =
@@ -413,17 +395,11 @@ impl Phone {
         &self,
         site_id: &str,
     ) -> Result<Vec<crate::types::Templates>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/setting_templates?{}", query_);
 
         let mut resp: crate::types::ListSettingTemplatesResponse =
@@ -531,20 +507,14 @@ impl Phone {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::ListLocationsResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/locations?{}", query_);
 
         let resp: crate::types::ListLocationsResponseData =
@@ -742,20 +712,14 @@ impl Phone {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::SipGroups>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/sip_groups?{}", query_);
 
         let resp: crate::types::ListSipGroupsResponse = self.client.get(&url, None).await.unwrap();
@@ -840,17 +804,14 @@ impl Phone {
         template_id: &str,
         custom_query_fields: &str,
     ) -> Result<crate::types::GetSettingTemplateResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !custom_query_fields.is_empty() {
-            query_args.push(format!("custom_query_fields={}", custom_query_fields));
+            query_args.push((
+                "custom_query_fields".to_string(),
+                custom_query_fields.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/setting_templates/{}?{}",
             crate::progenitor_support::encode_path(&template_id.to_string()),
@@ -930,35 +891,29 @@ impl Phone {
         phone_number: &str,
         time_type: crate::types::TimeType,
     ) -> Result<Vec<crate::types::CallLogs>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !phone_number.is_empty() {
-            query_args.push(format!("phone_number={}", phone_number));
+            query_args.push(("phone_number".to_string(), phone_number.to_string()));
         }
         if !time_type.to_string().is_empty() {
-            query_args.push(format!("time_type={}", time_type.to_string()));
+            query_args.push(("time_type".to_string(), time_type.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
         if !type_.to_string().is_empty() {
-            query_args.push(format!("type={}", type_.to_string()));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/users/{}/call_logs?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -996,29 +951,23 @@ impl Phone {
         phone_number: &str,
         time_type: crate::types::TimeType,
     ) -> Result<Vec<crate::types::CallLogs>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !phone_number.is_empty() {
-            query_args.push(format!("phone_number={}", phone_number));
+            query_args.push(("phone_number".to_string(), phone_number.to_string()));
         }
         if !time_type.to_string().is_empty() {
-            query_args.push(format!("time_type={}", time_type.to_string()));
+            query_args.push(("time_type".to_string(), time_type.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
         if !type_.to_string().is_empty() {
-            query_args.push(format!("type={}", type_.to_string()));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/users/{}/call_logs?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1090,26 +1039,20 @@ impl Phone {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::Recordings>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/users/{}/recordings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1144,20 +1087,14 @@ impl Phone {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::Recordings>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/users/{}/recordings?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1231,29 +1168,23 @@ impl Phone {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::VoiceMails>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !status.to_string().is_empty() {
-            query_args.push(format!("status={}", status.to_string()));
+            query_args.push(("status".to_string(), status.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/users/{}/voice_mails?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1289,23 +1220,17 @@ impl Phone {
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
     ) -> Result<Vec<crate::types::VoiceMails>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.to_string().is_empty() {
-            query_args.push(format!("from={}", from.to_string()));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !status.to_string().is_empty() {
-            query_args.push(format!("status={}", status.to_string()));
+            query_args.push(("status".to_string(), status.to_string()));
         }
         if !to.to_string().is_empty() {
-            query_args.push(format!("to={}", to.to_string()));
+            query_args.push(("to".to_string(), to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/users/{}/voice_mails?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1415,17 +1340,11 @@ impl Phone {
         setting_type: &str,
         shared_id: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !shared_id.is_empty() {
-            query_args.push(format!("shared_id={}", shared_id));
+            query_args.push(("shared_id".to_string(), shared_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/users/{}/settings/{}?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1517,38 +1436,32 @@ impl Phone {
         time_type: crate::types::TimeType,
         site_id: &str,
     ) -> Result<Vec<crate::types::AccountCallLogsResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
-            query_args.push(format!("from={}", from));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !path.is_empty() {
-            query_args.push(format!("path={}", path));
+            query_args.push(("path".to_string(), path.to_string()));
         }
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
         if !time_type.to_string().is_empty() {
-            query_args.push(format!("time_type={}", time_type.to_string()));
+            query_args.push(("time_type".to_string(), time_type.to_string()));
         }
         if !to.is_empty() {
-            query_args.push(format!("to={}", to));
+            query_args.push(("to".to_string(), to.to_string()));
         }
         if !type_.is_empty() {
-            query_args.push(format!("type={}", type_));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/call_logs?{}", query_);
 
         let resp: crate::types::AccountCallLogsResponseData =
@@ -1583,32 +1496,26 @@ impl Phone {
         time_type: crate::types::TimeType,
         site_id: &str,
     ) -> Result<Vec<crate::types::AccountCallLogsResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
-            query_args.push(format!("from={}", from));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !path.is_empty() {
-            query_args.push(format!("path={}", path));
+            query_args.push(("path".to_string(), path.to_string()));
         }
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
         if !time_type.to_string().is_empty() {
-            query_args.push(format!("time_type={}", time_type.to_string()));
+            query_args.push(("time_type".to_string(), time_type.to_string()));
         }
         if !to.is_empty() {
-            query_args.push(format!("to={}", to));
+            query_args.push(("to".to_string(), to.to_string()));
         }
         if !type_.is_empty() {
-            query_args.push(format!("type={}", type_));
+            query_args.push(("type".to_string(), type_.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/call_logs?{}", query_);
 
         let mut resp: crate::types::AccountCallLogsResponseData =
@@ -1809,38 +1716,32 @@ impl Phone {
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
     ) -> Result<Vec<crate::types::GetPhoneRecordingsResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
-            query_args.push(format!("from={}", from));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if !owner_type.is_empty() {
-            query_args.push(format!("owner_type={}", owner_type));
+            query_args.push(("owner_type".to_string(), owner_type.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !query_date_type.to_string().is_empty() {
-            query_args.push(format!("query_date_type={}", query_date_type.to_string()));
+            query_args.push(("query_date_type".to_string(), query_date_type.to_string()));
         }
         if !recording_type.is_empty() {
-            query_args.push(format!("recording_type={}", recording_type));
+            query_args.push(("recording_type".to_string(), recording_type.to_string()));
         }
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
         if !to.is_empty() {
-            query_args.push(format!("to={}", to));
+            query_args.push(("to".to_string(), to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/recordings?{}", query_);
 
         let resp: crate::types::GetPhoneRecordingsResponseData =
@@ -1875,32 +1776,26 @@ impl Phone {
         site_id: &str,
         query_date_type: crate::types::QueryDateType,
     ) -> Result<Vec<crate::types::GetPhoneRecordingsResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !from.is_empty() {
-            query_args.push(format!("from={}", from));
+            query_args.push(("from".to_string(), from.to_string()));
         }
         if !owner_type.is_empty() {
-            query_args.push(format!("owner_type={}", owner_type));
+            query_args.push(("owner_type".to_string(), owner_type.to_string()));
         }
         if !query_date_type.to_string().is_empty() {
-            query_args.push(format!("query_date_type={}", query_date_type.to_string()));
+            query_args.push(("query_date_type".to_string(), query_date_type.to_string()));
         }
         if !recording_type.is_empty() {
-            query_args.push(format!("recording_type={}", recording_type));
+            query_args.push(("recording_type".to_string(), recording_type.to_string()));
         }
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
         if !to.is_empty() {
-            query_args.push(format!("to={}", to));
+            query_args.push(("to".to_string(), to.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/recordings?{}", query_);
 
         let mut resp: crate::types::GetPhoneRecordingsResponseData =
@@ -1961,20 +1856,14 @@ impl Phone {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::ByocSipTrunk>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/sip_trunk/trunks?{}", query_);
 
         let resp: crate::types::ListByocsipTrunkResponse =
@@ -2130,20 +2019,14 @@ impl Phone {
         next_page_token: &str,
         page_size: i64,
     ) -> Result<Vec<crate::types::ExternalContacts>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/external_contacts?{}", query_);
 
         let resp: crate::types::ListExternalContactsResponse =
@@ -2456,23 +2339,17 @@ impl Phone {
         next_page_token: &str,
         site_id: &str,
     ) -> Result<Vec<crate::types::ListPhoneUsersResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/users?{}", query_);
 
         let resp: crate::types::ListPhoneUsersResponseData =
@@ -2501,17 +2378,11 @@ impl Phone {
         &self,
         site_id: &str,
     ) -> Result<Vec<crate::types::ListPhoneUsersResponse>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !site_id.is_empty() {
-            query_args.push(format!("site_id={}", site_id));
+            query_args.push(("site_id".to_string(), site_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/users?{}", query_);
 
         let mut resp: crate::types::ListPhoneUsersResponseData =

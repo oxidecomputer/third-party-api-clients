@@ -39,29 +39,23 @@ impl EnvelopeRecipients {
         include_metadata: &str,
         include_tabs: &str,
     ) -> Result<crate::types::EnvelopeRecipients> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !include_anchor_tab_locations.is_empty() {
-            query_args.push(format!(
-                "include_anchor_tab_locations={}",
-                include_anchor_tab_locations
+            query_args.push((
+                "include_anchor_tab_locations".to_string(),
+                include_anchor_tab_locations.to_string(),
             ));
         }
         if !include_extended.is_empty() {
-            query_args.push(format!("include_extended={}", include_extended));
+            query_args.push(("include_extended".to_string(), include_extended.to_string()));
         }
         if !include_metadata.is_empty() {
-            query_args.push(format!("include_metadata={}", include_metadata));
+            query_args.push(("include_metadata".to_string(), include_metadata.to_string()));
         }
         if !include_tabs.is_empty() {
-            query_args.push(format!("include_tabs={}", include_tabs));
+            query_args.push(("include_tabs".to_string(), include_tabs.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -125,26 +119,20 @@ impl EnvelopeRecipients {
         resend_envelope: &str,
         body: &crate::types::EnvelopeRecipients,
     ) -> Result<crate::types::RecipientsUpdateSummary> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !combine_same_order_recipients.is_empty() {
-            query_args.push(format!(
-                "combine_same_order_recipients={}",
-                combine_same_order_recipients
+            query_args.push((
+                "combine_same_order_recipients".to_string(),
+                combine_same_order_recipients.to_string(),
             ));
         }
         if !offline_signing.is_empty() {
-            query_args.push(format!("offline_signing={}", offline_signing));
+            query_args.push(("offline_signing".to_string(), offline_signing.to_string()));
         }
         if !resend_envelope.is_empty() {
-            query_args.push(format!("resend_envelope={}", resend_envelope));
+            query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -182,17 +170,11 @@ impl EnvelopeRecipients {
         resend_envelope: &str,
         body: &crate::types::EnvelopeRecipients,
     ) -> Result<crate::types::EnvelopeRecipients> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !resend_envelope.is_empty() {
-            query_args.push(format!("resend_envelope={}", resend_envelope));
+            query_args.push(("resend_envelope".to_string(), resend_envelope.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),

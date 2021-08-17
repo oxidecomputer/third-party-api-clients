@@ -138,20 +138,14 @@ impl Customers {
         update_mask: &str,
         body: &crate::types::Printer,
     ) -> Result<crate::types::Printer> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !clear_mask.is_empty() {
-            query_args.push(format!("clear_mask={}", clear_mask));
+            query_args.push(("clear_mask".to_string(), clear_mask.to_string()));
         }
         if !update_mask.is_empty() {
-            query_args.push(format!("update_mask={}", update_mask));
+            query_args.push(("update_mask".to_string(), update_mask.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}?{}",
             crate::progenitor_support::encode_path(&name.to_string()),
@@ -187,26 +181,20 @@ impl Customers {
         page_size: i64,
         page_token: &str,
     ) -> Result<Vec<crate::types::Printer>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
-            query_args.push(format!("filter={}", filter));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !org_unit_id.is_empty() {
-            query_args.push(format!("org_unit_id={}", org_unit_id));
+            query_args.push(("org_unit_id".to_string(), org_unit_id.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers?{}",
             crate::progenitor_support::encode_path(&parent.to_string()),
@@ -232,20 +220,14 @@ impl Customers {
         filter: &str,
         org_unit_id: &str,
     ) -> Result<Vec<crate::types::Printer>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
-            query_args.push(format!("filter={}", filter));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !org_unit_id.is_empty() {
-            query_args.push(format!("org_unit_id={}", org_unit_id));
+            query_args.push(("org_unit_id".to_string(), org_unit_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers?{}",
             crate::progenitor_support::encode_path(&parent.to_string()),
@@ -387,23 +369,17 @@ impl Customers {
         page_size: i64,
         page_token: &str,
     ) -> Result<Vec<crate::types::PrinterModel>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
-            query_args.push(format!("filter={}", filter));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(format!("page_token={}", page_token));
+            query_args.push(("page_token".to_string(), page_token.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers:listPrinterModels?{}",
             crate::progenitor_support::encode_path(&parent.to_string()),
@@ -429,17 +405,11 @@ impl Customers {
         parent: &str,
         filter: &str,
     ) -> Result<Vec<crate::types::PrinterModel>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !filter.is_empty() {
-            query_args.push(format!("filter={}", filter));
+            query_args.push(("filter".to_string(), filter.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers:listPrinterModels?{}",
             crate::progenitor_support::encode_path(&parent.to_string()),

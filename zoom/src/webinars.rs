@@ -41,20 +41,14 @@ impl Webinars {
         page_size: i64,
         page_number: i64,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
+            query_args.push(("page_number".to_string(), page_number.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/webinars?{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -116,23 +110,17 @@ impl Webinars {
         occurrence_id: &str,
         show_previous_occurrences: bool,
     ) -> Result<crate::types::WebinarResponseAllOf> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         if show_previous_occurrences {
-            query_args.push(format!(
-                "show_previous_occurrences={}",
-                show_previous_occurrences
+            query_args.push((
+                "show_previous_occurrences".to_string(),
+                show_previous_occurrences.to_string(),
             ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/webinars/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -170,23 +158,17 @@ impl Webinars {
         occurrence_id: &str,
         cancel_webinar_reminder: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !cancel_webinar_reminder.is_empty() {
-            query_args.push(format!(
-                "cancel_webinar_reminder={}",
-                cancel_webinar_reminder
+            query_args.push((
+                "cancel_webinar_reminder".to_string(),
+                cancel_webinar_reminder.to_string(),
             ));
         }
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/webinars/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -215,17 +197,11 @@ impl Webinars {
      * * `occurrence_id: &str` -- Webinar occurrence id. Support change of agenda, start_time, duration, settings: {host_video, panelist_video, hd_video, watermark, auto_recording}.
      */
     pub async fn webinar_update(&self, webinar_id: i64, occurrence_id: &str) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/webinars/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -264,20 +240,14 @@ impl Webinars {
         page_size: i64,
         next_page_token: &str,
     ) -> Result<Vec<crate::types::Participants>> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/past_webinars/{}/participants?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -542,32 +512,29 @@ impl Webinars {
         page_number: i64,
         next_page_token: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         if page_number > 0 {
-            query_args.push(format!("page_number={}", page_number));
+            query_args.push(("page_number".to_string(), page_number.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
         if !status.to_string().is_empty() {
-            query_args.push(format!("status={}", status.to_string()));
+            query_args.push(("status".to_string(), status.to_string()));
         }
         if !tracking_source_id.is_empty() {
-            query_args.push(format!("tracking_source_id={}", tracking_source_id));
+            query_args.push((
+                "tracking_source_id".to_string(),
+                tracking_source_id.to_string(),
+            ));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/webinars/{}/registrants?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -599,17 +566,11 @@ impl Webinars {
         webinar_id: &str,
         occurrence_ids: &str,
     ) -> Result<crate::types::WebinarRegistrantCreateResponse> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_ids.is_empty() {
-            query_args.push(format!("occurrence_ids={}", occurrence_ids));
+            query_args.push(("occurrence_ids".to_string(), occurrence_ids.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/webinars/{}/registrants?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -685,17 +646,11 @@ impl Webinars {
         occurrence_id: &str,
         body: &crate::types::RegistrantStatus,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/webinars/{}/registrants/status?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -980,17 +935,11 @@ impl Webinars {
         registrant_id: &str,
         occurrence_id: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/webinars/{}/registrants/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -1023,17 +972,11 @@ impl Webinars {
         registrant_id: &str,
         occurrence_id: &str,
     ) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/webinars/{}/registrants/{}?{}",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -1067,23 +1010,17 @@ impl Webinars {
         next_page_token: &str,
         webinar_uuid: &str,
     ) -> Result<crate::types::Domains> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
+        let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
-            query_args.push(format!("next_page_token={}", next_page_token));
+            query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
         }
         if !occurrence_id.is_empty() {
-            query_args.push(format!("occurrence_id={}", occurrence_id));
+            query_args.push(("occurrence_id".to_string(), occurrence_id.to_string()));
         }
         if page_size > 0 {
-            query_args.push(format!("page_size={}", page_size));
+            query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/past_webinars/{}/absentees?{}",
             crate::progenitor_support::encode_path(&webinar_uuid.to_string()),

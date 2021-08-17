@@ -210,6 +210,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
 ]
@@ -429,6 +430,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
 ]
@@ -454,6 +456,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
  "yup-oauth2",
@@ -480,6 +483,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
  "yup-oauth2",
@@ -506,6 +510,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
  "yup-oauth2",
@@ -532,6 +537,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
  "yup-oauth2",
@@ -558,6 +564,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
 ]
@@ -973,6 +980,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
 ]
 
@@ -1163,6 +1171,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
 ]
@@ -1697,6 +1706,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
 ]
@@ -1979,6 +1989,7 @@ dependencies = [
  "schemars",
  "serde",
  "serde_json",
+ "serde_urlencoded",
  "tokio",
  "uuid",
 ]
