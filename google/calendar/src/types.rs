@@ -931,27 +931,23 @@ pub struct Creator {
     pub self_: bool,
 }
 
+/// Properties that are shared between copies of the event on other attendees' calendars.
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct Shared {}
+
 /// Extended properties of the event.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ExtendedProperties {
     /**
      * Extended properties of the event.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub private: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub private: Option<Shared>,
     /**
      * Extended properties of the event.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub shared: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub shared: Option<Shared>,
 }
 
 /// A gadget that extends this event. Gadgets are deprecated; this structure is instead only used for returning birthday calendar metadata.

@@ -351,7 +351,12 @@ impl Client {
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
-        let (url, auth) = self.url_and_auth(uri).await?;
+        let u = if uri.starts_with("https://") {
+            uri.to_string()
+        } else {
+            (DEFAULT_HOST.to_string() + uri).to_string()
+        };
+        let (url, auth) = self.url_and_auth(&u).await?;
 
         let instance = <&Client>::clone(&self);
 

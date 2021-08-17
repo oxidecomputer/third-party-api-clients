@@ -2620,15 +2620,9 @@ components:
           description: Extended properties of the event.
           properties:
             private:
-              additionalProperties:
-                description: The name of the private property and the corresponding value.
-                type: string
               description: Properties that are private to the copy of the event that appears on this calendar.
               type: object
             shared:
-              additionalProperties:
-                description: The name of the shared property and the corresponding value.
-                type: string
               description: Properties that are shared between copies of the event on other attendees' calendars.
               type: object
           type: object

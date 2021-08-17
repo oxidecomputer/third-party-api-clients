@@ -563,6 +563,7 @@ fn get_response_type(
     ))
 }
 
+#[allow(clippy::type_complexity)]
 fn get_fn_params(
     ts: &mut TypeSpace,
     o: &openapiv3::Operation,
