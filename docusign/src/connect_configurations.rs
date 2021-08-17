@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct ConnectConfigurations {
-    client: Client,
+    pub client: Client,
 }
 
 impl ConnectConfigurations {

@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Licenses {
-    client: Client,
+    pub client: Client,
 }
 
 impl Licenses {

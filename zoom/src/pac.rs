@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Pac {
-    client: Client,
+    pub client: Client,
 }
 
 impl Pac {

@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct TemplateDocumentTabs {
-    client: Client,
+    pub client: Client,
 }
 
 impl TemplateDocumentTabs {

@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Git {
-    client: Client,
+    pub client: Client,
 }
 
 impl Git {

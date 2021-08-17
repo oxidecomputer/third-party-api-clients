@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Files {
-    client: Client,
+    pub client: Client,
 }
 
 impl Files {
@@ -243,7 +243,6 @@ impl Files {
      */
     pub async fn drive_create(
         &self,
-        enforce_single_parent: bool,
         ignore_default_visibility: bool,
         include_permissions_for_view: &str,
         keep_revision_forever: bool,
@@ -255,9 +254,6 @@ impl Files {
     ) -> Result<crate::types::File> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if enforce_single_parent {
-            query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
-        }
         if ignore_default_visibility {
             query_args.push(format!(
                 "ignore_default_visibility={}",
@@ -352,20 +348,8 @@ impl Files {
      *
      * * `enforce_single_parent: bool` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
      */
-    pub async fn drive_empty_trash(&self, enforce_single_parent: bool) -> Result<()> {
-        let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        if enforce_single_parent {
-            query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
-        }
-        for (i, n) in query_args.iter().enumerate() {
-            if i > 0 {
-                query_.push('&');
-            }
-            query_.push_str(n);
-        }
-        let url = format!("/files/trash?{}", query_);
-
+    pub async fn drive_empty_trash(&self) -> Result<()> {
+        let url = "/files/trash".to_string();
         self.client.delete(&url, None).await
     }
 
@@ -437,15 +421,11 @@ impl Files {
     pub async fn drive_delete(
         &self,
         file_id: &str,
-        enforce_single_parent: bool,
         supports_all_drives: bool,
         supports_team_drives: bool,
     ) -> Result<()> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if enforce_single_parent {
-            query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
-        }
         if supports_all_drives {
             query_args.push(format!("supports_all_drives={}", supports_all_drives));
         }
@@ -489,7 +469,6 @@ impl Files {
         &self,
         file_id: &str,
         add_parents: &str,
-        enforce_single_parent: bool,
         include_permissions_for_view: &str,
         keep_revision_forever: bool,
         ocr_language: &str,
@@ -503,9 +482,6 @@ impl Files {
         let mut query_args: Vec<String> = Default::default();
         if !add_parents.is_empty() {
             query_args.push(format!("add_parents={}", add_parents));
-        }
-        if enforce_single_parent {
-            query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push(format!(
@@ -573,7 +549,6 @@ impl Files {
     pub async fn drive_copy(
         &self,
         file_id: &str,
-        enforce_single_parent: bool,
         ignore_default_visibility: bool,
         include_permissions_for_view: &str,
         keep_revision_forever: bool,
@@ -584,9 +559,6 @@ impl Files {
     ) -> Result<crate::types::File> {
         let mut query_ = String::new();
         let mut query_args: Vec<String> = Default::default();
-        if enforce_single_parent {
-            query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
-        }
         if ignore_default_visibility {
             query_args.push(format!(
                 "ignore_default_visibility={}",

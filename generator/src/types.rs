@@ -78,6 +78,7 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                         || sn == "Repo"
                         || sn == "Payload"
                         || sn == "Actor"
+                        || sn == "File"
                     {
                         a(
                             "#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, \

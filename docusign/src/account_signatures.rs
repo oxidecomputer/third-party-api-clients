@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct AccountSignatures {
-    client: Client,
+    pub client: Client,
 }
 
 impl AccountSignatures {

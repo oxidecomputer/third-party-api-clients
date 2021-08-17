@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct EnvelopeTransferRules {
-    client: Client,
+    pub client: Client,
 }
 
 impl EnvelopeTransferRules {

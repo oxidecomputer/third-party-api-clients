@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Payroll {
-    client: Client,
+    pub client: Client,
 }
 
 impl Payroll {

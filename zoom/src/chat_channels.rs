@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct ChatChannels {
-    client: Client,
+    pub client: Client,
 }
 
 impl ChatChannels {

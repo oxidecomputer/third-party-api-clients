@@ -57,6 +57,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "async-trait"
+version = "0.1.51"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "44318e776df68115a881de9a8fd1b9e53368d7a4a5ce4cc48517da3393233a5e"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "autocfg"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -184,7 +195,9 @@ version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -401,7 +414,9 @@ version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -424,7 +439,9 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -448,7 +465,9 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -472,7 +491,9 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -496,7 +517,9 @@ version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -520,7 +543,9 @@ version = "0.2.11"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -1123,7 +1148,9 @@ version = "0.2.4"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -1655,7 +1682,9 @@ version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",
@@ -1935,7 +1964,9 @@ version = "0.2.4"
 dependencies = [
  "anyhow",
  "async-recursion",
+ "async-trait",
  "base64 0.12.3",
+ "bytes",
  "chrono",
  "dirs",
  "http",

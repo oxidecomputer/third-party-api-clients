@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct AccountPermissionProfiles {
-    client: Client,
+    pub client: Client,
 }
 
 impl AccountPermissionProfiles {

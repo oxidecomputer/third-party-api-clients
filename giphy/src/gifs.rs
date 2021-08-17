@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Gifs {
-    client: Client,
+    pub client: Client,
 }
 
 impl Gifs {

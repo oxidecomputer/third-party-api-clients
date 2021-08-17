@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Folders {
-    client: Client,
+    pub client: Client,
 }
 
 impl Folders {

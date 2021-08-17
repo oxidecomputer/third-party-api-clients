@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Permissions {
-    client: Client,
+    pub client: Client,
 }
 
 impl Permissions {
@@ -183,7 +183,6 @@ impl Permissions {
         &self,
         file_id: &str,
         email_message: &str,
-        enforce_single_parent: bool,
         move_to_new_owners_root: bool,
         send_notification_email: bool,
         supports_all_drives: bool,
@@ -196,9 +195,6 @@ impl Permissions {
         let mut query_args: Vec<String> = Default::default();
         if !email_message.is_empty() {
             query_args.push(format!("email_message={}", email_message));
-        }
-        if enforce_single_parent {
-            query_args.push(format!("enforce_single_parent={}", enforce_single_parent));
         }
         if move_to_new_owners_root {
             query_args.push(format!(

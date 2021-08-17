@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Emojis {
-    client: Client,
+    pub client: Client,
 }
 
 impl Emojis {

@@ -2201,6 +2201,9 @@ fn gen(
         a(r#"#[cfg_attr(docsrs, doc(cfg(feature = "httpcache")))]"#);
         a("pub mod http_cache;");
     }
+    if proper_name == "Google Drive" {
+        a("pub mod traits;");
+    }
     a("#[cfg(test)]");
     a("mod tests;");
     // Hopefully there is never a "tag" named after these reserved libs.
@@ -2937,7 +2940,9 @@ fn main() -> Result<()> {
             let mut yup_oauth2_lib = "".to_string();
             if proper_name != "GitHub" {
                 uuid_lib = r#"
-uuid = { version = "0.8", features = ["serde", "v4"] }"#
+bytes = "1"
+async-trait = "^0.1.51"
+uuid = { version = "^0.8", features = ["serde", "v4"] }"#
                     .to_string();
             }
 
@@ -3074,7 +3079,7 @@ rustdoc-args = ["--cfg", "docsrs"]
 use crate::Client;
 
 pub struct {} {{
-    client: Client,
+    pub client: Client,
 }}
 
 impl {} {{

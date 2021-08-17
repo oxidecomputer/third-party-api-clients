@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Teams {
-    client: Client,
+    pub client: Client,
 }
 
 impl Teams {

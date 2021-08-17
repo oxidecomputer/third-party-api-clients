@@ -1706,7 +1706,7 @@ pub struct VideoMediaMetadata {
 }
 
 /// The metadata for a file.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct File {
     /**
      * The metadata for a file.

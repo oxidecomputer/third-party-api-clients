@@ -3,7 +3,7 @@ use anyhow::Result;
 use crate::Client;
 
 pub struct Checks {
-    client: Client,
+    pub client: Client,
 }
 
 impl Checks {
