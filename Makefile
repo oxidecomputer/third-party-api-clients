@@ -257,7 +257,7 @@ google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
 		-d "A fully generated & opinionated API client for the Google Sheets API." \
 		--spec-link "https://sheets.googleapis.com/$discovery/rest?version=v4" \
 		--token-endpoint "oauth2.googleapis.com/token" \
-		--host "sheets.googleapis.com/v4" $(EXTRA_ARGS)
+		--host "sheets.googleapis.com" $(EXTRA_ARGS)
 	cargo fmt -p sheets
 
 $(GUSTO_SPEC_DIR):
