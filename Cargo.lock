@@ -437,7 +437,7 @@ dependencies = [
 
 [[package]]
 name = "google-calendar"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -464,7 +464,7 @@ dependencies = [
 
 [[package]]
 name = "google-drive"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -491,7 +491,7 @@ dependencies = [
 
 [[package]]
 name = "google-groups-settings"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -518,7 +518,7 @@ dependencies = [
 
 [[package]]
 name = "gsuite-api"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "anyhow",
  "async-recursion",
