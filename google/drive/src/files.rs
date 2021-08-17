@@ -37,7 +37,6 @@ impl Files {
     pub async fn drive_list(
         &self,
         corpora: &str,
-        corpus: crate::types::Corpus,
         drive_id: &str,
         include_items_from_all_drives: bool,
         include_permissions_for_view: &str,
@@ -56,7 +55,6 @@ impl Files {
         if !corpora.is_empty() {
             query_args.push(format!("corpora={}", corpora));
         }
-        query_args.push(format!("corpus={}", corpus));
         if !drive_id.is_empty() {
             query_args.push(format!("drive_id={}", drive_id));
         }
@@ -126,7 +124,6 @@ impl Files {
     pub async fn drive_list_files(
         &self,
         corpora: &str,
-        corpus: crate::types::Corpus,
         drive_id: &str,
         include_items_from_all_drives: bool,
         include_permissions_for_view: &str,
@@ -143,7 +140,6 @@ impl Files {
         if !corpora.is_empty() {
             query_args.push(format!("corpora={}", corpora));
         }
-        query_args.push(format!("corpus={}", corpus));
         if !drive_id.is_empty() {
             query_args.push(format!("drive_id={}", drive_id));
         }

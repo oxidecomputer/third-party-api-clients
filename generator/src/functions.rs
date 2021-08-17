@@ -986,6 +986,7 @@ fn is_page_param(s: &str) -> bool {
 }
 
 fn is_google_unnecessary_param(s: &str) -> bool {
+    // These are either dumb or depreciated.
     s == "access_token"
         || s == "oauth_token"
         || s == "pretty_print"
@@ -1002,4 +1003,5 @@ fn is_google_unnecessary_param(s: &str) -> bool {
         || s == "upload_type"
         || s == "always_include_email"
         || s == "enforce_single_parent"
+        || s == "corpus"
 }

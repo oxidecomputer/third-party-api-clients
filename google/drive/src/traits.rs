@@ -1,7 +1,8 @@
-use anyhow::Result;
+#![allow(clippy::field_reassign_with_default)]
+use anyhow::{anyhow, Result};
 
 #[async_trait::async_trait]
-pub trait Operations {
+pub trait FileOps {
     /// Get a file by it's name.
     async fn get_by_name(&self, drive_id: &str, name: &str) -> Result<Vec<crate::types::File>>;
 
@@ -19,15 +20,17 @@ pub trait Operations {
 
     /// Download a file by it's ID.
     async fn download_by_id(&self, id: &str) -> Result<bytes::Bytes>;
+
+    /// Create a folder, if it doesn't exist.
+    async fn create_folder(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<String>;
 }
 
 #[async_trait::async_trait]
-impl Operations for crate::files::Files {
+impl FileOps for crate::files::Files {
     /// Get a file by it's name.
     async fn get_by_name(&self, drive_id: &str, name: &str) -> Result<Vec<crate::types::File>> {
         self.drive_list_files(
             "drive",                       // corpora
-            crate::types::Corpus::Noop,    // corpus
             drive_id,                      // drive id
             true,                          // include_items_from_all_drives
             "",                            // include_permissions_for_view
@@ -103,7 +106,7 @@ impl Operations for crate::files::Files {
         // Now upload the file to that location.
         Ok(self
             .client
-            .request_with_mime(reqwest::Method::PUT, &location, contents, mime_type)
+            .request_with_mime(reqwest::Method::PUT, location, contents, mime_type)
             .await
             .unwrap())
     }
@@ -121,5 +124,91 @@ impl Operations for crate::files::Files {
             .unwrap();
 
         Ok(resp.bytes().await.unwrap())
+    }
+
+    /// Create a folder, if it doesn't exist.
+    async fn create_folder(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<String> {
+        let folder_mime_type = "application/vnd.google-apps.folder";
+        let mut file: crate::types::File = Default::default();
+        // Set the name,
+        file.name = name.to_string();
+        file.mime_type = folder_mime_type.to_string();
+        if !parent_id.is_empty() {
+            file.parents = vec![parent_id.to_string()];
+        } else {
+            file.parents = vec![drive_id.to_string()];
+        }
+
+        let mut query = format!(
+            "name = '{}' and mimeType = 'application/vnd.google-apps.folder'",
+            name
+        );
+        if !parent_id.is_empty() {
+            query = format!("{} and '{}' in parents", query, parent_id);
+        }
+
+        // Check if the folder exists.
+        let folders = self
+            .drive_list_files(
+                "drive",  // corpora
+                drive_id, // drive id
+                true,     // include_items_from_all_drives
+                "",       // include_permissions_for_view
+                false,    // include_team_drive_items
+                "",       // order_by
+                &query,   // query
+                "",       // spaces
+                true,     // supports_all_drives
+                false,    // supports_team_drives
+                "",       // team_drive_id
+            )
+            .await
+            .unwrap_or_default();
+        if !folders.is_empty() {
+            let f = folders.get(0).unwrap().clone();
+            return Ok(f.id);
+        }
+
+        // Make the request and return the ID.
+        let folder: crate::types::File = self
+            .client
+            .request_with_mime(
+                reqwest::Method::POST,
+                "/files?supportsAllDrives=true&includeItemsFromAllDrives=true",
+                serde_json::to_string(&file).unwrap().as_bytes(),
+                folder_mime_type,
+            )
+            .await
+            .unwrap();
+
+        Ok(folder.id)
+    }
+}
+
+#[async_trait::async_trait]
+pub trait DriveOps {
+    /// Get a drive by it's name.
+    async fn get_by_name(&self, name: &str) -> Result<crate::types::Drive>;
+}
+
+#[async_trait::async_trait]
+impl DriveOps for crate::drives::Drives {
+    /// Get a drive by it's name.
+    async fn get_by_name(&self, name: &str) -> Result<crate::types::Drive> {
+        let drives = self
+            .drive_list_drives(
+                &format!("name = '{}'", name), // query
+                true,                          // use domain admin access
+            )
+            .await
+            .unwrap();
+
+        for drive in drives {
+            if drive.name == name {
+                return Ok(drive);
+            }
+        }
+
+        Err(anyhow!("could not find drive with name: {:?}", name))
     }
 }
