@@ -198,9 +198,8 @@ impl FileOps for crate::files::Files {
         // Make the request and return the ID.
         let folder: crate::types::File = self
             .client
-            .request(
-                reqwest::Method::POST,
-                "/files",
+            .post(
+                "/files?supportsAllDrives=true&includeItemsFromAllDrives=true",
                 Some(reqwest::Body::from(serde_json::to_vec(&file).unwrap())),
             )
             .await
