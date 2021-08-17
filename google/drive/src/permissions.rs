@@ -27,7 +27,7 @@ impl Permissions {
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
-    pub async fn drive_list(
+    pub async fn list(
         &self,
         file_id: &str,
         include_permissions_for_view: &str,
@@ -84,11 +84,11 @@ impl Permissions {
     /**
      * This function performs a `GET` to the `/files/{fileId}/permissions` endpoint.
      *
-     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists a file's or shared drive's permissions.
      */
-    pub async fn drive_list_permissions(
+    pub async fn list_all(
         &self,
         file_id: &str,
         include_permissions_for_view: &str,
@@ -179,7 +179,7 @@ impl Permissions {
      * * `transfer_ownership: bool` -- Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect. File owners can only transfer ownership of files existing on My Drive. Files existing in a shared drive are owned by the organization that owns that shared drive. Ownership transfers are not supported for files and folders in shared drives. Organizers of a shared drive can move items from that shared drive into their My Drive which transfers the ownership to them.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
-    pub async fn drive_create(
+    pub async fn create(
         &self,
         file_id: &str,
         email_message: &str,
@@ -259,7 +259,7 @@ impl Permissions {
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
-    pub async fn drive_get(
+    pub async fn get(
         &self,
         file_id: &str,
         permission_id: &str,
@@ -310,7 +310,7 @@ impl Permissions {
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
-    pub async fn drive_delete(
+    pub async fn delete(
         &self,
         file_id: &str,
         permission_id: &str,
@@ -363,7 +363,7 @@ impl Permissions {
      * * `transfer_ownership: bool` -- Whether to transfer ownership to the specified user and downgrade the current owner to a writer. This parameter is required as an acknowledgement of the side effect. File owners can only transfer ownership of files existing on My Drive. Files existing in a shared drive are owned by the organization that owns that shared drive. Ownership transfers are not supported for files and folders in shared drives. Organizers of a shared drive can move items from that shared drive into their My Drive which transfers the ownership to them.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if the file ID parameter refers to a shared drive and the requester is an administrator of the domain to which the shared drive belongs.
      */
-    pub async fn drive_update(
+    pub async fn update(
         &self,
         file_id: &str,
         permission_id: &str,

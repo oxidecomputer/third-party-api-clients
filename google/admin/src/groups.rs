@@ -80,7 +80,7 @@ impl Groups {
      *
      * Retrieves all groups of a domain or of a user given a userKey (paginated).
      */
-    pub async fn directory_list_groups(
+    pub async fn directory_list_all(
         &self,
         customer: &str,
         domain: &str,

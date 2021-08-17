@@ -26,7 +26,7 @@ impl Settings {
      *   Learn more about incremental synchronization.
      *   Optional. The default is to return all entries.
      */
-    pub async fn calendar_list(
+    pub async fn list(
         &self,
         max_results: i64,
         page_token: &str,
@@ -50,11 +50,11 @@ impl Settings {
     /**
      * This function performs a `GET` to the `/users/me/settings` endpoint.
      *
-     * As opposed to `calendar_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Returns all user settings for the authenticated user.
      */
-    pub async fn calendar_list_settings(&self) -> Result<Vec<crate::types::Setting>> {
+    pub async fn list_all(&self) -> Result<Vec<crate::types::Setting>> {
         let url = "/users/me/settings".to_string();
         let mut resp: crate::types::Settings = self.client.get(&url, None).await.unwrap();
 
@@ -104,7 +104,7 @@ impl Settings {
      *   Learn more about incremental synchronization.
      *   Optional. The default is to return all entries.
      */
-    pub async fn calendar_watch(
+    pub async fn watch(
         &self,
         max_results: i64,
         page_token: &str,
@@ -137,7 +137,7 @@ impl Settings {
      *
      * * `setting: &str` -- The id of the user setting.
      */
-    pub async fn calendar_get(&self, setting: &str) -> Result<crate::types::Setting> {
+    pub async fn get(&self, setting: &str) -> Result<crate::types::Setting> {
         let url = format!(
             "/users/me/settings/{}",
             crate::progenitor_support::encode_path(&setting.to_string()),

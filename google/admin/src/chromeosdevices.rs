@@ -81,7 +81,7 @@ impl Chromeosdevices {
      *
      * Retrieves a paginated list of Chrome OS devices within an account.
      */
-    pub async fn directory_list_chromeosdevices(
+    pub async fn directory_list_all(
         &self,
         customer_id: &str,
         order_by: crate::types::OrderBy,

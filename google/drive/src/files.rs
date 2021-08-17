@@ -34,7 +34,7 @@ impl Files {
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      * * `team_drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_list(
+    pub async fn list(
         &self,
         corpora: &str,
         drive_id: &str,
@@ -117,11 +117,11 @@ impl Files {
     /**
      * This function performs a `GET` to the `/files` endpoint.
      *
-     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists or searches files.
      */
-    pub async fn drive_list_files(
+    pub async fn list_all(
         &self,
         corpora: &str,
         drive_id: &str,
@@ -237,7 +237,7 @@ impl Files {
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      * * `use_content_as_indexable_text: bool` -- Whether to use the uploaded content as indexable text.
      */
-    pub async fn drive_create(
+    pub async fn create(
         &self,
         ignore_default_visibility: bool,
         include_permissions_for_view: &str,
@@ -310,7 +310,7 @@ impl Files {
      * * `space: &str` -- The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'. (Default: 'drive').
      * * `type_: &str` -- The type of items which the IDs can be used for. Supported values are 'files' and 'shortcuts'. Note that 'shortcuts' are only supported in the drive 'space'. (Default: 'files').
      */
-    pub async fn drive_generate_id(
+    pub async fn generate_id(
         &self,
         count: i64,
         space: &str,
@@ -341,7 +341,7 @@ impl Files {
      *
      * * `enforce_single_parent: bool` -- Deprecated. If an item is not in a shared drive and its last parent is deleted but the item itself is not, the item will be placed under its owner's root.
      */
-    pub async fn drive_empty_trash(&self) -> Result<()> {
+    pub async fn empty_trash(&self) -> Result<()> {
         let url = "/files/trash".to_string();
         self.client.delete(&url, None).await
     }
@@ -359,7 +359,7 @@ impl Files {
      * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      */
-    pub async fn drive_get(
+    pub async fn get(
         &self,
         file_id: &str,
         acknowledge_abuse: bool,
@@ -414,7 +414,7 @@ impl Files {
      * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      */
-    pub async fn drive_delete(
+    pub async fn delete(
         &self,
         file_id: &str,
         supports_all_drives: bool,
@@ -461,7 +461,7 @@ impl Files {
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      * * `use_content_as_indexable_text: bool` -- Whether to use the uploaded content as indexable text.
      */
-    pub async fn drive_update(
+    pub async fn update(
         &self,
         file_id: &str,
         add_parents: &str,
@@ -545,7 +545,7 @@ impl Files {
      * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      */
-    pub async fn drive_copy(
+    pub async fn copy(
         &self,
         file_id: &str,
         ignore_default_visibility: bool,
@@ -615,7 +615,7 @@ impl Files {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `mime_type: &str` -- The MIME type of the format requested for this export.
      */
-    pub async fn drive_export(&self, file_id: &str, mime_type: &str) -> Result<()> {
+    pub async fn export(&self, file_id: &str, mime_type: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !mime_type.is_empty() {
             query_args.push(("mimeType".to_string(), mime_type.to_string()));
@@ -643,7 +643,7 @@ impl Files {
      * * `supports_all_drives: bool` -- Whether the requesting application supports both My Drives and shared drives.
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      */
-    pub async fn drive_watch(
+    pub async fn watch(
         &self,
         file_id: &str,
         acknowledge_abuse: bool,

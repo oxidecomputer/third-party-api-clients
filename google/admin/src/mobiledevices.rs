@@ -76,7 +76,7 @@ impl Mobiledevices {
      *
      * Retrieves a paginated list of all mobile devices for an account.
      */
-    pub async fn directory_list_mobiledevices(
+    pub async fn directory_list_all(
         &self,
         customer_id: &str,
         order_by: crate::types::DirectoryMobiledevicesListOrderBy,

@@ -24,7 +24,7 @@ impl Teamdrives {
      * * `q: &str` -- A link to this theme's background image.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then all Team Drives of the domain in which the requester is an administrator are returned.
      */
-    pub async fn drive_list(
+    pub async fn list(
         &self,
         page_size: i64,
         page_token: &str,
@@ -59,11 +59,11 @@ impl Teamdrives {
     /**
      * This function performs a `GET` to the `/teamdrives` endpoint.
      *
-     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Deprecated use drives.list instead.
      */
-    pub async fn drive_list_teamdrives(
+    pub async fn list_all(
         &self,
         q: &str,
         use_domain_admin_access: bool,
@@ -124,7 +124,7 @@ impl Teamdrives {
      *
      * * `request_id: &str` -- An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a Team Drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same Team Drive. If the Team Drive already exists a 409 error will be returned.
      */
-    pub async fn drive_create(
+    pub async fn create(
         &self,
         request_id: &str,
         body: &crate::types::TeamDrive,
@@ -154,7 +154,7 @@ impl Teamdrives {
      * * `team_drive_id: &str` -- A link to this theme's background image.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
      */
-    pub async fn drive_get(
+    pub async fn get(
         &self,
         team_drive_id: &str,
         use_domain_admin_access: bool,
@@ -185,7 +185,7 @@ impl Teamdrives {
      *
      * * `team_drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_delete(&self, team_drive_id: &str) -> Result<()> {
+    pub async fn delete(&self, team_drive_id: &str) -> Result<()> {
         let url = format!(
             "/teamdrives/{}",
             crate::progenitor_support::encode_path(&team_drive_id.to_string()),
@@ -204,7 +204,7 @@ impl Teamdrives {
      * * `team_drive_id: &str` -- A link to this theme's background image.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the Team Drive belongs.
      */
-    pub async fn drive_update(
+    pub async fn update(
         &self,
         team_drive_id: &str,
         use_domain_admin_access: bool,

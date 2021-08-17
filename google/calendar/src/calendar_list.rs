@@ -30,7 +30,7 @@ impl CalendarList {
      *   Learn more about incremental synchronization.
      *   Optional. The default is to return all entries.
      */
-    pub async fn get_page(
+    pub async fn list(
         &self,
         max_results: i64,
         min_access_role: crate::types::MinAccessRole,
@@ -66,11 +66,11 @@ impl CalendarList {
     /**
      * This function performs a `GET` to the `/users/me/calendarList` endpoint.
      *
-     * As opposed to `get`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Returns the calendars on the user's calendar list.
      */
-    pub async fn get_all(
+    pub async fn list_all(
         &self,
         min_access_role: crate::types::MinAccessRole,
         show_deleted: bool,
@@ -132,7 +132,7 @@ impl CalendarList {
      *
      * * `color_rgb_format: bool` -- Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
      */
-    pub async fn insert(
+    pub async fn list_insert(
         &self,
         color_rgb_format: bool,
         body: &crate::types::CalendarListEntry,
@@ -170,7 +170,7 @@ impl CalendarList {
      *   Learn more about incremental synchronization.
      *   Optional. The default is to return all entries.
      */
-    pub async fn watch(
+    pub async fn list_watch(
         &self,
         max_results: i64,
         min_access_role: crate::types::MinAccessRole,
@@ -215,7 +215,7 @@ impl CalendarList {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn get(&self, calendar_id: &str) -> Result<crate::types::CalendarListEntry> {
+    pub async fn list_get(&self, calendar_id: &str) -> Result<crate::types::CalendarListEntry> {
         let url = format!(
             "/users/me/calendarList/{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -234,7 +234,7 @@ impl CalendarList {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `color_rgb_format: bool` -- Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
      */
-    pub async fn update(
+    pub async fn list_update(
         &self,
         calendar_id: &str,
         color_rgb_format: bool,
@@ -268,7 +268,7 @@ impl CalendarList {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn delete(&self, calendar_id: &str) -> Result<()> {
+    pub async fn list_delete(&self, calendar_id: &str) -> Result<()> {
         let url = format!(
             "/users/me/calendarList/{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -287,7 +287,7 @@ impl CalendarList {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `color_rgb_format: bool` -- Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.
      */
-    pub async fn patch(
+    pub async fn list_patch(
         &self,
         calendar_id: &str,
         color_rgb_format: bool,

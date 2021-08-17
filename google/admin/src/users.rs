@@ -96,7 +96,7 @@ impl Users {
      *
      * Retrieves a paginated list of either deleted users or all users in a domain.
      */
-    pub async fn directory_list_users(
+    pub async fn directory_list_all(
         &self,
         customer: &str,
         domain: &str,

@@ -24,7 +24,7 @@ impl Drives {
      * * `q: &str` -- A link to this theme's background image.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then all shared drives of the domain in which the requester is an administrator are returned.
      */
-    pub async fn drive_list(
+    pub async fn list(
         &self,
         page_size: i64,
         page_token: &str,
@@ -59,11 +59,11 @@ impl Drives {
     /**
      * This function performs a `GET` to the `/drives` endpoint.
      *
-     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists the user's shared drives.
      */
-    pub async fn drive_list_drives(
+    pub async fn list_all(
         &self,
         q: &str,
         use_domain_admin_access: bool,
@@ -124,7 +124,7 @@ impl Drives {
      *
      * * `request_id: &str` -- An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
      */
-    pub async fn drive_create(
+    pub async fn create(
         &self,
         request_id: &str,
         body: &crate::types::Drive,
@@ -154,7 +154,7 @@ impl Drives {
      * * `drive_id: &str` -- A link to this theme's background image.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
      */
-    pub async fn drive_get(
+    pub async fn get(
         &self,
         drive_id: &str,
         use_domain_admin_access: bool,
@@ -185,7 +185,7 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_delete(&self, drive_id: &str) -> Result<()> {
+    pub async fn delete(&self, drive_id: &str) -> Result<()> {
         let url = format!(
             "/drives/{}",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
@@ -204,7 +204,7 @@ impl Drives {
      * * `drive_id: &str` -- A link to this theme's background image.
      * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
      */
-    pub async fn drive_update(
+    pub async fn update(
         &self,
         drive_id: &str,
         use_domain_admin_access: bool,
@@ -241,7 +241,7 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_hide(&self, drive_id: &str) -> Result<crate::types::Drive> {
+    pub async fn hide(&self, drive_id: &str) -> Result<crate::types::Drive> {
         let url = format!(
             "/drives/{}/hide",
             crate::progenitor_support::encode_path(&drive_id.to_string()),
@@ -259,7 +259,7 @@ impl Drives {
      *
      * * `drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_unhide(&self, drive_id: &str) -> Result<crate::types::Drive> {
+    pub async fn unhide(&self, drive_id: &str) -> Result<crate::types::Drive> {
         let url = format!(
             "/drives/{}/unhide",
             crate::progenitor_support::encode_path(&drive_id.to_string()),

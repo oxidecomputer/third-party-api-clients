@@ -93,7 +93,7 @@ impl Members {
      *
      * Retrieves a paginated list of all members in a group.
      */
-    pub async fn directory_list_members(
+    pub async fn directory_list_all(
         &self,
         group_key: &str,
         include_derived_membership: bool,

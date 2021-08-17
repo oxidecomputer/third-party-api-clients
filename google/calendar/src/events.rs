@@ -51,7 +51,7 @@ impl Events {
      * * `time_zone: &str` -- Time zone used in the response. Optional. The default is the time zone of the calendar.
      * * `updated_min: &str` -- Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.
      */
-    pub async fn calendar_list(
+    pub async fn list(
         &self,
         calendar_id: &str,
         i_cal_uid: &str,
@@ -141,11 +141,11 @@ impl Events {
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events` endpoint.
      *
-     * As opposed to `calendar_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Returns events on the specified calendar.
      */
-    pub async fn calendar_list_events(
+    pub async fn list_all(
         &self,
         calendar_id: &str,
         i_cal_uid: &str,
@@ -268,7 +268,7 @@ impl Events {
      * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
      * * `supports_attachments: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
-    pub async fn calendar_insert(
+    pub async fn insert(
         &self,
         calendar_id: &str,
         conference_data_version: u64,
@@ -329,7 +329,7 @@ impl Events {
      * * `conference_data_version: u64` -- Version number of conference data supported by the API client. Version 0 assumes no conference data support and ignores conference data in the event's body. Version 1 enables support for copying of ConferenceData as well as for creating new conferences using the createRequest field of conferenceData. The default is 0.
      * * `supports_attachments: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
-    pub async fn calendar_import(
+    pub async fn import(
         &self,
         calendar_id: &str,
         conference_data_version: u64,
@@ -378,7 +378,7 @@ impl Events {
      *   Whether to send notifications about the creation of the event. Note that some emails might still be sent even if you set the value to false. The default is false.
      * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
      */
-    pub async fn calendar_quick_add(
+    pub async fn quick_add(
         &self,
         calendar_id: &str,
         text: &str,
@@ -447,7 +447,7 @@ impl Events {
      * * `time_zone: &str` -- Time zone used in the response. Optional. The default is the time zone of the calendar.
      * * `updated_min: &str` -- Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.
      */
-    pub async fn calendar_watch(
+    pub async fn watch(
         &self,
         calendar_id: &str,
         i_cal_uid: &str,
@@ -550,7 +550,7 @@ impl Events {
      * * `max_attendees: i64` -- The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.
      * * `time_zone: &str` -- Time zone used in the response. Optional. The default is the time zone of the calendar.
      */
-    pub async fn calendar_get(
+    pub async fn get(
         &self,
         calendar_id: &str,
         event_id: &str,
@@ -593,7 +593,7 @@ impl Events {
      * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
      * * `supports_attachments: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
-    pub async fn calendar_update(
+    pub async fn update(
         &self,
         calendar_id: &str,
         event_id: &str,
@@ -659,7 +659,7 @@ impl Events {
      *   Whether to send notifications about the deletion of the event. Note that some emails might still be sent even if you set the value to false. The default is false.
      * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
      */
-    pub async fn calendar_delete(
+    pub async fn delete(
         &self,
         calendar_id: &str,
         event_id: &str,
@@ -705,7 +705,7 @@ impl Events {
      * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
      * * `supports_attachments: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
-    pub async fn calendar_patch(
+    pub async fn patch(
         &self,
         calendar_id: &str,
         event_id: &str,
@@ -776,7 +776,7 @@ impl Events {
      * * `time_min: &str` -- Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset.
      * * `time_zone: &str` -- Time zone used in the response. Optional. The default is the time zone of the calendar.
      */
-    pub async fn calendar_instances(
+    pub async fn instances(
         &self,
         calendar_id: &str,
         event_id: &str,
@@ -831,11 +831,11 @@ impl Events {
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/events/{eventId}/instances` endpoint.
      *
-     * As opposed to `calendar_instances`, this function returns all the pages of the request at once.
+     * As opposed to `instances`, this function returns all the pages of the request at once.
      *
      * Returns instances of the specified recurring event.
      */
-    pub async fn get_all_calendar_instances(
+    pub async fn get_all_instances(
         &self,
         calendar_id: &str,
         event_id: &str,
@@ -922,7 +922,7 @@ impl Events {
      *   Whether to send notifications about the change of the event's organizer. Note that some emails might still be sent even if you set the value to false. The default is false.
      * * `send_updates: crate::types::SendUpdates` -- Whether to send notifications about the creation of the new event. Note that some emails might still be sent. The default is false.
      */
-    pub async fn calendar_move(
+    pub async fn mv(
         &self,
         calendar_id: &str,
         event_id: &str,

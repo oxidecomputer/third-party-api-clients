@@ -94,7 +94,7 @@ impl RequestLogs {
      * **Response**
      * If the Content-Transfer-Encoding header was set to base64, the log is returned as a base64 string.
      */
-    pub async fn api_request_log_get_request_logs(&self, request_log_id: &str) -> Result<Vec<u8>> {
+    pub async fn api_request_log_get_all(&self, request_log_id: &str) -> Result<Vec<u8>> {
         let url = format!(
             "/v2.1/diagnostics/request_logs/{}",
             crate::progenitor_support::encode_path(&request_log_id.to_string()),

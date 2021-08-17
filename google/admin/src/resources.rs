@@ -56,7 +56,7 @@ impl Resources {
      *
      * Retrieves a list of buildings for an account.
      */
-    pub async fn directory_buildings_list_resources(
+    pub async fn directory_buildings_list_all(
         &self,
         customer: &str,
     ) -> Result<Vec<crate::types::Building>> {
@@ -321,7 +321,7 @@ impl Resources {
      *
      * Retrieves a list of calendar resources for an account.
      */
-    pub async fn directory_calendars_list_resources(
+    pub async fn directory_calendars_list_all(
         &self,
         customer: &str,
         order_by: &str,
@@ -554,7 +554,7 @@ impl Resources {
      *
      * Retrieves a list of features for an account.
      */
-    pub async fn directory_features_list_resources(
+    pub async fn directory_features_list_all(
         &self,
         customer: &str,
     ) -> Result<Vec<crate::types::Feature>> {

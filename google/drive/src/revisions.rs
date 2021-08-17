@@ -23,7 +23,7 @@ impl Revisions {
      * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
      * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
      */
-    pub async fn drive_list(
+    pub async fn list(
         &self,
         file_id: &str,
         page_size: i64,
@@ -52,11 +52,11 @@ impl Revisions {
     /**
      * This function performs a `GET` to the `/files/{fileId}/revisions` endpoint.
      *
-     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists a file's revisions.
      */
-    pub async fn drive_list_revisions(&self, file_id: &str) -> Result<Vec<crate::types::Revision>> {
+    pub async fn list_all(&self, file_id: &str) -> Result<Vec<crate::types::Revision>> {
         let url = format!(
             "/files/{}/revisions",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -107,7 +107,7 @@ impl Revisions {
      * * `revision_id: &str` -- A link to this theme's background image.
      * * `acknowledge_abuse: bool` -- Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
      */
-    pub async fn drive_get(
+    pub async fn get(
         &self,
         file_id: &str,
         revision_id: &str,
@@ -141,7 +141,7 @@ impl Revisions {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `revision_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_delete(&self, file_id: &str, revision_id: &str) -> Result<()> {
+    pub async fn delete(&self, file_id: &str, revision_id: &str) -> Result<()> {
         let url = format!(
             "/files/{}/revisions/{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -161,7 +161,7 @@ impl Revisions {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `revision_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_update(
+    pub async fn update(
         &self,
         file_id: &str,
         revision_id: &str,

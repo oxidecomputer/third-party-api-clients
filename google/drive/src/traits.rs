@@ -50,7 +50,7 @@ impl FileOps for crate::files::Files {
             query = format!("{} and '{}' in parents", query, parent_id);
         }
 
-        self.drive_list_files(
+        self.list_all(
             "drive",  // corpora
             drive_id, // drive id
             true,     // include_items_from_all_drives
@@ -175,7 +175,7 @@ impl FileOps for crate::files::Files {
 
         // Check if the folder exists.
         let folders = self
-            .drive_list_files(
+            .list_all(
                 "drive",  // corpora
                 drive_id, // drive id
                 true,     // include_items_from_all_drives
@@ -246,7 +246,7 @@ impl FileOps for crate::files::Files {
         }
 
         // Delete the file.
-        self.drive_delete(
+        self.delete(
             &files.get(0).unwrap().id,
             true, // supports all drives
             true, // supports team drives
@@ -266,7 +266,7 @@ impl DriveOps for crate::drives::Drives {
     /// Get a drive by it's name.
     async fn get_by_name(&self, name: &str) -> Result<crate::types::Drive> {
         let drives = self
-            .drive_list_drives(
+            .list_all(
                 //&format!("name = '{}'", name), // query
                 "", true, // use domain admin access
             )

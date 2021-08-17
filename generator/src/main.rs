@@ -2387,7 +2387,7 @@ pub fn make_plural(proper_name: &str, s: &str) -> String {
 
     if s.ends_with("ss") {
         return format!("{}es", s);
-    } else if s.ends_with('s') {
+    } else if s.ends_with('s') || s.ends_with("_all") {
         return s.to_string();
     } else if s.ends_with('y') {
         return format!("{}ies", s.trim_end_matches('y'));
@@ -2479,6 +2479,14 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         return to_snake_case(oid).trim_start_matches('_').to_string();
     }
 
+    let mut clean_name = "_".to_string();
+    if proper_name.starts_with("Google") {
+        clean_name = format!(
+            "{}_",
+            proper_name.replace("Google", "").trim().to_lowercase()
+        );
+    }
+
     let mut o = oid.to_string();
     if o == "listimmessages" {
         o = "list im messages".to_string();
@@ -2499,6 +2507,7 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         .trim_start_matches('_')
         .trim_end_matches('_')
         .trim_end_matches("_id")
+        .trim_start_matches(&clean_name)
         .to_string();
 
     if st.starts_with("post_") {
@@ -2516,17 +2525,25 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         words.push(s.to_string());
     }
 
-    let f = words.join("_");
+    let mut f = words.join("_");
 
     if to_snake_case(tag) == f {
         return "get".to_string();
     }
 
-    f.replace(&tag, "")
+    f = f
+        .replace(&tag, "")
         .replace("__", "_")
         .trim_end_matches('_')
         .trim_end_matches("_s")
-        .replace("_s_", "_")
+        .replace("_s_", "_");
+
+    // Fix if we somehow created a function that is actually a keyword.
+    if f == "move" {
+        return "mv".to_string();
+    }
+
+    f
 }
 
 fn oid_to_object_name(s: &str) -> String {

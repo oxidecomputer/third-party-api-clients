@@ -257,6 +257,11 @@ pub fn generate_files(
                 fn_name = "get_page".to_string()
             }
 
+            // Fix if we somehow created a function that is actually a keyword.
+            if fn_name == "move" {
+                fn_name = "mv".to_string();
+            }
+
             // Do this right before printing. Check if we already have this function name.
             // This will ensure we don't have any duplicates.
             if fn_names.contains(&(fn_name.clone() + &tag)) {
@@ -337,7 +342,7 @@ pub fn generate_files(
                 // Do this right before printing. Check if we already have this function name.
                 // This will ensure we don't have any duplicates.
                 if fn_names.contains(&(fn_name.clone() + &tag)) {
-                    fn_name = format!("{}_{}", fn_name, tag);
+                    fn_name = format!("{}_all", fn_name);
                 }
                 fn_names.push(fn_name.clone() + &tag);
 

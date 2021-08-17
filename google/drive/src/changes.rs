@@ -33,7 +33,7 @@ impl Changes {
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      * * `team_drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_list(
+    pub async fn list(
         &self,
         page_token: &str,
         drive_id: &str,
@@ -122,11 +122,11 @@ impl Changes {
     /**
      * This function performs a `GET` to the `/changes` endpoint.
      *
-     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists the changes for a user or shared drive.
      */
-    pub async fn drive_list_changes(
+    pub async fn list_all(
         &self,
         drive_id: &str,
         include_corpus_removals: bool,
@@ -244,7 +244,7 @@ impl Changes {
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      * * `team_drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_get_start_page_token(
+    pub async fn get_start_page_token(
         &self,
         drive_id: &str,
         supports_all_drives: bool,
@@ -297,7 +297,7 @@ impl Changes {
      * * `supports_team_drives: bool` -- Whether the user has installed the requesting app.
      * * `team_drive_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_watch(
+    pub async fn watch(
         &self,
         page_token: &str,
         drive_id: &str,

@@ -17,7 +17,7 @@ impl Freebusy {
      *
      * Returns free/busy information for a set of calendars.
      */
-    pub async fn calendar_query(
+    pub async fn query(
         &self,
         body: &crate::types::FreeBusyRequest,
     ) -> Result<crate::types::FreeBusyResponse> {

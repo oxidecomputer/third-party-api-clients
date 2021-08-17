@@ -25,7 +25,7 @@ impl Replies {
      * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
      * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
      */
-    pub async fn drive_list(
+    pub async fn list(
         &self,
         file_id: &str,
         comment_id: &str,
@@ -60,11 +60,11 @@ impl Replies {
     /**
      * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
      *
-     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists a comment's replies.
      */
-    pub async fn drive_list_replies(
+    pub async fn list_all(
         &self,
         file_id: &str,
         comment_id: &str,
@@ -126,7 +126,7 @@ impl Replies {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `comment_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_create(
+    pub async fn create(
         &self,
         file_id: &str,
         comment_id: &str,
@@ -158,7 +158,7 @@ impl Replies {
      * * `reply_id: &str` -- A link to this theme's background image.
      * * `include_deleted: bool` -- Whether to return deleted replies. Deleted replies will not include their original content.
      */
-    pub async fn drive_get(
+    pub async fn get(
         &self,
         file_id: &str,
         comment_id: &str,
@@ -192,12 +192,7 @@ impl Replies {
      * * `comment_id: &str` -- A link to this theme's background image.
      * * `reply_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_delete(
-        &self,
-        file_id: &str,
-        comment_id: &str,
-        reply_id: &str,
-    ) -> Result<()> {
+    pub async fn delete(&self, file_id: &str, comment_id: &str, reply_id: &str) -> Result<()> {
         let url = format!(
             "/files/{}/comments/{}/replies/{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -219,7 +214,7 @@ impl Replies {
      * * `comment_id: &str` -- A link to this theme's background image.
      * * `reply_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_update(
+    pub async fn update(
         &self,
         file_id: &str,
         comment_id: &str,

@@ -17,10 +17,7 @@ impl Calendars {
      *
      * Creates a secondary calendar.
      */
-    pub async fn calendar_insert(
-        &self,
-        body: &crate::types::Calendar,
-    ) -> Result<crate::types::Calendar> {
+    pub async fn insert(&self, body: &crate::types::Calendar) -> Result<crate::types::Calendar> {
         let url = "/calendars".to_string();
         self.client
             .post(
@@ -39,7 +36,7 @@ impl Calendars {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn calendar_get(&self, calendar_id: &str) -> Result<crate::types::Calendar> {
+    pub async fn get(&self, calendar_id: &str) -> Result<crate::types::Calendar> {
         let url = format!(
             "/calendars/{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -57,7 +54,7 @@ impl Calendars {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn calendar_update(
+    pub async fn update(
         &self,
         calendar_id: &str,
         body: &crate::types::Calendar,
@@ -84,7 +81,7 @@ impl Calendars {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn calendar_delete(&self, calendar_id: &str) -> Result<()> {
+    pub async fn delete(&self, calendar_id: &str) -> Result<()> {
         let url = format!(
             "/calendars/{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -102,7 +99,7 @@ impl Calendars {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn calendar_patch(
+    pub async fn patch(
         &self,
         calendar_id: &str,
         body: &crate::types::Calendar,
@@ -129,7 +126,7 @@ impl Calendars {
      *
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      */
-    pub async fn calendar_clear(&self, calendar_id: &str) -> Result<()> {
+    pub async fn clear(&self, calendar_id: &str) -> Result<()> {
         let url = format!(
             "/calendars/{}/clear",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),

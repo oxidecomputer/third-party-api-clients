@@ -66,7 +66,7 @@ impl RoleAssignments {
      *
      * Retrieves a paginated list of all roleAssignments.
      */
-    pub async fn directory_list_role_assignments(
+    pub async fn directory_list_all(
         &self,
         customer: &str,
         role_id: &str,

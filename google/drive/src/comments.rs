@@ -25,7 +25,7 @@ impl Comments {
      * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
      * * `start_modified_time: &str` -- The minimum value of 'modifiedTime' for the result comments (RFC 3339 date-time).
      */
-    pub async fn drive_list(
+    pub async fn list(
         &self,
         file_id: &str,
         include_deleted: bool,
@@ -65,11 +65,11 @@ impl Comments {
     /**
      * This function performs a `GET` to the `/files/{fileId}/comments` endpoint.
      *
-     * As opposed to `drive_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists a file's comments.
      */
-    pub async fn drive_list_comments(
+    pub async fn list_all(
         &self,
         file_id: &str,
         include_deleted: bool,
@@ -135,7 +135,7 @@ impl Comments {
      *
      * * `file_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_create(
+    pub async fn create(
         &self,
         file_id: &str,
         body: &crate::types::Comment,
@@ -164,7 +164,7 @@ impl Comments {
      * * `comment_id: &str` -- A link to this theme's background image.
      * * `include_deleted: bool` -- Whether to return deleted comments. Deleted comments will not include their original content.
      */
-    pub async fn drive_get(
+    pub async fn get(
         &self,
         file_id: &str,
         comment_id: &str,
@@ -195,7 +195,7 @@ impl Comments {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `comment_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_delete(&self, file_id: &str, comment_id: &str) -> Result<()> {
+    pub async fn delete(&self, file_id: &str, comment_id: &str) -> Result<()> {
         let url = format!(
             "/files/{}/comments/{}",
             crate::progenitor_support::encode_path(&file_id.to_string()),
@@ -215,7 +215,7 @@ impl Comments {
      * * `file_id: &str` -- A link to this theme's background image.
      * * `comment_id: &str` -- A link to this theme's background image.
      */
-    pub async fn drive_update(
+    pub async fn update(
         &self,
         file_id: &str,
         comment_id: &str,

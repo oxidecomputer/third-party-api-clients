@@ -28,7 +28,7 @@ impl Acl {
      *   Learn more about incremental synchronization.
      *   Optional. The default is to return all entries.
      */
-    pub async fn calendar_list(
+    pub async fn list(
         &self,
         calendar_id: &str,
         max_results: i64,
@@ -61,11 +61,11 @@ impl Acl {
     /**
      * This function performs a `GET` to the `/calendars/{calendarId}/acl` endpoint.
      *
-     * As opposed to `calendar_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Returns the rules in the access control list for the calendar.
      */
-    pub async fn calendar_list_acl(
+    pub async fn list_all(
         &self,
         calendar_id: &str,
         show_deleted: bool,
@@ -125,7 +125,7 @@ impl Acl {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `send_notifications: bool` -- Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
      */
-    pub async fn calendar_insert(
+    pub async fn insert(
         &self,
         calendar_id: &str,
         send_notifications: bool,
@@ -169,7 +169,7 @@ impl Acl {
      *   Learn more about incremental synchronization.
      *   Optional. The default is to return all entries.
      */
-    pub async fn calendar_watch(
+    pub async fn watch(
         &self,
         calendar_id: &str,
         max_results: i64,
@@ -212,11 +212,7 @@ impl Acl {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `rule_id: &str` -- ETag of the collection.
      */
-    pub async fn calendar_get(
-        &self,
-        calendar_id: &str,
-        rule_id: &str,
-    ) -> Result<crate::types::AclRule> {
+    pub async fn get(&self, calendar_id: &str, rule_id: &str) -> Result<crate::types::AclRule> {
         let url = format!(
             "/calendars/{}/acl/{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -237,7 +233,7 @@ impl Acl {
      * * `rule_id: &str` -- ETag of the collection.
      * * `send_notifications: bool` -- Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True.
      */
-    pub async fn calendar_update(
+    pub async fn update(
         &self,
         calendar_id: &str,
         rule_id: &str,
@@ -277,7 +273,7 @@ impl Acl {
      * * `calendar_id: &str` -- Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the "primary" keyword.
      * * `rule_id: &str` -- ETag of the collection.
      */
-    pub async fn calendar_delete(&self, calendar_id: &str, rule_id: &str) -> Result<()> {
+    pub async fn delete(&self, calendar_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/calendars/{}/acl/{}",
             crate::progenitor_support::encode_path(&calendar_id.to_string()),
@@ -298,7 +294,7 @@ impl Acl {
      * * `rule_id: &str` -- ETag of the collection.
      * * `send_notifications: bool` -- Whether to send notifications about the calendar sharing change. Note that there are no notifications on access removal. Optional. The default is True.
      */
-    pub async fn calendar_patch(
+    pub async fn patch(
         &self,
         calendar_id: &str,
         rule_id: &str,

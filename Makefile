@@ -30,6 +30,10 @@ GOOGLE_GROUPS_SETTINGS_SPEC_DIR = $(GOOGLE_SPEC_DIR)/groups-settings
 GOOGLE_GROUPS_SETTINGS_SPEC = $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR)/groups-settings.yaml
 GOOGLE_GROUPS_SETTINGS_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/groupssettings/v1/openapi.yaml
 
+GOOGLE_SHEETS_SPEC_DIR = $(GOOGLE_SPEC_DIR)/sheets
+GOOGLE_SHEETS_SPEC = $(GOOGLE_SHEETS_SPEC_DIR)/sheets.yaml
+GOOGLE_SHEETS_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/sheets/v4/openapi.yaml
+
 GUSTO_SPEC_DIR = $(CURDIR)/specs/gusto
 GUSTO_SPEC = $(GUSTO_SPEC_DIR)/gusto.v1.yaml
 GUSTO_SPEC_REPO = Gusto-API/api.gusto.dev
@@ -67,7 +71,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: docusign giphy github google-admin google-calendar google-drive google-groups-settings gusto ramp tripactions zoom
+generate: docusign giphy github google-admin google-calendar google-drive google-groups-settings google-sheets gusto ramp tripactions zoom
 	cargo test tests
 	cargo clippy
 
@@ -167,7 +171,7 @@ github: target/debug/generator $(GITHUB_SPEC)
 	cargo fmt -p octorust
 
 .PHONY: google
-google: google-admin google-calendar google-drive google-groups-settings
+google: google-admin google-calendar google-drive google-groups-settings google-sheets
 	cargo test tests
 	cargo clippy
 
@@ -238,6 +242,23 @@ google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com/groups/v1/groups" $(EXTRA_ARGS)
 	cargo fmt -p google-groups-settings
+
+$(GOOGLE_SHEETS_SPEC_DIR):
+	mkdir -p $@
+
+$(GOOGLE_SHEETS_SPEC): $(GOOGLE_SHEETS_SPEC_DIR)
+	curl -sSL $(GOOGLE_SHEETS_SPEC_REMOTE) -o $@
+
+google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
+	./target/debug/generator -i $(GOOGLE_SHEETS_SPEC) -v 0.2.0 \
+		-o google/sheets \
+		-n sheets \
+		--proper-name "Google Sheets" \
+		-d "A fully generated & opinionated API client for the Google Sheets API." \
+		--spec-link "https://sheets.googleapis.com/$discovery/rest?version=v4" \
+		--token-endpoint "oauth2.googleapis.com/token" \
+		--host "sheets.googleapis.com/v4" $(EXTRA_ARGS)
+	cargo fmt -p sheets
 
 $(GUSTO_SPEC_DIR):
 	mkdir -p $@

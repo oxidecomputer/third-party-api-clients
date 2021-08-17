@@ -56,7 +56,7 @@ impl Roles {
      *
      * Retrieves a paginated list of all the roles in a domain.
      */
-    pub async fn directory_list_roles(&self, customer: &str) -> Result<Vec<crate::types::Role>> {
+    pub async fn directory_list_all(&self, customer: &str) -> Result<Vec<crate::types::Role>> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles",
             crate::progenitor_support::encode_path(&customer.to_string()),
