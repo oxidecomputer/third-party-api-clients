@@ -478,3 +478,30 @@ pub fn zero_f32(num: &f32) -> bool {
 pub fn zero_f64(num: &f64) -> bool {
     *num == 0.0
 }
+
+pub mod google_calendar_date_time_format {
+    use chrono::{DateTime, Utc};
+    use serde::{self, Serializer};
+
+    // Google Calendar doesn't accept actual normal date formats they want this.
+    const FORMAT: &str = "%Y-%m-%dT%H:%M:%S%.3fZ";
+
+    // The signature of a serialize_with function must follow the pattern:
+    //
+    //    fn serialize<S>(&T, S) -> Result<S::Ok, S::Error>
+    //    where
+    //        S: Serializer
+    //
+    // although it may also be generic over the input types T.
+    pub fn serialize<S>(date: &Option<DateTime<Utc>>, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        if date.is_some() {
+            let s = format!("{}", date.unwrap().format(FORMAT));
+            return serializer.serialize_str(&s);
+        }
+
+        serializer.serialize_none()
+    }
+}

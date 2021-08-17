@@ -3059,7 +3059,7 @@ rustdoc-args = ["--cfg", "docsrs"]
             /*
              * Create the Rust source types file containing the generated types:
              */
-            let types = types::generate_types(&mut ts)?;
+            let types = types::generate_types(&mut ts, &proper_name)?;
             let mut typesrs = src.clone();
             typesrs.push("types.rs");
             save(typesrs, types.as_str())?;

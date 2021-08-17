@@ -591,7 +591,8 @@ pub struct Colors {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize"
     )]
     pub updated: Option<chrono::DateTime<chrono::Utc>>,
 }
@@ -1170,7 +1171,8 @@ pub struct Event {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize"
     )]
     pub created: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1416,7 +1418,8 @@ pub struct Event {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize"
     )]
     pub updated: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1591,6 +1594,7 @@ pub struct EventDateTime {
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize",
         rename = "dateTime"
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
@@ -1726,7 +1730,8 @@ pub struct Events {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize"
     )]
     pub updated: Option<chrono::DateTime<chrono::Utc>>,
 }
@@ -1797,6 +1802,7 @@ pub struct FreeBusyRequest {
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize",
         rename = "timeMax"
     )]
     pub time_max: Option<chrono::DateTime<chrono::Utc>>,
@@ -1807,6 +1813,7 @@ pub struct FreeBusyRequest {
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize",
         rename = "timeMin"
     )]
     pub time_min: Option<chrono::DateTime<chrono::Utc>>,
@@ -1863,6 +1870,7 @@ pub struct FreeBusyResponse {
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize",
         rename = "timeMax"
     )]
     pub time_max: Option<chrono::DateTime<chrono::Utc>>,
@@ -1873,6 +1881,7 @@ pub struct FreeBusyResponse {
         default,
         skip_serializing_if = "Option::is_none",
         deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize",
         rename = "timeMin"
     )]
     pub time_min: Option<chrono::DateTime<chrono::Utc>>,
@@ -1973,7 +1982,8 @@ pub struct TimePeriod {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize"
     )]
     pub end: Option<chrono::DateTime<chrono::Utc>>,
     /**
@@ -1982,7 +1992,8 @@ pub struct TimePeriod {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        serialize_with = "crate::utils::google_calendar_date_time_format::serialize"
     )]
     pub start: Option<chrono::DateTime<chrono::Utc>>,
 }

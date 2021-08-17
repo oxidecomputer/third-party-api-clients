@@ -8,7 +8,7 @@ use crate::{render_param, struct_name, TypeDetails, TypeSpace};
 /*
  * Declare named types we know about:
  */
-pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
+pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
     let mut out = String::new();
 
     let mut a = |s: &str| {
@@ -134,6 +134,14 @@ pub fn generate_types(ts: &mut TypeSpace) -> Result<String> {
                                 } else if rt.starts_with("Option<chrono::DateTime") {
                                     a(r#"skip_serializing_if = "Option::is_none",
                                       deserialize_with = "crate::utils::date_time_format::deserialize","#);
+
+                                    // Google Calendar is weird and requires a custom format.
+                                    if proper_name == "Google Calendar" {
+                                        // We need to serialize with the right format!
+                                        a(
+                                            r#"serialize_with = "crate::utils::google_calendar_date_time_format::serialize","#,
+                                        );
+                                    }
                                 } else if rt.starts_with("Option<") {
                                     a(r#"skip_serializing_if = "Option::is_none","#);
                                 }
