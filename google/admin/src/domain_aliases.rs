@@ -30,7 +30,7 @@ impl DomainAliases {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !parent_domain_name.is_empty() {
             query_args.push((
-                "parent_domain_name".to_string(),
+                "parentDomainName".to_string(),
                 parent_domain_name.to_string(),
             ));
         }

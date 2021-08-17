@@ -15,7 +15,7 @@ pub struct Template {
 }
 
 impl Template {
-    pub fn compile(&self, query_params: BTreeMap<String, String>) -> String {
+    pub fn compile(&self, query_params: BTreeMap<String, (String, String)>) -> String {
         let mut out = String::new();
 
         let mut a = |s: &str| {
@@ -27,32 +27,26 @@ impl Template {
             // Format the query params if they exist.
             a("let mut query_args: Vec<(String, String)> = Default::default();");
 
-            for (nam, value) in &query_params {
+            for (nam, (value, prop)) in &query_params {
                 if value == "Option<chrono::DateTime<chrono::Utc>>" {
                     a(&format!(
                         r#"if let Some(date) = {} {{ query_args.push(("{}".to_string(), date.to_rfc3339())); }}"#,
-                        nam, nam
+                        nam, prop
                     ));
                 } else if value == "i64" || value == "i32" {
                     a(&format!(
                         r#"if {} > 0 {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
-                        nam,
-                        nam.trim_end_matches('_'),
-                        nam
+                        nam, prop, nam
                     ));
                 } else if value == "bool" {
                     a(&format!(
                         r#"if {} {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
-                        nam,
-                        nam.trim_end_matches('_'),
-                        nam
+                        nam, prop, nam
                     ));
                 } else if value == "&str" {
                     a(&format!(
                         r#"if !{}.is_empty() {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
-                        nam,
-                        nam.trim_end_matches('_'),
-                        nam
+                        nam, prop, nam
                     ));
                 } else if value == "&[String]" {
                     // TODO: I have no idea how these should be seperated and the docs
@@ -61,16 +55,12 @@ impl Template {
                     // https://docs.github.com/en/rest/reference/migrations
                     a(&format!(
                         r#"if !{}.is_empty() {{ query_args.push(("{}".to_string(), {}.join(" "))); }}"#,
-                        nam,
-                        nam.trim_end_matches('_'),
-                        nam
+                        nam, prop, nam
                     ));
                 } else {
                     a(&format!(
                         r#"if !{}.to_string().is_empty() {{  query_args.push(("{}".to_string(), {}.to_string())); }}"#,
-                        nam,
-                        nam.trim_end_matches('_'),
-                        nam
+                        nam, prop, nam
                     ));
                 }
             }

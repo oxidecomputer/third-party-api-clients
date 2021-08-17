@@ -41,16 +41,16 @@ impl Chromeosdevices {
     ) -> Result<Vec<crate::types::ChromeOsDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(("order_by".to_string(), order_by.to_string()));
+            query_args.push(("orderBy".to_string(), order_by.to_string()));
         }
         if !org_unit_path.is_empty() {
-            query_args.push(("org_unit_path".to_string(), org_unit_path.to_string()));
+            query_args.push(("orgUnitPath".to_string(), org_unit_path.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -59,7 +59,7 @@ impl Chromeosdevices {
             query_args.push(("query".to_string(), query.to_string()));
         }
         if !sort_order.to_string().is_empty() {
-            query_args.push(("sort_order".to_string(), sort_order.to_string()));
+            query_args.push(("sortOrder".to_string(), sort_order.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -92,10 +92,10 @@ impl Chromeosdevices {
     ) -> Result<Vec<crate::types::ChromeOsDevice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.to_string().is_empty() {
-            query_args.push(("order_by".to_string(), order_by.to_string()));
+            query_args.push(("orderBy".to_string(), order_by.to_string()));
         }
         if !org_unit_path.is_empty() {
-            query_args.push(("org_unit_path".to_string(), org_unit_path.to_string()));
+            query_args.push(("orgUnitPath".to_string(), org_unit_path.to_string()));
         }
         if !projection.to_string().is_empty() {
             query_args.push(("projection".to_string(), projection.to_string()));
@@ -104,7 +104,7 @@ impl Chromeosdevices {
             query_args.push(("query".to_string(), query.to_string()));
         }
         if !sort_order.to_string().is_empty() {
-            query_args.push(("sort_order".to_string(), sort_order.to_string()));
+            query_args.push(("sortOrder".to_string(), sort_order.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -165,7 +165,7 @@ impl Chromeosdevices {
     ) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !org_unit_path.is_empty() {
-            query_args.push(("org_unit_path".to_string(), org_unit_path.to_string()));
+            query_args.push(("orgUnitPath".to_string(), org_unit_path.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

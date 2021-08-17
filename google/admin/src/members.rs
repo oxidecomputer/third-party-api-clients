@@ -60,15 +60,15 @@ impl Members {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_derived_membership {
             query_args.push((
-                "include_derived_membership".to_string(),
+                "includeDerivedMembership".to_string(),
                 include_derived_membership.to_string(),
             ));
         }
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if !roles.is_empty() {
             query_args.push(("roles".to_string(), roles.to_string()));
@@ -102,7 +102,7 @@ impl Members {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_derived_membership {
             query_args.push((
-                "include_derived_membership".to_string(),
+                "includeDerivedMembership".to_string(),
                 include_derived_membership.to_string(),
             ));
         }

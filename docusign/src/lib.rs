@@ -2350,10 +2350,13 @@ impl Client {
         }
 
         if let Some(body) = body {
-            //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
+            println!(
+                "Body: {:?}",
+                String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
+            );
             req = req.body(body);
         }
-        //println!("Request: {:?}", &req);
+        println!("Request: {:?}", &req);
         Ok(req.send().await?)
     }
 
@@ -2373,7 +2376,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            println!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT {
                 serde_json::from_str("null")
             } else {
@@ -2448,7 +2454,7 @@ impl Client {
             req = req.body(b);
         }
 
-        //println!("Request: {:?}", &req);
+        println!("Request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
@@ -2456,7 +2462,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            println!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT {
                 serde_json::from_str("null")
             } else {

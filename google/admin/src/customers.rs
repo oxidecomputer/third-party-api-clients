@@ -140,10 +140,10 @@ impl Customers {
     ) -> Result<crate::types::Printer> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !clear_mask.is_empty() {
-            query_args.push(("clear_mask".to_string(), clear_mask.to_string()));
+            query_args.push(("clearMask".to_string(), clear_mask.to_string()));
         }
         if !update_mask.is_empty() {
-            query_args.push(("update_mask".to_string(), update_mask.to_string()));
+            query_args.push(("updateMask".to_string(), update_mask.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -186,13 +186,13 @@ impl Customers {
             query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !org_unit_id.is_empty() {
-            query_args.push(("org_unit_id".to_string(), org_unit_id.to_string()));
+            query_args.push(("orgUnitId".to_string(), org_unit_id.to_string()));
         }
         if page_size > 0 {
-            query_args.push(("page_size".to_string(), page_size.to_string()));
+            query_args.push(("pageSize".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -225,7 +225,7 @@ impl Customers {
             query_args.push(("filter".to_string(), filter.to_string()));
         }
         if !org_unit_id.is_empty() {
-            query_args.push(("org_unit_id".to_string(), org_unit_id.to_string()));
+            query_args.push(("orgUnitId".to_string(), org_unit_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -374,10 +374,10 @@ impl Customers {
             query_args.push(("filter".to_string(), filter.to_string()));
         }
         if page_size > 0 {
-            query_args.push(("page_size".to_string(), page_size.to_string()));
+            query_args.push(("pageSize".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

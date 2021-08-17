@@ -72,23 +72,23 @@ impl Events {
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
-            query_args.push(("i_cal_uid".to_string(), i_cal_uid.to_string()));
+            query_args.push(("iCalUID".to_string(), i_cal_uid.to_string()));
         }
         if max_attendees > 0 {
-            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
+            query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
         }
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(("order_by".to_string(), order_by.to_string()));
+            query_args.push(("orderBy".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if !private_extended_property.is_empty() {
             query_args.push((
-                "private_extended_property".to_string(),
+                "privateExtendedProperty".to_string(),
                 private_extended_property.join(" "),
             ));
         }
@@ -97,33 +97,33 @@ impl Events {
         }
         if !shared_extended_property.is_empty() {
             query_args.push((
-                "shared_extended_property".to_string(),
+                "sharedExtendedProperty".to_string(),
                 shared_extended_property.join(" "),
             ));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         if show_hidden_invitations {
             query_args.push((
-                "show_hidden_invitations".to_string(),
+                "showHiddenInvitations".to_string(),
                 show_hidden_invitations.to_string(),
             ));
         }
         if single_events {
-            query_args.push(("single_events".to_string(), single_events.to_string()));
+            query_args.push(("singleEvents".to_string(), single_events.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(("time_max".to_string(), time_max.to_string()));
+            query_args.push(("timeMax".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(("time_min".to_string(), time_min.to_string()));
+            query_args.push(("timeMin".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(("time_zone".to_string(), time_zone.to_string()));
+            query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         if !updated_min.is_empty() {
-            query_args.push(("updated_min".to_string(), updated_min.to_string()));
+            query_args.push(("updatedMin".to_string(), updated_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -164,17 +164,17 @@ impl Events {
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
-            query_args.push(("i_cal_uid".to_string(), i_cal_uid.to_string()));
+            query_args.push(("iCalUID".to_string(), i_cal_uid.to_string()));
         }
         if max_attendees > 0 {
-            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
+            query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(("order_by".to_string(), order_by.to_string()));
+            query_args.push(("orderBy".to_string(), order_by.to_string()));
         }
         if !private_extended_property.is_empty() {
             query_args.push((
-                "private_extended_property".to_string(),
+                "privateExtendedProperty".to_string(),
                 private_extended_property.join(" "),
             ));
         }
@@ -183,33 +183,33 @@ impl Events {
         }
         if !shared_extended_property.is_empty() {
             query_args.push((
-                "shared_extended_property".to_string(),
+                "sharedExtendedProperty".to_string(),
                 shared_extended_property.join(" "),
             ));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         if show_hidden_invitations {
             query_args.push((
-                "show_hidden_invitations".to_string(),
+                "showHiddenInvitations".to_string(),
                 show_hidden_invitations.to_string(),
             ));
         }
         if single_events {
-            query_args.push(("single_events".to_string(), single_events.to_string()));
+            query_args.push(("singleEvents".to_string(), single_events.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(("time_max".to_string(), time_max.to_string()));
+            query_args.push(("timeMax".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(("time_min".to_string(), time_min.to_string()));
+            query_args.push(("timeMin".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(("time_zone".to_string(), time_zone.to_string()));
+            query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         if !updated_min.is_empty() {
-            query_args.push(("updated_min".to_string(), updated_min.to_string()));
+            query_args.push(("updatedMin".to_string(), updated_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -281,25 +281,25 @@ impl Events {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
-                "conference_data_version".to_string(),
+                "conferenceDataVersion".to_string(),
                 conference_data_version.to_string(),
             ));
         }
         if max_attendees > 0 {
-            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
+            query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
         }
         if send_notifications {
             query_args.push((
-                "send_notifications".to_string(),
+                "sendNotifications".to_string(),
                 send_notifications.to_string(),
             ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(("send_updates".to_string(), send_updates.to_string()));
+            query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         if supports_attachments {
             query_args.push((
-                "supports_attachments".to_string(),
+                "supportsAttachments".to_string(),
                 supports_attachments.to_string(),
             ));
         }
@@ -339,13 +339,13 @@ impl Events {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
-                "conference_data_version".to_string(),
+                "conferenceDataVersion".to_string(),
                 conference_data_version.to_string(),
             ));
         }
         if supports_attachments {
             query_args.push((
-                "supports_attachments".to_string(),
+                "supportsAttachments".to_string(),
                 supports_attachments.to_string(),
             ));
         }
@@ -388,12 +388,12 @@ impl Events {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
-                "send_notifications".to_string(),
+                "sendNotifications".to_string(),
                 send_notifications.to_string(),
             ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(("send_updates".to_string(), send_updates.to_string()));
+            query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         if !text.is_empty() {
             query_args.push(("text".to_string(), text.to_string()));
@@ -469,23 +469,23 @@ impl Events {
     ) -> Result<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_cal_uid.is_empty() {
-            query_args.push(("i_cal_uid".to_string(), i_cal_uid.to_string()));
+            query_args.push(("iCalUID".to_string(), i_cal_uid.to_string()));
         }
         if max_attendees > 0 {
-            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
+            query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
         }
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !order_by.to_string().is_empty() {
-            query_args.push(("order_by".to_string(), order_by.to_string()));
+            query_args.push(("orderBy".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if !private_extended_property.is_empty() {
             query_args.push((
-                "private_extended_property".to_string(),
+                "privateExtendedProperty".to_string(),
                 private_extended_property.join(" "),
             ));
         }
@@ -494,33 +494,33 @@ impl Events {
         }
         if !shared_extended_property.is_empty() {
             query_args.push((
-                "shared_extended_property".to_string(),
+                "sharedExtendedProperty".to_string(),
                 shared_extended_property.join(" "),
             ));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         if show_hidden_invitations {
             query_args.push((
-                "show_hidden_invitations".to_string(),
+                "showHiddenInvitations".to_string(),
                 show_hidden_invitations.to_string(),
             ));
         }
         if single_events {
-            query_args.push(("single_events".to_string(), single_events.to_string()));
+            query_args.push(("singleEvents".to_string(), single_events.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(("time_max".to_string(), time_max.to_string()));
+            query_args.push(("timeMax".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(("time_min".to_string(), time_min.to_string()));
+            query_args.push(("timeMin".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(("time_zone".to_string(), time_zone.to_string()));
+            query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         if !updated_min.is_empty() {
-            query_args.push(("updated_min".to_string(), updated_min.to_string()));
+            query_args.push(("updatedMin".to_string(), updated_min.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -559,10 +559,10 @@ impl Events {
     ) -> Result<crate::types::Event> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
-            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
+            query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(("time_zone".to_string(), time_zone.to_string()));
+            query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -607,25 +607,25 @@ impl Events {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
-                "conference_data_version".to_string(),
+                "conferenceDataVersion".to_string(),
                 conference_data_version.to_string(),
             ));
         }
         if max_attendees > 0 {
-            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
+            query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
         }
         if send_notifications {
             query_args.push((
-                "send_notifications".to_string(),
+                "sendNotifications".to_string(),
                 send_notifications.to_string(),
             ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(("send_updates".to_string(), send_updates.to_string()));
+            query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         if supports_attachments {
             query_args.push((
-                "supports_attachments".to_string(),
+                "supportsAttachments".to_string(),
                 supports_attachments.to_string(),
             ));
         }
@@ -669,12 +669,12 @@ impl Events {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
-                "send_notifications".to_string(),
+                "sendNotifications".to_string(),
                 send_notifications.to_string(),
             ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(("send_updates".to_string(), send_updates.to_string()));
+            query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -719,25 +719,25 @@ impl Events {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !conference_data_version.to_string().is_empty() {
             query_args.push((
-                "conference_data_version".to_string(),
+                "conferenceDataVersion".to_string(),
                 conference_data_version.to_string(),
             ));
         }
         if max_attendees > 0 {
-            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
+            query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
         }
         if send_notifications {
             query_args.push((
-                "send_notifications".to_string(),
+                "sendNotifications".to_string(),
                 send_notifications.to_string(),
             ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(("send_updates".to_string(), send_updates.to_string()));
+            query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         if supports_attachments {
             query_args.push((
-                "supports_attachments".to_string(),
+                "supportsAttachments".to_string(),
                 supports_attachments.to_string(),
             ));
         }
@@ -791,28 +791,28 @@ impl Events {
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
-            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
+            query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
         }
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !original_start.is_empty() {
-            query_args.push(("original_start".to_string(), original_start.to_string()));
+            query_args.push(("originalStart".to_string(), original_start.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(("time_max".to_string(), time_max.to_string()));
+            query_args.push(("timeMax".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(("time_min".to_string(), time_min.to_string()));
+            query_args.push(("timeMin".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(("time_zone".to_string(), time_zone.to_string()));
+            query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -848,22 +848,22 @@ impl Events {
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_attendees > 0 {
-            query_args.push(("max_attendees".to_string(), max_attendees.to_string()));
+            query_args.push(("maxAttendees".to_string(), max_attendees.to_string()));
         }
         if !original_start.is_empty() {
-            query_args.push(("original_start".to_string(), original_start.to_string()));
+            query_args.push(("originalStart".to_string(), original_start.to_string()));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         if !time_max.is_empty() {
-            query_args.push(("time_max".to_string(), time_max.to_string()));
+            query_args.push(("timeMax".to_string(), time_max.to_string()));
         }
         if !time_min.is_empty() {
-            query_args.push(("time_min".to_string(), time_min.to_string()));
+            query_args.push(("timeMin".to_string(), time_min.to_string()));
         }
         if !time_zone.is_empty() {
-            query_args.push(("time_zone".to_string(), time_zone.to_string()));
+            query_args.push(("timeZone".to_string(), time_zone.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -936,12 +936,12 @@ impl Events {
         }
         if send_notifications {
             query_args.push((
-                "send_notifications".to_string(),
+                "sendNotifications".to_string(),
                 send_notifications.to_string(),
             ));
         }
         if !send_updates.to_string().is_empty() {
-            query_args.push(("send_updates".to_string(), send_updates.to_string()));
+            query_args.push(("sendUpdates".to_string(), send_updates.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

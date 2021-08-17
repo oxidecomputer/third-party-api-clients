@@ -31,10 +31,10 @@ impl Roles {
     ) -> Result<Vec<crate::types::Role>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

@@ -81,7 +81,7 @@ impl AccountConsumerDisclosures {
     ) -> Result<crate::types::AccountConsumerDisclosures> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !lang_code.is_empty() {
-            query_args.push(("lang_code".to_string(), lang_code.to_string()));
+            query_args.push(("langCode".to_string(), lang_code.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

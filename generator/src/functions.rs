@@ -570,14 +570,14 @@ fn get_fn_params(
     all_pages: bool,
     global_params: Vec<openapiv3::ReferenceOr<openapiv3::Parameter>>,
     proper_name: &str,
-) -> Result<(Vec<String>, BTreeMap<String, String>)> {
+) -> Result<(Vec<String>, BTreeMap<String, (String, String)>)> {
     /*
      * Query parameters are sorted lexicographically to ensure a stable
      * order in the generated code.
      */
     let mut fn_params_str: Vec<String> = Default::default();
     let mut fn_params: Vec<String> = Default::default();
-    let mut query_params: BTreeMap<String, String> = Default::default();
+    let mut query_params: BTreeMap<String, (String, String)> = Default::default();
     let mut gp = global_params;
     let mut op = o.parameters.clone();
     gp.append(&mut op);
@@ -633,7 +633,10 @@ fn get_fn_params(
         } = item
         {
             if nam == "ref" || nam == "type" {
-                query_params.insert(format!("{}_", nam), typ.to_string());
+                query_params.insert(
+                    format!("{}_", nam),
+                    (typ.to_string(), parameter_data.name.to_string()),
+                );
             } else if (!all_pages || !is_page_param(nam))
                 && nam != "authorization"
                 && !nam.starts_with("authorization_bearer")
@@ -641,9 +644,15 @@ fn get_fn_params(
                     || !is_google_unnecessary_param(proper_name, nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
-                    query_params.insert(nam.to_string(), format!("Option<{}>", typ));
+                    query_params.insert(
+                        nam.to_string(),
+                        (format!("Option<{}>", typ), parameter_data.name.to_string()),
+                    );
                 } else {
-                    query_params.insert(nam.to_string(), typ.to_string());
+                    query_params.insert(
+                        nam.to_string(),
+                        (typ.to_string(), parameter_data.name.to_string()),
+                    );
                 }
             }
         }

@@ -64,7 +64,7 @@ impl Scim {
             query_args.push(("filter".to_string(), filter.to_string()));
         }
         if start_index > 0 {
-            query_args.push(("start_index".to_string(), start_index.to_string()));
+            query_args.push(("startIndex".to_string(), start_index.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

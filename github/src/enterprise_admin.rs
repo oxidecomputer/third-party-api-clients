@@ -1096,7 +1096,7 @@ impl EnterpriseAdmin {
         }
         if !excluded_attributes.is_empty() {
             query_args.push((
-                "excluded_attributes".to_string(),
+                "excludedAttributes".to_string(),
                 excluded_attributes.to_string(),
             ));
         }
@@ -1104,7 +1104,7 @@ impl EnterpriseAdmin {
             query_args.push(("filter".to_string(), filter.to_string()));
         }
         if start_index > 0 {
-            query_args.push(("start_index".to_string(), start_index.to_string()));
+            query_args.push(("startIndex".to_string(), start_index.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -1173,7 +1173,7 @@ impl EnterpriseAdmin {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !excluded_attributes.is_empty() {
             query_args.push((
-                "excluded_attributes".to_string(),
+                "excludedAttributes".to_string(),
                 excluded_attributes.to_string(),
             ));
         }
@@ -1336,7 +1336,7 @@ impl EnterpriseAdmin {
             query_args.push(("filter".to_string(), filter.to_string()));
         }
         if start_index > 0 {
-            query_args.push(("start_index".to_string(), start_index.to_string()));
+            query_args.push(("startIndex".to_string(), start_index.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

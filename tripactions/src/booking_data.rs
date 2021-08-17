@@ -43,16 +43,16 @@ impl BookingData {
     ) -> Result<Vec<crate::types::BookingReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !booking_status.to_string().is_empty() {
-            query_args.push(("booking_status".to_string(), booking_status.to_string()));
+            query_args.push(("bookingStatus".to_string(), booking_status.to_string()));
         }
         if !booking_type.to_string().is_empty() {
-            query_args.push(("booking_type".to_string(), booking_type.to_string()));
+            query_args.push(("bookingType".to_string(), booking_type.to_string()));
         }
         if !created_from.is_empty() {
-            query_args.push(("created_from".to_string(), created_from.to_string()));
+            query_args.push(("createdFrom".to_string(), created_from.to_string()));
         }
         if !created_to.is_empty() {
-            query_args.push(("created_to".to_string(), created_to.to_string()));
+            query_args.push(("createdTo".to_string(), created_to.to_string()));
         }
         if !page.to_string().is_empty() {
             query_args.push(("page".to_string(), page.to_string()));
@@ -61,10 +61,10 @@ impl BookingData {
             query_args.push(("size".to_string(), size.to_string()));
         }
         if !start_date_from.is_empty() {
-            query_args.push(("start_date_from".to_string(), start_date_from.to_string()));
+            query_args.push(("startDateFrom".to_string(), start_date_from.to_string()));
         }
         if !start_date_to.is_empty() {
-            query_args.push(("start_date_to".to_string(), start_date_to.to_string()));
+            query_args.push(("startDateTo".to_string(), start_date_to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bookings?{}", query_);
@@ -95,22 +95,22 @@ impl BookingData {
     ) -> Result<Vec<crate::types::BookingReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !booking_status.to_string().is_empty() {
-            query_args.push(("booking_status".to_string(), booking_status.to_string()));
+            query_args.push(("bookingStatus".to_string(), booking_status.to_string()));
         }
         if !booking_type.to_string().is_empty() {
-            query_args.push(("booking_type".to_string(), booking_type.to_string()));
+            query_args.push(("bookingType".to_string(), booking_type.to_string()));
         }
         if !created_from.is_empty() {
-            query_args.push(("created_from".to_string(), created_from.to_string()));
+            query_args.push(("createdFrom".to_string(), created_from.to_string()));
         }
         if !created_to.is_empty() {
-            query_args.push(("created_to".to_string(), created_to.to_string()));
+            query_args.push(("createdTo".to_string(), created_to.to_string()));
         }
         if !start_date_from.is_empty() {
-            query_args.push(("start_date_from".to_string(), start_date_from.to_string()));
+            query_args.push(("startDateFrom".to_string(), start_date_from.to_string()));
         }
         if !start_date_to.is_empty() {
-            query_args.push(("start_date_to".to_string(), start_date_to.to_string()));
+            query_args.push(("startDateTo".to_string(), start_date_to.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bookings?{}", query_);

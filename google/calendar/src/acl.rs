@@ -37,13 +37,13 @@ impl Acl {
     ) -> Result<Vec<crate::types::AclRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -72,7 +72,7 @@ impl Acl {
     ) -> Result<Vec<crate::types::AclRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -134,7 +134,7 @@ impl Acl {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
-                "send_notifications".to_string(),
+                "sendNotifications".to_string(),
                 send_notifications.to_string(),
             ));
         }
@@ -179,13 +179,13 @@ impl Acl {
     ) -> Result<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -247,7 +247,7 @@ impl Acl {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
-                "send_notifications".to_string(),
+                "sendNotifications".to_string(),
                 send_notifications.to_string(),
             ));
         }
@@ -308,7 +308,7 @@ impl Acl {
         let mut query_args: Vec<(String, String)> = Default::default();
         if send_notifications {
             query_args.push((
-                "send_notifications".to_string(),
+                "sendNotifications".to_string(),
                 send_notifications.to_string(),
             ));
         }

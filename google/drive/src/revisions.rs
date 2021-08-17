@@ -31,10 +31,10 @@ impl Revisions {
     ) -> Result<Vec<crate::types::Revision>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
-            query_args.push(("page_size".to_string(), page_size.to_string()));
+            query_args.push(("pageSize".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -116,7 +116,7 @@ impl Revisions {
         let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
             query_args.push((
-                "acknowledge_abuse".to_string(),
+                "acknowledgeAbuse".to_string(),
                 acknowledge_abuse.to_string(),
             ));
         }

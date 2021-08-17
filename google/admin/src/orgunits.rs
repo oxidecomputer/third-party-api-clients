@@ -31,7 +31,7 @@ impl Orgunits {
     ) -> Result<crate::types::OrgUnits> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !org_unit_path.is_empty() {
-            query_args.push(("org_unit_path".to_string(), org_unit_path.to_string()));
+            query_args.push(("orgUnitPath".to_string(), org_unit_path.to_string()));
         }
         if !type_.to_string().is_empty() {
             query_args.push(("type".to_string(), type_.to_string()));

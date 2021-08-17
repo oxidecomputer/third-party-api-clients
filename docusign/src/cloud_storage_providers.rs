@@ -38,7 +38,7 @@ impl CloudStorageProviders {
     ) -> Result<crate::types::CloudStorageProvidersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !redirect_url.is_empty() {
-            query_args.push(("redirect_url".to_string(), redirect_url.to_string()));
+            query_args.push(("redirectUrl".to_string(), redirect_url.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -146,7 +146,7 @@ impl CloudStorageProviders {
     ) -> Result<crate::types::CloudStorageProvidersData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !redirect_url.is_empty() {
-            query_args.push(("redirect_url".to_string(), redirect_url.to_string()));
+            query_args.push(("redirectUrl".to_string(), redirect_url.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

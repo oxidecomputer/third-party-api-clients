@@ -55,34 +55,34 @@ impl Files {
             query_args.push(("corpora".to_string(), corpora.to_string()));
         }
         if !drive_id.is_empty() {
-            query_args.push(("drive_id".to_string(), drive_id.to_string()));
+            query_args.push(("driveId".to_string(), drive_id.to_string()));
         }
         if include_items_from_all_drives {
             query_args.push((
-                "include_items_from_all_drives".to_string(),
+                "includeItemsFromAllDrives".to_string(),
                 include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if include_team_drive_items {
             query_args.push((
-                "include_team_drive_items".to_string(),
+                "includeTeamDriveItems".to_string(),
                 include_team_drive_items.to_string(),
             ));
         }
         if !order_by.is_empty() {
-            query_args.push(("order_by".to_string(), order_by.to_string()));
+            query_args.push(("orderBy".to_string(), order_by.to_string()));
         }
         if page_size > 0 {
-            query_args.push(("page_size".to_string(), page_size.to_string()));
+            query_args.push(("pageSize".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -92,18 +92,18 @@ impl Files {
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
+            query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
@@ -140,28 +140,28 @@ impl Files {
             query_args.push(("corpora".to_string(), corpora.to_string()));
         }
         if !drive_id.is_empty() {
-            query_args.push(("drive_id".to_string(), drive_id.to_string()));
+            query_args.push(("driveId".to_string(), drive_id.to_string()));
         }
         if include_items_from_all_drives {
             query_args.push((
-                "include_items_from_all_drives".to_string(),
+                "includeItemsFromAllDrives".to_string(),
                 include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if include_team_drive_items {
             query_args.push((
-                "include_team_drive_items".to_string(),
+                "includeTeamDriveItems".to_string(),
                 include_team_drive_items.to_string(),
             ));
         }
         if !order_by.is_empty() {
-            query_args.push(("order_by".to_string(), order_by.to_string()));
+            query_args.push(("orderBy".to_string(), order_by.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -171,18 +171,18 @@ impl Files {
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
+            query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
@@ -251,40 +251,40 @@ impl Files {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ignore_default_visibility {
             query_args.push((
-                "ignore_default_visibility".to_string(),
+                "ignoreDefaultVisibility".to_string(),
                 ignore_default_visibility.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if keep_revision_forever {
             query_args.push((
-                "keep_revision_forever".to_string(),
+                "keepRevisionForever".to_string(),
                 keep_revision_forever.to_string(),
             ));
         }
         if !ocr_language.is_empty() {
-            query_args.push(("ocr_language".to_string(), ocr_language.to_string()));
+            query_args.push(("ocrLanguage".to_string(), ocr_language.to_string()));
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
         if use_content_as_indexable_text {
             query_args.push((
-                "use_content_as_indexable_text".to_string(),
+                "useContentAsIndexableText".to_string(),
                 use_content_as_indexable_text.to_string(),
             ));
         }
@@ -370,25 +370,25 @@ impl Files {
         let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
             query_args.push((
-                "acknowledge_abuse".to_string(),
+                "acknowledgeAbuse".to_string(),
                 acknowledge_abuse.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
@@ -423,13 +423,13 @@ impl Files {
         let mut query_args: Vec<(String, String)> = Default::default();
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
@@ -476,41 +476,41 @@ impl Files {
     ) -> Result<crate::types::File> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !add_parents.is_empty() {
-            query_args.push(("add_parents".to_string(), add_parents.to_string()));
+            query_args.push(("addParents".to_string(), add_parents.to_string()));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if keep_revision_forever {
             query_args.push((
-                "keep_revision_forever".to_string(),
+                "keepRevisionForever".to_string(),
                 keep_revision_forever.to_string(),
             ));
         }
         if !ocr_language.is_empty() {
-            query_args.push(("ocr_language".to_string(), ocr_language.to_string()));
+            query_args.push(("ocrLanguage".to_string(), ocr_language.to_string()));
         }
         if !remove_parents.is_empty() {
-            query_args.push(("remove_parents".to_string(), remove_parents.to_string()));
+            query_args.push(("removeParents".to_string(), remove_parents.to_string()));
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
         if use_content_as_indexable_text {
             query_args.push((
-                "use_content_as_indexable_text".to_string(),
+                "useContentAsIndexableText".to_string(),
                 use_content_as_indexable_text.to_string(),
             ));
         }
@@ -559,34 +559,34 @@ impl Files {
         let mut query_args: Vec<(String, String)> = Default::default();
         if ignore_default_visibility {
             query_args.push((
-                "ignore_default_visibility".to_string(),
+                "ignoreDefaultVisibility".to_string(),
                 ignore_default_visibility.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if keep_revision_forever {
             query_args.push((
-                "keep_revision_forever".to_string(),
+                "keepRevisionForever".to_string(),
                 keep_revision_forever.to_string(),
             ));
         }
         if !ocr_language.is_empty() {
-            query_args.push(("ocr_language".to_string(), ocr_language.to_string()));
+            query_args.push(("ocrLanguage".to_string(), ocr_language.to_string()));
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
@@ -618,7 +618,7 @@ impl Files {
     pub async fn drive_export(&self, file_id: &str, mime_type: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !mime_type.is_empty() {
-            query_args.push(("mime_type".to_string(), mime_type.to_string()));
+            query_args.push(("mimeType".to_string(), mime_type.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -655,25 +655,25 @@ impl Files {
         let mut query_args: Vec<(String, String)> = Default::default();
         if acknowledge_abuse {
             query_args.push((
-                "acknowledge_abuse".to_string(),
+                "acknowledgeAbuse".to_string(),
                 acknowledge_abuse.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }

@@ -40,19 +40,19 @@ impl CalendarList {
     ) -> Result<Vec<crate::types::CalendarListEntry>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !min_access_role.to_string().is_empty() {
-            query_args.push(("min_access_role".to_string(), min_access_role.to_string()));
+            query_args.push(("minAccessRole".to_string(), min_access_role.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         if show_hidden {
-            query_args.push(("show_hidden".to_string(), show_hidden.to_string()));
+            query_args.push(("showHidden".to_string(), show_hidden.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users/me/calendarList?{}", query_);
@@ -78,13 +78,13 @@ impl CalendarList {
     ) -> Result<Vec<crate::types::CalendarListEntry>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !min_access_role.to_string().is_empty() {
-            query_args.push(("min_access_role".to_string(), min_access_role.to_string()));
+            query_args.push(("minAccessRole".to_string(), min_access_role.to_string()));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         if show_hidden {
-            query_args.push(("show_hidden".to_string(), show_hidden.to_string()));
+            query_args.push(("showHidden".to_string(), show_hidden.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users/me/calendarList?{}", query_);
@@ -139,7 +139,7 @@ impl CalendarList {
     ) -> Result<crate::types::CalendarListEntry> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if color_rgb_format {
-            query_args.push(("color_rgb_format".to_string(), color_rgb_format.to_string()));
+            query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users/me/calendarList?{}", query_);
@@ -181,19 +181,19 @@ impl CalendarList {
     ) -> Result<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !min_access_role.to_string().is_empty() {
-            query_args.push(("min_access_role".to_string(), min_access_role.to_string()));
+            query_args.push(("minAccessRole".to_string(), min_access_role.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if show_deleted {
-            query_args.push(("show_deleted".to_string(), show_deleted.to_string()));
+            query_args.push(("showDeleted".to_string(), show_deleted.to_string()));
         }
         if show_hidden {
-            query_args.push(("show_hidden".to_string(), show_hidden.to_string()));
+            query_args.push(("showHidden".to_string(), show_hidden.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users/me/calendarList/watch?{}", query_);
@@ -242,7 +242,7 @@ impl CalendarList {
     ) -> Result<crate::types::CalendarListEntry> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if color_rgb_format {
-            query_args.push(("color_rgb_format".to_string(), color_rgb_format.to_string()));
+            query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -295,7 +295,7 @@ impl CalendarList {
     ) -> Result<crate::types::CalendarListEntry> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if color_rgb_format {
-            query_args.push(("color_rgb_format".to_string(), color_rgb_format.to_string()));
+            query_args.push(("colorRgbFormat".to_string(), color_rgb_format.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

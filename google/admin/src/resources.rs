@@ -31,10 +31,10 @@ impl Resources {
     ) -> Result<Vec<crate::types::Building>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -118,7 +118,7 @@ impl Resources {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
             query_args.push((
-                "coordinates_source".to_string(),
+                "coordinatesSource".to_string(),
                 coordinates_source.to_string(),
             ));
         }
@@ -182,7 +182,7 @@ impl Resources {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
             query_args.push((
-                "coordinates_source".to_string(),
+                "coordinatesSource".to_string(),
                 coordinates_source.to_string(),
             ));
         }
@@ -247,7 +247,7 @@ impl Resources {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coordinates_source.to_string().is_empty() {
             query_args.push((
-                "coordinates_source".to_string(),
+                "coordinatesSource".to_string(),
                 coordinates_source.to_string(),
             ));
         }
@@ -290,13 +290,13 @@ impl Resources {
     ) -> Result<Vec<crate::types::CalendarResource>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !order_by.is_empty() {
-            query_args.push(("order_by".to_string(), order_by.to_string()));
+            query_args.push(("orderBy".to_string(), order_by.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -329,7 +329,7 @@ impl Resources {
     ) -> Result<Vec<crate::types::CalendarResource>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !order_by.is_empty() {
-            query_args.push(("order_by".to_string(), order_by.to_string()));
+            query_args.push(("orderBy".to_string(), order_by.to_string()));
         }
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -529,10 +529,10 @@ impl Resources {
     ) -> Result<Vec<crate::types::Feature>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if max_results > 0 {
-            query_args.push(("max_results".to_string(), max_results.to_string()));
+            query_args.push(("maxResults".to_string(), max_results.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

@@ -35,13 +35,13 @@ impl Replies {
     ) -> Result<Vec<crate::types::Reply>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_deleted {
-            query_args.push(("include_deleted".to_string(), include_deleted.to_string()));
+            query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
         }
         if page_size > 0 {
-            query_args.push(("page_size".to_string(), page_size.to_string()));
+            query_args.push(("pageSize".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -72,7 +72,7 @@ impl Replies {
     ) -> Result<Vec<crate::types::Reply>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_deleted {
-            query_args.push(("include_deleted".to_string(), include_deleted.to_string()));
+            query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -167,7 +167,7 @@ impl Replies {
     ) -> Result<crate::types::Reply> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_deleted {
-            query_args.push(("include_deleted".to_string(), include_deleted.to_string()));
+            query_args.push(("includeDeleted".to_string(), include_deleted.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

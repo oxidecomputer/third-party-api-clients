@@ -51,44 +51,44 @@ impl Changes {
     ) -> Result<Vec<crate::types::Change>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
-            query_args.push(("drive_id".to_string(), drive_id.to_string()));
+            query_args.push(("driveId".to_string(), drive_id.to_string()));
         }
         if include_corpus_removals {
             query_args.push((
-                "include_corpus_removals".to_string(),
+                "includeCorpusRemovals".to_string(),
                 include_corpus_removals.to_string(),
             ));
         }
         if include_items_from_all_drives {
             query_args.push((
-                "include_items_from_all_drives".to_string(),
+                "includeItemsFromAllDrives".to_string(),
                 include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if include_removed {
-            query_args.push(("include_removed".to_string(), include_removed.to_string()));
+            query_args.push(("includeRemoved".to_string(), include_removed.to_string()));
         }
         if include_team_drive_items {
             query_args.push((
-                "include_team_drive_items".to_string(),
+                "includeTeamDriveItems".to_string(),
                 include_team_drive_items.to_string(),
             ));
         }
         if page_size > 0 {
-            query_args.push(("page_size".to_string(), page_size.to_string()));
+            query_args.push(("pageSize".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if restrict_to_my_drive {
             query_args.push((
-                "restrict_to_my_drive".to_string(),
+                "restrictToMyDrive".to_string(),
                 restrict_to_my_drive.to_string(),
             ));
         }
@@ -97,18 +97,18 @@ impl Changes {
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
+            query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes?{}", query_);
@@ -142,38 +142,38 @@ impl Changes {
     ) -> Result<Vec<crate::types::Change>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
-            query_args.push(("drive_id".to_string(), drive_id.to_string()));
+            query_args.push(("driveId".to_string(), drive_id.to_string()));
         }
         if include_corpus_removals {
             query_args.push((
-                "include_corpus_removals".to_string(),
+                "includeCorpusRemovals".to_string(),
                 include_corpus_removals.to_string(),
             ));
         }
         if include_items_from_all_drives {
             query_args.push((
-                "include_items_from_all_drives".to_string(),
+                "includeItemsFromAllDrives".to_string(),
                 include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if include_removed {
-            query_args.push(("include_removed".to_string(), include_removed.to_string()));
+            query_args.push(("includeRemoved".to_string(), include_removed.to_string()));
         }
         if include_team_drive_items {
             query_args.push((
-                "include_team_drive_items".to_string(),
+                "includeTeamDriveItems".to_string(),
                 include_team_drive_items.to_string(),
             ));
         }
         if restrict_to_my_drive {
             query_args.push((
-                "restrict_to_my_drive".to_string(),
+                "restrictToMyDrive".to_string(),
                 restrict_to_my_drive.to_string(),
             ));
         }
@@ -182,18 +182,18 @@ impl Changes {
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
+            query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes?{}", query_);
@@ -253,22 +253,22 @@ impl Changes {
     ) -> Result<crate::types::StartPageToken> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
-            query_args.push(("drive_id".to_string(), drive_id.to_string()));
+            query_args.push(("driveId".to_string(), drive_id.to_string()));
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
+            query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes/startPageToken?{}", query_);
@@ -316,44 +316,44 @@ impl Changes {
     ) -> Result<crate::types::Channel> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !drive_id.is_empty() {
-            query_args.push(("drive_id".to_string(), drive_id.to_string()));
+            query_args.push(("driveId".to_string(), drive_id.to_string()));
         }
         if include_corpus_removals {
             query_args.push((
-                "include_corpus_removals".to_string(),
+                "includeCorpusRemovals".to_string(),
                 include_corpus_removals.to_string(),
             ));
         }
         if include_items_from_all_drives {
             query_args.push((
-                "include_items_from_all_drives".to_string(),
+                "includeItemsFromAllDrives".to_string(),
                 include_items_from_all_drives.to_string(),
             ));
         }
         if !include_permissions_for_view.is_empty() {
             query_args.push((
-                "include_permissions_for_view".to_string(),
+                "includePermissionsForView".to_string(),
                 include_permissions_for_view.to_string(),
             ));
         }
         if include_removed {
-            query_args.push(("include_removed".to_string(), include_removed.to_string()));
+            query_args.push(("includeRemoved".to_string(), include_removed.to_string()));
         }
         if include_team_drive_items {
             query_args.push((
-                "include_team_drive_items".to_string(),
+                "includeTeamDriveItems".to_string(),
                 include_team_drive_items.to_string(),
             ));
         }
         if page_size > 0 {
-            query_args.push(("page_size".to_string(), page_size.to_string()));
+            query_args.push(("pageSize".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if restrict_to_my_drive {
             query_args.push((
-                "restrict_to_my_drive".to_string(),
+                "restrictToMyDrive".to_string(),
                 restrict_to_my_drive.to_string(),
             ));
         }
@@ -362,18 +362,18 @@ impl Changes {
         }
         if supports_all_drives {
             query_args.push((
-                "supports_all_drives".to_string(),
+                "supportsAllDrives".to_string(),
                 supports_all_drives.to_string(),
             ));
         }
         if supports_team_drives {
             query_args.push((
-                "supports_team_drives".to_string(),
+                "supportsTeamDrives".to_string(),
                 supports_team_drives.to_string(),
             ));
         }
         if !team_drive_id.is_empty() {
-            query_args.push(("team_drive_id".to_string(), team_drive_id.to_string()));
+            query_args.push(("teamDriveId".to_string(), team_drive_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/changes/watch?{}", query_);

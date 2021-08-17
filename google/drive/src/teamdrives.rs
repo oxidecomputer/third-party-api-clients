@@ -33,17 +33,17 @@ impl Teamdrives {
     ) -> Result<Vec<crate::types::TeamDrive>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page_size > 0 {
-            query_args.push(("page_size".to_string(), page_size.to_string()));
+            query_args.push(("pageSize".to_string(), page_size.to_string()));
         }
         if !page_token.is_empty() {
-            query_args.push(("page_token".to_string(), page_token.to_string()));
+            query_args.push(("pageToken".to_string(), page_token.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
         }
         if use_domain_admin_access {
             query_args.push((
-                "use_domain_admin_access".to_string(),
+                "useDomainAdminAccess".to_string(),
                 use_domain_admin_access.to_string(),
             ));
         }
@@ -74,7 +74,7 @@ impl Teamdrives {
         }
         if use_domain_admin_access {
             query_args.push((
-                "use_domain_admin_access".to_string(),
+                "useDomainAdminAccess".to_string(),
                 use_domain_admin_access.to_string(),
             ));
         }
@@ -131,7 +131,7 @@ impl Teamdrives {
     ) -> Result<crate::types::TeamDrive> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !request_id.is_empty() {
-            query_args.push(("request_id".to_string(), request_id.to_string()));
+            query_args.push(("requestId".to_string(), request_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/teamdrives?{}", query_);
@@ -162,7 +162,7 @@ impl Teamdrives {
         let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
             query_args.push((
-                "use_domain_admin_access".to_string(),
+                "useDomainAdminAccess".to_string(),
                 use_domain_admin_access.to_string(),
             ));
         }
@@ -213,7 +213,7 @@ impl Teamdrives {
         let mut query_args: Vec<(String, String)> = Default::default();
         if use_domain_admin_access {
             query_args.push((
-                "use_domain_admin_access".to_string(),
+                "useDomainAdminAccess".to_string(),
                 use_domain_admin_access.to_string(),
             ));
         }
