@@ -2979,7 +2979,8 @@ percent-encoding = "2.1"
 reqwest = {{ version = "0.11", features = ["json"] }}
 schemars = {{ version = "0.8", features = ["chrono", "uuid"] }}
 serde = {{ version = "1", features = ["derive"] }}
-serde_json = "1"{}{}
+serde_json = "1"
+serde_urlencoded = "^0.7"{}{}
 
 [dev-dependencies]
 base64 = "^0.12"
