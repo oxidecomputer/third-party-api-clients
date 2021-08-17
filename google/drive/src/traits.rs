@@ -97,6 +97,8 @@ impl FileOps for crate::files::Files {
                 f.parents = vec![drive_id.to_string()];
             }
 
+            uri += "?uploadType=resumable&supportsAllDrives=true&includeItemsFromAllDrives=true";
+
             // Create the file.
         } else {
             method = reqwest::Method::PATCH;
@@ -153,6 +155,7 @@ impl FileOps for crate::files::Files {
     /// Create a folder, if it doesn't exist, returns the ID of the folder.
     async fn create_folder(&self, drive_id: &str, parent_id: &str, name: &str) -> Result<String> {
         let folder_mime_type = "application/vnd.google-apps.folder";
+        let mut uri = "https://www.googleapis.com/upload/drive/v3/files".to_string();
         let mut file: crate::types::File = Default::default();
         // Set the name,
         file.name = name.to_string();
@@ -193,12 +196,13 @@ impl FileOps for crate::files::Files {
             return Ok(f.id);
         }
 
+        uri += "?uploadType=resumable&supportsAllDrives=true&includeItemsFromAllDrives=true";
         // Make the request and return the ID.
         let folder: crate::types::File = self
             .client
             .request_with_mime(
                 reqwest::Method::POST,
-                "/files?supportsAllDrives=true&includeItemsFromAllDrives=true",
+                &uri,
                 serde_json::to_string(&file).unwrap().as_bytes(),
                 folder_mime_type,
             )
