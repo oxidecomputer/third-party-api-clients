@@ -136,7 +136,7 @@ use std::io::Write;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://www.googleapis.com/admin/directory/v1";
+pub const DEFAULT_HOST: &str = "https://www.googleapis.com";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};

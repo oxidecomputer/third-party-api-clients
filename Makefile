@@ -185,7 +185,7 @@ google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
 		-d "A fully generated & opinionated API client for the Google Admin API." \
 		--spec-link "https://admin.googleapis.com/$discovery/rest?version=directory_v1" \
 		--token-endpoint "oauth2.googleapis.com/token" \
-		--host "www.googleapis.com/admin/directory/v1" $(EXTRA_ARGS)
+		--host "www.googleapis.com" $(EXTRA_ARGS)
 	cargo fmt -p gsuite-api
 
 $(GOOGLE_CALENDAR_SPEC_DIR):
@@ -202,7 +202,7 @@ google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
 		-d "A fully generated & opinionated API client for the Google Calendar API." \
 		--spec-link "https://calendar-json.googleapis.com/$discovery/rest?version=v3" \
 		--token-endpoint "oauth2.googleapis.com/token" \
-		--host "www.googleapis.com/calendar/directory/v1" $(EXTRA_ARGS)
+		--host "www.googleapis.com/calendar/v3" $(EXTRA_ARGS)
 	cargo fmt -p google-calendar
 
 $(GOOGLE_DRIVE_SPEC_DIR):
@@ -219,7 +219,7 @@ google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
 		-d "A fully generated & opinionated API client for the Google Drive API." \
 		--spec-link "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest" \
 		--token-endpoint "oauth2.googleapis.com/token" \
-		--host "www.googleapis.com/drive/directory/v1" $(EXTRA_ARGS)
+		--host "www.googleapis.com/drive/v3" $(EXTRA_ARGS)
 	cargo fmt -p google-drive
 
 $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR):
@@ -236,7 +236,7 @@ google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
 		-d "A fully generated & opinionated API client for the Google Groups Settings API." \
 		--spec-link "https://groupssettings.googleapis.com/$discovery/rest?version=v1" \
 		--token-endpoint "oauth2.googleapis.com/token" \
-		--host "www.googleapis.com/groupssettings/directory/v1" $(EXTRA_ARGS)
+		--host "www.googleapis.com/groups/v1/groups" $(EXTRA_ARGS)
 	cargo fmt -p google-groups-settings
 
 $(GUSTO_SPEC_DIR):

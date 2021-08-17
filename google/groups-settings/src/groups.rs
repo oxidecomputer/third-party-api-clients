@@ -23,10 +23,24 @@ impl Groups {
      *  - true: G Suite users external to your organization can become members of this group.
      *  - false: Users not belonging to the organization are not allowed to become members of this group.
      */
-    pub async fn settings_get(&self, group_unique_id: &str) -> Result<crate::types::Groups> {
+    pub async fn settings_get(
+        &self,
+        alt: crate::types::Alt,
+        group_unique_id: &str,
+    ) -> Result<crate::types::Groups> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
         let url = format!(
-            "/{}",
+            "/{}?{}",
             crate::progenitor_support::encode_path(&group_unique_id.to_string()),
+            query_
         );
 
         self.client.get(&url, None).await
@@ -45,12 +59,23 @@ impl Groups {
      */
     pub async fn settings_update(
         &self,
+        alt: crate::types::Alt,
         group_unique_id: &str,
         body: &crate::types::Groups,
     ) -> Result<crate::types::Groups> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
         let url = format!(
-            "/{}",
+            "/{}?{}",
             crate::progenitor_support::encode_path(&group_unique_id.to_string()),
+            query_
         );
 
         self.client
@@ -74,12 +99,23 @@ impl Groups {
      */
     pub async fn settings_patch(
         &self,
+        alt: crate::types::Alt,
         group_unique_id: &str,
         body: &crate::types::Groups,
     ) -> Result<crate::types::Groups> {
+        let mut query_ = String::new();
+        let mut query_args: Vec<String> = Default::default();
+        query_args.push(format!("alt={}", alt));
+        for (i, n) in query_args.iter().enumerate() {
+            if i > 0 {
+                query_.push('&');
+            }
+            query_.push_str(n);
+        }
         let url = format!(
-            "/{}",
+            "/{}?{}",
             crate::progenitor_support::encode_path(&group_unique_id.to_string()),
+            query_
         );
 
         self.client

@@ -605,7 +605,8 @@ fn get_fn_params(
         } else if (!all_pages || !is_page_param(nam))
             && nam != "authorization"
             && !nam.starts_with("authorization_bearer")
-            && (!proper_name.starts_with("Google") || !is_google_unnecessary_param(nam))
+            && (!proper_name.starts_with("Google")
+                || !is_google_unnecessary_param(proper_name, nam))
         {
             if typ == "chrono::DateTime<chrono::Utc>" {
                 fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
@@ -636,7 +637,8 @@ fn get_fn_params(
             } else if (!all_pages || !is_page_param(nam))
                 && nam != "authorization"
                 && !nam.starts_with("authorization_bearer")
-                && (!proper_name.starts_with("Google") || !is_google_unnecessary_param(nam))
+                && (!proper_name.starts_with("Google")
+                    || !is_google_unnecessary_param(proper_name, nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
                     query_params.insert(nam.to_string(), format!("Option<{}>", typ));
@@ -985,7 +987,7 @@ fn is_page_param(s: &str) -> bool {
         || s == "sync_token"
 }
 
-fn is_google_unnecessary_param(s: &str) -> bool {
+fn is_google_unnecessary_param(proper_name: &str, s: &str) -> bool {
     // These are either dumb or depreciated.
     s == "access_token"
         || s == "oauth_token"
@@ -997,11 +999,11 @@ fn is_google_unnecessary_param(s: &str) -> bool {
         || s == "quota_user"
         || s == "key"
         || s == "fields"
-        || s == "alt"
         || s == "callback"
         || s == "upload_protocol"
         || s == "upload_type"
         || s == "always_include_email"
         || s == "enforce_single_parent"
         || s == "corpus"
+        || (s == "alt" && proper_name != "Google Groups Settings")
 }

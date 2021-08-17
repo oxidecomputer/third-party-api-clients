@@ -191,8 +191,7 @@ impl FileOps for crate::files::Files {
     // TODO: make binary content work in the actual library.
     async fn get_contents_by_id(&self, id: &str) -> Result<String> {
         let mut query_ = String::new();
-        let mut query_args: Vec<String> = Default::default();
-        query_args.push("mime_type=text/plain".to_string());
+        let query_args = vec!["mime_type=text/plain".to_string()];
         for (i, n) in query_args.iter().enumerate() {
             if i > 0 {
                 query_.push('&');
