@@ -63,7 +63,7 @@ impl ContactsApiLists {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_contactdb_lists(&self, body: &Vec<i64>) -> Result<()> {
+    pub async fn delete_contactdb_lists(&self, body: &[i64]) -> Result<()> {
         let url = "/contactdb/lists".to_string();
         self.client
             .delete(
@@ -217,7 +217,7 @@ impl ContactsApiLists {
     pub async fn post_contactdb_lists_list_recipient(
         &self,
         list_id: i64,
-        body: &Vec<i64>,
+        body: &[i64],
     ) -> Result<()> {
         let url = format!(
             "/contactdb/lists/{}/recipients",

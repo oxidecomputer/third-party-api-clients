@@ -70,8 +70,6 @@ impl Query {
         &self,
         query: &str,
         limit: f64,
-        x_query_id: &str,
-        x_cursor: &str,
     ) -> Result<crate::types::GetMessagesResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.to_string().is_empty() {

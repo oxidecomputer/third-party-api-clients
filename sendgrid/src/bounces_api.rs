@@ -30,7 +30,6 @@ impl BouncesApi {
         &self,
         start_time: i64,
         end_time: i64,
-        accept: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -58,7 +57,6 @@ impl BouncesApi {
         &self,
         start_time: i64,
         end_time: i64,
-        accept: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {

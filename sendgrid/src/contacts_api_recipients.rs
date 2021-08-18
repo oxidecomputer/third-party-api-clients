@@ -63,7 +63,7 @@ impl ContactsApiRecipients {
      */
     pub async fn post_contactdb_recipient(
         &self,
-        body: &Vec<crate::types::PostContactdbRecipientsRequest>,
+        body: &[crate::types::PostContactdbRecipientsRequest],
     ) -> Result<crate::types::ContactDbRecipientResponse> {
         let url = "/contactdb/recipients".to_string();
         self.client
@@ -87,10 +87,7 @@ impl ContactsApiRecipients {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_contactdb_recipients(
-        &self,
-        body: &Vec<String>,
-    ) -> Result<crate::types::Help> {
+    pub async fn delete_contactdb_recipients(&self, body: &[String]) -> Result<crate::types::Help> {
         let url = "/contactdb/recipients".to_string();
         self.client
             .delete(
@@ -117,7 +114,7 @@ impl ContactsApiRecipients {
      */
     pub async fn patch_contactdb_recipients(
         &self,
-        body: &Vec<crate::types::PatchContactdbRecipientsRequest>,
+        body: &[crate::types::PatchContactdbRecipientsRequest],
     ) -> Result<crate::types::ContactDbRecipientResponse> {
         let url = "/contactdb/recipients".to_string();
         self.client

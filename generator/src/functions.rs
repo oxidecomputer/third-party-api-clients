@@ -124,11 +124,32 @@ pub fn generate_files(
                                         (None, None)
                                     } else {
                                         let rt = ts.render_type(&id, false)?;
-                                        (Some(format!("&{}", rt)), Some("json".to_string()))
+                                        if rt.starts_with("Vec") {
+                                            (
+                                                Some(format!(
+                                                    "&[{}]",
+                                                    rt.trim_start_matches("Vec<")
+                                                        .trim_end_matches('>')
+                                                )),
+                                                Some("json".to_string()),
+                                            )
+                                        } else {
+                                            (Some(format!("&{}", rt)), Some("json".to_string()))
+                                        }
                                     }
                                 } else {
                                     let rt = ts.render_type(&id, false)?;
-                                    (Some(format!("&{}", rt)), Some("json".to_string()))
+                                    if rt.starts_with("Vec") {
+                                        (
+                                            Some(format!(
+                                                "&[{}]",
+                                                rt.trim_start_matches("Vec<").trim_end_matches('>')
+                                            )),
+                                            Some("json".to_string()),
+                                        )
+                                    } else {
+                                        (Some(format!("&{}", rt)), Some("json".to_string()))
+                                    }
                                 }
                             } else {
                                 (None, None)
@@ -1024,5 +1045,5 @@ fn is_google_unnecessary_param(proper_name: &str, s: &str) -> bool {
 }
 
 fn is_sendgrid_unnecessary_param(s: &str) -> bool {
-    s == "on_behalf_of"
+    s == "on_behalf_of" || s == "accept" || s == "x_query_id" || s == "x_cursor"
 }
