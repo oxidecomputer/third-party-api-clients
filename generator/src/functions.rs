@@ -31,9 +31,6 @@ pub fn generate_files(
             };
 
             let od = to_snake_case(o.operation_id.as_deref().unwrap());
-            if od == "accounts" {
-                println!("function accounts: {:?}", p);
-            }
 
             // Make sure we have exactly 1 tag. This likely needs to change in the
             // future but for now it seems fairly consistent.

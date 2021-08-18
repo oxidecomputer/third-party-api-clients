@@ -2346,6 +2346,8 @@ fn gen(
     // Print the client template.
     if proper_name == "GitHub" {
         a(crate::client::GITHUB_TEMPLATE);
+    } else if proper_name == "SendGrid" || proper_name == "Giphy" {
+        a(&crate::client::generate_client_generic_api_key(proper_name));
     } else {
         a(&crate::client::generate_client_generic_token(
             proper_name,
@@ -2550,6 +2552,9 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         .replace("_id_", "_")
         .replace("_a_", "_")
         .replace("_to_", "_")
+        .replace("_id_", "_")
+        .replace("_with_", "_")
+        .replace("_by_", "_")
         .replace("_v_2_", "_")
         .replace("_v_3_", "_")
         .replace("s_uuid", "")
@@ -2568,6 +2573,7 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         .trim_end_matches('_')
         .trim_end_matches("_a")
         .trim_end_matches("_in")
+        .trim_end_matches("_id")
         .trim_end_matches("_by")
         .trim_end_matches("_with")
         .trim_end_matches("_to")
@@ -3109,6 +3115,14 @@ rustdoc-args = ["--cfg", "docsrs"]
                     &version,
                     &proper_name,
                     host.trim_start_matches("https://"),
+                    &spec_link,
+                )
+            } else if proper_name == "SendGrid" || proper_name == "Giphy" {
+                template::generate_docs_generic_api_key(
+                    &api,
+                    &to_snake_case(&name),
+                    &version,
+                    &proper_name,
                     &spec_link,
                 )
             } else {

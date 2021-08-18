@@ -470,19 +470,6 @@ impl Client {
         }
     }
 
-    async fn request_entity<D>(
-        &self,
-        method: http::Method,
-        uri: &str,
-        body: Option<reqwest::Body>,
-    ) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {
-        let r = self.request(method, uri, body).await?;
-        Ok(r)
-    }
-
     /// Return a user consent url with an optional set of scopes.
     /// If no scopes are provided, they will not be passed in the url.
     pub fn user_consent_url(&self, scopes: &[String]) -> String {
@@ -572,6 +559,19 @@ impl Client {
         self.refresh_token = t.refresh_token.to_string();
 
         Ok(t)
+    }
+
+    async fn request_entity<D>(
+        &self,
+        method: http::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let r = self.request(method, uri, body).await?;
+        Ok(r)
     }
 
     #[allow(dead_code)]

@@ -683,3 +683,58 @@ pub fn generate_docs_generic_token(
         proper_name.to_lowercase(),
     )
 }
+
+pub fn generate_docs_generic_api_key(
+    api: &openapiv3::OpenAPI,
+    name: &str,
+    version: &str,
+    proper_name: &str,
+    spec_link: &str,
+) -> String {
+    let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
+    format!(
+        r#"{}
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
+//!
+//! ```toml
+//! [dependencies]
+//! {} = "{}"
+//! ```
+//!
+//! ## Basic example
+//!
+//! Typical use will require intializing a `Client`. This requires
+//! a user agent string and set of credentials.
+//!
+//! ```
+//! use {}::Client;
+//!
+//! let {} = Client::new(
+//!     String::from("api-key"),
+//! );
+//! ```
+//!
+//! Alternatively, the library can search for most of the variables required for
+//! the client in the environment:
+//!
+//! - `{}_API_KEY`
+//!
+//! And then you can create a client from the environment.
+//!
+//! ```
+//! use {}::Client;
+//!
+//! let {} = Client::new_from_env();
+//! ```
+//!"#,
+        info,
+        name,
+        version,
+        name,
+        proper_name.to_lowercase(),
+        proper_name.to_uppercase(),
+        name,
+        proper_name.to_lowercase(),
+    )
+}

@@ -754,21 +754,6 @@ impl Client {{
         }}
     }}
 
-    async fn request_entity<D>(
-        &self,
-        method: http::Method,
-        uri: &str,
-        body: Option<reqwest::Body>,
-    ) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        let r = self
-            .request(method, uri, body)
-            .await?;
-        Ok(r)
-    }}
-
     /// Return a user consent url with an optional set of scopes.
     /// If no scopes are provided, they will not be passed in the url.
     pub fn user_consent_url(&self, scopes: &[String]) -> String {{
@@ -860,81 +845,11 @@ impl Client {{
         Ok(t)
     }}
 
-    #[allow(dead_code)]
-    async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.request_entity(
-            http::Method::GET,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        ).await
-    }}
-
-    #[allow(dead_code)]
-    async fn get_all_pages<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<Vec<D>>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        // TODO: implement this.
-        self.request_entity(
-            http::Method::GET,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        ).await
-    }}
-
-    #[allow(dead_code)]
-    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.request_entity(
-            http::Method::POST,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        ).await
-    }}
-
-    #[allow(dead_code)]
-    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.request_entity(
-            http::Method::PATCH,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        ).await
-    }}
-
-    #[allow(dead_code)]
-    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.request_entity(
-            http::Method::PUT,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        ).await
-    }}
-
-    #[allow(dead_code)]
-    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
-    where
-        D: serde::de::DeserializeOwned + 'static + Send,
-    {{
-        self.request_entity(
-            http::Method::DELETE,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        ).await
-    }}"#,
+    {}"#,
         token_endpoint.trim_start_matches("https://"),
         user_consent_endpoint.trim_start_matches("https://"),
-        new_from_env
+        new_from_env,
+        SHARED_FUNCTIONS_TEMPLATE
     )
 }
 
@@ -1019,3 +934,241 @@ where
     }
 }
 "#;
+
+pub fn generate_client_generic_api_key(proper_name: &str) -> String {
+    format!(
+        r#"use std::env;
+
+/// Entrypoint for interacting with the API client.
+#[derive(Clone)]
+pub struct Client {{
+    token: String,
+
+    client: reqwest::Client,
+}}
+
+impl Client {{
+    /// Create a new Client struct. It takes a type that can convert into
+    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
+    /// given a valid API key your requests will work.
+    pub fn new<T>(
+        token: T,
+    ) -> Self
+    where
+        T: ToString,
+    {{
+        let client = reqwest::Client::builder().build();
+        match client {{
+            Ok(c) => {{
+                Client {{
+                    token: token.to_string(),
+
+                    client: c,
+                }}
+            }}
+            Err(e) => panic!("creating reqwest client failed: {{:?}}", e),
+        }}
+    }}
+
+    /// Create a new Client struct from environment variables. It
+    /// takes a type that can convert into
+    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
+    /// given a valid API key and your requests will work.
+    /// We pass in the token and refresh token to the client so if you are storing
+    /// it in a database, you can get it first.
+    pub fn new_from_env() -> Self
+    {{
+        let token = env::var("{}_API_KEY").unwrap();
+
+        Client::new(
+            token,
+        )
+    }}
+
+    async fn url_and_auth(
+        &self,
+        uri: &str,
+    ) -> Result<(reqwest::Url, Option<String>)> {{
+        let parsed_url = uri.parse::<reqwest::Url>();
+
+        let auth = format!("Bearer {{}}", self.token);
+        parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+    }}
+
+    async fn request_raw(
+        &self,
+        method: reqwest::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<reqwest::Response>
+    {{
+        let u = if uri.starts_with("https://") {{
+            uri.to_string()
+        }} else {{
+            (DEFAULT_HOST.to_string() + uri).to_string()
+        }};
+        let (url, auth) = self.url_and_auth(&u).await?;
+
+        let instance = <&Client>::clone(&self);
+
+        let mut req = instance.client.request(method, url);
+
+        // Set the default headers.
+        req = req.header(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+
+        if let Some(auth_str) = auth {{
+            req = req.header(http::header::AUTHORIZATION, &*auth_str);
+        }}
+
+        if let Some(body) = body {{
+            //println!("Body: {{:?}}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
+            req = req.body(body);
+        }}
+        //println!("Request: {{:?}}", &req);
+        Ok(req.send().await?)
+    }}
+
+    async fn request<Out>(
+        &self,
+        method: reqwest::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<Out>
+        where
+        Out: serde::de::DeserializeOwned + 'static + Send,
+    {{
+        let response = self.request_raw(method, uri, body).await?;
+
+        let status = response.status();
+
+        let response_body = response.bytes().await?;
+
+        if status.is_success() {{
+            //println!("response payload {{}}", String::from_utf8_lossy(&response_body));
+            let parsed_response = if status == http::StatusCode::NO_CONTENT {{
+                serde_json::from_str("null")
+            }} else {{
+                serde_json::from_slice::<Out>(&response_body)
+            }};
+            parsed_response.map_err(Error::from)
+        }} else {{
+            /*println!("error status: {{:?}}, response payload: {{}}",
+                status,
+                String::from_utf8_lossy(&response_body),
+            );*/
+
+            let error = if response_body.is_empty() {{
+                anyhow!("code: {{}}, empty response", status)
+            }} else {{
+                anyhow!(
+                    "code: {{}}, error: {{:?}}",
+                    status,
+                    String::from_utf8_lossy(&response_body),
+                )
+            }};
+
+            Err(error)
+        }}
+    }}
+
+    {}"#,
+        proper_name.to_uppercase(),
+        SHARED_FUNCTIONS_TEMPLATE
+    )
+}
+
+const SHARED_FUNCTIONS_TEMPLATE: &str = r#"
+    async fn request_entity<D>(
+        &self,
+        method: http::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let r = self
+            .request(method, uri, body)
+            .await?;
+        Ok(r)
+    }
+
+    #[allow(dead_code)]
+    async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::GET,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        ).await
+    }
+
+    #[allow(dead_code)]
+    async fn get_all_pages<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        // TODO: implement this.
+        self.request_entity(
+            http::Method::GET,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        ).await
+    }
+
+    #[allow(dead_code)]
+    async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::POST,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        ).await
+    }
+
+    #[allow(dead_code)]
+    async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::PATCH,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        ).await
+    }
+
+    #[allow(dead_code)]
+    async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::PUT,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        ).await
+    }
+
+    #[allow(dead_code)]
+    async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_entity(
+            http::Method::DELETE,
+            &(DEFAULT_HOST.to_string() + uri),
+            message,
+        ).await
+    }"#;
