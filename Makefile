@@ -171,6 +171,7 @@ github: target/debug/generator $(GITHUB_SPEC)
 		--spec-link "https://github.com/$(GITHUB_SPEC_REPO)" \
 		--host "api.github.com" $(EXTRA_ARGS)
 	cargo fmt -p octorust
+	@echo -e "- [GitHub](octorust/) [![docs.rs](https://docs.rs/octorust/badge.svg)](https://docs.rs/octorust)" >> README.md
 
 .PHONY: google
 google: google-admin google-calendar google-drive google-groups-settings google-sheets
@@ -193,6 +194,7 @@ google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com" $(EXTRA_ARGS)
 	cargo fmt -p gsuite-api
+	@echo -e "- [Google Admin](google/admin/) [![docs.rs](https://docs.rs/gsuite-api/badge.svg)](https://docs.rs/gsuite-api)" >> README.md
 
 $(GOOGLE_CALENDAR_SPEC_DIR):
 	mkdir -p $@
@@ -210,6 +212,7 @@ google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com/calendar/v3" $(EXTRA_ARGS)
 	cargo fmt -p google-calendar
+	@echo -e "- [Google Calendar](google/calendar/) [![docs.rs](https://docs.rs/google-calendar/badge.svg)](https://docs.rs/google-calendar)" >> README.md
 
 $(GOOGLE_DRIVE_SPEC_DIR):
 	mkdir -p $@

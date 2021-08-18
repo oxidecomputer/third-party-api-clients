@@ -573,8 +573,8 @@ pub fn generate_docs_openapi_info(
 //! along with the code to make this library easy to use.
 //! "#,
         proper_name,
-        package_name,
-        package_name,
+        to_snake_case(package_name),
+        to_snake_case(package_name),
         description,
         tos,
         contact,
