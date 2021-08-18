@@ -339,7 +339,7 @@ fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String 
             || name.starts_with("Vec<")
         {
             a(&format!(
-                r#"impl From<{}> for {} {{
+                r#"impl std::convert::From<{}> for {} {{
                                     fn from(f: {}) -> Self {{
                                         {}::{}(f)
                                     }}
@@ -353,7 +353,7 @@ fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String 
     for name in name_map.values() {
         if name == "i64" || name == "i32" || name == "f64" || name == "f32" || name == "bool" {
             a(&format!(
-                r#"impl From<{}> for {} {{
+                r#"impl std::convert::From<{}> for {} {{
                                     fn from(f: {}) -> Self {{
                                         *f.{}().unwrap()
                                     }}
@@ -369,7 +369,7 @@ fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String 
             ));
         } else if name == "String" || name.starts_with("Vec<") {
             a(&format!(
-                r#"impl From<{}> for {} {{
+                r#"impl std::convert::From<{}> for {} {{
                                     fn from(f: {}) -> Self {{
                                         f.{}().unwrap().clone()
                                     }}

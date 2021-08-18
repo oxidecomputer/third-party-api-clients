@@ -127,7 +127,7 @@ pub mod marketing_campaigns_stats;
 pub mod query;
 pub mod reverse_dns;
 pub mod segmenting_contacts;
-pub mod segmenting_contacts_v_2_beta;
+pub mod segmenting_contacts_beta;
 pub mod send_test_email;
 pub mod sender_identities_api;
 pub mod sender_verification;
@@ -790,10 +790,8 @@ impl Client {
         segmenting_contacts::SegmentingContacts::new(self.clone())
     }
 
-    pub fn segmenting_contacts_v_2_beta(
-        &self,
-    ) -> segmenting_contacts_v_2_beta::SegmentingContactsBeta {
-        segmenting_contacts_v_2_beta::SegmentingContactsBeta::new(self.clone())
+    pub fn segmenting_contacts_beta(&self) -> segmenting_contacts_beta::SegmentingContactsBeta {
+        segmenting_contacts_beta::SegmentingContactsBeta::new(self.clone())
     }
 
     pub fn send_test_email(&self) -> send_test_email::SendTestEmail {

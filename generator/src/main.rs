@@ -2272,7 +2272,7 @@ fn gen(
         // ones we found ourselves.
         for tag in tags.iter() {
             if !tag.is_empty() {
-                a(&format!("pub mod {};", to_snake_case(tag)));
+                a(&format!("pub mod {};", to_snake_case(&clean_name(tag))));
             }
         }
     }
@@ -2390,10 +2390,10 @@ fn gen(
                     r#"pub fn {}(&self) -> {}::{} {{
                     {}::{}::new(self.clone())
                }}"#,
-                    to_snake_case(tag),
-                    to_snake_case(tag),
+                    to_snake_case(&clean_name(tag)),
+                    to_snake_case(&clean_name(tag)),
                     struct_name(tag),
-                    to_snake_case(tag),
+                    to_snake_case(&clean_name(tag)),
                     struct_name(tag),
                 ));
                 a("");
@@ -2810,6 +2810,14 @@ fn main() -> Result<()> {
     for (pn, p) in api.paths.iter() {
         let op = p.item()?;
 
+        /*
+         * Get the request parameters, those might have lingering enums.
+         */
+        for par in op.parameters.iter() {
+            // The name will be filled in by the parameter data.
+            ts.select_param(None, par)?;
+        }
+
         let grab = |pn: &str,
                     m: &str,
                     o: Option<&openapiv3::Operation>,
@@ -3123,7 +3131,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                     // We have a map of our files, let's write to them.
                     for (f, content) in files {
                         let mut tagrs = src.clone();
-                        tagrs.push(format!("{}.rs", f));
+                        tagrs.push(format!("{}.rs", to_snake_case(&clean_name(&f))));
 
                         let output = format!(
                             r#"use anyhow::Result;

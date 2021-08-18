@@ -11472,13 +11472,13 @@ impl FieldMappingsAnyOf {
     }
 }
 
-impl From<String> for FieldMappingsAnyOf {
+impl std::convert::From<String> for FieldMappingsAnyOf {
     fn from(f: String) -> Self {
         FieldMappingsAnyOf::String(f)
     }
 }
 
-impl From<FieldMappingsAnyOf> for String {
+impl std::convert::From<FieldMappingsAnyOf> for String {
     fn from(f: FieldMappingsAnyOf) -> Self {
         f.string().unwrap().clone()
     }
@@ -12273,25 +12273,25 @@ impl ValueAnyOf {
     }
 }
 
-impl From<i64> for ValueAnyOf {
+impl std::convert::From<i64> for ValueAnyOf {
     fn from(f: i64) -> Self {
         ValueAnyOf::I64(f)
     }
 }
 
-impl From<String> for ValueAnyOf {
+impl std::convert::From<String> for ValueAnyOf {
     fn from(f: String) -> Self {
         ValueAnyOf::String(f)
     }
 }
 
-impl From<ValueAnyOf> for i64 {
+impl std::convert::From<ValueAnyOf> for i64 {
     fn from(f: ValueAnyOf) -> Self {
         *f.i64().unwrap()
     }
 }
 
-impl From<ValueAnyOf> for String {
+impl std::convert::From<ValueAnyOf> for String {
     fn from(f: ValueAnyOf) -> Self {
         f.string().unwrap().clone()
     }
@@ -13296,6 +13296,50 @@ pub struct GetClientsStatsResponse {
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub stats: Vec<GetDevicesStatsResponse>,
+}
+
+/**
+ * Specifies the type of client to retrieve stats for. Must be either "phone", "tablet", "webmail", or "desktop".
+ */
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub enum ClientType {
+    #[serde(rename = "desktop")]
+    Desktop,
+    #[serde(rename = "phone")]
+    Phone,
+    #[serde(rename = "tablet")]
+    Tablet,
+    #[serde(rename = "webmail")]
+    Webmail,
+    #[serde(rename = "")]
+    Noop,
+    #[serde(other)]
+    FallthroughString,
+}
+
+impl std::fmt::Display for ClientType {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match &*self {
+            ClientType::Desktop => "desktop",
+            ClientType::Phone => "phone",
+            ClientType::Tablet => "tablet",
+            ClientType::Webmail => "webmail",
+            ClientType::Noop => "",
+            ClientType::FallthroughString => "*",
+        }
+        .fmt(f)
+    }
+}
+
+impl Default for ClientType {
+    fn default() -> ClientType {
+        ClientType::Noop
+    }
+}
+impl ClientType {
+    pub fn is_noop(&self) -> bool {
+        matches!(self, ClientType::Noop)
+    }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
