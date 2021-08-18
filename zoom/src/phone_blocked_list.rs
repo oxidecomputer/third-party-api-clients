@@ -114,7 +114,7 @@ impl PhoneBlockedList {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn add_anumber_to_blocked_list(
+    pub async fn add_anumber_blocked_list(
         &self,
         body: &crate::types::UpdateBlockedListRequest,
     ) -> Result<crate::types::Groups> {
@@ -140,7 +140,7 @@ impl PhoneBlockedList {
      *
      * * `blocked_list_id: &str` -- Unique Identifier of the blocked list.
      */
-    pub async fn get_a_blocked_list(
+    pub async fn get_blocked_list(
         &self,
         blocked_list_id: &str,
     ) -> Result<crate::types::BlockedList> {
@@ -170,7 +170,7 @@ impl PhoneBlockedList {
      *
      * * `blocked_list_id: &str` -- Unique Identifier of the blocked list. This can be retrieved from the List Blocked List API.
      */
-    pub async fn delete_a_blocked_list(&self, blocked_list_id: &str) -> Result<()> {
+    pub async fn delete_blocked_list(&self, blocked_list_id: &str) -> Result<()> {
         let url = format!(
             "/phone/blocked_list/{}",
             crate::progenitor_support::encode_path(&blocked_list_id.to_string()),

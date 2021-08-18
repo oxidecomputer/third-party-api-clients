@@ -37,7 +37,7 @@ impl ImGroups {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn im_group_create(&self, body: &crate::types::ImGroupCreateRequest) -> Result<()> {
+    pub async fn create(&self, body: &crate::types::ImGroupCreateRequest) -> Result<()> {
         let url = "/im/groups".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -83,7 +83,7 @@ impl ImGroups {
      * * `group_id: &str` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn im_group_delete(&self, group_id: &str) -> Result<()> {
+    pub async fn delete(&self, group_id: &str) -> Result<()> {
         let url = format!(
             "/im/groups/{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -107,7 +107,7 @@ impl ImGroups {
      * * `group_id: &str` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn im_group_update(
+    pub async fn update(
         &self,
         group_id: &str,
         body: &crate::types::ImGroupCreateRequest,
@@ -143,7 +143,7 @@ impl ImGroups {
      *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn im_group_member(
+    pub async fn member(
         &self,
         group_id: &str,
         page_size: i64,
@@ -185,7 +185,7 @@ impl ImGroups {
      * * `group_id: &str` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn im_group_members_create(
+    pub async fn members_create(
         &self,
         group_id: &str,
         body: &crate::types::AddRoleMembersRequest,
@@ -216,7 +216,7 @@ impl ImGroups {
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      * * `member_id: &str` -- User's first name.
      */
-    pub async fn im_group_members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
+    pub async fn members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
         let url = format!(
             "/im/groups/{}/members/{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),

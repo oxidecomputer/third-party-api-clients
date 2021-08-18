@@ -27,11 +27,7 @@ impl Teammates {
      * * `offset: u64` -- Paging offset.
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_v_3(
-        &self,
-        limit: u64,
-        offset: u64,
-    ) -> Result<crate::types::GetV3TeammatesResponse> {
+    pub async fn get(&self, limit: u64, offset: u64) -> Result<crate::types::GetTeammatesResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.to_string().is_empty() {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -60,10 +56,10 @@ impl Teammates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn post_v_3_teammate(
+    pub async fn post(
         &self,
-        body: &crate::types::PostV3TeammatesRequest,
-    ) -> Result<crate::types::PostV3TeammatesResponse> {
+        body: &crate::types::PostTeammatesRequest,
+    ) -> Result<crate::types::PostTeammatesResponse> {
         let url = "/teammates".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -83,10 +79,10 @@ impl Teammates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn post_v_3_pending_token_resend(
+    pub async fn post_pending_token_resend(
         &self,
         token: &str,
-    ) -> Result<crate::types::PostV3TeammatesResponse> {
+    ) -> Result<crate::types::PostTeammatesResponse> {
         let url = format!(
             "/teammates/pending/{}/resend",
             crate::progenitor_support::encode_path(&token.to_string()),
@@ -109,11 +105,11 @@ impl Teammates {
      * * `limit: i64` -- Optional field to limit the number of results returned.
      * * `offset: i64` -- Optional beginning point in the list to retrieve from.
      */
-    pub async fn get_v_3_scopes_requests(
+    pub async fn get_scopes_requests(
         &self,
         limit: i64,
         offset: i64,
-    ) -> Result<Vec<crate::types::GetV3ScopesRequestsResponse>> {
+    ) -> Result<Vec<crate::types::GetScopesRequestsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -132,17 +128,17 @@ impl Teammates {
      *
      * This function performs a `GET` to the `/scopes/requests` endpoint.
      *
-     * As opposed to `get_v_3_scopes_requests`, this function returns all the pages of the request at once.
+     * As opposed to `get_scopes_requests`, this function returns all the pages of the request at once.
      *
      * **This endpoint allows you to retrieve a list of all recent access requests.**
      *
      * The Response Header's `link` parameter will include pagination info.
      */
-    pub async fn get_all_v_3_scopes_requests(
+    pub async fn get_all_scopes_requests(
         &self,
         limit: i64,
         offset: i64,
-    ) -> Result<Vec<crate::types::GetV3ScopesRequestsResponse>> {
+    ) -> Result<Vec<crate::types::GetScopesRequestsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -169,7 +165,7 @@ impl Teammates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_v_3_pending(&self) -> Result<crate::types::GetV3TeammatesPendingResponse> {
+    pub async fn get_pending(&self) -> Result<crate::types::GetTeammatesPendingResponse> {
         let url = "/teammates/pending".to_string();
         self.client.get(&url, None).await
     }
@@ -187,10 +183,10 @@ impl Teammates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_v_3_username(
+    pub async fn get_username(
         &self,
         username: &str,
-    ) -> Result<crate::types::GetV3TeammatesUsernameResponse> {
+    ) -> Result<crate::types::GetTeammatesUsernameResponse> {
         let url = format!(
             "/teammates/{}",
             crate::progenitor_support::encode_path(&username.to_string()),
@@ -212,7 +208,7 @@ impl Teammates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_v_3_username(
+    pub async fn delete_username(
         &self,
         username: &str,
     ) -> Result<crate::types::PostSendersResponse> {
@@ -241,11 +237,11 @@ impl Teammates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn patch_v_3_username(
+    pub async fn patch_username(
         &self,
         username: &str,
-        body: &crate::types::PatchV3TeammatesUsernameRequest,
-    ) -> Result<crate::types::GetV3TeammatesUsernameResponse> {
+        body: &crate::types::PatchTeammatesUsernameRequest,
+    ) -> Result<crate::types::GetTeammatesUsernameResponse> {
         let url = format!(
             "/teammates/{}",
             crate::progenitor_support::encode_path(&username.to_string()),
@@ -265,10 +261,10 @@ impl Teammates {
      *
      * **Note:** Only teammate admins may approve another teammate’s access request.
      */
-    pub async fn patch_v_3_scopes_requests_approve(
+    pub async fn patch_scopes_requests_approve(
         &self,
         request_id: &str,
-    ) -> Result<crate::types::PatchV3ScopesRequestsApproveResponse> {
+    ) -> Result<crate::types::PatchScopesRequestsApproveResponse> {
         let url = format!(
             "/scopes/requests/{}/approve",
             crate::progenitor_support::encode_path(&request_id.to_string()),
@@ -286,7 +282,7 @@ impl Teammates {
      *
      * **Note:** Only teammate admins may delete a teammate's access request.
      */
-    pub async fn delete_v_3_scopes_requests_request(&self, request_id: &str) -> Result<()> {
+    pub async fn delete_scopes_requests_request(&self, request_id: &str) -> Result<()> {
         let url = format!(
             "/scopes/requests/{}",
             crate::progenitor_support::encode_path(&request_id.to_string()),
@@ -306,7 +302,7 @@ impl Teammates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_v_3_pending_token(&self, token: &str) -> Result<()> {
+    pub async fn delete_pending_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/teammates/pending/{}",
             crate::progenitor_support::encode_path(&token.to_string()),

@@ -251,7 +251,7 @@ impl ChatChannels {
      * * `channel_id: &str` -- Unique Identifier of the Channel from where you would like to remove a member. This can be retrieved from the [List Channels API](https://marketplace.zoom.us/docs/api-reference/zoom-api/chat-channels/getchannels).
      * * `member_id: &str` -- Email address of the member whom you would like to be remove from the channel.
      */
-    pub async fn remove_a_user_level_channel_member(
+    pub async fn remove_user_level_channel_member(
         &self,
         channel_id: &str,
         member_id: &str,

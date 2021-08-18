@@ -182,7 +182,7 @@ impl ChatMessages {
      *
      *  <p style="background-color:#e1f5fe; color:#01579b; padding:8px"> <b>Note:</b> For an <b>account-level</b> <a href="https://marketplace.zoom.us/docs/guides/getting-started/app-types/create-oauth-app">OAuth app</a>, this API can only be used on behalf of a user who is assigned with a <a href="https://support.zoom.us/hc/en-us/articles/115001078646-Using-role-management#:~:text=Each%20user%20in%20a%20Zoom,owner%2C%20administrator%2C%20or%20member.&text=Role%2Dbased%20access%20control%20enables,needs%20to%20view%20or%20edit."> role</a> that has the <b>Edit</b> permission for <b>Chat Messages</b>.</p>
      */
-    pub async fn senda_chat_message(
+    pub async fn senda(
         &self,
         user_id: &str,
         body: &crate::types::SendaChatMessageRequest,
@@ -284,7 +284,7 @@ impl ChatMessages {
      * * `to_contact: &str` -- The `userId` or email address of a Zoom Chat contact to whom you sent the message.\n\n**Note:** You must use this query parameter to delete a message sent to a Zoom Chat contact. .
      * * `to_channel: &str` -- The `channelId` of the Zoom Chat channel where sent the message.\n\n**Note:** You must use this query parameter to delete a message sent to Zoom Chat channel.
      */
-    pub async fn get_chat_message(
+    pub async fn get(
         &self,
         user_id: &str,
         message_id: &str,
@@ -372,7 +372,7 @@ impl ChatMessages {
      *   
      *   You must provide either `to_contact` or `to_channel` as a query parameter to delete a message that was previously sent to either an individual or a chat channel .
      */
-    pub async fn delete_chat_message(
+    pub async fn delete(
         &self,
         user_id: &str,
         message_id: &str,

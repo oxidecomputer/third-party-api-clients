@@ -119,7 +119,7 @@ impl Spreadsheets {
      * * `spreadsheet_id: &str` -- The fields of CellData that should be updated. At least one field must be specified. The root is the CellData; 'row.values.' should not be specified. A single `"\*"` can be used as short-hand for listing every field.
      * * `sheet_id: i64` -- The zero-based index where the rule should be inserted.
      */
-    pub async fn sheets_copy_to(
+    pub async fn sheets_copy(
         &self,
         spreadsheet_id: &str,
         sheet_id: i64,
@@ -376,7 +376,7 @@ impl Spreadsheets {
      *
      * * `spreadsheet_id: &str` -- The fields of CellData that should be updated. At least one field must be specified. The root is the CellData; 'row.values.' should not be specified. A single `"\*"` can be used as short-hand for listing every field.
      */
-    pub async fn values_batch_clear_by_data_filter(
+    pub async fn values_batch_clear_data_filter(
         &self,
         spreadsheet_id: &str,
         body: &crate::types::BatchClearValuesByDataFilterRequest,
@@ -450,7 +450,7 @@ impl Spreadsheets {
      *
      * * `spreadsheet_id: &str` -- The fields of CellData that should be updated. At least one field must be specified. The root is the CellData; 'row.values.' should not be specified. A single `"\*"` can be used as short-hand for listing every field.
      */
-    pub async fn values_batch_get_by_data_filter(
+    pub async fn values_batch_get_data_filter(
         &self,
         spreadsheet_id: &str,
         body: &crate::types::BatchGetValuesByDataFilterRequest,
@@ -498,7 +498,7 @@ impl Spreadsheets {
      *
      * * `spreadsheet_id: &str` -- The fields of CellData that should be updated. At least one field must be specified. The root is the CellData; 'row.values.' should not be specified. A single `"\*"` can be used as short-hand for listing every field.
      */
-    pub async fn values_batch_update_by_data_filter(
+    pub async fn values_batch_update_data_filter(
         &self,
         spreadsheet_id: &str,
         body: &crate::types::BatchUpdateValuesByDataFilterRequest,
@@ -546,7 +546,7 @@ impl Spreadsheets {
      *
      * * `spreadsheet_id: &str` -- The fields of CellData that should be updated. At least one field must be specified. The root is the CellData; 'row.values.' should not be specified. A single `"\*"` can be used as short-hand for listing every field.
      */
-    pub async fn get_by_data_filter(
+    pub async fn get_data_filter(
         &self,
         spreadsheet_id: &str,
         body: &crate::types::GetSpreadsheetByDataFilterRequest,

@@ -97,7 +97,7 @@ impl Query {
      *
      * * `authorization: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_v_3_messages_msg(&self, msg_id: &str) -> Result<crate::types::Message> {
+    pub async fn get_messages_msg(&self, msg_id: &str) -> Result<crate::types::Message> {
         let url = format!(
             "/messages/{}",
             crate::progenitor_support::encode_path(&msg_id.to_string()),

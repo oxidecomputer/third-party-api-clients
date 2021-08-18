@@ -95,7 +95,7 @@ impl Invoices {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `invoice_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn billing_get_invoice(
+    pub async fn billing_get_invoices(
         &self,
         account_id: &str,
         invoice_id: &str,

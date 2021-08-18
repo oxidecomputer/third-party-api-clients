@@ -251,7 +251,7 @@ impl Contacts {
      * * `contact_id: &str` -- The user's contact Id or email address. The contact can be either a company contact or an external contact.
      * * `query_presence_status: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
-    pub async fn get_user_contact(
+    pub async fn get_user_contacts(
         &self,
         contact_id: &str,
         query_presence_status: bool,

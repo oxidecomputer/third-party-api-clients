@@ -51,7 +51,7 @@ impl Benefits {
      *
      * The benefit object in Gusto contains high level information about a particular benefit type and its tax considerations. When companies choose to offer a benefit, they are creating a Company Benefit object associated with a particular benefit.
      */
-    pub async fn get_benefit(&self, benefit_id: &str) -> Result<crate::types::SupportedBenefit> {
+    pub async fn get(&self, benefit_id: &str) -> Result<crate::types::SupportedBenefit> {
         let url = format!(
             "/v1/benefits/{}",
             crate::progenitor_support::encode_path(&benefit_id.to_string()),
@@ -110,7 +110,7 @@ impl Benefits {
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn post_company_benefit(
+    pub async fn post_company(
         &self,
         company_id: &str,
         body: &crate::types::PostCompanyBenefitsRequest,
@@ -134,7 +134,7 @@ impl Benefits {
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn get_company_benefit(
+    pub async fn get_company_benefits(
         &self,
         company_benefit_id: &str,
     ) -> Result<crate::types::CompanyBenefit> {
@@ -155,7 +155,7 @@ impl Benefits {
      *
      * Note that company benefits can be deactivated only when no employees are enrolled.
      */
-    pub async fn put_company_benefit(
+    pub async fn put_company(
         &self,
         company_benefit_id: &str,
         body: &crate::types::PutCompanyBenefitRequest,
@@ -221,7 +221,7 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn post_employee_benefit(
+    pub async fn post_employee(
         &self,
         employee_id: &str,
         body: &crate::types::PostEmployeeBenefitsRequest,
@@ -243,7 +243,7 @@ impl Benefits {
      *
      * Year-to-date benefit amounts from a different company represents the amount of money added to an employees plan during a current year, made outside of the current contribution when they were employed at a different company.
      */
-    pub async fn post_employee_ytd_benefit_amounts_from_different_company(
+    pub async fn post_employee_ytd_amounts_from_different_company(
         &self,
         employee_id: &str,
         body: &crate::types::PostEmployeeYtdBenefitAmountsFromDifferentCompanyRequest,
@@ -265,7 +265,7 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn get_employee_benefit(
+    pub async fn get_employee_benefits(
         &self,
         employee_benefit_id: &str,
     ) -> Result<crate::types::EmployeeBenefit> {
@@ -284,7 +284,7 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn put_employee_benefit(
+    pub async fn put_employee(
         &self,
         employee_benefit_id: &str,
         body: &crate::types::PutEmployeeBenefitRequest,
@@ -306,7 +306,7 @@ impl Benefits {
      *
      * Employee benefits represent an employee enrolled in a particular company benefit. It includes information specific to that employee’s enrollment.
      */
-    pub async fn delete_employee_benefit(&self, employee_benefit_id: &str) -> Result<()> {
+    pub async fn delete_employee(&self, employee_benefit_id: &str) -> Result<()> {
         let url = format!(
             "/v1/employee_benefits/{}",
             crate::progenitor_support::encode_path(&employee_benefit_id.to_string()),

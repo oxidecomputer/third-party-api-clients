@@ -155,7 +155,7 @@ impl Chromeosdevices {
      * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
      * * `org_unit_path: &str` -- Full path of the target organizational unit or its ID.
      */
-    pub async fn move_devices_to_ou(
+    pub async fn move_devices_ou(
         &self,
         customer_id: &str,
         org_unit_path: &str,

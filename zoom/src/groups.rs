@@ -43,7 +43,7 @@ impl Groups {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn group_create(&self, body: &crate::types::GroupCreateRequest) -> Result<()> {
+    pub async fn create(&self, body: &crate::types::GroupCreateRequest) -> Result<()> {
         let url = "/groups".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -93,7 +93,7 @@ impl Groups {
      * * `group_id: &str` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn group_delete(&self, group_id: &str) -> Result<()> {
+    pub async fn delete(&self, group_id: &str) -> Result<()> {
         let url = format!(
             "/groups/{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -119,7 +119,7 @@ impl Groups {
      * * `group_id: &str` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn group_update(
+    pub async fn update(
         &self,
         group_id: &str,
         body: &crate::types::GroupCreateRequest,
@@ -157,7 +157,7 @@ impl Groups {
      *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn group_members(
+    pub async fn members(
         &self,
         group_id: &str,
         page_size: i64,
@@ -192,7 +192,7 @@ impl Groups {
      *
      * This function performs a `GET` to the `/groups/{groupId}/members` endpoint.
      *
-     * As opposed to `group_members`, this function returns all the pages of the request at once.
+     * As opposed to `members`, this function returns all the pages of the request at once.
      *
      * List the members of a [group](https://support.zoom.us/hc/en-us/articles/204519819-Group-Management-) under your account.
      *
@@ -201,7 +201,7 @@ impl Groups {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn get_all_group_members(
+    pub async fn get_all_members(
         &self,
         group_id: &str,
     ) -> Result<Vec<crate::types::UserCreateResponse>> {
@@ -260,7 +260,7 @@ impl Groups {
      * * `group_id: &str` -- The group ID.<br>
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      */
-    pub async fn group_members_create(
+    pub async fn members_create(
         &self,
         group_id: &str,
         body: &crate::types::AddRoleMembersRequest,
@@ -293,7 +293,7 @@ impl Groups {
      *   Can be retrieved by calling [GET /groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups).
      * * `member_id: &str` -- User's first name.
      */
-    pub async fn group_members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
+    pub async fn members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
         let url = format!(
             "/groups/{}/members/{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -326,7 +326,7 @@ impl Groups {
      *   * To move a group member from one group to another, use the `groupId` of the designated group.
      * * `member_id: &str` -- The group member's unique ID. To get this value, use the [List Group Members](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groupmembers) API.
      */
-    pub async fn update_a_group_member(
+    pub async fn update_member(
         &self,
         group_id: &str,
         member_id: &str,
@@ -362,7 +362,7 @@ impl Groups {
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      */
-    pub async fn get_group_settings_domains(
+    pub async fn get_settings_domains(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -407,7 +407,7 @@ impl Groups {
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      */
-    pub async fn get_group_settings_meeting_security(
+    pub async fn get_settings_meeting_security(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -452,7 +452,7 @@ impl Groups {
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      */
-    pub async fn get_group_settings_response(
+    pub async fn get_settings_group_response(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -497,7 +497,7 @@ impl Groups {
      *  \* `security` — View the account's security settings. For example, password requirements for user login or two-factor authentication.<br>
      *  \* `meeting_security` — View the account's meeting security settings.
      */
-    pub async fn get_group_setting(
+    pub async fn get_setting(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -539,7 +539,7 @@ impl Groups {
      * * `group_id: &str` -- User's first name.
      * * `option: crate::types::UpdateGroupSettingsOption`
      */
-    pub async fn update_group_settings(
+    pub async fn update_settings(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -585,7 +585,7 @@ impl Groups {
      * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
-    pub async fn get_group_lock_settings_meeting_security(
+    pub async fn get_lock_settings_meeting_security(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -628,7 +628,7 @@ impl Groups {
      * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
-    pub async fn get_group_lock_settings_response(
+    pub async fn get_lock_settings_group_response(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -671,7 +671,7 @@ impl Groups {
      * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
-    pub async fn get_group_lock_setting(
+    pub async fn get_lock_setting(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -714,7 +714,7 @@ impl Groups {
      * * `group_id: &str` -- User's first name.
      * * `option: &str` -- Specify `meeting_security` as the value of this field if you would like to view security settings applied on a meeting hosted by the users in this group.
      */
-    pub async fn group_locked_settings(
+    pub async fn locked_settings(
         &self,
         group_id: &str,
         custom_query_fields: &str,
@@ -763,7 +763,7 @@ impl Groups {
      *
      * * `group_id: &str` -- Unique identifier of the group. Retrieve the value for this field by calling the [List groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
      */
-    pub async fn upload_group_vb(
+    pub async fn upload_vb(
         &self,
         file_ids: &str,
         group_id: &str,
@@ -804,7 +804,7 @@ impl Groups {
      * * `group_id: &str` -- Unique identifier of the group. Retrieve the value for this field by calling the [List groups](https://marketplace.zoom.us/docs/api-reference/zoom-api/groups/groups) API.
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      */
-    pub async fn del_group_vb(&self, file_ids: &str, group_id: &str) -> Result<()> {
+    pub async fn del_vb(&self, file_ids: &str, group_id: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !file_ids.is_empty() {
             query_args.push(("file_ids".to_string(), file_ids.to_string()));

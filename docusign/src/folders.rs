@@ -94,7 +94,7 @@ impl Folders {
      * * `status: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `to_date: &str` -- The billing period end date in UTC timedate format.
      */
-    pub async fn get_folder_items(
+    pub async fn get_items(
         &self,
         account_id: &str,
         folder_id: &str,
@@ -160,7 +160,7 @@ impl Folders {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn put_folder_by(
+    pub async fn put(
         &self,
         account_id: &str,
         folder_id: &str,
@@ -203,7 +203,7 @@ impl Folders {
      * * `start_position: &str` -- Specifies the the starting location in the result set of the items that are returned.
      * * `to_date: &str` -- The billing period end date in UTC timedate format.
      */
-    pub async fn search_get_folder_contents(
+    pub async fn search_get_contents(
         &self,
         account_id: &str,
         search_folder_id: &str,

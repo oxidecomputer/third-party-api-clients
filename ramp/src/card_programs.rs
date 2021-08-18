@@ -54,7 +54,7 @@ impl CardPrograms {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn post_resources_card_program(
+    pub async fn post_resources(
         &self,
         body: &crate::types::PostResourcesCardProgramRequest,
     ) -> Result<crate::types::CardProgram> {

@@ -89,7 +89,7 @@ impl Departments {
      *
      * Create a new department.
      */
-    pub async fn post_department(
+    pub async fn post(
         &self,
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Department> {
@@ -110,7 +110,7 @@ impl Departments {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_department(&self, id: &str) -> Result<crate::types::Department> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::Department> {
         let url = format!(
             "/departments/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -126,7 +126,7 @@ impl Departments {
      *
      * Modify a department.
      */
-    pub async fn patch_department(
+    pub async fn patch(
         &self,
         id: &str,
         body: &crate::types::PostLocationRequest,

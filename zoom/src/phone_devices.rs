@@ -132,7 +132,7 @@ impl PhoneDevices {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn add_phone_device(&self, body: &crate::types::AddPhoneDeviceRequest) -> Result<()> {
+    pub async fn add(&self, body: &crate::types::AddPhoneDeviceRequest) -> Result<()> {
         let url = "/phone/devices".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -156,7 +156,7 @@ impl PhoneDevices {
      *
      * * `device_id: &str` -- Unique Identifier of the device.
      */
-    pub async fn get_a_device(&self, device_id: &str) -> Result<crate::types::GetDeviceResponse> {
+    pub async fn get_device(&self, device_id: &str) -> Result<crate::types::GetDeviceResponse> {
         let url = format!(
             "/phone/devices/{}",
             crate::progenitor_support::encode_path(&device_id.to_string()),
@@ -184,7 +184,7 @@ impl PhoneDevices {
      *
      * * `device_id: &str` -- Unique Identifier of the device.
      */
-    pub async fn delete_a_device(&self, device_id: &str) -> Result<()> {
+    pub async fn delete_device(&self, device_id: &str) -> Result<()> {
         let url = format!(
             "/phone/devices/{}",
             crate::progenitor_support::encode_path(&device_id.to_string()),
@@ -211,7 +211,7 @@ impl PhoneDevices {
      *
      * * `device_id: &str` -- Unique Identifier of the Device.
      */
-    pub async fn update_a_device(
+    pub async fn update_device(
         &self,
         device_id: &str,
         body: &crate::types::UpdateDeviceRequest,

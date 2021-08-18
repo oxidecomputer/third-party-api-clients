@@ -62,7 +62,7 @@ impl Terminations {
      *
      * Note that some states require employees to receive their final wages within 24 hours (unless they consent otherwise,) in which case running a one-off payroll may be the only option.
      */
-    pub async fn post_employee_termination(
+    pub async fn post_employee(
         &self,
         employee_id: &str,
         body: &crate::types::PostEmployeeTerminationsRequest,

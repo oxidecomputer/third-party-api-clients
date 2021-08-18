@@ -119,7 +119,7 @@ impl Contacts {
      *   - `rooms`
      *   - `docusignCore` (default).
      */
-    pub async fn get_contact_by(
+    pub async fn get(
         &self,
         account_id: &str,
         contact_id: &str,
@@ -152,7 +152,7 @@ impl Contacts {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `contact_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete_contact_with(
+    pub async fn delete_contacts(
         &self,
         account_id: &str,
         contact_id: &str,

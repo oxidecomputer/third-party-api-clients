@@ -149,7 +149,7 @@ impl Users {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn user_create(
+    pub async fn create(
         &self,
         body: &crate::types::UserCreateRequest,
     ) -> Result<crate::types::UserCreateResponse> {
@@ -227,7 +227,7 @@ impl Users {
      * * `transfer_webinar: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      * * `transfer_recording: bool` -- Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
      */
-    pub async fn user_delete(
+    pub async fn delete(
         &self,
         user_id: &str,
         action: crate::types::UserDeleteAction,
@@ -285,7 +285,7 @@ impl Users {
      *  
      *  `11` — Phone number</br>`21` — WeChat</br>`23` — Alipay.
      */
-    pub async fn user_update(
+    pub async fn update(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
@@ -319,7 +319,7 @@ impl Users {
      *
      *
      */
-    pub async fn user_zak(&self) -> Result<crate::types::UserZakResponse> {
+    pub async fn zak(&self) -> Result<crate::types::UserZakResponse> {
         let url = "/users/me/zak".to_string();
         self.client.get(&url, None).await
     }
@@ -343,7 +343,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_assistant(&self, user_id: &str) -> Result<crate::types::UserAssistantsList> {
+    pub async fn assistant(&self, user_id: &str) -> Result<crate::types::UserAssistantsList> {
         let url = format!(
             "/users/{}/assistants",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -371,7 +371,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_assistant_create(
+    pub async fn assistant_create(
         &self,
         user_id: &str,
         body: &crate::types::UserAssistantsList,
@@ -405,7 +405,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_assistants_delete(&self, user_id: &str) -> Result<()> {
+    pub async fn assistants_delete(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/assistants",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -434,7 +434,7 @@ impl Users {
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `assistant_id: &str` -- User's first name.
      */
-    pub async fn user_assistant_delete(&self, user_id: &str, assistant_id: &str) -> Result<()> {
+    pub async fn assistant_delete(&self, user_id: &str, assistant_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/assistants/{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -462,7 +462,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_scheduler(&self, user_id: &str) -> Result<crate::types::UserSchedulersList> {
+    pub async fn scheduler(&self, user_id: &str) -> Result<crate::types::UserSchedulersList> {
         let url = format!(
             "/users/{}/schedulers",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -489,7 +489,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_schedulers_delete(&self, user_id: &str) -> Result<()> {
+    pub async fn schedulers_delete(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/schedulers",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -517,7 +517,7 @@ impl Users {
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      * * `scheduler_id: &str` -- User's first name.
      */
-    pub async fn user_scheduler_delete(&self, user_id: &str, scheduler_id: &str) -> Result<()> {
+    pub async fn scheduler_delete(&self, user_id: &str, scheduler_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/schedulers/{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -542,7 +542,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_picture(&self, user_id: &str) -> Result<()> {
+    pub async fn picture(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/picture",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -583,7 +583,7 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_settings_domains(
+    pub async fn settings_domains(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
@@ -645,7 +645,7 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_settings(
+    pub async fn settings_user(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
@@ -707,7 +707,7 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_settings_meeting_security(
+    pub async fn settings_meeting_security(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
@@ -769,7 +769,7 @@ impl Users {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn user_setting(
+    pub async fn setting(
         &self,
         user_id: &str,
         login_type: crate::types::LoginType,
@@ -813,7 +813,7 @@ impl Users {
      * * `option: crate::types::UserSettingsUpdateOption`
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_settings_update(
+    pub async fn settings_update(
         &self,
         option: crate::types::UserSettingsUpdateOption,
         user_id: &str,
@@ -850,7 +850,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_status(
+    pub async fn status(
         &self,
         user_id: &str,
         body: &crate::types::UserStatusRequest,
@@ -883,7 +883,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_password(
+    pub async fn password(
         &self,
         user_id: &str,
         body: &crate::types::UserPasswordRequest,
@@ -913,7 +913,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_permission(&self, user_id: &str) -> Result<crate::types::UserPermissions> {
+    pub async fn permission(&self, user_id: &str) -> Result<crate::types::UserPermissions> {
         let url = format!(
             "/users/{}/permissions",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -939,7 +939,7 @@ impl Users {
      * * `type_: crate::types::UserTokenType` -- User token types:<br>`token` - Used for starting meetings with the client SDK. This token expires in 14 days and a new token will be returned after the expiry.<br>`zak` - Used for generating the start meeting URL. The token expiration time is two hours. For API users, the expiration time is 90 days.
      * * `ttl: i64` -- Use this field in conjunction with the `type` field where the value of `type` field is `zak`. The value of this field denotes the expiry time of the `zak` token in seconds. For example, if you would like the zak token to be expired after one hour of the token generation, the value of this field should be `3600`.
      */
-    pub async fn user_token(
+    pub async fn token(
         &self,
         user_id: &str,
         type_: crate::types::UserTokenType,
@@ -977,7 +977,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_sso_token_delete(&self, user_id: &str) -> Result<()> {
+    pub async fn sso_token_delete(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/token",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1004,7 +1004,7 @@ impl Users {
      *
      * * `email: &str` -- The email address to be verified.
      */
-    pub async fn user_email(&self, email: &str) -> Result<crate::types::UserEmailResponse> {
+    pub async fn email(&self, email: &str) -> Result<crate::types::UserEmailResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -1035,11 +1035,7 @@ impl Users {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn user_email_update(
-        &self,
-        user_id: &str,
-        body: &crate::types::Members,
-    ) -> Result<()> {
+    pub async fn email_update(&self, user_id: &str, body: &crate::types::Members) -> Result<()> {
         let url = format!(
             "/users/{}/email",
             crate::progenitor_support::encode_path(&user_id.to_string()),
@@ -1065,7 +1061,7 @@ impl Users {
      *
      * * `vanity_name: &str` -- Personal meeting room name.
      */
-    pub async fn user_vanity_name(
+    pub async fn vanity_name(
         &self,
         vanity_name: &str,
     ) -> Result<crate::types::UserVanityNameResponse> {
@@ -1103,7 +1099,7 @@ impl Users {
      *
      * * `account_id: &str` -- User's first name.
      */
-    pub async fn switch_user_account(
+    pub async fn switch_account(
         &self,
         account_id: &str,
         user_id: &str,
@@ -1208,7 +1204,7 @@ impl Users {
      * * `file_ids: &str` -- Provide the id of the file that is to be deleted. To delete multiple files, provide comma separated values for this field.
      * * `user_id: &str` -- Unique identifier of the user. Retrieve the value of this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API. .
      */
-    pub async fn del_user_vb(&self, user_id: &str, file_ids: &str) -> Result<()> {
+    pub async fn del_vb(&self, user_id: &str, file_ids: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !file_ids.is_empty() {
             query_args.push(("file_ids".to_string(), file_ids.to_string()));

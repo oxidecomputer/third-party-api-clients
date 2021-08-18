@@ -362,7 +362,7 @@ impl EnvelopeRecipients {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn views_post_envelope_recipient_preview(
+    pub async fn views_post_preview(
         &self,
         account_id: &str,
         envelope_id: &str,

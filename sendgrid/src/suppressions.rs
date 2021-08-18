@@ -63,7 +63,7 @@ impl Suppressions {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn post_asm_groups_group_suppression(
+    pub async fn post_asm_groups_group(
         &self,
         group_id: &str,
         body: &crate::types::SuppressionsRequestBody,

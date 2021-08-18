@@ -129,7 +129,7 @@ impl Receipts {
      *
      *
      */
-    pub async fn get_receipt(&self, id: &str) -> Result<crate::types::Receipt> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::Receipt> {
         let url = format!(
             "/receipts/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

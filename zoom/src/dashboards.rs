@@ -34,7 +34,7 @@ impl Dashboards {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `include_fields: crate::types::IncludeFields` -- Set the value of this field to "tracking_fields" if you would like to include tracking fields of each meeting in the response.
      */
-    pub async fn dashboard_meeting(
+    pub async fn meeting(
         &self,
         type_: crate::types::DashboardMeetingsType,
         from: chrono::NaiveDate,
@@ -88,7 +88,7 @@ impl Dashboards {
      *  
      *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      */
-    pub async fn dashboard_meeting_detail(
+    pub async fn meeting_detail(
         &self,
         meeting_id: &str,
         type_: crate::types::DashboardMeetingsType,
@@ -131,7 +131,7 @@ impl Dashboards {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
      */
-    pub async fn dashboard_meeting_participant(
+    pub async fn meeting_participant(
         &self,
         meeting_id: &str,
         type_: crate::types::DashboardMeetingsType,
@@ -184,7 +184,7 @@ impl Dashboards {
      *  
      *  If you do not provide this field, the default value will be `live` and thus, the API will only query responses for live meetings.
      */
-    pub async fn dashboard_meeting_participant_qo(
+    pub async fn meeting_participant_qo(
         &self,
         meeting_id: &str,
         participant_id: &str,
@@ -227,7 +227,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of items returned per page.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_meeting_participants_qo(
+    pub async fn meeting_participants_qo(
         &self,
         meeting_id: &str,
         type_: crate::types::DashboardMeetingsType,
@@ -276,7 +276,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_meeting_participant_share(
+    pub async fn meeting_participant_share(
         &self,
         meeting_id: &str,
         type_: crate::types::DashboardMeetingsType,
@@ -325,7 +325,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_webinar(
+    pub async fn webinar(
         &self,
         type_: crate::types::DashboardWebinarsType,
         from: chrono::NaiveDate,
@@ -375,7 +375,7 @@ impl Dashboards {
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
      */
-    pub async fn dashboard_webinar_detail(
+    pub async fn webinar_detail(
         &self,
         webinar_id: &str,
         type_: crate::types::DashboardWebinarsType,
@@ -417,7 +417,7 @@ impl Dashboards {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
      */
-    pub async fn dashboard_webinar_participant(
+    pub async fn webinar_participant(
         &self,
         webinar_id: &str,
         type_: crate::types::DashboardWebinarsType,
@@ -468,7 +468,7 @@ impl Dashboards {
      * * `participant_id: &str` -- User's first name.
      * * `type_: crate::types::DashboardWebinarsType` -- The webinar type.
      */
-    pub async fn dashboard_webinar_participant_qo(
+    pub async fn webinar_participant_qo(
         &self,
         webinar_id: &str,
         participant_id: &str,
@@ -511,7 +511,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of items returned per page.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_webinar_participants_qo(
+    pub async fn webinar_participants_qo(
         &self,
         webinar_id: &str,
         type_: crate::types::DashboardWebinarsType,
@@ -560,7 +560,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceed the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_webinar_participant_share(
+    pub async fn webinar_participant_share(
         &self,
         webinar_id: &str,
         type_: crate::types::DashboardWebinarsType,
@@ -608,7 +608,7 @@ impl Dashboards {
      * * `page_number: i64` -- The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_zoom_room(
+    pub async fn zoom_room(
         &self,
         page_size: i64,
         page_number: i64,
@@ -652,7 +652,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_zoom_room_dashboards(
+    pub async fn zoom_room_dashboards(
         &self,
         zoomroom_id: &str,
         from: chrono::NaiveDate,
@@ -702,7 +702,7 @@ impl Dashboards {
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
      * * `to: chrono::NaiveDate` -- Start Date.
      */
-    pub async fn dashboard_crc(
+    pub async fn crc(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -742,7 +742,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_im(
+    pub async fn im(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -792,7 +792,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_chat(
+    pub async fn chat(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -838,7 +838,7 @@ impl Dashboards {
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
      * * `to: chrono::NaiveDate` -- Start Date.
      */
-    pub async fn dashboard_client_feedback(
+    pub async fn client_feedback(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -875,7 +875,7 @@ impl Dashboards {
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
      * * `to: chrono::NaiveDate` -- Start Date.
      */
-    pub async fn dashboard_zoom_room_issue(
+    pub async fn zoom_room_issue(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -910,7 +910,7 @@ impl Dashboards {
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
      * * `to: chrono::NaiveDate` -- Start Date.
      */
-    pub async fn dashboard_issue_zoom_room(
+    pub async fn issue_zoom_room(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -949,7 +949,7 @@ impl Dashboards {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn dashboard_issue_detail_zoom_room(
+    pub async fn issue_detail_zoom_room(
         &self,
         zoomroom_id: &str,
         from: chrono::NaiveDate,
@@ -1004,7 +1004,7 @@ impl Dashboards {
      * * `page_size: i64` -- Account seats.
      * * `next_page_token: &str` -- User's first name.
      */
-    pub async fn dashboard_client_feedback_detail(
+    pub async fn client_feedback_detail(
         &self,
         feedback_id: &str,
         from: chrono::NaiveDate,

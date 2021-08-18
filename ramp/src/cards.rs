@@ -64,7 +64,7 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_card(&self, id: &str) -> Result<crate::types::Card> {
+    pub async fn get_cards(&self, id: &str) -> Result<crate::types::Card> {
         let url = format!(
             "/cards/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -84,7 +84,7 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn patch_resources_card(
+    pub async fn patch_resources(
         &self,
         id: &str,
         body: &crate::types::PatchResourcesCardsCardRequest,
@@ -110,7 +110,7 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn post_resources_card_physical(
+    pub async fn post_resources_physical(
         &self,
         body: &crate::types::PostResourcesCardPhysicalRequest,
     ) -> Result<crate::types::TaskResponse> {
@@ -131,7 +131,7 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn post_resources_card_virtual(
+    pub async fn post_resources_virtual(
         &self,
         body: &crate::types::PostResourcesCardVirtualRequest,
     ) -> Result<crate::types::TaskResponse> {
@@ -148,7 +148,7 @@ impl Cards {
      *
      * Terminates a card permanently.
      */
-    pub async fn post_resources_card_termination(
+    pub async fn post_resources_termination(
         &self,
         id: &str,
         body: &crate::types::PostResourcesCardsCardSuspensionRequest,
@@ -170,7 +170,7 @@ impl Cards {
      *
      * Suspends a card so that it is locked from use. The suspension is revertable.
      */
-    pub async fn post_resources_card_suspension(
+    pub async fn post_resources_suspension(
         &self,
         id: &str,
         body: &crate::types::PostResourcesCardsCardSuspensionRequest,
@@ -192,7 +192,7 @@ impl Cards {
      *
      * Removes a card's suspension so that it may be used again.
      */
-    pub async fn post_resources_card_unsuspension(
+    pub async fn post_resources_unsuspension(
         &self,
         id: &str,
         body: &crate::types::PostResourcesCardsCardSuspensionRequest,

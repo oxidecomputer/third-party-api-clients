@@ -23,7 +23,7 @@ impl Workspaces {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn workspace_get(&self, account_id: &str) -> Result<crate::types::WorkspaceList> {
+    pub async fn get(&self, account_id: &str) -> Result<crate::types::WorkspaceList> {
         let url = format!(
             "/v2.1/accounts/{}/workspaces",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -43,7 +43,7 @@ impl Workspaces {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn workspace_post(
+    pub async fn post(
         &self,
         account_id: &str,
         body: &crate::types::Workspace,
@@ -70,7 +70,7 @@ impl Workspaces {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn workspace_get_workspaces(
+    pub async fn get_workspaces(
         &self,
         account_id: &str,
         workspace_id: &str,
@@ -96,7 +96,7 @@ impl Workspaces {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn workspace_put(
+    pub async fn put(
         &self,
         account_id: &str,
         workspace_id: &str,
@@ -125,7 +125,7 @@ impl Workspaces {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `workspace_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn workspace_delete(
+    pub async fn delete(
         &self,
         account_id: &str,
         workspace_id: &str,

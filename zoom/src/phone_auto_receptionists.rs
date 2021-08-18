@@ -126,7 +126,7 @@ impl PhoneAutoReceptionists {
      * * `auto_receptionist_id: &str` -- Unique identifier of the auto receptionist. This can be retrieved from the List Phone Sites API.
      * * `phone_number_id: &str` -- Unique Identifier of the phone number or provide the actual phone number in e164 format (example: +19995550123).
      */
-    pub async fn unassign_a_phone_num_auto_receptionist(
+    pub async fn unassign_phone_num_auto_receptionist(
         &self,
         auto_receptionist_id: &str,
         phone_number_id: &str,

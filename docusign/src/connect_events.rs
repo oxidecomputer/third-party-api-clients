@@ -51,7 +51,7 @@ impl ConnectEvents {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn connect_publish_put_retry_by_envelope(
+    pub async fn connect_publish_put_retry_envelope(
         &self,
         account_id: &str,
         envelope_id: &str,

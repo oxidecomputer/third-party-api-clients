@@ -53,7 +53,7 @@ impl Lists {
      *
      * A link to the newly created object is in `_metadata`.
      */
-    pub async fn post_mc_list(&self, body: &crate::types::IpPool) -> Result<crate::types::List> {
+    pub async fn post_mc(&self, body: &crate::types::IpPool) -> Result<crate::types::List> {
         let url = "/marketing/lists".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))

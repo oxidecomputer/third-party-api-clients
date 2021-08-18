@@ -304,7 +304,7 @@ impl Templates {
      *   - `documents`: Includes information about documents.
      *   - `favorite_template_status`: : Includes the template `favoritedByMe` property in the response. **Note**: You can mark a template as a favorite only in eSignature v2.1.
      */
-    pub async fn get_template(
+    pub async fn get_templates(
         &self,
         account_id: &str,
         template_id: &str,
@@ -337,7 +337,7 @@ impl Templates {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn put_template(
+    pub async fn put(
         &self,
         account_id: &str,
         template_id: &str,
@@ -374,7 +374,7 @@ impl Templates {
      * * `show_changes: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `start_position: &str` -- The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
      */
-    pub async fn pages_get_template_page_image(
+    pub async fn pages_get_page_image(
         &self,
         account_id: &str,
         document_id: &str,
@@ -435,7 +435,7 @@ impl Templates {
      * * `page_number: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn pages_delete_template_page(
+    pub async fn pages_delete_page(
         &self,
         account_id: &str,
         document_id: &str,
@@ -474,7 +474,7 @@ impl Templates {
      * * `max_width: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `show_changes: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn pages_get_template_page_image_templates(
+    pub async fn pages_get_page_image_templates(
         &self,
         account_id: &str,
         document_id: &str,
@@ -525,7 +525,7 @@ impl Templates {
      * * `page_number: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn pages_put_template_page_image(
+    pub async fn pages_put_page_image(
         &self,
         account_id: &str,
         document_id: &str,
@@ -558,7 +558,7 @@ impl Templates {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn notification_get_template(
+    pub async fn notification_get(
         &self,
         account_id: &str,
         template_id: &str,
@@ -584,7 +584,7 @@ impl Templates {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn notification_put_template(
+    pub async fn notification_put(
         &self,
         account_id: &str,
         template_id: &str,
@@ -616,7 +616,7 @@ impl Templates {
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `template_part: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn put_template_part(
+    pub async fn put_part(
         &self,
         account_id: &str,
         template_id: &str,
@@ -648,7 +648,7 @@ impl Templates {
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `template_part: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete_template_part(
+    pub async fn delete_part(
         &self,
         account_id: &str,
         template_id: &str,

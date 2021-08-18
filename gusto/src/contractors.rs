@@ -19,10 +19,7 @@ impl Contractors {
      *
      * Get a contractor.
      */
-    pub async fn get_contractor(
-        &self,
-        contractor_id_or_uuid: &str,
-    ) -> Result<crate::types::Contractor> {
+    pub async fn get(&self, contractor_id_or_uuid: &str) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/contractors/{}",
             crate::progenitor_support::encode_path(&contractor_id_or_uuid.to_string()),
@@ -38,7 +35,7 @@ impl Contractors {
      *
      * Update a contractor.
      */
-    pub async fn put_contractor(
+    pub async fn put(
         &self,
         contractor_id_or_uuid: &str,
         body: &crate::types::PutComntractorRequest,
@@ -100,7 +97,7 @@ impl Contractors {
      *
      * Create an individual or business contractor.
      */
-    pub async fn post_company_contractor(
+    pub async fn post_company(
         &self,
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyContractorsRequest,

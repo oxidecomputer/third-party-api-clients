@@ -25,7 +25,7 @@ impl IdentityVerifications {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn account_identity_verification_get(
+    pub async fn account_get(
         &self,
         account_id: &str,
     ) -> Result<crate::types::AccountIdentityVerificationResponse> {

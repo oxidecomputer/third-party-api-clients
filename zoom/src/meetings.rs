@@ -84,7 +84,7 @@ impl Meetings {
      *
      * * `user_id: &str` -- The user ID or email address of the user. For user-level apps, pass `me` as the value for userId.
      */
-    pub async fn meeting_create(
+    pub async fn create(
         &self,
         user_id: &str,
         body: &crate::types::MeetingCreate,
@@ -170,7 +170,7 @@ impl Meetings {
      *   
      *   The default value of this field is `false`.
      */
-    pub async fn meeting_delete(
+    pub async fn delete(
         &self,
         meeting_id: i64,
         occurrence_id: &str,
@@ -219,7 +219,7 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      * * `occurrence_id: &str` -- Meeting occurrence id. Support change of agenda, start_time, duration, settings: {host_video, participant_video, join_before_host, mute_upon_entry, waiting_room, watermark, auto_recording}.
      */
-    pub async fn meeting_update(
+    pub async fn update(
         &self,
         meeting_id: i64,
         occurrence_id: &str,
@@ -256,7 +256,7 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn meeting_status(
+    pub async fn status(
         &self,
         meeting_id: i64,
         body: &crate::types::MeetingStatusRequest,
@@ -295,7 +295,7 @@ impl Meetings {
      *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn meeting_registrant(
+    pub async fn registrant(
         &self,
         meeting_id: i64,
         occurrence_id: &str,
@@ -350,7 +350,7 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      * * `occurrence_ids: &str` -- Occurrence IDs. You can find these with the meeting get API. Multiple values separated by comma.
      */
-    pub async fn meeting_registrant_create(
+    pub async fn registrant_create(
         &self,
         meeting_id: i64,
         occurrence_ids: &str,
@@ -422,7 +422,7 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      * * `occurrence_id: &str` -- The meeting occurrence ID.
      */
-    pub async fn meeting_registrant_status(
+    pub async fn registrant_status(
         &self,
         meeting_id: i64,
         occurrence_id: &str,
@@ -461,7 +461,7 @@ impl Meetings {
      *   
      *   If the meeting UUID begins with a `/` character or contains a `//` character, you **must** double-encode the meeting UUID when using the meeting UUID for other API calls.
      */
-    pub async fn past_meeting_details(
+    pub async fn past_details(
         &self,
         meeting_uuid: &str,
     ) -> Result<crate::types::PastMeetingDetailsResponse> {
@@ -496,7 +496,7 @@ impl Meetings {
      * * `page_size: i64` -- The number of records returned within a single API call.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn past_meeting_participant(
+    pub async fn past_participant(
         &self,
         meeting_uuid: &str,
         page_size: i64,
@@ -563,7 +563,7 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn meeting_poll(&self, meeting_id: i64) -> Result<crate::types::Domains> {
+    pub async fn poll(&self, meeting_id: i64) -> Result<crate::types::Domains> {
         let url = format!(
             "/meetings/{}/polls",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -592,7 +592,7 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn meeting_poll_create(
+    pub async fn poll_create(
         &self,
         meeting_id: i64,
         body: &crate::types::Poll,
@@ -627,7 +627,7 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      * * `poll_id: &str` -- User's first name.
      */
-    pub async fn meeting_poll_get(
+    pub async fn poll_get(
         &self,
         meeting_id: i64,
         poll_id: &str,
@@ -660,7 +660,7 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      * * `poll_id: &str` -- User's first name.
      */
-    pub async fn meeting_poll_update(
+    pub async fn poll_update(
         &self,
         meeting_id: i64,
         poll_id: &str,
@@ -697,7 +697,7 @@ impl Meetings {
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      * * `poll_id: &str` -- User's first name.
      */
-    pub async fn meeting_poll_delete(&self, meeting_id: i64, poll_id: &str) -> Result<()> {
+    pub async fn poll_delete(&self, meeting_id: i64, poll_id: &str) -> Result<()> {
         let url = format!(
             "/meetings/{}/polls/{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -726,7 +726,7 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn meeting_registrants_questions_get(
+    pub async fn registrants_questions_get(
         &self,
         meeting_id: i64,
     ) -> Result<crate::types::MeetingRegistrantQuestionsData> {
@@ -756,7 +756,7 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn meeting_registrant_question_update(
+    pub async fn registrant_question_update(
         &self,
         meeting_id: i64,
         body: &crate::types::MeetingRegistrantQuestionsData,
@@ -789,10 +789,7 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn meeting_invitation(
-        &self,
-        meeting_id: i64,
-    ) -> Result<crate::types::MeetingInvitation> {
+    pub async fn invitation(&self, meeting_id: i64) -> Result<crate::types::MeetingInvitation> {
         let url = format!(
             "/meetings/{}/invitation",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
@@ -851,7 +848,7 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn meeting_live_stream_update(
+    pub async fn live_stream_update(
         &self,
         meeting_id: &str,
         body: &crate::types::MeetingLiveStream,
@@ -885,7 +882,7 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn meeting_live_stream_status_update(
+    pub async fn live_stream_status_update(
         &self,
         meeting_id: i64,
         body: &crate::types::MeetingLiveStreamStatus,
@@ -919,7 +916,7 @@ impl Meetings {
      *   
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
-    pub async fn list_past_meeting_polls(
+    pub async fn list_past_polls(
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::ListPastMeetingPollsResponse> {
@@ -990,7 +987,7 @@ impl Meetings {
      *
      * * `meeting_id: &str` -- Unique identifier of the live meeting.
      */
-    pub async fn in_meeting_recording_control(
+    pub async fn recording_control(
         &self,
         meeting_id: &str,
         body: &crate::types::InMeetingRecordingControlRequest,
@@ -1012,7 +1009,7 @@ impl Meetings {
      *
      * Get the quality scores of a meeting.
      */
-    pub async fn meeting_quality_score(&self) -> Result<crate::types::Domains> {
+    pub async fn quality_score(&self) -> Result<crate::types::Domains> {
         let url = "/metrics/quality".to_string();
         self.client.get(&url, None).await
     }
@@ -1064,7 +1061,7 @@ impl Meetings {
      *
      * * `user_id: &str` -- Unique identifier of the user. Retrieve the value of this field by calling the [List users](https://marketplace.zoom.us/docs/api-reference/zoom-api/users/users) API.
      */
-    pub async fn list_meeting_template(
+    pub async fn list_template(
         &self,
         user_id: &str,
     ) -> Result<crate::types::ListMeetingTemplatesResponseData> {
@@ -1091,7 +1088,7 @@ impl Meetings {
      *   
      *   While storing it in your database, store it as a **long** data type and **not as an integer**, as the Meeting IDs can be longer than 10 digits.
      */
-    pub async fn meeting_invite_links_create(
+    pub async fn invite_links_create(
         &self,
         meeting_id: i64,
         body: &crate::types::InviteLink,

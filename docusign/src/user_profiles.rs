@@ -27,11 +27,7 @@ impl UserProfiles {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn user_profile_get(
-        &self,
-        account_id: &str,
-        user_id: &str,
-    ) -> Result<crate::types::UserProfile> {
+    pub async fn get(&self, account_id: &str, user_id: &str) -> Result<crate::types::UserProfile> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -56,7 +52,7 @@ impl UserProfiles {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn user_profile_put(
+    pub async fn put(
         &self,
         account_id: &str,
         user_id: &str,

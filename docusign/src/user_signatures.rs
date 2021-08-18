@@ -194,7 +194,7 @@ impl UserSignatures {
      *   .
      * * `close_existing_signature: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn put_signature_by(
+    pub async fn put_signature_user_signatures(
         &self,
         account_id: &str,
         signature_id: &str,

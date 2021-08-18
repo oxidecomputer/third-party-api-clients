@@ -181,7 +181,7 @@ impl TemplateRecipients {
      * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn recipients_delete_template_recipient(
+    pub async fn recipients_delete(
         &self,
         account_id: &str,
         recipient_id: &str,
@@ -214,7 +214,7 @@ impl TemplateRecipients {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn views_post_template_recipient_preview(
+    pub async fn views_post_preview(
         &self,
         account_id: &str,
         template_id: &str,

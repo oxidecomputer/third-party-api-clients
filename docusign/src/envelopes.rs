@@ -754,7 +754,7 @@ impl Envelopes {
      *   - `payment_tabs`: The payment tabs associated with the envelope.
      *   .
      */
-    pub async fn get_envelope(
+    pub async fn get_envelopes(
         &self,
         account_id: &str,
         envelope_id: &str,
@@ -957,7 +957,7 @@ impl Envelopes {
      * * `advanced_update: &str` -- When set to **true**, allows the caller to update recipients, tabs, custom fields, notification, email settings and other envelope attributes.
      * * `resend_envelope: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn put_envelope(
+    pub async fn put(
         &self,
         account_id: &str,
         envelope_id: &str,
@@ -1212,7 +1212,7 @@ impl Envelopes {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn notification_get_envelope(
+    pub async fn notification_get(
         &self,
         account_id: &str,
         envelope_id: &str,
@@ -1240,7 +1240,7 @@ impl Envelopes {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn notification_put_envelope(
+    pub async fn notification_put(
         &self,
         account_id: &str,
         envelope_id: &str,

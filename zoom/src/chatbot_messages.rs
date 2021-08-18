@@ -50,7 +50,7 @@ impl ChatbotMessages {
      *
      * * `message_id: &str` -- Unique Identifier of the message that needs to be updated. This should be retrieved from the response of [Send Chatbot Message API](https://marketplace.zoom.us/docs/api-reference/zoom-api/im-chat/sendchatbot).
      */
-    pub async fn edit_chatbot_message(
+    pub async fn edit(
         &self,
         message_id: &str,
         body: &crate::types::EditChatbotMessageRequest,
@@ -74,7 +74,7 @@ impl ChatbotMessages {
      * You will need to send your ClientID and Secret as a Basic base64 encoded AUthorization header. Ex. `Basic base64Encode({client_id}:{client_sceret})`<br><br> Next, use the token received (access_token) as a bearer token while making the DELETE /im/chat/messages/{message_id} request to delete a message.<br><br>
      * Learn more about how to authotize chatbots in the [Chatbot Authorization](https://marketplace.zoom.us/docs/guides/chatbots/authorization) guide.
      */
-    pub async fn delete_a_chatbot_message(
+    pub async fn delete(
         &self,
         message_id: &str,
         body: &crate::types::DeleteChatbotMessageRequest,

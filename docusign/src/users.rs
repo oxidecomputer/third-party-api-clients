@@ -277,7 +277,7 @@ impl Users {
      * * `additional_info: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `email: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn user_get(
+    pub async fn get_users(
         &self,
         account_id: &str,
         user_id: &str,
@@ -315,7 +315,7 @@ impl Users {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn user_put(
+    pub async fn put_users(
         &self,
         account_id: &str,
         user_id: &str,
@@ -350,7 +350,7 @@ impl Users {
      *   .
      * * `encoding: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn user_profile_image_get(
+    pub async fn profile_image_get(
         &self,
         account_id: &str,
         user_id: &str,
@@ -386,7 +386,7 @@ impl Users {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn user_profile_image_put(&self, account_id: &str, user_id: &str) -> Result<()> {
+    pub async fn profile_image_put(&self, account_id: &str, user_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile/image",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -411,7 +411,7 @@ impl Users {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn user_profile_image_delete(&self, account_id: &str, user_id: &str) -> Result<()> {
+    pub async fn profile_image_delete(&self, account_id: &str, user_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile/image",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -444,7 +444,7 @@ impl Users {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn user_settings_get(
+    pub async fn settings_get(
         &self,
         account_id: &str,
         user_id: &str,
@@ -471,7 +471,7 @@ impl Users {
      * * `user_id: &str` -- The ID of the user to access. Generally this is the ID of the current authenticated user, but if the authenticated user is an Administrator on the account, `userId` can represent another user whom the Administrator is accessing.
      *   .
      */
-    pub async fn user_settings_put(
+    pub async fn settings_put(
         &self,
         account_id: &str,
         user_id: &str,

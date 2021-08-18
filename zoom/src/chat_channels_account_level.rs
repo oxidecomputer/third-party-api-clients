@@ -263,7 +263,7 @@ impl ChatChannelsAccountLevel {
      * * `member_id: &str` -- Email address of the member whom you would like to be remove from the channel.
      * * `user_id: &str` -- Unique identifier of the channel owner.
      */
-    pub async fn remove_a_channel_member(
+    pub async fn remove_channel_member(
         &self,
         user_id: &str,
         channel_id: &str,

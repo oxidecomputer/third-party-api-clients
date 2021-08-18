@@ -39,7 +39,7 @@ impl Transactions {
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      * * `requires_memo: bool` -- Filters for transactions which require a memo, but do not have one. This can only be set to true.
      */
-    pub async fn get_transactions(
+    pub async fn get_page(
         &self,
         department_id: uuid::Uuid,
         location_id: uuid::Uuid,
@@ -133,11 +133,11 @@ impl Transactions {
      *
      * This function performs a `GET` to the `/transactions` endpoint.
      *
-     * As opposed to `get_transaction`, this function returns all the pages of the request at once.
+     * As opposed to `get`, this function returns all the pages of the request at once.
      *
      * Retrieves all transactions for the business. This endpoint supports filtering and ordering. NOTE: only one ordering param is supported.
      */
-    pub async fn get_all_transactions(
+    pub async fn get_all(
         &self,
         department_id: uuid::Uuid,
         location_id: uuid::Uuid,
@@ -248,7 +248,7 @@ impl Transactions {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_resources_transaction(&self, id: &str) -> Result<crate::types::Data> {
+    pub async fn get_resource(&self, id: &str) -> Result<crate::types::Data> {
         let url = format!(
             "/transactions/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

@@ -19,7 +19,7 @@ impl Certificates {
      *
      * **This endpoint allows you to create an SSO certificate.**
      */
-    pub async fn post_sso_certificate(
+    pub async fn post_sso(
         &self,
         body: &crate::types::PostSsoCertificatesRequest,
     ) -> Result<crate::types::SsoCertificateBody> {

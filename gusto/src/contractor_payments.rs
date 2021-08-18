@@ -65,7 +65,7 @@ impl ContractorPayments {
      * * `bonus: f64` -- If the contractor is on an hourly wage, this is the bonus the contractor earned.
      * * `reimbursement: f64` -- Reimbursed wages for the contractor .
      */
-    pub async fn post_company_contractor_payment(
+    pub async fn post_company(
         &self,
         company_id: &str,
         date: &str,
@@ -111,7 +111,7 @@ impl ContractorPayments {
      *
      * Returns a single contractor payments
      */
-    pub async fn get_company_contractor_payment(
+    pub async fn get_company_contractor_payments(
         &self,
         company_id: &str,
         contractor_payment_id_or_uuid: &str,
@@ -134,7 +134,7 @@ impl ContractorPayments {
      *
      * This endpoint is in beta and intended for **[Gusto Embedded Payroll](https://gusto.com/embedded-payroll)** customers. Please [apply for early access](https://gusto-embedded-payroll.typeform.com/to/iomAQIj3?utm_source=docs) if you’d like to learn more and use it for production. Note, this endpoint will require you to enter a different agreement with Gusto.
      */
-    pub async fn delete_company_contractor_payment(
+    pub async fn delete_company(
         &self,
         company_id: &str,
         contractor_payment_id_or_uuid: &str,

@@ -127,7 +127,7 @@ impl CommonAreaPhones {
      * * Account owner or admin permissions
      * * A [supported device](https://support.zoom.us/hc/en-us/articles/360001299063-Zoom-Voice-Supported-Devices)
      */
-    pub async fn add_common_area_phone(
+    pub async fn add(
         &self,
         body: &crate::types::AddCommonAreaPhoneRequest,
     ) -> Result<crate::types::AddCommonAreaPhoneResponse> {
@@ -157,7 +157,7 @@ impl CommonAreaPhones {
      *
      * * `common_area_phone_id: &str` -- Unique Identifier of the Common Area Phone. Use the unique identifier or the Mac address of the common area phone. The Mac address can be in hyphenated (`00-04-f2-5e-ec-3c`) or not hyphenated (`0004f25eec3c`) format. You can get this value from the [List Common Area Phones API](https://marketplace.zoom.us/docs/api-reference/zoom-api/common-area-phones/listcommonareaphones).
      */
-    pub async fn get_a_common_area_phone(
+    pub async fn get(
         &self,
         common_area_phone_id: &str,
     ) -> Result<crate::types::GetCommonAreaPhoneResponse> {
@@ -187,7 +187,7 @@ impl CommonAreaPhones {
      *
      * * `common_area_phone_id: &str` -- Unique Identifier of the common area phone.
      */
-    pub async fn delete_common_area_phone(&self, common_area_phone_id: &str) -> Result<()> {
+    pub async fn delete(&self, common_area_phone_id: &str) -> Result<()> {
         let url = format!(
             "/phone/common_area_phones/{}",
             crate::progenitor_support::encode_path(&common_area_phone_id.to_string()),
@@ -213,7 +213,7 @@ impl CommonAreaPhones {
      * * Account owner or admin permissions
      * * A [supported device](https://support.zoom.us/hc/en-us/articles/360001299063-Zoom-Voice-Supported-Devices)
      */
-    pub async fn update_common_area_phone(
+    pub async fn update(
         &self,
         common_area_phone_id: &str,
         body: &crate::types::UpdateCommonAreaPhoneRequest,
@@ -242,7 +242,7 @@ impl CommonAreaPhones {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn assign_phone_numbers_to_common_area(
+    pub async fn assign_phone_numbers_common_area(
         &self,
         common_area_phone_id: &str,
         body: &crate::types::AssignPhoneNumbersCommonAreaRequest,
@@ -303,7 +303,7 @@ impl CommonAreaPhones {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn assign_calling_plans_to_common_area_phone(
+    pub async fn assign_calling_plans(
         &self,
         common_area_phone_id: &str,
         body: &crate::types::AssignCallingPlansCommonAreaPhoneRequestData,
@@ -336,7 +336,7 @@ impl CommonAreaPhones {
      * * `common_area_phone_id: &str` -- The common area phone's unique ID.
      * * `type_: &str` -- The [calling plan](https://marketplace.zoom.us/docs/api-reference/other-references/plans#zoom-phone-calling-plans) to remove.
      */
-    pub async fn unassign_calling_plans_from_common_area_phone(
+    pub async fn unassign_calling_plans_from(
         &self,
         common_area_phone_id: &str,
         type_: &str,

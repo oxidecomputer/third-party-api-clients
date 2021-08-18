@@ -59,7 +59,7 @@ impl Companies {
      * Authorization: Token bbb286ff1a4fe6b84742b0d49b8d0d65bd0208d27d3d50333591df71
      * ```
      */
-    pub async fn post_partner_managed_companie(
+    pub async fn post_partner_managed(
         &self,
         body: &crate::types::PostPartnerManagedCompaniesRequest,
     ) -> Result<crate::types::PostPartnerManagedCompaniesResponse> {

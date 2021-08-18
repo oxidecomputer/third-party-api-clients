@@ -25,7 +25,7 @@ impl Locations {
      * * `start: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
-    pub async fn get_locations(
+    pub async fn get_page(
         &self,
         start: uuid::Uuid,
         page_size: f64,
@@ -51,11 +51,11 @@ impl Locations {
      *
      * This function performs a `GET` to the `/locations` endpoint.
      *
-     * As opposed to `get_location`, this function returns all the pages of the request at once.
+     * As opposed to `get`, this function returns all the pages of the request at once.
      *
      * Retrieves all locations for your business.
      */
-    pub async fn get_all_locations(&self) -> Result<Vec<crate::types::Location>> {
+    pub async fn get_all(&self) -> Result<Vec<crate::types::Location>> {
         let url = "/locations".to_string();
         let mut resp: crate::types::GetLocationResponse = self.client.get(&url, None).await?;
 
@@ -93,7 +93,7 @@ impl Locations {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn post_location(
+    pub async fn post(
         &self,
         body: &crate::types::PostLocationRequest,
     ) -> Result<crate::types::Location> {
@@ -114,7 +114,7 @@ impl Locations {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_location(&self, id: &str) -> Result<crate::types::Location> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::Location> {
         let url = format!(
             "/locations/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -130,7 +130,7 @@ impl Locations {
      *
      * Modifies a specific location.
      */
-    pub async fn patch_location(
+    pub async fn patch(
         &self,
         id: &str,
         body: &crate::types::PostLocationRequest,

@@ -123,7 +123,7 @@ impl PhoneSharedLineGroups {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn create_a_shared_line_group(
+    pub async fn create_shared_line_group(
         &self,
         body: &crate::types::CreateSharedLineGroupRequest,
     ) -> Result<()> {
@@ -153,7 +153,7 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique Identifier of the Shared Line Group.
      */
-    pub async fn get_a_shared_line_group(
+    pub async fn get_shared_line_group(
         &self,
         shared_line_group_id: &str,
     ) -> Result<crate::types::GetSharedLineGroupResponse> {
@@ -184,7 +184,7 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group that you would like to delete.
      */
-    pub async fn delete_a_shared_line_group(&self, shared_line_group_id: &str) -> Result<()> {
+    pub async fn delete_shared_line_group(&self, shared_line_group_id: &str) -> Result<()> {
         let url = format!(
             "/phone/shared_line_groups/{}",
             crate::progenitor_support::encode_path(&shared_line_group_id.to_string()),
@@ -211,7 +211,7 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique identifier of the shared line group that is to be updated.
      */
-    pub async fn update_a_shared_line_group(
+    pub async fn update_shared_line_group(
         &self,
         shared_line_group_id: &str,
         body: &crate::types::UpdateSharedLineGroupRequest,
@@ -247,7 +247,7 @@ impl PhoneSharedLineGroups {
      *
      * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group.
      */
-    pub async fn add_members_to_shared_line_group(
+    pub async fn add_members_shared_line_group(
         &self,
         shared_line_group_id: &str,
         body: &crate::types::AddMembersSharedLineGroupRequestData,
@@ -312,7 +312,7 @@ impl PhoneSharedLineGroups {
      * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group from which you would like to remove a member.
      * * `member_id: &str` -- Unique identifier of the member who is to be removed.
      */
-    pub async fn delete_a_member_slg(
+    pub async fn delete_member_slg(
         &self,
         shared_line_group_id: &str,
         member_id: &str,
@@ -405,7 +405,7 @@ impl PhoneSharedLineGroups {
      * * `shared_line_group_id: &str` -- Unique identifier of the shared line group from which you would like to unassign a phone number.
      * * `phone_number_id: &str` -- Unique identifier of the phone number which is to be unassigned. This can be retrieved from Get a Shared Line Group API.
      */
-    pub async fn delete_a_phone_number_slg(
+    pub async fn delete_phone_number_slg(
         &self,
         shared_line_group_id: &str,
         phone_number_id: &str,

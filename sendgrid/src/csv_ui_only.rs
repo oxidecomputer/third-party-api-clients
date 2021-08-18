@@ -30,10 +30,10 @@ impl CsvUiOnly {
      * * `query: &str` -- Uses a SQL like syntax to indicate which messages to include in the CSV.
      * * `authorization: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn post_v_3_messages_download(
+    pub async fn post_messages_download(
         &self,
         query: &str,
-    ) -> Result<crate::types::PostV3MessagesDownloadResponse> {
+    ) -> Result<crate::types::PostMessagesDownloadResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -55,10 +55,10 @@ impl CsvUiOnly {
      *
      * * `authorization: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_v_3_messages_download(
+    pub async fn get_messages_download(
         &self,
         download_uuid: uuid::Uuid,
-    ) -> Result<crate::types::GetV3MessagesDownloadResponse> {
+    ) -> Result<crate::types::GetMessagesDownloadResponse> {
         let url = format!(
             "/messages/download/{}",
             crate::progenitor_support::encode_path(&download_uuid.to_string()),

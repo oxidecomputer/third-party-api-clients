@@ -149,7 +149,7 @@ impl Rooms {
      * **Scopes**: `room:write:admin`<br>
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
      */
-    pub async fn add_a_room(
+    pub async fn add(
         &self,
         body: &crate::types::AddRoomRequest,
     ) -> Result<crate::types::AddRoomResponse> {
@@ -203,7 +203,7 @@ impl Rooms {
      *
      * * `room_id: &str` -- Unique Identifier of a Zoom Room.
      */
-    pub async fn delete_a_zoom_room(&self, room_id: &str) -> Result<crate::types::Domains> {
+    pub async fn delete_zoom(&self, room_id: &str) -> Result<crate::types::Domains> {
         let url = format!(
             "/rooms/{}",
             crate::progenitor_support::encode_path(&room_id.to_string()),
@@ -228,7 +228,7 @@ impl Rooms {
      *
      * * `room_id: &str` -- Unique Identifier of a Zoom Room.
      */
-    pub async fn update_room_profile(
+    pub async fn update_profile(
         &self,
         room_id: &str,
         body: &crate::types::UpdateRoomProfileRequest,
@@ -392,7 +392,7 @@ impl Rooms {
      *
      * * `id: &str` -- User's first name.
      */
-    pub async fn check_in(&self, id: &str, body: &crate::types::CheckInRoomsRequest) -> Result<()> {
+    pub async fn check(&self, id: &str, body: &crate::types::CheckInRoomsRequest) -> Result<()> {
         let url = format!(
             "/rooms/{}/events",
             crate::progenitor_support::encode_path(&id.to_string()),

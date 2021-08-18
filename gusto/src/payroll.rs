@@ -384,7 +384,7 @@ impl Payroll {
      *
      * Returns all approved Payroll Reversals for a Company.
      */
-    pub async fn get_company_reversals(
+    pub async fn get_company_or_reversals(
         &self,
         company_id_or_uuid: &str,
     ) -> Result<crate::types::GetCompanyPayrollReversalsResponse> {

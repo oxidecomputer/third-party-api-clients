@@ -35,7 +35,7 @@ impl BillingPlans {
      * * `include_metadata: &str` -- When set to **true**, the `canUpgrade` and `renewalStatus` properities are included the response and an array of `supportedCountries` is added to the `billingAddress` information. .
      * * `include_successor_plans: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn billing_plan_get(
+    pub async fn get(
         &self,
         account_id: &str,
         include_credit_card_information: &str,
@@ -80,7 +80,7 @@ impl BillingPlans {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `preview_billing_plan: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn billing_plan_put(
+    pub async fn put(
         &self,
         account_id: &str,
         preview_billing_plan: &str,
@@ -116,7 +116,7 @@ impl BillingPlans {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn billing_plan_get_credit_card_info(
+    pub async fn get_credit_card_info(
         &self,
         account_id: &str,
     ) -> Result<crate::types::CreditCardInformation> {
@@ -139,7 +139,7 @@ impl BillingPlans {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn billing_plan_get_downgrade_request_info(
+    pub async fn get_downgrade_request_info(
         &self,
         account_id: &str,
     ) -> Result<crate::types::DowngradRequestBillingInfoResponse> {
@@ -162,7 +162,7 @@ impl BillingPlans {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn billing_plan_put_downgrade_account(
+    pub async fn put_downgrade_account(
         &self,
         account_id: &str,
         body: &crate::types::DowngradeBillingPlanInformation,
@@ -210,7 +210,7 @@ impl BillingPlans {
      *
      * Retrieves a list of the billing plans associated with a distributor.
      */
-    pub async fn get(&self) -> Result<crate::types::BillingPlansResponse> {
+    pub async fn get_billing_plans(&self) -> Result<crate::types::BillingPlansResponse> {
         let url = "/v2.1/billing_plans".to_string();
         self.client.get(&url, None).await
     }

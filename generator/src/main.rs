@@ -2484,6 +2484,7 @@ fn clean_name(t: &str) -> String {
     .replace("_i_ds", "_ids")
     .replace("v_1_", "")
     .replace("_v_2_", "_")
+    .replace("_v_3_", "_")
     .replace("s_uuid", "")
     .replace("_id_or_uuid", "")
     .replace("_uuid", "")
@@ -2545,18 +2546,31 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
 
     let mut st = to_snake_case(&o)
         .replace("v_1_", "")
+        .replace("_in_", "_")
+        .replace("_id_", "_")
+        .replace("_a_", "_")
+        .replace("_to_", "_")
         .replace("_v_2_", "_")
+        .replace("_v_3_", "_")
         .replace("s_uuid", "")
         .replace("_id_or_uuid", "")
         .replace("_uuid", "")
-        .replace("_id_", "_")
         .replace("companies_company_", "company_")
         .replace("employees_employee_", "employee_")
         .replace("jobs_job_", "job_")
         .replace("applicants_applicant_", "applicant_")
         .trim_start_matches('_')
+        .trim_start_matches("in_")
+        .trim_start_matches("by_")
+        .trim_start_matches("with_")
+        .trim_start_matches("to_")
+        .trim_start_matches("a_")
         .trim_end_matches('_')
-        .trim_end_matches("_id")
+        .trim_end_matches("_a")
+        .trim_end_matches("_in")
+        .trim_end_matches("_by")
+        .trim_end_matches("_with")
+        .trim_end_matches("_to")
         .trim_start_matches(&clean_name)
         .to_string();
 
@@ -2583,10 +2597,13 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
 
     f = f
         .replace(&tag, "")
+        .replace(&format!("_{}", tag.trim_end_matches('s')), "")
         .replace("__", "_")
         .trim_end_matches('_')
         .trim_end_matches("_s")
-        .replace("_s_", "_");
+        .replace("_s_", "_")
+        .trim_start_matches(&format!("{}_", tag.trim_end_matches('s')))
+        .to_string();
 
     // Fix if we somehow created a function that is actually a keyword.
     if f == "move" {

@@ -27,7 +27,7 @@ impl Senders {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn post_marketing_sender(
+    pub async fn post_marketing(
         &self,
         body: &crate::types::PostMarketingSendersRequest,
     ) -> Result<crate::types::SenderAllOf> {

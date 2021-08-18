@@ -24,7 +24,7 @@ impl FederalTaxDetailsBeta {
 * 
 * Fetches attributes relevant for a company's federal taxes.
 */
-pub async fn get_company_federal_tax_details(
+pub async fn get_company_or_federal_tax_details(
 &self,
 company_id_or_uuid: &str,
 ) -> Result<crate::types::GetCompanyFederalTaxDetailsResponse> {
@@ -44,7 +44,7 @@ self.client.get(&url, None).await
 * 
 * Updates attributes relevant for a company's federal taxes. This information is required is to onboard a company for use with Gusto Embedded Payroll.
 */
-pub async fn put_company_federal_tax_details(
+pub async fn put_company_or_federal_tax_details(
 &self,
 company_id_or_uuid: &str,
 body: &crate::types::PutCompanyFederalTaxDetailsRequest

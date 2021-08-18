@@ -180,7 +180,7 @@ impl Accounts {
      * * `include_account_settings: &str` -- When set to **true**, includes account settings
      *   in the response. If you omit this parameter, the default behavior is **false**.
      */
-    pub async fn get_account(
+    pub async fn get(
         &self,
         account_id: &str,
         include_account_settings: &str,
@@ -213,7 +213,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn delete_account(&self, account_id: &str) -> Result<()> {
+    pub async fn delete(&self, account_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -241,7 +241,7 @@ impl Accounts {
      *   * seats
      *   .
      */
-    pub async fn billing_charges_get_account(
+    pub async fn billing_charges_get(
         &self,
         account_id: &str,
         include_charges: &str,
@@ -691,7 +691,7 @@ impl Accounts {
      * * `organization_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `result_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn organization_exports_get_account_settings_export(
+    pub async fn organization_exports_get_settings_export(
         &self,
         organization_id: &str,
         result_id: &str,

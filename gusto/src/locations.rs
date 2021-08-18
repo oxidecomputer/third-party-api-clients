@@ -65,7 +65,7 @@ impl Locations {
      *
      * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
      */
-    pub async fn post_company_location(
+    pub async fn post_company(
         &self,
         company_id_or_uuid: &str,
         body: &crate::types::PostCompanyLocationsRequest,
@@ -87,7 +87,7 @@ impl Locations {
      *
      * Get a location.
      */
-    pub async fn get_location(&self, location_id: &str) -> Result<crate::types::Location> {
+    pub async fn get(&self, location_id: &str) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/locations/{}",
             crate::progenitor_support::encode_path(&location_id.to_string()),
@@ -103,7 +103,7 @@ impl Locations {
      *
      * Update a location.
      */
-    pub async fn put_location(
+    pub async fn put(
         &self,
         location_id: &str,
         body: &crate::types::PutLocationRequest,

@@ -47,7 +47,7 @@ impl Roles {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
      */
-    pub async fn create_role(&self, body: &crate::types::CreateRoleRequest) -> Result<()> {
+    pub async fn create(&self, body: &crate::types::CreateRoleRequest) -> Result<()> {
         let url = "/roles".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -77,7 +77,7 @@ impl Roles {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `page_size: i64` -- The number of records returned within a single API call.
      */
-    pub async fn role_members(
+    pub async fn members(
         &self,
         role_id: &str,
         page_count: &str,
@@ -116,7 +116,7 @@ impl Roles {
      *
      * This function performs a `GET` to the `/roles/{roleId}/members` endpoint.
      *
-     * As opposed to `role_members`, this function returns all the pages of the request at once.
+     * As opposed to `members`, this function returns all the pages of the request at once.
      *
      * User [roles](https://support.zoom.us/hc/en-us/articles/115001078646-Role-Based-Access-Control) can have a set of permissions that allows access only to the pages a user needs to view or edit. Use this API to list all the members that are assigned a specific role.
      *
@@ -125,7 +125,7 @@ impl Roles {
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`<br>**Prerequisites:**<br>
      * * A Pro or a higher plan.
      */
-    pub async fn get_all_role_members(
+    pub async fn get_all_members(
         &self,
         role_id: &str,
         page_count: &str,
@@ -191,7 +191,7 @@ impl Roles {
      *
      * * `role_id: &str` -- User's first name.
      */
-    pub async fn add_role_members(
+    pub async fn add_members(
         &self,
         role_id: &str,
         body: &crate::types::AddRoleMembersRequest,
@@ -224,7 +224,7 @@ impl Roles {
      * * `role_id: &str` -- User's first name.
      * * `member_id: &str` -- User's first name.
      */
-    pub async fn role_member_delete(&self, role_id: &str, member_id: &str) -> Result<()> {
+    pub async fn member_delete(&self, role_id: &str, member_id: &str) -> Result<()> {
         let url = format!(
             "/roles/{}/members/{}",
             crate::progenitor_support::encode_path(&role_id.to_string()),
@@ -254,7 +254,7 @@ impl Roles {
      *
      * * `role_id: &str` -- User's first name.
      */
-    pub async fn get_role_information(
+    pub async fn get_information(
         &self,
         role_id: &str,
     ) -> Result<crate::types::GetRoleInformationResponse> {
@@ -286,7 +286,7 @@ impl Roles {
      *
      * * `role_id: &str` -- User's first name.
      */
-    pub async fn delete_role(&self, role_id: &str) -> Result<()> {
+    pub async fn delete(&self, role_id: &str) -> Result<()> {
         let url = format!(
             "/roles/{}",
             crate::progenitor_support::encode_path(&role_id.to_string()),
@@ -313,7 +313,7 @@ impl Roles {
      *
      * * `role_id: &str` -- User's first name.
      */
-    pub async fn update_role(
+    pub async fn update(
         &self,
         role_id: &str,
         body: &crate::types::UpdateRoleRequest,

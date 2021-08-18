@@ -74,7 +74,7 @@ impl Alerts {
      * * `authorization: &str` -- The license key provided with your New Relic account.
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn post_alert(
+    pub async fn post(
         &self,
         body: &crate::types::PostAlertsRequest,
     ) -> Result<crate::types::PostAlertsResponse> {
@@ -102,7 +102,7 @@ impl Alerts {
      * * `authorization: &str` -- The license key provided with your New Relic account.
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_alert(&self, alert_id: i64) -> Result<crate::types::GetAlertsAlertResponse> {
+    pub async fn get(&self, alert_id: i64) -> Result<crate::types::GetAlertsAlertResponse> {
         let url = format!(
             "/alerts/{}",
             crate::progenitor_support::encode_path(&alert_id.to_string()),
@@ -128,7 +128,7 @@ impl Alerts {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_alert(&self, alert_id: i64) -> Result<crate::types::Help> {
+    pub async fn delete(&self, alert_id: i64) -> Result<crate::types::Help> {
         let url = format!(
             "/alerts/{}",
             crate::progenitor_support::encode_path(&alert_id.to_string()),
@@ -154,7 +154,7 @@ impl Alerts {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn patch_alert(
+    pub async fn patch(
         &self,
         alert_id: i64,
         body: &crate::types::PatchAlertsAlertRequest,

@@ -135,7 +135,7 @@ impl TemplateDocuments {
      * * `encrypt: &str` -- When set to **true**, the PDF bytes returned in the response are encrypted for all the key managers configured on your DocuSign account. You can decrypt the documents by using the Key Manager DecryptDocument API method. For more information about Key Manager, see the DocuSign Security Appliance Installation Guide that your organization received from DocuSign.
      * * `show_changes: &str` -- When set to **true**, any document fields that a recipient changed are highlighted in yellow in the returned PDF document, and optional signatures or initials are outlined in red.
      */
-    pub async fn documents_get_template_document(
+    pub async fn documents_get(
         &self,
         account_id: &str,
         document_id: &str,
@@ -176,7 +176,7 @@ impl TemplateDocuments {
      * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `is_envelope_definition: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn documents_put_template_document(
+    pub async fn documents_put(
         &self,
         account_id: &str,
         document_id: &str,

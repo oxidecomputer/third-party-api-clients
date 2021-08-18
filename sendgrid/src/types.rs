@@ -7609,7 +7609,7 @@ pub struct TraitGlobalErrors500Response {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetV3MessagesMsgResponse {
+pub struct GetMessagesMsgResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub errors: Vec<TraitGlobalErrors500Response>,
 }
@@ -8626,7 +8626,7 @@ pub struct GetPartnerSettingsResponse {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetV3TeammatesResponseResult {
+pub struct GetTeammatesResponseResult {
     /**
      * The license key provided with your New Relic account.
      */
@@ -8752,13 +8752,13 @@ pub struct GetV3TeammatesResponseResult {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetV3TeammatesResponse {
+pub struct GetTeammatesResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub result: Vec<GetV3TeammatesResponseResult>,
+    pub result: Vec<GetTeammatesResponseResult>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PostV3TeammatesRequest {
+pub struct PostTeammatesRequest {
     /**
      * The license key provided with your New Relic account.
      */
@@ -8781,7 +8781,7 @@ pub struct PostV3TeammatesRequest {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PostV3TeammatesResponse {
+pub struct PostTeammatesResponse {
     /**
      * The license key provided with your New Relic account.
      */
@@ -8816,7 +8816,7 @@ pub struct PostV3TeammatesResponse {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PostV3TeammatesResponseErrors {
+pub struct PostTeammatesResponseErrors {
     /**
      * The license key provided with your New Relic account.
      */
@@ -8840,11 +8840,11 @@ pub struct PostV3TeammatesResponseErrors {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostSendersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub errors: Vec<PostV3TeammatesResponseErrors>,
+    pub errors: Vec<PostTeammatesResponseErrors>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetV3ScopesRequestsResponse {
+pub struct GetScopesRequestsResponse {
     /**
      * The license key provided with your New Relic account.
      */
@@ -8899,7 +8899,7 @@ pub struct GetV3ScopesRequestsResponse {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetV3TeammatesPendingResponseResult {
+pub struct GetTeammatesPendingResponseResult {
     /**
      * The license key provided with your New Relic account.
      */
@@ -8940,13 +8940,13 @@ pub struct GetV3TeammatesPendingResponseResult {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetV3TeammatesPendingResponse {
+pub struct GetTeammatesPendingResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub result: Vec<GetV3TeammatesPendingResponseResult>,
+    pub result: Vec<GetTeammatesPendingResponseResult>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetV3TeammatesUsernameResponse {
+pub struct GetTeammatesUsernameResponse {
     /**
      * The license key provided with your New Relic account.
      */
@@ -9077,7 +9077,7 @@ pub struct GetV3TeammatesUsernameResponse {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PatchV3TeammatesUsernameRequest {
+pub struct PatchTeammatesUsernameRequest {
     /**
      * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
@@ -9091,7 +9091,7 @@ pub struct PatchV3TeammatesUsernameRequest {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PatchV3ScopesRequestsApproveResponse {
+pub struct PatchScopesRequestsApproveResponse {
     /**
      * The license key provided with your New Relic account.
      */
@@ -11941,7 +11941,7 @@ pub struct PostMarketingTestSendEmailRequest {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetV3SendersResponse {
+pub struct GetSendersResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub result: Vec<SenderAllOf>,
 }
@@ -12875,7 +12875,7 @@ pub struct GetMessagesResponse {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum PostV3MessagesDownloadResponseStatus {
+pub enum PostMessagesDownloadResponseStatus {
     #[serde(rename = "pending")]
     Pending,
     #[serde(rename = "")]
@@ -12884,30 +12884,30 @@ pub enum PostV3MessagesDownloadResponseStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for PostV3MessagesDownloadResponseStatus {
+impl std::fmt::Display for PostMessagesDownloadResponseStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            PostV3MessagesDownloadResponseStatus::Pending => "pending",
-            PostV3MessagesDownloadResponseStatus::Noop => "",
-            PostV3MessagesDownloadResponseStatus::FallthroughString => "*",
+            PostMessagesDownloadResponseStatus::Pending => "pending",
+            PostMessagesDownloadResponseStatus::Noop => "",
+            PostMessagesDownloadResponseStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for PostV3MessagesDownloadResponseStatus {
-    fn default() -> PostV3MessagesDownloadResponseStatus {
-        PostV3MessagesDownloadResponseStatus::Noop
+impl Default for PostMessagesDownloadResponseStatus {
+    fn default() -> PostMessagesDownloadResponseStatus {
+        PostMessagesDownloadResponseStatus::Noop
     }
 }
-impl PostV3MessagesDownloadResponseStatus {
+impl PostMessagesDownloadResponseStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, PostV3MessagesDownloadResponseStatus::Noop)
+        matches!(self, PostMessagesDownloadResponseStatus::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PostV3MessagesDownloadResponse {
+pub struct PostMessagesDownloadResponse {
     /**
      * The license key provided with your New Relic account.
      */
@@ -12918,11 +12918,11 @@ pub struct PostV3MessagesDownloadResponse {
     )]
     pub message: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<PostV3MessagesDownloadResponseStatus>,
+    pub status: Option<PostMessagesDownloadResponseStatus>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetV3MessagesDownloadResponse {
+pub struct GetMessagesDownloadResponse {
     /**
      * The license key provided with your New Relic account.
      */

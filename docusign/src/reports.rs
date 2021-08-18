@@ -24,10 +24,7 @@ impl Reports {
     *
     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
     */
-    pub async fn in_product_get_report_list(
-        &self,
-        account_id: &str,
-    ) -> Result<crate::types::Reports> {
+    pub async fn product_get_list(&self, account_id: &str) -> Result<crate::types::Reports> {
         let url = format!(
             "/v2.1/accounts/{}/reports",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -47,7 +44,7 @@ impl Reports {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn in_product_post_report_create(
+    pub async fn product_post_create(
         &self,
         account_id: &str,
         body: &crate::types::ReportInProductRunRequest,
@@ -73,7 +70,7 @@ impl Reports {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn in_product_put_report_run_results(
+    pub async fn product_put_run_results(
         &self,
         account_id: &str,
         body: &crate::types::ReportInProductRunRequest,
@@ -99,7 +96,7 @@ impl Reports {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn in_product_put_report_results_csv(
+    pub async fn product_put_results_csv(
         &self,
         account_id: &str,
         body: &crate::types::ReportInProductCsvRunRequest,
@@ -126,7 +123,7 @@ impl Reports {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn in_product_get_report(
+    pub async fn product_get(
         &self,
         account_id: &str,
         id: &str,
@@ -152,7 +149,7 @@ impl Reports {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn in_product_put_report_save(
+    pub async fn product_put_save(
         &self,
         account_id: &str,
         id: &str,
@@ -181,7 +178,7 @@ impl Reports {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn in_product_delete_report(
+    pub async fn product_delete(
         &self,
         account_id: &str,
         id: &str,

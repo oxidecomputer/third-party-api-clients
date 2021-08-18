@@ -23,7 +23,7 @@ impl Users {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_user(&self, id: &str) -> Result<crate::types::User> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::User> {
         let url = format!(
             "/users/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

@@ -75,7 +75,7 @@ impl Accounts {
      *
      *  
      */
-    pub async fn account_create(
+    pub async fn create(
         &self,
         body: &crate::types::AccountCreateRequest,
     ) -> Result<crate::types::AccountCreateResponse> {
@@ -137,7 +137,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- User's first name.
      */
-    pub async fn account_disassociate(&self, account_id: &str) -> Result<()> {
+    pub async fn disassociate(&self, account_id: &str) -> Result<()> {
         let url = format!(
             "/accounts/{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -167,7 +167,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- User's first name.
      */
-    pub async fn account_options_update(
+    pub async fn options_update(
         &self,
         account_id: &str,
         body: &crate::types::Options,
@@ -210,7 +210,7 @@ impl Accounts {
      *   
      *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
-    pub async fn account_settings_domains(
+    pub async fn settings_domains(
         &self,
         account_id: &str,
         option: crate::types::OptionData,
@@ -264,7 +264,7 @@ impl Accounts {
      *   
      *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
-    pub async fn account_settings_security(
+    pub async fn settings_security(
         &self,
         account_id: &str,
         option: crate::types::OptionData,
@@ -318,7 +318,7 @@ impl Accounts {
      *   
      *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
-    pub async fn account_settings(
+    pub async fn settings_account(
         &self,
         account_id: &str,
         option: crate::types::OptionData,
@@ -372,7 +372,7 @@ impl Accounts {
      *   
      *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
-    pub async fn account_settings_meeting_security(
+    pub async fn settings_meeting_security(
         &self,
         account_id: &str,
         option: crate::types::OptionData,
@@ -426,7 +426,7 @@ impl Accounts {
      *   
      *   To use multiple values, comma-separate each value. For example: `host_video,participant_video`.
      */
-    pub async fn account_setting(
+    pub async fn setting(
         &self,
         account_id: &str,
         option: crate::types::OptionData,
@@ -469,7 +469,7 @@ impl Accounts {
      * * `account_id: &str` -- User's first name.
      * * `option: crate::types::AccountSettingsUpdateOption`
      */
-    pub async fn account_settings_update(
+    pub async fn settings_update(
         &self,
         account_id: &str,
         option: crate::types::AccountSettingsUpdateOption,
@@ -514,10 +514,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- Unique Identifier of the account. To retrieve locked settings of the master account or a regular account, provide "me" as the value of this field. <br> To retrieve locked settings of a sub account, provide the Account ID of the sub account in this field.
      */
-    pub async fn account_managed_domain(
-        &self,
-        account_id: &str,
-    ) -> Result<crate::types::DomainsList> {
+    pub async fn managed_domain(&self, account_id: &str) -> Result<crate::types::DomainsList> {
         let url = format!(
             "/accounts/{}/managed_domains",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -542,7 +539,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- User's first name.
      */
-    pub async fn account_trusted_domain(
+    pub async fn trusted_domain(
         &self,
         account_id: &str,
     ) -> Result<crate::types::AccountTrustedDomainResponse> {
@@ -587,7 +584,7 @@ impl Accounts {
      *   }
      *   <br>You can provide multiple values by separating them with commas(example: "host_video,participant_video”).
      */
-    pub async fn get_account_lock_setting(
+    pub async fn get_lock_setting(
         &self,
         account_id: &str,
         option: &str,
@@ -634,7 +631,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- Unique Identifier of the account. To retrieve locked settings of the master account or a regular account, provide "me" as the value of this field. <br> To retrieve locked settings of a sub account, provide the Account ID of the sub account in this field.
      */
-    pub async fn update_account_lock_settings(&self, account_id: &str) -> Result<()> {
+    pub async fn update_lock_settings(&self, account_id: &str) -> Result<()> {
         let url = format!(
             "/accounts/{}/lock_settings",
             crate::progenitor_support::encode_path(&account_id.to_string()),
@@ -662,11 +659,7 @@ impl Accounts {
      *
      * * `account_id: &str` -- The account's account ID.
      */
-    pub async fn update_account_owner(
-        &self,
-        account_id: &str,
-        body: &crate::types::Members,
-    ) -> Result<()> {
+    pub async fn update_owner(&self, account_id: &str, body: &crate::types::Members) -> Result<()> {
         let url = format!(
             "/accounts/{}/owner",
             crate::progenitor_support::encode_path(&account_id.to_string()),

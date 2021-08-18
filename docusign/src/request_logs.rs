@@ -27,10 +27,7 @@ impl RequestLogs {
      *
      * * `encoding: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn api_request_log_get_log(
-        &self,
-        encoding: &str,
-    ) -> Result<crate::types::ApiRequestLogsResult> {
+    pub async fn api_get_log(&self, encoding: &str) -> Result<crate::types::ApiRequestLogsResult> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !encoding.is_empty() {
             query_args.push(("encoding".to_string(), encoding.to_string()));
@@ -48,7 +45,7 @@ impl RequestLogs {
      *
      * Deletes the request log files.
      */
-    pub async fn api_request_log_delete_logs(&self) -> Result<()> {
+    pub async fn api_delete_logs(&self) -> Result<()> {
         let url = "/v2.1/diagnostics/request_logs".to_string();
         self.client.delete(&url, None).await
     }
@@ -70,7 +67,7 @@ impl RequestLogs {
      *
      * * `request_log_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn api_request_log_get(&self, request_log_id: &str) -> Result<Vec<u8>> {
+    pub async fn api_get(&self, request_log_id: &str) -> Result<Vec<u8>> {
         let url = format!(
             "/v2.1/diagnostics/request_logs/{}",
             crate::progenitor_support::encode_path(&request_log_id.to_string()),
@@ -84,7 +81,7 @@ impl RequestLogs {
      *
      * This function performs a `GET` to the `/v2.1/diagnostics/request_logs/{requestLogId}` endpoint.
      *
-     * As opposed to `api_request_log_get`, this function returns all the pages of the request at once.
+     * As opposed to `api_get`, this function returns all the pages of the request at once.
      *
      * Retrieves information for a single log entry.
      *
@@ -94,7 +91,7 @@ impl RequestLogs {
      * **Response**
      * If the Content-Transfer-Encoding header was set to base64, the log is returned as a base64 string.
      */
-    pub async fn api_request_log_get_all(&self, request_log_id: &str) -> Result<Vec<u8>> {
+    pub async fn api_get_all(&self, request_log_id: &str) -> Result<Vec<u8>> {
         let url = format!(
             "/v2.1/diagnostics/request_logs/{}",
             crate::progenitor_support::encode_path(&request_log_id.to_string()),
@@ -113,9 +110,7 @@ impl RequestLogs {
      * **Response**
      * The response includes the current API request logging setting for the user, along with the maximum log entries and remaining log entries.
      */
-    pub async fn api_request_log_get_setting(
-        &self,
-    ) -> Result<crate::types::DiagnosticsSettingsInformation> {
+    pub async fn api_get_setting(&self) -> Result<crate::types::DiagnosticsSettingsInformation> {
         let url = "/v2.1/diagnostics/settings".to_string();
         self.client.get(&url, None).await
     }
@@ -138,7 +133,7 @@ impl RequestLogs {
      * API request logging only captures requests from the authenticated user. Any call that does not authenticate the user and resolve a userId is not logged.
      *
      */
-    pub async fn api_request_log_put_settings(
+    pub async fn api_put_settings(
         &self,
         body: &crate::types::DiagnosticsSettingsInformation,
     ) -> Result<crate::types::DiagnosticsSettingsInformation> {

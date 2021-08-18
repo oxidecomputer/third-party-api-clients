@@ -22,7 +22,7 @@ impl Members {
      * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
      * * `member_key: &str` -- Identifies the user member in the API request. The value can be the user's primary email address, alias, or unique ID.
      */
-    pub async fn has_member(
+    pub async fn has(
         &self,
         group_key: &str,
         member_key: &str,

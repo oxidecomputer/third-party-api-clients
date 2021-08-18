@@ -148,7 +148,7 @@ impl Employees {
      *
      * Create an employee.
      */
-    pub async fn post_employee(
+    pub async fn post(
         &self,
         company_id_or_uuid: &str,
         body: &crate::types::PostEmployeesRequest,
@@ -170,10 +170,7 @@ impl Employees {
      *
      * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      */
-    pub async fn get_employee_home_addre(
-        &self,
-        employee_id: &str,
-    ) -> Result<crate::types::Location> {
+    pub async fn get_home_address(&self, employee_id: &str) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/employees/{}/home_address",
             crate::progenitor_support::encode_path(&employee_id.to_string()),
@@ -189,7 +186,7 @@ impl Employees {
      *
      * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
      */
-    pub async fn put_employee_home_address(
+    pub async fn put_home_address(
         &self,
         employee_id: &str,
         body: &crate::types::PutEmployeeHomeAddressRequest,

@@ -31,6 +31,9 @@ pub fn generate_files(
             };
 
             let od = to_snake_case(o.operation_id.as_deref().unwrap());
+            if od == "accounts" {
+                println!("function accounts: {:?}", p);
+            }
 
             // Make sure we have exactly 1 tag. This likely needs to change in the
             // future but for now it seems fairly consistent.
@@ -275,6 +278,8 @@ pub fn generate_files(
                 && !frt.ends_with("Response")
                 && !frt.ends_with("Summary")
                 && http::Method::GET == m
+                && !fn_name.ends_with("address")
+                && !fn_name.ends_with("has")
             {
                 // Make sure we don't add an s where we don't need one.
                 // Don't make a function plural where it is not needed.

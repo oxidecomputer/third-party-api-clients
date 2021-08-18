@@ -27,7 +27,7 @@ impl Payments {
      * * `from_date: &str` -- Specifies the date/time of the earliest payment in the account to retrieve.
      * * `to_date: &str` -- Specifies the date/time of the latest payment in the account to retrieve.
      */
-    pub async fn billing_get_payment_list(
+    pub async fn billing_get_list(
         &self,
         account_id: &str,
         from_date: &str,
@@ -68,7 +68,7 @@ impl Payments {
      *
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn billing_post_payment(
+    pub async fn billing_post(
         &self,
         account_id: &str,
         body: &crate::types::BillingPaymentRequest,
@@ -97,7 +97,7 @@ impl Payments {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `payment_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn billing_get_payment(
+    pub async fn billing_get(
         &self,
         account_id: &str,
         payment_id: &str,

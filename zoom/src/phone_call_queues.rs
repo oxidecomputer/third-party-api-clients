@@ -152,7 +152,7 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- Unique Identifier of the Call Queue. This can be retrieved from [List Call Queues API](https://marketplace.zoom.us/docs/api-reference/zoom-api/phone-call-queues/listcallqueues).
      */
-    pub async fn get_a_call_queue(
+    pub async fn get_call_queue(
         &self,
         call_queue_id: &str,
     ) -> Result<crate::types::GetCallQueueResponse> {
@@ -185,7 +185,7 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- Unique Identifier of the call queue.
      */
-    pub async fn delete_a_call_queue(&self, call_queue_id: &str) -> Result<()> {
+    pub async fn delete_call_queue(&self, call_queue_id: &str) -> Result<()> {
         let url = format!(
             "/phone/call_queues/{}",
             crate::progenitor_support::encode_path(&call_queue_id.to_string()),
@@ -247,7 +247,7 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- Unique Identifier of the Call Queue.
      */
-    pub async fn assign_phone_to_call_queue(
+    pub async fn assign(
         &self,
         call_queue_id: &str,
         body: &crate::types::AddByocNumberResponse,
@@ -280,7 +280,7 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- Unique Identifier of the Call Queue. This can be retrieved from List Call Queues API.
      */
-    pub async fn unassign_a_phone_num_call_queue(
+    pub async fn unassign_phone_num_call_queue(
         &self,
         call_queue_id: &str,
     ) -> Result<crate::types::Domains> {
@@ -343,7 +343,7 @@ impl PhoneCallQueues {
      *
      * * `call_queue_id: &str` -- Unique Identifier of the Call Queue.
      */
-    pub async fn add_members_to_call_queue(
+    pub async fn add_members_call_queue(
         &self,
         call_queue_id: &str,
         body: &crate::types::AddMembersCallQueueRequestData,

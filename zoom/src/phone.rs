@@ -2053,7 +2053,7 @@ impl Phone {
      *
      * * `external_contact_id: &str` -- The external contact's ID.
      */
-    pub async fn get_a_external_contact(
+    pub async fn get_external_contact(
         &self,
         external_contact_id: &str,
     ) -> Result<crate::types::ExternalContacts> {
@@ -2082,7 +2082,7 @@ impl Phone {
      *
      * * `external_contact_id: &str` -- The external contact's ID.
      */
-    pub async fn delete_a_external_contact(&self, external_contact_id: &str) -> Result<()> {
+    pub async fn delete_external_contact(&self, external_contact_id: &str) -> Result<()> {
         let url = format!(
             "/phone/external_contacts/{}",
             crate::progenitor_support::encode_path(&external_contact_id.to_string()),

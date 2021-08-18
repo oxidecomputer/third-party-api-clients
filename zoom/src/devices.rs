@@ -31,7 +31,7 @@ impl Devices {
      *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn device_list(
+    pub async fn list(
         &self,
         page_size: i64,
         page_number: i64,
@@ -63,7 +63,7 @@ impl Devices {
      *
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light` <br>
      */
-    pub async fn device_create(&self, body: &crate::types::Device) -> Result<()> {
+    pub async fn create(&self, body: &crate::types::Device) -> Result<()> {
         let url = "/h323/devices".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -84,7 +84,7 @@ impl Devices {
      *
      * * `device_id: &str` -- User's first name.
      */
-    pub async fn device_delete(&self, device_id: &str) -> Result<()> {
+    pub async fn delete(&self, device_id: &str) -> Result<()> {
         let url = format!(
             "/h323/devices/{}",
             crate::progenitor_support::encode_path(&device_id.to_string()),
@@ -107,7 +107,7 @@ impl Devices {
      *
      * * `device_id: &str` -- User's first name.
      */
-    pub async fn device_update(&self, device_id: &str, body: &crate::types::Device) -> Result<()> {
+    pub async fn update(&self, device_id: &str, body: &crate::types::Device) -> Result<()> {
         let url = format!(
             "/h323/devices/{}",
             crate::progenitor_support::encode_path(&device_id.to_string()),

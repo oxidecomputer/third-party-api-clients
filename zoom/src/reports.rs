@@ -29,11 +29,7 @@ impl Reports {
      * * `year: i64` -- Year for this report.
      * * `month: i64` -- Month for this report.
      */
-    pub async fn report_daily(
-        &self,
-        year: i64,
-        month: i64,
-    ) -> Result<crate::types::ReportDailyResponse> {
+    pub async fn daily(&self, year: i64, month: i64) -> Result<crate::types::ReportDailyResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if month > 0 {
             query_args.push(("month".to_string(), month.to_string()));
@@ -69,7 +65,7 @@ impl Reports {
      * * `page_number: i64` -- The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn report_user(
+    pub async fn user(
         &self,
         type_: crate::types::ReportUsersType,
         from: chrono::NaiveDate,
@@ -126,7 +122,7 @@ impl Reports {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `type_: crate::types::ReportMeetingsType` -- The meeting types: <br>`past` - Past meetings.<br>`pastOne` - Past one user meetings.
      */
-    pub async fn report_meeting(
+    pub async fn meeting(
         &self,
         user_id: &str,
         from: chrono::NaiveDate,
@@ -180,7 +176,7 @@ impl Reports {
      *   
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
-    pub async fn report_meeting_details(
+    pub async fn meeting_details(
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::ReportMeetingDetailsResponse> {
@@ -215,7 +211,7 @@ impl Reports {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
      */
-    pub async fn report_meeting_participant(
+    pub async fn meeting_participant(
         &self,
         meeting_id: &str,
         page_size: i64,
@@ -261,7 +257,7 @@ impl Reports {
      *   
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
-    pub async fn report_meeting_polls(
+    pub async fn meeting_polls(
         &self,
         meeting_id: &str,
     ) -> Result<crate::types::ReportMeetingPollsResponse> {
@@ -291,7 +287,7 @@ impl Reports {
      *   
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
-    pub async fn report_webinar_details(
+    pub async fn webinar_details(
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::ReportMeetingDetailsResponse> {
@@ -324,7 +320,7 @@ impl Reports {
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      * * `include_fields: crate::types::DashboardMeetingParticipantsIncludeFields` -- Provide `registrant_id` as the value for this field if you would like to see the registrant ID attribute in the response of this API call. A registrant ID is a unique identifier of a [meeting registrant](https://marketplace.zoom.us/docs/api-reference/zoom-api/meetings/meetingregistrants). This is not supported for `live` meeting types.
      */
-    pub async fn report_webinar_participant(
+    pub async fn webinar_participant(
         &self,
         webinar_id: &str,
         page_size: i64,
@@ -369,7 +365,7 @@ impl Reports {
      *   
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
-    pub async fn report_webinar_polls(
+    pub async fn webinar_polls(
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::ReportMeetingPollsResponse> {
@@ -401,7 +397,7 @@ impl Reports {
      *   
      *   If a UUID starts with "/" or contains "//" (example: "/ajXp112QmuoKj4854875==\"), you must **double encode** the UUID before making an API request.
      */
-    pub async fn report_webinar_qa(
+    pub async fn webinar_qa(
         &self,
         webinar_id: &str,
     ) -> Result<crate::types::ReportWebinarQaResponse> {
@@ -439,7 +435,7 @@ impl Reports {
      *   The page number of the current page in the returned records.
      * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
      */
-    pub async fn report_telephone(
+    pub async fn telephone(
         &self,
         type_: &str,
         query_date_type: crate::types::QueryDateType,
@@ -494,7 +490,7 @@ impl Reports {
      * * `from: chrono::NaiveDate` -- Start date in 'yyyy-mm-dd' format. The date range defined by the "from" and "to" parameters should only be one month as the report includes only one month worth of data at once.
      * * `to: chrono::NaiveDate` -- Start Date.
      */
-    pub async fn report_cloud_recording(
+    pub async fn cloud_recording(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -535,7 +531,7 @@ impl Reports {
      *  Filter your response by a category type to see reports for a specific category.
      *  The value for this field can be one of the following:<br> `all`<br>`user`<br>`user_settings`<br>`account`<br>`billing`<br>`im`<br>`recording`<br>`phone_contacts`<br>`webinar`<br>`sub_account`<br>`role`<br>`zoom_rooms`.
      */
-    pub async fn report_operation_log(
+    pub async fn operation_log(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -584,7 +580,7 @@ impl Reports {
      * * `page_size: i64` -- The number of records to be returned within a single API call.
      * * `next_page_token: &str` -- Next page token is used to paginate through large result sets.
      */
-    pub async fn report_sign_in_out_activities(
+    pub async fn sign_out_activities(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -619,7 +615,7 @@ impl Reports {
      *
      * This function performs a `GET` to the `/report/activities` endpoint.
      *
-     * As opposed to `report_sign_in_out_activities`, this function returns all the pages of the request at once.
+     * As opposed to `sign_out_activities`, this function returns all the pages of the request at once.
      *
      * Retrieve a list of sign in / sign out activity logs [report](https://support.zoom.us/hc/en-us/articles/201363213-Getting-Started-with-Reports) of users under a Zoom account.<br>
      * **Prerequisites**<br>
@@ -628,7 +624,7 @@ impl Reports {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      */
-    pub async fn get_all_report_sign_in_out_activities(
+    pub async fn get_all_sign_out_activities(
         &self,
         from: chrono::NaiveDate,
         to: chrono::NaiveDate,
@@ -691,7 +687,7 @@ impl Reports {
      *  
      *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
      */
-    pub async fn get_billing_report(&self) -> Result<crate::types::GetBillingReportResponse> {
+    pub async fn get_billing(&self) -> Result<crate::types::GetBillingReportResponse> {
         let url = "/report/billing".to_string();
         self.client.get(&url, None).await
     }

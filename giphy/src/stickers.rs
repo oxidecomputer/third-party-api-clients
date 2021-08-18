@@ -25,11 +25,7 @@ impl Stickers {
      * * `tag: &str` -- The unique bit.ly URL for this GIF.
      * * `rating: &str` -- The unique bit.ly URL for this GIF.
      */
-    pub async fn random_sticker(
-        &self,
-        tag: &str,
-        rating: &str,
-    ) -> Result<crate::types::RandomGifResponse> {
+    pub async fn random(&self, tag: &str, rating: &str) -> Result<crate::types::RandomGifResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !rating.is_empty() {
             query_args.push(("rating".to_string(), rating.to_string()));
@@ -101,7 +97,7 @@ impl Stickers {
      *
      * * `s: &str` -- The unique bit.ly URL for this GIF.
      */
-    pub async fn translate_sticker(&self, s: &str) -> Result<crate::types::RandomGifResponse> {
+    pub async fn translate(&self, s: &str) -> Result<crate::types::RandomGifResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !s.is_empty() {
             query_args.push(("s".to_string(), s.to_string()));

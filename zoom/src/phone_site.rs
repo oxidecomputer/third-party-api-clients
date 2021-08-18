@@ -146,7 +146,7 @@ impl PhoneSite {
      *
      * * `site_id: &str` -- Unique Identifier of the Site.
      */
-    pub async fn get_a_site(&self, site_id: &str) -> Result<crate::types::GetSiteResponse> {
+    pub async fn get_site(&self, site_id: &str) -> Result<crate::types::GetSiteResponse> {
         let url = format!(
             "/phone/sites/{}",
             crate::progenitor_support::encode_path(&site_id.to_string()),

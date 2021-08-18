@@ -22,10 +22,7 @@ impl Compensations {
      * Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error.
      *
      */
-    pub async fn get_compensation(
-        &self,
-        compensation_id: &str,
-    ) -> Result<crate::types::Compensation> {
+    pub async fn get(&self, compensation_id: &str) -> Result<crate::types::Compensation> {
         let url = format!(
             "/v1/compensations/{}",
             crate::progenitor_support::encode_path(&compensation_id.to_string()),
@@ -43,7 +40,7 @@ impl Compensations {
      *
      * Note: Currently, jobs are arbitrarily limited to a single compensation as multiple compensations per job are not yet available in Gusto. The API is architected as if multiple compensations may exist, so integrations should integrate under the same assumption. The only exception is that creating a compensation with the same `job_id` as another will fail with a relevant error
      */
-    pub async fn put_compensation(
+    pub async fn put(
         &self,
         compensation_id: &str,
         body: &crate::types::PutCompensationRequest,
