@@ -41,9 +41,7 @@ use tripactions::Client;
 let tripactions = Client::new(
     String::from("client-id"),
     String::from("client-secret"),
-    String::from("redirect-uri"),
     String::from("token"),
-    String::from("refresh-token")
 );
 ```
 
@@ -52,7 +50,6 @@ the client in the environment:
 
 - `TRIPACTIONS_CLIENT_ID`
 - `TRIPACTIONS_CLIENT_SECRET`
-- `TRIPACTIONS_REDIRECT_URI`
 
 And then you can create a client from the environment.
 
@@ -61,34 +58,20 @@ use tripactions::Client;
 
 let tripactions = Client::new_from_env(
     String::from("token"),
-    String::from("refresh-token")
 );
 ```
 
-It is okay to pass empty values for `token` and `refresh_token`. In
-the initial state of the client, you will not know these values.
+It is okay to pass an empty value for `token`. In
+the initial state of the client, you will not know this value.
 
-To start off a fresh client and get a `token` and `refresh_token`, use the following.
+To start off a fresh client and get a `token`, use the following.
 
 ```
 use tripactions::Client;
 
 async fn do_call() {
-    let mut tripactions = Client::new_from_env("", "");
+    let mut tripactions = Client::new_from_env("");
 
-    // Get the URL to request consent from the user.
-    // You can optionally pass in scopes. If none are provided, then the
-    // resulting URL will not have any scopes.
-    let user_consent_url = tripactions.user_consent_url(&["some-scope".to_string()]);
-
-    // In your redirect URL capture the code sent and our state.
-    // Send it along to the request for the token.
-    let code = "thing-from-redirect-url";
-    let state = "state-from-redirect-url";
-    let mut access_token = tripactions.get_access_token(code, state).await.unwrap();
-
-    // You can additionally refresh the access token with the following.
-    // You must have a refresh token to be able to call this function.
-    access_token = tripactions.refresh_access_token().await.unwrap();
+    let mut access_token = tripactions.get_access_token().await.unwrap();
 }
 ```

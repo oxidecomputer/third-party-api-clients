@@ -738,3 +738,82 @@ pub fn generate_docs_generic_api_key(
         proper_name.to_lowercase(),
     )
 }
+
+pub fn generate_docs_generic_client_credentials(
+    api: &openapiv3::OpenAPI,
+    name: &str,
+    version: &str,
+    proper_name: &str,
+    spec_link: &str,
+) -> String {
+    let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
+    format!(
+        r#"{}
+//!
+//! To install the library, add the following to your `Cargo.toml` file.
+//!
+//! ```toml
+//! [dependencies]
+//! {} = "{}"
+//! ```
+//!
+//! ## Basic example
+//!
+//! Typical use will require intializing a `Client`. This requires
+//! a user agent string and set of credentials.
+//!
+//! ```
+//! use {}::Client;
+//!
+//! let {} = Client::new(
+//!     String::from("client-id"),
+//!     String::from("client-secret"),
+//!     String::from("token"),
+//! );
+//! ```
+//!
+//! Alternatively, the library can search for most of the variables required for
+//! the client in the environment:
+//!
+//! - `{}_CLIENT_ID`
+//! - `{}_CLIENT_SECRET`
+//!
+//! And then you can create a client from the environment.
+//!
+//! ```
+//! use {}::Client;
+//!
+//! let {} = Client::new_from_env(
+//!     String::from("token"),
+//! );
+//! ```
+//!
+//! It is okay to pass an empty value for `token`. In
+//! the initial state of the client, you will not know this value.
+//!
+//! To start off a fresh client and get a `token`, use the following.
+//!
+//! ```
+//! use {}::Client;
+//!
+//! async fn do_call() {{
+//!     let mut {} = Client::new_from_env("");
+//!
+//!     let mut access_token = {}.get_access_token().await.unwrap();
+//! }}
+//! ```
+//!"#,
+        info,
+        name,
+        version,
+        name,
+        proper_name.to_lowercase(),
+        proper_name.to_uppercase(),
+        proper_name.to_uppercase(),
+        name,
+        proper_name.to_lowercase(),
+        name,
+        proper_name.to_lowercase(),
+        proper_name.to_lowercase(),
+    )
+}

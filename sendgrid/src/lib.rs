@@ -27,7 +27,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! sendgrid_api = "0.2.0"
+//! sendgrid_api = "0.2.1"
 //! ```
 //!
 //! ## Basic example
@@ -247,6 +247,94 @@ impl Client {
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         let response = self.request_raw(method, uri, body).await?;
+
+        let status = response.status();
+
+        let response_body = response.bytes().await?;
+
+        if status.is_success() {
+            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            let parsed_response = if status == http::StatusCode::NO_CONTENT {
+                serde_json::from_str("null")
+            } else {
+                serde_json::from_slice::<Out>(&response_body)
+            };
+            parsed_response.map_err(Error::from)
+        } else {
+            /*println!("error status: {:?}, response payload: {}",
+                status,
+                String::from_utf8_lossy(&response_body),
+            );*/
+
+            let error = if response_body.is_empty() {
+                anyhow!("code: {}, empty response", status)
+            } else {
+                anyhow!(
+                    "code: {}, error: {:?}",
+                    status,
+                    String::from_utf8_lossy(&response_body),
+                )
+            };
+
+            Err(error)
+        }
+    }
+
+    /* TODO: make this more DRY */
+    #[allow(dead_code)]
+    async fn request_with_mime<Out>(
+        &self,
+        method: reqwest::Method,
+        uri: &str,
+        content: &[u8],
+        mime_type: &str,
+    ) -> Result<Out>
+    where
+        Out: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let u = if uri.starts_with("https://") {
+            uri.to_string()
+        } else {
+            (DEFAULT_HOST.to_string() + uri).to_string()
+        };
+        let (url, auth) = self.url_and_auth(&u).await?;
+
+        let instance = <&Client>::clone(&self);
+
+        let mut req = instance.client.request(method, url);
+
+        // Set the default headers.
+        req = req.header(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_bytes(mime_type.as_bytes()).unwrap(),
+        );
+        // We are likely uploading a file so add the right headers.
+        req = req.header(
+            reqwest::header::HeaderName::from_static("x-upload-content-type"),
+            reqwest::header::HeaderValue::from_static("application/octet-stream"),
+        );
+        req = req.header(
+            reqwest::header::HeaderName::from_static("x-upload-content-length"),
+            reqwest::header::HeaderValue::from_bytes(format!("{}", content.len()).as_bytes())
+                .unwrap(),
+        );
+
+        if let Some(auth_str) = auth {
+            req = req.header(http::header::AUTHORIZATION, &*auth_str);
+        }
+
+        if content.len() > 1 {
+            let b = bytes::Bytes::copy_from_slice(content);
+            // We are uploading a file so add that as the body.
+            req = req.body(b);
+        }
+
+        //println!("Request: {:?}", &req);
+        let response = req.send().await?;
 
         let status = response.status();
 

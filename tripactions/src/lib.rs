@@ -39,9 +39,7 @@
 //! let tripactions = Client::new(
 //!     String::from("client-id"),
 //!     String::from("client-secret"),
-//!     String::from("redirect-uri"),
 //!     String::from("token"),
-//!     String::from("refresh-token"),
 //! );
 //! ```
 //!
@@ -50,41 +48,27 @@
 //!
 //! - `TRIPACTIONS_CLIENT_ID`
 //! - `TRIPACTIONS_CLIENT_SECRET`
-//! - `TRIPACTIONS_REDIRECT_URI`
 //!
 //! And then you can create a client from the environment.
 //!
 //! ```
 //! use tripactions::Client;
 //!
-//! let tripactions = Client::new_from_env(String::from("token"), String::from("refresh-token"));
+//! let tripactions = Client::new_from_env(String::from("token"));
 //! ```
 //!
-//! It is okay to pass empty values for `token` and `refresh_token`. In
-//! the initial state of the client, you will not know these values.
+//! It is okay to pass an empty value for `token`. In
+//! the initial state of the client, you will not know this value.
 //!
-//! To start off a fresh client and get a `token` and `refresh_token`, use the following.
+//! To start off a fresh client and get a `token`, use the following.
 //!
 //! ```
 //! use tripactions::Client;
 //!
 //! async fn do_call() {
-//!     let mut tripactions = Client::new_from_env("", "");
+//!     let mut tripactions = Client::new_from_env("");
 //!
-//!     // Get the URL to request consent from the user.
-//!     // You can optionally pass in scopes. If none are provided, then the
-//!     // resulting URL will not have any scopes.
-//!     let user_consent_url = tripactions.user_consent_url(&["some-scope".to_string()]);
-//!
-//!     // In your redirect URL capture the code sent and our state.
-//!     // Send it along to the request for the token.
-//!     let code = "thing-from-redirect-url";
-//!     let state = "state-from-redirect-url";
-//!     let mut access_token = tripactions.get_access_token(code, state).await.unwrap();
-//!
-//!     // You can additionally refresh the access token with the following.
-//!     // You must have a refresh token to be able to call this function.
-//!     access_token = tripactions.refresh_access_token().await.unwrap();
+//!     let mut access_token = tripactions.get_access_token().await.unwrap();
 //! }
 //! ```
 #![feature(async_stream)]
@@ -128,25 +112,20 @@ mod progenitor_support {
 
 use std::env;
 
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
-
 const TOKEN_ENDPOINT: &str = "https://api.tripactions.com/ta-auth/oauth/token";
-const USER_CONSENT_ENDPOINT: &str = "https://";
 
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
     token: String,
-    // This will expire within a certain amount of time as determined by the
-    // expiration date passed back in the initial request.
-    refresh_token: String,
     client_id: String,
     client_secret: String,
-    redirect_uri: String,
 
     client: reqwest::Client,
 }
+
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, JsonSchema, Clone, Default, Serialize, Deserialize)]
 pub struct AccessToken {
@@ -187,38 +166,21 @@ impl Client {
     /// Create a new Client struct. It takes a type that can convert into
     /// an &str (`String` or `Vec<u8>` for example). As long as the function is
     /// given a valid API key your requests will work.
-    pub fn new<I, K, R, T, Q>(
-        client_id: I,
-        client_secret: K,
-        redirect_uri: R,
-        token: T,
-        refresh_token: Q,
-    ) -> Self
+    pub fn new<I, K, T>(client_id: I, client_secret: K, token: T) -> Self
     where
         I: ToString,
         K: ToString,
-        R: ToString,
         T: ToString,
-        Q: ToString,
     {
         let client = reqwest::Client::builder().build();
         match client {
-            Ok(c) => {
-                // We do not refresh the access token here since we leave that up to the
-                // user to do so they can re-save it to their database.
-                // TODO: But in the future we should save the expires in date and refresh it
-                // if it needs to be refreshed.
-                //
-                Client {
-                    client_id: client_id.to_string(),
-                    client_secret: client_secret.to_string(),
-                    redirect_uri: redirect_uri.to_string(),
-                    token: token.to_string(),
-                    refresh_token: refresh_token.to_string(),
+            Ok(c) => Client {
+                client_id: client_id.to_string(),
+                client_secret: client_secret.to_string(),
+                token: token.to_string(),
 
-                    client: c,
-                }
-            }
+                client: c,
+            },
             Err(e) => panic!("creating reqwest client failed: {:?}", e),
         }
     }
@@ -229,16 +191,45 @@ impl Client {
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
-    pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
+    pub fn new_from_env<T>(token: T) -> Self
     where
         T: ToString,
-        R: ToString,
     {
         let client_id = env::var("TRIPACTIONS_CLIENT_ID").unwrap();
         let client_secret = env::var("TRIPACTIONS_CLIENT_SECRET").unwrap();
-        let redirect_uri = env::var("TRIPACTIONS_REDIRECT_URI").unwrap();
 
-        Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
+        Client::new(client_id, client_secret, token)
+    }
+
+    /// Get an access token from the code returned by the URL paramter sent to the
+    /// redirect URL.
+    pub async fn get_access_token(&mut self) -> Result<AccessToken> {
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.append(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+
+        let params = [
+            ("grant_type", "client_credentials"),
+            ("client_id", &self.client_id),
+            ("client_secret", &self.client_secret),
+        ];
+        let client = reqwest::Client::new();
+        let resp = client
+            .post(TOKEN_ENDPOINT)
+            .headers(headers)
+            .form(&params)
+            .basic_auth(&self.client_id, Some(&self.client_secret))
+            .send()
+            .await?;
+
+        // Unwrap the response.
+        let t: AccessToken = resp.json().await?;
+
+        self.token = t.access_token.to_string();
+
+        Ok(t)
     }
 
     async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
@@ -416,97 +407,6 @@ impl Client {
 
             Err(error)
         }
-    }
-
-    /// Return a user consent url with an optional set of scopes.
-    /// If no scopes are provided, they will not be passed in the url.
-    pub fn user_consent_url(&self, scopes: &[String]) -> String {
-        let state = uuid::Uuid::new_v4();
-
-        let url = format!(
-            "{}?client_id={}&response_type=code&redirect_uri={}&state={}",
-            USER_CONSENT_ENDPOINT, self.client_id, self.redirect_uri, state
-        );
-
-        if scopes.is_empty() {
-            return url;
-        }
-
-        // Add the scopes.
-        format!("{}&scope={}", url, scopes.join(" "))
-    }
-
-    /// Refresh an access token from a refresh token. Client must have a refresh token
-    /// for this to work.
-    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
-        if self.refresh_token.is_empty() {
-            anyhow!("refresh token cannot be empty");
-        }
-
-        let mut headers = reqwest::header::HeaderMap::new();
-        headers.append(
-            reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
-
-        let params = [
-            ("grant_type", "refresh_token"),
-            ("refresh_token", &self.refresh_token),
-            ("client_id", &self.client_id),
-            ("client_secret", &self.client_secret),
-            ("redirect_uri", &self.redirect_uri),
-        ];
-        let client = reqwest::Client::new();
-        let resp = client
-            .post(TOKEN_ENDPOINT)
-            .headers(headers)
-            .form(&params)
-            .basic_auth(&self.client_id, Some(&self.client_secret))
-            .send()
-            .await?;
-
-        // Unwrap the response.
-        let t: AccessToken = resp.json().await?;
-
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
-
-        Ok(t)
-    }
-
-    /// Get an access token from the code returned by the URL paramter sent to the
-    /// redirect URL.
-    pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<AccessToken> {
-        let mut headers = reqwest::header::HeaderMap::new();
-        headers.append(
-            reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
-
-        let params = [
-            ("grant_type", "authorization_code"),
-            ("code", code),
-            ("client_id", &self.client_id),
-            ("client_secret", &self.client_secret),
-            ("redirect_uri", &self.redirect_uri),
-            ("state", state),
-        ];
-        let client = reqwest::Client::new();
-        let resp = client
-            .post(TOKEN_ENDPOINT)
-            .headers(headers)
-            .form(&params)
-            .basic_auth(&self.client_id, Some(&self.client_secret))
-            .send()
-            .await?;
-
-        // Unwrap the response.
-        let t: AccessToken = resp.json().await?;
-
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
-
-        Ok(t)
     }
 
     async fn request_entity<D>(

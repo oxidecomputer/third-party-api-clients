@@ -143,9 +143,6 @@ mod progenitor_support {
 
 use std::env;
 
-use schemars::JsonSchema;
-use serde::{Deserialize, Serialize};
-
 const TOKEN_ENDPOINT: &str = "https://oauth2.googleapis.com/token";
 const USER_CONSENT_ENDPOINT: &str = "https://";
 
@@ -162,6 +159,9 @@ pub struct Client {
 
     client: reqwest::Client,
 }
+
+use schemars::JsonSchema;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, JsonSchema, Clone, Default, Serialize, Deserialize)]
 pub struct AccessToken {
@@ -284,6 +284,97 @@ impl Client {
             }
             Err(e) => panic!("creating reqwest client failed: {:?}", e),
         }
+    }
+
+    /// Return a user consent url with an optional set of scopes.
+    /// If no scopes are provided, they will not be passed in the url.
+    pub fn user_consent_url(&self, scopes: &[String]) -> String {
+        let state = uuid::Uuid::new_v4();
+
+        let url = format!(
+            "{}?client_id={}&response_type=code&redirect_uri={}&state={}",
+            USER_CONSENT_ENDPOINT, self.client_id, self.redirect_uri, state
+        );
+
+        if scopes.is_empty() {
+            return url;
+        }
+
+        // Add the scopes.
+        format!("{}&scope={}", url, scopes.join(" "))
+    }
+
+    /// Refresh an access token from a refresh token. Client must have a refresh token
+    /// for this to work.
+    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
+        if self.refresh_token.is_empty() {
+            anyhow!("refresh token cannot be empty");
+        }
+
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.append(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+
+        let params = [
+            ("grant_type", "refresh_token"),
+            ("refresh_token", &self.refresh_token),
+            ("client_id", &self.client_id),
+            ("client_secret", &self.client_secret),
+            ("redirect_uri", &self.redirect_uri),
+        ];
+        let client = reqwest::Client::new();
+        let resp = client
+            .post(TOKEN_ENDPOINT)
+            .headers(headers)
+            .form(&params)
+            .basic_auth(&self.client_id, Some(&self.client_secret))
+            .send()
+            .await?;
+
+        // Unwrap the response.
+        let t: AccessToken = resp.json().await?;
+
+        self.token = t.access_token.to_string();
+        self.refresh_token = t.refresh_token.to_string();
+
+        Ok(t)
+    }
+
+    /// Get an access token from the code returned by the URL paramter sent to the
+    /// redirect URL.
+    pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<AccessToken> {
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.append(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+
+        let params = [
+            ("grant_type", "authorization_code"),
+            ("code", code),
+            ("client_id", &self.client_id),
+            ("client_secret", &self.client_secret),
+            ("redirect_uri", &self.redirect_uri),
+            ("state", state),
+        ];
+        let client = reqwest::Client::new();
+        let resp = client
+            .post(TOKEN_ENDPOINT)
+            .headers(headers)
+            .form(&params)
+            .basic_auth(&self.client_id, Some(&self.client_secret))
+            .send()
+            .await?;
+
+        // Unwrap the response.
+        let t: AccessToken = resp.json().await?;
+
+        self.token = t.access_token.to_string();
+        self.refresh_token = t.refresh_token.to_string();
+
+        Ok(t)
     }
 
     async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
@@ -461,97 +552,6 @@ impl Client {
 
             Err(error)
         }
-    }
-
-    /// Return a user consent url with an optional set of scopes.
-    /// If no scopes are provided, they will not be passed in the url.
-    pub fn user_consent_url(&self, scopes: &[String]) -> String {
-        let state = uuid::Uuid::new_v4();
-
-        let url = format!(
-            "{}?client_id={}&response_type=code&redirect_uri={}&state={}",
-            USER_CONSENT_ENDPOINT, self.client_id, self.redirect_uri, state
-        );
-
-        if scopes.is_empty() {
-            return url;
-        }
-
-        // Add the scopes.
-        format!("{}&scope={}", url, scopes.join(" "))
-    }
-
-    /// Refresh an access token from a refresh token. Client must have a refresh token
-    /// for this to work.
-    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
-        if self.refresh_token.is_empty() {
-            anyhow!("refresh token cannot be empty");
-        }
-
-        let mut headers = reqwest::header::HeaderMap::new();
-        headers.append(
-            reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
-
-        let params = [
-            ("grant_type", "refresh_token"),
-            ("refresh_token", &self.refresh_token),
-            ("client_id", &self.client_id),
-            ("client_secret", &self.client_secret),
-            ("redirect_uri", &self.redirect_uri),
-        ];
-        let client = reqwest::Client::new();
-        let resp = client
-            .post(TOKEN_ENDPOINT)
-            .headers(headers)
-            .form(&params)
-            .basic_auth(&self.client_id, Some(&self.client_secret))
-            .send()
-            .await?;
-
-        // Unwrap the response.
-        let t: AccessToken = resp.json().await?;
-
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
-
-        Ok(t)
-    }
-
-    /// Get an access token from the code returned by the URL paramter sent to the
-    /// redirect URL.
-    pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<AccessToken> {
-        let mut headers = reqwest::header::HeaderMap::new();
-        headers.append(
-            reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
-
-        let params = [
-            ("grant_type", "authorization_code"),
-            ("code", code),
-            ("client_id", &self.client_id),
-            ("client_secret", &self.client_secret),
-            ("redirect_uri", &self.redirect_uri),
-            ("state", state),
-        ];
-        let client = reqwest::Client::new();
-        let resp = client
-            .post(TOKEN_ENDPOINT)
-            .headers(headers)
-            .form(&params)
-            .basic_auth(&self.client_id, Some(&self.client_secret))
-            .send()
-            .await?;
-
-        // Unwrap the response.
-        let t: AccessToken = resp.json().await?;
-
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
-
-        Ok(t)
     }
 
     async fn request_entity<D>(

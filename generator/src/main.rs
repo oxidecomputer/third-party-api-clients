@@ -2348,6 +2348,11 @@ fn gen(
         a(crate::client::GITHUB_TEMPLATE);
     } else if proper_name == "SendGrid" || proper_name == "Giphy" {
         a(&crate::client::generate_client_generic_api_key(proper_name));
+    } else if proper_name == "TripActions" {
+        a(&crate::client::generate_client_generic_client_credentials(
+            proper_name,
+            token_endpoint,
+        ));
     } else {
         a(&crate::client::generate_client_generic_token(
             proper_name,
@@ -3119,6 +3124,14 @@ rustdoc-args = ["--cfg", "docsrs"]
                 )
             } else if proper_name == "SendGrid" || proper_name == "Giphy" {
                 template::generate_docs_generic_api_key(
+                    &api,
+                    &to_snake_case(&name),
+                    &version,
+                    &proper_name,
+                    &spec_link,
+                )
+            } else if proper_name == "TripActions" {
+                template::generate_docs_generic_client_credentials(
                     &api,
                     &to_snake_case(&name),
                     &version,

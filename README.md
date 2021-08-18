@@ -4,6 +4,7 @@ A place for keeping all our generated third party API clients.
 
 ## Clients Generated
 - [DocuSign](docusign/) [![docs.rs](https://docs.rs/docusign/badge.svg)](https://docs.rs/docusign)
+- [Giphy](giphy/) [![docs.rs](https://docs.rs/giphy-api/badge.svg)](https://docs.rs/giphy-api)
 - [GitHub](github/) [![docs.rs](https://docs.rs/octorust/badge.svg)](https://docs.rs/octorust)
 - [Google Admin](google/admin/) [![docs.rs](https://docs.rs/gsuite-api/badge.svg)](https://docs.rs/gsuite-api)
 - [Google Calendar](google/calendar/) [![docs.rs](https://docs.rs/google-calendar/badge.svg)](https://docs.rs/google-calendar)
