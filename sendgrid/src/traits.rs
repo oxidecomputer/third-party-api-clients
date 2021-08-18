@@ -31,7 +31,7 @@ impl MailOps for crate::mail_send::MailSend {
         bccs: &[String],
         from: &str,
     ) -> Result<()> {
-        let mut mail: PostMailSendRequest = Default::default();
+        let mut mail: crate::types::PostMailSendRequest = Default::default();
         mail.subject = subject.to_string();
         mail.from = crate::types::FromEmailObject {
             email: from.to_string(),

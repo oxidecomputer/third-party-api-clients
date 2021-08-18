@@ -4,25 +4,25 @@
 //!
 //! The Zoom API allows developers to access information from Zoom. You can use this API to build private services or public applications on the [Zoom App Marketplace](http://marketplace.zoom.us). To learn how to get your credentials and create private/public applications, read our [Authorization Guide](https://marketplace.zoom.us/docs/guides/authorization/credentials).
 //! All endpoints are available via `https` and are located at `api.zoom.us/v2/`.
-//! 
+//!
 //! For instance you can list all users on an account via `https://api.zoom.us/v2/users/`.
 //!
 //! [API Terms of Service](https://zoom.us/docs/en-us/zoom_api_license_and_tou.html)
 //!
 //! ### Contact
 //!
-//! 
+//!
 //! | name | url | email |
 //! |----|----|----|
 //! | Zoom Developers | <https://developer.zoom.us/> | developersupport@zoom.us |
-//! 
+//!
 //! ### License
 //!
-//! 
+//!
 //! | name | url |
 //! |----|----|
 //! | MIT for OAS 2.0 | <https://opensource.org/licenses/MIT> |
-//! 
+//!
 //!
 //! ## Client Details
 //!
@@ -30,7 +30,7 @@
 //! specs](https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json) based on API spec version `2.0.0`. This way it will remain
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
-//! 
+//!
 //!
 //! To install the library, add the following to your `Cargo.toml` file.
 //!
@@ -52,7 +52,7 @@
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
 //!     String::from("token"),
-//!     String::from("refresh-token")
+//!     String::from("refresh-token"),
 //! );
 //! ```
 //!
@@ -68,10 +68,7 @@
 //! ```
 //! use zoom_api::Client;
 //!
-//! let zoom = Client::new_from_env(
-//!     String::from("token"),
-//!     String::from("refresh-token")
-//! );
+//! let zoom = Client::new_from_env(String::from("token"), String::from("refresh-token"));
 //! ```
 //!
 //! It is okay to pass empty values for `token` and `refresh_token`. In
@@ -101,7 +98,6 @@
 //!     access_token = zoom.refresh_access_token().await.unwrap();
 //! }
 //! ```
-//!
 #![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
@@ -110,11 +106,6 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-#[cfg(test)]
-mod tests;
-pub mod types;
-#[doc(hidden)]
-pub mod utils;
 pub mod accounts;
 pub mod archiving;
 pub mod billing;
@@ -149,9 +140,14 @@ pub mod rooms_devices;
 pub mod rooms_location;
 pub mod sip_connected_audio;
 pub mod sip_phone;
+#[cfg(test)]
+mod tests;
 pub mod tracking_field;
 pub mod tsp;
+pub mod types;
 pub mod users;
+#[doc(hidden)]
+pub mod utils;
 pub mod webinars;
 
 use anyhow::{anyhow, Error, Result};
@@ -159,7 +155,7 @@ use anyhow::{anyhow, Error, Result};
 pub const DEFAULT_HOST: &str = "https://api.zoom.us/v2";
 
 mod progenitor_support {
-    use percent_encoding::{AsciiSet, CONTROLS, utf8_percent_encode};
+    use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
 
     const PATH_SET: &AsciiSet = &CONTROLS
         .add(b' ')
@@ -177,7 +173,6 @@ mod progenitor_support {
         utf8_percent_encode(pc, PATH_SET).to_string()
     }
 }
-
 
 use std::env;
 
@@ -276,35 +271,25 @@ impl Client {
         }
     }
 
-    
-/// Create a new Client struct from environment variables. It
-/// takes a type that can convert into
-/// an &str (`String` or `Vec<u8>` for example). As long as the function is
-/// given a valid API key and your requests will work.
-/// We pass in the token and refresh token to the client so if you are storing
-/// it in a database, you can get it first.
-pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
-where
-    T: ToString,
-    R: ToString,
-{
-    let client_id = env::var("ZOOM_CLIENT_ID").unwrap();
-    let client_secret = env::var("ZOOM_CLIENT_SECRET").unwrap();
-    let redirect_uri = env::var("ZOOM_REDIRECT_URI").unwrap();
+    /// Create a new Client struct from environment variables. It
+    /// takes a type that can convert into
+    /// an &str (`String` or `Vec<u8>` for example). As long as the function is
+    /// given a valid API key and your requests will work.
+    /// We pass in the token and refresh token to the client so if you are storing
+    /// it in a database, you can get it first.
+    pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
+    where
+        T: ToString,
+        R: ToString,
+    {
+        let client_id = env::var("ZOOM_CLIENT_ID").unwrap();
+        let client_secret = env::var("ZOOM_CLIENT_SECRET").unwrap();
+        let redirect_uri = env::var("ZOOM_REDIRECT_URI").unwrap();
 
-    Client::new(
-        client_id,
-        client_secret,
-        redirect_uri,
-        token,
-        refresh_token,
-    )
-}
+        Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
+    }
 
-    async fn url_and_auth(
-        &self,
-        uri: &str,
-    ) -> Result<(reqwest::Url, Option<String>)> {
+    async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
         let parsed_url = uri.parse::<reqwest::Url>();
 
         let auth = format!("Bearer {}", self.token);
@@ -316,8 +301,7 @@ where
         method: reqwest::Method,
         uri: &str,
         body: Option<reqwest::Body>,
-    ) -> Result<reqwest::Response>
-    {
+    ) -> Result<reqwest::Response> {
         let u = if uri.starts_with("https://") {
             uri.to_string()
         } else {
@@ -357,7 +341,7 @@ where
         uri: &str,
         body: Option<reqwest::Body>,
     ) -> Result<Out>
-        where
+    where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         let response = self.request_raw(method, uri, body).await?;
@@ -403,7 +387,7 @@ where
         content: &[u8],
         mime_type: &str,
     ) -> Result<Out>
-        where
+    where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
         let u = if uri.starts_with("https://") {
@@ -433,7 +417,8 @@ where
         );
         req = req.header(
             reqwest::header::HeaderName::from_static("x-upload-content-length"),
-            reqwest::header::HeaderValue::from_bytes(format!("{}", content.len()).as_bytes()).unwrap(),
+            reqwest::header::HeaderValue::from_bytes(format!("{}", content.len()).as_bytes())
+                .unwrap(),
         );
 
         if let Some(auth_str) = auth {
@@ -490,9 +475,7 @@ where
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        let r = self
-            .request(method, uri, body)
-            .await?;
+        let r = self.request(method, uri, body).await?;
         Ok(r)
     }
 
@@ -590,7 +573,7 @@ where
     }
 
     #[allow(dead_code)]
-    async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
+    async fn get<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -598,11 +581,12 @@ where
             http::Method::GET,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
-    async fn get_all_pages<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -611,7 +595,8 @@ where
             http::Method::GET,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -623,7 +608,8 @@ where
             http::Method::POST,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -635,7 +621,8 @@ where
             http::Method::PATCH,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -647,7 +634,8 @@ where
             http::Method::PUT,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
     #[allow(dead_code)]
@@ -659,159 +647,161 @@ where
             http::Method::DELETE,
             &(DEFAULT_HOST.to_string() + uri),
             message,
-        ).await
+        )
+        .await
     }
 
-pub fn accounts(&self) -> accounts::Accounts {
-                    accounts::Accounts::new(self.clone())
-               }
+    pub fn accounts(&self) -> accounts::Accounts {
+        accounts::Accounts::new(self.clone())
+    }
 
-pub fn archiving(&self) -> archiving::Archiving {
-                    archiving::Archiving::new(self.clone())
-               }
+    pub fn archiving(&self) -> archiving::Archiving {
+        archiving::Archiving::new(self.clone())
+    }
 
-pub fn billing(&self) -> billing::Billing {
-                    billing::Billing::new(self.clone())
-               }
+    pub fn billing(&self) -> billing::Billing {
+        billing::Billing::new(self.clone())
+    }
 
-pub fn chat_channels(&self) -> chat_channels::ChatChannels {
-                    chat_channels::ChatChannels::new(self.clone())
-               }
+    pub fn chat_channels(&self) -> chat_channels::ChatChannels {
+        chat_channels::ChatChannels::new(self.clone())
+    }
 
-pub fn chat_channels_account_level(&self) -> chat_channels_account_level::ChatChannelsAccountLevel {
-                    chat_channels_account_level::ChatChannelsAccountLevel::new(self.clone())
-               }
+    pub fn chat_channels_account_level(
+        &self,
+    ) -> chat_channels_account_level::ChatChannelsAccountLevel {
+        chat_channels_account_level::ChatChannelsAccountLevel::new(self.clone())
+    }
 
-pub fn chat_messages(&self) -> chat_messages::ChatMessages {
-                    chat_messages::ChatMessages::new(self.clone())
-               }
+    pub fn chat_messages(&self) -> chat_messages::ChatMessages {
+        chat_messages::ChatMessages::new(self.clone())
+    }
 
-pub fn chatbot_messages(&self) -> chatbot_messages::ChatbotMessages {
-                    chatbot_messages::ChatbotMessages::new(self.clone())
-               }
+    pub fn chatbot_messages(&self) -> chatbot_messages::ChatbotMessages {
+        chatbot_messages::ChatbotMessages::new(self.clone())
+    }
 
-pub fn cloud_recording(&self) -> cloud_recording::CloudRecording {
-                    cloud_recording::CloudRecording::new(self.clone())
-               }
+    pub fn cloud_recording(&self) -> cloud_recording::CloudRecording {
+        cloud_recording::CloudRecording::new(self.clone())
+    }
 
-pub fn common_area_phones(&self) -> common_area_phones::CommonAreaPhones {
-                    common_area_phones::CommonAreaPhones::new(self.clone())
-               }
+    pub fn common_area_phones(&self) -> common_area_phones::CommonAreaPhones {
+        common_area_phones::CommonAreaPhones::new(self.clone())
+    }
 
-pub fn contacts(&self) -> contacts::Contacts {
-                    contacts::Contacts::new(self.clone())
-               }
+    pub fn contacts(&self) -> contacts::Contacts {
+        contacts::Contacts::new(self.clone())
+    }
 
-pub fn dashboards(&self) -> dashboards::Dashboards {
-                    dashboards::Dashboards::new(self.clone())
-               }
+    pub fn dashboards(&self) -> dashboards::Dashboards {
+        dashboards::Dashboards::new(self.clone())
+    }
 
-pub fn deprecated_api_endpoints(&self) -> deprecated_api_endpoints::DeprecatedApiEndpoints {
-                    deprecated_api_endpoints::DeprecatedApiEndpoints::new(self.clone())
-               }
+    pub fn deprecated_api_endpoints(&self) -> deprecated_api_endpoints::DeprecatedApiEndpoints {
+        deprecated_api_endpoints::DeprecatedApiEndpoints::new(self.clone())
+    }
 
-pub fn devices(&self) -> devices::Devices {
-                    devices::Devices::new(self.clone())
-               }
+    pub fn devices(&self) -> devices::Devices {
+        devices::Devices::new(self.clone())
+    }
 
-pub fn groups(&self) -> groups::Groups {
-                    groups::Groups::new(self.clone())
-               }
+    pub fn groups(&self) -> groups::Groups {
+        groups::Groups::new(self.clone())
+    }
 
-pub fn im_chat(&self) -> im_chat::ImChat {
-                    im_chat::ImChat::new(self.clone())
-               }
+    pub fn im_chat(&self) -> im_chat::ImChat {
+        im_chat::ImChat::new(self.clone())
+    }
 
-pub fn im_groups(&self) -> im_groups::ImGroups {
-                    im_groups::ImGroups::new(self.clone())
-               }
+    pub fn im_groups(&self) -> im_groups::ImGroups {
+        im_groups::ImGroups::new(self.clone())
+    }
 
-pub fn meetings(&self) -> meetings::Meetings {
-                    meetings::Meetings::new(self.clone())
-               }
+    pub fn meetings(&self) -> meetings::Meetings {
+        meetings::Meetings::new(self.clone())
+    }
 
-pub fn pac(&self) -> pac::Pac {
-                    pac::Pac::new(self.clone())
-               }
+    pub fn pac(&self) -> pac::Pac {
+        pac::Pac::new(self.clone())
+    }
 
-pub fn phone(&self) -> phone::Phone {
-                    phone::Phone::new(self.clone())
-               }
+    pub fn phone(&self) -> phone::Phone {
+        phone::Phone::new(self.clone())
+    }
 
-pub fn phone_auto_receptionists(&self) -> phone_auto_receptionists::PhoneAutoReceptionists {
-                    phone_auto_receptionists::PhoneAutoReceptionists::new(self.clone())
-               }
+    pub fn phone_auto_receptionists(&self) -> phone_auto_receptionists::PhoneAutoReceptionists {
+        phone_auto_receptionists::PhoneAutoReceptionists::new(self.clone())
+    }
 
-pub fn phone_blocked_list(&self) -> phone_blocked_list::PhoneBlockedList {
-                    phone_blocked_list::PhoneBlockedList::new(self.clone())
-               }
+    pub fn phone_blocked_list(&self) -> phone_blocked_list::PhoneBlockedList {
+        phone_blocked_list::PhoneBlockedList::new(self.clone())
+    }
 
-pub fn phone_call_queues(&self) -> phone_call_queues::PhoneCallQueues {
-                    phone_call_queues::PhoneCallQueues::new(self.clone())
-               }
+    pub fn phone_call_queues(&self) -> phone_call_queues::PhoneCallQueues {
+        phone_call_queues::PhoneCallQueues::new(self.clone())
+    }
 
-pub fn phone_devices(&self) -> phone_devices::PhoneDevices {
-                    phone_devices::PhoneDevices::new(self.clone())
-               }
+    pub fn phone_devices(&self) -> phone_devices::PhoneDevices {
+        phone_devices::PhoneDevices::new(self.clone())
+    }
 
-pub fn phone_reports(&self) -> phone_reports::PhoneReports {
-                    phone_reports::PhoneReports::new(self.clone())
-               }
+    pub fn phone_reports(&self) -> phone_reports::PhoneReports {
+        phone_reports::PhoneReports::new(self.clone())
+    }
 
-pub fn phone_shared_line_groups(&self) -> phone_shared_line_groups::PhoneSharedLineGroups {
-                    phone_shared_line_groups::PhoneSharedLineGroups::new(self.clone())
-               }
+    pub fn phone_shared_line_groups(&self) -> phone_shared_line_groups::PhoneSharedLineGroups {
+        phone_shared_line_groups::PhoneSharedLineGroups::new(self.clone())
+    }
 
-pub fn phone_site(&self) -> phone_site::PhoneSite {
-                    phone_site::PhoneSite::new(self.clone())
-               }
+    pub fn phone_site(&self) -> phone_site::PhoneSite {
+        phone_site::PhoneSite::new(self.clone())
+    }
 
-pub fn reports(&self) -> reports::Reports {
-                    reports::Reports::new(self.clone())
-               }
+    pub fn reports(&self) -> reports::Reports {
+        reports::Reports::new(self.clone())
+    }
 
-pub fn roles(&self) -> roles::Roles {
-                    roles::Roles::new(self.clone())
-               }
+    pub fn roles(&self) -> roles::Roles {
+        roles::Roles::new(self.clone())
+    }
 
-pub fn rooms(&self) -> rooms::Rooms {
-                    rooms::Rooms::new(self.clone())
-               }
+    pub fn rooms(&self) -> rooms::Rooms {
+        rooms::Rooms::new(self.clone())
+    }
 
-pub fn rooms_account(&self) -> rooms_account::RoomsAccount {
-                    rooms_account::RoomsAccount::new(self.clone())
-               }
+    pub fn rooms_account(&self) -> rooms_account::RoomsAccount {
+        rooms_account::RoomsAccount::new(self.clone())
+    }
 
-pub fn rooms_devices(&self) -> rooms_devices::RoomsDevices {
-                    rooms_devices::RoomsDevices::new(self.clone())
-               }
+    pub fn rooms_devices(&self) -> rooms_devices::RoomsDevices {
+        rooms_devices::RoomsDevices::new(self.clone())
+    }
 
-pub fn rooms_location(&self) -> rooms_location::RoomsLocation {
-                    rooms_location::RoomsLocation::new(self.clone())
-               }
+    pub fn rooms_location(&self) -> rooms_location::RoomsLocation {
+        rooms_location::RoomsLocation::new(self.clone())
+    }
 
-pub fn sip_connected_audio(&self) -> sip_connected_audio::SipConnectedAudio {
-                    sip_connected_audio::SipConnectedAudio::new(self.clone())
-               }
+    pub fn sip_connected_audio(&self) -> sip_connected_audio::SipConnectedAudio {
+        sip_connected_audio::SipConnectedAudio::new(self.clone())
+    }
 
-pub fn sip_phone(&self) -> sip_phone::SipPhone {
-                    sip_phone::SipPhone::new(self.clone())
-               }
+    pub fn sip_phone(&self) -> sip_phone::SipPhone {
+        sip_phone::SipPhone::new(self.clone())
+    }
 
-pub fn tracking_field(&self) -> tracking_field::TrackingField {
-                    tracking_field::TrackingField::new(self.clone())
-               }
+    pub fn tracking_field(&self) -> tracking_field::TrackingField {
+        tracking_field::TrackingField::new(self.clone())
+    }
 
-pub fn tsp(&self) -> tsp::Tsp {
-                    tsp::Tsp::new(self.clone())
-               }
+    pub fn tsp(&self) -> tsp::Tsp {
+        tsp::Tsp::new(self.clone())
+    }
 
-pub fn users(&self) -> users::Users {
-                    users::Users::new(self.clone())
-               }
+    pub fn users(&self) -> users::Users {
+        users::Users::new(self.clone())
+    }
 
-pub fn webinars(&self) -> webinars::Webinars {
-                    webinars::Webinars::new(self.clone())
-               }
-
+    pub fn webinars(&self) -> webinars::Webinars {
+        webinars::Webinars::new(self.clone())
+    }
 }
