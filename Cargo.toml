@@ -10,6 +10,7 @@ members = [
 	"google/groups-settings",
 	"google/sheets",
 	"gusto",
+	"mailchimp",
 	"ramp",
 	"sendgrid",
 	"tripactions",

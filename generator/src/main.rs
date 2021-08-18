@@ -269,6 +269,9 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         "ISO 8601 date-time" => {
                                             "chrono::DateTime<chrono::Utc>".to_string()
                                         }
+                                        "Promo date-time" => {
+                                            "chrono::DateTime<chrono::Utc>".to_string()
+                                        }
                                         "ipv4" => "std::net::Ipv4Addr".to_string(),
                                         "uri" => "&str".to_string(),
                                         "uri-template" => "&str".to_string(),
@@ -1219,14 +1222,31 @@ impl TypeSpace {
                             "",
                             is_reference,
                         );
+                    } else if !name.contains("links") {
+                        // Let's try to append "type" onto the end and see if that helps.
+                        let new_name = format!("{} links", name);
+                        return self.add_if_not_exists(
+                            Some(clean_name(&new_name)),
+                            details,
+                            "",
+                            is_reference,
+                        );
+                    } else if !name.contains("object") {
+                        // Let's try to append "type" onto the end and see if that helps.
+                        let new_name = format!("{} object", name);
+                        return self.add_if_not_exists(
+                            Some(clean_name(&new_name)),
+                            details,
+                            "",
+                            is_reference,
+                        );
                     }
 
                     // If we don't have anything to append, let's bail.
                     // WE ARE RUNNING OUT OF NAMES AND WE TRIED.
                     bail!(
-                        "we ran out of unique names for this thing {}: {:?} != {:?}",
+                        "we ran out of unique names for this thing {}: {:?}",
                         name,
-                        et.details,
                         details,
                     );
                 }
@@ -1469,6 +1489,10 @@ impl TypeSpace {
                         }
                     });
 
+                    if self.name_to_id.get(&name).is_some() && !parent_name.is_empty() {
+                        name = clean_name(&format!("{} {}", parent_name, name));
+                    }
+
                     // TODO: this is a horrible fix just for google!
                     if name == "user custom properties" {
                         return Ok((
@@ -1702,6 +1726,13 @@ impl TypeSpace {
                                 ),
                             )),
                             "ISO 8601 date-time" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic(
+                                    "Option<chrono::DateTime<chrono::Utc>>".to_string(),
+                                    s.schema_data.clone(),
+                                ),
+                            )),
+                            "Promo date-time" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic(
                                     "Option<chrono::DateTime<chrono::Utc>>".to_string(),
