@@ -79,6 +79,9 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                         || sn == "Payload"
                         || sn == "Actor"
                         || sn == "File"
+                        || sn == "PostMailSendRequest"
+                        || sn == "FromEmailObject"
+                        || sn == "Personalizations"
                     {
                         a(
                             "#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, \

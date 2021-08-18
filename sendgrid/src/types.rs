@@ -854,7 +854,7 @@ pub struct LinkBranding200Response {
     pub valid: bool,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FromEmailObject {
     /**
      * The license key provided with your New Relic account.
@@ -7770,7 +7770,7 @@ pub struct TraitMakoErrorResponse400 {
     pub errors: Vec<TraitMakoErrorResponse400Errors>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Personalizations {
     /**
      * An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
@@ -8235,7 +8235,7 @@ pub struct TrackingSettings {
     pub subscription_tracking: Option<SubscriptionTracking>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMailSendRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub asm: Option<Asm>,

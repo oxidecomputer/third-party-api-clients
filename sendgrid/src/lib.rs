@@ -151,6 +151,7 @@ pub mod suppressions_unsubscribe_groups;
 pub mod teammates;
 #[cfg(test)]
 mod tests;
+pub mod traits;
 pub mod transactional_templates;
 pub mod transactional_templates_versions;
 pub mod types;
