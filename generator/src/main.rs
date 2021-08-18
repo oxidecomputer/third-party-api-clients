@@ -1224,7 +1224,7 @@ impl TypeSpace {
                     // If we don't have anything to append, let's bail.
                     // WE ARE RUNNING OUT OF NAMES AND WE TRIED.
                     bail!(
-                        "no parent_name and object details for {} do not match: {:?} != {:?}",
+                        "we ran out of unique names for this thing {}: {:?} != {:?}",
                         name,
                         et.details,
                         details,
@@ -1515,8 +1515,15 @@ impl TypeSpace {
                         // If we have a unit struct where there is only one property in
                         // the object, call the object by that property name.
                         // This is Oxide exclusive.
-                        /* if o.properties.len() == 1 {
-                            name = clean_name(n);
+                        // Turn this off it breaks other generators, we, Oxide just need to add
+                        // titles to weird shit we do.
+                        /*if o.properties.len() == 1 {
+                            if self.name_to_id.get(&clean_name(&n)).is_none()
+                                && clean_name(&n) != "default"
+                            {
+                                // Use this name since it doesn't already exist.
+                                name = clean_name(n);
+                            }
                         }*/
 
                         let itid = self.select_box(
