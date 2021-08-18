@@ -44,26 +44,22 @@ impl MailOps for crate::mail_send::MailSend {
         let mut p = Default::default();
         p.from = Some(mail.from);
         for to in tos {
-            mail.personalizations.to.push(crate::types::ReplyTo {
+            p.to.push(crate::types::ReplyTo {
                 email: to.to_string(),
                 name: String::new(),
             });
         }
         for cc in ccs {
-            mail.personalizations
-                .cc
-                .push(crate::types::CcBccEmailObject {
-                    email: cc.to_string(),
-                    name: String::new(),
-                });
+            p.cc.push(crate::types::CcBccEmailObject {
+                email: cc.to_string(),
+                name: String::new(),
+            });
         }
         for bcc in bccs {
-            mail.personalizations
-                .bcc
-                .push(crate::types::CcBccEmailObject {
-                    email: bcc.to_string(),
-                    name: String::new(),
-                });
+            p.bcc.push(crate::types::CcBccEmailObject {
+                email: bcc.to_string(),
+                name: String::new(),
+            });
         }
         mail.personalizations = vec![p];
 
