@@ -1,3 +1,5 @@
+SHELL := bash
+
 DOCUSIGN_SPEC_DIR = $(CURDIR)/specs/docusign
 DOCUSIGN_SPEC = $(DOCUSIGN_SPEC_DIR)/docusign.yaml
 DOCUSIGN_SPEC_REPO = docusign/OpenAPI-Specifications
@@ -154,7 +156,7 @@ giphy: target/debug/generator $(GIPHY_SPEC)
 		--spec-link "https://github.com/APIs-guru/openapi-directory/tree/main/APIs/giphy.com" \
 		--host "api.giphy.com/v1" $(EXTRA_ARGS)
 	cargo fmt -p giphy-api
-	@echo -e "- [Giphy](giphy-api/) [![docs.rs](https://docs.rs/giphy-api/badge.svg)](https://docs.rs/giphy-api)" >> README.md
+	@echo -e "- [Giphy](giphy/) [![docs.rs](https://docs.rs/giphy_api/badge.svg)](https://docs.rs/giphy_api)" >> README.md
 
 $(GITHUB_SPEC_DIR):
 	mkdir -p $@
@@ -171,7 +173,7 @@ github: target/debug/generator $(GITHUB_SPEC)
 		--spec-link "https://github.com/$(GITHUB_SPEC_REPO)" \
 		--host "api.github.com" $(EXTRA_ARGS)
 	cargo fmt -p octorust
-	@echo -e "- [GitHub](octorust/) [![docs.rs](https://docs.rs/octorust/badge.svg)](https://docs.rs/octorust)" >> README.md
+	@echo -e "- [GitHub](github/) [![docs.rs](https://docs.rs/octorust/badge.svg)](https://docs.rs/octorust)" >> README.md
 
 .PHONY: google
 google: google-admin google-calendar google-drive google-groups-settings google-sheets
@@ -194,7 +196,7 @@ google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com" $(EXTRA_ARGS)
 	cargo fmt -p gsuite-api
-	@echo -e "- [Google Admin](google/admin/) [![docs.rs](https://docs.rs/gsuite-api/badge.svg)](https://docs.rs/gsuite-api)" >> README.md
+	@echo -e "- [Google Admin](google/admin/) [![docs.rs](https://docs.rs/gsuite_api/badge.svg)](https://docs.rs/gsuite_api)" >> README.md
 
 $(GOOGLE_CALENDAR_SPEC_DIR):
 	mkdir -p $@
@@ -212,7 +214,7 @@ google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com/calendar/v3" $(EXTRA_ARGS)
 	cargo fmt -p google-calendar
-	@echo -e "- [Google Calendar](google/calendar/) [![docs.rs](https://docs.rs/google-calendar/badge.svg)](https://docs.rs/google-calendar)" >> README.md
+	@echo -e "- [Google Calendar](google/calendar/) [![docs.rs](https://docs.rs/google_calendar/badge.svg)](https://docs.rs/google_calendar)" >> README.md
 
 $(GOOGLE_DRIVE_SPEC_DIR):
 	mkdir -p $@
@@ -230,6 +232,7 @@ google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com/drive/v3" $(EXTRA_ARGS)
 	cargo fmt -p google-drive
+	@echo -e "- [Google Drive](google/drive/) [![docs.rs](https://docs.rs/google_drive/badge.svg)](https://docs.rs/google_drive)" >> README.md
 
 $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR):
 	mkdir -p $@
@@ -247,6 +250,7 @@ google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com/groups/v1/groups" $(EXTRA_ARGS)
 	cargo fmt -p google-groups-settings
+	@echo -e "- [Google Groups Settings](google/groups-settings/) [![docs.rs](https://docs.rs/google_groups_settings/badge.svg)](https://docs.rs/google_groups_settings)" >> README.md
 
 $(GOOGLE_SHEETS_SPEC_DIR):
 	mkdir -p $@
@@ -264,6 +268,7 @@ google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "sheets.googleapis.com" $(EXTRA_ARGS)
 	cargo fmt -p sheets
+	@echo -e "- [Google Sheets](google/sheets/) [![docs.rs](https://docs.rs/sheets/badge.svg)](https://docs.rs/sheets)" >> README.md
 
 $(GUSTO_SPEC_DIR):
 	mkdir -p $@
@@ -282,6 +287,7 @@ gusto: target/debug/generator $(GUSTO_SPEC)
 		--token-endpoint "api.gusto.com/oauth/token" \
 		--user-consent-endpoint "api.gusto.com/oauth/authorize" $(EXTRA_ARGS)
 	cargo fmt -p gusto-api
+	@echo -e "- [Gusto](gusto/) [![docs.rs](https://docs.rs/gusto_api/badge.svg)](https://docs.rs/gusto_api)" >> README.md
 
 $(MAILCHIMP_SPEC_DIR):
 	mkdir -p $@
@@ -303,6 +309,7 @@ mailchimp: target/debug/generator $(MAILCHIMP_SPEC)
 		--token-endpoint "login.mailchimp.com/oauth2/token" \
 		--user-consent-endpoint "login.mailchimp.com/oauth2/authorize" $(EXTRA_ARGS)
 	cargo fmt -p mailchimp-api
+	@echo -e "- [MailChimp](mailchimp/) [![docs.rs](https://docs.rs/mailchimp_api/badge.svg)](https://docs.rs/mailchimp_api)" >> README.md
 
 $(OKTA_SPEC_DIR):
 	mkdir -p $@
@@ -324,6 +331,7 @@ okta: target/debug/generator $(OKTA_SPEC)
 		--token-endpoint "account.okta.com/oauth/token" \
 		--user-consent-endpoint "account.okta.com/oauth/auth" $(EXTRA_ARGS)
 	cargo fmt -p okta
+	@echo -e "- [Okta](okta/) [![docs.rs](https://docs.rs/okta/badge.svg)](https://docs.rs/okta)" >> README.md
 
 $(RAMP_SPEC_REFERENCE):
 	git clone git@github.com:$(RAMP_SPEC_REPO).git $(RAMP_SPEC_DIR)
@@ -345,6 +353,7 @@ ramp: target/debug/generator $(RAMP_SPEC)
 		--token-endpoint "api.ramp.com/v1/public/customer/token" \
 		--user-consent-endpoint "app.ramp.com/v1/authorize" $(EXTRA_ARGS)
 	cargo fmt -p ramp-api
+	@echo -e "- [Ramp](ramp/) [![docs.rs](https://docs.rs/ramp_api/badge.svg)](https://docs.rs/ramp_api)" >> README.md
 
 $(SENDGRID_SPEC_DIR):
 	mkdir -p $@
@@ -366,6 +375,7 @@ sendgrid: target/debug/generator $(SENDGRID_SPEC)
 		--token-endpoint "sendgrid.us/oauth/token" \
 		--user-consent-endpoint "sendgrid.us/oauth/authorize" $(EXTRA_ARGS)
 	cargo fmt -p sendgrid-api
+	@echo -e "- [SendGrid](sendgrid/) [![docs.rs](https://docs.rs/sendgrid_api/badge.svg)](https://docs.rs/sendgrid_api)" >> README.md
 
 $(SLACK_SPEC_DIR):
 	mkdir -p $@
@@ -387,6 +397,7 @@ slack: target/debug/generator $(SLACK_SPEC)
 		--token-endpoint "slack.com/api/oauth.v2.access" \
 		--user-consent-endpoint "slack.com/oauth/v2/authorize" $(EXTRA_ARGS)
 	cargo fmt -p slack-chat-api
+	@echo -e "- [Slack](slack/) [![docs.rs](https://docs.rs/slack_chat_api/badge.svg)](https://docs.rs/slack_chat_api)" >> README.md
 
 $(TRIPACTIONS_SPEC_DIR):
 	mkdir -p $@
@@ -404,6 +415,7 @@ tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
 		--host "api.tripactions.com/v1" \
 		--token-endpoint "api.tripactions.com/ta-auth/oauth/token" $(EXTRA_ARGS)
 	cargo fmt -p tripactions
+	@echo -e "- [TripActions](tripactions/) [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)" >> README.md
 
 $(ZOOM_SPEC_DIR):
 	mkdir -p $@
@@ -425,6 +437,7 @@ zoom: target/debug/generator $(ZOOM_SPEC)
 		--token-endpoint "zoom.us/oauth/token" \
 		--user-consent-endpoint "zoom.us/oauth/authorize" $(EXTRA_ARGS)
 	cargo fmt -p zoom-api
+	@echo -e "- [Zoom](zoom/) [![docs.rs](https://docs.rs/zoom_api/badge.svg)](https://docs.rs/zoom_api)" >> README.md
 
 .PHONY: README.md
 README.md: ## Cleans client info in README.md.
