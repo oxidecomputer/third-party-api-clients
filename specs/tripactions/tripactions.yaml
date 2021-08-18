@@ -218,16 +218,16 @@ components:
     Page:
       properties:
         totalPages:
-          type: long
+          type: integer
           example: 2
         currentPage:
-          type: int
+          type: integer
           example: 1
         pageSize:
-          type: int
+          type: integer
           example: 10
         totalElements:
-          type: long
+          type: integer
           example: 20
     Cnr:
       properties:

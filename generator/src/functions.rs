@@ -727,11 +727,7 @@ fn get_fn_inner(
         "None"
     };
 
-    if all_pages
-        && proper_name != "Ramp"
-        && proper_name != "Zoom"
-        && !proper_name.starts_with("Google")
-    {
+    if all_pages && pagination_property.is_empty() {
         return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
     } else if all_pages && proper_name.starts_with("Google") {
         // We will do a custom function here.
@@ -812,6 +808,44 @@ fn get_fn_inner(
         );
 
         return Ok(inner);
+    } else if all_pages && proper_name == "TripActions" {
+        // We will do a custom function here.
+        let inner = format!(
+            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+
+            let mut {} = resp.{};
+            let mut page = resp.page.current_page + 1;
+
+            // Paginate if we should.
+            while page <= (resp.page.total_pages - 1) {{
+                if !url.contains('?') {{
+                    resp = self.client.{}(&format!("{{}}?page={{}}", url, page), {}).await?;
+                }} else {{
+                    resp = self.client.{}(&format!("{{}}&page={{}}", url, page), {}).await?;
+                }}
+
+                {}.append(&mut resp.{});
+
+                page = resp.page.current_page + 1;
+            }}
+
+            // Return our response data.
+            Ok({})"#,
+            response_type,
+            m.to_lowercase(),
+            body,
+            pagination_property,
+            pagination_property,
+            m.to_lowercase(),
+            body,
+            m.to_lowercase(),
+            body,
+            pagination_property,
+            pagination_property,
+            pagination_property,
+        );
+
+        return Ok(inner);
     } else if all_pages && proper_name == "Zoom" {
         // We will do a custom function here.
         let inner = format!(
@@ -855,6 +889,12 @@ fn get_fn_inner(
         );
 
         return Ok(inner);
+    } else if all_pages && !pagination_property.is_empty() {
+        bail!(
+            "must implement custom pagination function for {} {}",
+            proper_name,
+            pagination_property
+        );
     }
 
     if (m == http::Method::GET

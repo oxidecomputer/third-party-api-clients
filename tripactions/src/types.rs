@@ -418,26 +418,34 @@ pub struct BookingReportResponse {
 
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Page {
-    /**
-     * Nearest airport code to this location
-     */
-    #[serde(rename = "currentPage")]
-    pub current_page: serde_json::Value,
-    /**
-     * Nearest airport code to this location
-     */
-    #[serde(rename = "pageSize")]
-    pub page_size: serde_json::Value,
-    /**
-     * Nearest airport code to this location
-     */
-    #[serde(rename = "totalElements")]
-    pub total_elements: serde_json::Value,
-    /**
-     * Nearest airport code to this location
-     */
-    #[serde(rename = "totalPages")]
-    pub total_pages: serde_json::Value,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "currentPage"
+    )]
+    pub current_page: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "pageSize"
+    )]
+    pub page_size: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "totalElements"
+    )]
+    pub total_elements: i64,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "totalPages"
+    )]
+    pub total_pages: i64,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]

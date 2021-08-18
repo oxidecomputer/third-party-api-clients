@@ -115,6 +115,31 @@ impl BookingData {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bookings?{}", query_);
 
-        self.client.get_all_pages(&url, None).await
+        let mut resp: crate::types::BookingReportResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut page = resp.page.current_page + 1;
+
+        // Paginate if we should.
+        while page <= (resp.page.total_pages - 1) {
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?page={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&page={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            page = resp.page.current_page + 1;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 }
