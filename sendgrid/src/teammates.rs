@@ -66,10 +66,7 @@ impl Teammates {
     ) -> Result<crate::types::PostV3TeammatesResponse> {
         let url = "/teammates".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -255,10 +252,7 @@ impl Teammates {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

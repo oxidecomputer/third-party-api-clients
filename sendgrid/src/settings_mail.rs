@@ -94,10 +94,7 @@ impl SettingsMail {
     ) -> Result<crate::types::MailSettingsAddressWhitelabel> {
         let url = "/mail_settings/address_whitelist".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -142,10 +139,7 @@ impl SettingsMail {
     ) -> Result<crate::types::MailSettingsFooter> {
         let url = "/mail_settings/footer".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -201,10 +195,7 @@ impl SettingsMail {
     ) -> Result<crate::types::MailSettingsForwardSpam> {
         let url = "/mail_settings/forward_spam".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -249,10 +240,7 @@ impl SettingsMail {
     ) -> Result<crate::types::PatchMailSettingsTemplateResponse> {
         let url = "/mail_settings/template".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -307,10 +295,7 @@ impl SettingsMail {
     ) -> Result<crate::types::MailSettingsBouncePurge> {
         let url = "/mail_settings/bounce_purge".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -355,10 +340,7 @@ impl SettingsMail {
     ) -> Result<crate::types::MailSettingsForwardBounce> {
         let url = "/mail_settings/forward_bounce".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

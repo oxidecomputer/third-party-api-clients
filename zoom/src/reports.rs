@@ -608,7 +608,7 @@ impl Reports {
         let url = format!("/report/activities?{}", query_);
 
         let resp: crate::types::ReportSignInOutActivitiesResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.activity_logs)
@@ -644,7 +644,7 @@ impl Reports {
         let url = format!("/report/activities?{}", query_);
 
         let mut resp: crate::types::ReportSignInOutActivitiesResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut activity_logs = resp.activity_logs;
         let mut page = resp.next_page_token;
@@ -656,14 +656,12 @@ impl Reports {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             activity_logs.append(&mut resp.activity_logs);

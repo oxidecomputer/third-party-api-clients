@@ -77,10 +77,7 @@ impl SingleSignOnSettings {
     ) -> Result<crate::types::SsoIntegrationAllOf> {
         let url = "/sso/integrations".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -165,10 +162,7 @@ impl SingleSignOnSettings {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

@@ -20,10 +20,7 @@ impl Calendars {
     pub async fn insert(&self, body: &crate::types::Calendar) -> Result<crate::types::Calendar> {
         let url = "/calendars".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -65,10 +62,7 @@ impl Calendars {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -110,10 +104,7 @@ impl Calendars {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

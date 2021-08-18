@@ -59,8 +59,7 @@ impl RoomsLocation {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms/locations?{}", query_);
 
-        let resp: crate::types::ListZrLocationsResponseData =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListZrLocationsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.locations)
@@ -100,7 +99,7 @@ impl RoomsLocation {
         let url = format!("/rooms/locations?{}", query_);
 
         let mut resp: crate::types::ListZrLocationsResponseData =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut locations = resp.locations;
         let mut page = resp.next_page_token;
@@ -112,14 +111,12 @@ impl RoomsLocation {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             locations.append(&mut resp.locations);
@@ -156,10 +153,7 @@ impl RoomsLocation {
     ) -> Result<crate::types::AddAzrLocationResponse> {
         let url = "/rooms/locations".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -223,10 +217,7 @@ impl RoomsLocation {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -343,10 +334,7 @@ impl RoomsLocation {
     ) -> Result<()> {
         let url = "/rooms/locations/structure".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -377,10 +365,7 @@ impl RoomsLocation {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

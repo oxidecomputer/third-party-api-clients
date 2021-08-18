@@ -68,7 +68,7 @@ impl Chromeosdevices {
             query_
         );
 
-        let resp: crate::types::ChromeOsDevices = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ChromeOsDevices = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.chromeosdevices)
@@ -113,7 +113,7 @@ impl Chromeosdevices {
             query_
         );
 
-        let mut resp: crate::types::ChromeOsDevices = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::ChromeOsDevices = self.client.get(&url, None).await?;
 
         let mut chromeosdevices = resp.chromeosdevices;
         let mut page = resp.next_page_token;
@@ -124,14 +124,12 @@ impl Chromeosdevices {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             chromeosdevices.append(&mut resp.chromeosdevices);
@@ -175,10 +173,7 @@ impl Chromeosdevices {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -245,10 +240,7 @@ impl Chromeosdevices {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -283,10 +275,7 @@ impl Chromeosdevices {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -313,10 +302,7 @@ impl Chromeosdevices {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

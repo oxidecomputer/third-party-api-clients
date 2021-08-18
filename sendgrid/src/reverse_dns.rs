@@ -108,10 +108,7 @@ impl ReverseDns {
     ) -> Result<crate::types::ReverseDns> {
         let url = "/whitelabel/ips".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

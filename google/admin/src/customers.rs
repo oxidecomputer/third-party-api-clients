@@ -50,10 +50,7 @@ impl Customers {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -77,10 +74,7 @@ impl Customers {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -153,10 +147,7 @@ impl Customers {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -201,7 +192,7 @@ impl Customers {
             query_
         );
 
-        let resp: crate::types::ListPrintersResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListPrintersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.printers)
@@ -234,8 +225,7 @@ impl Customers {
             query_
         );
 
-        let mut resp: crate::types::ListPrintersResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::ListPrintersResponse = self.client.get(&url, None).await?;
 
         let mut printers = resp.printers;
         let mut page = resp.next_page_token;
@@ -246,14 +236,12 @@ impl Customers {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             printers.append(&mut resp.printers);
@@ -289,10 +277,7 @@ impl Customers {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -316,10 +301,7 @@ impl Customers {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -343,10 +325,7 @@ impl Customers {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -386,8 +365,7 @@ impl Customers {
             query_
         );
 
-        let resp: crate::types::ListPrinterModelsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListPrinterModelsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.printer_models)
@@ -416,8 +394,7 @@ impl Customers {
             query_
         );
 
-        let mut resp: crate::types::ListPrinterModelsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::ListPrinterModelsResponse = self.client.get(&url, None).await?;
 
         let mut printer_models = resp.printer_models;
         let mut page = resp.next_page_token;
@@ -428,14 +405,12 @@ impl Customers {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             printer_models.append(&mut resp.printer_models);

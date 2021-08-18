@@ -62,10 +62,7 @@ impl Users {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -107,7 +104,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
 
-        let resp: crate::types::GetUsersResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GetUsersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data)
@@ -137,7 +134,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
 
-        let mut resp: crate::types::GetUsersResponse = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::GetUsersResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next;
@@ -147,8 +144,7 @@ impl Users {
             resp = self
                 .client
                 .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
-                .await
-                .unwrap();
+                .await?;
 
             data.append(&mut resp.data);
 
@@ -176,10 +172,7 @@ impl Users {
     ) -> Result<crate::types::User> {
         let url = "/users/deferred".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

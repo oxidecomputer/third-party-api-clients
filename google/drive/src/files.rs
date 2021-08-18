@@ -108,7 +108,7 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
 
-        let resp: crate::types::FileList = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::FileList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.files)
@@ -187,7 +187,7 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files?{}", query_);
 
-        let mut resp: crate::types::FileList = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::FileList = self.client.get(&url, None).await?;
 
         let mut files = resp.files;
         let mut page = resp.next_page_token;
@@ -198,14 +198,12 @@ impl Files {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             files.append(&mut resp.files);
@@ -292,10 +290,7 @@ impl Files {
         let url = format!("/files?{}", query_);
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -522,10 +517,7 @@ impl Files {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -598,10 +590,7 @@ impl Files {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -685,10 +674,7 @@ impl Files {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

@@ -67,10 +67,7 @@ impl ContactsApiRecipients {
     ) -> Result<crate::types::ContactDbRecipientResponse> {
         let url = "/contactdb/recipients".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -90,10 +87,7 @@ impl ContactsApiRecipients {
     pub async fn delete_contactdb_recipients(&self, body: &[String]) -> Result<crate::types::Help> {
         let url = "/contactdb/recipients".to_string();
         self.client
-            .delete(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -118,10 +112,7 @@ impl ContactsApiRecipients {
     ) -> Result<crate::types::ContactDbRecipientResponse> {
         let url = "/contactdb/recipients".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -344,10 +335,7 @@ impl ContactsApiRecipients {
     ) -> Result<crate::types::PostContactdbRecipientsSearchResponseData> {
         let url = "/contactdb/recipients/search".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

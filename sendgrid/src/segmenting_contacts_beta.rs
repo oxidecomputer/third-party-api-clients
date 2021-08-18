@@ -69,10 +69,7 @@ impl SegmentingContactsBeta {
     ) -> Result<crate::types::SegmentResponse> {
         let url = "/marketing/segments/2.0".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -142,10 +139,7 @@ impl SegmentingContactsBeta {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

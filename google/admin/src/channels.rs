@@ -20,10 +20,7 @@ impl Channels {
     pub async fn admin_stop(&self, body: &crate::types::Channel) -> Result<()> {
         let url = "/admin/directory_v1/channels/stop".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

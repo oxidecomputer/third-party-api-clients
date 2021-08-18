@@ -49,8 +49,7 @@ impl CommonAreaPhones {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/common_area_phones?{}", query_);
 
-        let resp: crate::types::ListCommonAreaPhonesResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListCommonAreaPhonesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.common_area_phones)
@@ -78,7 +77,7 @@ impl CommonAreaPhones {
     pub async fn list_all(&self) -> Result<Vec<crate::types::CommonAreaPhones>> {
         let url = "/phone/common_area_phones".to_string();
         let mut resp: crate::types::ListCommonAreaPhonesResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut common_area_phones = resp.common_area_phones;
         let mut page = resp.next_page_token;
@@ -90,14 +89,12 @@ impl CommonAreaPhones {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             common_area_phones.append(&mut resp.common_area_phones);
@@ -136,10 +133,7 @@ impl CommonAreaPhones {
     ) -> Result<crate::types::AddCommonAreaPhoneResponse> {
         let url = "/phone/common_area_phones".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -230,10 +224,7 @@ impl CommonAreaPhones {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -262,10 +253,7 @@ impl CommonAreaPhones {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -326,10 +314,7 @@ impl CommonAreaPhones {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

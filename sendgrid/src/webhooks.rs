@@ -59,10 +59,7 @@ impl Webhooks {
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
         let url = "/user/webhooks/event/settings".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -220,10 +217,7 @@ impl Webhooks {
     ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
         let url = "/user/webhooks/event/settings/signed".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -252,10 +246,7 @@ impl Webhooks {
     ) -> Result<()> {
         let url = "/user/webhooks/event/test".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

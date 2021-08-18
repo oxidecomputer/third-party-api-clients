@@ -37,8 +37,7 @@ impl Reimbursements {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/reimbursements?{}", query_);
 
-        let resp: crate::types::GetReimbursementsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data)
@@ -53,8 +52,7 @@ impl Reimbursements {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Reimbursement>> {
         let url = "/reimbursements".to_string();
-        let mut resp: crate::types::GetReimbursementsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next;
@@ -64,8 +62,7 @@ impl Reimbursements {
             resp = self
                 .client
                 .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
-                .await
-                .unwrap();
+                .await?;
 
             data.append(&mut resp.data);
 

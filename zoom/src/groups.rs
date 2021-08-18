@@ -46,10 +46,7 @@ impl Groups {
     pub async fn group_create(&self, body: &crate::types::GroupCreateRequest) -> Result<()> {
         let url = "/groups".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -133,10 +130,7 @@ impl Groups {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -187,8 +181,7 @@ impl Groups {
             query_
         );
 
-        let resp: crate::types::GroupMembersResponseData =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GroupMembersResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.members)
@@ -217,8 +210,7 @@ impl Groups {
             crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
-        let mut resp: crate::types::GroupMembersResponseData =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::GroupMembersResponseData = self.client.get(&url, None).await?;
 
         let mut members = resp.members;
         let mut page = resp.next_page_token;
@@ -230,14 +222,12 @@ impl Groups {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             members.append(&mut resp.members);
@@ -281,10 +271,7 @@ impl Groups {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -352,10 +339,7 @@ impl Groups {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -580,10 +564,7 @@ impl Groups {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -758,10 +739,7 @@ impl Groups {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -803,10 +781,7 @@ impl Groups {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

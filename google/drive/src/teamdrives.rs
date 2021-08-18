@@ -50,7 +50,7 @@ impl Teamdrives {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/teamdrives?{}", query_);
 
-        let resp: crate::types::TeamDriveList = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::TeamDriveList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.team_drives)
@@ -81,7 +81,7 @@ impl Teamdrives {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/teamdrives?{}", query_);
 
-        let mut resp: crate::types::TeamDriveList = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::TeamDriveList = self.client.get(&url, None).await?;
 
         let mut team_drives = resp.team_drives;
         let mut page = resp.next_page_token;
@@ -92,14 +92,12 @@ impl Teamdrives {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             team_drives.append(&mut resp.team_drives);
@@ -137,10 +135,7 @@ impl Teamdrives {
         let url = format!("/teamdrives?{}", query_);
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -225,10 +220,7 @@ impl Teamdrives {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

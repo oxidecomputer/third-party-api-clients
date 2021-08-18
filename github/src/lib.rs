@@ -419,8 +419,7 @@ impl Client {
                                 repository_ids: Default::default(),
                             },
                         )
-                        .await
-                        .unwrap();
+                        .await?;
                     let auth = format!("token {}", &token.token);
                     *token_ref.lock().unwrap() = Some(token.token);
                     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)

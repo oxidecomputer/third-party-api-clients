@@ -53,10 +53,7 @@ impl Contacts {
     ) -> Result<crate::types::PutMcContactsResponse> {
         let url = "/marketing/contacts".to_string();
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -156,10 +153,7 @@ impl Contacts {
     ) -> Result<crate::types::PostMcContactsExportsResponse> {
         let url = "/marketing/contacts/exports".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -204,10 +198,7 @@ impl Contacts {
     ) -> Result<crate::types::PostMcContactsSearchResponse> {
         let url = "/marketing/contacts/search".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -240,10 +231,7 @@ impl Contacts {
     ) -> Result<crate::types::PutMcContactsImportsResponse> {
         let url = "/marketing/contacts/imports".to_string();
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -310,10 +298,7 @@ impl Contacts {
     ) -> Result<crate::types::PostMarketingContactsBatchResponse> {
         let url = "/marketing/contacts/batch".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -344,10 +329,7 @@ impl Contacts {
     ) -> Result<crate::types::PostMarketingContactsSearchEmailsResponse> {
         let url = "/marketing/contacts/search/emails".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

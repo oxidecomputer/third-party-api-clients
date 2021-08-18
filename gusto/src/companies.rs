@@ -65,10 +65,7 @@ impl Companies {
     ) -> Result<crate::types::PostPartnerManagedCompaniesResponse> {
         let url = "/v1/partner_managed_companies".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -103,10 +100,7 @@ impl Companies {
     ) -> Result<crate::types::PostProvisionResponse> {
         let url = "/v1/provision".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

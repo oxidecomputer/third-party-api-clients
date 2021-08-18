@@ -59,7 +59,7 @@ impl Receipts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/receipts?{}", query_);
 
-        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data)
@@ -97,8 +97,7 @@ impl Receipts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/receipts?{}", query_);
 
-        let mut resp: crate::types::GetReceiptsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next;
@@ -108,8 +107,7 @@ impl Receipts {
             resp = self
                 .client
                 .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
-                .await
-                .unwrap();
+                .await?;
 
             data.append(&mut resp.data);
 

@@ -75,7 +75,7 @@ impl Permissions {
             query_
         );
 
-        let resp: crate::types::PermissionList = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::PermissionList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.permissions)
@@ -128,7 +128,7 @@ impl Permissions {
             query_
         );
 
-        let mut resp: crate::types::PermissionList = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::PermissionList = self.client.get(&url, None).await?;
 
         let mut permissions = resp.permissions;
         let mut page = resp.next_page_token;
@@ -139,14 +139,12 @@ impl Permissions {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             permissions.append(&mut resp.permissions);
@@ -239,10 +237,7 @@ impl Permissions {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -414,10 +409,7 @@ impl Permissions {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

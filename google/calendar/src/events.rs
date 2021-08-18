@@ -132,7 +132,7 @@ impl Events {
             query_
         );
 
-        let resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::Events = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.items)
@@ -218,7 +218,7 @@ impl Events {
             query_
         );
 
-        let mut resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::Events = self.client.get(&url, None).await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -229,14 +229,12 @@ impl Events {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             items.append(&mut resp.items);
@@ -311,10 +309,7 @@ impl Events {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -357,10 +352,7 @@ impl Events {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -530,10 +522,7 @@ impl Events {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -638,10 +627,7 @@ impl Events {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -750,10 +736,7 @@ impl Events {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -822,7 +805,7 @@ impl Events {
             query_
         );
 
-        let resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::Events = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.items)
@@ -873,7 +856,7 @@ impl Events {
             query_
         );
 
-        let mut resp: crate::types::Events = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::Events = self.client.get(&url, None).await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -884,14 +867,12 @@ impl Events {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             items.append(&mut resp.items);

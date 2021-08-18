@@ -24,10 +24,7 @@ impl Markdown {
     pub async fn render(&self, body: &crate::types::MarkdownRenderRequest) -> Result<String> {
         let url = "/markdown".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

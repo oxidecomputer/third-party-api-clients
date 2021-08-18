@@ -45,10 +45,7 @@ impl UsersApi {
     ) -> Result<crate::types::UserProfile> {
         let url = "/user/profile".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -103,10 +100,7 @@ impl UsersApi {
     ) -> Result<crate::types::GetUserEmailResponse> {
         let url = "/user/email".to_string();
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -143,10 +137,7 @@ impl UsersApi {
     ) -> Result<crate::types::PutUserUsernameResponse> {
         let url = "/user/username".to_string();
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -185,10 +176,7 @@ impl UsersApi {
     ) -> Result<crate::types::Help> {
         let url = "/user/password".to_string();
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

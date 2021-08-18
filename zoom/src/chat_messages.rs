@@ -81,8 +81,7 @@ impl ChatMessages {
             query_
         );
 
-        let resp: crate::types::GetChatMessagesResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GetChatMessagesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.messages)
@@ -137,8 +136,7 @@ impl ChatMessages {
             query_
         );
 
-        let mut resp: crate::types::GetChatMessagesResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::GetChatMessagesResponse = self.client.get(&url, None).await?;
 
         let mut messages = resp.messages;
         let mut page = resp.next_page_token;
@@ -150,14 +148,12 @@ impl ChatMessages {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             messages.append(&mut resp.messages);
@@ -197,10 +193,7 @@ impl ChatMessages {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -233,10 +226,7 @@ impl ChatMessages {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -269,10 +259,7 @@ impl ChatMessages {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -353,10 +340,7 @@ impl ChatMessages {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

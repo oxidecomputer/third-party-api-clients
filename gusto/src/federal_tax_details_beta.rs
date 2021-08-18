@@ -53,7 +53,7 @@ let url =
 format!("/v1/companies/{}/federal_tax_details",
 crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),);
 
-self.client.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))).await
+self.client.put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?))).await
 }
 
 

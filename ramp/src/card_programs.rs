@@ -40,8 +40,7 @@ impl CardPrograms {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/card-programs?{}", query_);
 
-        let resp: crate::types::GetCardProgramsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GetCardProgramsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.card_programs)
@@ -58,8 +57,7 @@ impl CardPrograms {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::CardProgram>> {
         let url = "/card-programs".to_string();
-        let mut resp: crate::types::GetCardProgramsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::GetCardProgramsResponse = self.client.get(&url, None).await?;
 
         let mut card_programs = resp.card_programs;
         let mut page = resp.page.next;
@@ -69,8 +67,7 @@ impl CardPrograms {
             resp = self
                 .client
                 .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
-                .await
-                .unwrap();
+                .await?;
 
             card_programs.append(&mut resp.card_programs);
 
@@ -102,10 +99,7 @@ impl CardPrograms {
     ) -> Result<crate::types::CardProgram> {
         let url = "/card-programs".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

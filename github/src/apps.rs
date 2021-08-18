@@ -86,10 +86,7 @@ impl Apps {
     ) -> Result<crate::types::WebhookConfig> {
         let url = "/app/hook/config".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -360,7 +357,7 @@ impl Apps {
         self.client
             .post_media(
                 &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+                Some(reqwest::Body::from(serde_json::to_vec(body)?)),
                 crate::utils::MediaType::Json,
                 crate::auth::AuthenticationConstraint::JWT,
             )
@@ -440,10 +437,7 @@ impl Apps {
         );
 
         self.client
-            .delete(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -503,10 +497,7 @@ impl Apps {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -534,10 +525,7 @@ impl Apps {
         );
 
         self.client
-            .delete(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -565,10 +553,7 @@ impl Apps {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -596,10 +581,7 @@ impl Apps {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -1163,10 +1145,7 @@ impl Apps {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

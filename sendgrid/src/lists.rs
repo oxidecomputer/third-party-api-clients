@@ -56,10 +56,7 @@ impl Lists {
     pub async fn post_mc_list(&self, body: &crate::types::IpPool) -> Result<crate::types::List> {
         let url = "/marketing/lists".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -166,10 +163,7 @@ impl Lists {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

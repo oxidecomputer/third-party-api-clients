@@ -48,8 +48,7 @@ impl PhoneSharedLineGroups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/shared_line_groups?{}", query_);
 
-        let resp: crate::types::ListSharedLineGroupsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListSharedLineGroupsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.shared_line_groups)
@@ -76,7 +75,7 @@ impl PhoneSharedLineGroups {
     pub async fn list_all_shared_line_groups(&self) -> Result<Vec<crate::types::SharedLineGroups>> {
         let url = "/phone/shared_line_groups".to_string();
         let mut resp: crate::types::ListSharedLineGroupsResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut shared_line_groups = resp.shared_line_groups;
         let mut page = resp.next_page_token;
@@ -88,14 +87,12 @@ impl PhoneSharedLineGroups {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             shared_line_groups.append(&mut resp.shared_line_groups);
@@ -132,10 +129,7 @@ impl PhoneSharedLineGroups {
     ) -> Result<()> {
         let url = "/phone/shared_line_groups".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -228,10 +222,7 @@ impl PhoneSharedLineGroups {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -267,10 +258,7 @@ impl PhoneSharedLineGroups {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -367,10 +355,7 @@ impl PhoneSharedLineGroups {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

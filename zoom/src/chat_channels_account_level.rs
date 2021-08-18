@@ -102,10 +102,7 @@ impl ChatChannelsAccountLevel {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -150,7 +147,7 @@ impl ChatChannelsAccountLevel {
         );
 
         let resp: crate::types::ListChannelMembersResponseData =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.members)
@@ -181,7 +178,7 @@ impl ChatChannelsAccountLevel {
         );
 
         let mut resp: crate::types::ListChannelMembersResponseData =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut members = resp.members;
         let mut page = resp.next_page_token;
@@ -193,14 +190,12 @@ impl ChatChannelsAccountLevel {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             members.append(&mut resp.members);
@@ -245,10 +240,7 @@ impl ChatChannelsAccountLevel {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

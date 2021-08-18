@@ -538,11 +538,10 @@ impl Client {
             .form(&params)
             .basic_auth(&self.client_id, Some(&self.client_secret))
             .send()
-            .await
-            .unwrap();
+            .await?;
 
         // Unwrap the response.
-        let t: AccessToken = resp.json().await.unwrap();
+        let t: AccessToken = resp.json().await?;
 
         self.token = t.access_token.to_string();
         self.refresh_token = t.refresh_token.to_string();
@@ -574,11 +573,10 @@ impl Client {
             .form(&params)
             .basic_auth(&self.client_id, Some(&self.client_secret))
             .send()
-            .await
-            .unwrap();
+            .await?;
 
         // Unwrap the response.
-        let t: AccessToken = resp.json().await.unwrap();
+        let t: AccessToken = resp.json().await?;
 
         self.token = t.access_token.to_string();
         self.refresh_token = t.refresh_token.to_string();

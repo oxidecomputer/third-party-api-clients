@@ -48,7 +48,7 @@ impl PhoneCallQueues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/call_queues?{}", query_);
 
-        let resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.call_queues)
@@ -74,8 +74,7 @@ impl PhoneCallQueues {
      */
     pub async fn list_all_call_queues(&self) -> Result<Vec<crate::types::CallQueues>> {
         let url = "/phone/call_queues".to_string();
-        let mut resp: crate::types::ListCallQueuesResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None).await?;
 
         let mut call_queues = resp.call_queues;
         let mut page = resp.next_page_token;
@@ -87,14 +86,12 @@ impl PhoneCallQueues {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             call_queues.append(&mut resp.call_queues);
@@ -132,10 +129,7 @@ impl PhoneCallQueues {
     ) -> Result<crate::types::CreateCallQueueResponse> {
         let url = "/phone/call_queues".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -230,10 +224,7 @@ impl PhoneCallQueues {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -267,10 +258,7 @@ impl PhoneCallQueues {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -366,10 +354,7 @@ impl PhoneCallQueues {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -464,10 +449,7 @@ impl PhoneCallQueues {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -522,7 +504,7 @@ impl PhoneCallQueues {
         );
 
         let resp: crate::types::GetCallQueueRecordingsResponseData =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.recordings)
@@ -565,7 +547,7 @@ impl PhoneCallQueues {
         );
 
         let mut resp: crate::types::GetCallQueueRecordingsResponseData =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut recordings = resp.recordings;
         let mut page = resp.next_page_token;
@@ -577,14 +559,12 @@ impl PhoneCallQueues {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             recordings.append(&mut resp.recordings);

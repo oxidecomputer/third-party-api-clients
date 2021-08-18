@@ -55,10 +55,7 @@ impl SettingsPartner {
     ) -> Result<crate::types::PartnerSettingsNewRelic> {
         let url = "/partner_settings/new_relic".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

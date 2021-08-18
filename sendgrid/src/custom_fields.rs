@@ -45,10 +45,7 @@ impl CustomFields {
     ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
         let url = "/marketing/field_definitions".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -90,10 +87,7 @@ impl CustomFields {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

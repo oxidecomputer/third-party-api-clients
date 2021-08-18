@@ -50,10 +50,7 @@ impl Roles {
     pub async fn create_role(&self, body: &crate::types::CreateRoleRequest) -> Result<()> {
         let url = "/roles".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -108,7 +105,7 @@ impl Roles {
             query_
         );
 
-        let resp: crate::types::RoleMembersList = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::RoleMembersList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.members)
@@ -144,7 +141,7 @@ impl Roles {
             query_
         );
 
-        let mut resp: crate::types::RoleMembersList = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::RoleMembersList = self.client.get(&url, None).await?;
 
         let mut members = resp.members;
         let mut page = resp.next_page_token;
@@ -156,14 +153,12 @@ impl Roles {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             members.append(&mut resp.members);
@@ -207,10 +202,7 @@ impl Roles {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -332,10 +324,7 @@ impl Roles {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

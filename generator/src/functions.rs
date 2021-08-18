@@ -709,7 +709,7 @@ fn get_fn_inner(
 ) -> Result<String> {
     let body = if let Some(f) = &body_func {
         if f == "json" {
-            "Some(reqwest::Body::from(serde_json::to_vec(body).unwrap()))"
+            "Some(reqwest::Body::from(serde_json::to_vec(body)?))"
         } else {
             "Some(body.into())"
         }
@@ -726,7 +726,7 @@ fn get_fn_inner(
     } else if all_pages && proper_name.starts_with("Google") {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await.unwrap();
+            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
 
             let mut {} = resp.{};
             let mut page = resp.next_page_token;
@@ -734,9 +734,9 @@ fn get_fn_inner(
             // Paginate if we should.
             while !page.is_empty() {{
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?pageToken={{}}", url, page), {}).await.unwrap();
+                    resp = self.client.{}(&format!("{{}}?pageToken={{}}", url, page), {}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&pageToken={{}}", url, page), {}).await.unwrap();
+                    resp = self.client.{}(&format!("{{}}&pageToken={{}}", url, page), {}).await?;
                 }}
 
 
@@ -769,14 +769,14 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "Ramp" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await.unwrap();
+            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
 
             let mut {} = resp.{};
             let mut page = resp.page.next;
 
             // Paginate if we should.
             while !page.is_empty() {{
-                resp = self.client.{}(page.trim_start_matches(crate::DEFAULT_HOST), {}).await.unwrap();
+                resp = self.client.{}(page.trim_start_matches(crate::DEFAULT_HOST), {}).await?;
 
                 {}.append(&mut resp.{});
 
@@ -805,7 +805,7 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "Zoom" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await.unwrap();
+            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
 
             let mut {} = resp.{};
             let mut page = resp.next_page_token;
@@ -814,9 +814,9 @@ fn get_fn_inner(
             while !page.is_empty() {{
                 // Check if we already have URL params and need to concat the token.
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", url, page), {}).await.unwrap();
+                    resp = self.client.{}(&format!("{{}}?next_page_token={{}}", url, page), {}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", url, page), {}).await.unwrap();
+                    resp = self.client.{}(&format!("{{}}&next_page_token={{}}", url, page), {}).await?;
                 }}
 
                 {}.append(&mut resp.{});
@@ -864,7 +864,7 @@ fn get_fn_inner(
 
         // Okay we have an inner response type, let's return that instead.
         return Ok(format!(
-            r#"let resp: {} = self.client.{}(&url, {}).await.unwrap();
+            r#"let resp: {} = self.client.{}(&url, {}).await?;
 
                 // Return our response data.
                 Ok(resp.{})"#,
@@ -881,7 +881,7 @@ fn get_fn_inner(
 
     Ok(r#"self.client.post_media(
             &url,
-            Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
+            Some(reqwest::Body::from(serde_json::to_vec(body)?)),
             crate::utils::MediaType::Json,
             crate::auth::AuthenticationConstraint::JWT,
         ).await"#

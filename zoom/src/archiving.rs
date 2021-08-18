@@ -61,8 +61,7 @@ impl Archiving {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/archive_files?{}", query_);
 
-        let resp: crate::types::ListArchivedFilesResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListArchivedFilesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.meetings)
@@ -103,8 +102,7 @@ impl Archiving {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/archive_files?{}", query_);
 
-        let mut resp: crate::types::ListArchivedFilesResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::ListArchivedFilesResponse = self.client.get(&url, None).await?;
 
         let mut meetings = resp.meetings;
         let mut page = resp.next_page_token;
@@ -116,14 +114,12 @@ impl Archiving {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             meetings.append(&mut resp.meetings);

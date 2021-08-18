@@ -93,10 +93,7 @@ impl CancelScheduledSends {
     ) -> Result<crate::types::UserScheduledSendStatusAllOf> {
         let url = "/user/scheduled_sends".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -216,10 +213,7 @@ impl CancelScheduledSends {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

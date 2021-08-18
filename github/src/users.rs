@@ -75,10 +75,7 @@ impl Users {
     ) -> Result<crate::types::PrivateUser> {
         let url = "/user".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -193,10 +190,7 @@ impl Users {
     ) -> Result<Vec<crate::types::Email>> {
         let url = "/user/email/visibility".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -263,10 +257,7 @@ impl Users {
     ) -> Result<Vec<crate::types::Email>> {
         let url = "/user/emails".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -285,10 +276,7 @@ impl Users {
     ) -> Result<()> {
         let url = "/user/emails".to_string();
         self.client
-            .delete(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -523,10 +511,7 @@ impl Users {
     ) -> Result<crate::types::GpgKey> {
         let url = "/user/gpg_keys".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -642,10 +627,7 @@ impl Users {
     ) -> Result<crate::types::Key> {
         let url = "/user/keys".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

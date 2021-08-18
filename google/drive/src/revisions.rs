@@ -43,7 +43,7 @@ impl Revisions {
             query_
         );
 
-        let resp: crate::types::RevisionList = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::RevisionList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.revisions)
@@ -62,7 +62,7 @@ impl Revisions {
             crate::progenitor_support::encode_path(&file_id.to_string()),
         );
 
-        let mut resp: crate::types::RevisionList = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::RevisionList = self.client.get(&url, None).await?;
 
         let mut revisions = resp.revisions;
         let mut page = resp.next_page_token;
@@ -73,14 +73,12 @@ impl Revisions {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             revisions.append(&mut resp.revisions);
@@ -174,10 +172,7 @@ impl Revisions {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

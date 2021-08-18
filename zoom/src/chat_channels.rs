@@ -51,7 +51,7 @@ impl ChatChannels {
             query_
         );
 
-        let resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.channels)
@@ -78,8 +78,7 @@ impl ChatChannels {
             crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
-        let mut resp: crate::types::GetChannelsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await?;
 
         let mut channels = resp.channels;
         let mut page = resp.next_page_token;
@@ -91,14 +90,12 @@ impl ChatChannels {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             channels.append(&mut resp.channels);
@@ -142,10 +139,7 @@ impl ChatChannels {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -234,10 +228,7 @@ impl ChatChannels {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

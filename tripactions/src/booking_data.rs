@@ -69,7 +69,7 @@ impl BookingData {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bookings?{}", query_);
 
-        let resp: crate::types::BookingReportResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::BookingReportResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data)

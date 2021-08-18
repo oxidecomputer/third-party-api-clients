@@ -51,7 +51,7 @@ impl Replies {
             query_
         );
 
-        let resp: crate::types::ReplyList = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ReplyList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.replies)
@@ -82,7 +82,7 @@ impl Replies {
             query_
         );
 
-        let mut resp: crate::types::ReplyList = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::ReplyList = self.client.get(&url, None).await?;
 
         let mut replies = resp.replies;
         let mut page = resp.next_page_token;
@@ -93,14 +93,12 @@ impl Replies {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             replies.append(&mut resp.replies);
@@ -139,10 +137,7 @@ impl Replies {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -229,10 +224,7 @@ impl Replies {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

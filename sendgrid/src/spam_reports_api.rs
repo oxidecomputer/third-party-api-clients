@@ -112,10 +112,7 @@ impl SpamReportsApi {
     ) -> Result<crate::types::Help> {
         let url = "/suppression/spam_reports".to_string();
         self.client
-            .delete(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .delete(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

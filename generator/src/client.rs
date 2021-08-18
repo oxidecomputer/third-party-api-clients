@@ -143,7 +143,7 @@ impl Client {
                         permissions: Default::default(),
                         repositories: Default::default(),
                         repository_ids: Default::default(),
-                    }).await.unwrap();
+                    }).await?;
                     let auth = format!("token {}", &token.token);
                     *token_ref.lock().unwrap() = Some(token.token);
                     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
@@ -814,11 +814,10 @@ impl Client {{
             .form(&params)
             .basic_auth(&self.client_id, Some(&self.client_secret))
             .send()
-            .await
-            .unwrap();
+            .await?;
 
         // Unwrap the response.
-        let t: AccessToken = resp.json().await.unwrap();
+        let t: AccessToken = resp.json().await?;
 
         self.token = t.access_token.to_string();
         self.refresh_token = t.refresh_token.to_string();
@@ -850,11 +849,10 @@ impl Client {{
             .form(&params)
             .basic_auth(&self.client_id, Some(&self.client_secret))
             .send()
-            .await
-            .unwrap();
+            .await?;
 
         // Unwrap the response.
-        let t: AccessToken = resp.json().await.unwrap();
+        let t: AccessToken = resp.json().await?;
 
         self.token = t.access_token.to_string();
         self.refresh_token = t.refresh_token.to_string();

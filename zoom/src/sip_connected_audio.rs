@@ -59,10 +59,7 @@ impl SipConnectedAudio {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -95,10 +92,7 @@ impl SipConnectedAudio {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -178,10 +172,7 @@ impl SipConnectedAudio {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -265,10 +256,7 @@ impl SipConnectedAudio {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -341,8 +329,7 @@ impl SipConnectedAudio {
             query_
         );
 
-        let resp: crate::types::ListInternalNumbersResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListInternalNumbersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.internal_numbers)
@@ -373,7 +360,7 @@ impl SipConnectedAudio {
         );
 
         let mut resp: crate::types::ListInternalNumbersResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut internal_numbers = resp.internal_numbers;
         let mut page = resp.next_page_token;
@@ -385,14 +372,12 @@ impl SipConnectedAudio {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             internal_numbers.append(&mut resp.internal_numbers);
@@ -435,10 +420,7 @@ impl SipConnectedAudio {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

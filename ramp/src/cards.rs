@@ -50,7 +50,7 @@ impl Cards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
 
-        let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.cards)
@@ -80,7 +80,7 @@ impl Cards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
 
-        let mut resp: crate::types::GetCardsResponse = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
 
         let mut cards = resp.cards;
         let mut page = resp.page.next;
@@ -90,8 +90,7 @@ impl Cards {
             resp = self
                 .client
                 .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
-                .await
-                .unwrap();
+                .await?;
 
             cards.append(&mut resp.cards);
 
@@ -148,10 +147,7 @@ impl Cards {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -172,10 +168,7 @@ impl Cards {
     ) -> Result<crate::types::TaskResponse> {
         let url = "/cards/deferred/physical".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -196,10 +189,7 @@ impl Cards {
     ) -> Result<crate::types::TaskResponse> {
         let url = "/cards/deferred/virtual".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -221,10 +211,7 @@ impl Cards {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -246,10 +233,7 @@ impl Cards {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -271,10 +255,7 @@ impl Cards {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

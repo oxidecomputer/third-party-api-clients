@@ -43,7 +43,7 @@ impl Resources {
             query_
         );
 
-        let resp: crate::types::Buildings = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::Buildings = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.buildings)
@@ -62,7 +62,7 @@ impl Resources {
             crate::progenitor_support::encode_path(&customer.to_string()),
         );
 
-        let mut resp: crate::types::Buildings = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::Buildings = self.client.get(&url, None).await?;
 
         let mut buildings = resp.buildings;
         let mut page = resp.next_page_token;
@@ -73,14 +73,12 @@ impl Resources {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             buildings.append(&mut resp.buildings);
@@ -127,10 +125,7 @@ impl Resources {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -192,10 +187,7 @@ impl Resources {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -253,10 +245,7 @@ impl Resources {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -301,7 +290,7 @@ impl Resources {
             query_
         );
 
-        let resp: crate::types::CalendarResources = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::CalendarResources = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.items)
@@ -334,7 +323,7 @@ impl Resources {
             query_
         );
 
-        let mut resp: crate::types::CalendarResources = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::CalendarResources = self.client.get(&url, None).await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -345,14 +334,12 @@ impl Resources {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             items.append(&mut resp.items);
@@ -388,10 +375,7 @@ impl Resources {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -442,10 +426,7 @@ impl Resources {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -492,10 +473,7 @@ impl Resources {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -530,7 +508,7 @@ impl Resources {
             query_
         );
 
-        let resp: crate::types::Features = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::Features = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.features)
@@ -549,7 +527,7 @@ impl Resources {
             crate::progenitor_support::encode_path(&customer.to_string()),
         );
 
-        let mut resp: crate::types::Features = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::Features = self.client.get(&url, None).await?;
 
         let mut features = resp.features;
         let mut page = resp.next_page_token;
@@ -560,14 +538,12 @@ impl Resources {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             features.append(&mut resp.features);
@@ -603,10 +579,7 @@ impl Resources {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -657,10 +630,7 @@ impl Resources {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -707,10 +677,7 @@ impl Resources {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -737,10 +704,7 @@ impl Resources {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

@@ -45,7 +45,7 @@ impl PhoneSite {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/phone/sites?{}", query_);
 
-        let resp: crate::types::ListPhoneSitesResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListPhoneSitesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.sites)
@@ -68,8 +68,7 @@ impl PhoneSite {
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::Sites>> {
         let url = "/phone/sites".to_string();
-        let mut resp: crate::types::ListPhoneSitesResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::ListPhoneSitesResponse = self.client.get(&url, None).await?;
 
         let mut sites = resp.sites;
         let mut page = resp.next_page_token;
@@ -81,14 +80,12 @@ impl PhoneSite {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             sites.append(&mut resp.sites);
@@ -125,10 +122,7 @@ impl PhoneSite {
     ) -> Result<crate::types::Site> {
         let url = "/phone/sites".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -227,10 +221,7 @@ impl PhoneSite {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

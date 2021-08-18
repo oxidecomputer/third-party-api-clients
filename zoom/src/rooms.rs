@@ -63,8 +63,7 @@ impl Rooms {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms?{}", query_);
 
-        let resp: crate::types::ListZoomRoomsResponseData =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ListZoomRoomsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.rooms)
@@ -106,8 +105,7 @@ impl Rooms {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rooms?{}", query_);
 
-        let mut resp: crate::types::ListZoomRoomsResponseData =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::ListZoomRoomsResponseData = self.client.get(&url, None).await?;
 
         let mut rooms = resp.rooms;
         let mut page = resp.next_page_token;
@@ -119,14 +117,12 @@ impl Rooms {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             rooms.append(&mut resp.rooms);
@@ -159,10 +155,7 @@ impl Rooms {
     ) -> Result<crate::types::AddRoomResponse> {
         let url = "/rooms".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -246,10 +239,7 @@ impl Rooms {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -381,10 +371,7 @@ impl Rooms {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -412,10 +399,7 @@ impl Rooms {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -466,7 +450,7 @@ impl Rooms {
         let url = format!("/rooms/digital_signage?{}", query_);
 
         let resp: crate::types::ListDigitalSignageContentResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.contents)
@@ -504,7 +488,7 @@ impl Rooms {
         let url = format!("/rooms/digital_signage?{}", query_);
 
         let mut resp: crate::types::ListDigitalSignageContentResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut contents = resp.contents;
         let mut page = resp.next_page_token;
@@ -516,14 +500,12 @@ impl Rooms {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             contents.append(&mut resp.contents);

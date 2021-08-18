@@ -78,10 +78,7 @@ impl SuppressionsUnsubscribeGroups {
     ) -> Result<crate::types::PostAsmGroupsResponse> {
         let url = "/asm/groups".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -154,10 +151,7 @@ impl SuppressionsUnsubscribeGroups {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

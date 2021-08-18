@@ -41,7 +41,7 @@ impl Settings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users/me/settings?{}", query_);
 
-        let resp: crate::types::Settings = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::Settings = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.items)
@@ -56,7 +56,7 @@ impl Settings {
      */
     pub async fn list_all(&self) -> Result<Vec<crate::types::Setting>> {
         let url = "/users/me/settings".to_string();
-        let mut resp: crate::types::Settings = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::Settings = self.client.get(&url, None).await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -67,14 +67,12 @@ impl Settings {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             items.append(&mut resp.items);
@@ -121,10 +119,7 @@ impl Settings {
         let url = format!("/users/me/settings/watch?{}", query_);
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 

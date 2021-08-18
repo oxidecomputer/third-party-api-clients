@@ -122,7 +122,10 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                             let te = ts.id_to_entry.get(tid).unwrap();
 
                             // Render the serde string.
-                            if rt == "String" || rt.starts_with("Vec<") || rt.starts_with("Option<")
+                            if rt == "String"
+                                || rt.starts_with("Vec<")
+                                || rt.starts_with("Option<")
+                                || rt.starts_with("HashMap<")
                             {
                                 a(r#"#[serde(default,"#);
                                 if rt == "String" {

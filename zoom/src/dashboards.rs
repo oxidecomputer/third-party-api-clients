@@ -1133,7 +1133,7 @@ impl Dashboards {
         let url = format!("/phone/metrics/call_logs?{}", query_);
 
         let resp: crate::types::ListCallLogsMetricsResponseData =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.call_logs)
@@ -1181,7 +1181,7 @@ impl Dashboards {
         let url = format!("/phone/metrics/call_logs?{}", query_);
 
         let mut resp: crate::types::ListCallLogsMetricsResponseData =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut call_logs = resp.call_logs;
         let mut page = resp.next_page_token;
@@ -1193,14 +1193,12 @@ impl Dashboards {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             call_logs.append(&mut resp.call_logs);
@@ -1325,8 +1323,7 @@ impl Dashboards {
             query_
         );
 
-        let resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ParticipantFeedbackResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.participants)
@@ -1366,7 +1363,7 @@ impl Dashboards {
         );
 
         let mut resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut participants = resp.participants;
         let mut page = resp.next_page_token;
@@ -1378,14 +1375,12 @@ impl Dashboards {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             participants.append(&mut resp.participants);
@@ -1452,8 +1447,7 @@ impl Dashboards {
             query_
         );
 
-        let resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::ParticipantFeedbackResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.participants)
@@ -1494,7 +1488,7 @@ impl Dashboards {
         );
 
         let mut resp: crate::types::ParticipantFeedbackResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut participants = resp.participants;
         let mut page = resp.next_page_token;
@@ -1506,14 +1500,12 @@ impl Dashboards {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             participants.append(&mut resp.participants);

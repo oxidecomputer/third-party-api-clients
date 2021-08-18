@@ -53,10 +53,7 @@ impl SettingsEnforcedTls {
     ) -> Result<crate::types::EnforcedTlsRequestResponse> {
         let url = "/user/settings/enforced_tls".to_string();
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

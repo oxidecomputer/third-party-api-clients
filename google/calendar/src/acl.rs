@@ -52,7 +52,7 @@ impl Acl {
             query_
         );
 
-        let resp: crate::types::Acl = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::Acl = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.items)
@@ -81,7 +81,7 @@ impl Acl {
             query_
         );
 
-        let mut resp: crate::types::Acl = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::Acl = self.client.get(&url, None).await?;
 
         let mut items = resp.items;
         let mut page = resp.next_page_token;
@@ -92,14 +92,12 @@ impl Acl {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             items.append(&mut resp.items);
@@ -146,10 +144,7 @@ impl Acl {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -195,10 +190,7 @@ impl Acl {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -256,10 +248,7 @@ impl Acl {
         );
 
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -317,10 +306,7 @@ impl Acl {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

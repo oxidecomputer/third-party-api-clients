@@ -63,7 +63,7 @@ impl Mobiledevices {
             query_
         );
 
-        let resp: crate::types::MobileDevices = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::MobileDevices = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.mobiledevices)
@@ -104,7 +104,7 @@ impl Mobiledevices {
             query_
         );
 
-        let mut resp: crate::types::MobileDevices = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::MobileDevices = self.client.get(&url, None).await?;
 
         let mut mobiledevices = resp.mobiledevices;
         let mut page = resp.next_page_token;
@@ -115,14 +115,12 @@ impl Mobiledevices {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             mobiledevices.append(&mut resp.mobiledevices);
@@ -213,10 +211,7 @@ impl Mobiledevices {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

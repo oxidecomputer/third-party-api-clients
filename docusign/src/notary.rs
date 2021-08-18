@@ -48,10 +48,7 @@ impl Notary {
     pub async fn put(&self, body: &crate::types::NotaryData) -> Result<crate::types::NotaryData> {
         let url = "/v2.1/current_user/notary".to_string();
         self.client
-            .put(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -65,10 +62,7 @@ impl Notary {
     pub async fn post(&self, body: &crate::types::NotaryData) -> Result<crate::types::NotaryData> {
         let url = "/v2.1/current_user/notary".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

@@ -40,7 +40,7 @@ impl Departments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/departments?{}", query_);
 
-        let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.data)
@@ -57,8 +57,7 @@ impl Departments {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Department>> {
         let url = "/departments".to_string();
-        let mut resp: crate::types::GetDepartmentsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
         let mut page = resp.page.next;
@@ -68,8 +67,7 @@ impl Departments {
             resp = self
                 .client
                 .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
-                .await
-                .unwrap();
+                .await?;
 
             data.append(&mut resp.data);
 
@@ -97,10 +95,7 @@ impl Departments {
     ) -> Result<crate::types::Department> {
         let url = "/departments".to_string();
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -142,10 +137,7 @@ impl Departments {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }

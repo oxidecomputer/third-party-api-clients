@@ -56,8 +56,7 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/contacts?{}", query_);
 
-        let resp: crate::types::SearchCompanyContactsResponse =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::SearchCompanyContactsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.contacts)
@@ -95,7 +94,7 @@ impl Contacts {
         let url = format!("/contacts?{}", query_);
 
         let mut resp: crate::types::SearchCompanyContactsResponse =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut contacts = resp.contacts;
         let mut page = resp.next_page_token;
@@ -107,14 +106,12 @@ impl Contacts {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             contacts.append(&mut resp.contacts);
@@ -170,8 +167,7 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/chat/users/me/contacts?{}", query_);
 
-        let resp: crate::types::GetUserContactsResponseData =
-            self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::GetUserContactsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.contacts)
@@ -204,7 +200,7 @@ impl Contacts {
         let url = format!("/chat/users/me/contacts?{}", query_);
 
         let mut resp: crate::types::GetUserContactsResponseData =
-            self.client.get(&url, None).await.unwrap();
+            self.client.get(&url, None).await?;
 
         let mut contacts = resp.contacts;
         let mut page = resp.next_page_token;
@@ -216,14 +212,12 @@ impl Contacts {
                 resp = self
                     .client
                     .get(&format!("{}?next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&next_page_token={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             contacts.append(&mut resp.contacts);

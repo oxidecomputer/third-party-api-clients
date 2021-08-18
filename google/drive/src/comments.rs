@@ -56,7 +56,7 @@ impl Comments {
             query_
         );
 
-        let resp: crate::types::CommentList = self.client.get(&url, None).await.unwrap();
+        let resp: crate::types::CommentList = self.client.get(&url, None).await?;
 
         // Return our response data.
         Ok(resp.comments)
@@ -92,7 +92,7 @@ impl Comments {
             query_
         );
 
-        let mut resp: crate::types::CommentList = self.client.get(&url, None).await.unwrap();
+        let mut resp: crate::types::CommentList = self.client.get(&url, None).await?;
 
         let mut comments = resp.comments;
         let mut page = resp.next_page_token;
@@ -103,14 +103,12 @@ impl Comments {
                 resp = self
                     .client
                     .get(&format!("{}?pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             } else {
                 resp = self
                     .client
                     .get(&format!("{}&pageToken={}", url, page), None)
-                    .await
-                    .unwrap();
+                    .await?;
             }
 
             comments.append(&mut resp.comments);
@@ -146,10 +144,7 @@ impl Comments {
         );
 
         self.client
-            .post(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 
@@ -228,10 +223,7 @@ impl Comments {
         );
 
         self.client
-            .patch(
-                &url,
-                Some(reqwest::Body::from(serde_json::to_vec(body).unwrap())),
-            )
+            .patch(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
             .await
     }
 }
