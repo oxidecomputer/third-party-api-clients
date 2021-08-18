@@ -34,12 +34,12 @@ fn test_deserialize() {
     println!("reimbursement = {:?}", deserialized);
 
     let t = crate::types::PostUsersDeferredRequest {
-        department_id: "1".to_string(),
-        direct_manager_id: "2".to_string(),
+        department_id: Some(uuid::Uuid::new_v4()),
+        direct_manager_id: Some(uuid::Uuid::new_v4()),
         email: "3".to_string(),
         first_name: "Joe".to_string(),
         last_name: "Smith".to_string(),
-        location_id: "4".to_string(),
+        location_id: Some(uuid::Uuid::new_v4()),
         phone: "5553245132".to_string(),
         role: crate::types::Role::BusinessUser,
     };

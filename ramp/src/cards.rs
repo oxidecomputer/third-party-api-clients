@@ -22,87 +22,35 @@ impl Cards {
      * **Parameters:**
      *
      * * `authorization: &str` -- The OAuth2 token header.
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `start: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `user_id: &str` -- The OAuth2 token header.
-     * * `card_program_id: &str` -- The OAuth2 token header.
+     * * `user_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `card_program_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    pub async fn get_page(
+    pub async fn get(
         &self,
-        start: &str,
+        start: uuid::Uuid,
         page_size: f64,
-        user_id: &str,
-        card_program_id: &str,
-    ) -> Result<Vec<crate::types::Card>> {
+        user_id: uuid::Uuid,
+        card_program_id: uuid::Uuid,
+    ) -> Result<crate::types::GetCardsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !card_program_id.is_empty() {
+        if !card_program_id.to_string().is_empty() {
             query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
         }
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        if !start.is_empty() {
+        if !start.to_string().is_empty() {
             query_args.push(("start".to_string(), start.to_string()));
         }
-        if !user_id.is_empty() {
+        if !user_id.to_string().is_empty() {
             query_args.push(("user_id".to_string(), user_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
 
-        let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
-
-        // Return our response data.
-        Ok(resp.cards)
-    }
-
-    /**
-     * List cards.
-     *
-     * This function performs a `GET` to the `/cards` endpoint.
-     *
-     * As opposed to `get`, this function returns all the pages of the request at once.
-     *
-     * Retrieve all cards.
-     */
-    pub async fn get_all(
-        &self,
-        user_id: &str,
-        card_program_id: &str,
-    ) -> Result<Vec<crate::types::Card>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !card_program_id.is_empty() {
-            query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
-        }
-        if !user_id.is_empty() {
-            query_args.push(("user_id".to_string(), user_id.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/cards?{}", query_);
-
-        let mut resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
-
-        let mut cards = resp.cards;
-        let mut page = resp.page.next;
-
-        // Paginate if we should.
-        while !page.is_empty() {
-            resp = self
-                .client
-                .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
-                .await?;
-
-            cards.append(&mut resp.cards);
-
-            if !resp.page.next.is_empty() && resp.page.next != page {
-                page = resp.page.next.to_string();
-            } else {
-                page = "".to_string();
-            }
-        }
-
-        // Return our response data.
-        Ok(cards)
+        self.client.get(&url, None).await
     }
 
     /**

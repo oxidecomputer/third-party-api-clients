@@ -22,19 +22,19 @@ impl Departments {
      * **Parameters:**
      *
      * * `authorization: &str` -- The OAuth2 token header.
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `start: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
     pub async fn get_page(
         &self,
-        start: &str,
+        start: uuid::Uuid,
         page_size: f64,
     ) -> Result<Vec<crate::types::Department>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        if !start.is_empty() {
+        if !start.to_string().is_empty() {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();

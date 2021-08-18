@@ -273,7 +273,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         "uri" => "&str".to_string(),
                                         "uri-template" => "&str".to_string(),
                                         "email" => "&str".to_string(),
-                                        "uuid" => "&str".to_string(),
+                                        "uuid" => "uuid::Uuid".to_string(),
                                         "hostname" => "&str".to_string(),
                                         "time" => "chrono::NaiveTime".to_string(),
                                         f => {
@@ -1715,7 +1715,7 @@ impl TypeSpace {
                             )),
                             "uuid" => Ok((
                                 Some(uid.to_string()),
-                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                                TypeDetails::Basic("uuid::Uuid".to_string(), s.schema_data.clone()),
                             )),
                             "hostname" => Ok((
                                 Some(uid.to_string()),

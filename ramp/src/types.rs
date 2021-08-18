@@ -99,12 +99,8 @@ pub struct User {
     /**
      * Ramp User
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub business_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub business_id: Option<uuid::Uuid>,
     /**
      * Ramp User
      */
@@ -133,14 +129,10 @@ pub struct User {
     )]
     pub first_name: String,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde()]
+    pub id: uuid::Uuid,
     /**
      * The OAuth2 token header
      */
@@ -184,32 +176,20 @@ pub struct User {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchUsersRequest {
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub department_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub department_id: Option<uuid::Uuid>,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub direct_manager_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub direct_manager_id: Option<uuid::Uuid>,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub location_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub location_id: Option<uuid::Uuid>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub role: Option<Role>,
 }
@@ -230,14 +210,10 @@ pub struct Page {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CardHolder {
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub department_id: String,
+    #[serde()]
+    pub department_id: uuid::Uuid,
     /**
      * The OAuth2 token header
      */
@@ -266,14 +242,10 @@ pub struct CardHolder {
     )]
     pub last_name: String,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub location_id: String,
+    #[serde()]
+    pub location_id: uuid::Uuid,
     /**
      * The OAuth2 token header
      */
@@ -351,14 +323,10 @@ pub struct PolicyViolations {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     /**
      * The OAuth2 token header
      */
@@ -422,14 +390,10 @@ pub struct Disputes {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     /**
      * The OAuth2 token header
      */
@@ -463,28 +427,20 @@ pub struct Data {
     #[serde()]
     pub card_holder: CardHolder,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub card_id: String,
+    #[serde()]
+    pub card_id: uuid::Uuid,
     /**
      * Ramp transaction
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub disputes: Vec<Disputes>,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde()]
+    pub id: uuid::Uuid,
     /**
      * Ramp transaction
      */
@@ -495,14 +451,10 @@ pub struct Data {
     )]
     pub memo: String,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub merchant_id: String,
+    #[serde()]
+    pub merchant_id: uuid::Uuid,
     /**
      * The OAuth2 token header
      */
@@ -521,7 +473,7 @@ pub struct Data {
      * Ramp transaction
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub receipts: Vec<String>,
+    pub receipts: Vec<uuid::Uuid>,
     /**
      * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      */
@@ -571,12 +523,8 @@ pub struct Location {
     /**
      * Ramp location
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     /**
      * Ramp location
      */
@@ -625,12 +573,8 @@ pub struct Department {
     /**
      * Ramp Department
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     /**
      * Ramp Department
      */
@@ -648,6 +592,15 @@ pub struct GetDepartmentsResponse {
     pub data: Vec<Department>,
     #[serde(default)]
     pub page: Page,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct GetCardsResponsePage {
+    /**
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
+     */
+    #[serde()]
+    pub next: uuid::Uuid,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -839,21 +792,13 @@ pub struct Card {
     /**
      * Card data that holds mostly static information about a card.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub card_program_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub card_program_id: Option<uuid::Uuid>,
     /**
      * Card data that holds mostly static information about a card.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub cardholder_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub cardholder_id: Option<uuid::Uuid>,
     /**
      * Card data that holds mostly static information about a card.
      */
@@ -880,12 +825,8 @@ pub struct Card {
     /**
      * Card data that holds mostly static information about a card.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     /**
      * Card data that holds mostly static information about a card.
      */
@@ -914,21 +855,17 @@ pub struct Card {
 pub struct GetCardsResponse {
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub cards: Vec<Card>,
-    #[serde(default)]
-    pub page: Page,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<GetCardsResponsePage>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchResourcesCardsCardRequest {
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub card_program_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub card_program_id: Option<uuid::Uuid>,
     /**
      * The OAuth2 token header
      */
@@ -950,14 +887,10 @@ pub struct PatchResourcesCardsCardRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCustomProviderResponse {
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub custom_id_provider: String,
+    #[serde()]
+    pub custom_id_provider: uuid::Uuid,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1139,14 +1072,10 @@ pub struct Business {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardPhysicalRequest {
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub card_program_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub card_program_id: Option<uuid::Uuid>,
     /**
      * The OAuth2 token header
      */
@@ -1176,27 +1105,19 @@ pub struct PostResourcesCardPhysicalRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub user_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub user_id: Option<uuid::Uuid>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostResourcesCardVirtualRequest {
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub card_program_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub card_program_id: Option<uuid::Uuid>,
     /**
      * The OAuth2 token header
      */
@@ -1221,14 +1142,10 @@ pub struct PostResourcesCardVirtualRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub spending_restrictions: Option<SpendingRestrictions>,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub user_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub user_id: Option<uuid::Uuid>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1373,14 +1290,10 @@ pub struct PostResourcesCardsCardSuspensionRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetEntityTypeCustomRampResponse {
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub ramp_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ramp_id: Option<uuid::Uuid>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1417,14 +1330,10 @@ pub struct GetResourcesCardsDeferredResponseData {
     )]
     pub error: String,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     /**
      * The OAuth2 token header
      */
@@ -1482,14 +1391,10 @@ pub struct GetResourcesCardsDeferredResponse {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub data: Option<GetResourcesCardsDeferredResponseData>,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
 }
@@ -1582,12 +1487,8 @@ pub struct CardProgram {
     /**
      * Card Program data that serves as a template for creating new cards.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     /**
      * Card Program data that serves as a template for creating new cards.
      */
@@ -1619,8 +1520,8 @@ pub struct GetCardProgramsResponse {
         rename = "card-programs"
     )]
     pub card_programs: Vec<CardProgram>,
-    #[serde(default)]
-    pub page: Page,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<GetCardsResponsePage>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1659,23 +1560,15 @@ pub struct PostResourcesCardProgramRequest {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostUsersDeferredRequest {
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub department_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub department_id: Option<uuid::Uuid>,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub direct_manager_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub direct_manager_id: Option<uuid::Uuid>,
     /**
      * The OAuth2 token header
      */
@@ -1704,14 +1597,10 @@ pub struct PostUsersDeferredRequest {
     )]
     pub last_name: String,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub location_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub location_id: Option<uuid::Uuid>,
     /**
      * The OAuth2 token header
      */
@@ -1737,14 +1626,10 @@ pub struct GetUsersDeferredStatusResponseData {
     )]
     pub error: String,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     /**
      * The OAuth2 token header
      */
@@ -1755,14 +1640,10 @@ pub struct GetUsersDeferredStatusResponseData {
     )]
     pub misc: String,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub user_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub user_id: Option<uuid::Uuid>,
 }
 
 ///
@@ -1811,30 +1692,18 @@ pub struct Receipt {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub receipt_url: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub transaction_id: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub user_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub transaction_id: Option<uuid::Uuid>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub user_id: Option<uuid::Uuid>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1865,12 +1734,8 @@ pub struct Reimbursement {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub id: Option<uuid::Uuid>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -1878,15 +1743,11 @@ pub struct Reimbursement {
     )]
     pub merchant: String,
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub receipts: Vec<String>,
+    pub receipts: Vec<uuid::Uuid>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub transaction_date: Option<chrono::NaiveDate>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub user_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub user_id: Option<uuid::Uuid>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1909,12 +1770,8 @@ pub struct PostCustomProviderEntityTypeLinkRequest {
     )]
     pub custom_id: String,
     /**
-     * The OAuth2 token header
+     * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub ramp_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub ramp_id: Option<uuid::Uuid>,
 }

@@ -922,7 +922,7 @@ impl Meetings {
     pub async fn list_past_meeting_polls(
         &self,
         meeting_id: &str,
-    ) -> Result<crate::types::ReportMeetingPollsResponse> {
+    ) -> Result<crate::types::ListPastMeetingPollsResponse> {
         let url = format!(
             "/past_meetings/{}/polls",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
