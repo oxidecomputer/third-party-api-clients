@@ -1,3 +1,4 @@
+
 use std::{fmt, str::FromStr};
 
 use serde::de::{self, Visitor};
@@ -29,34 +30,43 @@ pub mod date_time_format {
                     // This is google calendar.
                     match Utc.datetime_from_str(&s, "%Y-%m-%dT%H:%M:%S%.3fZ") {
                         Ok(t) => Ok(Some(t)),
-                        Err(_) => match Utc.datetime_from_str(&s, FORMAT) {
-                            Ok(t) => Ok(Some(t)),
-                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
+                        Err(_) => {
+                            match Utc.datetime_from_str(&s, FORMAT) {
                                 Ok(t) => Ok(Some(t)),
-                                Err(_) => match chrono::NaiveDate::parse_from_str(&s, "%Y-%m-%d") {
-                                    Ok(d) => Ok(Some(DateTime::<Utc>::from_utc(
-                                        chrono::NaiveDateTime::new(
-                                            d,
-                                            chrono::NaiveTime::from_hms(0, 0, 0),
-                                        ),
-                                        Utc,
-                                    ))),
-                                    Err(_) => {
-                                        s = format!("{}+00:00", s);
-                                        match Utc.datetime_from_str(&s, FORMAT) {
-                                            Ok(r) => Ok(Some(r)),
-                                            Err(_) => match Utc.datetime_from_str(&s, "%+") {
-                                                Ok(d) => Ok(Some(d)),
-                                                Err(e) => Err(serde::de::Error::custom(format!(
-                                                    "deserializing {} as DateTime<Utc> failed: {}",
-                                                    s, e
-                                                ))),
-                                            },
+                                Err(_) => {
+                                    match Utc.datetime_from_str(&s, "%+") {
+                                        Ok(t) => Ok(Some(t)),
+                                        Err(_) => {
+                                            match chrono::NaiveDate::parse_from_str(&s, "%Y-%m-%d") {
+                                                Ok(d) => Ok(Some(
+                                                    DateTime::<Utc>::from_utc(
+                                                        chrono::NaiveDateTime::new(
+                                                            d,
+                                                            chrono::NaiveTime::from_hms(0,0,0),
+                                                        ),
+                                                        Utc,
+                                                    )
+                                                )),
+                                                Err(_) => {
+                                                    s = format!("{}+00:00", s);
+                                                    match Utc.datetime_from_str(&s, FORMAT) {
+                                                        Ok(r) => Ok(Some(r)),
+                                                        Err(_) => {
+                                                            match Utc.datetime_from_str(&s, "%+") {
+                                                                Ok(d) => Ok(Some(d)),
+                                                                Err(e) => {
+                                                                    Err(serde::de::Error::custom(format!("deserializing {} as DateTime<Utc> failed: {}", s, e)))
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
-                                },
-                            },
-                        },
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -478,6 +488,7 @@ pub fn zero_f32(num: &f32) -> bool {
 pub fn zero_f64(num: &f64) -> bool {
     *num == 0.0
 }
+
 
 pub mod google_calendar_date_time_format {
     use chrono::{DateTime, Utc};
