@@ -1489,10 +1489,6 @@ impl TypeSpace {
                         }
                     });
 
-                    if self.name_to_id.get(&name).is_some() && !parent_name.is_empty() {
-                        name = clean_name(&format!("{} {}", parent_name, name));
-                    }
-
                     // TODO: this is a horrible fix just for google!
                     if name == "user custom properties" {
                         return Ok((
@@ -3083,6 +3079,7 @@ fn main() -> Result<()> {
                 uuid_lib = r#"
 bytes = "1"
 async-trait = "^0.1.51"
+urlencoding = "^1.3.3"
 uuid = { version = "^0.8", features = ["serde", "v4"] }"#
                     .to_string();
             }

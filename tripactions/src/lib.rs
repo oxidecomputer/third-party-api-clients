@@ -88,7 +88,7 @@ pub mod utils;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://api.tripactions.com/v1";
+pub const DEFAULT_HOST: &str = "https://api.tripactions.com";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
@@ -271,13 +271,10 @@ impl Client {
         }
 
         if let Some(body) = body {
-            println!(
-                "Body: {:?}",
-                String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
-            );
+            //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
             req = req.body(body);
         }
-        println!("Request: {:?}", &req);
+        //println!("Request: {:?}", &req);
         Ok(req.send().await?)
     }
 

@@ -97,7 +97,12 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                     for (name, tid) in omap.iter() {
                         if let Ok(mut rt) = ts.render_type(tid, true) {
                             let mut prop = name.to_string();
-                            if name == "ref" || name == "type" || name == "self" || name == "box" {
+                            if name == "ref"
+                                || name == "type"
+                                || name == "self"
+                                || name == "box"
+                                || name == "match"
+                            {
                                 prop = format!("{}_", name);
                             } else if name == "$ref" {
                                 prop = format!("{}_", name.replace('$', ""));

@@ -73,7 +73,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: README.md docusign giphy github google-admin google-calendar google-drive google-groups-settings google-sheets gusto ramp sendgrid tripactions zoom
+generate: README.md docusign giphy github google-admin google-calendar google-drive google-groups-settings google-sheets gusto mailchimp ramp sendgrid tripactions zoom
 	cargo test tests
 	cargo clippy
 
@@ -410,7 +410,7 @@ tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
 		--proper-name "TripActions" \
 		-d "A fully generated & opinionated API client for the TripActions API." \
 		--spec-link "https://app.tripactions.com/api/public/documentation/swagger-ui/index.html?configUrl=/api/public/documentation/api-docs/swagger-config" \
-		--host "api.tripactions.com/v1" \
+		--host "api.tripactions.com" \
 		--token-endpoint "api.tripactions.com/ta-auth/oauth/token" $(EXTRA_ARGS)
 	cargo fmt -p tripactions
 	@echo -e "- [TripActions](tripactions/) [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)" >> README.md
