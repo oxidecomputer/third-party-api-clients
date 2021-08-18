@@ -1,6 +1,6 @@
 //! A fully generated, opinionated API client library for SendGrid.
 //!
-//! [![docs.rs](https://docs.rs/sendgrid_api/badge.svg)](https://docs.rs/sendgrid_api)
+//! [![docs.rs](https://docs.rs/sendgrid-api/badge.svg)](https://docs.rs/sendgrid-api)
 //!
 //! ## API Details
 //!

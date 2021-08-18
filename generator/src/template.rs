@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 
 use anyhow::{anyhow, bail, Context, Result};
-use inflector::cases::snakecase::to_snake_case;
+use inflector::cases::{kebabcase::to_kebab_case, snakecase::to_snake_case};
 
 #[derive(Eq, PartialEq, Clone, Debug)]
 enum Component {
@@ -573,8 +573,8 @@ pub fn generate_docs_openapi_info(
 //! along with the code to make this library easy to use.
 //! "#,
         proper_name,
-        to_snake_case(package_name),
-        to_snake_case(package_name),
+        to_kebab_case(package_name),
+        to_kebab_case(package_name),
         description,
         tos,
         contact,
