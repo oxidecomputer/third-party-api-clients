@@ -69901,7 +69901,6 @@ pub struct PaymentGatewayAccountsInfo {
 /// A line item describes details
 /// about an individual line item
 /// in a payment request.
-///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaymentLineItem {
     /**

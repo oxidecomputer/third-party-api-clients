@@ -215,18 +215,12 @@ impl EnvelopeConsumerDisclosures {
         lang_code: &str,
         recipient_id: &str,
     ) -> Result<crate::types::ConsumerDisclosure> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !lang_code.is_empty() {
-            query_args.push(("langCode".to_string(), lang_code.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure/{}?{}",
+            "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure/{}",
             crate::progenitor_support::encode_path(&account_id.to_string()),
             crate::progenitor_support::encode_path(&envelope_id.to_string()),
             crate::progenitor_support::encode_path(&recipient_id.to_string()),
             crate::progenitor_support::encode_path(&lang_code.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await

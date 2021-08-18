@@ -323,7 +323,7 @@ okta: target/debug/generator $(OKTA_SPEC)
 $(RAMP_SPEC_REFERENCE):
 	git clone git@github.com:$(RAMP_SPEC_REPO).git $(RAMP_SPEC_DIR)
 
-$(RAMP_SPEC): $(RAMP_SPEC_REFERENCE)
+$(RAMP_SPEC):
 	npx swagger-cli bundle \
 		--dereference \
 		--type json \

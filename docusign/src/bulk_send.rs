@@ -36,7 +36,7 @@ impl BulkSend {
      *   - sent
      *   - queued.
      */
-    pub async fn v_2_batch_get_batche(
+    pub async fn batch_get_batche(
         &self,
         account_id: &str,
         batch_ids: &str,
@@ -85,7 +85,7 @@ impl BulkSend {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `bulk_send_batch_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn v_2_batch_get_statu(
+    pub async fn batch_get_statu(
         &self,
         account_id: &str,
         bulk_send_batch_id: &str,
@@ -111,7 +111,7 @@ impl BulkSend {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `bulk_send_batch_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn v_2_batch_put_status(
+    pub async fn batch_put_status(
         &self,
         account_id: &str,
         bulk_send_batch_id: &str,
@@ -342,7 +342,7 @@ impl BulkSend {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `bulk_send_list_id: &str` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
      */
-    pub async fn v_2_post_request(
+    pub async fn post_request(
         &self,
         account_id: &str,
         bulk_send_list_id: &str,
@@ -411,7 +411,7 @@ impl BulkSend {
      * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      * * `bulk_send_list_id: &str` -- The GUID of the bulk send list. This property is created after you post a new bulk send list.
      */
-    pub async fn v_2_test_post_request(
+    pub async fn test_post_request(
         &self,
         account_id: &str,
         bulk_send_list_id: &str,

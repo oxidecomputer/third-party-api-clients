@@ -352,25 +352,25 @@ impl WebhookConfigInsecureSslOneOf {
     }
 }
 
-impl From<f64> for WebhookConfigInsecureSslOneOf {
+impl std::convert::From<f64> for WebhookConfigInsecureSslOneOf {
     fn from(f: f64) -> Self {
         WebhookConfigInsecureSslOneOf::F64(f)
     }
 }
 
-impl From<String> for WebhookConfigInsecureSslOneOf {
+impl std::convert::From<String> for WebhookConfigInsecureSslOneOf {
     fn from(f: String) -> Self {
         WebhookConfigInsecureSslOneOf::String(f)
     }
 }
 
-impl From<WebhookConfigInsecureSslOneOf> for f64 {
+impl std::convert::From<WebhookConfigInsecureSslOneOf> for f64 {
     fn from(f: WebhookConfigInsecureSslOneOf) -> Self {
         *f.f64().unwrap()
     }
 }
 
-impl From<WebhookConfigInsecureSslOneOf> for String {
+impl std::convert::From<WebhookConfigInsecureSslOneOf> for String {
     fn from(f: WebhookConfigInsecureSslOneOf) -> Self {
         f.string().unwrap().clone()
     }
@@ -559,37 +559,37 @@ impl ValueOneOf {
     }
 }
 
-impl From<i64> for ValueOneOf {
+impl std::convert::From<i64> for ValueOneOf {
     fn from(f: i64) -> Self {
         ValueOneOf::I64(f)
     }
 }
 
-impl From<String> for ValueOneOf {
+impl std::convert::From<String> for ValueOneOf {
     fn from(f: String) -> Self {
         ValueOneOf::String(f)
     }
 }
 
-impl From<Vec<String>> for ValueOneOf {
+impl std::convert::From<Vec<String>> for ValueOneOf {
     fn from(f: Vec<String>) -> Self {
         ValueOneOf::StringVector(f)
     }
 }
 
-impl From<ValueOneOf> for i64 {
+impl std::convert::From<ValueOneOf> for i64 {
     fn from(f: ValueOneOf) -> Self {
         *f.i64().unwrap()
     }
 }
 
-impl From<ValueOneOf> for String {
+impl std::convert::From<ValueOneOf> for String {
     fn from(f: ValueOneOf) -> Self {
         f.string().unwrap().clone()
     }
 }
 
-impl From<ValueOneOf> for Vec<String> {
+impl std::convert::From<ValueOneOf> for Vec<String> {
     fn from(f: ValueOneOf) -> Self {
         f.vec_string().unwrap().clone()
     }
@@ -5347,13 +5347,13 @@ impl LabelsOneOf {
     }
 }
 
-impl From<String> for LabelsOneOf {
+impl std::convert::From<String> for LabelsOneOf {
     fn from(f: String) -> Self {
         LabelsOneOf::String(f)
     }
 }
 
-impl From<LabelsOneOf> for String {
+impl std::convert::From<LabelsOneOf> for String {
     fn from(f: LabelsOneOf) -> Self {
         f.string().unwrap().clone()
     }
@@ -11081,13 +11081,13 @@ impl PayloadOneOf {
     }
 }
 
-impl From<String> for PayloadOneOf {
+impl std::convert::From<String> for PayloadOneOf {
     fn from(f: String) -> Self {
         PayloadOneOf::String(f)
     }
 }
 
-impl From<PayloadOneOf> for String {
+impl std::convert::From<PayloadOneOf> for String {
     fn from(f: PayloadOneOf) -> Self {
         f.string().unwrap().clone()
     }
@@ -21793,25 +21793,25 @@ impl ScimUserOperationsValueOneOf {
     }
 }
 
-impl From<String> for ScimUserOperationsValueOneOf {
+impl std::convert::From<String> for ScimUserOperationsValueOneOf {
     fn from(f: String) -> Self {
         ScimUserOperationsValueOneOf::String(f)
     }
 }
 
-impl From<Vec<String>> for ScimUserOperationsValueOneOf {
+impl std::convert::From<Vec<String>> for ScimUserOperationsValueOneOf {
     fn from(f: Vec<String>) -> Self {
         ScimUserOperationsValueOneOf::StringVector(f)
     }
 }
 
-impl From<ScimUserOperationsValueOneOf> for String {
+impl std::convert::From<ScimUserOperationsValueOneOf> for String {
     fn from(f: ScimUserOperationsValueOneOf) -> Self {
         f.string().unwrap().clone()
     }
 }
 
-impl From<ScimUserOperationsValueOneOf> for Vec<String> {
+impl std::convert::From<ScimUserOperationsValueOneOf> for Vec<String> {
     fn from(f: ScimUserOperationsValueOneOf) -> Self {
         f.vec_string().unwrap().clone()
     }
@@ -24107,25 +24107,25 @@ impl TitleOneOf {
     }
 }
 
-impl From<i64> for TitleOneOf {
+impl std::convert::From<i64> for TitleOneOf {
     fn from(f: i64) -> Self {
         TitleOneOf::I64(f)
     }
 }
 
-impl From<String> for TitleOneOf {
+impl std::convert::From<String> for TitleOneOf {
     fn from(f: String) -> Self {
         TitleOneOf::String(f)
     }
 }
 
-impl From<TitleOneOf> for i64 {
+impl std::convert::From<TitleOneOf> for i64 {
     fn from(f: TitleOneOf) -> Self {
         *f.i64().unwrap()
     }
 }
 
-impl From<TitleOneOf> for String {
+impl std::convert::From<TitleOneOf> for String {
     fn from(f: TitleOneOf) -> Self {
         f.string().unwrap().clone()
     }
@@ -24897,13 +24897,13 @@ impl PublicOneOf {
     }
 }
 
-impl From<bool> for PublicOneOf {
+impl std::convert::From<bool> for PublicOneOf {
     fn from(f: bool) -> Self {
         PublicOneOf::Bool(f)
     }
 }
 
-impl From<PublicOneOf> for bool {
+impl std::convert::From<PublicOneOf> for bool {
     fn from(f: PublicOneOf) -> Self {
         *f.bool().unwrap()
     }
@@ -27211,13 +27211,13 @@ impl ReposAddStatusCheckContextsRequestOneOf {
     }
 }
 
-impl From<Vec<String>> for ReposAddStatusCheckContextsRequestOneOf {
+impl std::convert::From<Vec<String>> for ReposAddStatusCheckContextsRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         ReposAddStatusCheckContextsRequestOneOf::StringVector(f)
     }
 }
 
-impl From<ReposAddStatusCheckContextsRequestOneOf> for Vec<String> {
+impl std::convert::From<ReposAddStatusCheckContextsRequestOneOf> for Vec<String> {
     fn from(f: ReposAddStatusCheckContextsRequestOneOf) -> Self {
         f.vec_string().unwrap().clone()
     }
@@ -27269,13 +27269,13 @@ impl ReposAddAppAccessRestrictionsRequestOneOf {
     }
 }
 
-impl From<Vec<String>> for ReposAddAppAccessRestrictionsRequestOneOf {
+impl std::convert::From<Vec<String>> for ReposAddAppAccessRestrictionsRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         ReposAddAppAccessRestrictionsRequestOneOf::StringVector(f)
     }
 }
 
-impl From<ReposAddAppAccessRestrictionsRequestOneOf> for Vec<String> {
+impl std::convert::From<ReposAddAppAccessRestrictionsRequestOneOf> for Vec<String> {
     fn from(f: ReposAddAppAccessRestrictionsRequestOneOf) -> Self {
         f.vec_string().unwrap().clone()
     }
@@ -27327,13 +27327,13 @@ impl ReposAddTeamAccessRestrictionsRequestOneOf {
     }
 }
 
-impl From<Vec<String>> for ReposAddTeamAccessRestrictionsRequestOneOf {
+impl std::convert::From<Vec<String>> for ReposAddTeamAccessRestrictionsRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         ReposAddTeamAccessRestrictionsRequestOneOf::StringVector(f)
     }
 }
 
-impl From<ReposAddTeamAccessRestrictionsRequestOneOf> for Vec<String> {
+impl std::convert::From<ReposAddTeamAccessRestrictionsRequestOneOf> for Vec<String> {
     fn from(f: ReposAddTeamAccessRestrictionsRequestOneOf) -> Self {
         f.vec_string().unwrap().clone()
     }
@@ -27385,13 +27385,13 @@ impl ReposAddUserAccessRestrictionsRequestOneOf {
     }
 }
 
-impl From<Vec<String>> for ReposAddUserAccessRestrictionsRequestOneOf {
+impl std::convert::From<Vec<String>> for ReposAddUserAccessRestrictionsRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         ReposAddUserAccessRestrictionsRequestOneOf::StringVector(f)
     }
 }
 
-impl From<ReposAddUserAccessRestrictionsRequestOneOf> for Vec<String> {
+impl std::convert::From<ReposAddUserAccessRestrictionsRequestOneOf> for Vec<String> {
     fn from(f: ReposAddUserAccessRestrictionsRequestOneOf) -> Self {
         f.vec_string().unwrap().clone()
     }
@@ -27983,13 +27983,13 @@ impl ReposGetContentResponseOneOf {
     }
 }
 
-impl From<Vec<Entries>> for ReposGetContentResponseOneOf {
+impl std::convert::From<Vec<Entries>> for ReposGetContentResponseOneOf {
     fn from(f: Vec<Entries>) -> Self {
         ReposGetContentResponseOneOf::EntriesVector(f)
     }
 }
 
-impl From<ReposGetContentResponseOneOf> for Vec<Entries> {
+impl std::convert::From<ReposGetContentResponseOneOf> for Vec<Entries> {
     fn from(f: ReposGetContentResponseOneOf) -> Self {
         f.vec_entries().unwrap().clone()
     }
@@ -28958,13 +28958,13 @@ impl IssuesCreateRequestLabelsOneOf {
     }
 }
 
-impl From<String> for IssuesCreateRequestLabelsOneOf {
+impl std::convert::From<String> for IssuesCreateRequestLabelsOneOf {
     fn from(f: String) -> Self {
         IssuesCreateRequestLabelsOneOf::String(f)
     }
 }
 
-impl From<IssuesCreateRequestLabelsOneOf> for String {
+impl std::convert::From<IssuesCreateRequestLabelsOneOf> for String {
     fn from(f: IssuesCreateRequestLabelsOneOf) -> Self {
         f.string().unwrap().clone()
     }
@@ -29118,37 +29118,37 @@ impl IssuesAddLabelsRequestOneOf {
     }
 }
 
-impl From<Vec<ProjectsUpdateColumnRequest>> for IssuesAddLabelsRequestOneOf {
+impl std::convert::From<Vec<ProjectsUpdateColumnRequest>> for IssuesAddLabelsRequestOneOf {
     fn from(f: Vec<ProjectsUpdateColumnRequest>) -> Self {
         IssuesAddLabelsRequestOneOf::ProjectsUpdateColumnRequestVector(f)
     }
 }
 
-impl From<String> for IssuesAddLabelsRequestOneOf {
+impl std::convert::From<String> for IssuesAddLabelsRequestOneOf {
     fn from(f: String) -> Self {
         IssuesAddLabelsRequestOneOf::String(f)
     }
 }
 
-impl From<Vec<String>> for IssuesAddLabelsRequestOneOf {
+impl std::convert::From<Vec<String>> for IssuesAddLabelsRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         IssuesAddLabelsRequestOneOf::StringVector(f)
     }
 }
 
-impl From<IssuesAddLabelsRequestOneOf> for Vec<ProjectsUpdateColumnRequest> {
+impl std::convert::From<IssuesAddLabelsRequestOneOf> for Vec<ProjectsUpdateColumnRequest> {
     fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
         f.vec_projects_update_column_request().unwrap().clone()
     }
 }
 
-impl From<IssuesAddLabelsRequestOneOf> for String {
+impl std::convert::From<IssuesAddLabelsRequestOneOf> for String {
     fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
         f.string().unwrap().clone()
     }
 }
 
-impl From<IssuesAddLabelsRequestOneOf> for Vec<String> {
+impl std::convert::From<IssuesAddLabelsRequestOneOf> for Vec<String> {
     fn from(f: IssuesAddLabelsRequestOneOf) -> Self {
         f.vec_string().unwrap().clone()
     }
@@ -29213,37 +29213,37 @@ impl IssuesSetLabelsRequestAnyOf {
     }
 }
 
-impl From<Vec<ProjectsUpdateColumnRequest>> for IssuesSetLabelsRequestAnyOf {
+impl std::convert::From<Vec<ProjectsUpdateColumnRequest>> for IssuesSetLabelsRequestAnyOf {
     fn from(f: Vec<ProjectsUpdateColumnRequest>) -> Self {
         IssuesSetLabelsRequestAnyOf::ProjectsUpdateColumnRequestVector(f)
     }
 }
 
-impl From<String> for IssuesSetLabelsRequestAnyOf {
+impl std::convert::From<String> for IssuesSetLabelsRequestAnyOf {
     fn from(f: String) -> Self {
         IssuesSetLabelsRequestAnyOf::String(f)
     }
 }
 
-impl From<Vec<String>> for IssuesSetLabelsRequestAnyOf {
+impl std::convert::From<Vec<String>> for IssuesSetLabelsRequestAnyOf {
     fn from(f: Vec<String>) -> Self {
         IssuesSetLabelsRequestAnyOf::StringVector(f)
     }
 }
 
-impl From<IssuesSetLabelsRequestAnyOf> for Vec<ProjectsUpdateColumnRequest> {
+impl std::convert::From<IssuesSetLabelsRequestAnyOf> for Vec<ProjectsUpdateColumnRequest> {
     fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
         f.vec_projects_update_column_request().unwrap().clone()
     }
 }
 
-impl From<IssuesSetLabelsRequestAnyOf> for String {
+impl std::convert::From<IssuesSetLabelsRequestAnyOf> for String {
     fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
         f.string().unwrap().clone()
     }
 }
 
-impl From<IssuesSetLabelsRequestAnyOf> for Vec<String> {
+impl std::convert::From<IssuesSetLabelsRequestAnyOf> for Vec<String> {
     fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
         f.vec_string().unwrap().clone()
     }
@@ -30246,25 +30246,25 @@ impl ActivityListStargazersRepoResponseAnyOf {
     }
 }
 
-impl From<Vec<SimpleUser>> for ActivityListStargazersRepoResponseAnyOf {
+impl std::convert::From<Vec<SimpleUser>> for ActivityListStargazersRepoResponseAnyOf {
     fn from(f: Vec<SimpleUser>) -> Self {
         ActivityListStargazersRepoResponseAnyOf::SimpleUserVector(f)
     }
 }
 
-impl From<Vec<Stargazer>> for ActivityListStargazersRepoResponseAnyOf {
+impl std::convert::From<Vec<Stargazer>> for ActivityListStargazersRepoResponseAnyOf {
     fn from(f: Vec<Stargazer>) -> Self {
         ActivityListStargazersRepoResponseAnyOf::StargazerVector(f)
     }
 }
 
-impl From<ActivityListStargazersRepoResponseAnyOf> for Vec<SimpleUser> {
+impl std::convert::From<ActivityListStargazersRepoResponseAnyOf> for Vec<SimpleUser> {
     fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
         f.vec_simple_user().unwrap().clone()
     }
 }
 
-impl From<ActivityListStargazersRepoResponseAnyOf> for Vec<Stargazer> {
+impl std::convert::From<ActivityListStargazersRepoResponseAnyOf> for Vec<Stargazer> {
     fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
         f.vec_stargazer().unwrap().clone()
     }
@@ -30664,25 +30664,29 @@ impl ScimUpdateAttributeUserRequestOperationsValueOneOf {
     }
 }
 
-impl From<Vec<ScimUserEmails>> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
+impl std::convert::From<Vec<ScimUserEmails>>
+    for ScimUpdateAttributeUserRequestOperationsValueOneOf
+{
     fn from(f: Vec<ScimUserEmails>) -> Self {
         ScimUpdateAttributeUserRequestOperationsValueOneOf::ScimUserEmailsVector(f)
     }
 }
 
-impl From<String> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
+impl std::convert::From<String> for ScimUpdateAttributeUserRequestOperationsValueOneOf {
     fn from(f: String) -> Self {
         ScimUpdateAttributeUserRequestOperationsValueOneOf::String(f)
     }
 }
 
-impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for Vec<ScimUserEmails> {
+impl std::convert::From<ScimUpdateAttributeUserRequestOperationsValueOneOf>
+    for Vec<ScimUserEmails>
+{
     fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
         f.vec_scim_user_emails().unwrap().clone()
     }
 }
 
-impl From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for String {
+impl std::convert::From<ScimUpdateAttributeUserRequestOperationsValueOneOf> for String {
     fn from(f: ScimUpdateAttributeUserRequestOperationsValueOneOf) -> Self {
         f.string().unwrap().clone()
     }
@@ -31277,25 +31281,25 @@ impl UsersAddEmailAuthenticatedRequestOneOf {
     }
 }
 
-impl From<String> for UsersAddEmailAuthenticatedRequestOneOf {
+impl std::convert::From<String> for UsersAddEmailAuthenticatedRequestOneOf {
     fn from(f: String) -> Self {
         UsersAddEmailAuthenticatedRequestOneOf::String(f)
     }
 }
 
-impl From<Vec<String>> for UsersAddEmailAuthenticatedRequestOneOf {
+impl std::convert::From<Vec<String>> for UsersAddEmailAuthenticatedRequestOneOf {
     fn from(f: Vec<String>) -> Self {
         UsersAddEmailAuthenticatedRequestOneOf::StringVector(f)
     }
 }
 
-impl From<UsersAddEmailAuthenticatedRequestOneOf> for String {
+impl std::convert::From<UsersAddEmailAuthenticatedRequestOneOf> for String {
     fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
         f.string().unwrap().clone()
     }
 }
 
-impl From<UsersAddEmailAuthenticatedRequestOneOf> for Vec<String> {
+impl std::convert::From<UsersAddEmailAuthenticatedRequestOneOf> for Vec<String> {
     fn from(f: UsersAddEmailAuthenticatedRequestOneOf) -> Self {
         f.vec_string().unwrap().clone()
     }
@@ -31618,25 +31622,25 @@ impl ActivityListReposStarredByUserResponseAnyOf {
     }
 }
 
-impl From<Vec<Repository>> for ActivityListReposStarredByUserResponseAnyOf {
+impl std::convert::From<Vec<Repository>> for ActivityListReposStarredByUserResponseAnyOf {
     fn from(f: Vec<Repository>) -> Self {
         ActivityListReposStarredByUserResponseAnyOf::RepositoryVector(f)
     }
 }
 
-impl From<Vec<StarredRepository>> for ActivityListReposStarredByUserResponseAnyOf {
+impl std::convert::From<Vec<StarredRepository>> for ActivityListReposStarredByUserResponseAnyOf {
     fn from(f: Vec<StarredRepository>) -> Self {
         ActivityListReposStarredByUserResponseAnyOf::StarredRepositoryVector(f)
     }
 }
 
-impl From<ActivityListReposStarredByUserResponseAnyOf> for Vec<Repository> {
+impl std::convert::From<ActivityListReposStarredByUserResponseAnyOf> for Vec<Repository> {
     fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
         f.vec_repository().unwrap().clone()
     }
 }
 
-impl From<ActivityListReposStarredByUserResponseAnyOf> for Vec<StarredRepository> {
+impl std::convert::From<ActivityListReposStarredByUserResponseAnyOf> for Vec<StarredRepository> {
     fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
         f.vec_starred_repository().unwrap().clone()
     }
