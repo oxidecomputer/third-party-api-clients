@@ -42,6 +42,14 @@ pub fn generate_files(
                     tags = xtags;
                 }
             }
+            if tags.is_empty() {
+                // If we still have no tags.... Oxide, parse it from
+                // the path.
+                let split = pn.trim_start_matches('/').split('/');
+                let vec = split.collect::<Vec<&str>>();
+
+                tags.push(vec.first().unwrap().to_string());
+            }
             let tag = to_snake_case(&clean_name(&make_plural(
                 proper_name,
                 tags.first().unwrap(),

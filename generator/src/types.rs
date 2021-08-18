@@ -237,9 +237,27 @@ fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String 
     // Get the description.
     let mut description = "All of the following types:\n\n".to_string();
 
-    for itid in omap {
+    let mut flatten = true;
+    for (i, itid) in omap.iter().enumerate() {
         let rt = ts.render_type(itid, true).unwrap();
         description.push_str(&format!("- `{}`\n", rt));
+
+        // Determine if we can do anything fancy with the resulting enum and flatten it.
+        let et = ts.id_to_entry.get(itid).unwrap();
+
+        if i == 0 && !et.details.is_enum() {
+            // If we don't have an enum for the first type we can't do anything
+            // fancy and flatten the enum.
+            flatten = false;
+        } else if let TypeDetails::Object(o, _) = &et.details {
+            if o.is_empty() || o.len() > 1 {
+                // We don't have a unit struct so we can't do anything fancy.
+                flatten = false;
+            }
+        } else {
+            // We don't have an object so let's just call it not fancy.
+            flatten = false;
+        }
     }
     description.push_str(
         "\nYou can easily convert this enum to the inner value with `From` and `Into`, as both \
@@ -249,7 +267,9 @@ fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String 
     a(&description);
 
     a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
-    a("#[serde(untagged)]");
+    if !flatten {
+        a("#[serde(untagged)]");
+    }
     a(&format!("pub enum {} {{", sn));
     let mut name_map: BTreeMap<String, String> = Default::default();
     // Becasue we have so many defaults set on our serde types these enums
