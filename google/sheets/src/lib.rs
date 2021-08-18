@@ -33,7 +33,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! sheets = "0.2.1"
+//! sheets = "0.2.2"
 //! ```
 //!
 //! ## Basic example

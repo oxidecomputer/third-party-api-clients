@@ -33,7 +33,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google_drive = "0.2.2"
+//! google_drive = "0.2.3"
 //! ```
 //!
 //! ## Basic example
