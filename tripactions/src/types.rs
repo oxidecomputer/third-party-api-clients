@@ -206,15 +206,13 @@ impl PassengerStatus {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
-    /**
-     * Nearest airport code to this location
-     */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
         rename = "airportCode"
     )]
-    pub airport_code: Option<serde_json::Value>,
+    pub airport_code: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -248,9 +246,6 @@ pub struct Segment {
     pub arrival: Option<Location>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub departure: Option<Location>,
-    /**
-     * Nearest airport code to this location
-     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -285,9 +280,6 @@ pub struct Segment {
         rename = "providerName"
     )]
     pub provider_name: String,
-    /**
-     * Nearest airport code to this location
-     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -470,9 +462,6 @@ pub struct BookingReport {
         rename = "airlineCreditCardSurcharge"
     )]
     pub airline_credit_card_surcharge: f64,
-    /**
-     * Nearest airport code to this location
-     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -564,26 +553,21 @@ pub struct BookingReport {
     )]
     pub cancellation_reason: String,
     /**
-     * Nearest airport code to this location
+     * Time at which the object was created.
      */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize",
         rename = "cancelledAt"
     )]
-    pub cancelled_at: Option<serde_json::Value>,
-    /**
-     * Nearest airport code to this location
-     */
+    pub cancelled_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
         rename = "carbonEmissions"
     )]
     pub carbon_emissions: Option<serde_json::Value>,
-    /**
-     * Nearest airport code to this location
-     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -606,9 +590,6 @@ pub struct BookingReport {
         rename = "companyPaymentMethod"
     )]
     pub company_payment_method: String,
-    /**
-     * Nearest airport code to this location
-     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -623,10 +604,14 @@ pub struct BookingReport {
     )]
     pub corporate_discount_used: String,
     /**
-     * Nearest airport code to this location
+     * Time at which the object was created.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub created: Option<serde_json::Value>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub created: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -694,9 +679,6 @@ pub struct BookingReport {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub flight: String,
-    /**
-     * Nearest airport code to this location
-     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -735,14 +717,15 @@ pub struct BookingReport {
     )]
     pub invoice: String,
     /**
-     * Nearest airport code to this location
+     * Time at which the object was created.
      */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize",
         rename = "lastModified"
     )]
-    pub last_modified: Option<serde_json::Value>,
+    pub last_modified: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -920,9 +903,6 @@ pub struct BookingReport {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub tax: f64,
-    /**
-     * Nearest airport code to this location
-     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",

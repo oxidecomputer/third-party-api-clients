@@ -145,7 +145,7 @@ components:
         city:
           type: string
         airportCode:
-          type: String
+          type: string
           description: 'Nearest airport code to this location'
     Segment:
       properties:
@@ -243,11 +243,13 @@ components:
         uuid:
           type: string
         created:
-          type: instant
+          type: string
+          format: date-time
           description: "Time at which the object was created."
           example: "2021-02-03T11:25:30.00Z"
         lastModified:
-          type: instant
+          type: string
+          format: date-time
           description: "Time at which the object was last modified."
           example: "2021-02-03T11:25:30.00Z"
         pcc:
@@ -270,7 +272,8 @@ components:
         bookingStatus:
           type: string
         cancelledAt:
-          type: instant
+          type: string
+          format: date-time
           description: "Time at which the booking was cancelled."
           example: "2021-02-03T11:25:30.00Z"
         cancellationReason:
