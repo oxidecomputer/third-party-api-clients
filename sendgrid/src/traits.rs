@@ -41,7 +41,7 @@ impl MailOps for crate::mail_send::MailSend {
             value: message.to_string(),
             type_: "text/plain".to_string(),
         }];
-        let mut p = Default::default();
+        let mut p: crate::types::Personalizations = Default::default();
         p.from = Some(mail.from);
         for to in tos {
             p.to.push(crate::types::ReplyTo {
