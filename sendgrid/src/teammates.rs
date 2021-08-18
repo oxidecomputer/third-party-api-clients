@@ -31,7 +31,6 @@ impl Teammates {
         &self,
         limit: u64,
         offset: u64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetV3TeammatesResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.to_string().is_empty() {
@@ -63,7 +62,6 @@ impl Teammates {
      */
     pub async fn post_v_3_teammate(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostV3TeammatesRequest,
     ) -> Result<crate::types::PostV3TeammatesResponse> {
         let url = "/teammates".to_string();
@@ -91,7 +89,6 @@ impl Teammates {
     pub async fn post_v_3_pending_token_resend(
         &self,
         token: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::PostV3TeammatesResponse> {
         let url = format!(
             "/teammates/pending/{}/resend",
@@ -175,10 +172,7 @@ impl Teammates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_v_3_pending(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::GetV3TeammatesPendingResponse> {
+    pub async fn get_v_3_pending(&self) -> Result<crate::types::GetV3TeammatesPendingResponse> {
         let url = "/teammates/pending".to_string();
         self.client.get(&url, None).await
     }
@@ -199,7 +193,6 @@ impl Teammates {
     pub async fn get_v_3_username(
         &self,
         username: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetV3TeammatesUsernameResponse> {
         let url = format!(
             "/teammates/{}",
@@ -225,7 +218,6 @@ impl Teammates {
     pub async fn delete_v_3_username(
         &self,
         username: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::PostSendersResponse> {
         let url = format!(
             "/teammates/{}",
@@ -255,7 +247,6 @@ impl Teammates {
     pub async fn patch_v_3_username(
         &self,
         username: &str,
-        on_behalf_of: &str,
         body: &crate::types::PatchV3TeammatesUsernameRequest,
     ) -> Result<crate::types::GetV3TeammatesUsernameResponse> {
         let url = format!(
@@ -321,7 +312,7 @@ impl Teammates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_v_3_pending_token(&self, token: &str, on_behalf_of: &str) -> Result<()> {
+    pub async fn delete_v_3_pending_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/teammates/pending/{}",
             crate::progenitor_support::encode_path(&token.to_string()),

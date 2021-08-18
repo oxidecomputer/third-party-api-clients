@@ -33,7 +33,6 @@ impl InvalidEmailsApi {
         end_time: i64,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::InvalidEmail>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -69,7 +68,6 @@ impl InvalidEmailsApi {
         end_time: i64,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::InvalidEmail>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -108,7 +106,6 @@ impl InvalidEmailsApi {
      */
     pub async fn delete_suppression_invalid_emails(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::DeleteSuppressionBlocksRequest,
     ) -> Result<crate::types::Help> {
         let url = "/suppression/invalid_emails".to_string();
@@ -134,7 +131,6 @@ impl InvalidEmailsApi {
     pub async fn get_suppression_invalid_emails_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::InvalidEmail>> {
         let url = format!(
             "/suppression/invalid_emails/{}",
@@ -156,7 +152,6 @@ impl InvalidEmailsApi {
     pub async fn get_all_suppression_invalid_emails_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::InvalidEmail>> {
         let url = format!(
             "/suppression/invalid_emails/{}",
@@ -180,7 +175,6 @@ impl InvalidEmailsApi {
     pub async fn delete_suppression_invalid_emails_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/suppression/invalid_emails/{}",

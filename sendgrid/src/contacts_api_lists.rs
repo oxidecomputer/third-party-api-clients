@@ -23,10 +23,7 @@ impl ContactsApiLists {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_contactdb_lists(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::ListAllListsResponse> {
+    pub async fn get_contactdb_lists(&self) -> Result<crate::types::ListAllListsResponse> {
         let url = "/contactdb/lists".to_string();
         self.client.get(&url, None).await
     }
@@ -44,7 +41,6 @@ impl ContactsApiLists {
      */
     pub async fn post_contactdb_list(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::ContactdbList> {
         let url = "/contactdb/lists".to_string();
@@ -67,7 +63,7 @@ impl ContactsApiLists {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_contactdb_lists(&self, on_behalf_of: &str, body: &Vec<i64>) -> Result<()> {
+    pub async fn delete_contactdb_lists(&self, body: &Vec<i64>) -> Result<()> {
         let url = "/contactdb/lists".to_string();
         self.client
             .delete(
@@ -92,17 +88,10 @@ impl ContactsApiLists {
     pub async fn get_contactdb_lists_list(
         &self,
         list_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::ContactdbList> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if list_id > 0 {
-            query_args.push(("list_id".to_string(), list_id.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/contactdb/lists/{}?{}",
+            "/contactdb/lists/{}",
             crate::progenitor_support::encode_path(&list_id.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -124,7 +113,6 @@ impl ContactsApiLists {
         &self,
         list_id: &str,
         delete_contacts: bool,
-        on_behalf_of: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -161,18 +149,11 @@ impl ContactsApiLists {
     pub async fn patch_contactdb_lists_list(
         &self,
         list_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::PatchContactdbListsListResponse> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if list_id > 0 {
-            query_args.push(("list_id".to_string(), list_id.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/contactdb/lists/{}?{}",
+            "/contactdb/lists/{}",
             crate::progenitor_support::encode_path(&list_id.to_string()),
-            query_
         );
 
         self.client
@@ -202,12 +183,8 @@ impl ContactsApiLists {
         list_id: i64,
         page: i64,
         page_size: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetContactdbRecipientsSearchResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if list_id > 0 {
-            query_args.push(("list_id".to_string(), list_id.to_string()));
-        }
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
         }
@@ -240,7 +217,6 @@ impl ContactsApiLists {
     pub async fn post_contactdb_lists_list_recipient(
         &self,
         list_id: i64,
-        on_behalf_of: &str,
         body: &Vec<i64>,
     ) -> Result<()> {
         let url = format!(
@@ -271,7 +247,6 @@ impl ContactsApiLists {
         &self,
         list_id: i64,
         recipient_id: &str,
-        on_behalf_of: &str,
     ) -> Result<()> {
         let url = format!(
             "/contactdb/lists/{}/recipients/{}",
@@ -299,22 +274,12 @@ impl ContactsApiLists {
         &self,
         list_id: i64,
         recipient_id: &str,
-        on_behalf_of: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if list_id > 0 {
-            query_args.push(("list_id".to_string(), list_id.to_string()));
-        }
-        if recipient_id > 0 {
-            query_args.push(("recipient_id".to_string(), recipient_id.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/contactdb/lists/{}/recipients/{}?{}",
+            "/contactdb/lists/{}/recipients/{}",
             crate::progenitor_support::encode_path(&list_id.to_string()),
             crate::progenitor_support::encode_path(&recipient_id.to_string()),
-            query_
         );
 
         self.client

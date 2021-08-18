@@ -7183,13 +7183,13 @@ pub struct Message {
     /**
      * This is the IP of the user who sent the message.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub originating_ip: Option<std::net::Ipv4Addr>,
+    #[serde()]
+    pub originating_ip: std::net::Ipv4Addr,
     /**
      * This is the IP of the user who sent the message.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub outbound_ip: Option<std::net::Ipv4Addr>,
+    #[serde()]
+    pub outbound_ip: std::net::Ipv4Addr,
     /**
      * Whether or not the outbound IP is dedicated vs shared
      */
@@ -9768,7 +9768,7 @@ pub struct PostSubusersRequest {
      * The IP addresses that should be assigned to this subuser.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub ips: Vec<Option<std::net::Ipv4Addr>>,
+    pub ips: Vec<std::net::Ipv4Addr>,
     /**
      * The license key provided with your New Relic account.
      */
@@ -9823,7 +9823,7 @@ pub struct PutSubusersSubuserNameIpsResponse {
      * The IP addresses that should be assigned to this subuser.
      */
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
-    pub ips: Vec<Option<std::net::Ipv4Addr>>,
+    pub ips: Vec<std::net::Ipv4Addr>,
 }
 
 /**

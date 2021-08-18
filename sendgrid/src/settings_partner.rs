@@ -29,7 +29,6 @@ impl SettingsPartner {
      */
     pub async fn get_partner_settings_new_relic(
         &self,
-        on_behalf_of: &str,
     ) -> Result<crate::types::PartnerSettingsNewRelic> {
         let url = "/partner_settings/new_relic".to_string();
         self.client.get(&url, None).await
@@ -52,7 +51,6 @@ impl SettingsPartner {
      */
     pub async fn patch_partner_settings_new_relic(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PatchPartnerSettingsNewRelicRequest,
     ) -> Result<crate::types::PartnerSettingsNewRelic> {
         let url = "/partner_settings/new_relic".to_string();
@@ -83,7 +81,6 @@ impl SettingsPartner {
         &self,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetPartnerSettingsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {

@@ -31,7 +31,6 @@ impl Categories {
         limit: i64,
         category: &str,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::GetCategoriesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !category.is_empty() {
@@ -63,7 +62,6 @@ impl Categories {
         limit: i64,
         category: &str,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::GetCategoriesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !category.is_empty() {
@@ -110,7 +108,6 @@ impl Categories {
         limit: i64,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-        on_behalf_of: &str,
     ) -> Result<crate::types::CategoryStats> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
@@ -170,7 +167,6 @@ impl Categories {
         limit: i64,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::CategoryStats>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
@@ -216,7 +212,6 @@ impl Categories {
         limit: i64,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::CategoryStats>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {

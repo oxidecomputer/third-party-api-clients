@@ -29,7 +29,6 @@ impl Senders {
      */
     pub async fn post_marketing_sender(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostMarketingSendersRequest,
     ) -> Result<crate::types::SenderAllOf> {
         let url = "/marketing/senders".to_string();

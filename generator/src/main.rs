@@ -1697,7 +1697,7 @@ impl TypeSpace {
                             "ipv4" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic(
-                                    "Option<std::net::Ipv4Addr>".to_string(),
+                                    "std::net::Ipv4Addr".to_string(),
                                     s.schema_data.clone(),
                                 ),
                             )),

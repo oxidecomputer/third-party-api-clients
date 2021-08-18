@@ -30,11 +30,7 @@ impl ApiKeys {
      * * `limit: i64`
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get(
-        &self,
-        limit: i64,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::GetApiKeysResponse> {
+    pub async fn get(&self, limit: i64) -> Result<crate::types::GetApiKeysResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -70,7 +66,6 @@ impl ApiKeys {
      */
     pub async fn create(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::CreateApiKeysRequest,
     ) -> Result<crate::types::CreateApiKeysResponse> {
         let url = "/api_keys".to_string();
@@ -97,11 +92,7 @@ impl ApiKeys {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_key(
-        &self,
-        api_key_id: &str,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::GetApiKeysKeyResponse> {
+    pub async fn get_key(&self, api_key_id: &str) -> Result<crate::types::GetApiKeysKeyResponse> {
         let url = format!(
             "/api_keys/{}",
             crate::progenitor_support::encode_path(&api_key_id.to_string()),
@@ -130,7 +121,6 @@ impl ApiKeys {
     pub async fn put_key(
         &self,
         api_key_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::PutApiKeysKeyRequest,
     ) -> Result<crate::types::ApiKeyNameScopesAllOf> {
         let url = format!(
@@ -159,7 +149,7 @@ impl ApiKeys {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_key(&self, api_key_id: &str, on_behalf_of: &str) -> Result<()> {
+    pub async fn delete_key(&self, api_key_id: &str) -> Result<()> {
         let url = format!(
             "/api_keys/{}",
             crate::progenitor_support::encode_path(&api_key_id.to_string()),
@@ -184,7 +174,6 @@ impl ApiKeys {
     pub async fn patch_key(
         &self,
         api_key_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::IpPool,
     ) -> Result<crate::types::ApiKeyNameId> {
         let url = format!(

@@ -23,11 +23,7 @@ impl Suppressions {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_asm_groups_group(
-        &self,
-        group_id: &str,
-        on_behalf_of: &str,
-    ) -> Result<Vec<String>> {
+    pub async fn get_asm_groups_group(&self, group_id: &str) -> Result<Vec<String>> {
         let url = format!(
             "/asm/groups/{}/suppressions",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -45,11 +41,7 @@ impl Suppressions {
      *
      * **This endpoint allows you to retrieve all suppressed email addresses belonging to the given group.**
      */
-    pub async fn get_all_asm_groups_group(
-        &self,
-        group_id: &str,
-        on_behalf_of: &str,
-    ) -> Result<Vec<String>> {
+    pub async fn get_all_asm_groups_group(&self, group_id: &str) -> Result<Vec<String>> {
         let url = format!(
             "/asm/groups/{}/suppressions",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -74,7 +66,6 @@ impl Suppressions {
     pub async fn post_asm_groups_group_suppression(
         &self,
         group_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::SuppressionsRequestBody,
     ) -> Result<crate::types::PostAsmGroupsGroupSuppressionsResponse> {
         let url = format!(
@@ -106,7 +97,6 @@ impl Suppressions {
     pub async fn post_asm_groups_group_search(
         &self,
         group_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::SuppressionsRequestBody,
     ) -> Result<Vec<String>> {
         let url = format!(
@@ -133,10 +123,7 @@ impl Suppressions {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_asm(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<Vec<crate::types::GetAsmSuppressionsResponse>> {
+    pub async fn get_asm(&self) -> Result<Vec<crate::types::GetAsmSuppressionsResponse>> {
         let url = "/asm/suppressions".to_string();
         self.client.get(&url, None).await
     }
@@ -150,10 +137,7 @@ impl Suppressions {
      *
      * **This endpoint allows you to retrieve a list of all suppressions.**
      */
-    pub async fn get_all_asm(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<Vec<crate::types::GetAsmSuppressionsResponse>> {
+    pub async fn get_all_asm(&self) -> Result<Vec<crate::types::GetAsmSuppressionsResponse>> {
         let url = "/asm/suppressions".to_string();
         self.client.get_all_pages(&url, None).await
     }
@@ -172,7 +156,6 @@ impl Suppressions {
     pub async fn get_asm_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetAsmSuppressionsEmailResponse> {
         let url = format!(
             "/asm/suppressions/{}",
@@ -195,12 +178,7 @@ impl Suppressions {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_asm_groups_group_email(
-        &self,
-        group_id: &str,
-        email: &str,
-        on_behalf_of: &str,
-    ) -> Result<()> {
+    pub async fn delete_asm_groups_group_email(&self, group_id: &str, email: &str) -> Result<()> {
         let url = format!(
             "/asm/groups/{}/suppressions/{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),

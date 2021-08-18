@@ -33,7 +33,6 @@ impl SpamReportsApi {
         end_time: i64,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -69,7 +68,6 @@ impl SpamReportsApi {
         end_time: i64,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -110,7 +108,6 @@ impl SpamReportsApi {
      */
     pub async fn delete_suppression_spam_reports(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::DeleteSuppressionBlocksRequest,
     ) -> Result<crate::types::Help> {
         let url = "/suppression/spam_reports".to_string();
@@ -136,7 +133,6 @@ impl SpamReportsApi {
     pub async fn get_suppression_spam_reports_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
         let url = format!(
             "/suppression/spam_reports/{}",
@@ -158,7 +154,6 @@ impl SpamReportsApi {
     pub async fn get_all_suppression_spam_reports_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
         let url = format!(
             "/suppression/spam_reports/{}",
@@ -184,7 +179,6 @@ impl SpamReportsApi {
     pub async fn delete_suppression_spam_reports_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/suppression/spam_reports/{}",

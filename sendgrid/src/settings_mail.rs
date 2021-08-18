@@ -31,7 +31,6 @@ impl SettingsMail {
         &self,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetMailSettingsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
@@ -63,7 +62,6 @@ impl SettingsMail {
      */
     pub async fn get_mail_settings_address_whitelist(
         &self,
-        on_behalf_of: &str,
     ) -> Result<crate::types::MailSettingsAddressWhitelabel> {
         let url = "/mail_settings/address_whitelist".to_string();
         self.client.get(&url, None).await
@@ -92,7 +90,6 @@ impl SettingsMail {
      */
     pub async fn patch_mail_settings_address_whitelist(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PatchMailSettingsAddressWhitelistRequest,
     ) -> Result<crate::types::MailSettingsAddressWhitelabel> {
         let url = "/mail_settings/address_whitelist".to_string();
@@ -119,10 +116,7 @@ impl SettingsMail {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_mail_settings_footer(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::MailSettingsFooter> {
+    pub async fn get_mail_settings_footer(&self) -> Result<crate::types::MailSettingsFooter> {
         let url = "/mail_settings/footer".to_string();
         self.client.get(&url, None).await
     }
@@ -144,7 +138,6 @@ impl SettingsMail {
      */
     pub async fn patch_mail_settings_footer(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::MailSettingsFooter,
     ) -> Result<crate::types::MailSettingsFooter> {
         let url = "/mail_settings/footer".to_string();
@@ -171,7 +164,6 @@ impl SettingsMail {
      */
     pub async fn get_mail_settings_forward_spam(
         &self,
-        on_behalf_of: &str,
     ) -> Result<crate::types::MailSettingsForwardSpam> {
         let url = "/mail_settings/forward_spam".to_string();
         self.client.get(&url, None).await
@@ -205,7 +197,6 @@ impl SettingsMail {
      */
     pub async fn patch_mail_settings_forward_spam(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::MailSettingsForwardSpam,
     ) -> Result<crate::types::MailSettingsForwardSpam> {
         let url = "/mail_settings/forward_spam".to_string();
@@ -232,10 +223,7 @@ impl SettingsMail {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_mail_settings_template(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::MailSettingsTemplate> {
+    pub async fn get_mail_settings_template(&self) -> Result<crate::types::MailSettingsTemplate> {
         let url = "/mail_settings/template".to_string();
         self.client.get(&url, None).await
     }
@@ -257,7 +245,6 @@ impl SettingsMail {
      */
     pub async fn patch_mail_settings_template(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PatchMailSettingsTemplateRequest,
     ) -> Result<crate::types::PatchMailSettingsTemplateResponse> {
         let url = "/mail_settings/template".to_string();
@@ -290,7 +277,6 @@ impl SettingsMail {
      */
     pub async fn get_mail_settings_bounce_purge(
         &self,
-        on_behalf_of: &str,
     ) -> Result<crate::types::MailSettingsBouncePurge> {
         let url = "/mail_settings/bounce_purge".to_string();
         self.client.get(&url, None).await
@@ -317,7 +303,6 @@ impl SettingsMail {
      */
     pub async fn patch_mail_settings_bounce_purge(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::MailSettingsBouncePurge,
     ) -> Result<crate::types::MailSettingsBouncePurge> {
         let url = "/mail_settings/bounce_purge".to_string();
@@ -344,7 +329,6 @@ impl SettingsMail {
      */
     pub async fn get_mail_settings_forward_bounce(
         &self,
-        on_behalf_of: &str,
     ) -> Result<crate::types::MailSettingsForwardBounce> {
         let url = "/mail_settings/forward_bounce".to_string();
         self.client.get(&url, None).await
@@ -367,7 +351,6 @@ impl SettingsMail {
      */
     pub async fn patch_mail_settings_forward_bounce(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::MailSettingsForwardBounce,
     ) -> Result<crate::types::MailSettingsForwardBounce> {
         let url = "/mail_settings/forward_bounce".to_string();

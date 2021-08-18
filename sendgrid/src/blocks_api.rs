@@ -33,7 +33,6 @@ impl BlocksApi {
         end_time: i64,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::BlocksResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -69,7 +68,6 @@ impl BlocksApi {
         end_time: i64,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::BlocksResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -108,7 +106,6 @@ impl BlocksApi {
      */
     pub async fn delete_suppression_blocks(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::DeleteSuppressionBlocksRequest,
     ) -> Result<crate::types::Help> {
         let url = "/suppression/blocks".to_string();
@@ -134,7 +131,6 @@ impl BlocksApi {
     pub async fn get_suppression_blocks_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::BlocksResponse>> {
         let url = format!(
             "/suppression/blocks/{}",
@@ -156,7 +152,6 @@ impl BlocksApi {
     pub async fn get_all_suppression_blocks_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::BlocksResponse>> {
         let url = format!(
             "/suppression/blocks/{}",
@@ -177,11 +172,7 @@ impl BlocksApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_suppression_blocks_email(
-        &self,
-        email: &str,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::Help> {
+    pub async fn delete_suppression_blocks_email(&self, email: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/suppression/blocks/{}",
             crate::progenitor_support::encode_path(&email.to_string()),

@@ -32,7 +32,6 @@ impl Stats {
      */
     pub async fn get_page(
         &self,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -70,7 +69,6 @@ impl Stats {
      */
     pub async fn get_all(
         &self,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -119,7 +117,6 @@ impl Stats {
     pub async fn get_geo(
         &self,
         country: crate::types::Country,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -163,7 +160,6 @@ impl Stats {
     pub async fn get_all_geo(
         &self,
         country: crate::types::Country,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -222,7 +218,6 @@ impl Stats {
      */
     pub async fn get_devices(
         &self,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -271,7 +266,6 @@ impl Stats {
      */
     pub async fn get_all_devices(
         &self,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -316,7 +310,6 @@ impl Stats {
      */
     pub async fn get_clients(
         &self,
-        on_behalf_of: &str,
         start_date: &str,
         end_date: &str,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
@@ -352,7 +345,6 @@ impl Stats {
      */
     pub async fn get_all_clients(
         &self,
-        on_behalf_of: &str,
         start_date: &str,
         end_date: &str,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
@@ -400,7 +392,6 @@ impl Stats {
     pub async fn get_clients_client_type(
         &self,
         client_type: crate::types::ClientType,
-        on_behalf_of: &str,
         start_date: &str,
         end_date: &str,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
@@ -447,7 +438,6 @@ impl Stats {
     pub async fn get_all_clients_client_type(
         &self,
         client_type: crate::types::ClientType,
-        on_behalf_of: &str,
         start_date: &str,
         end_date: &str,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
@@ -496,7 +486,6 @@ impl Stats {
     pub async fn get_mailbox_providers(
         &self,
         mailbox_providers: &str,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -543,7 +532,6 @@ impl Stats {
     pub async fn get_all_mailbox_providers(
         &self,
         mailbox_providers: &str,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -598,7 +586,6 @@ impl Stats {
     pub async fn get_browsers(
         &self,
         browsers: &str,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -642,7 +629,6 @@ impl Stats {
     pub async fn get_all_browsers(
         &self,
         browsers: &str,
-        on_behalf_of: &str,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,

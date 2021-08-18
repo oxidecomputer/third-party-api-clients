@@ -25,10 +25,7 @@ impl IpAccessManagement {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_access_settings_whitelist(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::IpAccessResponse> {
+    pub async fn get_access_settings_whitelist(&self) -> Result<crate::types::IpAccessResponse> {
         let url = "/access_settings/whitelist".to_string();
         self.client.get(&url, None).await
     }
@@ -48,7 +45,6 @@ impl IpAccessManagement {
      */
     pub async fn post_access_settings_whitelist(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostAccessSettingsWhitelistRequest,
     ) -> Result<crate::types::IpAccessResponse> {
         let url = "/access_settings/whitelist".to_string();
@@ -77,7 +73,6 @@ impl IpAccessManagement {
      */
     pub async fn delete_access_settings_whitelist(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::DeleteAccessSettingsWhitelistRequest,
     ) -> Result<crate::types::Help> {
         let url = "/access_settings/whitelist".to_string();
@@ -104,7 +99,6 @@ impl IpAccessManagement {
     pub async fn get_access_settings_activity(
         &self,
         limit: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetAccessSettingsActivityResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
@@ -132,7 +126,6 @@ impl IpAccessManagement {
     pub async fn get_access_settings_whitelist_rule(
         &self,
         rule_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::IpAccessResponse> {
         let url = format!(
             "/access_settings/whitelist/{}",
@@ -158,7 +151,6 @@ impl IpAccessManagement {
     pub async fn delete_access_settings_whitelist_rule(
         &self,
         rule_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/access_settings/whitelist/{}",

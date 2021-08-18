@@ -31,7 +31,6 @@ impl Webhooks {
      */
     pub async fn get_user_event_settings(
         &self,
-        on_behalf_of: &str,
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
         let url = "/user/webhooks/event/settings".to_string();
         self.client.get(&url, None).await
@@ -56,7 +55,6 @@ impl Webhooks {
      */
     pub async fn patch_user_event_settings(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::WebhooksEventWebhookUpdateWithOAuthRequest,
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
         let url = "/user/webhooks/event/settings".to_string();
@@ -81,7 +79,6 @@ impl Webhooks {
      */
     pub async fn get_user_parse_settings(
         &self,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetUserWebhooksParseSettingsResponse> {
         let url = "/user/webhooks/parse/settings".to_string();
         self.client.get(&url, None).await
@@ -114,7 +111,6 @@ impl Webhooks {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::GetUserWebhooksParseStatsResponseData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
@@ -158,7 +154,6 @@ impl Webhooks {
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
         end_date: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::GetUserWebhooksParseStatsResponseData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !aggregated_by.to_string().is_empty() {
@@ -199,7 +194,6 @@ impl Webhooks {
      */
     pub async fn get_user_event_settings_signed(
         &self,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
         let url = "/user/webhooks/event/settings/signed".to_string();
         self.client.get(&url, None).await
@@ -222,7 +216,6 @@ impl Webhooks {
      */
     pub async fn patch_user_event_settings_signed(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::GetTrackingSettingsOpenResponse,
     ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
         let url = "/user/webhooks/event/settings/signed".to_string();
@@ -255,7 +248,6 @@ impl Webhooks {
      */
     pub async fn post_user_event_test(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostUserWebhooksEventTestRequest,
     ) -> Result<()> {
         let url = "/user/webhooks/event/test".to_string();

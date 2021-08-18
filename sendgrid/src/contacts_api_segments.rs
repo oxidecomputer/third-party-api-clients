@@ -23,10 +23,7 @@ impl ContactsApiSegments {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_contactdb_segments(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::ListAllSegmentsResponse> {
+    pub async fn get_contactdb_segments(&self) -> Result<crate::types::ListAllSegmentsResponse> {
         let url = "/contactdb/segments".to_string();
         self.client.get(&url, None).await
     }
@@ -83,7 +80,6 @@ impl ContactsApiSegments {
      */
     pub async fn post_contactdb_segment(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::ContactdbSegments,
     ) -> Result<crate::types::ContactdbSegmentsWithAllOf> {
         let url = "/contactdb/segments".to_string();
@@ -110,17 +106,10 @@ impl ContactsApiSegments {
     pub async fn get_contactdb_segments_segment(
         &self,
         segment_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::ContactdbSegments> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if segment_id > 0 {
-            query_args.push(("segment_id".to_string(), segment_id.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/contactdb/segments/{}?{}",
+            "/contactdb/segments/{}",
             crate::progenitor_support::encode_path(&segment_id.to_string()),
-            query_
         );
 
         self.client.get(&url, None).await
@@ -144,7 +133,6 @@ impl ContactsApiSegments {
         &self,
         segment_id: &str,
         delete_contacts: bool,
-        on_behalf_of: &str,
         body: &serde_json::Value,
     ) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -181,18 +169,11 @@ impl ContactsApiSegments {
     pub async fn patch_contactdb_segments_segment(
         &self,
         segment_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::PatchContactdbSegmentsSegmentRequest,
     ) -> Result<crate::types::ContactdbSegments> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !segment_id.is_empty() {
-            query_args.push(("segment_id".to_string(), segment_id.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/contactdb/segments/{}?{}",
+            "/contactdb/segments/{}",
             crate::progenitor_support::encode_path(&segment_id.to_string()),
-            query_
         );
 
         self.client
@@ -221,7 +202,6 @@ impl ContactsApiSegments {
         segment_id: i64,
         page: i64,
         page_size: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::ListRecipientsOnASegmentResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if page > 0 {

@@ -37,7 +37,6 @@ impl ReverseDns {
         limit: i64,
         offset: i64,
         ip: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::ReverseDns>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ip.is_empty() {
@@ -75,7 +74,6 @@ impl ReverseDns {
         limit: i64,
         offset: i64,
         ip: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::ReverseDns>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ip.is_empty() {
@@ -106,7 +104,6 @@ impl ReverseDns {
      */
     pub async fn post_whitelabel_ip(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostWhitelabelIpsRequest,
     ) -> Result<crate::types::ReverseDns> {
         let url = "/whitelabel/ips".to_string();
@@ -138,7 +135,6 @@ impl ReverseDns {
     pub async fn post_whitelabel_ips_validate(
         &self,
         id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::PostWhitelabelIpsValidateResponse> {
         let url = format!(
             "/whitelabel/ips/{}/validate",
@@ -161,11 +157,7 @@ impl ReverseDns {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_whitelabel_ip(
-        &self,
-        id: &str,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::ReverseDns> {
+    pub async fn get_whitelabel_ip(&self, id: &str) -> Result<crate::types::ReverseDns> {
         let url = format!(
             "/whitelabel/ips/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -189,11 +181,7 @@ impl ReverseDns {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_whitelabel_ips(
-        &self,
-        id: &str,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::Help> {
+    pub async fn delete_whitelabel_ips(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/whitelabel/ips/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

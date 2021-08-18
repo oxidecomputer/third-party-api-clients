@@ -26,7 +26,6 @@ impl TransactionalTemplatesVersions {
     pub async fn post_templates_template_version(
         &self,
         template_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = format!(
@@ -57,7 +56,6 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = format!(
             "/templates/{}/versions/{}/activate",
@@ -83,7 +81,6 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = format!(
             "/templates/{}/versions/{}",
@@ -109,7 +106,6 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-        on_behalf_of: &str,
     ) -> Result<()> {
         let url = format!(
             "/templates/{}/versions/{}",
@@ -135,7 +131,6 @@ impl TransactionalTemplatesVersions {
         &self,
         template_id: &str,
         version_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::TransactionalTemplateVersionCreate,
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = format!(

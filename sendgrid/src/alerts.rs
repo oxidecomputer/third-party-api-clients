@@ -30,10 +30,7 @@ impl Alerts {
      * * `authorization: &str` -- The license key provided with your New Relic account.
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_page(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<Vec<crate::types::GetAlertsResponse>> {
+    pub async fn get_page(&self) -> Result<Vec<crate::types::GetAlertsResponse>> {
         let url = "/alerts".to_string();
         self.client.get(&url, None).await
     }
@@ -53,10 +50,7 @@ impl Alerts {
      *
      * For more information about alerts, please see our [Alerts documentation](https://sendgrid.com/docs/ui/account-and-settings/alerts/).
      */
-    pub async fn get_all(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<Vec<crate::types::GetAlertsResponse>> {
+    pub async fn get_all(&self) -> Result<Vec<crate::types::GetAlertsResponse>> {
         let url = "/alerts".to_string();
         self.client.get_all_pages(&url, None).await
     }
@@ -82,7 +76,6 @@ impl Alerts {
      */
     pub async fn post_alert(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostAlertsRequest,
     ) -> Result<crate::types::PostAlertsResponse> {
         let url = "/alerts".to_string();
@@ -112,11 +105,7 @@ impl Alerts {
      * * `authorization: &str` -- The license key provided with your New Relic account.
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_alert(
-        &self,
-        alert_id: i64,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::GetAlertsAlertResponse> {
+    pub async fn get_alert(&self, alert_id: i64) -> Result<crate::types::GetAlertsAlertResponse> {
         let url = format!(
             "/alerts/{}",
             crate::progenitor_support::encode_path(&alert_id.to_string()),
@@ -142,11 +131,7 @@ impl Alerts {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_alert(
-        &self,
-        alert_id: i64,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::Help> {
+    pub async fn delete_alert(&self, alert_id: i64) -> Result<crate::types::Help> {
         let url = format!(
             "/alerts/{}",
             crate::progenitor_support::encode_path(&alert_id.to_string()),
@@ -175,7 +160,6 @@ impl Alerts {
     pub async fn patch_alert(
         &self,
         alert_id: i64,
-        on_behalf_of: &str,
         body: &crate::types::PatchAlertsAlertRequest,
     ) -> Result<crate::types::GetAlertsAlertResponse> {
         let url = format!(

@@ -29,7 +29,6 @@ impl LinkBranding {
     pub async fn get_whitelabel_links(
         &self,
         limit: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::LinkBranding200Response>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
@@ -55,7 +54,6 @@ impl LinkBranding {
     pub async fn get_all_whitelabel_links(
         &self,
         limit: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::LinkBranding200Response>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
@@ -84,7 +82,6 @@ impl LinkBranding {
      */
     pub async fn post_whitelabel_link(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostWhitelabelLinksRequest,
     ) -> Result<crate::types::LinkBranding200Response> {
         let url = "/whitelabel/links".to_string();
@@ -112,7 +109,6 @@ impl LinkBranding {
     pub async fn post_whitelabel_links_validate(
         &self,
         id: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::PostWhitelabelLinksValidateResponse> {
         let url = format!(
             "/whitelabel/links/{}/validate",
@@ -165,7 +161,6 @@ impl LinkBranding {
     pub async fn get_whitelabel_links_link_branding(
         &self,
         id: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::LinkBranding200Response> {
         let url = format!(
             "/whitelabel/links/{}",
@@ -190,11 +185,7 @@ impl LinkBranding {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_whitelabel_links(
-        &self,
-        id: i64,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::Help> {
+    pub async fn delete_whitelabel_links(&self, id: i64) -> Result<crate::types::Help> {
         let url = format!(
             "/whitelabel/links/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -219,7 +210,6 @@ impl LinkBranding {
     pub async fn patch_whitelabel_links(
         &self,
         id: i64,
-        on_behalf_of: &str,
         body: &crate::types::PatchWhitelabelLinksRequest,
     ) -> Result<crate::types::LinkBranding200Response> {
         let url = format!(
@@ -258,7 +248,6 @@ impl LinkBranding {
     pub async fn get_whitelabel_links_default(
         &self,
         domain: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::LinkBranding200Response> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain.is_empty() {

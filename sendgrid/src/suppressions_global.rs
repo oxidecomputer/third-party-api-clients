@@ -25,7 +25,6 @@ impl SuppressionsGlobal {
      */
     pub async fn post_asm(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::SuppressionsRequestBody,
     ) -> Result<crate::types::SuppressionsRequestBody> {
         let url = "/asm/suppressions/global".to_string();
@@ -58,7 +57,6 @@ impl SuppressionsGlobal {
         end_time: i64,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::GetSuppressionUnsubscribesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -94,7 +92,6 @@ impl SuppressionsGlobal {
         end_time: i64,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::GetSuppressionUnsubscribesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -131,7 +128,6 @@ impl SuppressionsGlobal {
     pub async fn get_asm_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::RetrieveAGlobalSuppressionResponse> {
         let url = format!(
             "/asm/suppressions/global/{}",
@@ -154,11 +150,7 @@ impl SuppressionsGlobal {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_asm_email(
-        &self,
-        email: &str,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::Help> {
+    pub async fn delete_asm_email(&self, email: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/asm/suppressions/global/{}",
             crate::progenitor_support::encode_path(&email.to_string()),

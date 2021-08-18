@@ -33,7 +33,6 @@ impl CampaignsApi {
         &self,
         limit: i64,
         offset: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetCampaignsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
@@ -63,7 +62,6 @@ impl CampaignsApi {
      */
     pub async fn post_campaign(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::CampaignsRequest,
     ) -> Result<crate::types::CampaignResponseAllOf> {
         let url = "/campaigns".to_string();
@@ -89,7 +87,6 @@ impl CampaignsApi {
     pub async fn get_campaigns_campaign(
         &self,
         campaign_id: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetCampaignsCampaignResponse> {
         let url = format!(
             "/campaigns/{}",
@@ -110,11 +107,7 @@ impl CampaignsApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_campaigns_campaign(
-        &self,
-        campaign_id: i64,
-        on_behalf_of: &str,
-    ) -> Result<()> {
+    pub async fn delete_campaigns_campaign(&self, campaign_id: i64) -> Result<()> {
         let url = format!(
             "/campaigns/{}",
             crate::progenitor_support::encode_path(&campaign_id.to_string()),
@@ -139,7 +132,6 @@ impl CampaignsApi {
     pub async fn patch_campaigns_campaign(
         &self,
         campaign_id: i64,
-        on_behalf_of: &str,
         body: &crate::types::UpdateACampaignRequest,
     ) -> Result<crate::types::CampaignResponseAllOf> {
         let url = format!(
@@ -171,7 +163,6 @@ impl CampaignsApi {
     pub async fn post_campaigns_campaign_schedules_now(
         &self,
         campaign_id: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::SendACampaignResponse> {
         let url = format!(
             "/campaigns/{}/schedules/now",
@@ -195,7 +186,6 @@ impl CampaignsApi {
     pub async fn get_campaigns_campaign_schedule(
         &self,
         campaign_id: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::ScheduleACampaignRequest> {
         let url = format!(
             "/campaigns/{}/schedules",
@@ -221,7 +211,6 @@ impl CampaignsApi {
     pub async fn post_campaigns_campaign_schedule(
         &self,
         campaign_id: i64,
-        on_behalf_of: &str,
         body: &crate::types::ScheduleACampaignRequest,
     ) -> Result<crate::types::ScheduleACampaignResponse> {
         let url = format!(
@@ -251,11 +240,7 @@ impl CampaignsApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_campaigns_campaign_schedules(
-        &self,
-        campaign_id: i64,
-        on_behalf_of: &str,
-    ) -> Result<()> {
+    pub async fn delete_campaigns_campaign_schedules(&self, campaign_id: i64) -> Result<()> {
         let url = format!(
             "/campaigns/{}/schedules",
             crate::progenitor_support::encode_path(&campaign_id.to_string()),
@@ -278,7 +263,6 @@ impl CampaignsApi {
     pub async fn patch_campaigns_campaign_schedules(
         &self,
         campaign_id: i64,
-        on_behalf_of: &str,
         body: &crate::types::ScheduleACampaignRequest,
     ) -> Result<crate::types::UpdateAScheduledCampaignResponse> {
         let url = format!(
@@ -310,7 +294,6 @@ impl CampaignsApi {
     pub async fn post_campaigns_campaign_schedules_test(
         &self,
         campaign_id: i64,
-        on_behalf_of: &str,
         body: &crate::types::SendATestCampaignRequest,
     ) -> Result<crate::types::SendATestCampaignRequest> {
         let url = format!(

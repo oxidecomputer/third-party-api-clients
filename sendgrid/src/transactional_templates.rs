@@ -31,7 +31,6 @@ impl TransactionalTemplates {
         generations: crate::types::Generations,
         page_size: f64,
         page_token: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetTemplatesResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !generations.to_string().is_empty() {
@@ -62,7 +61,6 @@ impl TransactionalTemplates {
      */
     pub async fn post_template(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostTemplatesRequest,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = "/templates".to_string();
@@ -88,7 +86,6 @@ impl TransactionalTemplates {
     pub async fn get_templates_template(
         &self,
         template_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = format!(
             "/templates/{}",
@@ -112,7 +109,6 @@ impl TransactionalTemplates {
     pub async fn post_templates_template(
         &self,
         template_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::PostTemplatesTemplateRequest,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = format!(
@@ -139,11 +135,7 @@ impl TransactionalTemplates {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_templates_template(
-        &self,
-        template_id: &str,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::Help> {
+    pub async fn delete_templates_template(&self, template_id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/templates/{}",
             crate::progenitor_support::encode_path(&template_id.to_string()),
@@ -168,7 +160,6 @@ impl TransactionalTemplates {
     pub async fn patch_templates_template(
         &self,
         template_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::PatchTemplatesTemplateRequest,
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = format!(

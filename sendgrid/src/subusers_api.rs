@@ -217,7 +217,7 @@ impl SubusersApi {
     pub async fn put_subusers_subuser_name_ips(
         &self,
         subuser_name: &str,
-        body: &Vec<Option<std::net::Ipv4Addr>>,
+        body: &Vec<std::net::Ipv4Addr>,
     ) -> Result<crate::types::PutSubusersSubuserNameIpsResponse> {
         let url = format!(
             "/subusers/{}/ips",

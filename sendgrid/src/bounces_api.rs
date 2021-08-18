@@ -31,7 +31,6 @@ impl BouncesApi {
         start_time: i64,
         end_time: i64,
         accept: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -60,7 +59,6 @@ impl BouncesApi {
         start_time: i64,
         end_time: i64,
         accept: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
@@ -93,7 +91,6 @@ impl BouncesApi {
      */
     pub async fn delete_suppression_bounces(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::DeleteSuppressionBouncesRequest,
     ) -> Result<()> {
         let url = "/suppression/bounces".to_string();
@@ -119,7 +116,6 @@ impl BouncesApi {
     pub async fn get_suppression_bounces_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
         let url = format!(
             "/suppression/bounces/{}",
@@ -141,7 +137,6 @@ impl BouncesApi {
     pub async fn get_all_suppression_bounces_email(
         &self,
         email: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::BounceResponse>> {
         let url = format!(
             "/suppression/bounces/{}",
@@ -167,7 +162,6 @@ impl BouncesApi {
         &self,
         email: &str,
         email_address: &str,
-        on_behalf_of: &str,
         body: &serde_json::Value,
     ) -> Result<crate::types::Help> {
         let mut query_args: Vec<(String, String)> = Default::default();

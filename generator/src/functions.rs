@@ -603,69 +603,70 @@ fn get_fn_params(
 
         let parameter_data = get_parameter_data(item).unwrap();
         let nam = &to_snake_case(&parameter_data.name);
-        let typ = parameter_data.render_type(&param_name, ts)?;
-        if nam == "ref" || nam == "type" {
-            fn_params_str.push(format!("{}_: {},", nam, typ));
-            fn_params.push(nam.to_string() + "_");
-        } else if (!all_pages || !is_page_param(nam))
-            && nam != "authorization"
-            && !nam.starts_with("authorization_bearer")
-            && (!proper_name.starts_with("Google")
-                || !is_google_unnecessary_param(proper_name, nam))
-        {
-            if typ == "chrono::DateTime<chrono::Utc>" {
-                fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
-                fn_params.push(nam.to_string());
-            } else {
-                let p = format!("{}: {},", nam, typ);
-                if !fn_params.contains(nam) {
-                    fn_params_str.push(p);
-                    fn_params.push(nam.to_string());
-                }
-            }
-        }
 
-        // Check if we have a query.
-        // TODO: make this a bool ext.
-        if let openapiv3::Parameter::Query {
-            parameter_data: _,
-            allow_reserved: _,
-            style: openapiv3::QueryStyle::Form,
-            // We can ignore the allow empty value, we support this by default and
-            // aren't strict about not allowing empty values on other parameters
-            // merely because specs cannot be trusted.
-            allow_empty_value: _,
-        } = item
-        {
+        if !fn_params.contains(nam) && !fn_params.contains(&format!("{}_", nam)) {
+            let typ = parameter_data.render_type(&param_name, ts)?;
             if nam == "ref" || nam == "type" {
-                query_params.insert(
-                    format!("{}_", nam),
-                    (typ.to_string(), parameter_data.name.to_string()),
-                );
+                fn_params_str.push(format!("{}_: {},", nam, typ));
+                fn_params.push(nam.to_string() + "_");
             } else if (!all_pages || !is_page_param(nam))
                 && nam != "authorization"
                 && !nam.starts_with("authorization_bearer")
                 && (!proper_name.starts_with("Google")
                     || !is_google_unnecessary_param(proper_name, nam))
+                && (proper_name != "SendGrid" || !is_sendgrid_unnecessary_param(nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
-                    query_params.insert(
-                        nam.to_string(),
-                        (format!("Option<{}>", typ), parameter_data.name.to_string()),
-                    );
+                    fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
+                    fn_params.push(nam.to_string());
                 } else {
+                    let p = format!("{}: {},", nam, typ);
+                    if !fn_params.contains(nam) {
+                        fn_params_str.push(p);
+                        fn_params.push(nam.to_string());
+                    }
+                }
+            }
+
+            // Check if we have a query.
+            // TODO: make this a bool ext.
+            if let openapiv3::Parameter::Query {
+                parameter_data: _,
+                allow_reserved: _,
+                style: openapiv3::QueryStyle::Form,
+                // We can ignore the allow empty value, we support this by default and
+                // aren't strict about not allowing empty values on other parameters
+                // merely because specs cannot be trusted.
+                allow_empty_value: _,
+            } = item
+            {
+                if nam == "ref" || nam == "type" {
                     query_params.insert(
-                        nam.to_string(),
+                        format!("{}_", nam),
                         (typ.to_string(), parameter_data.name.to_string()),
                     );
+                } else if (!all_pages || !is_page_param(nam))
+                    && nam != "authorization"
+                    && !nam.starts_with("authorization_bearer")
+                    && (!proper_name.starts_with("Google")
+                        || !is_google_unnecessary_param(proper_name, nam))
+                    && (proper_name != "SendGrid" || !is_sendgrid_unnecessary_param(nam))
+                {
+                    if typ == "chrono::DateTime<chrono::Utc>" {
+                        query_params.insert(
+                            nam.to_string(),
+                            (format!("Option<{}>", typ), parameter_data.name.to_string()),
+                        );
+                    } else {
+                        query_params.insert(
+                            nam.to_string(),
+                            (typ.to_string(), parameter_data.name.to_string()),
+                        );
+                    }
                 }
             }
         }
     }
-
-    // If we sort here, likely everything will get messed up since
-    // we already have code consuming this library.
-    fn_params_str.dedup();
 
     Ok((fn_params_str, query_params))
 }
@@ -1020,4 +1021,8 @@ fn is_google_unnecessary_param(proper_name: &str, s: &str) -> bool {
         || s == "enforce_single_parent"
         || s == "corpus"
         || (s == "alt" && proper_name != "Google Groups Settings")
+}
+
+fn is_sendgrid_unnecessary_param(s: &str) -> bool {
+    s == "on_behalf_of"
 }

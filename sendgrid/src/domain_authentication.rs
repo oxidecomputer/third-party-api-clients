@@ -35,7 +35,6 @@ impl DomainAuthentication {
         exclude_subusers: bool,
         username: &str,
         domain: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::DomainAuthentication200ResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain.is_empty() {
@@ -75,7 +74,6 @@ impl DomainAuthentication {
         exclude_subusers: bool,
         username: &str,
         domain: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::DomainAuthentication200ResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain.is_empty() {
@@ -116,7 +114,6 @@ impl DomainAuthentication {
      */
     pub async fn post_whitelabel_domain(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostWhitelabelDomainsRequest,
     ) -> Result<crate::types::AuthenticationDomain> {
         let url = "/whitelabel/domains".to_string();
@@ -142,7 +139,6 @@ impl DomainAuthentication {
     pub async fn get_whitelabel_domains_domain(
         &self,
         domain_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::AuthenticationDomain> {
         let url = format!(
             "/whitelabel/domains/{}",
@@ -166,7 +162,6 @@ impl DomainAuthentication {
     pub async fn delete_whitelabel_domains_domain(
         &self,
         domain_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/whitelabel/domains/{}",
@@ -190,7 +185,6 @@ impl DomainAuthentication {
     pub async fn patch_whitelabel_domains_domain(
         &self,
         domain_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::PatchWhitelabelDomainsDomainRequest,
     ) -> Result<Vec<crate::types::DomainAuthentication200ResponseAllOf>> {
         let url = format!(
@@ -225,7 +219,6 @@ impl DomainAuthentication {
     pub async fn get_whitelabel_domains_default(
         &self,
         domain: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::DomainAuthentication200ResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain.is_empty() {
@@ -253,7 +246,6 @@ impl DomainAuthentication {
     pub async fn get_all_whitelabel_domains_default(
         &self,
         domain: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::DomainAuthentication200ResponseAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain.is_empty() {
@@ -279,7 +271,6 @@ impl DomainAuthentication {
     pub async fn post_whitelabel_domains_ip(
         &self,
         id: i64,
-        on_behalf_of: &str,
         body: &crate::types::Ips,
     ) -> Result<crate::types::DomainAuthentication> {
         let url = format!(
@@ -310,7 +301,6 @@ impl DomainAuthentication {
         &self,
         id: i64,
         ip: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::DomainAuthentication> {
         let url = format!(
             "/whitelabel/domains/{}/ips/{}",
@@ -335,7 +325,6 @@ impl DomainAuthentication {
     pub async fn post_whitelabel_domains_validate(
         &self,
         id: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::PostWhitelabelDomainsValidateResponse> {
         let url = format!(
             "/whitelabel/domains/{}/validate",

@@ -27,7 +27,7 @@ impl CancelScheduledSends {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn post_mail_batch(&self, on_behalf_of: &str) -> Result<crate::types::MailBatchId> {
+    pub async fn post_mail_batch(&self) -> Result<crate::types::MailBatchId> {
         let url = "/mail/batch".to_string();
         self.client.post(&url, None).await
     }
@@ -47,7 +47,6 @@ impl CancelScheduledSends {
      */
     pub async fn get_user_scheduled_sends(
         &self,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = "/user/scheduled_sends".to_string();
         self.client.get(&url, None).await
@@ -66,7 +65,6 @@ impl CancelScheduledSends {
      */
     pub async fn get_all_user_scheduled_sends(
         &self,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = "/user/scheduled_sends".to_string();
         self.client.get_all_pages(&url, None).await
@@ -91,7 +89,6 @@ impl CancelScheduledSends {
      */
     pub async fn post_user_scheduled_send(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::CancelPauseAScheduledSendRequest,
     ) -> Result<crate::types::UserScheduledSendStatusAllOf> {
         let url = "/user/scheduled_sends".to_string();
@@ -120,11 +117,7 @@ impl CancelScheduledSends {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_mail_batch(
-        &self,
-        batch_id: &str,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::MailBatchId> {
+    pub async fn get_mail_batch(&self, batch_id: &str) -> Result<crate::types::MailBatchId> {
         let url = format!(
             "/mail/batch/{}",
             crate::progenitor_support::encode_path(&batch_id.to_string()),
@@ -147,7 +140,6 @@ impl CancelScheduledSends {
     pub async fn get_user_scheduled_sends_batch(
         &self,
         batch_id: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = format!(
             "/user/scheduled_sends/{}",
@@ -169,7 +161,6 @@ impl CancelScheduledSends {
     pub async fn get_all_user_scheduled_sends_batch(
         &self,
         batch_id: &str,
-        on_behalf_of: &str,
     ) -> Result<Vec<crate::types::UserScheduledSendStatusAllOf>> {
         let url = format!(
             "/user/scheduled_sends/{}",
@@ -192,11 +183,7 @@ impl CancelScheduledSends {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_user_scheduled_sends_batch(
-        &self,
-        batch_id: &str,
-        on_behalf_of: &str,
-    ) -> Result<()> {
+    pub async fn delete_user_scheduled_sends_batch(&self, batch_id: &str) -> Result<()> {
         let url = format!(
             "/user/scheduled_sends/{}",
             crate::progenitor_support::encode_path(&batch_id.to_string()),
@@ -221,7 +208,6 @@ impl CancelScheduledSends {
     pub async fn patch_user_scheduled_sends_batch(
         &self,
         batch_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::UserScheduledSendStatus,
     ) -> Result<()> {
         let url = format!(

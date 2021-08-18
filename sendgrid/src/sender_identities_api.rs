@@ -23,10 +23,7 @@ impl SenderIdentitiesApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_v_3_senders(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::GetV3SendersResponse> {
+    pub async fn get_v_3_senders(&self) -> Result<crate::types::GetV3SendersResponse> {
         let url = "/senders".to_string();
         self.client.get(&url, None).await
     }
@@ -46,7 +43,6 @@ impl SenderIdentitiesApi {
      */
     pub async fn post_sender(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PostSendersRequestAllOf,
     ) -> Result<crate::types::SenderAllOf> {
         let url = "/senders".to_string();
@@ -72,7 +68,6 @@ impl SenderIdentitiesApi {
     pub async fn get_v_3_senders_sender(
         &self,
         sender_id: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::SenderAllOf> {
         let url = format!(
             "/senders/{}",
@@ -93,11 +88,7 @@ impl SenderIdentitiesApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_v_3_senders_sender(
-        &self,
-        sender_id: i64,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::Help> {
+    pub async fn delete_v_3_senders_sender(&self, sender_id: i64) -> Result<crate::types::Help> {
         let url = format!(
             "/senders/{}",
             crate::progenitor_support::encode_path(&sender_id.to_string()),
@@ -124,7 +115,6 @@ impl SenderIdentitiesApi {
     pub async fn patch_v_3_senders_sender(
         &self,
         sender_id: i64,
-        on_behalf_of: &str,
         body: &crate::types::SenderRequest,
     ) -> Result<crate::types::SenderAllOf> {
         let url = format!(
@@ -154,7 +144,6 @@ impl SenderIdentitiesApi {
     pub async fn post_v_3_senders_sender_resend_verification(
         &self,
         sender_id: i64,
-        on_behalf_of: &str,
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/senders/{}/resend_verification",

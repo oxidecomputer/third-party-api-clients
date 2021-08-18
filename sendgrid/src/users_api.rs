@@ -21,10 +21,7 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_profile(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::GetUserProfileResponse> {
+    pub async fn get_user_profile(&self) -> Result<crate::types::GetUserProfileResponse> {
         let url = "/user/profile".to_string();
         self.client.get(&url, None).await
     }
@@ -44,7 +41,6 @@ impl UsersApi {
      */
     pub async fn patch_user_profile(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::UserProfile,
     ) -> Result<crate::types::UserProfile> {
         let url = "/user/profile".to_string();
@@ -69,10 +65,7 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_account(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::GetUserAccountResponse> {
+    pub async fn get_user_account(&self) -> Result<crate::types::GetUserAccountResponse> {
         let url = "/user/account".to_string();
         self.client.get(&url, None).await
     }
@@ -88,10 +81,7 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_email(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::GetUserEmailResponse> {
+    pub async fn get_user_email(&self) -> Result<crate::types::GetUserEmailResponse> {
         let url = "/user/email".to_string();
         self.client.get(&url, None).await
     }
@@ -109,7 +99,6 @@ impl UsersApi {
      */
     pub async fn put_user_email(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PutUserEmailRequest,
     ) -> Result<crate::types::GetUserEmailResponse> {
         let url = "/user/email".to_string();
@@ -132,7 +121,7 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_username(&self, on_behalf_of: &str) -> Result<crate::types::Users> {
+    pub async fn get_user_username(&self) -> Result<crate::types::Users> {
         let url = "/user/username".to_string();
         self.client.get(&url, None).await
     }
@@ -150,7 +139,6 @@ impl UsersApi {
      */
     pub async fn put_user_username(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PutUserUsernameRequest,
     ) -> Result<crate::types::PutUserUsernameResponse> {
         let url = "/user/username".to_string();
@@ -175,10 +163,7 @@ impl UsersApi {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_user_credits(
-        &self,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::GetUserCreditsResponse> {
+    pub async fn get_user_credits(&self) -> Result<crate::types::GetUserCreditsResponse> {
         let url = "/user/credits".to_string();
         self.client.get(&url, None).await
     }
@@ -196,7 +181,6 @@ impl UsersApi {
      */
     pub async fn put_user_password(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::PutUserPasswordRequest,
     ) -> Result<crate::types::Help> {
         let url = "/user/password".to_string();

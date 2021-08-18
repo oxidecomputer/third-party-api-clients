@@ -26,11 +26,7 @@ impl SuppressionsUnsubscribeGroups {
      * * `id: i64`
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn get_asm_groups(
-        &self,
-        id: i64,
-        on_behalf_of: &str,
-    ) -> Result<Vec<crate::types::SuppressionGroup>> {
+    pub async fn get_asm_groups(&self, id: i64) -> Result<Vec<crate::types::SuppressionGroup>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if id > 0 {
             query_args.push(("id".to_string(), id.to_string()));
@@ -52,11 +48,7 @@ impl SuppressionsUnsubscribeGroups {
      *
      * This endpoint can also return information for multiple group IDs that you include in your request. To add a group ID to your request, simply append `?id=123456&id=123456`, with the appropriate group IDs.
      */
-    pub async fn get_all_asm_groups(
-        &self,
-        id: i64,
-        on_behalf_of: &str,
-    ) -> Result<Vec<crate::types::SuppressionGroup>> {
+    pub async fn get_all_asm_groups(&self, id: i64) -> Result<Vec<crate::types::SuppressionGroup>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if id > 0 {
             query_args.push(("id".to_string(), id.to_string()));
@@ -82,7 +74,6 @@ impl SuppressionsUnsubscribeGroups {
      */
     pub async fn post_asm_group(
         &self,
-        on_behalf_of: &str,
         body: &crate::types::SuppressionGroupRequestBase,
     ) -> Result<crate::types::PostAsmGroupsResponse> {
         let url = "/asm/groups".to_string();
@@ -108,7 +99,6 @@ impl SuppressionsUnsubscribeGroups {
     pub async fn get_asm_groups_group(
         &self,
         group_id: &str,
-        on_behalf_of: &str,
     ) -> Result<crate::types::GetAsmGroupsGroupResponseAllOf> {
         let url = format!(
             "/asm/groups/{}",
@@ -133,11 +123,7 @@ impl SuppressionsUnsubscribeGroups {
      *
      * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
      */
-    pub async fn delete_asm_groups_group(
-        &self,
-        group_id: &str,
-        on_behalf_of: &str,
-    ) -> Result<crate::types::Help> {
+    pub async fn delete_asm_groups_group(&self, group_id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/asm/groups/{}",
             crate::progenitor_support::encode_path(&group_id.to_string()),
@@ -160,7 +146,6 @@ impl SuppressionsUnsubscribeGroups {
     pub async fn patch_asm_groups_group(
         &self,
         group_id: &str,
-        on_behalf_of: &str,
         body: &crate::types::SuppressionGroupRequestBase,
     ) -> Result<crate::types::SuppressionGroup> {
         let url = format!(
