@@ -71,7 +71,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: docusign giphy github google-admin google-calendar google-drive google-groups-settings google-sheets gusto ramp sendgrid tripactions zoom
+generate: README.md docusign giphy github google-admin google-calendar google-drive google-groups-settings google-sheets gusto ramp sendgrid tripactions zoom
 	cargo test tests
 	cargo clippy
 
@@ -137,6 +137,7 @@ docusign: target/debug/generator $(DOCUSIGN_SPEC)
 		--token-endpoint "account.docusign.com/oauth/token" \
 		--user-consent-endpoint "account.docusign.com/oauth/auth" $(EXTRA_ARGS)
 	cargo fmt -p docusign
+	@echo -e "- [DocuSign](docusign/) [![docs.rs](https://docs.rs/docusign/badge.svg)](https://docs.rs/docusign)" >> README.md
 
 $(GIPHY_SPEC_DIR):
 	mkdir -p $@
@@ -153,6 +154,7 @@ giphy: target/debug/generator $(GIPHY_SPEC)
 		--spec-link "https://github.com/APIs-guru/openapi-directory/tree/main/APIs/giphy.com" \
 		--host "api.giphy.com/v1" $(EXTRA_ARGS)
 	cargo fmt -p giphy-api
+	@echo -e "- [Giphy](giphy-api/) [![docs.rs](https://docs.rs/giphy-api/badge.svg)](https://docs.rs/giphy-api)" >> README.md
 
 $(GITHUB_SPEC_DIR):
 	mkdir -p $@
@@ -420,3 +422,7 @@ zoom: target/debug/generator $(ZOOM_SPEC)
 		--token-endpoint "zoom.us/oauth/token" \
 		--user-consent-endpoint "zoom.us/oauth/authorize" $(EXTRA_ARGS)
 	cargo fmt -p zoom-api
+
+.PHONY: README.md
+README.md: ## Cleans client info in README.md.
+	@sed -i '/## Clients Generated/q' $@

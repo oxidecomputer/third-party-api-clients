@@ -2,6 +2,8 @@
 
 A fully generated, opinionated API client library for DocuSign.
 
+[![docs.rs](https://docs.rs/docusign/badge.svg)](https://docs.rs/docusign)
+
 ## API Details
 
 The DocuSign REST API provides you with a powerful, convenient, and simple Web services API for interacting with DocuSign.

@@ -2,6 +2,8 @@
 
 A fully generated, opinionated API client library for Google Calendar.
 
+[![docs.rs](https://docs.rs/google_calendar/badge.svg)](https://docs.rs/google_calendar)
+
 ## API Details
 
 Manipulates events and other calendar data.

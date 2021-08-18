@@ -1,5 +1,7 @@
 //! A fully generated, opinionated API client library for Giphy.
 //!
+//! [![docs.rs](https://docs.rs/giphy_api/badge.svg)](https://docs.rs/giphy_api)
+//!
 //! ## API Details
 //!
 //! Giphy API

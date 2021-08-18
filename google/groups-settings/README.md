@@ -2,6 +2,8 @@
 
 A fully generated, opinionated API client library for Google Groups Settings.
 
+[![docs.rs](https://docs.rs/google_groups_settings/badge.svg)](https://docs.rs/google_groups_settings)
+
 ## API Details
 
 Manages permission levels and related settings of a group.

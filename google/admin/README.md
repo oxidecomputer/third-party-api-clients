@@ -2,6 +2,8 @@
 
 A fully generated, opinionated API client library for Google Admin.
 
+[![docs.rs](https://docs.rs/gsuite_api/badge.svg)](https://docs.rs/gsuite_api)
+
 ## API Details
 
 Admin SDK lets administrators of enterprise domains to view and manage resources like user, groups etc. It also provides audit and usage reports of domain.

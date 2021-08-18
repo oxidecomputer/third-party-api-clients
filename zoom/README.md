@@ -2,6 +2,8 @@
 
 A fully generated, opinionated API client library for Zoom.
 
+[![docs.rs](https://docs.rs/zoom_api/badge.svg)](https://docs.rs/zoom_api)
+
 ## API Details
 
 The Zoom API allows developers to access information from Zoom. You can use this API to build private services or public applications on the [Zoom App Marketplace](http://marketplace.zoom.us). To learn how to get your credentials and create private/public applications, read our [Authorization Guide](https://marketplace.zoom.us/docs/guides/authorization/credentials).

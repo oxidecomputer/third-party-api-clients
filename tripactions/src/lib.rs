@@ -1,5 +1,7 @@
 //! A fully generated, opinionated API client library for TripActions.
 //!
+//! [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)
+//!
 //! ## API Details
 //!
 //! <p>Welcome to the TripActions Booking Data API reference documentation.</p> <p>You can use this API to retrieve your booking data from TripActions.</p> <p>To access the API, your company admin needs to supply you with a client id and a secret key. They can generate this in the TripActions Admin Dashboard, in the Integrations section of the Settings page.<p> </br>

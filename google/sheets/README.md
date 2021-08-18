@@ -2,6 +2,8 @@
 
 A fully generated, opinionated API client library for Google Sheets.
 
+[![docs.rs](https://docs.rs/sheets/badge.svg)](https://docs.rs/sheets)
+
 ## API Details
 
 Reads and writes Google Sheets.

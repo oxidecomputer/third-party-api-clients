@@ -1,5 +1,7 @@
 //! A fully generated, opinionated API client library for Gusto.
 //!
+//! [![docs.rs](https://docs.rs/gusto_api/badge.svg)](https://docs.rs/gusto_api)
+//!
 //! ## API Details
 //!
 //! Welcome to Gusto's API documentation.

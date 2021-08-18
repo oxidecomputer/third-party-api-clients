@@ -285,7 +285,7 @@ pub fn generate_docs_github(
     host: &str,
     spec_link: &str,
 ) -> String {
-    let info = generate_docs_openapi_info(api, proper_name, spec_link);
+    let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
 
     format!(
         r#"{}
@@ -456,6 +456,7 @@ pub fn generate_docs_openapi_info(
     api: &openapiv3::OpenAPI,
     proper_name: &str,
     spec_link: &str,
+    package_name: &str,
 ) -> String {
     let mut description = String::new();
     if let Some(d) = &api.info.description {
@@ -553,6 +554,8 @@ pub fn generate_docs_openapi_info(
     format!(
         r#"//! A fully generated, opinionated API client library for {}.
 //!
+//! [![docs.rs](https://docs.rs/{}/badge.svg)](https://docs.rs/{})
+//!
 //! ## API Details
 //!
 //! {}
@@ -569,7 +572,16 @@ pub fn generate_docs_openapi_info(
 //! up to date as features are added. The documentation for the crate is generated
 //! along with the code to make this library easy to use.
 //! "#,
-        proper_name, description, tos, contact, license, proper_name, spec_link, api_version,
+        proper_name,
+        package_name,
+        package_name,
+        description,
+        tos,
+        contact,
+        license,
+        proper_name,
+        spec_link,
+        api_version,
     )
 }
 
@@ -580,7 +592,7 @@ pub fn generate_docs_generic_token(
     proper_name: &str,
     spec_link: &str,
 ) -> String {
-    let info = generate_docs_openapi_info(api, proper_name, spec_link);
+    let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
     format!(
         r#"{}
 //!

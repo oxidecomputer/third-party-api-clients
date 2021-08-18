@@ -2,6 +2,8 @@
 
 A fully generated, opinionated API client library for Google Drive.
 
+[![docs.rs](https://docs.rs/google_drive/badge.svg)](https://docs.rs/google_drive)
+
 ## API Details
 
 Manages files in Drive including uploading, downloading, searching, detecting changes, and updating sharing permissions.

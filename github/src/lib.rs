@@ -1,5 +1,7 @@
 //! A fully generated, opinionated API client library for GitHub.
 //!
+//! [![docs.rs](https://docs.rs/octorust/badge.svg)](https://docs.rs/octorust)
+//!
 //! ## API Details
 //!
 //! GitHub's v3 REST API.

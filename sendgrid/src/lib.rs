@@ -1,5 +1,7 @@
 //! A fully generated, opinionated API client library for SendGrid.
 //!
+//! [![docs.rs](https://docs.rs/sendgrid_api/badge.svg)](https://docs.rs/sendgrid_api)
+//!
 //! ## API Details
 //!
 //! The Beta endpoints for the new Email Activity APIs - functionality is subject to change without notice. You may not have access to this Beta endpoint.
