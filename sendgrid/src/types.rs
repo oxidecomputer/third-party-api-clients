@@ -11372,48 +11372,19 @@ impl PutMcContactsImportsRequestFileType {
     }
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `String`
 /// - `serde_json::Value`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum FieldMappingsAnyOf {
+pub struct FieldMappingsAnyOf {
     /**
      * The license key provided with your New Relic account.
      */
-    String(String),
-    Value(serde_json::Value),
-}
-
-impl FieldMappingsAnyOf {
-    pub fn string(&self) -> Option<&String> {
-        if let FieldMappingsAnyOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn serde_json_value(&self) -> Option<&serde_json::Value> {
-        if let FieldMappingsAnyOf::Value(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl std::convert::From<String> for FieldMappingsAnyOf {
-    fn from(f: String) -> Self {
-        FieldMappingsAnyOf::String(f)
-    }
-}
-
-impl std::convert::From<FieldMappingsAnyOf> for String {
-    fn from(f: FieldMappingsAnyOf) -> Self {
-        f.string().unwrap().clone()
-    }
+    #[serde(flatten)]
+    pub string: String,
+    #[serde(flatten)]
+    pub value: serde_json::Value,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -12161,60 +12132,19 @@ pub struct PostContactdbRecipientsSearchRequest {
     pub list_id: i64,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `String`
 /// - `i64`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ValueAnyOf {
+pub struct ValueAnyOf {
     /**
      * The license key provided with your New Relic account.
      */
-    String(String),
-    I64(i64),
-}
-
-impl ValueAnyOf {
-    pub fn i64(&self) -> Option<&i64> {
-        if let ValueAnyOf::I64(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let ValueAnyOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl std::convert::From<i64> for ValueAnyOf {
-    fn from(f: i64) -> Self {
-        ValueAnyOf::I64(f)
-    }
-}
-
-impl std::convert::From<String> for ValueAnyOf {
-    fn from(f: String) -> Self {
-        ValueAnyOf::String(f)
-    }
-}
-
-impl std::convert::From<ValueAnyOf> for i64 {
-    fn from(f: ValueAnyOf) -> Self {
-        *f.i64().unwrap()
-    }
-}
-
-impl std::convert::From<ValueAnyOf> for String {
-    fn from(f: ValueAnyOf) -> Self {
-        f.string().unwrap().clone()
-    }
+    #[serde(flatten)]
+    pub string: String,
+    #[serde(flatten)]
+    pub i64: i64,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]

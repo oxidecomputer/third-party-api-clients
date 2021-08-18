@@ -1514,9 +1514,10 @@ impl TypeSpace {
 
                         // If we have a unit struct where there is only one property in
                         // the object, call the object by that property name.
-                        if o.properties.len() == 1 {
+                        // This is Oxide exclusive.
+                        /* if o.properties.len() == 1 {
                             name = clean_name(n);
-                        }
+                        }*/
 
                         let itid = self.select_box(
                             Some(n),

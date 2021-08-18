@@ -1133,39 +1133,22 @@ pub struct AppPermissions {
     pub workflows: Option<Workflows>,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `SimpleUser`
 /// - `Enterprise`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum AccountAnyOf {
+pub struct AccountAnyOf {
     /**
      * Simple User
      */
-    SimpleUser(SimpleUser),
+    #[serde(flatten)]
+    pub simple_user: SimpleUser,
     /**
      * An enterprise account
      */
-    Enterprise(Enterprise),
-}
-
-impl AccountAnyOf {
-    pub fn enterprise(&self) -> Option<&Enterprise> {
-        if let AccountAnyOf::Enterprise(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn simple_user(&self) -> Option<&SimpleUser> {
-        if let AccountAnyOf::SimpleUser(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub enterprise: Enterprise,
 }
 
 /**
@@ -10977,39 +10960,22 @@ pub struct Environment {
     pub url: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `SimpleUser`
 /// - `Team`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ReviewerAnyOf {
+pub struct ReviewerAnyOf {
     /**
      * Simple User
      */
-    SimpleUser(SimpleUser),
+    #[serde(flatten)]
+    pub simple_user: SimpleUser,
     /**
      * Groups of organization members that gives permissions on specified repositories.
      */
-    Team(Team),
-}
-
-impl ReviewerAnyOf {
-    pub fn simple_user(&self) -> Option<&SimpleUser> {
-        if let ReviewerAnyOf::SimpleUser(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn team(&self) -> Option<&Team> {
-        if let ReviewerAnyOf::Team(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub team: Team,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -15749,42 +15715,19 @@ pub struct ProtectionRulesDataType {
     pub type_: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `ProtectionRules`
 /// - `ProtectionRulesData`
 /// - `ProtectionRulesDataType`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ProtectionRulesAnyOf {
-    ProtectionRules(ProtectionRules),
-    ProtectionRulesData(ProtectionRulesData),
-    ProtectionRulesDataType(ProtectionRulesDataType),
-}
-
-impl ProtectionRulesAnyOf {
-    pub fn protection_rules(&self) -> Option<&ProtectionRules> {
-        if let ProtectionRulesAnyOf::ProtectionRules(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn protection_rules_data(&self) -> Option<&ProtectionRulesData> {
-        if let ProtectionRulesAnyOf::ProtectionRulesData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn protection_rules_data_type(&self) -> Option<&ProtectionRulesDataType> {
-        if let ProtectionRulesAnyOf::ProtectionRulesDataType(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+pub struct ProtectionRulesAnyOf {
+    #[serde(flatten)]
+    pub protection_rules: ProtectionRules,
+    #[serde(flatten)]
+    pub protection_rules_data: ProtectionRulesData,
+    #[serde(flatten)]
+    pub protection_rules_data_type: ProtectionRulesDataType,
 }
 
 /// Details of a deployment environment
@@ -17599,7 +17542,7 @@ pub struct ConvertedNoteIssueEvent {
     pub url: String,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `LabeledIssueEvent`
 /// - `LabeledIssueEvent`
@@ -17616,145 +17559,68 @@ pub struct ConvertedNoteIssueEvent {
 /// - `MovedColumnInProjectIssueEvent`
 /// - `RemovedFromProjectIssueEvent`
 /// - `ConvertedNoteIssueEvent`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum IssueEventAnyOf {
+pub struct IssueEventAnyOf {
     /**
      * Labeled Issue Event
      */
-    LabeledIssueEvent(LabeledIssueEvent),
+    #[serde(flatten)]
+    pub labeled_issue_event: LabeledIssueEvent,
     /**
      * Assigned Issue Event
      */
-    AssignedIssueEvent(AssignedIssueEvent),
+    #[serde(flatten)]
+    pub assigned_issue_event: AssignedIssueEvent,
     /**
      * Milestoned Issue Event
      */
-    MilestonedIssueEvent(MilestonedIssueEvent),
+    #[serde(flatten)]
+    pub milestoned_issue_event: MilestonedIssueEvent,
     /**
      * Renamed Issue Event
      */
-    RenamedIssueEvent(RenamedIssueEvent),
+    #[serde(flatten)]
+    pub renamed_issue_event: RenamedIssueEvent,
     /**
      * Review Requested Issue Event
      */
-    ReviewRequestedIssueEvent(ReviewRequestedIssueEvent),
+    #[serde(flatten)]
+    pub review_requested_issue_event: ReviewRequestedIssueEvent,
     /**
      * Review Request Removed Issue Event
      */
-    ReviewRequestRemovedIssueEvent(ReviewRequestRemovedIssueEvent),
+    #[serde(flatten)]
+    pub review_request_removed_issue_event: ReviewRequestRemovedIssueEvent,
     /**
      * Review Dismissed Issue Event
      */
-    ReviewDismissedIssueEvent(ReviewDismissedIssueEvent),
+    #[serde(flatten)]
+    pub review_dismissed_issue_event: ReviewDismissedIssueEvent,
     /**
      * Locked Issue Event
      */
-    LockedIssueEvent(LockedIssueEvent),
+    #[serde(flatten)]
+    pub locked_issue_event: LockedIssueEvent,
     /**
      * Added to Project Issue Event
      */
-    AddedProjectIssueEvent(AddedProjectIssueEvent),
+    #[serde(flatten)]
+    pub added_project_issue_event: AddedProjectIssueEvent,
     /**
      * Moved Column in Project Issue Event
      */
-    MovedColumnInProjectIssueEvent(MovedColumnInProjectIssueEvent),
+    #[serde(flatten)]
+    pub moved_column_in_project_issue_event: MovedColumnInProjectIssueEvent,
     /**
      * Removed from Project Issue Event
      */
-    RemovedFromProjectIssueEvent(RemovedFromProjectIssueEvent),
+    #[serde(flatten)]
+    pub removed_from_project_issue_event: RemovedFromProjectIssueEvent,
     /**
      * Converted Note to Issue Issue Event
      */
-    ConvertedNoteIssueEvent(ConvertedNoteIssueEvent),
-}
-
-impl IssueEventAnyOf {
-    pub fn added_project_issue_event(&self) -> Option<&AddedProjectIssueEvent> {
-        if let IssueEventAnyOf::AddedProjectIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn assigned_issue_event(&self) -> Option<&AssignedIssueEvent> {
-        if let IssueEventAnyOf::AssignedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn converted_note_issue_event(&self) -> Option<&ConvertedNoteIssueEvent> {
-        if let IssueEventAnyOf::ConvertedNoteIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn labeled_issue_event(&self) -> Option<&LabeledIssueEvent> {
-        if let IssueEventAnyOf::LabeledIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn locked_issue_event(&self) -> Option<&LockedIssueEvent> {
-        if let IssueEventAnyOf::LockedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn milestoned_issue_event(&self) -> Option<&MilestonedIssueEvent> {
-        if let IssueEventAnyOf::MilestonedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn moved_column_in_project_issue_event(&self) -> Option<&MovedColumnInProjectIssueEvent> {
-        if let IssueEventAnyOf::MovedColumnInProjectIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn removed_from_project_issue_event(&self) -> Option<&RemovedFromProjectIssueEvent> {
-        if let IssueEventAnyOf::RemovedFromProjectIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn renamed_issue_event(&self) -> Option<&RenamedIssueEvent> {
-        if let IssueEventAnyOf::RenamedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn review_dismissed_issue_event(&self) -> Option<&ReviewDismissedIssueEvent> {
-        if let IssueEventAnyOf::ReviewDismissedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn review_request_removed_issue_event(&self) -> Option<&ReviewRequestRemovedIssueEvent> {
-        if let IssueEventAnyOf::ReviewRequestRemovedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn review_requested_issue_event(&self) -> Option<&ReviewRequestedIssueEvent> {
-        if let IssueEventAnyOf::ReviewRequestedIssueEvent(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub converted_note_issue_event: ConvertedNoteIssueEvent,
 }
 
 /// Timeline Comment Event
@@ -25623,36 +25489,19 @@ pub struct AppsListInstallationsResponse {
     pub total_count: i64,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Data`
 /// - `InteractionLimits`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum InteractionsGetRestrictionsResponseAnyOf {
-    Data(Data),
+pub struct InteractionsGetRestrictionsResponseAnyOf {
+    #[serde(flatten)]
+    pub data: Data,
     /**
      * Interaction limit settings.
      */
-    InteractionLimits(InteractionLimits),
-}
-
-impl InteractionsGetRestrictionsResponseAnyOf {
-    pub fn data(&self) -> Option<&Data> {
-        if let InteractionsGetRestrictionsResponseAnyOf::Data(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn interaction_limits(&self) -> Option<&InteractionLimits> {
-        if let InteractionsGetRestrictionsResponseAnyOf::InteractionLimits(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub interaction_limits: InteractionLimits,
 }
 
 /**
@@ -29154,99 +29003,28 @@ impl std::convert::From<IssuesAddLabelsRequestOneOf> for Vec<String> {
     }
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `String`
 /// - `Vec<String>`
 /// - `IssuesAddLabelsRequest`
 /// - `Vec<ProjectsUpdateColumnRequest>`
 /// - `IssuesSetLabelsRequest`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum IssuesSetLabelsRequestAnyOf {
-    String(String),
+pub struct IssuesSetLabelsRequestAnyOf {
+    #[serde(flatten)]
+    pub string: String,
     /**
      * The list of events for the GitHub app
      */
-    StringVector(Vec<String>),
-    IssuesAddLabelsRequest(IssuesAddLabelsRequest),
-    ProjectsUpdateColumnRequestVector(Vec<ProjectsUpdateColumnRequest>),
-    IssuesSetLabelsRequest(IssuesSetLabelsRequest),
-}
-
-impl IssuesSetLabelsRequestAnyOf {
-    pub fn issues_add_labels_request(&self) -> Option<&IssuesAddLabelsRequest> {
-        if let IssuesSetLabelsRequestAnyOf::IssuesAddLabelsRequest(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn issues_set_labels_request(&self) -> Option<&IssuesSetLabelsRequest> {
-        if let IssuesSetLabelsRequestAnyOf::IssuesSetLabelsRequest(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_projects_update_column_request(&self) -> Option<&Vec<ProjectsUpdateColumnRequest>> {
-        if let IssuesSetLabelsRequestAnyOf::ProjectsUpdateColumnRequestVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn string(&self) -> Option<&String> {
-        if let IssuesSetLabelsRequestAnyOf::String(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_string(&self) -> Option<&Vec<String>> {
-        if let IssuesSetLabelsRequestAnyOf::StringVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl std::convert::From<Vec<ProjectsUpdateColumnRequest>> for IssuesSetLabelsRequestAnyOf {
-    fn from(f: Vec<ProjectsUpdateColumnRequest>) -> Self {
-        IssuesSetLabelsRequestAnyOf::ProjectsUpdateColumnRequestVector(f)
-    }
-}
-
-impl std::convert::From<String> for IssuesSetLabelsRequestAnyOf {
-    fn from(f: String) -> Self {
-        IssuesSetLabelsRequestAnyOf::String(f)
-    }
-}
-
-impl std::convert::From<Vec<String>> for IssuesSetLabelsRequestAnyOf {
-    fn from(f: Vec<String>) -> Self {
-        IssuesSetLabelsRequestAnyOf::StringVector(f)
-    }
-}
-
-impl std::convert::From<IssuesSetLabelsRequestAnyOf> for Vec<ProjectsUpdateColumnRequest> {
-    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
-        f.vec_projects_update_column_request().unwrap().clone()
-    }
-}
-
-impl std::convert::From<IssuesSetLabelsRequestAnyOf> for String {
-    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
-        f.string().unwrap().clone()
-    }
-}
-
-impl std::convert::From<IssuesSetLabelsRequestAnyOf> for Vec<String> {
-    fn from(f: IssuesSetLabelsRequestAnyOf) -> Self {
-        f.vec_string().unwrap().clone()
-    }
+    #[serde(flatten)]
+    pub string_vector: Vec<String>,
+    #[serde(flatten)]
+    pub issues_add_labels_request: IssuesAddLabelsRequest,
+    #[serde(flatten)]
+    pub projects_update_column_request_vector: Vec<ProjectsUpdateColumnRequest>,
+    #[serde(flatten)]
+    pub issues_set_labels_request: IssuesSetLabelsRequest,
 }
 
 /**
@@ -29583,39 +29361,22 @@ pub struct SourceDataType {
     pub path: Path,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `SourceData`
 /// - `SourceDataType`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum SourceAnyOf {
+pub struct SourceAnyOf {
     /**
      * Update the source for the repository. Must include the branch name, and may optionally specify the subdirectory `/docs`. Possible values are `"gh-pages"`, `"master"`, and `"master /docs"`.
      */
-    SourceData(SourceData),
+    #[serde(flatten)]
+    pub source_data: SourceData,
     /**
      * Update the source for the repository. Must include the branch name and path.
      */
-    SourceDataType(SourceDataType),
-}
-
-impl SourceAnyOf {
-    pub fn source_data(&self) -> Option<&SourceData> {
-        if let SourceAnyOf::SourceData(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn source_data_type(&self) -> Option<&SourceDataType> {
-        if let SourceAnyOf::SourceDataType(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
+    #[serde(flatten)]
+    pub source_data_type: SourceDataType,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -30217,57 +29978,16 @@ pub struct SecretScanningUpdateAlertRequest {
     pub state: SecretScanningAlertState,
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Vec<SimpleUser>`
 /// - `Vec<Stargazer>`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ActivityListStargazersRepoResponseAnyOf {
-    SimpleUserVector(Vec<SimpleUser>),
-    StargazerVector(Vec<Stargazer>),
-}
-
-impl ActivityListStargazersRepoResponseAnyOf {
-    pub fn vec_simple_user(&self) -> Option<&Vec<SimpleUser>> {
-        if let ActivityListStargazersRepoResponseAnyOf::SimpleUserVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_stargazer(&self) -> Option<&Vec<Stargazer>> {
-        if let ActivityListStargazersRepoResponseAnyOf::StargazerVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl std::convert::From<Vec<SimpleUser>> for ActivityListStargazersRepoResponseAnyOf {
-    fn from(f: Vec<SimpleUser>) -> Self {
-        ActivityListStargazersRepoResponseAnyOf::SimpleUserVector(f)
-    }
-}
-
-impl std::convert::From<Vec<Stargazer>> for ActivityListStargazersRepoResponseAnyOf {
-    fn from(f: Vec<Stargazer>) -> Self {
-        ActivityListStargazersRepoResponseAnyOf::StargazerVector(f)
-    }
-}
-
-impl std::convert::From<ActivityListStargazersRepoResponseAnyOf> for Vec<SimpleUser> {
-    fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
-        f.vec_simple_user().unwrap().clone()
-    }
-}
-
-impl std::convert::From<ActivityListStargazersRepoResponseAnyOf> for Vec<Stargazer> {
-    fn from(f: ActivityListStargazersRepoResponseAnyOf) -> Self {
-        f.vec_stargazer().unwrap().clone()
-    }
+pub struct ActivityListStargazersRepoResponseAnyOf {
+    #[serde(flatten)]
+    pub simple_user_vector: Vec<SimpleUser>,
+    #[serde(flatten)]
+    pub stargazer_vector: Vec<Stargazer>,
 }
 
 /**
@@ -31593,55 +31313,14 @@ impl Default for ReposListUserType {
     }
 }
 
-/// All of the following types:
+/// All of the following types are flattened into one object:
 ///
 /// - `Vec<Repository>`
 /// - `Vec<StarredRepository>`
-///
-/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-#[serde(untagged)]
-pub enum ActivityListReposStarredByUserResponseAnyOf {
-    RepositoryVector(Vec<Repository>),
-    StarredRepositoryVector(Vec<StarredRepository>),
-}
-
-impl ActivityListReposStarredByUserResponseAnyOf {
-    pub fn vec_repository(&self) -> Option<&Vec<Repository>> {
-        if let ActivityListReposStarredByUserResponseAnyOf::RepositoryVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-
-    pub fn vec_starred_repository(&self) -> Option<&Vec<StarredRepository>> {
-        if let ActivityListReposStarredByUserResponseAnyOf::StarredRepositoryVector(ref_) = self {
-            return Some(ref_);
-        }
-        None
-    }
-}
-
-impl std::convert::From<Vec<Repository>> for ActivityListReposStarredByUserResponseAnyOf {
-    fn from(f: Vec<Repository>) -> Self {
-        ActivityListReposStarredByUserResponseAnyOf::RepositoryVector(f)
-    }
-}
-
-impl std::convert::From<Vec<StarredRepository>> for ActivityListReposStarredByUserResponseAnyOf {
-    fn from(f: Vec<StarredRepository>) -> Self {
-        ActivityListReposStarredByUserResponseAnyOf::StarredRepositoryVector(f)
-    }
-}
-
-impl std::convert::From<ActivityListReposStarredByUserResponseAnyOf> for Vec<Repository> {
-    fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
-        f.vec_repository().unwrap().clone()
-    }
-}
-
-impl std::convert::From<ActivityListReposStarredByUserResponseAnyOf> for Vec<StarredRepository> {
-    fn from(f: ActivityListReposStarredByUserResponseAnyOf) -> Self {
-        f.vec_starred_repository().unwrap().clone()
-    }
+pub struct ActivityListReposStarredByUserResponseAnyOf {
+    #[serde(flatten)]
+    pub repository_vector: Vec<Repository>,
+    #[serde(flatten)]
+    pub starred_repository_vector: Vec<StarredRepository>,
 }

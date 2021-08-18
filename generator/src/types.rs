@@ -41,7 +41,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                     a(&p);
                 }
                 TypeDetails::OneOf(omap, _) => a(&do_of_type(ts, omap, sn)),
-                TypeDetails::AnyOf(omap, _) => a(&do_of_type(ts, omap, sn)),
+                TypeDetails::AnyOf(omap, _) => a(&do_all_of_type(ts, omap, sn)),
                 TypeDetails::AllOf(omap, _) => a(&do_all_of_type(ts, omap, sn)),
                 TypeDetails::Object(omap, schema_data) => {
                     /*
