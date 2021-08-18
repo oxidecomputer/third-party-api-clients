@@ -371,9 +371,7 @@ sendgrid: target/debug/generator $(SENDGRID_SPEC)
 		--proper-name SendGrid \
 		-d "A fully generated & opinionated API client for the SendGrid API." \
 		--spec-link "$(SENDGRID_SPEC_REMOTE)" \
-		--host "api.sendgrid.us/v2" \
-		--token-endpoint "sendgrid.us/oauth/token" \
-		--user-consent-endpoint "sendgrid.us/oauth/authorize" $(EXTRA_ARGS)
+		--host "api.sendgrid.com/v3" $(EXTRA_ARGS)
 	cargo fmt -p sendgrid-api
 	@echo -e "- [SendGrid](sendgrid/) [![docs.rs](https://docs.rs/sendgrid-api/badge.svg)](https://docs.rs/sendgrid-api)" >> README.md
 

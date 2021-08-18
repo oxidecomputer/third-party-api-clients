@@ -1,5 +1,5 @@
 #![allow(clippy::field_reassign_with_default)]
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 
 #[async_trait::async_trait]
 pub trait MailOps {
@@ -63,6 +63,18 @@ impl MailOps for crate::mail_send::MailSend {
         }
         mail.personalizations = vec![p];
 
-        self.post(&mail).await
+        let resp = self
+            .client
+            .request_raw(
+                reqwest::Method::POST,
+                "/mail/send",
+                Some(reqwest::Body::from(serde_json::to_vec(&mail).unwrap())),
+            )
+            .await?;
+
+        match resp.status() {
+            http::StatusCode::ACCEPTED => Ok(()),
+            s => Err(anyhow!("received response status: {:?}", s)),
+        }
     }
 }

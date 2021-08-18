@@ -128,7 +128,7 @@ pub mod webhooks;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://api.sendgrid.us/v2";
+pub const DEFAULT_HOST: &str = "https://api.sendgrid.com/v3";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};
