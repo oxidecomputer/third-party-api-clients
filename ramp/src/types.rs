@@ -196,15 +196,8 @@ pub struct PatchUsersRequest {
 
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Page {
-    /**
-     * The OAuth2 token header
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub next: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub next: Option<url::Url>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -537,6 +530,19 @@ pub struct GetTransactionResponse {
     pub page: Page,
 }
 
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct GetLocationResponsePage {
+    /**
+     * The OAuth2 token header
+     */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub next: String,
+}
+
 /// Ramp location
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
@@ -564,8 +570,8 @@ pub struct GetLocationResponse {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub data: Vec<Location>,
-    #[serde(default)]
-    pub page: Page,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<GetLocationResponsePage>,
 }
 
 ///
@@ -622,8 +628,8 @@ pub struct GetDepartmentsResponse {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub data: Vec<Department>,
-    #[serde(default)]
-    pub page: Page,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<GetLocationResponsePage>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1739,12 +1745,8 @@ pub struct Receipt {
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub id: Option<uuid::Uuid>,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub receipt_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub receipt_url: Option<url::Url>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub transaction_id: Option<uuid::Uuid>,
     #[serde(default, skip_serializing_if = "Option::is_none")]

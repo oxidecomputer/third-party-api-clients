@@ -4194,14 +4194,10 @@ pub struct MeetingInvitation {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MeetingLiveStream {
     /**
-     * User's first name.
+     * The livestream page URL.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub page_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page_url: Option<url::Url>,
     /**
      * User's first name.
      */

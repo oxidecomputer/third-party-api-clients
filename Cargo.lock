@@ -117,6 +117,9 @@ name = "bytes"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b700ce4376041dcd0a327fd0097c41095743c4c8af8887265942faf1100bd040"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "cc"
@@ -1024,6 +1027,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
 ]
 
 [[package]]
@@ -1436,11 +1440,13 @@ version = "0.8.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bc6ab463ae35acccb5cba66c0084c985257b797d288b6050cc2f6ac1b266cb78"
 dependencies = [
+ "bytes",
  "chrono",
  "dyn-clone",
  "schemars_derive",
  "serde",
  "serde_json",
+ "url",
  "uuid",
 ]
 

@@ -10040,12 +10040,8 @@ pub struct RssOpts {
     /**
      * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub feed_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub feed_url: Option<url::Url>,
     /**
      * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
@@ -10943,14 +10939,10 @@ pub struct RssOptions {
     )]
     pub constrain_rss_img: bool,
     /**
-     * The name of the folder.
+     * The URL for the RSS feed.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub feed_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub feed_url: Option<url::Url>,
     /**
      * The frequency of the RSS Campaign.
      */
@@ -11215,14 +11207,10 @@ pub struct CampaignRssOptions {
     )]
     pub constrain_rss_img: bool,
     /**
-     * The name of the folder.
+     * The URL for the RSS feed.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub feed_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub feed_url: Option<url::Url>,
     /**
      * The frequency of the RSS Campaign.
      */
@@ -11428,14 +11416,10 @@ pub struct CampaignRssOptionsData {
     )]
     pub constrain_rss_img: bool,
     /**
-     * The name of the folder.
+     * The URL for the RSS feed.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub feed_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub feed_url: Option<url::Url>,
     /**
      * The frequency of the RSS Campaign.
      */
@@ -13174,12 +13158,8 @@ pub struct Files {
     /**
      * An individual file listed in the File Manager.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub full_size_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub full_size_url: Option<url::Url>,
     /**
      * An individual file listed in the File Manager.
      */
@@ -13219,12 +13199,8 @@ pub struct Files {
     /**
      * An individual file listed in the File Manager.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub thumbnail_url: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub thumbnail_url: Option<url::Url>,
     /**
      * An individual file listed in the File Manager.
      */

@@ -291,7 +291,7 @@ impl AccountBrands {
         account_id: &str,
         brand_id: &str,
         logo_type: &str,
-        body: Vec<u8>,
+        body: bytes::Bytes,
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/brands/{}/logos/{}",

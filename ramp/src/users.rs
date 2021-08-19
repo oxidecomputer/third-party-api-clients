@@ -137,7 +137,11 @@ impl Users {
         let mut resp: crate::types::GetUsersResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
-        let mut page = resp.page.next;
+        let mut page = if let Some(p) = resp.page.next {
+            p.to_string()
+        } else {
+            "".to_string()
+        };
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -148,11 +152,15 @@ impl Users {
 
             data.append(&mut resp.data);
 
-            if !resp.page.next.is_empty() && resp.page.next != page {
-                page = resp.page.next.to_string();
+            page = if let Some(p) = resp.page.next {
+                if p.to_string() != page {
+                    p.to_string()
+                } else {
+                    "".to_string()
+                }
             } else {
-                page = "".to_string();
-            }
+                "".to_string()
+            };
         }
 
         // Return our response data.

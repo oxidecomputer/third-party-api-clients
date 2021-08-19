@@ -255,8 +255,8 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     Item(Date) => "chrono::NaiveDate".to_string(),
                                     Item(Password) => "&str".to_string(),
                                     // TODO: as per the spec this is base64 encoded chars.
-                                    Item(Byte) => "&str".to_string(),
-                                    Item(Binary) => "&[u8]".to_string(),
+                                    Item(Byte) => "&bytes::Bytes".to_string(),
+                                    Item(Binary) => "&bytes::Bytes".to_string(),
                                     Empty => "&str".to_string(),
                                     Unknown(f) => match f.as_str() {
                                         "float" => "f64".to_string(),
@@ -274,9 +274,9 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         }
                                         "dateTime" => "chrono::DateTime<chrono::Utc>".to_string(),
                                         "ipv4" => "std::net::Ipv4Addr".to_string(),
-                                        "uri" => "&str".to_string(),
+                                        "uri" => "&url::Url".to_string(),
                                         "uri-template" => "&str".to_string(),
-                                        "url" => "&str".to_string(),
+                                        "url" => "&url::Url".to_string(),
                                         "email" => "&str".to_string(),
                                         "uuid" => "uuid::Uuid".to_string(),
                                         "hostname" => "&str".to_string(),
@@ -1666,11 +1666,11 @@ impl TypeSpace {
                         // TODO: as per the spec this is base64 encoded chars.
                         Item(Byte) => Ok((
                             Some(uid.to_string()),
-                            TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            TypeDetails::Basic("bytes::Bytes".to_string(), s.schema_data.clone()),
                         )),
                         Item(Binary) => Ok((
                             Some(uid.to_string()),
-                            TypeDetails::Basic("Vec<u8>".to_string(), s.schema_data.clone()),
+                            TypeDetails::Basic("bytes::Bytes".to_string(), s.schema_data.clone()),
                         )),
                         Empty => {
                             // Get the name, we need to find out if its secretly a date.
@@ -1753,7 +1753,10 @@ impl TypeSpace {
                             )),
                             "uri" => Ok((
                                 Some(uid.to_string()),
-                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                                TypeDetails::Basic(
+                                    "Option<url::Url>".to_string(),
+                                    s.schema_data.clone(),
+                                ),
                             )),
                             "uri-template" => Ok((
                                 Some(uid.to_string()),
@@ -1761,7 +1764,10 @@ impl TypeSpace {
                             )),
                             "url" => Ok((
                                 Some(uid.to_string()),
-                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                                TypeDetails::Basic(
+                                    "Option<url::Url>".to_string(),
+                                    s.schema_data.clone(),
+                                ),
                             )),
                             "email" => Ok((
                                 Some(uid.to_string()),
@@ -3090,9 +3096,8 @@ fn main() -> Result<()> {
             let mut yup_oauth2_lib = "".to_string();
             if proper_name != "GitHub" {
                 uuid_lib = r#"
-bytes = "1"
+bytes = { version = "1", features = ["serde"] }
 async-trait = "^0.1.51"
-url = { version = "2", features = ["serde"] }
 urlencoding = "^1.3.3"
 uuid = { version = "^0.8", features = ["serde", "v4"] }"#
                     .to_string();
@@ -3129,10 +3134,11 @@ jsonwebtoken = "7"
 mime = "0.3"
 percent-encoding = "2.1"
 reqwest = {{ version = "0.11", features = ["json"] }}
-schemars = {{ version = "0.8", features = ["chrono", "uuid"] }}
+schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid"] }}
 serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1"
-serde_urlencoded = "^0.7"{}{}
+serde_urlencoded = "^0.7"
+url = {{ version = "2", features = ["serde"] }}{}{}
 
 [dev-dependencies]
 base64 = "^0.12"

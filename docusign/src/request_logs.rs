@@ -67,37 +67,13 @@ impl RequestLogs {
      *
      * * `request_log_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
      */
-    pub async fn api_get(&self, request_log_id: &str) -> Result<Vec<u8>> {
+    pub async fn api_get(&self, request_log_id: &str) -> Result<bytes::Bytes> {
         let url = format!(
             "/v2.1/diagnostics/request_logs/{}",
             crate::progenitor_support::encode_path(&request_log_id.to_string()),
         );
 
         self.client.get(&url, None).await
-    }
-
-    /**
-     * Gets a request logging log file.
-     *
-     * This function performs a `GET` to the `/v2.1/diagnostics/request_logs/{requestLogId}` endpoint.
-     *
-     * As opposed to `api_get`, this function returns all the pages of the request at once.
-     *
-     * Retrieves information for a single log entry.
-     *
-     * **Request**
-     * The `requestLogfId` property can be retrieved by getting the list of log entries. The Content-Transfer-Encoding header can be set to base64 to retrieve the API request/response as base 64 string. Otherwise the bytes of the request/response are returned.
-     *
-     * **Response**
-     * If the Content-Transfer-Encoding header was set to base64, the log is returned as a base64 string.
-     */
-    pub async fn api_get_all(&self, request_log_id: &str) -> Result<Vec<u8>> {
-        let url = format!(
-            "/v2.1/diagnostics/request_logs/{}",
-            crate::progenitor_support::encode_path(&request_log_id.to_string()),
-        );
-
-        self.client.get_all_pages(&url, None).await
     }
 
     /**

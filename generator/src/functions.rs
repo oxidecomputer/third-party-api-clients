@@ -778,7 +778,11 @@ fn get_fn_inner(
             r#"let mut resp: {} = self.client.{}(&url, {}).await?;
 
             let mut {} = resp.{};
-            let mut page = resp.page.next;
+            let mut page = if let Some(p) = resp.page.next {{
+                p.to_string()
+            }} else {{
+                "".to_string()
+            }};
 
             // Paginate if we should.
             while !page.is_empty() {{
@@ -786,11 +790,15 @@ fn get_fn_inner(
 
                 {}.append(&mut resp.{});
 
-                if !resp.page.next.is_empty() && resp.page.next != page {{
-                    page = resp.page.next.to_string();
+                page = if let Some(p) = resp.page.next {{
+                    if p.to_string() != page {{
+                        p.to_string()
+                    }} else {{
+                        "".to_string()
+                    }}
                 }} else {{
-                    page = "".to_string();
-                }}
+                    "".to_string()
+                }};
             }}
 
             // Return our response data.

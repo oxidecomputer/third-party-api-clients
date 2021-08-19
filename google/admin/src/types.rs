@@ -5116,13 +5116,11 @@ pub struct UserPhoto {
         rename = "mimeType"
     )]
     pub mime_type: String,
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
-        rename = "photoData"
-    )]
-    pub photo_data: String,
+    /**
+     * The user photo's upload data in [web-safe Base64](https://en.wikipedia.org/wiki/Base64#URL_applications) format in bytes. This means: \* The slash (/) character is replaced with the underscore (_) character. \* The plus sign (+) character is replaced with the hyphen (-) character. \* The equals sign (=) character is replaced with the asterisk (\*). \* For padding, the period (.) character is used instead of the RFC-4648 baseURL definition which uses the equals sign (=) for padding. This is done to simplify URL-parsing. \* Whatever the size of the photo being uploaded, the API downsizes it to 96x96 pixels.
+     */
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "photoData")]
+    pub photo_data: Option<bytes::Bytes>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",

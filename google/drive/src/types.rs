@@ -1308,12 +1308,8 @@ pub struct Thumbnail {
     /**
      * A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
      */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub image: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub image: Option<bytes::Bytes>,
     /**
      * A thumbnail for the file. This will only be used if Google Drive cannot generate a standard thumbnail.
      */
