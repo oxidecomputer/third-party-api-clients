@@ -273,8 +273,9 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                             "chrono::DateTime<chrono::Utc>".to_string()
                                         }
                                         "ipv4" => "std::net::Ipv4Addr".to_string(),
-                                        "uri" => "&str".to_string(),
+                                        "uri" => "&url::Url".to_string(),
                                         "uri-template" => "&str".to_string(),
+                                        "url" => "&url::Url".to_string(),
                                         "email" => "&str".to_string(),
                                         "uuid" => "uuid::Uuid".to_string(),
                                         "hostname" => "&str".to_string(),
@@ -1744,11 +1745,15 @@ impl TypeSpace {
                             )),
                             "uri" => Ok((
                                 Some(uid.to_string()),
-                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                                TypeDetails::Basic("url::Url".to_string(), s.schema_data.clone()),
                             )),
                             "uri-template" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
+                            )),
+                            "url" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("url::Url".to_string(), s.schema_data.clone()),
                             )),
                             "email" => Ok((
                                 Some(uid.to_string()),
@@ -3079,6 +3084,7 @@ fn main() -> Result<()> {
                 uuid_lib = r#"
 bytes = "1"
 async-trait = "^0.1.51"
+url = { version = "2", features = ["serde"] }
 urlencoding = "^1.3.3"
 uuid = { version = "^0.8", features = ["serde", "v4"] }"#
                     .to_string();
