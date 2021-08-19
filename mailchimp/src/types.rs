@@ -10040,7 +10040,11 @@ pub struct RssOpts {
     /**
      * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+    )]
     pub feed_url: Option<url::Url>,
     /**
      * [RSS](https://mailchimp.com/help/share-your-blog-posts-with-mailchimp/) options for a campaign.
@@ -10941,7 +10945,11 @@ pub struct RssOptions {
     /**
      * The URL for the RSS feed.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+    )]
     pub feed_url: Option<url::Url>,
     /**
      * The frequency of the RSS Campaign.
@@ -11209,7 +11217,11 @@ pub struct CampaignRssOptions {
     /**
      * The URL for the RSS feed.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+    )]
     pub feed_url: Option<url::Url>,
     /**
      * The frequency of the RSS Campaign.
@@ -11418,7 +11430,11 @@ pub struct CampaignRssOptionsData {
     /**
      * The URL for the RSS feed.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+    )]
     pub feed_url: Option<url::Url>,
     /**
      * The frequency of the RSS Campaign.
@@ -13158,7 +13174,11 @@ pub struct Files {
     /**
      * An individual file listed in the File Manager.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+    )]
     pub full_size_url: Option<url::Url>,
     /**
      * An individual file listed in the File Manager.
@@ -13199,7 +13219,11 @@ pub struct Files {
     /**
      * An individual file listed in the File Manager.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+    )]
     pub thumbnail_url: Option<url::Url>,
     /**
      * An individual file listed in the File Manager.

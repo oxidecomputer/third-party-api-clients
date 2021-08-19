@@ -58,7 +58,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await
         .unwrap();
 
-    println!("{}", serde_json::to_string_pretty(&repo).unwrap());
+    println!("{:#?}", repo);
 
     // Get a repo without a license.
     let repo = github
@@ -67,7 +67,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await
         .unwrap();
 
-    println!("{}", serde_json::to_string_pretty(&repo).unwrap());
+    println!("{:#?}", repo);
 
     Ok(())
 }

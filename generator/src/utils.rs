@@ -75,7 +75,35 @@ pub mod date_time_format {
     }
 }
 
-// TODO: we should add a function for deserializing a null vector.
+pub mod deserialize_empty_url {
+    use serde::{self, Deserialize, Deserializer};
+
+    // The signature of a deserialize_with function must follow the pattern:
+    //
+    //    fn deserialize<'de, D>(D) -> Result<T, D::Error>
+    //    where
+    //        D: Deserializer<'de>
+    //
+    // although it may also be generic over the output types T.
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<Option<url::Url>, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        if let Ok(s) = String::deserialize(deserializer) {
+            if s.is_empty() {
+                return Ok(None);
+            }
+
+            match url::Url::parse(&s) {
+                Ok(u) => return Ok(Some(u)),
+                Err(e) => return Err(serde::de::Error::custom(format!("error url parsing {}: {}", s, e))),
+            }
+        }
+
+        Ok(None)
+    }
+}
+
 pub mod deserialize_null_string {
     use serde::{self, Deserialize, Deserializer};
 

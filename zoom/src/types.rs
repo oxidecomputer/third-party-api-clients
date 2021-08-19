@@ -4196,7 +4196,11 @@ pub struct MeetingLiveStream {
     /**
      * The livestream page URL.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+    )]
     pub page_url: Option<url::Url>,
     /**
      * User's first name.

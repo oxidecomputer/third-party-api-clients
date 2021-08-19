@@ -196,7 +196,11 @@ pub struct PatchUsersRequest {
 
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Page {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+    )]
     pub next: Option<url::Url>,
 }
 
@@ -1745,7 +1749,11 @@ pub struct Receipt {
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub id: Option<uuid::Uuid>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+    )]
     pub receipt_url: Option<url::Url>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub transaction_id: Option<uuid::Uuid>,
