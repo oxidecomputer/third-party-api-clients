@@ -111,7 +111,12 @@ pub struct About {
     /**
      * Information about the user, the user's Drive, and system capabilities.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "driveThemes")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "driveThemes"
+    )]
     pub drive_themes: Vec<DriveThemes>,
     /**
      * Information about the user, the user's Drive, and system capabilities.
@@ -119,6 +124,7 @@ pub struct About {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "exportFormats"
     )]
     pub export_formats: Vec<String>,
@@ -128,6 +134,7 @@ pub struct About {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "folderColorPalette"
     )]
     pub folder_color_palette: Vec<String>,
@@ -137,6 +144,7 @@ pub struct About {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "importFormats"
     )]
     pub import_formats: Vec<String>,
@@ -184,6 +192,7 @@ pub struct About {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "teamDriveThemes"
     )]
     pub team_drive_themes: Vec<DriveThemes>,
@@ -293,7 +302,11 @@ pub struct ChangeList {
     /**
      * A list of changes for a user.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub changes: Vec<Change>,
     /**
      * A list of changes for a user.
@@ -535,7 +548,11 @@ pub struct Comment {
     /**
      * A comment on a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub replies: Vec<Reply>,
     /**
      * A comment on a file.
@@ -550,7 +567,11 @@ pub struct CommentList {
     /**
      * A list of comments on a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub comments: Vec<Comment>,
     /**
      * A list of comments on a file.
@@ -958,7 +979,11 @@ pub struct DriveList {
     /**
      * A list of shared drives.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub drives: Vec<Drive>,
     /**
      * A list of shared drives.
@@ -1675,6 +1700,7 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "contentRestrictions"
     )]
     pub content_restrictions: Vec<ContentRestriction>,
@@ -1933,12 +1959,20 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub owners: Vec<User>,
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parents: Vec<String>,
     /**
      * The metadata for a file.
@@ -1946,13 +1980,18 @@ pub struct File {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "permissionIds"
     )]
     pub permission_ids: Vec<String>,
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub permissions: Vec<Permission>,
     /**
      * The metadata for a file.
@@ -2028,7 +2067,11 @@ pub struct File {
     /**
      * The metadata for a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub spaces: Vec<String>,
     /**
      * The metadata for a file.
@@ -2172,7 +2215,11 @@ pub struct FileList {
     /**
      * A list of files.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub files: Vec<File>,
     /**
      * A list of files.
@@ -2210,7 +2257,11 @@ pub struct GeneratedIds {
     /**
      * A list of generated file IDs which can be provided in create requests.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ids: Vec<String>,
     /**
      * A list of generated file IDs which can be provided in create requests.
@@ -2388,6 +2439,7 @@ pub struct Permission {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "permissionDetails"
     )]
     pub permission_details: Vec<PermissionDetails>,
@@ -2416,6 +2468,7 @@ pub struct Permission {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "teamDrivePermissionDetails"
     )]
     pub team_drive_permission_details: Vec<TeamDrivePermissionDetails>,
@@ -2465,7 +2518,11 @@ pub struct PermissionList {
     /**
      * A list of permissions for a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub permissions: Vec<Permission>,
 }
 
@@ -2575,7 +2632,11 @@ pub struct ReplyList {
     /**
      * A list of replies to a comment on a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub replies: Vec<Reply>,
 }
 
@@ -2737,7 +2798,11 @@ pub struct RevisionList {
     /**
      * A list of revisions of a file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub revisions: Vec<Revision>,
 }
 
@@ -3124,7 +3189,12 @@ pub struct TeamDriveList {
     /**
      * A list of Team Drives.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "teamDrives")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "teamDrives"
+    )]
     pub team_drives: Vec<TeamDrive>,
 }
 

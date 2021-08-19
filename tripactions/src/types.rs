@@ -402,7 +402,11 @@ pub struct Property {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BookingReportResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<BookingReport>,
     #[serde(default)]
     pub page: Page,
@@ -442,7 +446,12 @@ pub struct Page {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Cnr {
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "cnrCodes")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "cnrCodes"
+    )]
     pub cnr_codes: Vec<String>,
     #[serde(
         default,
@@ -628,6 +637,7 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<Property>,
@@ -638,7 +648,11 @@ pub struct BookingReport {
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "endDate")]
     pub end_date: Option<chrono::NaiveDate>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub etickets: Vec<String>,
     #[serde(
         default,
@@ -772,6 +786,7 @@ pub struct BookingReport {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "outOfPolicyViolationTypes"
     )]
     pub out_of_policy_violation_types: Vec<String>,
@@ -782,7 +797,11 @@ pub struct BookingReport {
         rename = "outOfPolicyViolations"
     )]
     pub out_of_policy_violations: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub passengers: Vec<Passenger>,
     #[serde(
         default,
@@ -874,7 +893,11 @@ pub struct BookingReport {
         rename = "savingMissed"
     )]
     pub saving_missed: f64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub seats: Vec<String>,
     #[serde(
         default,
@@ -883,7 +906,11 @@ pub struct BookingReport {
         rename = "seatsFee"
     )]
     pub seats_fee: f64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segments: Vec<Segment>,
     /**
      * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
@@ -958,7 +985,12 @@ pub struct BookingReport {
         rename = "tripName"
     )]
     pub trip_name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "tripUuids")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tripUuids"
+    )]
     pub trip_uuids: Vec<String>,
     #[serde(
         default,

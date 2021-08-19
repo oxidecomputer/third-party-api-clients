@@ -125,6 +125,7 @@ pub struct AddDimensionGroupResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "dimensionGroups"
     )]
     pub dimension_groups: Vec<DimensionGroup>,
@@ -261,7 +262,11 @@ pub struct AppendCellsRequest {
     /**
      * Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub rows: Vec<RowData>,
     /**
      * Adds new cells after the last row with data in a sheet, inserting new rows into the sheet if necessary.
@@ -858,6 +863,7 @@ pub struct BasicChartSeries {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "styleOverrides"
     )]
     pub style_overrides: Vec<BasicSeriesDataPointStyleOverride>,
@@ -1020,7 +1026,11 @@ pub struct BasicChartSpec {
     /**
      * The specification for a basic chart. See BasicChartType for the list of charts this supports.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub axis: Vec<BasicChartAxis>,
     /**
      * The specification for a basic chart. See BasicChartType for the list of charts this supports.
@@ -1039,7 +1049,11 @@ pub struct BasicChartSpec {
     /**
      * The specification for a basic chart. See BasicChartType for the list of charts this supports.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub domains: Vec<BasicChartDomain>,
     /**
      * The specification for a basic chart. See BasicChartType for the list of charts this supports.
@@ -1081,7 +1095,11 @@ pub struct BasicChartSpec {
     /**
      * The specification for a basic chart. See BasicChartType for the list of charts this supports.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub series: Vec<BasicChartSeries>,
     /**
      * The specification for a basic chart. See BasicChartType for the list of charts this supports.
@@ -1123,7 +1141,12 @@ pub struct BasicFilter {
     /**
      * The default filter associated with a sheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "filterSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "filterSpecs"
+    )]
     pub filter_specs: Vec<FilterSpec>,
     /**
      * The default filter associated with a sheet.
@@ -1133,7 +1156,12 @@ pub struct BasicFilter {
     /**
      * The default filter associated with a sheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "sortSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "sortSpecs"
+    )]
     pub sort_specs: Vec<SortSpec>,
 }
 
@@ -1180,7 +1208,12 @@ pub struct BatchClearValuesByDataFilterRequest {
     /**
      * The request for clearing more than one range selected by a DataFilter in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dataFilters")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dataFilters"
+    )]
     pub data_filters: Vec<DataFilter>,
 }
 
@@ -1193,6 +1226,7 @@ pub struct BatchClearValuesByDataFilterResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "clearedRanges"
     )]
     pub cleared_ranges: Vec<String>,
@@ -1214,7 +1248,11 @@ pub struct BatchClearValuesRequest {
     /**
      * The request for clearing more than one range of values in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ranges: Vec<String>,
 }
 
@@ -1227,6 +1265,7 @@ pub struct BatchClearValuesResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "clearedRanges"
     )]
     pub cleared_ranges: Vec<String>,
@@ -1327,7 +1366,12 @@ pub struct BatchGetValuesByDataFilterRequest {
     /**
      * The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dataFilters")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dataFilters"
+    )]
     pub data_filters: Vec<DataFilter>,
     /**
      * The request for retrieving a range of values in a spreadsheet selected by a set of DataFilters.
@@ -1374,7 +1418,12 @@ pub struct BatchGetValuesByDataFilterResponse {
     /**
      * The response when retrieving more than one range of values in a spreadsheet selected by DataFilters.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "valueRanges")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "valueRanges"
+    )]
     pub value_ranges: Vec<MatchedValueRange>,
 }
 
@@ -1394,7 +1443,12 @@ pub struct BatchGetValuesResponse {
     /**
      * The response when retrieving more than one range of values in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "valueRanges")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "valueRanges"
+    )]
     pub value_ranges: Vec<ValueRange>,
 }
 
@@ -1413,7 +1467,11 @@ pub struct BatchUpdateSpreadsheetRequest {
     /**
      * The request for updating any aspect of a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub requests: Vec<Request>,
     /**
      * The request for updating any aspect of a spreadsheet.
@@ -1430,6 +1488,7 @@ pub struct BatchUpdateSpreadsheetRequest {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "responseRanges"
     )]
     pub response_ranges: Vec<String>,
@@ -1441,7 +1500,11 @@ pub struct BatchUpdateSpreadsheetResponse {
     /**
      * The reply for batch updating a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub replies: Vec<Response>,
     /**
      * The reply for batch updating a spreadsheet.
@@ -1511,7 +1574,11 @@ pub struct BatchUpdateValuesByDataFilterRequest {
     /**
      * The request for updating more than one range of values in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<DataFilterValueRange>,
     /**
      * The request for updating more than one range of values in a spreadsheet.
@@ -1557,7 +1624,11 @@ pub struct BatchUpdateValuesByDataFilterResponse {
     /**
      * The response when updating a range of values in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub responses: Vec<UpdateValuesByDataFilterResponse>,
     /**
      * The response when updating a range of values in a spreadsheet.
@@ -1617,7 +1688,11 @@ pub struct BatchUpdateValuesRequest {
     /**
      * The request for updating more than one range of values in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<ValueRange>,
     /**
      * The request for updating more than one range of values in a spreadsheet.
@@ -1663,7 +1738,11 @@ pub struct BatchUpdateValuesResponse {
     /**
      * The response when updating a range of values in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub responses: Vec<UpdateValuesResponse>,
     /**
      * The response when updating a range of values in a spreadsheet.
@@ -1931,7 +2010,11 @@ pub struct BooleanCondition {
     /**
      * A condition that can evaluate to true or false. BooleanConditions are used by conditional formatting, data validation, and the criteria in filters.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub values: Vec<ConditionValue>,
 }
 
@@ -2229,7 +2312,11 @@ pub struct CandlestickChartSpec {
     /**
      * A candlestick chart.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<CandlestickData>,
     /**
      * A candlestick chart.
@@ -2394,6 +2481,7 @@ pub struct CellData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "textFormatRuns"
     )]
     pub text_format_runs: Vec<TextFormatRun>,
@@ -3088,7 +3176,11 @@ pub struct ChartSourceRange {
     /**
      * Source ranges for a chart.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sources: Vec<GridRange>,
 }
 
@@ -3211,7 +3303,12 @@ pub struct ChartSpec {
     /**
      * The specifications of a chart.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "filterSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "filterSpecs"
+    )]
     pub filter_specs: Vec<FilterSpec>,
     /**
      * The specifications of a chart.
@@ -3271,7 +3368,12 @@ pub struct ChartSpec {
     /**
      * The specifications of a chart.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "sortSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "sortSpecs"
+    )]
     pub sort_specs: Vec<SortSpec>,
     /**
      * The specifications of a chart.
@@ -3614,7 +3716,11 @@ pub struct ConditionalFormatRule {
     /**
      * A rule describing a conditional format.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ranges: Vec<GridRange>,
 }
 
@@ -4022,7 +4128,11 @@ pub struct DataFilterValueRange {
     /**
      * A range of values whose location is specified by a DataFilter.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub values: Vec<Vec<String>>,
 }
 
@@ -4171,6 +4281,7 @@ pub struct DataSource {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "calculatedColumns"
     )]
     pub calculated_columns: Vec<DataSourceColumn>,
@@ -4340,7 +4451,11 @@ pub struct DataSourceObjectReferences {
     /**
      * A list of references to data source objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub references: Vec<DataSourceObjectReference>,
 }
 
@@ -4389,7 +4504,12 @@ pub struct DataSourceRefreshMonthlySchedule {
     /**
      * A monthly schedule for data to refresh on specific days in the month in a given time interval.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "daysOfMonth")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "daysOfMonth"
+    )]
     pub days_of_month: Vec<i64>,
     /**
      * A monthly schedule for data to refresh on specific days in the month in a given time interval.
@@ -4551,7 +4671,12 @@ pub struct DataSourceRefreshWeeklySchedule {
     /**
      * A weekly schedule for data to refresh on specific days in a given time interval.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "daysOfWeek")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "daysOfWeek"
+    )]
     pub days_of_week: Vec<DaysOfWeek>,
     /**
      * A weekly schedule for data to refresh on specific days in a given time interval.
@@ -4569,6 +4694,7 @@ pub struct DataSourceSheetDimensionRange {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "columnReferences"
     )]
     pub column_references: Vec<DataSourceColumnReference>,
@@ -4590,7 +4716,11 @@ pub struct DataSourceSheetProperties {
     /**
      * Additional properties of a DATA_SOURCE sheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub columns: Vec<DataSourceColumn>,
     /**
      * Additional properties of a DATA_SOURCE sheet.
@@ -4624,7 +4754,11 @@ pub struct DataSourceSpec {
     /**
      * This specifies the details of the data source. For example, for BigQuery, this specifies information about the BigQuery source.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parameters: Vec<DataSourceParameter>,
 }
 
@@ -4686,7 +4820,11 @@ pub struct DataSourceTable {
     /**
      * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub columns: Vec<DataSourceColumnReference>,
     /**
      * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
@@ -4710,7 +4848,12 @@ pub struct DataSourceTable {
     /**
      * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "filterSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "filterSpecs"
+    )]
     pub filter_specs: Vec<FilterSpec>,
     /**
      * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
@@ -4725,7 +4868,12 @@ pub struct DataSourceTable {
     /**
      * A data source table, which allows the user to import a static table of data from the DataSource into Sheets. This is also known as "Extract" in the Sheets editor.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "sortSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "sortSpecs"
+    )]
     pub sort_specs: Vec<SortSpec>,
 }
 
@@ -4943,6 +5091,7 @@ pub struct DeleteDeveloperMetadataResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "deletedDeveloperMetadata"
     )]
     pub deleted_developer_metadata: Vec<DeveloperMetadata>,
@@ -4967,6 +5116,7 @@ pub struct DeleteDimensionGroupResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "dimensionGroups"
     )]
     pub dimension_groups: Vec<DimensionGroup>,
@@ -4991,6 +5141,7 @@ pub struct DeleteDuplicatesRequest {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "comparisonColumns"
     )]
     pub comparison_columns: Vec<DimensionRange>,
@@ -5443,6 +5594,7 @@ pub struct DimensionProperties {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "developerMetadata"
     )]
     pub developer_metadata: Vec<DeveloperMetadata>,
@@ -5611,12 +5763,20 @@ pub struct Editors {
     /**
      * The editors of a protected range.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<String>,
     /**
      * The editors of a protected range.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<String>,
 }
 
@@ -5850,6 +6010,7 @@ pub struct FilterCriteria {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "hiddenValues"
     )]
     pub hidden_values: Vec<String>,
@@ -5935,7 +6096,12 @@ pub struct FilterView {
     /**
      * A filter view.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "filterSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "filterSpecs"
+    )]
     pub filter_specs: Vec<FilterSpec>,
     /**
      * A filter view.
@@ -5965,7 +6131,12 @@ pub struct FilterView {
     /**
      * A filter view.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "sortSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "sortSpecs"
+    )]
     pub sort_specs: Vec<SortSpec>,
     /**
      * A filter view.
@@ -6114,7 +6285,12 @@ pub struct GetSpreadsheetByDataFilterRequest {
     /**
      * The request for retrieving a Spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dataFilters")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dataFilters"
+    )]
     pub data_filters: Vec<DataFilter>,
     /**
      * The request for retrieving a Spreadsheet.
@@ -6191,18 +6367,29 @@ pub struct GridData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "columnMetadata"
     )]
     pub column_metadata: Vec<DimensionProperties>,
     /**
      * Data in the grid, as well as metadata about the dimensions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "rowData")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "rowData"
+    )]
     pub row_data: Vec<RowData>,
     /**
      * Data in the grid, as well as metadata about the dimensions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "rowMetadata")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "rowMetadata"
+    )]
     pub row_metadata: Vec<DimensionProperties>,
     /**
      * Data in the grid, as well as metadata about the dimensions.
@@ -6443,7 +6630,11 @@ pub struct HistogramChartSpec {
     /**
      * A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub series: Vec<HistogramSeries>,
     /**
      * A histogram chart. A histogram chart groups data items into bins, displaying each bin as a column of stacked items. Histograms are used to display the distribution of a dataset. Each column of items represents a range into which those items fall. The number of bins can be chosen automatically or specified explicitly.
@@ -6802,7 +6993,11 @@ pub struct ManualRule {
     /**
      * Allows you to manually organize the values in a source data column into buckets with names of your choosing. For example, a pivot table that aggregates population by state: +-------+-------------------+ | State | SUM of Population | +-------+-------------------+ | AK | 0.7 | | AL | 4.8 | | AR | 2.9 | ... +-------+-------------------+ could be turned into a pivot table that aggregates population by time zone by providing a list of groups (for example, groupName = 'Central', items = ['AL', 'AR', 'IA', ...]) to a manual group rule. Note that a similar effect could be achieved by adding a time zone column to the source data and adjusting the pivot table. +-----------+-------------------+ | Time Zone | SUM of Population | +-----------+-------------------+ | Central | 106.3 | | Eastern | 151.9 | | Mountain | 17.4 | ... +-----------+-------------------+
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<ManualRuleGroup>,
 }
 
@@ -6817,7 +7012,11 @@ pub struct ManualRuleGroup {
     /**
      * A group name and a list of items from the source data that should be placed in the group with this name.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<ExtendedValue>,
 }
 
@@ -6827,7 +7026,12 @@ pub struct MatchedDeveloperMetadata {
     /**
      * A developer metadata entry and the data filters specified in the original request that matched it.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dataFilters")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dataFilters"
+    )]
     pub data_filters: Vec<DataFilter>,
     /**
      * A developer metadata entry and the data filters specified in the original request that matched it.
@@ -6846,7 +7050,12 @@ pub struct MatchedValueRange {
     /**
      * A value range that was matched by one or more data filers.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dataFilters")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dataFilters"
+    )]
     pub data_filters: Vec<DataFilter>,
     /**
      * A value range that was matched by one or more data filers.
@@ -7401,6 +7610,7 @@ pub struct PivotFilterCriteria {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "visibleValues"
     )]
     pub visible_values: Vec<String>,
@@ -7563,6 +7773,7 @@ pub struct PivotGroup {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "valueMetadata"
     )]
     pub value_metadata: Vec<PivotGroupValueMetadata>,
@@ -7631,7 +7842,11 @@ pub struct PivotGroupSortValueBucket {
     /**
      * Information about which values in a pivot group should be used for sorting.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub buckets: Vec<ExtendedValue>,
     /**
      * Information about which values in a pivot group should be used for sorting.
@@ -7707,7 +7922,11 @@ pub struct PivotTable {
     /**
      * A pivot table.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub columns: Vec<PivotGroup>,
     /**
      * A pivot table.
@@ -7736,12 +7955,21 @@ pub struct PivotTable {
     /**
      * A pivot table.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "filterSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "filterSpecs"
+    )]
     pub filter_specs: Vec<PivotFilterSpec>,
     /**
      * A pivot table.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub rows: Vec<PivotGroup>,
     /**
      * A pivot table.
@@ -7760,7 +7988,11 @@ pub struct PivotTable {
     /**
      * A pivot table.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub values: Vec<PivotValue>,
 }
 
@@ -8084,6 +8316,7 @@ pub struct ProtectedRange {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "unprotectedRanges"
     )]
     pub unprotected_ranges: Vec<GridRange>,
@@ -8163,7 +8396,11 @@ pub struct RefreshDataSourceResponse {
     /**
      * The response from refreshing one or multiple data source objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub statuses: Vec<RefreshDataSourceObjectExecutionStatus>,
 }
 
@@ -8955,7 +9192,11 @@ pub struct RowData {
     /**
      * Data about each cell in a row.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub values: Vec<CellData>,
 }
 
@@ -9086,7 +9327,12 @@ pub struct SearchDeveloperMetadataRequest {
     /**
      * A request to retrieve all developer metadata matching the set of specified criteria.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dataFilters")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dataFilters"
+    )]
     pub data_filters: Vec<DataFilter>,
 }
 
@@ -9099,6 +9345,7 @@ pub struct SearchDeveloperMetadataResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "matchedDeveloperMetadata"
     )]
     pub matched_developer_metadata: Vec<MatchedDeveloperMetadata>,
@@ -9138,6 +9385,7 @@ pub struct Sheet {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bandedRanges"
     )]
     pub banded_ranges: Vec<BandedRange>,
@@ -9153,7 +9401,11 @@ pub struct Sheet {
     /**
      * A sheet in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub charts: Vec<EmbeddedChart>,
     /**
      * A sheet in a spreadsheet.
@@ -9161,6 +9413,7 @@ pub struct Sheet {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "columnGroups"
     )]
     pub column_groups: Vec<DimensionGroup>,
@@ -9170,13 +9423,18 @@ pub struct Sheet {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "conditionalFormats"
     )]
     pub conditional_formats: Vec<ConditionalFormatRule>,
     /**
      * A sheet in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<GridData>,
     /**
      * A sheet in a spreadsheet.
@@ -9184,18 +9442,28 @@ pub struct Sheet {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "developerMetadata"
     )]
     pub developer_metadata: Vec<DeveloperMetadata>,
     /**
      * A sheet in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "filterViews")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "filterViews"
+    )]
     pub filter_views: Vec<FilterView>,
     /**
      * A sheet in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub merges: Vec<GridRange>,
     /**
      * A sheet in a spreadsheet.
@@ -9208,18 +9476,28 @@ pub struct Sheet {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "protectedRanges"
     )]
     pub protected_ranges: Vec<ProtectedRange>,
     /**
      * A sheet in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "rowGroups")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "rowGroups"
+    )]
     pub row_groups: Vec<DimensionGroup>,
     /**
      * A sheet in a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub slicers: Vec<Slicer>,
 }
 
@@ -9473,7 +9751,12 @@ pub struct SortRangeRequest {
     /**
      * Sorts data in rows based on a sort order per column.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "sortSpecs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "sortSpecs"
+    )]
     pub sort_specs: Vec<SortSpec>,
 }
 
@@ -9576,13 +9859,19 @@ pub struct Spreadsheet {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "dataSourceSchedules"
     )]
     pub data_source_schedules: Vec<DataSourceRefreshSchedule>,
     /**
      * Resource that represents a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dataSources")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dataSources"
+    )]
     pub data_sources: Vec<DataSource>,
     /**
      * Resource that represents a spreadsheet.
@@ -9590,13 +9879,19 @@ pub struct Spreadsheet {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "developerMetadata"
     )]
     pub developer_metadata: Vec<DeveloperMetadata>,
     /**
      * Resource that represents a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "namedRanges")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "namedRanges"
+    )]
     pub named_ranges: Vec<NamedRange>,
     /**
      * Resource that represents a spreadsheet.
@@ -9606,7 +9901,11 @@ pub struct Spreadsheet {
     /**
      * Resource that represents a spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sheets: Vec<Sheet>,
     /**
      * Resource that represents a spreadsheet.
@@ -9759,7 +10058,12 @@ pub struct SpreadsheetTheme {
     /**
      * Represents spreadsheet theme
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "themeColors")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "themeColors"
+    )]
     pub theme_colors: Vec<ThemeColorPair>,
 }
 
@@ -10352,7 +10656,11 @@ pub struct UpdateCellsRequest {
     /**
      * Updates all cells in a range with new data.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub rows: Vec<RowData>,
     /**
      * Updates all cells in a range with new data.
@@ -10507,7 +10815,12 @@ pub struct UpdateDeveloperMetadataRequest {
     /**
      * A request to update properties of developer metadata. Updates the properties of the developer metadata selected by the filters to the values provided in the DeveloperMetadata resource. Callers must specify the properties they wish to update in the fields parameter, as well as specify at least one DataFilter matching the metadata they wish to update.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dataFilters")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dataFilters"
+    )]
     pub data_filters: Vec<DataFilter>,
     /**
      * A request to update properties of developer metadata. Updates the properties of the developer metadata selected by the filters to the values provided in the DeveloperMetadata resource. Callers must specify the properties they wish to update in the fields parameter, as well as specify at least one DataFilter matching the metadata they wish to update.
@@ -10538,6 +10851,7 @@ pub struct UpdateDeveloperMetadataResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "developerMetadata"
     )]
     pub developer_metadata: Vec<DeveloperMetadata>,
@@ -10954,7 +11268,11 @@ pub struct ValueRange {
     /**
      * Data within a range of the spreadsheet.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub values: Vec<Vec<String>>,
 }
 
@@ -11046,6 +11364,7 @@ pub struct WaterfallChartSeries {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customSubtotals"
     )]
     pub custom_subtotals: Vec<WaterfallChartCustomSubtotal>,
@@ -11178,7 +11497,11 @@ pub struct WaterfallChartSpec {
     /**
      * A waterfall chart.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub series: Vec<WaterfallChartSeries>,
     /**
      * A waterfall chart.

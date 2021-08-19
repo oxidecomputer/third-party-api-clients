@@ -198,7 +198,11 @@ pub struct GitHubApp {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     #[serde(
         default,
@@ -313,7 +317,11 @@ pub struct ValidationErrorSimple {
     /**
      * Validation Error Simple
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<String>,
     #[serde(
         default,
@@ -498,7 +506,11 @@ pub struct ScimError {
     /**
      * Scim Error
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
     #[serde(
         default,
@@ -643,7 +655,11 @@ pub struct ValidationError {
     /**
      * Validation Error
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<Errors>,
     #[serde(
         default,
@@ -1227,7 +1243,11 @@ pub struct Installation {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     /**
      * Installation
@@ -1274,7 +1294,11 @@ pub struct Installation {
     /**
      * Installation
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub single_file_paths: Vec<String>,
     #[serde(
         default,
@@ -1934,7 +1958,11 @@ pub struct TemplateRepository {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub temp_clone_token: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub topics: Vec<String>,
     #[serde(
         default,
@@ -2461,7 +2489,11 @@ pub struct Repository {
     /**
      * A git repository
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub topics: Vec<String>,
     #[serde(
         default,
@@ -2526,7 +2558,11 @@ pub struct InstallationToken {
     /**
      * Authentication token for a GitHub App installed on a user or org.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<Repository>,
     /**
      * Authentication token for a GitHub App installed on a user or org.
@@ -2542,7 +2578,11 @@ pub struct InstallationToken {
     /**
      * Authentication token for a GitHub App installed on a user or org.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub single_file_paths: Vec<String>,
     #[serde(
         default,
@@ -2594,7 +2634,11 @@ pub struct ApplicationGrant {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
     #[serde(
         default,
@@ -2646,7 +2690,11 @@ pub struct ScopedInstallation {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub single_file_name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub single_file_paths: Vec<String>,
 }
 
@@ -2696,7 +2744,11 @@ pub struct Authorization {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
     #[serde(
         default,
@@ -2956,7 +3008,11 @@ pub struct SelectedActions {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub patterns_allowed: Vec<String>,
     #[serde(
         default,
@@ -3082,7 +3138,11 @@ pub struct Runner {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<Labels>,
     #[serde(
         default,
@@ -3163,7 +3223,11 @@ pub struct AuthenticationToken {
     /**
      * Authentication Token
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<Repository>,
     /**
      * Authentication Token
@@ -3255,12 +3319,20 @@ pub struct AuditLogEvent {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub config: Vec<String>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub config_was: Vec<String>,
     #[serde(
         default,
@@ -3291,12 +3363,20 @@ pub struct AuditLogEvent {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events_were: Vec<String>,
     #[serde(
         default,
@@ -3830,7 +3910,11 @@ pub struct IssueSimple {
     pub active_lock_reason: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<SimpleUser>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
@@ -3897,7 +3981,11 @@ pub struct IssueSimple {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<Label>,
     #[serde(
         default,
@@ -4201,7 +4289,11 @@ pub struct Payload {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub issue: Option<IssueSimple>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pages: Vec<EventPayloadPages>,
 }
 
@@ -4283,7 +4375,11 @@ pub struct Links {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_user_organization: Option<LinkWithType>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub current_user_organizations: Vec<LinkWithType>,
     /**
      * Hypermedia Link with Type
@@ -4327,7 +4423,11 @@ pub struct Feed {
     /**
      * Feed
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub current_user_organization_urls: Vec<String>,
     #[serde(
         default,
@@ -4434,7 +4534,11 @@ pub struct BaseGist {
     /**
      * Base Gist
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub forks: Vec<String>,
     #[serde(
         default,
@@ -4457,7 +4561,11 @@ pub struct BaseGist {
     /**
      * Base Gist
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub history: Vec<String>,
     #[serde(
         default,
@@ -4920,7 +5028,11 @@ pub struct Gist {
     /**
      * Gist
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub forks: Vec<String>,
     #[serde(
         default,
@@ -4943,7 +5055,11 @@ pub struct Gist {
     /**
      * Gist
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub history: Vec<String>,
     #[serde(
         default,
@@ -5083,7 +5199,11 @@ pub struct GistSimple {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub fork_of: Option<Gist>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub forks: Vec<Forks>,
     #[serde(
         default,
@@ -5103,7 +5223,11 @@ pub struct GistSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub git_push_url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub history: Vec<GistHistory>,
     #[serde(
         default,
@@ -5353,7 +5477,11 @@ pub struct Issue {
     pub active_lock_reason: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<SimpleUser>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
@@ -5425,7 +5553,11 @@ pub struct Issue {
     /**
      * Labels to associate with this issue; pass one or more label names to replace the set of labels on this issue; send an empty array to clear all labels from the issue; note that the labels are silently dropped for users without push access to the repository
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<LabelsOneOf>,
     #[serde(
         default,
@@ -5521,7 +5653,11 @@ pub struct LicenseData {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<String>,
     #[serde(
         default,
@@ -5555,7 +5691,11 @@ pub struct LicenseData {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub limitations: Vec<String>,
     #[serde(
         default,
@@ -5572,7 +5712,11 @@ pub struct LicenseData {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub permissions: Vec<String>,
     #[serde(
         default,
@@ -5600,7 +5744,11 @@ pub struct MarketplaceListingPlan {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub bullets: Vec<String>,
     #[serde(
         default,
@@ -5809,42 +5957,74 @@ pub struct ApiOverview {
     /**
      * Api Overview
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub actions: Vec<String>,
     /**
      * Api Overview
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub api: Vec<String>,
     /**
      * Api Overview
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub dependabot: Vec<String>,
     /**
      * Api Overview
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub git: Vec<String>,
     /**
      * Api Overview
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub hooks: Vec<String>,
     /**
      * Api Overview
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub importer: Vec<String>,
     /**
      * Api Overview
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub packages: Vec<String>,
     /**
      * Api Overview
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pages: Vec<String>,
     /**
      * Api Overview
@@ -5859,7 +6039,11 @@ pub struct ApiOverview {
     /**
      * Api Overview
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub web: Vec<String>,
 }
 
@@ -6426,7 +6610,11 @@ pub struct MinimalRepository {
     /**
      * Minimal Repository
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub topics: Vec<String>,
     #[serde(
         default,
@@ -7213,7 +7401,11 @@ pub struct CredentialAuthorization {
     /**
      * Credential Authorization
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
     #[serde(
         default,
@@ -7346,7 +7538,11 @@ pub struct OrgHook {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     #[serde(
         default,
@@ -7841,7 +8037,11 @@ pub struct Migration {
     /**
      * A migration.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub exclude: Vec<String>,
     #[serde(
         default,
@@ -7873,7 +8073,11 @@ pub struct Migration {
     pub node_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub owner: Option<SimpleUser>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<Repository>,
     #[serde(
         default,
@@ -8037,13 +8241,21 @@ pub struct Container {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tags: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Docker {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tag: Vec<String>,
 }
 
@@ -8306,7 +8518,11 @@ pub struct GroupMapping {
     /**
      * External Groups to be mapped to a team for membership
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<Groups>,
 }
 
@@ -9378,7 +9594,11 @@ pub struct TeamRepository {
     /**
      * A team's access to a repository.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub topics: Vec<String>,
     #[serde(
         default,
@@ -10224,7 +10444,11 @@ pub struct FullRepository {
     /**
      * Full Repository
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub topics: Vec<String>,
     #[serde(
         default,
@@ -10485,7 +10709,11 @@ pub struct Job {
     /**
      * Information of a job execution in a workflow run
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub steps: Vec<Steps>,
     #[serde(
         default,
@@ -10727,7 +10955,11 @@ pub struct WorkflowRun {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pull_requests: Vec<PullRequestMinimal>,
     /**
      * Minimal Repository
@@ -10874,7 +11106,11 @@ pub struct EnvironmentApproval {
     /**
      * The list of environments that were approved or rejected
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub environments: Vec<Environments>,
     /**
      * Whether deployment to the environment(s) was approved or rejected
@@ -11002,7 +11238,11 @@ pub struct PendingDeployment {
     /**
      * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reviewers: Vec<Reviewers>,
     #[serde(
         default,
@@ -11414,7 +11654,11 @@ pub struct DismissalRestrictions {
     /**
      * The list of teams with review dismissal access.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub teams: Vec<Team>,
     #[serde(
         default,
@@ -11428,7 +11672,11 @@ pub struct DismissalRestrictions {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<SimpleUser>,
     #[serde(
         default,
@@ -11736,7 +11984,11 @@ pub struct Apps {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     #[serde(
         default,
@@ -11789,7 +12041,11 @@ pub struct Apps {
 /// Branch Restriction Policy
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BranchRestrictionPolicy {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub apps: Vec<Apps>,
     #[serde(
         default,
@@ -11797,7 +12053,11 @@ pub struct BranchRestrictionPolicy {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub apps_url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub teams: Vec<Teams>,
     #[serde(
         default,
@@ -11811,7 +12071,11 @@ pub struct BranchRestrictionPolicy {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<Users>,
     #[serde(
         default,
@@ -11826,7 +12090,11 @@ pub struct RequiredStatusChecks {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contexts: Vec<String>,
     #[serde(
         default,
@@ -12172,7 +12440,11 @@ pub struct CommitDataType {
     /**
      * Commit
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub files: Vec<CommitFiles>,
     #[serde(
         default,
@@ -12186,7 +12458,11 @@ pub struct CommitDataType {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parents: Vec<Parents>,
     #[serde(
         default,
@@ -12279,7 +12555,11 @@ pub struct StatusCheckPolicy {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contexts: Vec<String>,
     #[serde(
         default,
@@ -12305,7 +12585,11 @@ pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
     /**
      * The list of teams with review dismissal access.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub teams: Vec<Team>,
     #[serde(
         default,
@@ -12319,7 +12603,11 @@ pub struct ProtectedBranchRequiredPullRequestReviewsDismissalRestrictions {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<SimpleUser>,
     #[serde(
         default,
@@ -12670,7 +12958,11 @@ pub struct CheckRun {
     pub node_id: String,
     #[serde()]
     pub output: Output,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pull_requests: Vec<PullRequestMinimal>,
     #[serde(
         default,
@@ -12822,7 +13114,11 @@ pub struct CheckSuiteData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pull_requests: Vec<PullRequestMinimal>,
     /**
      * Minimal Repository
@@ -12865,7 +13161,11 @@ pub struct AutoTriggerChecks {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Preferences {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub auto_trigger_checks: Vec<AutoTriggerChecks>,
 }
 
@@ -13172,7 +13472,11 @@ pub struct CodeScanningAlertInstance {
      * Classifications that have been applied to the file that triggered the alert.
      *  For example identifying it as documentation, or a generated file.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub classifications: Vec<CodeScanningAlertClassification>,
     #[serde(
         default,
@@ -13363,7 +13667,11 @@ pub struct CodeScanningAlertRule {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tags: Vec<String>,
 }
 
@@ -14184,7 +14492,11 @@ pub struct PullRequestSimple {
     pub active_lock_reason: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<SimpleUser>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
@@ -14262,7 +14574,11 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub issue_url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<LabelsData>,
     #[serde(
         default,
@@ -14301,12 +14617,20 @@ pub struct PullRequestSimple {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub patch_url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub requested_reviewers: Vec<SimpleUser>,
     /**
      * Pull Request Simple
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub requested_teams: Vec<Team>,
     #[serde(
         default,
@@ -14449,7 +14773,11 @@ pub struct CombinedCommitStatus {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub state: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub statuses: Vec<SimpleCommitStatus>,
     #[serde(
         default,
@@ -14743,7 +15071,11 @@ pub struct CommitComparison {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub behind_by: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub commits: Vec<CommitDataType>,
     #[serde(
         default,
@@ -14754,7 +15086,11 @@ pub struct CommitComparison {
     /**
      * Commit Comparison
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub files: Vec<DiffEntry>,
     #[serde(
         default,
@@ -14928,7 +15264,11 @@ pub struct ContentTree {
     /**
      * Content Tree
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub entries: Vec<Entries>,
     #[serde(
         default,
@@ -15315,7 +15655,11 @@ pub struct FileCommit {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parents: Vec<Parents>,
     #[serde(
         default,
@@ -15681,7 +16025,11 @@ pub struct ProtectionRulesData {
     /**
      * The people or teams that may approve jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reviewers: Vec<Reviewers>,
     #[serde(
         default,
@@ -15771,7 +16119,11 @@ pub struct EnvironmentData {
     /**
      * Details of a deployment environment
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub protection_rules: Vec<ProtectionRulesAnyOf>,
     #[serde(
         default,
@@ -15888,7 +16240,11 @@ pub struct GitCommit {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parents: Vec<Parents>,
     #[serde(
         default,
@@ -16054,7 +16410,11 @@ pub struct GitTreeData {
     /**
      * Objects specifying a tree structure
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tree: Vec<GitTree>,
     #[serde(
         default,
@@ -16176,7 +16536,11 @@ pub struct Hook {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     #[serde(
         default,
@@ -16413,7 +16777,11 @@ pub struct Import {
     /**
      * A repository import from an external source.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub project_choices: Vec<ProjectChoices>,
     /**
      * A repository import from an external source.
@@ -17802,7 +18170,11 @@ pub struct TimelineCommittedEvent {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parents: Vec<Parents>,
     #[serde(
         default,
@@ -18156,7 +18528,11 @@ pub struct TimelineLineCommentedEvent {
     /**
      * Timeline Line Commented Event
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub comments: Vec<PullRequestReviewComment>,
     #[serde(
         default,
@@ -18178,7 +18554,11 @@ pub struct TimelineCommitCommentedEvent {
     /**
      * Timeline Commit Commented Event
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub comments: Vec<CommitComment>,
     #[serde(
         default,
@@ -18475,7 +18855,11 @@ pub struct PagesHttpsCertificate {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub domains: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub expires_at: Option<chrono::NaiveDate>,
@@ -19489,7 +19873,11 @@ pub struct PullRequestHeadRepo {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub temp_clone_token: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub topics: Vec<String>,
     #[serde(
         default,
@@ -19975,7 +20363,11 @@ pub struct PullRequestBaseRepo {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub topics: Vec<String>,
     #[serde(
         default,
@@ -20055,7 +20447,11 @@ pub struct PullRequestData {
     pub additions: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<SimpleUser>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
@@ -20157,7 +20553,11 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub issue_url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<LabelsData>,
     #[serde(
         default,
@@ -20227,9 +20627,17 @@ pub struct PullRequestData {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub rebaseable: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub requested_reviewers: Vec<SimpleUser>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub requested_teams: Vec<TeamSimple>,
     #[serde(
         default,
@@ -20310,9 +20718,17 @@ pub struct PullRequestReview {
     /**
      * The list of teams with review dismissal access.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub teams: Vec<Team>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<SimpleUser>,
 }
 
@@ -20707,7 +21123,11 @@ pub struct ReleaseAsset {
 /// A release.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Release {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assets: Vec<ReleaseAsset>,
     #[serde(
         default,
@@ -21004,7 +21424,11 @@ pub struct CommitActivity {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub days: Vec<i64>,
     #[serde(
         default,
@@ -21059,7 +21483,11 @@ pub struct ContributorActivity {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub weeks: Vec<Weeks>,
 }
 
@@ -21068,12 +21496,20 @@ pub struct ParticipationStats {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub all: Vec<i64>,
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub owner: Vec<i64>,
 }
 
@@ -21153,7 +21589,11 @@ pub struct Topic {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub names: Vec<String>,
 }
 
@@ -21182,7 +21622,11 @@ pub struct Traffic {
 /// Clone Traffic
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CloneTraffic {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub clones: Vec<Traffic>,
     #[serde(
         default,
@@ -21265,7 +21709,11 @@ pub struct ViewTraffic {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub uniques: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub views: Vec<Traffic>,
 }
 
@@ -21344,20 +21792,33 @@ pub struct ScimEnterpriseGroup {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<Members>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub meta: Option<Meta>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScimGroupListEnterprise {
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Resources")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "Resources"
+    )]
     pub resources: Vec<ScimEnterpriseGroup>,
     #[serde(
         default,
@@ -21369,7 +21830,11 @@ pub struct ScimGroupListEnterprise {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
     #[serde(
         default,
@@ -21444,7 +21909,11 @@ pub struct ScimEnterpriseUser {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub active: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<Emails>,
     #[serde(
         default,
@@ -21453,7 +21922,11 @@ pub struct ScimEnterpriseUser {
         rename = "externalId"
     )]
     pub external_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<ScimUserListEnterpriseResourcesGroups>,
     #[serde(
         default,
@@ -21468,7 +21941,11 @@ pub struct ScimEnterpriseUser {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
     #[serde(
         default,
@@ -21481,7 +21958,12 @@ pub struct ScimEnterpriseUser {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScimUserListEnterprise {
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Resources")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "Resources"
+    )]
     pub resources: Vec<ScimEnterpriseUser>,
     #[serde(
         default,
@@ -21493,7 +21975,11 @@ pub struct ScimUserListEnterprise {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
     #[serde(
         default,
@@ -21715,7 +22201,11 @@ pub struct ScimUser {
     /**
      * user emails
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<ScimUserEmails>,
     #[serde(
         default,
@@ -21727,7 +22217,11 @@ pub struct ScimUser {
     /**
      * SCIM /Users provisioning endpoints
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<String>,
     #[serde(
         default,
@@ -21742,7 +22236,11 @@ pub struct ScimUser {
     /**
      * SCIM /Users provisioning endpoints
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub operations: Vec<Operations>,
     /**
      * SCIM /Users provisioning endpoints
@@ -21756,7 +22254,11 @@ pub struct ScimUser {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
     #[serde(
         default,
@@ -21770,7 +22272,12 @@ pub struct ScimUser {
 /// SCIM User List
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ScimUserList {
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Resources")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "Resources"
+    )]
     pub resources: Vec<ScimUser>,
     #[serde(
         default,
@@ -21782,7 +22289,11 @@ pub struct ScimUserList {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
     #[serde(
         default,
@@ -21805,7 +22316,11 @@ pub struct Matches {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub indices: Vec<i64>,
     #[serde(
         default,
@@ -21823,7 +22338,11 @@ pub struct SearchResultTextMatches {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub fragment: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub matches: Vec<Matches>,
     #[serde(
         default,
@@ -21887,7 +22406,11 @@ pub struct CodeSearchResultItem {
     /**
      * Code Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub line_numbers: Vec<String>,
     #[serde(
         default,
@@ -21921,7 +22444,11 @@ pub struct CodeSearchResultItem {
     /**
      * Code Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
@@ -21991,7 +22518,11 @@ pub struct CommitSearchResultItemData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub node_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parents: Vec<Parents>,
     /**
      * Minimal Repository
@@ -22013,7 +22544,11 @@ pub struct CommitSearchResultItemData {
     /**
      * Commit Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
@@ -22034,7 +22569,11 @@ pub struct IssueSearchResultItem {
     pub active_lock_reason: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub assignee: Option<SimpleUser>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assignees: Vec<SimpleUser>,
     /**
      * How the author is associated with the repository.
@@ -22109,7 +22648,11 @@ pub struct IssueSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub id: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<LabelsData>,
     #[serde(
         default,
@@ -22169,7 +22712,11 @@ pub struct IssueSearchResultItem {
     /**
      * Issue Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
@@ -22246,7 +22793,11 @@ pub struct LabelSearchResultItem {
     /**
      * Label Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
@@ -22716,12 +23267,20 @@ pub struct RepoSearchResultItem {
     /**
      * Repo Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub text_matches: Vec<SearchResultTextMatches>,
     /**
      * Repo Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub topics: Vec<String>,
     #[serde(
         default,
@@ -22792,7 +23351,11 @@ pub struct Related {
 /// Topic Search Result Item
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TopicSearchResultItem {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub aliases: Vec<Related>,
     #[serde(
         default,
@@ -22840,7 +23403,11 @@ pub struct TopicSearchResultItem {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub related: Vec<Related>,
     #[serde(
         default,
@@ -22872,7 +23439,11 @@ pub struct TopicSearchResultItem {
     /**
      * Topic Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
@@ -23087,7 +23658,11 @@ pub struct UserSearchResultItem {
     /**
      * User Search Result Item
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub text_matches: Vec<SearchResultTextMatches>,
     #[serde(
         default,
@@ -23445,7 +24020,11 @@ pub struct Subkeys {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<String>,
     #[serde(
         default,
@@ -23486,7 +24065,11 @@ pub struct Subkeys {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subkeys: Vec<String>,
 }
 
@@ -23519,7 +24102,11 @@ pub struct GpgKey {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<GpgKeyEmails>,
     #[serde(
         default,
@@ -23557,7 +24144,11 @@ pub struct GpgKey {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub raw_key: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subkeys: Vec<Subkeys>,
 }
 
@@ -23735,7 +24326,11 @@ pub struct Contexts {
 /// Hovercard
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Hovercard {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contexts: Vec<Contexts>,
 }
 
@@ -24384,12 +24979,20 @@ pub struct AppsCreateInstallationAccessTokenRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<String>,
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repository_ids: Vec<i64>,
 }
 
@@ -24419,12 +25022,20 @@ pub struct AppsScopeTokenRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<String>,
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repository_ids: Vec<i64>,
     #[serde(
         default,
@@ -24475,7 +25086,11 @@ pub struct OauthAuthorizationsCreateAuthorizationRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -24508,7 +25123,11 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -24535,7 +25154,11 @@ pub struct OauthAuthorizationsGetCreateAuthorizationAppFingerprintRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -24544,7 +25167,11 @@ pub struct OauthAuthorizationsUpdateAuthorizationRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub add_scopes: Vec<String>,
     #[serde(
         default,
@@ -24567,12 +25194,20 @@ pub struct OauthAuthorizationsUpdateAuthorizationRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub remove_scopes: Vec<String>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -24592,7 +25227,11 @@ pub struct EnterpriseAdminSetGithubActionsPermissionsRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminListOrgAccessSelfHostedRunnerGroupInResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub organizations: Vec<OrganizationSimple>,
     #[serde(
         default,
@@ -24607,13 +25246,21 @@ pub struct EnterpriseAdminSetOrgAccessSelfHostedRunnerGroupInRequest {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selected_organization_ids: Vec<i64>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminListSelfHostedRunnerGroupsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub runner_groups: Vec<RunnerGroupsEnterprise>,
     #[serde(
         default,
@@ -24634,12 +25281,20 @@ pub struct EnterpriseAdminCreateSelfHostedRunnerGroupRequest {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub runners: Vec<i64>,
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selected_organization_ids: Vec<i64>,
     /**
      * Describe whether all repositories have been selected or there's a selection involved
@@ -24665,7 +25320,11 @@ pub struct EnterpriseAdminUpdateSelfHostedRunnerGroupRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelfHostedRunnersInGroupOrgResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub runners: Vec<Runner>,
     #[serde(
         default,
@@ -24680,13 +25339,21 @@ pub struct ActionsSetSelfHostedRunnersInGroupOrgRequest {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub runners: Vec<i64>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnterpriseAdminListSelfHostedRunnersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub runners: Vec<Runner>,
     #[serde(
         default,
@@ -24833,7 +25500,11 @@ pub struct PullsUpdateReviewRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppsListInstallationReposResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<Repository>,
     #[serde(
         default,
@@ -25211,7 +25882,11 @@ pub struct ActionsSetGithubPermissionsOrganizationRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelectedRepositoriesEnabledGithubOrganizationResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<Repository>,
     #[serde(
         default,
@@ -25226,13 +25901,21 @@ pub struct ActionsSetRepoAccessSelfHostedRunnerGroupInOrgRequest {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selected_repository_ids: Vec<i64>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelfHostedRunnerGroupsOrgResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub runner_groups: Vec<RunnerGroupsOrg>,
     #[serde(
         default,
@@ -25253,12 +25936,20 @@ pub struct ActionsCreateSelfHostedRunnerGroupOrgRequest {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub runners: Vec<i64>,
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selected_repository_ids: Vec<i64>,
     /**
      * Visibility of a secret
@@ -25284,7 +25975,11 @@ pub struct ActionsUpdateSelfHostedRunnerGroupOrgRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<MinimalRepository>,
     #[serde(
         default,
@@ -25296,7 +25991,11 @@ pub struct ActionsListRepoAccessSelfHostedRunnerGroupInOrgResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelfHostedRunnersOrgResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub runners: Vec<Runner>,
     #[serde(
         default,
@@ -25308,7 +26007,11 @@ pub struct ActionsListSelfHostedRunnersOrgResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListOrgSecretsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub secrets: Vec<OrganizationActionsSecret>,
     #[serde(
         default,
@@ -25335,7 +26038,11 @@ pub struct ActionsCreateUpdateOrgSecretRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selected_repository_ids: Vec<String>,
     /**
      * Visibility of a secret
@@ -25346,7 +26053,11 @@ pub struct ActionsCreateUpdateOrgSecretRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListSelectedReposOrgSecretResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<MinimalRepository>,
     #[serde(
         default,
@@ -25361,7 +26072,11 @@ pub struct ActionsSetSelectedReposOrgSecretRequest {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selected_repository_ids: Vec<i64>,
 }
 
@@ -25417,7 +26132,11 @@ pub struct OrgsCreateWebhookRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     #[serde(
         default,
@@ -25467,7 +26186,11 @@ pub struct OrgsUpdateWebhookRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     #[serde(
         default,
@@ -25479,7 +26202,11 @@ pub struct OrgsUpdateWebhookRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AppsListInstallationsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub installations: Vec<Installation>,
     #[serde(
         default,
@@ -25565,7 +26292,11 @@ pub struct OrgsCreateInvitationRequest {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub team_ids: Vec<i64>,
 }
 
@@ -25720,7 +26451,11 @@ pub struct MigrationsStartRequest {
     /**
      * Exclude attributes from the API response to improve performance
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub exclude: Vec<Exclude>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub exclude_attachments: Option<bool>,
@@ -25729,7 +26464,11 @@ pub struct MigrationsStartRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repositories: Vec<String>,
 }
 
@@ -26028,7 +26767,11 @@ pub struct TeamsCreateRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub maintainers: Vec<String>,
     #[serde(
         default,
@@ -26058,7 +26801,11 @@ pub struct TeamsCreateRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub repo_names: Vec<String>,
 }
 
@@ -26291,7 +27038,11 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsInOrgRequest {
     /**
      * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<TeamsCreateUpdateIdpGroupConnectionsInOrgRequestGroups>,
 }
 
@@ -26306,7 +27057,11 @@ pub struct ProjectsDeleteResponse {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<String>,
     #[serde(
         default,
@@ -26380,7 +27135,11 @@ pub struct ProjectsMoveCardResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub documentation_url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<ProjectsMoveCardResponseErrors>,
     #[serde(
         default,
@@ -26420,7 +27179,11 @@ pub struct ProjectsCreateCardResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub documentation_url: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<ProjectsMoveCardResponseErrorsData>,
     #[serde(
         default,
@@ -26692,7 +27455,11 @@ pub struct ReposUpdateRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListArtifactsRepoResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub artifacts: Vec<Artifact>,
     #[serde(
         default,
@@ -26721,7 +27488,11 @@ pub struct ActionsListWorkflowRunsResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_count: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub workflow_runs: Vec<WorkflowRun>,
 }
 
@@ -26759,7 +27530,11 @@ impl Default for ActionsListJobsWorkflowRunFilter {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListJobsWorkflowRunResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub jobs: Vec<Job>,
     #[serde(
         default,
@@ -26780,7 +27555,11 @@ pub struct ActionsReviewPendingDeploymentsRunRequest {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub environment_ids: Vec<i64>,
     /**
      * Whether deployment to the environment(s) was approved or rejected
@@ -26791,7 +27570,11 @@ pub struct ActionsReviewPendingDeploymentsRunRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ActionsListRepoSecretsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub secrets: Vec<ActionsSecret>,
     #[serde(
         default,
@@ -26825,7 +27608,11 @@ pub struct ActionsListRepoWorkflowsResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_count: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub workflows: Vec<Workflow>,
 }
 
@@ -26868,7 +27655,11 @@ pub struct ReposUpdateBranchProtectionRequestRequiredStatusChecks {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contexts: Vec<String>,
     #[serde(
         default,
@@ -26883,12 +27674,20 @@ pub struct ReposUpdateBranchProtectionRequestRequiredPullReviewsDismissalRestric
     /**
      * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub teams: Vec<String>,
     /**
      * Specify which users and teams can dismiss pull request reviews. Pass an empty `dismissal_restrictions` object to disable. User and team `dismissal_restrictions` are only available for organization-owned repositories. Omit this parameter for personal repositories.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<String>,
 }
 
@@ -26934,17 +27733,29 @@ pub struct Restrictions {
     /**
      * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub apps: Vec<String>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub teams: Vec<String>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<String>,
 }
 
@@ -27009,7 +27820,11 @@ pub struct ReposUpdateStatusCheckProtectionRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contexts: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub strict: Option<bool>,
@@ -27020,7 +27835,11 @@ pub struct ReposAddStatusCheckContextsRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contexts: Vec<String>,
 }
 
@@ -27077,7 +27896,11 @@ pub struct ReposAddAppAccessRestrictionsRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub apps: Vec<String>,
 }
 
@@ -27135,7 +27958,11 @@ pub struct ReposAddTeamAccessRestrictionsRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub teams: Vec<String>,
 }
 
@@ -27193,7 +28020,11 @@ pub struct ReposAddUserAccessRestrictionsRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<String>,
 }
 
@@ -27439,12 +28270,20 @@ pub struct ChecksCreateRequestOutput {
     /**
      * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub annotations: Vec<Annotations>,
     /**
      * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object) description.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub images: Vec<Images>,
     #[serde(
         default,
@@ -27493,7 +28332,11 @@ pub struct ChecksCreateRequest {
     /**
      * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub actions: Vec<ChecksCreateRequestActions>,
     #[serde(
         default,
@@ -27555,12 +28398,20 @@ pub struct ChecksUpdateRequestOutput {
     /**
      * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub annotations: Vec<Annotations>,
     /**
      * Check runs can accept a variety of data in the `output` object, including a `title` and `summary` and can optionally provide descriptive details about the run. See the [`output` object](https://docs.github.com/rest/reference/checks#output-object-1) description.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub images: Vec<Images>,
     #[serde(
         default,
@@ -27587,7 +28438,11 @@ pub struct ChecksUpdateRequest {
     /**
      * Displays a button on GitHub that can be clicked to alert your app to do additional tasks. For example, a code linting app can display a button that automatically fixes detected errors. The button created in this object is displayed after the check run completes. When a user clicks the button, GitHub sends the [`check_run.requested_action` webhook](https://docs.github.com/webhooks/event-payloads/#check_run) to your app. Each action includes a `label`, `identifier` and `description`. A maximum of three actions are accepted. See the [`actions` object](https://docs.github.com/rest/reference/checks#actions-object) description. To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)." To learn more about check runs and requested actions, see "[Check runs and requested actions](https://docs.github.com/rest/reference/checks#check-runs-and-requested-actions)."
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub actions: Vec<ChecksCreateRequestActions>,
     #[serde(
         default,
@@ -27649,7 +28504,11 @@ pub struct ChecksCreateSuiteRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksListRefResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub check_runs: Vec<CheckRun>,
     #[serde(
         default,
@@ -27766,7 +28625,11 @@ pub struct ReposCreateCommitCommentRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChecksListSuitesRefResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub check_suites: Vec<CheckSuiteData>,
     #[serde(
         default,
@@ -27932,7 +28795,11 @@ pub struct ReposCreateDeploymentRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub required_contexts: Vec<String>,
     #[serde(
         default,
@@ -28039,7 +28906,11 @@ pub struct ReposCreateDispatchEventRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReposGetAllEnvironmentsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub environments: Vec<EnvironmentData>,
     #[serde(
         default,
@@ -28074,7 +28945,11 @@ pub struct ReposCreateUpdateEnvironmentRequest {
     /**
      * The people or teams that may review jobs that reference the environment. You can list up to six users or teams as reviewers. The reviewers must have at least read access to the repository. Only one of the required reviewers needs to approve the job for it to proceed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reviewers: Vec<ReposCreateUpdateEnvironmentRequestReviewers>,
     #[serde(
         default,
@@ -28219,7 +29094,11 @@ pub struct GitCreateCommitRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parents: Vec<String>,
     #[serde(
         default,
@@ -28463,7 +29342,11 @@ pub struct GitCreateTreeRequestData {
     /**
      * Objects (of `path`, `mode`, `type`, and `sha`) specifying a tree structure.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tree: Vec<GitCreateTreeRequest>,
 }
 
@@ -28513,7 +29396,11 @@ pub struct ReposCreateWebhookRequest {
     pub active: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub config: Option<ReposCreateWebhookRequestConfig>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     #[serde(
         default,
@@ -28570,7 +29457,11 @@ pub struct ReposUpdateWebhookRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub add_events: Vec<String>,
     /**
      * Key/value pairs to provide settings for this webhook. [These are defined below](https://docs.github.com/rest/reference/repos#create-hook-config-params).
@@ -28580,12 +29471,20 @@ pub struct ReposUpdateWebhookRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<String>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub remove_events: Vec<String>,
 }
 
@@ -28830,7 +29729,11 @@ pub struct IssuesCreateRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assignees: Vec<String>,
     #[serde(
         default,
@@ -28841,7 +29744,11 @@ pub struct IssuesCreateRequest {
     /**
      * Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub milestone: Option<TitleOneOf>,
@@ -28860,7 +29767,11 @@ pub struct IssuesUpdateRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assignees: Vec<String>,
     #[serde(
         default,
@@ -28871,7 +29782,11 @@ pub struct IssuesUpdateRequest {
     /**
      * Labels to associate with this issue. _NOTE: Only users with push access can set labels for new issues. Labels are silently dropped otherwise._
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<IssuesCreateRequestLabelsOneOf>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub milestone: Option<TitleOneOf>,
@@ -28889,7 +29804,11 @@ pub struct IssuesAddAssigneesRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assignees: Vec<String>,
 }
 
@@ -28898,13 +29817,21 @@ pub struct IssuesAddLabelsRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IssuesSetLabelsRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub labels: Vec<ProjectsUpdateColumnRequest>,
 }
 
@@ -29662,12 +30589,20 @@ pub struct PullsRequestReviewers {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reviewers: Vec<String>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub team_reviewers: Vec<String>,
 }
 
@@ -29676,12 +30611,20 @@ pub struct PullsRemoveRequestedReviewersRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reviewers: Vec<String>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub team_reviewers: Vec<String>,
 }
 
@@ -29783,7 +30726,11 @@ pub struct PullsCreateReviewRequest {
     /**
      * Use the following table to specify the location, destination, and contents of the draft review comment.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub comments: Vec<Comments>,
     #[serde(
         default,
@@ -30083,7 +31030,11 @@ pub struct ReposTransferRequest {
     /**
      * Code Frequency Stat
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub team_ids: Vec<i64>,
 }
 
@@ -30122,12 +31073,20 @@ pub struct EnterpriseAdminProvisionInviteGroupRequest {
         rename = "displayName"
     )]
     pub display_name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<ScimUserListEnterpriseResourcesGroups>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
 }
 
@@ -30194,12 +31153,21 @@ pub struct EnterpriseAdminUpdateAttributeGroupRequest {
     /**
      * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Operations")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "Operations"
+    )]
     pub operations: Vec<EnterpriseAdminUpdateAttributeGroupRequestOperations>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
 }
 
@@ -30230,16 +31198,28 @@ pub struct EnterpriseAdminProvisionInviteUserRequest {
     /**
      * List of user emails.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<EnterpriseAdminProvisionInviteUserRequestEmails>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<ScimUserListEnterpriseResourcesGroups>,
     #[serde()]
     pub name: Name,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
     #[serde(
         default,
@@ -30255,12 +31235,21 @@ pub struct EnterpriseAdminUpdateAttributeUserRequest {
     /**
      * Array of [SCIM operations](https://tools.ietf.org/html/rfc7644#section-3.5.2).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Operations")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "Operations"
+    )]
     pub operations: Vec<Data>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
 }
 
@@ -30275,7 +31264,11 @@ pub struct ScimProvisionInviteUserRequest {
         rename = "displayName"
     )]
     pub display_name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<Emails>,
     #[serde(
         default,
@@ -30287,14 +31280,22 @@ pub struct ScimProvisionInviteUserRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<String>,
     #[serde()]
     pub name: ScimUserName,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
     #[serde(
         default,
@@ -30431,12 +31432,21 @@ pub struct ScimUpdateAttributeUserRequest {
     /**
      * Set of operations to be performed
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "Operations")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "Operations"
+    )]
     pub operations: Vec<ScimUpdateAttributeUserRequestOperations>,
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<String>,
 }
 
@@ -30482,7 +31492,11 @@ pub struct SearchCodeResponse {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub incomplete_results: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<CodeSearchResultItem>,
     #[serde(
         default,
@@ -30537,7 +31551,11 @@ pub struct SearchCommitsResponse {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub incomplete_results: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<CommitSearchResultItemData>,
     #[serde(
         default,
@@ -30619,7 +31637,11 @@ pub struct SearchIssuesPullRequestsResponse {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub incomplete_results: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<IssueSearchResultItem>,
     #[serde(
         default,
@@ -30636,7 +31658,11 @@ pub struct SearchLabelsResponse {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub incomplete_results: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<LabelSearchResultItem>,
     #[serde(
         default,
@@ -30697,7 +31723,11 @@ pub struct SearchReposResponse {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub incomplete_results: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<RepoSearchResultItem>,
     #[serde(
         default,
@@ -30714,7 +31744,11 @@ pub struct SearchTopicsResponse {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub incomplete_results: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<TopicSearchResultItem>,
     #[serde(
         default,
@@ -30772,7 +31806,11 @@ pub struct SearchUsersResponse {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub incomplete_results: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<UserSearchResultItem>,
     #[serde(
         default,
@@ -30848,7 +31886,11 @@ pub struct TeamsCreateUpdateIdpGroupConnectionsLegacyRequest {
     /**
      * The IdP groups you want to connect to a GitHub team. When updating, the new `groups` object will replace the original one. You must include any existing groups that you don't want to remove.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<TeamsCreateUpdateIdpGroupConnectionsLegacyRequestGroups>,
     #[serde(
         default,
@@ -30952,7 +31994,11 @@ pub struct UsersAddEmailAuthenticatedRequest {
     /**
      * The list of events for the GitHub app
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<String>,
 }
 

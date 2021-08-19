@@ -8,7 +8,11 @@ pub struct AccountBrands {
     /**
      * The AccountBrands resource enables you to use account-level brands to customize the styles and text that recipients see.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub brands: Vec<Brand>,
     /**
      * The AccountBrands resource enables you to use account-level brands to customize the styles and text that recipients see.
@@ -363,6 +367,7 @@ pub struct AccountCustomFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "listCustomFields"
     )]
     pub list_custom_fields: Vec<ListCustomField>,
@@ -372,6 +377,7 @@ pub struct AccountCustomFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "textCustomFields"
     )]
     pub text_custom_fields: Vec<TextCustomField>,
@@ -636,7 +642,11 @@ pub struct AccountPermissionProfiles {
     /**
      * The AccountPermissionProfiles resource provides methods that allow you to manage permission profiles for groups of account users.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UserInformation>,
 }
 
@@ -646,7 +656,11 @@ pub struct AccountSeals {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub seals: Vec<SealIdentifier>,
 }
 
@@ -660,6 +674,7 @@ pub struct AccountSignatureProviders {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signatureProviders"
     )]
     pub signature_providers: Vec<AccountSignatureProvider>,
@@ -862,6 +877,7 @@ pub struct AccountSignature {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signatureGroups"
     )]
     pub signature_groups: Vec<SignatureGroup>,
@@ -931,6 +947,7 @@ pub struct AccountSignature {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signatureUsers"
     )]
     pub signature_users: Vec<SignatureUser>,
@@ -1783,6 +1800,7 @@ pub struct Accounts {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientDomains"
     )]
     pub recipient_domains: Vec<RecipientDomain>,
@@ -1860,6 +1878,7 @@ pub struct BccEmailArchive {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bccEmailArchiveHistory"
     )]
     pub bcc_email_archive_history: Vec<BccEmailArchiveHistory>,
@@ -2023,6 +2042,7 @@ pub struct BillingPlans {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "successorPlans"
     )]
     pub successor_plans: Vec<BillingPlan>,
@@ -2038,7 +2058,12 @@ pub struct BulkSend {
      *  
      *  \*\*Note\*\*: The Bulk Send feature is only available on Business Pro plans that are using EasySign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "bulkCopies")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "bulkCopies"
+    )]
     pub bulk_copies: Vec<BulkSendingCopy>,
     /**
      * The bulk send list resource provides methods that enable you to create and manage bulk sending lists, which you can use to send multiple copies of an envelope in a single batch.
@@ -2093,6 +2118,7 @@ pub struct ChunkedUploads {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "chunkedUploadParts"
     )]
     pub chunked_upload_parts: Vec<ChunkedUploadPart>,
@@ -2191,7 +2217,11 @@ pub struct CloudStorage {
     /**
      * Cloud storage
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<ExternalFile>,
     /**
      * Cloud storage
@@ -2263,6 +2293,7 @@ pub struct CloudStorageProviders {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "storageProviders"
     )]
     pub storage_providers: Vec<CloudStorageProvider>,
@@ -2302,7 +2333,11 @@ pub struct Comments {
     /**
      * Details about envelope comments.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub mentions: Vec<String>,
     /**
      * Details about envelope comments.
@@ -2462,7 +2497,12 @@ pub struct Comments {
     /**
      * Details about envelope comments.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "visibleTo")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "visibleTo"
+    )]
     pub visible_to: Vec<String>,
 }
 
@@ -2535,6 +2575,7 @@ pub struct ConnectConfigurations {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeEvents"
     )]
     pub envelope_events: Vec<String>,
@@ -2667,6 +2708,7 @@ pub struct ConnectConfigurations {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientEvents"
     )]
     pub recipient_events: Vec<String>,
@@ -2746,13 +2788,19 @@ pub struct ConnectConfigurations {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "senderSelectableItems"
     )]
     pub sender_selectable_items: Vec<String>,
     /**
      * Contains information about a DocuSign Connect configuration.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "sfObjects")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "sfObjects"
+    )]
     pub sf_objects: Vec<ConnectSalesforceObject>,
     /**
      * Contains information about a DocuSign Connect configuration.
@@ -2797,7 +2845,12 @@ pub struct ConnectConfigurations {
     /**
      * Contains information about a DocuSign Connect configuration.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "userIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "userIds"
+    )]
     pub user_ids: Vec<String>,
     /**
      * Contains information about a DocuSign Connect configuration.
@@ -2817,12 +2870,20 @@ pub struct ConnectEvents {
     /**
      * Connect event logging information. This object contains sections for regular Connect logs and for Connect failures.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub failures: Vec<ConnectLog>,
     /**
      * Connect event logging information. This object contains sections for regular Connect logs and for Connect failures.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub logs: Vec<ConnectLog>,
     /**
      * Connect event logging information. This object contains sections for regular Connect logs and for Connect failures.
@@ -2852,12 +2913,20 @@ pub struct ConnectLogs {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub failures: Vec<ConnectLog>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub logs: Vec<ConnectLog>,
     /**
      *
@@ -2920,6 +2989,7 @@ pub struct Contacts {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "contactPhoneNumbers"
     )]
     pub contact_phone_numbers: Vec<ContactPhoneNumber>,
@@ -2936,7 +3006,11 @@ pub struct Contacts {
     /**
      * The `Contacts` resource enables you to manage the contact in an account's address book.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<String>,
     /**
      * The `Contacts` resource enables you to manage the contact in an account's address book.
@@ -3234,7 +3308,11 @@ pub struct CustomTabs {
     /**
      * Custom tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<String>,
     /**
      * Custom tabs
@@ -3478,6 +3556,7 @@ pub struct DocumentResponsiveHtmlPreview {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "htmlDefinitions"
     )]
     pub html_definitions: Vec<String>,
@@ -3943,6 +4022,7 @@ pub struct EnvelopeCustomFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "listCustomFields"
     )]
     pub list_custom_fields: Vec<ListCustomField>,
@@ -3954,6 +4034,7 @@ pub struct EnvelopeCustomFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "textCustomFields"
     )]
     pub text_custom_fields: Vec<TextCustomField>,
@@ -3968,6 +4049,7 @@ pub struct EnvelopeDocumentFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentFields"
     )]
     pub document_fields: Vec<NameValue>,
@@ -3982,6 +4064,7 @@ pub struct EnvelopeHtmlDefinitions {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "htmlDefinitions"
     )]
     pub html_definitions: Vec<DocumentHtmlDefinitionOriginal>,
@@ -3993,7 +4076,12 @@ pub struct EnvelopeDocumentTabs {
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "approveTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "approveTabs"
+    )]
     pub approve_tabs: Vec<Approve>,
     /**
      * Envelope Document Tabs resource
@@ -4001,6 +4089,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "checkboxTabs"
     )]
     pub checkbox_tabs: Vec<Checkbox>,
@@ -4010,6 +4099,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commentThreadTabs"
     )]
     pub comment_thread_tabs: Vec<CommentThread>,
@@ -4019,6 +4109,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
     pub commission_county_tabs: Vec<PhoneNumber>,
@@ -4028,6 +4119,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
     pub commission_expiration_tabs: Vec<PhoneNumber>,
@@ -4037,6 +4129,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
     pub commission_number_tabs: Vec<PhoneNumber>,
@@ -4046,13 +4139,19 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
     pub commission_state_tabs: Vec<PhoneNumber>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "companyTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "companyTabs"
+    )]
     pub company_tabs: Vec<Company>,
     /**
      * Envelope Document Tabs resource
@@ -4060,6 +4159,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "currencyTabs"
     )]
     pub currency_tabs: Vec<Currency>,
@@ -4069,23 +4169,39 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "dateSignedTabs"
     )]
     pub date_signed_tabs: Vec<DateSigned>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dateTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dateTabs"
+    )]
     pub date_tabs: Vec<Date>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "declineTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "declineTabs"
+    )]
     pub decline_tabs: Vec<Decline>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "drawTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "drawTabs"
+    )]
     pub draw_tabs: Vec<Draw>,
     /**
      * Envelope Document Tabs resource
@@ -4093,13 +4209,19 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "emailAddressTabs"
     )]
     pub email_address_tabs: Vec<EmailAddress>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "emailTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "emailTabs"
+    )]
     pub email_tabs: Vec<Email>,
     /**
      * Envelope Document Tabs resource
@@ -4107,6 +4229,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeIdTabs"
     )]
     pub envelope_id_tabs: Vec<EnvelopeId>,
@@ -4116,13 +4239,19 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "firstNameTabs"
     )]
     pub first_name_tabs: Vec<FirstName>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "formulaTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formulaTabs"
+    )]
     pub formula_tabs: Vec<FormulaTab>,
     /**
      * Envelope Document Tabs resource
@@ -4130,6 +4259,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "fullNameTabs"
     )]
     pub full_name_tabs: Vec<FullName>,
@@ -4139,6 +4269,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "initialHereTabs"
     )]
     pub initial_here_tabs: Vec<InitialHere>,
@@ -4148,13 +4279,19 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "lastNameTabs"
     )]
     pub last_name_tabs: Vec<LastName>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "listTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listTabs"
+    )]
     pub list_tabs: Vec<List>,
     /**
      * Envelope Document Tabs resource
@@ -4162,6 +4299,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarizeTabs"
     )]
     pub notarize_tabs: Vec<Notarize>,
@@ -4171,18 +4309,29 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarySealTabs"
     )]
     pub notary_seal_tabs: Vec<NotarySeal>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "noteTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "noteTabs"
+    )]
     pub note_tabs: Vec<Note>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "numberTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "numberTabs"
+    )]
     pub number_tabs: Vec<Number>,
     /**
      * Envelope Document Tabs resource
@@ -4190,6 +4339,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "phoneNumberTabs"
     )]
     pub phone_number_tabs: Vec<PhoneNumber>,
@@ -4199,6 +4349,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "polyLineOverlayTabs"
     )]
     pub poly_line_overlay_tabs: Vec<PolyLineOverlay>,
@@ -4217,6 +4368,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "radioGroupTabs"
     )]
     pub radio_group_tabs: Vec<RadioGroup>,
@@ -4226,6 +4378,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signHereTabs"
     )]
     pub sign_here_tabs: Vec<SignHere>,
@@ -4235,6 +4388,7 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signerAttachmentTabs"
     )]
     pub signer_attachment_tabs: Vec<SignerAttachment>,
@@ -4244,38 +4398,69 @@ pub struct EnvelopeDocumentTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "smartSectionTabs"
     )]
     pub smart_section_tabs: Vec<SmartSection>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "ssnTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "ssnTabs"
+    )]
     pub ssn_tabs: Vec<Ssn>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "tabGroups")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroups"
+    )]
     pub tab_groups: Vec<TabGroup>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "textTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "textTabs"
+    )]
     pub text_tabs: Vec<Text>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "titleTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "titleTabs"
+    )]
     pub title_tabs: Vec<Title>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "viewTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "viewTabs"
+    )]
     pub view_tabs: Vec<View>,
     /**
      * Envelope Document Tabs resource
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "zipTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "zipTabs"
+    )]
     pub zip_tabs: Vec<Zip>,
 }
 
@@ -4306,6 +4491,7 @@ pub struct EnvelopeDocumentVisibility {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -4320,6 +4506,7 @@ pub struct EnvelopeDocuments {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeDocuments"
     )]
     pub envelope_documents: Vec<EnvelopeDocument>,
@@ -4344,6 +4531,7 @@ pub struct EnvelopeEmailSettings {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bccEmailAddresses"
     )]
     pub bcc_email_addresses: Vec<BccEmailAddress>,
@@ -4395,7 +4583,12 @@ pub struct EnvelopeFormData {
     /**
      * This object contains the data that recipients have entered into the form fields associated with an envelope.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "formData")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formData"
+    )]
     pub form_data: Vec<FormDataItem>,
     /**
      * This object contains the data that recipients have entered into the form fields associated with an envelope.
@@ -4403,6 +4596,7 @@ pub struct EnvelopeFormData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "prefillFormData"
     )]
     pub prefill_form_data: Vec<FormDataItem>,
@@ -4412,6 +4606,7 @@ pub struct EnvelopeFormData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFormData"
     )]
     pub recipient_form_data: Vec<RecipientFormData>,
@@ -4526,7 +4721,12 @@ pub struct EnvelopeRecipientTabs {
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "approveTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "approveTabs"
+    )]
     pub approve_tabs: Vec<Approve>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
@@ -4535,6 +4735,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "checkboxTabs"
     )]
     pub checkbox_tabs: Vec<Checkbox>,
@@ -4545,6 +4746,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commentThreadTabs"
     )]
     pub comment_thread_tabs: Vec<CommentThread>,
@@ -4555,6 +4757,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
     pub commission_county_tabs: Vec<PhoneNumber>,
@@ -4565,6 +4768,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
     pub commission_expiration_tabs: Vec<PhoneNumber>,
@@ -4575,6 +4779,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
     pub commission_number_tabs: Vec<PhoneNumber>,
@@ -4585,6 +4790,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
     pub commission_state_tabs: Vec<PhoneNumber>,
@@ -4592,7 +4798,12 @@ pub struct EnvelopeRecipientTabs {
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "companyTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "companyTabs"
+    )]
     pub company_tabs: Vec<Company>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
@@ -4601,6 +4812,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "currencyTabs"
     )]
     pub currency_tabs: Vec<Currency>,
@@ -4611,6 +4823,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "dateSignedTabs"
     )]
     pub date_signed_tabs: Vec<DateSigned>,
@@ -4618,19 +4831,34 @@ pub struct EnvelopeRecipientTabs {
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dateTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dateTabs"
+    )]
     pub date_tabs: Vec<Date>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "declineTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "declineTabs"
+    )]
     pub decline_tabs: Vec<Decline>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "drawTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "drawTabs"
+    )]
     pub draw_tabs: Vec<Draw>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
@@ -4639,6 +4867,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "emailAddressTabs"
     )]
     pub email_address_tabs: Vec<EmailAddress>,
@@ -4646,7 +4875,12 @@ pub struct EnvelopeRecipientTabs {
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "emailTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "emailTabs"
+    )]
     pub email_tabs: Vec<Email>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
@@ -4655,6 +4889,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeIdTabs"
     )]
     pub envelope_id_tabs: Vec<EnvelopeId>,
@@ -4665,6 +4900,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "firstNameTabs"
     )]
     pub first_name_tabs: Vec<FirstName>,
@@ -4672,7 +4908,12 @@ pub struct EnvelopeRecipientTabs {
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "formulaTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formulaTabs"
+    )]
     pub formula_tabs: Vec<FormulaTab>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
@@ -4681,6 +4922,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "fullNameTabs"
     )]
     pub full_name_tabs: Vec<FullName>,
@@ -4691,6 +4933,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "initialHereTabs"
     )]
     pub initial_here_tabs: Vec<InitialHere>,
@@ -4701,6 +4944,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "lastNameTabs"
     )]
     pub last_name_tabs: Vec<LastName>,
@@ -4708,7 +4952,12 @@ pub struct EnvelopeRecipientTabs {
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "listTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listTabs"
+    )]
     pub list_tabs: Vec<List>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
@@ -4717,6 +4966,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarizeTabs"
     )]
     pub notarize_tabs: Vec<Notarize>,
@@ -4727,6 +4977,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarySealTabs"
     )]
     pub notary_seal_tabs: Vec<NotarySeal>,
@@ -4734,13 +4985,23 @@ pub struct EnvelopeRecipientTabs {
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "noteTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "noteTabs"
+    )]
     pub note_tabs: Vec<Note>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "numberTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "numberTabs"
+    )]
     pub number_tabs: Vec<Number>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
@@ -4749,6 +5010,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "phoneNumberTabs"
     )]
     pub phone_number_tabs: Vec<PhoneNumber>,
@@ -4759,6 +5021,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "polyLineOverlayTabs"
     )]
     pub poly_line_overlay_tabs: Vec<PolyLineOverlay>,
@@ -4779,6 +5042,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "radioGroupTabs"
     )]
     pub radio_group_tabs: Vec<RadioGroup>,
@@ -4789,6 +5053,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signHereTabs"
     )]
     pub sign_here_tabs: Vec<SignHere>,
@@ -4799,6 +5064,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signerAttachmentTabs"
     )]
     pub signer_attachment_tabs: Vec<SignerAttachment>,
@@ -4809,6 +5075,7 @@ pub struct EnvelopeRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "smartSectionTabs"
     )]
     pub smart_section_tabs: Vec<SmartSection>,
@@ -4816,37 +5083,67 @@ pub struct EnvelopeRecipientTabs {
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "ssnTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "ssnTabs"
+    )]
     pub ssn_tabs: Vec<Ssn>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "tabGroups")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroups"
+    )]
     pub tab_groups: Vec<TabGroup>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "textTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "textTabs"
+    )]
     pub text_tabs: Vec<Text>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "titleTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "titleTabs"
+    )]
     pub title_tabs: Vec<Title>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "viewTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "viewTabs"
+    )]
     pub view_tabs: Vec<View>,
     /**
      * All of the tabs associated with a recipient. Each property is a list of a type of tab.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "zipTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "zipTabs"
+    )]
     pub zip_tabs: Vec<Zip>,
 }
 
@@ -4856,7 +5153,11 @@ pub struct EnvelopeRecipients {
     /**
      * Envelope recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub agents: Vec<Agent>,
     /**
      * Envelope recipients
@@ -4864,6 +5165,7 @@ pub struct EnvelopeRecipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "carbonCopies"
     )]
     pub carbon_copies: Vec<CarbonCopy>,
@@ -4873,6 +5175,7 @@ pub struct EnvelopeRecipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "certifiedDeliveries"
     )]
     pub certified_deliveries: Vec<CertifiedDelivery>,
@@ -4889,7 +5192,11 @@ pub struct EnvelopeRecipients {
     /**
      * Envelope recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub editors: Vec<Editor>,
     /**
      * Envelope recipients
@@ -4906,18 +5213,27 @@ pub struct EnvelopeRecipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "inPersonSigners"
     )]
     pub in_person_signers: Vec<InPersonSigner>,
     /**
      * Envelope recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub intermediaries: Vec<Intermediary>,
     /**
      * Envelope recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub notaries: Vec<NotaryRecipient>,
     /**
      * Envelope recipients
@@ -4932,17 +5248,29 @@ pub struct EnvelopeRecipients {
     /**
      * Envelope recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub seals: Vec<SealSign>,
     /**
      * Envelope recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub signers: Vec<Signer>,
     /**
      * Envelope recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub witnesses: Vec<Witness>,
 }
 
@@ -4952,7 +5280,11 @@ pub struct EnvelopeTemplates {
     /**
      * Envelope templates
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub templates: Vec<TemplateSummary>,
 }
 
@@ -4975,6 +5307,7 @@ pub struct EnvelopeTransferRules {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeTransferRules"
     )]
     pub envelope_transfer_rules: Vec<EnvelopeTransferRule>,
@@ -5073,6 +5406,7 @@ pub struct EnvelopeWorkflowDefinition {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "workflowSteps"
     )]
     pub workflow_steps: Vec<WorkflowStep>,
@@ -5384,6 +5718,7 @@ pub struct Envelopes {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeAttachments"
     )]
     pub envelope_attachments: Vec<Attachment>,
@@ -5393,6 +5728,7 @@ pub struct Envelopes {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeDocuments"
     )]
     pub envelope_documents: Vec<EnvelopeDocument>,
@@ -5488,7 +5824,11 @@ pub struct Envelopes {
     /**
      * Envelope creation, management
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      * Envelope creation, management
@@ -5819,6 +6159,7 @@ pub struct FavoriteTemplates {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "favoriteTemplates"
     )]
     pub favorite_templates: Vec<FavoriteTemplatesContentItem>,
@@ -5850,12 +6191,20 @@ pub struct Folders {
     /**
      * Folder management
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub envelopes: Vec<EnvelopeSummary>,
     /**
      * Folder management
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      * Folder management
@@ -5918,6 +6267,7 @@ pub struct GroupBrands {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "brandOptions"
     )]
     pub brand_options: Vec<Brand>,
@@ -6009,7 +6359,11 @@ pub struct GroupUsers {
     /**
      * Groups' users
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UserInfo>,
 }
 
@@ -6029,7 +6383,11 @@ pub struct Groups {
     /**
      * Group information
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<Group>,
     /**
      * Group information
@@ -6092,6 +6450,7 @@ pub struct IdentityVerifications {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "identityVerification"
     )]
     pub identity_verification: Vec<AccountIdentityVerificationWorkflow>,
@@ -6139,6 +6498,7 @@ pub struct Invoices {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "invoiceItems"
     )]
     pub invoice_items: Vec<BillingInvoiceItem>,
@@ -6496,6 +6856,7 @@ pub struct PaymentGatewayAccounts {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "supportedCurrencies"
     )]
     pub supported_currencies: Vec<String>,
@@ -6505,6 +6866,7 @@ pub struct PaymentGatewayAccounts {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "supportedPaymentMethods"
     )]
     pub supported_payment_methods: Vec<String>,
@@ -6514,6 +6876,7 @@ pub struct PaymentGatewayAccounts {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "supportedPaymentMethodsWithOptions"
     )]
     pub supported_payment_methods_with_options: Vec<PaymentMethodWithOptions>,
@@ -6523,6 +6886,7 @@ pub struct PaymentGatewayAccounts {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "zeroDecimalCurrencies"
     )]
     pub zero_decimal_currencies: Vec<String>,
@@ -6596,7 +6960,11 @@ pub struct PowerFormData {
     /**
      * Data that recipients have entered in PowerForm fields.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<PowerFormDataRecipient>,
 }
 
@@ -6646,7 +7014,11 @@ pub struct PowerForms {
     /**
      * The PowerForms resource enables you to create fillable forms that you can email or make available for self service on the web.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub envelopes: Vec<Envelope>,
     /**
      * The PowerForms resource enables you to create fillable forms that you can email or make available for self service on the web.
@@ -6758,7 +7130,11 @@ pub struct PowerForms {
     /**
      * The PowerForms resource enables you to create fillable forms that you can email or make available for self service on the web.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<PowerFormRecipient>,
     /**
      * The PowerForms resource enables you to create fillable forms that you can email or make available for self service on the web.
@@ -6847,7 +7223,11 @@ pub struct Reports {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reports: Vec<ReportInProductListItem>,
 }
 
@@ -6892,7 +7272,11 @@ pub struct Resources {
     /**
      * API resource information
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub resources: Vec<NameValue>,
 }
 
@@ -6905,6 +7289,7 @@ pub struct ResponsiveHtmlPreview {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "htmlDefinitions"
     )]
     pub html_definitions: Vec<String>,
@@ -6956,7 +7341,12 @@ pub struct Services {
     /**
      * API service information
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "linkedSites")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "linkedSites"
+    )]
     pub linked_sites: Vec<String>,
     /**
      * API service information
@@ -6964,6 +7354,7 @@ pub struct Services {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "serviceVersions"
     )]
     pub service_versions: Vec<ServiceVersion>,
@@ -6975,7 +7366,11 @@ pub struct SigningGroupUsers {
     /**
      * Signing groups' users
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<SigningGroupUser>,
 }
 
@@ -7072,7 +7467,11 @@ pub struct SigningGroups {
     /**
      * Signing groups
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<SigningGroupUser>,
 }
 
@@ -7489,6 +7888,7 @@ pub struct TemplateBulkRecipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bulkRecipients"
     )]
     pub bulk_recipients: Vec<BulkRecipient>,
@@ -7563,6 +7963,7 @@ pub struct TemplateCustomFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "listCustomFields"
     )]
     pub list_custom_fields: Vec<ListCustomField>,
@@ -7572,6 +7973,7 @@ pub struct TemplateCustomFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "textCustomFields"
     )]
     pub text_custom_fields: Vec<TextCustomField>,
@@ -7586,6 +7988,7 @@ pub struct TemplateDocumentFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentFields"
     )]
     pub document_fields: Vec<NameValue>,
@@ -7600,6 +8003,7 @@ pub struct TemplateDocumentResponsiveHtmlPreview {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "htmlDefinitions"
     )]
     pub html_definitions: Vec<String>,
@@ -7611,7 +8015,12 @@ pub struct TemplateTabs {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "approveTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "approveTabs"
+    )]
     pub approve_tabs: Vec<Approve>,
     /**
      *
@@ -7619,6 +8028,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "checkboxTabs"
     )]
     pub checkbox_tabs: Vec<Checkbox>,
@@ -7628,6 +8038,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commentThreadTabs"
     )]
     pub comment_thread_tabs: Vec<CommentThread>,
@@ -7637,6 +8048,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
     pub commission_county_tabs: Vec<PhoneNumber>,
@@ -7646,6 +8058,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
     pub commission_expiration_tabs: Vec<PhoneNumber>,
@@ -7655,6 +8068,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
     pub commission_number_tabs: Vec<PhoneNumber>,
@@ -7664,13 +8078,19 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
     pub commission_state_tabs: Vec<PhoneNumber>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "companyTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "companyTabs"
+    )]
     pub company_tabs: Vec<Company>,
     /**
      *
@@ -7678,6 +8098,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "currencyTabs"
     )]
     pub currency_tabs: Vec<Currency>,
@@ -7687,23 +8108,39 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "dateSignedTabs"
     )]
     pub date_signed_tabs: Vec<DateSigned>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dateTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dateTabs"
+    )]
     pub date_tabs: Vec<Date>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "declineTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "declineTabs"
+    )]
     pub decline_tabs: Vec<Decline>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "drawTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "drawTabs"
+    )]
     pub draw_tabs: Vec<Draw>,
     /**
      *
@@ -7711,13 +8148,19 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "emailAddressTabs"
     )]
     pub email_address_tabs: Vec<EmailAddress>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "emailTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "emailTabs"
+    )]
     pub email_tabs: Vec<Email>,
     /**
      *
@@ -7725,6 +8168,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeIdTabs"
     )]
     pub envelope_id_tabs: Vec<EnvelopeId>,
@@ -7734,13 +8178,19 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "firstNameTabs"
     )]
     pub first_name_tabs: Vec<FirstName>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "formulaTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formulaTabs"
+    )]
     pub formula_tabs: Vec<FormulaTab>,
     /**
      *
@@ -7748,6 +8198,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "fullNameTabs"
     )]
     pub full_name_tabs: Vec<FullName>,
@@ -7757,6 +8208,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "initialHereTabs"
     )]
     pub initial_here_tabs: Vec<InitialHere>,
@@ -7766,13 +8218,19 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "lastNameTabs"
     )]
     pub last_name_tabs: Vec<LastName>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "listTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listTabs"
+    )]
     pub list_tabs: Vec<List>,
     /**
      *
@@ -7780,6 +8238,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarizeTabs"
     )]
     pub notarize_tabs: Vec<Notarize>,
@@ -7789,18 +8248,29 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarySealTabs"
     )]
     pub notary_seal_tabs: Vec<NotarySeal>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "noteTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "noteTabs"
+    )]
     pub note_tabs: Vec<Note>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "numberTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "numberTabs"
+    )]
     pub number_tabs: Vec<Number>,
     /**
      *
@@ -7808,6 +8278,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "phoneNumberTabs"
     )]
     pub phone_number_tabs: Vec<PhoneNumber>,
@@ -7817,6 +8288,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "polyLineOverlayTabs"
     )]
     pub poly_line_overlay_tabs: Vec<PolyLineOverlay>,
@@ -7835,6 +8307,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "radioGroupTabs"
     )]
     pub radio_group_tabs: Vec<RadioGroup>,
@@ -7844,6 +8317,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signHereTabs"
     )]
     pub sign_here_tabs: Vec<SignHere>,
@@ -7853,6 +8327,7 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signerAttachmentTabs"
     )]
     pub signer_attachment_tabs: Vec<SignerAttachment>,
@@ -7862,38 +8337,69 @@ pub struct TemplateTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "smartSectionTabs"
     )]
     pub smart_section_tabs: Vec<SmartSection>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "ssnTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "ssnTabs"
+    )]
     pub ssn_tabs: Vec<Ssn>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "tabGroups")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroups"
+    )]
     pub tab_groups: Vec<TabGroup>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "textTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "textTabs"
+    )]
     pub text_tabs: Vec<Text>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "titleTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "titleTabs"
+    )]
     pub title_tabs: Vec<Title>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "viewTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "viewTabs"
+    )]
     pub view_tabs: Vec<View>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "zipTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "zipTabs"
+    )]
     pub zip_tabs: Vec<Zip>,
 }
 
@@ -7906,6 +8412,7 @@ pub struct TemplateDocuments {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "templateDocuments"
     )]
     pub template_documents: Vec<EnvelopeDocument>,
@@ -8010,7 +8517,12 @@ pub struct TemplateRecipientTabs {
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "approveTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "approveTabs"
+    )]
     pub approve_tabs: Vec<Approve>,
     /**
      * Template tabs
@@ -8018,6 +8530,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "checkboxTabs"
     )]
     pub checkbox_tabs: Vec<Checkbox>,
@@ -8027,6 +8540,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commentThreadTabs"
     )]
     pub comment_thread_tabs: Vec<CommentThread>,
@@ -8036,6 +8550,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
     pub commission_county_tabs: Vec<PhoneNumber>,
@@ -8045,6 +8560,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
     pub commission_expiration_tabs: Vec<PhoneNumber>,
@@ -8054,6 +8570,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
     pub commission_number_tabs: Vec<PhoneNumber>,
@@ -8063,13 +8580,19 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
     pub commission_state_tabs: Vec<PhoneNumber>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "companyTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "companyTabs"
+    )]
     pub company_tabs: Vec<Company>,
     /**
      * Template tabs
@@ -8077,6 +8600,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "currencyTabs"
     )]
     pub currency_tabs: Vec<Currency>,
@@ -8086,23 +8610,39 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "dateSignedTabs"
     )]
     pub date_signed_tabs: Vec<DateSigned>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dateTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dateTabs"
+    )]
     pub date_tabs: Vec<Date>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "declineTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "declineTabs"
+    )]
     pub decline_tabs: Vec<Decline>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "drawTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "drawTabs"
+    )]
     pub draw_tabs: Vec<Draw>,
     /**
      * Template tabs
@@ -8110,13 +8650,19 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "emailAddressTabs"
     )]
     pub email_address_tabs: Vec<EmailAddress>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "emailTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "emailTabs"
+    )]
     pub email_tabs: Vec<Email>,
     /**
      * Template tabs
@@ -8124,6 +8670,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeIdTabs"
     )]
     pub envelope_id_tabs: Vec<EnvelopeId>,
@@ -8133,13 +8680,19 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "firstNameTabs"
     )]
     pub first_name_tabs: Vec<FirstName>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "formulaTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formulaTabs"
+    )]
     pub formula_tabs: Vec<FormulaTab>,
     /**
      * Template tabs
@@ -8147,6 +8700,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "fullNameTabs"
     )]
     pub full_name_tabs: Vec<FullName>,
@@ -8156,6 +8710,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "initialHereTabs"
     )]
     pub initial_here_tabs: Vec<InitialHere>,
@@ -8165,13 +8720,19 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "lastNameTabs"
     )]
     pub last_name_tabs: Vec<LastName>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "listTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listTabs"
+    )]
     pub list_tabs: Vec<List>,
     /**
      * Template tabs
@@ -8179,6 +8740,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarizeTabs"
     )]
     pub notarize_tabs: Vec<Notarize>,
@@ -8188,18 +8750,29 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarySealTabs"
     )]
     pub notary_seal_tabs: Vec<NotarySeal>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "noteTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "noteTabs"
+    )]
     pub note_tabs: Vec<Note>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "numberTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "numberTabs"
+    )]
     pub number_tabs: Vec<Number>,
     /**
      * Template tabs
@@ -8207,6 +8780,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "phoneNumberTabs"
     )]
     pub phone_number_tabs: Vec<PhoneNumber>,
@@ -8216,6 +8790,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "polyLineOverlayTabs"
     )]
     pub poly_line_overlay_tabs: Vec<PolyLineOverlay>,
@@ -8234,6 +8809,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "radioGroupTabs"
     )]
     pub radio_group_tabs: Vec<RadioGroup>,
@@ -8243,6 +8819,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signHereTabs"
     )]
     pub sign_here_tabs: Vec<SignHere>,
@@ -8252,6 +8829,7 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signerAttachmentTabs"
     )]
     pub signer_attachment_tabs: Vec<SignerAttachment>,
@@ -8261,38 +8839,69 @@ pub struct TemplateRecipientTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "smartSectionTabs"
     )]
     pub smart_section_tabs: Vec<SmartSection>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "ssnTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "ssnTabs"
+    )]
     pub ssn_tabs: Vec<Ssn>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "tabGroups")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroups"
+    )]
     pub tab_groups: Vec<TabGroup>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "textTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "textTabs"
+    )]
     pub text_tabs: Vec<Text>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "titleTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "titleTabs"
+    )]
     pub title_tabs: Vec<Title>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "viewTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "viewTabs"
+    )]
     pub view_tabs: Vec<View>,
     /**
      * Template tabs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "zipTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "zipTabs"
+    )]
     pub zip_tabs: Vec<Zip>,
 }
 
@@ -8302,7 +8911,11 @@ pub struct TemplateRecipients {
     /**
      * Template recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub agents: Vec<Agent>,
     /**
      * Template recipients
@@ -8310,6 +8923,7 @@ pub struct TemplateRecipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "carbonCopies"
     )]
     pub carbon_copies: Vec<CarbonCopy>,
@@ -8319,6 +8933,7 @@ pub struct TemplateRecipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "certifiedDeliveries"
     )]
     pub certified_deliveries: Vec<CertifiedDelivery>,
@@ -8335,7 +8950,11 @@ pub struct TemplateRecipients {
     /**
      * Template recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub editors: Vec<Editor>,
     /**
      * Template recipients
@@ -8352,18 +8971,27 @@ pub struct TemplateRecipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "inPersonSigners"
     )]
     pub in_person_signers: Vec<InPersonSigner>,
     /**
      * Template recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub intermediaries: Vec<Intermediary>,
     /**
      * Template recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub notaries: Vec<NotaryRecipient>,
     /**
      * Template recipients
@@ -8378,17 +9006,29 @@ pub struct TemplateRecipients {
     /**
      * Template recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub seals: Vec<SealSign>,
     /**
      * Template recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub signers: Vec<Signer>,
     /**
      * Template recipients
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub witnesses: Vec<Witness>,
 }
 
@@ -8401,6 +9041,7 @@ pub struct TemplateResponsiveHtmlPreview {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "htmlDefinitions"
     )]
     pub html_definitions: Vec<String>,
@@ -8692,7 +9333,11 @@ pub struct Templates {
     /**
      * Template management
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub documents: Vec<Document>,
     /**
      * Template management
@@ -8769,6 +9414,7 @@ pub struct Templates {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeAttachments"
     )]
     pub envelope_attachments: Vec<Attachment>,
@@ -8778,6 +9424,7 @@ pub struct Templates {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeDocuments"
     )]
     pub envelope_documents: Vec<EnvelopeDocument>,
@@ -8893,7 +9540,12 @@ pub struct Templates {
     /**
      * Template management
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "folderIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "folderIds"
+    )]
     pub folder_ids: Vec<String>,
     /**
      * Template management
@@ -8908,7 +9560,11 @@ pub struct Templates {
     /**
      * Template management
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      * Template management
@@ -9132,7 +9788,12 @@ pub struct Templates {
     /**
      * Template management
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "powerForms")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "powerForms"
+    )]
     pub power_forms: Vec<PowerForm>,
     /**
      * Template management
@@ -9345,6 +10006,7 @@ pub struct UserCustomSettings {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customSettings"
     )]
     pub custom_settings: Vec<NameValue>,
@@ -9364,6 +10026,7 @@ pub struct UserProfiles {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "authenticationMethods"
     )]
     pub authentication_methods: Vec<AuthenticationMethod>,
@@ -9795,6 +10458,7 @@ pub struct Users {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "connectConfigurations"
     )]
     pub connect_configurations: Vec<ConnectUserObject>,
@@ -9824,6 +10488,7 @@ pub struct Users {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customSettings"
     )]
     pub custom_settings: Vec<NameValue>,
@@ -9887,7 +10552,12 @@ pub struct Users {
     /**
      * The Users resource enables you to create and manage account users.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "groupList")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "groupList"
+    )]
     pub group_list: Vec<Group>,
     /**
      * The Users resource enables you to create and manage account users.
@@ -10741,6 +11411,7 @@ pub struct AccountAddress {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "supportedCountries"
     )]
     pub supported_countries: Vec<Country>,
@@ -10752,7 +11423,12 @@ pub struct AccountBillingPlan {
     /**
      * Contains information about an account billing plan.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "addOns")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "addOns"
+    )]
     pub add_ons: Vec<AddOn>,
     /**
      * Contains information about an account billing plan.
@@ -10917,6 +11593,7 @@ pub struct AccountBillingPlan {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "planFeatureSets"
     )]
     pub plan_feature_sets: Vec<FeatureSet>,
@@ -10956,6 +11633,7 @@ pub struct AccountBillingPlan {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "seatDiscounts"
     )]
     pub seat_discounts: Vec<SeatDiscount>,
@@ -11073,6 +11751,7 @@ pub struct AccountBillingPlanResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "successorPlans"
     )]
     pub successor_plans: Vec<BillingPlan>,
@@ -11121,6 +11800,7 @@ pub struct AccountIdentityVerificationResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "identityVerification"
     )]
     pub identity_verification: Vec<AccountIdentityVerificationWorkflow>,
@@ -11179,6 +11859,7 @@ pub struct AccountIdentityVerificationWorkflow {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "inputOptions"
     )]
     pub input_options: Vec<AccountIdentityInputOption>,
@@ -11516,6 +12197,7 @@ pub struct AccountInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientDomains"
     )]
     pub recipient_domains: Vec<RecipientDomain>,
@@ -11685,7 +12367,11 @@ pub struct AccountPasswordLockoutDurationType {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub options: Vec<String>,
 }
 
@@ -11943,7 +12629,11 @@ pub struct AccountPasswordStrengthType {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub options: Vec<AccountPasswordStrengthTypeOption>,
 }
 
@@ -16111,6 +16801,7 @@ pub struct AccountSettingsInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "idCheckConfigurations"
     )]
     pub id_check_configurations: Vec<IdCheckConfiguration>,
@@ -16196,6 +16887,7 @@ pub struct AccountSettingsInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "identityVerification"
     )]
     pub identity_verification: Vec<AccountIdentityVerificationWorkflow>,
@@ -17015,6 +17707,7 @@ pub struct AccountSettingsInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signatureProviders"
     )]
     pub signature_providers: Vec<String>,
@@ -17895,6 +18588,7 @@ pub struct AccountSharedAccess {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "sharedAccess"
     )]
     pub shared_access: Vec<MemberSharedItems>,
@@ -18018,6 +18712,7 @@ pub struct AccountSignatureDefinition {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signatureGroups"
     )]
     pub signature_groups: Vec<SignatureGroupDef>,
@@ -18057,6 +18752,7 @@ pub struct AccountSignatureDefinition {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signatureUsers"
     )]
     pub signature_users: Vec<SignatureUserDef>,
@@ -18153,6 +18849,7 @@ pub struct AccountSignatureProvider {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signatureProviderOptionsMetadata"
     )]
     pub signature_provider_options_metadata: Vec<AccountSignatureProviderOption>,
@@ -18164,6 +18861,7 @@ pub struct AccountSignatureProvider {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signatureProviderRequiredOptions"
     )]
     pub signature_provider_required_options: Vec<SignatureProviderRequiredOption>,
@@ -18213,6 +18911,7 @@ pub struct AccountSignatureProvidersData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signatureProviders"
     )]
     pub signature_providers: Vec<AccountSignatureProvider>,
@@ -18227,6 +18926,7 @@ pub struct AccountSignaturesInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "accountSignatures"
     )]
     pub account_signatures: Vec<AccountSignature>,
@@ -18723,6 +19423,7 @@ pub struct Agent {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "additionalNotifications"
     )]
     pub additional_notifications: Vec<RecipientAdditionalNotification>,
@@ -18762,6 +19463,7 @@ pub struct Agent {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -18840,6 +19542,7 @@ pub struct Agent {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -18895,6 +19598,7 @@ pub struct Agent {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "excludedDocuments"
     )]
     pub excluded_documents: Vec<String>,
@@ -19092,6 +19796,7 @@ pub struct Agent {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -19110,6 +19815,7 @@ pub struct Agent {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -19255,6 +19961,7 @@ pub struct Agent {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -19273,6 +19980,7 @@ pub struct Agent {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -19399,6 +20107,7 @@ pub struct ApiRequestLogsResult {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "apiRequestLogs"
     )]
     pub api_request_logs: Vec<ApiRequestLog>,
@@ -20224,6 +20933,7 @@ pub struct Approve {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -21034,6 +21744,7 @@ pub struct BccEmailArchiveHistoryList {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bccEmailArchiveHistory"
     )]
     pub bcc_email_archive_history: Vec<BccEmailArchiveHistory>,
@@ -21108,6 +21819,7 @@ pub struct BccEmailArchiveList {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bccEmailArchives"
     )]
     pub bcc_email_archives: Vec<BccEmailArchiveData>,
@@ -21228,7 +21940,11 @@ pub struct BillingCharge {
     /**
      * Contains information about a billing charge.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub discounts: Vec<BillingDiscount>,
     /**
      * Contains information about a billing charge.
@@ -21271,7 +21987,11 @@ pub struct BillingCharge {
     /**
      * Contains information about a billing charge.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub prices: Vec<BillingPrice>,
     /**
      * Contains information about a billing charge.
@@ -21304,6 +22024,7 @@ pub struct BillingChargeResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "billingChargeItems"
     )]
     pub billing_charge_items: Vec<BillingCharge>,
@@ -21385,6 +22106,7 @@ pub struct BillingInvoice {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "invoiceItems"
     )]
     pub invoice_items: Vec<BillingInvoiceItem>,
@@ -21503,6 +22225,7 @@ pub struct BillingInvoicesResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "billingInvoices"
     )]
     pub billing_invoices: Vec<BillingInvoice>,
@@ -21537,6 +22260,7 @@ pub struct BillingInvoicesSummary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "billingInvoices"
     )]
     pub billing_invoices: Vec<BillingInvoice>,
@@ -21672,6 +22396,7 @@ pub struct BillingPaymentResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "billingPayments"
     )]
     pub billing_payments: Vec<BillingPayment>,
@@ -21686,6 +22411,7 @@ pub struct BillingPaymentsResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "billingPayments"
     )]
     pub billing_payments: Vec<BillingPaymentItem>,
@@ -21720,6 +22446,7 @@ pub struct BillingPlan {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "appStoreProducts"
     )]
     pub app_store_products: Vec<AppStoreProduct>,
@@ -21729,6 +22456,7 @@ pub struct BillingPlan {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "currencyPlanPrices"
     )]
     pub currency_plan_prices: Vec<CurrencyPlanPrice>,
@@ -21808,6 +22536,7 @@ pub struct BillingPlan {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "planFeatureSets"
     )]
     pub plan_feature_sets: Vec<FeatureSet>,
@@ -21837,6 +22566,7 @@ pub struct BillingPlan {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "seatDiscounts"
     )]
     pub seat_discounts: Vec<SeatDiscount>,
@@ -22118,6 +22848,7 @@ pub struct BillingPlanResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "successorPlans"
     )]
     pub successor_plans: Vec<BillingPlan>,
@@ -22216,6 +22947,7 @@ pub struct BillingPlansResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "billingPlans"
     )]
     pub billing_plans: Vec<BillingPlan>,
@@ -22285,6 +23017,7 @@ pub struct Brand {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "brandLanguages"
     )]
     pub brand_languages: Vec<String>,
@@ -22301,7 +23034,11 @@ pub struct Brand {
     /**
      * Information about a brand that is associated with an account. A brand applies custom styles and text to an envelope.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub colors: Vec<NameValue>,
     /**
      * Information about a brand that is associated with an account. A brand applies custom styles and text to an envelope.
@@ -22319,6 +23056,7 @@ pub struct Brand {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "emailContent"
     )]
     pub email_content: Vec<BrandEmailContent>,
@@ -22364,13 +23102,18 @@ pub struct Brand {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "landingPages"
     )]
     pub landing_pages: Vec<NameValue>,
     /**
      * Information about a brand that is associated with an account. A brand applies custom styles and text to an envelope.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub links: Vec<BrandLink>,
     /**
      * Information about a brand that is associated with an account. A brand applies custom styles and text to an envelope.
@@ -22624,6 +23367,7 @@ pub struct BrandResources {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "dataNotSavedNotInMaster"
     )]
     pub data_not_saved_not_in_master: Vec<String>,
@@ -22651,6 +23395,7 @@ pub struct BrandResources {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "modifiedTemplates"
     )]
     pub modified_templates: Vec<String>,
@@ -22685,6 +23430,7 @@ pub struct BrandResourcesList {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "resourcesContentTypes"
     )]
     pub resources_content_types: Vec<BrandResources>,
@@ -22696,7 +23442,11 @@ pub struct BrandsRequest {
     /**
      * Details about one or more brands.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub brands: Vec<BrandRequest>,
 }
 
@@ -22706,7 +23456,11 @@ pub struct BrandsResponse {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub brands: Vec<Brand>,
     /**
      *
@@ -22851,6 +23605,7 @@ pub struct BulkEnvelopeStatus {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bulkEnvelopes"
     )]
     pub bulk_envelopes: Vec<BulkEnvelope>,
@@ -22990,6 +23745,7 @@ pub struct BulkRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "errorDetails"
     )]
     pub error_details: Vec<ErrorDetails>,
@@ -23036,6 +23792,7 @@ pub struct BulkRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientSignatureProviderInfo"
     )]
     pub recipient_signature_provider_info: Vec<BulkRecipientTabLabel>,
@@ -23052,7 +23809,12 @@ pub struct BulkRecipient {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "tabLabels")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabLabels"
+    )]
     pub tab_labels: Vec<BulkRecipientTabLabel>,
 }
 
@@ -23088,6 +23850,7 @@ pub struct BulkRecipientsRequest {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bulkRecipients"
     )]
     pub bulk_recipients: Vec<BulkRecipient>,
@@ -23102,6 +23865,7 @@ pub struct BulkRecipientsResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bulkRecipients"
     )]
     pub bulk_recipients: Vec<BulkRecipient>,
@@ -23176,6 +23940,7 @@ pub struct BulkRecipientsSummaryResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bulkRecipients"
     )]
     pub bulk_recipients: Vec<BulkRecipient>,
@@ -23205,6 +23970,7 @@ pub struct BulkRecipientsSummaryResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "errorDetails"
     )]
     pub error_details: Vec<ErrorDetails>,
@@ -23271,7 +24037,12 @@ pub struct BulkSendBatchStatus {
     /**
      * Result of `getBulkSendBatchStatus`
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "bulkErrors")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "bulkErrors"
+    )]
     pub bulk_errors: Vec<BulkSendErrorStatus>,
     /**
      * Result of `getBulkSendBatchStatus`
@@ -23380,6 +24151,7 @@ pub struct BulkSendBatchSummaries {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bulkBatchSummaries"
     )]
     pub bulk_batch_summaries: Vec<BulkSendBatchSummary>,
@@ -23574,6 +24346,7 @@ pub struct BulkSendErrorStatus {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientEmails"
     )]
     pub recipient_emails: Vec<String>,
@@ -23653,13 +24426,18 @@ pub struct BulkSendResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "errorDetails"
     )]
     pub error_details: Vec<String>,
     /**
      * The object contains the response to a bulk send request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<String>,
     /**
      * The object contains the response to a bulk send request.
@@ -23701,6 +24479,7 @@ pub struct BulkSendTestResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "validationErrorDetails"
     )]
     pub validation_error_details: Vec<String>,
@@ -23710,6 +24489,7 @@ pub struct BulkSendTestResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "validationErrors"
     )]
     pub validation_errors: Vec<String>,
@@ -23724,6 +24504,7 @@ pub struct BulkSendingCopy {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<BulkSendingCopyCustomField>,
@@ -23750,7 +24531,11 @@ pub struct BulkSendingCopy {
     /**
      * This object contains the details to use for a specific copy, or instance, of the envelope. When you send an envelope by using a bulk send list, you can customize these properties for each instance.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<BulkSendingCopyRecipient>,
 }
 
@@ -23806,6 +24591,7 @@ pub struct BulkSendingCopyRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -23949,6 +24735,7 @@ pub struct BulkSendingCopyRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientSignatureProviders"
     )]
     pub recipient_signature_providers: Vec<RecipientSignatureProvider>,
@@ -23997,13 +24784,18 @@ pub struct BulkSendingCopyRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
     /**
      * This object contains details about a bulk send recipient.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tabs: Vec<BulkSendingCopyTab>,
 }
 
@@ -24044,7 +24836,12 @@ pub struct BulkSendingList {
     /**
      * This object contains the details for the bulk send list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "bulkCopies")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "bulkCopies"
+    )]
     pub bulk_copies: Vec<BulkSendingCopy>,
     /**
      * This object contains the details for the bulk send list.
@@ -24076,6 +24873,7 @@ pub struct BulkSendingListSummaries {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bulkListSummaries"
     )]
     pub bulk_list_summaries: Vec<BulkSendingListSummary>,
@@ -24176,6 +24974,7 @@ pub struct CaptiveRecipientInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "captiveRecipients"
     )]
     pub captive_recipients: Vec<CaptiveRecipient>,
@@ -24219,6 +25018,7 @@ pub struct CarbonCopy {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "additionalNotifications"
     )]
     pub additional_notifications: Vec<RecipientAdditionalNotification>,
@@ -24278,6 +25078,7 @@ pub struct CarbonCopy {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -24356,6 +25157,7 @@ pub struct CarbonCopy {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -24411,6 +25213,7 @@ pub struct CarbonCopy {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "excludedDocuments"
     )]
     pub excluded_documents: Vec<String>,
@@ -24613,6 +25416,7 @@ pub struct CarbonCopy {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -24631,6 +25435,7 @@ pub struct CarbonCopy {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -24776,6 +25581,7 @@ pub struct CarbonCopy {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -24794,6 +25600,7 @@ pub struct CarbonCopy {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -24911,6 +25718,7 @@ pub struct CertifiedDelivery {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "additionalNotifications"
     )]
     pub additional_notifications: Vec<RecipientAdditionalNotification>,
@@ -24970,6 +25778,7 @@ pub struct CertifiedDelivery {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -25048,6 +25857,7 @@ pub struct CertifiedDelivery {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -25103,6 +25913,7 @@ pub struct CertifiedDelivery {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "excludedDocuments"
     )]
     pub excluded_documents: Vec<String>,
@@ -25305,6 +26116,7 @@ pub struct CertifiedDelivery {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -25323,6 +26135,7 @@ pub struct CertifiedDelivery {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -25468,6 +26281,7 @@ pub struct CertifiedDelivery {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -25486,6 +26300,7 @@ pub struct CertifiedDelivery {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -26294,6 +27109,7 @@ pub struct Checkbox {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -26612,6 +27428,7 @@ pub struct ChunkedUploadResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "chunkedUploadParts"
     )]
     pub chunked_upload_parts: Vec<ChunkedUploadPart>,
@@ -26738,6 +27555,7 @@ pub struct CloudStorageProvidersData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "storageProviders"
     )]
     pub storage_providers: Vec<CloudStorageProvider>,
@@ -26777,7 +27595,11 @@ pub struct Comment {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub mentions: Vec<String>,
     /**
      *
@@ -26937,7 +27759,12 @@ pub struct Comment {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "visibleTo")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "visibleTo"
+    )]
     pub visible_to: Vec<String>,
 }
 
@@ -26947,7 +27774,11 @@ pub struct CommentHistoryResult {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub comments: Vec<Comment>,
     /**
      *
@@ -26995,7 +27826,11 @@ pub struct CommentPublish {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub mentions: Vec<String>,
     /**
      *
@@ -27029,7 +27864,12 @@ pub struct CommentPublish {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "visibleTo")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "visibleTo"
+    )]
     pub visible_to: Vec<String>,
 }
 
@@ -27247,7 +28087,11 @@ pub struct CommentThread {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub comments: Vec<Comment>,
     /**
      *
@@ -27601,6 +28445,7 @@ pub struct CommentThread {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -27840,6 +28685,7 @@ pub struct CommentsPublish {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commentsToPublish"
     )]
     pub comments_to_publish: Vec<CommentPublish>,
@@ -28538,6 +29384,7 @@ pub struct PhoneNumber {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -29543,6 +30390,7 @@ pub struct Company {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -29812,7 +30660,11 @@ pub struct CompleteSignHashResponse {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub documents: Vec<serde_json::Value>,
     /**
      *
@@ -29868,6 +30720,7 @@ pub struct CompositeTemplate {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "inlineTemplates"
     )]
     pub inline_templates: Vec<InlineTemplate>,
@@ -29891,6 +30744,7 @@ pub struct CompositeTemplate {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "serverTemplates"
     )]
     pub server_templates: Vec<ServerTemplate>,
@@ -29902,7 +30756,11 @@ pub struct ConditionalRecipientRule {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<ConditionalRecipientRuleCondition>,
     /**
      *
@@ -29940,7 +30798,11 @@ pub struct ConditionalRecipientRuleCondition {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub filters: Vec<ConditionalRecipientRuleFilter>,
     /**
      *
@@ -30031,7 +30893,11 @@ pub struct ConnectConfigResults {
     /**
      * This object contains the results of a ConnectConfigurations::GET method.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub configurations: Vec<ConnectCustomConfiguration>,
     /**
      * This object contains the results of a ConnectConfigurations::GET method.
@@ -30114,6 +30980,7 @@ pub struct ConnectCustomConfiguration {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeEvents"
     )]
     pub envelope_events: Vec<String>,
@@ -30246,6 +31113,7 @@ pub struct ConnectCustomConfiguration {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientEvents"
     )]
     pub recipient_events: Vec<String>,
@@ -30325,13 +31193,19 @@ pub struct ConnectCustomConfiguration {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "senderSelectableItems"
     )]
     pub sender_selectable_items: Vec<String>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "sfObjects")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "sfObjects"
+    )]
     pub sf_objects: Vec<ConnectSalesforceObject>,
     /**
      *
@@ -30376,7 +31250,12 @@ pub struct ConnectCustomConfiguration {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "userIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "userIds"
+    )]
     pub user_ids: Vec<String>,
     /**
      *
@@ -30461,7 +31340,12 @@ pub struct ConnectEventData {
      * This object lets you choose the data format of your Connect response.
      *  For  more information about using this object, see [Connect webhooks with JSON notifications](https://www.docusign.com/blog/developers/connect-webhooks-json-notifications).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "includeData")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "includeData"
+    )]
     pub include_data: Vec<String>,
     /**
      * This object lets you choose the data format of your Connect response.
@@ -30481,7 +31365,12 @@ pub struct ConnectFailureFilter {
     /**
      * A list of failed envelope IDs to retry.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "envelopeIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "envelopeIds"
+    )]
     pub envelope_ids: Vec<String>,
     /**
      * A list of failed envelope IDs to retry.
@@ -30554,7 +31443,12 @@ pub struct ConnectFailureResults {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "retryQueue")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "retryQueue"
+    )]
     pub retry_queue: Vec<ConnectFailureResult>,
 }
 
@@ -30587,6 +31481,7 @@ pub struct ConnectLog {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "connectDebugLog"
     )]
     pub connect_debug_log: Vec<ConnectDebugLog>,
@@ -30897,6 +31792,7 @@ pub struct ConnectSalesforceObject {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "selectFields"
     )]
     pub select_fields: Vec<ConnectSalesforceField>,
@@ -30935,6 +31831,7 @@ pub struct ConnectSalesforceObject {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "updateFields"
     )]
     pub update_fields: Vec<ConnectSalesforceField>,
@@ -30987,6 +31884,7 @@ pub struct ConnectUserObject {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "senderSearchableItems"
     )]
     pub sender_searchable_items: Vec<String>,
@@ -31378,6 +32276,7 @@ pub struct Contact {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "contactPhoneNumbers"
     )]
     pub contact_phone_numbers: Vec<ContactPhoneNumber>,
@@ -31394,7 +32293,11 @@ pub struct Contact {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<String>,
     /**
      *
@@ -31469,7 +32372,11 @@ pub struct ContactGetResponse {
     /**
      * This response object contains information about the contacts associated with an account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contacts: Vec<Contact>,
     /**
      * This response object contains information about the contacts associated with an account.
@@ -31539,7 +32446,12 @@ pub struct ContactModRequest {
     /**
      * The request object containing the new information for the contacts.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "contactList")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "contactList"
+    )]
     pub contact_list: Vec<Contact>,
 }
 
@@ -31574,7 +32486,11 @@ pub struct ContactUpdateResponse {
     /**
      * This response objects shows the updated details for the contacts.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contacts: Vec<Contact>,
 }
 
@@ -31648,7 +32564,11 @@ pub struct Country {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub provinces: Vec<Province>,
 }
 
@@ -31728,7 +32648,12 @@ pub struct CreditCardTypes {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "cardTypes")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "cardTypes"
+    )]
     pub card_types: Vec<String>,
 }
 
@@ -32510,6 +33435,7 @@ pub struct Currency {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -32902,7 +33828,12 @@ pub struct CustomField {
     /**
      * This object provides details about a custom field.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "listItems")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listItems"
+    )]
     pub list_items: Vec<String>,
     /**
      * This object provides details about a custom field.
@@ -32951,6 +33882,7 @@ pub struct CustomFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "listCustomFields"
     )]
     pub list_custom_fields: Vec<ListCustomField>,
@@ -32960,6 +33892,7 @@ pub struct CustomFields {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "textCustomFields"
     )]
     pub text_custom_fields: Vec<TextCustomField>,
@@ -32974,6 +33907,7 @@ pub struct CustomFieldsEnvelope {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "listCustomFields"
     )]
     pub list_custom_fields: Vec<ListCustomField>,
@@ -32983,6 +33917,7 @@ pub struct CustomFieldsEnvelope {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "textCustomFields"
     )]
     pub text_custom_fields: Vec<TextCustomField>,
@@ -32997,6 +33932,7 @@ pub struct CustomSettingsInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customSettings"
     )]
     pub custom_settings: Vec<NameValue>,
@@ -34433,6 +35369,7 @@ pub struct Date {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -35647,6 +36584,7 @@ pub struct DateSigned {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -36798,6 +37736,7 @@ pub struct Decline {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -37395,6 +38334,7 @@ pub struct Document {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentFields"
     )]
     pub document_fields: Vec<NameValue>,
@@ -37460,7 +38400,12 @@ pub struct Document {
     /**
      * A document object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "matchBoxes")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "matchBoxes"
+    )]
     pub match_boxes: Vec<MatchBox>,
     /**
      * A document object.
@@ -37592,6 +38537,7 @@ pub struct DocumentFieldsInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentFields"
     )]
     pub document_fields: Vec<NameValue>,
@@ -37720,6 +38666,7 @@ pub struct DocumentHtmlDefinition {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "displayAnchors"
     )]
     pub display_anchors: Vec<DocumentHtmlDisplayAnchor>,
@@ -37857,6 +38804,7 @@ pub struct DocumentHtmlDefinitions {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "htmlDefinitions"
     )]
     pub html_definitions: Vec<String>,
@@ -38107,6 +39055,7 @@ pub struct DocumentTemplateList {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentTemplates"
     )]
     pub document_templates: Vec<DocumentTemplate>,
@@ -38173,6 +39122,7 @@ pub struct DocumentVisibilityList {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -38825,6 +39775,7 @@ pub struct Draw {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -39128,6 +40079,7 @@ pub struct Editor {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "additionalNotifications"
     )]
     pub additional_notifications: Vec<RecipientAdditionalNotification>,
@@ -39167,6 +40119,7 @@ pub struct Editor {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -39245,6 +40198,7 @@ pub struct Editor {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -39488,6 +40442,7 @@ pub struct Editor {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -39506,6 +40461,7 @@ pub struct Editor {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -39651,6 +40607,7 @@ pub struct Editor {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -39669,6 +40626,7 @@ pub struct Editor {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -41257,6 +42215,7 @@ pub struct Email {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -42500,6 +43459,7 @@ pub struct EmailAddress {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -42821,6 +43781,7 @@ pub struct EmailSettings {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "bccEmailAddresses"
     )]
     pub bcc_email_addresses: Vec<BccEmailAddress>,
@@ -43176,6 +44137,7 @@ pub struct Envelope {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeAttachments"
     )]
     pub envelope_attachments: Vec<Attachment>,
@@ -43185,6 +44147,7 @@ pub struct Envelope {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeDocuments"
     )]
     pub envelope_documents: Vec<EnvelopeDocument>,
@@ -43280,7 +44243,11 @@ pub struct Envelope {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      *
@@ -43599,7 +44566,11 @@ pub struct EnvelopeAttachmentsRequest {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub attachments: Vec<Attachment>,
 }
 
@@ -43609,7 +44580,11 @@ pub struct EnvelopeAttachmentsResult {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub attachments: Vec<EnvelopeAttachment>,
 }
 
@@ -43619,7 +44594,12 @@ pub struct EnvelopeAuditEvent {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "eventFields")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "eventFields"
+    )]
     pub event_fields: Vec<NameValue>,
 }
 
@@ -43629,7 +44609,12 @@ pub struct EnvelopeAuditEventResponse {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "auditEvents")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "auditEvents"
+    )]
     pub audit_events: Vec<EnvelopeAuditEvent>,
 }
 
@@ -43727,7 +44712,11 @@ pub struct EnvelopeDefinition {
     /**
      * Envelope object definition.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub attachments: Vec<Attachment>,
     /**
      * Envelope object definition.
@@ -43815,6 +44804,7 @@ pub struct EnvelopeDefinition {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "compositeTemplates"
     )]
     pub composite_templates: Vec<CompositeTemplate>,
@@ -43900,7 +44890,11 @@ pub struct EnvelopeDefinition {
     /**
      * Envelope object definition.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub documents: Vec<Document>,
     /**
      * Envelope object definition.
@@ -43977,6 +44971,7 @@ pub struct EnvelopeDefinition {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeAttachments"
     )]
     pub envelope_attachments: Vec<Attachment>,
@@ -43986,6 +44981,7 @@ pub struct EnvelopeDefinition {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeDocuments"
     )]
     pub envelope_documents: Vec<EnvelopeDocument>,
@@ -44090,7 +45086,11 @@ pub struct EnvelopeDefinition {
     /**
      * Envelope object definition.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      * Envelope object definition.
@@ -44371,6 +45371,7 @@ pub struct EnvelopeDefinition {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "templateRoles"
     )]
     pub template_roles: Vec<TemplateRole>,
@@ -44440,6 +45441,7 @@ pub struct EnvelopeDocument {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "addedRecipientIds"
     )]
     pub added_recipient_ids: Vec<String>,
@@ -44478,6 +45480,7 @@ pub struct EnvelopeDocument {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "availableDocumentTypes"
     )]
     pub available_document_types: Vec<SignatureType>,
@@ -44515,6 +45518,7 @@ pub struct EnvelopeDocument {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentFields"
     )]
     pub document_fields: Vec<NameValue>,
@@ -44596,7 +45600,11 @@ pub struct EnvelopeDocument {
     /**
      * This object contains details about the envelope document.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pages: Vec<Page>,
     /**
      * This object contains details about the envelope document.
@@ -44677,6 +45685,7 @@ pub struct EnvelopeDocumentsResult {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeDocuments"
     )]
     pub envelope_documents: Vec<EnvelopeDocument>,
@@ -44743,7 +45752,12 @@ pub struct EnvelopeFormDataType {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "formData")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formData"
+    )]
     pub form_data: Vec<FormDataItem>,
     /**
      *
@@ -44751,6 +45765,7 @@ pub struct EnvelopeFormDataType {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "prefillFormData"
     )]
     pub prefill_form_data: Vec<FormDataItem>,
@@ -44760,6 +45775,7 @@ pub struct EnvelopeFormDataType {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFormData"
     )]
     pub recipient_form_data: Vec<RecipientFormData>,
@@ -45490,6 +46506,7 @@ pub struct EnvelopeId {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -45762,7 +46779,12 @@ pub struct EnvelopeIdsRequest {
     /**
      * Lists of envelope and transaction IDs to use in the results.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "envelopeIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "envelopeIds"
+    )]
     pub envelope_ids: Vec<String>,
     /**
      * Lists of envelope and transaction IDs to use in the results.
@@ -45770,6 +46792,7 @@ pub struct EnvelopeIdsRequest {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "transactionIds"
     )]
     pub transaction_ids: Vec<String>,
@@ -46213,7 +47236,11 @@ pub struct EnvelopeTemplate {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub documents: Vec<Document>,
     /**
      *
@@ -46290,6 +47317,7 @@ pub struct EnvelopeTemplate {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeAttachments"
     )]
     pub envelope_attachments: Vec<Attachment>,
@@ -46299,6 +47327,7 @@ pub struct EnvelopeTemplate {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeDocuments"
     )]
     pub envelope_documents: Vec<EnvelopeDocument>,
@@ -46414,7 +47443,12 @@ pub struct EnvelopeTemplate {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "folderIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "folderIds"
+    )]
     pub folder_ids: Vec<String>,
     /**
      *
@@ -46429,7 +47463,11 @@ pub struct EnvelopeTemplate {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      *
@@ -46653,7 +47691,12 @@ pub struct EnvelopeTemplate {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "powerForms")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "powerForms"
+    )]
     pub power_forms: Vec<PowerForm>,
     /**
      *
@@ -46876,13 +47919,18 @@ pub struct EnvelopeTemplateResults {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeTemplates"
     )]
     pub envelope_templates: Vec<EnvelopeTemplate>,
     /**
      * Information about templates.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      * Information about templates.
@@ -47080,6 +48128,7 @@ pub struct EnvelopeTransferRuleInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeTransferRules"
     )]
     pub envelope_transfer_rules: Vec<EnvelopeTransferRule>,
@@ -47180,12 +48229,22 @@ pub struct EnvelopeTransferRuleRequest {
     /**
      * This object contains details about the envelope transfer rule that you want to create.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "fromGroups")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "fromGroups"
+    )]
     pub from_groups: Vec<Group>,
     /**
      * This object contains details about the envelope transfer rule that you want to create.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "fromUsers")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "fromUsers"
+    )]
     pub from_users: Vec<UserInformation>,
     /**
      * This object contains details about the envelope transfer rule that you want to create.
@@ -47254,6 +48313,7 @@ pub struct EnvelopeUpdateSummary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "listCustomFieldUpdateResults"
     )]
     pub list_custom_field_update_results: Vec<ListCustomField>,
@@ -47282,6 +48342,7 @@ pub struct EnvelopeUpdateSummary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientUpdateResults"
     )]
     pub recipient_update_results: Vec<RecipientUpdateResponse>,
@@ -47300,6 +48361,7 @@ pub struct EnvelopeUpdateSummary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "textCustomFieldUpdateResults"
     )]
     pub text_custom_field_update_results: Vec<TextCustomField>,
@@ -47334,18 +48396,27 @@ pub struct EnvelopesInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeTransactionStatuses"
     )]
     pub envelope_transaction_statuses: Vec<EnvelopeTransactionStatus>,
     /**
      * Result set for the Envelopes: listStatusChanges method
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub envelopes: Vec<Envelope>,
     /**
      * Result set for the Envelopes: listStatusChanges method
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      * Result set for the Envelopes: listStatusChanges method
@@ -47422,6 +48493,7 @@ pub struct EventNotification {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeEvents"
     )]
     pub envelope_events: Vec<EnvelopeEvent>,
@@ -47526,6 +48598,7 @@ pub struct EventNotification {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientEvents"
     )]
     pub recipient_events: Vec<RecipientEvent>,
@@ -47948,7 +49021,11 @@ pub struct ExternalFolder {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<ExternalFile>,
     /**
      *
@@ -48077,6 +49154,7 @@ pub struct FeatureSet {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "currencyFeatureSetPrices"
     )]
     pub currency_feature_set_prices: Vec<CurrencyFeatureSetPrice>,
@@ -48192,7 +49270,12 @@ pub struct FileTypeList {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "fileTypes")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "fileTypes"
+    )]
     pub file_types: Vec<FileType>,
 }
 
@@ -49140,6 +50223,7 @@ pub struct FirstName {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -49508,12 +50592,21 @@ pub struct Folder {
     /**
      * This object contains details about a folder.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "folderItems")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "folderItems"
+    )]
     pub folder_items: Vec<FolderItemV2>,
     /**
      * This object contains details about a folder.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      * This object contains details about a folder.
@@ -49626,7 +50719,12 @@ pub struct FolderItemResponse {
     /**
      * Results from a folder item request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "folderItems")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "folderItems"
+    )]
     pub folder_items: Vec<FolderItemV2>,
     /**
      * Results from a folder item request.
@@ -49894,12 +50992,20 @@ pub struct FoldersResponse {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub envelopes: Vec<EnvelopeSummary>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      *
@@ -50024,13 +51130,19 @@ pub struct FolderSharedItem {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "sharedGroups"
     )]
     pub shared_groups: Vec<MemberGroupSharedItem>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "sharedUsers")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "sharedUsers"
+    )]
     pub shared_users: Vec<UserSharedItem>,
     /**
      *
@@ -50054,12 +51166,21 @@ pub struct FoldersRequest {
     /**
      * Information for a folder request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "envelopeIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "envelopeIds"
+    )]
     pub envelope_ids: Vec<String>,
     /**
      * Information for a folder request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folder>,
     /**
      * Information for a folder request.
@@ -53052,6 +54173,7 @@ pub struct FormulaTab {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -54609,6 +55731,7 @@ pub struct FullName {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -54962,7 +56085,11 @@ pub struct Group {
     /**
      * This object contains information about a group.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UserInfo>,
     /**
      * This object contains information about a group.
@@ -54992,7 +56119,11 @@ pub struct GroupInformation {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<Group>,
     /**
      *
@@ -55052,7 +56183,12 @@ pub struct IdCheckConfiguration {
     /**
      * A complex object specifying ID check configuration.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "authSteps")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "authSteps"
+    )]
     pub auth_steps: Vec<IdCheckSecurityStep>,
     /**
      * A complex object specifying ID check configuration.
@@ -55316,6 +56452,7 @@ pub struct InPersonSigner {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -55476,6 +56613,7 @@ pub struct InPersonSigner {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -55579,6 +56717,7 @@ pub struct InPersonSigner {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "excludedDocuments"
     )]
     pub excluded_documents: Vec<String>,
@@ -55979,6 +57118,7 @@ pub struct InPersonSigner {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -56013,6 +57153,7 @@ pub struct InPersonSigner {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -56066,6 +57207,7 @@ pub struct InPersonSigner {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientSignatureProviders"
     )]
     pub recipient_signature_providers: Vec<RecipientSignatureProvider>,
@@ -56559,6 +57701,7 @@ pub struct InPersonSigner {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -56593,6 +57736,7 @@ pub struct InPersonSigner {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -57364,6 +58508,7 @@ pub struct InitialHere {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -57623,7 +58768,11 @@ pub struct InlineTemplate {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub documents: Vec<Document>,
     /**
      *
@@ -57722,7 +58871,11 @@ pub struct IntegratedUserInfoList {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UserInfo>,
 }
 
@@ -57764,6 +58917,7 @@ pub struct Intermediary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "additionalNotifications"
     )]
     pub additional_notifications: Vec<RecipientAdditionalNotification>,
@@ -57803,6 +58957,7 @@ pub struct Intermediary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -57881,6 +59036,7 @@ pub struct Intermediary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -57936,6 +59092,7 @@ pub struct Intermediary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "excludedDocuments"
     )]
     pub excluded_documents: Vec<String>,
@@ -58133,6 +59290,7 @@ pub struct Intermediary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -58151,6 +59309,7 @@ pub struct Intermediary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -58296,6 +59455,7 @@ pub struct Intermediary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -58314,6 +59474,7 @@ pub struct Intermediary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -59333,6 +60494,7 @@ pub struct LastName {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -60363,7 +61525,12 @@ pub struct List {
      *  objects to specify the selectable options.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "listItems")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listItems"
+    )]
     pub list_items: Vec<ListItem>,
     /**
      * This tab offers a list of options to choose from.
@@ -60748,6 +61915,7 @@ pub struct List {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -61146,7 +62314,12 @@ pub struct ListCustomField {
     /**
      * This object represents a list custom field from which envelope creators and senders can select custom data.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "listItems")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listItems"
+    )]
     pub list_items: Vec<String>,
     /**
      * This object represents a list custom field from which envelope creators and senders can select custom data.
@@ -62010,6 +63183,7 @@ pub struct LoginAccount {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "loginAccountSettings"
     )]
     pub login_account_settings: Vec<NameValue>,
@@ -62019,6 +63193,7 @@ pub struct LoginAccount {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "loginUserSettings"
     )]
     pub login_user_settings: Vec<NameValue>,
@@ -62082,6 +63257,7 @@ pub struct LoginInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "loginAccounts"
     )]
     pub login_accounts: Vec<LoginAccount>,
@@ -62174,7 +63350,11 @@ pub struct MemberSharedItems {
     /**
      * Information about shared items.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub envelopes: Vec<SharedItem>,
     /**
      * Information about shared items.
@@ -62188,12 +63368,20 @@ pub struct MemberSharedItems {
     /**
      * Information about shared items.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<FolderSharedItem>,
     /**
      * Information about shared items.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub templates: Vec<TemplateSharedItem>,
     /**
      * Information about shared items.
@@ -62258,6 +63446,7 @@ pub struct MergeField {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "pathExtended"
     )]
     pub path_extended: Vec<PathExtendedElement>,
@@ -62360,6 +63549,7 @@ pub struct MobileNotifierConfigurationInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "mobileNotifierConfigurations"
     )]
     pub mobile_notifier_configurations: Vec<MobileNotifierConfiguration>,
@@ -62776,7 +63966,12 @@ pub struct NewUsersDefinition {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "newUsers")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "newUsers"
+    )]
     pub new_users: Vec<UserInformation>,
 }
 
@@ -62786,7 +63981,12 @@ pub struct NewUsersSummary {
     /**
      * Object representing a summary of data for new users.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "newUsers")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "newUsers"
+    )]
     pub new_users: Vec<NewUser>,
 }
 
@@ -63396,6 +64596,7 @@ pub struct Notarize {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -63793,6 +64994,7 @@ pub struct NotaryHost {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -63943,6 +65145,7 @@ pub struct NotaryHost {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -64328,6 +65531,7 @@ pub struct NotaryHost {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -64364,6 +65568,7 @@ pub struct NotaryHost {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -64644,6 +65849,7 @@ pub struct NotaryHost {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -64680,6 +65886,7 @@ pub struct NotaryHost {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -64893,6 +66100,7 @@ pub struct NotaryJournalList {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notaryJournals"
     )]
     pub notary_journals: Vec<NotaryJournal>,
@@ -64956,6 +66164,7 @@ pub struct NotaryJournalMetaData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "credibleWitnesses"
     )]
     pub credible_witnesses: Vec<NotaryJournalCredibleWitness>,
@@ -65078,6 +66287,7 @@ pub struct NotaryJurisdictionList {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notaryJurisdictions"
     )]
     pub notary_jurisdictions: Vec<NotaryJurisdictionData>,
@@ -65161,6 +66371,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "additionalNotifications"
     )]
     pub additional_notifications: Vec<RecipientAdditionalNotification>,
@@ -65260,6 +66471,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -65348,6 +66560,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -65403,6 +66616,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "excludedDocuments"
     )]
     pub excluded_documents: Vec<String>,
@@ -65612,6 +66826,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarySigners"
     )]
     pub notary_signers: Vec<String>,
@@ -65672,6 +66887,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -65690,6 +66906,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -65719,6 +66936,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientSignatureProviders"
     )]
     pub recipient_signature_providers: Vec<RecipientSignatureProvider>,
@@ -65912,6 +67130,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -65930,6 +67149,7 @@ pub struct NotaryRecipient {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -66015,7 +67235,11 @@ pub struct NotaryResult {
     /**
      * Describes a single notary jurisdiction.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub jurisdictions: Vec<Jurisdiction>,
     /**
      * Describes a single notary jurisdiction.
@@ -66523,6 +67747,7 @@ pub struct NotarySeal {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -67453,6 +68678,7 @@ pub struct Note {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -68742,6 +69968,7 @@ pub struct Number {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -69091,7 +70318,11 @@ pub struct OauthAccess {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<NameValue>,
     /**
      *
@@ -69233,7 +70464,11 @@ pub struct PageImages {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pages: Vec<Page>,
     /**
      *
@@ -69411,6 +70646,7 @@ pub struct PaymentDetails {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "allowedPaymentMethods"
     )]
     pub allowed_payment_methods: Vec<String>,
@@ -69613,7 +70849,12 @@ pub struct PaymentDetails {
      *  [paymentguide]:     https://support.docusign.com/en/guides/requesting-payments-along-with-signatures
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "lineItems")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "lineItems"
+    )]
     pub line_items: Vec<PaymentLineItem>,
     /**
      * When a formula tab
@@ -69807,6 +71048,7 @@ pub struct PaymentGatewayAccount {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "supportedCurrencies"
     )]
     pub supported_currencies: Vec<String>,
@@ -69816,6 +71058,7 @@ pub struct PaymentGatewayAccount {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "supportedPaymentMethods"
     )]
     pub supported_payment_methods: Vec<String>,
@@ -69825,6 +71068,7 @@ pub struct PaymentGatewayAccount {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "supportedPaymentMethodsWithOptions"
     )]
     pub supported_payment_methods_with_options: Vec<PaymentMethodWithOptions>,
@@ -69834,6 +71078,7 @@ pub struct PaymentGatewayAccount {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "zeroDecimalCurrencies"
     )]
     pub zero_decimal_currencies: Vec<String>,
@@ -69893,6 +71138,7 @@ pub struct PaymentGatewayAccountsInfo {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "paymentGatewayAccounts"
     )]
     pub payment_gateway_accounts: Vec<PaymentGatewayAccount>,
@@ -69969,6 +71215,7 @@ pub struct PaymentMethodWithOptions {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "supportedOptions"
     )]
     pub supported_options: Vec<String>,
@@ -70089,7 +71336,11 @@ pub struct PermissionProfile {
     /**
      * This object defines the account permissions for a profile that you can apply to a group of users.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UserInformation>,
 }
 
@@ -70102,6 +71353,7 @@ pub struct PermissionProfileInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "permissionProfiles"
     )]
     pub permission_profiles: Vec<PermissionProfile>,
@@ -70113,7 +71365,12 @@ pub struct PlanInformation {
     /**
      * An object used to identify the features and attributes of the account being created.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "addOns")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "addOns"
+    )]
     pub add_ons: Vec<AddOn>,
     /**
      * An object used to identify the features and attributes of the account being created.
@@ -70141,6 +71398,7 @@ pub struct PlanInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "planFeatureSets"
     )]
     pub plan_feature_sets: Vec<FeatureSet>,
@@ -70160,6 +71418,7 @@ pub struct PlanInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientDomains"
     )]
     pub recipient_domains: Vec<RecipientDomain>,
@@ -70650,7 +71909,12 @@ pub struct PolyLineOverlay {
     /**
      * This tab enables users to strike through the text of a document. The tab is implemented as a line represented as a pair of x and y coordinates.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "polyLines")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "polyLines"
+    )]
     pub poly_lines: Vec<PolyLine>,
     /**
      * This tab enables users to strike through the text of a document. The tab is implemented as a line represented as a pair of x and y coordinates.
@@ -70741,6 +72005,7 @@ pub struct PolyLineOverlay {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -70980,7 +72245,11 @@ pub struct PowerForm {
     /**
      * Contains details about a PowerForm.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub envelopes: Vec<Envelope>,
     /**
      * Contains details about a PowerForm.
@@ -71092,7 +72361,11 @@ pub struct PowerForm {
     /**
      * Contains details about a PowerForm.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<PowerFormRecipient>,
     /**
      * Contains details about a PowerForm.
@@ -71191,7 +72464,11 @@ pub struct PowerFormDataEnvelope {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<PowerFormDataRecipient>,
 }
 
@@ -71210,7 +72487,12 @@ pub struct PowerFormDataRecipient {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "formData")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formData"
+    )]
     pub form_data: Vec<NameValue>,
     /**
      *
@@ -71395,6 +72677,7 @@ pub struct PowerFormSendersResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "powerFormSenders"
     )]
     pub power_form_senders: Vec<UserInfo>,
@@ -71446,7 +72729,11 @@ pub struct PowerFormsFormDataResponse {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub envelopes: Vec<PowerFormDataEnvelope>,
 }
 
@@ -71456,7 +72743,12 @@ pub struct PowerFormsRequest {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "powerForms")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "powerForms"
+    )]
     pub power_forms: Vec<PowerForm>,
 }
 
@@ -71486,7 +72778,12 @@ pub struct PowerFormsResponse {
     /**
      * A list of PowerForms.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "powerForms")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "powerForms"
+    )]
     pub power_forms: Vec<PowerForm>,
     /**
      * A list of PowerForms.
@@ -71539,6 +72836,7 @@ pub struct PrefillTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "checkboxTabs"
     )]
     pub checkbox_tabs: Vec<Checkbox>,
@@ -71548,18 +72846,29 @@ pub struct PrefillTabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "radioGroupTabs"
     )]
     pub radio_group_tabs: Vec<RadioGroup>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "tabGroups")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroups"
+    )]
     pub tab_groups: Vec<TabGroup>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "textTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "textTabs"
+    )]
     pub text_tabs: Vec<Text>,
 }
 
@@ -71609,7 +72918,11 @@ pub struct PropertyMetadata {
     /**
      * Metadata about a property.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub options: Vec<String>,
     /**
      * Metadata about a property.
@@ -72614,7 +73927,11 @@ pub struct RadioGroup {
      *  be selected in a group.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub radios: Vec<Radio>,
     /**
      * This group tab is used to place radio buttons on a document.
@@ -73186,7 +74503,12 @@ pub struct RecipientFormData {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "formData")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formData"
+    )]
     pub form_data: Vec<FormDataItem>,
     /**
      *
@@ -73235,7 +74557,11 @@ pub struct RecipientGroup {
     /**
      * Describes a group of recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<RecipientOption>,
 }
 
@@ -73257,6 +74583,7 @@ pub struct RecipientIdentityInputOption {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "phoneNumberList"
     )]
     pub phone_number_list: Vec<RecipientIdentityPhoneNumber>,
@@ -73312,6 +74639,7 @@ pub struct RecipientIdentityVerification {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "inputOptions"
     )]
     pub input_options: Vec<RecipientIdentityInputOption>,
@@ -73350,6 +74678,7 @@ pub struct RecipientNamesResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientNames"
     )]
     pub recipient_names: Vec<String>,
@@ -73495,6 +74824,7 @@ pub struct RecipientPhoneAuthentication {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "senderProvidedNumbers"
     )]
     pub sender_provided_numbers: Vec<String>,
@@ -73724,6 +75054,7 @@ pub struct RecipientRules {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "conditionalRecipients"
     )]
     pub conditional_recipients: Vec<ConditionalRecipientRule>,
@@ -73738,6 +75069,7 @@ pub struct RecipientSmsAuthentication {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "senderProvidedNumbers"
     )]
     pub sender_provided_numbers: Vec<String>,
@@ -74039,6 +75371,7 @@ pub struct RecipientViewRequest {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "frameAncestors"
     )]
     pub frame_ancestors: Vec<String>,
@@ -74048,6 +75381,7 @@ pub struct RecipientViewRequest {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "messageOrigins"
     )]
     pub message_origins: Vec<String>,
@@ -74149,7 +75483,11 @@ pub struct Recipients {
     /**
      * Specifies the envelope recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub agents: Vec<Agent>,
     /**
      * Specifies the envelope recipients.
@@ -74157,6 +75495,7 @@ pub struct Recipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "carbonCopies"
     )]
     pub carbon_copies: Vec<CarbonCopy>,
@@ -74166,6 +75505,7 @@ pub struct Recipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "certifiedDeliveries"
     )]
     pub certified_deliveries: Vec<CertifiedDelivery>,
@@ -74182,7 +75522,11 @@ pub struct Recipients {
     /**
      * Specifies the envelope recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub editors: Vec<Editor>,
     /**
      * Specifies the envelope recipients.
@@ -74199,18 +75543,27 @@ pub struct Recipients {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "inPersonSigners"
     )]
     pub in_person_signers: Vec<InPersonSigner>,
     /**
      * Specifies the envelope recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub intermediaries: Vec<Intermediary>,
     /**
      * Specifies the envelope recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub notaries: Vec<NotaryRecipient>,
     /**
      * Specifies the envelope recipients.
@@ -74225,17 +75578,29 @@ pub struct Recipients {
     /**
      * Specifies the envelope recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub seals: Vec<SealSign>,
     /**
      * Specifies the envelope recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub signers: Vec<Signer>,
     /**
      * Specifies the envelope recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub witnesses: Vec<Witness>,
 }
 
@@ -74248,6 +75613,7 @@ pub struct RecipientsUpdateSummary {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientUpdateResults"
     )]
     pub recipient_update_results: Vec<RecipientUpdateResponse>,
@@ -74593,7 +75959,11 @@ pub struct ReportInProductCsvRunRequest {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub fields: Vec<ReportInProductField>,
     /**
      *
@@ -74901,7 +76271,11 @@ pub struct ReportInProductGet {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub fields: Vec<ReportInProductField>,
     /**
      *
@@ -75316,7 +76690,11 @@ pub struct ReportInProductRunRequest {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub fields: Vec<ReportInProductField>,
     /**
      *
@@ -75496,7 +76874,11 @@ pub struct ReportInProductRunResponse {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub rows: Vec<ReportInProductRunResponseRow>,
     /**
      *
@@ -76754,12 +78136,20 @@ pub struct ReportInProductSentByDetails {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<Group>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UserInfo>,
 }
 
@@ -76769,7 +78159,11 @@ pub struct ResourceInformation {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub resources: Vec<NameValue>,
 }
 
@@ -77088,6 +78482,7 @@ pub struct SealSign {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -77350,6 +78745,7 @@ pub struct SealSign {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -77900,6 +79296,7 @@ pub struct SealSign {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -77964,6 +79361,7 @@ pub struct SealSign {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -78062,6 +79460,7 @@ pub struct SealSign {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientSignatureProviders"
     )]
     pub recipient_signature_providers: Vec<RecipientSignatureProvider>,
@@ -78420,6 +79819,7 @@ pub struct SealSign {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -78903,7 +80303,12 @@ pub struct ServiceInformation {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "linkedSites")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "linkedSites"
+    )]
     pub linked_sites: Vec<String>,
     /**
      *
@@ -78911,6 +80316,7 @@ pub struct ServiceInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "serviceVersions"
     )]
     pub service_versions: Vec<ServiceVersion>,
@@ -78956,7 +80362,11 @@ pub struct SettingsMetadata {
     /**
      * Metadata that indicates whether a property is editable and describes setting-specific options.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub options: Vec<String>,
     /**
      * Metadata that indicates whether a property is editable and describes setting-specific options.
@@ -79697,6 +81107,7 @@ pub struct SignHere {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -80032,6 +81443,7 @@ pub struct SignatureProviderRequiredOption {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "requiredSignatureProviderOptionIds"
     )]
     pub required_signature_provider_option_ids: Vec<String>,
@@ -80188,6 +81600,7 @@ pub struct Signer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "additionalNotifications"
     )]
     pub additional_notifications: Vec<RecipientAdditionalNotification>,
@@ -80287,6 +81700,7 @@ pub struct Signer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -80375,6 +81789,7 @@ pub struct Signer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -80430,6 +81845,7 @@ pub struct Signer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "excludedDocuments"
     )]
     pub excluded_documents: Vec<String>,
@@ -80661,6 +82077,7 @@ pub struct Signer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -80679,6 +82096,7 @@ pub struct Signer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -80708,6 +82126,7 @@ pub struct Signer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientSignatureProviders"
     )]
     pub recipient_signature_providers: Vec<RecipientSignatureProvider>,
@@ -80901,6 +82320,7 @@ pub struct Signer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -80919,6 +82339,7 @@ pub struct Signer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -81626,6 +83047,7 @@ pub struct SignerAttachment {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -82128,7 +83550,11 @@ pub struct SigningGroup {
     /**
      * Contains details about a signing group. Signing groups enable you to send an envelope to a predefined group of recipients and have any one member of the group sign your documents. When you send an envelope to a signing group, anyone in the group can open it and sign it with their own signature.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<SigningGroupUser>,
 }
 
@@ -82138,7 +83564,11 @@ pub struct SigningGroupInformation {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<SigningGroup>,
 }
 
@@ -82181,7 +83611,11 @@ pub struct SigningGroupUsersData {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<SigningGroupUser>,
 }
 
@@ -82799,6 +84233,7 @@ pub struct SmartSection {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -84313,6 +85748,7 @@ pub struct Ssn {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -84933,7 +86369,11 @@ pub struct SupportedLanguages {
     /**
      * A list of supported languages.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub languages: Vec<NameValue>,
 }
 
@@ -85475,6 +86915,7 @@ pub struct TabGroup {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -85925,7 +87366,11 @@ pub struct TabMetadata {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<String>,
     /**
      *
@@ -86166,7 +87611,11 @@ pub struct TabMetadataList {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tabs: Vec<TabMetadata>,
 }
 
@@ -86176,7 +87625,12 @@ pub struct Tabs {
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "approveTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "approveTabs"
+    )]
     pub approve_tabs: Vec<Approve>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
@@ -86184,6 +87638,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "checkboxTabs"
     )]
     pub checkbox_tabs: Vec<Checkbox>,
@@ -86193,6 +87648,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commentThreadTabs"
     )]
     pub comment_thread_tabs: Vec<CommentThread>,
@@ -86202,6 +87658,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
     pub commission_county_tabs: Vec<PhoneNumber>,
@@ -86211,6 +87668,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
     pub commission_expiration_tabs: Vec<PhoneNumber>,
@@ -86220,6 +87678,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
     pub commission_number_tabs: Vec<PhoneNumber>,
@@ -86229,13 +87688,19 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
     pub commission_state_tabs: Vec<PhoneNumber>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "companyTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "companyTabs"
+    )]
     pub company_tabs: Vec<Company>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
@@ -86243,6 +87708,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "currencyTabs"
     )]
     pub currency_tabs: Vec<Currency>,
@@ -86252,23 +87718,39 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "dateSignedTabs"
     )]
     pub date_signed_tabs: Vec<DateSigned>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "dateTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dateTabs"
+    )]
     pub date_tabs: Vec<Date>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "declineTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "declineTabs"
+    )]
     pub decline_tabs: Vec<Decline>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "drawTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "drawTabs"
+    )]
     pub draw_tabs: Vec<Draw>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
@@ -86276,13 +87758,19 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "emailAddressTabs"
     )]
     pub email_address_tabs: Vec<EmailAddress>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "emailTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "emailTabs"
+    )]
     pub email_tabs: Vec<Email>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
@@ -86290,6 +87778,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "envelopeIdTabs"
     )]
     pub envelope_id_tabs: Vec<EnvelopeId>,
@@ -86299,13 +87788,19 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "firstNameTabs"
     )]
     pub first_name_tabs: Vec<FirstName>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "formulaTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formulaTabs"
+    )]
     pub formula_tabs: Vec<FormulaTab>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
@@ -86313,6 +87808,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "fullNameTabs"
     )]
     pub full_name_tabs: Vec<FullName>,
@@ -86322,6 +87818,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "initialHereTabs"
     )]
     pub initial_here_tabs: Vec<InitialHere>,
@@ -86331,13 +87828,19 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "lastNameTabs"
     )]
     pub last_name_tabs: Vec<LastName>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "listTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listTabs"
+    )]
     pub list_tabs: Vec<List>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
@@ -86345,6 +87848,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarizeTabs"
     )]
     pub notarize_tabs: Vec<Notarize>,
@@ -86354,18 +87858,29 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "notarySealTabs"
     )]
     pub notary_seal_tabs: Vec<NotarySeal>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "noteTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "noteTabs"
+    )]
     pub note_tabs: Vec<Note>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "numberTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "numberTabs"
+    )]
     pub number_tabs: Vec<Number>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
@@ -86373,6 +87888,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "phoneNumberTabs"
     )]
     pub phone_number_tabs: Vec<PhoneNumber>,
@@ -86382,6 +87898,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "polyLineOverlayTabs"
     )]
     pub poly_line_overlay_tabs: Vec<PolyLineOverlay>,
@@ -86400,6 +87917,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "radioGroupTabs"
     )]
     pub radio_group_tabs: Vec<RadioGroup>,
@@ -86409,6 +87927,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signHereTabs"
     )]
     pub sign_here_tabs: Vec<SignHere>,
@@ -86418,6 +87937,7 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signerAttachmentTabs"
     )]
     pub signer_attachment_tabs: Vec<SignerAttachment>,
@@ -86427,38 +87947,69 @@ pub struct Tabs {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "smartSectionTabs"
     )]
     pub smart_section_tabs: Vec<SmartSection>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "ssnTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "ssnTabs"
+    )]
     pub ssn_tabs: Vec<Ssn>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "tabGroups")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroups"
+    )]
     pub tab_groups: Vec<TabGroup>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "textTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "textTabs"
+    )]
     pub text_tabs: Vec<Text>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "titleTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "titleTabs"
+    )]
     pub title_tabs: Vec<Title>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "viewTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "viewTabs"
+    )]
     pub view_tabs: Vec<View>,
     /**
      * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "zipTabs")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "zipTabs"
+    )]
     pub zip_tabs: Vec<Zip>,
 }
 
@@ -86471,6 +88022,7 @@ pub struct TemplateDocumentVisibilityList {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -86485,6 +88037,7 @@ pub struct TemplateDocumentsResult {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "templateDocuments"
     )]
     pub template_documents: Vec<EnvelopeDocument>,
@@ -86506,7 +88059,11 @@ pub struct TemplateInformation {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub templates: Vec<TemplateSummary>,
 }
 
@@ -86585,7 +88142,11 @@ pub struct TemplateRecipientsData {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub agents: Vec<Agent>,
     /**
      *
@@ -86593,6 +88154,7 @@ pub struct TemplateRecipientsData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "carbonCopies"
     )]
     pub carbon_copies: Vec<CarbonCopy>,
@@ -86602,6 +88164,7 @@ pub struct TemplateRecipientsData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "certifiedDeliveries"
     )]
     pub certified_deliveries: Vec<CertifiedDelivery>,
@@ -86618,7 +88181,11 @@ pub struct TemplateRecipientsData {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub editors: Vec<Editor>,
     /**
      *
@@ -86635,18 +88202,27 @@ pub struct TemplateRecipientsData {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "inPersonSigners"
     )]
     pub in_person_signers: Vec<InPersonSigner>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub intermediaries: Vec<Intermediary>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub notaries: Vec<NotaryRecipient>,
     /**
      *
@@ -86661,17 +88237,29 @@ pub struct TemplateRecipientsData {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub seals: Vec<SealSign>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub signers: Vec<Signer>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub witnesses: Vec<Witness>,
 }
 
@@ -86761,6 +88349,7 @@ pub struct TemplateRole {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientSignatureProviders"
     )]
     pub recipient_signature_providers: Vec<RecipientSignatureProvider>,
@@ -86842,13 +88431,19 @@ pub struct TemplateSharedItem {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "sharedGroups"
     )]
     pub shared_groups: Vec<MemberGroupSharedItem>,
     /**
      * Information about shared templates.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "sharedUsers")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "sharedUsers"
+    )]
     pub shared_users: Vec<UserSharedItem>,
     /**
      * Information about shared templates.
@@ -87822,6 +89417,7 @@ pub struct Text {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -88964,6 +90560,7 @@ pub struct Title {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -89602,7 +91199,11 @@ pub struct UserInfoList {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UserInfo>,
 }
 
@@ -89634,6 +91235,7 @@ pub struct UserInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "connectConfigurations"
     )]
     pub connect_configurations: Vec<ConnectUserObject>,
@@ -89663,6 +91265,7 @@ pub struct UserInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customSettings"
     )]
     pub custom_settings: Vec<NameValue>,
@@ -89726,7 +91329,12 @@ pub struct UserInformation {
     /**
      * User information.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "groupList")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "groupList"
+    )]
     pub group_list: Vec<Group>,
     /**
      * User information.
@@ -90087,7 +91695,11 @@ pub struct UserInformationList {
     /**
      * Contains a list of account users.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UserInformation>,
 }
 
@@ -90172,6 +91784,7 @@ pub struct UserProfile {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "authenticationMethods"
     )]
     pub authentication_methods: Vec<AuthenticationMethod>,
@@ -91300,6 +92913,7 @@ pub struct UserSettingsInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "sealIdentifiers"
     )]
     pub seal_identifiers: Vec<SealIdentifier>,
@@ -92250,6 +93864,7 @@ pub struct UserSignaturesInformation {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "userSignatures"
     )]
     pub user_signatures: Vec<UserSignature>,
@@ -92264,6 +93879,7 @@ pub struct UserSocialResult {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAccountInformation"
     )]
     pub social_account_information: Vec<SocialAccountInformation>,
@@ -92345,7 +93961,11 @@ pub struct UsersResponse {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UserInfo>,
 }
 
@@ -92959,6 +94579,7 @@ pub struct View {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,
@@ -93231,6 +94852,7 @@ pub struct Witness {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "additionalNotifications"
     )]
     pub additional_notifications: Vec<RecipientAdditionalNotification>,
@@ -93330,6 +94952,7 @@ pub struct Witness {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "customFields"
     )]
     pub custom_fields: Vec<String>,
@@ -93418,6 +95041,7 @@ pub struct Witness {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "documentVisibility"
     )]
     pub document_visibility: Vec<DocumentVisibility>,
@@ -93473,6 +95097,7 @@ pub struct Witness {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "excludedDocuments"
     )]
     pub excluded_documents: Vec<String>,
@@ -93713,6 +95338,7 @@ pub struct Witness {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientAttachments"
     )]
     pub recipient_attachments: Vec<RecipientAttachment>,
@@ -93731,6 +95357,7 @@ pub struct Witness {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientFeatureMetadata"
     )]
     pub recipient_feature_metadata: Vec<FeatureAvailableMetadata>,
@@ -93760,6 +95387,7 @@ pub struct Witness {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientSignatureProviders"
     )]
     pub recipient_signature_providers: Vec<RecipientSignatureProvider>,
@@ -93953,6 +95581,7 @@ pub struct Witness {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "signingGroupUsers"
     )]
     pub signing_group_users: Vec<UserInfo>,
@@ -93971,6 +95600,7 @@ pub struct Witness {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "socialAuthentications"
     )]
     pub social_authentications: Vec<SocialAuthentication>,
@@ -94099,6 +95729,7 @@ pub struct Workflow {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "workflowSteps"
     )]
     pub workflow_steps: Vec<WorkflowStep>,
@@ -94205,7 +95836,11 @@ pub struct WorkspaceFolderContents {
     /**
      * This object's properties describe the contents of a workspace folder.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<WorkspaceItem>,
     /**
      * This object's properties describe the contents of a workspace folder.
@@ -94213,6 +95848,7 @@ pub struct WorkspaceFolderContents {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "parentFolders"
     )]
     pub parent_folders: Vec<WorkspaceItem>,
@@ -94495,7 +96131,11 @@ pub struct WorkspaceItemList {
     /**
      * An array of objects that describe the items in a workspace.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<WorkspaceItem>,
 }
 
@@ -94545,7 +96185,11 @@ pub struct WorkspaceList {
     /**
      * This object contains a list of available workspaces.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub workspaces: Vec<Workspace>,
 }
 
@@ -96048,6 +97692,7 @@ pub struct Zip {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "tabGroupLabels"
     )]
     pub tab_group_labels: Vec<String>,

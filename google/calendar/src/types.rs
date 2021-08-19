@@ -16,7 +16,11 @@ pub struct Acl {
     /**
      * List of rules on the access control list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<AclRule>,
     /**
      * ETag of the collection.
@@ -206,7 +210,11 @@ pub struct CalendarList {
     /**
      * Calendars that are present on the user's calendar list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<CalendarListEntry>,
     /**
      * ETag of the collection.
@@ -245,7 +253,11 @@ pub struct NotificationSettings {
     /**
      * The notifications that the authenticated user is receiving for this calendar.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub notifications: Vec<CalendarNotification>,
 }
 
@@ -293,6 +305,7 @@ pub struct CalendarListEntry {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "defaultReminders"
     )]
     pub default_reminders: Vec<EventReminder>,
@@ -626,7 +639,12 @@ pub struct ConferenceData {
      *  All of them must belong to the same conference.
      *  Either conferenceSolution and at least one entryPoint, or createRequest is required.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "entryPoints")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "entryPoints"
+    )]
     pub entry_points: Vec<EntryPoint>,
     /**
      * ETag of the collection.
@@ -685,6 +703,7 @@ pub struct ConferenceProperties {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "allowedConferenceSolutionTypes"
     )]
     pub allowed_conference_solution_types: Vec<String>,
@@ -787,6 +806,7 @@ pub struct EntryPoint {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "entryPointFeatures"
     )]
     pub entry_point_features: Vec<String>,
@@ -1073,7 +1093,11 @@ pub struct Reminders {
     /**
      * Information about the event's reminders for the authenticated user.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub overrides: Vec<EventReminder>,
     /**
      * Information about the event's reminders for the authenticated user.
@@ -1125,12 +1149,20 @@ pub struct Event {
      *  In order to modify attachments the supportsAttachments request parameter should be set to true.
      *  There can be at most 25 attachments per event,
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub attachments: Vec<EventAttachment>,
     /**
      * The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users. Service accounts need to use domain-wide delegation of authority to populate the attendee list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub attendees: Vec<EventAttendee>,
     /**
      * Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.
@@ -1344,7 +1376,11 @@ pub struct Event {
      *  - "eventNamedHangout"
      *  - "hangoutsMeet"  Optional.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recurrence: Vec<String>,
     /**
      * ETag of the collection.
@@ -1642,6 +1678,7 @@ pub struct Events {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "defaultReminders"
     )]
     pub default_reminders: Vec<EventReminder>,
@@ -1666,7 +1703,11 @@ pub struct Events {
     /**
      * List of events on the calendar.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<Event>,
     /**
      * ETag of the collection.
@@ -1733,12 +1774,20 @@ pub struct FreeBusyCalendar {
     /**
      * List of time ranges during which this calendar should be regarded as busy.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub busy: Vec<TimePeriod>,
     /**
      * Optional error(s) (if computation for the calendar failed).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<Error>,
 }
 
@@ -1751,12 +1800,20 @@ pub struct FreeBusyGroup {
      *  - "eventNamedHangout"
      *  - "hangoutsMeet"  Optional.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub calendars: Vec<String>,
     /**
      * Optional error(s) (if computation for the calendar failed).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<Error>,
 }
 
@@ -1785,7 +1842,11 @@ pub struct FreeBusyRequest {
     /**
      * List of calendars and/or groups to query.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<FreeBusyRequestItem>,
     /**
      * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.
@@ -1933,7 +1994,11 @@ pub struct Settings {
     /**
      * List of user settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<Setting>,
     /**
      * ETag of the collection.

@@ -46,7 +46,11 @@ pub struct Options {
     /**
      * Account options object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub meeting_connector_list: Vec<String>,
     /**
      * Account options object.
@@ -56,7 +60,11 @@ pub struct Options {
     /**
      * Account options object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub room_connector_list: Vec<String>,
     /**
      * Account options object.
@@ -222,7 +230,11 @@ pub struct AccountListItem {
     /**
      * Account object in the account list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub accounts: Vec<Accounts>,
 }
 
@@ -386,12 +398,20 @@ pub struct PhonePlan {
     /**
      * Phone Plan Object
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_calling: Vec<PlanNumber>,
     /**
      * Phone Plan Object
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_number: Vec<PlanNumber>,
 }
 
@@ -411,7 +431,11 @@ pub struct AccountPlans {
     /**
      * Account Plans object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_large_meeting: Vec<AccountPlan>,
     /**
      * Account Plans object.
@@ -435,7 +459,11 @@ pub struct AccountPlans {
     /**
      * Account Plans object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_webinar: Vec<AccountPlan>,
     /**
      * Account Plans object.
@@ -855,7 +883,11 @@ pub struct VirtualBackgroundSettings {
     /**
      * Settings to manage virtual background.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub files: Vec<Files>,
 }
 
@@ -1035,7 +1067,11 @@ pub struct InMeeting {
     /**
      * Account Settings: In Meeting.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data_center_regions: Vec<String>,
     /**
      * Account Settings: In Meeting.
@@ -1606,12 +1642,20 @@ pub struct Security {
     /**
      * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sign_in_with_two_factor_auth_groups: Vec<String>,
     /**
      * [Security settings](https://support.zoom.us/hc/en-us/articles/360034675592-Advanced-security-settings#h_bf8a25f6-9a66-447a-befd-f02ed3404f89) of an Account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sign_in_with_two_factor_auth_roles: Vec<String>,
 }
 
@@ -1982,12 +2026,20 @@ pub struct TelephonyRegions {
     /**
      * Indicates where most of the participants call into or call from duriing a meeting.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub allowed_values: Vec<String>,
     /**
      * Indicates where most of the participants call into or call from duriing a meeting.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selection_values: Vec<String>,
 }
 
@@ -2100,7 +2152,11 @@ pub struct Tsp {
     /**
      * Account Settings: TSP.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub call_out_countries: Vec<String>,
     /**
      * Account Settings: TSP.
@@ -2128,7 +2184,11 @@ pub struct RecordingStorageLocation {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub allowed_values: Vec<String>,
     /**
      * User's first name.
@@ -2179,7 +2239,11 @@ pub struct UpdateAccountSettingsTelephonyRegions {
     /**
      * Indicates where most of the participants call into or call from duriing a meeting.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selection_values: Vec<String>,
 }
 
@@ -2242,7 +2306,11 @@ pub struct DomainsList {
     /**
      * List of managed domains.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub domains: Vec<Domains>,
     /**
      * List of managed domains.
@@ -2652,7 +2720,11 @@ pub struct GroupList {
     /**
      * List of Groups.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<GroupsAllOf>,
     /**
      * List of Groups.
@@ -2991,13 +3063,21 @@ pub struct ApprovedDeniedCountriesRegions {
      * Approve or block users from specific regions/countries from joining this meeting.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub approved_list: Vec<String>,
     /**
      * Approve or block users from specific regions/countries from joining this meeting.
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub denied_list: Vec<String>,
     /**
      * Approve or block users from specific regions/countries from joining this meeting.
@@ -3055,7 +3135,11 @@ pub struct Rooms {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub participants: Vec<String>,
 }
 
@@ -3073,7 +3157,11 @@ pub struct BreakoutRoom {
     /**
      * Setting to [pre-assign breakout rooms](https://support.zoom.us/hc/en-us/articles/360032752671-Pre-assigning-participants-to-breakout-rooms#h_36f71353-4190-48a2-b999-ca129861c1f4).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub rooms: Vec<Rooms>,
 }
 
@@ -3112,7 +3200,11 @@ pub struct LanguageInterpretation {
     /**
      * Information associated with the interpreter.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub interpreters: Vec<Interpreters>,
 }
 
@@ -3197,7 +3289,11 @@ pub struct MeetingSettings {
     /**
      * Meeting settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub authentication_exception: Vec<AuthenticationException>,
     /**
      * Meeting settings.
@@ -3264,7 +3360,11 @@ pub struct MeetingSettings {
     /**
      * Meeting settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_keys: Vec<CustomKeys>,
     /**
      * Meeting settings.
@@ -3291,12 +3391,20 @@ pub struct MeetingSettings {
     /**
      * Meeting settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub global_dial_in_countries: Vec<String>,
     /**
      * Meeting settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub global_dial_in_numbers: Vec<GlobalDialInNumbers>,
     /**
      * Meeting settings.
@@ -3592,7 +3700,11 @@ pub struct MeetingInfo {
     /**
      * Meeting object
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub occurrences: Vec<Occurrence>,
     /**
      * Meeting object
@@ -3669,7 +3781,11 @@ pub struct MeetingInfo {
     /**
      * Meeting object
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<TrackingFields>,
     /**
      * Meeting object
@@ -3782,7 +3898,11 @@ pub struct MeetingInfoGet {
     /**
      * Meeting object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub occurrences: Vec<Occurrence>,
     /**
      * Meeting object.
@@ -3864,7 +3984,11 @@ pub struct MeetingInfoGet {
     /**
      * Meeting object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<TrackingFields>,
     /**
      * Meeting object.
@@ -3884,7 +4008,11 @@ pub struct MeetingMetric {
     /**
      * Meeting metric details.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_keys: Vec<CustomKeys>,
     /**
      * Meeting metric details.
@@ -4384,7 +4512,11 @@ pub struct PanelistList {
     /**
      * List of panelists.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub panelists: Vec<PanelistsAllOf>,
     /**
      * List of panelists.
@@ -4779,7 +4911,11 @@ pub struct RecordingRegistrantStatus {
     /**
      * Registrant Status
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub registrants: Vec<String>,
 }
 
@@ -4825,7 +4961,11 @@ pub struct Registrant {
     /**
      * Registrant base object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_questions: Vec<CustomQuestion>,
     /**
      * User's first name.
@@ -5010,7 +5150,11 @@ pub struct RegistrantStatus {
     /**
      * List of registrants.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub registrants: Vec<Assistants>,
 }
 
@@ -5020,7 +5164,11 @@ pub struct RoleMembersList {
     /**
      * List of a Role Members
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<Domains>,
     /**
      * List of a Role Members
@@ -5075,7 +5223,11 @@ pub struct AddRoleMembers {
     /**
      * Add Role Members
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<String>,
 }
 
@@ -5149,7 +5301,11 @@ pub struct Session {
     /**
      * Base object for sessions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<String>,
     /**
      * Base object for sessions.
@@ -5299,7 +5455,11 @@ pub struct SessionUpdate {
     /**
      * Base object for sessions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
      * Base object for sessions.
@@ -5681,7 +5841,11 @@ pub struct WebinarSettings {
     /**
      * Webinar settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub global_dial_in_countries: Vec<String>,
     /**
      * Webinar settings.
@@ -5883,7 +6047,11 @@ pub struct SessionWebinar {
     /**
      * Base webinar object for sessions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
      * Base webinar object for sessions.
@@ -5982,7 +6150,11 @@ pub struct SessionWebinarUpdate {
     /**
      * Base webinar object for sessions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
      * Base webinar object for sessions.
@@ -6128,7 +6300,11 @@ pub struct TspAccountsList {
     /**
      * List of TSP accounts.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub dial_in_numbers: Vec<DialInNumbers>,
     /**
      * User's first name.
@@ -6183,12 +6359,20 @@ pub struct Pac {
     /**
      * List of PAC accounts.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub dedicated_dial_in_number: Vec<DedicatedDialInNumber>,
     /**
      * List of PAC accounts.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub global_dial_in_numbers: Vec<DedicatedDialInNumber>,
     /**
      * List of PAC accounts.
@@ -6628,7 +6812,11 @@ pub struct UserAssistantsList {
     /**
      * List of user's assistants.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub assistants: Vec<Assistants>,
 }
 
@@ -6669,7 +6857,11 @@ pub struct UserSchedulersList {
     /**
      * List of user's schedulers.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schedulers: Vec<Schedulers>,
 }
 
@@ -6973,7 +7165,11 @@ pub struct UserSettingsInMeeting {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data_center_regions: Vec<String>,
     /**
      *
@@ -7515,7 +7711,11 @@ pub struct UserSettingsTsp {
     /**
      * Account Settings: TSP.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub call_out_countries: Vec<String>,
     /**
      * Account Settings: TSP.
@@ -7668,7 +7868,11 @@ pub struct UserPermissions {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub permissions: Vec<String>,
 }
 
@@ -7714,7 +7918,11 @@ pub struct WebinarInfo {
     /**
      * Webinar object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub occurrences: Vec<Occurrence>,
     /**
      * Webinar object.
@@ -7774,7 +7982,11 @@ pub struct WebinarInfo {
     /**
      * Webinar object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
      * Webinar object.
@@ -7794,7 +8006,11 @@ pub struct Webinars {
     /**
      * Webinar metric details.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_keys: Vec<CustomKeys>,
     /**
      * Webinar metric details.
@@ -7955,7 +8171,11 @@ pub struct WebinarPanelist {
     /**
      * Webinar panelist.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub panelists: Vec<Panelist>,
 }
 
@@ -8028,7 +8248,11 @@ pub struct ZoomRoom {
     /**
      * Zoom room.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub issues: Vec<String>,
     /**
      * Zoom room.
@@ -8132,7 +8356,11 @@ pub struct Questions {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub answers: Vec<String>,
     /**
      * User's first name.
@@ -8156,7 +8384,11 @@ pub struct Poll {
     /**
      * Poll
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<Questions>,
     /**
      * Poll
@@ -8303,7 +8535,11 @@ pub struct CustomQuestions {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub answers: Vec<String>,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -8335,12 +8571,20 @@ pub struct MeetingRegistrantQuestionsData {
     /**
      * Meeting Registrant Questions
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_questions: Vec<CustomQuestions>,
     /**
      * Meeting Registrant Questions
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<MeetingRegistrantQuestions>,
 }
 
@@ -8350,12 +8594,20 @@ pub struct WebinarRegistrantQuestions {
     /**
      * Webinar Registrant Questions
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_questions: Vec<String>,
     /**
      * Webinar Registrant Questions
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<String>,
 }
 
@@ -8501,7 +8753,11 @@ pub struct RecordingRegistrantQuestionsCustom {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub answers: Vec<String>,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -8533,12 +8789,20 @@ pub struct RecordingRegistrantQuestionsData {
     /**
      * Recording Registrant Questions
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_questions: Vec<RecordingRegistrantQuestionsCustom>,
     /**
      * Recording Registrant Questions
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<RecordingRegistrantQuestions>,
 }
 
@@ -8557,7 +8821,11 @@ pub struct TrackingField {
     /**
      * Tracking Field
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recommended_values: Vec<String>,
     /**
      * Tracking Field
@@ -8705,7 +8973,11 @@ pub struct CreateWebinarSettings {
     /**
      * Create Webinar settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub global_dial_in_countries: Vec<String>,
     /**
      * Create Webinar settings.
@@ -8863,7 +9135,11 @@ pub struct MeetingCreateSettingsLanguageInterpretation {
      *  
      *  \*\*Note:\*\* This feature is only available on certain Webinar add-on, Education, Business and higher plans. If this feature is not enabled on the host's account, this setting will not be applied for the meeting.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub interpreters: Vec<Interpreters>,
 }
 
@@ -8873,7 +9149,11 @@ pub struct MeetingCreateSettings {
     /**
      * Meeting settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub additional_data_center_regions: Vec<String>,
     /**
      * Meeting settings.
@@ -8931,7 +9211,11 @@ pub struct MeetingCreateSettings {
     /**
      * Meeting settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub authentication_exception: Vec<AuthenticationException>,
     /**
      * Meeting settings.
@@ -8994,7 +9278,11 @@ pub struct MeetingCreateSettings {
     /**
      * Meeting settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub global_dial_in_countries: Vec<String>,
     /**
      * Meeting settings.
@@ -9213,7 +9501,11 @@ pub struct MeetingCreate {
     /**
      * Base object for meeting.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<MeetingCreateTrackingFields>,
     /**
      * Base object for meeting.
@@ -9297,7 +9589,11 @@ pub struct CreateWebinar {
     /**
      * Base webinar object for sessions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<MeetingCreateTrackingFields>,
     /**
      * Base webinar object for sessions.
@@ -9908,7 +10204,11 @@ pub struct ParticipantQos {
     /**
      * Participant QOS.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub user_qos: Vec<UserQos>,
     /**
      * Participant QOS.
@@ -10255,7 +10555,11 @@ pub struct MeetingSecurity {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub block_user_domain_list: Vec<String>,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -10361,7 +10665,11 @@ pub struct Metrics {
     /**
      * Meeting metric details.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_keys: Vec<CustomKeys>,
     /**
      * Meeting metric details.
@@ -10512,7 +10820,11 @@ pub struct Metrics {
     /**
      * Meeting metric details.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
      * Meeting metric details.
@@ -10751,7 +11063,11 @@ pub struct CloudArchivedFiles {
     /**
      * Information about the archive files.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub archive_files: Vec<ArchiveFiles>,
     /**
      * Account seats.
@@ -10865,7 +11181,11 @@ pub struct InviteLink {
     /**
      * Invite Links
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub attendees: Vec<Attendees>,
     /**
      * Invite Links
@@ -10906,7 +11226,11 @@ pub struct InviteLinks {
     /**
      * Invite links response.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub attendees: Vec<InviteLinksAttendees>,
 }
 
@@ -11323,7 +11647,11 @@ pub struct ListAccountPhoneNumbersResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub capability: Vec<String>,
     /**
      * Displayed when the `type` request parameter is `byoc`.
@@ -11410,7 +11738,11 @@ pub struct ListAccountPhoneNumbersResponseData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub page_size: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<ListAccountPhoneNumbersResponse>,
     /**
      * Account seats.
@@ -11665,7 +11997,11 @@ pub struct ListSipPhonesResponse {
     /**
      * SIP phones object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phones: Vec<Phones>,
     /**
      * Account seats.
@@ -12127,7 +12463,11 @@ pub struct ListZoomRoomsResponseData {
     /**
      * List of existing Zoom Rooms.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub rooms: Vec<ListZoomRoomsResponse>,
 }
 
@@ -12335,7 +12675,11 @@ pub struct ListPhoneSitesResponse {
     /**
      * List of site(s).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sites: Vec<Sites>,
     /**
      * User's first name.
@@ -12631,7 +12975,11 @@ pub struct Contacts {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub direct_numbers: Vec<String>,
     /**
      * User's first name.
@@ -12742,7 +13090,11 @@ pub struct Contacts {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SearchCompanyContactsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contacts: Vec<Contacts>,
     /**
      * User's first name.
@@ -12926,7 +13278,11 @@ pub struct GetChatMessagesResponse {
     /**
      * Chat message object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub messages: Vec<Messages>,
     /**
      * Chat message object.
@@ -12993,7 +13349,11 @@ pub struct SendaChatMessageRequest {
     /**
      * [Chat mentions](https://support.zoom.us/hc/en-us/articles/360037567431-Using-chat-mentions-and-slash-commands) object. Use this object to include mentions in the message that will be sent to  a channel.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub at_items: Vec<AtItems>,
     /**
      * User's first name.
@@ -13234,7 +13594,11 @@ pub struct GetChatMessageResponse {
     /**
      * A chat message object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reactions: Vec<Reactions>,
     /**
      * A chat message object.
@@ -13344,7 +13708,11 @@ pub struct GetChannelsResponse {
     /**
      * Chat Channel object(s).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub channels: Vec<Channels>,
     /**
      * User's first name.
@@ -13393,7 +13761,11 @@ pub struct CreateChannelRequest {
     /**
      * Member(s) to include in the channel. A max of 5 members can be added to the channel at once with this API.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<Members>,
     /**
      * User's first name.
@@ -13502,7 +13874,11 @@ pub struct GetUserContactsResponseData {
     /**
      * The contacts object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contacts: Vec<GetUserContactsResponse>,
     /**
      * User's first name.
@@ -13532,7 +13908,11 @@ pub struct GetUserContactResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub direct_numbers: Vec<String>,
     /**
      * User's first name.
@@ -13696,7 +14076,11 @@ pub struct ListChannelMembersResponseData {
     /**
      * Members in a channel.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<ListChannelMembersResponse>,
     /**
      * User's first name.
@@ -13732,7 +14116,11 @@ pub struct InviteChannelMembersRequest {
     /**
      * Member(s) to include in the channel. A max of 5 members can be added to the channel at once with this API.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<Members>,
 }
 
@@ -13753,7 +14141,11 @@ pub struct InviteChannelMembersResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ids: Vec<String>,
 }
 
@@ -14107,7 +14499,11 @@ pub struct AccountTrustedDomainResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub trusted_domains: Vec<String>,
 }
 
@@ -14383,12 +14779,20 @@ pub struct PlanPhone {
     /**
      * Phone Plan Object
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_calling: Vec<PlanZoomRooms>,
     /**
      * Phone Plan Object
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_number: Vec<PlanZoomRooms>,
 }
 
@@ -14401,7 +14805,11 @@ pub struct AccountPlansResponse {
     pub plan_audio: Option<AccountPlansResponsePlanAudio>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_base: Option<PlanZoomRooms>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_large_meeting: Vec<PlanWebinar>,
     /**
      * Phone Plan Object
@@ -14434,7 +14842,11 @@ pub struct AccountPlansResponse {
     pub plan_recording_status: Option<PlanRecordingStatus>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_room_connector: Option<PlanZoomRooms>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_webinar: Vec<PlanWebinar>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_zoom_rooms: Option<PlanZoomRooms>,
@@ -14615,7 +15027,11 @@ pub struct UserCreateResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupMembersResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<UserCreateResponse>,
     /**
      * User's first name.
@@ -14669,7 +15085,11 @@ pub struct AddRoleMembersRequest {
     /**
      * List of registrants.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<Assistants>,
 }
 
@@ -15014,7 +15434,11 @@ pub struct ImChatSessionsResponseData {
     /**
      * Array of session objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sessions: Vec<Sessions>,
 }
 
@@ -15113,7 +15537,11 @@ pub struct ImChatMessagesResponseDataType {
     /**
      * Array of session objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub messages: Vec<ImChatMessagesResponseData>,
 }
 
@@ -15586,7 +16014,11 @@ pub struct PastMeetingParticipantsResponse {
     /**
      * Array of meeting participant objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub participants: Vec<Participants>,
 }
 
@@ -15861,7 +16293,11 @@ pub struct DashboardMeetingsResponse {
     /**
      * Array of meeting objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub meetings: Vec<Metrics>,
 }
 
@@ -16396,7 +16832,11 @@ pub struct DashboardMeetingParticipantsResponseData {
      *  
      *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `user_name`, `ip_address`, `location`, and `email` responses.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub participants: Vec<DashboardMeetingParticipantsResponse>,
 }
 
@@ -16451,7 +16891,11 @@ pub struct DashboardMeetingParticipantShareResponseParticipants {
     /**
      * Array of sharing and recording details.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub details: Vec<Details>,
     /**
      * User's first name.
@@ -16487,7 +16931,11 @@ pub struct DashboardMeetingParticipantShareResponse {
     /**
      * Array of participants.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub participants: Vec<DashboardMeetingParticipantShareResponseParticipants>,
 }
 
@@ -16541,7 +16989,11 @@ pub struct DashboardWebinarsResponse {
     /**
      * Array of webinar objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub webinars: Vec<Webinars>,
 }
 
@@ -16819,7 +17271,11 @@ pub struct DashboardWebinarParticipantsResponseData {
      *  
      *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `user_name`, `ip_address`, `location`, and `email` responses.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub participants: Vec<DashboardWebinarParticipantsResponse>,
 }
 
@@ -17015,7 +17471,11 @@ pub struct Users {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardImResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<Users>,
 }
 
@@ -17193,7 +17653,11 @@ pub struct DashboardChatResponseUsers {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardChatResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<DashboardChatResponseUsers>,
 }
 
@@ -17242,7 +17706,11 @@ pub struct ClientFeedbacks {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardClientFeedbackResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub client_feedbacks: Vec<ClientFeedbacks>,
     /**
      * Start Date.
@@ -17296,7 +17764,11 @@ pub struct DashboardIssueZoomRoomResponseData {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub zoom_rooms: Vec<String>,
 }
 
@@ -17336,7 +17808,11 @@ pub struct IssueDetails {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardIssueDetailZoomRoomResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub issue_details: Vec<IssueDetails>,
 }
 
@@ -17408,7 +17884,11 @@ pub struct ReportDailyResponse {
     /**
      * Array of date objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub dates: Vec<Dates>,
     /**
      * Account seats.
@@ -17503,7 +17983,11 @@ pub struct Meetings {
     /**
      * Custom keys and values assigned to the meeting.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_keys: Vec<CustomKeys>,
     /**
      * Account seats.
@@ -17622,7 +18106,11 @@ pub struct ReportMeetingsResponse {
     /**
      * Array of meeting objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub meetings: Vec<Meetings>,
     /**
      * User's first name.
@@ -17660,7 +18148,11 @@ pub struct ReportMeetingDetailsResponse {
     /**
      * Custom keys and values assigned to the meeting.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_keys: Vec<CustomKeys>,
     /**
      * User's first name.
@@ -17737,7 +18229,11 @@ pub struct ReportMeetingDetailsResponse {
     /**
      * Tracking fields
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_fields: Vec<SessionUpdateTrackingFields>,
     /**
      * Account seats.
@@ -17870,7 +18366,11 @@ pub struct ReportMeetingParticipantsResponseData {
      *  
      *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `name` and `user_email` responses.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub participants: Vec<ReportMeetingParticipantsResponse>,
 }
 
@@ -17952,7 +18452,11 @@ pub struct ReportMeetingPollsResponseQuestions {
     /**
      * Array of questions from user.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub question_details: Vec<QuestionDetails>,
 }
 
@@ -17970,7 +18474,11 @@ pub struct ReportMeetingPollsResponse {
     /**
      * Array of meeting question objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<ReportMeetingPollsResponseQuestions>,
     /**
      * Account subscription start date and time.
@@ -18075,7 +18583,11 @@ pub struct ReportWebinarParticipantsResponseData {
      *  
      *  If the account calling this API is a [business associate (BAA) under HIPAA](https://www.ecfr.gov/cgi-bin/retrieveECFR?gp=1&n=se45.1.160_1103&r=SECTION&ty=HTML), this array returns an empty string value for the `name` and `user_email` responses.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub participants: Vec<ReportWebinarParticipantsResponse>,
 }
 
@@ -18139,7 +18651,11 @@ pub struct ReportWebinarQaResponseQuestions {
     /**
      * Array of questions from user.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub question_details: Vec<ReportWebinarQaResponseQuestionsQuestionDetails>,
 }
 
@@ -18157,7 +18673,11 @@ pub struct ReportWebinarQaResponse {
     /**
      * Array of webinar question objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<ReportWebinarQaResponseQuestions>,
     /**
      * Account subscription start date and time.
@@ -18213,7 +18733,11 @@ pub struct ReportCloudRecordingResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub cloud_recording_storage: Vec<String>,
 }
 
@@ -18353,7 +18877,11 @@ pub struct ReportOperationLogsResponse {
     /**
      * Array of operation log objects
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub operation_logs: Vec<OperationLogs>,
 }
 
@@ -18398,7 +18926,11 @@ pub struct CreateRoleRequest {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub privileges: Vec<String>,
 }
 
@@ -18437,7 +18969,11 @@ pub struct CreateRoleResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub privileges: Vec<String>,
     /**
      * Account seats.
@@ -18514,7 +19050,11 @@ pub struct TspResponse {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub dial_in_number_unrestricted: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub dial_in_numbers: Vec<TspResponseDialInNumbers>,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -18732,7 +19272,11 @@ pub struct UsersResponse {
      *  
      *  This field is \*\*only\*\* returned if users are assigned custom attributes and you provided the `custom_attributes` value for the `include_fields` query parameter in the API request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_attributes: Vec<UsersResponseCustomAttributes>,
     /**
      * User's first name.
@@ -18767,7 +19311,11 @@ pub struct UsersResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub group_ids: Vec<String>,
     /**
      * User's first name.
@@ -18793,7 +19341,11 @@ pub struct UsersResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub im_group_ids: Vec<String>,
     /**
      * User's first name.
@@ -18939,7 +19491,11 @@ pub struct UsersResponseData {
     /**
      * Information about the users.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<UsersResponse>,
 }
 
@@ -19252,7 +19808,11 @@ pub struct UserResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub group_ids: Vec<String>,
     /**
      * User's first name.
@@ -19269,7 +19829,11 @@ pub struct UserResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub im_group_ids: Vec<String>,
     /**
      * User's first name.
@@ -19669,12 +20233,20 @@ pub struct PacAccounts {
     /**
      * List of dedicated dial-in numbers.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub dedicated_dial_in_number: Vec<DedicatedDialInNumber>,
     /**
      * List of dedicated dial-in numbers.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub global_dial_in_numbers: Vec<DedicatedDialInNumber>,
     /**
      * User's first name.
@@ -19698,7 +20270,11 @@ pub struct PacAccounts {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserPaCsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pac_accounts: Vec<PacAccounts>,
 }
 
@@ -19717,7 +20293,11 @@ pub struct TspAccounts {
     /**
      * List of TSP accounts.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub dial_in_numbers: Vec<DialInNumbers>,
     /**
      * List of TSP accounts.
@@ -19746,7 +20326,11 @@ pub struct TspAccounts {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UserTsPsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tsp_accounts: Vec<TspAccounts>,
 }
 
@@ -19765,7 +20349,11 @@ pub struct TspAccount {
     /**
      * TSP account of the user.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub dial_in_numbers: Vec<DialInNumbers>,
     /**
      * TSP account of the user.
@@ -19807,7 +20395,11 @@ pub struct TspAccountData {
     /**
      * TSP account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub dial_in_numbers: Vec<DialInNumbers>,
     /**
      * User's first name.
@@ -20074,7 +20666,11 @@ pub struct ListWebinarParticipantsResponseData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub page_size: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub participants: Vec<ListWebinarParticipantsResponse>,
     /**
      * Account seats.
@@ -20234,7 +20830,11 @@ pub struct AddBatchRegistrantsRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub auto_approve: Option<bool>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub registrants: Vec<AddBatchWebinarRegistrantsRequest>,
 }
 
@@ -20271,7 +20871,11 @@ pub struct AddBatchWebinarRegistrantsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddBatchRegistrantsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub registrants: Vec<AddBatchWebinarRegistrantsResponse>,
 }
 
@@ -20571,7 +21175,11 @@ pub struct ClientFeedbackDetails {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DashboardClientFeedbackDetailResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub client_feedback_details: Vec<ClientFeedbackDetails>,
 }
 
@@ -20652,7 +21260,11 @@ pub struct ListimmessagesResponse {
     /**
      * Array of im messages.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub messages: Vec<ListimmessagesResponseMessages>,
     /**
      * User's first name.
@@ -20751,7 +21363,11 @@ pub struct PhoneUserResponse {
     /**
      * Zoom User Profile
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub calling_plan: Vec<CallingPlan>,
     /**
      * Zoom User Profile
@@ -20783,7 +21399,11 @@ pub struct PhoneUserResponse {
     /**
      * Zoom User Profile
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<PhoneUserResponseNumbers>,
     /**
      * Zoom User Profile
@@ -21315,7 +21935,11 @@ pub struct ListSettingTemplatesResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub page_size: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub templates: Vec<Templates>,
     /**
      * Account seats.
@@ -21614,7 +22238,11 @@ pub struct Locations {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub identifier: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub network_switches: Vec<NetworkSwitches>,
     /**
      * User's first name.
@@ -21656,7 +22284,11 @@ pub struct Locations {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct BatchAddLocationsRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub locations: Vec<Locations>,
     /**
      * User's first name.
@@ -21803,7 +22435,11 @@ pub struct ListLocationsResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub network_switches: Vec<NetworkSwitches>,
     /**
      * User's first name.
@@ -21849,7 +22485,11 @@ pub struct ListLocationsResponseData {
     /**
      * Information about emergency service locations.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub locations: Vec<ListLocationsResponse>,
     /**
      * User's first name.
@@ -22134,7 +22774,11 @@ pub struct GetLocationResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub network_switches: Vec<NetworkSwitches>,
     /**
      * User's first name.
@@ -22213,7 +22857,11 @@ pub struct UpdateLocationRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub network_switches: Vec<NetworkSwitches>,
     /**
      * User's first name.
@@ -22334,7 +22982,11 @@ pub struct ListSipGroupsResponse {
     /**
      * SIP group information.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sip_groups: Vec<SipGroups>,
 }
 
@@ -22667,7 +23319,11 @@ pub struct BusinessHours {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub connect_to_operator: Option<ConnectOperator>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_hours: Vec<CustomHours>,
     /**
      * Audio types:<br>`1` - Toll-free Call-in & Call-out.<br>`2` - Toll <br>
@@ -23515,7 +24171,11 @@ pub struct PhoneUserCallLogsResponse {
     /**
      * Phone User Call Logs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub call_logs: Vec<CallLogs>,
     /**
      * Phone User Call Logs
@@ -23728,7 +24388,11 @@ pub struct PhoneUserRecordingsResponse {
     /**
      * Phone User Recordings
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recordings: Vec<Recordings>,
     /**
      * Phone User Recordings
@@ -23964,7 +24628,11 @@ pub struct PhoneUserVoiceMailsResponse {
     /**
      * Phone User Voice Mails
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub voice_mails: Vec<VoiceMails>,
 }
 
@@ -24405,7 +25073,11 @@ pub struct AccountCallLogsResponseData {
     /**
      * Account Call Logs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub call_logs: Vec<AccountCallLogsResponse>,
     /**
      * Account Call Logs
@@ -24465,7 +25137,11 @@ pub struct AccountCallLogsResponseData {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddByocNumberResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<PhoneUserResponseNumbers>,
 }
 
@@ -24485,7 +25161,11 @@ pub struct CallingPlans {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlanRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub calling_plans: Vec<CallingPlans>,
 }
 
@@ -24758,7 +25438,11 @@ pub struct GetPhoneRecordingsResponseData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub page_size: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recordings: Vec<GetPhoneRecordingsResponse>,
     /**
      * Account seats.
@@ -24831,7 +25515,11 @@ pub struct ByocSipTrunk {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListByocsipTrunkResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub byoc_sip_trunk: Vec<ByocSipTrunk>,
     /**
      * User's first name.
@@ -24889,7 +25577,11 @@ pub struct PostPhoneSipTrunkRequest {
     /**
      * SIP trunk configurations.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sip_trunks: Vec<SipTrunks>,
 }
 
@@ -25084,7 +25776,11 @@ pub struct ReportSignInOutActivitiesResponse {
     /**
      * Report object
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub activity_logs: Vec<ActivityLogs>,
     /**
      * Report object
@@ -25351,7 +26047,11 @@ pub struct GetGroupSettingsResponseInMeeting {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data_center_regions: Vec<String>,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -26109,7 +26809,11 @@ pub struct UpdateGroupSettingsRequestInMeeting {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data_center_regions: Vec<String>,
     /**
      * Enable/disable the option for a sub account to use shared [Virtual Room Connector(s)](https://support.zoom.us/hc/en-us/articles/202134758-Getting-Started-With-Virtual-Room-Connector) that are set up by the master account. Virtual Room Connectors can only be used by On-prem users.
@@ -27300,7 +28004,11 @@ pub struct GetRoleInformationResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub privileges: Vec<String>,
     /**
      * This field will only be displayed to accounts that are enrolled in a partner plan and follow the master accounts and sub accounts structure.
@@ -27367,7 +28075,11 @@ pub struct UpdateRoleRequest {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub privileges: Vec<String>,
     /**
      * This field will only be displayed to accounts that are enrolled in the partner plan and follow master accounts and sub accounts structure.
@@ -27524,12 +28236,20 @@ pub struct GetPlanUsageResponse {
     /**
      * The base plan subscribed for the sub account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_base: Vec<GetPlanUsageResponseBase>,
     /**
      * The base plan subscribed for the sub account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_large_meeting: Vec<GetPlanUsageResponseBase>,
     /**
      * Recording Plan
@@ -27544,12 +28264,20 @@ pub struct GetPlanUsageResponse {
     /**
      * The base plan subscribed for the sub account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_webinar: Vec<GetPlanUsageResponseBase>,
     /**
      * The base plan subscribed for the sub account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub plan_zoom_rooms: Vec<GetPlanUsageResponseBase>,
 }
 
@@ -27921,7 +28649,11 @@ pub struct GetAccountCloudRecordingResponseMeetings {
     /**
      * Recording files object
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recording_files: Vec<RecordingFiles>,
     /**
      * Account subscription start date and time.
@@ -27975,7 +28707,11 @@ pub struct GetAccountCloudRecordingResponse {
     /**
      * Meetings Object
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub meetings: Vec<GetAccountCloudRecordingResponseMeetings>,
     /**
      * User's first name.
@@ -28078,7 +28814,11 @@ pub struct GetTrackingSourcesResponse {
     /**
      * Tracking Sources object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tracking_sources: Vec<TrackingSources>,
 }
 
@@ -28249,7 +28989,11 @@ pub struct AddAzrLocationResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListZrLocationsResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub locations: Vec<AddAzrLocationResponse>,
     /**
      * User's first name.
@@ -28383,7 +29127,11 @@ pub struct GetZrLocationStructureResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub structures: Vec<String>,
 }
 
@@ -28657,7 +29405,11 @@ pub struct Devices {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListZrDevicesResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub devices: Vec<Devices>,
 }
 
@@ -28666,7 +29418,11 @@ pub struct ListSipTrunkNumbersResponse {
     /**
      * List of dedicated dial-in numbers.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<DedicatedDialInNumber>,
     /**
      * Account seats.
@@ -28719,7 +29475,11 @@ pub struct AssignSipTrunkNumbersRequest {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<String>,
 }
 
@@ -28737,7 +29497,11 @@ pub struct ListPastMeetingPollsResponse {
     /**
      * Array of meeting question objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<ReportMeetingPollsResponseQuestions>,
     /**
      * Account subscription start date and time.
@@ -28792,7 +29556,11 @@ pub struct InMeetingFiles {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListPastMeetingFilesResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub in_meeting_files: Vec<InMeetingFiles>,
     /**
      * Account seats.
@@ -28819,7 +29587,11 @@ pub struct ListPastWebinarQaResponse {
     /**
      * Array of webinar question objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<ReportWebinarQaResponseQuestions>,
     /**
      * Account subscription start date and time.
@@ -28888,7 +29660,11 @@ pub struct ClientSatisfaction {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMeetingSatisfactionResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub client_satisfaction: Vec<ClientSatisfaction>,
     /**
      * Start Date.
@@ -29069,7 +29845,11 @@ pub struct ListPhoneDevicesResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListPhoneDevicesResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub devices: Vec<ListPhoneDevicesResponse>,
     /**
      * User's first name.
@@ -29358,7 +30138,11 @@ pub struct Provision {
     /**
      * Provisioning information of a device.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sip_accounts: Vec<SipAccounts>,
     /**
      * Provisioning information of a device.
@@ -29526,7 +30310,11 @@ pub struct ExternalContacts {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<String>,
 }
 
@@ -29535,7 +30323,11 @@ pub struct ListExternalContactsResponse {
     /**
      * External contacts information.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub external_contacts: Vec<ExternalContacts>,
     /**
      * User's first name.
@@ -29610,7 +30402,11 @@ pub struct AddExternalContactRequest {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<String>,
     /**
      * User's first name.
@@ -29676,7 +30472,11 @@ pub struct UpdateExternalContactRequest {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<String>,
     /**
      * User's first name.
@@ -29774,7 +30574,11 @@ pub struct CallQueues {
     /**
      * Phone number(s) assigned to the call queue.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<ListCallQueuesResponsePhoneNumbers>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
@@ -29787,7 +30591,11 @@ pub struct CallQueues {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListCallQueuesResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub call_queues: Vec<CallQueues>,
     /**
      * User's first name.
@@ -29824,12 +30632,20 @@ pub struct CreateCallQueueRequestMembers {
     /**
      * A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub common_area_phone_ids: Vec<String>,
     /**
      * A list of one or more phone users to be included in the call queue. Provide either users or common area phone(s). Provide at least one user in the users object.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<Assistants>,
 }
 
@@ -29997,9 +30813,17 @@ pub struct GetCallQueueResponseMembersUsers {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCallQueueResponseMembers {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub common_area_phones: Vec<Site>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<GetCallQueueResponseMembersUsers>,
 }
 
@@ -30037,7 +30861,11 @@ pub struct GetCallQueueResponse {
     /**
      * Phone number(s) assigned to the call queue.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<ListCallQueuesResponsePhoneNumbers>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
@@ -30108,12 +30936,20 @@ pub struct AddMembersCallQueueRequest {
     /**
      * A maximum of 10 members can be added at a time.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub common_area_phone_ids: Vec<String>,
     /**
      * A maximum of 10 members can be added at a time.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<Assistants>,
 }
 
@@ -30193,7 +31029,11 @@ pub struct GetPhoneNumberDetailsResponse {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub capability: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub carrier: Option<GetPhoneNumberDetailsResponseCarrier>,
@@ -30262,7 +31102,11 @@ pub struct UpdatePhoneNumberDetailsRequest {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub capability: Vec<String>,
     /**
      * User's first name.
@@ -30349,7 +31193,11 @@ pub struct ListCallingPlansResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListCallingPlansResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub calling_plans: Vec<ListCallingPlansResponse>,
 }
 
@@ -30378,7 +31226,11 @@ pub struct ListPhoneUsersResponseCallingPlans {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListPhoneUsersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub calling_plans: Vec<ListPhoneUsersResponseCallingPlans>,
     /**
      * User's first name.
@@ -30467,7 +31319,11 @@ pub struct ListPhoneUsersResponseData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_records: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<ListPhoneUsersResponse>,
 }
 
@@ -30495,7 +31351,11 @@ pub struct UpdateAutoReceptionistRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CommonAreaPhones {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub calling_plans: Vec<ListPhoneUsersResponseCallingPlans>,
     /**
      * User's first name.
@@ -30536,7 +31396,11 @@ pub struct CommonAreaPhones {
     /**
      * Phone number(s) assigned to the call queue.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<ListCallQueuesResponsePhoneNumbers>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
@@ -30553,7 +31417,11 @@ pub struct CommonAreaPhones {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListCommonAreaPhonesResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub common_area_phones: Vec<CommonAreaPhones>,
     /**
      * User's first name.
@@ -30734,7 +31602,11 @@ pub struct GetCommonAreaPhoneResponseProvision {
     /**
      * Provisioning information of the common area phone.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sip_accounts: Vec<GetCommonAreaPhoneResponseProvisionSipAccounts>,
     /**
      * Provisioning information of the common area phone.
@@ -30903,7 +31775,11 @@ pub struct GetCommonAreaPhoneResponsePolicy {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCommonAreaPhoneResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub calling_plans: Vec<ListPhoneUsersResponseCallingPlans>,
     /**
      * User's first name.
@@ -30941,7 +31817,11 @@ pub struct GetCommonAreaPhoneResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<GetCommonAreaPhoneResponseNumbers>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub policy: Option<GetCommonAreaPhoneResponsePolicy>,
@@ -31031,7 +31911,11 @@ pub struct UpdateCommonAreaPhoneRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersCommonAreaRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<PhoneUserResponseNumbers>,
 }
 
@@ -31059,7 +31943,11 @@ pub struct AssignPhoneNumbersCommonAreaResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignPhoneNumbersCommonAreaResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<AssignPhoneNumbersCommonAreaResponse>,
 }
 
@@ -31079,7 +31967,11 @@ pub struct AssignCallingPlansCommonAreaPhoneRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlansCommonAreaPhoneRequestData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub calling_plans: Vec<AssignCallingPlansCommonAreaPhoneRequest>,
 }
 
@@ -31108,7 +32000,11 @@ pub struct AssignCallingPlansCommonAreaPhoneResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignCallingPlansCommonAreaPhoneResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub calling_plans: Vec<AssignCallingPlansCommonAreaPhoneResponse>,
 }
 
@@ -31202,7 +32098,11 @@ pub struct BlockedList {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListBlockedResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub blocked_list: Vec<BlockedList>,
     /**
      * User's first name.
@@ -31325,7 +32225,11 @@ pub struct BillingReports {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetBillingReportResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub billing_reports: Vec<BillingReports>,
     /**
      * User's first name.
@@ -31408,7 +32312,11 @@ pub struct GetBillingInvoicesReportsResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub invoices: Vec<Invoices>,
 }
 
@@ -31471,7 +32379,11 @@ pub struct SharedLineGroups {
     /**
      * Phone Numbers Assigned to the Shared Line Group.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<ListSharedLineGroupsResponsePhoneNumbers>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub site: Option<Site>,
@@ -31502,7 +32414,11 @@ pub struct ListSharedLineGroupsResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub page_size: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub shared_line_groups: Vec<SharedLineGroups>,
     /**
      * Account seats.
@@ -31584,12 +32500,20 @@ pub struct GetSharedLineGroupResponseMembers {
     /**
      * View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub common_area_phones: Vec<Site>,
     /**
      * View current [members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_3ffbbb77-a009-4c09-91e4-81fc264b61d6) of the shared line group.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<Site>,
 }
 
@@ -31627,7 +32551,11 @@ pub struct GetSharedLineGroupResponse {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub members: Option<GetSharedLineGroupResponseMembers>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<PhoneUserResponseNumbers>,
     /**
      * User's first name.
@@ -31729,12 +32657,20 @@ pub struct AddMembersSharedLineGroupRequest {
     /**
      * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub common_area_phone_ids: Vec<String>,
     /**
      * Members can comprise of users on the account as well as common area phones. You can add a maximum of 10 members at once.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<Assistants>,
 }
 
@@ -31897,7 +32833,11 @@ pub struct GetCallQueueRecordingsResponseData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub page_size: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recordings: Vec<GetCallQueueRecordingsResponse>,
     /**
      * User's first name.
@@ -32047,7 +32987,11 @@ pub struct ListSipTrunksResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListSipTrunksResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sip_trunks: Vec<ListSipTrunksResponse>,
     /**
      * Account seats.
@@ -32096,7 +33040,11 @@ pub struct AssignSipTrunksRequestData {
     /**
      * Array of one or more SIP Trunk objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sip_trunks: Vec<AssignSipTrunksRequest>,
 }
 
@@ -32151,7 +33099,11 @@ pub struct AssignSipTrunksResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AssignSipTrunksResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sip_trunks: Vec<AssignSipTrunksResponse>,
 }
 
@@ -32188,7 +33140,11 @@ pub struct CalloutCountries {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListInternalCalloutCountriesResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub callout_countries: Vec<CalloutCountries>,
     /**
      * Account seats.
@@ -32219,13 +33175,21 @@ pub struct AddCalloutCountriesRequestData {
     /**
      * List of callout countries.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub callout_countries: Vec<AddCalloutCountriesRequest>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddCalloutCountriesResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub callout_countries: Vec<CalloutCountries>,
 }
 
@@ -32351,7 +33315,11 @@ pub struct InternalNumbers {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListInternalNumbersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub internal_numbers: Vec<InternalNumbers>,
     /**
      * User's first name.
@@ -32384,7 +33352,11 @@ pub struct ListInternalNumbersResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddInternalNumbersRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub internal_numbers: Vec<InternalNumbers>,
 }
 
@@ -32478,7 +33450,11 @@ pub struct AddInternalNumbersResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AddInternalNumbersResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub internal_numbers: Vec<AddInternalNumbersResponse>,
 }
 
@@ -32542,7 +33518,11 @@ pub struct ChangeZoomRoomsAppVersionRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListDigitalSignageContentResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contents: Vec<Site>,
     /**
      * User's first name.
@@ -32566,7 +33546,11 @@ pub struct ListDigitalSignageContentResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListWebinarTemplatesResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub templates: Vec<Site>,
     /**
      * Account seats.
@@ -32934,7 +33918,11 @@ pub struct ListCallLogsMetricsResponseData {
     /**
      * Call logs.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub call_logs: Vec<ListCallLogsMetricsResponse>,
     /**
      * User's first name.
@@ -33080,12 +34068,20 @@ pub struct CallerQos {
     /**
      * Quality of Service object that represents the call quality data of the caller.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub receiving: Vec<Sending>,
     /**
      * Quality of Service object that represents the call quality data of the caller.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sending: Vec<Sending>,
 }
 
@@ -33112,12 +34108,20 @@ pub struct CalleeQos {
     /**
      * QoS sent by the caller.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub receiving: Vec<Sending>,
     /**
      * QoS sent by the caller.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sending: Vec<Sending>,
 }
 
@@ -33146,7 +34150,11 @@ pub struct CreateBatchPollsRequest {
     /**
      * Array of Polls
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<Questions>,
     /**
      * User's first name.
@@ -33173,7 +34181,11 @@ pub struct Polls {
     /**
      * Array of Polls
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub questions: Vec<Questions>,
     /**
      * Status of the Meeting Poll:<br>`notstart` - Poll not started<br>`started` - Poll started<br>`ended` - Poll ended<br>`sharing` - Sharing poll results
@@ -33193,7 +34205,11 @@ pub struct Polls {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CreateBatchPollsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub polls: Vec<Polls>,
 }
 
@@ -33294,7 +34310,11 @@ pub struct AccountBillingInvoicesResponseData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub currency: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub invoices: Vec<AccountBillingInvoicesResponse>,
 }
 
@@ -33405,7 +34425,11 @@ pub struct GetAccountBillingInvoiceResponse {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub invoice_date: Option<chrono::NaiveDate>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub invoice_items: Vec<InvoiceItems>,
     /**
      * User's first name.
@@ -33550,7 +34574,11 @@ pub struct ParticipantFeedbackResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub page_size: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub participants: Vec<ParticipantFeedbackResponseParticipants>,
 }
 
@@ -33836,7 +34864,11 @@ pub struct GetCallLogDetailsResponse {
     /**
      * Child records.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub log_details: Vec<LogDetails>,
     /**
      * User's first name.
@@ -33871,7 +34903,11 @@ pub struct AddByocNumberRequest {
      *  
      *  \*\*Note:\*\* This option can only be used if the value of `share_rc` is set to `true`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phone_numbers: Vec<String>,
     /**
      * User's first name.
@@ -33927,7 +34963,11 @@ pub struct ListMeetingTemplatesResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListMeetingTemplatesResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub templates: Vec<ListMeetingTemplatesResponse>,
     /**
      * Account seats.
@@ -34032,7 +35072,11 @@ pub struct ListArchivedFilesResponseMeetingsArchive {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListArchivedFilesResponseMeetings {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub archive_files: Vec<ListArchivedFilesResponseMeetingsArchive>,
     /**
      * Account seats.
@@ -34138,7 +35182,11 @@ pub struct ListArchivedFilesResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub from: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub meetings: Vec<ListArchivedFilesResponseMeetings>,
     /**
      * User's first name.

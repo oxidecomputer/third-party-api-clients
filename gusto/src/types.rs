@@ -26,7 +26,11 @@ pub struct Employee {
     /**
      * The representation of an employee in Gusto.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_fields: Vec<EmployeeCustomField>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub date_of_birth: Option<chrono::NaiveDate>,
@@ -42,7 +46,11 @@ pub struct Employee {
     /**
      * The representation of an employee in Gusto.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub eligible_paid_time_off: Vec<PaidTimeOff>,
     /**
      * The representation of an employee in Gusto.
@@ -65,7 +73,11 @@ pub struct Employee {
     /**
      * The representation of an employee in Gusto.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub garnishments: Vec<Garnishment>,
     /**
      * The representation of an employee in Gusto.
@@ -92,7 +104,11 @@ pub struct Employee {
     /**
      * The representation of an employee in Gusto.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub jobs: Vec<Job>,
     /**
      * The representation of an employee in Gusto.
@@ -167,7 +183,11 @@ pub struct Employee {
     /**
      * The representation of an employee in Gusto.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub terminations: Vec<Termination>,
     /**
      * The representation of an employee in Gusto.
@@ -785,7 +805,11 @@ pub struct Job {
     /**
      * The representation of a job in Gusto.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub compensations: Vec<Compensation>,
     /**
      * The representation of a job in Gusto.
@@ -1096,17 +1120,29 @@ pub struct Compensations {
     /**
      * The available company-wide compensation rates for the company.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub fixed: Vec<Fixed>,
     /**
      * The available company-wide compensation rates for the company.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub hourly: Vec<Hourly>,
     /**
      * The available company-wide compensation rates for the company.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub paid_time_off: Vec<Fixed>,
 }
 
@@ -1293,7 +1329,11 @@ pub struct Company {
     /**
      * The representation of a company in Gusto.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub locations: Vec<Location>,
     /**
      * The representation of a company in Gusto.
@@ -1770,7 +1810,11 @@ pub struct ContractorPayments {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub payments: Vec<ContractorPayment>,
     /**
      *
@@ -1798,7 +1842,11 @@ pub struct ContractorPaymentSummary {
     /**
      * The representation of the summary of contractor payments for a given company in a given time period.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contractor_payments: Vec<ContractorPayments>,
     /**
      * The representation of the summary of contractor payments for a given company in a given time period.
@@ -2029,7 +2077,11 @@ pub struct Companies {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub id: f64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub locations: Vec<Location>,
     #[serde(
         default,
@@ -2047,7 +2099,11 @@ pub struct Companies {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PayrollAdmin {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub companies: Vec<Companies>,
 }
 
@@ -2699,7 +2755,11 @@ pub struct EligibleEmployees {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub id: f64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub job_ids: Vec<f64>,
 }
 
@@ -2731,7 +2791,11 @@ pub struct PayPeriod {
     /**
      * The representation of a pay period.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub eligible_employees: Vec<EligibleEmployees>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub end_date: Option<chrono::NaiveDate>,
@@ -3176,12 +3240,20 @@ pub struct EmployeeCompensations {
     /**
      * An array of employee benefits for the pay period. Benefits are only included for processed payroll when the include parameter is present.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub benefits: Vec<Benefits>,
     /**
      * An array of employee deductions for the pay period. Deductions are only included for processed payroll when the include parameter is present.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub deductions: Vec<Deductions>,
     /**
      * The ID of the employee in Gusto.
@@ -3195,7 +3267,11 @@ pub struct EmployeeCompensations {
     /**
      * An array of fixed compensations for the employee. Fixed compensations include tips, bonuses, and one time reimbursements. If this payroll has been procesed, only fixed compensations with a value greater than 0.00 are returned. For an unprocess payroll, all active fixed compensations are returned.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub fixed_compensations: Vec<FixedCompensations>,
     /**
      * A unique identifier of the employee in Gusto.
@@ -3209,7 +3285,11 @@ pub struct EmployeeCompensations {
     /**
      * An array of hourly compensations for the employee. Hourly compensations include regular, overtime, and double overtime hours. If this payroll has been procesed, only hourly compensations with a value greater than 0.00 are returned. For an unprocess payroll, all active hourly compensations are returned.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub hourly_compensations: Vec<HourlyCompensations>,
     /**
      * A unique identifier of the employee in Gusto.
@@ -3223,7 +3303,11 @@ pub struct EmployeeCompensations {
     /**
      * An array of all paid time off the employee is eligible for this pay period.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub paid_time_off: Vec<PayrollEmployeeCompensationsPaidTimeOff>,
     /**
      * The employee's compensation payment method. This value is only available for processed payrolls.
@@ -3233,7 +3317,11 @@ pub struct EmployeeCompensations {
     /**
      * An array of employer and employee taxes for the pay period. Taxes are only included for processed payroll when the include parameter is present.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub taxes: Vec<Taxes>,
 }
 
@@ -3272,7 +3360,11 @@ pub struct PayrollData {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub employee_compensations: Vec<EmployeeCompensations>,
     /**
      *
@@ -3418,7 +3510,11 @@ pub struct EmployeeCustomField {
     /**
      * A custom field of an employee
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selection_options: Vec<String>,
     #[serde(rename = "type")]
     pub type_: CustomFieldType,
@@ -3466,7 +3562,11 @@ pub struct CompanyCustomField {
     /**
      * A custom field on a company
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub selection_options: Vec<String>,
     #[serde(rename = "type")]
     pub type_: CustomFieldType,
@@ -3701,12 +3801,20 @@ pub struct EarningTypeListResponse {
     /**
      * The default earning types for the company.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom: Vec<EarningType>,
     /**
      * The default earning types for the company.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub default: Vec<EarningType>,
 }
 
@@ -4950,7 +5058,11 @@ impl OffCycleReason {
 pub struct PostCompanyPayrollsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub check_date: Option<chrono::NaiveDate>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub employee_ids: Vec<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub end_date: Option<chrono::NaiveDate>,
@@ -5048,23 +5160,39 @@ pub struct PutCompanyPayrollsRequestEmployeeCompensations {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub fixed_compensations: Vec<PutCompanyPayrollsRequestEmployeeCompensationsFixed>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub hourly_compensations: Vec<PutCompanyPayrollsRequestEmployeeCompensationsHourly>,
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub paid_time_off: Vec<PayrollEmployeeCompensationsPaidTimeOff>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutCompanyPayrollsRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub employee_compensations: Vec<PutCompanyPayrollsRequestEmployeeCompensations>,
     /**
      * A unique identifier of the employee in Gusto.
@@ -5265,7 +5393,11 @@ pub struct PostProvisionRequestCompany {
     /**
      * The locations for the company. This includes mailing, work, and filing addresses.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub addresses: Vec<Addresses>,
     /**
      * A unique identifier of the employee in Gusto.
@@ -5297,7 +5429,11 @@ pub struct PostProvisionRequestCompany {
     /**
      * An array of options for fields of type radio. Otherwise, null.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub states: Vec<String>,
     /**
      * A unique identifier of the employee in Gusto.
@@ -5341,13 +5477,21 @@ pub struct GetEmployeeCustomFieldsResponse {
     /**
      * Custom fields are only included for the employee if the include param has the custom_fields value set
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_fields: Vec<EmployeeCustomField>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCompanyCustomFieldsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_fields: Vec<CompanyCustomField>,
 }
 
@@ -5555,7 +5699,11 @@ pub struct GetCompanyPayrollReversalsResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub reversal_payroll_id: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reversed_employee_ids: Vec<i64>,
     /**
      * The unique identifier of the location in Gusto.

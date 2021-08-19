@@ -191,7 +191,11 @@ pub struct Gif {
      * An array of featured tags for this GIF (Note: Not available when using the Public Beta Key)
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub featured_tags: Vec<String>,
     /**
      * The unique bit.ly URL for this GIF
@@ -265,7 +269,11 @@ pub struct Gif {
      * An array of featured tags for this GIF (Note: Not available when using the Public Beta Key)
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tags: Vec<String>,
     /**
      * The date this GIF was added to the GIPHY database.
@@ -533,7 +541,11 @@ pub struct User {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetGifsByResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<Gif>,
     /**
      * The Meta Object contains basic information regarding the request, whether it was successful, and the response given by the API.  Check `responses` to see a description of types of response codes the API might give you under different cirumstances.

@@ -137,7 +137,8 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                     a(r#"skip_serializing_if = "String::is_empty",
                                         deserialize_with = "crate::utils::deserialize_null_string::deserialize","#);
                                 } else if rt.starts_with("Vec<") {
-                                    a(r#"skip_serializing_if = "Vec::is_empty","#);
+                                    a(r#"skip_serializing_if = "Vec::is_empty",
+                                      deserialize_with = "crate::utils::deserialize_null_vector::deserialize","#);
                                 } else if rt.starts_with("std::collections::HashMap<") {
                                     a(
                                         r#"skip_serializing_if = "std::collections::HashMap::is_empty","#,

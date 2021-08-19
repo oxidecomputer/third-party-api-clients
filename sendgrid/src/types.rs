@@ -72,7 +72,11 @@ pub struct Errors {
     /**
      * The indices of the recipient(s) sent that caused the error.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub error_indices: Vec<f64>,
     /**
      * The license key provided with your New Relic account.
@@ -96,9 +100,17 @@ pub struct ContactDbRecipientResponse {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub error_count: f64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub error_indices: Vec<f64>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<Errors>,
     /**
      * The number of errors found while adding recipients.
@@ -112,7 +124,11 @@ pub struct ContactDbRecipientResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub persisted_recipients: Vec<String>,
     /**
      * The number of errors found while adding recipients.
@@ -482,7 +498,11 @@ pub struct ReverseDns {
     /**
      * The users who are able to send mail from the IP address.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<Users>,
     /**
      * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
@@ -649,7 +669,11 @@ pub struct MailSettingsAddressWhitelabel {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub enabled: bool,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list: Vec<String>,
 }
 
@@ -878,7 +902,11 @@ pub struct ApiKeyNameScopes {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -899,7 +927,11 @@ pub struct ContactdbSegments {
     /**
      * The conditions for a recipient to be included in this segment.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<ContactdbSegmentsConditions>,
     #[serde(
         default,
@@ -1048,7 +1080,11 @@ pub struct GlobalErrorResponseSchemaErrors {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GlobalErrorResponseSchema {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<GlobalErrorResponseSchemaErrors>,
     #[serde(
         default,
@@ -1576,7 +1612,11 @@ pub struct CategoryStats {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub date: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stats: Vec<Stats>,
 }
 
@@ -1716,7 +1756,11 @@ pub struct MailSettingsBouncePurge {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TransactionalTemplateVersionOutput {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub warnings: Vec<Warning>,
 }
 
@@ -1833,7 +1877,11 @@ impl Editor {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct CampaignsRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     #[serde(
         default,
@@ -1858,7 +1906,11 @@ pub struct CampaignsRequest {
     /**
      * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<i64>,
     #[serde(
         default,
@@ -1869,7 +1921,11 @@ pub struct CampaignsRequest {
     /**
      * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segment_ids: Vec<i64>,
     #[serde(
         default,
@@ -2051,7 +2107,11 @@ pub struct SubuserStatsData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub date: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stats: Vec<SubuserStats>,
 }
 
@@ -2198,7 +2258,11 @@ pub struct Recipients {
     /**
      * The custom fields assigned to this recipient and their values.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_fields: Vec<ContactdbCustomFieldWithValueAllOf>,
     /**
      * The license key provided with your New Relic account.
@@ -2276,7 +2340,11 @@ pub struct Recipients {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ContactdbRecipient {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<Recipients>,
 }
 
@@ -2591,7 +2659,11 @@ pub struct TransactionalTemplatesTemplateLean {
         rename = "updated_at "
     )]
     pub updated_at: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub versions: Vec<TransactionalTemplatesVersionOutputLean>,
 }
 
@@ -2611,7 +2683,11 @@ pub struct ContactDetails {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub address_line_2: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub alternate_emails: Vec<String>,
     #[serde(
         default,
@@ -2666,7 +2742,11 @@ pub struct ContactDetails {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<String>,
     #[serde(
         default,
@@ -2910,7 +2990,11 @@ pub struct Contact {
 pub struct SingleContactRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub contact: Option<Contact>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<uuid::Uuid>,
 }
 
@@ -3018,7 +3102,11 @@ pub struct ContactExport {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub updated_at: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub urls: Vec<String>,
 }
 
@@ -3065,7 +3153,11 @@ pub struct ContactSummary {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<String>,
     /**
      * The number of errors found while adding recipients.
@@ -3092,7 +3184,11 @@ pub struct ContactRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub address_line_2: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub alternate_emails: Vec<String>,
     #[serde(
         default,
@@ -3159,7 +3255,11 @@ pub struct ContactDetails2 {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub address_line_2: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub alternate_emails: Vec<String>,
     #[serde(
         default,
@@ -3219,7 +3319,11 @@ pub struct ContactDetails2 {
     /**
      * The contact's list IDs.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<uuid::Uuid>,
     #[serde(
         default,
@@ -3233,7 +3337,11 @@ pub struct ContactDetails2 {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub postal_code: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segment_ids: Vec<uuid::Uuid>,
     #[serde(
         default,
@@ -3589,7 +3697,11 @@ pub struct SegmentQueryJsonContactsL {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SegmentQueryJsonContactsLR {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub args: Vec<L>,
     /**
      * The license key provided with your New Relic account.
@@ -3659,7 +3771,11 @@ pub struct SegmentQueryJsonContactsR {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub v: Vec<String>,
 }
 
@@ -3751,7 +3867,11 @@ pub struct ContactResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub alternate_emails: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -3808,7 +3928,11 @@ pub struct ContactResponse {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<uuid::Uuid>,
     #[serde(
         default,
@@ -3816,7 +3940,11 @@ pub struct ContactResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub postal_code: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segment_ids: Vec<uuid::Uuid>,
     /**
      * The license key provided with your New Relic account.
@@ -3938,7 +4066,11 @@ pub struct ApiError {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ApiErrors {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<ApiError>,
 }
 
@@ -4093,7 +4225,11 @@ pub struct ContactDetails3 {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub address_line_2: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub alternate_emails: Vec<String>,
     #[serde(
         default,
@@ -4160,7 +4296,11 @@ pub struct ContactDetails3 {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<String>,
     #[serde(
         default,
@@ -4177,7 +4317,11 @@ pub struct ContactDetails3 {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segment_ids: Vec<String>,
     #[serde(
         default,
@@ -4252,7 +4396,11 @@ pub struct ErrorsData {
 /// If the request is incorrect, an array of errors will be returned.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ErrorsDataType {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<ErrorsData>,
 }
 
@@ -4323,7 +4471,11 @@ pub struct SinglesendsResponseResults {
 pub struct SinglesendsResponse {
     #[serde(rename = "_metadata")]
     pub metadata: Metadata,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub results: Vec<SinglesendsResponseResults>,
 }
 
@@ -4360,7 +4512,11 @@ pub struct AutomationsResponseResults {
 pub struct AutomationsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<Metadata>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub results: Vec<AutomationsResponseResults>,
 }
 
@@ -4480,7 +4636,11 @@ impl SinglesendSearchStatus {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SinglesendSearch {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     #[serde(
         default,
@@ -4488,7 +4648,11 @@ pub struct SinglesendSearch {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub status: Vec<SinglesendSearchStatus>,
 }
 
@@ -4505,12 +4669,20 @@ pub struct SendTo {
     /**
      * The contact's list IDs.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<uuid::Uuid>,
     /**
      * The contact's list IDs.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segment_ids: Vec<uuid::Uuid>,
 }
 
@@ -4599,7 +4771,11 @@ pub struct EmailConfig {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SinglesendRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub email_config: Option<EmailConfig>,
@@ -4667,7 +4843,11 @@ pub struct Warnings {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SinglesendWarning {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub warnings: Vec<Warnings>,
 }
 
@@ -4925,7 +5105,11 @@ pub struct AutomationsLinkStatsResponse {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub results: Vec<AutomationsLinkStatsResponseResults>,
     #[serde(
         default,
@@ -5006,7 +5190,11 @@ pub struct SinglesendsLinkStatsResponse {
     /**
      * This is the index of the link's location in the email contents.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub results: Vec<SinglesendsLinkStatsResponseResults>,
     #[serde(
         default,
@@ -5043,7 +5231,11 @@ pub struct DomainAuthentication200Response {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub last_validation_attempt_at: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subusers: Vec<Subusers>,
 }
 
@@ -5201,7 +5393,11 @@ pub struct SinglesendResponseShort {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     #[serde(
         default,
@@ -5466,7 +5662,11 @@ pub struct Result {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct IpAccessResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<Result>,
 }
 
@@ -5581,13 +5781,21 @@ pub struct StatsAdvancedBaseSchemaData {
     /**
      * The individual email activity stats.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stats: Vec<StatsAdvancedBaseSchema>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FullSegment {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contacts_sample: Vec<ContactResponse>,
     /**
      * helper text or docs for troubleshooting
@@ -5730,7 +5938,11 @@ pub struct SinglesendResponse {
         deserialize_with = "crate::utils::date_time_format::deserialize"
     )]
     pub updated_at: Option<chrono::DateTime<chrono::Utc>>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub warnings: Vec<Warnings>,
 }
 
@@ -5751,7 +5963,11 @@ pub struct DesignCommonFields {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     /**
      * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
@@ -5882,7 +6098,11 @@ pub struct SuppressionsRequestBody {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipient_emails: Vec<String>,
 }
 
@@ -6078,7 +6298,11 @@ pub struct GetScopesResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -6204,7 +6428,11 @@ pub struct SsoTeammatesPatchResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -6559,7 +6787,11 @@ pub struct AllSegmentsResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parent_list_ids: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -6601,7 +6833,11 @@ pub struct SegmentSummaryV2 {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub results: Vec<SegmentSummary>,
 }
 
@@ -6613,7 +6849,11 @@ pub struct SegmentResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub contacts_count: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contacts_sample: Vec<ContactResponse>,
     /**
      * The license key provided with your New Relic account.
@@ -6650,7 +6890,11 @@ pub struct SegmentResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parent_list_ids: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -6720,7 +6964,11 @@ pub struct ErrorsSeg {
 /// If the request is incorrect, an array of errors will be returned.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ErrorsSegData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<ErrorsSeg>,
 }
 
@@ -6735,7 +6983,11 @@ pub struct SegmentWriteV2 {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub parent_list_ids: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -7091,12 +7343,20 @@ pub struct Message {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     /**
      * List of events related to email message
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<Event>,
     /**
      * The license key provided with your New Relic account.
@@ -7256,7 +7516,11 @@ pub struct DomainAuthentication {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ips: Vec<String>,
     /**
      * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
@@ -7369,7 +7633,11 @@ pub struct AuthenticationDomain {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ips: Vec<String>,
     /**
      * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
@@ -7610,7 +7878,11 @@ pub struct TraitGlobalErrors500Response {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMessagesMsgResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<TraitGlobalErrors500Response>,
 }
 
@@ -7643,7 +7915,11 @@ pub struct TraitCancelScheduledSendsErrors400Response {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TraitCancelScheduledSendsErrors400ResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<TraitCancelScheduledSendsErrors400Response>,
     /**
      * The license key provided with your New Relic account.
@@ -7698,7 +7974,11 @@ pub struct TraitMakoErrorResponse400Errors {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TraitMakoErrorResponse400 {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<TraitMakoErrorResponse400Errors>,
 }
 
@@ -7707,12 +7987,20 @@ pub struct Personalizations {
     /**
      * An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub bcc: Vec<CcBccEmailObject>,
     /**
      * An array of recipients who will receive a copy of your email. Each object in this array must contain the recipient's email address. Each object in the array may optionally contain the recipient's name.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub cc: Vec<CcBccEmailObject>,
     /**
      * helper text or docs for troubleshooting
@@ -7751,7 +8039,11 @@ pub struct Personalizations {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub substitutions: Option<Help>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub to: Vec<ReplyTo>,
 }
 
@@ -7866,7 +8158,11 @@ pub struct Asm {
     /**
      * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups_to_display: Vec<i64>,
 }
 
@@ -8171,7 +8467,11 @@ pub struct TrackingSettings {
 pub struct PostMailSendRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub asm: Option<Asm>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub attachments: Vec<Attachments>,
     #[serde(
         default,
@@ -8179,12 +8479,20 @@ pub struct PostMailSendRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub batch_id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     /**
      * An array where you can specify the content of your email. You can include multiple [MIME types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of content, but you must specify at least one MIME type. To include more than one MIME type, add another object to the array containing the `type` and `value` parameters.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub content: Vec<Content>,
     #[serde(
         default,
@@ -8207,7 +8515,11 @@ pub struct PostMailSendRequest {
     /**
      * An array of messages and their metadata. Each object within personalizations can be thought of as an envelope - it defines who should receive an individual message and how that message should be handled. See our [Personalizations documentation](https://sendgrid.com/docs/for-developers/sending-email/personalizations/) for examples.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub personalizations: Vec<Personalizations>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reply_to: Option<ReplyEmailObject>,
@@ -8256,7 +8568,11 @@ pub struct CancelPauseAScheduledSendRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetApiKeysResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<ApiKeyNameId>,
 }
 
@@ -8271,7 +8587,11 @@ pub struct CreateApiKeysRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -8307,13 +8627,21 @@ pub struct CreateApiKeysResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetApiKeysKeyResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<ApiKeyNameScopesAllOf>,
 }
 
@@ -8328,7 +8656,11 @@ pub struct PutApiKeysKeyRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -8352,7 +8684,11 @@ pub struct GetScopesResponseData {
     /**
      * This 401 response indicates that the user making the call doesn't have the authorization to view the list of scopes.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<GetScopesResponseErrors>,
 }
 
@@ -8374,7 +8710,11 @@ pub struct PostAccessSettingsWhitelistRequest {
     /**
      * An array containing the IP(s) you want to allow.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ips: Vec<Ips>,
 }
 
@@ -8383,7 +8723,11 @@ pub struct DeleteAccessSettingsWhitelistRequest {
     /**
      * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ids: Vec<i64>,
 }
 
@@ -8443,7 +8787,11 @@ pub struct GetAccessSettingsActivityResponse {
     /**
      * An array containing the IPs that recently attempted to access your account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<GetAccessSettingsActivityResponseResult>,
 }
 
@@ -8509,7 +8857,11 @@ pub struct PatchSsoTeammatesUsernameRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub last_name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -8557,7 +8909,11 @@ pub struct GetMailSettingsResponse {
     /**
      * The list of all mail settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<GetMailSettingsResponseResult>,
 }
 
@@ -8565,7 +8921,11 @@ pub struct GetMailSettingsResponse {
 pub struct PatchMailSettingsAddressWhitelistRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub enabled: Option<bool>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list: Vec<String>,
 }
 
@@ -8621,7 +8981,11 @@ pub struct GetPartnerSettingsResponse {
     /**
      * The list of all mail settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<GetMailSettingsResponseResult>,
 }
 
@@ -8753,7 +9117,11 @@ pub struct GetTeammatesResponseResult {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTeammatesResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<GetTeammatesResponseResult>,
 }
 
@@ -8776,7 +9144,11 @@ pub struct PostTeammatesRequest {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -8802,7 +9174,11 @@ pub struct PostTeammatesResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -8839,7 +9215,11 @@ pub struct PostTeammatesResponseErrors {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostSendersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<PostTeammatesResponseErrors>,
 }
 
@@ -8926,7 +9306,11 @@ pub struct GetTeammatesPendingResponseResult {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -8941,7 +9325,11 @@ pub struct GetTeammatesPendingResponseResult {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTeammatesPendingResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<GetTeammatesPendingResponseResult>,
 }
 
@@ -9031,7 +9419,11 @@ pub struct GetTeammatesUsernameResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -9086,7 +9478,11 @@ pub struct PatchTeammatesUsernameRequest {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
 }
 
@@ -9699,7 +10095,11 @@ pub struct PostSubusersRequest {
     /**
      * The IP addresses that should be assigned to this subuser.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ips: Vec<std::net::Ipv4Addr>,
     /**
      * The license key provided with your New Relic account.
@@ -9754,7 +10154,11 @@ pub struct PutSubusersSubuserNameIpsResponse {
     /**
      * The IP addresses that should be assigned to this subuser.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ips: Vec<std::net::Ipv4Addr>,
 }
 
@@ -9938,7 +10342,11 @@ pub struct PostMarketingSegmentsResponse {
     /**
      * The reasons why the validation failed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<PostWhitelabelLinksValidateResponseErrors>,
 }
 
@@ -9988,7 +10396,11 @@ pub struct PostIpsWarmupResponse {
     /**
      * The errors that were encountered.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<PostIpsWarmupResponseErrors>,
 }
 
@@ -10352,7 +10764,11 @@ pub struct GetIpsAssignedResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pools: Vec<String>,
     #[serde(
         default,
@@ -10375,7 +10791,11 @@ pub struct GetIpsPoolsPoolNameResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ips: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -10431,7 +10851,11 @@ pub struct GetIpsResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pools: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -10454,7 +10878,11 @@ pub struct GetIpsResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subusers: Vec<String>,
     /**
      * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
@@ -10482,7 +10910,11 @@ pub struct PostIpsRequest {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub count: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subusers: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub warmup: Option<bool>,
@@ -10502,7 +10934,11 @@ pub struct PostIpsResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subusers: Vec<String>,
 }
 
@@ -10511,7 +10947,11 @@ pub struct PostIpsResponseData {
     /**
      * List of IP objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ips: Vec<PostIpsResponse>,
     #[serde(
         default,
@@ -10559,7 +10999,11 @@ pub struct GetIpsRemainingResponseResults {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetIpsRemainingResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub results: Vec<GetIpsRemainingResponseResults>,
 }
 
@@ -10577,7 +11021,11 @@ pub struct GetIpsIpAddressResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub pools: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -10597,7 +11045,11 @@ pub struct GetIpsIpAddressResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subusers: Vec<String>,
     /**
      * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
@@ -10640,7 +11092,11 @@ pub struct PostWhitelabelDomainsRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub domain: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ips: Vec<String>,
     #[serde(
         default,
@@ -10783,7 +11239,11 @@ pub struct PostWhitelabelDomainsValidateResponseData {
     /**
      * The reasons why the validation failed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<PostWhitelabelLinksValidateResponseErrors>,
 }
 
@@ -10792,12 +11252,20 @@ pub struct GetVerifiedSendersDomainsResponseResults {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub hard_failures: Vec<String>,
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub soft_failures: Vec<String>,
 }
 
@@ -10835,7 +11303,11 @@ pub struct GetVerifiedSendersStepsCompletedResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetVerifiedSendersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub results: Vec<VerifiedSenderResponseSchema>,
 }
 
@@ -10872,7 +11344,11 @@ pub struct PostVerifiedSendersResponseErrors {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostVerifiedSendersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<PostVerifiedSendersResponseErrors>,
 }
 
@@ -10900,19 +11376,31 @@ pub struct GetVerifiedSendersVerifyTokenResponseErrors {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchVerifiedSendersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<GetVerifiedSendersVerifyTokenResponseErrors>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteVerifiedSendersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<GetVerifiedSendersVerifyTokenResponseErrors>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutDesignRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub generate_plain_content: Option<bool>,
@@ -10946,7 +11434,11 @@ pub struct PutDesignRequest {
 pub struct ListDesignsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<MetadataType>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<DesignOutputSummaryAllOf>,
 }
 
@@ -10960,13 +11452,21 @@ pub struct GetMcContatsResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub contact_count: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<ContactDetails3>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMcListsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<Error>,
 }
 
@@ -10975,12 +11475,20 @@ pub struct PutMcContactsRequest {
     /**
      * One or more contacts objects that you intend to upsert. The available fields for a contact, including the required `email` field are described below.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contacts: Vec<ContactRequest>,
     /**
      * The contact's list IDs.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<uuid::Uuid>,
 }
 
@@ -11009,7 +11517,11 @@ pub struct DeleteMcContactsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DeleteMcContactsResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<Help>,
 }
 
@@ -11158,9 +11670,17 @@ pub struct GetMarketingContactsExportsResponseResult {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lists: Vec<Lists>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segments: Vec<Lists>,
     /**
      * The license key provided with your New Relic account.
@@ -11174,7 +11694,11 @@ pub struct GetMarketingContactsExportsResponseResult {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub urls: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -11191,7 +11715,11 @@ pub struct GetMarketingContactsExportsResponseResult {
 pub struct GetMarketingContactsExportsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<GetMarketingContactsExportsResponseResultMetadata>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<GetMarketingContactsExportsResponseResult>,
 }
 
@@ -11219,7 +11747,11 @@ pub struct GetMarketingContactsExportsResponseErrors {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMarketingContactsExportsResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<GetMarketingContactsExportsResponseErrors>,
 }
 
@@ -11275,7 +11807,11 @@ pub struct PostMcContactsExportsRequest {
     /**
      * The contact's list IDs.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<uuid::Uuid>,
     #[serde(
         default,
@@ -11288,7 +11824,11 @@ pub struct PostMcContactsExportsRequest {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segment_ids: Vec<String>,
 }
 
@@ -11333,7 +11873,11 @@ pub struct PostMcContactsSearchResponse {
         deserialize_with = "crate::utils::deserialize_null_f64::deserialize"
     )]
     pub contact_count: f64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<ContactDetails3>,
 }
 
@@ -11392,7 +11936,11 @@ pub struct PutMcContactsImportsRequest {
     /**
      * Import file header to reserved/custom field mapping.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub field_mappings: Vec<FieldMappingsAnyOf>,
     /**
      * Upload file type.
@@ -11405,7 +11953,11 @@ pub struct PutMcContactsImportsRequest {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<String>,
 }
 
@@ -11445,7 +11997,11 @@ pub struct PutMcContactsImportsResponse {
     /**
      * A list of headers that must be included in PUT request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub upload_headers: Vec<UploadHeaders>,
     /**
      * The license key provided with your New Relic account.
@@ -11460,7 +12016,11 @@ pub struct PutMcContactsImportsResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutMcContactsImportsResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<Error>,
 }
 
@@ -11476,13 +12036,21 @@ pub struct PostMarketingContactsBatchRequest {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ids: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingContactsBatchResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<ContactDetails3>,
 }
 
@@ -11492,7 +12060,11 @@ pub struct PostMarketingContactsSearchEmailsRequest {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<String>,
 }
 
@@ -11571,7 +12143,11 @@ pub struct PostMarketingSendersRequest {
 pub struct GetMcListsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<Metadata>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<List>,
 }
 
@@ -11651,9 +12227,17 @@ pub struct DeleteMcListsContactsResponse {
 pub struct GetMcFieldDefinitionsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<MetadataType>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_fields: Vec<CustomFieldDefinitionsResponse>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reserved_fields: Vec<ReservedFieldDefinitionsResponse>,
 }
 
@@ -11692,7 +12276,11 @@ pub struct PostMcFieldDefinitionsResponseAllOf {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMarketingSegmentsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub results: Vec<SegmentSummary>,
 }
 
@@ -11719,7 +12307,11 @@ pub struct PostMarketingSegmentsRequestAllOf {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSegmentsDeleteRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ids: Vec<uuid::Uuid>,
 }
 
@@ -11729,7 +12321,11 @@ pub struct Resources {
     /**
      * resources in which segment is being used
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ids: Vec<String>,
     /**
      * resources in which segment is being used
@@ -11772,7 +12368,11 @@ pub struct PostMarketingSegmentsDeleteResponseErrors {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSegmentsDeleteResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<PostMarketingSegmentsDeleteResponseErrors>,
 }
 
@@ -11780,13 +12380,21 @@ pub struct PostMarketingSegmentsDeleteResponse {
 pub struct GetMarketingSinglesendsResponse {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_metadata")]
     pub metadata: Option<MetadataType>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<SinglesendResponseShort>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSinglesendsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<SsoErrorResponse>,
 }
 
@@ -11896,7 +12504,11 @@ pub struct GetMarketingSinglesendsCategoriesResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
 }
 
@@ -11911,7 +12523,11 @@ pub struct PostMarketingTestSendEmailRequest {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<String>,
     #[serde(
         default,
@@ -11942,7 +12558,11 @@ pub struct PostMarketingTestSendEmailRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetSendersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<SenderAllOf>,
 }
 
@@ -11974,7 +12594,11 @@ pub struct PostSendersRequestAllOf {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListAllListsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lists: Vec<ContactdbList>,
 }
 
@@ -12005,13 +12629,21 @@ pub struct PatchContactdbListsListResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetContactdbRecipientsSearchResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<ContactdbRecipient>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListRecipientsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<Help>,
 }
 
@@ -12107,13 +12739,21 @@ pub struct GetContactdbStatusResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetContactdbStatusResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub status: Vec<GetContactdbStatusResponse>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetContactdbRecipientsRecipientListsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lists: Vec<ContactdbList>,
 }
 
@@ -12122,7 +12762,11 @@ pub struct PostContactdbRecipientsSearchRequest {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<String>,
     #[serde(
         default,
@@ -12186,7 +12830,11 @@ pub struct PostContactdbRecipientsSearchResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub created_at: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_fields: Vec<PostContactdbRecipientsSearchResponseCustomFields>,
     /**
      * The license key provided with your New Relic account.
@@ -12249,13 +12897,21 @@ pub struct PostContactdbRecipientsSearchResponseData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub recipient_count: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<PostContactdbRecipientsSearchResponse>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListAllCustomFieldsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub custom_fields: Vec<ContactdbCustomFieldWithAllOf>,
 }
 
@@ -12301,19 +12957,31 @@ pub struct ReservedFields {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetContactdbReservedFieldsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reserved_fields: Vec<ReservedFields>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListAllSegmentsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segments: Vec<ContactdbSegments>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchContactdbSegmentsSegmentRequest {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<ContactdbSegmentsConditions>,
     #[serde(
         default,
@@ -12334,7 +13002,11 @@ pub struct PatchContactdbSegmentsSegmentRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ListRecipientsOnASegmentResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipients: Vec<ContactdbRecipient>,
 }
 
@@ -12353,13 +13025,21 @@ pub struct GetCategoriesResponse {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCategoriesResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<ErrorsSeg>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCampaignsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<CampaignResponseAllOf>,
 }
 
@@ -12368,7 +13048,11 @@ pub struct GetCampaignsCampaignResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -12406,7 +13090,11 @@ pub struct GetCampaignsCampaignResponse {
     /**
      * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub list_ids: Vec<i64>,
     /**
      * The license key provided with your New Relic account.
@@ -12420,7 +13108,11 @@ pub struct GetCampaignsCampaignResponse {
     /**
      * The IDs of the lists you are sending this campaign to. You can have both segment IDs and list IDs
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segment_ids: Vec<i64>,
     #[serde(
         default,
@@ -12468,7 +13160,11 @@ pub struct UpdateACampaignRequest {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<String>,
     /**
      * The license key provided with your New Relic account.
@@ -12674,7 +13370,11 @@ pub struct GetTemplatesResponse {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<TransactionalTemplatesTemplateLean>,
 }
 
@@ -12702,7 +13402,11 @@ pub struct GetTemplatesResponseErrors {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTemplatesResponseData {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<GetTemplatesResponseErrors>,
 }
 
@@ -12746,7 +13450,11 @@ pub struct GetUserWebhooksParseSettingsResponse {
     /**
      * The list of your current inbound parse settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<ParseSetting>,
 }
 
@@ -12783,7 +13491,11 @@ pub struct GetUserWebhooksParseStatsResponseData {
     /**
      * The Parse Webhook usage statistics.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stats: Vec<GetUserWebhooksParseStatsResponse>,
 }
 
@@ -12836,7 +13548,11 @@ pub struct PatchUserWebhooksEventSettingsSignedResponseErrors {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PatchUserWebhooksEventSettingsSignedResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<PatchUserWebhooksEventSettingsSignedResponseErrors>,
 }
 
@@ -12870,7 +13586,11 @@ pub struct PostUserWebhooksEventTestRequest {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetMessagesResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub messages: Vec<Messages>,
 }
 
@@ -12987,7 +13707,11 @@ pub struct GetTrackingSettingsResponse {
     /**
      * The list of all tracking settings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub result: Vec<GetTrackingSettingsResponseResult>,
 }
 
@@ -13017,7 +13741,11 @@ pub struct GetStatsResponseData {
     /**
      * The individual email activity stats.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stats: Vec<GetStatsResponse>,
 }
 
@@ -13098,7 +13826,11 @@ pub struct GetGeoStatsResponseData {
     /**
      * The list of statistics.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stats: Vec<GetGeoStatsResponse>,
 }
 
@@ -13144,7 +13876,11 @@ pub struct GetClientsStatsResponse {
     /**
      * The list of statistics.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stats: Vec<GetDevicesStatsResponse>,
 }
 
@@ -13231,7 +13967,11 @@ pub struct GetMailboxProvidersStatsResponseData {
     /**
      * The list of statistics.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stats: Vec<GetMailboxProvidersStatsResponse>,
 }
 
@@ -13277,7 +14017,11 @@ pub struct GetBrowsersStatsResponseData {
     /**
      * The list of statistics.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stats: Vec<GetBrowsersStatsResponse>,
 }
 
@@ -13285,7 +14029,11 @@ pub struct GetBrowsersStatsResponseData {
 pub struct DeleteSuppressionBouncesRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delete_all: Option<bool>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<String>,
 }
 
@@ -13293,7 +14041,11 @@ pub struct DeleteSuppressionBouncesRequest {
 pub struct DeleteSuppressionBlocksRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub delete_all: Option<bool>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<String>,
 }
 
@@ -13407,7 +14159,11 @@ pub struct PostAsmGroupsGroupSuppressionsResponse {
     /**
      * The recipient IDs of the recipients that already existed from this request.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub recipient_emails: Vec<String>,
 }
 
@@ -13494,6 +14250,10 @@ pub struct GetAsmSuppressionsEmailResponse {
     /**
      * The array of suppression groups.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub suppressions: Vec<Suppressions>,
 }

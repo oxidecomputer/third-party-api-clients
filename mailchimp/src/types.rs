@@ -612,7 +612,12 @@ pub struct ApiRoot {
     /**
      * The API root resource links to all other resources available in the API.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The API root resource links to all other resources available in the API.
@@ -898,12 +903,21 @@ pub struct GetActivityFeedChimpChatterResponse {
     /**
      * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub chimp_chatter: Vec<ChimpChatter>,
     /**
      * An array of Chimp Chatter messages. There's a maximum of 200 messages present for an account.
@@ -922,7 +936,12 @@ pub struct Apps {
     /**
      * An authorized app.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An authorized app.
@@ -954,7 +973,11 @@ pub struct Apps {
     /**
      * An authorized app.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<String>,
 }
 
@@ -964,12 +987,21 @@ pub struct GetAuthorizedAppsResponse {
     /**
      * An array of objects, each representing an authorized application.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An array of objects, each representing an authorized application.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub apps: Vec<Apps>,
     /**
      * An array of objects, each representing an authorized application.
@@ -2558,7 +2590,11 @@ pub struct InterestsSegment {
     /**
      * Segment by an interest group merge field.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub value: Vec<String>,
 }
 
@@ -6708,7 +6744,11 @@ pub struct SegmentOpts {
     /**
      * An object representing all segmentation options.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
      * An object representing all segmentation options.
@@ -7146,7 +7186,11 @@ pub struct Runtime {
     /**
      * A workflow's runtime settings for an Automation.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub days: Vec<Days>,
     /**
      * A workflow's runtime settings for an Automation.
@@ -7253,7 +7297,12 @@ pub struct Automations {
     /**
      * A summary of an individual Automation workflow's settings and content.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of an individual Automation workflow's settings and content.
@@ -7329,12 +7378,21 @@ pub struct GetAutomationsResponse {
     /**
      * An array of objects, each representing an Automation workflow.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An array of objects, each representing an Automation workflow.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub automations: Vec<Automations>,
     /**
      * An array of objects, each representing an Automation workflow.
@@ -7693,7 +7751,11 @@ pub struct SegmentOptions {
     /**
      * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
      * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
@@ -7788,7 +7850,11 @@ pub struct CampaignSettings {
     /**
      * Settings for the campaign including the email subject, from name, and from email address.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub auto_fb_post: Vec<String>,
     /**
      * Settings for the campaign including the email subject, from name, and from email address.
@@ -8057,7 +8123,12 @@ pub struct Emails {
     /**
      * A summary of an individual Automation workflow email.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of an individual Automation workflow email.
@@ -8213,12 +8284,21 @@ pub struct AutomationEmails {
     /**
      * A summary of the emails in an Automation workflow.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of the emails in an Automation workflow.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<Emails>,
     /**
      * A summary of the emails in an Automation workflow.
@@ -8407,7 +8487,12 @@ pub struct Queue {
     /**
      * Information about subscribers in an Automation email queue.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The name of the folder.
@@ -8471,7 +8556,12 @@ pub struct GetAutomationsEmailsQueueResponse {
     /**
      * An automation workflow
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An automation workflow
@@ -8485,7 +8575,11 @@ pub struct GetAutomationsEmailsQueueResponse {
     /**
      * An automation workflow
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub queue: Vec<Queue>,
     /**
      * An automation workflow
@@ -8513,7 +8607,12 @@ pub struct SubscriberInAutomationQueueData {
     /**
      * Information about subscribers in an Automation email queue.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about subscribers in an Automation email queue.
@@ -8585,7 +8684,12 @@ pub struct Subscribers {
     /**
      * A summary of a subscriber removed from an Automation workflow.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of a subscriber removed from an Automation workflow.
@@ -8631,12 +8735,21 @@ pub struct RemovedSubscribers {
     /**
      * A summary of the subscribers who were removed from an Automation workflow.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of the subscribers who were removed from an Automation workflow.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subscribers: Vec<Subscribers>,
     /**
      * A summary of the subscribers who were removed from an Automation workflow.
@@ -8711,7 +8824,12 @@ pub struct Batch {
     /**
      * The status of a batch request
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The status of a batch request
@@ -8789,12 +8907,21 @@ pub struct BatchOperations {
     /**
      * A summary of batch requests that have been made.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of batch requests that have been made.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub batches: Vec<Batch>,
     /**
      * A summary of batch requests that have been made.
@@ -8895,7 +9022,11 @@ pub struct PostBatchesRequest {
     /**
      * An array of objects that describes operations to perform.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub operations: Vec<Operations>,
 }
 
@@ -8905,7 +9036,12 @@ pub struct Webhooks {
     /**
      * A webhook configured for batch status updates.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A webhook configured for batch status updates.
@@ -8933,7 +9069,12 @@ pub struct BatchWebhooks {
     /**
      * Manage webhooks for batch requests.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Manage webhooks for batch requests.
@@ -8947,7 +9088,11 @@ pub struct BatchWebhooks {
     /**
      * Manage webhooks for batch requests.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub webhooks: Vec<Webhooks>,
 }
 
@@ -8971,7 +9116,12 @@ pub struct Folders {
     /**
      * A folder used to organize templates.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A folder used to organize templates.
@@ -9008,12 +9158,21 @@ pub struct TemplateFolders {
     /**
      * A list of template folders
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of template folders
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<Folders>,
     /**
      * A list of template folders
@@ -9032,7 +9191,12 @@ pub struct CampaignFolder {
     /**
      * A folder used to organize campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A folder used to organize campaigns.
@@ -9069,12 +9233,21 @@ pub struct CampaignFolders {
     /**
      * A list of campaign folders
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of campaign folders
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<CampaignFolder>,
     /**
      * A list of campaign folders
@@ -9371,7 +9544,11 @@ pub struct GetCampaignsResponseCampaignSettings {
     /**
      * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub auto_fb_post: Vec<String>,
     /**
      * The settings for your campaign, including subject, from name, reply-to address, and more.
@@ -9620,32 +9797,56 @@ pub struct ABTestOptions {
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub combinations: Vec<Combinations>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contents: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub from_names: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reply_to_addresses: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub send_times: Vec<Option<chrono::DateTime<chrono::Utc>>>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subject_lines: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
@@ -10295,7 +10496,12 @@ pub struct Campaign {
     /**
      * A summary of an individual campaign's settings and content.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of an individual campaign's settings and content.
@@ -10453,12 +10659,21 @@ pub struct GetCampaignsResponse {
     /**
      * An array of campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An array of campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub campaigns: Vec<Campaign>,
     /**
      * An array of campaigns.
@@ -10477,7 +10692,11 @@ pub struct CreatedCampaignListSegmentOptions {
     /**
      * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
      * An object representing all segmentation options. This object should contain a `saved_segment_id` to use an existing segment, or you can create a new segment by including both `match` and `conditions` options.
@@ -10528,7 +10747,11 @@ pub struct CreatedCampaignSettings {
     /**
      * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub auto_fb_post: Vec<String>,
     /**
      * The settings for your campaign, including subject, from name, reply-to address, and more.
@@ -10650,22 +10873,38 @@ pub struct VariateSettings {
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub from_names: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reply_to_addresses: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub send_times: Vec<Option<chrono::DateTime<chrono::Utc>>>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subject_lines: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
@@ -10844,7 +11083,11 @@ pub struct CampaignSettingsData {
     /**
      * The settings for your campaign, including subject, from name, reply-to address, and more.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub auto_fb_post: Vec<String>,
     /**
      * The settings for your campaign, including subject, from name, reply-to address, and more.
@@ -11079,32 +11322,56 @@ pub struct CampaignABTestOptions {
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub combinations: Vec<Combinations>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contents: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub from_names: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reply_to_addresses: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub send_times: Vec<Option<chrono::DateTime<chrono::Utc>>>,
     /**
      * The settings specific to A/B test campaigns.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub subject_lines: Vec<String>,
     /**
      * The settings specific to A/B test campaigns.
@@ -11260,7 +11527,12 @@ pub struct CampaignDataType {
     /**
      * A summary of an individual campaign's settings and content.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of an individual campaign's settings and content.
@@ -11514,7 +11786,11 @@ pub struct PostCampaignsActionsTestRequest {
     /**
      * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub test_emails: Vec<String>,
 }
 
@@ -11555,7 +11831,12 @@ pub struct CampaignContent {
     /**
      * The HTML and plain-text content for a campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The HTML and plain-text content for a campaign.
@@ -11587,7 +11868,11 @@ pub struct CampaignContent {
     /**
      * The HTML and plain-text content for a campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub variate_contents: Vec<VariateContents>,
 }
 
@@ -11791,7 +12076,11 @@ pub struct CampaignContentData {
     /**
      * The HTML and plain-text content for a campaign
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub variate_contents: Vec<CampaignContentVariateContents>,
 }
 
@@ -11851,7 +12140,12 @@ pub struct Feedback {
     /**
      * A specific feedback message from a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A specific feedback message from a specific campaign.
@@ -11946,7 +12240,12 @@ pub struct CampaignReports {
     /**
      * A summary of the comment feedback for a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of the comment feedback for a specific campaign.
@@ -11960,7 +12259,11 @@ pub struct CampaignReports {
     /**
      * A summary of the comment feedback for a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub feedback: Vec<Feedback>,
     /**
      * A summary of the comment feedback for a specific campaign.
@@ -12010,7 +12313,12 @@ pub struct CampaignFeedbackData {
     /**
      * A specific feedback message from a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A specific feedback message from a specific campaign.
@@ -12213,7 +12521,12 @@ pub struct SendChecklist {
     /**
      * The send checklist for the campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The send checklist for the campaign.
@@ -12226,7 +12539,11 @@ pub struct SendChecklist {
     /**
      * The send checklist for the campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<Items>,
 }
 
@@ -12259,7 +12576,12 @@ pub struct Sites {
     /**
      * Information about a specific connected site.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific connected site.
@@ -12328,12 +12650,21 @@ pub struct ConnectedSites {
     /**
      * A collection of connected sites in the account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of connected sites in the account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sites: Vec<Sites>,
     /**
      * A collection of connected sites in the account.
@@ -12471,7 +12802,12 @@ pub struct Conversation {
     /**
      * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Details about an individual conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
@@ -12558,12 +12894,21 @@ pub struct TrackedConversations {
     /**
      * A collection of this account's tracked conversations.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of this account's tracked conversations.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conversations: Vec<Conversation>,
     /**
      * A collection of this account's tracked conversations.
@@ -12582,7 +12927,12 @@ pub struct ConversationMessage {
     /**
      * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An individual message in a conversation. Conversation tracking is a feature available to paid accounts that lets you view replies to your campaigns in your Mailchimp account.
@@ -12672,7 +13022,12 @@ pub struct CollectionOfConversationMessages {
     /**
      * Messages from a specific conversation.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Messages from a specific conversation.
@@ -12686,7 +13041,11 @@ pub struct CollectionOfConversationMessages {
     /**
      * Messages from a specific conversation.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conversation_messages: Vec<ConversationMessage>,
     /**
      * Messages from a specific conversation.
@@ -12778,7 +13137,12 @@ pub struct Files {
     /**
      * An individual file listed in the File Manager.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An individual file listed in the File Manager.
@@ -12883,12 +13247,21 @@ pub struct FileManager {
     /**
      * A list of available images and files stored in the File Manager for the account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of available images and files stored in the File Manager for the account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub files: Vec<Files>,
     /**
      * A list of available images and files stored in the File Manager for the account.
@@ -12971,7 +13344,12 @@ pub struct FileManagerFoldersGalleryFolder {
     /**
      * An individual folder listed in the File Manager.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An individual folder listed in the File Manager.
@@ -13026,12 +13404,21 @@ pub struct FileManagerFolders {
     /**
      * A list of all folders in the File Manager.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of all folders in the File Manager.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub folders: Vec<FileManagerFoldersGalleryFolder>,
     /**
      * A list of all folders in the File Manager.
@@ -13401,7 +13788,12 @@ pub struct Lists {
     /**
      * Information about a specific list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific list.
@@ -13484,7 +13876,11 @@ pub struct Lists {
     /**
      * Information about a specific list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub modules: Vec<String>,
     /**
      * Information about a specific list.
@@ -13606,7 +14002,12 @@ pub struct SubscriberLists {
     /**
      * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
@@ -13616,7 +14017,11 @@ pub struct SubscriberLists {
     /**
      * An array of objects, each representing a list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lists: Vec<Lists>,
     /**
      * A collection of subscriber lists for this account. Lists contain subscribers who have opted-in to receive correspondence from you or your organization.
@@ -14007,7 +14412,11 @@ pub struct MembersSubscribeUnsubscribeFromAListInBatch {
     /**
      * An array of objects, each representing an email address and the subscription status for a specific list. Up to 500 members may be added or updated with each API call.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<Members>,
     /**
      * Members to subscribe to or unsubscribe from a list.
@@ -14217,7 +14626,12 @@ pub struct NewMembers {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -14345,7 +14759,11 @@ pub struct NewMembers {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tags: Vec<Tags>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -14464,7 +14882,12 @@ pub struct BatchUpdateListMembers {
     /**
      * Batch update list members.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Batch update list members.
@@ -14478,12 +14901,20 @@ pub struct BatchUpdateListMembers {
     /**
      * Batch update list members.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<Errors>,
     /**
      * Batch update list members.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub new_members: Vec<NewMembers>,
     /**
      * Batch update list members.
@@ -14506,7 +14937,11 @@ pub struct BatchUpdateListMembers {
     /**
      * Batch update list members.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub updated_members: Vec<NewMembers>,
 }
 
@@ -14678,7 +15113,12 @@ pub struct AbuseReports {
     /**
      * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
@@ -14755,12 +15195,21 @@ pub struct AbuseComplaints {
     /**
      * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub abuse_reports: Vec<AbuseReports>,
     /**
      * A collection of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
@@ -14788,7 +15237,12 @@ pub struct Activity {
     /**
      * One day's worth of list activity. Doesn't include Automation activity.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * One day's worth of list activity. Doesn't include Automation activity.
@@ -14888,12 +15342,21 @@ pub struct ListActivity {
     /**
      * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub activity: Vec<Activity>,
     /**
      * Up to the previous 180 days of daily detailed aggregated activity stats for a specific list. Does not include AutoResponder or Automation activity.
@@ -14944,12 +15407,21 @@ pub struct EmailClients {
     /**
      * The top email clients based on user-agent strings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The top email clients based on user-agent strings.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub clients: Vec<Clients>,
     /**
      * The top email clients based on user-agent strings.
@@ -15012,7 +15484,12 @@ pub struct History {
     /**
      * A summary of a specific list's growth activity for a specific month and year.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of a specific list's growth activity for a specific month and year.
@@ -15130,12 +15607,21 @@ pub struct GrowthHistory {
     /**
      * A month-by-month summary of a specific list's growth activity.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A month-by-month summary of a specific list's growth activity.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub history: Vec<History>,
     /**
      * A month-by-month summary of a specific list's growth activity.
@@ -15163,7 +15649,12 @@ pub struct Categories {
     /**
      * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Interest categories organize interests, which are used to group subscribers based on their preferences. These correspond to Group Titles the application.
@@ -15214,12 +15705,21 @@ pub struct InterestGroupings {
     /**
      * Information about this list's interest categories.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about this list's interest categories.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<Categories>,
     /**
      * Information about this list's interest categories.
@@ -15247,7 +15747,12 @@ pub struct InterestsInterest {
     /**
      * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Assign subscribers to interests to group them together. Interests are referred to as 'group names' in the Mailchimp application.
@@ -15311,7 +15816,12 @@ pub struct InterestsData {
     /**
      * A list of this category's interests
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of this category's interests
@@ -15325,7 +15835,11 @@ pub struct InterestsData {
     /**
      * A list of this category's interests
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub interests: Vec<InterestsInterest>,
     /**
      * A list of this category's interests
@@ -15394,7 +15908,11 @@ pub struct Options {
     /**
      * The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
      * The conditions of the segment. Static segments (tags) and fuzzy segments don't have conditions.
@@ -15409,7 +15927,12 @@ pub struct Segments {
     /**
      * Information about a specific segment.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific segment.
@@ -15483,7 +16006,12 @@ pub struct CollectionOfSegments {
     /**
      * A list of available segments.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of available segments.
@@ -15497,7 +16025,11 @@ pub struct CollectionOfSegments {
     /**
      * A list of available segments.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub segments: Vec<Segments>,
     /**
      * A list of available segments.
@@ -15516,7 +16048,11 @@ pub struct ListConditions {
     /**
      * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<ConditionsOneOf>,
     /**
      * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
@@ -15545,7 +16081,11 @@ pub struct ListData {
     /**
      * Information about a specific list segment.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub static_segment: Vec<String>,
 }
 
@@ -15555,12 +16095,20 @@ pub struct MembersAddRemoveFromAStaticSegment {
     /**
      * Members to add/remove to/from a static segment
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members_to_add: Vec<String>,
     /**
      * Members to add/remove to/from a static segment
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members_to_remove: Vec<String>,
 }
 
@@ -15569,7 +16117,11 @@ pub struct BatchAddRemoveListMembersFromStaticSegmentErrors {
     /**
      * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub email_addresses: Vec<String>,
     /**
      * The name of the folder.
@@ -15588,7 +16140,12 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
     /**
      * Batch add/remove List members to/from static segment
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Batch add/remove List members to/from static segment
@@ -15602,17 +16159,29 @@ pub struct BatchAddRemoveListMembersFromStaticSegment {
     /**
      * Batch add/remove List members to/from static segment
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub errors: Vec<BatchAddRemoveListMembersFromStaticSegmentErrors>,
     /**
      * Batch add/remove List members to/from static segment
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members_added: Vec<NewMembers>,
     /**
      * Batch add/remove List members to/from static segment
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members_removed: Vec<NewMembers>,
     /**
      * Batch add/remove List members to/from static segment
@@ -15640,7 +16209,11 @@ pub struct ListConditionsData {
     /**
      * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub conditions: Vec<Vec<ConditionsOneOf>>,
     /**
      * The [conditions of the segment](https://mailchimp.com/help/save-and-manage-segments/). Static and fuzzy segments don't have conditions.
@@ -15669,7 +16242,11 @@ pub struct ListDataType {
     /**
      * Information about a specific list segment.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub static_segment: Vec<String>,
 }
 
@@ -15679,7 +16256,12 @@ pub struct ListMembers {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -15847,12 +16429,21 @@ pub struct SegmentMembers {
     /**
      * View members in a specific list segment.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * View members in a specific list segment.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<ListMembers>,
     /**
      * View members in a specific list segment.
@@ -15871,7 +16462,11 @@ pub struct TagSearchResults {
     /**
      * A list of tags matching the input query.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tags: Vec<String>,
     /**
      * A list of tags matching the input query.
@@ -16113,7 +16708,12 @@ pub struct ListMembersData {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -16226,7 +16826,11 @@ pub struct ListMembersData {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub marketing_permissions: Vec<MarketingPermission>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -16264,7 +16868,11 @@ pub struct ListMembersData {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tags: Vec<Tags>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -16336,7 +16944,12 @@ pub struct ListMembersDataType {
     /**
      * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
@@ -16350,7 +16963,11 @@ pub struct ListMembersDataType {
     /**
      * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<ListMembersData>,
     /**
      * Manage members of a specific Mailchimp list, including currently subscribed, unsubscribed, and bounced members.
@@ -16449,7 +17066,11 @@ pub struct AddListMembers {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub marketing_permissions: Vec<MarketingPermissions>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -16464,7 +17085,11 @@ pub struct AddListMembers {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tags: Vec<String>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -16558,7 +17183,11 @@ pub struct AddListMembersData {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub marketing_permissions: Vec<MarketingPermissions>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -16667,7 +17296,11 @@ pub struct AddListMembersDataType {
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub marketing_permissions: Vec<MarketingPermissions>,
     /**
      * Individuals who are currently or have been previously subscribed to this list, including members who have bounced or unsubscribed.
@@ -16782,12 +17415,21 @@ pub struct MemberActivityEvents {
     /**
      * The last 50 member events for a list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The last 50 member events for a list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub activity: Vec<MemberActivity>,
     /**
      * The last 50 member events for a list.
@@ -17987,7 +18629,12 @@ pub struct Lines {
     /**
      * Information about a specific order line.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific order line.
@@ -18101,7 +18748,11 @@ pub struct EcommerceOrder {
     /**
      * Activity feed item that represents an order.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub order_items: Vec<Lines>,
     /**
      * Activity feed item that represents an order.
@@ -18223,7 +18874,11 @@ pub struct ContactActivityEvent {
     /**
      * Activity feed item that represents a generic event.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub event_properties: Vec<String>,
 }
 
@@ -18520,12 +19175,21 @@ pub struct MemberActivityEventsData {
     /**
      * The member activity events for a given member.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The member activity events for a given member.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub activity: Vec<ActivityOneOf>,
     /**
      * The member activity events for a given member.
@@ -18553,12 +19217,21 @@ pub struct CollectionOfTags {
     /**
      * A list of tags assigned to a list member.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of tags assigned to a list member.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tags: Vec<String>,
     /**
      * A list of tags assigned to a list member.
@@ -18642,7 +19315,11 @@ pub struct MemberTags {
     /**
      * A list of tags assigned to the list member.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub tags: Vec<MemberTag>,
 }
 
@@ -18684,12 +19361,21 @@ pub struct CollectionOfEvents {
     /**
      * A collection of events for a given contact
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of events for a given contact
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub events: Vec<Event>,
     /**
      * A collection of events for a given contact
@@ -18789,7 +19475,12 @@ pub struct CollectionOfMemberActivityEvents {
     /**
      * The last 50 Goal events for a member on a specific list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The last 50 Goal events for a member on a specific list.
@@ -18803,7 +19494,11 @@ pub struct CollectionOfMemberActivityEvents {
     /**
      * The last 50 Goal events for a member on a specific list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub goals: Vec<Goal>,
     /**
      * The last 50 Goal events for a member on a specific list.
@@ -18872,7 +19567,12 @@ pub struct CollectionOfNotesMember {
     /**
      * A specific note for a specific member.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A specific note for a specific member.
@@ -18945,7 +19645,12 @@ pub struct CollectionOfNotes {
     /**
      * The last 10 notes for a specific list member, based on date created.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The last 10 notes for a specific list member, based on date created.
@@ -18968,7 +19673,11 @@ pub struct CollectionOfNotes {
     /**
      * The last 10 notes for a specific list member, based on date created.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub notes: Vec<CollectionOfNotesMember>,
     /**
      * The last 10 notes for a specific list member, based on date created.
@@ -19052,7 +19761,11 @@ pub struct MergeFieldOptions {
     /**
      * Extra options for some merge field types.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub choices: Vec<String>,
     /**
      * Extra options for some merge field types.
@@ -19094,7 +19807,12 @@ pub struct MergeField {
     /**
      * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A merge field ([audience field](https://mailchimp.com/help/getting-started-with-merge-tags/)) for a list.
@@ -19193,7 +19911,12 @@ pub struct CollectionOfMergeFields {
     /**
      * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
@@ -19207,7 +19930,11 @@ pub struct CollectionOfMergeFields {
     /**
      * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub merge_fields: Vec<MergeField>,
     /**
      * The merge fields ([audience fields](https://mailchimp.com/help/getting-started-with-merge-tags/)) for an audience.
@@ -19306,7 +20033,11 @@ pub struct MergeFieldOptionsData {
     /**
      * Extra options for some merge field types.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub choices: Vec<String>,
     /**
      * Extra options for some merge field types.
@@ -19492,7 +20223,12 @@ pub struct ListWebhooks {
     /**
      * Webhook configured for the given list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Webhook configured for the given list.
@@ -19539,7 +20275,12 @@ pub struct ListWebhooksData {
     /**
      * Manage webhooks for a specific list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Manage webhooks for a specific list.
@@ -19562,7 +20303,11 @@ pub struct ListWebhooksData {
     /**
      * Manage webhooks for a specific list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub webhooks: Vec<ListWebhooks>,
 }
 
@@ -19962,7 +20707,11 @@ pub struct Styles {
     /**
      * Collection of Element style for List Signup Forms.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub options: Vec<AnOptionSignupFormStyles>,
     /**
      * Collection of Element style for List Signup Forms.
@@ -19977,12 +20726,21 @@ pub struct SignupForm {
     /**
      * List signup form.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * List signup form.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contents: Vec<Contents>,
     /**
      * List signup form.
@@ -20010,7 +20768,11 @@ pub struct SignupForm {
     /**
      * List signup form.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub styles: Vec<Styles>,
 }
 
@@ -20020,7 +20782,12 @@ pub struct ListSignupForms {
     /**
      * List Signup Forms.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * List Signup Forms.
@@ -20034,7 +20801,11 @@ pub struct ListSignupForms {
     /**
      * List Signup Forms.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub signup_forms: Vec<SignupForm>,
     /**
      * List Signup Forms.
@@ -20053,7 +20824,11 @@ pub struct SignupFormData {
     /**
      * List signup form.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub contents: Vec<Contents>,
     /**
      * List signup form.
@@ -20063,7 +20838,11 @@ pub struct SignupFormData {
     /**
      * List signup form.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub styles: Vec<Styles>,
 }
 
@@ -20101,7 +20880,12 @@ pub struct ListLocations {
     /**
      * A summary of List's locations.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of List's locations.
@@ -20115,7 +20899,11 @@ pub struct ListLocations {
     /**
      * A summary of List's locations.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub locations: Vec<Locations>,
     /**
      * A summary of List's locations.
@@ -20234,7 +21022,12 @@ pub struct LandingPage {
     /**
      * A summary of an individual landing page's settings and content.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of an individual landing page's settings and content.
@@ -20380,12 +21173,21 @@ pub struct GetAllLandingPagesResponse {
     /**
      * A collection of landing pages.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of landing pages.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub landing_pages: Vec<LandingPage>,
     /**
      * A collection of landing pages.
@@ -20566,7 +21368,12 @@ pub struct LandingPageContent {
     /**
      * The HTML content for a landing page.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * The HTML content for a landing page.
@@ -21249,7 +22056,12 @@ pub struct Reports {
     /**
      * Report details about a sent campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Report details about a sent campaign.
@@ -21407,12 +22219,20 @@ pub struct Reports {
     /**
      * Report details about a sent campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub timeseries: Vec<Timeseries>,
     /**
      * Report details about a sent campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub timewarp: Vec<Timewarp>,
     /**
      * Report details about a sent campaign.
@@ -21441,12 +22261,21 @@ pub struct CampaignReportsData {
     /**
      * A list of reports containing campaigns marked as Sent.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of reports containing campaigns marked as Sent.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reports: Vec<Reports>,
     /**
      * A list of reports containing campaigns marked as Sent.
@@ -21465,7 +22294,12 @@ pub struct AbuseComplaint {
     /**
      * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Details of abuse complaints for a specific list. An abuse complaint occurs when your recipient clicks to 'report spam' in their email program.
@@ -21550,12 +22384,21 @@ pub struct AbuseComplaintsData {
     /**
      * A list of abuse complaints for a specific list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of abuse complaints for a specific list.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub abuse_reports: Vec<AbuseComplaint>,
     /**
      * A list of abuse complaints for a specific list.
@@ -21624,7 +22467,12 @@ pub struct Advice {
     /**
      * Campaign feedback details.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Campaign feedback details.
@@ -21648,12 +22496,21 @@ pub struct CampaignAdviceReport {
     /**
      * A list of feedback based on a campaign's statistics.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of feedback based on a campaign's statistics.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub advice: Vec<Advice>,
     /**
      * A list of feedback based on a campaign's statistics.
@@ -21778,7 +22635,12 @@ pub struct UrlsClicked {
     /**
      * A report of links clicked in a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A report of links clicked in a specific campaign.
@@ -21865,7 +22727,12 @@ pub struct ClickDetailReport {
     /**
      * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
@@ -21888,7 +22755,11 @@ pub struct ClickDetailReport {
     /**
      * A list of URLs and unique IDs included in HTML and plain-text versions of a campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub urls_clicked: Vec<UrlsClicked>,
 }
 
@@ -21898,7 +22769,12 @@ pub struct ClickDetailMember {
     /**
      * A subscriber who clicked a specific URL in a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A subscriber who clicked a specific URL in a specific campaign.
@@ -21992,7 +22868,12 @@ pub struct ClickDetailMembers {
     /**
      * A collection of members who clicked on a specific link within a campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of members who clicked on a specific link within a campaign.
@@ -22006,7 +22887,11 @@ pub struct ClickDetailMembers {
     /**
      * A collection of members who clicked on a specific link within a campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<ClickDetailMember>,
     /**
      * A collection of members who clicked on a specific link within a campaign.
@@ -22039,7 +22924,12 @@ pub struct OpenActivity {
     /**
      * A list of a member's opens activity in a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of a member's opens activity in a specific campaign.
@@ -22102,7 +22992,11 @@ pub struct OpenActivity {
     /**
      * A list of a member's opens activity in a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub opens: Vec<OpenDetailReportActivityMember>,
     /**
      * A list of a member's opens activity in a specific campaign.
@@ -22129,7 +23023,12 @@ pub struct OpenDetailReport {
     /**
      * A detailed report of any campaign emails that were opened by a list member.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A detailed report of any campaign emails that were opened by a list member.
@@ -22143,7 +23042,11 @@ pub struct OpenDetailReport {
     /**
      * A detailed report of any campaign emails that were opened by a list member.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<OpenActivity>,
     /**
      * A detailed report of any campaign emails that were opened by a list member.
@@ -22284,7 +23187,12 @@ pub struct DomainPerformance {
     /**
      * Statistics for the top-performing email domains in a campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Statistics for the top-performing email domains in a campaign.
@@ -22298,7 +23206,11 @@ pub struct DomainPerformance {
     /**
      * Statistics for the top-performing email domains in a campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub domains: Vec<Domains>,
     /**
      * Statistics for the top-performing email domains in a campaign.
@@ -22402,7 +23314,11 @@ pub struct Twitter {
     /**
      * A summary of Twitter activity for a campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub statuses: Vec<Statuses>,
     /**
      * A summary of Twitter activity for a campaign.
@@ -22471,7 +23387,11 @@ pub struct ClickSummary {
     /**
      * A summary of the click-throughs on the campaign's URL.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub locations: Vec<EepurlActivityClickSummaryLocation>,
 }
 
@@ -22522,7 +23442,12 @@ pub struct EepurlActivity {
     /**
      * A summary of social activity for the campaign, tracked by EepURL.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of social activity for the campaign, tracked by EepURL.
@@ -22550,7 +23475,11 @@ pub struct EepurlActivity {
     /**
      * A summary of social activity for the campaign, tracked by EepURL.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub referrers: Vec<Referrer>,
     /**
      * A summary of social activity for the campaign, tracked by EepURL.
@@ -22625,12 +23554,21 @@ pub struct EmailActivity {
     /**
      * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub activity: Vec<EmailActivityMember>,
     /**
      * A list of a member's subscriber activity in a specific campaign, including opens, clicks, and bounces.
@@ -22684,7 +23622,12 @@ pub struct EmailActivityData {
     /**
      * A list of member's subscriber activity in a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of member's subscriber activity in a specific campaign.
@@ -22698,7 +23641,11 @@ pub struct EmailActivityData {
     /**
      * A list of member's subscriber activity in a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<EmailActivity>,
     /**
      * A list of member's subscriber activity in a specific campaign.
@@ -22757,7 +23704,12 @@ pub struct OpenLocationsData {
     /**
      * Top open locations for a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Top open locations for a specific campaign.
@@ -22771,7 +23723,11 @@ pub struct OpenLocationsData {
     /**
      * Top open locations for a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub locations: Vec<OpenLocations>,
     /**
      * Top open locations for a specific campaign.
@@ -22790,7 +23746,12 @@ pub struct SentTo {
     /**
      * A subscriber's status for a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A subscriber's status for a specific campaign.
@@ -22902,7 +23863,12 @@ pub struct SentData {
     /**
      * A list of subscribers who were sent a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of subscribers who were sent a specific campaign.
@@ -22916,7 +23882,11 @@ pub struct SentData {
     /**
      * A list of subscribers who were sent a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub sent_to: Vec<SentTo>,
     /**
      * A list of subscribers who were sent a specific campaign.
@@ -22935,7 +23905,12 @@ pub struct CampaignSubReports {
     /**
      * A list of reports containing child campaigns for a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of reports containing child campaigns for a specific campaign.
@@ -22949,7 +23924,11 @@ pub struct CampaignSubReports {
     /**
      * A list of reports containing child campaigns for a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub reports: Vec<Reports>,
     /**
      * A list of reports containing child campaigns for a specific campaign.
@@ -22968,7 +23947,12 @@ pub struct Unsubscribes {
     /**
      * A member who unsubscribed from a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A member who unsubscribed from a specific campaign.
@@ -23053,7 +24037,12 @@ pub struct UnsubscribesData {
     /**
      * A list of members who have unsubscribed from a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list of members who have unsubscribed from a specific campaign.
@@ -23076,7 +24065,11 @@ pub struct UnsubscribesData {
     /**
      * A list of members who have unsubscribed from a specific campaign.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub unsubscribes: Vec<Unsubscribes>,
 }
 
@@ -23203,12 +24196,21 @@ pub struct GetReportsEcommerceProductActivityResponse {
     /**
      * A collection of ecommerce products.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of ecommerce products.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub products: Vec<Products>,
     /**
      * A collection of ecommerce products.
@@ -23268,7 +24270,12 @@ pub struct Templates {
     /**
      * Information about a specific template.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific template.
@@ -23402,12 +24409,21 @@ pub struct TemplatesData {
     /**
      * A list an account's available templates.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A list an account's available templates.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub templates: Vec<Templates>,
     /**
      * A list an account's available templates.
@@ -23426,7 +24442,12 @@ pub struct TemplateDefaultContent {
     /**
      * Default content for a template.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Default content for a template.
@@ -23520,7 +24541,12 @@ pub struct Customer {
     /**
      * Information about a specific customer.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific customer.
@@ -24014,7 +25040,12 @@ pub struct Orders {
     /**
      * Information about a specific order.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific order.
@@ -24101,7 +25132,11 @@ pub struct Orders {
     /**
      * Information about a specific order.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lines: Vec<Lines>,
     /**
      * Information about a specific order.
@@ -24138,7 +25173,11 @@ pub struct Orders {
     /**
      * Information about a specific order.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub promos: Vec<Promos>,
     /**
      * Information about a specific order.
@@ -24194,12 +25233,21 @@ pub struct OrdersData {
     /**
      * A collection of orders in an account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of orders in an account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub orders: Vec<Orders>,
     /**
      * A collection of orders in an account.
@@ -24403,7 +25451,12 @@ pub struct Stores {
     /**
      * An individual store in an account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * An individual store in an account.
@@ -24561,12 +25614,21 @@ pub struct ECommerceStores {
     /**
      * A collection of stores in the account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of stores in the account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub stores: Vec<Stores>,
     /**
      * A collection of stores in the account.
@@ -24801,7 +25863,12 @@ pub struct ECommerceCartLineItem {
     /**
      * Information about a specific cart line item.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific cart line item.
@@ -24874,7 +25941,12 @@ pub struct Carts {
     /**
      * Information about a specific cart.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific cart.
@@ -24929,7 +26001,11 @@ pub struct Carts {
     /**
      * Information about a specific cart.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lines: Vec<ECommerceCartLineItem>,
     /**
      * Information about a specific cart.
@@ -24966,12 +26042,21 @@ pub struct CartsData {
     /**
      * A collection of a store's carts.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of a store's carts.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub carts: Vec<Carts>,
     /**
      * A collection of a store's carts.
@@ -25153,7 +26238,11 @@ pub struct ECommerceCart {
     /**
      * An array of the cart's line items.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lines: Vec<ECommerceCartLineItemData>,
     /**
      * The price of a product variant.
@@ -25299,7 +26388,11 @@ pub struct ECommerceCartData {
     /**
      * Information about a specific cart.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lines: Vec<ECommerceCartLineItemDataType>,
     /**
      * Information about a specific cart.
@@ -25327,7 +26420,12 @@ pub struct CartLines {
     /**
      * A collection of a cart's line items.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of a cart's line items.
@@ -25341,7 +26439,11 @@ pub struct CartLines {
     /**
      * A collection of a cart's line items.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lines: Vec<ECommerceCartLineItem>,
     /**
      * A collection of a cart's line items.
@@ -25369,12 +26471,21 @@ pub struct Customers {
     /**
      * A collection of the store's customers.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of the store's customers.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub customers: Vec<Customer>,
     /**
      * A collection of the store's customers.
@@ -25569,7 +26680,12 @@ pub struct PromoRules {
     /**
      * Information about an Ecommerce Store's specific Promo Rule
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about an Ecommerce Store's specific Promo Rule
@@ -25669,12 +26785,21 @@ pub struct PromoRulesData {
     /**
      * A collection of the store's promo rules.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of the store's promo rules.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub promo_rules: Vec<PromoRules>,
     /**
      * A collection of the store's promo rules.
@@ -25887,7 +27012,12 @@ pub struct PromoCodes {
     /**
      * Information about an Ecommerce Store's specific Promo Code
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about an Ecommerce Store's specific Promo Code
@@ -25959,12 +27089,21 @@ pub struct PromoCodesData {
     /**
      * A collection of the store's promo codes.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of the store's promo codes.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub promo_codes: Vec<PromoCodes>,
     /**
      * A collection of the store's promo codes.
@@ -26117,12 +27256,21 @@ pub struct OrdersDataType {
     /**
      * A collection of orders in a store.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of orders in a store.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub orders: Vec<Orders>,
     /**
      * A collection of orders in a store.
@@ -26336,7 +27484,11 @@ pub struct ECommerceOrder {
     /**
      * An array of the order's line items.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lines: Vec<ECommerceOrderLineItem>,
     /**
      * The price of a product variant.
@@ -26373,7 +27525,11 @@ pub struct ECommerceOrder {
     /**
      * Information about a specific order.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub promos: Vec<ECommerceOrderPromos>,
     /**
      * Information about a specific order.
@@ -26543,7 +27699,11 @@ pub struct ECommerceOrderData {
     /**
      * Information about a specific order.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lines: Vec<ECommerceOrderLineItemData>,
     /**
      * Information about a specific order.
@@ -26580,7 +27740,11 @@ pub struct ECommerceOrderData {
     /**
      * Information about a specific order.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub promos: Vec<ECommerceOrderPromos>,
     /**
      * Information about a specific order.
@@ -26627,12 +27791,21 @@ pub struct OrderLines {
     /**
      * A collection of an order's line items.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of an order's line items.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub lines: Vec<Lines>,
     /**
      * A collection of an order's line items.
@@ -26669,7 +27842,12 @@ pub struct Variants {
     /**
      * Information about a specific product variant.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific product variant.
@@ -26778,7 +27956,12 @@ pub struct Images {
     /**
      * Information about a specific product image.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific product image.
@@ -26801,7 +27984,11 @@ pub struct Images {
     /**
      * Information about a specific product image.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub variant_ids: Vec<String>,
 }
 
@@ -26811,7 +27998,12 @@ pub struct ECommerceProduct {
     /**
      * Information about a specific product.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Information about a specific product.
@@ -26861,7 +28053,11 @@ pub struct ECommerceProduct {
     /**
      * Information about a specific product.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub images: Vec<Images>,
     /**
      * Information about a specific product.
@@ -26903,7 +28099,11 @@ pub struct ECommerceProduct {
     /**
      * Information about a specific product.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub variants: Vec<Variants>,
     /**
      * Information about a specific product.
@@ -26922,12 +28122,21 @@ pub struct ProductsData {
     /**
      * A collection of a store's products.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of a store's products.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub products: Vec<ECommerceProduct>,
     /**
      * A collection of a store's products.
@@ -26973,7 +28182,11 @@ pub struct ECommerceProductImage {
     /**
      * Information about a specific product image.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub variant_ids: Vec<String>,
 }
 
@@ -27019,7 +28232,11 @@ pub struct ECommerceProductData {
     /**
      * Information about a specific product.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub images: Vec<ECommerceProductImage>,
     /**
      * Information about a specific product.
@@ -27061,7 +28278,11 @@ pub struct ECommerceProductData {
     /**
      * An array of the product's variants. At least one variant is required for each product. A variant can use the same `id` and `title` as the parent product.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub variants: Vec<ECommerceProductVariant>,
     /**
      * Information about a specific product.
@@ -27175,7 +28396,11 @@ pub struct ECommerceProductImageData {
     /**
      * Information about a specific product image.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub variant_ids: Vec<String>,
 }
 
@@ -27212,7 +28437,11 @@ pub struct ECommerceProductDataType {
     /**
      * Information about a specific product.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub images: Vec<ECommerceProductImageData>,
     /**
      * Information about a specific product.
@@ -27254,7 +28483,11 @@ pub struct ECommerceProductDataType {
     /**
      * Information about a specific product.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub variants: Vec<ECommerceProductVariantData>,
     /**
      * Information about a specific product.
@@ -27273,7 +28506,12 @@ pub struct EcommerceProductVariants {
     /**
      * A collection of a product's variants.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of a product's variants.
@@ -27305,7 +28543,11 @@ pub struct EcommerceProductVariants {
     /**
      * A collection of a product's variants.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub variants: Vec<Variants>,
 }
 
@@ -27315,12 +28557,21 @@ pub struct EcommerceProductImages {
     /**
      * A collection of a product's images.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of a product's images.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub images: Vec<Images>,
     /**
      * A collection of a product's images.
@@ -27375,12 +28626,21 @@ pub struct Campaigns {
     /**
      * Campaigns and Snippets found for given search term.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Campaigns and Snippets found for given search term.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub results: Vec<Results>,
     /**
      * Campaigns and Snippets found for given search term.
@@ -27399,7 +28659,11 @@ pub struct ExactMatches {
     /**
      * Exact matches of the provided search query.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<ListMembersData>,
     /**
      * Exact matches of the provided search query.
@@ -27418,7 +28682,11 @@ pub struct FullSearch {
     /**
      * Partial matches of the provided search query.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<ListMembersData>,
     /**
      * Partial matches of the provided search query.
@@ -27437,7 +28705,12 @@ pub struct MembersData {
     /**
      * Members found for given search term
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Members found for given search term
@@ -28280,22 +29553,38 @@ pub struct FacebookAdsAudienceTargetingSpecsLocations {
     /**
      * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub cities: Vec<String>,
     /**
      * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub countries: Vec<String>,
     /**
      * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub regions: Vec<String>,
     /**
      * A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub zips: Vec<String>,
 }
 
@@ -28323,7 +29612,11 @@ pub struct TargetingSpecs {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub gender: i64,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub interests: Vec<FacebookAdsAudienceTargetingSpecsInterests>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub locations: Option<FacebookAdsAudienceTargetingSpecsLocations>,
@@ -28471,7 +29764,11 @@ pub struct Attachments {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Content {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub attachments: Vec<Attachments>,
     /**
      * The name of the folder.
@@ -28593,7 +29890,12 @@ pub struct GetFacebookAdsResponse {
     /**
      * A list of link types and descriptions for the API schema documents.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
 }
 
@@ -28624,12 +29926,21 @@ pub struct GetAllFacebookAdsResponse {
     /**
      * Contains an array of facebook ads.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * Contains an array of facebook ads.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub facebook_ads: Vec<FacebookAdsAllOf>,
     /**
      * Contains an array of facebook ads.
@@ -28922,11 +30233,23 @@ pub struct Revenue {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct AudienceActivity {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub clicks: Vec<FacebookAdsAudienceActivityClicks>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub impressions: Vec<Impressions>,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub revenue: Vec<Revenue>,
 }
 
@@ -28977,12 +30300,21 @@ pub struct GetReportingFacebookAdsResponse {
     /**
      * A collection of Facebook ads.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of Facebook ads.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub facebook_ads: Vec<GetReportingFacebookAdsResponseAllOf>,
     /**
      * A collection of Facebook ads.
@@ -29023,17 +30355,29 @@ pub struct DailyStats {
     /**
      * The clicks and visits data from the last seven days.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub clicks: Vec<Visits>,
     /**
      * The clicks and visits data from the last seven days.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub unique_visits: Vec<Visits>,
     /**
      * The clicks and visits data from the last seven days.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub visits: Vec<Visits>,
 }
 
@@ -29043,17 +30387,29 @@ pub struct WeeklyStats {
     /**
      * The clicks and visits data from the last five weeks.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub clicks: Vec<Visits>,
     /**
      * The clicks and visits data from the last five weeks.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub unique_visits: Vec<Visits>,
     /**
      * The clicks and visits data from the last five weeks.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub visits: Vec<Visits>,
 }
 
@@ -29133,7 +30489,12 @@ pub struct LandingPages {
     /**
      * A summary of an individual landing page's settings and content.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A summary of an individual landing page's settings and content.
@@ -29206,7 +30567,11 @@ pub struct LandingPages {
     /**
      * A summary of an individual landing page's settings and content.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub signup_tags: Vec<Tag>,
     /**
      * A summary of an individual landing page's settings and content.
@@ -29293,12 +30658,21 @@ pub struct GetReportingLandingPagesResponse {
     /**
      * A collection of landing pages.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "_links")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "_links"
+    )]
     pub links: Vec<Links>,
     /**
      * A collection of landing pages.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub landing_pages: Vec<LandingPages>,
     /**
      * A collection of landing pages.
@@ -29379,7 +30753,11 @@ pub struct VerifiedDomainsData {
     /**
      * The verified domains currently on the account.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub domains: Vec<VerifiedDomains>,
     /**
      * The verified domains currently on the account.

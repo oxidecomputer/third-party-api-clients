@@ -115,7 +115,15 @@ impl BookingData {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bookings?{}", query_);
 
-        let mut resp: crate::types::BookingReportResponse = self.client.get(&url, None).await?;
+        let mut resp: crate::types::BookingReportResponse = if !url.contains('?') {
+            self.client
+                .get(&format!("{}?page=0&size=100", url), None)
+                .await?
+        } else {
+            self.client
+                .get(&format!("{}&page=0&size=100", url), None)
+                .await?
+        };
 
         let mut data = resp.data;
         let mut page = resp.page.current_page + 1;

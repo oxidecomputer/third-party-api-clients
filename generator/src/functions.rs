@@ -811,7 +811,12 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "TripActions" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+            r#"
+            let mut resp: {} = if !url.contains('?') {{
+                self.client.{}(&format!("{{}}?page=0&size=100", url), {}).await?
+            }} else {{
+                self.client.{}(&format!("{{}}&page=0&size=100", url), {}).await?
+            }};
 
             let mut {} = resp.{};
             let mut page = resp.page.current_page + 1;
@@ -832,6 +837,8 @@ fn get_fn_inner(
             // Return our response data.
             Ok({})"#,
             response_type,
+            m.to_lowercase(),
+            body,
             m.to_lowercase(),
             body,
             pagination_property,

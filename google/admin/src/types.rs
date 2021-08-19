@@ -59,7 +59,11 @@ pub struct Aliases {
     /**
      * JSON response template to list aliases in Directory API.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub aliases: Vec<String>,
     /**
      * JSON response template to list aliases in Directory API.
@@ -164,7 +168,11 @@ pub struct Asps {
     /**
      * A list of ASP resources.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<Asp>,
     #[serde(
         default,
@@ -254,7 +262,11 @@ pub struct BatchCreatePrintersRequest {
     /**
      * Request for adding new printers in batch.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub requests: Vec<CreatePrinterRequest>,
 }
 
@@ -264,12 +276,20 @@ pub struct BatchCreatePrintersResponse {
     /**
      * Response for adding new printers in batch.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub failures: Vec<FailureInfo>,
     /**
      * Response for adding new printers in batch.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub printers: Vec<Printer>,
 }
 
@@ -279,7 +299,12 @@ pub struct BatchDeletePrintersRequest {
     /**
      * Request for deleting existing printers in batch.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "printerIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "printerIds"
+    )]
     pub printer_ids: Vec<String>,
 }
 
@@ -292,13 +317,19 @@ pub struct BatchDeletePrintersResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "failedPrinters"
     )]
     pub failed_printers: Vec<FailureInfo>,
     /**
      * Response for deleting existing printers in batch.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "printerIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "printerIds"
+    )]
     pub printer_ids: Vec<String>,
 }
 
@@ -356,7 +387,12 @@ pub struct Building {
     /**
      * Public API: Resources.buildings
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "floorNames")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "floorNames"
+    )]
     pub floor_names: Vec<String>,
     /**
      * Public API: Resources.buildings
@@ -378,6 +414,7 @@ pub struct BuildingAddress {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "addressLines"
     )]
     pub address_lines: Vec<String>,
@@ -470,7 +507,11 @@ pub struct Buildings {
     /**
      * Public API: Resources.buildings
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub buildings: Vec<Building>,
     /**
      * Public API: Resources.buildings
@@ -668,7 +709,11 @@ pub struct CalendarResources {
     /**
      * Public API: Resources.calendars
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<CalendarResource>,
     /**
      * Public API: Resources.calendars
@@ -834,12 +879,14 @@ pub struct CpuStatusReports {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "cpuTemperatureInfo"
     )]
     pub cpu_temperature_info: Vec<CpuTemperatureInfo>,
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "cpuUtilizationPercentageInfo"
     )]
     pub cpu_utilization_percentage_info: Vec<i64>,
@@ -925,7 +972,12 @@ pub struct DiskVolumeReports {
     /**
      * Disk volumes
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "volumeInfo")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "volumeInfo"
+    )]
     pub volume_info: Vec<VolumeInfo>,
 }
 
@@ -993,6 +1045,7 @@ pub struct SystemRamFreeReports {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "systemRamFreeInfo"
     )]
     pub system_ram_free_info: Vec<i64>,
@@ -1070,6 +1123,7 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "activeTimeRanges"
     )]
     pub active_time_ranges: Vec<ActiveTimeRanges>,
@@ -1129,13 +1183,19 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "cpuStatusReports"
     )]
     pub cpu_status_reports: Vec<CpuStatusReports>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "deviceFiles")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "deviceFiles"
+    )]
     pub device_files: Vec<DeviceFiles>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
@@ -1153,6 +1213,7 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "diskVolumeReports"
     )]
     pub disk_volume_reports: Vec<DiskVolumeReports>,
@@ -1230,6 +1291,7 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "lastKnownNetwork"
     )]
     pub last_known_network: Vec<LastKnownNetwork>,
@@ -1332,7 +1394,12 @@ pub struct ChromeOsDevice {
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "recentUsers")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "recentUsers"
+    )]
     pub recent_users: Vec<RecentUsers>,
     /**
      * Google Chrome devices run on the [Chrome OS](https://support.google.com/chromeos). For more information about common API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-chrome-devices).
@@ -1340,6 +1407,7 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "screenshotFiles"
     )]
     pub screenshot_files: Vec<DeviceFiles>,
@@ -1378,6 +1446,7 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "systemRamFreeReports"
     )]
     pub system_ram_free_reports: Vec<SystemRamFreeReports>,
@@ -1433,7 +1502,11 @@ pub struct ChromeOsDevices {
     /**
      * List of Chrome OS Device objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub chromeosdevices: Vec<ChromeOsDevice>,
     #[serde(
         default,
@@ -1458,7 +1531,12 @@ pub struct ChromeOsDevices {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ChromeOsMoveDevicesOu {
-    #[serde(default, skip_serializing_if = "Vec::is_empty", rename = "deviceIds")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "deviceIds"
+    )]
     pub device_ids: Vec<String>,
 }
 
@@ -1945,6 +2023,7 @@ pub struct DomainAliases {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "domainAliases"
     )]
     pub domain_aliases: Vec<DomainAlias>,
@@ -1980,6 +2059,7 @@ pub struct Domains {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "domainAliases"
     )]
     pub domain_aliases: Vec<DomainAlias>,
@@ -2026,7 +2106,11 @@ pub struct Domains2 {
     /**
      * List of domain objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub domains: Vec<Domains>,
     #[serde(
         default,
@@ -2232,7 +2316,11 @@ pub struct Features {
     /**
      * Public API: Resources.features
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub features: Vec<Feature>,
     /**
      * Public API: Resources.features
@@ -2270,7 +2358,11 @@ pub struct Group {
     /**
      * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub aliases: Vec<String>,
     /**
      * Google Groups provide your users the ability to send messages to groups of people using the group's email address. For more information about common tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-groups).
@@ -2342,6 +2434,7 @@ pub struct Group {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "nonEditableAliases"
     )]
     pub non_editable_aliases: Vec<String>,
@@ -2358,7 +2451,11 @@ pub struct Groups {
     /**
      * List of group objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub groups: Vec<Group>,
     #[serde(
         default,
@@ -2394,6 +2491,7 @@ pub struct ListPrinterModelsResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "printerModels"
     )]
     pub printer_models: Vec<PrinterModel>,
@@ -2415,7 +2513,11 @@ pub struct ListPrintersResponse {
     /**
      * Response for listing printers.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub printers: Vec<Printer>,
 }
 
@@ -2514,7 +2616,11 @@ pub struct Members {
     /**
      * List of member objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub members: Vec<Member>,
     #[serde(
         default,
@@ -2555,7 +2661,11 @@ pub struct Applications {
         rename = "packageName"
     )]
     pub package_name: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub permission: Vec<String>,
     /**
      * The unique ID of the ASP.
@@ -2591,7 +2701,11 @@ pub struct MobileDevice {
     /**
      * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub applications: Vec<Applications>,
     /**
      * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
@@ -2684,7 +2798,11 @@ pub struct MobileDevice {
     /**
      * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub email: Vec<String>,
     /**
      * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
@@ -2811,7 +2929,11 @@ pub struct MobileDevice {
     /**
      * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub name: Vec<String>,
     /**
      * Google Workspace Mobile Management includes Android, [Google Sync](https://support.google.com/a/answer/135937), and iOS devices. For more information about common group mobile device API tasks, see the [Developer's Guide](/admin-sdk/directory/v1/guides/manage-mobile-devices.html).
@@ -2838,6 +2960,7 @@ pub struct MobileDevice {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "otherAccountsInfo"
     )]
     pub other_accounts_info: Vec<String>,
@@ -2976,7 +3099,11 @@ pub struct MobileDevices {
     /**
      * List of Mobile Device objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub mobiledevices: Vec<MobileDevice>,
     #[serde(
         default,
@@ -3097,6 +3224,7 @@ pub struct OrgUnits {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "organizationUnits"
     )]
     pub organization_units: Vec<OrgUnit>,
@@ -3111,6 +3239,7 @@ pub struct Printer {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "auxiliaryMessages"
     )]
     pub auxiliary_messages: Vec<AuxiliaryMessage>,
@@ -3243,6 +3372,7 @@ pub struct Privilege {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "childPrivileges"
     )]
     pub child_privileges: Vec<Privilege>,
@@ -3301,7 +3431,11 @@ pub struct Privileges {
     /**
      * A list of child privileges. Privileges for a service form a tree. Each privilege can have a list of child privileges; this list is empty for a leaf privilege.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<Privilege>,
     #[serde(
         default,
@@ -3391,6 +3525,7 @@ pub struct Role {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "rolePrivileges"
     )]
     pub role_privileges: Vec<RolePrivileges>,
@@ -3480,7 +3615,11 @@ pub struct RoleAssignments {
     /**
      * A list of RoleAssignment resources.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<RoleAssignment>,
     #[serde(
         default,
@@ -3508,7 +3647,11 @@ pub struct Roles {
     /**
      * A list of Role resources.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<Role>,
     #[serde(
         default,
@@ -3550,7 +3693,11 @@ pub struct Schema {
     /**
      * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub fields: Vec<SchemaFieldSpec>,
     /**
      * The type of API resource. For Schema resources, this is always `admin#directory#schema`.
@@ -3731,7 +3878,11 @@ pub struct Schemas {
     /**
      * JSON response template for List Schema operation in Directory API.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub schemas: Vec<Schema>,
 }
 
@@ -3796,7 +3947,11 @@ pub struct Token {
     /**
      * JSON template for token resource in Directory API.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub scopes: Vec<String>,
     /**
      * JSON template for token resource in Directory API.
@@ -3825,7 +3980,11 @@ pub struct Tokens {
     /**
      * JSON response template for List tokens operation in Directory API.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<Token>,
     /**
      * JSON response template for List tokens operation in Directory API.
@@ -3889,7 +4048,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub addresses: Vec<UserAddress>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -3903,7 +4066,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub aliases: Vec<String>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -3961,7 +4128,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub emails: Vec<UserEmail>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -4008,7 +4179,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub ims: Vec<Ims>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -4105,7 +4280,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub locations: Vec<UserLocation>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -4118,6 +4297,7 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "nonEditableAliases"
     )]
     pub non_editable_aliases: Vec<String>,
@@ -4153,7 +4333,11 @@ pub struct User {
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub phones: Vec<UserPhone>,
     /**
      * The Directory API allows you to create and manage your account's users, user aliases, and user Gmail chat profile photos. For more information about common tasks, see the [User Accounts Developer's Guide](/admin-sdk/directory/v1/guides/manage-users.html) and the [User Aliases Developer's Guide](/admin-sdk/directory/v1/guides/manage-user-aliases.html).
@@ -4205,6 +4389,7 @@ pub struct User {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "sshPublicKeys"
     )]
     pub ssh_public_keys: Vec<UserSshPublicKey>,
@@ -5196,7 +5381,11 @@ pub struct Users {
     /**
      * List of user objects.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub users: Vec<User>,
 }
 
@@ -5258,7 +5447,11 @@ pub struct VerificationCodes {
     /**
      * JSON response template for List verification codes operation in Directory API.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub items: Vec<VerificationCode>,
     /**
      * JSON response template for List verification codes operation in Directory API.

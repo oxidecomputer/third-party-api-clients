@@ -413,7 +413,11 @@ pub struct Data {
     /**
      * Ramp transaction
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub accounting_categories: Vec<AccountingCategories>,
     /**
      * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
@@ -434,7 +438,11 @@ pub struct Data {
     /**
      * Ramp transaction
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub disputes: Vec<Disputes>,
     /**
      * The ID of the last entity of the previous page, used for pagination to get the next page.
@@ -467,12 +475,20 @@ pub struct Data {
     /**
      * Ramp transaction
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub policy_violations: Vec<PolicyViolations>,
     /**
      * Ramp transaction
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub receipts: Vec<uuid::Uuid>,
     /**
      * The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
@@ -511,7 +527,11 @@ pub struct Data {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetTransactionResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<Data>,
     #[serde(default)]
     pub page: Page,
@@ -538,7 +558,11 @@ pub struct Location {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<Location>,
     #[serde(default)]
     pub page: Page,
@@ -561,7 +585,11 @@ pub struct PostLocationRequest {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetUsersResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<User>,
     #[serde(default)]
     pub page: Page,
@@ -588,7 +616,11 @@ pub struct Department {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetDepartmentsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<Department>,
     #[serde(default)]
     pub page: Page,
@@ -746,12 +778,20 @@ pub struct SpendingRestrictions {
     /**
      * Specifies the spend restrictions on a Ramp card.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub blocked_categories: Vec<f64>,
     /**
      * Specifies the spend restrictions on a Ramp card.
      */
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub categories: Vec<f64>,
     /**
      * Time interval to apply limit to.
@@ -853,7 +893,11 @@ pub struct Card {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCardsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub cards: Vec<Card>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub page: Option<GetCardsResponsePage>,
@@ -1517,6 +1561,7 @@ pub struct GetCardProgramsResponse {
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "card-programs"
     )]
     pub card_programs: Vec<CardProgram>,
@@ -1708,7 +1753,11 @@ pub struct Receipt {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReceiptsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<Receipt>,
     #[serde(default)]
     pub page: Page,
@@ -1742,7 +1791,11 @@ pub struct Reimbursement {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub merchant: String,
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub receipts: Vec<uuid::Uuid>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub transaction_date: Option<chrono::NaiveDate>,
@@ -1752,7 +1805,11 @@ pub struct Reimbursement {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetReimbursementsResponse {
-    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
     pub data: Vec<Reimbursement>,
     #[serde(default)]
     pub page: Page,

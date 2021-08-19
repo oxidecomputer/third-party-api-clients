@@ -515,6 +515,56 @@ pub mod google_calendar_date_time_format {
         serializer.serialize_none()
     }
 }
+
+struct VectorVisitor<T>(std::marker::PhantomData<fn() -> Vec<T>>);
+
+impl<'de, T> Visitor<'de> for VectorVisitor<T>
+where
+    T: de::Deserialize<'de>,
+{
+    type Value = Vec<T>;
+
+    fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        formatter.write_str("a very special vector")
+    }
+
+    fn visit_seq<A: de::SeqAccess<'de>>(self, mut access: A) -> Result<Self::Value, A::Error> {
+        let mut things: Vec<T> = Default::default();
+
+        // While there are entries remaining in the input, add them
+        // into our vector.
+        while let Some(t) = access.next_element::<T>()? {
+            things.push(t);
+        }
+
+        Ok(things)
+    }
+}
+
+pub mod deserialize_null_vector {
+    use serde::{self, Deserialize, Deserializer};
+
+    use super::VectorVisitor;
+
+    // The signature of a deserialize_with function must follow the pattern:
+    //
+    //    fn deserialize<'de, D>(D) -> Result<T, D::Error>
+    //    where
+    //        D: Deserializer<'de>
+    //
+    // although it may also be generic over the output types T.
+    pub fn deserialize<'de, T, D>(deserializer: D) -> Result<Vec<T>, D::Error>
+    where
+        T: Deserialize<'de>,
+        D: Deserializer<'de>,
+    {
+        if let Ok(r) = deserializer.deserialize_seq(VectorVisitor::<T>(std::marker::PhantomData)) {
+            return Ok(r);
+        }
+
+        Ok(Default::default())
+    }
+}
 "#;
 
 const GITHUB_TEMPLATE: &str = r#"//const X_GITHUB_REQUEST_ID: &str = "x-github-request-id";
