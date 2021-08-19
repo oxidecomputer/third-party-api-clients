@@ -55,6 +55,10 @@ RAMP_SPEC = $(RAMP_SPEC_DIR)/ramp.v1.json
 RAMP_SPEC_REPO = sumatokado/ramp-developer
 RAMP_SPEC_REFERENCE = $(RAMP_SPEC_DIR)/reference/Ramp-developer.v1.yaml
 
+REVAI_SPEC_DIR = $(CURDIR)/specs/rev.ai
+REVAI_SPEC = $(REVAI_SPEC_DIR)/rev.ai.yaml
+REVAI_SPEC_REMOTE = http://api.rev.ai/openapi/v1/documentation.yaml
+
 SENDGRID_SPEC_DIR = $(CURDIR)/specs/sendgrid
 SENDGRID_SPEC = $(SENDGRID_SPEC_DIR)/sendgrid.json
 SENDGRID_SPEC_REPO = sendgrid/sendgrid-oai
@@ -354,6 +358,23 @@ ramp: target/debug/generator $(RAMP_SPEC)
 		--user-consent-endpoint "app.ramp.com/v1/authorize" $(EXTRA_ARGS)
 	cargo fmt -p ramp-api
 	@echo -e "- [Ramp](ramp/) [![docs.rs](https://docs.rs/ramp-api/badge.svg)](https://docs.rs/ramp-api)" >> README.md
+
+$(REVAI_SPEC_DIR):
+	mkdir -p $@
+
+$(REVAI_SPEC): $(REVAI_SPEC_DIR)
+	curl -sSL $(REVAI_SPEC_REMOTE) -o $@
+
+tripactions: target/debug/generator $(REVAI_SPEC)
+	./target/debug/generator -i $(REVAI_SPEC) -v 0.2.0 \
+		-o rev.ai \
+		-n revai \
+		--proper-name "Rev.ai" \
+		-d "A fully generated & opinionated API client for the Rev.ai API." \
+		--spec-link "$(REVAI_SPEC_REMOTE)" \
+		--host "api.rev.ai/speechtotext/v1" $(EXTRA_ARGS)
+	cargo fmt -p revai
+	@echo -e "- [Rev.ai](rev.ai/) [![docs.rs](https://docs.rs/revai/badge.svg)](https://docs.rs/revai)" >> README.md
 
 $(SENDGRID_SPEC_DIR):
 	mkdir -p $@

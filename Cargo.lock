@@ -212,6 +212,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
 ]
@@ -433,6 +434,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
 ]
@@ -460,6 +462,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
  "yup-oauth2",
@@ -488,6 +491,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
  "yup-oauth2",
@@ -516,6 +520,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
  "yup-oauth2",
@@ -544,6 +549,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
  "yup-oauth2",
@@ -572,6 +578,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
 ]
@@ -846,6 +853,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
 ]
@@ -1207,6 +1215,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
 ]
@@ -1487,6 +1496,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
 ]
@@ -1580,6 +1590,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
  "yup-oauth2",
@@ -1777,7 +1788,7 @@ dependencies = [
 
 [[package]]
 name = "tripactions"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1798,6 +1809,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
 ]
@@ -1863,6 +1875,7 @@ dependencies = [
  "idna",
  "matches",
  "percent-encoding",
+ "serde",
 ]
 
 [[package]]
@@ -2088,6 +2101,7 @@ dependencies = [
  "serde_json",
  "serde_urlencoded",
  "tokio",
+ "url",
  "urlencoding",
  "uuid",
 ]

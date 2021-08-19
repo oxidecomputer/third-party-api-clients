@@ -273,9 +273,9 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                             "chrono::DateTime<chrono::Utc>".to_string()
                                         }
                                         "ipv4" => "std::net::Ipv4Addr".to_string(),
-                                        "uri" => "&url::Url".to_string(),
+                                        "uri" => "&str".to_string(),
                                         "uri-template" => "&str".to_string(),
-                                        "url" => "&url::Url".to_string(),
+                                        "url" => "&str".to_string(),
                                         "email" => "&str".to_string(),
                                         "uuid" => "uuid::Uuid".to_string(),
                                         "hostname" => "&str".to_string(),
@@ -1745,7 +1745,7 @@ impl TypeSpace {
                             )),
                             "uri" => Ok((
                                 Some(uid.to_string()),
-                                TypeDetails::Basic("url::Url".to_string(), s.schema_data.clone()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
                             )),
                             "uri-template" => Ok((
                                 Some(uid.to_string()),
@@ -1753,7 +1753,7 @@ impl TypeSpace {
                             )),
                             "url" => Ok((
                                 Some(uid.to_string()),
-                                TypeDetails::Basic("url::Url".to_string(), s.schema_data.clone()),
+                                TypeDetails::Basic("String".to_string(), s.schema_data.clone()),
                             )),
                             "email" => Ok((
                                 Some(uid.to_string()),
