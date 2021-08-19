@@ -12,6 +12,7 @@ members = [
 	"gusto",
 	"mailchimp",
 	"ramp",
+	"rev.ai",
 	"sendgrid",
 	"tripactions",
 	"zoom"

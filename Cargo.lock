@@ -1341,6 +1341,34 @@ dependencies = [
 ]
 
 [[package]]
+name = "revai"
+version = "0.2.0"
+dependencies = [
+ "anyhow",
+ "async-recursion",
+ "async-trait",
+ "base64 0.12.3",
+ "bytes",
+ "chrono",
+ "dirs",
+ "http",
+ "hyperx",
+ "jsonwebtoken",
+ "mime",
+ "nom_pem",
+ "percent-encoding",
+ "reqwest",
+ "schemars",
+ "serde",
+ "serde_json",
+ "serde_urlencoded",
+ "tokio",
+ "url",
+ "urlencoding",
+ "uuid",
+]
+
+[[package]]
 name = "ring"
 version = "0.16.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"

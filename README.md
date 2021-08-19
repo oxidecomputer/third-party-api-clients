@@ -14,6 +14,7 @@ A place for keeping all our generated third party API clients.
 - [Gusto](gusto/) [![docs.rs](https://docs.rs/gusto-api/badge.svg)](https://docs.rs/gusto-api)
 - [MailChimp](mailchimp/) [![docs.rs](https://docs.rs/mailchimp-api/badge.svg)](https://docs.rs/mailchimp-api)
 - [Ramp](ramp/) [![docs.rs](https://docs.rs/ramp-api/badge.svg)](https://docs.rs/ramp-api)
+- [Rev.ai](rev.ai/) [![docs.rs](https://docs.rs/revai/badge.svg)](https://docs.rs/revai)
 - [SendGrid](sendgrid/) [![docs.rs](https://docs.rs/sendgrid-api/badge.svg)](https://docs.rs/sendgrid-api)
 - [TripActions](tripactions/) [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)
 - [Zoom](zoom/) [![docs.rs](https://docs.rs/zoom-api/badge.svg)](https://docs.rs/zoom-api)

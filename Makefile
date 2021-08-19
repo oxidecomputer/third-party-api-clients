@@ -57,7 +57,7 @@ RAMP_SPEC_REFERENCE = $(RAMP_SPEC_DIR)/reference/Ramp-developer.v1.yaml
 
 REVAI_SPEC_DIR = $(CURDIR)/specs/rev.ai
 REVAI_SPEC = $(REVAI_SPEC_DIR)/rev.ai.yaml
-REVAI_SPEC_REMOTE = http://api.rev.ai/openapi/v1/documentation.yaml
+REVAI_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/rev.ai/v1/openapi.yaml
 
 SENDGRID_SPEC_DIR = $(CURDIR)/specs/sendgrid
 SENDGRID_SPEC = $(SENDGRID_SPEC_DIR)/sendgrid.json
@@ -77,7 +77,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: README.md docusign giphy github google-admin google-calendar google-drive google-groups-settings google-sheets gusto mailchimp ramp sendgrid tripactions zoom
+generate: README.md docusign giphy github google-admin google-calendar google-drive google-groups-settings google-sheets gusto mailchimp ramp revai sendgrid tripactions zoom
 	cargo test tests
 	cargo clippy
 
@@ -109,6 +109,7 @@ update-specs:
 		$(OKTA_SPEC_DIR) \
 		$(SENDGRID_SPEC_DIR) \
 		$(SLACK_SPEC_DIR) \
+		$(REVAI_SPEC_DIR) \
 		$(TRIPACTIONS_SPEC_DIR) \
 		$(ZOOM_SPEC_DIR)
 	make $(DOCUSIGN_SPEC) \
@@ -123,6 +124,7 @@ update-specs:
 		$(OKTA_SPEC) \
 		$(SENDGRID_SPEC) \
 		$(SLACK_SPEC) \
+		$(REVAI_SPEC_DIR) \
 		$(TRIPACTIONS_SPEC) \
 		$(ZOOM_SPEC)
 
@@ -365,7 +367,7 @@ $(REVAI_SPEC_DIR):
 $(REVAI_SPEC): $(REVAI_SPEC_DIR)
 	curl -sSL $(REVAI_SPEC_REMOTE) -o $@
 
-tripactions: target/debug/generator $(REVAI_SPEC)
+revai: target/debug/generator $(REVAI_SPEC)
 	./target/debug/generator -i $(REVAI_SPEC) -v 0.2.0 \
 		-o rev.ai \
 		-n revai \

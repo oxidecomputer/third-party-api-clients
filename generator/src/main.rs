@@ -272,6 +272,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         "Promo date-time" => {
                                             "chrono::DateTime<chrono::Utc>".to_string()
                                         }
+                                        "dateTime" => "chrono::DateTime<chrono::Utc>".to_string(),
                                         "ipv4" => "std::net::Ipv4Addr".to_string(),
                                         "uri" => "&str".to_string(),
                                         "uri-template" => "&str".to_string(),
@@ -1736,6 +1737,13 @@ impl TypeSpace {
                                     s.schema_data.clone(),
                                 ),
                             )),
+                            "dateTime" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic(
+                                    "Option<chrono::DateTime<chrono::Utc>>".to_string(),
+                                    s.schema_data.clone(),
+                                ),
+                            )),
                             "ipv4" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic(
@@ -2378,7 +2386,7 @@ fn gen(
     // Print the client template.
     if proper_name == "GitHub" {
         a(crate::client::GITHUB_TEMPLATE);
-    } else if proper_name == "SendGrid" || proper_name == "Giphy" {
+    } else if proper_name == "SendGrid" || proper_name == "Giphy" || proper_name == "Rev.ai" {
         a(&crate::client::generate_client_generic_api_key(proper_name));
     } else if proper_name == "TripActions" {
         a(&crate::client::generate_client_generic_client_credentials(
@@ -3156,7 +3164,8 @@ rustdoc-args = ["--cfg", "docsrs"]
                     host.trim_start_matches("https://"),
                     &spec_link,
                 )
-            } else if proper_name == "SendGrid" || proper_name == "Giphy" {
+            } else if proper_name == "SendGrid" || proper_name == "Giphy" || proper_name == "Rev.ai"
+            {
                 template::generate_docs_generic_api_key(
                     &api,
                     &to_snake_case(&name),
