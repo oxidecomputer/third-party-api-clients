@@ -1613,7 +1613,6 @@ dependencies = [
  "chrono",
  "dirs",
  "http",
- "hyperx",
  "jsonwebtoken",
  "mime",
  "nom_pem",
