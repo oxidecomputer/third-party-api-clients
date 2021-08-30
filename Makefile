@@ -93,6 +93,7 @@ examples: generate github/examples/*.rs
 run:
 	cargo run --example list_repos_for_org --features="httpcache"
 	cargo run --example get_repo_in_org --features="httpcache"
+	cargo run --example list_pulls_for_repo --features="httpcache"
 
 update: update-specs
 

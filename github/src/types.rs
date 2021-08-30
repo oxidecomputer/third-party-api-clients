@@ -4341,8 +4341,8 @@ pub struct Event {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub public: bool,
-    #[serde()]
-    pub repo: Repo,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub repo: Option<Repo>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -10813,8 +10813,8 @@ pub struct Head {
         rename = "ref"
     )]
     pub ref_: String,
-    #[serde()]
-    pub repo: PullRequestMinimalHeadRepo,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub repo: Option<PullRequestMinimalHeadRepo>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14525,8 +14525,8 @@ pub struct PullRequestSimpleHead {
     /**
      * A git repository
      */
-    #[serde()]
-    pub repo: Repository,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub repo: Option<Repository>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -14555,8 +14555,8 @@ pub struct Base {
     /**
      * A git repository
      */
-    #[serde()]
-    pub repo: Repository,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub repo: Option<Repository>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -20686,8 +20686,8 @@ pub struct PullRequestBase {
         rename = "ref"
     )]
     pub ref_: String,
-    #[serde()]
-    pub repo: PullRequestBaseRepo,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub repo: Option<PullRequestBaseRepo>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -24576,8 +24576,8 @@ pub struct StarredRepository {
     /**
      * A git repository
      */
-    #[serde()]
-    pub repo: Repository,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub repo: Option<Repository>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",

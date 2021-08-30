@@ -1557,7 +1557,7 @@ impl TypeSpace {
                         if let Some(sd) = &self.get_schema_data_for_id(&itid) {
                             let schema_data = &(*sd).clone();
                             // TODO: "page" is specific to ramp
-                            if schema_data.nullable && name != "page" {
+                            if (schema_data.nullable && name != "page") || (n == "repo") {
                                 // This is an optional member.
                                 omap.insert(
                                     n.to_string(),
@@ -1567,7 +1567,7 @@ impl TypeSpace {
                             }
 
                             // TODO: "page" is specific to ramp
-                            if o.required.contains(n) || name == "page" {
+                            if (o.required.contains(n) || name == "page") && (n != "repo") {
                                 omap.insert(n.to_string(), itid.clone());
                             } else {
                                 // This is an optional member.
