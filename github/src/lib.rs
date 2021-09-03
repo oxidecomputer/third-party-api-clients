@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = "0.1.27"
+//! octorust = "0.1.28"
 //! ```
 //!
 //! ## Basic example
@@ -53,7 +53,7 @@
 //! ```
 //!
 //! If you are a GitHub enterprise customer, you will want to create a client with the
-//! [Client#host](https://docs.rs/octorust/0.1.27/octorust/struct.Client.html#method.host) method.
+//! [Client#host](https://docs.rs/octorust/0.1.28/octorust/struct.Client.html#method.host) method.
 //!
 //! ## Feature flags
 //!
@@ -67,7 +67,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! octorust = { version = "0.1.27", features = ["httpcache"] }
+//! octorust = { version = "0.1.28", features = ["httpcache"] }
 //! ```
 //!
 //! Then use the `Client::custom` constructor to provide a cache implementation.
@@ -774,13 +774,13 @@ impl Client {
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let mut global_items = Vec::new();
-        let (new_link, mut items) = self.get_pages(uri).await.unwrap();
+        let (new_link, mut items) = self.get_pages(uri).await?;
         let mut link = new_link;
         while !items.is_empty() {
             global_items.append(&mut items);
             // We need to get the next link.
             if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
-                let url = reqwest::Url::parse(&url).unwrap();
+                let url = reqwest::Url::parse(&url)?;
                 let (new_link, new_items) = self.get_pages_url(&url).await?;
                 link = new_link;
                 items = new_items;

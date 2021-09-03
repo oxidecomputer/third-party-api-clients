@@ -449,13 +449,13 @@ impl Client {
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         let mut global_items = Vec::new();
-        let (new_link, mut items) = self.get_pages(uri).await.unwrap();
+        let (new_link, mut items) = self.get_pages(uri).await?;
         let mut link = new_link;
         while !items.is_empty() {
             global_items.append(&mut items);
             // We need to get the next link.
             if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
-                let url = reqwest::Url::parse(&url).unwrap();
+                let url = reqwest::Url::parse(&url)?;
                 let (new_link, new_items) = self.get_pages_url(&url).await?;
                 link = new_link;
                 items = new_items;
