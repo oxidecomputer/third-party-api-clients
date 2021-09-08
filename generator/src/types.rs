@@ -158,7 +158,12 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                         );
                                     }
                                 } else if rt.starts_with("Option<") {
-                                    a(r#"skip_serializing_if = "Option::is_none","#);
+                                    if prop != "required_pull_request_reviews"
+                                        && prop != "required_status_checks"
+                                        && prop != "restrictions "
+                                    {
+                                        a(r#"skip_serializing_if = "Option::is_none","#);
+                                    }
                                 }
                             } else if rt == "bool" {
                                 if sn.ends_with("Request") || proper_name == "Google Drive" {
