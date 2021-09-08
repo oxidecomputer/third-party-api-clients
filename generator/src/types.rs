@@ -158,10 +158,12 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                         );
                                     }
                                 } else if rt.starts_with("Option<") {
-                                    if prop != "required_pull_request_reviews"
-                                        && prop != "required_status_checks"
-                                        && prop != "restrictions "
+                                    if (prop == "required_pull_request_reviews"
+                                        || prop == "required_status_checks"
+                                        || prop == "restrictions")
+                                        && proper_name == "GitHub"
                                     {
+                                    } else {
                                         a(r#"skip_serializing_if = "Option::is_none","#);
                                     }
                                 }
