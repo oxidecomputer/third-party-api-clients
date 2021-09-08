@@ -12260,7 +12260,7 @@ pub struct BranchProtection {
     /**
      * Branch Protection
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub restrictions: Option<BranchRestrictionPolicy>,
     #[serde(
         default,
@@ -12768,7 +12768,7 @@ pub struct ProtectedBranch {
     /**
      * Branch protections protect branches
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub restrictions: Option<BranchRestrictionPolicy>,
     #[serde(
         default,
@@ -28064,7 +28064,7 @@ pub struct ReposUpdateBranchProtectionRequest {
     /**
      * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub restrictions: Option<Restrictions>,
 }
 
