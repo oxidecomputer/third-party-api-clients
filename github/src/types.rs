@@ -12245,7 +12245,7 @@ pub struct BranchProtection {
     /**
      * Branch Protection
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub required_pull_request_reviews: Option<ProtectedBranchPullRequestReview>,
     /**
      * Branch Protection
@@ -12255,7 +12255,7 @@ pub struct BranchProtection {
     /**
      * Branch Protection
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub required_status_checks: Option<RequiredStatusChecks>,
     /**
      * Branch Protection
@@ -12753,7 +12753,7 @@ pub struct ProtectedBranch {
     /**
      * Branch protections protect branches
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub required_pull_request_reviews: Option<RequiredPullRequestReviews>,
     /**
      * Branch protections protect branches
@@ -12763,7 +12763,7 @@ pub struct ProtectedBranch {
     /**
      * Branch protections protect branches
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub required_status_checks: Option<StatusCheckPolicy>,
     /**
      * Branch protections protect branches
@@ -28053,13 +28053,13 @@ pub struct ReposUpdateBranchProtectionRequest {
     /**
      * Require at least one approving review on a pull request, before merging. Set to `null` to disable.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub required_pull_request_reviews:
         Option<ReposUpdateBranchProtectionRequestRequiredPullReviews>,
     /**
      * Require status checks to pass before merging. Set to `null` to disable.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(default)]
     pub required_status_checks: Option<ReposUpdateBranchProtectionRequestRequiredStatusChecks>,
     /**
      * Restrict who can push to the protected branch. User, app, and team `restrictions` are only available for organization-owned repositories. Set to `null` to disable.
