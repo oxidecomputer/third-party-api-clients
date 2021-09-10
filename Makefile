@@ -230,7 +230,7 @@ $(GOOGLE_DRIVE_SPEC): $(GOOGLE_DRIVE_SPEC_DIR)
 	curl -sSL $(GOOGLE_DRIVE_SPEC_REMOTE) -o $@
 
 google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
-	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.2.3 \
+	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.2.4 \
 		-o google/drive \
 		-n google-drive \
 		--proper-name "Google Drive" \
