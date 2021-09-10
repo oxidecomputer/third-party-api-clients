@@ -199,12 +199,10 @@ impl Permissions {
                 move_to_new_owners_root.to_string(),
             ));
         }
-        if send_notification_email {
-            query_args.push((
-                "sendNotificationEmail".to_string(),
-                send_notification_email.to_string(),
-            ));
-        }
+        query_args.push((
+            "sendNotificationEmail".to_string(),
+            send_notification_email.to_string(),
+        ));
         if supports_all_drives {
             query_args.push((
                 "supportsAllDrives".to_string(),

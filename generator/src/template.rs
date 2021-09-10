@@ -38,6 +38,11 @@ impl Template {
                         r#"if {} > 0 {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
                         nam, prop, nam
                     ));
+                } else if value == "bool" && prop == "sendNotificationEmail" {
+                    a(&format!(
+                        r#"query_args.push(("{}".to_string(), {}.to_string()));"#,
+                        prop, nam
+                    ));
                 } else if value == "bool" {
                     a(&format!(
                         r#"if {} {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,

@@ -473,7 +473,7 @@ dependencies = [
 
 [[package]]
 name = "google-drive"
-version = "0.2.3"
+version = "0.2.4"
 dependencies = [
  "anyhow",
  "async-recursion",
