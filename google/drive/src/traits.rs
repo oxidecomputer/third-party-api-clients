@@ -2,6 +2,118 @@
 use anyhow::{anyhow, Result};
 
 #[async_trait::async_trait]
+pub trait PermissionOps {
+    /// Add a permission if it does not already exist.
+    ///
+    /// `role`: The role granted by this permission. While new values may be supported in the future, the following are currently allowed:
+    /// - `owner`
+    /// - `organizer`
+    /// - `fileOrganizer`
+    /// - `writer`
+    /// - `commenter`
+    /// - `reader`
+    ///
+    /// `type_`: The type of the grantee. Valid values are:
+    /// - `user`
+    /// - `group`
+    /// - `domain`
+    /// - `anyone`
+    /// When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for a anyone type.
+    async fn add_if_not_exists(
+        &self,
+        file_id: &str,
+        email_address: &str,
+        email_message: &str,
+        role: &str,
+        type_: &str,
+        use_domain_admin_access: bool,
+        send_notification_email: bool,
+    ) -> Result<crate::types::Permission>;
+}
+
+#[async_trait::async_trait]
+impl PermissionOps for crate::permissions::Permissions {
+    /// Add a permission if it does not already exist.
+    ///
+    /// `role`: The role granted by this permission. While new values may be supported in the future, the following are currently allowed:
+    /// - `owner`
+    /// - `organizer`
+    /// - `fileOrganizer`
+    /// - `writer`
+    /// - `commenter`
+    /// - `reader`
+    ///
+    /// `type_`: The type of the grantee. Valid values are:
+    /// - `user`
+    /// - `group`
+    /// - `domain`
+    /// - `anyone`
+    /// When creating a permission, if type is user or group, you must provide an emailAddress for the user or group. When type is domain, you must provide a domain. There isn't extra information required for a anyone type.
+    async fn add_if_not_exists(
+        &self,
+        file_id: &str,
+        email_address: &str,
+        email_message: &str,
+        role: &str,
+        type_: &str,
+        use_domain_admin_access: bool,
+        send_notification_email: bool,
+    ) -> Result<crate::types::Permission> {
+        // First let's check if the permission already exists.
+        // List all the permissions for a file.
+        let perms = self
+            .list_all(
+                file_id,
+                "",   // include_permissions_for_view
+                true, // supports_all_drives
+                true, // supports_team_drives
+                use_domain_admin_access,
+            )
+            .await?;
+
+        // Iterate over our permissions and see if we have ours.
+        for perm in perms {
+            if perm.email_address == email_address && perm.role == role && perm.type_ == type_ {
+                // We found the permission, return it.
+                return Ok(perm);
+            }
+        }
+
+        // If we got here we could not find the permission so let's create it.
+        let perm = crate::types::Permission {
+            allow_file_discovery: None,
+            deleted: None,
+            display_name: String::new(),
+            domain: String::new(),
+            email_address: email_address.to_string(),
+            expiration_time: None,
+            id: String::new(),
+            kind: String::new(),
+            permission_details: Default::default(),
+            photo_link: String::new(),
+            role: role.to_string(),
+            team_drive_permission_details: Default::default(),
+            type_: type_.to_string(),
+            view: String::new(),
+        };
+
+        // Create the permission and return it.
+        self.create(
+            file_id,
+            email_message,
+            false, // move_to_new_owners_root
+            send_notification_email,
+            true,  // supports_all_drives
+            true,  // supports_team_drives
+            false, // transfer_ownership
+            use_domain_admin_access,
+            &perm,
+        )
+        .await
+    }
+}
+
+#[async_trait::async_trait]
 pub trait FileOps {
     /// Get a file by it's name.
     async fn get_by_name(
