@@ -408,7 +408,7 @@ impl Client {
                     let auth = format!("token {}", token);
                     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
                 } else {
-                    println!("App token is stale, refreshing");
+                    //println!("App token is stale, refreshing");
                     let token_ref = apptoken.access_key.clone();
 
                     let token = self
