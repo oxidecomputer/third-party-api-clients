@@ -850,7 +850,7 @@ impl Orgs {
         org: &str,
         hook_id: i64,
         delivery_id: i64,
-    ) -> Result<crate::types::Data> {
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/hooks/{}/deliveries/{}/attempts",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -1427,7 +1427,7 @@ impl Orgs {
         &self,
         org: &str,
         username: &str,
-    ) -> Result<crate::types::Data> {
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/outside_collaborators/{}",
             crate::progenitor_support::encode_path(&org.to_string()),

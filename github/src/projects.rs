@@ -202,7 +202,7 @@ impl Projects {
         &self,
         card_id: i64,
         body: &crate::types::ProjectsMoveCardRequest,
-    ) -> Result<crate::types::Data> {
+    ) -> Result<()> {
         let url = format!(
             "/projects/columns/cards/{}/moves",
             crate::progenitor_support::encode_path(&card_id.to_string()),
@@ -403,7 +403,7 @@ impl Projects {
         &self,
         column_id: i64,
         body: &crate::types::ProjectsMoveColumnRequest,
-    ) -> Result<crate::types::Data> {
+    ) -> Result<()> {
         let url = format!(
             "/projects/columns/{}/moves",
             crate::progenitor_support::encode_path(&column_id.to_string()),

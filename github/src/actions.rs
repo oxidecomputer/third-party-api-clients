@@ -1146,7 +1146,7 @@ impl Actions {
         org: &str,
         secret_name: &str,
         body: &crate::types::ActionsCreateUpdateOrgSecretRequest,
-    ) -> Result<crate::types::Data> {
+    ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}",
             crate::progenitor_support::encode_path(&org.to_string()),
@@ -2091,12 +2091,7 @@ impl Actions {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn approve_workflow_run(
-        &self,
-        owner: &str,
-        repo: &str,
-        run_id: i64,
-    ) -> Result<crate::types::Data> {
+    pub async fn approve_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/approve",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2166,12 +2161,7 @@ impl Actions {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn cancel_workflow_run(
-        &self,
-        owner: &str,
-        repo: &str,
-        run_id: i64,
-    ) -> Result<crate::types::Data> {
+    pub async fn cancel_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/cancel",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2411,12 +2401,7 @@ impl Actions {
      * * `repo: &str`
      * * `run_id: i64` -- The id of the workflow run.
      */
-    pub async fn re_run_workflow(
-        &self,
-        owner: &str,
-        repo: &str,
-        run_id: i64,
-    ) -> Result<crate::types::Data> {
+    pub async fn re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/rerun",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -2655,7 +2640,7 @@ impl Actions {
         repo: &str,
         secret_name: &str,
         body: &crate::types::ActionsCreateUpdateRepoSecretRequest,
-    ) -> Result<crate::types::Data> {
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/{}",
             crate::progenitor_support::encode_path(&owner.to_string()),
@@ -3164,7 +3149,7 @@ impl Actions {
         environment_name: &str,
         secret_name: &str,
         body: &crate::types::ActionsCreateUpdateRepoSecretRequest,
-    ) -> Result<crate::types::Data> {
+    ) -> Result<()> {
         let url = format!(
             "/repositories/{}/environments/{}/secrets/{}",
             crate::progenitor_support::encode_path(&repository_id.to_string()),

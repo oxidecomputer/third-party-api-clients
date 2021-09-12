@@ -193,7 +193,7 @@ impl Apps {
      *
      * * `delivery_id: i64`
      */
-    pub async fn redeliver_webhook_delivery(&self, delivery_id: i64) -> Result<crate::types::Data> {
+    pub async fn redeliver_webhook_delivery(&self, delivery_id: i64) -> Result<()> {
         let url = format!(
             "/app/hook/deliveries/{}/attempts",
             crate::progenitor_support::encode_path(&delivery_id.to_string()),

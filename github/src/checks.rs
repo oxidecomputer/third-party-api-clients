@@ -369,7 +369,7 @@ impl Checks {
         owner: &str,
         repo: &str,
         check_suite_id: i64,
-    ) -> Result<crate::types::Data> {
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/rerequest",
             crate::progenitor_support::encode_path(&owner.to_string()),

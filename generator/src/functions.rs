@@ -215,6 +215,10 @@ pub fn generate_files(
              */
             let (mut response_type, tid, inner_response_type, pagination_property) =
                 get_response_type(&od, ts, o)?;
+
+            if proper_name == "GitHub" && response_type == "crate::types::Data" {
+                response_type = "()".to_string();
+            }
             // We shouldn't ever have an optional response type, thats just annoying.
             if response_type.starts_with("Option<") {
                 response_type = response_type

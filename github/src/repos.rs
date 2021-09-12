@@ -4545,7 +4545,7 @@ impl Repos {
         repo: &str,
         hook_id: i64,
         delivery_id: i64,
-    ) -> Result<crate::types::Data> {
+    ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/hooks/{}/deliveries/{}/attempts",
             crate::progenitor_support::encode_path(&owner.to_string()),
