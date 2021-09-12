@@ -22,3 +22,4 @@ A place for keeping all our generated third party API clients.
 - [MailChimp](mailchimp/) [![docs.rs](https://docs.rs/mailchimp-api/badge.svg)](https://docs.rs/mailchimp-api)
 - [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)
 - [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)
+- [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)

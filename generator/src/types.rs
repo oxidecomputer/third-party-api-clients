@@ -102,6 +102,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 || name == "self"
                                 || name == "box"
                                 || name == "match"
+                                || name == "foo"
                             {
                                 prop = format!("{}_", name);
                             } else if name == "$ref" {

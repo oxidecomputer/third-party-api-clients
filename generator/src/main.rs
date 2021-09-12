@@ -2215,26 +2215,22 @@ fn render_param(
 
     // Add a default for the enum if it is not required.
     if !required || default.is_some() {
+        a(&format!("impl Default for {} {{", sn));
+        a(&format!("fn default() -> {} {{", sn));
         if let Some(d) = default {
             // Use the default that can be passed to the OpenAPI,
             // github is not using that currently for everything but we might want to
             // in the future.
-            a(&format!("impl Default for {} {{", sn));
-            a(&format!("fn default() -> {} {{", sn));
             a(&format!(
                 "{}::{}",
                 sn,
                 struct_name(&d.to_string().replace('"', ""))
             ));
-            a("}");
-            a("}");
         } else {
-            a(&format!("impl Default for {} {{", sn));
-            a(&format!("fn default() -> {} {{", sn));
             a(&format!("{}::Noop", sn));
-            a("}");
-            a("}");
         }
+        a("}");
+        a("}");
     }
 
     // Add a method to check if it is empty if it has this Noop state.
