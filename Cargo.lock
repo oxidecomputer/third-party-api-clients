@@ -1657,6 +1657,34 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f173ac3d1a7e3b28003f40de0b5ce7fe2710f9b9dc3fc38664cebee46b3b6527"
 
 [[package]]
+name = "slack-chat-api"
+version = "0.2.0"
+dependencies = [
+ "anyhow",
+ "async-recursion",
+ "async-trait",
+ "base64 0.12.3",
+ "bytes",
+ "chrono",
+ "dirs",
+ "http",
+ "hyperx",
+ "jsonwebtoken",
+ "mime",
+ "nom_pem",
+ "percent-encoding",
+ "reqwest",
+ "schemars",
+ "serde",
+ "serde_json",
+ "serde_urlencoded",
+ "tokio",
+ "url",
+ "urlencoding",
+ "uuid",
+]
+
+[[package]]
 name = "smallvec"
 version = "1.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"

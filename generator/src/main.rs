@@ -2820,7 +2820,10 @@ fn main() -> Result<()> {
 
             for (ct, mt) in content {
                 // TODO: have a better way of handling multipart/form-data
-                if ct == "application/json" || (ct == "multipart/form-data" && content.len() == 1) {
+                if ct == "application/json"
+                    || ((ct == "multipart/form-data" || ct == "application/x-www-form-urlencoded")
+                        && content.len() == 1)
+                {
                     if let Some(s) = &mt.schema {
                         let object_name = format!("{} request", name);
                         let id = ts.select(Some(&clean_name(&object_name)), s, "")?;

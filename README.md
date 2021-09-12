@@ -18,3 +18,6 @@ A place for keeping all our generated third party API clients.
 - [SendGrid](sendgrid/) [![docs.rs](https://docs.rs/sendgrid-api/badge.svg)](https://docs.rs/sendgrid-api)
 - [TripActions](tripactions/) [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)
 - [Zoom](zoom/) [![docs.rs](https://docs.rs/zoom-api/badge.svg)](https://docs.rs/zoom-api)
+- [DocuSign](docusign/) [![docs.rs](https://docs.rs/docusign/badge.svg)](https://docs.rs/docusign)
+- [MailChimp](mailchimp/) [![docs.rs](https://docs.rs/mailchimp-api/badge.svg)](https://docs.rs/mailchimp-api)
+- [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)
