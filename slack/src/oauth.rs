@@ -27,7 +27,7 @@ impl Oauth {
      * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
      * * `single_channel: bool` -- Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps).
      */
-    pub async fn acce(
+    pub async fn access(
         &self,
         client_id: &str,
         client_secret: &str,

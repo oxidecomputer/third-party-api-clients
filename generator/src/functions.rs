@@ -281,6 +281,7 @@ pub fn generate_files(
                 && http::Method::GET == m
                 && !fn_name.ends_with("address")
                 && !fn_name.ends_with("has")
+                && !fn_name.ends_with("access")
             {
                 // Make sure we don't add an s where we don't need one.
                 // Don't make a function plural where it is not needed.

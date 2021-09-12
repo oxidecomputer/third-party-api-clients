@@ -26,7 +26,7 @@ impl OauthV2 {
      * * `code: &str` -- The `code` param returned via the OAuth callback.
      * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
      */
-    pub async fn oauth_acce(
+    pub async fn oauth_access(
         &self,
         client_id: &str,
         client_secret: &str,

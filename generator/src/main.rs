@@ -2476,7 +2476,7 @@ pub fn make_plural(proper_name: &str, s: &str) -> String {
         return s.to_string();
     }
 
-    if s.ends_with("ss") {
+    if s.ends_with("ss") && !s.ends_with("access") {
         return format!("{}es", s);
     } else if s.ends_with('s') || s.ends_with("_all") {
         return s.to_string();
