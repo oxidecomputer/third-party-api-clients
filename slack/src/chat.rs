@@ -23,7 +23,7 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn delete(&self, token: &str) -> Result<crate::types::ChatDeleteSuccessSchema> {
+    pub async fn delete(&self) -> Result<crate::types::ChatDeleteSuccessSchema> {
         let url = "/chat.delete".to_string();
         self.client.post(&url, None).await
     }
@@ -39,10 +39,7 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn delete_scheduled_message(
-        &self,
-        token: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    pub async fn delete_scheduled_message(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/chat.deleteScheduledMessage".to_string();
         self.client.post(&url, None).await
     }
@@ -62,7 +59,6 @@ impl Chat {
      */
     pub async fn get_permalink(
         &self,
-        token: &str,
         channel: &str,
         message_ts: &str,
     ) -> Result<crate::types::ChatGetPermalinkSuccessSchema> {
@@ -72,9 +68,6 @@ impl Chat {
         }
         if !message_ts.is_empty() {
             query_args.push(("message_ts".to_string(), message_ts.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/chat.getPermalink?{}", query_);
@@ -93,7 +86,7 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn me_message(&self, token: &str) -> Result<crate::types::ChatMeMessageSchema> {
+    pub async fn me_message(&self) -> Result<crate::types::ChatMeMessageSchema> {
         let url = "/chat.meMessage".to_string();
         self.client.post(&url, None).await
     }
@@ -109,10 +102,7 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn post_ephemeral(
-        &self,
-        token: &str,
-    ) -> Result<crate::types::ChatPostEphemeralSuccessSchema> {
+    pub async fn post_ephemeral(&self) -> Result<crate::types::ChatPostEphemeralSuccessSchema> {
         let url = "/chat.postEphemeral".to_string();
         self.client.post(&url, None).await
     }
@@ -128,10 +118,7 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn post_message(
-        &self,
-        token: &str,
-    ) -> Result<crate::types::ChatPostMessageSuccessSchema> {
+    pub async fn post_message(&self) -> Result<crate::types::ChatPostMessageSuccessSchema> {
         let url = "/chat.postMessage".to_string();
         self.client.post(&url, None).await
     }
@@ -147,10 +134,7 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn schedule_message(
-        &self,
-        token: &str,
-    ) -> Result<crate::types::ChatScheduleMessageSuccessSchema> {
+    pub async fn schedule_message(&self) -> Result<crate::types::ChatScheduleMessageSuccessSchema> {
         let url = "/chat.scheduleMessage".to_string();
         self.client.post(&url, None).await
     }
@@ -166,7 +150,7 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `links:write`.
      */
-    pub async fn unfurl(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn unfurl(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/chat.unfurl".to_string();
         self.client.post(&url, None).await
     }
@@ -182,7 +166,7 @@ impl Chat {
      *
      * * `token: &str` -- Authentication token. Requires scope: `chat:write`.
      */
-    pub async fn update(&self, token: &str) -> Result<crate::types::ChatUpdateSuccessSchema> {
+    pub async fn update(&self) -> Result<crate::types::ChatUpdateSuccessSchema> {
         let url = "/chat.update".to_string();
         self.client.post(&url, None).await
     }

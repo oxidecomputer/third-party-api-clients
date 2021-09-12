@@ -30,7 +30,6 @@ impl Users {
      */
     pub async fn conversation(
         &self,
-        token: &str,
         user: &str,
         types: &str,
         exclude_archived: bool,
@@ -46,9 +45,6 @@ impl Users {
         }
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         if !types.is_empty() {
             query_args.push(("types".to_string(), types.to_string()));
@@ -88,13 +84,9 @@ impl Users {
      */
     pub async fn get_presence(
         &self,
-        token: &str,
         user: &str,
     ) -> Result<crate::types::ApiMethodUsersGetPresence> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
         if !user.is_empty() {
             query_args.push(("user".to_string(), user.to_string()));
         }
@@ -115,17 +107,8 @@ impl Users {
      *
      * * `token: &str` -- Authentication token. Requires scope: `identity.basic`.
      */
-    pub async fn identity(
-        &self,
-        token: &str,
-    ) -> Result<Vec<crate::types::UsersIdentityResponseAnyOf>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users.identity?{}", query_);
-
+    pub async fn identity(&self) -> Result<Vec<crate::types::UsersIdentityResponseAnyOf>> {
+        let url = "/users.identity".to_string();
         self.client.get(&url, None).await
     }
 
@@ -138,17 +121,8 @@ impl Users {
      *
      * FROM: <https://api.slack.com/methods/users.identity>
      */
-    pub async fn get_all_identity(
-        &self,
-        token: &str,
-    ) -> Result<Vec<crate::types::UsersIdentityResponseAnyOf>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/users.identity?{}", query_);
-
+    pub async fn get_all_identity(&self) -> Result<Vec<crate::types::UsersIdentityResponseAnyOf>> {
+        let url = "/users.identity".to_string();
         self.client.get_all_pages(&url, None).await
     }
 
@@ -167,16 +141,12 @@ impl Users {
      */
     pub async fn info(
         &self,
-        token: &str,
         include_locale: bool,
         user: &str,
     ) -> Result<crate::types::UsersInfoSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_locale {
             query_args.push(("include_locale".to_string(), include_locale.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         if !user.is_empty() {
             query_args.push(("user".to_string(), user.to_string()));
@@ -203,7 +173,6 @@ impl Users {
      */
     pub async fn list(
         &self,
-        token: &str,
         limit: i64,
         cursor: &str,
         include_locale: bool,
@@ -217,9 +186,6 @@ impl Users {
         }
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users.list?{}", query_);
@@ -239,17 +205,10 @@ impl Users {
      * * `token: &str` -- Authentication token. Requires scope: `users:read.email`.
      * * `email: &str` -- An email address belonging to a user in the workspace.
      */
-    pub async fn lookup_email(
-        &self,
-        token: &str,
-        email: &str,
-    ) -> Result<crate::types::UsersInfoSuccessSchema> {
+    pub async fn lookup_email(&self, email: &str) -> Result<crate::types::UsersInfoSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users.lookupByEmail?{}", query_);
@@ -268,7 +227,7 @@ impl Users {
      *
      * * `token: &str` -- Authentication token. Requires scope: `users:write`.
      */
-    pub async fn set_active(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_active(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/users.setActive".to_string();
         self.client.post(&url, None).await
     }
@@ -296,7 +255,7 @@ impl Users {
      *
      * * `token: &str` -- Authentication token. Requires scope: `users:write`.
      */
-    pub async fn set_presence(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_presence(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/users.setPresence".to_string();
         self.client.post(&url, None).await
     }

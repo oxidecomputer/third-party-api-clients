@@ -28,7 +28,6 @@ impl Team {
      */
     pub async fn access_log(
         &self,
-        token: &str,
         before: &str,
         count: &str,
         page: &str,
@@ -42,9 +41,6 @@ impl Team {
         }
         if !page.is_empty() {
             query_args.push(("page".to_string(), page.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/team.accessLogs?{}", query_);
@@ -64,15 +60,8 @@ impl Team {
      * * `token: &str` -- Authentication token. Requires scope: `admin`.
      * * `user: &str` -- A user to retrieve the billable information for. Defaults to all users.
      */
-    pub async fn billable_info(
-        &self,
-        token: &str,
-        user: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    pub async fn billable_info(&self, user: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
         if !user.is_empty() {
             query_args.push(("user".to_string(), user.to_string()));
         }
@@ -94,13 +83,10 @@ impl Team {
      * * `token: &str` -- Authentication token. Requires scope: `team:read`.
      * * `team: &str` -- Team to get info on, if omitted, will return information about the current team. Will only return team that the authenticated token is allowed to see through external shared channels.
      */
-    pub async fn info(&self, token: &str, team: &str) -> Result<crate::types::TeamInfoSchema> {
+    pub async fn info(&self, team: &str) -> Result<crate::types::TeamInfoSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !team.is_empty() {
             query_args.push(("team".to_string(), team.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/team.info?{}", query_);
@@ -127,7 +113,6 @@ impl Team {
      */
     pub async fn integration_log(
         &self,
-        token: &str,
         app_id: &str,
         change_type: &str,
         count: &str,
@@ -150,9 +135,6 @@ impl Team {
         }
         if !service_id.is_empty() {
             query_args.push(("service_id".to_string(), service_id.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         if !user.is_empty() {
             query_args.push(("user".to_string(), user.to_string()));

@@ -28,7 +28,6 @@ impl AppsEventAuthorizations {
      */
     pub async fn list(
         &self,
-        token: &str,
         event_context: &str,
         cursor: &str,
         limit: i64,

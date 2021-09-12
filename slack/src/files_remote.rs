@@ -37,21 +37,13 @@ impl FilesRemote {
      * * `file: &str` -- Specify a file by providing its ID.
      * * `external_id: &str` -- Creator defined GUID for the file.
      */
-    pub async fn info(
-        &self,
-        token: &str,
-        file: &str,
-        external_id: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    pub async fn info(&self, file: &str, external_id: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !external_id.is_empty() {
             query_args.push(("external_id".to_string(), external_id.to_string()));
         }
         if !file.is_empty() {
             query_args.push(("file".to_string(), file.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files.remote.info?{}", query_);
@@ -77,7 +69,6 @@ impl FilesRemote {
      */
     pub async fn list(
         &self,
-        token: &str,
         channel: &str,
         ts_from: f64,
         ts_to: f64,
@@ -93,9 +84,6 @@ impl FilesRemote {
         }
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         if !ts_from.to_string().is_empty() {
             query_args.push(("ts_from".to_string(), ts_from.to_string()));
@@ -137,7 +125,6 @@ impl FilesRemote {
      */
     pub async fn share(
         &self,
-        token: &str,
         file: &str,
         external_id: &str,
         channels: &str,
@@ -151,9 +138,6 @@ impl FilesRemote {
         }
         if !file.is_empty() {
             query_args.push(("file".to_string(), file.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files.remote.share?{}", query_);

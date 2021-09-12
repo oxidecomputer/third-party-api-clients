@@ -29,7 +29,6 @@ impl AdminConversationsEkm {
      */
     pub async fn list_original_connected_channel_info(
         &self,
-        token: &str,
         channel_ids: &str,
         team_ids: &str,
         limit: i64,
@@ -47,9 +46,6 @@ impl AdminConversationsEkm {
         }
         if !team_ids.is_empty() {
             query_args.push(("team_ids".to_string(), team_ids.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(

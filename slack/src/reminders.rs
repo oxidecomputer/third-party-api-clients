@@ -23,7 +23,7 @@ impl Reminders {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
-    pub async fn add(&self, token: &str) -> Result<crate::types::RemindersAddSchema> {
+    pub async fn add(&self) -> Result<crate::types::RemindersAddSchema> {
         let url = "/reminders.add".to_string();
         self.client.post(&url, None).await
     }
@@ -39,7 +39,7 @@ impl Reminders {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
-    pub async fn complete(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn complete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/reminders.complete".to_string();
         self.client.post(&url, None).await
     }
@@ -55,7 +55,7 @@ impl Reminders {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reminders:write`.
      */
-    pub async fn delete(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/reminders.delete".to_string();
         self.client.post(&url, None).await
     }
@@ -72,17 +72,10 @@ impl Reminders {
      * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
      * * `reminder: &str` -- The ID of the reminder.
      */
-    pub async fn info(
-        &self,
-        token: &str,
-        reminder: &str,
-    ) -> Result<crate::types::RemindersAddSchema> {
+    pub async fn info(&self, reminder: &str) -> Result<crate::types::RemindersAddSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !reminder.is_empty() {
             query_args.push(("reminder".to_string(), reminder.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/reminders.info?{}", query_);
@@ -101,14 +94,8 @@ impl Reminders {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reminders:read`.
      */
-    pub async fn list(&self, token: &str) -> Result<crate::types::RemindersListSchema> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/reminders.list?{}", query_);
-
+    pub async fn list(&self) -> Result<crate::types::RemindersListSchema> {
+        let url = "/reminders.list".to_string();
         self.client.get(&url, None).await
     }
 }

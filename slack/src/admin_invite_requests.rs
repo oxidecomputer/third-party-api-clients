@@ -25,7 +25,6 @@ impl AdminInviteRequests {
      */
     pub async fn approve(
         &self,
-        token: &str,
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.inviteRequests.approve".to_string();
@@ -47,7 +46,6 @@ impl AdminInviteRequests {
      */
     pub async fn deny(
         &self,
-        token: &str,
         body: &crate::types::AdminInviteRequestsApproveRequest,
     ) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.inviteRequests.deny".to_string();
@@ -72,7 +70,6 @@ impl AdminInviteRequests {
      */
     pub async fn list(
         &self,
-        token: &str,
         team_id: &str,
         cursor: &str,
         limit: i64,

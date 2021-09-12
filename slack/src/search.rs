@@ -31,7 +31,6 @@ impl Search {
      */
     pub async fn message(
         &self,
-        token: &str,
         count: i64,
         highlight: bool,
         page: i64,
@@ -57,9 +56,6 @@ impl Search {
         }
         if !sort_dir.is_empty() {
             query_args.push(("sort_dir".to_string(), sort_dir.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/search.messages?{}", query_);

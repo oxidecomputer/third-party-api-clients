@@ -27,16 +27,12 @@ impl UsergroupsUsers {
      */
     pub async fn list(
         &self,
-        token: &str,
         include_disabled: bool,
         usergroup: &str,
     ) -> Result<crate::types::UsergroupsUsersListSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if include_disabled {
             query_args.push(("include_disabled".to_string(), include_disabled.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         if !usergroup.is_empty() {
             query_args.push(("usergroup".to_string(), usergroup.to_string()));
@@ -58,7 +54,7 @@ impl UsergroupsUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn update(&self, token: &str) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.users.update".to_string();
         self.client.post(&url, None).await
     }

@@ -23,7 +23,7 @@ impl Usergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn create(&self, token: &str) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn create(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.create".to_string();
         self.client.post(&url, None).await
     }
@@ -39,7 +39,7 @@ impl Usergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn disable(&self, token: &str) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn disable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.disable".to_string();
         self.client.post(&url, None).await
     }
@@ -55,7 +55,7 @@ impl Usergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn enable(&self, token: &str) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn enable(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.enable".to_string();
         self.client.post(&url, None).await
     }
@@ -77,7 +77,6 @@ impl Usergroups {
     pub async fn list(
         &self,
         include_users: bool,
-        token: &str,
         include_count: bool,
         include_disabled: bool,
     ) -> Result<crate::types::UsergroupsListSchema> {
@@ -90,9 +89,6 @@ impl Usergroups {
         }
         if include_users {
             query_args.push(("include_users".to_string(), include_users.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/usergroups.list?{}", query_);
@@ -111,7 +107,7 @@ impl Usergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `usergroups:write`.
      */
-    pub async fn update(&self, token: &str) -> Result<crate::types::UsergroupsCreateSchema> {
+    pub async fn update(&self) -> Result<crate::types::UsergroupsCreateSchema> {
         let url = "/usergroups.update".to_string();
         self.client.post(&url, None).await
     }

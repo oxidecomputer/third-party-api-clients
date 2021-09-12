@@ -23,7 +23,7 @@ impl AdminTeams {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
-    pub async fn create(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn create(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.create".to_string();
         self.client.post(&url, None).await
     }
@@ -41,12 +41,7 @@ impl AdminTeams {
      * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 100 both inclusive.
      * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
      */
-    pub async fn list(
-        &self,
-        token: &str,
-        limit: i64,
-        cursor: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    pub async fn list(&self, limit: i64, cursor: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));

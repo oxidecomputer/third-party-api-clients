@@ -23,14 +23,8 @@ impl AppsPermissions {
      *
      * * `token: &str` -- Authentication token. Requires scope: `none`.
      */
-    pub async fn info(&self, token: &str) -> Result<crate::types::AppsPermissionsInfoSchema> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/apps.permissions.info?{}", query_);
-
+    pub async fn info(&self) -> Result<crate::types::AppsPermissionsInfoSchema> {
+        let url = "/apps.permissions.info".to_string();
         self.client.get(&url, None).await
     }
 
@@ -49,16 +43,12 @@ impl AppsPermissions {
      */
     pub async fn request(
         &self,
-        token: &str,
         scopes: &str,
         trigger_id: &str,
     ) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scopes.is_empty() {
             query_args.push(("scopes".to_string(), scopes.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         if !trigger_id.is_empty() {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));

@@ -23,7 +23,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn assign(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn assign(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.assign".to_string();
         self.client.post(&url, None).await
     }
@@ -39,7 +39,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn invite(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.invite".to_string();
         self.client.post(&url, None).await
     }
@@ -60,7 +60,6 @@ impl AdminUsers {
      */
     pub async fn list(
         &self,
-        token: &str,
         team_id: &str,
         cursor: &str,
         limit: i64,
@@ -92,7 +91,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn remove(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.remove".to_string();
         self.client.post(&url, None).await
     }
@@ -108,7 +107,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn set(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setAdmin".to_string();
         self.client.post(&url, None).await
     }
@@ -124,7 +123,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn set_expiration(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_expiration(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setExpiration".to_string();
         self.client.post(&url, None).await
     }
@@ -140,7 +139,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn set_owner(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_owner(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setOwner".to_string();
         self.client.post(&url, None).await
     }
@@ -156,7 +155,7 @@ impl AdminUsers {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.users:write`.
      */
-    pub async fn set_regular(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_regular(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.users.setRegular".to_string();
         self.client.post(&url, None).await
     }

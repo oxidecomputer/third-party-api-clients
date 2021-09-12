@@ -27,7 +27,6 @@ impl Rtm {
      */
     pub async fn connect(
         &self,
-        token: &str,
         batch_presence_aware: bool,
         presence_sub: bool,
     ) -> Result<crate::types::RtmConnectSchema> {
@@ -40,9 +39,6 @@ impl Rtm {
         }
         if presence_sub {
             query_args.push(("presence_sub".to_string(), presence_sub.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/rtm.connect?{}", query_);

@@ -39,7 +39,6 @@ impl AdminConversationsRestrictAccess {
      */
     pub async fn list_group(
         &self,
-        token: &str,
         channel_id: &str,
         team_id: &str,
     ) -> Result<crate::types::DndEndSchema> {
@@ -49,9 +48,6 @@ impl AdminConversationsRestrictAccess {
         }
         if !team_id.is_empty() {
             query_args.push(("team_id".to_string(), team_id.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.conversations.restrictAccess.listGroups?{}", query_);

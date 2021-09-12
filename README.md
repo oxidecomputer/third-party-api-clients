@@ -21,3 +21,4 @@ A place for keeping all our generated third party API clients.
 - [DocuSign](docusign/) [![docs.rs](https://docs.rs/docusign/badge.svg)](https://docs.rs/docusign)
 - [MailChimp](mailchimp/) [![docs.rs](https://docs.rs/mailchimp-api/badge.svg)](https://docs.rs/mailchimp-api)
 - [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)
+- [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)

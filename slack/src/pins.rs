@@ -23,7 +23,7 @@ impl Pins {
      *
      * * `token: &str` -- Authentication token. Requires scope: `pins:write`.
      */
-    pub async fn add(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/pins.add".to_string();
         self.client.post(&url, None).await
     }
@@ -40,17 +40,10 @@ impl Pins {
      * * `token: &str` -- Authentication token. Requires scope: `pins:read`.
      * * `channel: &str` -- Channel to get pinned items for.
      */
-    pub async fn list(
-        &self,
-        token: &str,
-        channel: &str,
-    ) -> Result<Vec<crate::types::PinsListResponseAnyOf>> {
+    pub async fn list(&self, channel: &str) -> Result<Vec<crate::types::PinsListResponseAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/pins.list?{}", query_);
@@ -69,15 +62,11 @@ impl Pins {
      */
     pub async fn list_all(
         &self,
-        token: &str,
         channel: &str,
     ) -> Result<Vec<crate::types::PinsListResponseAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !channel.is_empty() {
             query_args.push(("channel".to_string(), channel.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/pins.list?{}", query_);
@@ -96,7 +85,7 @@ impl Pins {
      *
      * * `token: &str` -- Authentication token. Requires scope: `pins:write`.
      */
-    pub async fn remove(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/pins.remove".to_string();
         self.client.post(&url, None).await
     }

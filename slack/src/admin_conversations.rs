@@ -23,7 +23,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn archive(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn archive(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.archive".to_string();
         self.client.post(&url, None).await
     }
@@ -39,7 +39,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn convert_private(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn convert_private(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.convertToPrivate".to_string();
         self.client.post(&url, None).await
     }
@@ -55,10 +55,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn create(
-        &self,
-        token: &str,
-    ) -> Result<crate::types::AdminConversationsCreateSchema> {
+    pub async fn create(&self) -> Result<crate::types::AdminConversationsCreateSchema> {
         let url = "/admin.conversations.create".to_string();
         self.client.post(&url, None).await
     }
@@ -74,7 +71,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn delete(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.delete".to_string();
         self.client.post(&url, None).await
     }
@@ -90,7 +87,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn disconnect_shared(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn disconnect_shared(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.disconnectShared".to_string();
         self.client.post(&url, None).await
     }
@@ -109,7 +106,6 @@ impl AdminConversations {
      */
     pub async fn get_conversation_pref(
         &self,
-        token: &str,
         channel_id: &str,
     ) -> Result<crate::types::AdminConversationsGetConversationPrefsSchemaData> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -138,7 +134,6 @@ impl AdminConversations {
      */
     pub async fn get_team(
         &self,
-        token: &str,
         channel_id: &str,
         cursor: &str,
         limit: i64,
@@ -170,7 +165,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn invite(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn invite(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.invite".to_string();
         self.client.post(&url, None).await
     }
@@ -186,7 +181,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn rename(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn rename(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.rename".to_string();
         self.client.post(&url, None).await
     }
@@ -211,7 +206,6 @@ impl AdminConversations {
      */
     pub async fn search(
         &self,
-        token: &str,
         team_ids: &str,
         query: &str,
         limit: i64,
@@ -262,7 +256,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn set_conversation_prefs(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_conversation_prefs(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.setConversationPrefs".to_string();
         self.client.post(&url, None).await
     }
@@ -278,7 +272,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn set_teams(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_teams(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.setTeams".to_string();
         self.client.post(&url, None).await
     }
@@ -294,7 +288,7 @@ impl AdminConversations {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:write`.
      */
-    pub async fn unarchive(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn unarchive(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.conversations.unarchive".to_string();
         self.client.post(&url, None).await
     }

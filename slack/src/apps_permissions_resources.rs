@@ -27,7 +27,6 @@ impl AppsPermissionsResources {
      */
     pub async fn list(
         &self,
-        token: &str,
         cursor: &str,
         limit: i64,
     ) -> Result<crate::types::AppsPermissionsResourcesListSuccessSchema> {
@@ -37,9 +36,6 @@ impl AppsPermissionsResources {
         }
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/apps.permissions.resources.list?{}", query_);

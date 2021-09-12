@@ -24,7 +24,7 @@ impl AdminTeamsSettings {
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:read`.
      * * `team_id: &str`
      */
-    pub async fn info(&self, token: &str, team_id: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn info(&self, team_id: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !team_id.is_empty() {
             query_args.push(("team_id".to_string(), team_id.to_string()));
@@ -58,7 +58,7 @@ impl AdminTeamsSettings {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
-    pub async fn set_description(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_description(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.settings.setDescription".to_string();
         self.client.post(&url, None).await
     }
@@ -74,7 +74,7 @@ impl AdminTeamsSettings {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
-    pub async fn set_discoverability(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_discoverability(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.settings.setDiscoverability".to_string();
         self.client.post(&url, None).await
     }
@@ -102,7 +102,7 @@ impl AdminTeamsSettings {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
-    pub async fn set_name(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn set_name(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.teams.settings.setName".to_string();
         self.client.post(&url, None).await
     }

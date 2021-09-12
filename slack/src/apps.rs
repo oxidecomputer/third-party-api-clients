@@ -27,7 +27,6 @@ impl Apps {
      */
     pub async fn uninstall(
         &self,
-        token: &str,
         client_id: &str,
         client_secret: &str,
     ) -> Result<crate::types::DndEndSchema> {
@@ -37,9 +36,6 @@ impl Apps {
         }
         if !client_secret.is_empty() {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/apps.uninstall?{}", query_);

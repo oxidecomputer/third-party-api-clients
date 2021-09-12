@@ -25,12 +25,7 @@ impl Views {
      * * `trigger_id: &str` -- Exchange a trigger to post to the user.
      * * `view: &str` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
      */
-    pub async fn open(
-        &self,
-        token: &str,
-        trigger_id: &str,
-        view: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    pub async fn open(&self, trigger_id: &str, view: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !trigger_id.is_empty() {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
@@ -60,7 +55,6 @@ impl Views {
      */
     pub async fn publish(
         &self,
-        token: &str,
         user_id: &str,
         view: &str,
         hash: &str,
@@ -94,12 +88,7 @@ impl Views {
      * * `trigger_id: &str` -- Exchange a trigger to post to the user.
      * * `view: &str` -- A [view payload](/reference/surfaces/views). This must be a JSON-encoded string.
      */
-    pub async fn push(
-        &self,
-        token: &str,
-        trigger_id: &str,
-        view: &str,
-    ) -> Result<crate::types::DndEndSchema> {
+    pub async fn push(&self, trigger_id: &str, view: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !trigger_id.is_empty() {
             query_args.push(("trigger_id".to_string(), trigger_id.to_string()));
@@ -130,7 +119,6 @@ impl Views {
      */
     pub async fn update(
         &self,
-        token: &str,
         view_id: &str,
         external_id: &str,
         view: &str,

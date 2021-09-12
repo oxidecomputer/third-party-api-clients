@@ -28,7 +28,6 @@ impl AdminInviteRequestsDenied {
      */
     pub async fn list(
         &self,
-        token: &str,
         team_id: &str,
         cursor: &str,
         limit: i64,

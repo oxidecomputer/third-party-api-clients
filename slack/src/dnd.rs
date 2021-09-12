@@ -23,7 +23,7 @@ impl Dnd {
      *
      * * `token: &str` -- Authentication token. Requires scope: `dnd:write`.
      */
-    pub async fn end(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn end(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/dnd.endDnd".to_string();
         self.client.post(&url, None).await
     }
@@ -39,7 +39,7 @@ impl Dnd {
      *
      * * `token: &str` -- Authentication token. Requires scope: `dnd:write`.
      */
-    pub async fn end_snooze(&self, token: &str) -> Result<crate::types::DndEndSnoozeSchema> {
+    pub async fn end_snooze(&self) -> Result<crate::types::DndEndSnoozeSchema> {
         let url = "/dnd.endSnooze".to_string();
         self.client.post(&url, None).await
     }
@@ -56,11 +56,8 @@ impl Dnd {
      * * `token: &str` -- Authentication token. Requires scope: `dnd:read`.
      * * `user: &str` -- User to fetch status for (defaults to current user).
      */
-    pub async fn info(&self, token: &str, user: &str) -> Result<crate::types::DndInfoSchema> {
+    pub async fn info(&self, user: &str) -> Result<crate::types::DndInfoSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
         if !user.is_empty() {
             query_args.push(("user".to_string(), user.to_string()));
         }
@@ -94,11 +91,8 @@ impl Dnd {
      * * `token: &str` -- Authentication token. Requires scope: `dnd:read`.
      * * `users: &str` -- Comma-separated list of users to fetch Do Not Disturb status for.
      */
-    pub async fn team_info(&self, token: &str, users: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn team_info(&self, users: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
         if !users.is_empty() {
             query_args.push(("users".to_string(), users.to_string()));
         }

@@ -23,7 +23,7 @@ impl AdminUsergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.usergroups:write`.
      */
-    pub async fn add_channels(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn add_channels(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.usergroups.addChannels".to_string();
         self.client.post(&url, None).await
     }
@@ -39,7 +39,7 @@ impl AdminUsergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.teams:write`.
      */
-    pub async fn add_teams(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn add_teams(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.usergroups.addTeams".to_string();
         self.client.post(&url, None).await
     }
@@ -60,7 +60,6 @@ impl AdminUsergroups {
      */
     pub async fn list_channel(
         &self,
-        token: &str,
         usergroup_id: &str,
         team_id: &str,
         include_num_members: bool,
@@ -95,7 +94,7 @@ impl AdminUsergroups {
      *
      * * `token: &str` -- Authentication token. Requires scope: `admin.usergroups:write`.
      */
-    pub async fn remove_channels(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn remove_channels(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/admin.usergroups.removeChannels".to_string();
         self.client.post(&url, None).await
     }

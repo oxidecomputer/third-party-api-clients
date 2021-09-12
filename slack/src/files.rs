@@ -23,7 +23,7 @@ impl Files {
      *
      * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
      */
-    pub async fn delete(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn delete(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/files.delete".to_string();
         self.client.post(&url, None).await
     }
@@ -46,7 +46,6 @@ impl Files {
      */
     pub async fn info(
         &self,
-        token: &str,
         file: &str,
         count: &str,
         page: &str,
@@ -68,9 +67,6 @@ impl Files {
         }
         if !page.is_empty() {
             query_args.push(("page".to_string(), page.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/files.info?{}", query_);
@@ -99,7 +95,6 @@ impl Files {
      */
     pub async fn list(
         &self,
-        token: &str,
         user: &str,
         channel: &str,
         ts_from: f64,
@@ -124,9 +119,6 @@ impl Files {
                 "show_files_hidden_by_limit".to_string(),
                 show_files_hidden_by_limit.to_string(),
             ));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         if !ts_from.to_string().is_empty() {
             query_args.push(("ts_from".to_string(), ts_from.to_string()));
@@ -157,7 +149,7 @@ impl Files {
      *
      * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
      */
-    pub async fn revoke_public_url(&self, token: &str) -> Result<crate::types::FilesUploadSchema> {
+    pub async fn revoke_public_url(&self) -> Result<crate::types::FilesUploadSchema> {
         let url = "/files.revokePublicURL".to_string();
         self.client.post(&url, None).await
     }
@@ -173,7 +165,7 @@ impl Files {
      *
      * * `token: &str` -- Authentication token. Requires scope: `files:write:user`.
      */
-    pub async fn shared_public_url(&self, token: &str) -> Result<crate::types::FilesUploadSchema> {
+    pub async fn shared_public_url(&self) -> Result<crate::types::FilesUploadSchema> {
         let url = "/files.sharedPublicURL".to_string();
         self.client.post(&url, None).await
     }

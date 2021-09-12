@@ -49,21 +49,13 @@ impl AdminEmoji {
      * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
      * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
      */
-    pub async fn list(
-        &self,
-        token: &str,
-        cursor: &str,
-        limit: i64,
-    ) -> Result<crate::types::DndEndSchema> {
+    pub async fn list(&self, cursor: &str, limit: i64) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
         }
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/admin.emoji.list?{}", query_);

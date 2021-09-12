@@ -650,6 +650,7 @@ fn get_fn_params(
                 && (!proper_name.starts_with("Google")
                     || !is_google_unnecessary_param(proper_name, nam))
                 && (proper_name != "SendGrid" || !is_sendgrid_unnecessary_param(nam))
+                && (proper_name != "Slack" || !is_slack_unnecessary_param(nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
                     fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
@@ -686,6 +687,7 @@ fn get_fn_params(
                     && (!proper_name.starts_with("Google")
                         || !is_google_unnecessary_param(proper_name, nam))
                     && (proper_name != "SendGrid" || !is_sendgrid_unnecessary_param(nam))
+                    && (proper_name != "Slack" || !is_slack_unnecessary_param(nam))
                 {
                     if typ == "chrono::DateTime<chrono::Utc>" {
                         query_params.insert(
@@ -1111,6 +1113,10 @@ fn is_google_unnecessary_param(proper_name: &str, s: &str) -> bool {
         || s == "enforce_single_parent"
         || s == "corpus"
         || (s == "alt" && proper_name != "Google Groups Settings")
+}
+
+fn is_slack_unnecessary_param(s: &str) -> bool {
+    s == "token"
 }
 
 fn is_sendgrid_unnecessary_param(s: &str) -> bool {

@@ -23,14 +23,8 @@ impl Emoji {
      *
      * * `token: &str` -- Authentication token. Requires scope: `emoji:read`.
      */
-    pub async fn list(&self, token: &str) -> Result<crate::types::DndEndSchema> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/emoji.list?{}", query_);
-
+    pub async fn list(&self) -> Result<crate::types::DndEndSchema> {
+        let url = "/emoji.list".to_string();
         self.client.get(&url, None).await
     }
 }

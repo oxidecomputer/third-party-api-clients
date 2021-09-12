@@ -23,7 +23,7 @@ impl Reactions {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
      */
-    pub async fn add(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/reactions.add".to_string();
         self.client.post(&url, None).await
     }
@@ -46,7 +46,6 @@ impl Reactions {
      */
     pub async fn get(
         &self,
-        token: &str,
         channel: &str,
         file: &str,
         file_comment: &str,
@@ -68,9 +67,6 @@ impl Reactions {
         }
         if !timestamp.is_empty() {
             query_args.push(("timestamp".to_string(), timestamp.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/reactions.get?{}", query_);
@@ -97,7 +93,6 @@ impl Reactions {
      */
     pub async fn list(
         &self,
-        token: &str,
         user: &str,
         full: bool,
         count: i64,
@@ -121,9 +116,6 @@ impl Reactions {
         if page > 0 {
             query_args.push(("page".to_string(), page.to_string()));
         }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
         if !user.is_empty() {
             query_args.push(("user".to_string(), user.to_string()));
         }
@@ -144,7 +136,7 @@ impl Reactions {
      *
      * * `token: &str` -- Authentication token. Requires scope: `reactions:write`.
      */
-    pub async fn remove(&self, token: &str) -> Result<crate::types::DndEndSchema> {
+    pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/reactions.remove".to_string();
         self.client.post(&url, None).await
     }

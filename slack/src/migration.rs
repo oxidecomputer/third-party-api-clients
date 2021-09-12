@@ -28,7 +28,6 @@ impl Migration {
      */
     pub async fn exchange(
         &self,
-        token: &str,
         users: &str,
         team_id: &str,
         to_old: bool,
@@ -39,9 +38,6 @@ impl Migration {
         }
         if to_old {
             query_args.push(("to_old".to_string(), to_old.to_string()));
-        }
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
         }
         if !users.is_empty() {
             query_args.push(("users".to_string(), users.to_string()));

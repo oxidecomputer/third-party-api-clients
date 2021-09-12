@@ -27,7 +27,6 @@ impl Workflows {
      */
     pub async fn step_completed(
         &self,
-        token: &str,
         workflow_step_execute_id: &str,
         outputs: &str,
     ) -> Result<crate::types::DndEndSchema> {
@@ -62,7 +61,6 @@ impl Workflows {
      */
     pub async fn step_failed(
         &self,
-        token: &str,
         workflow_step_execute_id: &str,
         error: &str,
     ) -> Result<crate::types::DndEndSchema> {
@@ -100,7 +98,6 @@ impl Workflows {
      */
     pub async fn update_step(
         &self,
-        token: &str,
         workflow_step_edit_id: &str,
         inputs: &str,
         outputs: &str,

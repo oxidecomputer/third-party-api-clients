@@ -24,15 +24,8 @@ impl TeamProfile {
      * * `token: &str` -- Authentication token. Requires scope: `users.profile:read`.
      * * `visibility: &str` -- Filter by visibility.
      */
-    pub async fn get(
-        &self,
-        token: &str,
-        visibility: &str,
-    ) -> Result<crate::types::TeamProfileGetSuccessSchema> {
+    pub async fn get(&self, visibility: &str) -> Result<crate::types::TeamProfileGetSuccessSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !token.is_empty() {
-            query_args.push(("token".to_string(), token.to_string()));
-        }
         if !visibility.is_empty() {
             query_args.push(("visibility".to_string(), visibility.to_string()));
         }

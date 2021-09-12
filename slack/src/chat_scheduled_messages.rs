@@ -30,7 +30,6 @@ impl ChatScheduledMessages {
      */
     pub async fn list(
         &self,
-        token: &str,
         channel: &str,
         latest: f64,
         oldest: f64,
