@@ -284,7 +284,7 @@ $(GUSTO_SPEC): $(GUSTO_SPEC_DIR)
 	curl -sSL $(GUSTO_SPEC_REMOTE) -o $@
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.11 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.12 \
 		-o gusto \
 		-n gusto-api \
 		--proper-name Gusto \
