@@ -240,7 +240,12 @@ impl Client {
                     }
                 }
             }
-            let parsed_response = if status == http::StatusCode::NO_CONTENT { serde_json::from_str("null") } else { serde_json::from_slice::<Out>(&response_body) };
+
+            let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){
+                serde_json::from_str("null")
+            } else {
+                serde_json::from_slice::<Out>(&response_body)
+            };
             parsed_response.map(|out| (link, out)).map_err(Error::from)
         } else if status == http::StatusCode::NOT_MODIFIED {
                 // only supported case is when client provides if-none-match
@@ -758,7 +763,7 @@ async fn request<Out>(
 
     if status.is_success() {
         //println!("response payload {}", String::from_utf8_lossy(&response_body));
-        let parsed_response = if status == http::StatusCode::NO_CONTENT {
+        let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){
             serde_json::from_str("null")
         } else {
             serde_json::from_slice::<Out>(&response_body)
@@ -845,7 +850,7 @@ async fn request_with_mime<Out>(
 
     if status.is_success() {
         //println!("response payload {}", String::from_utf8_lossy(&response_body));
-        let parsed_response = if status == http::StatusCode::NO_CONTENT {
+        let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){
             serde_json::from_str("null")
         } else {
             serde_json::from_slice::<Out>(&response_body)

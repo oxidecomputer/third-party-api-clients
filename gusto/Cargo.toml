@@ -1,7 +1,7 @@
 [package]
 name = "gusto-api"
 description = "A fully generated & opinionated API client for the Gusto API."
-version = "0.2.11"
+version = "0.2.12"
 documentation = "https://docs.rs/gusto-api/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/gusto"
 readme = "README.md"

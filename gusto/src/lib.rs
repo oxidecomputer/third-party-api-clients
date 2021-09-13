@@ -29,7 +29,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gusto_api = "0.2.11"
+//! gusto_api = "0.2.12"
 //! ```
 //!
 //! ## Basic example
@@ -417,7 +417,9 @@ impl Client {
 
         if status.is_success() {
             //println!("response payload {}", String::from_utf8_lossy(&response_body));
-            let parsed_response = if status == http::StatusCode::NO_CONTENT {
+            let parsed_response = if status == http::StatusCode::NO_CONTENT
+                || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
+            {
                 serde_json::from_str("null")
             } else {
                 serde_json::from_slice::<Out>(&response_body)
@@ -505,7 +507,9 @@ impl Client {
 
         if status.is_success() {
             //println!("response payload {}", String::from_utf8_lossy(&response_body));
-            let parsed_response = if status == http::StatusCode::NO_CONTENT {
+            let parsed_response = if status == http::StatusCode::NO_CONTENT
+                || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
+            {
                 serde_json::from_str("null")
             } else {
                 serde_json::from_slice::<Out>(&response_body)
