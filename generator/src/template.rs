@@ -672,7 +672,7 @@ pub fn generate_docs_generic_token(
 //! ```
 //!"#,
         info,
-        name,
+        name.replace("_", "-").to_lowercase(),
         version,
         name,
         proper_name.to_lowercase(),
@@ -734,7 +734,7 @@ pub fn generate_docs_generic_api_key(
 //! ```
 //!"#,
         info,
-        name,
+        name.replace("_", "-").to_lowercase(),
         version,
         name,
         proper_name.to_lowercase(),
@@ -809,7 +809,7 @@ pub fn generate_docs_generic_client_credentials(
 //! ```
 //!"#,
         info,
-        name,
+        name.replace("_", "-").to_lowercase(),
         version,
         name,
         proper_name.to_lowercase(),

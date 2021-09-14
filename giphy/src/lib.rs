@@ -29,7 +29,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! giphy_api = "0.2.0"
+//! giphy-api = "0.2.0"
 //! ```
 //!
 //! ## Basic example

@@ -25,7 +25,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! ramp_api = "0.2.4"
+//! ramp-api = "0.2.4"
 //! ```
 //!
 //! ## Basic example

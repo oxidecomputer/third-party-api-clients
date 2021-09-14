@@ -40,7 +40,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-zoom_api = "0.2.4"
+zoom-api = "0.2.4"
 ```
 
 ## Basic example

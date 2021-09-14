@@ -37,7 +37,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-google_calendar = "0.1.3"
+google-calendar = "0.1.3"
 ```
 
 ## Basic example
