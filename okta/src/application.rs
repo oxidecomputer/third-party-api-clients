@@ -126,7 +126,6 @@ impl Application {
     pub async fn create(
         &self,
         activate: bool,
-        okta_access_gateway_agent: &str,
         body: &crate::types::Application,
     ) -> Result<crate::types::Application> {
         let mut query_args: Vec<(String, String)> = Default::default();

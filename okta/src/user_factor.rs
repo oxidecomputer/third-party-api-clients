@@ -301,9 +301,6 @@ impl UserFactor {
         factor_id: &str,
         template_id: &str,
         token_lifetime_seconds: i64,
-        x_forwarded_for: &str,
-        user_agent: &str,
-        accept_language: &str,
         body: &crate::types::VerifyFactorRequest,
     ) -> Result<crate::types::VerifyUserFactorResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();

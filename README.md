@@ -20,3 +20,6 @@ A place for keeping all our generated third party API clients.
 - [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)
 - [TripActions](tripactions/) [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)
 - [Zoom](zoom/) [![docs.rs](https://docs.rs/zoom-api/badge.svg)](https://docs.rs/zoom-api)
+- [Okta](okta/) [![docs.rs](https://docs.rs/okta/badge.svg)](https://docs.rs/okta)
+- [Okta](okta/) [![docs.rs](https://docs.rs/okta/badge.svg)](https://docs.rs/okta)
+- [Okta](okta/) [![docs.rs](https://docs.rs/okta/badge.svg)](https://docs.rs/okta)

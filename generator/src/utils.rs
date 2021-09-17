@@ -2,6 +2,22 @@ const TEMPLATE: &str = r#"use std::{fmt, str::FromStr};
 
 use serde::de::{self, Visitor};
 
+pub fn next_link(l: &hyperx::header::Link) -> Option<String> {
+    l.values().iter().find_map(|value| {
+        value.rel().and_then(|rels| {
+            if rels
+                .iter()
+                .any(|rel| rel == &hyperx::header::RelationType::Next)
+            {
+                Some(value.link().into())
+            } else {
+                None
+            }
+        })
+    })
+}
+
+
 pub mod date_time_format {
     use chrono::{DateTime, TimeZone, Utc};
     use serde::{self, Deserialize, Deserializer};
@@ -599,21 +615,6 @@ const GITHUB_TEMPLATE: &str = r#"//const X_GITHUB_REQUEST_ID: &str = "x-github-r
 //const X_RATELIMIT_LIMIT: &str = "x-ratelimit-limit";
 const X_RATELIMIT_REMAINING: &str = "x-ratelimit-remaining";
 const X_RATELIMIT_RESET: &str = "x-ratelimit-reset";
-
-pub fn next_link(l: &hyperx::header::Link) -> Option<String> {
-    l.values().iter().find_map(|value| {
-        value.rel().and_then(|rels| {
-            if rels
-                .iter()
-                .any(|rel| rel == &hyperx::header::RelationType::Next)
-            {
-                Some(value.link().into())
-            } else {
-                None
-            }
-        })
-    })
-}
 
 #[cfg(not(feature = "httpcache"))]
 type HeaderValues = (Option<u32>, Option<u32>);

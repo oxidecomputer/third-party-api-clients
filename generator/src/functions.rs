@@ -663,6 +663,7 @@ fn get_fn_params(
                     || !is_google_unnecessary_param(proper_name, nam))
                 && (proper_name != "SendGrid" || !is_sendgrid_unnecessary_param(nam))
                 && (proper_name != "Slack" || !is_slack_unnecessary_param(nam))
+                && (proper_name != "Okta" || !is_okta_unnecessary_param(nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
                     fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
@@ -706,6 +707,7 @@ fn get_fn_params(
                         || !is_google_unnecessary_param(proper_name, nam))
                     && (proper_name != "SendGrid" || !is_sendgrid_unnecessary_param(nam))
                     && (proper_name != "Slack" || !is_slack_unnecessary_param(nam))
+                    && (proper_name != "Okta" || !is_okta_unnecessary_param(nam))
                 {
                     if typ == "chrono::DateTime<chrono::Utc>" {
                         query_params.insert(
@@ -1145,4 +1147,11 @@ fn is_slack_unnecessary_param(s: &str) -> bool {
 
 fn is_sendgrid_unnecessary_param(s: &str) -> bool {
     s == "on_behalf_of" || s == "accept" || s == "x_query_id" || s == "x_cursor"
+}
+
+fn is_okta_unnecessary_param(s: &str) -> bool {
+    s == "okta_access_gateway_agent"
+        || s == "x_forwarded_for"
+        || s == "user_agent"
+        || s == "accept_language"
 }
