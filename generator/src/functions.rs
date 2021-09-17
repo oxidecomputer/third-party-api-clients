@@ -656,7 +656,7 @@ fn get_fn_params(
             {
                 fn_params_str.push(format!("{}_: {},", nam, typ));
                 fn_params.push(nam.to_string() + "_");
-            } else if (!all_pages || !is_page_param(nam))
+            } else if (!all_pages || !is_page_param(nam, proper_name))
                 && nam != "authorization"
                 && !nam.starts_with("authorization_bearer")
                 && (!proper_name.starts_with("Google")
@@ -700,7 +700,7 @@ fn get_fn_params(
                         format!("{}_", nam),
                         (typ.to_string(), parameter_data.name.to_string()),
                     );
-                } else if (!all_pages || !is_page_param(nam))
+                } else if (!all_pages || !is_page_param(nam, proper_name))
                     && nam != "authorization"
                     && !nam.starts_with("authorization_bearer")
                     && (!proper_name.starts_with("Google")
@@ -1106,7 +1106,7 @@ fn get_fn_docs_all(o: &openapiv3::Operation, m: &str, p: &str, fn_name: &str) ->
     Ok(out.trim().to_string())
 }
 
-fn is_page_param(s: &str) -> bool {
+fn is_page_param(s: &str, proper_name: &str) -> bool {
     s == "page"
         || s == "per_page"
         || s == "per"
@@ -1118,6 +1118,8 @@ fn is_page_param(s: &str) -> bool {
         || s == "page_number"
         || s == "start"
         || s == "sync_token"
+        || s == "limit"
+        || (s == "after" && proper_name == "Okta")
 }
 
 fn is_google_unnecessary_param(proper_name: &str, s: &str) -> bool {

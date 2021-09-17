@@ -469,6 +469,55 @@ impl Client {
         }
     }
 
+    async fn request_with_links<Out>(
+        &self,
+        method: http::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<(Option<hyperx::header::Link>, Out)>
+    where
+        Out: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let response = self.request_raw(method, uri, body).await?;
+
+        let status = response.status();
+        let link = response
+            .headers()
+            .get(http::header::LINK)
+            .and_then(|l| l.to_str().ok())
+            .and_then(|l| l.parse().ok());
+
+        let response_body = response.bytes().await?;
+
+        if status.is_success() {
+            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+
+            let parsed_response = if status == http::StatusCode::NO_CONTENT
+                || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
+            {
+                serde_json::from_str("null")
+            } else {
+                serde_json::from_slice::<Out>(&response_body)
+            };
+            parsed_response.map(|out| (link, out)).map_err(Error::from)
+        } else {
+            /*println!("error status: {:?}, response payload: {}",
+                status,
+                String::from_utf8_lossy(&response_body),
+            );*/
+            let error = if response_body.is_empty() {
+                anyhow!("code: {}, empty response", status)
+            } else {
+                anyhow!(
+                    "code: {}, error: {:?}",
+                    status,
+                    String::from_utf8_lossy(&response_body),
+                )
+            };
+            Err(error)
+        }
+    }
+
     /* TODO: make this more DRY */
     #[allow(dead_code)]
     async fn request_with_mime<Out>(
@@ -586,17 +635,56 @@ impl Client {
     }
 
     #[allow(dead_code)]
-    async fn get_all_pages<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<Vec<D>>
+    async fn get_all_pages<D>(&self, uri: &str, _message: Option<reqwest::Body>) -> Result<Vec<D>>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
         // TODO: implement this.
-        self.request_entity(
-            http::Method::GET,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        )
-        .await
+        self.unfold(uri).await
+    }
+
+    /// "unfold" paginated results of a vector of items
+    #[allow(dead_code)]
+    async fn unfold<D>(&self, uri: &str) -> Result<Vec<D>>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let mut global_items = Vec::new();
+        let (new_link, mut items) = self.get_pages(uri).await?;
+        let mut link = new_link;
+        while !items.is_empty() {
+            global_items.append(&mut items);
+            // We need to get the next link.
+            if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
+                let url = reqwest::Url::parse(&url)?;
+                let (new_link, new_items) = self.get_pages_url(&url).await?;
+                link = new_link;
+                items = new_items;
+            }
+        }
+
+        Ok(global_items)
+    }
+
+    #[allow(dead_code)]
+    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_with_links(http::Method::GET, &(DEFAULT_HOST.to_string() + uri), None)
+            .await
+    }
+
+    #[allow(dead_code)]
+    async fn get_pages_url<D>(
+        &self,
+        url: &reqwest::Url,
+    ) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    where
+        D: serde::de::DeserializeOwned + 'static + Send,
+    {
+        self.request_with_links(http::Method::GET, url.as_str(), None)
+            .await
     }
 
     #[allow(dead_code)]
