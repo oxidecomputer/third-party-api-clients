@@ -64,17 +64,9 @@ impl IdentityProvider {
     pub async fn list_all(
         &self,
         q: &str,
-        after: &str,
-        limit: i64,
         type_: &str,
     ) -> Result<Vec<crate::types::IdentityProvider>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
         }
@@ -143,21 +135,8 @@ impl IdentityProvider {
      *
      * Enumerates IdP key credentials.
      */
-    pub async fn list_all_keys(
-        &self,
-        after: &str,
-        limit: i64,
-    ) -> Result<Vec<crate::types::JsonWebKey>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/api/v1/idps/credentials/keys?{}", query_);
-
+    pub async fn list_all_keys(&self) -> Result<Vec<crate::types::JsonWebKey>> {
+        let url = "/api/v1/idps/credentials/keys".to_string();
         self.client.get_all_pages(&url, None).await
     }
 

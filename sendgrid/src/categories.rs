@@ -59,16 +59,12 @@ impl Categories {
      */
     pub async fn get_all(
         &self,
-        limit: i64,
         category: &str,
         offset: i64,
     ) -> Result<Vec<crate::types::GetCategoriesResponse>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !category.is_empty() {
             query_args.push(("category".to_string(), category.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if offset > 0 {
             query_args.push(("offset".to_string(), offset.to_string()));
@@ -209,7 +205,6 @@ impl Categories {
         start_date: &str,
         end_date: &str,
         categories: &str,
-        limit: i64,
         offset: i64,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
     ) -> Result<Vec<crate::types::CategoryStats>> {
@@ -222,9 +217,6 @@ impl Categories {
         }
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if offset > 0 {
             query_args.push(("offset".to_string(), offset.to_string()));

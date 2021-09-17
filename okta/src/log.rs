@@ -82,19 +82,11 @@ impl Log {
         until: Option<chrono::DateTime<chrono::Utc>>,
         filter: &str,
         q: &str,
-        limit: i64,
         sort_order: &str,
-        after: &str,
     ) -> Result<Vec<crate::types::LogEvent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));

@@ -70,19 +70,11 @@ impl Group {
         &self,
         q: &str,
         search: &str,
-        after: &str,
-        limit: i64,
         expand: &str,
     ) -> Result<Vec<crate::types::Group>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -161,20 +153,12 @@ impl Group {
      */
     pub async fn list_all_rules(
         &self,
-        limit: i64,
-        after: &str,
         search: &str,
         expand: &str,
     ) -> Result<Vec<crate::types::GroupRule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !search.is_empty() {
             query_args.push(("search".to_string(), search.to_string()));
@@ -434,21 +418,10 @@ impl Group {
     pub async fn list_all_assigned_applications_for(
         &self,
         group_id: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::Application>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/api/v1/groups/{}/apps?{}",
+            "/api/v1/groups/{}/apps",
             crate::progenitor_support::encode_path(&group_id.to_string()),
-            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -632,22 +605,11 @@ impl Group {
         &self,
         group_id: &str,
         role_id: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::CatalogApplication>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/catalog/apps?{}",
+            "/api/v1/groups/{}/roles/{}/targets/catalog/apps",
             crate::progenitor_support::encode_path(&group_id.to_string()),
             crate::progenitor_support::encode_path(&role_id.to_string()),
-            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -819,22 +781,11 @@ impl Group {
         &self,
         group_id: &str,
         role_id: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::Group>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/api/v1/groups/{}/roles/{}/targets/groups?{}",
+            "/api/v1/groups/{}/roles/{}/targets/groups",
             crate::progenitor_support::encode_path(&group_id.to_string()),
             crate::progenitor_support::encode_path(&role_id.to_string()),
-            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -939,24 +890,10 @@ impl Group {
      *
      * Enumerates all users that are a member of a group.
      */
-    pub async fn list_all_users(
-        &self,
-        group_id: &str,
-        after: &str,
-        limit: i64,
-    ) -> Result<Vec<crate::types::User>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+    pub async fn list_all_users(&self, group_id: &str) -> Result<Vec<crate::types::User>> {
         let url = format!(
-            "/api/v1/groups/{}/users?{}",
+            "/api/v1/groups/{}/users",
             crate::progenitor_support::encode_path(&group_id.to_string()),
-            query_
         );
 
         self.client.get_all_pages(&url, None).await

@@ -63,13 +63,9 @@ impl SubusersApi {
     pub async fn get_all_subusers(
         &self,
         username: &str,
-        limit: i64,
         offset: i64,
     ) -> Result<Vec<crate::types::Subuser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
         if offset > 0 {
             query_args.push(("offset".to_string(), offset.to_string()));
         }

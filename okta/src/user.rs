@@ -79,22 +79,14 @@ impl User {
     pub async fn list_all(
         &self,
         q: &str,
-        after: &str,
-        limit: i64,
         filter: &str,
         search: &str,
         sort_by: &str,
         sort_order: &str,
     ) -> Result<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -416,18 +408,10 @@ impl User {
         user_id: &str,
         client_id: &str,
         expand: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::OAuth2ScopeConsentGrant>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -514,18 +498,10 @@ impl User {
         user_id: &str,
         client_id: &str,
         expand: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::OAuth2RefreshToken>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -746,18 +722,10 @@ impl User {
         user_id: &str,
         scope_id: &str,
         expand: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::OAuth2ScopeConsentGrant>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !scope_id.is_empty() {
             query_args.push(("scopeId".to_string(), scope_id.to_string()));
@@ -1215,22 +1183,11 @@ impl User {
         &self,
         user_id: &str,
         relationship_name: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::Links>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/api/v1/users/{}/linkedObjects/{}?{}",
+            "/api/v1/users/{}/linkedObjects/{}",
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&relationship_name.to_string()),
-            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1418,22 +1375,11 @@ impl User {
         &self,
         user_id: &str,
         role_id: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::CatalogApplication>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/api/v1/users/{}/roles/{}/targets/catalog/apps?{}",
+            "/api/v1/users/{}/roles/{}/targets/catalog/apps",
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&role_id.to_string()),
-            query_
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1625,22 +1571,11 @@ impl User {
         &self,
         user_id: &str,
         role_id: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::Group>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
-            "/api/v1/users/{}/roles/{}/targets/groups?{}",
+            "/api/v1/users/{}/roles/{}/targets/groups",
             crate::progenitor_support::encode_path(&user_id.to_string()),
             crate::progenitor_support::encode_path(&role_id.to_string()),
-            query_
         );
 
         self.client.get_all_pages(&url, None).await

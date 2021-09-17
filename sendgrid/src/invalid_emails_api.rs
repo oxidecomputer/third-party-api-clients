@@ -66,15 +66,11 @@ impl InvalidEmailsApi {
         &self,
         start_time: i64,
         end_time: i64,
-        limit: i64,
         offset: i64,
     ) -> Result<Vec<crate::types::InvalidEmail>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if end_time > 0 {
             query_args.push(("end_time".to_string(), end_time.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if offset > 0 {
             query_args.push(("offset".to_string(), offset.to_string()));

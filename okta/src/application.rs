@@ -77,16 +77,11 @@ impl Application {
     pub async fn list_all(
         &self,
         q: &str,
-        after: &str,
-        limit: i64,
         filter: &str,
         expand: &str,
         include_non_deleted: bool,
     ) -> Result<Vec<crate::types::Application>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
@@ -98,9 +93,6 @@ impl Application {
                 "includeNonDeleted".to_string(),
                 include_non_deleted.to_string(),
             ));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -626,19 +618,11 @@ impl Application {
         &self,
         app_id: &str,
         q: &str,
-        after: &str,
-        limit: i64,
         expand: &str,
     ) -> Result<Vec<crate::types::ApplicationGroupAssignment>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
@@ -828,18 +812,10 @@ impl Application {
         &self,
         app_id: &str,
         expand: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::OAuth2Token>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -991,23 +967,15 @@ impl Application {
         app_id: &str,
         q: &str,
         query_scope: &str,
-        after: &str,
-        limit: i64,
         filter: &str,
         expand: &str,
     ) -> Result<Vec<crate::types::AppUser>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
         }
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));

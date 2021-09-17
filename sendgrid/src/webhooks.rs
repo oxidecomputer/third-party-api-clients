@@ -146,7 +146,6 @@ impl Webhooks {
      */
     pub async fn get_all_user_parse_stats(
         &self,
-        limit: &str,
         offset: &str,
         aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy,
         start_date: &str,
@@ -158,9 +157,6 @@ impl Webhooks {
         }
         if !end_date.is_empty() {
             query_args.push(("end_date".to_string(), end_date.to_string()));
-        }
-        if !limit.is_empty() {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !offset.is_empty() {
             query_args.push(("offset".to_string(), offset.to_string()));

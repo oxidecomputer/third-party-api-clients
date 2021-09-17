@@ -53,15 +53,8 @@ impl LinkBranding {
      */
     pub async fn get_all_whitelabel_links(
         &self,
-        limit: i64,
     ) -> Result<Vec<crate::types::LinkBranding200Response>> {
-        let mut query_args: Vec<(String, String)> = Default::default();
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
-        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
-        let url = format!("/whitelabel/links?{}", query_);
-
+        let url = "/whitelabel/links".to_string();
         self.client.get_all_pages(&url, None).await
     }
 

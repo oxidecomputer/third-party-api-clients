@@ -56,21 +56,10 @@ impl NetworkZone {
      *
      * Enumerates network zones added to your organization with pagination. A subset of zones can be returned that match a supported filter expression or query.
      */
-    pub async fn list_all(
-        &self,
-        after: &str,
-        limit: i64,
-        filter: &str,
-    ) -> Result<Vec<crate::types::NetworkZone>> {
+    pub async fn list_all(&self, filter: &str) -> Result<Vec<crate::types::NetworkZone>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/api/v1/zones?{}", query_);

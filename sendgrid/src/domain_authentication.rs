@@ -69,7 +69,6 @@ impl DomainAuthentication {
      */
     pub async fn get_all_whitelabel_domains(
         &self,
-        limit: i64,
         offset: i64,
         exclude_subusers: bool,
         username: &str,
@@ -81,9 +80,6 @@ impl DomainAuthentication {
         }
         if exclude_subusers {
             query_args.push(("exclude_subusers".to_string(), exclude_subusers.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if offset > 0 {
             query_args.push(("offset".to_string(), offset.to_string()));

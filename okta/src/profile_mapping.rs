@@ -59,18 +59,10 @@ impl ProfileMapping {
      */
     pub async fn list_all(
         &self,
-        after: &str,
-        limit: i64,
         source_id: &str,
         target_id: &str,
     ) -> Result<Vec<crate::types::ProfileMapping>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
         if !source_id.is_empty() {
             query_args.push(("sourceId".to_string(), source_id.to_string()));
         }

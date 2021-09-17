@@ -53,13 +53,9 @@ impl Jobs {
      */
     pub async fn get_all_list_all_of(
         &self,
-        limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::JobAllOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
         if !starting_after.is_empty() {
             query_args.push(("starting_after".to_string(), starting_after.to_string()));
         }

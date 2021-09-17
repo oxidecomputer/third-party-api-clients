@@ -71,16 +71,12 @@ impl ReverseDns {
      */
     pub async fn get_all_whitelabel_ips(
         &self,
-        limit: i64,
         offset: i64,
         ip: &str,
     ) -> Result<Vec<crate::types::ReverseDns>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ip.is_empty() {
             query_args.push(("ip".to_string(), ip.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if offset > 0 {
             query_args.push(("offset".to_string(), offset.to_string()));

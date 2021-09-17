@@ -89,7 +89,6 @@ impl IpAddresses {
         &self,
         ip: &str,
         exclude_whitelabels: bool,
-        limit: i64,
         offset: i64,
         subuser: &str,
         sort_by_direction: crate::types::SortByDirection,
@@ -103,9 +102,6 @@ impl IpAddresses {
         }
         if !ip.is_empty() {
             query_args.push(("ip".to_string(), ip.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if offset > 0 {
             query_args.push(("offset".to_string(), offset.to_string()));

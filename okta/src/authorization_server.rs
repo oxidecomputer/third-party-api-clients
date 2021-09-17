@@ -52,19 +52,8 @@ impl AuthorizationServer {
      *
      * Success
      */
-    pub async fn list_all(
-        &self,
-        q: &str,
-        limit: &str,
-        after: &str,
-    ) -> Result<Vec<crate::types::AuthorizationServer>> {
+    pub async fn list_all(&self, q: &str) -> Result<Vec<crate::types::AuthorizationServer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
-        if !limit.is_empty() {
-            query_args.push(("limit".to_string(), limit.to_string()));
-        }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
         }
@@ -378,18 +367,10 @@ impl AuthorizationServer {
         auth_server_id: &str,
         client_id: &str,
         expand: &str,
-        after: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::OAuth2RefreshToken>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !after.is_empty() {
-            query_args.push(("after".to_string(), after.to_string()));
-        }
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
@@ -1024,7 +1005,6 @@ impl AuthorizationServer {
         q: &str,
         filter: &str,
         cursor: &str,
-        limit: i64,
     ) -> Result<Vec<crate::types::OAuth2Scope>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
@@ -1032,9 +1012,6 @@ impl AuthorizationServer {
         }
         if !filter.is_empty() {
             query_args.push(("filter".to_string(), filter.to_string()));
-        }
-        if limit > 0 {
-            query_args.push(("limit".to_string(), limit.to_string()));
         }
         if !q.is_empty() {
             query_args.push(("q".to_string(), q.to_string()));
