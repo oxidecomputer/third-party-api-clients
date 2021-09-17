@@ -123,7 +123,13 @@ impl Template {
         out.push_str("\",\n");
         for c in self.components.iter() {
             if let Component::Parameter(n) = &c {
-                if n == "type" || n == "ref" || n == "foo" {
+                if n == "type"
+                    || n == "ref"
+                    || n == "foo"
+                    || n == "enum"
+                    || n == "const"
+                    || n == "use"
+                {
                     out.push_str(&format!(
                         "crate::progenitor_support::encode_path(&{}_.to_string()),",
                         to_snake_case(n)

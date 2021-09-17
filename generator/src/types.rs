@@ -103,6 +103,9 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 || name == "box"
                                 || name == "match"
                                 || name == "foo"
+                                || name == "enum"
+                                || name == "const"
+                                || name == "use"
                             {
                                 prop = format!("{}_", name);
                             } else if name == "$ref" {

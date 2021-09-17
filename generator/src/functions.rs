@@ -30,6 +30,11 @@ pub fn generate_files(
                 return Ok(());
             };
 
+            if o.operation_id.is_none() {
+                // Skipping.
+                return Ok(());
+            }
+
             let od = to_snake_case(o.operation_id.as_deref().unwrap());
 
             // Make sure we have exactly 1 tag. This likely needs to change in the
@@ -642,7 +647,13 @@ fn get_fn_params(
 
         if !fn_params.contains(nam) && !fn_params.contains(&format!("{}_", nam)) {
             let typ = parameter_data.render_type(&param_name, ts)?;
-            if nam == "ref" || nam == "type" || nam == "foo" {
+            if nam == "ref"
+                || nam == "type"
+                || nam == "foo"
+                || nam == "enum"
+                || nam == "const"
+                || nam == "use"
+            {
                 fn_params_str.push(format!("{}_: {},", nam, typ));
                 fn_params.push(nam.to_string() + "_");
             } else if (!all_pages || !is_page_param(nam))
@@ -677,7 +688,13 @@ fn get_fn_params(
                 allow_empty_value: _,
             } = item
             {
-                if nam == "ref" || nam == "type" || nam == "foo" {
+                if nam == "ref"
+                    || nam == "type"
+                    || nam == "foo"
+                    || nam == "enum"
+                    || nam == "const"
+                    || nam == "use"
+                {
                     query_params.insert(
                         format!("{}_", nam),
                         (typ.to_string(), parameter_data.name.to_string()),
@@ -1035,7 +1052,13 @@ fn get_fn_docs(
         let nam = &to_snake_case(&clean_name(&parameter_data.name));
         let typ = parameter_data.render_type(&param_name, ts)?;
 
-        if nam == "ref" || nam == "type" || nam == "foo" {
+        if nam == "ref"
+            || nam == "type"
+            || nam == "foo"
+            || nam == "enum"
+            || nam == "const"
+            || nam == "use"
+        {
             a(&format!("* * `{}_: {}`{}", nam, typ, docs));
         } else {
             a(&format!("* * `{}: {}`{}", nam, typ, docs));

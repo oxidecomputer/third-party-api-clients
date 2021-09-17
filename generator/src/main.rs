@@ -142,7 +142,7 @@ where
                                 println!("op {}: has response default", oid);
                             }
                         } else {
-                            bail!("path {} is missing operation ID", p.0);
+                            println!("XXXXXX path {} is missing operation ID, skipping", p.0);
                         }
                     }
 
@@ -2912,6 +2912,11 @@ fn main() -> Result<()> {
                     ts: &mut TypeSpace|
          -> Result<String> {
             if let Some(o) = o {
+                if o.operation_id.is_none() {
+                    // Skipping.
+                    return Ok("".to_string());
+                }
+
                 let od = to_snake_case(o.operation_id.as_deref().unwrap());
 
                 // Make sure we have exactly 1 tag. This likely needs to change in the
