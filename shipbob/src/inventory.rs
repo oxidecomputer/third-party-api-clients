@@ -141,7 +141,7 @@ impl Inventory {
      * * `product_id: i64` -- The product id to get inventory for.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn product_get(
+    pub async fn get_product(
         &self,
         product_id: i64,
         shipbob_channel_id: i64,
@@ -159,9 +159,9 @@ impl Inventory {
      *
      * This function performs a `GET` to the `/product/{productId}/inventory` endpoint.
      *
-     * As opposed to `product_get`, this function returns all the pages of the request at once.
+     * As opposed to `get_product`, this function returns all the pages of the request at once.
      */
-    pub async fn product_get_all(
+    pub async fn get_all_product(
         &self,
         product_id: i64,
         shipbob_channel_id: i64,

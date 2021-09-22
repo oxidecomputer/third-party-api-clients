@@ -26,7 +26,7 @@ impl Orders {
      *
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn estimate_post<T: Into<reqwest::Body>>(
+    pub async fn post_estimate<T: Into<reqwest::Body>>(
         &self,
         shipbob_channel_id: i64,
         body: crate::types::ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel,
@@ -225,7 +225,7 @@ impl Orders {
      * * `order_id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn cancel_post(
+    pub async fn post_cancel(
         &self,
         order_id: i64,
         shipbob_channel_id: i64,
@@ -247,7 +247,7 @@ impl Orders {
      *
      * * `order_id: i64` -- The order ID to Get the JSON Stored.
      */
-    pub async fn store_json_get(&self, order_id: i64) -> Result<String> {
+    pub async fn get_store_json(&self, order_id: i64) -> Result<String> {
         let url = format!(
             "/order/{}/storeOrderJson",
             crate::progenitor_support::encode_path(&order_id.to_string()),
@@ -265,7 +265,7 @@ impl Orders {
      *
      * * `order_id: i64` -- Unique id of the channel.
      */
-    pub async fn store_json_post<T: Into<reqwest::Body>>(
+    pub async fn post_store_json<T: Into<reqwest::Body>>(
         &self,
         order_id: i64,
         body: crate::types::ShipBobOrdersPresentationModelsAddStoreOrderJsonModel,
@@ -289,7 +289,7 @@ impl Orders {
      * * `shipment_id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn shipment_get(
+    pub async fn get_shipment(
         &self,
         order_id: i64,
         shipment_id: i64,
@@ -315,7 +315,7 @@ impl Orders {
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      * * `order_id: &str` -- Name of the channel.
      */
-    pub async fn shipment_cancel_post(
+    pub async fn post_shipment_cancel(
         &self,
         shipment_id: i64,
         shipbob_channel_id: i64,
@@ -341,7 +341,7 @@ impl Orders {
      * * `shipment_id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn shipment_timeline_get(
+    pub async fn get_shipment_timeline(
         &self,
         order_id: i64,
         shipment_id: i64,
@@ -361,9 +361,9 @@ impl Orders {
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment/{shipmentId}/timeline` endpoint.
      *
-     * As opposed to `shipment_timeline_get`, this function returns all the pages of the request at once.
+     * As opposed to `get_shipment_timeline`, this function returns all the pages of the request at once.
      */
-    pub async fn shipment_timeline_get_all(
+    pub async fn get_all_shipment_timeline(
         &self,
         order_id: i64,
         shipment_id: i64,
@@ -388,7 +388,7 @@ impl Orders {
      * * `order_id: i64` -- The order id to get shipments for.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn shipment_get_orders(
+    pub async fn get_shipment_orders(
         &self,
         order_id: i64,
         shipbob_channel_id: i64,
@@ -406,9 +406,9 @@ impl Orders {
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment` endpoint.
      *
-     * As opposed to `shipment_get`, this function returns all the pages of the request at once.
+     * As opposed to `get_shipment`, this function returns all the pages of the request at once.
      */
-    pub async fn shipment_get_all(
+    pub async fn get_all_shipment(
         &self,
         order_id: i64,
         shipbob_channel_id: i64,
@@ -432,7 +432,7 @@ impl Orders {
      * * `shipment_id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn shipment_logs_get(
+    pub async fn get_shipment_logs(
         &self,
         order_id: i64,
         shipment_id: i64,
@@ -452,9 +452,9 @@ impl Orders {
      *
      * This function performs a `GET` to the `/order/{orderId}/shipment/{shipmentId}/logs` endpoint.
      *
-     * As opposed to `shipment_logs_get`, this function returns all the pages of the request at once.
+     * As opposed to `get_shipment_logs`, this function returns all the pages of the request at once.
      */
-    pub async fn shipment_logs_get_all(
+    pub async fn get_all_shipment_logs(
         &self,
         order_id: i64,
         shipment_id: i64,
@@ -479,7 +479,7 @@ impl Orders {
      * * `shipment_id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn shipment_get_orders(
+    pub async fn get_shipment_orders(
         &self,
         shipment_id: i64,
         shipbob_channel_id: i64,
@@ -502,7 +502,7 @@ impl Orders {
      * * `shipment_id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn shipment_cancel_post_orders(
+    pub async fn post_shipment_cancel_orders(
         &self,
         shipment_id: i64,
         shipbob_channel_id: i64,
@@ -524,7 +524,7 @@ impl Orders {
      *
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn shipment_cancelbulk_post<T: Into<reqwest::Body>>(
+    pub async fn post_shipment_cancelbulk<T: Into<reqwest::Body>>(
         &self,
         shipbob_channel_id: i64,
         body: crate::types::ShipBobOrdersPresentationModelsCancelShipmentsModel,
@@ -543,7 +543,7 @@ impl Orders {
      * * `shipment_id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn shipment_timeline_get_orders(
+    pub async fn get_shipment_timeline_orders(
         &self,
         shipment_id: i64,
         shipbob_channel_id: i64,
@@ -561,9 +561,9 @@ impl Orders {
      *
      * This function performs a `GET` to the `/shipment/{shipmentId}/timeline` endpoint.
      *
-     * As opposed to `shipment_timeline_get`, this function returns all the pages of the request at once.
+     * As opposed to `get_shipment_timeline`, this function returns all the pages of the request at once.
      */
-    pub async fn shipment_timeline_get_all(
+    pub async fn get_all_shipment_timeline_all(
         &self,
         shipment_id: i64,
         shipbob_channel_id: i64,
@@ -586,7 +586,7 @@ impl Orders {
      * * `shipment_id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn shipment_logs_get_orders(
+    pub async fn get_shipment_logs_orders(
         &self,
         shipment_id: i64,
         shipbob_channel_id: i64,
@@ -604,9 +604,9 @@ impl Orders {
      *
      * This function performs a `GET` to the `/shipment/{shipmentId}/logs` endpoint.
      *
-     * As opposed to `shipment_logs_get`, this function returns all the pages of the request at once.
+     * As opposed to `get_shipment_logs`, this function returns all the pages of the request at once.
      */
-    pub async fn shipment_logs_get_all(
+    pub async fn get_all_shipment_logs_all(
         &self,
         shipment_id: i64,
         shipbob_channel_id: i64,
@@ -631,7 +631,7 @@ impl Orders {
      * * `page: i64` -- Unique id of the channel.
      * * `limit: i64` -- Amount of records per page to request.
      */
-    pub async fn shipping_method_get(
+    pub async fn get_shippingmethod(
         &self,
         page: i64,
         limit: i64,
@@ -654,11 +654,11 @@ impl Orders {
      *
      * This function performs a `GET` to the `/shippingmethod` endpoint.
      *
-     * As opposed to `shipping_method_get`, this function returns all the pages of the request at once.
+     * As opposed to `get_shippingmethod`, this function returns all the pages of the request at once.
      *
      * Get all merchants shipping methods
      */
-    pub async fn shipping_method_get_all(
+    pub async fn get_all_shippingmethod(
         &self,
     ) -> Result<Vec<crate::types::ShipBobOrdersPresentationViewModelsMethodDetailModel>> {
         let url = "/shippingmethod".to_string();

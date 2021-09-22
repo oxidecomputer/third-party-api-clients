@@ -237,7 +237,7 @@ impl Returns {
      * * `id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn cancel_post(
+    pub async fn post_cancel(
         &self,
         id: i64,
         shipbob_channel_id: i64,
@@ -260,7 +260,7 @@ impl Returns {
      * * `id: i64` -- Unique id of the channel.
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn statushistory_get(
+    pub async fn get_statushistory(
         &self,
         id: i64,
         shipbob_channel_id: i64,

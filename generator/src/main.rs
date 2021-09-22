@@ -2567,14 +2567,19 @@ fn clean_name(t: &str) -> String {
 }
 
 pub fn path_to_operation_id(path: &str, method: &str) -> String {
-    format!(
+    let new = format!(
         "{}_{}",
+        method.to_lowercase(),
         path.replace("/", "-")
             .trim_start_matches('-')
             .replace('{', "_by_")
             .replace('}', ""),
-        method.to_lowercase()
-    )
+            .replace("shippingmethod", "shipping_method")
+            .replace("statushistory", "status_history")
+    );
+    println!("path: {} -> {}", path, to_snake_case(&new));
+
+    new
 }
 
 pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {

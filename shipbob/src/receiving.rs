@@ -17,7 +17,7 @@ impl Receiving {
      *
      * This function performs a `GET` to the `/fulfillmentCenter` endpoint.
      */
-    pub async fn fulfillment_center_get(
+    pub async fn get_fulfillment_center(
         &self,
     ) -> Result<Vec<crate::types::ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel>> {
         let url = "/fulfillmentCenter".to_string();
@@ -29,9 +29,9 @@ impl Receiving {
      *
      * This function performs a `GET` to the `/fulfillmentCenter` endpoint.
      *
-     * As opposed to `fulfillment_center_get`, this function returns all the pages of the request at once.
+     * As opposed to `get_fulfillment_center`, this function returns all the pages of the request at once.
      */
-    pub async fn fulfillment_center_get_all(
+    pub async fn get_all_fulfillment_center(
         &self,
     ) -> Result<Vec<crate::types::ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel>> {
         let url = "/fulfillmentCenter".to_string();
@@ -68,7 +68,7 @@ impl Receiving {
      *
      * * `id: i64` -- Unique id of the channel.
      */
-    pub async fn labels_get(&self, id: i64) -> Result<bytes::Bytes> {
+    pub async fn get_label(&self, id: i64) -> Result<bytes::Bytes> {
         let url = format!(
             "/receiving/{}/labels",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -99,7 +99,7 @@ impl Receiving {
      *
      * * `id: i64` -- Id of the receiving order to cancel.
      */
-    pub async fn cancel_post(&self, id: i64) -> Result<()> {
+    pub async fn post_cancel(&self, id: i64) -> Result<()> {
         let url = format!(
             "/receiving/{}/cancel",
             crate::progenitor_support::encode_path(&id.to_string()),

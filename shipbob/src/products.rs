@@ -188,7 +188,7 @@ impl Products {
      *
      * * `shipbob_channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn batch_post<T: Into<reqwest::Body>>(
+    pub async fn post_batch<T: Into<reqwest::Body>>(
         &self,
         shipbob_channel_id: i64,
         body: Vec<crate::types::ShipbobProductsApiModelsPublicCreateProductModel>,

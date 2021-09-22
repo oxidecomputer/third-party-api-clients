@@ -23,3 +23,6 @@ A place for keeping all our generated third party API clients.
 - [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)
 - [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)
 - [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)
+- [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)
+- [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)
+- [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)

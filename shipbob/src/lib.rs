@@ -27,7 +27,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! shipbob = "0.2.1"
+//! shipbob = "0.1.0"
 //! ```
 //!
 //! ## Basic example
@@ -215,8 +215,8 @@ mod progenitor_support {
 
 use std::env;
 
-const TOKEN_ENDPOINT: &str = "https://";
-const USER_CONSENT_ENDPOINT: &str = "https://";
+const TOKEN_ENDPOINT: &str = "https://auth.shipbob.com/connect/token";
+const USER_CONSENT_ENDPOINT: &str = "https://auth.shipbob.com/connect/integrate";
 
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
