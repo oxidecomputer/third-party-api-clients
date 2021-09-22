@@ -234,7 +234,7 @@ $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC): $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR)
 	curl -sSL $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_REMOTE) -o $@
 
 google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC)
-	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.1.0 \
+	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.1.1 \
 		-o google/cloud-resource-manager \
 		-n google-cloud-resource-manager \
 		--proper-name "Google Cloud Resource Manager" \
