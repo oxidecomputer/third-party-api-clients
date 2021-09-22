@@ -24,7 +24,7 @@ impl Folders {
      * * `parent: &str` -- Required. The resource name of the Organization or Folder whose Folders are being listed. Must be of the form `folders/{folder_id}` or `organizations/{org_id}`. Access to this method is controlled by checking the `resourcemanager.folders.list` permission on the `parent`.
      * * `show_deleted: bool` -- True if the project can be retrieved using `GetProject`. No other operations on the project are guaranteed to work until the project creation is complete.
      */
-    pub async fn cloudresourcemanager_list(
+    pub async fn list(
         &self,
         page_size: i64,
         page_token: &str,
@@ -56,11 +56,11 @@ impl Folders {
     /**
      * This function performs a `GET` to the `/v2/folders` endpoint.
      *
-     * As opposed to `cloudresourcemanager_list`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Lists the Folders that are direct descendants of supplied parent resource. List provides a strongly consistent view of the Folders underneath the specified parent resource. List returns Folders sorted based upon the (ascending) lexical ordering of their display_name. The caller must have `resourcemanager.folders.list` permission on the identified parent.
      */
-    pub async fn cloudresourcemanager_list_all(
+    pub async fn list_all(
         &self,
         parent: &str,
         show_deleted: bool,
@@ -116,7 +116,7 @@ impl Folders {
      *
      * * `parent: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_create(
+    pub async fn create(
         &self,
         parent: &str,
         body: &crate::types::Folder,
@@ -138,7 +138,7 @@ impl Folders {
      *
      * Search for folders that match specific filter criteria. Search provides an eventually consistent view of the folders a user has access to which meet the specified filter criteria. This will only return folders on which the caller has the permission `resourcemanager.folders.get`.
      */
-    pub async fn cloudresourcemanager_search(
+    pub async fn search(
         &self,
         body: &crate::types::SearchFoldersRequest,
     ) -> Result<Vec<crate::types::Folder>> {
@@ -161,7 +161,7 @@ impl Folders {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_get(&self, name: &str) -> Result<crate::types::Folder> {
+    pub async fn get(&self, name: &str) -> Result<crate::types::Folder> {
         let url = format!(
             "/v2/{}",
             crate::progenitor_support::encode_path(&name.to_string()),
@@ -179,7 +179,7 @@ impl Folders {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_delete(&self, name: &str) -> Result<crate::types::Folder> {
+    pub async fn delete(&self, name: &str) -> Result<crate::types::Folder> {
         let url = format!(
             "/v2/{}",
             crate::progenitor_support::encode_path(&name.to_string()),
@@ -198,7 +198,7 @@ impl Folders {
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      * * `update_mask: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_patch(
+    pub async fn patch(
         &self,
         name: &str,
         update_mask: &str,
@@ -229,7 +229,7 @@ impl Folders {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_move(
+    pub async fn mv(
         &self,
         name: &str,
         body: &crate::types::MoveFolderRequest,
@@ -253,7 +253,7 @@ impl Folders {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_undelete(
+    pub async fn undelete(
         &self,
         name: &str,
         body: &crate::types::MoveProjectMetadata,
@@ -277,7 +277,7 @@ impl Folders {
      *
      * * `resource: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_get_iam_policy(
+    pub async fn get_iam_policy(
         &self,
         resource: &str,
         body: &crate::types::GetIamPolicyRequest,
@@ -301,7 +301,7 @@ impl Folders {
      *
      * * `resource: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_set_iam_policy(
+    pub async fn set_iam_policy(
         &self,
         resource: &str,
         body: &crate::types::SetIamPolicyRequest,
@@ -325,7 +325,7 @@ impl Folders {
      *
      * * `resource: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_test_iam_permissions(
+    pub async fn test_iam_permissions(
         &self,
         resource: &str,
         body: &crate::types::TestIamPermissionsRequest,

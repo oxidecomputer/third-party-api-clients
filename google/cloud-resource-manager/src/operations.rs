@@ -21,7 +21,7 @@ impl Operations {
      *
      * * `name: &str` -- Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
      */
-    pub async fn cloudresourcemanager_get(&self, name: &str) -> Result<crate::types::Operation> {
+    pub async fn get(&self, name: &str) -> Result<crate::types::Operation> {
         let url = format!(
             "/v1/{}",
             crate::progenitor_support::encode_path(&name.to_string()),

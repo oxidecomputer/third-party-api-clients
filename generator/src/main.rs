@@ -2607,6 +2607,7 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         .replace("s_uuid", "")
         .replace("_id_or_uuid", "")
         .replace("_uuid", "")
+        .replace("cloudresourcemanager_", "_")
         .replace("companies_company_", "company_")
         .replace("employees_employee_", "employee_")
         .replace("jobs_job_", "job_")
