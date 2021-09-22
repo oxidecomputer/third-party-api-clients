@@ -640,9 +640,9 @@ where
     R: ToString,
     {}
 {{
-    let client_id = env::var("{}_CLIENT_ID").unwrap();
-    let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
-    let redirect_uri = env::var("{}_REDIRECT_URI").unwrap();
+    let client_id = env::var("{}_CLIENT_ID").expect("must set {}_CLIENT_ID");
+    let client_secret = env::var("{}_CLIENT_SECRET").expect("must set {}_CLIENT_SECRET");
+    let redirect_uri = env::var("{}_REDIRECT_URI").expect("must set {}_REDIRECT_URI");
 
     Client::new(
         client_id,
@@ -656,6 +656,9 @@ where
         add_post_header_type,
         add_post_header_args,
         add_post_header_args_where,
+        proper_name.to_uppercase(),
+        proper_name.to_uppercase(),
+        proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
@@ -756,7 +759,7 @@ impl Client {{
     /// it in a database, you can get it first.
     pub fn new_from_env() -> Self
     {{
-        let token = env::var("{}_API_KEY").unwrap();
+        let token = env::var("{}_API_KEY").expect("must set {}_API_KEY");
 
         Client::new(
             token,
@@ -764,6 +767,7 @@ impl Client {{
     }}
 
     {}"#,
+        proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         get_shared_functions(add_post_header)
     )
@@ -1338,8 +1342,8 @@ impl Client {{
     where
         T: ToString,
     {{
-        let client_id = env::var("{}_CLIENT_ID").unwrap();
-        let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
+        let client_id = env::var("{}_CLIENT_ID").expect("must set {}_CLIENT_ID");
+        let client_secret = env::var("{}_CLIENT_SECRET").expect("must set {}_CLIENT_SECRET");
 
         Client::new(
             client_id,
@@ -1353,6 +1357,8 @@ impl Client {{
     {}"#,
         token_endpoint.trim_start_matches("https://"),
         ACCESS_TOKEN_STRUCT_TEMPLATE,
+        proper_name.to_uppercase(),
+        proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         CLIENT_AUTH_TEMPLATE,

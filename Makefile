@@ -72,6 +72,11 @@ SHIPBOB_SPEC_DIR = $(CURDIR)/specs/shipbob
 SHIPBOB_SPEC = $(SHIPBOB_SPEC_DIR)/shipbob.json
 SHIPBOB_SPEC_REMOTE = https://developer.shipbob.com/c196c993-6cf8-4901-84aa-b425f3448df3
 
+SHOPIFY_SPEC_DIR = $(CURDIR)/specs/shopify
+SHOPIFY_SPEC = $(SHOPIFY_SPEC_DIR)/shopify.json
+SHOPIFY_SPEC_REPO = allengrant/shopify_openapi
+SHOPIFY_SPEC_REMOTE = https://raw.githubusercontent.com/$(SHOPIFY_SPEC_REPO)/master/shopify_openapi.json
+
 SLACK_SPEC_DIR = $(CURDIR)/specs/slack
 SLACK_SPEC = $(SLACK_SPEC_DIR)/slack.json
 SLACK_SPEC_REPO = slackapi/slack-api-specs
@@ -119,6 +124,7 @@ update-specs:
 		$(OKTA_SPEC_DIR) \
 		$(SENDGRID_SPEC_DIR) \
 		$(SHIPBOB_SPEC_DIR) \
+		$(SHOPIFY_SPEC_DIR) \
 		$(SLACK_SPEC_DIR) \
 		$(REVAI_SPEC_DIR) \
 		$(TRIPACTIONS_SPEC_DIR) \
@@ -136,6 +142,7 @@ update-specs:
 		$(OKTA_SPEC) \
 		$(SENDGRID_SPEC) \
 		$(SHIPBOB_SPEC) \
+		$(SHOPIFY_SPEC) \
 		$(SLACK_SPEC) \
 		$(REVAI_SPEC_DIR) \
 		$(TRIPACTIONS_SPEC) \
@@ -452,6 +459,25 @@ shipbob: target/debug/generator $(SHIPBOB_SPEC)
 		--user-consent-endpoint "auth.shipbob.com/connect/integrate" $(EXTRA_ARGS)
 	cargo fmt -p shipbob
 	@echo -e "- [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)" >> README.md
+
+$(SHOPIFY_SPEC_DIR):
+	mkdir -p $@
+
+$(SHOPIFY_SPEC): $(SHOPIFY_SPEC_DIR)
+	curl -sSL $(SHOPIFY_SPEC_REMOTE) -o $@
+
+shopify: target/debug/generator $(SHOPIFY_SPEC)
+	./target/debug/generator -i $(SHOPIFY_SPEC) -v 0.1.0 \
+		-o shopify \
+		-n shopify \
+		--proper-name "Shopify" \
+		-d "A fully generated & opinionated API client for the Shopify API." \
+		--spec-link "$(SHOPIFY_SPEC_REMOTE)" \
+		--host "{shop}.myshopify.com/admin/api/2021-07" \
+		--token-endpoint "{shop}.myshopify.com/admin/oauth/access_token" \
+		--user-consent-endpoint "{shop}.myshopify.com/admin/oauth/authorize" $(EXTRA_ARGS)
+	cargo fmt -p shopify
+	@echo -e "- [Shopify](shopify/) [![docs.rs](https://docs.rs/shopify/badge.svg)](https://docs.rs/shopify)" >> README.md
 
 $(SLACK_SPEC_DIR):
 	mkdir -p $@
