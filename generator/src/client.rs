@@ -526,6 +526,7 @@ const USER_CONSENT_ENDPOINT: &str = "https://{}";
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {{
+    host: String,
     token: String,
     // This will expire within a certain amount of time as determined by the
     // expiration date passed back in the initial request.
@@ -569,6 +570,7 @@ impl Client {{
                 // if it needs to be refreshed.
                 //
                 Client {{
+                    host: DEFAULT_HOST.to_string(),
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     redirect_uri: redirect_uri.to_string(),
@@ -582,6 +584,16 @@ impl Client {{
             Err(e) => panic!("creating reqwest client failed: {{:?}}", e),
         }}
     }}
+
+    /// Override the default host for the client.
+    pub fn with_host<H>(&self, host: H) -> Self
+    where
+        H: ToString,
+    {{
+        let mut c = self.clone();
+        c.host = host.to_string();
+        c
+     }}
 
     {}
 
@@ -702,6 +714,7 @@ where
             // if it needs to be refreshed.
             //
             Client {
+                host: DEFAULT_HOST.to_string(),
                 client_id: secret.client_id.to_string(),
                 client_secret: secret.client_secret.to_string(),
                 redirect_uri: secret.redirect_uris[0].to_string(),
@@ -723,6 +736,7 @@ pub fn generate_client_generic_api_key(proper_name: &str, add_post_header: &str)
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {{
+    host: String,
     token: String,
 
     client: reqwest::Client,
@@ -742,6 +756,7 @@ impl Client {{
         match client {{
             Ok(c) => {{
                 Client {{
+                    host: DEFAULT_HOST.to_string(),
                     token: token.to_string(),
 
                     client: c,
@@ -750,6 +765,16 @@ impl Client {{
             Err(e) => panic!("creating reqwest client failed: {{:?}}", e),
         }}
     }}
+
+    /// Override the default host for the client.
+    pub fn with_host<H>(&self, host: H) -> Self
+    where
+        H: ToString,
+    {{
+        let mut c = self.clone();
+        c.host = host.to_string();
+        c
+     }}
 
     /// Create a new Client struct from environment variables. It
     /// takes a type that can convert into
@@ -811,7 +836,7 @@ async fn request_raw(
     let u = if uri.starts_with("https://") {{
         uri.to_string()
     }} else {{
-        (DEFAULT_HOST.to_string() + uri).to_string()
+        (self.host.clone() + uri).to_string()
     }};
     let (url, auth) = self.url_and_auth(&u).await?;
 
@@ -945,7 +970,7 @@ async fn post_form<Out>(
     let u = if uri.starts_with("https://") {{
         uri.to_string()
     }} else {{
-        (DEFAULT_HOST.to_string() + uri).to_string()
+        (self.host.clone() + uri).to_string()
     }};
     let (url, auth) = self.url_and_auth(&u).await?;
 
@@ -1021,7 +1046,7 @@ async fn request_with_accept_mime<Out>(
     let u = if uri.starts_with("https://") {{
         uri.to_string()
     }} else {{
-        (DEFAULT_HOST.to_string() + uri).to_string()
+        (self.host.clone() + uri).to_string()
     }};
     let (url, auth) = self.url_and_auth(&u).await?;
 
@@ -1092,7 +1117,7 @@ async fn request_with_mime<Out>(
     let u = if uri.starts_with("https://") {{
         uri.to_string()
     }} else {{
-        (DEFAULT_HOST.to_string() + uri).to_string()
+        (self.host.clone() + uri).to_string()
     }};
     let (url, auth) = self.url_and_auth(&u).await?;
 
@@ -1186,7 +1211,7 @@ where
 {{
     self.request_entity(
         http::Method::GET,
-        &(DEFAULT_HOST.to_string() + uri),
+        &(self.host.to_string() + uri),
         message,
     ).await
 }}
@@ -1233,7 +1258,7 @@ where
 {{
     self.request_with_links(
         http::Method::GET,
-        &(DEFAULT_HOST.to_string() + uri),
+        &(self.host.to_string() + uri),
         None,
     ).await
 }}
@@ -1257,7 +1282,7 @@ where
 {{
     self.request_entity(
         http::Method::POST,
-        &(DEFAULT_HOST.to_string() + uri),
+        &(self.host.to_string() + uri),
         message,
     ).await
 }}
@@ -1269,7 +1294,7 @@ where
 {{
     self.request_entity(
         http::Method::PATCH,
-        &(DEFAULT_HOST.to_string() + uri),
+        &(self.host.to_string() + uri),
         message,
     ).await
 }}
@@ -1281,7 +1306,7 @@ where
 {{
     self.request_entity(
         http::Method::PUT,
-        &(DEFAULT_HOST.to_string() + uri),
+        &(self.host.to_string() + uri),
         message,
     ).await
 }}
@@ -1293,7 +1318,7 @@ where
 {{
     self.request_entity(
         http::Method::DELETE,
-        &(DEFAULT_HOST.to_string() + uri),
+        &(self.host.to_string() + uri),
         message,
     ).await
 }}"#,
@@ -1439,6 +1464,7 @@ const TOKEN_ENDPOINT: &str = "https://{}";
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {{
+    host: String,
     token: String,
     client_id: String,
     client_secret: String,
@@ -1466,6 +1492,7 @@ impl Client {{
         match client {{
             Ok(c) => {{
                 Client {{
+                    host: DEFAULT_HOST.to_string(),
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     token: token.to_string(),
@@ -1476,6 +1503,16 @@ impl Client {{
             Err(e) => panic!("creating reqwest client failed: {{:?}}", e),
         }}
     }}
+
+    /// Override the default host for the client.
+    pub fn with_host<H>(&self, host: H) -> Self
+    where
+        H: ToString,
+    {{
+        let mut c = self.clone();
+        c.host = host.to_string();
+        c
+     }}
 
     /// Create a new Client struct from environment variables. It
     /// takes a type that can convert into
