@@ -440,13 +440,15 @@ $(SHIPBOB_SPEC): $(SHIPBOB_SPEC_DIR)
 
 .PHONY: shipbob
 shipbob: target/debug/generator $(SHIPBOB_SPEC)
-	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.0 \
 		-o shipbob \
 		-n shipbob \
 		--proper-name "ShipBob" \
 		-d "A fully generated & opinionated API client for the ShipBob API." \
 		--spec-link "$(SHIPBOB_SPEC_REMOTE)" \
-		--host "api.shipbob.com/1.0" $(EXTRA_ARGS)
+		--host "api.shipbob.com/1.0" \
+		--token-endpoint "auth.shipbob.com/connect/token" \
+		--user-consent-endpoint "auth.shipbob.com/connect/integrate" $(EXTRA_ARGS)
 	cargo fmt -p shipbob
 	@echo -e "- [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)" >> README.md
 

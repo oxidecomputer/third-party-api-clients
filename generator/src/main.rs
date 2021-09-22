@@ -2571,7 +2571,7 @@ pub fn path_to_operation_id(path: &str, method: &str) -> String {
         "{}_{}",
         path.replace("/", "-")
             .trim_start_matches('-')
-            .replace('{', "")
+            .replace('{', "_by_")
             .replace('}', ""),
         method.to_lowercase()
     )
@@ -2617,6 +2617,7 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         .replace("_id_or_uuid", "")
         .replace("_uuid", "")
         .replace("cloudresourcemanager_", "_")
+        .replace("shippingmethod_", "shipping_method_")
         .replace("companies_company_", "company_")
         .replace("employees_employee_", "employee_")
         .replace("jobs_job_", "job_")

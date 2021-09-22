@@ -631,7 +631,7 @@ impl Orders {
      * * `page: i64` -- Unique id of the channel.
      * * `limit: i64` -- Amount of records per page to request.
      */
-    pub async fn shippingmethod_get(
+    pub async fn shipping_method_get(
         &self,
         page: i64,
         limit: i64,
@@ -654,11 +654,11 @@ impl Orders {
      *
      * This function performs a `GET` to the `/shippingmethod` endpoint.
      *
-     * As opposed to `shippingmethod_get`, this function returns all the pages of the request at once.
+     * As opposed to `shipping_method_get`, this function returns all the pages of the request at once.
      *
      * Get all merchants shipping methods
      */
-    pub async fn shippingmethod_get_all(
+    pub async fn shipping_method_get_all(
         &self,
     ) -> Result<Vec<crate::types::ShipBobOrdersPresentationViewModelsMethodDetailModel>> {
         let url = "/shippingmethod".to_string();
