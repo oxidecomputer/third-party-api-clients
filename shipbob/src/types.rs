@@ -3,7 +3,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobChannelsApiViewModelsChannelModel {
+pub struct ChannelsChannelView {
     /**
      * Name of the channel
      */
@@ -44,7 +44,7 @@ pub struct ShipBobChannelsApiViewModelsChannelModel {
 
 /// Information about an inventory item's dimensions
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobInventoryApiViewModelsDimensionModel {
+pub struct InventoryDimensionView {
     /**
      * Information about an inventory item's dimensions
      */
@@ -85,7 +85,7 @@ pub struct ShipbobInventoryApiViewModelsDimensionModel {
 
 /// Break down of fulfillable quantity by fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobInventoryApiViewModelsFulfillmentCenterQuantityModel {
+pub struct InventoryFulfillmentCenterQuantityView {
     /**
      * Break down of fulfillable quantity by fulfillment center
      */
@@ -153,7 +153,7 @@ pub struct ShipbobInventoryApiViewModelsFulfillmentCenterQuantityModel {
 
 /// Break down of fulfillable quantity by lot
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobInventoryApiViewModelsLotQuantityModel {
+pub struct InventoryLotQuantityView {
     /**
      * Break down of fulfillable quantity by lot
      */
@@ -198,8 +198,7 @@ pub struct ShipbobInventoryApiViewModelsLotQuantityModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub fulfillable_quantity_by_fulfillment_center:
-        Vec<ShipbobInventoryApiViewModelsFulfillmentCenterQuantityModel>,
+    pub fulfillable_quantity_by_fulfillment_center: Vec<InventoryFulfillmentCenterQuantityView>,
     /**
      * Break down of fulfillable quantity by lot
      */
@@ -290,12 +289,12 @@ impl PackagingAttribute {
 
 /// Information about an inventory item
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobInventoryApiViewModelsModel {
+pub struct InventoryView {
     /**
      * Information about an inventory item
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub dimensions: Option<ShipbobInventoryApiViewModelsDimensionModel>,
+    pub dimensions: Option<InventoryDimensionView>,
     /**
      * Information about an inventory item
      */
@@ -304,8 +303,7 @@ pub struct ShipbobInventoryApiViewModelsModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub fulfillable_quantity_by_fulfillment_center:
-        Vec<ShipbobInventoryApiViewModelsFulfillmentCenterQuantityModel>,
+    pub fulfillable_quantity_by_fulfillment_center: Vec<InventoryFulfillmentCenterQuantityView>,
     /**
      * Information about an inventory item
      */
@@ -314,7 +312,7 @@ pub struct ShipbobInventoryApiViewModelsModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub fulfillable_quantity_by_lot: Vec<ShipbobInventoryApiViewModelsLotQuantityModel>,
+    pub fulfillable_quantity_by_lot: Vec<InventoryLotQuantityView>,
     /**
      * Information about an inventory item
      */
@@ -445,7 +443,7 @@ pub struct ShipbobInventoryApiViewModelsModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsEstimationAddressModel {
+pub struct OrdersPresentationViewModelsEstimationAddress {
     /**
      * Name of the channel
      */
@@ -514,7 +512,7 @@ pub struct ShipBobOrdersPresentationViewModelsEstimationAddressModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationModelsEstimateProductInfoModel {
+pub struct OrdersPresentationModelsEstimateProductInfo {
     /**
      * Unique id of the channel
      */
@@ -545,9 +543,9 @@ pub struct ShipBobOrdersPresentationModelsEstimateProductInfoModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel {
+pub struct OrdersPresentationModelsEstimateFulfillmentRequest {
     #[serde()]
-    pub address: ShipBobOrdersPresentationViewModelsEstimationAddressModel,
+    pub address: OrdersPresentationViewModelsEstimationAddress,
     /**
      * Products to be included in the order. Each product must include one of reference_id or id
      */
@@ -556,7 +554,7 @@ pub struct ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub products: Vec<ShipBobOrdersPresentationModelsEstimateProductInfoModel>,
+    pub products: Vec<OrdersPresentationModelsEstimateProductInfo>,
     /**
      * Array of permissions granted for the channel
      */
@@ -570,7 +568,7 @@ pub struct ShipBobOrdersPresentationModelsEstimateFulfillmentRequestModel {
 
 /// Information about a fulfillment center that a shipment can belong to
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsFulfillmentCenterModel {
+pub struct OrdersPresentationViewModelsFulfillmentCenter {
     /**
      * Information about a fulfillment center that a shipment can belong to
      */
@@ -592,7 +590,7 @@ pub struct ShipBobOrdersPresentationViewModelsFulfillmentCenterModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsEstimateDetailModel {
+pub struct OrdersPresentationViewModelsEstimateDetail {
     /**
      * Weight in ounces of this inventory item
      */
@@ -606,7 +604,7 @@ pub struct ShipBobOrdersPresentationViewModelsEstimateDetailModel {
      * Information about a fulfillment center that a shipment can belong to
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub fulfillment_center: Option<ShipBobOrdersPresentationViewModelsFulfillmentCenterModel>,
+    pub fulfillment_center: Option<OrdersPresentationViewModelsFulfillmentCenter>,
     /**
      * Name of the channel
      */
@@ -619,7 +617,7 @@ pub struct ShipBobOrdersPresentationViewModelsEstimateDetailModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsEstimateModel {
+pub struct OrdersPresentationViewModelsEstimate {
     /**
      * Array of estimates for each shipping method
      */
@@ -628,12 +626,12 @@ pub struct ShipBobOrdersPresentationViewModelsEstimateModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub estimates: Vec<ShipBobOrdersPresentationViewModelsEstimateDetailModel>,
+    pub estimates: Vec<OrdersPresentationViewModelsEstimateDetail>,
 }
 
 /// Created by channel metadata
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsChannelInfoModel {
+pub struct ReturnsChannelInfoView {
     /**
      * Created by channel metadata
      */
@@ -696,7 +694,7 @@ impl Type {
 
 /// Address to used when creating a B2B/DropShip order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsRetailerProgramDataAddressModel {
+pub struct OrdersPresentationViewModelsRetailerProgramDataAddress {
     /**
      * Name of the channel
      */
@@ -773,12 +771,12 @@ pub struct ShipBobOrdersPresentationViewModelsRetailerProgramDataAddressModel {
 
 /// Information about the recipient of an order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsRecipientInfoModel {
+pub struct OrdersPresentationViewModelsRecipientInfo {
     /**
      * Address to used when creating a B2B/DropShip order.
      */
     #[serde()]
-    pub address: ShipBobOrdersPresentationViewModelsRetailerProgramDataAddressModel,
+    pub address: OrdersPresentationViewModelsRetailerProgramDataAddress,
     /**
      * Name of the channel
      */
@@ -809,7 +807,7 @@ pub struct ShipBobOrdersPresentationViewModelsRecipientInfoModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsProductInfoModel {
+pub struct OrdersPresentationViewModelsProductInfo {
     /**
      * Unique id of the channel
      */
@@ -849,7 +847,7 @@ pub struct ShipBobOrdersPresentationViewModelsProductInfoModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsTagModel {
+pub struct OrdersPresentationViewModelsTag {
     /**
      * Name of the channel
      */
@@ -872,12 +870,12 @@ pub struct ShipBobOrdersPresentationViewModelsTagModel {
 
 /// Information about the recipient of a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsRecipientModel {
+pub struct OrdersPresentationViewModelsRecipient {
     /**
      * Information about the recipient of a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub address: Option<ShipBobOrdersPresentationViewModelsRetailerProgramDataAddressModel>,
+    pub address: Option<OrdersPresentationViewModelsRetailerProgramDataAddress>,
     /**
      * Name of the channel
      */
@@ -908,7 +906,7 @@ pub struct ShipBobOrdersPresentationViewModelsRecipientModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsStatusDetailModel {
+pub struct OrdersPresentationViewModelsStatusDetail {
     /**
      * Name of the channel
      */
@@ -958,7 +956,7 @@ pub struct ShipBobOrdersPresentationViewModelsStatusDetailModel {
 
 /// Tracking information for a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsTrackingModel {
+pub struct OrdersPresentationViewModelsTracking {
     /**
      * Name of the channel
      */
@@ -999,7 +997,7 @@ pub struct ShipBobOrdersPresentationViewModelsTrackingModel {
 
 /// Information about inventory belonging to a store product
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsInventoryModel {
+pub struct OrdersPresentationViewModelsInventory {
     /**
      * Expiration date for this lot
      */
@@ -1075,7 +1073,7 @@ pub struct ShipBobOrdersPresentationViewModelsInventoryModel {
 
 /// Information about a store product belonging to a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsShipmentProductModel {
+pub struct OrdersPresentationViewModelsShipmentProduct {
     /**
      * Information about a store product belonging to a shipment
      */
@@ -1093,7 +1091,7 @@ pub struct ShipBobOrdersPresentationViewModelsShipmentProductModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub inventory_items: Vec<ShipBobOrdersPresentationViewModelsInventoryModel>,
+    pub inventory_items: Vec<OrdersPresentationViewModelsInventory>,
     /**
      * Name of the channel
      */
@@ -1125,7 +1123,7 @@ pub struct ShipBobOrdersPresentationViewModelsShipmentProductModel {
 
 /// Measurements of a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsMeasurementsModel {
+pub struct OrdersPresentationViewModelsMeasurements {
     /**
      * Measurements of a shipment
      */
@@ -1345,7 +1343,7 @@ impl EstimatedFulfillmentDateStatus {
 
 /// Information about a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsShipmentModel {
+pub struct OrdersPresentationViewModelsShipment {
     /**
      * Expiration date for this lot
      */
@@ -1435,12 +1433,12 @@ pub struct ShipBobOrdersPresentationViewModelsShipmentModel {
      * Information about a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub location: Option<ShipBobOrdersPresentationViewModelsFulfillmentCenterModel>,
+    pub location: Option<OrdersPresentationViewModelsFulfillmentCenter>,
     /**
      * Information about a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub measurements: Option<ShipBobOrdersPresentationViewModelsMeasurementsModel>,
+    pub measurements: Option<OrdersPresentationViewModelsMeasurements>,
     /**
      * Information about a shipment
      */
@@ -1463,12 +1461,12 @@ pub struct ShipBobOrdersPresentationViewModelsShipmentModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub products: Vec<ShipBobOrdersPresentationViewModelsShipmentProductModel>,
+    pub products: Vec<OrdersPresentationViewModelsShipmentProduct>,
     /**
      * Information about a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub recipient: Option<ShipBobOrdersPresentationViewModelsRecipientModel>,
+    pub recipient: Option<OrdersPresentationViewModelsRecipient>,
     /**
      * Name of the channel
      */
@@ -1508,12 +1506,12 @@ pub struct ShipBobOrdersPresentationViewModelsShipmentModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub status_details: Vec<ShipBobOrdersPresentationViewModelsStatusDetailModel>,
+    pub status_details: Vec<OrdersPresentationViewModelsStatusDetail>,
     /**
      * Information about a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub tracking: Option<ShipBobOrdersPresentationViewModelsTrackingModel>,
+    pub tracking: Option<OrdersPresentationViewModelsTracking>,
 }
 
 /**
@@ -1607,7 +1605,7 @@ impl PaymentTerm {
 
 /// Contains shipping properties that need to be used for fulfilling an order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsShippingTermsModel {
+pub struct OrdersPresentationViewModelsShippingTerms {
     /**
      * Identifies whether to ship parcel or freight.
      *  
@@ -1632,7 +1630,7 @@ pub struct ShipBobOrdersPresentationViewModelsShippingTermsModel {
 
 /// Contains properties that needs to be used for fulfilling B2B/Dropship orders.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsRetailerProgramDataModel {
+pub struct OrdersPresentationViewModelsRetailerProgramData {
     /**
      * Contains properties that needs to be used for fulfilling B2B/Dropship orders.
      */
@@ -1641,7 +1639,7 @@ pub struct ShipBobOrdersPresentationViewModelsRetailerProgramDataModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub addresses: Vec<ShipBobOrdersPresentationViewModelsRetailerProgramDataAddressModel>,
+    pub addresses: Vec<OrdersPresentationViewModelsRetailerProgramDataAddress>,
     /**
      * Expiration date for this lot
      */
@@ -1684,7 +1682,7 @@ pub struct ShipBobOrdersPresentationViewModelsRetailerProgramDataModel {
  * The order status
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipBobOrdersPresentationViewModelsOrderModelStatus {
+pub enum OrdersPresentationViewModelsOrderStatus {
     #[serde(rename = "Cancelled")]
     Cancelled,
     #[serde(rename = "Exception")]
@@ -1703,35 +1701,30 @@ pub enum ShipBobOrdersPresentationViewModelsOrderModelStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipBobOrdersPresentationViewModelsOrderModelStatus {
+impl std::fmt::Display for OrdersPresentationViewModelsOrderStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipBobOrdersPresentationViewModelsOrderModelStatus::Cancelled => "Cancelled",
-            ShipBobOrdersPresentationViewModelsOrderModelStatus::Exception => "Exception",
-            ShipBobOrdersPresentationViewModelsOrderModelStatus::Fulfilled => "Fulfilled",
-            ShipBobOrdersPresentationViewModelsOrderModelStatus::ImportReview => "ImportReview",
-            ShipBobOrdersPresentationViewModelsOrderModelStatus::PartiallyFulfilled => {
-                "PartiallyFulfilled"
-            }
-            ShipBobOrdersPresentationViewModelsOrderModelStatus::Processing => "Processing",
-            ShipBobOrdersPresentationViewModelsOrderModelStatus::Noop => "",
-            ShipBobOrdersPresentationViewModelsOrderModelStatus::FallthroughString => "*",
+            OrdersPresentationViewModelsOrderStatus::Cancelled => "Cancelled",
+            OrdersPresentationViewModelsOrderStatus::Exception => "Exception",
+            OrdersPresentationViewModelsOrderStatus::Fulfilled => "Fulfilled",
+            OrdersPresentationViewModelsOrderStatus::ImportReview => "ImportReview",
+            OrdersPresentationViewModelsOrderStatus::PartiallyFulfilled => "PartiallyFulfilled",
+            OrdersPresentationViewModelsOrderStatus::Processing => "Processing",
+            OrdersPresentationViewModelsOrderStatus::Noop => "",
+            OrdersPresentationViewModelsOrderStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipBobOrdersPresentationViewModelsOrderModelStatus {
-    fn default() -> ShipBobOrdersPresentationViewModelsOrderModelStatus {
-        ShipBobOrdersPresentationViewModelsOrderModelStatus::Noop
+impl Default for OrdersPresentationViewModelsOrderStatus {
+    fn default() -> OrdersPresentationViewModelsOrderStatus {
+        OrdersPresentationViewModelsOrderStatus::Noop
     }
 }
-impl ShipBobOrdersPresentationViewModelsOrderModelStatus {
+impl OrdersPresentationViewModelsOrderStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(
-            self,
-            ShipBobOrdersPresentationViewModelsOrderModelStatus::Noop
-        )
+        matches!(self, OrdersPresentationViewModelsOrderStatus::Noop)
     }
 }
 
@@ -1739,7 +1732,7 @@ impl ShipBobOrdersPresentationViewModelsOrderModelStatus {
  * Shipment type of the order
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipBobOrdersPresentationViewModelsOrderModelType {
+pub enum OrdersPresentationViewModelsOrderType {
     #[serde(rename = "B2B")]
     B2B,
     #[serde(rename = "DTC")]
@@ -1752,40 +1745,37 @@ pub enum ShipBobOrdersPresentationViewModelsOrderModelType {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipBobOrdersPresentationViewModelsOrderModelType {
+impl std::fmt::Display for OrdersPresentationViewModelsOrderType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipBobOrdersPresentationViewModelsOrderModelType::B2B => "B2B",
-            ShipBobOrdersPresentationViewModelsOrderModelType::Dtc => "DTC",
-            ShipBobOrdersPresentationViewModelsOrderModelType::DropShip => "DropShip",
-            ShipBobOrdersPresentationViewModelsOrderModelType::Noop => "",
-            ShipBobOrdersPresentationViewModelsOrderModelType::FallthroughString => "*",
+            OrdersPresentationViewModelsOrderType::B2B => "B2B",
+            OrdersPresentationViewModelsOrderType::Dtc => "DTC",
+            OrdersPresentationViewModelsOrderType::DropShip => "DropShip",
+            OrdersPresentationViewModelsOrderType::Noop => "",
+            OrdersPresentationViewModelsOrderType::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipBobOrdersPresentationViewModelsOrderModelType {
-    fn default() -> ShipBobOrdersPresentationViewModelsOrderModelType {
-        ShipBobOrdersPresentationViewModelsOrderModelType::Noop
+impl Default for OrdersPresentationViewModelsOrderType {
+    fn default() -> OrdersPresentationViewModelsOrderType {
+        OrdersPresentationViewModelsOrderType::Noop
     }
 }
-impl ShipBobOrdersPresentationViewModelsOrderModelType {
+impl OrdersPresentationViewModelsOrderType {
     pub fn is_noop(&self) -> bool {
-        matches!(
-            self,
-            ShipBobOrdersPresentationViewModelsOrderModelType::Noop
-        )
+        matches!(self, OrdersPresentationViewModelsOrderType::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsOrderModel {
+pub struct OrdersPresentationViewModelsOrder {
     /**
      * Created by channel metadata
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub channel: Option<ShipbobReturnsPublicApiViewModelsChannelInfoModel>,
+    pub channel: Option<ReturnsChannelInfoView>,
     /**
      * Expiration date for this lot
      */
@@ -1830,7 +1820,7 @@ pub struct ShipBobOrdersPresentationViewModelsOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub products: Vec<ShipBobOrdersPresentationViewModelsProductInfoModel>,
+    pub products: Vec<OrdersPresentationViewModelsProductInfo>,
     /**
      * Expiration date for this lot
      */
@@ -1844,7 +1834,7 @@ pub struct ShipBobOrdersPresentationViewModelsOrderModel {
      * Information about the recipient of an order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub recipient: Option<ShipBobOrdersPresentationViewModelsRecipientInfoModel>,
+    pub recipient: Option<OrdersPresentationViewModelsRecipientInfo>,
     /**
      * Name of the channel
      */
@@ -1858,7 +1848,7 @@ pub struct ShipBobOrdersPresentationViewModelsOrderModel {
      * Contains properties that needs to be used for fulfilling B2B/Dropship orders.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub retailer_program_data: Option<ShipBobOrdersPresentationViewModelsRetailerProgramDataModel>,
+    pub retailer_program_data: Option<OrdersPresentationViewModelsRetailerProgramData>,
     /**
      * Shipments affiliated with the order
      */
@@ -1867,7 +1857,7 @@ pub struct ShipBobOrdersPresentationViewModelsOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub shipments: Vec<ShipBobOrdersPresentationViewModelsShipmentModel>,
+    pub shipments: Vec<OrdersPresentationViewModelsShipment>,
     /**
      * Name of the channel
      */
@@ -1881,12 +1871,12 @@ pub struct ShipBobOrdersPresentationViewModelsOrderModel {
      * Contains shipping properties that need to be used for fulfilling an order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub shipping_terms: Option<ShipBobOrdersPresentationViewModelsShippingTermsModel>,
+    pub shipping_terms: Option<OrdersPresentationViewModelsShippingTerms>,
     /**
      * The order status
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<ShipBobOrdersPresentationViewModelsOrderModelStatus>,
+    pub status: Option<OrdersPresentationViewModelsOrderStatus>,
     /**
      * Client-defined order tags
      */
@@ -1895,16 +1885,16 @@ pub struct ShipBobOrdersPresentationViewModelsOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub tags: Vec<ShipBobOrdersPresentationViewModelsTagModel>,
+    pub tags: Vec<OrdersPresentationViewModelsTag>,
     /**
      * Shipment type of the order
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
-    pub type_: Option<ShipBobOrdersPresentationViewModelsOrderModelType>,
+    pub type_: Option<OrdersPresentationViewModelsOrderType>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationModelsAddProductOrderByModel {
+pub struct OrdersPresentationModelsAddProductOrderBy {
     /**
      * Unique id of the channel
      */
@@ -1926,7 +1916,7 @@ pub struct ShipBobOrdersPresentationModelsAddProductOrderByModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationModelsAddProductOrderByReferenceModel {
+pub struct OrdersPresentationModelsAddProductOrderByReference {
     /**
      * Name of the channel
      */
@@ -1958,35 +1948,33 @@ pub struct ShipBobOrdersPresentationModelsAddProductOrderByReferenceModel {
 
 /// All of the following types:
 ///
-/// - `ShipBobOrdersPresentationModelsAddProductOrderByModel`
-/// - `ShipBobOrdersPresentationModelsAddProductOrderByReferenceModel`
+/// - `OrdersPresentationModelsAddProductOrderBy`
+/// - `OrdersPresentationModelsAddProductOrderByReference`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum ShipBobOrdersPresentationModelsAddProductOrderModelOneOf {
-    ShipBobOrdersPresentationModelsAddProductOrderByModel(
-        ShipBobOrdersPresentationModelsAddProductOrderByModel,
-    ),
-    ShipBobOrdersPresentationModelsAddProductOrderByReferenceModel(
-        ShipBobOrdersPresentationModelsAddProductOrderByReferenceModel,
+pub enum OrdersPresentationModelsAddProductOrderOneOf {
+    OrdersPresentationModelsAddProductOrderBy(OrdersPresentationModelsAddProductOrderBy),
+    OrdersPresentationModelsAddProductOrderByReference(
+        OrdersPresentationModelsAddProductOrderByReference,
     ),
 }
 
-impl ShipBobOrdersPresentationModelsAddProductOrderModelOneOf {
-    pub fn ship_bob_orders_presentation_models_add_product_order_by_model(
+impl OrdersPresentationModelsAddProductOrderOneOf {
+    pub fn orders_presentation_models_add_product_order_by(
         &self,
-    ) -> Option<&ShipBobOrdersPresentationModelsAddProductOrderByModel> {
-        if let ShipBobOrdersPresentationModelsAddProductOrderModelOneOf::ShipBobOrdersPresentationModelsAddProductOrderByModel(ref_) = self {
+    ) -> Option<&OrdersPresentationModelsAddProductOrderBy> {
+        if let OrdersPresentationModelsAddProductOrderOneOf::OrdersPresentationModelsAddProductOrderBy(ref_) = self {
                                 return Some(ref_);
                             }
         None
     }
 
-    pub fn ship_bob_orders_presentation_models_add_product_order_by_reference_model(
+    pub fn orders_presentation_models_add_product_order_by_reference(
         &self,
-    ) -> Option<&ShipBobOrdersPresentationModelsAddProductOrderByReferenceModel> {
-        if let ShipBobOrdersPresentationModelsAddProductOrderModelOneOf::ShipBobOrdersPresentationModelsAddProductOrderByReferenceModel(ref_) = self {
+    ) -> Option<&OrdersPresentationModelsAddProductOrderByReference> {
+        if let OrdersPresentationModelsAddProductOrderOneOf::OrdersPresentationModelsAddProductOrderByReference(ref_) = self {
                                 return Some(ref_);
                             }
         None
@@ -1994,7 +1982,7 @@ impl ShipBobOrdersPresentationModelsAddProductOrderModelOneOf {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationModelsCreateOrderModel {
+pub struct OrdersPresentationModelsCreateOrder {
     /**
      * Name of the channel
      */
@@ -2030,7 +2018,7 @@ pub struct ShipBobOrdersPresentationModelsCreateOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub products: Vec<ShipBobOrdersPresentationModelsAddProductOrderModelOneOf>,
+    pub products: Vec<OrdersPresentationModelsAddProductOrderOneOf>,
     /**
      * Expiration date for this lot
      */
@@ -2044,7 +2032,7 @@ pub struct ShipBobOrdersPresentationModelsCreateOrderModel {
      * Information about the recipient of an order
      */
     #[serde()]
-    pub recipient: ShipBobOrdersPresentationViewModelsRecipientInfoModel,
+    pub recipient: OrdersPresentationViewModelsRecipientInfo,
     /**
      * Name of the channel
      */
@@ -2058,7 +2046,7 @@ pub struct ShipBobOrdersPresentationModelsCreateOrderModel {
      * Contains properties that needs to be used for fulfilling B2B/Dropship orders.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub retailer_program_data: Option<ShipBobOrdersPresentationViewModelsRetailerProgramDataModel>,
+    pub retailer_program_data: Option<OrdersPresentationViewModelsRetailerProgramData>,
     /**
      * Name of the channel
      */
@@ -2072,7 +2060,7 @@ pub struct ShipBobOrdersPresentationModelsCreateOrderModel {
      * Contains shipping properties that need to be used for fulfilling an order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub shipping_terms: Option<ShipBobOrdersPresentationViewModelsShippingTermsModel>,
+    pub shipping_terms: Option<OrdersPresentationViewModelsShippingTerms>,
     /**
      * Client-defined order tags
      */
@@ -2081,12 +2069,12 @@ pub struct ShipBobOrdersPresentationModelsCreateOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub tags: Vec<ShipBobOrdersPresentationViewModelsTagModel>,
+    pub tags: Vec<OrdersPresentationViewModelsTag>,
     /**
      * Shipment type of the order
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
-    pub type_: Option<ShipBobOrdersPresentationViewModelsOrderModelType>,
+    pub type_: Option<OrdersPresentationViewModelsOrderType>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -2123,7 +2111,7 @@ impl Action {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsCanceledShipmentModel {
+pub struct OrdersPresentationViewModelsCanceledShipment {
     /**
      *
      */
@@ -2161,7 +2149,7 @@ pub struct ShipBobOrdersPresentationViewModelsCanceledShipmentModel {
  * The overall result of canceling the shipments associated with the order
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus {
+pub enum OrdersPresentationViewModelsCanceledOrderStatus {
     #[serde(rename = "Failure")]
     Failure,
     #[serde(rename = "PartialSuccess")]
@@ -2174,38 +2162,33 @@ pub enum ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus {
+impl std::fmt::Display for OrdersPresentationViewModelsCanceledOrderStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus::Failure => "Failure",
-            ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus::PartialSuccess => {
-                "PartialSuccess"
-            }
-            ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus::Success => "Success",
-            ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus::Noop => "",
-            ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus::FallthroughString => "*",
+            OrdersPresentationViewModelsCanceledOrderStatus::Failure => "Failure",
+            OrdersPresentationViewModelsCanceledOrderStatus::PartialSuccess => "PartialSuccess",
+            OrdersPresentationViewModelsCanceledOrderStatus::Success => "Success",
+            OrdersPresentationViewModelsCanceledOrderStatus::Noop => "",
+            OrdersPresentationViewModelsCanceledOrderStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus {
-    fn default() -> ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus {
-        ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus::Noop
+impl Default for OrdersPresentationViewModelsCanceledOrderStatus {
+    fn default() -> OrdersPresentationViewModelsCanceledOrderStatus {
+        OrdersPresentationViewModelsCanceledOrderStatus::Noop
     }
 }
-impl ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus {
+impl OrdersPresentationViewModelsCanceledOrderStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(
-            self,
-            ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus::Noop
-        )
+        matches!(self, OrdersPresentationViewModelsCanceledOrderStatus::Noop)
     }
 }
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsCanceledOrderModel {
+pub struct OrdersPresentationViewModelsCanceledOrder {
     /**
      *
      */
@@ -2214,12 +2197,12 @@ pub struct ShipBobOrdersPresentationViewModelsCanceledOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub canceled_shipment_results: Vec<ShipBobOrdersPresentationViewModelsCanceledShipmentModel>,
+    pub canceled_shipment_results: Vec<OrdersPresentationViewModelsCanceledShipment>,
     /**
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub order: Option<ShipBobOrdersPresentationViewModelsOrderModel>,
+    pub order: Option<OrdersPresentationViewModelsOrder>,
     /**
      *
      */
@@ -2233,12 +2216,12 @@ pub struct ShipBobOrdersPresentationViewModelsCanceledOrderModel {
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<ShipBobOrdersPresentationViewModelsCanceledOrderModelStatus>,
+    pub status: Option<OrdersPresentationViewModelsCanceledOrderStatus>,
 }
 
 /// Model for adding a Store Order Json to a ShipBob Order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationModelsAddStoreOrderJsonModel {
+pub struct OrdersPresentationModelsAddStoreOrderJson {
     /**
      * Name of the channel
      */
@@ -2251,7 +2234,7 @@ pub struct ShipBobOrdersPresentationModelsAddStoreOrderJsonModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsShipmentLogModel {
+pub struct OrdersPresentationViewModelsShipmentLog {
     /**
      * Unique id of the channel
      */
@@ -2301,7 +2284,7 @@ pub struct ShipBobOrdersPresentationViewModelsShipmentLogModel {
 
 /// Model for cancel multiple shipments at once
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationModelsCancelShipmentsModel {
+pub struct OrdersPresentationModelsCancelShipments {
     /**
      * Model for cancel multiple shipments at once
      */
@@ -2315,7 +2298,7 @@ pub struct ShipBobOrdersPresentationModelsCancelShipmentsModel {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsCanceledShipmentsModel {
+pub struct OrdersPresentationViewModelsCanceledShipments {
     /**
      *
      */
@@ -2324,11 +2307,11 @@ pub struct ShipBobOrdersPresentationViewModelsCanceledShipmentsModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub results: Vec<ShipBobOrdersPresentationViewModelsCanceledShipmentModel>,
+    pub results: Vec<OrdersPresentationViewModelsCanceledShipment>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsServiceLevelDetailModel {
+pub struct ProductsPublicBundleRootInformationView {
     /**
      * Unique id of the channel
      */
@@ -2350,7 +2333,7 @@ pub struct ShipBobOrdersPresentationViewModelsServiceLevelDetailModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobOrdersPresentationViewModelsMethodDetailModel {
+pub struct OrdersPresentationViewModelsShipMethodDetail {
     /**
      * True if the inventory item is marked as a digital item
      */
@@ -2386,11 +2369,11 @@ pub struct ShipBobOrdersPresentationViewModelsMethodDetailModel {
     )]
     pub name: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub service_level: Option<ShipBobOrdersPresentationViewModelsServiceLevelDetailModel>,
+    pub service_level: Option<ProductsPublicBundleRootInformationView>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobProductsCommonModelsProductActiveStatus {
+pub enum ProductsCommonModelsProductActiveStatus {
     #[serde(rename = "Active")]
     Active,
     #[serde(rename = "Any")]
@@ -2403,32 +2386,32 @@ pub enum ShipbobProductsCommonModelsProductActiveStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobProductsCommonModelsProductActiveStatus {
+impl std::fmt::Display for ProductsCommonModelsProductActiveStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobProductsCommonModelsProductActiveStatus::Active => "Active",
-            ShipbobProductsCommonModelsProductActiveStatus::Any => "Any",
-            ShipbobProductsCommonModelsProductActiveStatus::Inactive => "Inactive",
-            ShipbobProductsCommonModelsProductActiveStatus::Noop => "",
-            ShipbobProductsCommonModelsProductActiveStatus::FallthroughString => "*",
+            ProductsCommonModelsProductActiveStatus::Active => "Active",
+            ProductsCommonModelsProductActiveStatus::Any => "Any",
+            ProductsCommonModelsProductActiveStatus::Inactive => "Inactive",
+            ProductsCommonModelsProductActiveStatus::Noop => "",
+            ProductsCommonModelsProductActiveStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobProductsCommonModelsProductActiveStatus {
-    fn default() -> ShipbobProductsCommonModelsProductActiveStatus {
-        ShipbobProductsCommonModelsProductActiveStatus::Noop
+impl Default for ProductsCommonModelsProductActiveStatus {
+    fn default() -> ProductsCommonModelsProductActiveStatus {
+        ProductsCommonModelsProductActiveStatus::Noop
     }
 }
-impl ShipbobProductsCommonModelsProductActiveStatus {
+impl ProductsCommonModelsProductActiveStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobProductsCommonModelsProductActiveStatus::Noop)
+        matches!(self, ProductsCommonModelsProductActiveStatus::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobProductsCommonModelsProductBundleStatus {
+pub enum ProductsCommonModelsProductBundleStatus {
     #[serde(rename = "Any")]
     Any,
     #[serde(rename = "Bundle")]
@@ -2441,33 +2424,33 @@ pub enum ShipbobProductsCommonModelsProductBundleStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobProductsCommonModelsProductBundleStatus {
+impl std::fmt::Display for ProductsCommonModelsProductBundleStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobProductsCommonModelsProductBundleStatus::Any => "Any",
-            ShipbobProductsCommonModelsProductBundleStatus::Bundle => "Bundle",
-            ShipbobProductsCommonModelsProductBundleStatus::NotBundle => "NotBundle",
-            ShipbobProductsCommonModelsProductBundleStatus::Noop => "",
-            ShipbobProductsCommonModelsProductBundleStatus::FallthroughString => "*",
+            ProductsCommonModelsProductBundleStatus::Any => "Any",
+            ProductsCommonModelsProductBundleStatus::Bundle => "Bundle",
+            ProductsCommonModelsProductBundleStatus::NotBundle => "NotBundle",
+            ProductsCommonModelsProductBundleStatus::Noop => "",
+            ProductsCommonModelsProductBundleStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobProductsCommonModelsProductBundleStatus {
-    fn default() -> ShipbobProductsCommonModelsProductBundleStatus {
-        ShipbobProductsCommonModelsProductBundleStatus::Noop
+impl Default for ProductsCommonModelsProductBundleStatus {
+    fn default() -> ProductsCommonModelsProductBundleStatus {
+        ProductsCommonModelsProductBundleStatus::Noop
     }
 }
-impl ShipbobProductsCommonModelsProductBundleStatus {
+impl ProductsCommonModelsProductBundleStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobProductsCommonModelsProductBundleStatus::Noop)
+        matches!(self, ProductsCommonModelsProductBundleStatus::Noop)
     }
 }
 
 /// Information about a store channel
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobProductsApiViewModelsPublicChannelModel {
+pub struct ProductsPublicChannelView {
     /**
      * Information about a store channel
      */
@@ -2490,7 +2473,7 @@ pub struct ShipbobProductsApiViewModelsPublicChannelModel {
 
 /// The inventory that store products can resolve to when packing a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobProductsApiViewModelsPublicInventoryItemModel {
+pub struct ProductsPublicInventoryItemView {
     /**
      * The inventory that store products can resolve to when packing a shipment
      */
@@ -2522,7 +2505,7 @@ pub struct ShipbobProductsApiViewModelsPublicInventoryItemModel {
 
 /// Break down of quantities by fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobProductsApiViewModelsPublicFulfillmentCenterQuantityModel {
+pub struct ProductsPublicFulfillmentCenterQuantityView {
     /**
      * Break down of quantities by fulfillment center
      */
@@ -2571,7 +2554,7 @@ pub struct ShipbobProductsApiViewModelsPublicFulfillmentCenterQuantityModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobProductsApiViewModelsPublicProductModel {
+pub struct ProductsPublicProductView {
     /**
      * Name of the channel
      */
@@ -2582,12 +2565,12 @@ pub struct ShipbobProductsApiViewModelsPublicProductModel {
     )]
     pub barcode: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub bundle_root_information: Option<ShipBobOrdersPresentationViewModelsServiceLevelDetailModel>,
+    pub bundle_root_information: Option<ProductsPublicBundleRootInformationView>,
     /**
      * Information about a store channel
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub channel: Option<ShipbobProductsApiViewModelsPublicChannelModel>,
+    pub channel: Option<ProductsPublicChannelView>,
     /**
      * Expiration date for this lot
      */
@@ -2605,7 +2588,7 @@ pub struct ShipbobProductsApiViewModelsPublicProductModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub fulfillable_inventory_items: Vec<ShipbobProductsApiViewModelsPublicInventoryItemModel>,
+    pub fulfillable_inventory_items: Vec<ProductsPublicInventoryItemView>,
     /**
      * Fulfillable quantity of this product broken down by fulfillment center location
      */
@@ -2615,7 +2598,7 @@ pub struct ShipbobProductsApiViewModelsPublicProductModel {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub fulfillable_quantity_by_fulfillment_center:
-        Vec<ShipbobProductsApiViewModelsPublicFulfillmentCenterQuantityModel>,
+        Vec<ProductsPublicFulfillmentCenterQuantityView>,
     /**
      * Name of the channel
      */
@@ -2710,7 +2693,7 @@ pub struct ShipbobProductsApiViewModelsPublicProductModel {
 
 /// The product to create
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobProductsApiModelsPublicCreateProductModel {
+pub struct ProductsApiModelsPublicCreateProduct {
     /**
      * Name of the channel
      */
@@ -2778,7 +2761,7 @@ pub struct ShipbobProductsApiModelsPublicCreateProductModel {
 
 /// Updates to an existing product product
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobProductsApiModelsPublicUpdateProductModel {
+pub struct ProductsApiModelsPublicUpdateProduct {
     /**
      * Name of the channel
      */
@@ -2837,7 +2820,7 @@ pub struct ShipbobProductsApiModelsPublicUpdateProductModel {
 
 /// Information about a fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel {
+pub struct ReceivingFulfillmentCenterView {
     /**
      * Name of the channel
      */
@@ -2942,7 +2925,7 @@ pub struct ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobReceivingPublicCommonModelsStatus {
+pub enum ReceivingPublicCommonModelsStatus {
     #[serde(rename = "Arrived")]
     Arrived,
     #[serde(rename = "Awaiting")]
@@ -2963,36 +2946,36 @@ pub enum ShipbobReceivingPublicCommonModelsStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobReceivingPublicCommonModelsStatus {
+impl std::fmt::Display for ReceivingPublicCommonModelsStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobReceivingPublicCommonModelsStatus::Arrived => "Arrived",
-            ShipbobReceivingPublicCommonModelsStatus::Awaiting => "Awaiting",
-            ShipbobReceivingPublicCommonModelsStatus::Cancelled => "Cancelled",
-            ShipbobReceivingPublicCommonModelsStatus::Completed => "Completed",
-            ShipbobReceivingPublicCommonModelsStatus::Incomplete => "Incomplete",
-            ShipbobReceivingPublicCommonModelsStatus::PartiallyArrived => "PartiallyArrived",
-            ShipbobReceivingPublicCommonModelsStatus::Processing => "Processing",
-            ShipbobReceivingPublicCommonModelsStatus::Noop => "",
-            ShipbobReceivingPublicCommonModelsStatus::FallthroughString => "*",
+            ReceivingPublicCommonModelsStatus::Arrived => "Arrived",
+            ReceivingPublicCommonModelsStatus::Awaiting => "Awaiting",
+            ReceivingPublicCommonModelsStatus::Cancelled => "Cancelled",
+            ReceivingPublicCommonModelsStatus::Completed => "Completed",
+            ReceivingPublicCommonModelsStatus::Incomplete => "Incomplete",
+            ReceivingPublicCommonModelsStatus::PartiallyArrived => "PartiallyArrived",
+            ReceivingPublicCommonModelsStatus::Processing => "Processing",
+            ReceivingPublicCommonModelsStatus::Noop => "",
+            ReceivingPublicCommonModelsStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobReceivingPublicCommonModelsStatus {
-    fn default() -> ShipbobReceivingPublicCommonModelsStatus {
-        ShipbobReceivingPublicCommonModelsStatus::Noop
+impl Default for ReceivingPublicCommonModelsStatus {
+    fn default() -> ReceivingPublicCommonModelsStatus {
+        ReceivingPublicCommonModelsStatus::Noop
     }
 }
-impl ShipbobReceivingPublicCommonModelsStatus {
+impl ReceivingPublicCommonModelsStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobReceivingPublicCommonModelsStatus::Noop)
+        matches!(self, ReceivingPublicCommonModelsStatus::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobReceivingPublicCommonModelsPackageType {
+pub enum ReceivingPublicCommonModelsPackageType {
     #[serde(rename = "FloorLoadedContainer")]
     FloorLoadedContainer,
     #[serde(rename = "Package")]
@@ -3005,34 +2988,32 @@ pub enum ShipbobReceivingPublicCommonModelsPackageType {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobReceivingPublicCommonModelsPackageType {
+impl std::fmt::Display for ReceivingPublicCommonModelsPackageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobReceivingPublicCommonModelsPackageType::FloorLoadedContainer => {
-                "FloorLoadedContainer"
-            }
-            ShipbobReceivingPublicCommonModelsPackageType::Package => "Package",
-            ShipbobReceivingPublicCommonModelsPackageType::Pallet => "Pallet",
-            ShipbobReceivingPublicCommonModelsPackageType::Noop => "",
-            ShipbobReceivingPublicCommonModelsPackageType::FallthroughString => "*",
+            ReceivingPublicCommonModelsPackageType::FloorLoadedContainer => "FloorLoadedContainer",
+            ReceivingPublicCommonModelsPackageType::Package => "Package",
+            ReceivingPublicCommonModelsPackageType::Pallet => "Pallet",
+            ReceivingPublicCommonModelsPackageType::Noop => "",
+            ReceivingPublicCommonModelsPackageType::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobReceivingPublicCommonModelsPackageType {
-    fn default() -> ShipbobReceivingPublicCommonModelsPackageType {
-        ShipbobReceivingPublicCommonModelsPackageType::Noop
+impl Default for ReceivingPublicCommonModelsPackageType {
+    fn default() -> ReceivingPublicCommonModelsPackageType {
+        ReceivingPublicCommonModelsPackageType::Noop
     }
 }
-impl ShipbobReceivingPublicCommonModelsPackageType {
+impl ReceivingPublicCommonModelsPackageType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobReceivingPublicCommonModelsPackageType::Noop)
+        matches!(self, ReceivingPublicCommonModelsPackageType::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobReceivingPublicCommonModelsPackingType {
+pub enum ReceivingPublicCommonModelsPackingType {
     #[serde(rename = "EverythingInOneBox")]
     EverythingInOneBox,
     #[serde(rename = "MultipleSkuPerBox")]
@@ -3045,34 +3026,32 @@ pub enum ShipbobReceivingPublicCommonModelsPackingType {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobReceivingPublicCommonModelsPackingType {
+impl std::fmt::Display for ReceivingPublicCommonModelsPackingType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobReceivingPublicCommonModelsPackingType::EverythingInOneBox => {
-                "EverythingInOneBox"
-            }
-            ShipbobReceivingPublicCommonModelsPackingType::MultipleSkuPerBox => "MultipleSkuPerBox",
-            ShipbobReceivingPublicCommonModelsPackingType::OneSkuPerBox => "OneSkuPerBox",
-            ShipbobReceivingPublicCommonModelsPackingType::Noop => "",
-            ShipbobReceivingPublicCommonModelsPackingType::FallthroughString => "*",
+            ReceivingPublicCommonModelsPackingType::EverythingInOneBox => "EverythingInOneBox",
+            ReceivingPublicCommonModelsPackingType::MultipleSkuPerBox => "MultipleSkuPerBox",
+            ReceivingPublicCommonModelsPackingType::OneSkuPerBox => "OneSkuPerBox",
+            ReceivingPublicCommonModelsPackingType::Noop => "",
+            ReceivingPublicCommonModelsPackingType::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobReceivingPublicCommonModelsPackingType {
-    fn default() -> ShipbobReceivingPublicCommonModelsPackingType {
-        ShipbobReceivingPublicCommonModelsPackingType::Noop
+impl Default for ReceivingPublicCommonModelsPackingType {
+    fn default() -> ReceivingPublicCommonModelsPackingType {
+        ReceivingPublicCommonModelsPackingType::Noop
     }
 }
-impl ShipbobReceivingPublicCommonModelsPackingType {
+impl ReceivingPublicCommonModelsPackingType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobReceivingPublicCommonModelsPackingType::Noop)
+        matches!(self, ReceivingPublicCommonModelsPackingType::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobReceivingPublicCommonModelsBoxStatus {
+pub enum ReceivingPublicCommonModelsBoxStatus {
     #[serde(rename = "Arrived")]
     Arrived,
     #[serde(rename = "Awaiting")]
@@ -3091,36 +3070,36 @@ pub enum ShipbobReceivingPublicCommonModelsBoxStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobReceivingPublicCommonModelsBoxStatus {
+impl std::fmt::Display for ReceivingPublicCommonModelsBoxStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobReceivingPublicCommonModelsBoxStatus::Arrived => "Arrived",
-            ShipbobReceivingPublicCommonModelsBoxStatus::Awaiting => "Awaiting",
-            ShipbobReceivingPublicCommonModelsBoxStatus::Cancelled => "Cancelled",
-            ShipbobReceivingPublicCommonModelsBoxStatus::Completed => "Completed",
-            ShipbobReceivingPublicCommonModelsBoxStatus::Counting => "Counting",
-            ShipbobReceivingPublicCommonModelsBoxStatus::Stowing => "Stowing",
-            ShipbobReceivingPublicCommonModelsBoxStatus::Noop => "",
-            ShipbobReceivingPublicCommonModelsBoxStatus::FallthroughString => "*",
+            ReceivingPublicCommonModelsBoxStatus::Arrived => "Arrived",
+            ReceivingPublicCommonModelsBoxStatus::Awaiting => "Awaiting",
+            ReceivingPublicCommonModelsBoxStatus::Cancelled => "Cancelled",
+            ReceivingPublicCommonModelsBoxStatus::Completed => "Completed",
+            ReceivingPublicCommonModelsBoxStatus::Counting => "Counting",
+            ReceivingPublicCommonModelsBoxStatus::Stowing => "Stowing",
+            ReceivingPublicCommonModelsBoxStatus::Noop => "",
+            ReceivingPublicCommonModelsBoxStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobReceivingPublicCommonModelsBoxStatus {
-    fn default() -> ShipbobReceivingPublicCommonModelsBoxStatus {
-        ShipbobReceivingPublicCommonModelsBoxStatus::Noop
+impl Default for ReceivingPublicCommonModelsBoxStatus {
+    fn default() -> ReceivingPublicCommonModelsBoxStatus {
+        ReceivingPublicCommonModelsBoxStatus::Noop
     }
 }
-impl ShipbobReceivingPublicCommonModelsBoxStatus {
+impl ReceivingPublicCommonModelsBoxStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobReceivingPublicCommonModelsBoxStatus::Noop)
+        matches!(self, ReceivingPublicCommonModelsBoxStatus::Noop)
     }
 }
 
 /// Information about an item contained inside a box as part of a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReceivingPublicApiModelsBoxItemViewModel {
+pub struct ReceivingBoxItemView {
     /**
      * Information about an item contained inside a box as part of a receiving order
      */
@@ -3170,7 +3149,7 @@ pub struct ShipbobReceivingPublicApiModelsBoxItemViewModel {
 
 /// Information about a box shipment included in a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReceivingPublicApiModelsBoxViewModel {
+pub struct ReceivingBoxView {
     /**
      * Expiration date for this lot
      */
@@ -3188,7 +3167,7 @@ pub struct ShipbobReceivingPublicApiModelsBoxViewModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub box_items: Vec<ShipbobReceivingPublicApiModelsBoxItemViewModel>,
+    pub box_items: Vec<ReceivingBoxItemView>,
     /**
      * Information about a box shipment included in a receiving order
      */
@@ -3202,7 +3181,7 @@ pub struct ShipbobReceivingPublicApiModelsBoxViewModel {
      * Information about a box shipment included in a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub box_status: Option<ShipbobReceivingPublicCommonModelsBoxStatus>,
+    pub box_status: Option<ReceivingPublicCommonModelsBoxStatus>,
     /**
      * Expiration date for this lot
      */
@@ -3234,7 +3213,7 @@ pub struct ShipbobReceivingPublicApiModelsBoxViewModel {
 
 /// Information about a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReceivingPublicApiModelsOrderViewModel {
+pub struct ReceivingOrderView {
     /**
      * Name of the channel
      */
@@ -3248,7 +3227,7 @@ pub struct ShipbobReceivingPublicApiModelsOrderViewModel {
      * Information about a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub box_packaging_type: Option<ShipbobReceivingPublicCommonModelsPackingType>,
+    pub box_packaging_type: Option<ReceivingPublicCommonModelsPackingType>,
     /**
      * Information about the boxes being shipped in this receiving order
      */
@@ -3257,7 +3236,7 @@ pub struct ShipbobReceivingPublicApiModelsOrderViewModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub boxes: Vec<ShipbobReceivingPublicApiModelsBoxViewModel>,
+    pub boxes: Vec<ReceivingBoxView>,
     /**
      * Expiration date for this lot
      */
@@ -3271,7 +3250,7 @@ pub struct ShipbobReceivingPublicApiModelsOrderViewModel {
      * Information about a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub fulfillment_center: Option<ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel>,
+    pub fulfillment_center: Option<ReceivingFulfillmentCenterView>,
     /**
      * Information about a receiving order
      */
@@ -3303,12 +3282,12 @@ pub struct ShipbobReceivingPublicApiModelsOrderViewModel {
      * Information about a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub package_type: Option<ShipbobReceivingPublicCommonModelsPackageType>,
+    pub package_type: Option<ReceivingPublicCommonModelsPackageType>,
     /**
      * Information about a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<ShipbobReceivingPublicCommonModelsStatus>,
+    pub status: Option<ReceivingPublicCommonModelsStatus>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -3374,7 +3353,7 @@ pub struct MicrosoftAspNetCoreMvcValidationProblemDetails {
 
 /// Model containing information that assigns a receiving order to a fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReceivingPublicApiModelsAssignOrderFulfillmentCenterModel {
+pub struct ReceivingAssignOrderFulfillmentCenter {
     /**
      * Unique id of the channel
      */
@@ -3388,7 +3367,7 @@ pub struct ShipbobReceivingPublicApiModelsAssignOrderFulfillmentCenterModel {
 
 /// Information about an inventory item contained inside a receiving order box
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReceivingPublicApiModelsAddBoxItemModel {
+pub struct ReceivingAddBoxItemTo {
     /**
      * Unique id of the channel
      */
@@ -3429,7 +3408,7 @@ pub struct ShipbobReceivingPublicApiModelsAddBoxItemModel {
 
 /// Information about a box shipment to be added to a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReceivingPublicApiModelsAddBoxOrderModel {
+pub struct ReceivingAddBoxOrder {
     /**
      * Items contained in this box
      */
@@ -3438,7 +3417,7 @@ pub struct ShipbobReceivingPublicApiModelsAddBoxOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub box_items: Vec<ShipbobReceivingPublicApiModelsAddBoxItemModel>,
+    pub box_items: Vec<ReceivingAddBoxItemTo>,
     /**
      * Name of the channel
      */
@@ -3452,9 +3431,9 @@ pub struct ShipbobReceivingPublicApiModelsAddBoxOrderModel {
 
 /// Information to create a new receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReceivingPublicApiModelsCreateOrderModel {
+pub struct ReceivingCreateOrder {
     #[serde()]
-    pub box_packaging_type: ShipbobReceivingPublicCommonModelsPackingType,
+    pub box_packaging_type: ReceivingPublicCommonModelsPackingType,
     /**
      * Box shipments to be added to this receiving order
      */
@@ -3463,7 +3442,7 @@ pub struct ShipbobReceivingPublicApiModelsCreateOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub boxes: Vec<ShipbobReceivingPublicApiModelsAddBoxOrderModel>,
+    pub boxes: Vec<ReceivingAddBoxOrder>,
     /**
      * Expiration date for this lot
      */
@@ -3477,13 +3456,13 @@ pub struct ShipbobReceivingPublicApiModelsCreateOrderModel {
      * Model containing information that assigns a receiving order to a fulfillment center
      */
     #[serde()]
-    pub fulfillment_center: ShipbobReceivingPublicApiModelsAssignOrderFulfillmentCenterModel,
+    pub fulfillment_center: ReceivingAssignOrderFulfillmentCenter,
     #[serde()]
-    pub package_type: ShipbobReceivingPublicCommonModelsPackageType,
+    pub package_type: ReceivingPublicCommonModelsPackageType,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobReturnsPublicCommonReturnStatus {
+pub enum ReturnsPublicCommonReturnStatus {
     #[serde(rename = "Arrived")]
     Arrived,
     #[serde(rename = "AwaitingArrival")]
@@ -3500,34 +3479,34 @@ pub enum ShipbobReturnsPublicCommonReturnStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobReturnsPublicCommonReturnStatus {
+impl std::fmt::Display for ReturnsPublicCommonReturnStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobReturnsPublicCommonReturnStatus::Arrived => "Arrived",
-            ShipbobReturnsPublicCommonReturnStatus::AwaitingArrival => "AwaitingArrival",
-            ShipbobReturnsPublicCommonReturnStatus::Cancelled => "Cancelled",
-            ShipbobReturnsPublicCommonReturnStatus::Completed => "Completed",
-            ShipbobReturnsPublicCommonReturnStatus::Processing => "Processing",
-            ShipbobReturnsPublicCommonReturnStatus::Noop => "",
-            ShipbobReturnsPublicCommonReturnStatus::FallthroughString => "*",
+            ReturnsPublicCommonReturnStatus::Arrived => "Arrived",
+            ReturnsPublicCommonReturnStatus::AwaitingArrival => "AwaitingArrival",
+            ReturnsPublicCommonReturnStatus::Cancelled => "Cancelled",
+            ReturnsPublicCommonReturnStatus::Completed => "Completed",
+            ReturnsPublicCommonReturnStatus::Processing => "Processing",
+            ReturnsPublicCommonReturnStatus::Noop => "",
+            ReturnsPublicCommonReturnStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobReturnsPublicCommonReturnStatus {
-    fn default() -> ShipbobReturnsPublicCommonReturnStatus {
-        ShipbobReturnsPublicCommonReturnStatus::Noop
+impl Default for ReturnsPublicCommonReturnStatus {
+    fn default() -> ReturnsPublicCommonReturnStatus {
+        ReturnsPublicCommonReturnStatus::Noop
     }
 }
-impl ShipbobReturnsPublicCommonReturnStatus {
+impl ReturnsPublicCommonReturnStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobReturnsPublicCommonReturnStatus::Noop)
+        matches!(self, ReturnsPublicCommonReturnStatus::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobReturnsPublicCommonTransactionLogSource {
+pub enum ReturnsPublicCommonTransactionLogSource {
     #[serde(rename = "ReturnLabelInvoice")]
     ReturnLabelInvoice,
     #[serde(rename = "ReturnProcessingFee")]
@@ -3540,38 +3519,32 @@ pub enum ShipbobReturnsPublicCommonTransactionLogSource {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobReturnsPublicCommonTransactionLogSource {
+impl std::fmt::Display for ReturnsPublicCommonTransactionLogSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobReturnsPublicCommonTransactionLogSource::ReturnLabelInvoice => {
-                "ReturnLabelInvoice"
-            }
-            ShipbobReturnsPublicCommonTransactionLogSource::ReturnProcessingFee => {
-                "ReturnProcessingFee"
-            }
-            ShipbobReturnsPublicCommonTransactionLogSource::ReturnToSenderFee => {
-                "ReturnToSenderFee"
-            }
-            ShipbobReturnsPublicCommonTransactionLogSource::Noop => "",
-            ShipbobReturnsPublicCommonTransactionLogSource::FallthroughString => "*",
+            ReturnsPublicCommonTransactionLogSource::ReturnLabelInvoice => "ReturnLabelInvoice",
+            ReturnsPublicCommonTransactionLogSource::ReturnProcessingFee => "ReturnProcessingFee",
+            ReturnsPublicCommonTransactionLogSource::ReturnToSenderFee => "ReturnToSenderFee",
+            ReturnsPublicCommonTransactionLogSource::Noop => "",
+            ReturnsPublicCommonTransactionLogSource::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobReturnsPublicCommonTransactionLogSource {
-    fn default() -> ShipbobReturnsPublicCommonTransactionLogSource {
-        ShipbobReturnsPublicCommonTransactionLogSource::Noop
+impl Default for ReturnsPublicCommonTransactionLogSource {
+    fn default() -> ReturnsPublicCommonTransactionLogSource {
+        ReturnsPublicCommonTransactionLogSource::Noop
     }
 }
-impl ShipbobReturnsPublicCommonTransactionLogSource {
+impl ReturnsPublicCommonTransactionLogSource {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobReturnsPublicCommonTransactionLogSource::Noop)
+        matches!(self, ReturnsPublicCommonTransactionLogSource::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsTransactionModel {
+pub struct ReturnsTransactionView {
     /**
      * Weight in ounces of this inventory item
      */
@@ -3582,12 +3555,12 @@ pub struct ShipbobReturnsPublicApiViewModelsTransactionModel {
     )]
     pub amount: f64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub transaction_type: Option<ShipbobReturnsPublicCommonTransactionLogSource>,
+    pub transaction_type: Option<ReturnsPublicCommonTransactionLogSource>,
 }
 
 /// Information about a fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsFulfillmentCenterModel {
+pub struct ReturnsFulfillmentCenterView {
     /**
      * Unique id of the channel
      */
@@ -3609,7 +3582,7 @@ pub struct ShipbobReturnsPublicApiViewModelsFulfillmentCenterModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobReturnsPublicCommonReturnAction {
+pub enum ReturnsPublicCommonReturnAction {
     #[serde(rename = "Default")]
     Default,
     #[serde(rename = "Dispose")]
@@ -3624,33 +3597,33 @@ pub enum ShipbobReturnsPublicCommonReturnAction {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobReturnsPublicCommonReturnAction {
+impl std::fmt::Display for ReturnsPublicCommonReturnAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobReturnsPublicCommonReturnAction::Default => "Default",
-            ShipbobReturnsPublicCommonReturnAction::Dispose => "Dispose",
-            ShipbobReturnsPublicCommonReturnAction::Quarantine => "Quarantine",
-            ShipbobReturnsPublicCommonReturnAction::Restock => "Restock",
-            ShipbobReturnsPublicCommonReturnAction::Noop => "",
-            ShipbobReturnsPublicCommonReturnAction::FallthroughString => "*",
+            ReturnsPublicCommonReturnAction::Default => "Default",
+            ReturnsPublicCommonReturnAction::Dispose => "Dispose",
+            ReturnsPublicCommonReturnAction::Quarantine => "Quarantine",
+            ReturnsPublicCommonReturnAction::Restock => "Restock",
+            ReturnsPublicCommonReturnAction::Noop => "",
+            ReturnsPublicCommonReturnAction::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobReturnsPublicCommonReturnAction {
-    fn default() -> ShipbobReturnsPublicCommonReturnAction {
-        ShipbobReturnsPublicCommonReturnAction::Noop
+impl Default for ReturnsPublicCommonReturnAction {
+    fn default() -> ReturnsPublicCommonReturnAction {
+        ReturnsPublicCommonReturnAction::Noop
     }
 }
-impl ShipbobReturnsPublicCommonReturnAction {
+impl ReturnsPublicCommonReturnAction {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobReturnsPublicCommonReturnAction::Noop)
+        matches!(self, ReturnsPublicCommonReturnAction::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobReturnsPublicCommonReturnActionSource {
+pub enum ReturnsPublicCommonReturnActionSource {
     #[serde(rename = "InventoryDefault")]
     InventoryDefault,
     #[serde(rename = "Override")]
@@ -3661,35 +3634,35 @@ pub enum ShipbobReturnsPublicCommonReturnActionSource {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobReturnsPublicCommonReturnActionSource {
+impl std::fmt::Display for ReturnsPublicCommonReturnActionSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobReturnsPublicCommonReturnActionSource::InventoryDefault => "InventoryDefault",
-            ShipbobReturnsPublicCommonReturnActionSource::Override => "Override",
-            ShipbobReturnsPublicCommonReturnActionSource::Noop => "",
-            ShipbobReturnsPublicCommonReturnActionSource::FallthroughString => "*",
+            ReturnsPublicCommonReturnActionSource::InventoryDefault => "InventoryDefault",
+            ReturnsPublicCommonReturnActionSource::Override => "Override",
+            ReturnsPublicCommonReturnActionSource::Noop => "",
+            ReturnsPublicCommonReturnActionSource::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobReturnsPublicCommonReturnActionSource {
-    fn default() -> ShipbobReturnsPublicCommonReturnActionSource {
-        ShipbobReturnsPublicCommonReturnActionSource::Noop
+impl Default for ReturnsPublicCommonReturnActionSource {
+    fn default() -> ReturnsPublicCommonReturnActionSource {
+        ReturnsPublicCommonReturnActionSource::Noop
     }
 }
-impl ShipbobReturnsPublicCommonReturnActionSource {
+impl ReturnsPublicCommonReturnActionSource {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobReturnsPublicCommonReturnActionSource::Noop)
+        matches!(self, ReturnsPublicCommonReturnActionSource::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsReturnActionRequestedModel {
+pub struct ReturnsReturnActionRequestedView {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub action: Option<ShipbobReturnsPublicCommonReturnAction>,
+    pub action: Option<ReturnsPublicCommonReturnAction>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub action_type: Option<ShipbobReturnsPublicCommonReturnActionSource>,
+    pub action_type: Option<ReturnsPublicCommonReturnActionSource>,
     /**
      * Name of the channel
      */
@@ -3702,9 +3675,9 @@ pub struct ShipbobReturnsPublicApiViewModelsReturnActionRequestedModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsReturnActionTakenModel {
+pub struct ReturnsReturnActionTakenView {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub action: Option<ShipbobReturnsPublicCommonReturnAction>,
+    pub action: Option<ReturnsPublicCommonReturnAction>,
     /**
      * Name of the channel
      */
@@ -3726,9 +3699,9 @@ pub struct ShipbobReturnsPublicApiViewModelsReturnActionTakenModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsInventoryItemModel {
+pub struct ReturnsInventoryItemView {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub action_requested: Option<ShipbobReturnsPublicApiViewModelsReturnActionRequestedModel>,
+    pub action_requested: Option<ReturnsReturnActionRequestedView>,
     /**
      * Action(s) taken when processing the return
      */
@@ -3737,7 +3710,7 @@ pub struct ShipbobReturnsPublicApiViewModelsInventoryItemModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub action_taken: Vec<ShipbobReturnsPublicApiViewModelsReturnActionTakenModel>,
+    pub action_taken: Vec<ReturnsReturnActionTakenView>,
     /**
      * Unique id of the channel
      */
@@ -3768,7 +3741,7 @@ pub struct ShipbobReturnsPublicApiViewModelsInventoryItemModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipbobReturnsPublicCommonReturnType {
+pub enum ReturnsPublicCommonReturnType {
     #[serde(rename = "Regular")]
     Regular,
     #[serde(rename = "ReturnToSender")]
@@ -3779,41 +3752,41 @@ pub enum ShipbobReturnsPublicCommonReturnType {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipbobReturnsPublicCommonReturnType {
+impl std::fmt::Display for ReturnsPublicCommonReturnType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipbobReturnsPublicCommonReturnType::Regular => "Regular",
-            ShipbobReturnsPublicCommonReturnType::ReturnToSender => "ReturnToSender",
-            ShipbobReturnsPublicCommonReturnType::Noop => "",
-            ShipbobReturnsPublicCommonReturnType::FallthroughString => "*",
+            ReturnsPublicCommonReturnType::Regular => "Regular",
+            ReturnsPublicCommonReturnType::ReturnToSender => "ReturnToSender",
+            ReturnsPublicCommonReturnType::Noop => "",
+            ReturnsPublicCommonReturnType::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipbobReturnsPublicCommonReturnType {
-    fn default() -> ShipbobReturnsPublicCommonReturnType {
-        ShipbobReturnsPublicCommonReturnType::Noop
+impl Default for ReturnsPublicCommonReturnType {
+    fn default() -> ReturnsPublicCommonReturnType {
+        ReturnsPublicCommonReturnType::Noop
     }
 }
-impl ShipbobReturnsPublicCommonReturnType {
+impl ReturnsPublicCommonReturnType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipbobReturnsPublicCommonReturnType::Noop)
+        matches!(self, ReturnsPublicCommonReturnType::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsReturnOrderModel {
+pub struct ReturnsReturnOrderView {
     /**
      * Created by channel metadata
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub channel: Option<ShipbobReturnsPublicApiViewModelsChannelInfoModel>,
+    pub channel: Option<ReturnsChannelInfoView>,
     /**
      * Information about a fulfillment center
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub fulfillment_center: Option<ShipbobReturnsPublicApiViewModelsFulfillmentCenterModel>,
+    pub fulfillment_center: Option<ReturnsFulfillmentCenterView>,
     /**
      * Unique id of the channel
      */
@@ -3840,7 +3813,7 @@ pub struct ShipbobReturnsPublicApiViewModelsReturnOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub inventory: Vec<ShipbobReturnsPublicApiViewModelsInventoryItemModel>,
+    pub inventory: Vec<ReturnsInventoryItemView>,
     /**
      * Weight in ounces of this inventory item
      */
@@ -3869,9 +3842,9 @@ pub struct ShipbobReturnsPublicApiViewModelsReturnOrderModel {
     )]
     pub reference_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub return_type: Option<ShipbobReturnsPublicCommonReturnType>,
+    pub return_type: Option<ReturnsPublicCommonReturnType>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<ShipbobReturnsPublicCommonReturnStatus>,
+    pub status: Option<ReturnsPublicCommonReturnStatus>,
     /**
      * Name of the channel
      */
@@ -3889,11 +3862,11 @@ pub struct ShipbobReturnsPublicApiViewModelsReturnOrderModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub transactions: Vec<ShipbobReturnsPublicApiViewModelsTransactionModel>,
+    pub transactions: Vec<ReturnsTransactionView>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsReturnInventoryModel {
+pub struct ReturnsReturnInventoryView {
     /**
      * Unique id of the channel
      */
@@ -3913,16 +3886,16 @@ pub struct ShipbobReturnsPublicApiViewModelsReturnInventoryModel {
     )]
     pub quantity: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub requested_action: Option<ShipbobReturnsPublicCommonReturnAction>,
+    pub requested_action: Option<ReturnsPublicCommonReturnAction>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsCreateReturnModel {
+pub struct ReturnsCreateReturnView {
     /**
      * Information about a fulfillment center
      */
     #[serde()]
-    pub fulfillment_center: ShipbobReturnsPublicApiViewModelsFulfillmentCenterModel,
+    pub fulfillment_center: ReturnsFulfillmentCenterView,
     /**
      * Array of inventory items being returned
      */
@@ -3931,7 +3904,7 @@ pub struct ShipbobReturnsPublicApiViewModelsCreateReturnModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub inventory: Vec<ShipbobReturnsPublicApiViewModelsReturnInventoryModel>,
+    pub inventory: Vec<ReturnsReturnInventoryView>,
     /**
      * Unique id of the channel
      */
@@ -4000,9 +3973,9 @@ impl SortOrder {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryModel {
+pub struct ReturnsReturnOrderStatusHistoryView {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<ShipbobReturnsPublicCommonReturnStatus>,
+    pub status: Option<ReturnsPublicCommonReturnStatus>,
     /**
      * Expiration date for this lot
      */
@@ -4015,7 +3988,7 @@ pub struct ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ShipBobWebhooksPublicCommonTopics {
+pub enum WebhooksPublicCommonTopics {
     #[serde(rename = "order_shipped")]
     OrderShipped,
     #[serde(rename = "shipment_delivered")]
@@ -4030,33 +4003,33 @@ pub enum ShipBobWebhooksPublicCommonTopics {
     FallthroughString,
 }
 
-impl std::fmt::Display for ShipBobWebhooksPublicCommonTopics {
+impl std::fmt::Display for WebhooksPublicCommonTopics {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ShipBobWebhooksPublicCommonTopics::OrderShipped => "order_shipped",
-            ShipBobWebhooksPublicCommonTopics::ShipmentDelivered => "shipment_delivered",
-            ShipBobWebhooksPublicCommonTopics::ShipmentException => "shipment_exception",
-            ShipBobWebhooksPublicCommonTopics::ShipmentOnhold => "shipment_onhold",
-            ShipBobWebhooksPublicCommonTopics::Noop => "",
-            ShipBobWebhooksPublicCommonTopics::FallthroughString => "*",
+            WebhooksPublicCommonTopics::OrderShipped => "order_shipped",
+            WebhooksPublicCommonTopics::ShipmentDelivered => "shipment_delivered",
+            WebhooksPublicCommonTopics::ShipmentException => "shipment_exception",
+            WebhooksPublicCommonTopics::ShipmentOnhold => "shipment_onhold",
+            WebhooksPublicCommonTopics::Noop => "",
+            WebhooksPublicCommonTopics::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ShipBobWebhooksPublicCommonTopics {
-    fn default() -> ShipBobWebhooksPublicCommonTopics {
-        ShipBobWebhooksPublicCommonTopics::Noop
+impl Default for WebhooksPublicCommonTopics {
+    fn default() -> WebhooksPublicCommonTopics {
+        WebhooksPublicCommonTopics::Noop
     }
 }
-impl ShipBobWebhooksPublicCommonTopics {
+impl WebhooksPublicCommonTopics {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ShipBobWebhooksPublicCommonTopics::Noop)
+        matches!(self, WebhooksPublicCommonTopics::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobWebhooksPublicApiModelsWebhookViewModel {
+pub struct WebhooksWebhookView {
     /**
      * Expiration date for this lot
      */
@@ -4085,11 +4058,11 @@ pub struct ShipBobWebhooksPublicApiModelsWebhookViewModel {
     )]
     pub subscription_url: Option<url::Url>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub topic: Option<ShipBobWebhooksPublicCommonTopics>,
+    pub topic: Option<WebhooksPublicCommonTopics>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel {
+pub struct WebhooksCreateWebhookSubscription {
     /**
      * URL subscription events will be posted to
      */
@@ -4100,7 +4073,7 @@ pub struct ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel {
     )]
     pub subscription_url: Option<url::Url>,
     #[serde()]
-    pub topic: ShipBobWebhooksPublicCommonTopics,
+    pub topic: WebhooksPublicCommonTopics,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -4199,7 +4172,7 @@ impl IntegrationsLocationPublicCommonServiceTypeEnum {
 
 /// The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationPublicApiViewModelsAddressModel {
+pub struct IntegrationsLocationAddressView {
     /**
      * Name of the channel
      */
@@ -4286,12 +4259,12 @@ pub struct IntegrationsLocationPublicApiViewModelsAddressModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationPublicApiViewModelsServiceModel {
+pub struct IntegrationsLocationServiceView {
     /**
      * The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub address: Option<IntegrationsLocationPublicApiViewModelsAddressModel>,
+    pub address: Option<IntegrationsLocationAddressView>,
     /**
      * True if the inventory item is marked as a digital item
      */
@@ -4305,7 +4278,7 @@ pub struct IntegrationsLocationPublicApiViewModelsServiceModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationPublicApiViewModelsModel {
+pub struct IntegrationsLocationView {
     /**
      * Name of the channel
      */
@@ -4370,7 +4343,7 @@ pub struct IntegrationsLocationPublicApiViewModelsModel {
     )]
     pub name: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub region: Option<ShipBobOrdersPresentationViewModelsServiceLevelDetailModel>,
+    pub region: Option<ProductsPublicBundleRootInformationView>,
     /**
      * Services provided by the location
      */
@@ -4379,7 +4352,7 @@ pub struct IntegrationsLocationPublicApiViewModelsModel {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub services: Vec<IntegrationsLocationPublicApiViewModelsServiceModel>,
+    pub services: Vec<IntegrationsLocationServiceView>,
     /**
      * Name of the channel
      */
@@ -4392,7 +4365,7 @@ pub struct IntegrationsLocationPublicApiViewModelsModel {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationPublicApiViewModelsInternalModel {
+pub struct IntegrationsLocationInternalView {
     /**
      * True if the inventory item is marked as a digital item
      */
@@ -4405,14 +4378,12 @@ pub struct IntegrationsLocationPublicApiViewModelsInternalModel {
 
 /// All of the following types are flattened into one object:
 ///
-/// - `IntegrationsLocationPublicApiViewModelsModel`
-/// - `IntegrationsLocationPublicApiViewModelsInternalModel`
+/// - `IntegrationsLocationView`
+/// - `IntegrationsLocationInternalView`
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationPublicApiViewModelsInternalModelAllOf {
+pub struct IntegrationsLocationInternalViewAllOf {
     #[serde(flatten)]
-    pub integrations_location_public_api_view_models_model:
-        IntegrationsLocationPublicApiViewModelsModel,
+    pub integrations_location_view: IntegrationsLocationView,
     #[serde(flatten)]
-    pub integrations_location_public_api_view_models_internal_model:
-        IntegrationsLocationPublicApiViewModelsInternalModel,
+    pub integrations_location_internal_view: IntegrationsLocationInternalView,
 }

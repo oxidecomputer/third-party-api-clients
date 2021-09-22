@@ -127,7 +127,10 @@ pub fn generate_files(
                         (Some("B".to_string()), Some("body".to_string()))
                     } else {
                         let (ct, mt) = b.content.first().unwrap();
-                        if ct == "application/json" || ct == "application/octet-stream" {
+                        if ct == "application/json"
+                            || ct == "application/octet-stream"
+                            || ct.contains("application/json")
+                        {
                             if let Some(s) = &mt.schema {
                                 let object_name = format!("{} request", oid_to_object_name(&od));
                                 let id = ts.select(Some(&object_name), s, "")?;
@@ -666,6 +669,7 @@ fn get_fn_params(
                 && (proper_name != "SendGrid" || !is_sendgrid_unnecessary_param(nam))
                 && (proper_name != "Slack" || !is_slack_unnecessary_param(nam))
                 && (proper_name != "Okta" || !is_okta_unnecessary_param(nam))
+                && (proper_name != "ShipBob" || !is_shipbob_unnecessary_param(nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
                     fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
@@ -710,6 +714,7 @@ fn get_fn_params(
                     && (proper_name != "SendGrid" || !is_sendgrid_unnecessary_param(nam))
                     && (proper_name != "Slack" || !is_slack_unnecessary_param(nam))
                     && (proper_name != "Okta" || !is_okta_unnecessary_param(nam))
+                    && (proper_name != "ShipBob" || !is_shipbob_unnecessary_param(nam))
                 {
                     if typ == "chrono::DateTime<chrono::Utc>" {
                         query_params.insert(
@@ -1158,4 +1163,8 @@ fn is_okta_unnecessary_param(s: &str) -> bool {
         || s == "x_forwarded_for"
         || s == "user_agent"
         || s == "accept_language"
+}
+
+fn is_shipbob_unnecessary_param(s: &str) -> bool {
+    s == "shipbob_channel_id"
 }

@@ -2517,6 +2517,10 @@ fn clean_name(t: &str) -> String {
             .replace("040000", "subdirectory_tree")
             .replace("160000", "submodule_commit")
             .replace("120000", "symlink_path_blob")
+            .replace("shipbob", "")
+            .replace("ShipBob", "")
+            .replace("public api models", "")
+            .replace("api view models model", "")
             .replace(" an ", " ")
             .replace(" or ", " ")
             .replace(" for ", " ")
@@ -2547,6 +2551,11 @@ fn clean_name(t: &str) -> String {
     .replace("payrolls_payroll_", "payroll_")
     .replace("locations_location_", "location_")
     .replace("applicants_applicant_", "applicant_")
+    .replace("_public_api_view_models", "_")
+    .replace("_api_view_models", "_")
+    .replace("_channels_channel", "_channel")
+    .trim_end_matches("_model")
+    .trim_end_matches("_view")
     .trim_start_matches('_')
     .trim_end_matches('_')
     .replace("_", " ")
@@ -2573,11 +2582,17 @@ pub fn path_to_operation_id(path: &str, method: &str) -> String {
         path.replace("/", "-")
             .trim_start_matches('-')
             .replace('{', "_by_")
-            .replace('}', ""),
+            .replace('}', "")
             .replace("shippingmethod", "shipping_method")
             .replace("statushistory", "status_history")
+            .replace("cancelbulk", "cancel_bulk")
     );
-    println!("path: {} -> {}", path, to_snake_case(&new));
+
+    if path == "/order/{orderId}/shipment" {
+        return "get_order_shipments".to_string();
+    } else if path == "/order/{orderId}/shipment/{shipmentId}/logs" {
+        return "get_order_shipment_logs".to_string();
+    }
 
     new
 }

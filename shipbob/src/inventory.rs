@@ -21,10 +21,7 @@ impl Inventory {
      *
      * * `inventory_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(
-        &self,
-        inventory_id: i64,
-    ) -> Result<crate::types::ShipbobInventoryApiViewModelsModel> {
+    pub async fn get(&self, inventory_id: i64) -> Result<crate::types::InventoryView> {
         let url = format!(
             "/inventory/{}",
             crate::progenitor_support::encode_path(&inventory_id.to_string()),
@@ -52,7 +49,7 @@ impl Inventory {
      *   1. Expected behavior for search by Inventory ID is exact match
      *   2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,
      *   but must be consecutive characters. This is not case sensitive.
-     * * `shipbob_channel_id: i64` -- Unique id of the channel.
+     * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn get_page(
         &self,
@@ -63,8 +60,7 @@ impl Inventory {
         i_ds: &[String],
         sort: &str,
         search: &str,
-        shipbob_channel_id: i64,
-    ) -> Result<Vec<crate::types::ShipbobInventoryApiViewModelsModel>> {
+    ) -> Result<Vec<crate::types::InventoryView>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_ds.is_empty() {
             query_args.push(("IDs".to_string(), i_ds.join(" ")));
@@ -107,8 +103,7 @@ impl Inventory {
         i_ds: &[String],
         sort: &str,
         search: &str,
-        shipbob_channel_id: i64,
-    ) -> Result<Vec<crate::types::ShipbobInventoryApiViewModelsModel>> {
+    ) -> Result<Vec<crate::types::InventoryView>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_ds.is_empty() {
             query_args.push(("IDs".to_string(), i_ds.join(" ")));
@@ -139,13 +134,9 @@ impl Inventory {
      * **Parameters:**
      *
      * * `product_id: i64` -- The product id to get inventory for.
-     * * `shipbob_channel_id: i64` -- Unique id of the channel.
+     * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get_product(
-        &self,
-        product_id: i64,
-        shipbob_channel_id: i64,
-    ) -> Result<Vec<crate::types::ShipbobInventoryApiViewModelsModel>> {
+    pub async fn get_product(&self, product_id: i64) -> Result<Vec<crate::types::InventoryView>> {
         let url = format!(
             "/product/{}/inventory",
             crate::progenitor_support::encode_path(&product_id.to_string()),
@@ -164,8 +155,7 @@ impl Inventory {
     pub async fn get_all_product(
         &self,
         product_id: i64,
-        shipbob_channel_id: i64,
-    ) -> Result<Vec<crate::types::ShipbobInventoryApiViewModelsModel>> {
+    ) -> Result<Vec<crate::types::InventoryView>> {
         let url = format!(
             "/product/{}/inventory",
             crate::progenitor_support::encode_path(&product_id.to_string()),

@@ -19,7 +19,7 @@ impl Receiving {
      */
     pub async fn get_fulfillment_center(
         &self,
-    ) -> Result<Vec<crate::types::ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel>> {
+    ) -> Result<Vec<crate::types::ReceivingFulfillmentCenterView>> {
         let url = "/fulfillmentCenter".to_string();
         self.client.get(&url, None).await
     }
@@ -33,7 +33,7 @@ impl Receiving {
      */
     pub async fn get_all_fulfillment_center(
         &self,
-    ) -> Result<Vec<crate::types::ShipbobReceivingPublicApiModelsFulfillmentCenterViewModel>> {
+    ) -> Result<Vec<crate::types::ReceivingFulfillmentCenterView>> {
         let url = "/fulfillmentCenter".to_string();
         self.client.get_all_pages(&url, None).await
     }
@@ -47,10 +47,7 @@ impl Receiving {
      *
      * * `id: i64` -- Unique id of the channel.
      */
-    pub async fn get(
-        &self,
-        id: i64,
-    ) -> Result<crate::types::ShipbobReceivingPublicApiModelsOrderViewModel> {
+    pub async fn get(&self, id: i64) -> Result<crate::types::ReceivingOrderView> {
         let url = format!(
             "/receiving/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -82,12 +79,14 @@ impl Receiving {
      *
      * This function performs a `POST` to the `/receiving` endpoint.
      */
-    pub async fn post<T: Into<reqwest::Body>>(
+    pub async fn post(
         &self,
-        body: crate::types::ShipbobReceivingPublicApiModelsCreateOrderModel,
-    ) -> Result<crate::types::ShipbobReceivingPublicApiModelsOrderViewModel> {
+        body: &crate::types::ReceivingCreateOrder,
+    ) -> Result<crate::types::ReceivingOrderView> {
         let url = "/receiving".to_string();
-        self.client.post(&url, Some(body.into())).await
+        self.client
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .await
     }
 
     /**

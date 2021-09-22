@@ -20,13 +20,9 @@ impl Returns {
      * **Parameters:**
      *
      * * `id: i64` -- Unique id of the channel.
-     * * `shipbob_channel_id: i64` -- Unique id of the channel.
+     * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(
-        &self,
-        id: i64,
-        shipbob_channel_id: i64,
-    ) -> Result<crate::types::ShipbobReturnsPublicApiViewModelsReturnOrderModel> {
+    pub async fn get(&self, id: i64) -> Result<crate::types::ReturnsReturnOrderView> {
         let url = format!(
             "/return/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -42,21 +38,22 @@ impl Returns {
      *
      * **Parameters:**
      *
-     * * `shipbob_channel_id: i64` -- Unique id of the channel.
+     * * `channel_id: i64` -- Unique id of the channel.
      * * `id: i64` -- Unique id of the channel.
      */
-    pub async fn put<T: Into<reqwest::Body>>(
+    pub async fn put(
         &self,
-        shipbob_channel_id: i64,
         id: i64,
-        body: crate::types::ShipbobReturnsPublicApiViewModelsCreateReturnModel,
-    ) -> Result<crate::types::ShipbobReturnsPublicApiViewModelsReturnOrderModel> {
+        body: &crate::types::ReturnsCreateReturnView,
+    ) -> Result<crate::types::ReturnsReturnOrderView> {
         let url = format!(
             "/return/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
         );
 
-        self.client.put(&url, Some(body.into())).await
+        self.client
+            .put(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .await
     }
 
     /**
@@ -78,7 +75,7 @@ impl Returns {
      * * `tracking_numbers: &[String]` -- Comma separated list of tracking numbers to filter by.
      * * `original_shipment_ids: &[String]` -- Comma separated list of original shipment IDs to filter by.
      * * `inventory_ids: &[String]` -- Comma separated list of inventory IDs contained in return to filter by.
-     * * `shipbob_channel_id: i64` -- Unique id of the channel.
+     * * `channel_id: i64` -- Unique id of the channel.
      */
     pub async fn get_page(
         &self,
@@ -94,8 +91,7 @@ impl Returns {
         tracking_numbers: &[String],
         original_shipment_ids: &[String],
         inventory_ids: &[String],
-        shipbob_channel_id: i64,
-    ) -> Result<Vec<crate::types::ShipbobReturnsPublicApiViewModelsReturnOrderModel>> {
+    ) -> Result<Vec<crate::types::ReturnsReturnOrderView>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = end_date {
             query_args.push(("EndDate".to_string(), date.to_rfc3339()));
@@ -164,8 +160,7 @@ impl Returns {
         tracking_numbers: &[String],
         original_shipment_ids: &[String],
         inventory_ids: &[String],
-        shipbob_channel_id: i64,
-    ) -> Result<Vec<crate::types::ShipbobReturnsPublicApiViewModelsReturnOrderModel>> {
+    ) -> Result<Vec<crate::types::ReturnsReturnOrderView>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = end_date {
             query_args.push(("EndDate".to_string(), date.to_rfc3339()));
@@ -216,15 +211,16 @@ impl Returns {
      *
      * **Parameters:**
      *
-     * * `shipbob_channel_id: i64` -- Unique id of the channel.
+     * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn post<T: Into<reqwest::Body>>(
+    pub async fn post(
         &self,
-        shipbob_channel_id: i64,
-        body: crate::types::ShipbobReturnsPublicApiViewModelsCreateReturnModel,
-    ) -> Result<crate::types::ShipbobReturnsPublicApiViewModelsReturnOrderModel> {
+        body: &crate::types::ReturnsCreateReturnView,
+    ) -> Result<crate::types::ReturnsReturnOrderView> {
         let url = "/return".to_string();
-        self.client.post(&url, Some(body.into())).await
+        self.client
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .await
     }
 
     /**
@@ -235,13 +231,9 @@ impl Returns {
      * **Parameters:**
      *
      * * `id: i64` -- Unique id of the channel.
-     * * `shipbob_channel_id: i64` -- Unique id of the channel.
+     * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn post_cancel(
-        &self,
-        id: i64,
-        shipbob_channel_id: i64,
-    ) -> Result<crate::types::ShipbobReturnsPublicApiViewModelsReturnOrderModel> {
+    pub async fn post_cancel(&self, id: i64) -> Result<crate::types::ReturnsReturnOrderView> {
         let url = format!(
             "/return/{}/cancel",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -258,13 +250,12 @@ impl Returns {
      * **Parameters:**
      *
      * * `id: i64` -- Unique id of the channel.
-     * * `shipbob_channel_id: i64` -- Unique id of the channel.
+     * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get_statushistory(
+    pub async fn get_status_history(
         &self,
         id: i64,
-        shipbob_channel_id: i64,
-    ) -> Result<crate::types::ShipbobReturnsPublicApiViewModelsReturnOrderStatusHistoryModel> {
+    ) -> Result<crate::types::ReturnsReturnOrderStatusHistoryView> {
         let url = format!(
             "/return/{}/statushistory",
             crate::progenitor_support::encode_path(&id.to_string()),

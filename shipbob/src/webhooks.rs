@@ -21,16 +21,16 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `topic: crate::types::ShipBobWebhooksPublicCommonTopics` -- Topic of the webhooks requested.
+     * * `topic: crate::types::WebhooksPublicCommonTopics` -- Topic of the webhooks requested.
      * * `page: u64` -- Unique id of the channel.
      * * `limit: i64` -- Amount of Webhooks per page to request.
      */
     pub async fn get_page(
         &self,
-        topic: crate::types::ShipBobWebhooksPublicCommonTopics,
+        topic: crate::types::WebhooksPublicCommonTopics,
         page: u64,
         limit: i64,
-    ) -> Result<Vec<crate::types::ShipBobWebhooksPublicApiModelsWebhookViewModel>> {
+    ) -> Result<Vec<crate::types::WebhooksWebhookView>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("Limit".to_string(), limit.to_string()));
@@ -58,8 +58,8 @@ impl Webhooks {
      */
     pub async fn get_all(
         &self,
-        topic: crate::types::ShipBobWebhooksPublicCommonTopics,
-    ) -> Result<Vec<crate::types::ShipBobWebhooksPublicApiModelsWebhookViewModel>> {
+        topic: crate::types::WebhooksPublicCommonTopics,
+    ) -> Result<Vec<crate::types::WebhooksWebhookView>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !topic.to_string().is_empty() {
             query_args.push(("Topic".to_string(), topic.to_string()));
@@ -77,15 +77,16 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `shipbob_channel_id: i64` -- Unique id of the channel.
+     * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn post<T: Into<reqwest::Body>>(
+    pub async fn post(
         &self,
-        shipbob_channel_id: i64,
-        body: crate::types::ShipBobWebhooksPublicApiModelsCreateWebhookSubscriptionModel,
-    ) -> Result<crate::types::ShipBobWebhooksPublicApiModelsWebhookViewModel> {
+        body: &crate::types::WebhooksCreateWebhookSubscription,
+    ) -> Result<crate::types::WebhooksWebhookView> {
         let url = "/webhook".to_string();
-        self.client.post(&url, Some(body.into())).await
+        self.client
+            .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
+            .await
     }
 
     /**

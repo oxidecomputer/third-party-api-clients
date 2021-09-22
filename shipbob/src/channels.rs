@@ -17,9 +17,7 @@ impl Channels {
      *
      * This function performs a `GET` to the `/channel` endpoint.
      */
-    pub async fn get_page(
-        &self,
-    ) -> Result<Vec<crate::types::ShipBobChannelsApiViewModelsChannelModel>> {
+    pub async fn get_page(&self) -> Result<Vec<crate::types::ChannelsChannelView>> {
         let url = "/channel".to_string();
         self.client.get(&url, None).await
     }
@@ -31,9 +29,7 @@ impl Channels {
      *
      * As opposed to `get`, this function returns all the pages of the request at once.
      */
-    pub async fn get_all(
-        &self,
-    ) -> Result<Vec<crate::types::ShipBobChannelsApiViewModelsChannelModel>> {
+    pub async fn get_all(&self) -> Result<Vec<crate::types::ChannelsChannelView>> {
         let url = "/channel".to_string();
         self.client.get_all_pages(&url, None).await
     }
