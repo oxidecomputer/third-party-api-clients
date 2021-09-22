@@ -2390,7 +2390,11 @@ fn gen(
     // Print the client template.
     if proper_name == "GitHub" {
         a(crate::client::GITHUB_TEMPLATE);
-    } else if proper_name == "SendGrid" || proper_name == "Giphy" || proper_name == "Rev.ai" {
+    } else if proper_name == "SendGrid"
+        || proper_name == "Giphy"
+        || proper_name == "Rev.ai"
+        || proper_name == "Okta"
+    {
         a(&crate::client::generate_client_generic_api_key(
             proper_name,
             add_post_header,
@@ -3246,7 +3250,10 @@ rustdoc-args = ["--cfg", "docsrs"]
                     host.trim_start_matches("https://"),
                     &spec_link,
                 )
-            } else if proper_name == "SendGrid" || proper_name == "Giphy" || proper_name == "Rev.ai"
+            } else if proper_name == "SendGrid"
+                || proper_name == "Giphy"
+                || proper_name == "Rev.ai"
+                || proper_name == "Okta"
             {
                 template::generate_docs_generic_api_key(
                     &api,

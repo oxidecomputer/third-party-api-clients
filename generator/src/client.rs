@@ -612,7 +612,7 @@ impl Client {{
         add_post_header_fn,
         new_from_env,
         TOKEN_AUTH_TEMPLATE,
-        get_shared_functions(add_post_header)
+        get_shared_functions(proper_name, add_post_header)
     )
 }
 
@@ -794,11 +794,11 @@ impl Client {{
     {}"#,
         proper_name.to_uppercase().replace('.', ""),
         proper_name.to_uppercase().replace('.', ""),
-        get_shared_functions(add_post_header)
+        get_shared_functions(proper_name, add_post_header)
     )
 }
 
-fn get_shared_functions(add_post_header: &str) -> String {
+fn get_shared_functions(proper_name: &str, add_post_header: &str) -> String {
     let post_header_args = if !add_post_header.is_empty() {
         format!(
             r#"if method == reqwest::Method::POST {{
@@ -814,6 +814,12 @@ fn get_shared_functions(add_post_header: &str) -> String {
         String::new()
     };
 
+    let bearer = if proper_name == "Okta" {
+        "SSWS".to_string()
+    } else {
+        "Bearer".to_string()
+    };
+
     format!(
         r#"
 async fn url_and_auth(
@@ -822,7 +828,7 @@ async fn url_and_auth(
 ) -> Result<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>();
 
-    let auth = format!("Bearer {{}}", self.token);
+    let auth = format!("{} {{}}", self.token);
     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
 }}
 
@@ -1322,7 +1328,7 @@ where
         message,
     ).await
 }}"#,
-        post_header_args
+        bearer, post_header_args
     )
 }
 
@@ -1544,7 +1550,7 @@ impl Client {{
         proper_name.to_uppercase().replace('.', ""),
         proper_name.to_uppercase().replace('.', ""),
         CLIENT_AUTH_TEMPLATE,
-        get_shared_functions(add_post_header)
+        get_shared_functions(proper_name, add_post_header)
     )
 }
 
