@@ -447,6 +447,7 @@ shipbob: target/debug/generator $(SHIPBOB_SPEC)
 		-d "A fully generated & opinionated API client for the ShipBob API." \
 		--spec-link "$(SHIPBOB_SPEC_REMOTE)" \
 		--host "api.shipbob.com/1.0" \
+		--add-post-header "shipbob_channel_id" \
 		--token-endpoint "auth.shipbob.com/connect/token" \
 		--user-consent-endpoint "auth.shipbob.com/connect/integrate" $(EXTRA_ARGS)
 	cargo fmt -p shipbob

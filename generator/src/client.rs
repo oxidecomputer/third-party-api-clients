@@ -1,3 +1,5 @@
+use inflector::cases::snakecase::to_snake_case;
+
 /*
  * Declare the client object:
  */
@@ -474,11 +476,47 @@ pub fn generate_client_generic_token(
     proper_name: &str,
     token_endpoint: &str,
     user_consent_endpoint: &str,
+    add_post_header: &str,
 ) -> String {
-    let mut new_from_env = basic_new_from_env(proper_name);
+    let mut new_from_env = basic_new_from_env(proper_name, add_post_header);
     if proper_name.starts_with("Google") {
         new_from_env = GOOGLE_NEW_FROM_ENV_TEMPLATE.to_string();
     }
+
+    let add_post_header_struct = if add_post_header.is_empty() {
+        "".to_string()
+    } else {
+        format!("{}: String,", to_snake_case(add_post_header))
+    };
+
+    let add_post_header_args = if add_post_header.is_empty() {
+        "".to_string()
+    } else {
+        format!("{}: P,", to_snake_case(add_post_header))
+    };
+
+    let add_post_header_args_where = if add_post_header.is_empty() {
+        "".to_string()
+    } else {
+        "P: ToString,".to_string()
+    };
+
+    let add_post_header_fn = if add_post_header.is_empty() {
+        "".to_string()
+    } else {
+        format!(
+            "{} : {}.to_string(),",
+            to_snake_case(add_post_header),
+            to_snake_case(add_post_header)
+        )
+    };
+
+    let add_post_header_type = if !add_post_header.is_empty() {
+        ", P".to_string()
+    } else {
+        "".to_string()
+    };
+
     format!(
         r#"use std::env;
 
@@ -495,6 +533,7 @@ pub struct Client {{
     client_id: String,
     client_secret: String,
     redirect_uri: String,
+    {}
 
     client: reqwest::Client,
 }}
@@ -505,12 +544,13 @@ impl Client {{
     /// Create a new Client struct. It takes a type that can convert into
     /// an &str (`String` or `Vec<u8>` for example). As long as the function is
     /// given a valid API key your requests will work.
-    pub fn new<I, K, R, T, Q>(
+    pub fn new<I, K, R, T, Q{}>(
         client_id: I,
         client_secret: K,
         redirect_uri: R,
         token: T,
         refresh_token: Q,
+        {}
     ) -> Self
     where
         I: ToString,
@@ -518,6 +558,7 @@ impl Client {{
         R: ToString,
         T: ToString,
         Q: ToString,
+        {}
     {{
         let client = reqwest::Client::builder().build();
         match client {{
@@ -533,6 +574,7 @@ impl Client {{
                     redirect_uri: redirect_uri.to_string(),
                     token: token.to_string(),
                     refresh_token: refresh_token.to_string(),
+                    {}
 
                     client: c,
                 }}
@@ -550,14 +592,40 @@ impl Client {{
     {}"#,
         token_endpoint.trim_start_matches("https://"),
         user_consent_endpoint.trim_start_matches("https://"),
+        add_post_header_struct,
         ACCESS_TOKEN_STRUCT_TEMPLATE,
+        add_post_header_type,
+        add_post_header_args,
+        add_post_header_args_where,
+        add_post_header_fn,
         new_from_env,
         TOKEN_AUTH_TEMPLATE,
-        SHARED_FUNCTIONS_TEMPLATE
+        get_shared_functions(add_post_header)
     )
 }
 
-fn basic_new_from_env(proper_name: &str) -> String {
+fn basic_new_from_env(proper_name: &str, add_post_header: &str) -> String {
+    let add_post_header_type = if !add_post_header.is_empty() {
+        ", P".to_string()
+    } else {
+        "".to_string()
+    };
+    let add_post_header_args = if !add_post_header.is_empty() {
+        format!(",{}: P", to_snake_case(add_post_header))
+    } else {
+        "".to_string()
+    };
+    let add_post_header_args_where = if add_post_header.is_empty() {
+        "".to_string()
+    } else {
+        "P: ToString,".to_string()
+    };
+    let add_post_header_fn = if !add_post_header.is_empty() {
+        format!("{},", to_snake_case(add_post_header))
+    } else {
+        "".to_string()
+    };
+
     format!(
         r#"
 /// Create a new Client struct from environment variables. It
@@ -566,10 +634,11 @@ fn basic_new_from_env(proper_name: &str) -> String {
 /// given a valid API key and your requests will work.
 /// We pass in the token and refresh token to the client so if you are storing
 /// it in a database, you can get it first.
-pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
+pub fn new_from_env<T, R{}>(token: T, refresh_token: R{}) -> Self
 where
     T: ToString,
     R: ToString,
+    {}
 {{
     let client_id = env::var("{}_CLIENT_ID").unwrap();
     let client_secret = env::var("{}_CLIENT_SECRET").unwrap();
@@ -581,11 +650,16 @@ where
         redirect_uri,
         token,
         refresh_token,
+        {}
     )
 }}"#,
+        add_post_header_type,
+        add_post_header_args,
+        add_post_header_args_where,
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
+        add_post_header_fn,
     )
 }
 
@@ -639,7 +713,7 @@ where
 }
 "#;
 
-pub fn generate_client_generic_api_key(proper_name: &str) -> String {
+pub fn generate_client_generic_api_key(proper_name: &str, add_post_header: &str) -> String {
     format!(
         r#"use std::env;
 
@@ -691,20 +765,37 @@ impl Client {{
 
     {}"#,
         proper_name.to_uppercase(),
-        SHARED_FUNCTIONS_TEMPLATE
+        get_shared_functions(add_post_header)
     )
 }
 
-const SHARED_FUNCTIONS_TEMPLATE: &str = r#"
+fn get_shared_functions(add_post_header: &str) -> String {
+    let post_header_args = if !add_post_header.is_empty() {
+        format!(
+            r#"if method == reqwest::Method::POST {{
+            req = req.header(
+        reqwest::header::HeaderName::from_bytes(b"{}")?,
+        reqwest::header::HeaderValue::from_str(&self.{})?,
+    );
+            }}"#,
+            to_snake_case(add_post_header),
+            to_snake_case(add_post_header)
+        )
+    } else {
+        String::new()
+    };
+
+    format!(
+        r#"
 async fn url_and_auth(
     &self,
     uri: &str,
-) -> Result<(reqwest::Url, Option<String>)> {
+) -> Result<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>();
 
-    let auth = format!("Bearer {}", self.token);
+    let auth = format!("Bearer {{}}", self.token);
     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
-}
+}}
 
 async fn request_raw(
     &self,
@@ -712,17 +803,17 @@ async fn request_raw(
     uri: &str,
     body: Option<reqwest::Body>,
 ) -> Result<reqwest::Response>
-{
-    let u = if uri.starts_with("https://") {
+{{
+    let u = if uri.starts_with("https://") {{
         uri.to_string()
-    } else {
+    }} else {{
         (DEFAULT_HOST.to_string() + uri).to_string()
-    };
+    }};
     let (url, auth) = self.url_and_auth(&u).await?;
 
     let instance = <&Client>::clone(&self);
 
-    let mut req = instance.client.request(method, url);
+    let mut req = instance.client.request(method.clone(), url);
 
     // Set the default headers.
     req = req.header(
@@ -733,18 +824,19 @@ async fn request_raw(
         reqwest::header::CONTENT_TYPE,
         reqwest::header::HeaderValue::from_static("application/json"),
     );
+    {}
 
-    if let Some(auth_str) = auth {
+    if let Some(auth_str) = auth {{
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
-    }
+    }}
 
-    if let Some(body) = body {
-        //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
+    if let Some(body) = body {{
+        //println!("Body: {{:?}}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
         req = req.body(body);
-    }
-    //println!("Request: {:?}", &req);
+    }}
+    //println!("Request: {{:?}}", &req);
     Ok(req.send().await?)
-}
+}}
 
 async fn request<Out>(
     &self,
@@ -754,40 +846,40 @@ async fn request<Out>(
 ) -> Result<Out>
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     let response = self.request_raw(method, uri, body).await?;
 
     let status = response.status();
 
     let response_body = response.bytes().await?;
 
-    if status.is_success() {
-        //println!("response payload {}", String::from_utf8_lossy(&response_body));
-        let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){
+    if status.is_success() {{
+        //println!("response payload {{}}", String::from_utf8_lossy(&response_body));
+        let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
             serde_json::from_str("null")
-        } else {
+        }} else {{
             serde_json::from_slice::<Out>(&response_body)
-        };
+        }};
         parsed_response.map_err(Error::from)
-    } else {
-        /*println!("error status: {:?}, response payload: {}",
+    }} else {{
+        /*println!("error status: {{:?}}, response payload: {{}}",
             status,
             String::from_utf8_lossy(&response_body),
         );*/
 
-        let error = if response_body.is_empty() {
-            anyhow!("code: {}, empty response", status)
-        } else {
+        let error = if response_body.is_empty() {{
+            anyhow!("code: {{}}, empty response", status)
+        }} else {{
             anyhow!(
-                "code: {}, error: {:?}",
+                "code: {{}}, error: {{:?}}",
                 status,
                 String::from_utf8_lossy(&response_body),
             )
-        };
+        }};
 
         Err(error)
-    }
-}
+    }}
+}}
 
 async fn request_with_links<Out>(
     &self,
@@ -797,7 +889,7 @@ async fn request_with_links<Out>(
 ) -> Result<(Option<hyperx::header::Link>, Out)>
 where
     Out: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     let response = self.request_raw(method, uri, body).await?;
 
     let status = response.status();
@@ -809,32 +901,32 @@ where
 
     let response_body = response.bytes().await?;
 
-    if status.is_success() {
-        //println!("response payload {}", String::from_utf8_lossy(&response_body));
+    if status.is_success() {{
+        //println!("response payload {{}}", String::from_utf8_lossy(&response_body));
 
-        let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){
+        let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
             serde_json::from_str("null")
-        } else {
+        }} else {{
             serde_json::from_slice::<Out>(&response_body)
-        };
+        }};
         parsed_response.map(|out| (link, out)).map_err(Error::from)
-    } else {
-        /*println!("error status: {:?}, response payload: {}",
+    }} else {{
+        /*println!("error status: {{:?}}, response payload: {{}}",
             status,
             String::from_utf8_lossy(&response_body),
         );*/
-        let error = if response_body.is_empty() {
-            anyhow!("code: {}, empty response", status)
-        } else {
+        let error = if response_body.is_empty() {{
+            anyhow!("code: {{}}, empty response", status)
+        }} else {{
             anyhow!(
-                "code: {}, error: {:?}",
+                "code: {{}}, error: {{:?}}",
                 status,
                 String::from_utf8_lossy(&response_body),
             )
-        };
+        }};
         Err(error)
-    }
-}
+    }}
+}}
 
 /* TODO: make this more DRY */
 #[allow(dead_code)]
@@ -847,12 +939,12 @@ async fn request_with_mime<Out>(
 ) -> Result<Out>
     where
     Out: serde::de::DeserializeOwned + 'static + Send,
-{
-    let u = if uri.starts_with("https://") {
+{{
+    let u = if uri.starts_with("https://") {{
         uri.to_string()
-    } else {
+    }} else {{
         (DEFAULT_HOST.to_string() + uri).to_string()
-    };
+    }};
     let (url, auth) = self.url_and_auth(&u).await?;
 
     let instance = <&Client>::clone(&self);
@@ -875,53 +967,53 @@ async fn request_with_mime<Out>(
     );
     req = req.header(
         reqwest::header::HeaderName::from_static("x-upload-content-length"),
-        reqwest::header::HeaderValue::from_bytes(format!("{}", content.len()).as_bytes()).unwrap(),
+        reqwest::header::HeaderValue::from_bytes(format!("{{}}", content.len()).as_bytes()).unwrap(),
     );
 
-    if let Some(auth_str) = auth {
+    if let Some(auth_str) = auth {{
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
-    }
+    }}
 
-    if content.len() > 1 {
+    if content.len() > 1 {{
         let b = bytes::Bytes::copy_from_slice(content);
         // We are uploading a file so add that as the body.
         req = req.body(b);
-    }
+    }}
 
-    //println!("Request: {:?}", &req);
+    //println!("Request: {{:?}}", &req);
     let response = req.send().await?;
 
     let status = response.status();
 
     let response_body = response.bytes().await?;
 
-    if status.is_success() {
-        //println!("response payload {}", String::from_utf8_lossy(&response_body));
-        let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){
+    if status.is_success() {{
+        //println!("response payload {{}}", String::from_utf8_lossy(&response_body));
+        let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
             serde_json::from_str("null")
-        } else {
+        }} else {{
             serde_json::from_slice::<Out>(&response_body)
-        };
+        }};
         parsed_response.map_err(Error::from)
-    } else {
-        /*println!("error status: {:?}, response payload: {}",
+    }} else {{
+        /*println!("error status: {{:?}}, response payload: {{}}",
             status,
             String::from_utf8_lossy(&response_body),
         );*/
 
-        let error = if response_body.is_empty() {
-            anyhow!("code: {}, empty response", status)
-        } else {
+        let error = if response_body.is_empty() {{
+            anyhow!("code: {{}}, empty response", status)
+        }} else {{
             anyhow!(
-                "code: {}, error: {:?}",
+                "code: {{}}, error: {{:?}}",
                 status,
                 String::from_utf8_lossy(&response_body),
             )
-        };
+        }};
 
         Err(error)
-    }
-}
+    }}
+}}
 
 async fn request_entity<D>(
     &self,
@@ -931,33 +1023,33 @@ async fn request_entity<D>(
 ) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     let r = self
         .request(method, uri, body)
         .await?;
     Ok(r)
-}
+}}
 
 #[allow(dead_code)]
 async fn get<D>(&self, uri: &str,  message: Option<reqwest::Body>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     self.request_entity(
         http::Method::GET,
         &(DEFAULT_HOST.to_string() + uri),
         message,
     ).await
-}
+}}
 
 #[allow(dead_code)]
 async fn get_all_pages<D>(&self, uri: &str,  _message: Option<reqwest::Body>) -> Result<Vec<D>>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     // TODO: implement this.
     self.unfold(uri).await
-}
+}}
 
 /// "unfold" paginated results of a vector of items
 #[allow(dead_code)]
@@ -967,95 +1059,98 @@ async fn unfold<D>(
 ) -> Result<Vec<D>>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     let mut global_items = Vec::new();
     let (new_link, mut items) = self.get_pages(uri).await?;
     let mut link = new_link;
-    while !items.is_empty() {
+    while !items.is_empty() {{
         global_items.append(&mut items);
         // We need to get the next link.
-        if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
+        if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {{
             let url = reqwest::Url::parse(&url)?;
             let (new_link, new_items) = self.get_pages_url(&url).await?;
             link = new_link;
             items = new_items;
-        }
-    }
+        }}
+    }}
 
     Ok(global_items)
-}
+}}
 
 #[allow(dead_code)]
 async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     self.request_with_links(
         http::Method::GET,
         &(DEFAULT_HOST.to_string() + uri),
         None,
     ).await
-}
+}}
 
 #[allow(dead_code)]
 async fn get_pages_url<D>(&self, url: &reqwest::Url) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     self.request_with_links(
         http::Method::GET,
         url.as_str(),
         None,
     ).await
-}
+}}
 
 #[allow(dead_code)]
 async fn post<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     self.request_entity(
         http::Method::POST,
         &(DEFAULT_HOST.to_string() + uri),
         message,
     ).await
-}
+}}
 
 #[allow(dead_code)]
 async fn patch<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     self.request_entity(
         http::Method::PATCH,
         &(DEFAULT_HOST.to_string() + uri),
         message,
     ).await
-}
+}}
 
 #[allow(dead_code)]
 async fn put<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     self.request_entity(
         http::Method::PUT,
         &(DEFAULT_HOST.to_string() + uri),
         message,
     ).await
-}
+}}
 
 #[allow(dead_code)]
 async fn delete<D>(&self, uri: &str, message: Option<reqwest::Body>) -> Result<D>
 where
     D: serde::de::DeserializeOwned + 'static + Send,
-{
+{{
     self.request_entity(
         http::Method::DELETE,
         &(DEFAULT_HOST.to_string() + uri),
         message,
     ).await
-}"#;
+}}"#,
+        post_header_args
+    )
+}
 
 const TOKEN_AUTH_TEMPLATE: &str = r#"
 /// Return a user consent url with an optional set of scopes.
@@ -1184,6 +1279,7 @@ pub async fn get_access_token(&mut self) -> Result<AccessToken> {
 pub fn generate_client_generic_client_credentials(
     proper_name: &str,
     token_endpoint: &str,
+    add_post_header: &str,
 ) -> String {
     format!(
         r#"use std::env;
@@ -1260,7 +1356,7 @@ impl Client {{
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         CLIENT_AUTH_TEMPLATE,
-        SHARED_FUNCTIONS_TEMPLATE
+        get_shared_functions(add_post_header)
     )
 }
 

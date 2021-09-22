@@ -228,6 +228,7 @@ pub struct Client {
     client_id: String,
     client_secret: String,
     redirect_uri: String,
+    shipbob_channel_id: String,
 
     client: reqwest::Client,
 }
@@ -274,12 +275,13 @@ impl Client {
     /// Create a new Client struct. It takes a type that can convert into
     /// an &str (`String` or `Vec<u8>` for example). As long as the function is
     /// given a valid API key your requests will work.
-    pub fn new<I, K, R, T, Q>(
+    pub fn new<I, K, R, T, Q, P>(
         client_id: I,
         client_secret: K,
         redirect_uri: R,
         token: T,
         refresh_token: Q,
+        shipbob_channel_id: P,
     ) -> Self
     where
         I: ToString,
@@ -287,6 +289,7 @@ impl Client {
         R: ToString,
         T: ToString,
         Q: ToString,
+        P: ToString,
     {
         let client = reqwest::Client::builder().build();
         match client {
@@ -302,6 +305,7 @@ impl Client {
                     redirect_uri: redirect_uri.to_string(),
                     token: token.to_string(),
                     refresh_token: refresh_token.to_string(),
+                    shipbob_channel_id: shipbob_channel_id.to_string(),
 
                     client: c,
                 }
@@ -316,16 +320,24 @@ impl Client {
     /// given a valid API key and your requests will work.
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
-    pub fn new_from_env<T, R>(token: T, refresh_token: R) -> Self
+    pub fn new_from_env<T, R, P>(token: T, refresh_token: R, shipbob_channel_id: P) -> Self
     where
         T: ToString,
         R: ToString,
+        P: ToString,
     {
         let client_id = env::var("SHIPBOB_CLIENT_ID").unwrap();
         let client_secret = env::var("SHIPBOB_CLIENT_SECRET").unwrap();
         let redirect_uri = env::var("SHIPBOB_REDIRECT_URI").unwrap();
 
-        Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
+        Client::new(
+            client_id,
+            client_secret,
+            redirect_uri,
+            token,
+            refresh_token,
+            shipbob_channel_id,
+        )
     }
 
     /// Return a user consent url with an optional set of scopes.
@@ -441,7 +453,7 @@ impl Client {
 
         let instance = <&Client>::clone(&self);
 
-        let mut req = instance.client.request(method, url);
+        let mut req = instance.client.request(method.clone(), url);
 
         // Set the default headers.
         req = req.header(
@@ -452,6 +464,12 @@ impl Client {
             reqwest::header::CONTENT_TYPE,
             reqwest::header::HeaderValue::from_static("application/json"),
         );
+        if method == reqwest::Method::POST {
+            req = req.header(
+                reqwest::header::HeaderName::from_bytes(b"shipbob_channel_id")?,
+                reqwest::header::HeaderValue::from_str(&self.shipbob_channel_id)?,
+            );
+        }
 
         if let Some(auth_str) = auth {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);

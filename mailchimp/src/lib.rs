@@ -381,7 +381,7 @@ impl Client {
 
         let instance = <&Client>::clone(&self);
 
-        let mut req = instance.client.request(method, url);
+        let mut req = instance.client.request(method.clone(), url);
 
         // Set the default headers.
         req = req.header(

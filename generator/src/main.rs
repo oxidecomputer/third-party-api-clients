@@ -2254,6 +2254,7 @@ fn gen(
     tags: Vec<String>,
     token_endpoint: &str,
     user_consent_endpoint: &str,
+    add_post_header: &str,
 ) -> Result<String> {
     let mut out = String::new();
 
@@ -2387,17 +2388,22 @@ fn gen(
     if proper_name == "GitHub" {
         a(crate::client::GITHUB_TEMPLATE);
     } else if proper_name == "SendGrid" || proper_name == "Giphy" || proper_name == "Rev.ai" {
-        a(&crate::client::generate_client_generic_api_key(proper_name));
+        a(&crate::client::generate_client_generic_api_key(
+            proper_name,
+            add_post_header,
+        ));
     } else if proper_name == "TripActions" {
         a(&crate::client::generate_client_generic_client_credentials(
             proper_name,
             token_endpoint,
+            add_post_header,
         ));
     } else {
         a(&crate::client::generate_client_generic_token(
             proper_name,
             token_endpoint,
             user_consent_endpoint,
+            add_post_header,
         ));
     }
 
@@ -2752,12 +2758,6 @@ fn main() -> Result<()> {
     opts.reqopt("n", "", "Target Rust crate name", "CRATE");
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
     opts.reqopt("d", "", "Target Rust crate description", "DESCRIPTION");
-    opts.reqopt(
-        "",
-        "add-post-header",
-        "A header to add to post requests",
-        "ADD_POST_HEADER",
-    );
     opts.reqopt("", "host", "Target default host", "DEFAULT_HOST");
     opts.reqopt(
         "",
@@ -2777,6 +2777,12 @@ fn main() -> Result<()> {
         "user-consent-endpoint",
         "Target user consent endpoint",
         "USER_CONSENT_ENDPOINT",
+    );
+    opts.optopt(
+        "",
+        "add-post-header",
+        "A header to add to post requests",
+        "ADD_POST_HEADER",
     );
     opts.optflag("", "debug", "Print debug output");
 
@@ -3129,6 +3135,11 @@ fn main() -> Result<()> {
     tags.sort_unstable();
     tags.dedup();
 
+    let add_post_header = if let Some(ph) = args.opt_str("add-post-header") {
+        ph
+    } else {
+        String::new()
+    };
     let fail = match gen(
         &api,
         &proper_name,
@@ -3136,6 +3147,7 @@ fn main() -> Result<()> {
         tags,
         &token_endpoint,
         &user_consent_endpoint,
+        &add_post_header,
     ) {
         Ok(out) => {
             let description = args.opt_str("d").unwrap();
