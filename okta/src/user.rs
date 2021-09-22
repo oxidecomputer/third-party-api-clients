@@ -667,6 +667,27 @@ impl User {
     }
 
     /**
+     * Forgot Password.
+     *
+     * This function performs a `POST` to the `/api/v1/users/{userId}/credentials/forgot_password` endpoint.
+     *
+     * **Parameters:**
+     *
+     * * `user_id: &str`
+     */
+    pub async fn post_credentials_forgot_password(
+        &self,
+        user_id: &str,
+    ) -> Result<crate::types::ResetPasswordToken> {
+        let url = format!(
+            "/api/v1/users/{}/credentials/forgot_password",
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+        );
+
+        self.client.post(&url, None).await
+    }
+
+    /**
      * This function performs a `GET` to the `/api/v1/users/{userId}/grants` endpoint.
      *
      * Lists all grants for the specified user

@@ -19,7 +19,7 @@ impl Receiving {
      */
     pub async fn get_fulfillment_center(
         &self,
-    ) -> Result<Vec<crate::types::ReceivingFulfillmentCenterView>> {
+    ) -> Result<Vec<crate::types::ReceivingFulfillmentCenter>> {
         let url = "/fulfillmentCenter".to_string();
         self.client.get(&url, None).await
     }
@@ -33,7 +33,7 @@ impl Receiving {
      */
     pub async fn get_all_fulfillment_center(
         &self,
-    ) -> Result<Vec<crate::types::ReceivingFulfillmentCenterView>> {
+    ) -> Result<Vec<crate::types::ReceivingFulfillmentCenter>> {
         let url = "/fulfillmentCenter".to_string();
         self.client.get_all_pages(&url, None).await
     }
@@ -47,7 +47,7 @@ impl Receiving {
      *
      * * `id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, id: i64) -> Result<crate::types::ReceivingOrderView> {
+    pub async fn get(&self, id: i64) -> Result<crate::types::ReceivingOrder> {
         let url = format!(
             "/receiving/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -81,8 +81,8 @@ impl Receiving {
      */
     pub async fn post(
         &self,
-        body: &crate::types::ReceivingCreateOrder,
-    ) -> Result<crate::types::ReceivingOrderView> {
+        body: &crate::types::ReceivingCreateOrderModel,
+    ) -> Result<crate::types::ReceivingOrder> {
         let url = "/receiving".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))

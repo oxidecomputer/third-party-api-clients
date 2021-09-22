@@ -30,7 +30,7 @@ impl Webhooks {
         topic: crate::types::WebhooksPublicCommonTopics,
         page: u64,
         limit: i64,
-    ) -> Result<Vec<crate::types::WebhooksWebhookView>> {
+    ) -> Result<Vec<crate::types::Webhook>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("Limit".to_string(), limit.to_string()));
@@ -59,7 +59,7 @@ impl Webhooks {
     pub async fn get_all(
         &self,
         topic: crate::types::WebhooksPublicCommonTopics,
-    ) -> Result<Vec<crate::types::WebhooksWebhookView>> {
+    ) -> Result<Vec<crate::types::Webhook>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !topic.to_string().is_empty() {
             query_args.push(("Topic".to_string(), topic.to_string()));
@@ -81,8 +81,8 @@ impl Webhooks {
      */
     pub async fn post(
         &self,
-        body: &crate::types::WebhooksCreateWebhookSubscription,
-    ) -> Result<crate::types::WebhooksWebhookView> {
+        body: &crate::types::WebhooksCreateWebhookSubscriptionModel,
+    ) -> Result<crate::types::Webhook> {
         let url = "/webhook".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))

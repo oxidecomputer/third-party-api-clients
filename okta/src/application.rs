@@ -306,6 +306,28 @@ impl Application {
     }
 
     /**
+     * This function performs a `POST` to the `/api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle/publish` endpoint.
+     *
+     * **Parameters:**
+     *
+     * * `app_id: &str`
+     * * `csr_id: &str`
+     */
+    pub async fn post_app_credentials_csr_lifecycle_publish(
+        &self,
+        app_id: &str,
+        csr_id: &str,
+    ) -> Result<crate::types::JsonWebKey> {
+        let url = format!(
+            "/api/v1/apps/{}/credentials/csrs/{}/lifecycle/publish",
+            crate::progenitor_support::encode_path(&app_id.to_string()),
+            crate::progenitor_support::encode_path(&csr_id.to_string()),
+        );
+
+        self.client.post(&url, None).await
+    }
+
+    /**
      * List Key Credentials for Application.
      *
      * This function performs a `GET` to the `/api/v1/apps/{appId}/credentials/keys` endpoint.

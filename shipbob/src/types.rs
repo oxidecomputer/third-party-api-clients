@@ -3,7 +3,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ChannelsChannelView {
+pub struct Channel {
     /**
      * Name of the channel
      */
@@ -44,7 +44,7 @@ pub struct ChannelsChannelView {
 
 /// Information about an inventory item's dimensions
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct InventoryDimensionView {
+pub struct InventoryDimension {
     /**
      * Information about an inventory item's dimensions
      */
@@ -85,7 +85,7 @@ pub struct InventoryDimensionView {
 
 /// Break down of fulfillable quantity by fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct InventoryFulfillmentCenterQuantityView {
+pub struct InventoryFulfillmentCenterQuantity {
     /**
      * Break down of fulfillable quantity by fulfillment center
      */
@@ -153,7 +153,7 @@ pub struct InventoryFulfillmentCenterQuantityView {
 
 /// Break down of fulfillable quantity by lot
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct InventoryLotQuantityView {
+pub struct InventoryLotQuantity {
     /**
      * Break down of fulfillable quantity by lot
      */
@@ -198,7 +198,7 @@ pub struct InventoryLotQuantityView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub fulfillable_quantity_by_fulfillment_center: Vec<InventoryFulfillmentCenterQuantityView>,
+    pub fulfillable_quantity_by_fulfillment_center: Vec<InventoryFulfillmentCenterQuantity>,
     /**
      * Break down of fulfillable quantity by lot
      */
@@ -289,12 +289,12 @@ impl PackagingAttribute {
 
 /// Information about an inventory item
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct InventoryView {
+pub struct Inventory {
     /**
      * Information about an inventory item
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub dimensions: Option<InventoryDimensionView>,
+    pub dimensions: Option<InventoryDimension>,
     /**
      * Information about an inventory item
      */
@@ -303,7 +303,7 @@ pub struct InventoryView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub fulfillable_quantity_by_fulfillment_center: Vec<InventoryFulfillmentCenterQuantityView>,
+    pub fulfillable_quantity_by_fulfillment_center: Vec<InventoryFulfillmentCenterQuantity>,
     /**
      * Information about an inventory item
      */
@@ -312,7 +312,7 @@ pub struct InventoryView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub fulfillable_quantity_by_lot: Vec<InventoryLotQuantityView>,
+    pub fulfillable_quantity_by_lot: Vec<InventoryLotQuantity>,
     /**
      * Information about an inventory item
      */
@@ -443,7 +443,7 @@ pub struct InventoryView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsEstimationAddress {
+pub struct OrdersEstimationAddress {
     /**
      * Name of the channel
      */
@@ -512,7 +512,7 @@ pub struct OrdersPresentationViewModelsEstimationAddress {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationModelsEstimateProductInfo {
+pub struct OrdersEstimateProductInfoModel {
     /**
      * Unique id of the channel
      */
@@ -543,9 +543,9 @@ pub struct OrdersPresentationModelsEstimateProductInfo {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationModelsEstimateFulfillmentRequest {
+pub struct OrdersEstimateFulfillmentRequestModel {
     #[serde()]
-    pub address: OrdersPresentationViewModelsEstimationAddress,
+    pub address: OrdersEstimationAddress,
     /**
      * Products to be included in the order. Each product must include one of reference_id or id
      */
@@ -554,7 +554,7 @@ pub struct OrdersPresentationModelsEstimateFulfillmentRequest {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub products: Vec<OrdersPresentationModelsEstimateProductInfo>,
+    pub products: Vec<OrdersEstimateProductInfoModel>,
     /**
      * Array of permissions granted for the channel
      */
@@ -568,7 +568,7 @@ pub struct OrdersPresentationModelsEstimateFulfillmentRequest {
 
 /// Information about a fulfillment center that a shipment can belong to
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsFulfillmentCenter {
+pub struct OrdersFulfillmentCenter {
     /**
      * Information about a fulfillment center that a shipment can belong to
      */
@@ -590,7 +590,7 @@ pub struct OrdersPresentationViewModelsFulfillmentCenter {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsEstimateDetail {
+pub struct OrdersEstimateDetail {
     /**
      * Weight in ounces of this inventory item
      */
@@ -604,7 +604,7 @@ pub struct OrdersPresentationViewModelsEstimateDetail {
      * Information about a fulfillment center that a shipment can belong to
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub fulfillment_center: Option<OrdersPresentationViewModelsFulfillmentCenter>,
+    pub fulfillment_center: Option<OrdersFulfillmentCenter>,
     /**
      * Name of the channel
      */
@@ -617,7 +617,7 @@ pub struct OrdersPresentationViewModelsEstimateDetail {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsEstimate {
+pub struct OrdersEstimate {
     /**
      * Array of estimates for each shipping method
      */
@@ -626,12 +626,12 @@ pub struct OrdersPresentationViewModelsEstimate {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub estimates: Vec<OrdersPresentationViewModelsEstimateDetail>,
+    pub estimates: Vec<OrdersEstimateDetail>,
 }
 
 /// Created by channel metadata
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsChannelInfoView {
+pub struct OrdersChannelInfo {
     /**
      * Created by channel metadata
      */
@@ -694,7 +694,7 @@ impl Type {
 
 /// Address to used when creating a B2B/DropShip order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsRetailerProgramDataAddress {
+pub struct OrdersRetailerProgramDataAddress {
     /**
      * Name of the channel
      */
@@ -771,12 +771,12 @@ pub struct OrdersPresentationViewModelsRetailerProgramDataAddress {
 
 /// Information about the recipient of an order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsRecipientInfo {
+pub struct OrdersRecipientInfo {
     /**
      * Address to used when creating a B2B/DropShip order.
      */
     #[serde()]
-    pub address: OrdersPresentationViewModelsRetailerProgramDataAddress,
+    pub address: OrdersRetailerProgramDataAddress,
     /**
      * Name of the channel
      */
@@ -807,7 +807,7 @@ pub struct OrdersPresentationViewModelsRecipientInfo {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsProductInfo {
+pub struct OrdersProductInfo {
     /**
      * Unique id of the channel
      */
@@ -847,7 +847,7 @@ pub struct OrdersPresentationViewModelsProductInfo {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsTag {
+pub struct OrdersTag {
     /**
      * Name of the channel
      */
@@ -870,12 +870,12 @@ pub struct OrdersPresentationViewModelsTag {
 
 /// Information about the recipient of a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsRecipient {
+pub struct OrdersRecipient {
     /**
      * Information about the recipient of a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub address: Option<OrdersPresentationViewModelsRetailerProgramDataAddress>,
+    pub address: Option<OrdersRetailerProgramDataAddress>,
     /**
      * Name of the channel
      */
@@ -906,7 +906,7 @@ pub struct OrdersPresentationViewModelsRecipient {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsStatusDetail {
+pub struct OrdersStatusDetail {
     /**
      * Name of the channel
      */
@@ -956,7 +956,7 @@ pub struct OrdersPresentationViewModelsStatusDetail {
 
 /// Tracking information for a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsTracking {
+pub struct OrdersTracking {
     /**
      * Name of the channel
      */
@@ -997,7 +997,7 @@ pub struct OrdersPresentationViewModelsTracking {
 
 /// Information about inventory belonging to a store product
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsInventory {
+pub struct OrdersInventory {
     /**
      * Expiration date for this lot
      */
@@ -1073,7 +1073,7 @@ pub struct OrdersPresentationViewModelsInventory {
 
 /// Information about a store product belonging to a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsShipmentProduct {
+pub struct OrdersShipmentProduct {
     /**
      * Information about a store product belonging to a shipment
      */
@@ -1091,7 +1091,7 @@ pub struct OrdersPresentationViewModelsShipmentProduct {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub inventory_items: Vec<OrdersPresentationViewModelsInventory>,
+    pub inventory_items: Vec<OrdersInventory>,
     /**
      * Name of the channel
      */
@@ -1123,7 +1123,7 @@ pub struct OrdersPresentationViewModelsShipmentProduct {
 
 /// Measurements of a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsMeasurements {
+pub struct OrdersMeasurements {
     /**
      * Measurements of a shipment
      */
@@ -1343,7 +1343,7 @@ impl EstimatedFulfillmentDateStatus {
 
 /// Information about a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsShipment {
+pub struct OrdersShipment {
     /**
      * Expiration date for this lot
      */
@@ -1433,12 +1433,12 @@ pub struct OrdersPresentationViewModelsShipment {
      * Information about a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub location: Option<OrdersPresentationViewModelsFulfillmentCenter>,
+    pub location: Option<OrdersFulfillmentCenter>,
     /**
      * Information about a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub measurements: Option<OrdersPresentationViewModelsMeasurements>,
+    pub measurements: Option<OrdersMeasurements>,
     /**
      * Information about a shipment
      */
@@ -1461,12 +1461,12 @@ pub struct OrdersPresentationViewModelsShipment {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub products: Vec<OrdersPresentationViewModelsShipmentProduct>,
+    pub products: Vec<OrdersShipmentProduct>,
     /**
      * Information about a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub recipient: Option<OrdersPresentationViewModelsRecipient>,
+    pub recipient: Option<OrdersRecipient>,
     /**
      * Name of the channel
      */
@@ -1506,12 +1506,12 @@ pub struct OrdersPresentationViewModelsShipment {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub status_details: Vec<OrdersPresentationViewModelsStatusDetail>,
+    pub status_details: Vec<OrdersStatusDetail>,
     /**
      * Information about a shipment
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub tracking: Option<OrdersPresentationViewModelsTracking>,
+    pub tracking: Option<OrdersTracking>,
 }
 
 /**
@@ -1605,7 +1605,7 @@ impl PaymentTerm {
 
 /// Contains shipping properties that need to be used for fulfilling an order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsShippingTerms {
+pub struct OrdersShippingTerms {
     /**
      * Identifies whether to ship parcel or freight.
      *  
@@ -1630,7 +1630,7 @@ pub struct OrdersPresentationViewModelsShippingTerms {
 
 /// Contains properties that needs to be used for fulfilling B2B/Dropship orders.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsRetailerProgramData {
+pub struct OrdersRetailerProgramData {
     /**
      * Contains properties that needs to be used for fulfilling B2B/Dropship orders.
      */
@@ -1639,7 +1639,7 @@ pub struct OrdersPresentationViewModelsRetailerProgramData {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub addresses: Vec<OrdersPresentationViewModelsRetailerProgramDataAddress>,
+    pub addresses: Vec<OrdersRetailerProgramDataAddress>,
     /**
      * Expiration date for this lot
      */
@@ -1682,7 +1682,7 @@ pub struct OrdersPresentationViewModelsRetailerProgramData {
  * The order status
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum OrdersPresentationViewModelsOrderStatus {
+pub enum OrderStatus {
     #[serde(rename = "Cancelled")]
     Cancelled,
     #[serde(rename = "Exception")]
@@ -1701,30 +1701,30 @@ pub enum OrdersPresentationViewModelsOrderStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for OrdersPresentationViewModelsOrderStatus {
+impl std::fmt::Display for OrderStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            OrdersPresentationViewModelsOrderStatus::Cancelled => "Cancelled",
-            OrdersPresentationViewModelsOrderStatus::Exception => "Exception",
-            OrdersPresentationViewModelsOrderStatus::Fulfilled => "Fulfilled",
-            OrdersPresentationViewModelsOrderStatus::ImportReview => "ImportReview",
-            OrdersPresentationViewModelsOrderStatus::PartiallyFulfilled => "PartiallyFulfilled",
-            OrdersPresentationViewModelsOrderStatus::Processing => "Processing",
-            OrdersPresentationViewModelsOrderStatus::Noop => "",
-            OrdersPresentationViewModelsOrderStatus::FallthroughString => "*",
+            OrderStatus::Cancelled => "Cancelled",
+            OrderStatus::Exception => "Exception",
+            OrderStatus::Fulfilled => "Fulfilled",
+            OrderStatus::ImportReview => "ImportReview",
+            OrderStatus::PartiallyFulfilled => "PartiallyFulfilled",
+            OrderStatus::Processing => "Processing",
+            OrderStatus::Noop => "",
+            OrderStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for OrdersPresentationViewModelsOrderStatus {
-    fn default() -> OrdersPresentationViewModelsOrderStatus {
-        OrdersPresentationViewModelsOrderStatus::Noop
+impl Default for OrderStatus {
+    fn default() -> OrderStatus {
+        OrderStatus::Noop
     }
 }
-impl OrdersPresentationViewModelsOrderStatus {
+impl OrderStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, OrdersPresentationViewModelsOrderStatus::Noop)
+        matches!(self, OrderStatus::Noop)
     }
 }
 
@@ -1732,7 +1732,7 @@ impl OrdersPresentationViewModelsOrderStatus {
  * Shipment type of the order
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum OrdersPresentationViewModelsOrderType {
+pub enum OrderType {
     #[serde(rename = "B2B")]
     B2B,
     #[serde(rename = "DTC")]
@@ -1745,37 +1745,37 @@ pub enum OrdersPresentationViewModelsOrderType {
     FallthroughString,
 }
 
-impl std::fmt::Display for OrdersPresentationViewModelsOrderType {
+impl std::fmt::Display for OrderType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            OrdersPresentationViewModelsOrderType::B2B => "B2B",
-            OrdersPresentationViewModelsOrderType::Dtc => "DTC",
-            OrdersPresentationViewModelsOrderType::DropShip => "DropShip",
-            OrdersPresentationViewModelsOrderType::Noop => "",
-            OrdersPresentationViewModelsOrderType::FallthroughString => "*",
+            OrderType::B2B => "B2B",
+            OrderType::Dtc => "DTC",
+            OrderType::DropShip => "DropShip",
+            OrderType::Noop => "",
+            OrderType::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for OrdersPresentationViewModelsOrderType {
-    fn default() -> OrdersPresentationViewModelsOrderType {
-        OrdersPresentationViewModelsOrderType::Noop
+impl Default for OrderType {
+    fn default() -> OrderType {
+        OrderType::Noop
     }
 }
-impl OrdersPresentationViewModelsOrderType {
+impl OrderType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, OrdersPresentationViewModelsOrderType::Noop)
+        matches!(self, OrderType::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsOrder {
+pub struct Order {
     /**
      * Created by channel metadata
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub channel: Option<ReturnsChannelInfoView>,
+    pub channel: Option<OrdersChannelInfo>,
     /**
      * Expiration date for this lot
      */
@@ -1820,7 +1820,7 @@ pub struct OrdersPresentationViewModelsOrder {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub products: Vec<OrdersPresentationViewModelsProductInfo>,
+    pub products: Vec<OrdersProductInfo>,
     /**
      * Expiration date for this lot
      */
@@ -1834,7 +1834,7 @@ pub struct OrdersPresentationViewModelsOrder {
      * Information about the recipient of an order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub recipient: Option<OrdersPresentationViewModelsRecipientInfo>,
+    pub recipient: Option<OrdersRecipientInfo>,
     /**
      * Name of the channel
      */
@@ -1848,7 +1848,7 @@ pub struct OrdersPresentationViewModelsOrder {
      * Contains properties that needs to be used for fulfilling B2B/Dropship orders.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub retailer_program_data: Option<OrdersPresentationViewModelsRetailerProgramData>,
+    pub retailer_program_data: Option<OrdersRetailerProgramData>,
     /**
      * Shipments affiliated with the order
      */
@@ -1857,7 +1857,7 @@ pub struct OrdersPresentationViewModelsOrder {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub shipments: Vec<OrdersPresentationViewModelsShipment>,
+    pub shipments: Vec<OrdersShipment>,
     /**
      * Name of the channel
      */
@@ -1871,12 +1871,12 @@ pub struct OrdersPresentationViewModelsOrder {
      * Contains shipping properties that need to be used for fulfilling an order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub shipping_terms: Option<OrdersPresentationViewModelsShippingTerms>,
+    pub shipping_terms: Option<OrdersShippingTerms>,
     /**
      * The order status
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<OrdersPresentationViewModelsOrderStatus>,
+    pub status: Option<OrderStatus>,
     /**
      * Client-defined order tags
      */
@@ -1885,16 +1885,16 @@ pub struct OrdersPresentationViewModelsOrder {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub tags: Vec<OrdersPresentationViewModelsTag>,
+    pub tags: Vec<OrdersTag>,
     /**
      * Shipment type of the order
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
-    pub type_: Option<OrdersPresentationViewModelsOrderType>,
+    pub type_: Option<OrderType>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationModelsAddProductOrderBy {
+pub struct OrdersAddProductOrderByModel {
     /**
      * Unique id of the channel
      */
@@ -1916,7 +1916,7 @@ pub struct OrdersPresentationModelsAddProductOrderBy {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationModelsAddProductOrderByReference {
+pub struct OrdersAddProductOrderByReferenceModel {
     /**
      * Name of the channel
      */
@@ -1948,41 +1948,37 @@ pub struct OrdersPresentationModelsAddProductOrderByReference {
 
 /// All of the following types:
 ///
-/// - `OrdersPresentationModelsAddProductOrderBy`
-/// - `OrdersPresentationModelsAddProductOrderByReference`
+/// - `OrdersAddProductOrderByModel`
+/// - `OrdersAddProductOrderByReferenceModel`
 ///
 /// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 #[serde(untagged)]
-pub enum OrdersPresentationModelsAddProductOrderOneOf {
-    OrdersPresentationModelsAddProductOrderBy(OrdersPresentationModelsAddProductOrderBy),
-    OrdersPresentationModelsAddProductOrderByReference(
-        OrdersPresentationModelsAddProductOrderByReference,
-    ),
+pub enum OrdersAddProductOrderModelOneOf {
+    OrdersAddProductOrderByModel(OrdersAddProductOrderByModel),
+    OrdersAddProductOrderByReferenceModel(OrdersAddProductOrderByReferenceModel),
 }
 
-impl OrdersPresentationModelsAddProductOrderOneOf {
-    pub fn orders_presentation_models_add_product_order_by(
-        &self,
-    ) -> Option<&OrdersPresentationModelsAddProductOrderBy> {
-        if let OrdersPresentationModelsAddProductOrderOneOf::OrdersPresentationModelsAddProductOrderBy(ref_) = self {
-                                return Some(ref_);
-                            }
+impl OrdersAddProductOrderModelOneOf {
+    pub fn orders_add_product_order_by_model(&self) -> Option<&OrdersAddProductOrderByModel> {
+        if let OrdersAddProductOrderModelOneOf::OrdersAddProductOrderByModel(ref_) = self {
+            return Some(ref_);
+        }
         None
     }
 
-    pub fn orders_presentation_models_add_product_order_by_reference(
+    pub fn orders_add_product_order_by_reference_model(
         &self,
-    ) -> Option<&OrdersPresentationModelsAddProductOrderByReference> {
-        if let OrdersPresentationModelsAddProductOrderOneOf::OrdersPresentationModelsAddProductOrderByReference(ref_) = self {
-                                return Some(ref_);
-                            }
+    ) -> Option<&OrdersAddProductOrderByReferenceModel> {
+        if let OrdersAddProductOrderModelOneOf::OrdersAddProductOrderByReferenceModel(ref_) = self {
+            return Some(ref_);
+        }
         None
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationModelsCreateOrder {
+pub struct OrdersCreateOrderModel {
     /**
      * Name of the channel
      */
@@ -2018,7 +2014,7 @@ pub struct OrdersPresentationModelsCreateOrder {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub products: Vec<OrdersPresentationModelsAddProductOrderOneOf>,
+    pub products: Vec<OrdersAddProductOrderModelOneOf>,
     /**
      * Expiration date for this lot
      */
@@ -2032,7 +2028,7 @@ pub struct OrdersPresentationModelsCreateOrder {
      * Information about the recipient of an order
      */
     #[serde()]
-    pub recipient: OrdersPresentationViewModelsRecipientInfo,
+    pub recipient: OrdersRecipientInfo,
     /**
      * Name of the channel
      */
@@ -2046,7 +2042,7 @@ pub struct OrdersPresentationModelsCreateOrder {
      * Contains properties that needs to be used for fulfilling B2B/Dropship orders.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub retailer_program_data: Option<OrdersPresentationViewModelsRetailerProgramData>,
+    pub retailer_program_data: Option<OrdersRetailerProgramData>,
     /**
      * Name of the channel
      */
@@ -2060,7 +2056,7 @@ pub struct OrdersPresentationModelsCreateOrder {
      * Contains shipping properties that need to be used for fulfilling an order.
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub shipping_terms: Option<OrdersPresentationViewModelsShippingTerms>,
+    pub shipping_terms: Option<OrdersShippingTerms>,
     /**
      * Client-defined order tags
      */
@@ -2069,12 +2065,12 @@ pub struct OrdersPresentationModelsCreateOrder {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub tags: Vec<OrdersPresentationViewModelsTag>,
+    pub tags: Vec<OrdersTag>,
     /**
      * Shipment type of the order
      */
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
-    pub type_: Option<OrdersPresentationViewModelsOrderType>,
+    pub type_: Option<OrderType>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -2111,7 +2107,7 @@ impl Action {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsCanceledShipment {
+pub struct OrdersCanceledShipment {
     /**
      *
      */
@@ -2149,7 +2145,7 @@ pub struct OrdersPresentationViewModelsCanceledShipment {
  * The overall result of canceling the shipments associated with the order
  */
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum OrdersPresentationViewModelsCanceledOrderStatus {
+pub enum OrdersCanceledOrderStatus {
     #[serde(rename = "Failure")]
     Failure,
     #[serde(rename = "PartialSuccess")]
@@ -2162,33 +2158,33 @@ pub enum OrdersPresentationViewModelsCanceledOrderStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for OrdersPresentationViewModelsCanceledOrderStatus {
+impl std::fmt::Display for OrdersCanceledOrderStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            OrdersPresentationViewModelsCanceledOrderStatus::Failure => "Failure",
-            OrdersPresentationViewModelsCanceledOrderStatus::PartialSuccess => "PartialSuccess",
-            OrdersPresentationViewModelsCanceledOrderStatus::Success => "Success",
-            OrdersPresentationViewModelsCanceledOrderStatus::Noop => "",
-            OrdersPresentationViewModelsCanceledOrderStatus::FallthroughString => "*",
+            OrdersCanceledOrderStatus::Failure => "Failure",
+            OrdersCanceledOrderStatus::PartialSuccess => "PartialSuccess",
+            OrdersCanceledOrderStatus::Success => "Success",
+            OrdersCanceledOrderStatus::Noop => "",
+            OrdersCanceledOrderStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for OrdersPresentationViewModelsCanceledOrderStatus {
-    fn default() -> OrdersPresentationViewModelsCanceledOrderStatus {
-        OrdersPresentationViewModelsCanceledOrderStatus::Noop
+impl Default for OrdersCanceledOrderStatus {
+    fn default() -> OrdersCanceledOrderStatus {
+        OrdersCanceledOrderStatus::Noop
     }
 }
-impl OrdersPresentationViewModelsCanceledOrderStatus {
+impl OrdersCanceledOrderStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, OrdersPresentationViewModelsCanceledOrderStatus::Noop)
+        matches!(self, OrdersCanceledOrderStatus::Noop)
     }
 }
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsCanceledOrder {
+pub struct OrdersCanceledOrder {
     /**
      *
      */
@@ -2197,12 +2193,12 @@ pub struct OrdersPresentationViewModelsCanceledOrder {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub canceled_shipment_results: Vec<OrdersPresentationViewModelsCanceledShipment>,
+    pub canceled_shipment_results: Vec<OrdersCanceledShipment>,
     /**
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub order: Option<OrdersPresentationViewModelsOrder>,
+    pub order: Option<Order>,
     /**
      *
      */
@@ -2216,12 +2212,12 @@ pub struct OrdersPresentationViewModelsCanceledOrder {
      *
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<OrdersPresentationViewModelsCanceledOrderStatus>,
+    pub status: Option<OrdersCanceledOrderStatus>,
 }
 
 /// Model for adding a Store Order Json to a ShipBob Order.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationModelsAddStoreOrderJson {
+pub struct OrdersAddStoreOrderJsonModel {
     /**
      * Name of the channel
      */
@@ -2234,7 +2230,7 @@ pub struct OrdersPresentationModelsAddStoreOrderJson {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsShipmentLog {
+pub struct OrdersShipmentLog {
     /**
      * Unique id of the channel
      */
@@ -2284,7 +2280,7 @@ pub struct OrdersPresentationViewModelsShipmentLog {
 
 /// Model for cancel multiple shipments at once
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationModelsCancelShipments {
+pub struct OrdersCancelShipmentsModel {
     /**
      * Model for cancel multiple shipments at once
      */
@@ -2298,7 +2294,7 @@ pub struct OrdersPresentationModelsCancelShipments {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsCanceledShipments {
+pub struct OrdersCanceledShipments {
     /**
      *
      */
@@ -2307,11 +2303,11 @@ pub struct OrdersPresentationViewModelsCanceledShipments {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub results: Vec<OrdersPresentationViewModelsCanceledShipment>,
+    pub results: Vec<OrdersCanceledShipment>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ProductsPublicBundleRootInformationView {
+pub struct OrdersServiceLevelDetail {
     /**
      * Unique id of the channel
      */
@@ -2333,7 +2329,7 @@ pub struct ProductsPublicBundleRootInformationView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrdersPresentationViewModelsShipMethodDetail {
+pub struct OrdersShipMethodDetail {
     /**
      * True if the inventory item is marked as a digital item
      */
@@ -2369,7 +2365,7 @@ pub struct OrdersPresentationViewModelsShipMethodDetail {
     )]
     pub name: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub service_level: Option<ProductsPublicBundleRootInformationView>,
+    pub service_level: Option<OrdersServiceLevelDetail>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -2450,7 +2446,7 @@ impl ProductsCommonModelsProductBundleStatus {
 
 /// Information about a store channel
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ProductsPublicChannelView {
+pub struct ProductsChannel {
     /**
      * Information about a store channel
      */
@@ -2473,7 +2469,7 @@ pub struct ProductsPublicChannelView {
 
 /// The inventory that store products can resolve to when packing a shipment
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ProductsPublicInventoryItemView {
+pub struct ProductsInventoryItem {
     /**
      * The inventory that store products can resolve to when packing a shipment
      */
@@ -2505,7 +2501,7 @@ pub struct ProductsPublicInventoryItemView {
 
 /// Break down of quantities by fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ProductsPublicFulfillmentCenterQuantityView {
+pub struct ProductsFulfillmentCenterQuantity {
     /**
      * Break down of quantities by fulfillment center
      */
@@ -2554,7 +2550,7 @@ pub struct ProductsPublicFulfillmentCenterQuantityView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ProductsPublicProductView {
+pub struct ProductsProduct {
     /**
      * Name of the channel
      */
@@ -2565,12 +2561,12 @@ pub struct ProductsPublicProductView {
     )]
     pub barcode: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub bundle_root_information: Option<ProductsPublicBundleRootInformationView>,
+    pub bundle_root_information: Option<OrdersServiceLevelDetail>,
     /**
      * Information about a store channel
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub channel: Option<ProductsPublicChannelView>,
+    pub channel: Option<ProductsChannel>,
     /**
      * Expiration date for this lot
      */
@@ -2588,7 +2584,7 @@ pub struct ProductsPublicProductView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub fulfillable_inventory_items: Vec<ProductsPublicInventoryItemView>,
+    pub fulfillable_inventory_items: Vec<ProductsInventoryItem>,
     /**
      * Fulfillable quantity of this product broken down by fulfillment center location
      */
@@ -2597,8 +2593,7 @@ pub struct ProductsPublicProductView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub fulfillable_quantity_by_fulfillment_center:
-        Vec<ProductsPublicFulfillmentCenterQuantityView>,
+    pub fulfillable_quantity_by_fulfillment_center: Vec<ProductsFulfillmentCenterQuantity>,
     /**
      * Name of the channel
      */
@@ -2693,7 +2688,7 @@ pub struct ProductsPublicProductView {
 
 /// The product to create
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ProductsApiModelsPublicCreateProduct {
+pub struct ProductsCreateProductModel {
     /**
      * Name of the channel
      */
@@ -2761,7 +2756,7 @@ pub struct ProductsApiModelsPublicCreateProduct {
 
 /// Updates to an existing product product
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ProductsApiModelsPublicUpdateProduct {
+pub struct ProductsUpdateProductModel {
     /**
      * Name of the channel
      */
@@ -2820,7 +2815,7 @@ pub struct ProductsApiModelsPublicUpdateProduct {
 
 /// Information about a fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReceivingFulfillmentCenterView {
+pub struct ReceivingFulfillmentCenter {
     /**
      * Name of the channel
      */
@@ -3099,7 +3094,7 @@ impl ReceivingPublicCommonModelsBoxStatus {
 
 /// Information about an item contained inside a box as part of a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReceivingBoxItemView {
+pub struct ReceivingBoxItem {
     /**
      * Information about an item contained inside a box as part of a receiving order
      */
@@ -3149,7 +3144,7 @@ pub struct ReceivingBoxItemView {
 
 /// Information about a box shipment included in a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReceivingBoxView {
+pub struct ReceivingBox {
     /**
      * Expiration date for this lot
      */
@@ -3167,7 +3162,7 @@ pub struct ReceivingBoxView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub box_items: Vec<ReceivingBoxItemView>,
+    pub box_items: Vec<ReceivingBoxItem>,
     /**
      * Information about a box shipment included in a receiving order
      */
@@ -3213,7 +3208,7 @@ pub struct ReceivingBoxView {
 
 /// Information about a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReceivingOrderView {
+pub struct ReceivingOrder {
     /**
      * Name of the channel
      */
@@ -3236,7 +3231,7 @@ pub struct ReceivingOrderView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub boxes: Vec<ReceivingBoxView>,
+    pub boxes: Vec<ReceivingBox>,
     /**
      * Expiration date for this lot
      */
@@ -3250,7 +3245,7 @@ pub struct ReceivingOrderView {
      * Information about a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub fulfillment_center: Option<ReceivingFulfillmentCenterView>,
+    pub fulfillment_center: Option<ReceivingFulfillmentCenter>,
     /**
      * Information about a receiving order
      */
@@ -3353,7 +3348,7 @@ pub struct MicrosoftAspNetCoreMvcValidationProblemDetails {
 
 /// Model containing information that assigns a receiving order to a fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReceivingAssignOrderFulfillmentCenter {
+pub struct ReceivingAssignOrderFulfillmentCenterModel {
     /**
      * Unique id of the channel
      */
@@ -3367,7 +3362,7 @@ pub struct ReceivingAssignOrderFulfillmentCenter {
 
 /// Information about an inventory item contained inside a receiving order box
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReceivingAddBoxItemTo {
+pub struct ReceivingAddBoxItemModel {
     /**
      * Unique id of the channel
      */
@@ -3408,7 +3403,7 @@ pub struct ReceivingAddBoxItemTo {
 
 /// Information about a box shipment to be added to a receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReceivingAddBoxOrder {
+pub struct ReceivingAddBoxOrderModel {
     /**
      * Items contained in this box
      */
@@ -3417,7 +3412,7 @@ pub struct ReceivingAddBoxOrder {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub box_items: Vec<ReceivingAddBoxItemTo>,
+    pub box_items: Vec<ReceivingAddBoxItemModel>,
     /**
      * Name of the channel
      */
@@ -3431,7 +3426,7 @@ pub struct ReceivingAddBoxOrder {
 
 /// Information to create a new receiving order
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReceivingCreateOrder {
+pub struct ReceivingCreateOrderModel {
     #[serde()]
     pub box_packaging_type: ReceivingPublicCommonModelsPackingType,
     /**
@@ -3442,7 +3437,7 @@ pub struct ReceivingCreateOrder {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub boxes: Vec<ReceivingAddBoxOrder>,
+    pub boxes: Vec<ReceivingAddBoxOrderModel>,
     /**
      * Expiration date for this lot
      */
@@ -3456,7 +3451,7 @@ pub struct ReceivingCreateOrder {
      * Model containing information that assigns a receiving order to a fulfillment center
      */
     #[serde()]
-    pub fulfillment_center: ReceivingAssignOrderFulfillmentCenter,
+    pub fulfillment_center: ReceivingAssignOrderFulfillmentCenterModel,
     #[serde()]
     pub package_type: ReceivingPublicCommonModelsPackageType,
 }
@@ -3544,7 +3539,7 @@ impl ReturnsPublicCommonTransactionLogSource {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsTransactionView {
+pub struct ReturnsTransaction {
     /**
      * Weight in ounces of this inventory item
      */
@@ -3560,7 +3555,7 @@ pub struct ReturnsTransactionView {
 
 /// Information about a fulfillment center
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsFulfillmentCenterView {
+pub struct ReturnsFulfillmentCenter {
     /**
      * Unique id of the channel
      */
@@ -3658,7 +3653,7 @@ impl ReturnsPublicCommonReturnActionSource {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsReturnActionRequestedView {
+pub struct ReturnActionRequested {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<ReturnsPublicCommonReturnAction>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -3675,7 +3670,7 @@ pub struct ReturnsReturnActionRequestedView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsReturnActionTakenView {
+pub struct ReturnActionTaken {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub action: Option<ReturnsPublicCommonReturnAction>,
     /**
@@ -3699,9 +3694,9 @@ pub struct ReturnsReturnActionTakenView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsInventoryItemView {
+pub struct ReturnsInventoryItem {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub action_requested: Option<ReturnsReturnActionRequestedView>,
+    pub action_requested: Option<ReturnActionRequested>,
     /**
      * Action(s) taken when processing the return
      */
@@ -3710,7 +3705,7 @@ pub struct ReturnsInventoryItemView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub action_taken: Vec<ReturnsReturnActionTakenView>,
+    pub action_taken: Vec<ReturnActionTaken>,
     /**
      * Unique id of the channel
      */
@@ -3776,17 +3771,17 @@ impl ReturnsPublicCommonReturnType {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsReturnOrderView {
+pub struct ReturnOrder {
     /**
      * Created by channel metadata
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub channel: Option<ReturnsChannelInfoView>,
+    pub channel: Option<OrdersChannelInfo>,
     /**
      * Information about a fulfillment center
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub fulfillment_center: Option<ReturnsFulfillmentCenterView>,
+    pub fulfillment_center: Option<ReturnsFulfillmentCenter>,
     /**
      * Unique id of the channel
      */
@@ -3813,7 +3808,7 @@ pub struct ReturnsReturnOrderView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub inventory: Vec<ReturnsInventoryItemView>,
+    pub inventory: Vec<ReturnsInventoryItem>,
     /**
      * Weight in ounces of this inventory item
      */
@@ -3862,11 +3857,11 @@ pub struct ReturnsReturnOrderView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub transactions: Vec<ReturnsTransactionView>,
+    pub transactions: Vec<ReturnsTransaction>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsReturnInventoryView {
+pub struct ReturnInventory {
     /**
      * Unique id of the channel
      */
@@ -3890,12 +3885,12 @@ pub struct ReturnsReturnInventoryView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsCreateReturnView {
+pub struct ReturnsCreateReturn {
     /**
      * Information about a fulfillment center
      */
     #[serde()]
-    pub fulfillment_center: ReturnsFulfillmentCenterView,
+    pub fulfillment_center: ReturnsFulfillmentCenter,
     /**
      * Array of inventory items being returned
      */
@@ -3904,7 +3899,7 @@ pub struct ReturnsCreateReturnView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub inventory: Vec<ReturnsReturnInventoryView>,
+    pub inventory: Vec<ReturnInventory>,
     /**
      * Unique id of the channel
      */
@@ -3973,7 +3968,7 @@ impl SortOrder {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReturnsReturnOrderStatusHistoryView {
+pub struct ReturnOrderStatusHistory {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub status: Option<ReturnsPublicCommonReturnStatus>,
     /**
@@ -4029,7 +4024,7 @@ impl WebhooksPublicCommonTopics {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct WebhooksWebhookView {
+pub struct Webhook {
     /**
      * Expiration date for this lot
      */
@@ -4062,7 +4057,7 @@ pub struct WebhooksWebhookView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct WebhooksCreateWebhookSubscription {
+pub struct WebhooksCreateWebhookSubscriptionModel {
     /**
      * URL subscription events will be posted to
      */
@@ -4172,7 +4167,7 @@ impl IntegrationsLocationPublicCommonServiceTypeEnum {
 
 /// The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationAddressView {
+pub struct IntegrationsLocationAddress {
     /**
      * Name of the channel
      */
@@ -4259,12 +4254,12 @@ pub struct IntegrationsLocationAddressView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationServiceView {
+pub struct IntegrationsLocationService {
     /**
      * The service-specific address of the location. Each object contains address type, address1, address2, city, state, country, zip code, phone number, and email
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub address: Option<IntegrationsLocationAddressView>,
+    pub address: Option<IntegrationsLocationAddress>,
     /**
      * True if the inventory item is marked as a digital item
      */
@@ -4278,7 +4273,7 @@ pub struct IntegrationsLocationServiceView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationView {
+pub struct IntegrationsLocation {
     /**
      * Name of the channel
      */
@@ -4343,7 +4338,7 @@ pub struct IntegrationsLocationView {
     )]
     pub name: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub region: Option<ProductsPublicBundleRootInformationView>,
+    pub region: Option<OrdersServiceLevelDetail>,
     /**
      * Services provided by the location
      */
@@ -4352,7 +4347,7 @@ pub struct IntegrationsLocationView {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub services: Vec<IntegrationsLocationServiceView>,
+    pub services: Vec<IntegrationsLocationService>,
     /**
      * Name of the channel
      */
@@ -4365,7 +4360,7 @@ pub struct IntegrationsLocationView {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationInternalView {
+pub struct IntegrationsLocationInternal {
     /**
      * True if the inventory item is marked as a digital item
      */
@@ -4378,12 +4373,12 @@ pub struct IntegrationsLocationInternalView {
 
 /// All of the following types are flattened into one object:
 ///
-/// - `IntegrationsLocationView`
-/// - `IntegrationsLocationInternalView`
+/// - `IntegrationsLocation`
+/// - `IntegrationsLocationInternal`
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IntegrationsLocationInternalViewAllOf {
+pub struct IntegrationsLocationInternalAllOf {
     #[serde(flatten)]
-    pub integrations_location_view: IntegrationsLocationView,
+    pub integrations_location: IntegrationsLocation,
     #[serde(flatten)]
-    pub integrations_location_internal_view: IntegrationsLocationInternalView,
+    pub integrations_location_internal: IntegrationsLocationInternal,
 }

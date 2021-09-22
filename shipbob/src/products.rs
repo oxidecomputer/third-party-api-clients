@@ -46,7 +46,7 @@ impl Products {
         search: &str,
         active_status: crate::types::ProductsCommonModelsProductActiveStatus,
         bundle_status: crate::types::ProductsCommonModelsProductBundleStatus,
-    ) -> Result<Vec<crate::types::ProductsPublicProductView>> {
+    ) -> Result<Vec<crate::types::ProductsProduct>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !active_status.to_string().is_empty() {
             query_args.push(("ActiveStatus".to_string(), active_status.to_string()));
@@ -89,7 +89,7 @@ impl Products {
         search: &str,
         active_status: crate::types::ProductsCommonModelsProductActiveStatus,
         bundle_status: crate::types::ProductsCommonModelsProductBundleStatus,
-    ) -> Result<Vec<crate::types::ProductsPublicProductView>> {
+    ) -> Result<Vec<crate::types::ProductsProduct>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !active_status.to_string().is_empty() {
             query_args.push(("ActiveStatus".to_string(), active_status.to_string()));
@@ -123,8 +123,8 @@ impl Products {
      */
     pub async fn post(
         &self,
-        body: &crate::types::ProductsApiModelsPublicCreateProduct,
-    ) -> Result<Vec<crate::types::ProductsPublicProductView>> {
+        body: &crate::types::ProductsCreateProductModel,
+    ) -> Result<Vec<crate::types::ProductsProduct>> {
         let url = "/product".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -141,7 +141,7 @@ impl Products {
      * * `product_id: i64` -- Unique identifier of the product.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, product_id: i64) -> Result<crate::types::ProductsPublicProductView> {
+    pub async fn get(&self, product_id: i64) -> Result<crate::types::ProductsProduct> {
         let url = format!(
             "/product/{}",
             crate::progenitor_support::encode_path(&product_id.to_string()),
@@ -163,8 +163,8 @@ impl Products {
     pub async fn put(
         &self,
         product_id: i64,
-        body: &crate::types::ProductsApiModelsPublicUpdateProduct,
-    ) -> Result<Vec<crate::types::ProductsPublicProductView>> {
+        body: &crate::types::ProductsUpdateProductModel,
+    ) -> Result<Vec<crate::types::ProductsProduct>> {
         let url = format!(
             "/product/{}",
             crate::progenitor_support::encode_path(&product_id.to_string()),
@@ -186,8 +186,8 @@ impl Products {
      */
     pub async fn post_batch(
         &self,
-        body: &[crate::types::ProductsApiModelsPublicCreateProduct],
-    ) -> Result<Vec<crate::types::ProductsPublicProductView>> {
+        body: &[crate::types::ProductsCreateProductModel],
+    ) -> Result<Vec<crate::types::ProductsProduct>> {
         let url = "/product/batch".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))

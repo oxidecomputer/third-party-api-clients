@@ -363,7 +363,7 @@ impl Payroll {
      * Transitions a `processed` payroll back to the `unprocessed` state. A payroll cannot be canceled once it has entered the `funded` state.
      *
      */
-    pub async fn put_api_company_cancel(
+    pub async fn put_company_cancel(
         &self,
         company_id: &str,
         payroll_id: &str,

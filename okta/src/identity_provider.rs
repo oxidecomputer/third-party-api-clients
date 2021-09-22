@@ -368,6 +368,30 @@ impl IdentityProvider {
     }
 
     /**
+     * This function performs a `POST` to the `/api/v1/idps/{idpId}/credentials/csrs/{csrId}/lifecycle/publish` endpoint.
+     *
+     * Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.
+     *
+     * **Parameters:**
+     *
+     * * `idp_id: &str`
+     * * `csr_id: &str`
+     */
+    pub async fn post_idp_credentials_csr_lifecycle_publish(
+        &self,
+        idp_id: &str,
+        csr_id: &str,
+    ) -> Result<crate::types::JsonWebKey> {
+        let url = format!(
+            "/api/v1/idps/{}/credentials/csrs/{}/lifecycle/publish",
+            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(&csr_id.to_string()),
+        );
+
+        self.client.post(&url, None).await
+    }
+
+    /**
      * List Signing Key Credentials for IdP.
      *
      * This function performs a `GET` to the `/api/v1/idps/{idpId}/credentials/keys` endpoint.

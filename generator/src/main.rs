@@ -2553,9 +2553,15 @@ fn clean_name(t: &str) -> String {
     .replace("applicants_applicant_", "applicant_")
     .replace("_public_api_view_models", "_")
     .replace("_api_view_models", "_")
-    .replace("_channels_channel", "_channel")
-    .trim_end_matches("_model")
-    .trim_end_matches("_view")
+    .replace("_api_models_public", "_")
+    .replace("_presentation_view_models", "_")
+    .replace("_presentation_models", "_")
+    .replace("channels_channel", "channel")
+    .replace("orders_order", "order")
+    .replace("webhooks_webhook", "webhook")
+    .replace("products_public", "products")
+    .replace("returns_return", "return")
+    .replace("_view_model", "_")
     .trim_start_matches('_')
     .trim_end_matches('_')
     .replace("_", " ")
@@ -2637,6 +2643,8 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         .replace("_id_or_uuid", "")
         .replace("_uuid", "")
         .replace("cloudresourcemanager_", "_")
+        .replace("_csrs_csr", "_csr")
+        .replace("_idps_idp", "_idp")
         .replace("shippingmethod_", "shipping_method_")
         .replace("companies_company_", "company_")
         .replace("employees_employee_", "employee_")
@@ -2663,6 +2671,10 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
         st = st.trim_end_matches('s').to_string();
     }
 
+    if !st.contains("api_key") {
+        st = st.replace("_api_", "_");
+    }
+
     let mut words: Vec<String> = Default::default();
     // Only get a string with unique words.
     let split = st.split('_');
@@ -2682,6 +2694,7 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
     f = f
         .replace(&tag, "")
         .replace(&format!("_{}", tag.trim_end_matches('s')), "")
+        .replace("_apps_app", "_app")
         .replace("__", "_")
         .trim_end_matches('_')
         .trim_end_matches("_s")
@@ -2739,6 +2752,12 @@ fn main() -> Result<()> {
     opts.reqopt("n", "", "Target Rust crate name", "CRATE");
     opts.reqopt("v", "", "Target Rust crate version", "VERSION");
     opts.reqopt("d", "", "Target Rust crate description", "DESCRIPTION");
+    opts.reqopt(
+        "",
+        "add-post-header",
+        "A header to add to post requests",
+        "ADD_POST_HEADER",
+    );
     opts.reqopt("", "host", "Target default host", "DEFAULT_HOST");
     opts.reqopt(
         "",

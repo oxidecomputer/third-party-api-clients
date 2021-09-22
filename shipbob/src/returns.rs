@@ -22,7 +22,7 @@ impl Returns {
      * * `id: i64` -- Unique id of the channel.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, id: i64) -> Result<crate::types::ReturnsReturnOrderView> {
+    pub async fn get(&self, id: i64) -> Result<crate::types::ReturnOrder> {
         let url = format!(
             "/return/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -44,8 +44,8 @@ impl Returns {
     pub async fn put(
         &self,
         id: i64,
-        body: &crate::types::ReturnsCreateReturnView,
-    ) -> Result<crate::types::ReturnsReturnOrderView> {
+        body: &crate::types::ReturnsCreateReturn,
+    ) -> Result<crate::types::ReturnOrder> {
         let url = format!(
             "/return/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -91,7 +91,7 @@ impl Returns {
         tracking_numbers: &[String],
         original_shipment_ids: &[String],
         inventory_ids: &[String],
-    ) -> Result<Vec<crate::types::ReturnsReturnOrderView>> {
+    ) -> Result<Vec<crate::types::ReturnOrder>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = end_date {
             query_args.push(("EndDate".to_string(), date.to_rfc3339()));
@@ -160,7 +160,7 @@ impl Returns {
         tracking_numbers: &[String],
         original_shipment_ids: &[String],
         inventory_ids: &[String],
-    ) -> Result<Vec<crate::types::ReturnsReturnOrderView>> {
+    ) -> Result<Vec<crate::types::ReturnOrder>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if let Some(date) = end_date {
             query_args.push(("EndDate".to_string(), date.to_rfc3339()));
@@ -215,8 +215,8 @@ impl Returns {
      */
     pub async fn post(
         &self,
-        body: &crate::types::ReturnsCreateReturnView,
-    ) -> Result<crate::types::ReturnsReturnOrderView> {
+        body: &crate::types::ReturnsCreateReturn,
+    ) -> Result<crate::types::ReturnOrder> {
         let url = "/return".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -233,7 +233,7 @@ impl Returns {
      * * `id: i64` -- Unique id of the channel.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn post_cancel(&self, id: i64) -> Result<crate::types::ReturnsReturnOrderView> {
+    pub async fn post_cancel(&self, id: i64) -> Result<crate::types::ReturnOrder> {
         let url = format!(
             "/return/{}/cancel",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -255,7 +255,7 @@ impl Returns {
     pub async fn get_status_history(
         &self,
         id: i64,
-    ) -> Result<crate::types::ReturnsReturnOrderStatusHistoryView> {
+    ) -> Result<crate::types::ReturnOrderStatusHistory> {
         let url = format!(
             "/return/{}/statushistory",
             crate::progenitor_support::encode_path(&id.to_string()),

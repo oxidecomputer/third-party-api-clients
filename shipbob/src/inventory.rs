@@ -21,7 +21,7 @@ impl Inventory {
      *
      * * `inventory_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, inventory_id: i64) -> Result<crate::types::InventoryView> {
+    pub async fn get(&self, inventory_id: i64) -> Result<crate::types::Inventory> {
         let url = format!(
             "/inventory/{}",
             crate::progenitor_support::encode_path(&inventory_id.to_string()),
@@ -60,7 +60,7 @@ impl Inventory {
         i_ds: &[String],
         sort: &str,
         search: &str,
-    ) -> Result<Vec<crate::types::InventoryView>> {
+    ) -> Result<Vec<crate::types::Inventory>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_ds.is_empty() {
             query_args.push(("IDs".to_string(), i_ds.join(" ")));
@@ -103,7 +103,7 @@ impl Inventory {
         i_ds: &[String],
         sort: &str,
         search: &str,
-    ) -> Result<Vec<crate::types::InventoryView>> {
+    ) -> Result<Vec<crate::types::Inventory>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !i_ds.is_empty() {
             query_args.push(("IDs".to_string(), i_ds.join(" ")));
@@ -136,7 +136,7 @@ impl Inventory {
      * * `product_id: i64` -- The product id to get inventory for.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get_product(&self, product_id: i64) -> Result<Vec<crate::types::InventoryView>> {
+    pub async fn get_product(&self, product_id: i64) -> Result<Vec<crate::types::Inventory>> {
         let url = format!(
             "/product/{}/inventory",
             crate::progenitor_support::encode_path(&product_id.to_string()),
@@ -152,10 +152,7 @@ impl Inventory {
      *
      * As opposed to `get_product`, this function returns all the pages of the request at once.
      */
-    pub async fn get_all_product(
-        &self,
-        product_id: i64,
-    ) -> Result<Vec<crate::types::InventoryView>> {
+    pub async fn get_all_product(&self, product_id: i64) -> Result<Vec<crate::types::Inventory>> {
         let url = format!(
             "/product/{}/inventory",
             crate::progenitor_support::encode_path(&product_id.to_string()),
