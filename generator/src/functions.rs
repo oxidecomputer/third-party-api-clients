@@ -4,8 +4,9 @@ use anyhow::{bail, Result};
 use inflector::cases::snakecase::to_snake_case;
 
 use crate::{
-    clean_fn_name, clean_name, get_parameter_data, make_plural, oid_to_object_name, struct_name,
-    template::parse, ExtractJsonMediaType, ParameterDataExt, ReferenceOrExt, TypeId, TypeSpace,
+    clean_fn_name, clean_name, get_parameter_data, make_plural, oid_to_object_name,
+    path_to_operation_id, struct_name, template::parse, ExtractJsonMediaType, ParameterDataExt,
+    ReferenceOrExt, TypeId, TypeSpace,
 };
 
 /*
@@ -30,12 +31,13 @@ pub fn generate_files(
                 return Ok(());
             };
 
-            if o.operation_id.is_none() {
-                // Skipping.
-                return Ok(());
-            }
-
-            let od = to_snake_case(o.operation_id.as_deref().unwrap());
+            let op_id = if o.operation_id.is_none() {
+                // Make the operation id, the function.
+                path_to_operation_id(pn, m)
+            } else {
+                o.operation_id.as_ref().unwrap().to_string()
+            };
+            let od = to_snake_case(&op_id);
 
             // Make sure we have exactly 1 tag. This likely needs to change in the
             // future but for now it seems fairly consistent.

@@ -96,20 +96,22 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                     a(&format!("pub struct {} {{", sn));
                     for (name, tid) in omap.iter() {
                         if let Ok(mut rt) = ts.render_type(tid, true) {
-                            let mut prop = name.to_string();
-                            if name == "ref"
-                                || name == "type"
-                                || name == "self"
-                                || name == "box"
-                                || name == "match"
-                                || name == "foo"
-                                || name == "enum"
-                                || name == "const"
-                                || name == "use"
+                            let mut prop = name.trim().to_string();
+                            if prop == "ref"
+                                || prop == "type"
+                                || prop == "self"
+                                || prop == "box"
+                                || prop == "match"
+                                || prop == "foo"
+                                || prop == "enum"
+                                || prop == "const"
+                                || prop == "use"
                             {
                                 prop = format!("{}_", name);
                             } else if name == "$ref" {
                                 prop = format!("{}_", name.replace('$', ""));
+                            } else if name == "$type" {
+                                prop = format!("{}__", name.replace('$', ""));
                             } else if name == "+1" {
                                 prop = "plus_one".to_string()
                             } else if name == "-1" {
@@ -217,6 +219,22 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 prop = to_snake_case(&prop);
                             }
 
+                            // DO this again.
+                            // I know this is shit sue me, but sometimes we change the prop
+                            // so much it becomes one of these, ie. in the case of shipbob.
+                            if prop == "ref"
+                                || prop == "type"
+                                || prop == "self"
+                                || prop == "box"
+                                || prop == "match"
+                                || prop == "foo"
+                                || prop == "enum"
+                                || prop == "const"
+                                || prop == "use"
+                            {
+                                prop = format!("{}_", prop);
+                            }
+
                             // Close the serde string.
                             if *name != prop {
                                 a(&format!(r#"rename = "{}")]"#, name));
@@ -224,6 +242,10 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 a(r#"default)]"#);
                             } else {
                                 a(r#")]"#);
+                            }
+
+                            if prop == "type" {
+                                println!("{} {}", sn, prop);
                             }
 
                             a(&format!("pub {}: {},", prop, rt));

@@ -141,8 +141,6 @@ where
                             if o.responses.default.is_some() {
                                 println!("op {}: has response default", oid);
                             }
-                        } else {
-                            println!("XXXXXX path {} is missing operation ID, skipping", p.0);
                         }
                     }
 
@@ -2568,6 +2566,17 @@ fn clean_name(t: &str) -> String {
     words.join(" ")
 }
 
+pub fn path_to_operation_id(path: &str, method: &str) -> String {
+    format!(
+        "{}_{}",
+        path.replace("/", "-")
+            .trim_start_matches('-')
+            .replace('{', "")
+            .replace('}', ""),
+        method.to_lowercase()
+    )
+}
+
 pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
     if proper_name == "GitHub" {
         return to_snake_case(oid).trim_start_matches('_').to_string();
@@ -2662,6 +2671,8 @@ pub fn clean_fn_name(proper_name: &str, oid: &str, tag: &str) -> String {
     // Fix if we somehow created a function that is actually a keyword.
     if f == "move" {
         return "mv".to_string();
+    } else if f == "return" {
+        return "return_".to_string();
     }
 
     f
@@ -2913,12 +2924,13 @@ fn main() -> Result<()> {
                     ts: &mut TypeSpace|
          -> Result<String> {
             if let Some(o) = o {
-                if o.operation_id.is_none() {
-                    // Skipping.
-                    return Ok("".to_string());
-                }
-
-                let od = to_snake_case(o.operation_id.as_deref().unwrap());
+                let op_id = if o.operation_id.is_none() {
+                    // Make the operation id, the function.
+                    path_to_operation_id(pn, m)
+                } else {
+                    o.operation_id.as_ref().unwrap().to_string()
+                };
+                let od = to_snake_case(&op_id);
 
                 // Make sure we have exactly 1 tag. This likely needs to change in the
                 // future but for now it seems fairly consistent.
