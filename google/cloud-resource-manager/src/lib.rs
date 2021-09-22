@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-cloud-resource-manager = "0.1.0"
+//! google-cloud-resource-manager = "0.1.1"
 //! ```
 //!
 //! ## Basic example
@@ -120,7 +120,7 @@ use std::io::Write;
 
 use anyhow::{anyhow, Error, Result};
 
-pub const DEFAULT_HOST: &str = "https://www.googleapis.com/calendar/v3";
+pub const DEFAULT_HOST: &str = "https://cloudresourcemanager.googleapis.com/v2";
 
 mod progenitor_support {
     use percent_encoding::{utf8_percent_encode, AsciiSet, CONTROLS};

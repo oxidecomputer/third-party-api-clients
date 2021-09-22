@@ -68,6 +68,10 @@ SENDGRID_SPEC = $(SENDGRID_SPEC_DIR)/sendgrid.json
 SENDGRID_SPEC_REPO = sendgrid/sendgrid-oai
 SENDGRID_SPEC_REMOTE = https://raw.githubusercontent.com/$(SENDGRID_SPEC_REPO)/main/oai.json
 
+SHIPBOB_SPEC_DIR = $(CURDIR)/specs/shipbob
+SHIPBOB_SPEC = $(SHIPBOB_SPEC_DIR)/shipbob.json
+SHIPBOB_SPEC_REMOTE = https://developer.shipbob.com/c196c993-6cf8-4901-84aa-b425f3448df3
+
 SLACK_SPEC_DIR = $(CURDIR)/specs/slack
 SLACK_SPEC = $(SLACK_SPEC_DIR)/slack.json
 SLACK_SPEC_REPO = slackapi/slack-api-specs
@@ -81,7 +85,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: README.md docusign giphy github google-admin google-calendar google-cloud-resource-manager google-drive google-groups-settings google-sheets gusto mailchimp okta ramp revai sendgrid slack tripactions zoom
+generate: README.md docusign giphy github google-admin google-calendar google-cloud-resource-manager google-drive google-groups-settings google-sheets gusto mailchimp okta ramp revai sendgrid shipbob slack tripactions zoom
 	cargo test tests
 	cargo clippy
 
@@ -107,12 +111,14 @@ update-specs:
 		$(GITHUB_SPEC_DIR) \
 		$(GOOGLE_ADMIN_SPEC_DIR) \
 		$(GOOGLE_CALENDAR_SPEC_DIR) \
+		$(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR) \
 		$(GOOGLE_DRIVE_SPEC_DIR) \
 		$(GOOGLE_GROUPS_SETTINGS_SPEC_DIR) \
 		$(GUSTO_SPEC_DIR) \
 		$(MAILCHIMP_SPEC_DIR) \
 		$(OKTA_SPEC_DIR) \
 		$(SENDGRID_SPEC_DIR) \
+		$(SHIPBOB_SPEC_DIR) \
 		$(SLACK_SPEC_DIR) \
 		$(REVAI_SPEC_DIR) \
 		$(TRIPACTIONS_SPEC_DIR) \
@@ -122,12 +128,14 @@ update-specs:
 		$(GITHUB_SPEC) \
 		$(GOOGLE_ADMIN_SPEC) \
 		$(GOOGLE_CALENDAR_SPEC) \
+		$(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) \
 		$(GOOGLE_DRIVE_SPEC) \
 		$(GOOGLE_GROUPS_SETTINGS_SPEC) \
 		$(GUSTO_SPEC) \
 		$(MAILCHIMP_SPEC) \
 		$(OKTA_SPEC) \
 		$(SENDGRID_SPEC) \
+		$(SHIPBOB_SPEC) \
 		$(SLACK_SPEC) \
 		$(REVAI_SPEC_DIR) \
 		$(TRIPACTIONS_SPEC) \
@@ -241,7 +249,7 @@ google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MA
 		-d "A fully generated & opinionated API client for the Google Cloud Resource Manager API." \
 		--spec-link "https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v2" \
 		--token-endpoint "oauth2.googleapis.com/token" \
-		--host "www.googleapis.com/calendar/v3" $(EXTRA_ARGS)
+		--host "cloudresourcemanager.googleapis.com/v2" $(EXTRA_ARGS)
 	cargo fmt -p google-cloud-resource-manager
 	@echo -e "- [Google Cloud Resource Manager](google/cloud-resource-manager/) [![docs.rs](https://docs.rs/google-cloud-resource-manager/badge.svg)](https://docs.rs/google-cloud-resource-manager)" >> README.md
 
@@ -420,6 +428,27 @@ sendgrid: target/debug/generator $(SENDGRID_SPEC)
 		--host "api.sendgrid.com/v3" $(EXTRA_ARGS)
 	cargo fmt -p sendgrid-api
 	@echo -e "- [SendGrid](sendgrid/) [![docs.rs](https://docs.rs/sendgrid-api/badge.svg)](https://docs.rs/sendgrid-api)" >> README.md
+
+$(SHIPBOB_SPEC_DIR):
+	mkdir -p $@
+
+$(SHIPBOB_SPEC): $(SHIPBOB_SPEC_DIR)
+	npx swagger2openapi \
+		--outfile $@ \
+		--patch \
+		$(SHIPBOB_SPEC_DIR)/swagger.json
+
+.PHONY: shipbob
+shipbob: target/debug/generator $(SHIPBOB_SPEC)
+	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.2.1 \
+		-o shipbob \
+		-n shipbob \
+		--proper-name "ShipBob" \
+		-d "A fully generated & opinionated API client for the ShipBob API." \
+		--spec-link "$(SHIPBOB_SPEC_REMOTE)" \
+		--host "api.shipbob.com/1.0" $(EXTRA_ARGS)
+	cargo fmt -p shipbob
+	@echo -e "- [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)" >> README.md
 
 $(SLACK_SPEC_DIR):
 	mkdir -p $@

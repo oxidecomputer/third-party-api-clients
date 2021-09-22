@@ -16,6 +16,7 @@ members = [
 	"ramp",
 	"rev.ai",
 	"sendgrid",
+	"shipbob",
 	"slack",
 	"tripactions",
 	"zoom"

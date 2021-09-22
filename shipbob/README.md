@@ -1,34 +1,26 @@
-# `google-cloud-resource-manager`
+# `shipbob`
 
-A fully generated, opinionated API client library for Google Cloud Resource Manager.
+A fully generated, opinionated API client library for ShipBob.
 
-[![docs.rs](https://docs.rs/google-cloud-resource-manager/badge.svg)](https://docs.rs/google-cloud-resource-manager)
+[![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)
 
 ## API Details
 
-Creates, reads, and updates metadata for Google Cloud Platform resource containers.
+ShipBob Developer API Documentation
 
-[API Terms of Service](https://developers.google.com/terms/)
+# Authentication
 
-### Contact
-
-
-| name | url |
-|----|----|
-| Google | <https://google.com> |
-
-### License
+<!-- ReDoc-Inject: <security-definitions> -->
 
 
-| name | url |
-|----|----|
-| Creative Commons Attribution 3.0 | <http://creativecommons.org/licenses/by/3.0/> |
+
+
 
 
 ## Client Details
 
-This client is generated from the [Google Cloud Resource Manager OpenAPI
-specs](https://cloudresourcemanager.googleapis.com/iscovery/rest?version=v2) based on API spec version `v2`. This way it will remain
+This client is generated from the [ShipBob OpenAPI
+specs](https://developer.shipbob.com/c196c993-6cf8-4901-84aa-b425f3448df3) based on API spec version `1.0`. This way it will remain
 up to date as features are added. The documentation for the crate is generated
 along with the code to make this library easy to use.
 
@@ -37,7 +29,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-google-cloud-resource-manager = "0.1.1"
+shipbob = "0.2.1"
 ```
 
 ## Basic example
@@ -46,9 +38,9 @@ Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
 ```
-use google_cloud_resource_manager::Client;
+use shipbob::Client;
 
-let google cloud resource manager = Client::new(
+let shipbob = Client::new(
     String::from("client-id"),
     String::from("client-secret"),
     String::from("redirect-uri"),
@@ -60,16 +52,16 @@ let google cloud resource manager = Client::new(
 Alternatively, the library can search for most of the variables required for
 the client in the environment:
 
-- `GOOGLE CLOUD RESOURCE MANAGER_CLIENT_ID`
-- `GOOGLE CLOUD RESOURCE MANAGER_CLIENT_SECRET`
-- `GOOGLE CLOUD RESOURCE MANAGER_REDIRECT_URI`
+- `SHIPBOB_CLIENT_ID`
+- `SHIPBOB_CLIENT_SECRET`
+- `SHIPBOB_REDIRECT_URI`
 
 And then you can create a client from the environment.
 
 ```
-use google_cloud_resource_manager::Client;
+use shipbob::Client;
 
-let google cloud resource manager = Client::new_from_env(
+let shipbob = Client::new_from_env(
     String::from("token"),
     String::from("refresh-token")
 );
@@ -81,24 +73,24 @@ the initial state of the client, you will not know these values.
 To start off a fresh client and get a `token` and `refresh_token`, use the following.
 
 ```
-use google_cloud_resource_manager::Client;
+use shipbob::Client;
 
 async fn do_call() {
-    let mut google cloud resource manager = Client::new_from_env("", "");
+    let mut shipbob = Client::new_from_env("", "");
 
     // Get the URL to request consent from the user.
     // You can optionally pass in scopes. If none are provided, then the
     // resulting URL will not have any scopes.
-    let user_consent_url = google cloud resource manager.user_consent_url(&["some-scope".to_string()]);
+    let user_consent_url = shipbob.user_consent_url(&["some-scope".to_string()]);
 
     // In your redirect URL capture the code sent and our state.
     // Send it along to the request for the token.
     let code = "thing-from-redirect-url";
     let state = "state-from-redirect-url";
-    let mut access_token = google cloud resource manager.get_access_token(code, state).await.unwrap();
+    let mut access_token = shipbob.get_access_token(code, state).await.unwrap();
 
     // You can additionally refresh the access token with the following.
     // You must have a refresh token to be able to call this function.
-    access_token = google cloud resource manager.refresh_access_token().await.unwrap();
+    access_token = shipbob.refresh_access_token().await.unwrap();
 }
 ```
