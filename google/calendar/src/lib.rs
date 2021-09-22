@@ -526,6 +526,81 @@ impl Client {
 
     /* TODO: make this more DRY */
     #[allow(dead_code)]
+    async fn post_form<Out>(&self, uri: &str, form: reqwest::multipart::Form) -> Result<Out>
+    where
+        Out: serde::de::DeserializeOwned + 'static + Send,
+    {
+        let u = if uri.starts_with("https://") {
+            uri.to_string()
+        } else {
+            (DEFAULT_HOST.to_string() + uri).to_string()
+        };
+        let (url, auth) = self.url_and_auth(&u).await?;
+
+        let instance = <&Client>::clone(&self);
+
+        let mut req = instance.client.request(http::Method::POST, url);
+
+        // Set the default headers.
+        req = req.header(
+            reqwest::header::ACCEPT,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+        req = req.header(
+            reqwest::header::CONTENT_TYPE,
+            reqwest::header::HeaderValue::from_static("application/json"),
+        );
+
+        if let Some(auth_str) = auth {
+            req = req.header(http::header::AUTHORIZATION, &*auth_str);
+        }
+
+        req = req.multipart(form);
+
+        //println!("Request: {:?}", &req);
+        let response = req.send().await?;
+
+        let status = response.status();
+
+        let response_body = response.bytes().await?;
+
+        if status.is_success() {
+            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            let parsed_response = if status == http::StatusCode::NO_CONTENT
+                || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
+            {
+                serde_json::from_str("null")
+            } else if std::any::TypeId::of::<Out>() == std::any::TypeId::of::<String>() {
+                // Parse the output as a string.
+                serde_json::from_value(serde_json::json!(&String::from_utf8(
+                    response_body.to_vec()
+                )?))
+            } else {
+                serde_json::from_slice::<Out>(&response_body)
+            };
+            parsed_response.map_err(Error::from)
+        } else {
+            /*println!("error status: {:?}, response payload: {}",
+                status,
+                String::from_utf8_lossy(&response_body),
+            );*/
+
+            let error = if response_body.is_empty() {
+                anyhow!("code: {}, empty response", status)
+            } else {
+                anyhow!(
+                    "code: {}, error: {:?}",
+                    status,
+                    String::from_utf8_lossy(&response_body),
+                )
+            };
+
+            Err(error)
+        }
+    }
+
+    /* TODO: make this more DRY */
+    #[allow(dead_code)]
     async fn request_with_accept_mime<Out>(
         &self,
         method: reqwest::Method,

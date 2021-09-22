@@ -1,4 +1,4 @@
-use anyhow::{anyhow, Result};
+use anyhow::Result;
 
 #[async_trait::async_trait]
 pub trait JobOps {
@@ -12,10 +12,10 @@ pub trait JobOps {
 impl JobOps for crate::jobs::Jobs {
     /// Create a job.
     async fn post(&self, b: bytes::Bytes) -> Result<crate::types::Job> {
-        let form = requwest::multipart::Form::new()
+        let form = reqwest::multipart::Form::new()
             .part(
                 "media",
-                reqwest::multipart::Part::bytes(bytes.to_vec())
+                reqwest::multipart::Part::bytes(b.to_vec())
                     .mime_str("video/mp4")
                     .unwrap()
                     .file_name("testing.mp4"),
