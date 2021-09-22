@@ -6,6 +6,7 @@ members = [
 	"github",
 	"google/admin",
 	"google/calendar",
+	"google/cloud-resource-manager",
 	"google/drive",
 	"google/groups-settings",
 	"google/sheets",

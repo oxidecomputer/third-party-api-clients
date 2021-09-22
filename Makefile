@@ -24,6 +24,10 @@ GOOGLE_CALENDAR_SPEC_DIR = $(GOOGLE_SPEC_DIR)/calendar
 GOOGLE_CALENDAR_SPEC = $(GOOGLE_CALENDAR_SPEC_DIR)/calendar.yaml
 GOOGLE_CALENDAR_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/calendar/v3/openapi.yaml
 
+GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR = $(GOOGLE_SPEC_DIR)/cloud-resource-manager
+GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC = $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR)/cloud-resource-manager.yaml
+GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/cloudresourcemanager/v2/openapi.yaml
+
 GOOGLE_DRIVE_SPEC_DIR = $(GOOGLE_SPEC_DIR)/drive
 GOOGLE_DRIVE_SPEC = $(GOOGLE_DRIVE_SPEC_DIR)/drive.yaml
 GOOGLE_DRIVE_SPEC_REMOTE = https://raw.githubusercontent.com/APIs-guru/openapi-directory/main/APIs/googleapis.com/drive/v3/openapi.yaml
@@ -77,7 +81,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: README.md docusign giphy github google-admin google-calendar google-drive google-groups-settings google-sheets gusto mailchimp okta ramp revai sendgrid slack tripactions zoom
+generate: README.md docusign giphy github google-admin google-calendar google-cloud-resource-manager google-drive google-groups-settings google-sheets gusto mailchimp okta ramp revai sendgrid slack tripactions zoom
 	cargo test tests
 	cargo clippy
 
@@ -222,6 +226,24 @@ google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
 		--host "www.googleapis.com/calendar/v3" $(EXTRA_ARGS)
 	cargo fmt -p google-calendar
 	@echo -e "- [Google Calendar](google/calendar/) [![docs.rs](https://docs.rs/google-calendar/badge.svg)](https://docs.rs/google-calendar)" >> README.md
+
+$(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR):
+	mkdir -p $@
+
+$(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC): $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR)
+	curl -sSL $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_REMOTE) -o $@
+
+google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC)
+	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.1.0 \
+		-o google/cloud-resource-manager \
+		-n google-cloud-resource-manager \
+		--proper-name "Google Cloud Resource Manager" \
+		-d "A fully generated & opinionated API client for the Google Cloud Resource Manager API." \
+		--spec-link "https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v2" \
+		--token-endpoint "oauth2.googleapis.com/token" \
+		--host "www.googleapis.com/calendar/v3" $(EXTRA_ARGS)
+	cargo fmt -p google-cloud-resource-manager
+	@echo -e "- [Google Cloud Resource Manager](google/cloud-resource-manager/) [![docs.rs](https://docs.rs/google-cloud-resource-manager/badge.svg)](https://docs.rs/google-cloud-resource-manager)" >> README.md
 
 $(GOOGLE_DRIVE_SPEC_DIR):
 	mkdir -p $@
