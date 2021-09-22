@@ -26,12 +26,14 @@ impl Transcript {
      *
      * * `accept: crate::types::AcceptTranscript` -- MIME type specifying the transcription output format.
      */
-    pub async fn get(&self, id: &str, accept: crate::types::AcceptTranscript) -> Result<()> {
+    pub async fn get(&self, id: &str, accept: crate::types::AcceptTranscript) -> Result<String> {
         let url = format!(
             "/jobs/{}/transcript",
             crate::progenitor_support::encode_path(&id.to_string()),
         );
 
-        self.client.get(&url, None).await
+        self.client
+            .request_with_accept_mime(reqwest::Method::GET, &url, &accept.to_string())
+            .await
     }
 }

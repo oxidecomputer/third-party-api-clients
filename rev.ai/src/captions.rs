@@ -33,7 +33,7 @@ impl Captions {
         id: &str,
         accept: crate::types::Accept,
         speaker_channel: i64,
-    ) -> Result<()> {
+    ) -> Result<String> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if speaker_channel > 0 {
             query_args.push(("speaker_channel".to_string(), speaker_channel.to_string()));
@@ -45,6 +45,8 @@ impl Captions {
             query_
         );
 
-        self.client.get(&url, None).await
+        self.client
+            .request_with_accept_mime(reqwest::Method::GET, &url, &accept.to_string())
+            .await
     }
 }

@@ -1631,7 +1631,7 @@ components:
               description: Optional callback url to invoke when processing is complete
             custom_vocabulary_id:
               description: |
-                **This feature is in beta.** You can supply the id of a pre-completed custom vocabulary that you submitted through the [Custom Vocabularies API](https://rev.ai/docs/streaming#operation/SubmitCustomVocabulary) instead of uploading the list of phrases using the `custom_vocabularies` parameter. Using `custom_vocabulary_id` or `custom_vocabularies` with the same list of phrases yields the same transcription result, but `custom_vocabulary_id` allows your submission to finish processing faster by 6 seconds on average. 
+                **This feature is in beta.** You can supply the id of a pre-completed custom vocabulary that you submitted through the [Custom Vocabularies API](https://rev.ai/docs/streaming#operation/SubmitCustomVocabulary) instead of uploading the list of phrases using the `custom_vocabularies` parameter. Using `custom_vocabulary_id` or `custom_vocabularies` with the same list of phrases yields the same transcription result, but `custom_vocabulary_id` allows your submission to finish processing faster by 6 seconds on average.
 
                 You cannot use both `custom_vocabulary_id` and `custom_vocabularies` at the same time, and doing so will result in a 400 response. If the supplied id represents an incomplete, deleted, or non-existent custom vocabulary then you will receive a 404 response.
             delete_after_seconds:
@@ -1712,7 +1712,7 @@ components:
                 properties:
                   phrases:
                     description: |
-                      Array of phrases not found in normal dictionary. Add technical jargon, proper nouns and uncommon phrases as strings in this array to add them to the lexicon for this job. 
+                      Array of phrases not found in normal dictionary. Add technical jargon, proper nouns and uncommon phrases as strings in this array to add them to the lexicon for this job.
 
                       A phrase must contain at least 1 alpha character but may contain any non-numeric character from the Basic Latin set. A phrase can contain up to 12 words. Each word can contain up to 34 characters.
 

@@ -237,7 +237,7 @@ pub fn generate_files(
                     .to_string();
             }
 
-            let fn_inner = get_fn_inner(
+            let mut fn_inner = get_fn_inner(
                 proper_name,
                 &oid,
                 m,
@@ -247,6 +247,14 @@ pub fn generate_files(
                 &pagination_property,
                 false,
             )?;
+
+            // TODO: don't special case this.
+            if p == "/jobs/{id}/transcript" || p == "/jobs/{id}/captions" {
+                fn_inner =
+                    r#"self.client.request_with_accept_mime(reqwest::Method::GET, &url, &accept.to_string()).await"#
+                        .to_string();
+                response_type = "String".to_string();
+            }
 
             if let Some(te) = ts.id_to_entry.get(&tid) {
                 // If we have a one of, we can generate a few different subfunctions to
