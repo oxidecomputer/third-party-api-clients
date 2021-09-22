@@ -212,8 +212,10 @@ fn parse_inner(t: &str) -> Result<Template> {
                 }
             }
             State::ParameterSlash => {
-                if c == '/' || c == ':' {
+                if c == '/' || c == ':' || c == '.' {
                     // Google Admin API has ":issueCommand" so we want to allow that!
+                    // Shopify sometimes ends after a parameter with ".json", so we want to allow
+                    // that.
                     s = State::ConstantOrParameter;
                 } else {
                     bail!("expected a slash after parameter");

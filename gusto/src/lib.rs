@@ -256,9 +256,9 @@ impl Client {
         T: ToString,
         R: ToString,
     {
-        let client_id = env::var("GUSTO_CLIENT_ID").unwrap();
-        let client_secret = env::var("GUSTO_CLIENT_SECRET").unwrap();
-        let redirect_uri = env::var("GUSTO_REDIRECT_URI").unwrap();
+        let client_id = env::var("GUSTO_CLIENT_ID").expect("must set GUSTO_CLIENT_ID");
+        let client_secret = env::var("GUSTO_CLIENT_SECRET").expect("must set GUSTO_CLIENT_SECRET");
+        let redirect_uri = env::var("GUSTO_REDIRECT_URI").expect("must set GUSTO_REDIRECT_URI");
 
         Client::new(client_id, client_secret, redirect_uri, token, refresh_token)
     }

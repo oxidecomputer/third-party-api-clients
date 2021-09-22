@@ -331,9 +331,10 @@ impl Client {
         R: ToString,
         P: ToString,
     {
-        let client_id = env::var("SHIPBOB_CLIENT_ID").unwrap();
-        let client_secret = env::var("SHIPBOB_CLIENT_SECRET").unwrap();
-        let redirect_uri = env::var("SHIPBOB_REDIRECT_URI").unwrap();
+        let client_id = env::var("SHIPBOB_CLIENT_ID").expect("must set SHIPBOB_CLIENT_ID");
+        let client_secret =
+            env::var("SHIPBOB_CLIENT_SECRET").expect("must set SHIPBOB_CLIENT_SECRET");
+        let redirect_uri = env::var("SHIPBOB_REDIRECT_URI").expect("must set SHIPBOB_REDIRECT_URI");
 
         Client::new(
             client_id,

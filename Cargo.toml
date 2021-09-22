@@ -17,6 +17,7 @@ members = [
 	"rev.ai",
 	"sendgrid",
 	"shipbob",
+	"shopify",
 	"slack",
 	"tripactions",
 	"zoom"

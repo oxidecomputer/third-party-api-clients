@@ -186,7 +186,7 @@ impl Client {
     /// We pass in the token and refresh token to the client so if you are storing
     /// it in a database, you can get it first.
     pub fn new_from_env() -> Self {
-        let token = env::var("SENDGRID_API_KEY").unwrap();
+        let token = env::var("SENDGRID_API_KEY").expect("must set SENDGRID_API_KEY");
 
         Client::new(token)
     }

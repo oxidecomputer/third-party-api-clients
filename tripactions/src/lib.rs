@@ -195,8 +195,9 @@ impl Client {
     where
         T: ToString,
     {
-        let client_id = env::var("TRIPACTIONS_CLIENT_ID").unwrap();
-        let client_secret = env::var("TRIPACTIONS_CLIENT_SECRET").unwrap();
+        let client_id = env::var("TRIPACTIONS_CLIENT_ID").expect("must set TRIPACTIONS_CLIENT_ID");
+        let client_secret =
+            env::var("TRIPACTIONS_CLIENT_SECRET").expect("must set TRIPACTIONS_CLIENT_SECRET");
 
         Client::new(client_id, client_secret, token)
     }
