@@ -2558,6 +2558,9 @@ fn clean_name(t: &str) -> String {
     .replace("locations_location_", "location_")
     .replace("applicants_applicant_", "applicant_")
     .replace("_public_api_view_models", "_")
+    .replace("_public_common_models", "_")
+    .replace("_common_models", "_")
+    .replace("_public_common", "_")
     .replace("_api_view_models", "_")
     .replace("_api_models_public", "_")
     .replace("_presentation_view_models", "_")
@@ -2566,6 +2569,7 @@ fn clean_name(t: &str) -> String {
     .replace("orders_order", "order")
     .replace("webhooks_webhook", "webhook")
     .replace("products_public", "products")
+    .replace("products_product", "product")
     .replace("returns_return", "return")
     .replace("_view_model", "_")
     .trim_start_matches('_')
@@ -3263,6 +3267,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                     &version,
                     &proper_name,
                     &spec_link,
+                    &add_post_header,
                 )
             };
             let mut readme = root.clone();

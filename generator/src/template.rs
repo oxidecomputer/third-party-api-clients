@@ -602,8 +602,25 @@ pub fn generate_docs_generic_token(
     version: &str,
     proper_name: &str,
     spec_link: &str,
+    add_post_header: &str,
 ) -> String {
     let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
+
+    let add_post_header_args = if !add_post_header.is_empty() {
+        format!(
+            ",\n//!     String::from(\"{}\")",
+            to_snake_case(add_post_header)
+        )
+    } else {
+        String::new()
+    };
+
+    let add_post_header_var = if !add_post_header.is_empty() {
+        r#", """#.to_string()
+    } else {
+        String::new()
+    };
+
     format!(
         r#"{}
 //!
@@ -627,7 +644,7 @@ pub fn generate_docs_generic_token(
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
 //!     String::from("token"),
-//!     String::from("refresh-token")
+//!     String::from("refresh-token"){}
 //! );
 //! ```
 //!
@@ -645,7 +662,7 @@ pub fn generate_docs_generic_token(
 //!
 //! let {} = Client::new_from_env(
 //!     String::from("token"),
-//!     String::from("refresh-token")
+//!     String::from("refresh-token"){}
 //! );
 //! ```
 //!
@@ -658,7 +675,7 @@ pub fn generate_docs_generic_token(
 //! use {}::Client;
 //!
 //! async fn do_call() {{
-//!     let mut {} = Client::new_from_env("", "");
+//!     let mut {} = Client::new_from_env("", ""{});
 //!
 //!     // Get the URL to request consent from the user.
 //!     // You can optionally pass in scopes. If none are provided, then the
@@ -682,13 +699,16 @@ pub fn generate_docs_generic_token(
         version,
         name,
         proper_name.to_lowercase(),
+        add_post_header_args,
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         proper_name.to_uppercase(),
         name,
         proper_name.to_lowercase(),
+        add_post_header_args,
         name,
         proper_name.to_lowercase(),
+        add_post_header_var,
         proper_name.to_lowercase(),
         proper_name.to_lowercase(),
         proper_name.to_lowercase(),

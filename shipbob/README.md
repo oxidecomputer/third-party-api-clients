@@ -45,7 +45,8 @@ let shipbob = Client::new(
     String::from("client-secret"),
     String::from("redirect-uri"),
     String::from("token"),
-    String::from("refresh-token")
+    String::from("refresh-token"),
+    String::from("shipbob_channel_id")
 );
 ```
 
@@ -63,7 +64,8 @@ use shipbob::Client;
 
 let shipbob = Client::new_from_env(
     String::from("token"),
-    String::from("refresh-token")
+    String::from("refresh-token"),
+    String::from("shipbob_channel_id")
 );
 ```
 
@@ -76,7 +78,7 @@ To start off a fresh client and get a `token` and `refresh_token`, use the follo
 use shipbob::Client;
 
 async fn do_call() {
-    let mut shipbob = Client::new_from_env("", "");
+    let mut shipbob = Client::new_from_env("", "", "");
 
     // Get the URL to request consent from the user.
     // You can optionally pass in scopes. If none are provided, then the

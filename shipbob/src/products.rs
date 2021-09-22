@@ -27,11 +27,11 @@ impl Products {
      *   1. Expected behavior for search by Inventory ID is exact match
      *   2. Expected behavior for search by Inventory Name is partial match, i.e. does not have to be start of word,
      *   but must be consecutive characters. This is not case sensitive.
-     * * `active_status: crate::types::ProductsCommonModelsProductActiveStatus` -- Status filter for products:
+     * * `active_status: crate::types::ProductActiveStatus` -- Status filter for products:
      *   - Any: Include both active and inactive
      *   - Active: Filter products that are Active
      *   - Inactive: Filter products that are Inactive.
-     * * `bundle_status: crate::types::ProductsCommonModelsProductBundleStatus` -- Bundle filter for products:
+     * * `bundle_status: crate::types::ProductBundleStatus` -- Bundle filter for products:
      *   - Any: Don't filter and consider products that are bundles or not bundles
      *   - Bundle: Filter by products that are bundles
      *   - NotBundle: Filter by products that are not bundles.
@@ -44,9 +44,9 @@ impl Products {
         i_ds: &[String],
         reference_ids: &[String],
         search: &str,
-        active_status: crate::types::ProductsCommonModelsProductActiveStatus,
-        bundle_status: crate::types::ProductsCommonModelsProductBundleStatus,
-    ) -> Result<Vec<crate::types::ProductsProduct>> {
+        active_status: crate::types::ProductActiveStatus,
+        bundle_status: crate::types::ProductBundleStatus,
+    ) -> Result<Vec<crate::types::Product>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !active_status.to_string().is_empty() {
             query_args.push(("ActiveStatus".to_string(), active_status.to_string()));
@@ -87,9 +87,9 @@ impl Products {
         i_ds: &[String],
         reference_ids: &[String],
         search: &str,
-        active_status: crate::types::ProductsCommonModelsProductActiveStatus,
-        bundle_status: crate::types::ProductsCommonModelsProductBundleStatus,
-    ) -> Result<Vec<crate::types::ProductsProduct>> {
+        active_status: crate::types::ProductActiveStatus,
+        bundle_status: crate::types::ProductBundleStatus,
+    ) -> Result<Vec<crate::types::Product>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !active_status.to_string().is_empty() {
             query_args.push(("ActiveStatus".to_string(), active_status.to_string()));
@@ -124,7 +124,7 @@ impl Products {
     pub async fn post(
         &self,
         body: &crate::types::ProductsCreateProductModel,
-    ) -> Result<Vec<crate::types::ProductsProduct>> {
+    ) -> Result<Vec<crate::types::Product>> {
         let url = "/product".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))
@@ -141,7 +141,7 @@ impl Products {
      * * `product_id: i64` -- Unique identifier of the product.
      * * `channel_id: i64` -- Unique id of the channel.
      */
-    pub async fn get(&self, product_id: i64) -> Result<crate::types::ProductsProduct> {
+    pub async fn get(&self, product_id: i64) -> Result<crate::types::Product> {
         let url = format!(
             "/product/{}",
             crate::progenitor_support::encode_path(&product_id.to_string()),
@@ -164,7 +164,7 @@ impl Products {
         &self,
         product_id: i64,
         body: &crate::types::ProductsUpdateProductModel,
-    ) -> Result<Vec<crate::types::ProductsProduct>> {
+    ) -> Result<Vec<crate::types::Product>> {
         let url = format!(
             "/product/{}",
             crate::progenitor_support::encode_path(&product_id.to_string()),
@@ -187,7 +187,7 @@ impl Products {
     pub async fn post_batch(
         &self,
         body: &[crate::types::ProductsCreateProductModel],
-    ) -> Result<Vec<crate::types::ProductsProduct>> {
+    ) -> Result<Vec<crate::types::Product>> {
         let url = "/product/batch".to_string();
         self.client
             .post(&url, Some(reqwest::Body::from(serde_json::to_vec(body)?)))

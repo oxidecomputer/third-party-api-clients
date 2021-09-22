@@ -2369,7 +2369,7 @@ pub struct OrdersShipMethodDetail {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ProductsCommonModelsProductActiveStatus {
+pub enum ProductActiveStatus {
     #[serde(rename = "Active")]
     Active,
     #[serde(rename = "Any")]
@@ -2382,32 +2382,32 @@ pub enum ProductsCommonModelsProductActiveStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ProductsCommonModelsProductActiveStatus {
+impl std::fmt::Display for ProductActiveStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ProductsCommonModelsProductActiveStatus::Active => "Active",
-            ProductsCommonModelsProductActiveStatus::Any => "Any",
-            ProductsCommonModelsProductActiveStatus::Inactive => "Inactive",
-            ProductsCommonModelsProductActiveStatus::Noop => "",
-            ProductsCommonModelsProductActiveStatus::FallthroughString => "*",
+            ProductActiveStatus::Active => "Active",
+            ProductActiveStatus::Any => "Any",
+            ProductActiveStatus::Inactive => "Inactive",
+            ProductActiveStatus::Noop => "",
+            ProductActiveStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ProductsCommonModelsProductActiveStatus {
-    fn default() -> ProductsCommonModelsProductActiveStatus {
-        ProductsCommonModelsProductActiveStatus::Noop
+impl Default for ProductActiveStatus {
+    fn default() -> ProductActiveStatus {
+        ProductActiveStatus::Noop
     }
 }
-impl ProductsCommonModelsProductActiveStatus {
+impl ProductActiveStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ProductsCommonModelsProductActiveStatus::Noop)
+        matches!(self, ProductActiveStatus::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ProductsCommonModelsProductBundleStatus {
+pub enum ProductBundleStatus {
     #[serde(rename = "Any")]
     Any,
     #[serde(rename = "Bundle")]
@@ -2420,27 +2420,27 @@ pub enum ProductsCommonModelsProductBundleStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ProductsCommonModelsProductBundleStatus {
+impl std::fmt::Display for ProductBundleStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ProductsCommonModelsProductBundleStatus::Any => "Any",
-            ProductsCommonModelsProductBundleStatus::Bundle => "Bundle",
-            ProductsCommonModelsProductBundleStatus::NotBundle => "NotBundle",
-            ProductsCommonModelsProductBundleStatus::Noop => "",
-            ProductsCommonModelsProductBundleStatus::FallthroughString => "*",
+            ProductBundleStatus::Any => "Any",
+            ProductBundleStatus::Bundle => "Bundle",
+            ProductBundleStatus::NotBundle => "NotBundle",
+            ProductBundleStatus::Noop => "",
+            ProductBundleStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ProductsCommonModelsProductBundleStatus {
-    fn default() -> ProductsCommonModelsProductBundleStatus {
-        ProductsCommonModelsProductBundleStatus::Noop
+impl Default for ProductBundleStatus {
+    fn default() -> ProductBundleStatus {
+        ProductBundleStatus::Noop
     }
 }
-impl ProductsCommonModelsProductBundleStatus {
+impl ProductBundleStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ProductsCommonModelsProductBundleStatus::Noop)
+        matches!(self, ProductBundleStatus::Noop)
     }
 }
 
@@ -2550,7 +2550,7 @@ pub struct ProductsFulfillmentCenterQuantity {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ProductsProduct {
+pub struct Product {
     /**
      * Name of the channel
      */
@@ -2920,7 +2920,7 @@ pub struct ReceivingFulfillmentCenter {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ReceivingPublicCommonModelsStatus {
+pub enum ReceivingStatus {
     #[serde(rename = "Arrived")]
     Arrived,
     #[serde(rename = "Awaiting")]
@@ -2941,36 +2941,36 @@ pub enum ReceivingPublicCommonModelsStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ReceivingPublicCommonModelsStatus {
+impl std::fmt::Display for ReceivingStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ReceivingPublicCommonModelsStatus::Arrived => "Arrived",
-            ReceivingPublicCommonModelsStatus::Awaiting => "Awaiting",
-            ReceivingPublicCommonModelsStatus::Cancelled => "Cancelled",
-            ReceivingPublicCommonModelsStatus::Completed => "Completed",
-            ReceivingPublicCommonModelsStatus::Incomplete => "Incomplete",
-            ReceivingPublicCommonModelsStatus::PartiallyArrived => "PartiallyArrived",
-            ReceivingPublicCommonModelsStatus::Processing => "Processing",
-            ReceivingPublicCommonModelsStatus::Noop => "",
-            ReceivingPublicCommonModelsStatus::FallthroughString => "*",
+            ReceivingStatus::Arrived => "Arrived",
+            ReceivingStatus::Awaiting => "Awaiting",
+            ReceivingStatus::Cancelled => "Cancelled",
+            ReceivingStatus::Completed => "Completed",
+            ReceivingStatus::Incomplete => "Incomplete",
+            ReceivingStatus::PartiallyArrived => "PartiallyArrived",
+            ReceivingStatus::Processing => "Processing",
+            ReceivingStatus::Noop => "",
+            ReceivingStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ReceivingPublicCommonModelsStatus {
-    fn default() -> ReceivingPublicCommonModelsStatus {
-        ReceivingPublicCommonModelsStatus::Noop
+impl Default for ReceivingStatus {
+    fn default() -> ReceivingStatus {
+        ReceivingStatus::Noop
     }
 }
-impl ReceivingPublicCommonModelsStatus {
+impl ReceivingStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ReceivingPublicCommonModelsStatus::Noop)
+        matches!(self, ReceivingStatus::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ReceivingPublicCommonModelsPackageType {
+pub enum ReceivingPackageType {
     #[serde(rename = "FloorLoadedContainer")]
     FloorLoadedContainer,
     #[serde(rename = "Package")]
@@ -2983,32 +2983,32 @@ pub enum ReceivingPublicCommonModelsPackageType {
     FallthroughString,
 }
 
-impl std::fmt::Display for ReceivingPublicCommonModelsPackageType {
+impl std::fmt::Display for ReceivingPackageType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ReceivingPublicCommonModelsPackageType::FloorLoadedContainer => "FloorLoadedContainer",
-            ReceivingPublicCommonModelsPackageType::Package => "Package",
-            ReceivingPublicCommonModelsPackageType::Pallet => "Pallet",
-            ReceivingPublicCommonModelsPackageType::Noop => "",
-            ReceivingPublicCommonModelsPackageType::FallthroughString => "*",
+            ReceivingPackageType::FloorLoadedContainer => "FloorLoadedContainer",
+            ReceivingPackageType::Package => "Package",
+            ReceivingPackageType::Pallet => "Pallet",
+            ReceivingPackageType::Noop => "",
+            ReceivingPackageType::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ReceivingPublicCommonModelsPackageType {
-    fn default() -> ReceivingPublicCommonModelsPackageType {
-        ReceivingPublicCommonModelsPackageType::Noop
+impl Default for ReceivingPackageType {
+    fn default() -> ReceivingPackageType {
+        ReceivingPackageType::Noop
     }
 }
-impl ReceivingPublicCommonModelsPackageType {
+impl ReceivingPackageType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ReceivingPublicCommonModelsPackageType::Noop)
+        matches!(self, ReceivingPackageType::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ReceivingPublicCommonModelsPackingType {
+pub enum ReceivingPackingType {
     #[serde(rename = "EverythingInOneBox")]
     EverythingInOneBox,
     #[serde(rename = "MultipleSkuPerBox")]
@@ -3021,32 +3021,32 @@ pub enum ReceivingPublicCommonModelsPackingType {
     FallthroughString,
 }
 
-impl std::fmt::Display for ReceivingPublicCommonModelsPackingType {
+impl std::fmt::Display for ReceivingPackingType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ReceivingPublicCommonModelsPackingType::EverythingInOneBox => "EverythingInOneBox",
-            ReceivingPublicCommonModelsPackingType::MultipleSkuPerBox => "MultipleSkuPerBox",
-            ReceivingPublicCommonModelsPackingType::OneSkuPerBox => "OneSkuPerBox",
-            ReceivingPublicCommonModelsPackingType::Noop => "",
-            ReceivingPublicCommonModelsPackingType::FallthroughString => "*",
+            ReceivingPackingType::EverythingInOneBox => "EverythingInOneBox",
+            ReceivingPackingType::MultipleSkuPerBox => "MultipleSkuPerBox",
+            ReceivingPackingType::OneSkuPerBox => "OneSkuPerBox",
+            ReceivingPackingType::Noop => "",
+            ReceivingPackingType::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ReceivingPublicCommonModelsPackingType {
-    fn default() -> ReceivingPublicCommonModelsPackingType {
-        ReceivingPublicCommonModelsPackingType::Noop
+impl Default for ReceivingPackingType {
+    fn default() -> ReceivingPackingType {
+        ReceivingPackingType::Noop
     }
 }
-impl ReceivingPublicCommonModelsPackingType {
+impl ReceivingPackingType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ReceivingPublicCommonModelsPackingType::Noop)
+        matches!(self, ReceivingPackingType::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ReceivingPublicCommonModelsBoxStatus {
+pub enum ReceivingBoxStatus {
     #[serde(rename = "Arrived")]
     Arrived,
     #[serde(rename = "Awaiting")]
@@ -3065,30 +3065,30 @@ pub enum ReceivingPublicCommonModelsBoxStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ReceivingPublicCommonModelsBoxStatus {
+impl std::fmt::Display for ReceivingBoxStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ReceivingPublicCommonModelsBoxStatus::Arrived => "Arrived",
-            ReceivingPublicCommonModelsBoxStatus::Awaiting => "Awaiting",
-            ReceivingPublicCommonModelsBoxStatus::Cancelled => "Cancelled",
-            ReceivingPublicCommonModelsBoxStatus::Completed => "Completed",
-            ReceivingPublicCommonModelsBoxStatus::Counting => "Counting",
-            ReceivingPublicCommonModelsBoxStatus::Stowing => "Stowing",
-            ReceivingPublicCommonModelsBoxStatus::Noop => "",
-            ReceivingPublicCommonModelsBoxStatus::FallthroughString => "*",
+            ReceivingBoxStatus::Arrived => "Arrived",
+            ReceivingBoxStatus::Awaiting => "Awaiting",
+            ReceivingBoxStatus::Cancelled => "Cancelled",
+            ReceivingBoxStatus::Completed => "Completed",
+            ReceivingBoxStatus::Counting => "Counting",
+            ReceivingBoxStatus::Stowing => "Stowing",
+            ReceivingBoxStatus::Noop => "",
+            ReceivingBoxStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ReceivingPublicCommonModelsBoxStatus {
-    fn default() -> ReceivingPublicCommonModelsBoxStatus {
-        ReceivingPublicCommonModelsBoxStatus::Noop
+impl Default for ReceivingBoxStatus {
+    fn default() -> ReceivingBoxStatus {
+        ReceivingBoxStatus::Noop
     }
 }
-impl ReceivingPublicCommonModelsBoxStatus {
+impl ReceivingBoxStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ReceivingPublicCommonModelsBoxStatus::Noop)
+        matches!(self, ReceivingBoxStatus::Noop)
     }
 }
 
@@ -3176,7 +3176,7 @@ pub struct ReceivingBox {
      * Information about a box shipment included in a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub box_status: Option<ReceivingPublicCommonModelsBoxStatus>,
+    pub box_status: Option<ReceivingBoxStatus>,
     /**
      * Expiration date for this lot
      */
@@ -3222,7 +3222,7 @@ pub struct ReceivingOrder {
      * Information about a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub box_packaging_type: Option<ReceivingPublicCommonModelsPackingType>,
+    pub box_packaging_type: Option<ReceivingPackingType>,
     /**
      * Information about the boxes being shipped in this receiving order
      */
@@ -3277,12 +3277,12 @@ pub struct ReceivingOrder {
      * Information about a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub package_type: Option<ReceivingPublicCommonModelsPackageType>,
+    pub package_type: Option<ReceivingPackageType>,
     /**
      * Information about a receiving order
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<ReceivingPublicCommonModelsStatus>,
+    pub status: Option<ReceivingStatus>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -3428,7 +3428,7 @@ pub struct ReceivingAddBoxOrderModel {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReceivingCreateOrderModel {
     #[serde()]
-    pub box_packaging_type: ReceivingPublicCommonModelsPackingType,
+    pub box_packaging_type: ReceivingPackingType,
     /**
      * Box shipments to be added to this receiving order
      */
@@ -3453,11 +3453,11 @@ pub struct ReceivingCreateOrderModel {
     #[serde()]
     pub fulfillment_center: ReceivingAssignOrderFulfillmentCenterModel,
     #[serde()]
-    pub package_type: ReceivingPublicCommonModelsPackageType,
+    pub package_type: ReceivingPackageType,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ReturnsPublicCommonReturnStatus {
+pub enum ReturnStatus {
     #[serde(rename = "Arrived")]
     Arrived,
     #[serde(rename = "AwaitingArrival")]
@@ -3474,34 +3474,34 @@ pub enum ReturnsPublicCommonReturnStatus {
     FallthroughString,
 }
 
-impl std::fmt::Display for ReturnsPublicCommonReturnStatus {
+impl std::fmt::Display for ReturnStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ReturnsPublicCommonReturnStatus::Arrived => "Arrived",
-            ReturnsPublicCommonReturnStatus::AwaitingArrival => "AwaitingArrival",
-            ReturnsPublicCommonReturnStatus::Cancelled => "Cancelled",
-            ReturnsPublicCommonReturnStatus::Completed => "Completed",
-            ReturnsPublicCommonReturnStatus::Processing => "Processing",
-            ReturnsPublicCommonReturnStatus::Noop => "",
-            ReturnsPublicCommonReturnStatus::FallthroughString => "*",
+            ReturnStatus::Arrived => "Arrived",
+            ReturnStatus::AwaitingArrival => "AwaitingArrival",
+            ReturnStatus::Cancelled => "Cancelled",
+            ReturnStatus::Completed => "Completed",
+            ReturnStatus::Processing => "Processing",
+            ReturnStatus::Noop => "",
+            ReturnStatus::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ReturnsPublicCommonReturnStatus {
-    fn default() -> ReturnsPublicCommonReturnStatus {
-        ReturnsPublicCommonReturnStatus::Noop
+impl Default for ReturnStatus {
+    fn default() -> ReturnStatus {
+        ReturnStatus::Noop
     }
 }
-impl ReturnsPublicCommonReturnStatus {
+impl ReturnStatus {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ReturnsPublicCommonReturnStatus::Noop)
+        matches!(self, ReturnStatus::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ReturnsPublicCommonTransactionLogSource {
+pub enum ReturnsTransactionLogSource {
     #[serde(rename = "ReturnLabelInvoice")]
     ReturnLabelInvoice,
     #[serde(rename = "ReturnProcessingFee")]
@@ -3514,27 +3514,27 @@ pub enum ReturnsPublicCommonTransactionLogSource {
     FallthroughString,
 }
 
-impl std::fmt::Display for ReturnsPublicCommonTransactionLogSource {
+impl std::fmt::Display for ReturnsTransactionLogSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ReturnsPublicCommonTransactionLogSource::ReturnLabelInvoice => "ReturnLabelInvoice",
-            ReturnsPublicCommonTransactionLogSource::ReturnProcessingFee => "ReturnProcessingFee",
-            ReturnsPublicCommonTransactionLogSource::ReturnToSenderFee => "ReturnToSenderFee",
-            ReturnsPublicCommonTransactionLogSource::Noop => "",
-            ReturnsPublicCommonTransactionLogSource::FallthroughString => "*",
+            ReturnsTransactionLogSource::ReturnLabelInvoice => "ReturnLabelInvoice",
+            ReturnsTransactionLogSource::ReturnProcessingFee => "ReturnProcessingFee",
+            ReturnsTransactionLogSource::ReturnToSenderFee => "ReturnToSenderFee",
+            ReturnsTransactionLogSource::Noop => "",
+            ReturnsTransactionLogSource::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ReturnsPublicCommonTransactionLogSource {
-    fn default() -> ReturnsPublicCommonTransactionLogSource {
-        ReturnsPublicCommonTransactionLogSource::Noop
+impl Default for ReturnsTransactionLogSource {
+    fn default() -> ReturnsTransactionLogSource {
+        ReturnsTransactionLogSource::Noop
     }
 }
-impl ReturnsPublicCommonTransactionLogSource {
+impl ReturnsTransactionLogSource {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ReturnsPublicCommonTransactionLogSource::Noop)
+        matches!(self, ReturnsTransactionLogSource::Noop)
     }
 }
 
@@ -3550,7 +3550,7 @@ pub struct ReturnsTransaction {
     )]
     pub amount: f64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub transaction_type: Option<ReturnsPublicCommonTransactionLogSource>,
+    pub transaction_type: Option<ReturnsTransactionLogSource>,
 }
 
 /// Information about a fulfillment center
@@ -3577,7 +3577,7 @@ pub struct ReturnsFulfillmentCenter {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ReturnsPublicCommonReturnAction {
+pub enum ReturnAction {
     #[serde(rename = "Default")]
     Default,
     #[serde(rename = "Dispose")]
@@ -3592,33 +3592,33 @@ pub enum ReturnsPublicCommonReturnAction {
     FallthroughString,
 }
 
-impl std::fmt::Display for ReturnsPublicCommonReturnAction {
+impl std::fmt::Display for ReturnAction {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ReturnsPublicCommonReturnAction::Default => "Default",
-            ReturnsPublicCommonReturnAction::Dispose => "Dispose",
-            ReturnsPublicCommonReturnAction::Quarantine => "Quarantine",
-            ReturnsPublicCommonReturnAction::Restock => "Restock",
-            ReturnsPublicCommonReturnAction::Noop => "",
-            ReturnsPublicCommonReturnAction::FallthroughString => "*",
+            ReturnAction::Default => "Default",
+            ReturnAction::Dispose => "Dispose",
+            ReturnAction::Quarantine => "Quarantine",
+            ReturnAction::Restock => "Restock",
+            ReturnAction::Noop => "",
+            ReturnAction::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ReturnsPublicCommonReturnAction {
-    fn default() -> ReturnsPublicCommonReturnAction {
-        ReturnsPublicCommonReturnAction::Noop
+impl Default for ReturnAction {
+    fn default() -> ReturnAction {
+        ReturnAction::Noop
     }
 }
-impl ReturnsPublicCommonReturnAction {
+impl ReturnAction {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ReturnsPublicCommonReturnAction::Noop)
+        matches!(self, ReturnAction::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ReturnsPublicCommonReturnActionSource {
+pub enum ReturnActionSource {
     #[serde(rename = "InventoryDefault")]
     InventoryDefault,
     #[serde(rename = "Override")]
@@ -3629,35 +3629,35 @@ pub enum ReturnsPublicCommonReturnActionSource {
     FallthroughString,
 }
 
-impl std::fmt::Display for ReturnsPublicCommonReturnActionSource {
+impl std::fmt::Display for ReturnActionSource {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ReturnsPublicCommonReturnActionSource::InventoryDefault => "InventoryDefault",
-            ReturnsPublicCommonReturnActionSource::Override => "Override",
-            ReturnsPublicCommonReturnActionSource::Noop => "",
-            ReturnsPublicCommonReturnActionSource::FallthroughString => "*",
+            ReturnActionSource::InventoryDefault => "InventoryDefault",
+            ReturnActionSource::Override => "Override",
+            ReturnActionSource::Noop => "",
+            ReturnActionSource::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ReturnsPublicCommonReturnActionSource {
-    fn default() -> ReturnsPublicCommonReturnActionSource {
-        ReturnsPublicCommonReturnActionSource::Noop
+impl Default for ReturnActionSource {
+    fn default() -> ReturnActionSource {
+        ReturnActionSource::Noop
     }
 }
-impl ReturnsPublicCommonReturnActionSource {
+impl ReturnActionSource {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ReturnsPublicCommonReturnActionSource::Noop)
+        matches!(self, ReturnActionSource::Noop)
     }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReturnActionRequested {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub action: Option<ReturnsPublicCommonReturnAction>,
+    pub action: Option<ReturnAction>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub action_type: Option<ReturnsPublicCommonReturnActionSource>,
+    pub action_type: Option<ReturnActionSource>,
     /**
      * Name of the channel
      */
@@ -3672,7 +3672,7 @@ pub struct ReturnActionRequested {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReturnActionTaken {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub action: Option<ReturnsPublicCommonReturnAction>,
+    pub action: Option<ReturnAction>,
     /**
      * Name of the channel
      */
@@ -3736,7 +3736,7 @@ pub struct ReturnsInventoryItem {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum ReturnsPublicCommonReturnType {
+pub enum ReturnType {
     #[serde(rename = "Regular")]
     Regular,
     #[serde(rename = "ReturnToSender")]
@@ -3747,26 +3747,26 @@ pub enum ReturnsPublicCommonReturnType {
     FallthroughString,
 }
 
-impl std::fmt::Display for ReturnsPublicCommonReturnType {
+impl std::fmt::Display for ReturnType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            ReturnsPublicCommonReturnType::Regular => "Regular",
-            ReturnsPublicCommonReturnType::ReturnToSender => "ReturnToSender",
-            ReturnsPublicCommonReturnType::Noop => "",
-            ReturnsPublicCommonReturnType::FallthroughString => "*",
+            ReturnType::Regular => "Regular",
+            ReturnType::ReturnToSender => "ReturnToSender",
+            ReturnType::Noop => "",
+            ReturnType::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for ReturnsPublicCommonReturnType {
-    fn default() -> ReturnsPublicCommonReturnType {
-        ReturnsPublicCommonReturnType::Noop
+impl Default for ReturnType {
+    fn default() -> ReturnType {
+        ReturnType::Noop
     }
 }
-impl ReturnsPublicCommonReturnType {
+impl ReturnType {
     pub fn is_noop(&self) -> bool {
-        matches!(self, ReturnsPublicCommonReturnType::Noop)
+        matches!(self, ReturnType::Noop)
     }
 }
 
@@ -3837,9 +3837,9 @@ pub struct ReturnOrder {
     )]
     pub reference_id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub return_type: Option<ReturnsPublicCommonReturnType>,
+    pub return_type: Option<ReturnType>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<ReturnsPublicCommonReturnStatus>,
+    pub status: Option<ReturnStatus>,
     /**
      * Name of the channel
      */
@@ -3881,7 +3881,7 @@ pub struct ReturnInventory {
     )]
     pub quantity: i64,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub requested_action: Option<ReturnsPublicCommonReturnAction>,
+    pub requested_action: Option<ReturnAction>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -3970,7 +3970,7 @@ impl SortOrder {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct ReturnOrderStatusHistory {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub status: Option<ReturnsPublicCommonReturnStatus>,
+    pub status: Option<ReturnStatus>,
     /**
      * Expiration date for this lot
      */
@@ -3983,7 +3983,7 @@ pub struct ReturnOrderStatusHistory {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum WebhooksPublicCommonTopics {
+pub enum WebhooksTopics {
     #[serde(rename = "order_shipped")]
     OrderShipped,
     #[serde(rename = "shipment_delivered")]
@@ -3998,28 +3998,28 @@ pub enum WebhooksPublicCommonTopics {
     FallthroughString,
 }
 
-impl std::fmt::Display for WebhooksPublicCommonTopics {
+impl std::fmt::Display for WebhooksTopics {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            WebhooksPublicCommonTopics::OrderShipped => "order_shipped",
-            WebhooksPublicCommonTopics::ShipmentDelivered => "shipment_delivered",
-            WebhooksPublicCommonTopics::ShipmentException => "shipment_exception",
-            WebhooksPublicCommonTopics::ShipmentOnhold => "shipment_onhold",
-            WebhooksPublicCommonTopics::Noop => "",
-            WebhooksPublicCommonTopics::FallthroughString => "*",
+            WebhooksTopics::OrderShipped => "order_shipped",
+            WebhooksTopics::ShipmentDelivered => "shipment_delivered",
+            WebhooksTopics::ShipmentException => "shipment_exception",
+            WebhooksTopics::ShipmentOnhold => "shipment_onhold",
+            WebhooksTopics::Noop => "",
+            WebhooksTopics::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for WebhooksPublicCommonTopics {
-    fn default() -> WebhooksPublicCommonTopics {
-        WebhooksPublicCommonTopics::Noop
+impl Default for WebhooksTopics {
+    fn default() -> WebhooksTopics {
+        WebhooksTopics::Noop
     }
 }
-impl WebhooksPublicCommonTopics {
+impl WebhooksTopics {
     pub fn is_noop(&self) -> bool {
-        matches!(self, WebhooksPublicCommonTopics::Noop)
+        matches!(self, WebhooksTopics::Noop)
     }
 }
 
@@ -4053,7 +4053,7 @@ pub struct Webhook {
     )]
     pub subscription_url: Option<url::Url>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub topic: Option<WebhooksPublicCommonTopics>,
+    pub topic: Option<WebhooksTopics>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -4068,7 +4068,7 @@ pub struct WebhooksCreateWebhookSubscriptionModel {
     )]
     pub subscription_url: Option<url::Url>,
     #[serde()]
-    pub topic: WebhooksPublicCommonTopics,
+    pub topic: WebhooksTopics,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -4131,7 +4131,7 @@ pub struct MicrosoftAspNetCoreMvcProblemDetails {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub enum IntegrationsLocationPublicCommonServiceTypeEnum {
+pub enum IntegrationsLocationServiceTypeEnum {
     #[serde(rename = "Receiving")]
     Receiving,
     #[serde(rename = "Returns")]
@@ -4142,26 +4142,26 @@ pub enum IntegrationsLocationPublicCommonServiceTypeEnum {
     FallthroughString,
 }
 
-impl std::fmt::Display for IntegrationsLocationPublicCommonServiceTypeEnum {
+impl std::fmt::Display for IntegrationsLocationServiceTypeEnum {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match &*self {
-            IntegrationsLocationPublicCommonServiceTypeEnum::Receiving => "Receiving",
-            IntegrationsLocationPublicCommonServiceTypeEnum::Returns => "Returns",
-            IntegrationsLocationPublicCommonServiceTypeEnum::Noop => "",
-            IntegrationsLocationPublicCommonServiceTypeEnum::FallthroughString => "*",
+            IntegrationsLocationServiceTypeEnum::Receiving => "Receiving",
+            IntegrationsLocationServiceTypeEnum::Returns => "Returns",
+            IntegrationsLocationServiceTypeEnum::Noop => "",
+            IntegrationsLocationServiceTypeEnum::FallthroughString => "*",
         }
         .fmt(f)
     }
 }
 
-impl Default for IntegrationsLocationPublicCommonServiceTypeEnum {
-    fn default() -> IntegrationsLocationPublicCommonServiceTypeEnum {
-        IntegrationsLocationPublicCommonServiceTypeEnum::Noop
+impl Default for IntegrationsLocationServiceTypeEnum {
+    fn default() -> IntegrationsLocationServiceTypeEnum {
+        IntegrationsLocationServiceTypeEnum::Noop
     }
 }
-impl IntegrationsLocationPublicCommonServiceTypeEnum {
+impl IntegrationsLocationServiceTypeEnum {
     pub fn is_noop(&self) -> bool {
-        matches!(self, IntegrationsLocationPublicCommonServiceTypeEnum::Noop)
+        matches!(self, IntegrationsLocationServiceTypeEnum::Noop)
     }
 }
 
@@ -4269,7 +4269,7 @@ pub struct IntegrationsLocationService {
     )]
     pub enabled: bool,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub service_type: Option<IntegrationsLocationPublicCommonServiceTypeEnum>,
+    pub service_type: Option<IntegrationsLocationServiceTypeEnum>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]

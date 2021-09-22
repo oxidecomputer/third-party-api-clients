@@ -44,6 +44,7 @@
 //!     String::from("redirect-uri"),
 //!     String::from("token"),
 //!     String::from("refresh-token"),
+//!     String::from("shipbob_channel_id"),
 //! );
 //! ```
 //!
@@ -59,7 +60,11 @@
 //! ```
 //! use shipbob::Client;
 //!
-//! let shipbob = Client::new_from_env(String::from("token"), String::from("refresh-token"));
+//! let shipbob = Client::new_from_env(
+//!     String::from("token"),
+//!     String::from("refresh-token"),
+//!     String::from("shipbob_channel_id"),
+//! );
 //! ```
 //!
 //! It is okay to pass empty values for `token` and `refresh_token`. In
@@ -71,7 +76,7 @@
 //! use shipbob::Client;
 //!
 //! async fn do_call() {
-//!     let mut shipbob = Client::new_from_env("", "");
+//!     let mut shipbob = Client::new_from_env("", "", "");
 //!
 //!     // Get the URL to request consent from the user.
 //!     // You can optionally pass in scopes. If none are provided, then the

@@ -21,13 +21,13 @@ impl Webhooks {
      *
      * **Parameters:**
      *
-     * * `topic: crate::types::WebhooksPublicCommonTopics` -- Topic of the webhooks requested.
+     * * `topic: crate::types::WebhooksTopics` -- Topic of the webhooks requested.
      * * `page: u64` -- Unique id of the channel.
      * * `limit: i64` -- Amount of Webhooks per page to request.
      */
     pub async fn get_page(
         &self,
-        topic: crate::types::WebhooksPublicCommonTopics,
+        topic: crate::types::WebhooksTopics,
         page: u64,
         limit: i64,
     ) -> Result<Vec<crate::types::Webhook>> {
@@ -58,7 +58,7 @@ impl Webhooks {
      */
     pub async fn get_all(
         &self,
-        topic: crate::types::WebhooksPublicCommonTopics,
+        topic: crate::types::WebhooksTopics,
     ) -> Result<Vec<crate::types::Webhook>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !topic.to_string().is_empty() {
