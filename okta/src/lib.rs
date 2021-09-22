@@ -164,6 +164,7 @@ const USER_CONSENT_ENDPOINT: &str = "https://account.okta.com/oauth/auth";
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
 pub struct Client {
+    host: String,
     token: String,
     // This will expire within a certain amount of time as determined by the
     // expiration date passed back in the initial request.
@@ -240,6 +241,7 @@ impl Client {
                 // if it needs to be refreshed.
                 //
                 Client {
+                    host: DEFAULT_HOST.to_string(),
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     redirect_uri: redirect_uri.to_string(),
@@ -251,6 +253,16 @@ impl Client {
             }
             Err(e) => panic!("creating reqwest client failed: {:?}", e),
         }
+    }
+
+    /// Override the default host for the client.
+    pub fn with_host<H>(&self, host: H) -> Self
+    where
+        H: ToString,
+    {
+        let mut c = self.clone();
+        c.host = host.to_string();
+        c
     }
 
     /// Create a new Client struct from environment variables. It
@@ -378,7 +390,7 @@ impl Client {
         let u = if uri.starts_with("https://") {
             uri.to_string()
         } else {
-            (DEFAULT_HOST.to_string() + uri).to_string()
+            (self.host.clone() + uri).to_string()
         };
         let (url, auth) = self.url_and_auth(&u).await?;
 
@@ -511,7 +523,7 @@ impl Client {
         let u = if uri.starts_with("https://") {
             uri.to_string()
         } else {
-            (DEFAULT_HOST.to_string() + uri).to_string()
+            (self.host.clone() + uri).to_string()
         };
         let (url, auth) = self.url_and_auth(&u).await?;
 
@@ -591,7 +603,7 @@ impl Client {
         let u = if uri.starts_with("https://") {
             uri.to_string()
         } else {
-            (DEFAULT_HOST.to_string() + uri).to_string()
+            (self.host.clone() + uri).to_string()
         };
         let (url, auth) = self.url_and_auth(&u).await?;
 
@@ -666,7 +678,7 @@ impl Client {
         let u = if uri.starts_with("https://") {
             uri.to_string()
         } else {
-            (DEFAULT_HOST.to_string() + uri).to_string()
+            (self.host.clone() + uri).to_string()
         };
         let (url, auth) = self.url_and_auth(&u).await?;
 
@@ -759,12 +771,8 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(
-            http::Method::GET,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        )
-        .await
+        self.request_entity(http::Method::GET, &(self.host.to_string() + uri), message)
+            .await
     }
 
     #[allow(dead_code)]
@@ -804,7 +812,7 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_with_links(http::Method::GET, &(DEFAULT_HOST.to_string() + uri), None)
+        self.request_with_links(http::Method::GET, &(self.host.to_string() + uri), None)
             .await
     }
 
@@ -825,12 +833,8 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(
-            http::Method::POST,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        )
-        .await
+        self.request_entity(http::Method::POST, &(self.host.to_string() + uri), message)
+            .await
     }
 
     #[allow(dead_code)]
@@ -838,12 +842,8 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(
-            http::Method::PATCH,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        )
-        .await
+        self.request_entity(http::Method::PATCH, &(self.host.to_string() + uri), message)
+            .await
     }
 
     #[allow(dead_code)]
@@ -851,12 +851,8 @@ impl Client {
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
-        self.request_entity(
-            http::Method::PUT,
-            &(DEFAULT_HOST.to_string() + uri),
-            message,
-        )
-        .await
+        self.request_entity(http::Method::PUT, &(self.host.to_string() + uri), message)
+            .await
     }
 
     #[allow(dead_code)]
@@ -866,7 +862,7 @@ impl Client {
     {
         self.request_entity(
             http::Method::DELETE,
-            &(DEFAULT_HOST.to_string() + uri),
+            &(self.host.to_string() + uri),
             message,
         )
         .await
