@@ -22,6 +22,6 @@ impl JobOps for crate::jobs::Jobs {
             )
             .text("options", "{}");
 
-        self.client.post_form("jobs", form).await
+        self.client.post_form("/jobs", form).await
     }
 }
