@@ -81,7 +81,7 @@ impl Orders {
         &self,
         page: i64,
         limit: i64,
-        i_ds: &[String],
+        ids: &[String],
         reference_ids: &[String],
         start_date: Option<chrono::DateTime<chrono::Utc>>,
         end_date: Option<chrono::DateTime<chrono::Utc>>,
@@ -98,8 +98,8 @@ impl Orders {
         if has_tracking {
             query_args.push(("HasTracking".to_string(), has_tracking.to_string()));
         }
-        if !i_ds.is_empty() {
-            query_args.push(("IDs".to_string(), i_ds.join(" ")));
+        if !ids.is_empty() {
+            query_args.push(("IDs".to_string(), ids.join(" ")));
         }
         if is_tracking_uploaded {
             query_args.push((
@@ -145,7 +145,7 @@ impl Orders {
      */
     pub async fn get_all(
         &self,
-        i_ds: &[String],
+        ids: &[String],
         reference_ids: &[String],
         start_date: Option<chrono::DateTime<chrono::Utc>>,
         end_date: Option<chrono::DateTime<chrono::Utc>>,
@@ -162,8 +162,8 @@ impl Orders {
         if has_tracking {
             query_args.push(("HasTracking".to_string(), has_tracking.to_string()));
         }
-        if !i_ds.is_empty() {
-            query_args.push(("IDs".to_string(), i_ds.join(" ")));
+        if !ids.is_empty() {
+            query_args.push(("IDs".to_string(), ids.join(" ")));
         }
         if is_tracking_uploaded {
             query_args.push((

@@ -41,7 +41,7 @@ impl Products {
         &self,
         page: i64,
         limit: i64,
-        i_ds: &[String],
+        ids: &[String],
         reference_ids: &[String],
         search: &str,
         active_status: crate::types::ProductActiveStatus,
@@ -54,8 +54,8 @@ impl Products {
         if !bundle_status.to_string().is_empty() {
             query_args.push(("BundleStatus".to_string(), bundle_status.to_string()));
         }
-        if !i_ds.is_empty() {
-            query_args.push(("IDs".to_string(), i_ds.join(" ")));
+        if !ids.is_empty() {
+            query_args.push(("IDs".to_string(), ids.join(" ")));
         }
         if limit > 0 {
             query_args.push(("Limit".to_string(), limit.to_string()));
@@ -84,7 +84,7 @@ impl Products {
      */
     pub async fn get_all(
         &self,
-        i_ds: &[String],
+        ids: &[String],
         reference_ids: &[String],
         search: &str,
         active_status: crate::types::ProductActiveStatus,
@@ -97,8 +97,8 @@ impl Products {
         if !bundle_status.to_string().is_empty() {
             query_args.push(("BundleStatus".to_string(), bundle_status.to_string()));
         }
-        if !i_ds.is_empty() {
-            query_args.push(("IDs".to_string(), i_ds.join(" ")));
+        if !ids.is_empty() {
+            query_args.push(("IDs".to_string(), ids.join(" ")));
         }
         if !reference_ids.is_empty() {
             query_args.push(("ReferenceIds".to_string(), reference_ids.join(" ")));

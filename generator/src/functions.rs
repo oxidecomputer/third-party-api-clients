@@ -669,6 +669,9 @@ fn get_fn_params(
             {
                 fn_params_str.push(format!("{}_: {},", nam, typ));
                 fn_params.push(nam.to_string() + "_");
+            } else if nam == "i_ds" {
+                fn_params_str.push(format!("ids: {},", typ));
+                fn_params.push("ids".to_string());
             } else if (!all_pages || !is_page_param(nam, proper_name))
                 && nam != "authorization"
                 && !nam.starts_with("authorization_bearer")
@@ -712,6 +715,11 @@ fn get_fn_params(
                 {
                     query_params.insert(
                         format!("{}_", nam),
+                        (typ.to_string(), parameter_data.name.to_string()),
+                    );
+                } else if nam == "i_ds" {
+                    query_params.insert(
+                        "ids".to_string(),
                         (typ.to_string(), parameter_data.name.to_string()),
                     );
                 } else if (!all_pages || !is_page_param(nam, proper_name))

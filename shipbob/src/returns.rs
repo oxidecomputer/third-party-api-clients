@@ -84,7 +84,7 @@ impl Returns {
         sort_order: crate::types::SortOrder,
         start_date: Option<chrono::DateTime<chrono::Utc>>,
         end_date: Option<chrono::DateTime<chrono::Utc>>,
-        i_ds: &[String],
+        ids: &[String],
         reference_ids: &[String],
         status: &[String],
         fulfillment_center_ids: &[String],
@@ -102,8 +102,8 @@ impl Returns {
                 fulfillment_center_ids.join(" "),
             ));
         }
-        if !i_ds.is_empty() {
-            query_args.push(("IDs".to_string(), i_ds.join(" ")));
+        if !ids.is_empty() {
+            query_args.push(("IDs".to_string(), ids.join(" ")));
         }
         if !inventory_ids.is_empty() {
             query_args.push(("InventoryIds".to_string(), inventory_ids.join(" ")));
@@ -153,7 +153,7 @@ impl Returns {
         sort_order: crate::types::SortOrder,
         start_date: Option<chrono::DateTime<chrono::Utc>>,
         end_date: Option<chrono::DateTime<chrono::Utc>>,
-        i_ds: &[String],
+        ids: &[String],
         reference_ids: &[String],
         status: &[String],
         fulfillment_center_ids: &[String],
@@ -171,8 +171,8 @@ impl Returns {
                 fulfillment_center_ids.join(" "),
             ));
         }
-        if !i_ds.is_empty() {
-            query_args.push(("IDs".to_string(), i_ds.join(" ")));
+        if !ids.is_empty() {
+            query_args.push(("IDs".to_string(), ids.join(" ")));
         }
         if !inventory_ids.is_empty() {
             query_args.push(("InventoryIds".to_string(), inventory_ids.join(" ")));

@@ -2520,7 +2520,7 @@ fn clean_name(t: &str) -> String {
         s = "root";
     }
 
-    let st = to_snake_case(
+    let mut st = to_snake_case(
         &s.replace("+1", "plus_one")
             .replace("-1", "minus_one")
             .replace("2fa", "two_fa")
@@ -2584,6 +2584,10 @@ fn clean_name(t: &str) -> String {
     .replace("_", " ")
     .trim()
     .to_string();
+
+    if st == "i_ds" {
+        st = "ids".to_string();
+    }
 
     let mut words: Vec<String> = Default::default();
     // Only get a string with unique words.

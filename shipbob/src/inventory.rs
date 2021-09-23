@@ -57,13 +57,13 @@ impl Inventory {
         limit: i64,
         is_active: bool,
         is_digital: bool,
-        i_ds: &[String],
+        ids: &[String],
         sort: &str,
         search: &str,
     ) -> Result<Vec<crate::types::Inventory>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !i_ds.is_empty() {
-            query_args.push(("IDs".to_string(), i_ds.join(" ")));
+        if !ids.is_empty() {
+            query_args.push(("IDs".to_string(), ids.join(" ")));
         }
         if is_active {
             query_args.push(("IsActive".to_string(), is_active.to_string()));
@@ -100,13 +100,13 @@ impl Inventory {
         &self,
         is_active: bool,
         is_digital: bool,
-        i_ds: &[String],
+        ids: &[String],
         sort: &str,
         search: &str,
     ) -> Result<Vec<crate::types::Inventory>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !i_ds.is_empty() {
-            query_args.push(("IDs".to_string(), i_ds.join(" ")));
+        if !ids.is_empty() {
+            query_args.push(("IDs".to_string(), ids.join(" ")));
         }
         if is_active {
             query_args.push(("IsActive".to_string(), is_active.to_string()));
