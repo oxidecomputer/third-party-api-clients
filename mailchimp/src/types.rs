@@ -19770,7 +19770,11 @@ pub struct MergeFieldOptions {
     /**
      * Extra options for some merge field types.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_format: Option<chrono::NaiveDate>,
     /**
      * Extra options for some merge field types.
@@ -20042,7 +20046,11 @@ pub struct MergeFieldOptionsData {
     /**
      * Extra options for some merge field types.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_format: Option<chrono::NaiveDate>,
     /**
      * Extra options for some merge field types.

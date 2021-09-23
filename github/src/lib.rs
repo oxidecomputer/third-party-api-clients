@@ -370,7 +370,7 @@ impl Client {
                 Some(&crate::auth::Credentials::InstallationToken(ref apptoken)),
             ) => Some(apptoken.jwt()),
             (crate::auth::AuthenticationConstraint::JWT, creds) => {
-                println!(
+                log::info!(
                     "Request needs JWT authentication but only {:?} available",
                     creds
                 );
@@ -408,7 +408,7 @@ impl Client {
                     let auth = format!("token {}", token);
                     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
                 } else {
-                    //println!("App token is stale, refreshing");
+                    log::debug!("app token is stale, refreshing");
                     let token_ref = apptoken.access_key.clone();
 
                     let token = self
@@ -477,10 +477,13 @@ impl Client {
         }
 
         if let Some(body) = body {
-            //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
+            log::debug!(
+                "body: {:?}",
+                String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
+            );
             req = req.body(body);
         }
-        //println!("Request: {:?}", &req);
+        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         #[cfg(feature = "httpcache")]
@@ -505,7 +508,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             #[cfg(feature = "httpcache")]
             {
                 if let Some(etag) = etag {
@@ -517,7 +523,7 @@ impl Client {
                         &next_link,
                     ) {
                         // failing to cache isn't fatal, so just log & swallow the error
-                        println!("Failed to cache body & etag: {}", e);
+                        log::info!("failed to cache body & etag: {}", e);
                     }
                 }
             }
@@ -557,10 +563,6 @@ impl Client {
                 unreachable!("this should not be reachable without the httpcache feature enabled")
             }
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
             let error = match (remaining, reset) {
                 (Some(remaining), Some(reset)) if remaining == 0 => {
                     let now = std::time::SystemTime::now()

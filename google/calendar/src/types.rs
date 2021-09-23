@@ -1613,7 +1613,11 @@ pub struct EventDateTime {
     /**
      * The date, in the format "yyyy-mm-dd", if this is an all-day event.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date: Option<chrono::NaiveDate>,
     /**
      * Last modification time of the color palette (as a RFC3339 timestamp). Read-only.

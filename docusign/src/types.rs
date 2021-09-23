@@ -1555,6 +1555,7 @@ pub struct Accounts {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "billingPeriodEndDate"
     )]
     pub billing_period_end_date: Option<chrono::NaiveDate>,
@@ -1584,6 +1585,7 @@ pub struct Accounts {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "billingPeriodStartDate"
     )]
     pub billing_period_start_date: Option<chrono::NaiveDate>,
@@ -1623,6 +1625,7 @@ pub struct Accounts {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "createdDate"
     )]
     pub created_date: Option<chrono::NaiveDate>,
@@ -1772,6 +1775,7 @@ pub struct Accounts {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "planEndDate"
     )]
     pub plan_end_date: Option<chrono::NaiveDate>,
@@ -1791,6 +1795,7 @@ pub struct Accounts {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "planStartDate"
     )]
     pub plan_start_date: Option<chrono::NaiveDate>,
@@ -1840,6 +1845,7 @@ pub struct Accounts {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "suspensionDate"
     )]
     pub suspension_date: Option<chrono::NaiveDate>,
@@ -5973,6 +5979,7 @@ pub struct Envelopes {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeCompletedDate"
     )]
     pub purge_completed_date: Option<chrono::NaiveDate>,
@@ -5982,6 +5989,7 @@ pub struct Envelopes {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeRequestDate"
     )]
     pub purge_request_date: Option<chrono::NaiveDate>,
@@ -6480,7 +6488,12 @@ pub struct Invoices {
     /**
      * Invoices
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "dueDate")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "dueDate"
+    )]
     pub due_date: Option<chrono::NaiveDate>,
     /**
      * Invoices
@@ -6568,6 +6581,7 @@ pub struct Notary {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "createdDate"
     )]
     pub created_date: Option<chrono::NaiveDate>,
@@ -6614,6 +6628,7 @@ pub struct NotaryJournal {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "createdDate"
     )]
     pub created_date: Option<chrono::NaiveDate>,
@@ -6919,6 +6934,7 @@ pub struct Payments {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "paymentDate"
     )]
     pub payment_date: Option<chrono::NaiveDate>,
@@ -9801,6 +9817,7 @@ pub struct Templates {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeCompletedDate"
     )]
     pub purge_completed_date: Option<chrono::NaiveDate>,
@@ -9810,6 +9827,7 @@ pub struct Templates {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeRequestDate"
     )]
     pub purge_request_date: Option<chrono::NaiveDate>,
@@ -10123,6 +10141,7 @@ pub struct UserProfiles {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "userProfileLastModifiedDate"
     )]
     pub user_profile_last_modified_date: Option<chrono::NaiveDate>,
@@ -10799,6 +10818,7 @@ pub struct Users {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "userProfileLastModifiedDate"
     )]
     pub user_profile_last_modified_date: Option<chrono::NaiveDate>,
@@ -11436,6 +11456,7 @@ pub struct AccountBillingPlan {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "appStoreReceiptExpirationDate"
     )]
     pub app_store_receipt_expiration_date: Option<chrono::NaiveDate>,
@@ -11445,6 +11466,7 @@ pub struct AccountBillingPlan {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "appStoreReceiptPurchaseDate"
     )]
     pub app_store_receipt_purchase_date: Option<chrono::NaiveDate>,
@@ -11952,6 +11974,7 @@ pub struct AccountInformation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "billingPeriodEndDate"
     )]
     pub billing_period_end_date: Option<chrono::NaiveDate>,
@@ -11981,6 +12004,7 @@ pub struct AccountInformation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "billingPeriodStartDate"
     )]
     pub billing_period_start_date: Option<chrono::NaiveDate>,
@@ -12020,6 +12044,7 @@ pub struct AccountInformation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "createdDate"
     )]
     pub created_date: Option<chrono::NaiveDate>,
@@ -12169,6 +12194,7 @@ pub struct AccountInformation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "planEndDate"
     )]
     pub plan_end_date: Option<chrono::NaiveDate>,
@@ -12188,6 +12214,7 @@ pub struct AccountInformation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "planStartDate"
     )]
     pub plan_start_date: Option<chrono::NaiveDate>,
@@ -12237,6 +12264,7 @@ pub struct AccountInformation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "suspensionDate"
     )]
     pub suspension_date: Option<chrono::NaiveDate>,
@@ -21952,6 +21980,7 @@ pub struct BillingCharge {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "firstEffectiveDate"
     )]
     pub first_effective_date: Option<chrono::NaiveDate>,
@@ -21981,6 +22010,7 @@ pub struct BillingCharge {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "lastEffectiveDate"
     )]
     pub last_effective_date: Option<chrono::NaiveDate>,
@@ -22088,7 +22118,12 @@ pub struct BillingInvoice {
     /**
      * Contains information about a billing invoice.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "dueDate")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "dueDate"
+    )]
     pub due_date: Option<chrono::NaiveDate>,
     /**
      * Contains information about a billing invoice.
@@ -22347,6 +22382,7 @@ pub struct BillingPaymentItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "paymentDate"
     )]
     pub payment_date: Option<chrono::NaiveDate>,
@@ -23358,6 +23394,7 @@ pub struct BrandResources {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "createdDate"
     )]
     pub created_date: Option<chrono::NaiveDate>,
@@ -23386,6 +23423,7 @@ pub struct BrandResources {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "modifiedDate"
     )]
     pub modified_date: Option<chrono::NaiveDate>,
@@ -23702,6 +23740,7 @@ pub struct BulkEnvelopeStatus {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "submittedDate"
     )]
     pub submitted_date: Option<chrono::NaiveDate>,
@@ -24127,6 +24166,7 @@ pub struct BulkSendBatchStatus {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "submittedDate"
     )]
     pub submitted_date: Option<chrono::NaiveDate>,
@@ -24313,6 +24353,7 @@ pub struct BulkSendBatchSummary {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "submittedDate"
     )]
     pub submitted_date: Option<chrono::NaiveDate>,
@@ -24908,6 +24949,7 @@ pub struct BulkSendingListSummary {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "createdDate"
     )]
     pub created_date: Option<chrono::NaiveDate>,
@@ -36896,6 +36938,7 @@ pub struct DateStampProperties {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateAreaHeight"
     )]
     pub date_area_height: Option<chrono::NaiveDate>,
@@ -36912,6 +36955,7 @@ pub struct DateStampProperties {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateAreaWidth"
     )]
     pub date_area_width: Option<chrono::NaiveDate>,
@@ -36925,7 +36969,12 @@ pub struct DateStampProperties {
      *  - `DateAreaWidth`: The width of the rectangle.
      *  - `DateAreaHeight`: The height of the rectangle.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "dateAreaX")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "dateAreaX"
+    )]
     pub date_area_x: Option<chrono::NaiveDate>,
     /**
      * Specifies the area in which a date stamp is placed. This parameter uses pixel positioning to draw a rectangle at the center of the stamp area. The stamp is superimposed on top of this central area.
@@ -36937,7 +36986,12 @@ pub struct DateStampProperties {
      *  - `DateAreaWidth`: The width of the rectangle.
      *  - `DateAreaHeight`: The height of the rectangle.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "dateAreaY")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "dateAreaY"
+    )]
     pub date_area_y: Option<chrono::NaiveDate>,
 }
 
@@ -38253,6 +38307,7 @@ pub struct DobInformationInput {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateOfBirth"
     )]
     pub date_of_birth: Option<chrono::NaiveDate>,
@@ -39195,6 +39250,7 @@ pub struct DowngradePlanUpdateResponse {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "downgradeEffectiveDate"
     )]
     pub downgrade_effective_date: Option<chrono::NaiveDate>,
@@ -44392,6 +44448,7 @@ pub struct Envelope {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeCompletedDate"
     )]
     pub purge_completed_date: Option<chrono::NaiveDate>,
@@ -44401,6 +44458,7 @@ pub struct Envelope {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeRequestDate"
     )]
     pub purge_request_date: Option<chrono::NaiveDate>,
@@ -45244,6 +45302,7 @@ pub struct EnvelopeDefinition {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeCompletedDate"
     )]
     pub purge_completed_date: Option<chrono::NaiveDate>,
@@ -45253,6 +45312,7 @@ pub struct EnvelopeDefinition {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeRequestDate"
     )]
     pub purge_request_date: Option<chrono::NaiveDate>,
@@ -47704,6 +47764,7 @@ pub struct EnvelopeTemplate {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeCompletedDate"
     )]
     pub purge_completed_date: Option<chrono::NaiveDate>,
@@ -47713,6 +47774,7 @@ pub struct EnvelopeTemplate {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "purgeRequestDate"
     )]
     pub purge_request_date: Option<chrono::NaiveDate>,
@@ -48085,6 +48147,7 @@ pub struct EnvelopeTransferRule {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "modifiedDate"
     )]
     pub modified_date: Option<chrono::NaiveDate>,
@@ -48252,6 +48315,7 @@ pub struct EnvelopeTransferRuleRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "modifiedDate"
     )]
     pub modified_date: Option<chrono::NaiveDate>,
@@ -49106,6 +49170,7 @@ pub struct FavoriteTemplatesContentItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "favoritedDate"
     )]
     pub favorited_date: Option<chrono::NaiveDate>,
@@ -62605,6 +62670,7 @@ pub struct LocalePolicy {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateFormat"
     )]
     pub date_format: Option<chrono::NaiveDate>,
@@ -62942,6 +63008,7 @@ pub struct LocalePolicyTab {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateFormat"
     )]
     pub date_format: Option<chrono::NaiveDate>,
@@ -64827,6 +64894,7 @@ pub struct NotaryData {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "createdDate"
     )]
     pub created_date: Option<chrono::NaiveDate>,
@@ -75895,6 +75963,7 @@ pub struct ReportInProductCsvRunRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateRangeCustomFromDate"
     )]
     pub date_range_custom_from_date: Option<chrono::NaiveDate>,
@@ -75904,6 +75973,7 @@ pub struct ReportInProductCsvRunRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateRangeCustomToDate"
     )]
     pub date_range_custom_to_date: Option<chrono::NaiveDate>,
@@ -75913,6 +75983,7 @@ pub struct ReportInProductCsvRunRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateRangeFilter"
     )]
     pub date_range_filter: Option<chrono::NaiveDate>,
@@ -76197,6 +76268,7 @@ pub struct ReportInProductGet {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateRangeCustomFromDate"
     )]
     pub date_range_custom_from_date: Option<chrono::NaiveDate>,
@@ -76206,6 +76278,7 @@ pub struct ReportInProductGet {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateRangeCustomToDate"
     )]
     pub date_range_custom_to_date: Option<chrono::NaiveDate>,
@@ -76215,6 +76288,7 @@ pub struct ReportInProductGet {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateRangeFilter"
     )]
     pub date_range_filter: Option<chrono::NaiveDate>,
@@ -76283,6 +76357,7 @@ pub struct ReportInProductGet {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "lastScheduledExecutionDate"
     )]
     pub last_scheduled_execution_date: Option<chrono::NaiveDate>,
@@ -76292,6 +76367,7 @@ pub struct ReportInProductGet {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "lastScheduledExecutionSuccessDate"
     )]
     pub last_scheduled_execution_success_date: Option<chrono::NaiveDate>,
@@ -76485,6 +76561,7 @@ pub struct ReportInProductListItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "lastScheduledExecutionDate"
     )]
     pub last_scheduled_execution_date: Option<chrono::NaiveDate>,
@@ -76494,6 +76571,7 @@ pub struct ReportInProductListItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "lastScheduledExecutionSuccessDate"
     )]
     pub last_scheduled_execution_success_date: Option<chrono::NaiveDate>,
@@ -76573,6 +76651,7 @@ pub struct ReportInProductListItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "scheduleCreateDate"
     )]
     pub schedule_create_date: Option<chrono::NaiveDate>,
@@ -76582,6 +76661,7 @@ pub struct ReportInProductListItem {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "scheduleEndDate"
     )]
     pub schedule_end_date: Option<chrono::NaiveDate>,
@@ -76626,6 +76706,7 @@ pub struct ReportInProductRunRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateRangeCustomFromDate"
     )]
     pub date_range_custom_from_date: Option<chrono::NaiveDate>,
@@ -76635,6 +76716,7 @@ pub struct ReportInProductRunRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateRangeCustomToDate"
     )]
     pub date_range_custom_to_date: Option<chrono::NaiveDate>,
@@ -76644,6 +76726,7 @@ pub struct ReportInProductRunRequest {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "dateRangeFilter"
     )]
     pub date_range_filter: Option<chrono::NaiveDate>,
@@ -77040,6 +77123,7 @@ pub struct ReportInProductRunResponseRowFields {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "createdDate"
     )]
     pub created_date: Option<chrono::NaiveDate>,
@@ -77059,6 +77143,7 @@ pub struct ReportInProductRunResponseRowFields {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "declinedDate"
     )]
     pub declined_date: Option<chrono::NaiveDate>,
@@ -77078,6 +77163,7 @@ pub struct ReportInProductRunResponseRowFields {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "deliveredDate"
     )]
     pub delivered_date: Option<chrono::NaiveDate>,
@@ -77254,7 +77340,12 @@ pub struct ReportInProductRunResponseRowFields {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "eventDate")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "eventDate"
+    )]
     pub event_date: Option<chrono::NaiveDate>,
     /**
      *
@@ -77262,6 +77353,7 @@ pub struct ReportInProductRunResponseRowFields {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "expirationDate"
     )]
     pub expiration_date: Option<chrono::NaiveDate>,
@@ -77410,6 +77502,7 @@ pub struct ReportInProductRunResponseRowFields {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "lastActivityDate"
     )]
     pub last_activity_date: Option<chrono::NaiveDate>,
@@ -77419,6 +77512,7 @@ pub struct ReportInProductRunResponseRowFields {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "lastSentDate"
     )]
     pub last_sent_date: Option<chrono::NaiveDate>,
@@ -77843,7 +77937,12 @@ pub struct ReportInProductRunResponseRowFields {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "signDate")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "signDate"
+    )]
     pub sign_date: Option<chrono::NaiveDate>,
     /**
      *
@@ -77860,6 +77959,7 @@ pub struct ReportInProductRunResponseRowFields {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "signedDate"
     )]
     pub signed_date: Option<chrono::NaiveDate>,
@@ -77908,6 +78008,7 @@ pub struct ReportInProductRunResponseRowFields {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "statusChangedDate"
     )]
     pub status_changed_date: Option<chrono::NaiveDate>,
@@ -77965,6 +78066,7 @@ pub struct ReportInProductRunResponseRowFields {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "terminalStatusDate"
     )]
     pub terminal_status_date: Option<chrono::NaiveDate>,
@@ -78101,7 +78203,12 @@ pub struct ReportInProductRunResponseRowFields {
     /**
      *
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "viewDate")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "viewDate"
+    )]
     pub view_date: Option<chrono::NaiveDate>,
     /**
      *
@@ -91586,6 +91693,7 @@ pub struct UserInformation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "userProfileLastModifiedDate"
     )]
     pub user_profile_last_modified_date: Option<chrono::NaiveDate>,
@@ -91881,6 +91989,7 @@ pub struct UserProfile {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "userProfileLastModifiedDate"
     )]
     pub user_profile_last_modified_date: Option<chrono::NaiveDate>,
@@ -92789,6 +92898,7 @@ pub struct UserSettingsInformation {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "modifiedDate"
     )]
     pub modified_date: Option<chrono::NaiveDate>,
@@ -95753,6 +95863,7 @@ pub struct WorkflowStep {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "completedDate"
     )]
     pub completed_date: Option<chrono::NaiveDate>,
@@ -95800,6 +95911,7 @@ pub struct WorkflowStep {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "triggeredDate"
     )]
     pub triggered_date: Option<chrono::NaiveDate>,

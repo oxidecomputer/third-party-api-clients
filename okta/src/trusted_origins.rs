@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct TrustedOrigin {
+pub struct TrustedOrigins {
     pub client: Client,
 }
 
-impl TrustedOrigin {
+impl TrustedOrigins {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        TrustedOrigin { client }
+        TrustedOrigins { client }
     }
 
     /**

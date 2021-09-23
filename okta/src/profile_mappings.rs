@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct ProfileMapping {
+pub struct ProfileMappings {
     pub client: Client,
 }
 
-impl ProfileMapping {
+impl ProfileMappings {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        ProfileMapping { client }
+        ProfileMappings { client }
     }
 
     /**

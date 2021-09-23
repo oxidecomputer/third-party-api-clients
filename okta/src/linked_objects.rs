@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct LinkedObject {
+pub struct LinkedObjects {
     pub client: Client,
 }
 
-impl LinkedObject {
+impl LinkedObjects {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        LinkedObject { client }
+        LinkedObjects { client }
     }
 
     /**

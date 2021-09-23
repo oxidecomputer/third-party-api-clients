@@ -18,6 +18,40 @@ pub fn next_link(l: &hyperx::header::Link) -> Option<String> {
 }
 
 
+pub mod date_format {
+    use chrono::{NaiveDate};
+    use serde::{self, Deserialize, Deserializer};
+
+    // The signature of a deserialize_with function must follow the pattern:
+    //
+    //    fn deserialize<'de, D>(D) -> Result<T, D::Error>
+    //    where
+    //        D: Deserializer<'de>
+    //
+    // although it may also be generic over the output types T.
+    pub fn deserialize<'de, D>(deserializer: D) -> Result<Option<NaiveDate>, D::Error>
+    where
+        D: Deserializer<'de>,
+    {
+        let s: Option<String> = Option::deserialize(deserializer)?;
+        if let Some(s) = s {
+            if s.is_empty() {
+                Ok(None)
+            } else {
+                // This is standard.
+                match serde_json::from_str::<NaiveDate>(&format!("\"{}\"", s)) {
+                    Ok(t) => Ok(Some(t)),
+                    Err(e) => {
+                        Err(serde::de::Error::custom(format!("deserializing {} as NaiveDate failed: {}", s, e)))
+                    }
+                }
+            }
+        } else {
+            Ok(None)
+        }
+    }
+}
+
 pub mod date_time_format {
     use chrono::{DateTime, TimeZone, Utc};
     use serde::{self, Deserialize, Deserializer};

@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct ThreatInsight {
+pub struct ThreatInsights {
     pub client: Client,
 }
 
-impl ThreatInsight {
+impl ThreatInsights {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        ThreatInsight { client }
+        ThreatInsights { client }
     }
 
     /**

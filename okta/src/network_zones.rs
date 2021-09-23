@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct NetworkZone {
+pub struct NetworkZones {
     pub client: Client,
 }
 
-impl NetworkZone {
+impl NetworkZones {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        NetworkZone { client }
+        NetworkZones { client }
     }
 
     /**

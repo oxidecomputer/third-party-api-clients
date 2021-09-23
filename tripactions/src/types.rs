@@ -646,7 +646,12 @@ pub struct BookingReport {
     /**
      * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "endDate")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "endDate"
+    )]
     pub end_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
@@ -915,7 +920,12 @@ pub struct BookingReport {
     /**
      * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
      */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "startDate")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "startDate"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
     #[serde(
         default,

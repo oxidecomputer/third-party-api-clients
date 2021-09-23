@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct UserType {
+pub struct UserTypes {
     pub client: Client,
 }
 
-impl UserType {
+impl UserTypes {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        UserType { client }
+        UserTypes { client }
     }
 
     /**

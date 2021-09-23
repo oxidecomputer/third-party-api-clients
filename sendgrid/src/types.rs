@@ -5344,7 +5344,11 @@ pub struct AbTestSummary {
     /**
      * Last day to select an A/B Test Winner
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub expiration_date: Option<chrono::NaiveDate>,
     #[serde(
         default,

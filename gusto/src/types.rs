@@ -32,7 +32,11 @@ pub struct Employee {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub custom_fields: Vec<EmployeeCustomField>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      * The representation of an employee in Gusto.
@@ -541,7 +545,11 @@ pub struct Termination {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub active: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub effective_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a termination in Gusto.
@@ -674,7 +682,11 @@ impl FlsaStatus {
 /// The representation of compensation in Gusto.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Compensation {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub effective_date: Option<chrono::NaiveDate>,
     /**
      * The representation of compensation in Gusto.
@@ -829,7 +841,11 @@ pub struct Job {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub employee_id: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub hire_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a job in Gusto.
@@ -2189,7 +2205,11 @@ impl Frequency {
 /// The representation of a pay schedule.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PaySchedule {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub anchor_pay_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a pay schedule.
@@ -2797,7 +2817,11 @@ pub struct PayPeriod {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub eligible_employees: Vec<EligibleEmployees>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub end_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a pay period.
@@ -2822,13 +2846,21 @@ pub struct PayPeriod {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub payroll: Option<Payroll>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PayrollPayPeriod {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub end_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
@@ -2842,7 +2874,11 @@ pub struct PayrollPayPeriod {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub pay_schedule_uuid: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
 }
 
@@ -3337,7 +3373,11 @@ pub struct PayrollData {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub calculated_at: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub check_date: Option<chrono::NaiveDate>,
     /**
      *
@@ -3406,7 +3446,11 @@ pub struct PayrollData {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub processed: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub processed_date: Option<chrono::NaiveDate>,
     /**
      *
@@ -3631,7 +3675,11 @@ pub struct JobApplicant {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub company_uuid: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      * The representation of a job applicant in Gusto.
@@ -3698,7 +3746,11 @@ pub struct JobApplicant {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub phone: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
     /**
      * The representation of a job applicant in Gusto.
@@ -3853,7 +3905,11 @@ impl Include {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutEmployeesRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      *
@@ -3919,7 +3975,11 @@ pub struct PutEmployeesRequest {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostEmployeesRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      *
@@ -3971,7 +4031,11 @@ pub struct PostEmployeesRequest {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutJobRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub hire_date: Option<chrono::NaiveDate>,
     /**
      *
@@ -4005,7 +4069,11 @@ pub struct PutJobRequest {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostJobRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub hire_date: Option<chrono::NaiveDate>,
     /**
      *
@@ -4240,7 +4308,11 @@ pub struct PutComntractorRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub middle_initial: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
     /**
      *
@@ -4320,7 +4392,11 @@ pub struct PostCompanyContractorsRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub self_onboarding: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
     /**
      * The contractor's type, either "Individual" or "Business".
@@ -4370,7 +4446,11 @@ pub struct PutCompensationRequest {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostJobCompensationsRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub effective_date: Option<chrono::NaiveDate>,
     /**
      * The FLSA status for this compensation. Salaried ('Exempt') employees are paid a fixed salary every pay period. Salaried with overtime ('Salaried Nonexempt') employees are paid a fixed salary every pay period, and receive overtime pay when applicable. Hourly ('Nonexempt') employees are paid for the hours they work, and receive overtime pay when applicable. Owners ('Owner') are employees that own at least twenty percent of the company.
@@ -4544,7 +4624,11 @@ pub struct PutGarnishmentRequest {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostEmployeeTerminationsRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub effective_date: Option<chrono::NaiveDate>,
     /**
      *
@@ -5056,7 +5140,11 @@ impl OffCycleReason {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostCompanyPayrollsRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub check_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
@@ -5064,7 +5152,11 @@ pub struct PostCompanyPayrollsRequest {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub employee_ids: Vec<i64>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub end_date: Option<chrono::NaiveDate>,
     /**
      * A unique identifier of the employee in Gusto.
@@ -5077,7 +5169,11 @@ pub struct PostCompanyPayrollsRequest {
     pub off_cycle: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub off_cycle_reason: Option<OffCycleReason>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
 }
 
@@ -5536,7 +5632,11 @@ impl OnboardingPersonType {
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostCompanyJobApplicantsRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      * A unique identifier of the employee in Gusto.
@@ -5593,14 +5693,22 @@ pub struct PostCompanyJobApplicantsRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub send_offer: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
 }
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PutCompanyJobApplicantRequest {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_of_birth: Option<chrono::NaiveDate>,
     /**
      *
@@ -5657,7 +5765,11 @@ pub struct PutCompanyJobApplicantRequest {
      */
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub send_offer: Option<bool>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
 }
 

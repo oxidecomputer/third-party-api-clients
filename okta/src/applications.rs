@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct Application {
+pub struct Applications {
     pub client: Client,
 }
 
-impl Application {
+impl Applications {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        Application { client }
+        Applications { client }
     }
 
     /**
@@ -216,7 +216,7 @@ impl Application {
      *
      * * `app_id: &str`
      */
-    pub async fn list_csrs_for(&self, app_id: &str) -> Result<Vec<crate::types::Csr>> {
+    pub async fn list_csrs_fors(&self, app_id: &str) -> Result<Vec<crate::types::Csr>> {
         let url = format!(
             "/api/v1/apps/{}/credentials/csrs",
             crate::progenitor_support::encode_path(&app_id.to_string()),
@@ -234,7 +234,7 @@ impl Application {
      *
      * Enumerates Certificate Signing Requests for an application
      */
-    pub async fn list_all_csrs_for(&self, app_id: &str) -> Result<Vec<crate::types::Csr>> {
+    pub async fn list_all_csrs_fors(&self, app_id: &str) -> Result<Vec<crate::types::Csr>> {
         let url = format!(
             "/api/v1/apps/{}/credentials/csrs",
             crate::progenitor_support::encode_path(&app_id.to_string()),
@@ -796,7 +796,7 @@ impl Application {
      * * `after: &str`
      * * `limit: i64`
      */
-    pub async fn list_o_auth_2_tokens_for(
+    pub async fn list_o_auth_2_tokens_fors(
         &self,
         app_id: &str,
         expand: &str,
@@ -830,7 +830,7 @@ impl Application {
      *
      * Lists all tokens for the application
      */
-    pub async fn list_all_o_auth_2_tokens_for(
+    pub async fn list_all_o_auth_2_tokens_fors(
         &self,
         app_id: &str,
         expand: &str,

@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct EventHook {
+pub struct EventHooks {
     pub client: Client,
 }
 
-impl EventHook {
+impl EventHooks {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        EventHook { client }
+        EventHooks { client }
     }
 
     /**

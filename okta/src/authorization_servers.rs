@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct AuthorizationServer {
+pub struct AuthorizationServers {
     pub client: Client,
 }
 
-impl AuthorizationServer {
+impl AuthorizationServers {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        AuthorizationServer { client }
+        AuthorizationServers { client }
     }
 
     /**
@@ -282,7 +282,7 @@ impl AuthorizationServer {
      *
      * * `auth_server_id: &str`
      */
-    pub async fn list_o_auth_2_clients_for(
+    pub async fn list_o_auth_2_clients_fors(
         &self,
         auth_server_id: &str,
     ) -> Result<Vec<crate::types::OAuth2Client>> {
@@ -301,7 +301,7 @@ impl AuthorizationServer {
      *
      * Success
      */
-    pub async fn list_all_o_auth_2_clients_for(
+    pub async fn list_all_o_auth_2_clients_fors(
         &self,
         auth_server_id: &str,
     ) -> Result<Vec<crate::types::OAuth2Client>> {
@@ -326,7 +326,7 @@ impl AuthorizationServer {
      * * `after: &str`
      * * `limit: i64`
      */
-    pub async fn list_refresh_tokens_for_and_client(
+    pub async fn list_refresh_tokens_for_and_clients(
         &self,
         auth_server_id: &str,
         client_id: &str,
@@ -362,7 +362,7 @@ impl AuthorizationServer {
      *
      * Success
      */
-    pub async fn list_all_refresh_tokens_for_and_client(
+    pub async fn list_all_refresh_tokens_for_and_clients(
         &self,
         auth_server_id: &str,
         client_id: &str,

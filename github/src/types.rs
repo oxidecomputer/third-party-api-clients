@@ -5837,7 +5837,11 @@ pub struct MarketplaceListingPlan {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct MarketplacePendingChange {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub effective_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
@@ -5879,7 +5883,11 @@ pub struct MarketplacePurchase {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub is_installed: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub next_billing_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
@@ -19097,7 +19105,11 @@ pub struct PagesHttpsCertificate {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub domains: Vec<String>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub expires_at: Option<chrono::NaiveDate>,
     #[serde(default, skip_serializing_if = "PagesHttpsCertificateState::is_noop")]
     pub state: PagesHttpsCertificateState,

@@ -848,7 +848,11 @@ pub struct ActiveTimeRanges {
     /**
      * Date of usage
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date: Option<chrono::NaiveDate>,
 }
 
@@ -1321,6 +1325,7 @@ pub struct ChromeOsDevice {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
         rename = "manufactureDate"
     )]
     pub manufacture_date: Option<chrono::NaiveDate>,

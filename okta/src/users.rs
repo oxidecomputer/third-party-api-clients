@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct User {
+pub struct Users {
     pub client: Client,
 }
 
-impl User {
+impl Users {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        User { client }
+        Users { client }
     }
 
     /**
@@ -367,7 +367,7 @@ impl User {
      * * `after: &str`
      * * `limit: i64`
      */
-    pub async fn list_grants_for_and_client(
+    pub async fn list_grants_for_and_clients(
         &self,
         user_id: &str,
         client_id: &str,
@@ -403,7 +403,7 @@ impl User {
      *
      * Lists all grants for a specified user and client
      */
-    pub async fn list_all_grants_for_and_client(
+    pub async fn list_all_grants_for_and_clients(
         &self,
         user_id: &str,
         client_id: &str,
@@ -457,7 +457,7 @@ impl User {
      * * `after: &str`
      * * `limit: i64`
      */
-    pub async fn list_refresh_tokens_for_and_client(
+    pub async fn list_refresh_tokens_for_and_clients(
         &self,
         user_id: &str,
         client_id: &str,
@@ -493,7 +493,7 @@ impl User {
      *
      * Lists all refresh tokens issued for the specified User and Client.
      */
-    pub async fn list_all_refresh_tokens_for_and_client(
+    pub async fn list_all_refresh_tokens_for_and_clients(
         &self,
         user_id: &str,
         client_id: &str,
@@ -1168,7 +1168,7 @@ impl User {
      * * `after: &str`
      * * `limit: i64`
      */
-    pub async fn get_linked_objects_for(
+    pub async fn get_linked_objects_fors(
         &self,
         user_id: &str,
         relationship_name: &str,
@@ -1200,7 +1200,7 @@ impl User {
      *
      * Get linked objects for a user, relationshipName can be a primary or associated relationship name
      */
-    pub async fn get_all_linked_objects_for(
+    pub async fn get_all_linked_objects_fors(
         &self,
         user_id: &str,
         relationship_name: &str,
@@ -1248,7 +1248,7 @@ impl User {
      * * `user_id: &str`
      * * `expand: &str`
      */
-    pub async fn list_assigned_roles_for(
+    pub async fn list_assigned_roles_fors(
         &self,
         user_id: &str,
         expand: &str,
@@ -1274,7 +1274,7 @@ impl User {
      *
      * Lists all roles assigned to a user.
      */
-    pub async fn list_all_assigned_roles_for(
+    pub async fn list_all_assigned_roles_fors(
         &self,
         user_id: &str,
         expand: &str,
@@ -1360,7 +1360,7 @@ impl User {
      * * `after: &str`
      * * `limit: i64`
      */
-    pub async fn list_application_targets_for_administrator_role(
+    pub async fn list_application_targets_for_administrator_roles(
         &self,
         user_id: &str,
         role_id: &str,
@@ -1392,7 +1392,7 @@ impl User {
      *
      * Lists all App targets for an `APP_ADMIN` Role assigned to a User. This methods return list may include full Applications or Instances. The response for an instance will have an `ID` value, while Application will not have an ID.
      */
-    pub async fn list_all_application_targets_for_administrator_role(
+    pub async fn list_all_application_targets_for_administrator_roles(
         &self,
         user_id: &str,
         role_id: &str,
@@ -1526,7 +1526,7 @@ impl User {
      * * `app_name: &str`
      * * `application_id: &str`
      */
-    pub async fn remove_application_target_from_administrator_role_for_user(
+    pub async fn remove_application_target_from_administrator_role_for_users(
         &self,
         user_id: &str,
         role_id: &str,
@@ -1556,7 +1556,7 @@ impl User {
      * * `after: &str`
      * * `limit: i64`
      */
-    pub async fn list_group_targets_for_role(
+    pub async fn list_group_targets_for_roles(
         &self,
         user_id: &str,
         role_id: &str,
@@ -1588,7 +1588,7 @@ impl User {
      *
      * Success
      */
-    pub async fn list_all_group_targets_for_role(
+    pub async fn list_all_group_targets_for_roles(
         &self,
         user_id: &str,
         role_id: &str,

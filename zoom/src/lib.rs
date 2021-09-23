@@ -433,10 +433,13 @@ impl Client {
         }
 
         if let Some(body) = body {
-            //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
+            log::debug!(
+                "body: {:?}",
+                String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
+            );
             req = req.body(body);
         }
-        //println!("Request: {:?}", &req);
+        log::debug!("request: {:?}", &req);
         Ok(req.send().await?)
     }
 
@@ -456,7 +459,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -466,11 +472,6 @@ impl Client {
             };
             parsed_response.map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
-
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {
@@ -506,7 +507,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
 
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
@@ -517,10 +521,6 @@ impl Client {
             };
             parsed_response.map(|out| (link, out)).map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {
@@ -565,9 +565,10 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
+        log::debug!("form: {:?}", form);
         req = req.multipart(form);
 
-        //println!("Request: {:?}", &req);
+        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
@@ -575,7 +576,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -590,11 +594,6 @@ impl Client {
             };
             parsed_response.map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
-
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {
@@ -641,7 +640,7 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
-        //println!("Request: {:?}", &req);
+        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
@@ -649,7 +648,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -664,11 +666,6 @@ impl Client {
             };
             parsed_response.map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
-
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {
@@ -736,7 +733,7 @@ impl Client {
             req = req.body(b);
         }
 
-        //println!("Request: {:?}", &req);
+        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
@@ -744,7 +741,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -754,11 +754,6 @@ impl Client {
             };
             parsed_response.map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
-
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {

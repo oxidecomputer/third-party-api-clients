@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct InlineHook {
+pub struct InlineHooks {
     pub client: Client,
 }
 
-impl InlineHook {
+impl InlineHooks {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        InlineHook { client }
+        InlineHooks { client }
     }
 
     /**

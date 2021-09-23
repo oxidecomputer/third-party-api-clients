@@ -2483,7 +2483,7 @@ fn gen(
 
 pub fn make_plural(proper_name: &str, s: &str) -> String {
     // Only fix the ramp names.
-    if proper_name != "Ramp" {
+    if proper_name != "Ramp" && proper_name != "Okta" {
         return s.to_string();
     }
 
@@ -3211,6 +3211,7 @@ dirs = {{ version = "^3.0.2", optional = true }}
 http = "^0.2.4"
 hyperx = "1"
 jsonwebtoken = "7"
+log = {{ version = "^0.4", features = ["serde"] }}
 mime = "0.3"
 percent-encoding = "2.1"
 reqwest = {{ version = "0.11", features = ["json", "multipart"] }}

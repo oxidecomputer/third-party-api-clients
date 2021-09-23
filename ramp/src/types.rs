@@ -1310,12 +1310,20 @@ pub struct BusinessCurrentStatus {
     /**
      * Current data about the business.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub next_billing_date: Option<chrono::NaiveDate>,
     /**
      * Current data about the business.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub prev_billing_date: Option<chrono::NaiveDate>,
     /**
      * Current data about the business.
@@ -1807,7 +1815,11 @@ pub struct Reimbursement {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub receipts: Vec<uuid::Uuid>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub transaction_date: Option<chrono::NaiveDate>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub user_id: Option<uuid::Uuid>,

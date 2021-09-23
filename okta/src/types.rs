@@ -9347,7 +9347,11 @@ pub struct UserProfile {
         rename = "awsRole"
     )]
     pub aws_role: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub birthday: Option<chrono::NaiveDate>,
     #[serde(
         default,
@@ -9537,7 +9541,12 @@ pub struct UserProfile {
         rename = "secondEmail"
     )]
     pub second_email: String,
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "startDate")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "startDate"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
     #[serde(
         default,

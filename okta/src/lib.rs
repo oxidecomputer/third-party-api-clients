@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! okta = "0.2.1"
+//! okta = "0.2.2"
 //! ```
 //!
 //! ## Basic example
@@ -69,30 +69,30 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
-pub mod application;
-pub mod authorization_server;
-pub mod domain;
-pub mod event_hook;
-pub mod feature;
-pub mod group;
-pub mod identity_provider;
-pub mod inline_hook;
-pub mod linked_object;
-pub mod log;
-pub mod network_zone;
-pub mod policy;
-pub mod profile_mapping;
-pub mod session;
-pub mod template;
+pub mod applications;
+pub mod authorization_servers;
+pub mod domains;
+pub mod event_hooks;
+pub mod features;
+pub mod groups;
+pub mod identity_providers;
+pub mod inline_hooks;
+pub mod linked_objects;
+pub mod logs;
+pub mod network_zones;
+pub mod policies;
+pub mod profile_mappings;
+pub mod sessions;
+pub mod templates;
 #[cfg(test)]
 mod tests;
-pub mod threat_insight;
-pub mod trusted_origin;
+pub mod threat_insights;
+pub mod trusted_origins;
 pub mod types;
-pub mod user;
-pub mod user_factor;
-pub mod user_schema;
-pub mod user_type;
+pub mod user_factors;
+pub mod user_schemas;
+pub mod user_types;
+pub mod users;
 #[doc(hidden)]
 pub mod utils;
 
@@ -212,10 +212,13 @@ impl Client {
         }
 
         if let Some(body) = body {
-            //println!("Body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
+            log::debug!(
+                "body: {:?}",
+                String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
+            );
             req = req.body(body);
         }
-        //println!("Request: {:?}", &req);
+        log::debug!("request: {:?}", &req);
         Ok(req.send().await?)
     }
 
@@ -235,7 +238,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -245,11 +251,6 @@ impl Client {
             };
             parsed_response.map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
-
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {
@@ -285,7 +286,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
 
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
@@ -296,10 +300,6 @@ impl Client {
             };
             parsed_response.map(|out| (link, out)).map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {
@@ -344,9 +344,10 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
+        log::debug!("form: {:?}", form);
         req = req.multipart(form);
 
-        //println!("Request: {:?}", &req);
+        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
@@ -354,7 +355,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -369,11 +373,6 @@ impl Client {
             };
             parsed_response.map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
-
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {
@@ -420,7 +419,7 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
-        //println!("Request: {:?}", &req);
+        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
@@ -428,7 +427,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -443,11 +445,6 @@ impl Client {
             };
             parsed_response.map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
-
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {
@@ -515,7 +512,7 @@ impl Client {
             req = req.body(b);
         }
 
-        //println!("Request: {:?}", &req);
+        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
@@ -523,7 +520,10 @@ impl Client {
         let response_body = response.bytes().await?;
 
         if status.is_success() {
-            //println!("response payload {}", String::from_utf8_lossy(&response_body));
+            log::debug!(
+                "response payload {}",
+                String::from_utf8_lossy(&response_body)
+            );
             let parsed_response = if status == http::StatusCode::NO_CONTENT
                 || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>()
             {
@@ -533,11 +533,6 @@ impl Client {
             };
             parsed_response.map_err(Error::from)
         } else {
-            /*println!("error status: {:?}, response payload: {}",
-                status,
-                String::from_utf8_lossy(&response_body),
-            );*/
-
             let error = if response_body.is_empty() {
                 anyhow!("code: {}, empty response", status)
             } else {
@@ -667,87 +662,87 @@ impl Client {
         .await
     }
 
-    pub fn application(&self) -> application::Application {
-        application::Application::new(self.clone())
+    pub fn applications(&self) -> applications::Applications {
+        applications::Applications::new(self.clone())
     }
 
-    pub fn authorization_server(&self) -> authorization_server::AuthorizationServer {
-        authorization_server::AuthorizationServer::new(self.clone())
+    pub fn authorization_servers(&self) -> authorization_servers::AuthorizationServers {
+        authorization_servers::AuthorizationServers::new(self.clone())
     }
 
-    pub fn domain(&self) -> domain::Domain {
-        domain::Domain::new(self.clone())
+    pub fn domains(&self) -> domains::Domains {
+        domains::Domains::new(self.clone())
     }
 
-    pub fn event_hook(&self) -> event_hook::EventHook {
-        event_hook::EventHook::new(self.clone())
+    pub fn event_hooks(&self) -> event_hooks::EventHooks {
+        event_hooks::EventHooks::new(self.clone())
     }
 
-    pub fn feature(&self) -> feature::Feature {
-        feature::Feature::new(self.clone())
+    pub fn features(&self) -> features::Features {
+        features::Features::new(self.clone())
     }
 
-    pub fn group(&self) -> group::Group {
-        group::Group::new(self.clone())
+    pub fn groups(&self) -> groups::Groups {
+        groups::Groups::new(self.clone())
     }
 
-    pub fn identity_provider(&self) -> identity_provider::IdentityProvider {
-        identity_provider::IdentityProvider::new(self.clone())
+    pub fn identity_providers(&self) -> identity_providers::IdentityProviders {
+        identity_providers::IdentityProviders::new(self.clone())
     }
 
-    pub fn inline_hook(&self) -> inline_hook::InlineHook {
-        inline_hook::InlineHook::new(self.clone())
+    pub fn inline_hooks(&self) -> inline_hooks::InlineHooks {
+        inline_hooks::InlineHooks::new(self.clone())
     }
 
-    pub fn linked_object(&self) -> linked_object::LinkedObject {
-        linked_object::LinkedObject::new(self.clone())
+    pub fn linked_objects(&self) -> linked_objects::LinkedObjects {
+        linked_objects::LinkedObjects::new(self.clone())
     }
 
-    pub fn log(&self) -> log::Log {
-        log::Log::new(self.clone())
+    pub fn logs(&self) -> logs::Logs {
+        logs::Logs::new(self.clone())
     }
 
-    pub fn network_zone(&self) -> network_zone::NetworkZone {
-        network_zone::NetworkZone::new(self.clone())
+    pub fn network_zones(&self) -> network_zones::NetworkZones {
+        network_zones::NetworkZones::new(self.clone())
     }
 
-    pub fn policy(&self) -> policy::Policy {
-        policy::Policy::new(self.clone())
+    pub fn policies(&self) -> policies::Policies {
+        policies::Policies::new(self.clone())
     }
 
-    pub fn profile_mapping(&self) -> profile_mapping::ProfileMapping {
-        profile_mapping::ProfileMapping::new(self.clone())
+    pub fn profile_mappings(&self) -> profile_mappings::ProfileMappings {
+        profile_mappings::ProfileMappings::new(self.clone())
     }
 
-    pub fn session(&self) -> session::Session {
-        session::Session::new(self.clone())
+    pub fn sessions(&self) -> sessions::Sessions {
+        sessions::Sessions::new(self.clone())
     }
 
-    pub fn template(&self) -> template::Template {
-        template::Template::new(self.clone())
+    pub fn templates(&self) -> templates::Templates {
+        templates::Templates::new(self.clone())
     }
 
-    pub fn threat_insight(&self) -> threat_insight::ThreatInsight {
-        threat_insight::ThreatInsight::new(self.clone())
+    pub fn threat_insights(&self) -> threat_insights::ThreatInsights {
+        threat_insights::ThreatInsights::new(self.clone())
     }
 
-    pub fn trusted_origin(&self) -> trusted_origin::TrustedOrigin {
-        trusted_origin::TrustedOrigin::new(self.clone())
+    pub fn trusted_origins(&self) -> trusted_origins::TrustedOrigins {
+        trusted_origins::TrustedOrigins::new(self.clone())
     }
 
-    pub fn user(&self) -> user::User {
-        user::User::new(self.clone())
+    pub fn user_factors(&self) -> user_factors::UserFactors {
+        user_factors::UserFactors::new(self.clone())
     }
 
-    pub fn user_factor(&self) -> user_factor::UserFactor {
-        user_factor::UserFactor::new(self.clone())
+    pub fn user_schemas(&self) -> user_schemas::UserSchemas {
+        user_schemas::UserSchemas::new(self.clone())
     }
 
-    pub fn user_schema(&self) -> user_schema::UserSchema {
-        user_schema::UserSchema::new(self.clone())
+    pub fn user_types(&self) -> user_types::UserTypes {
+        user_types::UserTypes::new(self.clone())
     }
 
-    pub fn user_type(&self) -> user_type::UserType {
-        user_type::UserType::new(self.clone())
+    pub fn users(&self) -> users::Users {
+        users::Users::new(self.clone())
     }
 }

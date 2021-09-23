@@ -152,6 +152,9 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 } else if rt.starts_with("Option<url::Url") {
                                     a(r#"skip_serializing_if = "Option::is_none",
                                       deserialize_with = "crate::utils::deserialize_empty_url::deserialize","#);
+                                } else if rt.starts_with("Option<chrono::NaiveDate") {
+                                    a(r#"skip_serializing_if = "Option::is_none",
+                                      deserialize_with = "crate::utils::date_format::deserialize","#);
                                 } else if rt.starts_with("Option<chrono::DateTime") {
                                     a(r#"skip_serializing_if = "Option::is_none",
                                       deserialize_with = "crate::utils::date_time_format::deserialize","#);

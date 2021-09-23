@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct IdentityProvider {
+pub struct IdentityProviders {
     pub client: Client,
 }
 
-impl IdentityProvider {
+impl IdentityProviders {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        IdentityProvider { client }
+        IdentityProviders { client }
     }
 
     /**
@@ -274,7 +274,7 @@ impl IdentityProvider {
      *
      * * `idp_id: &str`
      */
-    pub async fn list_csrs_for(&self, idp_id: &str) -> Result<Vec<crate::types::Csr>> {
+    pub async fn list_csrs_fors(&self, idp_id: &str) -> Result<Vec<crate::types::Csr>> {
         let url = format!(
             "/api/v1/idps/{}/credentials/csrs",
             crate::progenitor_support::encode_path(&idp_id.to_string()),
@@ -292,7 +292,7 @@ impl IdentityProvider {
      *
      * Enumerates Certificate Signing Requests for an IdP
      */
-    pub async fn list_all_csrs_for(&self, idp_id: &str) -> Result<Vec<crate::types::Csr>> {
+    pub async fn list_all_csrs_fors(&self, idp_id: &str) -> Result<Vec<crate::types::Csr>> {
         let url = format!(
             "/api/v1/idps/{}/credentials/csrs",
             crate::progenitor_support::encode_path(&idp_id.to_string()),

@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct Policy {
+pub struct Policies {
     pub client: Client,
 }
 
-impl Policy {
+impl Policies {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        Policy { client }
+        Policies { client }
     }
 
     /**
@@ -23,7 +23,7 @@ impl Policy {
      * * `status: &str`
      * * `expand: &str`
      */
-    pub async fn list_policies(
+    pub async fn list(
         &self,
         type_: &str,
         status: &str,
@@ -48,11 +48,11 @@ impl Policy {
     /**
      * This function performs a `GET` to the `/api/v1/policies` endpoint.
      *
-     * As opposed to `list_policies`, this function returns all the pages of the request at once.
+     * As opposed to `list`, this function returns all the pages of the request at once.
      *
      * Gets all policies with the specified type.
      */
-    pub async fn list_all_policies(
+    pub async fn list_all(
         &self,
         type_: &str,
         status: &str,
@@ -83,7 +83,7 @@ impl Policy {
      *
      * * `activate: bool`
      */
-    pub async fn create(
+    pub async fn create_policy(
         &self,
         activate: bool,
         body: &crate::types::Policy,
@@ -110,7 +110,7 @@ impl Policy {
      * * `policy_id: &str`
      * * `expand: &str`
      */
-    pub async fn get(&self, policy_id: &str, expand: &str) -> Result<crate::types::Policy> {
+    pub async fn get_policy(&self, policy_id: &str, expand: &str) -> Result<crate::types::Policy> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
             query_args.push(("expand".to_string(), expand.to_string()));
@@ -134,7 +134,7 @@ impl Policy {
      *
      * * `policy_id: &str`
      */
-    pub async fn update(
+    pub async fn update_policy(
         &self,
         policy_id: &str,
         body: &crate::types::Policy,
@@ -158,7 +158,7 @@ impl Policy {
      *
      * * `policy_id: &str`
      */
-    pub async fn delete(&self, policy_id: &str) -> Result<()> {
+    pub async fn delete_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}",
             crate::progenitor_support::encode_path(&policy_id.to_string()),
@@ -176,7 +176,7 @@ impl Policy {
      *
      * * `policy_id: &str`
      */
-    pub async fn activate(&self, policy_id: &str) -> Result<()> {
+    pub async fn activate_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/lifecycle/activate",
             crate::progenitor_support::encode_path(&policy_id.to_string()),
@@ -194,7 +194,7 @@ impl Policy {
      *
      * * `policy_id: &str`
      */
-    pub async fn deactivate(&self, policy_id: &str) -> Result<()> {
+    pub async fn deactivate_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/lifecycle/deactivate",
             crate::progenitor_support::encode_path(&policy_id.to_string()),
@@ -212,7 +212,10 @@ impl Policy {
      *
      * * `policy_id: &str`
      */
-    pub async fn list_rules(&self, policy_id: &str) -> Result<Vec<crate::types::PolicyRule>> {
+    pub async fn list_policy_rules(
+        &self,
+        policy_id: &str,
+    ) -> Result<Vec<crate::types::PolicyRule>> {
         let url = format!(
             "/api/v1/policies/{}/rules",
             crate::progenitor_support::encode_path(&policy_id.to_string()),
@@ -224,11 +227,14 @@ impl Policy {
     /**
      * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules` endpoint.
      *
-     * As opposed to `list_rules`, this function returns all the pages of the request at once.
+     * As opposed to `list_policy_rules`, this function returns all the pages of the request at once.
      *
      * Enumerates all policy rules.
      */
-    pub async fn list_all_rules(&self, policy_id: &str) -> Result<Vec<crate::types::PolicyRule>> {
+    pub async fn list_all_policy_rules(
+        &self,
+        policy_id: &str,
+    ) -> Result<Vec<crate::types::PolicyRule>> {
         let url = format!(
             "/api/v1/policies/{}/rules",
             crate::progenitor_support::encode_path(&policy_id.to_string()),
@@ -246,7 +252,7 @@ impl Policy {
      *
      * * `policy_id: &str`
      */
-    pub async fn create_rule(
+    pub async fn create_policy_rule(
         &self,
         policy_id: &str,
         body: &crate::types::PolicyRule,
@@ -271,7 +277,7 @@ impl Policy {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn get_rule(
+    pub async fn get_policy_rule(
         &self,
         policy_id: &str,
         rule_id: &str,
@@ -295,7 +301,7 @@ impl Policy {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn update_rule(
+    pub async fn update_policy_rule(
         &self,
         policy_id: &str,
         rule_id: &str,
@@ -322,7 +328,7 @@ impl Policy {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn delete_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
+    pub async fn delete_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}",
             crate::progenitor_support::encode_path(&policy_id.to_string()),
@@ -342,7 +348,7 @@ impl Policy {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn activate_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
+    pub async fn activate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}/lifecycle/activate",
             crate::progenitor_support::encode_path(&policy_id.to_string()),
@@ -362,7 +368,7 @@ impl Policy {
      * * `policy_id: &str`
      * * `rule_id: &str`
      */
-    pub async fn deactivate_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
+    pub async fn deactivate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}/lifecycle/deactivate",
             crate::progenitor_support::encode_path(&policy_id.to_string()),

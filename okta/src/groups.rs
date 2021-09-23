@@ -2,14 +2,14 @@ use anyhow::Result;
 
 use crate::Client;
 
-pub struct Group {
+pub struct Groups {
     pub client: Client,
 }
 
-impl Group {
+impl Groups {
     #[doc(hidden)]
     pub fn new(client: Client) -> Self {
-        Group { client }
+        Groups { client }
     }
 
     /**
@@ -383,7 +383,7 @@ impl Group {
      * * `after: &str` -- Specifies the pagination cursor for the next page of apps.
      * * `limit: i64` -- Specifies the number of app results for a page.
      */
-    pub async fn list_assigned_applications_for(
+    pub async fn list_assigned_applications_fors(
         &self,
         group_id: &str,
         after: &str,
@@ -415,7 +415,7 @@ impl Group {
      *
      * Enumerates all applications that are assigned to a group.
      */
-    pub async fn list_all_assigned_applications_for(
+    pub async fn list_all_assigned_applications_fors(
         &self,
         group_id: &str,
     ) -> Result<Vec<crate::types::Application>> {
@@ -569,7 +569,7 @@ impl Group {
      * * `after: &str`
      * * `limit: i64`
      */
-    pub async fn list_application_targets_for_administrator_role(
+    pub async fn list_application_targets_for_administrator_roles(
         &self,
         group_id: &str,
         role_id: &str,
@@ -601,7 +601,7 @@ impl Group {
      *
      * Lists all App targets for an `APP_ADMIN` Role assigned to a Group. This methods return list may include full Applications or Instances. The response for an instance will have an `ID` value, while Application will not have an ID.
      */
-    pub async fn list_all_application_targets_for_administrator_role(
+    pub async fn list_all_application_targets_for_administrator_roles(
         &self,
         group_id: &str,
         role_id: &str,
@@ -715,7 +715,7 @@ impl Group {
      * * `app_name: &str`
      * * `application_id: &str`
      */
-    pub async fn remove_application_target_from_administrator_role_given_group(
+    pub async fn remove_application_target_from_administrator_role_given_groups(
         &self,
         group_id: &str,
         role_id: &str,
@@ -745,7 +745,7 @@ impl Group {
      * * `after: &str`
      * * `limit: i64`
      */
-    pub async fn list_targets_for_role(
+    pub async fn list_targets_for_roles(
         &self,
         group_id: &str,
         role_id: &str,
@@ -777,7 +777,7 @@ impl Group {
      *
      * Success
      */
-    pub async fn list_all_targets_for_role(
+    pub async fn list_all_targets_for_roles(
         &self,
         group_id: &str,
         role_id: &str,

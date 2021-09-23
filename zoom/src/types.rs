@@ -2542,12 +2542,20 @@ pub struct DateTime {
     /**
      * DateTime Object.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * DateTime Object.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
 }
 
@@ -13166,7 +13174,11 @@ pub struct Messages {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -13273,7 +13285,11 @@ pub struct GetChatMessagesResponse {
     /**
      * Chat message object.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date: Option<chrono::NaiveDate>,
     /**
      * Chat message object.
@@ -13535,7 +13551,11 @@ pub struct GetChatMessageResponse {
     /**
      * A chat message object.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * A chat message object.
@@ -14562,12 +14582,20 @@ pub struct PlanZoomRooms {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub next_invoice_date: Option<chrono::NaiveDate>,
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub service_effective_date: Option<chrono::NaiveDate>,
     /**
      * Status of the plan.
@@ -14601,12 +14629,20 @@ pub struct PlanWebinar {
     /**
      * Account plan object.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub next_invoice_date: Option<chrono::NaiveDate>,
     /**
      * Account plan object.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub service_effective_date: Option<chrono::NaiveDate>,
     /**
      * Account plan object.
@@ -14687,7 +14723,11 @@ pub struct AccountPlansResponsePlanAudio {
     /**
      * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub next_invoice_date: Option<chrono::NaiveDate>,
     /**
      * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
@@ -14701,7 +14741,11 @@ pub struct AccountPlansResponsePlanAudio {
     /**
      * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub service_effective_date: Option<chrono::NaiveDate>,
     /**
      * Additional audio conferencing <a href="https://marketplace.zoom.us/docs/api-reference/other-references/plans#audio-conferencing-plans">plan type.</a>
@@ -14744,12 +14788,20 @@ pub struct AccountPlansResponsePlanPhoneBase {
     /**
      * Additional phone base plans.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub next_invoice_date: Option<chrono::NaiveDate>,
     /**
      * Additional phone base plans.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub service_effective_date: Option<chrono::NaiveDate>,
     /**
      * Additional phone base plans.
@@ -14828,12 +14880,20 @@ pub struct AccountPlansResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub plan_recording_next_invoice_date: Option<chrono::NaiveDate>,
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub plan_recording_service_effective_date: Option<chrono::NaiveDate>,
     /**
      * Status of additional Cloud Recording plan.
@@ -15346,12 +15406,20 @@ pub struct DashboardImResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
 }
 
@@ -15465,7 +15533,11 @@ pub struct ImChatMessagesResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -15479,7 +15551,11 @@ pub struct ImChatMessagesResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
 }
 
@@ -17502,7 +17578,11 @@ pub struct DashboardChatResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -17525,7 +17605,11 @@ pub struct DashboardChatResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
 }
 
@@ -17715,12 +17799,20 @@ pub struct DashboardClientFeedbackResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
     /**
      * Account seats.
@@ -17738,12 +17830,20 @@ pub struct DashboardIssueZoomRoomResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
     /**
      * Account seats.
@@ -17839,7 +17939,11 @@ pub struct Dates {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date: Option<chrono::NaiveDate>,
     /**
      * Account seats.
@@ -18101,7 +18205,11 @@ pub struct ReportMeetingsResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * Array of meeting objects.
@@ -18124,7 +18232,11 @@ pub struct ReportMeetingsResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
 }
 
@@ -24050,7 +24162,11 @@ pub struct CallLogs {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -24310,7 +24426,11 @@ pub struct Recordings {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -24356,7 +24476,11 @@ pub struct PhoneUserRecordingsResponse {
     /**
      * Phone User Recordings
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * Phone User Recordings
@@ -24397,7 +24521,11 @@ pub struct PhoneUserRecordingsResponse {
     /**
      * Phone User Recordings
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
     /**
      * Phone User Recordings
@@ -24540,7 +24668,11 @@ pub struct VoiceMails {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -24582,7 +24714,11 @@ pub struct PhoneUserVoiceMailsResponse {
     /**
      * Phone User Voice Mails
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * Phone User Voice Mails
@@ -24614,7 +24750,11 @@ pub struct PhoneUserVoiceMailsResponse {
     /**
      * Phone User Voice Mails
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
     /**
      * Phone User Voice Mails
@@ -24954,7 +25094,11 @@ pub struct AccountCallLogsResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -29618,7 +29762,11 @@ pub struct ClientSatisfaction {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date: Option<chrono::NaiveDate>,
     /**
      * Account seats.
@@ -29669,12 +29817,20 @@ pub struct ListMeetingSatisfactionResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub from: Option<chrono::NaiveDate>,
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub to: Option<chrono::NaiveDate>,
     /**
      * Account seats.
@@ -32177,7 +32333,11 @@ pub struct BillingReports {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub end_date: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -32191,7 +32351,11 @@ pub struct BillingReports {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -32247,7 +32411,11 @@ pub struct Invoices {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub end_date: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -32279,7 +32447,11 @@ pub struct Invoices {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -32764,7 +32936,11 @@ pub struct GetCallQueueRecordingsResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -33882,7 +34058,11 @@ pub struct ListCallLogsMetricsResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -34240,7 +34420,11 @@ pub struct AccountBillingInvoicesResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub due_date: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -34254,7 +34438,11 @@ pub struct AccountBillingInvoicesResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub invoice_date: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -34277,7 +34465,11 @@ pub struct AccountBillingInvoicesResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub target_date: Option<chrono::NaiveDate>,
     /**
      * The recording file size.
@@ -34350,7 +34542,11 @@ pub struct InvoiceItems {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub end_date: Option<chrono::NaiveDate>,
     /**
      * Account seats.
@@ -34364,7 +34560,11 @@ pub struct InvoiceItems {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub start_date: Option<chrono::NaiveDate>,
     /**
      * The recording file size.
@@ -34409,7 +34609,11 @@ pub struct GetAccountBillingInvoiceResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub due_date: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -34423,7 +34627,11 @@ pub struct GetAccountBillingInvoiceResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub invoice_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
@@ -34452,7 +34660,11 @@ pub struct GetAccountBillingInvoiceResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub target_date: Option<chrono::NaiveDate>,
     /**
      * The recording file size.
@@ -34669,7 +34881,11 @@ pub struct LogDetails {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * User's first name.
@@ -34802,7 +35018,11 @@ pub struct GetCallLogDetailsResponse {
     /**
      * Start Date.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize"
+    )]
     pub date_time: Option<chrono::NaiveDate>,
     /**
      * User's first name.
