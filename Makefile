@@ -447,7 +447,7 @@ $(SHIPBOB_SPEC): $(SHIPBOB_SPEC_DIR)
 
 .PHONY: shipbob
 shipbob: target/debug/generator $(SHIPBOB_SPEC)
-	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.1 \
+	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.2 \
 		-o shipbob \
 		-n shipbob \
 		--proper-name "ShipBob" \
