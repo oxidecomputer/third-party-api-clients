@@ -406,7 +406,7 @@ $(REVAI_SPEC): $(REVAI_SPEC_DIR)
 	curl -sSL $(REVAI_SPEC_REMOTE) -o $@
 
 revai: target/debug/generator $(REVAI_SPEC)
-	./target/debug/generator -i $(REVAI_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(REVAI_SPEC) -v 0.2.2 \
 		-o rev.ai \
 		-n revai \
 		--proper-name "Rev.ai" \
