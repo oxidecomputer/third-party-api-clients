@@ -21108,6 +21108,47 @@
                     },
                     "zipCode": {
                         "type": "string"
+                    },
+                    "githubUsername": {
+                      "type": "string"
+                    },
+                    "matrixUsername": {
+                      "type": "string"
+                    },
+                    "awsRole": {
+                      "type": "string"
+                    },
+                    "startDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "birthday": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "workPostalAddress": {
+                      "type": "string"
+                    },
+                    "workStreetAddress": {
+                      "type": "string"
+                    },
+                    "workCity": {
+                      "type": "string"
+                    },
+                    "workState": {
+                      "type": "string"
+                    },
+                    "workZipCode": {
+                      "type": "string"
+                    },
+                    "workCountryCode": {
+                      "type": "string"
+                    },
+                    "emailAliases": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
                     }
                 },
                 "type": "object",

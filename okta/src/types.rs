@@ -9343,6 +9343,15 @@ pub struct UserProfile {
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "awsRole"
+    )]
+    pub aws_role: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub birthday: Option<chrono::NaiveDate>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub city: String,
@@ -9387,6 +9396,13 @@ pub struct UserProfile {
     pub email: String,
     #[serde(
         default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "emailAliases"
+    )]
+    pub email_aliases: Vec<String>,
+    #[serde(
+        default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize",
         rename = "employeeNumber"
@@ -9399,6 +9415,13 @@ pub struct UserProfile {
         rename = "firstName"
     )]
     pub first_name: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "githubUsername"
+    )]
+    pub github_username: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9445,6 +9468,13 @@ pub struct UserProfile {
         rename = "managerId"
     )]
     pub manager_id: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "matrixUsername"
+    )]
+    pub matrix_username: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9507,6 +9537,8 @@ pub struct UserProfile {
         rename = "secondEmail"
     )]
     pub second_email: String,
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "startDate")]
+    pub start_date: Option<chrono::NaiveDate>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -9539,6 +9571,48 @@ pub struct UserProfile {
         rename = "userType"
     )]
     pub user_type: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workCity"
+    )]
+    pub work_city: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workCountryCode"
+    )]
+    pub work_country_code: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workPostalAddress"
+    )]
+    pub work_postal_address: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workState"
+    )]
+    pub work_state: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workStreetAddress"
+    )]
+    pub work_street_address: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workZipCode"
+    )]
+    pub work_zip_code: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
