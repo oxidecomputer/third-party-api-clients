@@ -365,7 +365,7 @@ $(OKTA_SPEC): $(OKTA_SPEC_DIR)
 		$(OKTA_SPEC_REMOTE)
 
 okta: target/debug/generator $(OKTA_SPEC)
-	./target/debug/generator -i $(OKTA_SPEC) -v 0.2.2 \
+	./target/debug/generator -i $(OKTA_SPEC) -v 0.2.3 \
 		-o okta \
 		-n okta \
 		--proper-name Okta \
