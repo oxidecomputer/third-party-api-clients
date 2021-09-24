@@ -82,8 +82,6 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                         || sn == "PostMailSendRequest"
                         || sn == "FromEmailObject"
                         || sn == "Personalizations"
-                        || sn == "SubmitJobOptionsAllOf"
-                        || sn == "DescriptionlessJobOptionsAllOf"
                         || sn == "DescriptionlessJobOptions"
                         || sn == "DescriptionlessJobOptionsData"
                         || sn == "DescriptionlessJobOptionsDataType"
@@ -483,7 +481,11 @@ fn do_all_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> Str
     description = format!("/// {}", description.replace('\n', "\n/// "));
     a(&description);
 
-    a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
+    if sn == "SubmitJobOptionsAllOf" || sn == "DescriptionlessJobOptionsAllOf" {
+        a("#[derive(Serialize, Deserialize, Default, PartialEq, Debug, Clone, JsonSchema)]");
+    } else {
+        a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]");
+    }
     a(&format!("pub struct {} {{", sn));
     let mut name_map: BTreeMap<String, String> = Default::default();
     // Becasue we have so many defaults set on our serde types these enums

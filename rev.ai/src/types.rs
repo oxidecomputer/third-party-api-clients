@@ -232,7 +232,7 @@ pub struct DescriptionlessJobOptionsDataType {
 /// - `DescriptionlessJobOptions`
 /// - `DescriptionlessJobOptionsData`
 /// - `DescriptionlessJobOptionsDataType`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Default, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DescriptionlessJobOptionsAllOf {
     #[serde(flatten)]
     pub descriptionless_job_options: DescriptionlessJobOptions,
@@ -688,7 +688,7 @@ pub struct SubmitJobOptionsData {
 /// - `DescriptionlessJobOptionsAllOf`
 /// - `SubmitJobOptions`
 /// - `SubmitJobOptionsData`
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, Default, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubmitJobOptionsAllOf {
     #[serde(flatten)]
     pub descriptionless_job_options_all_of: DescriptionlessJobOptionsAllOf,
