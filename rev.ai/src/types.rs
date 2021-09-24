@@ -25,7 +25,7 @@ pub struct Account {
     pub email: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DescriptionlessJobOptions {
     /**
      * Email of developer account
@@ -38,7 +38,7 @@ pub struct DescriptionlessJobOptions {
     pub metadata: String,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DescriptionlessJobOptionsData {
     /**
      * Email of developer account
@@ -165,7 +165,7 @@ impl Default for Language {
     }
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DescriptionlessJobOptionsDataType {
     /**
      * Email of developer account
@@ -600,7 +600,7 @@ pub struct SubmitJobMediaUrlOptionsAllOf {
 }
 
 /// Rev.ai Job Options Object Model
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubmitJobOptions {
     /**
      * Rev.ai Job Options Object Model
@@ -673,7 +673,7 @@ pub struct CustomVocabularies {
     pub phrases: Vec<String>,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubmitJobOptionsData {
     #[serde(
         default,

@@ -82,6 +82,13 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                         || sn == "PostMailSendRequest"
                         || sn == "FromEmailObject"
                         || sn == "Personalizations"
+                        || sn == "SubmitJobOptionsAllOf"
+                        || sn == "DescriptionlessJobOptionsAllOf"
+                        || sn == "DescriptionlessJobOptions"
+                        || sn == "DescriptionlessJobOptionsData"
+                        || sn == "DescriptionlessJobOptionsDataType"
+                        || sn == "SubmitJobOptions"
+                        || sn == "SubmitJobOptionsData"
                     {
                         a(
                             "#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, \
