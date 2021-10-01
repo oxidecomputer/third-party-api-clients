@@ -22,18 +22,18 @@ impl Cards {
      * **Parameters:**
      *
      * * `authorization: &str` -- The OAuth2 token header.
-     * * `start: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `start: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `user_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `card_program_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `user_id: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `card_program_id: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    pub async fn get(
+    pub async fn get_page(
         &self,
-        start: uuid::Uuid,
+        start: Option<uuid::Uuid>,
         page_size: f64,
-        user_id: uuid::Uuid,
-        card_program_id: uuid::Uuid,
-    ) -> Result<crate::types::GetCardsResponse> {
+        user_id: Option<uuid::Uuid>,
+        card_program_id: Option<uuid::Uuid>,
+    ) -> Result<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card_program_id.to_string().is_empty() {
             query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
@@ -50,7 +50,80 @@ impl Cards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.cards)
+    }
+
+    /**
+     * List cards.
+     *
+     * This function performs a `GET` to the `/cards` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Retrieve all cards.
+     */
+    pub async fn get_all(
+        &self,
+        user_id: Option<uuid::Uuid>,
+        card_program_id: Option<uuid::Uuid>,
+    ) -> Result<Vec<crate::types::Card>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !card_program_id.to_string().is_empty() {
+            query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
+        }
+        if !user_id.to_string().is_empty() {
+            query_args.push(("user_id".to_string(), user_id.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/cards?{}", query_);
+
+        let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
+
+        let mut cards = resp.cards;
+        let mut page = if let Some(p) = resp.page.next {
+            p.to_string()
+        } else {
+            "".to_string()
+        };
+
+        // Paginate if we should.
+        while !page.is_empty() {
+            match self
+                .client
+                .get::<crate::types::GetCardsResponse>(
+                    page.trim_start_matches(crate::DEFAULT_HOST),
+                    None,
+                )
+                .await
+            {
+                Ok(mut resp) => {
+                    cards.append(&mut resp.cards);
+
+                    page = if let Some(p) = resp.page.next {
+                        if p.to_string() != page {
+                            p.to_string()
+                        } else {
+                            "".to_string()
+                        }
+                    } else {
+                        "".to_string()
+                    };
+                }
+                Err(e) => {
+                    if e.to_string().contains("404 Not Found") {
+                        page = "".to_string();
+                    } else {
+                        anyhow::bail!(e);
+                    }
+                }
+            }
+        }
+
+        // Return our response data.
+        Ok(cards)
     }
 
     /**
@@ -64,7 +137,7 @@ impl Cards {
      *
      * * `authorization: &str` -- The OAuth2 token header.
      */
-    pub async fn get_cards(&self, id: &str) -> Result<crate::types::Card> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::Card> {
         let url = format!(
             "/cards/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

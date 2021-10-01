@@ -22,8 +22,8 @@ impl Transactions {
      * **Parameters:**
      *
      * * `authorization: &str` -- The OAuth2 token header.
-     * * `department_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `location_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `department_id: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `location_id: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `from_date: chrono::DateTime<chrono::Utc>`
      * * `to_date: chrono::DateTime<chrono::Utc>`
      * * `merchant_id: &str` -- The OAuth2 token header.
@@ -35,14 +35,14 @@ impl Transactions {
      * * `state: &str` -- The OAuth2 token header.
      * * `min_amount: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      * * `max_amount: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `start: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `start: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
      * * `requires_memo: bool` -- Filters for transactions which require a memo, but do not have one. This can only be set to true.
      */
     pub async fn get_page(
         &self,
-        department_id: uuid::Uuid,
-        location_id: uuid::Uuid,
+        department_id: Option<uuid::Uuid>,
+        location_id: Option<uuid::Uuid>,
         from_date: Option<chrono::DateTime<chrono::Utc>>,
         to_date: Option<chrono::DateTime<chrono::Utc>>,
         merchant_id: &str,
@@ -54,7 +54,7 @@ impl Transactions {
         state: &str,
         min_amount: f64,
         max_amount: f64,
-        start: uuid::Uuid,
+        start: Option<uuid::Uuid>,
         page_size: f64,
         requires_memo: bool,
     ) -> Result<Vec<crate::types::Data>> {
@@ -139,8 +139,8 @@ impl Transactions {
      */
     pub async fn get_all(
         &self,
-        department_id: uuid::Uuid,
-        location_id: uuid::Uuid,
+        department_id: Option<uuid::Uuid>,
+        location_id: Option<uuid::Uuid>,
         from_date: Option<chrono::DateTime<chrono::Utc>>,
         to_date: Option<chrono::DateTime<chrono::Utc>>,
         merchant_id: &str,
