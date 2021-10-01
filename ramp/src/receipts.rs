@@ -116,7 +116,7 @@ impl Receipts {
                 )
                 .await
             {
-                Ok(resp) => {
+                Ok(mut resp) => {
                     data.append(&mut resp.data);
 
                     page = if let Some(p) = resp.page.next {

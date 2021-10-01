@@ -836,7 +836,7 @@ fn get_fn_inner(
             // Paginate if we should.
             while !page.is_empty() {{
                 match self.client.{}::<{}>(page.trim_start_matches(crate::DEFAULT_HOST), {}).await {{
-                    Ok(resp) => {{
+                    Ok(mut resp) => {{
                         {}.append(&mut resp.{});
 
                         page = if let Some(p) = resp.page.next {{
