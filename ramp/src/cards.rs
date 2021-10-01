@@ -35,16 +35,16 @@ impl Cards {
         card_program_id: uuid::Uuid,
     ) -> Result<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !card_program_id.to_string().is_empty() {
+        if card_program_id.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
         }
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        if !start.to_string().is_empty() {
+        if start.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("start".to_string(), start.to_string()));
         }
-        if !user_id.to_string().is_empty() {
+        if user_id.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("user_id".to_string(), user_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
@@ -71,10 +71,10 @@ impl Cards {
         card_program_id: uuid::Uuid,
     ) -> Result<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !card_program_id.to_string().is_empty() {
+        if card_program_id.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
         }
-        if !user_id.to_string().is_empty() {
+        if user_id.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("user_id".to_string(), user_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();

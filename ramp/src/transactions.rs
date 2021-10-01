@@ -59,13 +59,13 @@ impl Transactions {
         requires_memo: bool,
     ) -> Result<Vec<crate::types::Data>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !department_id.to_string().is_empty() {
+        if department_id.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
         }
         if let Some(date) = from_date {
             query_args.push(("from_date".to_string(), date.to_rfc3339()));
         }
-        if !location_id.to_string().is_empty() {
+        if location_id.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         if !max_amount.to_string().is_empty() {
@@ -110,7 +110,7 @@ impl Transactions {
         if !sk_category_id.is_empty() {
             query_args.push(("sk_category_id".to_string(), sk_category_id.to_string()));
         }
-        if !start.to_string().is_empty() {
+        if start.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("start".to_string(), start.to_string()));
         }
         if !state.is_empty() {
@@ -155,13 +155,13 @@ impl Transactions {
         requires_memo: bool,
     ) -> Result<Vec<crate::types::Data>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !department_id.to_string().is_empty() {
+        if department_id.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
         }
         if let Some(date) = from_date {
             query_args.push(("from_date".to_string(), date.to_rfc3339()));
         }
-        if !location_id.to_string().is_empty() {
+        if location_id.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         if !max_amount.to_string().is_empty() {

@@ -312,7 +312,7 @@ impl MarketingCampaignsStats {
         if !ab_phase_id.to_string().is_empty() {
             query_args.push(("ab_phase_id".to_string(), ab_phase_id.to_string()));
         }
-        if !ab_variation_id.to_string().is_empty() {
+        if ab_variation_id.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("ab_variation_id".to_string(), ab_variation_id.to_string()));
         }
         if !group_by.is_empty() {

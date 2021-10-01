@@ -34,7 +34,7 @@ impl CardPrograms {
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        if !start.to_string().is_empty() {
+        if start.to_string() != uuid::Uuid::nil().to_string() {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();

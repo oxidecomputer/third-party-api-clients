@@ -38,6 +38,11 @@ impl Template {
                         r#"if let Some(u) = {} {{ query_args.push(("{}".to_string(), u.to_string())); }}"#,
                         nam, prop
                     ));
+                } else if value == "uuid::Uuid" {
+                    a(&format!(
+                        r#"if {}.to_string() != uuid::Uuid::nil().to_string() {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
+                        nam, prop, nam
+                    ));
                 } else if value == "i64" || value == "i32" {
                     a(&format!(
                         r#"if {} > 0 {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
