@@ -76,29 +76,29 @@ impl Users {
      * **Parameters:**
      *
      * * `authorization: &str` -- The OAuth2 token header.
-     * * `start: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `department_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `location_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `department_id: &str` -- The OAuth2 token header.
+     * * `location_id: &str` -- The OAuth2 token header.
      */
     pub async fn get_page(
         &self,
-        start: uuid::Uuid,
+        start: &str,
         page_size: f64,
-        department_id: uuid::Uuid,
-        location_id: uuid::Uuid,
+        department_id: &str,
+        location_id: &str,
     ) -> Result<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if department_id.to_string() != uuid::Uuid::nil().to_string() {
+        if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
         }
-        if location_id.to_string() != uuid::Uuid::nil().to_string() {
+        if !location_id.is_empty() {
             query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        if start.to_string() != uuid::Uuid::nil().to_string() {
+        if !start.is_empty() {
             query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
@@ -121,14 +121,14 @@ impl Users {
      */
     pub async fn get_all(
         &self,
-        department_id: uuid::Uuid,
-        location_id: uuid::Uuid,
+        department_id: &str,
+        location_id: &str,
     ) -> Result<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if department_id.to_string() != uuid::Uuid::nil().to_string() {
+        if !department_id.is_empty() {
             query_args.push(("department_id".to_string(), department_id.to_string()));
         }
-        if location_id.to_string() != uuid::Uuid::nil().to_string() {
+        if !location_id.is_empty() {
             query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
