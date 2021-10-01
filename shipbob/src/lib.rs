@@ -27,7 +27,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! shipbob = "0.1.1"
+//! shipbob = "0.1.2"
 //! ```
 //!
 //! ## Basic example

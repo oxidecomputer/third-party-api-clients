@@ -835,19 +835,28 @@ fn get_fn_inner(
 
             // Paginate if we should.
             while !page.is_empty() {{
-                resp = self.client.{}(page.trim_start_matches(crate::DEFAULT_HOST), {}).await?;
+                match self.client.{}::<{}>(page.trim_start_matches(crate::DEFAULT_HOST), {}).await {{
+                    Ok(resp) => {{
+                        {}.append(&mut resp.{});
 
-                {}.append(&mut resp.{});
-
-                page = if let Some(p) = resp.page.next {{
-                    if p.to_string() != page {{
-                        p.to_string()
-                    }} else {{
-                        "".to_string()
+                        page = if let Some(p) = resp.page.next {{
+                            if p.to_string() != page {{
+                                p.to_string()
+                            }} else {{
+                            "".to_string()
+                            }}
+                        }} else {{
+                            "".to_string()
+                        }};
+                    }},
+                    Err(e) => {{
+                        if e.to_string().contains("404 Not Found") {{
+                            page = "".to_string();
+                        }} else {{
+                            bail!(e);
+                        }}
                     }}
-                }} else {{
-                    "".to_string()
-                }};
+                }}
             }}
 
             // Return our response data.
@@ -858,6 +867,7 @@ fn get_fn_inner(
             pagination_property,
             pagination_property,
             m.to_lowercase(),
+            response_type,
             body,
             pagination_property,
             pagination_property,

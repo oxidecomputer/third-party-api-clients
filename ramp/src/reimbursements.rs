@@ -63,22 +63,35 @@ impl Reimbursements {
 
         // Paginate if we should.
         while !page.is_empty() {
-            resp = self
+            match self
                 .client
-                .get(page.trim_start_matches(crate::DEFAULT_HOST), None)
-                .await?;
+                .get::<crate::types::GetReimbursementsResponse>(
+                    page.trim_start_matches(crate::DEFAULT_HOST),
+                    None,
+                )
+                .await
+            {
+                Ok(resp) => {
+                    data.append(&mut resp.data);
 
-            data.append(&mut resp.data);
-
-            page = if let Some(p) = resp.page.next {
-                if p.to_string() != page {
-                    p.to_string()
-                } else {
-                    "".to_string()
+                    page = if let Some(p) = resp.page.next {
+                        if p.to_string() != page {
+                            p.to_string()
+                        } else {
+                            "".to_string()
+                        }
+                    } else {
+                        "".to_string()
+                    };
                 }
-            } else {
-                "".to_string()
-            };
+                Err(e) => {
+                    if e.to_string().contains("404 Not Found") {
+                        page = "".to_string();
+                    } else {
+                        bail!(e);
+                    }
+                }
+            }
         }
 
         // Return our response data.

@@ -225,7 +225,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-revai = "0.2.2"
+revai = "0.2.3"
 ```
 
 ## Basic example
