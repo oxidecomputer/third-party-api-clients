@@ -52,7 +52,7 @@ impl Reimbursements {
      */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Reimbursement>> {
         let url = "/reimbursements".to_string();
-        let mut resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
         let mut page = if let Some(p) = resp.page.next {

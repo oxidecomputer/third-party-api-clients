@@ -824,7 +824,7 @@ fn get_fn_inner(
     } else if all_pages && proper_name == "Ramp" {
         // We will do a custom function here.
         let inner = format!(
-            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+            r#"let resp: {} = self.client.{}(&url, {}).await?;
 
             let mut {} = resp.{};
             let mut page = if let Some(p) = resp.page.next {{

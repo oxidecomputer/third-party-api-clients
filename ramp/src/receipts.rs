@@ -97,7 +97,7 @@ impl Receipts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/receipts?{}", query_);
 
-        let mut resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await?;
+        let resp: crate::types::GetReceiptsResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
         let mut page = if let Some(p) = resp.page.next {

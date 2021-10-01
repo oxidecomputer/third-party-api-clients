@@ -24,3 +24,4 @@ A place for keeping all our generated third party API clients.
 - [TripActions](tripactions/) [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)
 - [Zoom](zoom/) [![docs.rs](https://docs.rs/zoom-api/badge.svg)](https://docs.rs/zoom-api)
 - [Ramp](ramp/) [![docs.rs](https://docs.rs/ramp-api/badge.svg)](https://docs.rs/ramp-api)
+- [Ramp](ramp/) [![docs.rs](https://docs.rs/ramp-api/badge.svg)](https://docs.rs/ramp-api)
