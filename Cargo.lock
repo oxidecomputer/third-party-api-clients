@@ -1277,7 +1277,7 @@ dependencies = [
 
 [[package]]
 name = "ramp-api"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "anyhow",
  "async-recursion",
