@@ -11061,7 +11061,7 @@ pub struct WorkspaceItems {
     /**
      * This object contains information about a file or folder in a workspace.
      */
-    #[serde()]
+    #[serde(default)]
     pub thumbnail: Page,
     /**
      * This object contains information about a file or folder in a workspace.
@@ -96205,7 +96205,7 @@ pub struct WorkspaceItem {
     /**
      * This object represents an item in a workspace, which can be either a file or folder.
      */
-    #[serde()]
+    #[serde(default)]
     pub thumbnail: Page,
     /**
      * This object represents an item in a workspace, which can be either a file or folder.

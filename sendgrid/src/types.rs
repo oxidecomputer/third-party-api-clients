@@ -3437,10 +3437,10 @@ pub struct Metadata {
     pub count: f64,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub next: Option<url::Url>,
+    pub next: String,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -4084,10 +4084,10 @@ pub struct MetadataType {
     pub count: i64,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub next: Option<url::Url>,
+    pub next: String,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -5129,10 +5129,10 @@ pub struct LinkTrackingMetadata {
     pub count: f64,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub next: Option<url::Url>,
+    pub next: String,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",

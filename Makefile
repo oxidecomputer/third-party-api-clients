@@ -387,7 +387,7 @@ $(RAMP_SPEC):
 		-o $@ $?
 
 ramp: target/debug/generator $(RAMP_SPEC)
-	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.5 \
+	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.6 \
 		-o ramp \
 		-n ramp-api \
 		--proper-name Ramp \

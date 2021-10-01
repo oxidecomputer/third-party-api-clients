@@ -276,7 +276,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                         "uri-template" => "&str".to_string(),
                                         "url" => "&url::Url".to_string(),
                                         "email" => "&str".to_string(),
-                                        "uuid" => "Option<uuid::Uuid>".to_string(),
+                                        "uuid" => "uuid::Uuid".to_string(),
                                         "hostname" => "&str".to_string(),
                                         "time" => "chrono::NaiveTime".to_string(),
                                         f => {

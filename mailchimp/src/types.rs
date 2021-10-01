@@ -21025,7 +21025,7 @@ pub struct TrackingSettings {
 }
 
 /// A summary of an individual landing page's settings and content.
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct LandingPage {
     /**
      * A summary of an individual landing page's settings and content.

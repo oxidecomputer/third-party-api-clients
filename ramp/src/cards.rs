@@ -22,30 +22,30 @@ impl Cards {
      * **Parameters:**
      *
      * * `authorization: &str` -- The OAuth2 token header.
-     * * `start: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `start: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `user_id: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `card_program_id: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `user_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `card_program_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      */
     pub async fn get_page(
         &self,
-        start: Option<uuid::Uuid>,
+        start: uuid::Uuid,
         page_size: f64,
-        user_id: Option<uuid::Uuid>,
-        card_program_id: Option<uuid::Uuid>,
+        user_id: uuid::Uuid,
+        card_program_id: uuid::Uuid,
     ) -> Result<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if let Some(u) = card_program_id {
-            query_args.push(("card_program_id".to_string(), u.to_string()));
+        if !card_program_id.to_string().is_empty() {
+            query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
         }
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        if let Some(u) = start {
-            query_args.push(("start".to_string(), u.to_string()));
+        if !start.to_string().is_empty() {
+            query_args.push(("start".to_string(), start.to_string()));
         }
-        if let Some(u) = user_id {
-            query_args.push(("user_id".to_string(), u.to_string()));
+        if !user_id.to_string().is_empty() {
+            query_args.push(("user_id".to_string(), user_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
@@ -67,15 +67,15 @@ impl Cards {
      */
     pub async fn get_all(
         &self,
-        user_id: Option<uuid::Uuid>,
-        card_program_id: Option<uuid::Uuid>,
+        user_id: uuid::Uuid,
+        card_program_id: uuid::Uuid,
     ) -> Result<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if let Some(u) = card_program_id {
-            query_args.push(("card_program_id".to_string(), u.to_string()));
+        if !card_program_id.to_string().is_empty() {
+            query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
         }
-        if let Some(u) = user_id {
-            query_args.push(("user_id".to_string(), u.to_string()));
+        if !user_id.to_string().is_empty() {
+            query_args.push(("user_id".to_string(), user_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);

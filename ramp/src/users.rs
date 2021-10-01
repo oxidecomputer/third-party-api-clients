@@ -76,30 +76,30 @@ impl Users {
      * **Parameters:**
      *
      * * `authorization: &str` -- The OAuth2 token header.
-     * * `start: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `start: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     * * `department_id: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `location_id: Option<uuid::Uuid>` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `department_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `location_id: uuid::Uuid` -- The ID of the last entity of the previous page, used for pagination to get the next page.
      */
     pub async fn get_page(
         &self,
-        start: Option<uuid::Uuid>,
+        start: uuid::Uuid,
         page_size: f64,
-        department_id: Option<uuid::Uuid>,
-        location_id: Option<uuid::Uuid>,
+        department_id: uuid::Uuid,
+        location_id: uuid::Uuid,
     ) -> Result<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if let Some(u) = department_id {
-            query_args.push(("department_id".to_string(), u.to_string()));
+        if !department_id.to_string().is_empty() {
+            query_args.push(("department_id".to_string(), department_id.to_string()));
         }
-        if let Some(u) = location_id {
-            query_args.push(("location_id".to_string(), u.to_string()));
+        if !location_id.to_string().is_empty() {
+            query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        if let Some(u) = start {
-            query_args.push(("start".to_string(), u.to_string()));
+        if !start.to_string().is_empty() {
+            query_args.push(("start".to_string(), start.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
@@ -121,15 +121,15 @@ impl Users {
      */
     pub async fn get_all(
         &self,
-        department_id: Option<uuid::Uuid>,
-        location_id: Option<uuid::Uuid>,
+        department_id: uuid::Uuid,
+        location_id: uuid::Uuid,
     ) -> Result<Vec<crate::types::User>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if let Some(u) = department_id {
-            query_args.push(("department_id".to_string(), u.to_string()));
+        if !department_id.to_string().is_empty() {
+            query_args.push(("department_id".to_string(), department_id.to_string()));
         }
-        if let Some(u) = location_id {
-            query_args.push(("location_id".to_string(), u.to_string()));
+        if !location_id.to_string().is_empty() {
+            query_args.push(("location_id".to_string(), location_id.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/users?{}", query_);
