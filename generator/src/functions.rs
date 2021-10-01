@@ -853,7 +853,7 @@ fn get_fn_inner(
                         if e.to_string().contains("404 Not Found") {{
                             page = "".to_string();
                         }} else {{
-                            bail!(e);
+                            anyhow::bail!(e);
                         }}
                     }}
                 }}
