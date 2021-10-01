@@ -66,6 +66,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                     // TODO: just make everything a default,
                     // this is gated by the oneof types cooperating.
                     if sn == "Page"
+                        || sn.ends_with("Page")
                         || sn == "PagesSourceHash"
                         || sn == "PagesHttpsCertificate"
                         || sn == "ErrorDetails"
@@ -102,6 +103,9 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                     for (name, tid) in omap.iter() {
                         if let Ok(mut rt) = ts.render_type(tid, true) {
                             let mut prop = name.trim().to_string();
+                            if prop == "next" {
+                                rt = "String".to_string();
+                            }
                             if prop == "ref"
                                 || prop == "type"
                                 || prop == "self"
@@ -246,7 +250,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                             // Close the serde string.
                             if *name != prop {
                                 a(&format!(r#"rename = "{}")]"#, name));
-                            } else if rt == "Page" && prop == "page" {
+                            } else if rt == "Page" && prop == "page" || rt.ends_with("Page") {
                                 a(r#"default)]"#);
                             } else {
                                 a(r#")]"#);

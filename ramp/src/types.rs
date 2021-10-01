@@ -198,10 +198,10 @@ pub struct PatchUsersRequest {
 pub struct Page {
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub next: Option<url::Url>,
+    pub next: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -534,7 +534,7 @@ pub struct GetTransactionResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetLocationResponsePage {
     /**
      * The OAuth2 token header
@@ -574,8 +574,8 @@ pub struct GetLocationResponse {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub data: Vec<Location>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub page: Option<GetLocationResponsePage>,
+    #[serde(default)]
+    pub page: GetLocationResponsePage,
 }
 
 ///
@@ -632,17 +632,21 @@ pub struct GetDepartmentsResponse {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub data: Vec<Department>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub page: Option<GetLocationResponsePage>,
+    #[serde(default)]
+    pub page: GetLocationResponsePage,
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GetCardsResponsePage {
     /**
      * The ID of the last entity of the previous page, used for pagination to get the next page.
      */
-    #[serde()]
-    pub next: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub next: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -909,8 +913,8 @@ pub struct GetCardsResponse {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
     pub cards: Vec<Card>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub page: Option<GetCardsResponsePage>,
+    #[serde(default)]
+    pub page: GetCardsResponsePage,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1583,8 +1587,8 @@ pub struct GetCardProgramsResponse {
         rename = "card-programs"
     )]
     pub card_programs: Vec<CardProgram>,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub page: Option<GetCardsResponsePage>,
+    #[serde(default)]
+    pub page: GetCardsResponsePage,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]

@@ -473,7 +473,7 @@ fn get_response_type_from_object(
         // struct, so we want to ignore them and just get the data.
         if let Some(pid) = p.get("page") {
             let rt = ts.render_type(pid, false)?;
-            if rt == "crate::types::Page" || rt.ends_with("Page") || rt.ends_with("Page>") {
+            if rt == "crate::types::Page" || rt.ends_with("Page") {
                 if let Some(did) = p.get("data") {
                     let rt = ts.render_type(did, false)?;
                     return Ok((og_rt, did.clone(), rt, "data".to_string()));
@@ -827,11 +827,7 @@ fn get_fn_inner(
             r#"let resp: {} = self.client.{}(&url, {}).await?;
 
             let mut {} = resp.{};
-            let mut page = if let Some(p) = resp.page.next {{
-                p.to_string()
-            }} else {{
-                "".to_string()
-            }};
+            let mut page = resp.page.next.to_string();
 
             // Paginate if we should.
             while !page.is_empty() {{
@@ -839,14 +835,10 @@ fn get_fn_inner(
                     Ok(mut resp) => {{
                         {}.append(&mut resp.{});
 
-                        page = if let Some(p) = resp.page.next {{
-                            if p.to_string() != page {{
-                                p.to_string()
-                            }} else {{
-                            "".to_string()
-                            }}
+                        page = if resp.page.next != page {{
+                            resp.page.next.to_string()
                         }} else {{
-                            "".to_string()
+                        "".to_string()
                         }};
                     }},
                     Err(e) => {{

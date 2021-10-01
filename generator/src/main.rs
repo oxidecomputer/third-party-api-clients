@@ -973,6 +973,7 @@ impl TypeSpace {
                         || rt.starts_with("Option<")
                         // This is for ramp, let's hope it doesn't break anything in the future.
                         || rt == "Page"
+                        || rt.ends_with("Page")
                         || rt == "crate::types::Page"
                     {
                         Ok(rt)

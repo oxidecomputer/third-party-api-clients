@@ -34,8 +34,8 @@ impl Locations {
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        if !start.to_string().is_empty() {
-            query_args.push(("start".to_string(), start.to_string()));
+        if let Some(u) = start {
+            query_args.push(("start".to_string(), u.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/locations?{}", query_);
@@ -60,11 +60,7 @@ impl Locations {
         let resp: crate::types::GetLocationResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
-        let mut page = if let Some(p) = resp.page.next {
-            p.to_string()
-        } else {
-            "".to_string()
-        };
+        let mut page = resp.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -79,12 +75,8 @@ impl Locations {
                 Ok(mut resp) => {
                     data.append(&mut resp.data);
 
-                    page = if let Some(p) = resp.page.next {
-                        if p.to_string() != page {
-                            p.to_string()
-                        } else {
-                            "".to_string()
-                        }
+                    page = if resp.page.next != page {
+                        resp.page.next.to_string()
                     } else {
                         "".to_string()
                     };

@@ -59,14 +59,14 @@ impl Transactions {
         requires_memo: bool,
     ) -> Result<Vec<crate::types::Data>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !department_id.to_string().is_empty() {
-            query_args.push(("department_id".to_string(), department_id.to_string()));
+        if let Some(u) = department_id {
+            query_args.push(("department_id".to_string(), u.to_string()));
         }
         if let Some(date) = from_date {
             query_args.push(("from_date".to_string(), date.to_rfc3339()));
         }
-        if !location_id.to_string().is_empty() {
-            query_args.push(("location_id".to_string(), location_id.to_string()));
+        if let Some(u) = location_id {
+            query_args.push(("location_id".to_string(), u.to_string()));
         }
         if !max_amount.to_string().is_empty() {
             query_args.push(("max_amount".to_string(), max_amount.to_string()));
@@ -110,8 +110,8 @@ impl Transactions {
         if !sk_category_id.is_empty() {
             query_args.push(("sk_category_id".to_string(), sk_category_id.to_string()));
         }
-        if !start.to_string().is_empty() {
-            query_args.push(("start".to_string(), start.to_string()));
+        if let Some(u) = start {
+            query_args.push(("start".to_string(), u.to_string()));
         }
         if !state.is_empty() {
             query_args.push(("state".to_string(), state.to_string()));
@@ -155,14 +155,14 @@ impl Transactions {
         requires_memo: bool,
     ) -> Result<Vec<crate::types::Data>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !department_id.to_string().is_empty() {
-            query_args.push(("department_id".to_string(), department_id.to_string()));
+        if let Some(u) = department_id {
+            query_args.push(("department_id".to_string(), u.to_string()));
         }
         if let Some(date) = from_date {
             query_args.push(("from_date".to_string(), date.to_rfc3339()));
         }
-        if !location_id.to_string().is_empty() {
-            query_args.push(("location_id".to_string(), location_id.to_string()));
+        if let Some(u) = location_id {
+            query_args.push(("location_id".to_string(), u.to_string()));
         }
         if !max_amount.to_string().is_empty() {
             query_args.push(("max_amount".to_string(), max_amount.to_string()));
@@ -215,11 +215,7 @@ impl Transactions {
         let resp: crate::types::GetTransactionResponse = self.client.get(&url, None).await?;
 
         let mut data = resp.data;
-        let mut page = if let Some(p) = resp.page.next {
-            p.to_string()
-        } else {
-            "".to_string()
-        };
+        let mut page = resp.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -234,12 +230,8 @@ impl Transactions {
                 Ok(mut resp) => {
                     data.append(&mut resp.data);
 
-                    page = if let Some(p) = resp.page.next {
-                        if p.to_string() != page {
-                            p.to_string()
-                        } else {
-                            "".to_string()
-                        }
+                    page = if resp.page.next != page {
+                        resp.page.next.to_string()
                     } else {
                         "".to_string()
                     };

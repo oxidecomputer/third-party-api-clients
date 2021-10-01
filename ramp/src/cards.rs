@@ -35,17 +35,17 @@ impl Cards {
         card_program_id: Option<uuid::Uuid>,
     ) -> Result<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !card_program_id.to_string().is_empty() {
-            query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
+        if let Some(u) = card_program_id {
+            query_args.push(("card_program_id".to_string(), u.to_string()));
         }
         if !page_size.to_string().is_empty() {
             query_args.push(("page_size".to_string(), page_size.to_string()));
         }
-        if !start.to_string().is_empty() {
-            query_args.push(("start".to_string(), start.to_string()));
+        if let Some(u) = start {
+            query_args.push(("start".to_string(), u.to_string()));
         }
-        if !user_id.to_string().is_empty() {
-            query_args.push(("user_id".to_string(), user_id.to_string()));
+        if let Some(u) = user_id {
+            query_args.push(("user_id".to_string(), u.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
@@ -71,11 +71,11 @@ impl Cards {
         card_program_id: Option<uuid::Uuid>,
     ) -> Result<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
-        if !card_program_id.to_string().is_empty() {
-            query_args.push(("card_program_id".to_string(), card_program_id.to_string()));
+        if let Some(u) = card_program_id {
+            query_args.push(("card_program_id".to_string(), u.to_string()));
         }
-        if !user_id.to_string().is_empty() {
-            query_args.push(("user_id".to_string(), user_id.to_string()));
+        if let Some(u) = user_id {
+            query_args.push(("user_id".to_string(), u.to_string()));
         }
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/cards?{}", query_);
@@ -83,11 +83,7 @@ impl Cards {
         let resp: crate::types::GetCardsResponse = self.client.get(&url, None).await?;
 
         let mut cards = resp.cards;
-        let mut page = if let Some(p) = resp.page.next {
-            p.to_string()
-        } else {
-            "".to_string()
-        };
+        let mut page = resp.page.next.to_string();
 
         // Paginate if we should.
         while !page.is_empty() {
@@ -102,12 +98,8 @@ impl Cards {
                 Ok(mut resp) => {
                     cards.append(&mut resp.cards);
 
-                    page = if let Some(p) = resp.page.next {
-                        if p.to_string() != page {
-                            p.to_string()
-                        } else {
-                            "".to_string()
-                        }
+                    page = if resp.page.next != page {
+                        resp.page.next.to_string()
                     } else {
                         "".to_string()
                     };

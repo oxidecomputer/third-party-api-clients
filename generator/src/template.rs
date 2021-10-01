@@ -33,6 +33,11 @@ impl Template {
                         r#"if let Some(date) = {} {{ query_args.push(("{}".to_string(), date.to_rfc3339())); }}"#,
                         nam, prop
                     ));
+                } else if value == "Option<uuid::Uuid>" {
+                    a(&format!(
+                        r#"if let Some(u) = {} {{ query_args.push(("{}".to_string(), u.to_string())); }}"#,
+                        nam, prop
+                    ));
                 } else if value == "i64" || value == "i32" {
                     a(&format!(
                         r#"if {} > 0 {{ query_args.push(("{}".to_string(), {}.to_string())); }}"#,
