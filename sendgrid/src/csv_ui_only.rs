@@ -57,7 +57,7 @@ impl CsvUiOnly {
      */
     pub async fn get_messages_download(
         &self,
-        download_uuid: uuid::Uuid,
+        download_uuid: &str,
     ) -> Result<crate::types::GetMessagesDownloadResponse> {
         let url = format!(
             "/messages/download/{}",

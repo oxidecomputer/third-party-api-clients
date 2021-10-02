@@ -263,7 +263,7 @@ impl ImChat {
         &self,
         chat_user: &str,
         body: &crate::types::SendimmessagesRequest,
-    ) -> Result<crate::types::SendimmessagesResponse> {
+    ) -> Result<crate::types::Groups> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !chat_user.is_empty() {
             query_args.push(("chat_user".to_string(), chat_user.to_string()));

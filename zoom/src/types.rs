@@ -4180,8 +4180,12 @@ pub struct MeetingMetric {
     /**
      * Meeting metric details.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uuid: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub uuid: String,
 }
 
 /// Meeting invitation details.
@@ -8169,8 +8173,12 @@ pub struct Webinars {
     /**
      * Webinar metric details.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uuid: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub uuid: String,
 }
 
 /// Webinar panelist.
@@ -10198,8 +10206,12 @@ pub struct ParticipantQos {
     /**
      * Participant QOS.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub user_id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub user_id: String,
     /**
      * Participant QOS.
      */
@@ -10846,8 +10858,12 @@ pub struct Metrics {
     /**
      * Meeting metric details.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uuid: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub uuid: String,
 }
 
 /**
@@ -16052,19 +16068,27 @@ pub struct PastMeetingDetailsResponse {
     )]
     pub user_name: String,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uuid: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub uuid: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Participants {
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * User's first name.
      */
@@ -16709,10 +16733,14 @@ pub struct DashboardMeetingParticipantsResponse {
     )]
     pub harddisk_id: String,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * Account seats.
      */
@@ -17166,10 +17194,14 @@ pub struct DashboardWebinarParticipantsResponse {
     )]
     pub harddisk_id: String,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * User's first name.
      */
@@ -18194,10 +18226,14 @@ pub struct Meetings {
     )]
     pub user_name: String,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uuid: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub uuid: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -18376,10 +18412,14 @@ pub struct ReportMeetingDetailsResponse {
     )]
     pub user_name: String,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uuid: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub uuid: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -18411,10 +18451,14 @@ pub struct ReportMeetingParticipantsResponse {
     )]
     pub failover: bool,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * Account subscription start date and time.
      */
@@ -18602,10 +18646,14 @@ pub struct ReportMeetingPollsResponse {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uuid: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub uuid: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -18637,10 +18685,14 @@ pub struct ReportWebinarParticipantsResponse {
     )]
     pub failover: bool,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * Account subscription start date and time.
      */
@@ -18801,10 +18853,14 @@ pub struct ReportWebinarQaResponse {
     )]
     pub start_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uuid: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub uuid: String,
 }
 
 /**
@@ -20728,37 +20784,6 @@ pub struct ListWebinarParticipantsResponse {
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub id: String,
-    /**
-     * User's first name.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub name: String,
-    /**
-     * User's first name.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub user_email: String,
-}
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ListWebinarParticipantsResponseData {
-    /**
-     * User's first name.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
     pub next_page_token: String,
     /**
      * Account seats.
@@ -20778,12 +20803,15 @@ pub struct ListWebinarParticipantsResponseData {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub page_size: i64,
+    /**
+     * Array of meeting participant objects.
+     */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub participants: Vec<ListWebinarParticipantsResponse>,
+    pub participants: Vec<Participants>,
     /**
      * Account seats.
      */
@@ -21325,10 +21353,14 @@ pub struct ListimmessagesResponseMessages {
     )]
     pub date_time: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     * User's first name.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * User's first name.
      */
@@ -21409,15 +21441,6 @@ pub struct SendimmessagesRequest {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub message: String,
-}
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SendimmessagesResponse {
-    /**
-     * Meeting UUID. Please double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
-     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<uuid::Uuid>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -29628,46 +29651,6 @@ pub struct AssignSipTrunkNumbersRequest {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ListPastMeetingPollsResponse {
-    /**
-     * Account seats.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub id: i64,
-    /**
-     * Array of meeting question objects.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub questions: Vec<ReportMeetingPollsResponseQuestions>,
-    /**
-     * Account subscription start date and time.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
-    )]
-    pub start_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * User's first name.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub uuid: String,
-}
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct InMeetingFiles {
     /**
      * User's first name.
@@ -29715,46 +29698,6 @@ pub struct ListPastMeetingFilesResponse {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub total_records: i64,
-}
-
-#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ListPastWebinarQaResponse {
-    /**
-     * Account seats.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "crate::utils::zero_i64",
-        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
-    )]
-    pub id: i64,
-    /**
-     * Array of webinar question objects.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub questions: Vec<ReportWebinarQaResponseQuestions>,
-    /**
-     * Account subscription start date and time.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::date_time_format::deserialize"
-    )]
-    pub start_time: Option<chrono::DateTime<chrono::Utc>>,
-    /**
-     * User's first name.
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub uuid: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]

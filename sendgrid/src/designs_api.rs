@@ -23,7 +23,7 @@ impl DesignsApi {
      *
      * This endpoint is valuable when retrieving information stored in a field that you wish to update using a PATCH request.
      */
-    pub async fn get_design(&self, id: uuid::Uuid) -> Result<crate::types::DesignOutputAllOf> {
+    pub async fn get_design(&self, id: &str) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
             "/designs/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -48,7 +48,7 @@ impl DesignsApi {
      */
     pub async fn post_duplicate_design(
         &self,
-        id: uuid::Uuid,
+        id: &str,
         body: &crate::types::DesignDuplicateInput,
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
@@ -70,7 +70,7 @@ impl DesignsApi {
      *
      * Be sure to check the ID of the design you intend to delete before making this request; deleting a design is a permanent action.
      */
-    pub async fn delete_design(&self, id: uuid::Uuid) -> Result<crate::types::Help> {
+    pub async fn delete_design(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/designs/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -98,7 +98,7 @@ impl DesignsApi {
      */
     pub async fn put_design(
         &self,
-        id: uuid::Uuid,
+        id: &str,
         body: &crate::types::PutDesignRequest,
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
@@ -186,7 +186,7 @@ impl DesignsApi {
      */
     pub async fn get_sendgrid_pre_built_design(
         &self,
-        id: uuid::Uuid,
+        id: &str,
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
             "/designs/pre-builts/{}",
@@ -210,7 +210,7 @@ impl DesignsApi {
      */
     pub async fn post_sendgrid_pre_built_design(
         &self,
-        id: uuid::Uuid,
+        id: &str,
         body: &crate::types::DesignDuplicateInput,
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(

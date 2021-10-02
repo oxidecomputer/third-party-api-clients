@@ -67,7 +67,7 @@ impl MarketingCampaignsStats {
      * **Parameters:**
      *
      * * `group_by: &[String]` -- Automations can have multiple steps. Including `step_id` as a `group_by` metric allows further granularity of stats.
-     * * `step_ids: &[String]` -- Comma-separated list of `step_ids` that you want the link stats for.
+     * * `step_ids: &[String]` -- The recipient IDs of the recipients that already existed from this request.
      * * `aggregated_by: crate::types::AggregatedBy` -- Dictates how the stats are time-sliced. Currently, `"total"` and `"day"` are supported.
      * * `start_date: chrono::NaiveDate` -- Format: `YYYY-MM-DD`. If this parameter is included, the stats' start date is included in the search.
      * * `end_date: chrono::NaiveDate` -- Format: `YYYY-MM-DD`.If this parameter is included, the stats' end date is included in the search.
@@ -243,13 +243,13 @@ impl MarketingCampaignsStats {
      * **Parameters:**
      *
      * * `group_by: &[String]` -- Automations can have multiple steps. Including `step_id` as a `group_by` metric allows further granularity of stats.
-     * * `step_ids: &[String]` -- Comma-separated list of `step_ids` that you want the link stats for.
+     * * `step_ids: &[String]` -- The recipient IDs of the recipients that already existed from this request.
      * * `page_size: i64` -- The number of elements you want returned on each page.
      * * `page_token: &str` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
      */
     pub async fn get_automation_link_stat(
         &self,
-        id: uuid::Uuid,
+        id: &str,
         group_by: &[String],
         step_ids: &[String],
         page_size: i64,
@@ -296,7 +296,7 @@ impl MarketingCampaignsStats {
      * * `page_size: i64` -- The number of elements you want returned on each page.
      * * `page_token: &str` -- The stats endpoints are paginated. To get the next page, call the passed `_metadata.next` URL. If `_metadata.prev` doesn't exist, you're at the first page. Similarly, if `_metadata.next` is not present, you're at the last page.
      * * `group_by: &[String]` -- A/B Single Sends have multiple variation IDs and phase IDs. Including these additional fields allows further granularity of stats by these fields.
-     * * `ab_variation_id: uuid::Uuid` -- ID of the transactional template version.
+     * * `ab_variation_id: &str` -- The license key provided with your New Relic account.
      * * `ab_phase_id: crate::types::AbPhaseId`
      */
     pub async fn get_singlesend_link_stat(
@@ -305,14 +305,14 @@ impl MarketingCampaignsStats {
         page_size: i64,
         page_token: &str,
         group_by: &[String],
-        ab_variation_id: uuid::Uuid,
+        ab_variation_id: &str,
         ab_phase_id: crate::types::AbPhaseId,
     ) -> Result<crate::types::SinglesendsLinkStatsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ab_phase_id.to_string().is_empty() {
             query_args.push(("ab_phase_id".to_string(), ab_phase_id.to_string()));
         }
-        if ab_variation_id.to_string() != uuid::Uuid::nil().to_string() {
+        if !ab_variation_id.is_empty() {
             query_args.push(("ab_variation_id".to_string(), ab_variation_id.to_string()));
         }
         if !group_by.is_empty() {

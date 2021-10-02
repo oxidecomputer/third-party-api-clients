@@ -236,7 +236,7 @@ impl Webinars {
         webinar_id: &str,
         page_size: i64,
         next_page_token: &str,
-    ) -> Result<Vec<crate::types::ListWebinarParticipantsResponse>> {
+    ) -> Result<Vec<crate::types::Participants>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !next_page_token.is_empty() {
             query_args.push(("next_page_token".to_string(), next_page_token.to_string()));
@@ -251,7 +251,7 @@ impl Webinars {
             query_
         );
 
-        let resp: crate::types::ListWebinarParticipantsResponseData =
+        let resp: crate::types::ListWebinarParticipantsResponse =
             self.client.get(&url, None).await?;
 
         // Return our response data.
@@ -280,13 +280,13 @@ impl Webinars {
     pub async fn list_all_participants(
         &self,
         webinar_id: &str,
-    ) -> Result<Vec<crate::types::ListWebinarParticipantsResponse>> {
+    ) -> Result<Vec<crate::types::Participants>> {
         let url = format!(
             "/past_webinars/{}/participants",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
         );
 
-        let mut resp: crate::types::ListWebinarParticipantsResponseData =
+        let mut resp: crate::types::ListWebinarParticipantsResponse =
             self.client.get(&url, None).await?;
 
         let mut participants = resp.participants;
@@ -1057,7 +1057,7 @@ impl Webinars {
     pub async fn list_past_poll_results(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ListPastMeetingPollsResponse> {
+    ) -> Result<crate::types::ReportMeetingPollsResponse> {
         let url = format!(
             "/past_webinars/{}/polls",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),
@@ -1091,7 +1091,7 @@ impl Webinars {
     pub async fn list_past_qa(
         &self,
         webinar_id: &str,
-    ) -> Result<crate::types::ListPastWebinarQaResponse> {
+    ) -> Result<crate::types::ReportWebinarQaResponse> {
         let url = format!(
             "/past_webinars/{}/qa",
             crate::progenitor_support::encode_path(&webinar_id.to_string()),

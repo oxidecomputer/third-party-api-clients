@@ -2556,8 +2556,12 @@ pub struct TransactionalTemplatesVersionOutputLean {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub generate_plain_content: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -2636,10 +2640,14 @@ pub struct TransactionalTemplatesTemplateLean {
     #[serde(default, skip_serializing_if = "Generation::is_noop")]
     pub generation: Generation,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * The license key provided with your New Relic account.
      */
@@ -2995,7 +3003,7 @@ pub struct SingleContactRequest {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub list_ids: Vec<uuid::Uuid>,
+    pub list_ids: Vec<String>,
 }
 
 /**
@@ -3300,10 +3308,14 @@ pub struct ContactDetails2 {
     )]
     pub first_name: String,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3317,14 +3329,14 @@ pub struct ContactDetails2 {
     )]
     pub line: String,
     /**
-     * The contact's list IDs.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub list_ids: Vec<uuid::Uuid>,
+    pub list_ids: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3342,7 +3354,7 @@ pub struct ContactDetails2 {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub segment_ids: Vec<uuid::Uuid>,
+    pub segment_ids: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3624,10 +3636,14 @@ pub struct SegmentSummary {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3640,8 +3656,12 @@ pub struct SegmentSummary {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub next_sample_update: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub parent_list_id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub parent_list_id: String,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -3915,10 +3935,14 @@ pub struct ContactResponse {
     )]
     pub first_name: String,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * The license key provided with your New Relic account.
      */
@@ -3933,7 +3957,7 @@ pub struct ContactResponse {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub list_ids: Vec<uuid::Uuid>,
+    pub list_ids: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -3945,7 +3969,7 @@ pub struct ContactResponse {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub segment_ids: Vec<uuid::Uuid>,
+    pub segment_ids: Vec<String>,
     /**
      * The license key provided with your New Relic account.
      */
@@ -4161,10 +4185,14 @@ pub struct DesignOutputSummary {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * The license key provided with your New Relic account.
      */
@@ -4445,10 +4473,14 @@ pub struct SinglesendsResponseResults {
     #[serde(default)]
     pub ab_phase: AbPhase,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub ab_variation: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub ab_variation: String,
     /**
      * The license key provided with your New Relic account.
      */
@@ -4459,10 +4491,14 @@ pub struct SinglesendsResponseResults {
     )]
     pub aggregation: String,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<MetricsData>,
 }
@@ -4491,10 +4527,14 @@ pub struct AutomationsResponseResults {
     )]
     pub aggregation: String,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stats: Option<MetricsData>,
     /**
@@ -4667,23 +4707,23 @@ pub struct SendTo {
     )]
     pub all: bool,
     /**
-     * The contact's list IDs.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub list_ids: Vec<uuid::Uuid>,
+    pub list_ids: Vec<String>,
     /**
-     * The contact's list IDs.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub segment_ids: Vec<uuid::Uuid>,
+    pub segment_ids: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -5077,10 +5117,14 @@ pub struct AutomationsLinkStatsResponseResults {
     )]
     pub clicks: i64,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub step_id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub step_id: String,
     /**
      * The URL where you would like your users sent to unsubscribe.
      */
@@ -5156,10 +5200,14 @@ pub struct SinglesendsLinkStatsResponseResults {
     #[serde(default)]
     pub ab_phase: AbPhase,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub ab_variation: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub ab_variation: String,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5410,10 +5458,14 @@ pub struct SinglesendResponseShort {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * Indicates if your subuser statistics will be sent to your New Relic Dashboard.
      */
@@ -5930,10 +5982,14 @@ pub struct SinglesendResponse {
     )]
     pub created_at: Option<chrono::DateTime<chrono::Utc>>,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     #[serde(default, skip_serializing_if = "SinglesendSearchStatus::is_noop")]
     pub status: SinglesendSearchStatus,
     #[serde(
@@ -6766,10 +6822,14 @@ pub struct AllSegmentsResponse {
     )]
     pub created_at: String,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * The license key provided with your New Relic account.
      */
@@ -6869,10 +6929,14 @@ pub struct SegmentResponse {
     )]
     pub created_at: String,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
     /**
      * The license key provided with your New Relic account.
      */
@@ -7422,10 +7486,14 @@ pub struct Message {
     )]
     pub teammate: String,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub template_id: uuid::Uuid,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub template_id: String,
     /**
      * The license key provided with your New Relic account.
      */
@@ -11486,14 +11554,14 @@ pub struct PutMcContactsRequest {
     )]
     pub contacts: Vec<ContactRequest>,
     /**
-     * The contact's list IDs.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub list_ids: Vec<uuid::Uuid>,
+    pub list_ids: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -11809,14 +11877,14 @@ pub struct PostMcContactsExportsRequest {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub file_type: Option<FileType>,
     /**
-     * The contact's list IDs.
+     * The recipient IDs of the recipients that already existed from this request.
      */
     #[serde(
         default,
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub list_ids: Vec<uuid::Uuid>,
+    pub list_ids: Vec<String>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -12291,10 +12359,14 @@ pub struct GetMarketingSegmentsResponse {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PostMarketingSegmentsRequest {
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub parent_list_id: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub parent_list_id: String,
 }
 
 /// All of the following types are flattened into one object:
@@ -12316,7 +12388,7 @@ pub struct PostMarketingSegmentsDeleteRequest {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub ids: Vec<uuid::Uuid>,
+    pub ids: Vec<String>,
 }
 
 /// resources in which segment is being used
@@ -12552,12 +12624,20 @@ pub struct PostMarketingTestSendEmailRequest {
     )]
     pub suppression_group_id: i64,
     /**
-     * ID of the transactional template version.
+     * The license key provided with your New Relic account.
      */
-    #[serde()]
-    pub template_id: uuid::Uuid,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub version_id_override: Option<uuid::Uuid>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub template_id: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub version_id_override: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]

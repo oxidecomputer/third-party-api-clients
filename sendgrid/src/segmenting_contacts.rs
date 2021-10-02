@@ -84,7 +84,7 @@ impl SegmentingContacts {
      */
     pub async fn get_marketing_segments_segment(
         &self,
-        segment_id: uuid::Uuid,
+        segment_id: &str,
         query_json: bool,
     ) -> Result<crate::types::FullSegmentAllOf> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -112,7 +112,7 @@ impl SegmentingContacts {
      */
     pub async fn delete_marketing_segments_segment(
         &self,
-        segment_id: uuid::Uuid,
+        segment_id: &str,
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/marketing/segments/{}",
@@ -133,7 +133,7 @@ impl SegmentingContacts {
      */
     pub async fn patch_marketing_segments_segment(
         &self,
-        segment_id: uuid::Uuid,
+        segment_id: &str,
         body: &crate::types::SegmentWriteV2,
     ) -> Result<crate::types::FullSegmentAllOf> {
         let url = format!(
