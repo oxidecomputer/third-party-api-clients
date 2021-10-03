@@ -2267,7 +2267,6 @@ fn gen(
     /*
      * Deal with any dependencies we require to produce this client.
      */
-    a("#![feature(async_stream)]");
     a("#![allow(clippy::too_many_arguments)]");
     a("#![allow(clippy::nonstandard_macro_braces)]");
     a("#![allow(clippy::large_enum_variant)]");
