@@ -1,4 +1,11 @@
 SHELL := bash
+GENERATOR := target/debug/generator
+
+#
+# The rustfmt configuration uses various unstable features, so must be run with
+# the nightly version.
+#
+CARGO_FMT := cargo +nightly fmt
 
 DOCUSIGN_SPEC_DIR = $(CURDIR)/specs/docusign
 DOCUSIGN_SPEC = $(DOCUSIGN_SPEC_DIR)/docusign.yaml
@@ -94,7 +101,8 @@ generate: README.md docusign giphy github google-admin google-calendar google-cl
 	cargo test tests
 	cargo clippy
 
-target/debug/generator: generator/src/*.rs generator/Cargo.toml
+.PHONY: $(GENERATOR)
+$(GENERATOR):
 	cargo build --bin generator
 
 examples: generate github/examples/*.rs
@@ -154,8 +162,8 @@ $(DOCUSIGN_SPEC_DIR):
 $(DOCUSIGN_SPEC): $(DOCUSIGN_SPEC_DIR)
 	curl -sSL $(DOCUSIGN_SPEC_REMOTE) -o $@
 
-docusign: target/debug/generator $(DOCUSIGN_SPEC)
-	./target/debug/generator -i $(DOCUSIGN_SPEC) -v 0.2.0 \
+docusign: $(GENERATOR) $(DOCUSIGN_SPEC)
+	$(GENERATOR) -i $(DOCUSIGN_SPEC) -v 0.2.0 \
 		-o docusign \
 		-n docusign \
 		--proper-name DocuSign \
@@ -164,7 +172,7 @@ docusign: target/debug/generator $(DOCUSIGN_SPEC)
 		--host "na4.docusign.net" \
 		--token-endpoint "account.docusign.com/oauth/token" \
 		--user-consent-endpoint "account.docusign.com/oauth/auth" $(EXTRA_ARGS)
-	cargo fmt -p docusign
+	$(CARGO_FMT) -p docusign
 	@echo -e "- [DocuSign](docusign/) [![docs.rs](https://docs.rs/docusign/badge.svg)](https://docs.rs/docusign)" >> README.md
 
 $(GIPHY_SPEC_DIR):
@@ -173,15 +181,15 @@ $(GIPHY_SPEC_DIR):
 $(GIPHY_SPEC): $(GIPHY_SPEC_DIR)
 	curl -sSL $(GIPHY_SPEC_REMOTE) -o $@
 
-giphy: target/debug/generator $(GIPHY_SPEC)
-	./target/debug/generator -i $(GIPHY_SPEC) -v 0.2.0 \
+giphy: $(GENERATOR) $(GIPHY_SPEC)
+	$(GENERATOR) -i $(GIPHY_SPEC) -v 0.2.0 \
 		-o giphy \
 		-n giphy-api \
 		--proper-name "Giphy" \
 		-d "A fully generated & opinionated API client for the Giphy API." \
 		--spec-link "https://github.com/APIs-guru/openapi-directory/tree/main/APIs/giphy.com" \
 		--host "api.giphy.com/v1" $(EXTRA_ARGS)
-	cargo fmt -p giphy-api
+	$(CARGO_FMT) -p giphy-api
 	@echo -e "- [Giphy](giphy/) [![docs.rs](https://docs.rs/giphy-api/badge.svg)](https://docs.rs/giphy-api)" >> README.md
 
 $(GITHUB_SPEC_DIR):
@@ -190,15 +198,15 @@ $(GITHUB_SPEC_DIR):
 $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
-github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.34 \
+github: $(GENERATOR) $(GITHUB_SPEC)
+	$(GENERATOR) -i $(GITHUB_SPEC) -v 0.1.34 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \
 		-d "A fully generated & opinionated API client for the GitHub API." \
 		--spec-link "https://github.com/$(GITHUB_SPEC_REPO)" \
 		--host "api.github.com" $(EXTRA_ARGS)
-	cargo fmt -p octorust
+	$(CARGO_FMT) -p octorust
 	@echo -e "- [GitHub](github/) [![docs.rs](https://docs.rs/octorust/badge.svg)](https://docs.rs/octorust)" >> README.md
 
 .PHONY: google
@@ -212,8 +220,8 @@ $(GOOGLE_ADMIN_SPEC_DIR):
 $(GOOGLE_ADMIN_SPEC): $(GOOGLE_ADMIN_SPEC_DIR)
 	curl -sSL $(GOOGLE_ADMIN_SPEC_REMOTE) -o $@
 
-google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
-	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.2.3 \
+google-admin: $(GENERATOR) $(GOOGLE_ADMIN_SPEC)
+	$(GENERATOR) -i $(GOOGLE_ADMIN_SPEC) -v 0.2.3 \
 		-o google/admin \
 		-n gsuite-api \
 		--proper-name "Google Admin" \
@@ -221,7 +229,7 @@ google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
 		--spec-link "https://admin.googleapis.com/$discovery/rest?version=directory_v1" \
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com" $(EXTRA_ARGS)
-	cargo fmt -p gsuite-api
+	$(CARGO_FMT) -p gsuite-api
 	@echo -e "- [Google Admin](google/admin/) [![docs.rs](https://docs.rs/gsuite-api/badge.svg)](https://docs.rs/gsuite-api)" >> README.md
 
 $(GOOGLE_CALENDAR_SPEC_DIR):
@@ -230,8 +238,8 @@ $(GOOGLE_CALENDAR_SPEC_DIR):
 $(GOOGLE_CALENDAR_SPEC): $(GOOGLE_CALENDAR_SPEC_DIR)
 	curl -sSL $(GOOGLE_CALENDAR_SPEC_REMOTE) -o $@
 
-google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
-	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.1.3 \
+google-calendar: $(GENERATOR) $(GOOGLE_CALENDAR_SPEC)
+	$(GENERATOR) -i $(GOOGLE_CALENDAR_SPEC) -v 0.1.3 \
 		-o google/calendar \
 		-n google-calendar \
 		--proper-name "Google Calendar" \
@@ -239,7 +247,7 @@ google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
 		--spec-link "https://calendar-json.googleapis.com/$discovery/rest?version=v3" \
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com/calendar/v3" $(EXTRA_ARGS)
-	cargo fmt -p google-calendar
+	$(CARGO_FMT) -p google-calendar
 	@echo -e "- [Google Calendar](google/calendar/) [![docs.rs](https://docs.rs/google-calendar/badge.svg)](https://docs.rs/google-calendar)" >> README.md
 
 $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR):
@@ -248,8 +256,8 @@ $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR):
 $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC): $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR)
 	curl -sSL $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_REMOTE) -o $@
 
-google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC)
-	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.1.1 \
+google-cloud-resource-manager: $(GENERATOR) $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC)
+	$(GENERATOR) -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.1.1 \
 		-o google/cloud-resource-manager \
 		-n google-cloud-resource-manager \
 		--proper-name "Google Cloud Resource Manager" \
@@ -257,7 +265,7 @@ google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MA
 		--spec-link "https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v2" \
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "cloudresourcemanager.googleapis.com/v2" $(EXTRA_ARGS)
-	cargo fmt -p google-cloud-resource-manager
+	$(CARGO_FMT) -p google-cloud-resource-manager
 	@echo -e "- [Google Cloud Resource Manager](google/cloud-resource-manager/) [![docs.rs](https://docs.rs/google-cloud-resource-manager/badge.svg)](https://docs.rs/google-cloud-resource-manager)" >> README.md
 
 $(GOOGLE_DRIVE_SPEC_DIR):
@@ -266,8 +274,8 @@ $(GOOGLE_DRIVE_SPEC_DIR):
 $(GOOGLE_DRIVE_SPEC): $(GOOGLE_DRIVE_SPEC_DIR)
 	curl -sSL $(GOOGLE_DRIVE_SPEC_REMOTE) -o $@
 
-google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
-	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.2.5 \
+google-drive: $(GENERATOR) $(GOOGLE_DRIVE_SPEC)
+	$(GENERATOR) -i $(GOOGLE_DRIVE_SPEC) -v 0.2.5 \
 		-o google/drive \
 		-n google-drive \
 		--proper-name "Google Drive" \
@@ -275,7 +283,7 @@ google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
 		--spec-link "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest" \
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com/drive/v3" $(EXTRA_ARGS)
-	cargo fmt -p google-drive
+	$(CARGO_FMT) -p google-drive
 	@echo -e "- [Google Drive](google/drive/) [![docs.rs](https://docs.rs/google-drive/badge.svg)](https://docs.rs/google-drive)" >> README.md
 
 $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR):
@@ -284,8 +292,8 @@ $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR):
 $(GOOGLE_GROUPS_SETTINGS_SPEC): $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR)
 	curl -sSL $(GOOGLE_GROUPS_SETTINGS_SPEC_REMOTE) -o $@
 
-google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
-	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.1.3 \
+google-groups-settings: $(GENERATOR) $(GOOGLE_GROUPS_SETTINGS_SPEC)
+	$(GENERATOR) -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.1.3 \
 		-o google/groups-settings \
 		-n google-groups-settings \
 		--proper-name "Google Groups Settings" \
@@ -293,7 +301,7 @@ google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
 		--spec-link "https://groupssettings.googleapis.com/$discovery/rest?version=v1" \
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "www.googleapis.com/groups/v1/groups" $(EXTRA_ARGS)
-	cargo fmt -p google-groups-settings
+	$(CARGO_FMT) -p google-groups-settings
 	@echo -e "- [Google Groups Settings](google/groups-settings/) [![docs.rs](https://docs.rs/google-groups-settings/badge.svg)](https://docs.rs/google-groups-settings)" >> README.md
 
 $(GOOGLE_SHEETS_SPEC_DIR):
@@ -302,8 +310,8 @@ $(GOOGLE_SHEETS_SPEC_DIR):
 $(GOOGLE_SHEETS_SPEC): $(GOOGLE_SHEETS_SPEC_DIR)
 	curl -sSL $(GOOGLE_SHEETS_SPEC_REMOTE) -o $@
 
-google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
-	./target/debug/generator -i $(GOOGLE_SHEETS_SPEC) -v 0.2.2 \
+google-sheets: $(GENERATOR) $(GOOGLE_SHEETS_SPEC)
+	$(GENERATOR) -i $(GOOGLE_SHEETS_SPEC) -v 0.2.2 \
 		-o google/sheets \
 		-n sheets \
 		--proper-name "Google Sheets" \
@@ -311,7 +319,7 @@ google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
 		--spec-link "https://sheets.googleapis.com/$discovery/rest?version=v4" \
 		--token-endpoint "oauth2.googleapis.com/token" \
 		--host "sheets.googleapis.com" $(EXTRA_ARGS)
-	cargo fmt -p sheets
+	$(CARGO_FMT) -p sheets
 	@echo -e "- [Google Sheets](google/sheets/) [![docs.rs](https://docs.rs/sheets/badge.svg)](https://docs.rs/sheets)" >> README.md
 
 $(GUSTO_SPEC_DIR):
@@ -320,8 +328,8 @@ $(GUSTO_SPEC_DIR):
 $(GUSTO_SPEC): $(GUSTO_SPEC_DIR)
 	curl -sSL $(GUSTO_SPEC_REMOTE) -o $@
 
-gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.12 \
+gusto: $(GENERATOR) $(GUSTO_SPEC)
+	$(GENERATOR) -i $(GUSTO_SPEC) -v 0.2.12 \
 		-o gusto \
 		-n gusto-api \
 		--proper-name Gusto \
@@ -330,7 +338,7 @@ gusto: target/debug/generator $(GUSTO_SPEC)
 		--host "api.gusto.com" \
 		--token-endpoint "api.gusto.com/oauth/token" \
 		--user-consent-endpoint "api.gusto.com/oauth/authorize" $(EXTRA_ARGS)
-	cargo fmt -p gusto-api
+	$(CARGO_FMT) -p gusto-api
 	@echo -e "- [Gusto](gusto/) [![docs.rs](https://docs.rs/gusto-api/badge.svg)](https://docs.rs/gusto-api)" >> README.md
 
 $(MAILCHIMP_SPEC_DIR):
@@ -342,8 +350,8 @@ $(MAILCHIMP_SPEC): $(MAILCHIMP_SPEC_DIR)
 		--patch \
 		$(MAILCHIMP_SPEC_REMOTE)
 
-mailchimp: target/debug/generator $(MAILCHIMP_SPEC)
-	./target/debug/generator -i $(MAILCHIMP_SPEC) -v 0.2.0 \
+mailchimp: $(GENERATOR) $(MAILCHIMP_SPEC)
+	$(GENERATOR) -i $(MAILCHIMP_SPEC) -v 0.2.0 \
 		-o mailchimp \
 		-n mailchimp-api \
 		--proper-name MailChimp \
@@ -352,7 +360,7 @@ mailchimp: target/debug/generator $(MAILCHIMP_SPEC)
 		--host "us1.api.mailchimp.com" \
 		--token-endpoint "login.mailchimp.com/oauth2/token" \
 		--user-consent-endpoint "login.mailchimp.com/oauth2/authorize" $(EXTRA_ARGS)
-	cargo fmt -p mailchimp-api
+	$(CARGO_FMT) -p mailchimp-api
 	@echo -e "- [MailChimp](mailchimp/) [![docs.rs](https://docs.rs/mailchimp-api/badge.svg)](https://docs.rs/mailchimp-api)" >> README.md
 
 $(OKTA_SPEC_DIR):
@@ -364,8 +372,8 @@ $(OKTA_SPEC): $(OKTA_SPEC_DIR)
 		--patch \
 		$(OKTA_SPEC_REMOTE)
 
-okta: target/debug/generator $(OKTA_SPEC)
-	./target/debug/generator -i $(OKTA_SPEC) -v 0.2.3 \
+okta: $(GENERATOR) $(OKTA_SPEC)
+	$(GENERATOR) -i $(OKTA_SPEC) -v 0.2.3 \
 		-o okta \
 		-n okta \
 		--proper-name Okta \
@@ -374,7 +382,7 @@ okta: target/debug/generator $(OKTA_SPEC)
 		--host "na4.okta.net" \
 		--token-endpoint "account.okta.com/oauth/token" \
 		--user-consent-endpoint "account.okta.com/oauth/auth" $(EXTRA_ARGS)
-	cargo fmt -p okta
+	$(CARGO_FMT) -p okta
 	@echo -e "- [Okta](okta/) [![docs.rs](https://docs.rs/okta/badge.svg)](https://docs.rs/okta)" >> README.md
 
 $(RAMP_SPEC_REFERENCE):
@@ -386,8 +394,8 @@ $(RAMP_SPEC):
 		--type json \
 		-o $@ $?
 
-ramp: target/debug/generator $(RAMP_SPEC)
-	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.7 \
+ramp: $(GENERATOR) $(RAMP_SPEC)
+	$(GENERATOR) -i $(RAMP_SPEC) -v 0.2.7 \
 		-o ramp \
 		-n ramp-api \
 		--proper-name Ramp \
@@ -396,7 +404,7 @@ ramp: target/debug/generator $(RAMP_SPEC)
 		--host "api.ramp.com/developer/v1" \
 		--token-endpoint "api.ramp.com/v1/public/customer/token" \
 		--user-consent-endpoint "app.ramp.com/v1/authorize" $(EXTRA_ARGS)
-	cargo fmt -p ramp-api
+	$(CARGO_FMT) -p ramp-api
 	@echo -e "- [Ramp](ramp/) [![docs.rs](https://docs.rs/ramp-api/badge.svg)](https://docs.rs/ramp-api)" >> README.md
 
 $(REVAI_SPEC_DIR):
@@ -405,15 +413,15 @@ $(REVAI_SPEC_DIR):
 $(REVAI_SPEC): $(REVAI_SPEC_DIR)
 	curl -sSL $(REVAI_SPEC_REMOTE) -o $@
 
-revai: target/debug/generator $(REVAI_SPEC)
-	./target/debug/generator -i $(REVAI_SPEC) -v 0.2.3 \
+revai: $(GENERATOR) $(REVAI_SPEC)
+	$(GENERATOR) -i $(REVAI_SPEC) -v 0.2.3 \
 		-o rev.ai \
 		-n revai \
 		--proper-name "Rev.ai" \
 		-d "A fully generated & opinionated API client for the Rev.ai API." \
 		--spec-link "$(REVAI_SPEC_REMOTE)" \
 		--host "api.rev.ai/speechtotext/v1" $(EXTRA_ARGS)
-	cargo fmt -p revai
+	$(CARGO_FMT) -p revai
 	@echo -e "- [Rev.ai](rev.ai/) [![docs.rs](https://docs.rs/revai/badge.svg)](https://docs.rs/revai)" >> README.md
 
 $(SENDGRID_SPEC_DIR):
@@ -425,15 +433,15 @@ $(SENDGRID_SPEC): $(SENDGRID_SPEC_DIR)
 		--patch \
 		$(SENDGRID_SPEC_REMOTE)
 
-sendgrid: target/debug/generator $(SENDGRID_SPEC)
-	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.2.1 \
+sendgrid: $(GENERATOR) $(SENDGRID_SPEC)
+	$(GENERATOR) -i $(SENDGRID_SPEC) -v 0.2.1 \
 		-o sendgrid \
 		-n sendgrid-api \
 		--proper-name SendGrid \
 		-d "A fully generated & opinionated API client for the SendGrid API." \
 		--spec-link "$(SENDGRID_SPEC_REMOTE)" \
 		--host "api.sendgrid.com/v3" $(EXTRA_ARGS)
-	cargo fmt -p sendgrid-api
+	$(CARGO_FMT) -p sendgrid-api
 	@echo -e "- [SendGrid](sendgrid/) [![docs.rs](https://docs.rs/sendgrid-api/badge.svg)](https://docs.rs/sendgrid-api)" >> README.md
 
 $(SHIPBOB_SPEC_DIR):
@@ -446,8 +454,8 @@ $(SHIPBOB_SPEC): $(SHIPBOB_SPEC_DIR)
 		$(SHIPBOB_SPEC_DIR)/swagger.json
 
 .PHONY: shipbob
-shipbob: target/debug/generator $(SHIPBOB_SPEC)
-	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.2 \
+shipbob: $(GENERATOR) $(SHIPBOB_SPEC)
+	$(GENERATOR) -i $(SHIPBOB_SPEC) -v 0.1.2 \
 		-o shipbob \
 		-n shipbob \
 		--proper-name "ShipBob" \
@@ -457,7 +465,7 @@ shipbob: target/debug/generator $(SHIPBOB_SPEC)
 		--add-post-header "shipbob_channel_id" \
 		--token-endpoint "auth.shipbob.com/connect/token" \
 		--user-consent-endpoint "auth.shipbob.com/connect/integrate" $(EXTRA_ARGS)
-	cargo fmt -p shipbob
+	$(CARGO_FMT) -p shipbob
 	@echo -e "- [shipbob](shipbob/) [![docs.rs](https://docs.rs/shipbob/badge.svg)](https://docs.rs/shipbob)" >> README.md
 
 $(SHOPIFY_SPEC_DIR):
@@ -466,8 +474,8 @@ $(SHOPIFY_SPEC_DIR):
 $(SHOPIFY_SPEC): $(SHOPIFY_SPEC_DIR)
 	curl -sSL $(SHOPIFY_SPEC_REMOTE) -o $@
 
-shopify: target/debug/generator $(SHOPIFY_SPEC)
-	./target/debug/generator -i $(SHOPIFY_SPEC) -v 0.1.0 \
+shopify: $(GENERATOR) $(SHOPIFY_SPEC)
+	$(GENERATOR) -i $(SHOPIFY_SPEC) -v 0.1.0 \
 		-o shopify \
 		-n shopify \
 		--proper-name "Shopify" \
@@ -476,7 +484,7 @@ shopify: target/debug/generator $(SHOPIFY_SPEC)
 		--host "{shop}.myshopify.com/admin/api/2021-07" \
 		--token-endpoint "{shop}.myshopify.com/admin/oauth/access_token" \
 		--user-consent-endpoint "{shop}.myshopify.com/admin/oauth/authorize" $(EXTRA_ARGS)
-	cargo fmt -p shopify
+	$(CARGO_FMT) -p shopify
 	@echo -e "- [Shopify](shopify/) [![docs.rs](https://docs.rs/shopify/badge.svg)](https://docs.rs/shopify)" >> README.md
 
 $(SLACK_SPEC_DIR):
@@ -488,8 +496,8 @@ $(SLACK_SPEC): $(SLACK_SPEC_DIR)
 		--patch \
 		$(SLACK_SPEC_REMOTE)
 
-slack: target/debug/generator $(SLACK_SPEC)
-	./target/debug/generator -i $(SLACK_SPEC) -v 0.2.0 \
+slack: $(GENERATOR) $(SLACK_SPEC)
+	$(GENERATOR) -i $(SLACK_SPEC) -v 0.2.0 \
 		-o slack \
 		-n slack-chat-api \
 		--proper-name Slack \
@@ -498,7 +506,7 @@ slack: target/debug/generator $(SLACK_SPEC)
 		--host "slack.com/api" \
 		--token-endpoint "slack.com/api/oauth.v2.access" \
 		--user-consent-endpoint "slack.com/oauth/v2/authorize" $(EXTRA_ARGS)
-	cargo fmt -p slack-chat-api
+	$(CARGO_FMT) -p slack-chat-api
 	@echo -e "- [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)" >> README.md
 
 $(TRIPACTIONS_SPEC_DIR):
@@ -507,8 +515,8 @@ $(TRIPACTIONS_SPEC_DIR):
 $(TRIPACTIONS_SPEC): $(TRIPACTIONS_SPEC_DIR)
 	curl -sSL $(TRIPACTIONS_SPEC_REMOTE) -o $@
 
-tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
-	./target/debug/generator -i $(TRIPACTIONS_SPEC) -v 0.2.1 \
+tripactions: $(GENERATOR) $(TRIPACTIONS_SPEC)
+	$(GENERATOR) -i $(TRIPACTIONS_SPEC) -v 0.2.1 \
 		-o tripactions \
 		-n tripactions \
 		--proper-name "TripActions" \
@@ -516,7 +524,7 @@ tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
 		--spec-link "https://app.tripactions.com/api/public/documentation/swagger-ui/index.html?configUrl=/api/public/documentation/api-docs/swagger-config" \
 		--host "api.tripactions.com" \
 		--token-endpoint "api.tripactions.com/ta-auth/oauth/token" $(EXTRA_ARGS)
-	cargo fmt -p tripactions
+	$(CARGO_FMT) -p tripactions
 	@echo -e "- [TripActions](tripactions/) [![docs.rs](https://docs.rs/tripactions/badge.svg)](https://docs.rs/tripactions)" >> README.md
 
 $(ZOOM_SPEC_DIR):
@@ -528,8 +536,8 @@ $(ZOOM_SPEC): $(ZOOM_SPEC_DIR)
 		--patch \
 		$(ZOOM_SPEC_REMOTE)
 
-zoom: target/debug/generator $(ZOOM_SPEC)
-	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.4 \
+zoom: $(GENERATOR) $(ZOOM_SPEC)
+	$(GENERATOR) -i $(ZOOM_SPEC) -v 0.2.4 \
 		-o zoom \
 		-n zoom-api \
 		--proper-name Zoom \
@@ -538,7 +546,7 @@ zoom: target/debug/generator $(ZOOM_SPEC)
 		--host "api.zoom.us/v2" \
 		--token-endpoint "zoom.us/oauth/token" \
 		--user-consent-endpoint "zoom.us/oauth/authorize" $(EXTRA_ARGS)
-	cargo fmt -p zoom-api
+	$(CARGO_FMT) -p zoom-api
 	@echo -e "- [Zoom](zoom/) [![docs.rs](https://docs.rs/zoom-api/badge.svg)](https://docs.rs/zoom-api)" >> README.md
 
 .PHONY: README.md
