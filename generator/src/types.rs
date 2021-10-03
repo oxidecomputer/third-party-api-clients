@@ -88,6 +88,12 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                         || sn == "DescriptionlessJobOptionsDataType"
                         || sn == "SubmitJobOptions"
                         || sn == "SubmitJobOptionsData"
+                        || sn == "AppsCreateInstallationAccessTokenRequest"
+                        || sn == "AppPermissions"
+                        || sn == "ChecksUpdateRequestOutput"
+                        || sn == "ChecksUpdateRequest"
+                        || sn == "ChecksCreateRequestOutput"
+                        || sn == "ChecksCreateRequest"
                     {
                         a(
                             "#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, \
