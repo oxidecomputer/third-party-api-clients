@@ -46,31 +46,29 @@
 //! ```
 //! use google_cloud_resource_manager::Client;
 //!
-//! let google cloud resource manager = Client::new(
+//! let google_cloud_resource_manager = Client::new(
 //!     String::from("client-id"),
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
 //!     String::from("token"),
-//!     String::from("refresh-token")
+//!     String::from("refresh-token"),
 //! );
 //! ```
 //!
 //! Alternatively, the library can search for most of the variables required for
 //! the client in the environment:
 //!
-//! - `GOOGLE CLOUD RESOURCE MANAGER_CLIENT_ID`
-//! - `GOOGLE CLOUD RESOURCE MANAGER_CLIENT_SECRET`
-//! - `GOOGLE CLOUD RESOURCE MANAGER_REDIRECT_URI`
+//! - `GOOGLE_CLOUD_RESOURCE_MANAGER_CLIENT_ID`
+//! - `GOOGLE_CLOUD_RESOURCE_MANAGER_CLIENT_SECRET`
+//! - `GOOGLE_CLOUD_RESOURCE_MANAGER_REDIRECT_URI`
 //!
 //! And then you can create a client from the environment.
 //!
 //! ```
 //! use google_cloud_resource_manager::Client;
 //!
-//! let google cloud resource manager = Client::new_from_env(
-//!     String::from("token"),
-//!     String::from("refresh-token")
-//! );
+//! let google_cloud_resource_manager =
+//!     Client::new_from_env(String::from("token"), String::from("refresh-token"));
 //! ```
 //!
 //! It is okay to pass empty values for `token` and `refresh_token`. In
@@ -82,25 +80,31 @@
 //! use google_cloud_resource_manager::Client;
 //!
 //! async fn do_call() {
-//!     let mut google cloud resource manager = Client::new_from_env("", "");
+//!     let mut google_cloud_resource_manager = Client::new_from_env("", "");
 //!
 //!     // Get the URL to request consent from the user.
 //!     // You can optionally pass in scopes. If none are provided, then the
 //!     // resulting URL will not have any scopes.
-//!     let user_consent_url = google cloud resource manager.user_consent_url(&["some-scope".to_string()]);
+//!     let user_consent_url =
+//!         google_cloud_resource_manager.user_consent_url(&["some-scope".to_string()]);
 //!
 //!     // In your redirect URL capture the code sent and our state.
 //!     // Send it along to the request for the token.
 //!     let code = "thing-from-redirect-url";
 //!     let state = "state-from-redirect-url";
-//!     let mut access_token = google cloud resource manager.get_access_token(code, state).await.unwrap();
+//!     let mut access_token = google_cloud_resource_manager
+//!         .get_access_token(code, state)
+//!         .await
+//!         .unwrap();
 //!
 //!     // You can additionally refresh the access token with the following.
 //!     // You must have a refresh token to be able to call this function.
-//!     access_token = google cloud resource manager.refresh_access_token().await.unwrap();
+//!     access_token = google_cloud_resource_manager
+//!         .refresh_access_token()
+//!         .await
+//!         .unwrap();
 //! }
 //! ```
-#![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]

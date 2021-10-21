@@ -618,6 +618,7 @@ pub fn generate_docs_generic_token(
 ) -> String {
     let info = generate_docs_openapi_info(api, proper_name, spec_link, name);
 
+    let identifier_name = proper_name.replace(" ", "_");
     let add_post_header_args = if !add_post_header.is_empty() {
         format!(
             ",\n//!     String::from(\"{}\")",
@@ -710,20 +711,20 @@ pub fn generate_docs_generic_token(
         name.replace("_", "-").to_lowercase(),
         version,
         name,
-        proper_name.to_lowercase(),
+        identifier_name.to_lowercase(),
         add_post_header_args,
-        proper_name.to_uppercase(),
-        proper_name.to_uppercase(),
-        proper_name.to_uppercase(),
+        identifier_name.to_uppercase(),
+        identifier_name.to_uppercase(),
+        identifier_name.to_uppercase(),
         name,
-        proper_name.to_lowercase(),
+        identifier_name.to_lowercase(),
         add_post_header_args,
         name,
-        proper_name.to_lowercase(),
+        identifier_name.to_lowercase(),
         add_post_header_var,
-        proper_name.to_lowercase(),
-        proper_name.to_lowercase(),
-        proper_name.to_lowercase(),
+        identifier_name.to_lowercase(),
+        identifier_name.to_lowercase(),
+        identifier_name.to_lowercase(),
     )
 }
 

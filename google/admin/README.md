@@ -48,7 +48,7 @@ a user agent string and set of credentials.
 ```
 use gsuite_api::Client;
 
-let google admin = Client::new(
+let google_admin = Client::new(
     String::from("client-id"),
     String::from("client-secret"),
     String::from("redirect-uri"),
@@ -60,16 +60,16 @@ let google admin = Client::new(
 Alternatively, the library can search for most of the variables required for
 the client in the environment:
 
-- `GOOGLE ADMIN_CLIENT_ID`
-- `GOOGLE ADMIN_CLIENT_SECRET`
-- `GOOGLE ADMIN_REDIRECT_URI`
+- `GOOGLE_ADMIN_CLIENT_ID`
+- `GOOGLE_ADMIN_CLIENT_SECRET`
+- `GOOGLE_ADMIN_REDIRECT_URI`
 
 And then you can create a client from the environment.
 
 ```
 use gsuite_api::Client;
 
-let google admin = Client::new_from_env(
+let google_admin = Client::new_from_env(
     String::from("token"),
     String::from("refresh-token")
 );
@@ -84,21 +84,21 @@ To start off a fresh client and get a `token` and `refresh_token`, use the follo
 use gsuite_api::Client;
 
 async fn do_call() {
-    let mut google admin = Client::new_from_env("", "");
+    let mut google_admin = Client::new_from_env("", "");
 
     // Get the URL to request consent from the user.
     // You can optionally pass in scopes. If none are provided, then the
     // resulting URL will not have any scopes.
-    let user_consent_url = google admin.user_consent_url(&["some-scope".to_string()]);
+    let user_consent_url = google_admin.user_consent_url(&["some-scope".to_string()]);
 
     // In your redirect URL capture the code sent and our state.
     // Send it along to the request for the token.
     let code = "thing-from-redirect-url";
     let state = "state-from-redirect-url";
-    let mut access_token = google admin.get_access_token(code, state).await.unwrap();
+    let mut access_token = google_admin.get_access_token(code, state).await.unwrap();
 
     // You can additionally refresh the access token with the following.
     // You must have a refresh token to be able to call this function.
-    access_token = google admin.refresh_access_token().await.unwrap();
+    access_token = google_admin.refresh_access_token().await.unwrap();
 }
 ```
