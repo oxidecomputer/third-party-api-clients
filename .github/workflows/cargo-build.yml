@@ -4,6 +4,8 @@ on:
       - '**.rs'
       - Cargo.toml
       - Cargo.lock
+      - '**/Cargo.toml'
+      - '**/Cargo.lock'
       - .github/workflows/cargo-build.yml
 name: cargo build
 jobs:
