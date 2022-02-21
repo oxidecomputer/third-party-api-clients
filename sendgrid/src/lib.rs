@@ -53,7 +53,6 @@
 //!
 //! let sendgrid = Client::new_from_env();
 //! ```
-#![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]

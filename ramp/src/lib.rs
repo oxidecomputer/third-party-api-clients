@@ -87,7 +87,6 @@
 //!     access_token = ramp.refresh_access_token().await.unwrap();
 //! }
 //! ```
-#![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]

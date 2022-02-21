@@ -164,7 +164,6 @@
 //! way here. This extends that effort in a generated way so the library is
 //! always up to the date with the OpenAPI spec and no longer requires manual
 //! contributions to add new endpoints.
-#![feature(async_stream)]
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
