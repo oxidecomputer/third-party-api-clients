@@ -43,7 +43,7 @@ impl Client {
                 host,
                 agent,
                 credentials,
-                http:client,
+                client,
                 <dyn crate::http_cache::HttpCache>::noop(),
             ))
         }
