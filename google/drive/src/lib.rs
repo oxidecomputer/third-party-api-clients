@@ -167,7 +167,7 @@ pub struct Client {
     client_secret: String,
     redirect_uri: String,
 
-    client: reqwest::Client,
+    client: reqwest_middleware::ClientWithMiddleware,
 }
 
 use schemars::JsonSchema;
@@ -226,6 +226,9 @@ impl Client {
         T: ToString,
         Q: ToString,
     {
+        // Retry up to 3 times with increasing intervals between attempts.
+        let retry_policy =
+            reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         let client = reqwest::Client::builder().build();
         match client {
             Ok(c) => {
@@ -234,6 +237,15 @@ impl Client {
                 // TODO: But in the future we should save the expires in date and refresh it
                 // if it needs to be refreshed.
                 //
+                let client = reqwest_middleware::ClientBuilder::new(c)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware)
+                    // Retry failed requests.
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(
+                        retry_policy,
+                    ))
+                    .build();
+
                 Client {
                     host: DEFAULT_HOST.to_string(),
                     client_id: client_id.to_string(),
@@ -242,7 +254,7 @@ impl Client {
                     token: token.to_string(),
                     refresh_token: refresh_token.to_string(),
 
-                    client: c,
+                    client,
                 }
             }
             Err(e) => panic!("creating reqwest client failed: {:?}", e),
@@ -286,6 +298,8 @@ impl Client {
             .expect("failed to read google credential file");
 
         let client = reqwest::Client::builder().build();
+        let retry_policy =
+            reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {
             Ok(c) => {
                 // We do not refresh the access token here since we leave that up to the
@@ -293,6 +307,15 @@ impl Client {
                 // TODO: But in the future we should save the expires in date and refresh it
                 // if it needs to be refreshed.
                 //
+                let client = reqwest_middleware::ClientBuilder::new(c)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware)
+                    // Retry failed requests.
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(
+                        retry_policy,
+                    ))
+                    .build();
+
                 Client {
                     host: DEFAULT_HOST.to_string(),
                     client_id: secret.client_id.to_string(),
@@ -301,7 +324,7 @@ impl Client {
                     token: token.to_string(),
                     refresh_token: refresh_token.to_string(),
 
-                    client: c,
+                    client,
                 }
             }
             Err(e) => panic!("creating reqwest client failed: {:?}", e),

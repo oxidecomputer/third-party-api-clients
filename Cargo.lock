@@ -170,6 +170,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ea221b5284a47e40033bf9b66f35f984ec0ea2931eb03505246cd27a963f981b"
 
 [[package]]
+name = "crossbeam-channel"
+version = "0.5.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e54ea8bc3fb1ee042f5aace6e3c6e025d3874866da222930f70ce62aceba0bfa"
+dependencies = [
+ "cfg-if",
+ "crossbeam-utils",
+]
+
+[[package]]
+name = "crossbeam-utils"
+version = "0.8.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b5e5bed1f1c269533fa816a0a5492b3545209a205ca1a54842be180eb63a16a6"
+dependencies = [
+ "cfg-if",
+ "lazy_static",
+]
+
+[[package]]
 name = "ct-logs"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -217,6 +237,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -440,6 +463,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -469,6 +495,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -499,6 +528,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -529,6 +561,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -559,6 +594,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -589,6 +627,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -619,6 +660,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -897,6 +941,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1079,6 +1126,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1106,6 +1156,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1164,6 +1217,25 @@ dependencies = [
  "libc",
  "pkg-config",
  "vcpkg",
+]
+
+[[package]]
+name = "opentelemetry"
+version = "0.17.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6105e89802af13fdf48c49d7646d3b533a70e536d818aae7e78ba0433d01acb8"
+dependencies = [
+ "async-trait",
+ "crossbeam-channel",
+ "futures-channel",
+ "futures-executor",
+ "futures-util",
+ "js-sys",
+ "lazy_static",
+ "percent-encoding",
+ "pin-project",
+ "rand",
+ "thiserror",
 ]
 
 [[package]]
@@ -1301,6 +1373,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1433,6 +1508,69 @@ dependencies = [
 ]
 
 [[package]]
+name = "reqwest-middleware"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3b58621b8223cfc85b63d38b8d335c69b96a666d9b7561aa30a3b070ce1df31c"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "futures",
+ "http",
+ "reqwest",
+ "serde",
+ "task-local-extensions",
+ "thiserror",
+]
+
+[[package]]
+name = "reqwest-retry"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1d5cb0170c4fa3f251c036ef482b35abc550afac6305cf875541c4b78dd76c6c"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "chrono",
+ "futures",
+ "http",
+ "hyper",
+ "reqwest",
+ "reqwest-middleware",
+ "retry-policies",
+ "task-local-extensions",
+ "tokio",
+ "tracing",
+]
+
+[[package]]
+name = "reqwest-tracing"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "03f32bd53de59d66d157bd974bafbb69fbb9e98f665d14218b5b991e7dba8d75"
+dependencies = [
+ "async-trait",
+ "opentelemetry",
+ "reqwest",
+ "reqwest-middleware",
+ "task-local-extensions",
+ "tokio",
+ "tracing",
+ "tracing-opentelemetry",
+]
+
+[[package]]
+name = "retry-policies"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "47f9e19b18c6cdd796cc70aea8a9ea5ee7b813be611c6589e3624fcdbfd05f9d"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "rand",
+]
+
+[[package]]
 name = "revai"
 version = "0.2.3"
 dependencies = [
@@ -1451,6 +1589,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1615,6 +1756,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1692,6 +1836,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "sharded-slab"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "900fba806f70c630b0a382d0d825e17a0f19fcd059a2ade1ff237bcddf446b31"
+dependencies = [
+ "lazy_static",
+]
+
+[[package]]
 name = "sheets"
 version = "0.2.2"
 dependencies = [
@@ -1710,6 +1863,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1740,6 +1896,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1769,6 +1928,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1824,6 +1986,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -1868,6 +2033,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "task-local-extensions"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "36794203e10c86e5998179e260869d156e0674f02d5451b4a3fb9fd86d02aaab"
+dependencies = [
+ "tokio",
+]
+
+[[package]]
 name = "tempfile"
 version = "3.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1879,6 +2053,35 @@ dependencies = [
  "redox_syscall",
  "remove_dir_all",
  "winapi",
+]
+
+[[package]]
+name = "thiserror"
+version = "1.0.30"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "854babe52e4df1653706b98fcfc05843010039b406875930a70e4d9644e5c417"
+dependencies = [
+ "thiserror-impl",
+]
+
+[[package]]
+name = "thiserror-impl"
+version = "1.0.30"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "aa32fd3f627f367fe16f893e2597ae3c05020f8bba2666a4e6ea73d377e5714b"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "thread_local"
+version = "1.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5516c27b78311c50bf42c071425c560ac799b11c30b31f87e3081965fe5e0180"
+dependencies = [
+ "once_cell",
 ]
 
 [[package]]
@@ -1986,7 +2189,19 @@ checksum = "84f96e095c0c82419687c20ddf5cb3eadb61f4e1405923c9dc8e53a1adacbda8"
 dependencies = [
  "cfg-if",
  "pin-project-lite",
+ "tracing-attributes",
  "tracing-core",
+]
+
+[[package]]
+name = "tracing-attributes"
+version = "0.1.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8276d9a4a3a558d7b7ad5303ad50b53d58264641b82914b7ada36bd762e7a716"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -1996,6 +2211,41 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "46125608c26121c81b0c6d693eab5a420e416da7e43c426d2e8f7df8da8a3acf"
 dependencies = [
  "lazy_static",
+]
+
+[[package]]
+name = "tracing-log"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a6923477a48e41c1951f1999ef8bb5a3023eb723ceadafe78ffb65dc366761e3"
+dependencies = [
+ "lazy_static",
+ "log",
+ "tracing-core",
+]
+
+[[package]]
+name = "tracing-opentelemetry"
+version = "0.17.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1f9378e96a9361190ae297e7f3a8ff644aacd2897f244b1ff81f381669196fa6"
+dependencies = [
+ "opentelemetry",
+ "tracing",
+ "tracing-core",
+ "tracing-log",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "tracing-subscriber"
+version = "0.3.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5312f325fe3588e277415f5a6cca1f4ccad0f248c4cd5a4bd33032d7286abc22"
+dependencies = [
+ "sharded-slab",
+ "thread_local",
+ "tracing-core",
 ]
 
 [[package]]
@@ -2017,6 +2267,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",
@@ -2307,6 +2560,9 @@ dependencies = [
  "nom_pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
  "schemars",
  "serde",
  "serde_json",

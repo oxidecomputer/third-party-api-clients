@@ -121,7 +121,7 @@ pub struct Client {
     client_id: String,
     client_secret: String,
 
-    client: reqwest::Client,
+    client: reqwest_middleware::ClientWithMiddleware,
 }
 
 use schemars::JsonSchema;
@@ -173,15 +173,28 @@ impl Client {
         T: ToString,
     {
         let client = reqwest::Client::builder().build();
+        let retry_policy =
+            reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {
-            Ok(c) => Client {
-                host: DEFAULT_HOST.to_string(),
-                client_id: client_id.to_string(),
-                client_secret: client_secret.to_string(),
-                token: token.to_string(),
+            Ok(c) => {
+                let client = reqwest_middleware::ClientBuilder::new(c)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware)
+                    // Retry failed requests.
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(
+                        retry_policy,
+                    ))
+                    .build();
 
-                client: c,
-            },
+                Client {
+                    host: DEFAULT_HOST.to_string(),
+                    client_id: client_id.to_string(),
+                    client_secret: client_secret.to_string(),
+                    token: token.to_string(),
+
+                    client,
+                }
+            }
             Err(e) => panic!("creating reqwest client failed: {:?}", e),
         }
     }

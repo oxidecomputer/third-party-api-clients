@@ -8,7 +8,7 @@ pub const GITHUB_TEMPLATE: &str = r#"/// Entrypoint for interacting with the API
 pub struct Client {
     host: String,
     agent: String,
-    client: reqwest::Client,
+    client: reqwest_middleware::ClientWithMiddleware,
     credentials: Option<crate::auth::Credentials>,
     #[cfg(feature = "httpcache")]
     http_cache: crate::http_cache::BoxedHttpCache,
@@ -30,13 +30,20 @@ impl Client {
         C: Into<Option<crate::auth::Credentials>>,
     {
         let http = reqwest::Client::builder().build()?;
+        let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
+                let client = reqwest_middleware::ClientBuilder::new(http)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware)
+                    // Retry failed requests.
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                    .build();
         #[cfg(feature = "httpcache")]
         {
             Ok(Self::custom(
                 host,
                 agent,
                 credentials,
-                http,
+                http:client,
                 <dyn crate::http_cache::HttpCache>::noop(),
             ))
         }
@@ -51,7 +58,7 @@ impl Client {
         host: H,
         agent: A,
         credentials: CR,
-        http: reqwest::Client,
+        http: reqwest_middleware::ClientWithMiddleware,
         http_cache: crate::http_cache::BoxedHttpCache,
     ) -> Self
     where
@@ -69,7 +76,7 @@ impl Client {
     }
 
     #[cfg(not(feature = "httpcache"))]
-    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: reqwest::Client) -> Self
+    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: reqwest_middleware::ClientWithMiddleware) -> Self
     where
         H: Into<String>,
         A: Into<String>,
@@ -201,7 +208,6 @@ impl Client {
             log::debug!("body: {:?}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
             req = req.body(body);
         }
-        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         #[cfg(feature = "httpcache")]
@@ -532,7 +538,7 @@ pub struct Client {{
     redirect_uri: String,
     {}
 
-    client: reqwest::Client,
+    client: reqwest_middleware::ClientWithMiddleware,
 }}
 
 {}
@@ -557,6 +563,8 @@ impl Client {{
         Q: ToString,
         {}
     {{
+        // Retry up to 3 times with increasing intervals between attempts.
+        let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         let client = reqwest::Client::builder().build();
         match client {{
             Ok(c) => {{
@@ -565,6 +573,13 @@ impl Client {{
                 // TODO: But in the future we should save the expires in date and refresh it
                 // if it needs to be refreshed.
                 //
+                let client = reqwest_middleware::ClientBuilder::new(c)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware)
+                    // Retry failed requests.
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                    .build();
+
                 Client {{
                     host: DEFAULT_HOST.to_string(),
                     client_id: client_id.to_string(),
@@ -574,7 +589,7 @@ impl Client {{
                     refresh_token: refresh_token.to_string(),
                     {}
 
-                    client: c,
+                    client,
                 }}
             }}
             Err(e) => panic!("creating reqwest client failed: {{:?}}", e),
@@ -702,13 +717,21 @@ where
         .expect("failed to read google credential file");
 
     let client = reqwest::Client::builder().build();
-    match client {
-        Ok(c) => {
+        let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
+        match client {
+            Ok(c) => {
             // We do not refresh the access token here since we leave that up to the
             // user to do so they can re-save it to their database.
             // TODO: But in the future we should save the expires in date and refresh it
             // if it needs to be refreshed.
             //
+                let client = reqwest_middleware::ClientBuilder::new(c)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware)
+                    // Retry failed requests.
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                    .build();
+
             Client {
                 host: DEFAULT_HOST.to_string(),
                 client_id: secret.client_id.to_string(),
@@ -717,7 +740,7 @@ where
                 token: token.to_string(),
                 refresh_token: refresh_token.to_string(),
 
-                client: c,
+                client,
             }
         },
         Err(e) => panic!("creating reqwest client failed: {:?}", e),
@@ -735,7 +758,7 @@ pub struct Client {{
     host: String,
     token: String,
 
-    client: reqwest::Client,
+    client: reqwest_middleware::ClientWithMiddleware,
 }}
 
 impl Client {{
@@ -749,13 +772,21 @@ impl Client {{
         T: ToString,
     {{
         let client = reqwest::Client::builder().build();
+        let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {{
             Ok(c) => {{
+                let client = reqwest_middleware::ClientBuilder::new(c)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware)
+                    // Retry failed requests.
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                    .build();
+
                 Client {{
                     host: DEFAULT_HOST.to_string(),
                     token: token.to_string(),
 
-                    client: c,
+                    client,
                 }}
             }}
             Err(e) => panic!("creating reqwest client failed: {{:?}}", e),
@@ -865,7 +896,6 @@ async fn request_raw(
         log::debug!("body: {{:?}}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
         req = req.body(body);
     }}
-    log::debug!("request: {{:?}}", &req);
     Ok(req.send().await?)
 }}
 
@@ -988,7 +1018,6 @@ async fn post_form<Out>(
     log::debug!("form: {{:?}}", form);
     req = req.multipart(form);
 
-    log::debug!("request: {{:?}}", &req);
     let response = req.send().await?;
 
     let status = response.status();
@@ -1053,7 +1082,6 @@ async fn request_with_accept_mime<Out>(
         req = req.header(http::header::AUTHORIZATION, &*auth_str);
     }}
 
-    log::debug!("request: {{:?}}", &req);
     let response = req.send().await?;
 
     let status = response.status();
@@ -1138,7 +1166,6 @@ async fn request_with_mime<Out>(
         req = req.body(b);
     }}
 
-    log::debug!("request: {{:?}}", &req);
     let response = req.send().await?;
 
     let status = response.status();
@@ -1448,7 +1475,7 @@ pub struct Client {{
     client_id: String,
     client_secret: String,
 
-    client: reqwest::Client,
+    client: reqwest_middleware::ClientWithMiddleware,
 }}
 
 {}
@@ -1468,15 +1495,23 @@ impl Client {{
         T: ToString,
     {{
         let client = reqwest::Client::builder().build();
+        let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {{
             Ok(c) => {{
+                let client = reqwest_middleware::ClientBuilder::new(c)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware)
+                    // Retry failed requests.
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                    .build();
+
                 Client {{
                     host: DEFAULT_HOST.to_string(),
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     token: token.to_string(),
 
-                    client: c,
+                    client,
                 }}
             }}
             Err(e) => panic!("creating reqwest client failed: {{:?}}", e),

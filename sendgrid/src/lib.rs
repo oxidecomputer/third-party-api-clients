@@ -157,7 +157,7 @@ pub struct Client {
     host: String,
     token: String,
 
-    client: reqwest::Client,
+    client: reqwest_middleware::ClientWithMiddleware,
 }
 
 impl Client {
@@ -169,13 +169,26 @@ impl Client {
         T: ToString,
     {
         let client = reqwest::Client::builder().build();
+        let retry_policy =
+            reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
         match client {
-            Ok(c) => Client {
-                host: DEFAULT_HOST.to_string(),
-                token: token.to_string(),
+            Ok(c) => {
+                let client = reqwest_middleware::ClientBuilder::new(c)
+                    // Trace HTTP requests. See the tracing crate to make use of these traces.
+                    .with(reqwest_tracing::TracingMiddleware)
+                    // Retry failed requests.
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(
+                        retry_policy,
+                    ))
+                    .build();
 
-                client: c,
-            },
+                Client {
+                    host: DEFAULT_HOST.to_string(),
+                    token: token.to_string(),
+
+                    client,
+                }
+            }
             Err(e) => panic!("creating reqwest client failed: {:?}", e),
         }
     }

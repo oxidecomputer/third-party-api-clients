@@ -272,7 +272,7 @@ mod progenitor_support {
 pub struct Client {
     host: String,
     agent: String,
-    client: reqwest::Client,
+    client: reqwest_middleware::ClientWithMiddleware,
     credentials: Option<crate::auth::Credentials>,
     #[cfg(feature = "httpcache")]
     http_cache: crate::http_cache::BoxedHttpCache,
@@ -294,13 +294,23 @@ impl Client {
         C: Into<Option<crate::auth::Credentials>>,
     {
         let http = reqwest::Client::builder().build()?;
+        let retry_policy =
+            reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
+        let client = reqwest_middleware::ClientBuilder::new(http)
+            // Trace HTTP requests. See the tracing crate to make use of these traces.
+            .with(reqwest_tracing::TracingMiddleware)
+            // Retry failed requests.
+            .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(
+                retry_policy,
+            ))
+            .build();
         #[cfg(feature = "httpcache")]
         {
             Ok(Self::custom(
                 host,
                 agent,
                 credentials,
-                http,
+                http: client,
                 <dyn crate::http_cache::HttpCache>::noop(),
             ))
         }
@@ -315,7 +325,7 @@ impl Client {
         host: H,
         agent: A,
         credentials: CR,
-        http: reqwest::Client,
+        http: reqwest_middleware::ClientWithMiddleware,
         http_cache: crate::http_cache::BoxedHttpCache,
     ) -> Self
     where
@@ -333,7 +343,12 @@ impl Client {
     }
 
     #[cfg(not(feature = "httpcache"))]
-    pub fn custom<H, A, CR>(host: H, agent: A, credentials: CR, http: reqwest::Client) -> Self
+    pub fn custom<H, A, CR>(
+        host: H,
+        agent: A,
+        credentials: CR,
+        http: reqwest_middleware::ClientWithMiddleware,
+    ) -> Self
     where
         H: Into<String>,
         A: Into<String>,
@@ -482,7 +497,6 @@ impl Client {
             );
             req = req.body(body);
         }
-        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         #[cfg(feature = "httpcache")]
