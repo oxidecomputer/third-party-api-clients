@@ -35,12 +35,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let token_generator = InstallationTokenGenerator::new(app_installation_id, jwt);
 
+    let http = reqwest::Client::builder().build()?;
+    let retry_policy =
+        reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
+    let client = reqwest_middleware::ClientBuilder::new(http)
+        // Trace HTTP requests. See the tracing crate to make use of these traces.
+        .with(reqwest_tracing::TracingMiddleware)
+        // Retry failed requests.
+        .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(
+            retry_policy,
+        ))
+        .build();
+
     #[cfg(not(feature = "httpcache"))]
     let github = Client::custom(
         "https://api.github.com",
         concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
         Credentials::InstallationToken(token_generator),
-        reqwest::Client::builder().build().unwrap(),
+        client,
     );
 
     #[cfg(feature = "httpcache")]
@@ -48,7 +60,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         "https://api.github.com",
         concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION")),
         Credentials::InstallationToken(token_generator),
-        reqwest::Client::builder().build().unwrap(),
+        client,
         http_cache,
     );
 
