@@ -316,7 +316,7 @@ impl Client {
         }
         #[cfg(not(feature = "httpcache"))]
         {
-            Ok(Self::custom(host, agent, credentials, http))
+            Ok(Self::custom(host, agent, credentials, client))
         }
     }
 

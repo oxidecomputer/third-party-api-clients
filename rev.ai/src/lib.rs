@@ -404,7 +404,6 @@ impl Client {
             );
             req = req.body(body);
         }
-        log::debug!("request: {:?}", &req);
         Ok(req.send().await?)
     }
 
@@ -533,7 +532,6 @@ impl Client {
         log::debug!("form: {:?}", form);
         req = req.multipart(form);
 
-        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
@@ -605,7 +603,6 @@ impl Client {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
 
-        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
@@ -698,7 +695,6 @@ impl Client {
             req = req.body(b);
         }
 
-        log::debug!("request: {:?}", &req);
         let response = req.send().await?;
 
         let status = response.status();
