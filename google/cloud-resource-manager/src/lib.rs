@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-cloud-resource-manager = "0.1.1"
+//! google-cloud-resource-manager = "0.1.2"
 //! ```
 //!
 //! ## Basic example

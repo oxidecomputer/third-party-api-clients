@@ -191,7 +191,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.34 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.35 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \
@@ -213,7 +213,7 @@ $(GOOGLE_ADMIN_SPEC): $(GOOGLE_ADMIN_SPEC_DIR)
 	curl -sSL $(GOOGLE_ADMIN_SPEC_REMOTE) -o $@
 
 google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
-	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.2.3 \
+	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.2.4 \
 		-o google/admin \
 		-n gsuite-api \
 		--proper-name "Google Admin" \
@@ -231,7 +231,7 @@ $(GOOGLE_CALENDAR_SPEC): $(GOOGLE_CALENDAR_SPEC_DIR)
 	curl -sSL $(GOOGLE_CALENDAR_SPEC_REMOTE) -o $@
 
 google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
-	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.1.3 \
+	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.1.4 \
 		-o google/calendar \
 		-n google-calendar \
 		--proper-name "Google Calendar" \
@@ -249,7 +249,7 @@ $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC): $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR)
 	curl -sSL $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_REMOTE) -o $@
 
 google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC)
-	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.1.1 \
+	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.1.2 \
 		-o google/cloud-resource-manager \
 		-n google-cloud-resource-manager \
 		--proper-name "Google Cloud Resource Manager" \
@@ -267,7 +267,7 @@ $(GOOGLE_DRIVE_SPEC): $(GOOGLE_DRIVE_SPEC_DIR)
 	curl -sSL $(GOOGLE_DRIVE_SPEC_REMOTE) -o $@
 
 google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
-	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.2.5 \
+	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.2.6 \
 		-o google/drive \
 		-n google-drive \
 		--proper-name "Google Drive" \
@@ -285,7 +285,7 @@ $(GOOGLE_GROUPS_SETTINGS_SPEC): $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR)
 	curl -sSL $(GOOGLE_GROUPS_SETTINGS_SPEC_REMOTE) -o $@
 
 google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
-	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.1.3 \
+	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.1.4 \
 		-o google/groups-settings \
 		-n google-groups-settings \
 		--proper-name "Google Groups Settings" \
@@ -321,7 +321,7 @@ $(GUSTO_SPEC): $(GUSTO_SPEC_DIR)
 	curl -sSL $(GUSTO_SPEC_REMOTE) -o $@
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.12 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.13 \
 		-o gusto \
 		-n gusto-api \
 		--proper-name Gusto \
@@ -365,7 +365,7 @@ $(OKTA_SPEC): $(OKTA_SPEC_DIR)
 		$(OKTA_SPEC_REMOTE)
 
 okta: target/debug/generator $(OKTA_SPEC)
-	./target/debug/generator -i $(OKTA_SPEC) -v 0.2.3 \
+	./target/debug/generator -i $(OKTA_SPEC) -v 0.2.4 \
 		-o okta \
 		-n okta \
 		--proper-name Okta \
@@ -387,7 +387,7 @@ $(RAMP_SPEC):
 		-o $@ $?
 
 ramp: target/debug/generator $(RAMP_SPEC)
-	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.7 \
+	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.8 \
 		-o ramp \
 		-n ramp-api \
 		--proper-name Ramp \
@@ -406,7 +406,7 @@ $(REVAI_SPEC): $(REVAI_SPEC_DIR)
 	curl -sSL $(REVAI_SPEC_REMOTE) -o $@
 
 revai: target/debug/generator $(REVAI_SPEC)
-	./target/debug/generator -i $(REVAI_SPEC) -v 0.2.3 \
+	./target/debug/generator -i $(REVAI_SPEC) -v 0.2.4 \
 		-o rev.ai \
 		-n revai \
 		--proper-name "Rev.ai" \
@@ -426,7 +426,7 @@ $(SENDGRID_SPEC): $(SENDGRID_SPEC_DIR)
 		$(SENDGRID_SPEC_REMOTE)
 
 sendgrid: target/debug/generator $(SENDGRID_SPEC)
-	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.2.2 \
 		-o sendgrid \
 		-n sendgrid-api \
 		--proper-name SendGrid \
@@ -447,7 +447,7 @@ $(SHIPBOB_SPEC): $(SHIPBOB_SPEC_DIR)
 
 .PHONY: shipbob
 shipbob: target/debug/generator $(SHIPBOB_SPEC)
-	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.2 \
+	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.3 \
 		-o shipbob \
 		-n shipbob \
 		--proper-name "ShipBob" \
@@ -508,7 +508,7 @@ $(TRIPACTIONS_SPEC): $(TRIPACTIONS_SPEC_DIR)
 	curl -sSL $(TRIPACTIONS_SPEC_REMOTE) -o $@
 
 tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
-	./target/debug/generator -i $(TRIPACTIONS_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(TRIPACTIONS_SPEC) -v 0.2.2 \
 		-o tripactions \
 		-n tripactions \
 		--proper-name "TripActions" \
@@ -529,7 +529,7 @@ $(ZOOM_SPEC): $(ZOOM_SPEC_DIR)
 		$(ZOOM_SPEC_REMOTE)
 
 zoom: target/debug/generator $(ZOOM_SPEC)
-	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.4 \
+	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.5 \
 		-o zoom \
 		-n zoom-api \
 		--proper-name Zoom \
