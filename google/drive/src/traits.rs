@@ -213,18 +213,34 @@ impl FileOps for crate::files::Files {
 
             // Create the file.
         } else {
-            method = reqwest::Method::PATCH;
+            if let Some(f) = files.get(0) {
+                method = reqwest::Method::PATCH;
+                let mut f = f.clone();
+                uri += &format!(
+                    "/{}?uploadType=resumable&supportsAllDrives=true&\
+                     includeItemsFromAllDrives=true",
+                    f.id
+                );
 
-            f = files.get(0).unwrap().clone();
-            uri += &format!(
-                "/{}?uploadType=resumable&supportsAllDrives=true&includeItemsFromAllDrives=true",
-                f.id
-            );
+                f.id = "".to_string();
+                f.drive_id = "".to_string();
+                f.kind = "".to_string();
+                f.original_filename = f.name.to_string();
+            } else {
+                // Set the name,
+                f.name = name.to_string();
+                f.mime_type = mime_type.to_string();
+                if !parent_id.is_empty() {
+                    f.parents = vec![parent_id.to_string()];
+                } else {
+                    f.parents = vec![drive_id.to_string()];
+                }
 
-            f.id = "".to_string();
-            f.drive_id = "".to_string();
-            f.kind = "".to_string();
-            f.original_filename = f.name.to_string();
+                uri +=
+                    "?uploadType=resumable&supportsAllDrives=true&includeItemsFromAllDrives=true";
+
+                // Create the file.
+            }
         }
 
         // Build the request to get the URL upload location if we need to create the file.
