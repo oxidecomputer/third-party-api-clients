@@ -70,7 +70,7 @@ impl Groups {
     pub async fn group(&self, group_id: &str) -> Result<crate::types::GroupResponse> {
         let url = format!(
             "/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -96,7 +96,7 @@ impl Groups {
     pub async fn delete(&self, group_id: &str) -> Result<()> {
         let url = format!(
             "/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -126,7 +126,7 @@ impl Groups {
     ) -> Result<()> {
         let url = format!(
             "/groups/{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
         self.client
@@ -177,7 +177,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/members?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -207,7 +207,7 @@ impl Groups {
     ) -> Result<Vec<crate::types::UserCreateResponse>> {
         let url = format!(
             "/groups/{}/members",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
         let mut resp: crate::types::GroupMembersResponseData = self.client.get(&url, None).await?;
@@ -267,7 +267,7 @@ impl Groups {
     ) -> Result<()> {
         let url = format!(
             "/groups/{}/members",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
         self.client
@@ -296,8 +296,8 @@ impl Groups {
     pub async fn members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
         let url = format!(
             "/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(member_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(&member_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -334,8 +334,8 @@ impl Groups {
     ) -> Result<()> {
         let url = format!(
             "/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(member_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(&member_id.to_string()),
         );
 
         self.client
@@ -381,7 +381,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -426,7 +426,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -471,7 +471,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -516,7 +516,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -559,7 +559,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -604,7 +604,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/lock_settings?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -647,7 +647,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/lock_settings?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -690,7 +690,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/lock_settings?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -734,7 +734,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/lock_settings?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -776,7 +776,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings/virtual_backgrounds?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 
@@ -812,7 +812,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/groups/{}/settings/virtual_backgrounds?{}",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
             query_
         );
 

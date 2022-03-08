@@ -67,7 +67,7 @@ impl Tsp {
     pub async fn user_ts_ps(&self, user_id: &str) -> Result<crate::types::UserTsPsResponse> {
         let url = format!(
             "/users/{}/tsp",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -95,7 +95,7 @@ impl Tsp {
     ) -> Result<crate::types::TspAccountsList> {
         let url = format!(
             "/users/{}/tsp",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client
@@ -123,8 +123,8 @@ impl Tsp {
     pub async fn user(&self, user_id: &str, tsp_id: &str) -> Result<crate::types::TspAccount> {
         let url = format!(
             "/users/{}/tsp/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(tsp_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&tsp_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -150,8 +150,8 @@ impl Tsp {
     pub async fn user_delete(&self, user_id: &str, tsp_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/tsp/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(tsp_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&tsp_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -182,8 +182,8 @@ impl Tsp {
     ) -> Result<()> {
         let url = format!(
             "/users/{}/tsp/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(tsp_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&tsp_id.to_string()),
         );
 
         self.client
@@ -213,7 +213,7 @@ impl Tsp {
     ) -> Result<()> {
         let url = format!(
             "/users/{}/tsp/settings",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client

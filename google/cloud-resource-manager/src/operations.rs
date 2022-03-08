@@ -24,7 +24,7 @@ impl Operations {
     pub async fn get(&self, name: &str) -> Result<crate::types::Operation> {
         let url = format!(
             "/v1/{}",
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client.get(&url, None).await

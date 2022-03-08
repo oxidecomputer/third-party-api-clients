@@ -56,8 +56,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
             query_
@@ -94,8 +94,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
             query_
@@ -132,8 +132,8 @@ impl Reactions {
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
         );
@@ -172,8 +172,8 @@ impl Reactions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/comments/{}/reactions/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&comment_number.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
@@ -224,8 +224,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
@@ -260,8 +260,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             query_
         );
@@ -295,8 +295,8 @@ impl Reactions {
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
         );
 
@@ -332,8 +332,8 @@ impl Reactions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/teams/{}/discussions/{}/reactions/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(team_slug),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&team_slug.to_string()),
             crate::progenitor_support::encode_path(&discussion_number.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
@@ -405,8 +405,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
@@ -439,8 +439,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
@@ -472,8 +472,8 @@ impl Reactions {
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
@@ -509,8 +509,8 @@ impl Reactions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/comments/{}/reactions/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
@@ -558,8 +558,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
@@ -592,8 +592,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
@@ -625,8 +625,8 @@ impl Reactions {
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
@@ -662,8 +662,8 @@ impl Reactions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}/reactions/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
@@ -711,8 +711,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             query_
         );
@@ -745,8 +745,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             query_
         );
@@ -778,8 +778,8 @@ impl Reactions {
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -815,8 +815,8 @@ impl Reactions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/{}/reactions/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
@@ -864,8 +864,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
@@ -898,8 +898,8 @@ impl Reactions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
@@ -931,8 +931,8 @@ impl Reactions {
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
@@ -968,8 +968,8 @@ impl Reactions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/pulls/comments/{}/reactions/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
             crate::progenitor_support::encode_path(&reaction_id.to_string()),
         );
@@ -1001,8 +1001,8 @@ impl Reactions {
     ) -> Result<crate::types::Reaction> {
         let url = format!(
             "/repos/{}/{}/releases/{}/reactions",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&release_id.to_string()),
         );
 

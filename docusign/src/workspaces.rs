@@ -26,7 +26,7 @@ impl Workspaces {
     pub async fn get(&self, account_id: &str) -> Result<crate::types::WorkspaceList> {
         let url = format!(
             "/v2.1/accounts/{}/workspaces",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -50,7 +50,7 @@ impl Workspaces {
     ) -> Result<crate::types::Workspace> {
         let url = format!(
             "/v2.1/accounts/{}/workspaces",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -77,8 +77,8 @@ impl Workspaces {
     ) -> Result<crate::types::Workspace> {
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&workspace_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -104,8 +104,8 @@ impl Workspaces {
     ) -> Result<crate::types::Workspace> {
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&workspace_id.to_string()),
         );
 
         self.client
@@ -132,8 +132,8 @@ impl Workspaces {
     ) -> Result<crate::types::Workspace> {
         let url = format!(
             "/v2.1/accounts/{}/workspaces/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(workspace_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&workspace_id.to_string()),
         );
 
         self.client.delete(&url, None).await

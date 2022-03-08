@@ -24,7 +24,7 @@ impl VerificationCodes {
     pub async fn list(&self, user_key: &str) -> Result<crate::types::VerificationCodes> {
         let url = format!(
             "/admin/directory/v1/users/{}/verificationCodes",
-            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(&user_key.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -42,7 +42,7 @@ impl VerificationCodes {
     pub async fn generate(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/verificationCodes/generate",
-            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(&user_key.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -60,7 +60,7 @@ impl VerificationCodes {
     pub async fn invalidate(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/verificationCodes/invalidate",
-            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(&user_key.to_string()),
         );
 
         self.client.post(&url, None).await

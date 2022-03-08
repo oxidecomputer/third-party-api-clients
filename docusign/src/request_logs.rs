@@ -70,7 +70,7 @@ impl RequestLogs {
     pub async fn api_get(&self, request_log_id: &str) -> Result<bytes::Bytes> {
         let url = format!(
             "/v2.1/diagnostics/request_logs/{}",
-            crate::progenitor_support::encode_path(request_log_id),
+            crate::progenitor_support::encode_path(&request_log_id.to_string()),
         );
 
         self.client.get(&url, None).await

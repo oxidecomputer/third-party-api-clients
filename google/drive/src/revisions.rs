@@ -39,7 +39,7 @@ impl Revisions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/revisions?{}",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
             query_
         );
 
@@ -59,7 +59,7 @@ impl Revisions {
     pub async fn list_all(&self, file_id: &str) -> Result<Vec<crate::types::Revision>> {
         let url = format!(
             "/files/{}/revisions",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
         );
 
         let mut resp: crate::types::RevisionList = self.client.get(&url, None).await?;
@@ -121,8 +121,8 @@ impl Revisions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/revisions/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(revision_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&revision_id.to_string()),
             query_
         );
 
@@ -142,8 +142,8 @@ impl Revisions {
     pub async fn delete(&self, file_id: &str, revision_id: &str) -> Result<()> {
         let url = format!(
             "/files/{}/revisions/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(revision_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&revision_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -167,8 +167,8 @@ impl Revisions {
     ) -> Result<crate::types::Revision> {
         let url = format!(
             "/files/{}/revisions/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(revision_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&revision_id.to_string()),
         );
 
         self.client

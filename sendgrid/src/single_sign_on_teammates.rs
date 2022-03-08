@@ -49,7 +49,7 @@ impl SingleSignOnTeammates {
     ) -> Result<crate::types::SsoTeammatesPatchResponseAllOf> {
         let url = format!(
             "/sso/teammates/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client

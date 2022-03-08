@@ -118,7 +118,7 @@ impl Policies {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/policies/{}?{}",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
             query_
         );
 
@@ -141,7 +141,7 @@ impl Policies {
     ) -> Result<crate::types::Policy> {
         let url = format!(
             "/api/v1/policies/{}",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
 
         self.client
@@ -161,7 +161,7 @@ impl Policies {
     pub async fn delete_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -179,7 +179,7 @@ impl Policies {
     pub async fn activate_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -197,7 +197,7 @@ impl Policies {
     pub async fn deactivate_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -218,7 +218,7 @@ impl Policies {
     ) -> Result<Vec<crate::types::PolicyRule>> {
         let url = format!(
             "/api/v1/policies/{}/rules",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -237,7 +237,7 @@ impl Policies {
     ) -> Result<Vec<crate::types::PolicyRule>> {
         let url = format!(
             "/api/v1/policies/{}/rules",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -259,7 +259,7 @@ impl Policies {
     ) -> Result<crate::types::PolicyRule> {
         let url = format!(
             "/api/v1/policies/{}/rules",
-            crate::progenitor_support::encode_path(policy_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
         );
 
         self.client
@@ -284,8 +284,8 @@ impl Policies {
     ) -> Result<crate::types::PolicyRule> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -309,8 +309,8 @@ impl Policies {
     ) -> Result<crate::types::PolicyRule> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
 
         self.client
@@ -331,8 +331,8 @@ impl Policies {
     pub async fn delete_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -351,8 +351,8 @@ impl Policies {
     pub async fn activate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -371,8 +371,8 @@ impl Policies {
     pub async fn deactivate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(policy_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&policy_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
 
         self.client.post(&url, None).await

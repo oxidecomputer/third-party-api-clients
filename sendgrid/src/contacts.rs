@@ -169,7 +169,7 @@ impl Contacts {
     pub async fn get_mc(&self, id: &str) -> Result<crate::types::ContactDetails3> {
         let url = format!(
             "/marketing/contacts/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -255,7 +255,7 @@ impl Contacts {
     pub async fn get_marketing_import(&self, id: &str) -> Result<crate::types::ContactImport> {
         let url = format!(
             "/marketing/contacts/imports/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -275,7 +275,7 @@ impl Contacts {
     pub async fn get_mc_export(&self, id: &str) -> Result<crate::types::ContactExport> {
         let url = format!(
             "/marketing/contacts/exports/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await

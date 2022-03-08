@@ -25,7 +25,7 @@ impl Compensations {
     pub async fn get(&self, compensation_id: &str) -> Result<crate::types::Compensation> {
         let url = format!(
             "/v1/compensations/{}",
-            crate::progenitor_support::encode_path(compensation_id),
+            crate::progenitor_support::encode_path(&compensation_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -47,7 +47,7 @@ impl Compensations {
     ) -> Result<crate::types::Compensation> {
         let url = format!(
             "/v1/compensations/{}",
-            crate::progenitor_support::encode_path(compensation_id),
+            crate::progenitor_support::encode_path(&compensation_id.to_string()),
         );
 
         self.client
@@ -69,7 +69,7 @@ impl Compensations {
     pub async fn get_job(&self, job_id: &str) -> Result<Vec<crate::types::Compensation>> {
         let url = format!(
             "/v1/jobs/{}/compensations",
-            crate::progenitor_support::encode_path(job_id),
+            crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -91,7 +91,7 @@ impl Compensations {
     pub async fn get_all_job(&self, job_id: &str) -> Result<Vec<crate::types::Compensation>> {
         let url = format!(
             "/v1/jobs/{}/compensations",
-            crate::progenitor_support::encode_path(job_id),
+            crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await

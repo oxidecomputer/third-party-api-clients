@@ -31,7 +31,7 @@ impl ConnectConfigurations {
     ) -> Result<crate::types::ConnectConfigResults> {
         let url = format!(
             "/v2.1/accounts/{}/connect",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -57,7 +57,7 @@ impl ConnectConfigurations {
     ) -> Result<crate::types::ConnectCustomConfiguration> {
         let url = format!(
             "/v2.1/accounts/{}/connect",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -86,7 +86,7 @@ impl ConnectConfigurations {
     ) -> Result<crate::types::ConnectCustomConfiguration> {
         let url = format!(
             "/v2.1/accounts/{}/connect",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -116,8 +116,8 @@ impl ConnectConfigurations {
     ) -> Result<crate::types::ConnectConfigResults> {
         let url = format!(
             "/v2.1/accounts/{}/connect/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(connect_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&connect_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -143,8 +143,8 @@ impl ConnectConfigurations {
     pub async fn connect_delete_config(&self, account_id: &str, connect_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/connect/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(connect_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&connect_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -218,8 +218,8 @@ impl ConnectConfigurations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/connect/{}/users?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(connect_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&connect_id.to_string()),
             query_
         );
 

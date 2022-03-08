@@ -45,9 +45,9 @@ impl EnvelopeTemplates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
             query_
         );
 
@@ -86,9 +86,9 @@ impl EnvelopeTemplates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
             query_
         );
 
@@ -120,10 +120,10 @@ impl EnvelopeTemplates {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/templates/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -156,8 +156,8 @@ impl EnvelopeTemplates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/templates?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
             query_
         );
 
@@ -194,8 +194,8 @@ impl EnvelopeTemplates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/templates?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
             query_
         );
 

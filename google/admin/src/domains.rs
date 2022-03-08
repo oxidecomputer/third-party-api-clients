@@ -24,7 +24,7 @@ impl Domains {
     pub async fn list(&self, customer: &str) -> Result<crate::types::Domains2> {
         let url = format!(
             "/admin/directory/v1/customer/{}/domains",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -46,7 +46,7 @@ impl Domains {
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/admin/directory/v1/customer/{}/domains",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
         );
 
         self.client
@@ -67,8 +67,8 @@ impl Domains {
     pub async fn get(&self, customer: &str, domain_name: &str) -> Result<crate::types::Domains> {
         let url = format!(
             "/admin/directory/v1/customer/{}/domains/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(domain_name),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&domain_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -87,8 +87,8 @@ impl Domains {
     pub async fn delete(&self, customer: &str, domain_name: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/domains/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(domain_name),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&domain_name.to_string()),
         );
 
         self.client.delete(&url, None).await

@@ -115,7 +115,7 @@ impl MarketingCampaignsStats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/stats/automations/{}?{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
             query_
         );
 
@@ -220,7 +220,7 @@ impl MarketingCampaignsStats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/stats/singlesends/{}?{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
             query_
         );
 
@@ -271,7 +271,7 @@ impl MarketingCampaignsStats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/stats/automations/{}/links?{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
             query_
         );
 
@@ -327,7 +327,7 @@ impl MarketingCampaignsStats {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/stats/singlesends/{}/links?{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
             query_
         );
 

@@ -216,8 +216,7 @@ impl FileOps for crate::files::Files {
             method = reqwest::Method::PATCH;
             let mut f = f.clone();
             uri += &format!(
-                "/{}?uploadType=resumable&supportsAllDrives=true&\
-                 includeItemsFromAllDrives=true",
+                "/{}?uploadType=resumable&supportsAllDrives=true&includeItemsFromAllDrives=true",
                 f.id
             );
 
@@ -235,8 +234,7 @@ impl FileOps for crate::files::Files {
                 f.parents = vec![drive_id.to_string()];
             }
 
-            uri +=
-                "?uploadType=resumable&supportsAllDrives=true&includeItemsFromAllDrives=true";
+            uri += "?uploadType=resumable&supportsAllDrives=true&includeItemsFromAllDrives=true";
 
             // Create the file.
         }
