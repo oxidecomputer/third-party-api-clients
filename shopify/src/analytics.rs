@@ -120,7 +120,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
             query_
         );
 
@@ -145,7 +145,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client
@@ -170,7 +170,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client.delete(&url, None).await
@@ -284,7 +284,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
             query_
         );
 
@@ -309,7 +309,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client
@@ -334,7 +334,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client.delete(&url, None).await
@@ -448,7 +448,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
             query_
         );
 
@@ -473,7 +473,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client
@@ -498,7 +498,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client.delete(&url, None).await
@@ -608,7 +608,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
             query_
         );
 
@@ -633,7 +633,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client
@@ -655,7 +655,7 @@ impl Analytics {
     pub async fn delete_reports_param_report(&self, report_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client.delete(&url, None).await
@@ -769,7 +769,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
             query_
         );
 
@@ -794,7 +794,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client
@@ -819,7 +819,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client.delete(&url, None).await
@@ -933,7 +933,7 @@ impl Analytics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/reports/{}/json?{}",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
             query_
         );
 
@@ -958,7 +958,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client
@@ -983,7 +983,7 @@ impl Analytics {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/reports/{}/json",
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(report_id),
         );
 
         self.client.delete(&url, None).await

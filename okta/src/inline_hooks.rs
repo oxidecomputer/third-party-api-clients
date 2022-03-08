@@ -77,7 +77,7 @@ impl InlineHooks {
     pub async fn get(&self, inline_hook_id: &str) -> Result<crate::types::InlineHook> {
         let url = format!(
             "/api/v1/inlineHooks/{}",
-            crate::progenitor_support::encode_path(&inline_hook_id.to_string()),
+            crate::progenitor_support::encode_path(inline_hook_id),
         );
 
         self.client.get(&url, None).await
@@ -99,7 +99,7 @@ impl InlineHooks {
     ) -> Result<crate::types::InlineHook> {
         let url = format!(
             "/api/v1/inlineHooks/{}",
-            crate::progenitor_support::encode_path(&inline_hook_id.to_string()),
+            crate::progenitor_support::encode_path(inline_hook_id),
         );
 
         self.client
@@ -119,7 +119,7 @@ impl InlineHooks {
     pub async fn delete(&self, inline_hook_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/inlineHooks/{}",
-            crate::progenitor_support::encode_path(&inline_hook_id.to_string()),
+            crate::progenitor_support::encode_path(inline_hook_id),
         );
 
         self.client.delete(&url, None).await
@@ -141,7 +141,7 @@ impl InlineHooks {
     ) -> Result<crate::types::InlineHookResponse> {
         let url = format!(
             "/api/v1/inlineHooks/{}/execute",
-            crate::progenitor_support::encode_path(&inline_hook_id.to_string()),
+            crate::progenitor_support::encode_path(inline_hook_id),
         );
 
         self.client
@@ -161,7 +161,7 @@ impl InlineHooks {
     pub async fn activate(&self, inline_hook_id: &str) -> Result<crate::types::InlineHook> {
         let url = format!(
             "/api/v1/inlineHooks/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(&inline_hook_id.to_string()),
+            crate::progenitor_support::encode_path(inline_hook_id),
         );
 
         self.client.post(&url, None).await
@@ -179,7 +179,7 @@ impl InlineHooks {
     pub async fn deactivate(&self, inline_hook_id: &str) -> Result<crate::types::InlineHook> {
         let url = format!(
             "/api/v1/inlineHooks/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(&inline_hook_id.to_string()),
+            crate::progenitor_support::encode_path(inline_hook_id),
         );
 
         self.client.post(&url, None).await

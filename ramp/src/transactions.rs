@@ -264,7 +264,7 @@ impl Transactions {
     pub async fn get_resource(&self, id: &str) -> Result<crate::types::Data> {
         let url = format!(
             "/transactions/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

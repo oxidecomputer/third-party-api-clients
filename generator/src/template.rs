@@ -483,7 +483,7 @@ pub fn generate_docs_openapi_info(
 ) -> String {
     let mut description = String::new();
     if let Some(d) = &api.info.description {
-        description = d.replace("\n", "\n//! ");
+        description = d.replace('\n', "\n//! ");
     }
 
     let mut tos = String::new();
@@ -707,7 +707,7 @@ pub fn generate_docs_generic_token(
 //! ```
 //!"#,
         info,
-        name.replace("_", "-").to_lowercase(),
+        name.replace('_', "-").to_lowercase(),
         version,
         name,
         proper_name.to_lowercase(),
@@ -772,7 +772,7 @@ pub fn generate_docs_generic_api_key(
 //! ```
 //!"#,
         info,
-        name.replace("_", "-").to_lowercase(),
+        name.replace('_', "-").to_lowercase(),
         version,
         name,
         proper_name.to_lowercase(),
@@ -847,7 +847,7 @@ pub fn generate_docs_generic_client_credentials(
 //! ```
 //!"#,
         info,
-        name.replace("_", "-").to_lowercase(),
+        name.replace('_', "-").to_lowercase(),
         version,
         name,
         proper_name.to_lowercase(),

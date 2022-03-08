@@ -1062,7 +1062,7 @@ fn get_fn_docs(
         let mut docs = ts.render_docs(&pid);
         if let Some(d) = &parameter_data.description {
             if !d.is_empty() && d.len() > docs.len() {
-                docs = format!(" -- {}.", d.trim_end_matches('.').replace("\n", "\n*   "));
+                docs = format!(" -- {}.", d.trim_end_matches('.').replace('\n', "\n*   "));
             } else if !docs.is_empty() {
                 docs = format!(
                     " -- {}.",

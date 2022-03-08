@@ -144,7 +144,7 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/templates/{}?{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
             query_
         );
 
@@ -165,7 +165,7 @@ impl Templates {
     pub async fn delete(&self, template_id: &str) -> Result<()> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client.delete(&url, None).await
@@ -189,7 +189,7 @@ impl Templates {
     ) -> Result<crate::types::Templates> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client
@@ -226,7 +226,7 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/templates/{}/default-content?{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
             query_
         );
 

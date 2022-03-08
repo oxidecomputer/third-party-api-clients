@@ -135,7 +135,7 @@ impl Settings {
     pub async fn get(&self, setting: &str) -> Result<crate::types::Setting> {
         let url = format!(
             "/users/me/settings/{}",
-            crate::progenitor_support::encode_path(&setting.to_string()),
+            crate::progenitor_support::encode_path(setting),
         );
 
         self.client.get(&url, None).await

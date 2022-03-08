@@ -38,8 +38,8 @@ impl TemplateDocuments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
             query_
         );
 
@@ -66,8 +66,8 @@ impl TemplateDocuments {
     ) -> Result<crate::types::TemplateDocumentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client
@@ -109,8 +109,8 @@ impl TemplateDocuments {
     ) -> Result<crate::types::TemplateDocumentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client
@@ -153,9 +153,9 @@ impl TemplateDocuments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
             query_
         );
 
@@ -194,9 +194,9 @@ impl TemplateDocuments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
             query_
         );
 

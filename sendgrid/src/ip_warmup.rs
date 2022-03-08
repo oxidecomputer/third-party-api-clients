@@ -70,7 +70,7 @@ impl IpWarmup {
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
         let url = format!(
             "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(&ip_address.to_string()),
+            crate::progenitor_support::encode_path(ip_address),
         );
 
         self.client.get(&url, None).await
@@ -93,7 +93,7 @@ impl IpWarmup {
     ) -> Result<Vec<crate::types::IpWarmupResponse>> {
         let url = format!(
             "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(&ip_address.to_string()),
+            crate::progenitor_support::encode_path(ip_address),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -114,7 +114,7 @@ impl IpWarmup {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/ips/warmup/{}",
-            crate::progenitor_support::encode_path(&ip_address.to_string()),
+            crate::progenitor_support::encode_path(ip_address),
         );
 
         self.client.delete(&url, None).await

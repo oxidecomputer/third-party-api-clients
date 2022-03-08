@@ -43,7 +43,7 @@ impl EnvelopeTransferRules {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
 
@@ -70,7 +70,7 @@ impl EnvelopeTransferRules {
     ) -> Result<crate::types::EnvelopeTransferRuleInformation> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
@@ -107,7 +107,7 @@ impl EnvelopeTransferRules {
     ) -> Result<crate::types::EnvelopeTransferRuleInformation> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
@@ -139,8 +139,8 @@ impl EnvelopeTransferRules {
     ) -> Result<crate::types::EnvelopeTransferRule> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_transfer_rule_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_transfer_rule_id),
         );
 
         self.client
@@ -165,8 +165,8 @@ impl EnvelopeTransferRules {
     pub async fn delete(&self, account_id: &str, envelope_transfer_rule_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_transfer_rule_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_transfer_rule_id),
         );
 
         self.client.delete(&url, None).await

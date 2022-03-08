@@ -46,7 +46,7 @@ impl Features {
     pub async fn get(&self, feature_id: &str) -> Result<crate::types::Feature> {
         let url = format!(
             "/api/v1/features/{}",
-            crate::progenitor_support::encode_path(&feature_id.to_string()),
+            crate::progenitor_support::encode_path(feature_id),
         );
 
         self.client.get(&url, None).await
@@ -64,7 +64,7 @@ impl Features {
     pub async fn list_dependencies(&self, feature_id: &str) -> Result<Vec<crate::types::Feature>> {
         let url = format!(
             "/api/v1/features/{}/dependencies",
-            crate::progenitor_support::encode_path(&feature_id.to_string()),
+            crate::progenitor_support::encode_path(feature_id),
         );
 
         self.client.get(&url, None).await
@@ -83,7 +83,7 @@ impl Features {
     ) -> Result<Vec<crate::types::Feature>> {
         let url = format!(
             "/api/v1/features/{}/dependencies",
-            crate::progenitor_support::encode_path(&feature_id.to_string()),
+            crate::progenitor_support::encode_path(feature_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -101,7 +101,7 @@ impl Features {
     pub async fn list_dependents(&self, feature_id: &str) -> Result<Vec<crate::types::Feature>> {
         let url = format!(
             "/api/v1/features/{}/dependents",
-            crate::progenitor_support::encode_path(&feature_id.to_string()),
+            crate::progenitor_support::encode_path(feature_id),
         );
 
         self.client.get(&url, None).await
@@ -120,7 +120,7 @@ impl Features {
     ) -> Result<Vec<crate::types::Feature>> {
         let url = format!(
             "/api/v1/features/{}/dependents",
-            crate::progenitor_support::encode_path(&feature_id.to_string()),
+            crate::progenitor_support::encode_path(feature_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -150,8 +150,8 @@ impl Features {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/features/{}/{}?{}",
-            crate::progenitor_support::encode_path(&feature_id.to_string()),
-            crate::progenitor_support::encode_path(&lifecycle.to_string()),
+            crate::progenitor_support::encode_path(feature_id),
+            crate::progenitor_support::encode_path(lifecycle),
             query_
         );
 
