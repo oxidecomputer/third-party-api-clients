@@ -59,7 +59,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/groups?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
 
@@ -84,7 +84,7 @@ impl Groups {
     ) -> Result<crate::types::GroupInformation> {
         let url = format!(
             "/v2.1/accounts/{}/groups",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
@@ -112,7 +112,7 @@ impl Groups {
     ) -> Result<crate::types::GroupInformation> {
         let url = format!(
             "/v2.1/accounts/{}/groups",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
@@ -152,7 +152,7 @@ impl Groups {
     ) -> Result<crate::types::GroupInformation> {
         let url = format!(
             "/v2.1/accounts/{}/groups",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client

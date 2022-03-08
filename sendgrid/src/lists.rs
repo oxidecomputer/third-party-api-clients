@@ -73,7 +73,7 @@ impl Lists {
     ) -> Result<crate::types::GetMcListsContactsCountResponse> {
         let url = format!(
             "/marketing/lists/{}/contacts/count",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -106,7 +106,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/lists/{}?{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
             query_
         );
 
@@ -138,7 +138,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/lists/{}?{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
             query_
         );
 
@@ -159,7 +159,7 @@ impl Lists {
     ) -> Result<crate::types::List> {
         let url = format!(
             "/marketing/lists/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -192,7 +192,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/lists/{}/contacts?{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
             query_
         );
 

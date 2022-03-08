@@ -92,7 +92,7 @@ impl ApiKeys {
     pub async fn get_key(&self, api_key_id: &str) -> Result<crate::types::GetApiKeysKeyResponse> {
         let url = format!(
             "/api_keys/{}",
-            crate::progenitor_support::encode_path(&api_key_id.to_string()),
+            crate::progenitor_support::encode_path(api_key_id),
         );
 
         self.client.get(&url, None).await
@@ -122,7 +122,7 @@ impl ApiKeys {
     ) -> Result<crate::types::ApiKeyNameScopesAllOf> {
         let url = format!(
             "/api_keys/{}",
-            crate::progenitor_support::encode_path(&api_key_id.to_string()),
+            crate::progenitor_support::encode_path(api_key_id),
         );
 
         self.client
@@ -146,7 +146,7 @@ impl ApiKeys {
     pub async fn delete_key(&self, api_key_id: &str) -> Result<()> {
         let url = format!(
             "/api_keys/{}",
-            crate::progenitor_support::encode_path(&api_key_id.to_string()),
+            crate::progenitor_support::encode_path(api_key_id),
         );
 
         self.client.delete(&url, None).await
@@ -172,7 +172,7 @@ impl ApiKeys {
     ) -> Result<crate::types::ApiKeyNameId> {
         let url = format!(
             "/api_keys/{}",
-            crate::progenitor_support::encode_path(&api_key_id.to_string()),
+            crate::progenitor_support::encode_path(api_key_id),
         );
 
         self.client

@@ -30,7 +30,7 @@ impl TransactionalTemplatesVersions {
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = format!(
             "/templates/{}/versions",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client
@@ -56,8 +56,8 @@ impl TransactionalTemplatesVersions {
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = format!(
             "/templates/{}/versions/{}/activate",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&version_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(version_id),
         );
 
         self.client.post(&url, None).await
@@ -81,8 +81,8 @@ impl TransactionalTemplatesVersions {
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = format!(
             "/templates/{}/versions/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&version_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(version_id),
         );
 
         self.client.get(&url, None).await
@@ -106,8 +106,8 @@ impl TransactionalTemplatesVersions {
     ) -> Result<()> {
         let url = format!(
             "/templates/{}/versions/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&version_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(version_id),
         );
 
         self.client.delete(&url, None).await
@@ -132,8 +132,8 @@ impl TransactionalTemplatesVersions {
     ) -> Result<crate::types::TransactionalTemplateVersionOutputAllOf> {
         let url = format!(
             "/templates/{}/versions/{}",
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&version_id.to_string()),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(version_id),
         );
 
         self.client

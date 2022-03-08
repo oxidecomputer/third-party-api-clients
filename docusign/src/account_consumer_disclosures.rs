@@ -86,7 +86,7 @@ impl AccountConsumerDisclosures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/consumer_disclosure?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
 
@@ -162,8 +162,8 @@ impl AccountConsumerDisclosures {
     ) -> Result<crate::types::AccountConsumerDisclosures> {
         let url = format!(
             "/v2.1/accounts/{}/consumer_disclosure/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&lang_code.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(lang_code),
         );
 
         self.client.get(&url, None).await
@@ -291,8 +291,8 @@ impl AccountConsumerDisclosures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/consumer_disclosure/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&lang_code.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(lang_code),
             query_
         );
 

@@ -132,7 +132,7 @@ impl Cards {
     pub async fn get(&self, id: &str) -> Result<crate::types::Card> {
         let url = format!(
             "/cards/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -156,7 +156,7 @@ impl Cards {
     ) -> Result<()> {
         let url = format!(
             "/cards/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -220,7 +220,7 @@ impl Cards {
     ) -> Result<crate::types::TaskResponse> {
         let url = format!(
             "/cards/{}/deferred/termination",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -242,7 +242,7 @@ impl Cards {
     ) -> Result<crate::types::TaskResponse> {
         let url = format!(
             "/cards/{}/deferred/suspension",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -264,7 +264,7 @@ impl Cards {
     ) -> Result<crate::types::TaskResponse> {
         let url = format!(
             "/cards/{}/deferred/unsuspension",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -289,7 +289,7 @@ impl Cards {
     ) -> Result<crate::types::GetResourcesCardsDeferredResponse> {
         let url = format!(
             "/cards/deferred/status/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

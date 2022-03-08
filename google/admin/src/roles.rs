@@ -39,7 +39,7 @@ impl Roles {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/roles?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -59,7 +59,7 @@ impl Roles {
     pub async fn list_all(&self, customer: &str) -> Result<Vec<crate::types::Role>> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         let mut resp: crate::types::Roles = self.client.get(&url, None).await?;
@@ -110,7 +110,7 @@ impl Roles {
     ) -> Result<crate::types::Role> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client
@@ -131,8 +131,8 @@ impl Roles {
     pub async fn get(&self, customer: &str, role_id: &str) -> Result<crate::types::Role> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&role_id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(role_id),
         );
 
         self.client.get(&url, None).await
@@ -156,8 +156,8 @@ impl Roles {
     ) -> Result<crate::types::Role> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&role_id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(role_id),
         );
 
         self.client
@@ -178,8 +178,8 @@ impl Roles {
     pub async fn delete(&self, customer: &str, role_id: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&role_id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(role_id),
         );
 
         self.client.delete(&url, None).await
@@ -203,8 +203,8 @@ impl Roles {
     ) -> Result<crate::types::Role> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&role_id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(role_id),
         );
 
         self.client

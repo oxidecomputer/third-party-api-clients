@@ -46,7 +46,7 @@ impl AccountSignatures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/signatures?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
 
@@ -72,7 +72,7 @@ impl AccountSignatures {
     ) -> Result<crate::types::AccountSignaturesInformation> {
         let url = format!(
             "/v2.1/accounts/{}/signatures",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
@@ -106,7 +106,7 @@ impl AccountSignatures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/signatures?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
 
@@ -134,8 +134,8 @@ impl AccountSignatures {
     ) -> Result<crate::types::AccountSignature> {
         let url = format!(
             "/v2.1/accounts/{}/signatures/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&signature_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(signature_id),
         );
 
         self.client.get(&url, None).await
@@ -171,8 +171,8 @@ impl AccountSignatures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/signatures/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&signature_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(signature_id),
             query_
         );
 
@@ -196,8 +196,8 @@ impl AccountSignatures {
     pub async fn delete_signature(&self, account_id: &str, signature_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/signatures/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&signature_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(signature_id),
         );
 
         self.client.delete(&url, None).await
@@ -234,9 +234,9 @@ impl AccountSignatures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/signatures/{}/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&signature_id.to_string()),
-            crate::progenitor_support::encode_path(&image_type.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(signature_id),
+            crate::progenitor_support::encode_path(image_type),
             query_
         );
 
@@ -274,9 +274,9 @@ impl AccountSignatures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/signatures/{}/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&signature_id.to_string()),
-            crate::progenitor_support::encode_path(&image_type.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(signature_id),
+            crate::progenitor_support::encode_path(image_type),
             query_
         );
 
@@ -307,9 +307,9 @@ impl AccountSignatures {
     ) -> Result<crate::types::AccountSignature> {
         let url = format!(
             "/v2.1/accounts/{}/signatures/{}/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&signature_id.to_string()),
-            crate::progenitor_support::encode_path(&image_type.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(signature_id),
+            crate::progenitor_support::encode_path(image_type),
         );
 
         self.client.delete(&url, None).await
