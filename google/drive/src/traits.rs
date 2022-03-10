@@ -245,20 +245,20 @@ impl FileOps for crate::files::Files {
             .request_raw(
                 method,
                 &uri,
-                Some(reqwest::Body::from(serde_json::to_vec(&f).unwrap())),
+                Some(reqwest::Body::from(serde_json::to_vec(&f)?)),
             )
-            .await
-            .unwrap();
+            .await?;
 
         // Get the "Location" header.
-        let location = resp.headers().get("Location").unwrap().to_str().unwrap();
+        let location = match resp.headers().get("Location") {
+            Some(location) => location.to_str()?,
+            None => anyhow::bail!("No Location header"),
+        };
 
         // Now upload the file to that location.
-        Ok(self
-            .client
+        self.client
             .request_with_mime(reqwest::Method::PUT, location, contents, mime_type)
             .await
-            .unwrap())
     }
 
     /// Download a file by it's ID.
@@ -270,10 +270,9 @@ impl FileOps for crate::files::Files {
                 &format!("/files/{}?supportsAllDrives=true&alt=media", id),
                 None,
             )
-            .await
-            .unwrap();
+            .await?;
 
-        Ok(resp.bytes().await.unwrap())
+        Ok(resp.bytes().await?)
     }
 
     /// Create a folder, if it doesn't exist, returns the ID of the folder.
@@ -324,10 +323,9 @@ impl FileOps for crate::files::Files {
             .client
             .post(
                 "/files?supportsAllDrives=true&includeItemsFromAllDrives=true",
-                Some(reqwest::Body::from(serde_json::to_vec(&file).unwrap())),
+                Some(reqwest::Body::from(serde_json::to_vec(&file)?)),
             )
-            .await
-            .unwrap();
+            .await?;
 
         Ok(folder.id)
     }
@@ -351,10 +349,9 @@ impl FileOps for crate::files::Files {
         let resp = self
             .client
             .request_raw(reqwest::Method::GET, &url, None)
-            .await
-            .unwrap();
+            .await?;
 
-        Ok(resp.text().await.unwrap())
+        Ok(resp.text().await?)
     }
 
     /// Delete a file by its name.
@@ -394,8 +391,7 @@ impl DriveOps for crate::drives::Drives {
                 //&format!("name = '{}'", name), // query
                 "", true, // use domain admin access
             )
-            .await
-            .unwrap();
+            .await?;
 
         for drive in drives {
             if drive.name == name {
