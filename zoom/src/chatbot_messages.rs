@@ -57,7 +57,7 @@ impl ChatbotMessages {
     ) -> Result<crate::types::EditChatbotMessageResponse> {
         let url = format!(
             "/im/chat/messages/{}",
-            crate::progenitor_support::encode_path(&message_id.to_string()),
+            crate::progenitor_support::encode_path(message_id),
         );
 
         self.client
@@ -81,7 +81,7 @@ impl ChatbotMessages {
     ) -> Result<crate::types::DeleteChatbotMessageResponse> {
         let url = format!(
             "/im/chat/messages/{}",
-            crate::progenitor_support::encode_path(&message_id.to_string()),
+            crate::progenitor_support::encode_path(message_id),
         );
 
         self.client

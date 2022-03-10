@@ -163,7 +163,7 @@ impl CommonAreaPhones {
     ) -> Result<crate::types::GetCommonAreaPhoneResponse> {
         let url = format!(
             "/phone/common_area_phones/{}",
-            crate::progenitor_support::encode_path(&common_area_phone_id.to_string()),
+            crate::progenitor_support::encode_path(common_area_phone_id),
         );
 
         self.client.get(&url, None).await
@@ -190,7 +190,7 @@ impl CommonAreaPhones {
     pub async fn delete(&self, common_area_phone_id: &str) -> Result<()> {
         let url = format!(
             "/phone/common_area_phones/{}",
-            crate::progenitor_support::encode_path(&common_area_phone_id.to_string()),
+            crate::progenitor_support::encode_path(common_area_phone_id),
         );
 
         self.client.delete(&url, None).await
@@ -220,7 +220,7 @@ impl CommonAreaPhones {
     ) -> Result<()> {
         let url = format!(
             "/phone/common_area_phones/{}",
-            crate::progenitor_support::encode_path(&common_area_phone_id.to_string()),
+            crate::progenitor_support::encode_path(common_area_phone_id),
         );
 
         self.client
@@ -249,7 +249,7 @@ impl CommonAreaPhones {
     ) -> Result<crate::types::AssignPhoneNumbersCommonAreaResponseData> {
         let url = format!(
             "/phone/common_area_phones/{}/phone_numbers",
-            crate::progenitor_support::encode_path(&common_area_phone_id.to_string()),
+            crate::progenitor_support::encode_path(common_area_phone_id),
         );
 
         self.client
@@ -282,8 +282,8 @@ impl CommonAreaPhones {
     ) -> Result<()> {
         let url = format!(
             "/phone/common_area_phones/{}/phone_numbers/{}",
-            crate::progenitor_support::encode_path(&common_area_phone_id.to_string()),
-            crate::progenitor_support::encode_path(&phone_number_id.to_string()),
+            crate::progenitor_support::encode_path(common_area_phone_id),
+            crate::progenitor_support::encode_path(phone_number_id),
         );
 
         self.client.delete(&url, None).await
@@ -310,7 +310,7 @@ impl CommonAreaPhones {
     ) -> Result<crate::types::AssignCallingPlansCommonAreaPhoneResponseData> {
         let url = format!(
             "/phone/common_area_phones/{}/calling_plans",
-            crate::progenitor_support::encode_path(&common_area_phone_id.to_string()),
+            crate::progenitor_support::encode_path(common_area_phone_id),
         );
 
         self.client
@@ -343,8 +343,8 @@ impl CommonAreaPhones {
     ) -> Result<()> {
         let url = format!(
             "/phone/common_area_phones/{}/calling_plans/{}",
-            crate::progenitor_support::encode_path(&common_area_phone_id.to_string()),
-            crate::progenitor_support::encode_path(&type_.to_string()),
+            crate::progenitor_support::encode_path(common_area_phone_id),
+            crate::progenitor_support::encode_path(type_),
         );
 
         self.client.delete(&url, None).await

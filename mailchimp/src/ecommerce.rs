@@ -158,7 +158,7 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
             query_
         );
 
@@ -179,7 +179,7 @@ impl Ecommerce {
     pub async fn delete_stores(&self, store_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
         );
 
         self.client.delete(&url, None).await
@@ -203,7 +203,7 @@ impl Ecommerce {
     ) -> Result<crate::types::Stores> {
         let url = format!(
             "/ecommerce/stores/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
         );
 
         self.client
@@ -250,7 +250,7 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/carts?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
             query_
         );
 
@@ -275,7 +275,7 @@ impl Ecommerce {
     ) -> Result<crate::types::Carts> {
         let url = format!(
             "/ecommerce/stores/{}/carts",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
         );
 
         self.client
@@ -314,8 +314,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/carts/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&cart_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(cart_id),
             query_
         );
 
@@ -337,8 +337,8 @@ impl Ecommerce {
     pub async fn delete_stores_carts(&self, store_id: &str, cart_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/carts/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&cart_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(cart_id),
         );
 
         self.client.delete(&url, None).await
@@ -364,8 +364,8 @@ impl Ecommerce {
     ) -> Result<crate::types::Carts> {
         let url = format!(
             "/ecommerce/stores/{}/carts/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&cart_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(cart_id),
         );
 
         self.client
@@ -414,8 +414,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/carts/{}/lines?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&cart_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(cart_id),
             query_
         );
 
@@ -442,8 +442,8 @@ impl Ecommerce {
     ) -> Result<crate::types::ECommerceCartLineItem> {
         let url = format!(
             "/ecommerce/stores/{}/carts/{}/lines",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&cart_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(cart_id),
         );
 
         self.client
@@ -484,9 +484,9 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/carts/{}/lines/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&cart_id.to_string()),
-            crate::progenitor_support::encode_path(&line_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(cart_id),
+            crate::progenitor_support::encode_path(line_id),
             query_
         );
 
@@ -514,9 +514,9 @@ impl Ecommerce {
     ) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/carts/{}/lines/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&cart_id.to_string()),
-            crate::progenitor_support::encode_path(&line_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(cart_id),
+            crate::progenitor_support::encode_path(line_id),
         );
 
         self.client.delete(&url, None).await
@@ -544,9 +544,9 @@ impl Ecommerce {
     ) -> Result<crate::types::ECommerceCartLineItem> {
         let url = format!(
             "/ecommerce/stores/{}/carts/{}/lines/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&cart_id.to_string()),
-            crate::progenitor_support::encode_path(&line_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(cart_id),
+            crate::progenitor_support::encode_path(line_id),
         );
 
         self.client
@@ -598,7 +598,7 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/customers?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
             query_
         );
 
@@ -623,7 +623,7 @@ impl Ecommerce {
     ) -> Result<crate::types::Customer> {
         let url = format!(
             "/ecommerce/stores/{}/customers",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
         );
 
         self.client
@@ -662,8 +662,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/customers/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(customer_id),
             query_
         );
 
@@ -690,8 +690,8 @@ impl Ecommerce {
     ) -> Result<crate::types::Customer> {
         let url = format!(
             "/ecommerce/stores/{}/customers/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -714,8 +714,8 @@ impl Ecommerce {
     pub async fn delete_stores_customers(&self, store_id: &str, customer_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/customers/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client.delete(&url, None).await
@@ -741,8 +741,8 @@ impl Ecommerce {
     ) -> Result<crate::types::Customer> {
         let url = format!(
             "/ecommerce/stores/{}/customers/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(customer_id),
         );
 
         self.client
@@ -789,7 +789,7 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/promo-rules?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
             query_
         );
 
@@ -814,7 +814,7 @@ impl Ecommerce {
     ) -> Result<crate::types::PromoRules> {
         let url = format!(
             "/ecommerce/stores/{}/promo-rules",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
         );
 
         self.client
@@ -853,8 +853,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/promo-rules/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(promo_rule_id),
             query_
         );
 
@@ -880,8 +880,8 @@ impl Ecommerce {
     ) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/promo-rules/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(promo_rule_id),
         );
 
         self.client.delete(&url, None).await
@@ -907,8 +907,8 @@ impl Ecommerce {
     ) -> Result<crate::types::PromoRules> {
         let url = format!(
             "/ecommerce/stores/{}/promo-rules/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(promo_rule_id),
         );
 
         self.client
@@ -957,8 +957,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/promo-rules/{}/promo-codes?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(promo_rule_id),
             query_
         );
 
@@ -985,8 +985,8 @@ impl Ecommerce {
     ) -> Result<crate::types::PromoCodes> {
         let url = format!(
             "/ecommerce/stores/{}/promo-rules/{}/promo-codes",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(promo_rule_id),
         );
 
         self.client
@@ -1027,9 +1027,9 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/promo-rules/{}/promo-codes/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_code_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(promo_rule_id),
+            crate::progenitor_support::encode_path(promo_code_id),
             query_
         );
 
@@ -1057,9 +1057,9 @@ impl Ecommerce {
     ) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/promo-rules/{}/promo-codes/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_code_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(promo_rule_id),
+            crate::progenitor_support::encode_path(promo_code_id),
         );
 
         self.client.delete(&url, None).await
@@ -1087,9 +1087,9 @@ impl Ecommerce {
     ) -> Result<crate::types::PromoCodes> {
         let url = format!(
             "/ecommerce/stores/{}/promo-rules/{}/promo-codes/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&promo_code_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(promo_rule_id),
+            crate::progenitor_support::encode_path(promo_code_id),
         );
 
         self.client
@@ -1156,7 +1156,7 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/orders?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
             query_
         );
 
@@ -1181,7 +1181,7 @@ impl Ecommerce {
     ) -> Result<crate::types::Orders> {
         let url = format!(
             "/ecommerce/stores/{}/orders",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
         );
 
         self.client
@@ -1220,8 +1220,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/orders/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(order_id),
             query_
         );
 
@@ -1243,8 +1243,8 @@ impl Ecommerce {
     pub async fn delete_stores_orders(&self, store_id: &str, order_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/orders/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(order_id),
         );
 
         self.client.delete(&url, None).await
@@ -1270,8 +1270,8 @@ impl Ecommerce {
     ) -> Result<crate::types::Orders> {
         let url = format!(
             "/ecommerce/stores/{}/orders/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(order_id),
         );
 
         self.client
@@ -1320,8 +1320,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/orders/{}/lines?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(order_id),
             query_
         );
 
@@ -1348,8 +1348,8 @@ impl Ecommerce {
     ) -> Result<crate::types::Lines> {
         let url = format!(
             "/ecommerce/stores/{}/orders/{}/lines",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&order_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(order_id),
         );
 
         self.client
@@ -1390,9 +1390,9 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/orders/{}/lines/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&line_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(line_id),
             query_
         );
 
@@ -1420,9 +1420,9 @@ impl Ecommerce {
     ) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/orders/{}/lines/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&line_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(line_id),
         );
 
         self.client.delete(&url, None).await
@@ -1450,9 +1450,9 @@ impl Ecommerce {
     ) -> Result<crate::types::Lines> {
         let url = format!(
             "/ecommerce/stores/{}/orders/{}/lines/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&order_id.to_string()),
-            crate::progenitor_support::encode_path(&line_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(line_id),
         );
 
         self.client
@@ -1499,7 +1499,7 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/products?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
             query_
         );
 
@@ -1524,7 +1524,7 @@ impl Ecommerce {
     ) -> Result<crate::types::ECommerceProduct> {
         let url = format!(
             "/ecommerce/stores/{}/products",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
         );
 
         self.client
@@ -1563,8 +1563,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/products/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
             query_
         );
 
@@ -1586,8 +1586,8 @@ impl Ecommerce {
     pub async fn delete_stores_products(&self, store_id: &str, product_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
         );
 
         self.client.delete(&url, None).await
@@ -1613,8 +1613,8 @@ impl Ecommerce {
     ) -> Result<crate::types::ECommerceProduct> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
         );
 
         self.client
@@ -1663,8 +1663,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/products/{}/variants?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
             query_
         );
 
@@ -1691,8 +1691,8 @@ impl Ecommerce {
     ) -> Result<crate::types::Variants> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}/variants",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
         );
 
         self.client
@@ -1733,9 +1733,9 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/products/{}/variants/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
-            crate::progenitor_support::encode_path(&variant_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(variant_id),
             query_
         );
 
@@ -1764,9 +1764,9 @@ impl Ecommerce {
     ) -> Result<crate::types::Variants> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}/variants/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
-            crate::progenitor_support::encode_path(&variant_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(variant_id),
         );
 
         self.client
@@ -1795,9 +1795,9 @@ impl Ecommerce {
     ) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}/variants/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
-            crate::progenitor_support::encode_path(&variant_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(variant_id),
         );
 
         self.client.delete(&url, None).await
@@ -1825,9 +1825,9 @@ impl Ecommerce {
     ) -> Result<crate::types::Variants> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}/variants/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
-            crate::progenitor_support::encode_path(&variant_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(variant_id),
         );
 
         self.client
@@ -1876,8 +1876,8 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/products/{}/images?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
             query_
         );
 
@@ -1904,8 +1904,8 @@ impl Ecommerce {
     ) -> Result<crate::types::Images> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}/images",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
         );
 
         self.client
@@ -1946,9 +1946,9 @@ impl Ecommerce {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/ecommerce/stores/{}/products/{}/images/{}?{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
-            crate::progenitor_support::encode_path(&image_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(image_id),
             query_
         );
 
@@ -1976,9 +1976,9 @@ impl Ecommerce {
     ) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}/images/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
-            crate::progenitor_support::encode_path(&image_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(image_id),
         );
 
         self.client.delete(&url, None).await
@@ -2006,9 +2006,9 @@ impl Ecommerce {
     ) -> Result<crate::types::Images> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}/images/{}",
-            crate::progenitor_support::encode_path(&store_id.to_string()),
-            crate::progenitor_support::encode_path(&product_id.to_string()),
-            crate::progenitor_support::encode_path(&image_id.to_string()),
+            crate::progenitor_support::encode_path(store_id),
+            crate::progenitor_support::encode_path(product_id),
+            crate::progenitor_support::encode_path(image_id),
         );
 
         self.client

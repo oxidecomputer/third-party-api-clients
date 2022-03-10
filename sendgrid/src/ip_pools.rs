@@ -89,7 +89,7 @@ impl IpPools {
     ) -> Result<crate::types::GetIpsAssignedResponse> {
         let url = format!(
             "/ips/pools/{}/ips",
-            crate::progenitor_support::encode_path(&pool_name.to_string()),
+            crate::progenitor_support::encode_path(pool_name),
         );
 
         self.client
@@ -110,7 +110,7 @@ impl IpPools {
     ) -> Result<crate::types::GetIpsPoolsPoolNameResponse> {
         let url = format!(
             "/ips/pools/{}",
-            crate::progenitor_support::encode_path(&pool_name.to_string()),
+            crate::progenitor_support::encode_path(pool_name),
         );
 
         self.client.get(&url, None).await
@@ -130,7 +130,7 @@ impl IpPools {
     ) -> Result<crate::types::IpPoolsPoolResp> {
         let url = format!(
             "/ips/pools/{}",
-            crate::progenitor_support::encode_path(&pool_name.to_string()),
+            crate::progenitor_support::encode_path(pool_name),
         );
 
         self.client
@@ -148,7 +148,7 @@ impl IpPools {
     pub async fn delete_ips_pools_pool_name(&self, pool_name: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/ips/pools/{}",
-            crate::progenitor_support::encode_path(&pool_name.to_string()),
+            crate::progenitor_support::encode_path(pool_name),
         );
 
         self.client.delete(&url, None).await
@@ -168,8 +168,8 @@ impl IpPools {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/ips/pools/{}/ips/{}",
-            crate::progenitor_support::encode_path(&pool_name.to_string()),
-            crate::progenitor_support::encode_path(&ip.to_string()),
+            crate::progenitor_support::encode_path(pool_name),
+            crate::progenitor_support::encode_path(ip),
         );
 
         self.client.delete(&url, None).await

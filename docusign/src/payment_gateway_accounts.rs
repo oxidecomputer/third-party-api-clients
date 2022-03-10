@@ -29,7 +29,7 @@ impl PaymentGatewayAccounts {
     ) -> Result<crate::types::PaymentGatewayAccountsInfo> {
         let url = format!(
             "/v2.1/accounts/{}/payment_gateway_accounts",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client.get(&url, None).await

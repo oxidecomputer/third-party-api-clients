@@ -109,7 +109,7 @@ impl ImChat {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/im/chat/sessions/{}?{}",
-            crate::progenitor_support::encode_path(&session_id.to_string()),
+            crate::progenitor_support::encode_path(session_id),
             query_
         );
 
@@ -165,7 +165,7 @@ impl ImChat {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/im/users/{}/chat/messages?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -209,7 +209,7 @@ impl ImChat {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/im/users/{}/chat/messages?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
