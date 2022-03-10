@@ -39,7 +39,7 @@ impl Orgunits {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/orgunits?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -62,7 +62,7 @@ impl Orgunits {
     ) -> Result<crate::types::OrgUnit> {
         let url = format!(
             "/admin/directory/v1/customer/{}/orgunits",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -87,8 +87,8 @@ impl Orgunits {
     ) -> Result<crate::types::OrgUnit> {
         let url = format!(
             "/admin/directory/v1/customer/{}/orgunits/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(org_unit_path),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&org_unit_path.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -112,8 +112,8 @@ impl Orgunits {
     ) -> Result<crate::types::OrgUnit> {
         let url = format!(
             "/admin/directory/v1/customer/{}/orgunits/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(org_unit_path),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&org_unit_path.to_string()),
         );
 
         self.client
@@ -134,8 +134,8 @@ impl Orgunits {
     pub async fn delete(&self, customer_id: &str, org_unit_path: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/orgunits/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(org_unit_path),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&org_unit_path.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -159,8 +159,8 @@ impl Orgunits {
     ) -> Result<crate::types::OrgUnit> {
         let url = format!(
             "/admin/directory/v1/customer/{}/orgunits/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(org_unit_path),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&org_unit_path.to_string()),
         );
 
         self.client

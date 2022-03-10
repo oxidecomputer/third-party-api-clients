@@ -181,7 +181,7 @@ impl RoomsLocation {
     ) -> Result<crate::types::GetZrLocationProfileResponse> {
         let url = format!(
             "/rooms/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -213,7 +213,7 @@ impl RoomsLocation {
     ) -> Result<()> {
         let url = format!(
             "/rooms/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client
@@ -252,7 +252,7 @@ impl RoomsLocation {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/rooms/locations/{}/settings?{}",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
             query_
         );
 
@@ -290,7 +290,7 @@ impl RoomsLocation {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/rooms/locations/{}/settings?{}",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
             query_
         );
 
@@ -361,7 +361,7 @@ impl RoomsLocation {
     ) -> Result<()> {
         let url = format!(
             "/rooms/locations/{}/location",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client

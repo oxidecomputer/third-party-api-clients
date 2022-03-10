@@ -33,7 +33,7 @@ impl Actions {
     ) -> Result<crate::types::ActionsOrganizationPermissions> {
         let url = format!(
             "/orgs/{}/actions/permissions",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -63,7 +63,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client
@@ -105,7 +105,7 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/actions/permissions/repositories?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             query_
         );
 
@@ -134,7 +134,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client
@@ -165,7 +165,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
 
@@ -195,7 +195,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/repositories/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
 
@@ -223,7 +223,7 @@ impl Actions {
     ) -> Result<crate::types::SelectedActions> {
         let url = format!(
             "/orgs/{}/actions/permissions/selected-actions",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -255,7 +255,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/permissions/selected-actions",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client
@@ -298,7 +298,7 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/actions/runner-groups?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             query_
         );
 
@@ -329,7 +329,7 @@ impl Actions {
     ) -> Result<crate::types::RunnerGroupsOrg> {
         let url = format!(
             "/orgs/{}/actions/runner-groups",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client
@@ -362,7 +362,7 @@ impl Actions {
     ) -> Result<crate::types::RunnerGroupsOrg> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
@@ -394,7 +394,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
@@ -427,7 +427,7 @@ impl Actions {
     ) -> Result<crate::types::RunnerGroupsOrg> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
@@ -473,7 +473,7 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             query_
         );
@@ -507,7 +507,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
@@ -545,7 +545,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
@@ -581,7 +581,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/repositories/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
@@ -626,7 +626,7 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             query_
         );
@@ -660,7 +660,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
         );
 
@@ -698,7 +698,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
@@ -734,7 +734,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runner-groups/{}/runners/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_group_id.to_string()),
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
@@ -775,7 +775,7 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/actions/runners?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             query_
         );
 
@@ -803,7 +803,7 @@ impl Actions {
     ) -> Result<Vec<crate::types::RunnerApplication>> {
         let url = format!(
             "/orgs/{}/actions/runners/downloads",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -828,7 +828,7 @@ impl Actions {
     ) -> Result<Vec<crate::types::RunnerApplication>> {
         let url = format!(
             "/orgs/{}/actions/runners/downloads",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -863,7 +863,7 @@ impl Actions {
     ) -> Result<crate::types::AuthenticationToken> {
         let url = format!(
             "/orgs/{}/actions/runners/registration-token",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -899,7 +899,7 @@ impl Actions {
     ) -> Result<crate::types::AuthenticationToken> {
         let url = format!(
             "/orgs/{}/actions/runners/remove-token",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -928,7 +928,7 @@ impl Actions {
     ) -> Result<crate::types::Runner> {
         let url = format!(
             "/orgs/{}/actions/runners/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
 
@@ -958,7 +958,7 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/runners/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
 
@@ -996,7 +996,7 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/actions/secrets?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             query_
         );
 
@@ -1019,7 +1019,7 @@ impl Actions {
     pub async fn get_org_public_key(&self, org: &str) -> Result<crate::types::ActionsPublicKey> {
         let url = format!(
             "/orgs/{}/actions/secrets/public-key",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1046,8 +1046,8 @@ impl Actions {
     ) -> Result<crate::types::OrganizationActionsSecret> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1149,8 +1149,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client
@@ -1175,8 +1175,8 @@ impl Actions {
     pub async fn delete_org_secret(&self, org: &str, secret_name: &str) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1215,8 +1215,8 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories?{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
             query_
         );
 
@@ -1245,8 +1245,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client
@@ -1277,8 +1277,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
 
@@ -1308,8 +1308,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/actions/secrets/{}/repositories/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
             crate::progenitor_support::encode_path(&repository_id.to_string()),
         );
 
@@ -1349,8 +1349,8 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/actions/artifacts?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -1380,8 +1380,8 @@ impl Actions {
     ) -> Result<crate::types::Artifact> {
         let url = format!(
             "/repos/{}/{}/actions/artifacts/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&artifact_id.to_string()),
         );
 
@@ -1406,8 +1406,8 @@ impl Actions {
     pub async fn delete_artifact(&self, owner: &str, repo: &str, artifact_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/artifacts/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&artifact_id.to_string()),
         );
 
@@ -1442,10 +1442,10 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/artifacts/{}/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&artifact_id.to_string()),
-            crate::progenitor_support::encode_path(archive_format),
+            crate::progenitor_support::encode_path(&archive_format.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1474,8 +1474,8 @@ impl Actions {
     ) -> Result<crate::types::Job> {
         let url = format!(
             "/repos/{}/{}/actions/jobs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
@@ -1508,8 +1508,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/jobs/{}/logs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
@@ -1540,8 +1540,8 @@ impl Actions {
     ) -> Result<crate::types::ActionsRepositoryPermissions> {
         let url = format!(
             "/repos/{}/{}/actions/permissions",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1573,8 +1573,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/permissions",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -1605,8 +1605,8 @@ impl Actions {
     ) -> Result<crate::types::SelectedActions> {
         let url = format!(
             "/repos/{}/{}/actions/permissions/selected-actions",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1640,8 +1640,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/permissions/selected-actions",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -1682,8 +1682,8 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/actions/runners?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -1713,8 +1713,8 @@ impl Actions {
     ) -> Result<Vec<crate::types::RunnerApplication>> {
         let url = format!(
             "/repos/{}/{}/actions/runners/downloads",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1740,8 +1740,8 @@ impl Actions {
     ) -> Result<Vec<crate::types::RunnerApplication>> {
         let url = format!(
             "/repos/{}/{}/actions/runners/downloads",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1777,8 +1777,8 @@ impl Actions {
     ) -> Result<crate::types::AuthenticationToken> {
         let url = format!(
             "/repos/{}/{}/actions/runners/registration-token",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -1814,8 +1814,8 @@ impl Actions {
     ) -> Result<crate::types::AuthenticationToken> {
         let url = format!(
             "/repos/{}/{}/actions/runners/remove-token",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -1847,8 +1847,8 @@ impl Actions {
     ) -> Result<crate::types::Runner> {
         let url = format!(
             "/repos/{}/{}/actions/runners/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
 
@@ -1881,8 +1881,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runners/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&runner_id.to_string()),
         );
 
@@ -1949,8 +1949,8 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/actions/runs?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -1980,8 +1980,8 @@ impl Actions {
     ) -> Result<crate::types::WorkflowRun> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2008,8 +2008,8 @@ impl Actions {
     pub async fn delete_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2039,8 +2039,8 @@ impl Actions {
     ) -> Result<Vec<crate::types::EnvironmentApproval>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/approvals",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2066,8 +2066,8 @@ impl Actions {
     ) -> Result<Vec<crate::types::EnvironmentApproval>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/approvals",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2094,8 +2094,8 @@ impl Actions {
     pub async fn approve_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/approve",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2137,8 +2137,8 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/artifacts?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
             query_
         );
@@ -2164,8 +2164,8 @@ impl Actions {
     pub async fn cancel_workflow_run(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/cancel",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2214,8 +2214,8 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/jobs?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
             query_
         );
@@ -2249,8 +2249,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/logs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2280,8 +2280,8 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/logs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2313,8 +2313,8 @@ impl Actions {
     ) -> Result<Vec<crate::types::PendingDeployment>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/pending_deployments",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2342,8 +2342,8 @@ impl Actions {
     ) -> Result<Vec<crate::types::PendingDeployment>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/pending_deployments",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2376,8 +2376,8 @@ impl Actions {
     ) -> Result<Vec<crate::types::Deployment>> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/pending_deployments",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2404,8 +2404,8 @@ impl Actions {
     pub async fn re_run_workflow(&self, owner: &str, repo: &str, run_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/rerun",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2437,8 +2437,8 @@ impl Actions {
     ) -> Result<crate::types::WorkflowRunUsage> {
         let url = format!(
             "/repos/{}/{}/actions/runs/{}/timing",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&run_id.to_string()),
         );
 
@@ -2478,8 +2478,8 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/actions/secrets?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -2507,8 +2507,8 @@ impl Actions {
     ) -> Result<crate::types::ActionsPublicKey> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/public-key",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2537,9 +2537,9 @@ impl Actions {
     ) -> Result<crate::types::ActionsSecret> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2643,9 +2643,9 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client
@@ -2676,9 +2676,9 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/secrets/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -2717,8 +2717,8 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/actions/workflows?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -2748,9 +2748,9 @@ impl Actions {
     ) -> Result<crate::types::Workflow> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(workflow_id),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2776,9 +2776,9 @@ impl Actions {
     pub async fn disable_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/disable",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(workflow_id),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -2812,9 +2812,9 @@ impl Actions {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/dispatches",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(workflow_id),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
         self.client
@@ -2842,9 +2842,9 @@ impl Actions {
     pub async fn enable_workflow(&self, owner: &str, repo: &str, workflow_id: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/enable",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(workflow_id),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -2912,9 +2912,9 @@ impl Actions {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/runs?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(workflow_id),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&workflow_id.to_string()),
             query_
         );
 
@@ -2946,9 +2946,9 @@ impl Actions {
     ) -> Result<crate::types::WorkflowUsage> {
         let url = format!(
             "/repos/{}/{}/actions/workflows/{}/timing",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(workflow_id),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&workflow_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2988,7 +2988,7 @@ impl Actions {
         let url = format!(
             "/repositories/{}/environments/{}/secrets?{}",
             crate::progenitor_support::encode_path(&repository_id.to_string()),
-            crate::progenitor_support::encode_path(environment_name),
+            crate::progenitor_support::encode_path(&environment_name.to_string()),
             query_
         );
 
@@ -3017,7 +3017,7 @@ impl Actions {
         let url = format!(
             "/repositories/{}/environments/{}/secrets/public-key",
             crate::progenitor_support::encode_path(&repository_id.to_string()),
-            crate::progenitor_support::encode_path(environment_name),
+            crate::progenitor_support::encode_path(&environment_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -3047,8 +3047,8 @@ impl Actions {
         let url = format!(
             "/repositories/{}/environments/{}/secrets/{}",
             crate::progenitor_support::encode_path(&repository_id.to_string()),
-            crate::progenitor_support::encode_path(environment_name),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&environment_name.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -3153,8 +3153,8 @@ impl Actions {
         let url = format!(
             "/repositories/{}/environments/{}/secrets/{}",
             crate::progenitor_support::encode_path(&repository_id.to_string()),
-            crate::progenitor_support::encode_path(environment_name),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&environment_name.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client
@@ -3186,8 +3186,8 @@ impl Actions {
         let url = format!(
             "/repositories/{}/environments/{}/secrets/{}",
             crate::progenitor_support::encode_path(&repository_id.to_string()),
-            crate::progenitor_support::encode_path(environment_name),
-            crate::progenitor_support::encode_path(secret_name),
+            crate::progenitor_support::encode_path(&environment_name.to_string()),
+            crate::progenitor_support::encode_path(&secret_name.to_string()),
         );
 
         self.client.delete(&url, None).await

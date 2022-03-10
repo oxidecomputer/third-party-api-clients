@@ -130,7 +130,7 @@ impl Locations {
     pub async fn get(&self, id: &str) -> Result<crate::types::Location> {
         let url = format!(
             "/locations/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -150,7 +150,7 @@ impl Locations {
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/locations/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client

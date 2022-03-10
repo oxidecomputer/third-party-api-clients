@@ -47,7 +47,7 @@ impl Apps {
     ) -> Result<crate::types::AppsCreateFromManifestResponseAllOf> {
         let url = format!(
             "/app-manifests/{}/conversions",
-            crate::progenitor_support::encode_path(code),
+            crate::progenitor_support::encode_path(&code.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -433,7 +433,7 @@ impl Apps {
     ) -> Result<()> {
         let url = format!(
             "/applications/{}/grant",
-            crate::progenitor_support::encode_path(client_id),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
         );
 
         self.client
@@ -466,8 +466,8 @@ impl Apps {
     ) -> Result<()> {
         let url = format!(
             "/applications/{}/grants/{}",
-            crate::progenitor_support::encode_path(client_id),
-            crate::progenitor_support::encode_path(access_token),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
+            crate::progenitor_support::encode_path(&access_token.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -493,7 +493,7 @@ impl Apps {
     ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/applications/{}/token",
-            crate::progenitor_support::encode_path(client_id),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
         );
 
         self.client
@@ -521,7 +521,7 @@ impl Apps {
     ) -> Result<()> {
         let url = format!(
             "/applications/{}/token",
-            crate::progenitor_support::encode_path(client_id),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
         );
 
         self.client
@@ -549,7 +549,7 @@ impl Apps {
     ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/applications/{}/token",
-            crate::progenitor_support::encode_path(client_id),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
         );
 
         self.client
@@ -577,7 +577,7 @@ impl Apps {
     ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/applications/{}/token/scoped",
-            crate::progenitor_support::encode_path(client_id),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
         );
 
         self.client
@@ -608,8 +608,8 @@ impl Apps {
     ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/applications/{}/tokens/{}",
-            crate::progenitor_support::encode_path(client_id),
-            crate::progenitor_support::encode_path(access_token),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
+            crate::progenitor_support::encode_path(&access_token.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -638,8 +638,8 @@ impl Apps {
     ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/applications/{}/tokens/{}",
-            crate::progenitor_support::encode_path(client_id),
-            crate::progenitor_support::encode_path(access_token),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
+            crate::progenitor_support::encode_path(&access_token.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -668,8 +668,8 @@ impl Apps {
     ) -> Result<()> {
         let url = format!(
             "/applications/{}/tokens/{}",
-            crate::progenitor_support::encode_path(client_id),
-            crate::progenitor_support::encode_path(access_token),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
+            crate::progenitor_support::encode_path(&access_token.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -693,7 +693,7 @@ impl Apps {
     pub async fn get_by_slug(&self, app_slug: &str) -> Result<crate::types::GitHubApp> {
         let url = format!(
             "/apps/{}",
-            crate::progenitor_support::encode_path(app_slug),
+            crate::progenitor_support::encode_path(&app_slug.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1105,7 +1105,7 @@ impl Apps {
     pub async fn get_org_installation(&self, org: &str) -> Result<crate::types::Installation> {
         let url = format!(
             "/orgs/{}/installation",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1139,8 +1139,8 @@ impl Apps {
     ) -> Result<crate::types::ContentReferenceAttachment> {
         let url = format!(
             "/repos/{}/{}/content_references/{}/attachments",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&content_reference_id.to_string()),
         );
 
@@ -1172,8 +1172,8 @@ impl Apps {
     ) -> Result<crate::types::Installation> {
         let url = format!(
             "/repos/{}/{}/installation",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1442,7 +1442,7 @@ impl Apps {
     ) -> Result<crate::types::Installation> {
         let url = format!(
             "/users/{}/installation",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await

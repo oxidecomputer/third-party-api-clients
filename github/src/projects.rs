@@ -48,7 +48,7 @@ impl Projects {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/projects?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             query_
         );
 
@@ -78,7 +78,7 @@ impl Projects {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/projects?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             query_
         );
 
@@ -105,7 +105,7 @@ impl Projects {
     ) -> Result<crate::types::Project> {
         let url = format!(
             "/orgs/{}/projects",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client
@@ -585,7 +585,7 @@ impl Projects {
         let url = format!(
             "/projects/{}/collaborators/{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client
@@ -611,7 +611,7 @@ impl Projects {
         let url = format!(
             "/projects/{}/collaborators/{}",
             crate::progenitor_support::encode_path(&project_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -639,7 +639,7 @@ impl Projects {
         let url = format!(
             "/projects/{}/collaborators/{}/permission",
             crate::progenitor_support::encode_path(&project_id.to_string()),
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -772,8 +772,8 @@ impl Projects {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/projects?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -804,8 +804,8 @@ impl Projects {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/projects?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -834,8 +834,8 @@ impl Projects {
     ) -> Result<crate::types::Project> {
         let url = format!(
             "/repos/{}/{}/projects",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -898,7 +898,7 @@ impl Projects {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/projects?{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             query_
         );
 
@@ -928,7 +928,7 @@ impl Projects {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/projects?{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             query_
         );
 

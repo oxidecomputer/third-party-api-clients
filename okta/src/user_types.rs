@@ -58,7 +58,7 @@ impl UserTypes {
     pub async fn get(&self, type_id: &str) -> Result<crate::types::UserType> {
         let url = format!(
             "/api/v1/meta/types/user/{}",
-            crate::progenitor_support::encode_path(type_id),
+            crate::progenitor_support::encode_path(&type_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -80,7 +80,7 @@ impl UserTypes {
     ) -> Result<crate::types::UserType> {
         let url = format!(
             "/api/v1/meta/types/user/{}",
-            crate::progenitor_support::encode_path(type_id),
+            crate::progenitor_support::encode_path(&type_id.to_string()),
         );
 
         self.client
@@ -104,7 +104,7 @@ impl UserTypes {
     ) -> Result<crate::types::UserType> {
         let url = format!(
             "/api/v1/meta/types/user/{}",
-            crate::progenitor_support::encode_path(type_id),
+            crate::progenitor_support::encode_path(&type_id.to_string()),
         );
 
         self.client
@@ -124,7 +124,7 @@ impl UserTypes {
     pub async fn delete(&self, type_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/meta/types/user/{}",
-            crate::progenitor_support::encode_path(type_id),
+            crate::progenitor_support::encode_path(&type_id.to_string()),
         );
 
         self.client.delete(&url, None).await

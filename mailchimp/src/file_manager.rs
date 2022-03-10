@@ -128,7 +128,7 @@ impl FileManager {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/file-manager/files/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
             query_
         );
 
@@ -149,7 +149,7 @@ impl FileManager {
     pub async fn delete_files(&self, file_id: &str) -> Result<()> {
         let url = format!(
             "/file-manager/files/{}",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -173,7 +173,7 @@ impl FileManager {
     ) -> Result<crate::types::Files> {
         let url = format!(
             "/file-manager/files/{}",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
         );
 
         self.client
@@ -285,7 +285,7 @@ impl FileManager {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/file-manager/folders/{}?{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
             query_
         );
 
@@ -306,7 +306,7 @@ impl FileManager {
     pub async fn delete_folders(&self, folder_id: &str) -> Result<()> {
         let url = format!(
             "/file-manager/folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -330,7 +330,7 @@ impl FileManager {
     ) -> Result<crate::types::FileManagerFoldersGalleryFolder> {
         let url = format!(
             "/file-manager/folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client

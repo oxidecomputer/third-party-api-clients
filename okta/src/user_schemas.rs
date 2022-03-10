@@ -26,7 +26,7 @@ impl UserSchemas {
     pub async fn get_application(&self, app_instance_id: &str) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/apps/{}/default",
-            crate::progenitor_support::encode_path(app_instance_id),
+            crate::progenitor_support::encode_path(&app_instance_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -50,7 +50,7 @@ impl UserSchemas {
     ) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/apps/{}/default",
-            crate::progenitor_support::encode_path(app_instance_id),
+            crate::progenitor_support::encode_path(&app_instance_id.to_string()),
         );
 
         self.client
@@ -72,7 +72,7 @@ impl UserSchemas {
     pub async fn get(&self, schema_id: &str) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/user/{}",
-            crate::progenitor_support::encode_path(schema_id),
+            crate::progenitor_support::encode_path(&schema_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -94,7 +94,7 @@ impl UserSchemas {
     ) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/user/{}",
-            crate::progenitor_support::encode_path(schema_id),
+            crate::progenitor_support::encode_path(&schema_id.to_string()),
         );
 
         self.client

@@ -315,7 +315,7 @@ impl Orders {
     ) -> Result<crate::types::OrdersShipment> {
         let url = format!(
             "/order/{}/shipment/{}/cancel",
-            crate::progenitor_support::encode_path(order_id),
+            crate::progenitor_support::encode_path(&order_id.to_string()),
             crate::progenitor_support::encode_path(&shipment_id.to_string()),
         );
 

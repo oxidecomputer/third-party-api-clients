@@ -26,7 +26,7 @@ impl DesignsApi {
     pub async fn get_design(&self, id: &str) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
             "/designs/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -53,7 +53,7 @@ impl DesignsApi {
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
             "/designs/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client
@@ -73,7 +73,7 @@ impl DesignsApi {
     pub async fn delete_design(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/designs/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -103,7 +103,7 @@ impl DesignsApi {
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
             "/designs/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client
@@ -190,7 +190,7 @@ impl DesignsApi {
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
             "/designs/pre-builts/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -215,7 +215,7 @@ impl DesignsApi {
     ) -> Result<crate::types::DesignOutputAllOf> {
         let url = format!(
             "/designs/pre-builts/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client

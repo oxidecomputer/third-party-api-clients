@@ -70,7 +70,7 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -122,7 +122,7 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -174,7 +174,7 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -223,7 +223,7 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -275,7 +275,7 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -327,7 +327,7 @@ impl Access {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/storefront_access_tokens/{}/json",
-            crate::progenitor_support::encode_path(storefront_access_token_id),
+            crate::progenitor_support::encode_path(&storefront_access_token_id.to_string()),
         );
 
         self.client.delete(&url, None).await
