@@ -31,7 +31,7 @@ impl IdentityVerifications {
     ) -> Result<crate::types::AccountIdentityVerificationResponse> {
         let url = format!(
             "/v2.1/accounts/{}/identity_verification",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await

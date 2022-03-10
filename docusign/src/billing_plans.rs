@@ -61,7 +61,7 @@ impl BillingPlans {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/billing_plan?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -96,7 +96,7 @@ impl BillingPlans {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/billing_plan?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -122,7 +122,7 @@ impl BillingPlans {
     ) -> Result<crate::types::CreditCardInformation> {
         let url = format!(
             "/v2.1/accounts/{}/billing_plan/credit_card",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -145,7 +145,7 @@ impl BillingPlans {
     ) -> Result<crate::types::DowngradRequestBillingInfoResponse> {
         let url = format!(
             "/v2.1/accounts/{}/billing_plan/downgrade",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -169,7 +169,7 @@ impl BillingPlans {
     ) -> Result<crate::types::DowngradePlanUpdateResponse> {
         let url = format!(
             "/v2.1/accounts/{}/billing_plan/downgrade",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -195,7 +195,7 @@ impl BillingPlans {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/billing_plan/purchased_envelopes",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -232,7 +232,7 @@ impl BillingPlans {
     ) -> Result<crate::types::BillingPlanResponse> {
         let url = format!(
             "/v2.1/billing_plans/{}",
-            crate::progenitor_support::encode_path(billing_plan_id),
+            crate::progenitor_support::encode_path(&billing_plan_id.to_string()),
         );
 
         self.client.get(&url, None).await

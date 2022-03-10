@@ -160,7 +160,7 @@ impl Archiving {
     ) -> Result<crate::types::CloudArchivedFiles> {
         let url = format!(
             "/past_meetings/{}/archive_files",
-            crate::progenitor_support::encode_path(meeting_uuid),
+            crate::progenitor_support::encode_path(&meeting_uuid.to_string()),
         );
 
         self.client.get(&url, None).await

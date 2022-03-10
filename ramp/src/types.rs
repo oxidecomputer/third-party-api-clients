@@ -216,6 +216,9 @@ pub struct PatchUsersRequest {
 
 #[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Page {
+    /**
+     * The OAuth2 token header
+     */
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -582,19 +585,6 @@ pub struct GetTransactionResponse {
     pub page: Page,
 }
 
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetLocationResponsePage {
-    /**
-     * The OAuth2 token header
-     */
-    #[serde(
-        default,
-        skip_serializing_if = "String::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
-    )]
-    pub next: String,
-}
-
 /// Ramp location
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Location {
@@ -627,7 +617,7 @@ pub struct GetLocationResponse {
     )]
     pub data: Vec<Location>,
     #[serde(default)]
-    pub page: GetLocationResponsePage,
+    pub page: Page,
 }
 
 ///
@@ -689,7 +679,7 @@ pub struct GetDepartmentsResponse {
     )]
     pub data: Vec<Department>,
     #[serde(default)]
-    pub page: GetLocationResponsePage,
+    pub page: Page,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -969,7 +959,7 @@ pub struct GetCardsResponse {
     )]
     pub cards: Vec<Card>,
     #[serde(default)]
-    pub page: GetLocationResponsePage,
+    pub page: Page,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1683,7 +1673,7 @@ pub struct GetCardProgramsResponse {
     )]
     pub card_programs: Vec<CardProgram>,
     #[serde(default)]
-    pub page: GetLocationResponsePage,
+    pub page: Page,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -1882,10 +1872,10 @@ pub struct Receipt {
     pub id: String,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub receipt_url: Option<url::Url>,
+    pub receipt_url: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",

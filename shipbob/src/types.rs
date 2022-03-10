@@ -4044,14 +4044,14 @@ pub struct Webhook {
     )]
     pub id: i64,
     /**
-     * URL subscription events will be posted to
+     * Name of the channel
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub subscription_url: Option<url::Url>,
+    pub subscription_url: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub topic: Option<WebhooksTopics>,
 }
@@ -4059,14 +4059,14 @@ pub struct Webhook {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct WebhooksCreateWebhookSubscriptionModel {
     /**
-     * URL subscription events will be posted to
+     * Name of the channel
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub subscription_url: Option<url::Url>,
+    pub subscription_url: String,
     #[serde()]
     pub topic: WebhooksTopics,
 }

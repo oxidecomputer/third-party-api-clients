@@ -36,8 +36,8 @@ impl RoomsDevices {
     ) -> Result<()> {
         let url = format!(
             "/rooms/{}/devices/{}/app_version",
-            crate::progenitor_support::encode_path(room_id),
-            crate::progenitor_support::encode_path(device_id),
+            crate::progenitor_support::encode_path(&room_id.to_string()),
+            crate::progenitor_support::encode_path(&device_id.to_string()),
         );
 
         self.client

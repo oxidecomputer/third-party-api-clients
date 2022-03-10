@@ -24,7 +24,7 @@ impl UserFactors {
     pub async fn list_factors(&self, user_id: &str) -> Result<Vec<crate::types::UserFactor>> {
         let url = format!(
             "/api/v1/users/{}/factors",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -40,7 +40,7 @@ impl UserFactors {
     pub async fn list_all_factors(&self, user_id: &str) -> Result<Vec<crate::types::UserFactor>> {
         let url = format!(
             "/api/v1/users/{}/factors",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -89,7 +89,7 @@ impl UserFactors {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/users/{}/factors?{}",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
             query_
         );
 
@@ -113,7 +113,7 @@ impl UserFactors {
     ) -> Result<Vec<crate::types::UserFactor>> {
         let url = format!(
             "/api/v1/users/{}/factors/catalog",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -132,7 +132,7 @@ impl UserFactors {
     ) -> Result<Vec<crate::types::UserFactor>> {
         let url = format!(
             "/api/v1/users/{}/factors/catalog",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -153,7 +153,7 @@ impl UserFactors {
     ) -> Result<Vec<crate::types::SecurityQuestion>> {
         let url = format!(
             "/api/v1/users/{}/factors/questions",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -172,7 +172,7 @@ impl UserFactors {
     ) -> Result<Vec<crate::types::SecurityQuestion>> {
         let url = format!(
             "/api/v1/users/{}/factors/questions",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -195,8 +195,8 @@ impl UserFactors {
     ) -> Result<crate::types::UserFactor> {
         let url = format!(
             "/api/v1/users/{}/factors/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&factor_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -215,8 +215,8 @@ impl UserFactors {
     pub async fn delete_factor(&self, user_id: &str, factor_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/users/{}/factors/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&factor_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -242,8 +242,8 @@ impl UserFactors {
     ) -> Result<crate::types::UserFactor> {
         let url = format!(
             "/api/v1/users/{}/factors/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&factor_id.to_string()),
         );
 
         self.client
@@ -270,9 +270,9 @@ impl UserFactors {
     ) -> Result<crate::types::VerifyUserFactorResponse> {
         let url = format!(
             "/api/v1/users/{}/factors/{}/transactions/{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
-            crate::progenitor_support::encode_path(transaction_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&factor_id.to_string()),
+            crate::progenitor_support::encode_path(&transaction_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -316,8 +316,8 @@ impl UserFactors {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/users/{}/factors/{}/verify?{}",
-            crate::progenitor_support::encode_path(user_id),
-            crate::progenitor_support::encode_path(factor_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(&factor_id.to_string()),
             query_
         );
 

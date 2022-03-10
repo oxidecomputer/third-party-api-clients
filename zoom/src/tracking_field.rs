@@ -74,7 +74,7 @@ impl TrackingField {
     ) -> Result<crate::types::TrackingfieldGetResponseAllOf> {
         let url = format!(
             "/tracking_fields/{}",
-            crate::progenitor_support::encode_path(field_id),
+            crate::progenitor_support::encode_path(&field_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -99,7 +99,7 @@ impl TrackingField {
     pub async fn trackingfield_delete(&self, field_id: &str) -> Result<()> {
         let url = format!(
             "/tracking_fields/{}",
-            crate::progenitor_support::encode_path(field_id),
+            crate::progenitor_support::encode_path(&field_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -128,7 +128,7 @@ impl TrackingField {
     ) -> Result<()> {
         let url = format!(
             "/tracking_fields/{}",
-            crate::progenitor_support::encode_path(field_id),
+            crate::progenitor_support::encode_path(&field_id.to_string()),
         );
 
         self.client

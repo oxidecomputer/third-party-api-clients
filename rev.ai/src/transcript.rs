@@ -29,7 +29,7 @@ impl Transcript {
     pub async fn get(&self, id: &str, accept: crate::types::AcceptTranscript) -> Result<String> {
         let url = format!(
             "/jobs/{}/transcript",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client

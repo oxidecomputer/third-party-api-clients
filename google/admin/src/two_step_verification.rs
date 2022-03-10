@@ -24,7 +24,7 @@ impl TwoStepVerification {
     pub async fn turn_off(&self, user_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/twoStepVerification/turnOff",
-            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(&user_key.to_string()),
         );
 
         self.client.post(&url, None).await

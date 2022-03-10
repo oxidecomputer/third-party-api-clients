@@ -55,7 +55,7 @@ impl Meetings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/meetings?{}",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
             query_
         );
 
@@ -91,7 +91,7 @@ impl Meetings {
     ) -> Result<crate::types::MeetingCreateResponseAllOf> {
         let url = format!(
             "/users/{}/meetings",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client
@@ -399,7 +399,7 @@ impl Meetings {
         let url = format!(
             "/meetings/{}/registrants/{}?{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            crate::progenitor_support::encode_path(registrant_id),
+            crate::progenitor_support::encode_path(&registrant_id.to_string()),
             query_
         );
 
@@ -467,7 +467,7 @@ impl Meetings {
     ) -> Result<crate::types::PastMeetingDetailsResponse> {
         let url = format!(
             "/past_meetings/{}",
-            crate::progenitor_support::encode_path(meeting_uuid),
+            crate::progenitor_support::encode_path(&meeting_uuid.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -512,7 +512,7 @@ impl Meetings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/past_meetings/{}/participants?{}",
-            crate::progenitor_support::encode_path(meeting_uuid),
+            crate::progenitor_support::encode_path(&meeting_uuid.to_string()),
             query_
         );
 
@@ -635,7 +635,7 @@ impl Meetings {
         let url = format!(
             "/meetings/{}/polls/{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            crate::progenitor_support::encode_path(poll_id),
+            crate::progenitor_support::encode_path(&poll_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -669,7 +669,7 @@ impl Meetings {
         let url = format!(
             "/meetings/{}/polls/{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            crate::progenitor_support::encode_path(poll_id),
+            crate::progenitor_support::encode_path(&poll_id.to_string()),
         );
 
         self.client
@@ -701,7 +701,7 @@ impl Meetings {
         let url = format!(
             "/meetings/{}/polls/{}",
             crate::progenitor_support::encode_path(&meeting_id.to_string()),
-            crate::progenitor_support::encode_path(poll_id),
+            crate::progenitor_support::encode_path(&poll_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -824,7 +824,7 @@ impl Meetings {
     ) -> Result<crate::types::GetLiveStreamDetailsResponse> {
         let url = format!(
             "/meetings/{}/livestream",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -855,7 +855,7 @@ impl Meetings {
     ) -> Result<()> {
         let url = format!(
             "/meetings/{}/livestream",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
         );
 
         self.client
@@ -922,7 +922,7 @@ impl Meetings {
     ) -> Result<crate::types::ReportMeetingPollsResponse> {
         let url = format!(
             "/past_meetings/{}/polls",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -960,7 +960,7 @@ impl Meetings {
     ) -> Result<crate::types::AddBatchRegistrantsResponse> {
         let url = format!(
             "/meetings/{}/batch_registrants",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
         );
 
         self.client
@@ -994,7 +994,7 @@ impl Meetings {
     ) -> Result<()> {
         let url = format!(
             "/live_meetings/{}/events",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
         );
 
         self.client
@@ -1039,7 +1039,7 @@ impl Meetings {
     ) -> Result<crate::types::CreateBatchPollsResponse> {
         let url = format!(
             "/meetings/{}/batch_polls",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
         );
 
         self.client
@@ -1067,7 +1067,7 @@ impl Meetings {
     ) -> Result<crate::types::ListMeetingTemplatesResponseData> {
         let url = format!(
             "/users/{}/meeting_templates",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get(&url, None).await

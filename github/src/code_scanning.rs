@@ -73,8 +73,8 @@ impl CodeScanning {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -125,8 +125,8 @@ impl CodeScanning {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -159,8 +159,8 @@ impl CodeScanning {
     ) -> Result<crate::types::CodeScanningAlert> {
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&alert_number.to_string()),
         );
 
@@ -191,8 +191,8 @@ impl CodeScanning {
     ) -> Result<crate::types::CodeScanningAlert> {
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&alert_number.to_string()),
         );
 
@@ -241,8 +241,8 @@ impl CodeScanning {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&alert_number.to_string()),
             query_
         );
@@ -275,8 +275,8 @@ impl CodeScanning {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/code-scanning/alerts/{}/instances?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&alert_number.to_string()),
             query_
         );
@@ -352,8 +352,8 @@ impl CodeScanning {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/code-scanning/analyses?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -411,8 +411,8 @@ impl CodeScanning {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/code-scanning/analyses?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -462,8 +462,8 @@ impl CodeScanning {
     ) -> Result<crate::types::CodeScanningAnalysis> {
         let url = format!(
             "/repos/{}/{}/code-scanning/analyses/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&analysis_id.to_string()),
         );
 
@@ -563,8 +563,8 @@ impl CodeScanning {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/code-scanning/analyses/{}?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&analysis_id.to_string()),
             query_
         );
@@ -610,8 +610,8 @@ impl CodeScanning {
     ) -> Result<crate::types::CodeScanningSarifsReceipt> {
         let url = format!(
             "/repos/{}/{}/code-scanning/sarifs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -642,9 +642,9 @@ impl CodeScanning {
     ) -> Result<crate::types::CodeScanningSarifsStatus> {
         let url = format!(
             "/repos/{}/{}/code-scanning/sarifs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(sarif_id),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&sarif_id.to_string()),
         );
 
         self.client.get(&url, None).await

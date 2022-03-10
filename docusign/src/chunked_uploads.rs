@@ -30,7 +30,7 @@ impl ChunkedUploads {
     ) -> Result<crate::types::ChunkedUploadResponse> {
         let url = format!(
             "/v2.1/accounts/{}/chunked_uploads",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -66,8 +66,8 @@ impl ChunkedUploads {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/chunked_uploads/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(chunked_upload_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
             query_
         );
 
@@ -104,8 +104,8 @@ impl ChunkedUploads {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/chunked_uploads/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(chunked_upload_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
             query_
         );
 
@@ -139,8 +139,8 @@ impl ChunkedUploads {
     ) -> Result<crate::types::ChunkedUploadResponse> {
         let url = format!(
             "/v2.1/accounts/{}/chunked_uploads/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(chunked_upload_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -184,9 +184,9 @@ impl ChunkedUploads {
     ) -> Result<crate::types::ChunkedUploadResponse> {
         let url = format!(
             "/v2.1/accounts/{}/chunked_uploads/{}/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(chunked_upload_id),
-            crate::progenitor_support::encode_path(chunked_upload_part_seq),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&chunked_upload_id.to_string()),
+            crate::progenitor_support::encode_path(&chunked_upload_part_seq.to_string()),
         );
 
         self.client

@@ -44,7 +44,7 @@ impl Certificates {
     ) -> Result<Vec<crate::types::SsoCertificateBody>> {
         let url = format!(
             "/sso/integrations/{}/certificates",
-            crate::progenitor_support::encode_path(integration_id),
+            crate::progenitor_support::encode_path(&integration_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -67,7 +67,7 @@ impl Certificates {
     ) -> Result<Vec<crate::types::SsoCertificateBody>> {
         let url = format!(
             "/sso/integrations/{}/certificates",
-            crate::progenitor_support::encode_path(integration_id),
+            crate::progenitor_support::encode_path(&integration_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -83,7 +83,7 @@ impl Certificates {
     pub async fn get_sso_cert(&self, cert_id: &str) -> Result<crate::types::SsoCertificateBody> {
         let url = format!(
             "/sso/certificates/{}",
-            crate::progenitor_support::encode_path(cert_id),
+            crate::progenitor_support::encode_path(&cert_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -101,7 +101,7 @@ impl Certificates {
     pub async fn delete_sso_cert(&self, cert_id: &str) -> Result<crate::types::SsoCertificateBody> {
         let url = format!(
             "/sso/certificates/{}",
-            crate::progenitor_support::encode_path(cert_id),
+            crate::progenitor_support::encode_path(&cert_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -123,7 +123,7 @@ impl Certificates {
     ) -> Result<Vec<crate::types::SsoErrorResponse>> {
         let url = format!(
             "/sso/certificates/{}",
-            crate::progenitor_support::encode_path(cert_id),
+            crate::progenitor_support::encode_path(&cert_id.to_string()),
         );
 
         self.client

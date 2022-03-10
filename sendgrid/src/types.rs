@@ -61,10 +61,10 @@ pub struct SubscriptionTrackingSettings {
     pub replace: String,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub url: Option<url::Url>,
+    pub url: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -3455,17 +3455,17 @@ pub struct Metadata {
     pub next: String,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub prev: Option<url::Url>,
+    pub prev: String,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize",
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
         rename = "self"
     )]
-    pub self_: Option<url::Url>,
+    pub self_: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -4114,17 +4114,17 @@ pub struct MetadataType {
     pub next: String,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub prev: Option<url::Url>,
+    pub prev: String,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize",
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
         rename = "self"
     )]
-    pub self_: Option<url::Url>,
+    pub self_: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -4729,14 +4729,14 @@ pub struct SendTo {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EmailConfig {
     /**
-     * The URL where you would like your users sent to unsubscribe.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub custom_unsubscribe_url: Option<url::Url>,
+    pub custom_unsubscribe_url: String,
     /**
      * The license key provided with your New Relic account.
      */
@@ -5126,14 +5126,14 @@ pub struct AutomationsLinkStatsResponseResults {
     )]
     pub step_id: String,
     /**
-     * The URL where you would like your users sent to unsubscribe.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub url: Option<url::Url>,
+    pub url: String,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -5179,17 +5179,17 @@ pub struct LinkTrackingMetadata {
     pub next: String,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub prev: Option<url::Url>,
+    pub prev: String,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize",
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
         rename = "self"
     )]
-    pub self_: Option<url::Url>,
+    pub self_: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -5215,14 +5215,14 @@ pub struct SinglesendsLinkStatsResponseResults {
     )]
     pub clicks: i64,
     /**
-     * The URL where you would like your users sent to unsubscribe.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub url: Option<url::Url>,
+    pub url: String,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -13737,14 +13737,14 @@ pub struct GetMessagesDownloadResponse {
     )]
     pub csv: String,
     /**
-     * The URL where you would like your users sent to unsubscribe.
+     * The license key provided with your New Relic account.
      */
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub presigned_url: Option<url::Url>,
+    pub presigned_url: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
