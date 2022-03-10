@@ -191,7 +191,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.35 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.36 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \

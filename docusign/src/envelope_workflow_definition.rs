@@ -27,8 +27,8 @@ impl EnvelopeWorkflowDefinition {
     pub async fn get(&self, account_id: &str, envelope_id: &str) -> Result<crate::types::Workflow> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
 
         self.client.get(&url, None).await
@@ -54,8 +54,8 @@ impl EnvelopeWorkflowDefinition {
     ) -> Result<crate::types::Workflow> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
 
         self.client
@@ -79,8 +79,8 @@ impl EnvelopeWorkflowDefinition {
     pub async fn delete(&self, account_id: &str, envelope_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
 
         self.client.delete(&url, None).await
@@ -105,8 +105,8 @@ impl EnvelopeWorkflowDefinition {
     ) -> Result<crate::types::Workflow> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client.get(&url, None).await
@@ -132,8 +132,8 @@ impl EnvelopeWorkflowDefinition {
     ) -> Result<crate::types::Workflow> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client
@@ -156,8 +156,8 @@ impl EnvelopeWorkflowDefinition {
     pub async fn delete_template(&self, account_id: &str, template_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/workflow",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client.delete(&url, None).await

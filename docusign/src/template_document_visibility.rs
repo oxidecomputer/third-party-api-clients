@@ -35,8 +35,8 @@ impl TemplateDocumentVisibility {
     ) -> Result<crate::types::TemplateDocumentVisibilityList> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/document_visibility",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
         );
 
         self.client
@@ -65,9 +65,9 @@ impl TemplateDocumentVisibility {
     ) -> Result<crate::types::DocumentVisibilityList> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client.get(&url, None).await
@@ -97,9 +97,9 @@ impl TemplateDocumentVisibility {
     ) -> Result<crate::types::TemplateDocumentVisibilityList> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}/document_visibility",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client

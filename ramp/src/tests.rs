@@ -45,5 +45,5 @@ fn test_deserialize() {
     };
     let s = serde_json::to_string_pretty(&t).unwrap();
     println!("string_user_request = {}", s);
-    assert_eq!(true, s.contains("BUSINESS_USER"));
+    assert!(true, s.contains("BUSINESS_USER"));
 }

@@ -27,7 +27,7 @@ impl CompanyBankAccountsBeta {
     ) -> Result<Vec<crate::types::CompanyBankAccount>> {
         let url = format!(
             "/v1/companies/{}/bank_accounts",
-            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(company_id_or_uuid),
         );
 
         self.client.get(&url, None).await
@@ -50,7 +50,7 @@ impl CompanyBankAccountsBeta {
     ) -> Result<Vec<crate::types::CompanyBankAccount>> {
         let url = format!(
             "/v1/companies/{}/bank_accounts",
-            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(company_id_or_uuid),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -72,7 +72,7 @@ impl CompanyBankAccountsBeta {
     ) -> Result<crate::types::CompanyBankAccount> {
         let url = format!(
             "/v1/companies/{}/bank_accounts",
-            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(company_id_or_uuid),
         );
 
         self.client
@@ -97,8 +97,8 @@ impl CompanyBankAccountsBeta {
     ) -> Result<crate::types::CompanyBankAccount> {
         let url = format!(
             "/v1/companies/{}/bank_accounts/{}/verify",
-            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
-            crate::progenitor_support::encode_path(&bank_account_uuid.to_string()),
+            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(bank_account_uuid),
         );
 
         self.client

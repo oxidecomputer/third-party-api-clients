@@ -90,9 +90,9 @@ impl EnvelopeConsumerDisclosures {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
             query_
         );
 
@@ -217,10 +217,10 @@ impl EnvelopeConsumerDisclosures {
     ) -> Result<crate::types::ConsumerDisclosure> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/consumer_disclosure/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
-            crate::progenitor_support::encode_path(&lang_code.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(lang_code),
         );
 
         self.client.get(&url, None).await

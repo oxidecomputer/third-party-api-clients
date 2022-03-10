@@ -26,7 +26,7 @@ impl Users {
     pub async fn get(&self, id: &str) -> Result<crate::types::User> {
         let url = format!(
             "/users/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -42,7 +42,7 @@ impl Users {
     pub async fn delete(&self, id: &str) -> Result<()> {
         let url = format!(
             "/users/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await
@@ -58,7 +58,7 @@ impl Users {
     pub async fn patch(&self, id: &str, body: &crate::types::PatchUsersRequest) -> Result<()> {
         let url = format!(
             "/users/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -202,7 +202,7 @@ impl Users {
     ) -> Result<crate::types::GetUsersDeferredStatusResponse> {
         let url = format!(
             "/users/deferred/status/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

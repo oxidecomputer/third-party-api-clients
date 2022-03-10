@@ -153,7 +153,7 @@ impl Campaigns {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/campaigns/{}?{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
             query_
         );
 
@@ -174,7 +174,7 @@ impl Campaigns {
     pub async fn delete(&self, campaign_id: &str) -> Result<()> {
         let url = format!(
             "/campaigns/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.delete(&url, None).await
@@ -198,7 +198,7 @@ impl Campaigns {
     ) -> Result<crate::types::Campaign> {
         let url = format!(
             "/campaigns/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client
@@ -220,7 +220,7 @@ impl Campaigns {
     pub async fn post_actions_cancel_send(&self, campaign_id: &str) -> Result<()> {
         let url = format!(
             "/campaigns/{}/actions/cancel-send",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.post(&url, None).await
@@ -243,7 +243,7 @@ impl Campaigns {
     ) -> Result<crate::types::CampaignDataType> {
         let url = format!(
             "/campaigns/{}/actions/replicate",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.post(&url, None).await
@@ -263,7 +263,7 @@ impl Campaigns {
     pub async fn post_actions_send(&self, campaign_id: &str) -> Result<()> {
         let url = format!(
             "/campaigns/{}/actions/send",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.post(&url, None).await
@@ -287,7 +287,7 @@ impl Campaigns {
     ) -> Result<()> {
         let url = format!(
             "/campaigns/{}/actions/schedule",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client
@@ -309,7 +309,7 @@ impl Campaigns {
     pub async fn post_actions_unschedule(&self, campaign_id: &str) -> Result<()> {
         let url = format!(
             "/campaigns/{}/actions/unschedule",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.post(&url, None).await
@@ -333,7 +333,7 @@ impl Campaigns {
     ) -> Result<()> {
         let url = format!(
             "/campaigns/{}/actions/test",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client
@@ -355,7 +355,7 @@ impl Campaigns {
     pub async fn post_actions_pause(&self, campaign_id: &str) -> Result<()> {
         let url = format!(
             "/campaigns/{}/actions/pause",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.post(&url, None).await
@@ -375,7 +375,7 @@ impl Campaigns {
     pub async fn post_actions_resume(&self, campaign_id: &str) -> Result<()> {
         let url = format!(
             "/campaigns/{}/actions/resume",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.post(&url, None).await
@@ -398,7 +398,7 @@ impl Campaigns {
     ) -> Result<crate::types::CampaignDataType> {
         let url = format!(
             "/campaigns/{}/actions/create-resend",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client.post(&url, None).await
@@ -433,7 +433,7 @@ impl Campaigns {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/campaigns/{}/content?{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
             query_
         );
 
@@ -458,7 +458,7 @@ impl Campaigns {
     ) -> Result<crate::types::CampaignContent> {
         let url = format!(
             "/campaigns/{}/content",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client
@@ -495,7 +495,7 @@ impl Campaigns {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/campaigns/{}/feedback?{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
             query_
         );
 
@@ -520,7 +520,7 @@ impl Campaigns {
     ) -> Result<crate::types::CampaignFeedbackData> {
         let url = format!(
             "/campaigns/{}/feedback",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
         );
 
         self.client
@@ -559,8 +559,8 @@ impl Campaigns {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/campaigns/{}/feedback/{}?{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
-            crate::progenitor_support::encode_path(&feedback_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
+            crate::progenitor_support::encode_path(feedback_id),
             query_
         );
 
@@ -582,8 +582,8 @@ impl Campaigns {
     pub async fn delete_feedback(&self, campaign_id: &str, feedback_id: &str) -> Result<()> {
         let url = format!(
             "/campaigns/{}/feedback/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
-            crate::progenitor_support::encode_path(&feedback_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
+            crate::progenitor_support::encode_path(feedback_id),
         );
 
         self.client.delete(&url, None).await
@@ -609,8 +609,8 @@ impl Campaigns {
     ) -> Result<crate::types::CampaignFeedbackData> {
         let url = format!(
             "/campaigns/{}/feedback/{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
-            crate::progenitor_support::encode_path(&feedback_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
+            crate::progenitor_support::encode_path(feedback_id),
         );
 
         self.client
@@ -647,7 +647,7 @@ impl Campaigns {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/campaigns/{}/send-checklist?{}",
-            crate::progenitor_support::encode_path(&campaign_id.to_string()),
+            crate::progenitor_support::encode_path(campaign_id),
             query_
         );
 

@@ -98,7 +98,7 @@ impl Batches {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/batches/{}?{}",
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(batch_id),
             query_
         );
 
@@ -119,7 +119,7 @@ impl Batches {
     pub async fn delete(&self, batch_id: &str) -> Result<()> {
         let url = format!(
             "/batches/{}",
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.delete(&url, None).await
