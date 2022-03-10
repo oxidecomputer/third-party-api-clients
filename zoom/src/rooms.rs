@@ -182,7 +182,7 @@ impl Rooms {
     ) -> Result<crate::types::GetZrProfileResponse> {
         let url = format!(
             "/rooms/{}",
-            crate::progenitor_support::encode_path(&room_id.to_string()),
+            crate::progenitor_support::encode_path(room_id),
         );
 
         self.client.get(&url, None).await
@@ -206,7 +206,7 @@ impl Rooms {
     pub async fn delete_zoom(&self, room_id: &str) -> Result<crate::types::Domains> {
         let url = format!(
             "/rooms/{}",
-            crate::progenitor_support::encode_path(&room_id.to_string()),
+            crate::progenitor_support::encode_path(room_id),
         );
 
         self.client.delete(&url, None).await
@@ -235,7 +235,7 @@ impl Rooms {
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/rooms/{}",
-            crate::progenitor_support::encode_path(&room_id.to_string()),
+            crate::progenitor_support::encode_path(room_id),
         );
 
         self.client
@@ -274,7 +274,7 @@ impl Rooms {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/rooms/{}/settings?{}",
-            crate::progenitor_support::encode_path(&room_id.to_string()),
+            crate::progenitor_support::encode_path(room_id),
             query_
         );
 
@@ -308,7 +308,7 @@ impl Rooms {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/rooms/{}/settings?{}",
-            crate::progenitor_support::encode_path(&room_id.to_string()),
+            crate::progenitor_support::encode_path(room_id),
             query_
         );
 
@@ -338,7 +338,7 @@ impl Rooms {
     ) -> Result<crate::types::ListZrDevicesResponse> {
         let url = format!(
             "/rooms/{}/devices",
-            crate::progenitor_support::encode_path(&room_id.to_string()),
+            crate::progenitor_support::encode_path(room_id),
         );
 
         self.client.get(&url, None).await
@@ -367,7 +367,7 @@ impl Rooms {
     ) -> Result<()> {
         let url = format!(
             "/rooms/{}/location",
-            crate::progenitor_support::encode_path(&room_id.to_string()),
+            crate::progenitor_support::encode_path(room_id),
         );
 
         self.client
@@ -395,7 +395,7 @@ impl Rooms {
     pub async fn check(&self, id: &str, body: &crate::types::CheckInRoomsRequest) -> Result<()> {
         let url = format!(
             "/rooms/{}/events",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client

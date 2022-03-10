@@ -95,7 +95,7 @@ impl ConnectedSites {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/connected-sites/{}?{}",
-            crate::progenitor_support::encode_path(&connected_site_id.to_string()),
+            crate::progenitor_support::encode_path(connected_site_id),
             query_
         );
 
@@ -116,7 +116,7 @@ impl ConnectedSites {
     pub async fn delete(&self, connected_site_id: &str) -> Result<()> {
         let url = format!(
             "/connected-sites/{}",
-            crate::progenitor_support::encode_path(&connected_site_id.to_string()),
+            crate::progenitor_support::encode_path(connected_site_id),
         );
 
         self.client.delete(&url, None).await
@@ -139,7 +139,7 @@ impl ConnectedSites {
     ) -> Result<()> {
         let url = format!(
             "/connected-sites/{}/actions/verify-script-installation",
-            crate::progenitor_support::encode_path(&connected_site_id.to_string()),
+            crate::progenitor_support::encode_path(connected_site_id),
         );
 
         self.client.post(&url, None).await

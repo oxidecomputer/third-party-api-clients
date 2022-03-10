@@ -126,7 +126,7 @@ impl Departments {
     pub async fn get(&self, id: &str) -> Result<crate::types::Department> {
         let url = format!(
             "/departments/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -146,7 +146,7 @@ impl Departments {
     ) -> Result<crate::types::Department> {
         let url = format!(
             "/departments/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client

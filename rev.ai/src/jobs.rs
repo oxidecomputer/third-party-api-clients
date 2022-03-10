@@ -92,7 +92,7 @@ impl Jobs {
     pub async fn get(&self, id: &str) -> Result<crate::types::JobAllOf> {
         let url = format!(
             "/jobs/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -108,7 +108,7 @@ impl Jobs {
     pub async fn delete(&self, id: &str) -> Result<()> {
         let url = format!(
             "/jobs/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await

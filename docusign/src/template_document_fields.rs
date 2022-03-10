@@ -33,9 +33,9 @@ impl TemplateDocumentFields {
     ) -> Result<crate::types::DocumentFieldsInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
         );
 
         self.client.get(&url, None).await
@@ -63,9 +63,9 @@ impl TemplateDocumentFields {
     ) -> Result<crate::types::DocumentFieldsInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
         );
 
         self.client
@@ -95,9 +95,9 @@ impl TemplateDocumentFields {
     ) -> Result<crate::types::DocumentFieldsInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
         );
 
         self.client
@@ -127,9 +127,9 @@ impl TemplateDocumentFields {
     ) -> Result<crate::types::DocumentFieldsInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/fields",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
         );
 
         self.client

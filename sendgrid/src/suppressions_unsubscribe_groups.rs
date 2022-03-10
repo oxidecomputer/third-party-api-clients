@@ -99,7 +99,7 @@ impl SuppressionsUnsubscribeGroups {
     ) -> Result<crate::types::GetAsmGroupsGroupResponseAllOf> {
         let url = format!(
             "/asm/groups/{}",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client.get(&url, None).await
@@ -123,7 +123,7 @@ impl SuppressionsUnsubscribeGroups {
     pub async fn delete_asm_groups_group(&self, group_id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/asm/groups/{}",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client.delete(&url, None).await
@@ -147,7 +147,7 @@ impl SuppressionsUnsubscribeGroups {
     ) -> Result<crate::types::SuppressionGroup> {
         let url = format!(
             "/asm/groups/{}",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client

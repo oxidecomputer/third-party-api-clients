@@ -88,7 +88,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/events/{}/json?{}",
-            crate::progenitor_support::encode_path(&event_id.to_string()),
+            crate::progenitor_support::encode_path(event_id),
             query_
         );
 
@@ -201,7 +201,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/events/{}/json?{}",
-            crate::progenitor_support::encode_path(&event_id.to_string()),
+            crate::progenitor_support::encode_path(event_id),
             query_
         );
 
@@ -314,7 +314,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/events/{}/json?{}",
-            crate::progenitor_support::encode_path(&event_id.to_string()),
+            crate::progenitor_support::encode_path(event_id),
             query_
         );
 
@@ -427,7 +427,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/events/{}/json?{}",
-            crate::progenitor_support::encode_path(&event_id.to_string()),
+            crate::progenitor_support::encode_path(event_id),
             query_
         );
 
@@ -536,7 +536,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/events/{}/json?{}",
-            crate::progenitor_support::encode_path(&event_id.to_string()),
+            crate::progenitor_support::encode_path(event_id),
             query_
         );
 
@@ -649,7 +649,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/events/{}/json?{}",
-            crate::progenitor_support::encode_path(&event_id.to_string()),
+            crate::progenitor_support::encode_path(event_id),
             query_
         );
 
@@ -837,7 +837,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
             query_
         );
 
@@ -862,7 +862,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client
@@ -887,7 +887,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client.delete(&url, None).await
@@ -1044,7 +1044,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
             query_
         );
 
@@ -1069,7 +1069,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client
@@ -1094,7 +1094,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client.delete(&url, None).await
@@ -1251,7 +1251,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
             query_
         );
 
@@ -1276,7 +1276,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client
@@ -1301,7 +1301,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client.delete(&url, None).await
@@ -1446,7 +1446,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
             query_
         );
 
@@ -1471,7 +1471,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client
@@ -1493,7 +1493,7 @@ impl Events {
     pub async fn delete_webhooks_param_webhook(&self, webhook_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client.delete(&url, None).await
@@ -1650,7 +1650,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
             query_
         );
 
@@ -1675,7 +1675,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client
@@ -1700,7 +1700,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client.delete(&url, None).await
@@ -1857,7 +1857,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/webhooks/{}/json?{}",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
             query_
         );
 
@@ -1882,7 +1882,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client
@@ -1907,7 +1907,7 @@ impl Events {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/webhooks/{}/json",
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client.delete(&url, None).await

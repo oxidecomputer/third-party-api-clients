@@ -37,7 +37,7 @@ impl DomainAliases {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -60,7 +60,7 @@ impl DomainAliases {
     ) -> Result<crate::types::DomainAlias> {
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client
@@ -85,8 +85,8 @@ impl DomainAliases {
     ) -> Result<crate::types::DomainAlias> {
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&domain_alias_name.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(domain_alias_name),
         );
 
         self.client.get(&url, None).await
@@ -105,8 +105,8 @@ impl DomainAliases {
     pub async fn delete(&self, customer: &str, domain_alias_name: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&domain_alias_name.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(domain_alias_name),
         );
 
         self.client.delete(&url, None).await

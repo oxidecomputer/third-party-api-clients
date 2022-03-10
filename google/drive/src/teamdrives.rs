@@ -164,7 +164,7 @@ impl Teamdrives {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/teamdrives/{}?{}",
-            crate::progenitor_support::encode_path(&team_drive_id.to_string()),
+            crate::progenitor_support::encode_path(team_drive_id),
             query_
         );
 
@@ -183,7 +183,7 @@ impl Teamdrives {
     pub async fn delete(&self, team_drive_id: &str) -> Result<()> {
         let url = format!(
             "/teamdrives/{}",
-            crate::progenitor_support::encode_path(&team_drive_id.to_string()),
+            crate::progenitor_support::encode_path(team_drive_id),
         );
 
         self.client.delete(&url, None).await
@@ -215,7 +215,7 @@ impl Teamdrives {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/teamdrives/{}?{}",
-            crate::progenitor_support::encode_path(&team_drive_id.to_string()),
+            crate::progenitor_support::encode_path(team_drive_id),
             query_
         );
 

@@ -62,7 +62,7 @@ impl ImGroups {
     pub async fn im_group(&self, group_id: &str) -> Result<crate::types::ImGroupResponseAllOf> {
         let url = format!(
             "/im/groups/{}",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client.get(&url, None).await
@@ -86,7 +86,7 @@ impl ImGroups {
     pub async fn delete(&self, group_id: &str) -> Result<()> {
         let url = format!(
             "/im/groups/{}",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client.delete(&url, None).await
@@ -114,7 +114,7 @@ impl ImGroups {
     ) -> Result<()> {
         let url = format!(
             "/im/groups/{}",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client
@@ -163,7 +163,7 @@ impl ImGroups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/im/groups/{}/members?{}",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
             query_
         );
 
@@ -192,7 +192,7 @@ impl ImGroups {
     ) -> Result<()> {
         let url = format!(
             "/im/groups/{}/members",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client
@@ -219,8 +219,8 @@ impl ImGroups {
     pub async fn members_delete(&self, group_id: &str, member_id: &str) -> Result<()> {
         let url = format!(
             "/im/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(&group_id.to_string()),
-            crate::progenitor_support::encode_path(&member_id.to_string()),
+            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(member_id),
         );
 
         self.client.delete(&url, None).await

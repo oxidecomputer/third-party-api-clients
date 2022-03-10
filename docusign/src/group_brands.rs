@@ -31,8 +31,8 @@ impl GroupBrands {
     ) -> Result<crate::types::GroupBrands> {
         let url = format!(
             "/v2.1/accounts/{}/groups/{}/brands",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client.get(&url, None).await
@@ -58,8 +58,8 @@ impl GroupBrands {
     ) -> Result<crate::types::GroupBrands> {
         let url = format!(
             "/v2.1/accounts/{}/groups/{}/brands",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client
@@ -87,8 +87,8 @@ impl GroupBrands {
     ) -> Result<crate::types::GroupBrands> {
         let url = format!(
             "/v2.1/accounts/{}/groups/{}/brands",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(group_id),
         );
 
         self.client

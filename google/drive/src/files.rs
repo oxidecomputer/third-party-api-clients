@@ -390,7 +390,7 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}?{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
 
@@ -431,7 +431,7 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}?{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
 
@@ -512,7 +512,7 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}?{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
 
@@ -585,7 +585,7 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/copy?{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
 
@@ -612,7 +612,7 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/export?{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
 
@@ -669,7 +669,7 @@ impl Files {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/watch?{}",
-            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(file_id),
             query_
         );
 

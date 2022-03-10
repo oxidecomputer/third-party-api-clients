@@ -26,7 +26,7 @@ impl AccountPasswordRules {
     pub async fn get(&self, account_id: &str) -> Result<crate::types::AccountPasswordRulesData> {
         let url = format!(
             "/v2.1/accounts/{}/settings/password_rules",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client.get(&url, None).await
@@ -52,7 +52,7 @@ impl AccountPasswordRules {
     ) -> Result<crate::types::AccountPasswordRulesData> {
         let url = format!(
             "/v2.1/accounts/{}/settings/password_rules",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
