@@ -99,7 +99,7 @@ impl Conversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/conversations/{}?{}",
-            crate::progenitor_support::encode_path(conversation_id),
+            crate::progenitor_support::encode_path(&conversation_id.to_string()),
             query_
         );
 
@@ -150,7 +150,7 @@ impl Conversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/conversations/{}/messages?{}",
-            crate::progenitor_support::encode_path(conversation_id),
+            crate::progenitor_support::encode_path(&conversation_id.to_string()),
             query_
         );
 
@@ -188,8 +188,8 @@ impl Conversations {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/conversations/{}/messages/{}?{}",
-            crate::progenitor_support::encode_path(conversation_id),
-            crate::progenitor_support::encode_path(message_id),
+            crate::progenitor_support::encode_path(&conversation_id.to_string()),
+            crate::progenitor_support::encode_path(&message_id.to_string()),
             query_
         );
 

@@ -38,8 +38,8 @@ impl Checks {
     ) -> Result<crate::types::CheckRun> {
         let url = format!(
             "/repos/{}/{}/check-runs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -72,8 +72,8 @@ impl Checks {
     ) -> Result<crate::types::CheckRun> {
         let url = format!(
             "/repos/{}/{}/check-runs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
@@ -106,8 +106,8 @@ impl Checks {
     ) -> Result<crate::types::CheckRun> {
         let url = format!(
             "/repos/{}/{}/check-runs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
@@ -151,8 +151,8 @@ impl Checks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/check-runs/{}/annotations?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
             query_
         );
@@ -179,8 +179,8 @@ impl Checks {
     ) -> Result<Vec<crate::types::CheckAnnotation>> {
         let url = format!(
             "/repos/{}/{}/check-runs/{}/annotations",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_run_id.to_string()),
         );
 
@@ -211,8 +211,8 @@ impl Checks {
     ) -> Result<crate::types::CheckSuiteData> {
         let url = format!(
             "/repos/{}/{}/check-suites",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -242,8 +242,8 @@ impl Checks {
     ) -> Result<crate::types::CheckSuitePreference> {
         let url = format!(
             "/repos/{}/{}/check-suites/preferences",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -276,8 +276,8 @@ impl Checks {
     ) -> Result<crate::types::CheckSuiteData> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_suite_id.to_string()),
         );
 
@@ -338,8 +338,8 @@ impl Checks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/check-suites/{}/check-runs?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_suite_id.to_string()),
             query_
         );
@@ -372,8 +372,8 @@ impl Checks {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/check-suites/{}/rerequest",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&check_suite_id.to_string()),
         );
 
@@ -439,9 +439,9 @@ impl Checks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/commits/{}/check-runs?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(ref_),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
             query_
         );
 
@@ -495,9 +495,9 @@ impl Checks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/commits/{}/check-suites?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(ref_),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
             query_
         );
 

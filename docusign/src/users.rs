@@ -107,7 +107,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -132,7 +132,7 @@ impl Users {
     ) -> Result<crate::types::UserInformationList> {
         let url = format!(
             "/v2.1/accounts/{}/users",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -216,7 +216,7 @@ impl Users {
     ) -> Result<crate::types::NewUsersSummary> {
         let url = format!(
             "/v2.1/accounts/{}/users",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -251,7 +251,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -294,8 +294,8 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
             query_
         );
 
@@ -323,8 +323,8 @@ impl Users {
     ) -> Result<crate::types::UserInformation> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client
@@ -363,8 +363,8 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile/image?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
             query_
         );
 
@@ -389,8 +389,8 @@ impl Users {
     pub async fn profile_image_put(&self, account_id: &str, user_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile/image",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -414,8 +414,8 @@ impl Users {
     pub async fn profile_image_delete(&self, account_id: &str, user_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile/image",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -451,8 +451,8 @@ impl Users {
     ) -> Result<crate::types::UserSettingsInformation> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -479,8 +479,8 @@ impl Users {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/settings",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client

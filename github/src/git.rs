@@ -34,8 +34,8 @@ impl Git {
     ) -> Result<crate::types::Tree> {
         let url = format!(
             "/repos/{}/{}/git/blobs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -68,9 +68,9 @@ impl Git {
     ) -> Result<crate::types::Blob> {
         let url = format!(
             "/repos/{}/{}/git/blobs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(file_sha),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&file_sha.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -127,8 +127,8 @@ impl Git {
     ) -> Result<crate::types::GitCommit> {
         let url = format!(
             "/repos/{}/{}/git/commits",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -188,9 +188,9 @@ impl Git {
     ) -> Result<crate::types::GitCommit> {
         let url = format!(
             "/repos/{}/{}/git/commits/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(commit_sha),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&commit_sha.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -237,9 +237,9 @@ impl Git {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/git/matching-refs/{}?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(ref_),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
             query_
         );
 
@@ -271,9 +271,9 @@ impl Git {
     ) -> Result<Vec<crate::types::GitRef>> {
         let url = format!(
             "/repos/{}/{}/git/matching-refs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(ref_),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -304,9 +304,9 @@ impl Git {
     ) -> Result<crate::types::GitRef> {
         let url = format!(
             "/repos/{}/{}/git/ref/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(ref_),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -334,8 +334,8 @@ impl Git {
     ) -> Result<crate::types::GitRef> {
         let url = format!(
             "/repos/{}/{}/git/refs",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -361,9 +361,9 @@ impl Git {
     pub async fn delete_ref(&self, owner: &str, repo: &str, ref_: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/git/refs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(ref_),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -393,9 +393,9 @@ impl Git {
     ) -> Result<crate::types::GitRef> {
         let url = format!(
             "/repos/{}/{}/git/refs/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(ref_),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&ref_.to_string()),
         );
 
         self.client
@@ -454,8 +454,8 @@ impl Git {
     ) -> Result<crate::types::GitTag> {
         let url = format!(
             "/repos/{}/{}/git/tags",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -513,9 +513,9 @@ impl Git {
     ) -> Result<crate::types::GitTag> {
         let url = format!(
             "/repos/{}/{}/git/tags/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(tag_sha),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&tag_sha.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -545,8 +545,8 @@ impl Git {
     ) -> Result<crate::types::GitTreeData> {
         let url = format!(
             "/repos/{}/{}/git/trees",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -586,9 +586,9 @@ impl Git {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/git/trees/{}?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(tree_sha),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&tree_sha.to_string()),
             query_
         );
 

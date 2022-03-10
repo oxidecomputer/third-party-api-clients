@@ -27,7 +27,7 @@ impl Locations {
     ) -> Result<Vec<crate::types::Location>> {
         let url = format!(
             "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -50,7 +50,7 @@ impl Locations {
     ) -> Result<Vec<crate::types::Location>> {
         let url = format!(
             "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -72,7 +72,7 @@ impl Locations {
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client
@@ -90,7 +90,7 @@ impl Locations {
     pub async fn get(&self, location_id: &str) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -110,7 +110,7 @@ impl Locations {
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client

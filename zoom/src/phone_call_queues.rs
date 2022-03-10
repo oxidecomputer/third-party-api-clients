@@ -158,7 +158,7 @@ impl PhoneCallQueues {
     ) -> Result<crate::types::GetCallQueueResponse> {
         let url = format!(
             "/phone/call_queues/{}",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -188,7 +188,7 @@ impl PhoneCallQueues {
     pub async fn delete_call_queue(&self, call_queue_id: &str) -> Result<()> {
         let url = format!(
             "/phone/call_queues/{}",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -220,7 +220,7 @@ impl PhoneCallQueues {
     ) -> Result<()> {
         let url = format!(
             "/phone/call_queues/{}",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
         );
 
         self.client
@@ -254,7 +254,7 @@ impl PhoneCallQueues {
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/phone/call_queues/{}/phone_numbers",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
         );
 
         self.client
@@ -286,7 +286,7 @@ impl PhoneCallQueues {
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/phone/call_queues/{}/phone_numbers",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -318,8 +318,8 @@ impl PhoneCallQueues {
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/phone/call_queues/{}/phone_numbers/{}",
-            crate::progenitor_support::encode_path(call_queue_id),
-            crate::progenitor_support::encode_path(phone_number_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
+            crate::progenitor_support::encode_path(&phone_number_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -350,7 +350,7 @@ impl PhoneCallQueues {
     ) -> Result<crate::types::Domains> {
         let url = format!(
             "/phone/call_queues/{}/members",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
         );
 
         self.client
@@ -379,7 +379,7 @@ impl PhoneCallQueues {
     pub async fn unassign_all_members(&self, call_queue_id: &str) -> Result<()> {
         let url = format!(
             "/phone/call_queues/{}/members",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -411,8 +411,8 @@ impl PhoneCallQueues {
     ) -> Result<()> {
         let url = format!(
             "/phone/call_queues/{}/members/{}",
-            crate::progenitor_support::encode_path(call_queue_id),
-            crate::progenitor_support::encode_path(member_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
+            crate::progenitor_support::encode_path(&member_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -445,7 +445,7 @@ impl PhoneCallQueues {
     ) -> Result<()> {
         let url = format!(
             "/phone/call_queues/{}/manager",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
         );
 
         self.client
@@ -499,7 +499,7 @@ impl PhoneCallQueues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/call_queues/{}/recordings?{}",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
             query_
         );
 
@@ -542,7 +542,7 @@ impl PhoneCallQueues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/call_queues/{}/recordings?{}",
-            crate::progenitor_support::encode_path(call_queue_id),
+            crate::progenitor_support::encode_path(&call_queue_id.to_string()),
             query_
         );
 

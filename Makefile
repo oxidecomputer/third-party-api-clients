@@ -387,7 +387,7 @@ $(RAMP_SPEC):
 		-o $@ $?
 
 ramp: target/debug/generator $(RAMP_SPEC)
-	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.8 \
+	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.9 \
 		-o ramp \
 		-n ramp-api \
 		--proper-name Ramp \
@@ -426,7 +426,7 @@ $(SENDGRID_SPEC): $(SENDGRID_SPEC_DIR)
 		$(SENDGRID_SPEC_REMOTE)
 
 sendgrid: target/debug/generator $(SENDGRID_SPEC)
-	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.2.2 \
+	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.2.3 \
 		-o sendgrid \
 		-n sendgrid-api \
 		--proper-name SendGrid \
@@ -447,7 +447,7 @@ $(SHIPBOB_SPEC): $(SHIPBOB_SPEC_DIR)
 
 .PHONY: shipbob
 shipbob: target/debug/generator $(SHIPBOB_SPEC)
-	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.3 \
+	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.4 \
 		-o shipbob \
 		-n shipbob \
 		--proper-name "ShipBob" \
@@ -529,7 +529,7 @@ $(ZOOM_SPEC): $(ZOOM_SPEC_DIR)
 		$(ZOOM_SPEC_REMOTE)
 
 zoom: target/debug/generator $(ZOOM_SPEC)
-	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.5 \
+	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.6 \
 		-o zoom \
 		-n zoom-api \
 		--proper-name Zoom \

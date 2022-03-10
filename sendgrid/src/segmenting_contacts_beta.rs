@@ -96,7 +96,7 @@ impl SegmentingContactsBeta {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/segments/2.0/{}?{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
             query_
         );
 
@@ -113,7 +113,7 @@ impl SegmentingContactsBeta {
     pub async fn delete_segments_segment(&self, segment_id: &str) -> Result<()> {
         let url = format!(
             "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -135,7 +135,7 @@ impl SegmentingContactsBeta {
     ) -> Result<crate::types::SegmentResponse> {
         let url = format!(
             "/marketing/segments/2.0/{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
         );
 
         self.client

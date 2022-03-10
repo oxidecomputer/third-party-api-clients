@@ -43,7 +43,7 @@ impl Payroll {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/pay_periods?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
             query_
         );
 
@@ -78,7 +78,7 @@ impl Payroll {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/pay_periods?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
             query_
         );
 
@@ -136,7 +136,7 @@ impl Payroll {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/payrolls?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
             query_
         );
 
@@ -188,7 +188,7 @@ impl Payroll {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/payrolls?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
             query_
         );
 
@@ -211,7 +211,7 @@ impl Payroll {
     ) -> Result<crate::types::PayrollData> {
         let url = format!(
             "/v1/companies/{}/payrolls",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client
@@ -253,8 +253,8 @@ impl Payroll {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/payrolls/{}?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(payroll_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(&payroll_id_or_uuid.to_string()),
             query_
         );
 
@@ -276,8 +276,8 @@ impl Payroll {
     ) -> Result<crate::types::PayrollData> {
         let url = format!(
             "/v1/companies/{}/payrolls/{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(payroll_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(&payroll_id_or_uuid.to_string()),
         );
 
         self.client
@@ -303,9 +303,9 @@ impl Payroll {
     ) -> Result<crate::types::PayrollData> {
         let url = format!(
             "/v1/companies/{}/payrolls/{}/{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(pay_period_start_date),
-            crate::progenitor_support::encode_path(pay_period_end_date),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(&pay_period_start_date.to_string()),
+            crate::progenitor_support::encode_path(&pay_period_end_date.to_string()),
         );
 
         self.client
@@ -327,8 +327,8 @@ impl Payroll {
     pub async fn put_company_calculate(&self, company_id: &str, payroll_id: &str) -> Result<()> {
         let url = format!(
             "/v1/companies/{}/payrolls/{}/calculate",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(payroll_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(&payroll_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -346,8 +346,8 @@ impl Payroll {
     pub async fn put_company_submit(&self, company_id: &str, payroll_id: &str) -> Result<()> {
         let url = format!(
             "/v1/companies/{}/payrolls/{}/submit",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(payroll_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(&payroll_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -370,8 +370,8 @@ impl Payroll {
     ) -> Result<crate::types::PayrollData> {
         let url = format!(
             "/v1/companies/{}/payrolls/{}/cancel",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(payroll_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(&payroll_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -390,7 +390,7 @@ impl Payroll {
     ) -> Result<crate::types::GetCompanyPayrollReversalsResponse> {
         let url = format!(
             "/v1/companies/{}/payroll_reversals",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client.get(&url, None).await

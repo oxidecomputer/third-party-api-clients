@@ -1,7 +1,7 @@
 [package]
 name = "ramp-api"
 description = "A fully generated & opinionated API client for the Ramp API."
-version = "0.2.8"
+version = "0.2.9"
 documentation = "https://docs.rs/ramp-api/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/ramp"
 readme = "README.md"

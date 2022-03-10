@@ -58,7 +58,7 @@ impl EventHooks {
     pub async fn get(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
         let url = format!(
             "/api/v1/eventHooks/{}",
-            crate::progenitor_support::encode_path(event_hook_id),
+            crate::progenitor_support::encode_path(&event_hook_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -80,7 +80,7 @@ impl EventHooks {
     ) -> Result<crate::types::EventHook> {
         let url = format!(
             "/api/v1/eventHooks/{}",
-            crate::progenitor_support::encode_path(event_hook_id),
+            crate::progenitor_support::encode_path(&event_hook_id.to_string()),
         );
 
         self.client
@@ -100,7 +100,7 @@ impl EventHooks {
     pub async fn delete(&self, event_hook_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/eventHooks/{}",
-            crate::progenitor_support::encode_path(event_hook_id),
+            crate::progenitor_support::encode_path(&event_hook_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -118,7 +118,7 @@ impl EventHooks {
     pub async fn activate(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
         let url = format!(
             "/api/v1/eventHooks/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(event_hook_id),
+            crate::progenitor_support::encode_path(&event_hook_id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -136,7 +136,7 @@ impl EventHooks {
     pub async fn deactivate(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
         let url = format!(
             "/api/v1/eventHooks/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(event_hook_id),
+            crate::progenitor_support::encode_path(&event_hook_id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -154,7 +154,7 @@ impl EventHooks {
     pub async fn verify(&self, event_hook_id: &str) -> Result<crate::types::EventHook> {
         let url = format!(
             "/api/v1/eventHooks/{}/lifecycle/verify",
-            crate::progenitor_support::encode_path(event_hook_id),
+            crate::progenitor_support::encode_path(&event_hook_id.to_string()),
         );
 
         self.client.post(&url, None).await

@@ -33,8 +33,8 @@ impl SigningGroupUsers {
     ) -> Result<crate::types::SigningGroupUsersData> {
         let url = format!(
             "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(signing_group_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&signing_group_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -62,8 +62,8 @@ impl SigningGroupUsers {
     ) -> Result<crate::types::SigningGroupUsersData> {
         let url = format!(
             "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(signing_group_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&signing_group_id.to_string()),
         );
 
         self.client
@@ -93,8 +93,8 @@ impl SigningGroupUsers {
     ) -> Result<crate::types::SigningGroupUsersData> {
         let url = format!(
             "/v2.1/accounts/{}/signing_groups/{}/users",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(signing_group_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&signing_group_id.to_string()),
         );
 
         self.client

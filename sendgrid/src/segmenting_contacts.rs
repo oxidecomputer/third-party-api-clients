@@ -94,7 +94,7 @@ impl SegmentingContacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/marketing/segments/{}?{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
             query_
         );
 
@@ -116,7 +116,7 @@ impl SegmentingContacts {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/marketing/segments/{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -138,7 +138,7 @@ impl SegmentingContacts {
     ) -> Result<crate::types::FullSegmentAllOf> {
         let url = format!(
             "/marketing/segments/{}",
-            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(&segment_id.to_string()),
         );
 
         self.client

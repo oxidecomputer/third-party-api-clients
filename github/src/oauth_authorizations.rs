@@ -243,7 +243,7 @@ impl OauthAuthorizations {
     ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/authorizations/clients/{}",
-            crate::progenitor_support::encode_path(client_id),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
         );
 
         self.client
@@ -279,8 +279,8 @@ impl OauthAuthorizations {
     ) -> Result<crate::types::Authorization> {
         let url = format!(
             "/authorizations/clients/{}/{}",
-            crate::progenitor_support::encode_path(client_id),
-            crate::progenitor_support::encode_path(fingerprint),
+            crate::progenitor_support::encode_path(&client_id.to_string()),
+            crate::progenitor_support::encode_path(&fingerprint.to_string()),
         );
 
         self.client

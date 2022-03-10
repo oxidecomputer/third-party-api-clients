@@ -30,8 +30,8 @@ impl UserProfiles {
     pub async fn get(&self, account_id: &str, user_id: &str) -> Result<crate::types::UserProfile> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -60,8 +60,8 @@ impl UserProfiles {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/profile",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client
