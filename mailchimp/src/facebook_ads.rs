@@ -91,7 +91,7 @@ impl FacebookAds {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/facebook-ads/{}?{}",
-            crate::progenitor_support::encode_path(&outreach_id.to_string()),
+            crate::progenitor_support::encode_path(outreach_id),
             query_
         );
 

@@ -35,10 +35,10 @@ impl TemplateDocumentTabs {
     ) -> Result<crate::types::TemplateTabs> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/pages/{}/tabs",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
-            crate::progenitor_support::encode_path(&page_number.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(page_number),
         );
 
         self.client.get(&url, None).await
@@ -74,9 +74,9 @@ impl TemplateDocumentTabs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/tabs?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
             query_
         );
 
@@ -105,9 +105,9 @@ impl TemplateDocumentTabs {
     ) -> Result<crate::types::Tabs> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
         );
 
         self.client
@@ -137,9 +137,9 @@ impl TemplateDocumentTabs {
     ) -> Result<crate::types::Tabs> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
         );
 
         self.client
@@ -169,9 +169,9 @@ impl TemplateDocumentTabs {
     ) -> Result<crate::types::Tabs> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/documents/{}/tabs",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&template_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(document_id),
         );
 
         self.client

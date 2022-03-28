@@ -266,7 +266,7 @@ impl Contacts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/chat/users/me/contacts/{}?{}",
-            crate::progenitor_support::encode_path(&contact_id.to_string()),
+            crate::progenitor_support::encode_path(contact_id),
             query_
         );
 

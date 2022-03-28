@@ -27,7 +27,7 @@ impl JobApplicantsBeta {
     ) -> Result<Vec<crate::types::JobApplicant>> {
         let url = format!(
             "/v1/companies/{}/job_applicants",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(company_id),
         );
 
         self.client.get(&url, None).await
@@ -50,7 +50,7 @@ impl JobApplicantsBeta {
     ) -> Result<Vec<crate::types::JobApplicant>> {
         let url = format!(
             "/v1/companies/{}/job_applicants",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(company_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -72,7 +72,7 @@ impl JobApplicantsBeta {
     ) -> Result<crate::types::JobApplicant> {
         let url = format!(
             "/v1/companies/{}/job_applicants",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(company_id),
         );
 
         self.client
@@ -96,8 +96,8 @@ impl JobApplicantsBeta {
     ) -> Result<crate::types::JobApplicant> {
         let url = format!(
             "/v1/companies/{}/job_applicants/{}",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
-            crate::progenitor_support::encode_path(&job_applicant_uuid.to_string()),
+            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(job_applicant_uuid),
         );
 
         self.client.get(&url, None).await
@@ -120,8 +120,8 @@ impl JobApplicantsBeta {
     ) -> Result<crate::types::JobApplicant> {
         let url = format!(
             "/v1/companies/{}/job_applicants/{}",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
-            crate::progenitor_support::encode_path(&job_applicant_uuid.to_string()),
+            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(job_applicant_uuid),
         );
 
         self.client
@@ -145,8 +145,8 @@ impl JobApplicantsBeta {
     ) -> Result<()> {
         let url = format!(
             "/v1/companies/{}/job_applicants/{}",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
-            crate::progenitor_support::encode_path(&job_applicant_uuid.to_string()),
+            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(job_applicant_uuid),
         );
 
         self.client.delete(&url, None).await
