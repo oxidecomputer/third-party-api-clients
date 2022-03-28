@@ -13,19 +13,19 @@ impl SearchMembers {
     }
 
     /**
-     * Search members.
-     *
-     * This function performs a `GET` to the `/search-members` endpoint.
-     *
-     * Search for list members. This search can be restricted to a specific list, or can be used to search across all lists in an account.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `query: &str` -- The search query used to filter results. Query should be a valid email, or a string representing a contact's first or last name.
-     * * `list_id: &str` -- The unique id for the list.
-     */
+    * Search members.
+    *
+    * This function performs a `GET` to the `/search-members` endpoint.
+    *
+    * Search for list members. This search can be restricted to a specific list, or can be used to search across all lists in an account.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `query: &str` -- The search query used to filter results. Query should be a valid email, or a string representing a contact's first or last name.
+    * * `list_id: &str` -- The unique id for the list.
+    */
     pub async fn get(
         &self,
         fields: &[String],

@@ -13,27 +13,27 @@ impl Templates {
     }
 
     /**
-     * List templates.
-     *
-     * This function performs a `GET` to the `/templates` endpoint.
-     *
-     * Get a list of an account's available templates.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-     * * `created_by: &str` -- The Mailchimp account user who created the template.
-     * * `since_date_created: &str` -- Restrict the response to templates created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `before_date_created: &str` -- Restrict the response to templates created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-     * * `type_: &str` -- Limit results based on template type.
-     * * `category: &str` -- Limit results based on category.
-     * * `folder_id: &str` -- The name of the folder.
-     * * `sort_field: crate::types::GetTemplatesSortField` -- Returns user templates sorted by the specified field.
-     * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
-     */
+    * List templates.
+    *
+    * This function performs a `GET` to the `/templates` endpoint.
+    *
+    * Get a list of an account's available templates.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+    * * `created_by: &str` -- The Mailchimp account user who created the template.
+    * * `since_date_created: &str` -- Restrict the response to templates created after the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+    * * `before_date_created: &str` -- Restrict the response to templates created before the set date. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+    * * `type_: &str` -- Limit results based on template type.
+    * * `category: &str` -- Limit results based on category.
+    * * `folder_id: &str` -- The name of the folder.
+    * * `sort_field: crate::types::GetTemplatesSortField` -- Returns user templates sorted by the specified field.
+    * * `sort_dir: crate::types::SortDir` -- Determines the order direction for sorted results.
+    */
     pub async fn get(
         &self,
         fields: &[String],
@@ -99,12 +99,12 @@ impl Templates {
     }
 
     /**
-     * Add template.
-     *
-     * This function performs a `POST` to the `/templates` endpoint.
-     *
-     * Create a new template for the account. Only Classic templates are supported.
-     */
+    * Add template.
+    *
+    * This function performs a `POST` to the `/templates` endpoint.
+    *
+    * Create a new template for the account. Only Classic templates are supported.
+    */
     pub async fn post(
         &self,
         body: &crate::types::TemplateInstance,
@@ -116,18 +116,18 @@ impl Templates {
     }
 
     /**
-     * Get template info.
-     *
-     * This function performs a `GET` to the `/templates/{template_id}` endpoint.
-     *
-     * Get information about a specific template.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `template_id: &str` -- The unique id for the template.
-     */
+    * Get template info.
+    *
+    * This function performs a `GET` to the `/templates/{template_id}` endpoint.
+    *
+    * Get information about a specific template.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `template_id: &str` -- The unique id for the template.
+    */
     pub async fn get_templates(
         &self,
         fields: &[String],
@@ -144,7 +144,7 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/templates/{}?{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
             query_
         );
 
@@ -152,36 +152,36 @@ impl Templates {
     }
 
     /**
-     * Delete template.
-     *
-     * This function performs a `DELETE` to the `/templates/{template_id}` endpoint.
-     *
-     * Delete a specific template.
-     *
-     * **Parameters:**
-     *
-     * * `template_id: &str` -- The unique id for the template.
-     */
+    * Delete template.
+    *
+    * This function performs a `DELETE` to the `/templates/{template_id}` endpoint.
+    *
+    * Delete a specific template.
+    *
+    * **Parameters:**
+    *
+    * * `template_id: &str` -- The unique id for the template.
+    */
     pub async fn delete(&self, template_id: &str) -> Result<()> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * Update template.
-     *
-     * This function performs a `PATCH` to the `/templates/{template_id}` endpoint.
-     *
-     * Update the name, HTML, or `folder_id` of an existing template.
-     *
-     * **Parameters:**
-     *
-     * * `template_id: &str` -- The unique id for the template.
-     */
+    * Update template.
+    *
+    * This function performs a `PATCH` to the `/templates/{template_id}` endpoint.
+    *
+    * Update the name, HTML, or `folder_id` of an existing template.
+    *
+    * **Parameters:**
+    *
+    * * `template_id: &str` -- The unique id for the template.
+    */
     pub async fn patch(
         &self,
         template_id: &str,
@@ -189,7 +189,7 @@ impl Templates {
     ) -> Result<crate::types::Templates> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client
@@ -198,18 +198,18 @@ impl Templates {
     }
 
     /**
-     * View default content.
-     *
-     * This function performs a `GET` to the `/templates/{template_id}/default-content` endpoint.
-     *
-     * Get the sections that you can edit in a template, including each section's default content.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `template_id: &str` -- The unique id for the template.
-     */
+    * View default content.
+    *
+    * This function performs a `GET` to the `/templates/{template_id}/default-content` endpoint.
+    *
+    * Get the sections that you can edit in a template, including each section's default content.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `template_id: &str` -- The unique id for the template.
+    */
     pub async fn get_default_content(
         &self,
         fields: &[String],
@@ -226,7 +226,7 @@ impl Templates {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/templates/{}/default-content?{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
             query_
         );
 

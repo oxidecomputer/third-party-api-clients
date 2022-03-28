@@ -13,21 +13,21 @@ impl Receipts {
     }
 
     /**
-     * List receipts.
-     *
-     * This function performs a `GET` to the `/receipts` endpoint.
-     *
-     * Returns description of all receipts of a business.
-     *
-     * **Parameters:**
-     *
-     * * `from_date: chrono::DateTime<chrono::Utc>` -- Filter for receipts related to transactions which occurred after the specified date.
-     * * `to_date: chrono::DateTime<chrono::Utc>` -- Filter for receipts related to transactions which occurred before the specified date.
-     * * `created_after: chrono::DateTime<chrono::Utc>` -- Filter for receipts that were created after the specified date.
-     * * `created_before: chrono::DateTime<chrono::Utc>` -- Filter for receipts that were created before the specified date.
-     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-     */
+    * List receipts.
+    *
+    * This function performs a `GET` to the `/receipts` endpoint.
+    *
+    * Returns description of all receipts of a business.
+    *
+    * **Parameters:**
+    *
+    * * `from_date: chrono::DateTime<chrono::Utc>` -- Filter for receipts related to transactions which occurred after the specified date.
+    * * `to_date: chrono::DateTime<chrono::Utc>` -- Filter for receipts related to transactions which occurred before the specified date.
+    * * `created_after: chrono::DateTime<chrono::Utc>` -- Filter for receipts that were created after the specified date.
+    * * `created_before: chrono::DateTime<chrono::Utc>` -- Filter for receipts that were created before the specified date.
+    * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+    * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+    */
     pub async fn get_page(
         &self,
         from_date: Option<chrono::DateTime<chrono::Utc>>,
@@ -66,14 +66,14 @@ impl Receipts {
     }
 
     /**
-     * List receipts.
-     *
-     * This function performs a `GET` to the `/receipts` endpoint.
-     *
-     * As opposed to `get`, this function returns all the pages of the request at once.
-     *
-     * Returns description of all receipts of a business.
-     */
+    * List receipts.
+    *
+    * This function performs a `GET` to the `/receipts` endpoint.
+    *
+    * As opposed to `get`, this function returns all the pages of the request at once.
+    *
+    * Returns description of all receipts of a business.
+    */
     pub async fn get_all(
         &self,
         from_date: Option<chrono::DateTime<chrono::Utc>>,
@@ -136,16 +136,16 @@ impl Receipts {
     }
 
     /**
-     * Get details for one receipt.
-     *
-     * This function performs a `GET` to the `/receipts/{id}` endpoint.
-     *
-     *
-     */
+    * Get details for one receipt.
+    *
+    * This function performs a `GET` to the `/receipts/{id}` endpoint.
+    *
+    *
+    */
     pub async fn get(&self, id: &str) -> Result<crate::types::Receipt> {
         let url = format!(
             "/receipts/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await

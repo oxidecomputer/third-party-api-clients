@@ -13,32 +13,32 @@ impl Folders {
     }
 
     /**
-     * Gets a list of the folders for the account.
-     *
-     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/folders` endpoint.
-     *
-     * Retrieves a list of the folders for the account, including the folder hierarchy. You can specify whether to return just the template folder or template folder and normal folders by setting the `template` query string parameter.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `include: &str` -- A comma-separated list of folder types to include in the response.
-     *   Valid values are:
-     *   
-     *   - `envelope_folders`: Returns a list of envelope folders. (Default)
-     *   - `template_folders`: Returns a list of template folders.
-     *   - `shared_template_folders`: Returns a list of shared template folders.
-     *   .
-     * * `include_items: &str` -- Indicates whether folder items are included in the response. If this parameter is omitted, the default is false.
-     * * `start_position: &str` -- The position within the total result set from which to start returning values.
-     * * `template: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `user_filter: &str` -- Narrows down the resulting folder list by the following values:
-     *   
-     *   - `all`: Returns all templates owned or shared with the user. (default)
-     *   - `owned_by_me`: Returns only  templates the user owns.
-     *   - `shared_with_me`: Returns only templates that are shared with the user.
-     *   .
-     */
+    * Gets a list of the folders for the account.
+    *
+    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/folders` endpoint.
+    *
+    * Retrieves a list of the folders for the account, including the folder hierarchy. You can specify whether to return just the template folder or template folder and normal folders by setting the `template` query string parameter.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `include: &str` -- A comma-separated list of folder types to include in the response.
+    *   Valid values are:
+    *   
+    *   - `envelope_folders`: Returns a list of envelope folders. (Default)
+    *   - `template_folders`: Returns a list of template folders.
+    *   - `shared_template_folders`: Returns a list of shared template folders.
+    *   .
+    * * `include_items: &str` -- Indicates whether folder items are included in the response. If this parameter is omitted, the default is false.
+    * * `start_position: &str` -- The position within the total result set from which to start returning values.
+    * * `template: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `user_filter: &str` -- Narrows down the resulting folder list by the following values:
+    *   
+    *   - `all`: Returns all templates owned or shared with the user. (default)
+    *   - `owned_by_me`: Returns only  templates the user owns.
+    *   - `shared_with_me`: Returns only templates that are shared with the user.
+    *   .
+    */
     pub async fn get(
         &self,
         account_id: &str,
@@ -67,7 +67,7 @@ impl Folders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/folders?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -75,25 +75,25 @@ impl Folders {
     }
 
     /**
-     * Gets a list of the envelopes in the specified folder.
-     *
-     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/folders/{folderId}` endpoint.
-     *
-     * Retrieves a list of the envelopes in the specified folder. You can narrow the query by specifying search criteria in the query string parameters.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `from_date: &str` -- The billing period end date in UTC timedate format.
-     * * `include_items: &str` -- Indicates whether folder items are included in the response. If this parameter is omitted, the default is false.
-     * * `owner_email: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `owner_name: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `search_text: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `start_position: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `status: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `to_date: &str` -- The billing period end date in UTC timedate format.
-     */
+    * Gets a list of the envelopes in the specified folder.
+    *
+    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/folders/{folderId}` endpoint.
+    *
+    * Retrieves a list of the envelopes in the specified folder. You can narrow the query by specifying search criteria in the query string parameters.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `from_date: &str` -- The billing period end date in UTC timedate format.
+    * * `include_items: &str` -- Indicates whether folder items are included in the response. If this parameter is omitted, the default is false.
+    * * `owner_email: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `owner_name: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `search_text: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `start_position: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `status: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `to_date: &str` -- The billing period end date in UTC timedate format.
+    */
     pub async fn get_items(
         &self,
         account_id: &str,
@@ -135,8 +135,8 @@ impl Folders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/folders/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
             query_
         );
 
@@ -144,22 +144,22 @@ impl Folders {
     }
 
     /**
-     * Moves an envelope from its current folder to the specified folder.
-     *
-     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/folders/{folderId}` endpoint.
-     *
-     * Moves an envelope from its current folder to the specified folder.
-     *
-     * You can use this method to delete envelopes by specifying `recyclebin` in the `folderId` parameter.
-     * Placing an in-process envelope (envelope status of `sent` or `delivered`) in the recycle bin voids the envelope.
-     *
-     * You can also use this method to delete templates by specifying a template ID instead of an envelope ID in the `envelopeIds` property and specifying `recyclebin` in the `folderId` parameter.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     */
+    * Moves an envelope from its current folder to the specified folder.
+    *
+    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/folders/{folderId}` endpoint.
+    *
+    * Moves an envelope from its current folder to the specified folder.
+    *
+    * You can use this method to delete envelopes by specifying `recyclebin` in the `folderId` parameter.
+    * Placing an in-process envelope (envelope status of `sent` or `delivered`) in the recycle bin voids the envelope.
+    *
+    * You can also use this method to delete templates by specifying a template ID instead of an envelope ID in the `envelopeIds` property and specifying `recyclebin` in the `folderId` parameter.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `folder_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    */
     pub async fn put(
         &self,
         account_id: &str,
@@ -168,8 +168,8 @@ impl Folders {
     ) -> Result<crate::types::FoldersResponse> {
         let url = format!(
             "/v2.1/accounts/{}/folders/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client
@@ -178,31 +178,31 @@ impl Folders {
     }
 
     /**
-     * Gets a list of envelopes in folders matching the specified criteria.
-     *
-     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/search_folders/{searchFolderId}` endpoint.
-     *
-     * **This method is deprecated in API v2.1.**
-     *
-     * Use  [Envelopes::listStatusChanges](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/Envelopes/listStatusChanges) instead.
-     *
-     * Retrieves a list of items that match the criteria specified in the query.
-     *
-     * If the user ID of the user making the call is the same as the user ID for any returned recipient, then the userId property is added to the returned information for those recipients.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `search_folder_id: &str` -- Specifies the envelope group that is searched by the request. These are logical groupings, not actual folder names. Valid values are: drafts, awaiting_my_signature, completed, out_for_signature.
-     * * `all: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `count: &str` -- Specifies the number of records returned in the cache. The number must be greater than 0 and less than or equal to 100.
-     * * `from_date: &str` -- Specifies the start of the date range to return. If no value is provided, the default search is the previous 30 days.
-     * * `include_recipients: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `order: &str` -- Specifies the order in which the list is returned. Valid values are: `asc` for ascending order, and `desc` for descending order.
-     * * `order_by: &str` -- Specifies the property used to sort the list. Valid values are: `action_required`, `created`, `completed`, `sent`, `signer_list`, `status`, or `subject`.
-     * * `start_position: &str` -- Specifies the the starting location in the result set of the items that are returned.
-     * * `to_date: &str` -- The billing period end date in UTC timedate format.
-     */
+    * Gets a list of envelopes in folders matching the specified criteria.
+    *
+    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/search_folders/{searchFolderId}` endpoint.
+    *
+    * **This method is deprecated in API v2.1.**
+    *
+    * Use  [Envelopes::listStatusChanges](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/Envelopes/listStatusChanges) instead.
+    *
+    * Retrieves a list of items that match the criteria specified in the query.
+    *
+    * If the user ID of the user making the call is the same as the user ID for any returned recipient, then the userId property is added to the returned information for those recipients.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `search_folder_id: &str` -- Specifies the envelope group that is searched by the request. These are logical groupings, not actual folder names. Valid values are: drafts, awaiting_my_signature, completed, out_for_signature.
+    * * `all: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `count: &str` -- Specifies the number of records returned in the cache. The number must be greater than 0 and less than or equal to 100.
+    * * `from_date: &str` -- Specifies the start of the date range to return. If no value is provided, the default search is the previous 30 days.
+    * * `include_recipients: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `order: &str` -- Specifies the order in which the list is returned. Valid values are: `asc` for ascending order, and `desc` for descending order.
+    * * `order_by: &str` -- Specifies the property used to sort the list. Valid values are: `action_required`, `created`, `completed`, `sent`, `signer_list`, `status`, or `subject`.
+    * * `start_position: &str` -- Specifies the the starting location in the result set of the items that are returned.
+    * * `to_date: &str` -- The billing period end date in UTC timedate format.
+    */
     pub async fn search_get_contents(
         &self,
         account_id: &str,
@@ -247,8 +247,8 @@ impl Folders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/search_folders/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(search_folder_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&search_folder_id.to_string()),
             query_
         );
 

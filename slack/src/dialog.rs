@@ -13,18 +13,18 @@ impl Dialog {
     }
 
     /**
-     * This function performs a `GET` to the `/dialog.open` endpoint.
-     *
-     * Open a dialog with a user
-     *
-     * FROM: <https://api.slack.com/methods/dialog.open>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `none`.
-     * * `dialog: &str` -- The dialog definition. This must be a JSON-encoded string.
-     * * `trigger_id: &str` -- Exchange a trigger to post to the user.
-     */
+    * This function performs a `GET` to the `/dialog.open` endpoint.
+    *
+    * Open a dialog with a user
+    *
+    * FROM: <https://api.slack.com/methods/dialog.open>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `none`.
+    * * `dialog: &str` -- The dialog definition. This must be a JSON-encoded string.
+    * * `trigger_id: &str` -- Exchange a trigger to post to the user.
+    */
     pub async fn open(&self, dialog: &str, trigger_id: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !dialog.is_empty() {

@@ -13,21 +13,21 @@ impl DomainAuthentication {
     }
 
     /**
-     * List all authenticated domains.
-     *
-     * This function performs a `GET` to the `/whitelabel/domains` endpoint.
-     *
-     * **This endpoint allows you to retrieve a list of all domains you have authenticated.**
-     *
-     * **Parameters:**
-     *
-     * * `limit: i64` -- Number of domains to return.
-     * * `offset: i64` -- Paging offset.
-     * * `exclude_subusers: bool` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
-     * * `username: &str` -- The license key provided with your New Relic account.
-     * * `domain: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * List all authenticated domains.
+    *
+    * This function performs a `GET` to the `/whitelabel/domains` endpoint.
+    *
+    * **This endpoint allows you to retrieve a list of all domains you have authenticated.**
+    *
+    * **Parameters:**
+    *
+    * * `limit: i64` -- Number of domains to return.
+    * * `offset: i64` -- Paging offset.
+    * * `exclude_subusers: bool` -- Indicates if your subuser statistics will be sent to your New Relic Dashboard.
+    * * `username: &str` -- The license key provided with your New Relic account.
+    * * `domain: &str` -- The license key provided with your New Relic account.
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn get_whitelabel_domains(
         &self,
         limit: i64,
@@ -59,14 +59,14 @@ impl DomainAuthentication {
     }
 
     /**
-     * List all authenticated domains.
-     *
-     * This function performs a `GET` to the `/whitelabel/domains` endpoint.
-     *
-     * As opposed to `get_whitelabel_domains`, this function returns all the pages of the request at once.
-     *
-     * **This endpoint allows you to retrieve a list of all domains you have authenticated.**
-     */
+    * List all authenticated domains.
+    *
+    * This function performs a `GET` to the `/whitelabel/domains` endpoint.
+    *
+    * As opposed to `get_whitelabel_domains`, this function returns all the pages of the request at once.
+    *
+    * **This endpoint allows you to retrieve a list of all domains you have authenticated.**
+    */
     pub async fn get_all_whitelabel_domains(
         &self,
         offset: i64,
@@ -94,20 +94,20 @@ impl DomainAuthentication {
     }
 
     /**
-     * Authenticate a domain.
-     *
-     * This function performs a `POST` to the `/whitelabel/domains` endpoint.
-     *
-     * **This endpoint allows you to authenticate a domain.**
-     *
-     * If you are authenticating a domain for a subuser, you have two options:
-     * 1. Use the "username" parameter. This allows you to authenticate a domain on behalf of your subuser. This means the subuser is able to see and modify the authenticated domain.
-     * 2. Use the Association workflow (see Associate Domain section). This allows you to authenticate a domain created by the parent to a subuser. This means the subuser will default to the assigned domain, but will not be able to see or modify that authenticated domain. However, if the subuser authenticates their own domain it will overwrite the assigned domain.
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Authenticate a domain.
+    *
+    * This function performs a `POST` to the `/whitelabel/domains` endpoint.
+    *
+    * **This endpoint allows you to authenticate a domain.**
+    *
+    * If you are authenticating a domain for a subuser, you have two options:
+    * 1. Use the "username" parameter. This allows you to authenticate a domain on behalf of your subuser. This means the subuser is able to see and modify the authenticated domain.
+    * 2. Use the Association workflow (see Associate Domain section). This allows you to authenticate a domain created by the parent to a subuser. This means the subuser will default to the assigned domain, but will not be able to see or modify that authenticated domain. However, if the subuser authenticates their own domain it will overwrite the assigned domain.
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn post_whitelabel_domain(
         &self,
         body: &crate::types::PostWhitelabelDomainsRequest,
@@ -119,62 +119,62 @@ impl DomainAuthentication {
     }
 
     /**
-     * Retrieve an authenticated domain.
-     *
-     * This function performs a `GET` to the `/whitelabel/domains/{domain_id}` endpoint.
-     *
-     * **This endpoint allows you to retrieve a specific authenticated domain.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Retrieve an authenticated domain.
+    *
+    * This function performs a `GET` to the `/whitelabel/domains/{domain_id}` endpoint.
+    *
+    * **This endpoint allows you to retrieve a specific authenticated domain.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn get_whitelabel_domains_domain(
         &self,
         domain_id: &str,
     ) -> Result<crate::types::AuthenticationDomain> {
         let url = format!(
             "/whitelabel/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+            crate::progenitor_support::encode_path(&domain_id.to_string()),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-     * Delete an authenticated domain.
-     *
-     * This function performs a `DELETE` to the `/whitelabel/domains/{domain_id}` endpoint.
-     *
-     * **This endpoint allows you to delete an authenticated domain.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Delete an authenticated domain.
+    *
+    * This function performs a `DELETE` to the `/whitelabel/domains/{domain_id}` endpoint.
+    *
+    * **This endpoint allows you to delete an authenticated domain.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn delete_whitelabel_domains_domain(
         &self,
         domain_id: &str,
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/whitelabel/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+            crate::progenitor_support::encode_path(&domain_id.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * Update an authenticated domain.
-     *
-     * This function performs a `PATCH` to the `/whitelabel/domains/{domain_id}` endpoint.
-     *
-     * **This endpoint allows you to update the settings for an authenticated domain.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Update an authenticated domain.
+    *
+    * This function performs a `PATCH` to the `/whitelabel/domains/{domain_id}` endpoint.
+    *
+    * **This endpoint allows you to update the settings for an authenticated domain.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn patch_whitelabel_domains_domain(
         &self,
         domain_id: &str,
@@ -182,7 +182,7 @@ impl DomainAuthentication {
     ) -> Result<Vec<crate::types::DomainAuthentication200ResponseAllOf>> {
         let url = format!(
             "/whitelabel/domains/{}",
-            crate::progenitor_support::encode_path(domain_id),
+            crate::progenitor_support::encode_path(&domain_id.to_string()),
         );
 
         self.client
@@ -191,21 +191,21 @@ impl DomainAuthentication {
     }
 
     /**
-     * Get the default authentication.
-     *
-     * This function performs a `GET` to the `/whitelabel/domains/default` endpoint.
-     *
-     * **This endpoint allows you to retrieve the default authentication for a domain.**
-     *
-     * When creating or updating a domain authentication, you can set the domain as a default. The default domain will be used to send all mail. If you have multiple authenticated domains, the authenticated domain matching the domain of the From address will be used, and the default will be overridden.
-     *
-     * This endpoint will return a default domain and its details only if a default is set. You are not required to set a default. If you do not set a default domain, this endpoint will return general information about your domain authentication status.
-     *
-     * **Parameters:**
-     *
-     * * `domain: &str` -- The license key provided with your New Relic account.
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Get the default authentication.
+    *
+    * This function performs a `GET` to the `/whitelabel/domains/default` endpoint.
+    *
+    * **This endpoint allows you to retrieve the default authentication for a domain.**
+    *
+    * When creating or updating a domain authentication, you can set the domain as a default. The default domain will be used to send all mail. If you have multiple authenticated domains, the authenticated domain matching the domain of the From address will be used, and the default will be overridden.
+    *
+    * This endpoint will return a default domain and its details only if a default is set. You are not required to set a default. If you do not set a default domain, this endpoint will return general information about your domain authentication status.
+    *
+    * **Parameters:**
+    *
+    * * `domain: &str` -- The license key provided with your New Relic account.
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn get_whitelabel_domains_default(
         &self,
         domain: &str,
@@ -221,18 +221,18 @@ impl DomainAuthentication {
     }
 
     /**
-     * Get the default authentication.
-     *
-     * This function performs a `GET` to the `/whitelabel/domains/default` endpoint.
-     *
-     * As opposed to `get_whitelabel_domains_default`, this function returns all the pages of the request at once.
-     *
-     * **This endpoint allows you to retrieve the default authentication for a domain.**
-     *
-     * When creating or updating a domain authentication, you can set the domain as a default. The default domain will be used to send all mail. If you have multiple authenticated domains, the authenticated domain matching the domain of the From address will be used, and the default will be overridden.
-     *
-     * This endpoint will return a default domain and its details only if a default is set. You are not required to set a default. If you do not set a default domain, this endpoint will return general information about your domain authentication status.
-     */
+    * Get the default authentication.
+    *
+    * This function performs a `GET` to the `/whitelabel/domains/default` endpoint.
+    *
+    * As opposed to `get_whitelabel_domains_default`, this function returns all the pages of the request at once.
+    *
+    * **This endpoint allows you to retrieve the default authentication for a domain.**
+    *
+    * When creating or updating a domain authentication, you can set the domain as a default. The default domain will be used to send all mail. If you have multiple authenticated domains, the authenticated domain matching the domain of the From address will be used, and the default will be overridden.
+    *
+    * This endpoint will return a default domain and its details only if a default is set. You are not required to set a default. If you do not set a default domain, this endpoint will return general information about your domain authentication status.
+    */
     pub async fn get_all_whitelabel_domains_default(
         &self,
         domain: &str,
@@ -248,16 +248,16 @@ impl DomainAuthentication {
     }
 
     /**
-     * Add an IP to an authenticated domain.
-     *
-     * This function performs a `POST` to the `/whitelabel/domains/{id}/ips` endpoint.
-     *
-     * **This endpoint allows you to add an IP address to an authenticated domain.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Add an IP to an authenticated domain.
+    *
+    * This function performs a `POST` to the `/whitelabel/domains/{id}/ips` endpoint.
+    *
+    * **This endpoint allows you to add an IP address to an authenticated domain.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn post_whitelabel_domains_ip(
         &self,
         id: i64,
@@ -274,16 +274,16 @@ impl DomainAuthentication {
     }
 
     /**
-     * Remove an IP from an authenticated domain.
-     *
-     * This function performs a `DELETE` to the `/whitelabel/domains/{id}/ips/{ip}` endpoint.
-     *
-     * **This endpoint allows you to remove an IP address from that domain's authentication.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Remove an IP from an authenticated domain.
+    *
+    * This function performs a `DELETE` to the `/whitelabel/domains/{id}/ips/{ip}` endpoint.
+    *
+    * **This endpoint allows you to remove an IP address from that domain's authentication.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn delete_whitelabel_domains_ips_ip(
         &self,
         id: i64,
@@ -292,23 +292,23 @@ impl DomainAuthentication {
         let url = format!(
             "/whitelabel/domains/{}/ips/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
-            crate::progenitor_support::encode_path(ip),
+            crate::progenitor_support::encode_path(&ip.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * Validate a domain authentication.
-     *
-     * This function performs a `POST` to the `/whitelabel/domains/{id}/validate` endpoint.
-     *
-     * **This endpoint allows you to validate an authenticated domain. If it fails, it will return an error message describing why the domain could not be validated.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Validate a domain authentication.
+    *
+    * This function performs a `POST` to the `/whitelabel/domains/{id}/validate` endpoint.
+    *
+    * **This endpoint allows you to validate an authenticated domain. If it fails, it will return an error message describing why the domain could not be validated.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn post_whitelabel_domains_validate(
         &self,
         id: i64,
@@ -322,18 +322,18 @@ impl DomainAuthentication {
     }
 
     /**
-     * List the authenticated domain associated with the given user.
-     *
-     * This function performs a `GET` to the `/whitelabel/domains/subuser` endpoint.
-     *
-     * **This endpoint allows you to retrieve all of the authenticated domains that have been assigned to a specific subuser.**
-     *
-     * Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.
-     *
-     * **Parameters:**
-     *
-     * * `username: &str` -- Username for the subuser to find associated authenticated domain.
-     */
+    * List the authenticated domain associated with the given user.
+    *
+    * This function performs a `GET` to the `/whitelabel/domains/subuser` endpoint.
+    *
+    * **This endpoint allows you to retrieve all of the authenticated domains that have been assigned to a specific subuser.**
+    *
+    * Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.
+    *
+    * **Parameters:**
+    *
+    * * `username: &str` -- Username for the subuser to find associated authenticated domain.
+    */
     pub async fn get_whitelabel_domains_subuser(
         &self,
         username: &str,
@@ -349,18 +349,18 @@ impl DomainAuthentication {
     }
 
     /**
-     * Disassociate an authenticated domain from a given user.
-     *
-     * This function performs a `DELETE` to the `/whitelabel/domains/subuser` endpoint.
-     *
-     * **This endpoint allows you to disassociate a specific authenticated domain from a subuser.**
-     *
-     * Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.
-     *
-     * **Parameters:**
-     *
-     * * `username: &str` -- Username for the subuser to find associated authenticated domain.
-     */
+    * Disassociate an authenticated domain from a given user.
+    *
+    * This function performs a `DELETE` to the `/whitelabel/domains/subuser` endpoint.
+    *
+    * **This endpoint allows you to disassociate a specific authenticated domain from a subuser.**
+    *
+    * Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.
+    *
+    * **Parameters:**
+    *
+    * * `username: &str` -- Username for the subuser to find associated authenticated domain.
+    */
     pub async fn delete_whitelabel_domains_subuser(
         &self,
         username: &str,
@@ -376,14 +376,14 @@ impl DomainAuthentication {
     }
 
     /**
-     * Associate a authenticated domain with a given user.
-     *
-     * This function performs a `POST` to the `/whitelabel/domains/{domain_id}/subuser` endpoint.
-     *
-     * **This endpoint allows you to associate a specific authenticated domain with a subuser.**
-     *
-     * Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.
-     */
+    * Associate a authenticated domain with a given user.
+    *
+    * This function performs a `POST` to the `/whitelabel/domains/{domain_id}/subuser` endpoint.
+    *
+    * **This endpoint allows you to associate a specific authenticated domain with a subuser.**
+    *
+    * Authenticated domains can be associated with (i.e. assigned to) subusers from a parent account. This functionality allows subusers to send mail using their parent's domain authentication. To associate a authenticated domain with a subuser, the parent account must first authenticate and validate the domain. The the parent may then associate the authenticated domain via the subuser management tools.
+    */
     pub async fn post_whitelabel_domains_domain_subuser(
         &self,
         domain_id: i64,

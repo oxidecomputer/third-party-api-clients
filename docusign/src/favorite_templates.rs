@@ -13,20 +13,20 @@ impl FavoriteTemplates {
     }
 
     /**
-     * Retrieves the list of favorited templates for this caller.
-     *
-     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/favorite_templates` endpoint.
-     *
-     *
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     */
+    * Retrieves the list of favorited templates for this caller.
+    *
+    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/favorite_templates` endpoint.
+    *
+    *
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    */
     pub async fn get(&self, account_id: &str) -> Result<crate::types::FavoriteTemplates> {
         let url = format!(
             "/v2.1/accounts/{}/favorite_templates",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -51,7 +51,7 @@ impl FavoriteTemplates {
     ) -> Result<crate::types::FavoriteTemplates> {
         let url = format!(
             "/v2.1/accounts/{}/favorite_templates",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -60,16 +60,16 @@ impl FavoriteTemplates {
     }
 
     /**
-     * Unfavorites a template.
-     *
-     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/favorite_templates` endpoint.
-     *
-     *
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     */
+    * Unfavorites a template.
+    *
+    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/favorite_templates` endpoint.
+    *
+    *
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    */
     pub async fn un_template(
         &self,
         account_id: &str,
@@ -77,7 +77,7 @@ impl FavoriteTemplates {
     ) -> Result<crate::types::FavoriteTemplates> {
         let url = format!(
             "/v2.1/accounts/{}/favorite_templates",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client

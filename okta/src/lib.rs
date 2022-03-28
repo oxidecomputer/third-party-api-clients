@@ -46,7 +46,9 @@
 //! ```
 //! use okta::Client;
 //!
-//! let okta = Client::new(String::from("api-key"));
+//! let okta = Client::new(
+//!     String::from("api-key"),
+//! );
 //! ```
 //!
 //! Alternatively, the library can search for most of the variables required for
@@ -61,6 +63,7 @@
 //!
 //! let okta = Client::new_from_env();
 //! ```
+//!
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -598,7 +601,7 @@ impl Client {
         while !items.is_empty() {
             global_items.append(&mut items);
             // We need to get the next link.
-            if let Some(url) = link.as_ref().and_then(crate::utils::next_link) {
+            if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
                 let url = reqwest::Url::parse(&url)?;
                 let (new_link, new_items) = self.get_pages_url(&url).await?;
                 link = new_link;

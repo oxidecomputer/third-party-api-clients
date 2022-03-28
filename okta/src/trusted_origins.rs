@@ -13,17 +13,17 @@ impl TrustedOrigins {
     }
 
     /**
-     * This function performs a `GET` to the `/api/v1/trustedOrigins` endpoint.
-     *
-     * Success
-     *
-     * **Parameters:**
-     *
-     * * `q: &str`
-     * * `filter: &str`
-     * * `after: &str`
-     * * `limit: i64`
-     */
+    * This function performs a `GET` to the `/api/v1/trustedOrigins` endpoint.
+    *
+    * Success
+    *
+    * **Parameters:**
+    *
+    * * `q: &str`
+    * * `filter: &str`
+    * * `after: &str`
+    * * `limit: i64`
+    */
     pub async fn list_origins(
         &self,
         q: &str,
@@ -51,12 +51,12 @@ impl TrustedOrigins {
     }
 
     /**
-     * This function performs a `GET` to the `/api/v1/trustedOrigins` endpoint.
-     *
-     * As opposed to `list_origins`, this function returns all the pages of the request at once.
-     *
-     * Success
-     */
+    * This function performs a `GET` to the `/api/v1/trustedOrigins` endpoint.
+    *
+    * As opposed to `list_origins`, this function returns all the pages of the request at once.
+    *
+    * Success
+    */
     pub async fn list_all_origins(
         &self,
         q: &str,
@@ -76,10 +76,10 @@ impl TrustedOrigins {
     }
 
     /**
-     * This function performs a `POST` to the `/api/v1/trustedOrigins` endpoint.
-     *
-     * Success
-     */
+    * This function performs a `POST` to the `/api/v1/trustedOrigins` endpoint.
+    *
+    * Success
+    */
     pub async fn create_origin(
         &self,
         body: &crate::types::TrustedOrigin,
@@ -91,32 +91,32 @@ impl TrustedOrigins {
     }
 
     /**
-     * This function performs a `GET` to the `/api/v1/trustedOrigins/{trustedOriginId}` endpoint.
-     *
-     * Success
-     *
-     * **Parameters:**
-     *
-     * * `trusted_origin_id: &str`
-     */
+    * This function performs a `GET` to the `/api/v1/trustedOrigins/{trustedOriginId}` endpoint.
+    *
+    * Success
+    *
+    * **Parameters:**
+    *
+    * * `trusted_origin_id: &str`
+    */
     pub async fn get_origin(&self, trusted_origin_id: &str) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-     * This function performs a `PUT` to the `/api/v1/trustedOrigins/{trustedOriginId}` endpoint.
-     *
-     * Success
-     *
-     * **Parameters:**
-     *
-     * * `trusted_origin_id: &str`
-     */
+    * This function performs a `PUT` to the `/api/v1/trustedOrigins/{trustedOriginId}` endpoint.
+    *
+    * Success
+    *
+    * **Parameters:**
+    *
+    * * `trusted_origin_id: &str`
+    */
     pub async fn update_origin(
         &self,
         trusted_origin_id: &str,
@@ -124,7 +124,7 @@ impl TrustedOrigins {
     ) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
 
         self.client
@@ -133,60 +133,60 @@ impl TrustedOrigins {
     }
 
     /**
-     * This function performs a `DELETE` to the `/api/v1/trustedOrigins/{trustedOriginId}` endpoint.
-     *
-     * Success
-     *
-     * **Parameters:**
-     *
-     * * `trusted_origin_id: &str`
-     */
+    * This function performs a `DELETE` to the `/api/v1/trustedOrigins/{trustedOriginId}` endpoint.
+    *
+    * Success
+    *
+    * **Parameters:**
+    *
+    * * `trusted_origin_id: &str`
+    */
     pub async fn delete_origin(&self, trusted_origin_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/trustedOrigins/{}",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * This function performs a `POST` to the `/api/v1/trustedOrigins/{trustedOriginId}/lifecycle/activate` endpoint.
-     *
-     * Success
-     *
-     * **Parameters:**
-     *
-     * * `trusted_origin_id: &str`
-     */
+    * This function performs a `POST` to the `/api/v1/trustedOrigins/{trustedOriginId}/lifecycle/activate` endpoint.
+    *
+    * Success
+    *
+    * **Parameters:**
+    *
+    * * `trusted_origin_id: &str`
+    */
     pub async fn activate_origin(
         &self,
         trusted_origin_id: &str,
     ) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
 
         self.client.post(&url, None).await
     }
 
     /**
-     * This function performs a `POST` to the `/api/v1/trustedOrigins/{trustedOriginId}/lifecycle/deactivate` endpoint.
-     *
-     * Success
-     *
-     * **Parameters:**
-     *
-     * * `trusted_origin_id: &str`
-     */
+    * This function performs a `POST` to the `/api/v1/trustedOrigins/{trustedOriginId}/lifecycle/deactivate` endpoint.
+    *
+    * Success
+    *
+    * **Parameters:**
+    *
+    * * `trusted_origin_id: &str`
+    */
     pub async fn deactivate_origin(
         &self,
         trusted_origin_id: &str,
     ) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(trusted_origin_id),
+            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
         );
 
         self.client.post(&url, None).await

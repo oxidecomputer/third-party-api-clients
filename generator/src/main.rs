@@ -2388,6 +2388,7 @@ fn gen(
         || proper_name == "Giphy"
         || proper_name == "Rev.ai"
         || proper_name == "Okta"
+        || proper_name == "ShipBob"
     {
         a(&crate::client::generate_client_generic_api_key(
             proper_name,
@@ -3256,6 +3257,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                 || proper_name == "Giphy"
                 || proper_name == "Rev.ai"
                 || proper_name == "Okta"
+                || proper_name == "ShipBob"
             {
                 template::generate_docs_generic_api_key(
                     &api,

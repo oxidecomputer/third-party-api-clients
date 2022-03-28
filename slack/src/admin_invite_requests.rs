@@ -13,16 +13,16 @@ impl AdminInviteRequests {
     }
 
     /**
-     * This function performs a `POST` to the `/admin.inviteRequests.approve` endpoint.
-     *
-     * Approve a workspace invite request.
-     *
-     * FROM: <https://api.slack.com/methods/admin.inviteRequests.approve>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.invites:write`.
-     */
+    * This function performs a `POST` to the `/admin.inviteRequests.approve` endpoint.
+    *
+    * Approve a workspace invite request.
+    *
+    * FROM: <https://api.slack.com/methods/admin.inviteRequests.approve>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `admin.invites:write`.
+    */
     pub async fn approve(
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
@@ -34,16 +34,16 @@ impl AdminInviteRequests {
     }
 
     /**
-     * This function performs a `POST` to the `/admin.inviteRequests.deny` endpoint.
-     *
-     * Deny a workspace invite request.
-     *
-     * FROM: <https://api.slack.com/methods/admin.inviteRequests.deny>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.invites:write`.
-     */
+    * This function performs a `POST` to the `/admin.inviteRequests.deny` endpoint.
+    *
+    * Deny a workspace invite request.
+    *
+    * FROM: <https://api.slack.com/methods/admin.inviteRequests.deny>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `admin.invites:write`.
+    */
     pub async fn deny(
         &self,
         body: &crate::types::AdminInviteRequestsApproveRequest,
@@ -55,19 +55,19 @@ impl AdminInviteRequests {
     }
 
     /**
-     * This function performs a `GET` to the `/admin.inviteRequests.list` endpoint.
-     *
-     * List all pending workspace invite requests.
-     *
-     * FROM: <https://api.slack.com/methods/admin.inviteRequests.list>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.invites:read`.
-     * * `team_id: &str` -- ID for the workspace where the invite requests were made.
-     * * `cursor: &str` -- Value of the `next_cursor` field sent as part of the previous API response.
-     * * `limit: i64` -- The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive.
-     */
+    * This function performs a `GET` to the `/admin.inviteRequests.list` endpoint.
+    *
+    * List all pending workspace invite requests.
+    *
+    * FROM: <https://api.slack.com/methods/admin.inviteRequests.list>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `admin.invites:read`.
+    * * `team_id: &str` -- ID for the workspace where the invite requests were made.
+    * * `cursor: &str` -- Value of the `next_cursor` field sent as part of the previous API response.
+    * * `limit: i64` -- The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive.
+    */
     pub async fn list(
         &self,
         team_id: &str,

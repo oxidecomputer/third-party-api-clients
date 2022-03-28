@@ -13,34 +13,34 @@ impl SenderIdentitiesApi {
     }
 
     /**
-     * Get all Sender Identities.
-     *
-     * This function performs a `GET` to the `/senders` endpoint.
-     *
-     * **This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Get all Sender Identities.
+    *
+    * This function performs a `GET` to the `/senders` endpoint.
+    *
+    * **This endpoint allows you to retrieve a list of all sender identities that have been created for your account.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn get_senders(&self) -> Result<crate::types::GetSendersResponse> {
         let url = "/senders".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-     * Create a Sender Identity.
-     *
-     * This function performs a `POST` to the `/senders` endpoint.
-     *
-     * **This endpoint allows you to create a new sender identity.**
-     *
-     * You may create up to 100 unique sender identities.
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Create a Sender Identity.
+    *
+    * This function performs a `POST` to the `/senders` endpoint.
+    *
+    * **This endpoint allows you to create a new sender identity.**
+    *
+    * You may create up to 100 unique sender identities.
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn post_sender(
         &self,
         body: &crate::types::PostSendersRequestAllOf,
@@ -52,16 +52,16 @@ impl SenderIdentitiesApi {
     }
 
     /**
-     * View a Sender Identity.
-     *
-     * This function performs a `GET` to the `/senders/{sender_id}` endpoint.
-     *
-     * **This endpoint allows you to retrieve a specific sender identity.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * View a Sender Identity.
+    *
+    * This function performs a `GET` to the `/senders/{sender_id}` endpoint.
+    *
+    * **This endpoint allows you to retrieve a specific sender identity.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn get_senders_sender(&self, sender_id: i64) -> Result<crate::types::SenderAllOf> {
         let url = format!(
             "/senders/{}",
@@ -72,16 +72,16 @@ impl SenderIdentitiesApi {
     }
 
     /**
-     * Delete a Sender Identity.
-     *
-     * This function performs a `DELETE` to the `/senders/{sender_id}` endpoint.
-     *
-     * **This endoint allows you to delete one of your sender identities.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Delete a Sender Identity.
+    *
+    * This function performs a `DELETE` to the `/senders/{sender_id}` endpoint.
+    *
+    * **This endoint allows you to delete one of your sender identities.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn delete_senders_sender(&self, sender_id: i64) -> Result<crate::types::Help> {
         let url = format!(
             "/senders/{}",
@@ -92,20 +92,20 @@ impl SenderIdentitiesApi {
     }
 
     /**
-     * Update a Sender Identity.
-     *
-     * This function performs a `PATCH` to the `/senders/{sender_id}` endpoint.
-     *
-     * **This endpoint allows you to update a sender identity.**
-     *
-     * Updates to `from.email` require re-verification.
-     *
-     * Partial updates are allowed, but fields that are marked as "required" in the POST (create) endpoint must not be nil if that field is included in the PATCH request.
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Update a Sender Identity.
+    *
+    * This function performs a `PATCH` to the `/senders/{sender_id}` endpoint.
+    *
+    * **This endpoint allows you to update a sender identity.**
+    *
+    * Updates to `from.email` require re-verification.
+    *
+    * Partial updates are allowed, but fields that are marked as "required" in the POST (create) endpoint must not be nil if that field is included in the PATCH request.
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn patch_senders_sender(
         &self,
         sender_id: i64,
@@ -122,16 +122,16 @@ impl SenderIdentitiesApi {
     }
 
     /**
-     * Resend Sender Identity Verification.
-     *
-     * This function performs a `POST` to the `/senders/{sender_id}/resend_verification` endpoint.
-     *
-     * **This enpdoint allows you to resend a sender identity verification email.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Resend Sender Identity Verification.
+    *
+    * This function performs a `POST` to the `/senders/{sender_id}/resend_verification` endpoint.
+    *
+    * **This enpdoint allows you to resend a sender identity verification email.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn post_senders_sender_resend_verification(
         &self,
         sender_id: i64,

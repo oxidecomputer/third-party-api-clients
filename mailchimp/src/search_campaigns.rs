@@ -13,18 +13,18 @@ impl SearchCampaigns {
     }
 
     /**
-     * Search campaigns.
-     *
-     * This function performs a `GET` to the `/search-campaigns` endpoint.
-     *
-     * Search all campaigns for the specified query terms.
-     *
-     * **Parameters:**
-     *
-     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-     * * `query: &str` -- The search query used to filter results.
-     */
+    * Search campaigns.
+    *
+    * This function performs a `GET` to the `/search-campaigns` endpoint.
+    *
+    * Search all campaigns for the specified query terms.
+    *
+    * **Parameters:**
+    *
+    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+    * * `query: &str` -- The search query used to filter results.
+    */
     pub async fn get(
         &self,
         fields: &[String],

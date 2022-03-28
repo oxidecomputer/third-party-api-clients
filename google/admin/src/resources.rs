@@ -13,16 +13,16 @@ impl Resources {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
-     *
-     * Retrieves a list of buildings for an account.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `page_token: &str` -- Token to specify the next page in the list.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
+    *
+    * Retrieves a list of buildings for an account.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `max_results: i64` -- Maximum number of results to return.
+    * * `page_token: &str` -- Token to specify the next page in the list.
+    */
     pub async fn buildings_list(
         &self,
         customer: &str,
@@ -39,7 +39,7 @@ impl Resources {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings?{}",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
             query_
         );
 
@@ -50,16 +50,16 @@ impl Resources {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
-     *
-     * As opposed to `buildings_list`, this function returns all the pages of the request at once.
-     *
-     * Retrieves a list of buildings for an account.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
+    *
+    * As opposed to `buildings_list`, this function returns all the pages of the request at once.
+    *
+    * Retrieves a list of buildings for an account.
+    */
     pub async fn buildings_list_all(&self, customer: &str) -> Result<Vec<crate::types::Building>> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
         );
 
         let mut resp: crate::types::Buildings = self.client.get(&url, None).await?;
@@ -95,15 +95,15 @@ impl Resources {
     }
 
     /**
-     * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
-     *
-     * Inserts a building.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `coordinates_source: crate::types::CoordinatesSource` -- Source from which Building.coordinates are derived.
-     */
+    * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/buildings` endpoint.
+    *
+    * Inserts a building.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `coordinates_source: crate::types::CoordinatesSource` -- Source from which Building.coordinates are derived.
+    */
     pub async fn buildings_insert(
         &self,
         customer: &str,
@@ -120,7 +120,7 @@ impl Resources {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings?{}",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
             query_
         );
 
@@ -130,15 +130,15 @@ impl Resources {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
-     *
-     * Retrieves a building.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `building_id: &str` -- The unique ID of the building to retrieve.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
+    *
+    * Retrieves a building.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `building_id: &str` -- The unique ID of the building to retrieve.
+    */
     pub async fn buildings_get(
         &self,
         customer: &str,
@@ -146,24 +146,24 @@ impl Resources {
     ) -> Result<crate::types::Building> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(building_id),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&building_id.to_string()),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-     * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
-     *
-     * Updates a building.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `building_id: &str` -- The id of the building to update.
-     * * `coordinates_source: crate::types::CoordinatesSource` -- Source from which Building.coordinates are derived.
-     */
+    * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
+    *
+    * Updates a building.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `building_id: &str` -- The id of the building to update.
+    * * `coordinates_source: crate::types::CoordinatesSource` -- Source from which Building.coordinates are derived.
+    */
     pub async fn buildings_update(
         &self,
         customer: &str,
@@ -181,8 +181,8 @@ impl Resources {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(building_id),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&building_id.to_string()),
             query_
         );
 
@@ -192,36 +192,36 @@ impl Resources {
     }
 
     /**
-     * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
-     *
-     * Deletes a building.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `building_id: &str` -- The id of the building to delete.
-     */
+    * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
+    *
+    * Deletes a building.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `building_id: &str` -- The id of the building to delete.
+    */
     pub async fn buildings_delete(&self, customer: &str, building_id: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(building_id),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&building_id.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
-     *
-     * Patches a building.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `building_id: &str` -- The id of the building to update.
-     * * `coordinates_source: crate::types::CoordinatesSource` -- Source from which Building.coordinates are derived.
-     */
+    * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/buildings/{buildingId}` endpoint.
+    *
+    * Patches a building.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `building_id: &str` -- The id of the building to update.
+    * * `coordinates_source: crate::types::CoordinatesSource` -- Source from which Building.coordinates are derived.
+    */
     pub async fn buildings_patch(
         &self,
         customer: &str,
@@ -239,8 +239,8 @@ impl Resources {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/buildings/{}?{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(building_id),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&building_id.to_string()),
             query_
         );
 
@@ -250,18 +250,18 @@ impl Resources {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
-     *
-     * Retrieves a list of calendar resources for an account.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `order_by: &str` -- Field(s) to sort results by in either ascending or descending order. Supported fields include `resourceId`, `resourceName`, `capacity`, `buildingId`, and `floorName`. If no order is specified, defaults to ascending. Should be of the form "field [asc|desc], field [asc|desc], ...". For example `buildingId, capacity desc` would return results sorted first by `buildingId` in ascending order then by `capacity` in descending order.
-     * * `page_token: &str` -- Token to specify the next page in the list.
-     * * `query: &str` -- String query used to filter results. Should be of the form "field operator value" where field can be any of supported fields and operators can be any of supported operations. Operators include '=' for exact match, '!=' for mismatch and ':' for prefix match or HAS match where applicable. For prefix match, the value should always be followed by a *. Logical operators NOT and AND are supported (in this order of precedence). Supported fields include `generatedResourceName`, `name`, `buildingId`, `floor_name`, `capacity`, `featureInstances.feature.name`, `resourceEmail`, `resourceCategory`. For example `buildingId=US-NYC-9TH AND featureInstances.feature.name:Phone`.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
+    *
+    * Retrieves a list of calendar resources for an account.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `max_results: i64` -- Maximum number of results to return.
+    * * `order_by: &str` -- Field(s) to sort results by in either ascending or descending order. Supported fields include `resourceId`, `resourceName`, `capacity`, `buildingId`, and `floorName`. If no order is specified, defaults to ascending. Should be of the form "field [asc|desc], field [asc|desc], ...". For example `buildingId, capacity desc` would return results sorted first by `buildingId` in ascending order then by `capacity` in descending order.
+    * * `page_token: &str` -- Token to specify the next page in the list.
+    * * `query: &str` -- String query used to filter results. Should be of the form "field operator value" where field can be any of supported fields and operators can be any of supported operations. Operators include '=' for exact match, '!=' for mismatch and ':' for prefix match or HAS match where applicable. For prefix match, the value should always be followed by a *. Logical operators NOT and AND are supported (in this order of precedence). Supported fields include `generatedResourceName`, `name`, `buildingId`, `floor_name`, `capacity`, `featureInstances.feature.name`, `resourceEmail`, `resourceCategory`. For example `buildingId=US-NYC-9TH AND featureInstances.feature.name:Phone`.
+    */
     pub async fn calendars_list(
         &self,
         customer: &str,
@@ -286,7 +286,7 @@ impl Resources {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars?{}",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
             query_
         );
 
@@ -297,12 +297,12 @@ impl Resources {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
-     *
-     * As opposed to `calendars_list`, this function returns all the pages of the request at once.
-     *
-     * Retrieves a list of calendar resources for an account.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
+    *
+    * As opposed to `calendars_list`, this function returns all the pages of the request at once.
+    *
+    * Retrieves a list of calendar resources for an account.
+    */
     pub async fn calendars_list_all(
         &self,
         customer: &str,
@@ -319,7 +319,7 @@ impl Resources {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars?{}",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
             query_
         );
 
@@ -356,14 +356,14 @@ impl Resources {
     }
 
     /**
-     * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
-     *
-     * Inserts a calendar resource.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     */
+    * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/calendars` endpoint.
+    *
+    * Inserts a calendar resource.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    */
     pub async fn calendars_insert(
         &self,
         customer: &str,
@@ -371,7 +371,7 @@ impl Resources {
     ) -> Result<crate::types::CalendarResource> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
         );
 
         self.client
@@ -380,15 +380,15 @@ impl Resources {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
-     *
-     * Retrieves a calendar resource.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to retrieve.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
+    *
+    * Retrieves a calendar resource.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to retrieve.
+    */
     pub async fn calendars_get(
         &self,
         customer: &str,
@@ -396,23 +396,23 @@ impl Resources {
     ) -> Result<crate::types::CalendarResource> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(calendar_resource_id),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-     * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
-     *
-     * Updates a calendar resource. This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to update.
-     */
+    * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
+    *
+    * Updates a calendar resource. This method supports patch semantics, meaning you only need to include the fields you wish to update. Fields that are not present in the request will be preserved.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to update.
+    */
     pub async fn calendars_update(
         &self,
         customer: &str,
@@ -421,8 +421,8 @@ impl Resources {
     ) -> Result<crate::types::CalendarResource> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(calendar_resource_id),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
         );
 
         self.client
@@ -431,35 +431,35 @@ impl Resources {
     }
 
     /**
-     * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
-     *
-     * Deletes a calendar resource.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to delete.
-     */
+    * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
+    *
+    * Deletes a calendar resource.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to delete.
+    */
     pub async fn calendars_delete(&self, customer: &str, calendar_resource_id: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(calendar_resource_id),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
-     *
-     * Patches a calendar resource.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to update.
-     */
+    * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/calendars/{calendarResourceId}` endpoint.
+    *
+    * Patches a calendar resource.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `calendar_resource_id: &str` -- The unique ID of the calendar resource to update.
+    */
     pub async fn calendars_patch(
         &self,
         customer: &str,
@@ -468,8 +468,8 @@ impl Resources {
     ) -> Result<crate::types::CalendarResource> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/calendars/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(calendar_resource_id),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&calendar_resource_id.to_string()),
         );
 
         self.client
@@ -478,16 +478,16 @@ impl Resources {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
-     *
-     * Retrieves a list of features for an account.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `page_token: &str` -- Token to specify the next page in the list.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
+    *
+    * Retrieves a list of features for an account.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `max_results: i64` -- Maximum number of results to return.
+    * * `page_token: &str` -- Token to specify the next page in the list.
+    */
     pub async fn features_list(
         &self,
         customer: &str,
@@ -504,7 +504,7 @@ impl Resources {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features?{}",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
             query_
         );
 
@@ -515,16 +515,16 @@ impl Resources {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
-     *
-     * As opposed to `features_list`, this function returns all the pages of the request at once.
-     *
-     * Retrieves a list of features for an account.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
+    *
+    * As opposed to `features_list`, this function returns all the pages of the request at once.
+    *
+    * Retrieves a list of features for an account.
+    */
     pub async fn features_list_all(&self, customer: &str) -> Result<Vec<crate::types::Feature>> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
         );
 
         let mut resp: crate::types::Features = self.client.get(&url, None).await?;
@@ -560,14 +560,14 @@ impl Resources {
     }
 
     /**
-     * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
-     *
-     * Inserts a feature.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     */
+    * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/features` endpoint.
+    *
+    * Inserts a feature.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    */
     pub async fn features_insert(
         &self,
         customer: &str,
@@ -575,7 +575,7 @@ impl Resources {
     ) -> Result<crate::types::Feature> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features",
-            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(&customer.to_string()),
         );
 
         self.client
@@ -584,15 +584,15 @@ impl Resources {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
-     *
-     * Retrieves a feature.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `feature_key: &str` -- The unique ID of the feature to retrieve.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
+    *
+    * Retrieves a feature.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `feature_key: &str` -- The unique ID of the feature to retrieve.
+    */
     pub async fn features_get(
         &self,
         customer: &str,
@@ -600,23 +600,23 @@ impl Resources {
     ) -> Result<crate::types::Feature> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(feature_key),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&feature_key.to_string()),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-     * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
-     *
-     * Updates a feature.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `feature_key: &str` -- The unique ID of the feature to update.
-     */
+    * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
+    *
+    * Updates a feature.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `feature_key: &str` -- The unique ID of the feature to update.
+    */
     pub async fn features_update(
         &self,
         customer: &str,
@@ -625,8 +625,8 @@ impl Resources {
     ) -> Result<crate::types::Feature> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(feature_key),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&feature_key.to_string()),
         );
 
         self.client
@@ -635,35 +635,35 @@ impl Resources {
     }
 
     /**
-     * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
-     *
-     * Deletes a feature.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `feature_key: &str` -- The unique ID of the feature to delete.
-     */
+    * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
+    *
+    * Deletes a feature.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `feature_key: &str` -- The unique ID of the feature to delete.
+    */
     pub async fn features_delete(&self, customer: &str, feature_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(feature_key),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&feature_key.to_string()),
         );
 
         self.client.delete(&url, None).await
     }
 
     /**
-     * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
-     *
-     * Patches a feature.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `feature_key: &str` -- The unique ID of the feature to update.
-     */
+    * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/resources/features/{featureKey}` endpoint.
+    *
+    * Patches a feature.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `feature_key: &str` -- The unique ID of the feature to update.
+    */
     pub async fn features_patch(
         &self,
         customer: &str,
@@ -672,8 +672,8 @@ impl Resources {
     ) -> Result<crate::types::Feature> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(feature_key),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&feature_key.to_string()),
         );
 
         self.client
@@ -682,15 +682,15 @@ impl Resources {
     }
 
     /**
-     * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/features/{oldName}/rename` endpoint.
-     *
-     * Renames a feature.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
-     * * `old_name: &str` -- The unique ID of the feature to rename.
-     */
+    * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/resources/features/{oldName}/rename` endpoint.
+    *
+    * Renames a feature.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's customer ID.
+    * * `old_name: &str` -- The unique ID of the feature to rename.
+    */
     pub async fn features_rename(
         &self,
         customer: &str,
@@ -699,8 +699,8 @@ impl Resources {
     ) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/resources/features/{}/rename",
-            crate::progenitor_support::encode_path(customer),
-            crate::progenitor_support::encode_path(old_name),
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(&old_name.to_string()),
         );
 
         self.client

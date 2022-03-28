@@ -13,16 +13,16 @@ impl ContactsApiCustomFields {
     }
 
     /**
-     * Retrieve all custom fields.
-     *
-     * This function performs a `GET` to the `/contactdb/custom_fields` endpoint.
-     *
-     * **This endpoint allows you to retrieve all custom fields.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Retrieve all custom fields.
+    *
+    * This function performs a `GET` to the `/contactdb/custom_fields` endpoint.
+    *
+    * **This endpoint allows you to retrieve all custom fields.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn get_contactdb_custom_fields(
         &self,
     ) -> Result<crate::types::ListAllCustomFieldsResponse> {
@@ -31,18 +31,18 @@ impl ContactsApiCustomFields {
     }
 
     /**
-     * Create a Custom Field.
-     *
-     * This function performs a `POST` to the `/contactdb/custom_fields` endpoint.
-     *
-     * **This endpoint allows you to create a custom field.**
-     *
-     * **You can create up to 120 custom fields.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Create a Custom Field.
+    *
+    * This function performs a `POST` to the `/contactdb/custom_fields` endpoint.
+    *
+    * **This endpoint allows you to create a custom field.**
+    *
+    * **You can create up to 120 custom fields.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn post_contactdb_custom_field(
         &self,
         body: &crate::types::PostContactdbCustomFieldsRequest,
@@ -54,16 +54,16 @@ impl ContactsApiCustomFields {
     }
 
     /**
-     * Retrieve a Custom Field.
-     *
-     * This function performs a `GET` to the `/contactdb/custom_fields/{custom_field_id}` endpoint.
-     *
-     * **This endpoint allows you to retrieve a custom field by ID.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Retrieve a Custom Field.
+    *
+    * This function performs a `GET` to the `/contactdb/custom_fields/{custom_field_id}` endpoint.
+    *
+    * **This endpoint allows you to retrieve a custom field by ID.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn get_contactdb_custom_fields_field(
         &self,
         custom_field_id: i64,
@@ -77,16 +77,16 @@ impl ContactsApiCustomFields {
     }
 
     /**
-     * Delete a Custom Field.
-     *
-     * This function performs a `DELETE` to the `/contactdb/custom_fields/{custom_field_id}` endpoint.
-     *
-     * **This endpoint allows you to delete a custom field by ID.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Delete a Custom Field.
+    *
+    * This function performs a `DELETE` to the `/contactdb/custom_fields/{custom_field_id}` endpoint.
+    *
+    * **This endpoint allows you to delete a custom field by ID.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn delete_contactdb_custom_fields_field(
         &self,
         custom_field_id: i64,
@@ -100,16 +100,16 @@ impl ContactsApiCustomFields {
     }
 
     /**
-     * Retrieve reserved fields.
-     *
-     * This function performs a `GET` to the `/contactdb/reserved_fields` endpoint.
-     *
-     * **This endpoint allows you to list all fields that are reserved and can't be used for custom field names.**
-     *
-     * **Parameters:**
-     *
-     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-     */
+    * Retrieve reserved fields.
+    *
+    * This function performs a `GET` to the `/contactdb/reserved_fields` endpoint.
+    *
+    * **This endpoint allows you to list all fields that are reserved and can't be used for custom field names.**
+    *
+    * **Parameters:**
+    *
+    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+    */
     pub async fn get_contactdb_reserved_fields(
         &self,
     ) -> Result<crate::types::GetContactdbReservedFieldsResponse> {

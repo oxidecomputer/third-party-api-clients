@@ -13,19 +13,19 @@ impl AdminInviteRequestsApproved {
     }
 
     /**
-     * This function performs a `GET` to the `/admin.inviteRequests.approved.list` endpoint.
-     *
-     * List all approved workspace invite requests.
-     *
-     * FROM: <https://api.slack.com/methods/admin.inviteRequests.approved.list>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.invites:read`.
-     * * `team_id: &str` -- ID for the workspace where the invite requests were made.
-     * * `cursor: &str` -- Value of the `next_cursor` field sent as part of the previous API response.
-     * * `limit: i64` -- The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive.
-     */
+    * This function performs a `GET` to the `/admin.inviteRequests.approved.list` endpoint.
+    *
+    * List all approved workspace invite requests.
+    *
+    * FROM: <https://api.slack.com/methods/admin.inviteRequests.approved.list>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `admin.invites:read`.
+    * * `team_id: &str` -- ID for the workspace where the invite requests were made.
+    * * `cursor: &str` -- Value of the `next_cursor` field sent as part of the previous API response.
+    * * `limit: i64` -- The number of results that will be returned by the API on each invocation. Must be between 1 - 1000, both inclusive.
+    */
     pub async fn list(
         &self,
         team_id: &str,

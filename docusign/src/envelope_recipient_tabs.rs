@@ -13,26 +13,26 @@ impl EnvelopeRecipientTabs {
     }
 
     /**
-     * Gets the tabs information for a signer or sign-in-person recipient in an envelope.
-     *
-     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/{recipientId}/tabs` endpoint.
-     *
-     * Retrieves information about the tabs associated
-     * with a recipient. You can make a single API call
-     * to get all the tab values and information from a
-     * given, completed envelope in addition to draft
-     * ones.  Tab values can be retrieved by using the
-     * [EnvelopeRecipients:list method](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipients/list/)
-     * with query parameter `include_tabs` set to **true**.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     * * `include_anchor_tab_locations: &str` -- When set to **true**, all tabs with anchor tab properties are included in the response. The default value is **false**.
-     * * `include_metadata: &str` -- When set to **true**, the response includes metadata indicating which properties are editable.
-     */
+    * Gets the tabs information for a signer or sign-in-person recipient in an envelope.
+    *
+    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/{recipientId}/tabs` endpoint.
+    *
+    * Retrieves information about the tabs associated
+    * with a recipient. You can make a single API call
+    * to get all the tab values and information from a
+    * given, completed envelope in addition to draft
+    * ones.  Tab values can be retrieved by using the
+    * [EnvelopeRecipients:list method](https://developers.docusign.com/docs/esign-rest-api/reference/Envelopes/EnvelopeRecipients/list/)
+    * with query parameter `include_tabs` set to **true**.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+    * * `include_anchor_tab_locations: &str` -- When set to **true**, all tabs with anchor tab properties are included in the response. The default value is **false**.
+    * * `include_metadata: &str` -- When set to **true**, the response includes metadata indicating which properties are editable.
+    */
     pub async fn recipients_get_recipient_tab(
         &self,
         account_id: &str,
@@ -54,9 +54,9 @@ impl EnvelopeRecipientTabs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/tabs?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
             query_
         );
 
@@ -88,9 +88,9 @@ impl EnvelopeRecipientTabs {
     ) -> Result<crate::types::EnvelopeRecipientTabs> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
 
         self.client
@@ -99,18 +99,18 @@ impl EnvelopeRecipientTabs {
     }
 
     /**
-     * Adds tabs for a recipient.
-     *
-     * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/{recipientId}/tabs` endpoint.
-     *
-     * Adds one or more tabs for a recipient.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     */
+    * Adds tabs for a recipient.
+    *
+    * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/{recipientId}/tabs` endpoint.
+    *
+    * Adds one or more tabs for a recipient.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+    */
     pub async fn recipients_post_recipient_tabs(
         &self,
         account_id: &str,
@@ -120,9 +120,9 @@ impl EnvelopeRecipientTabs {
     ) -> Result<crate::types::EnvelopeRecipientTabs> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
 
         self.client
@@ -131,18 +131,18 @@ impl EnvelopeRecipientTabs {
     }
 
     /**
-     * Deletes the tabs associated with a recipient.
-     *
-     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/{recipientId}/tabs` endpoint.
-     *
-     * Deletes one or more tabs associated with a recipient in a draft envelope.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
-     */
+    * Deletes the tabs associated with a recipient.
+    *
+    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/recipients/{recipientId}/tabs` endpoint.
+    *
+    * Deletes one or more tabs associated with a recipient in a draft envelope.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `recipient_id: &str` -- A local reference that senders use to map recipients to other objects, such as specific document tabs. Within an envelope, each `recipientId` must be unique, but there is no uniqueness requirement across envelopes. For example, many envelopes assign the first recipient a `recipientId` of `1`.
+    */
     pub async fn recipients_delete_recipient_tabs(
         &self,
         account_id: &str,
@@ -152,9 +152,9 @@ impl EnvelopeRecipientTabs {
     ) -> Result<crate::types::EnvelopeRecipientTabs> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/tabs",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
 
         self.client

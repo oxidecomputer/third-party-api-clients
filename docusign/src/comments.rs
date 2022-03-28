@@ -13,20 +13,20 @@ impl Comments {
     }
 
     /**
-     * Gets a PDF transcript of all of the comments in an envelope.
-     *
-     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/comments/transcript` endpoint.
-     *
-     * Retrieves a PDF file containing all of the comments that senders and recipients have added to the documents in an envelope.
-     *
-     * **Note**: Comments are disabled by default. To use the comments feature, an account administrator must enable comments on the account (in the `accountSettingsInformation` object, set the `enableSigningExtensionComments` property to **true**).
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `encoding: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     */
+    * Gets a PDF transcript of all of the comments in an envelope.
+    *
+    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/{envelopeId}/comments/transcript` endpoint.
+    *
+    * Retrieves a PDF file containing all of the comments that senders and recipients have added to the documents in an envelope.
+    *
+    * **Note**: Comments are disabled by default. To use the comments feature, an account administrator must enable comments on the account (in the `accountSettingsInformation` object, set the `enableSigningExtensionComments` property to **true**).
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `envelope_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `encoding: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    */
     pub async fn get_transcript(
         &self,
         account_id: &str,
@@ -40,8 +40,8 @@ impl Comments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/comments/transcript?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
             query_
         );
 

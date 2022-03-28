@@ -13,17 +13,17 @@ impl CustomTabs {
     }
 
     /**
-     * Gets a list of all account tabs.
-     *
-     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/tab_definitions` endpoint.
-     *
-     * Retrieves a list of all tabs associated with the account.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `custom_tab_only: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     */
+    * Gets a list of all account tabs.
+    *
+    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/tab_definitions` endpoint.
+    *
+    * Retrieves a list of all tabs associated with the account.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `custom_tab_only: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    */
     pub async fn tabs_get_tab_definition(
         &self,
         account_id: &str,
@@ -36,7 +36,7 @@ impl CustomTabs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -44,18 +44,18 @@ impl CustomTabs {
     }
 
     /**
-     * Creates a custom tab.
-     *
-     * This function performs a `POST` to the `/v2.1/accounts/{accountId}/tab_definitions` endpoint.
-     *
-     * Creates a tab with pre-defined properties, such as a text tab with a certain font type and validation pattern. Users can access the custom tabs when sending documents through the DocuSign web application.
-     *
-     * Custom tabs can be created for approve, checkbox, company, date, date signed, decline, email, email address, envelope ID, first name, formula, full name, initial here, last name, list, note, number, radio, sign here, signer attachment, SSN, text, title, and zip tabs.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     */
+    * Creates a custom tab.
+    *
+    * This function performs a `POST` to the `/v2.1/accounts/{accountId}/tab_definitions` endpoint.
+    *
+    * Creates a tab with pre-defined properties, such as a text tab with a certain font type and validation pattern. Users can access the custom tabs when sending documents through the DocuSign web application.
+    *
+    * Custom tabs can be created for approve, checkbox, company, date, date signed, decline, email, email address, envelope ID, first name, formula, full name, initial here, last name, list, note, number, radio, sign here, signer attachment, SSN, text, title, and zip tabs.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    */
     pub async fn tabs_post_tab_definitions(
         &self,
         account_id: &str,
@@ -63,7 +63,7 @@ impl CustomTabs {
     ) -> Result<crate::types::TabMetadata> {
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -72,17 +72,17 @@ impl CustomTabs {
     }
 
     /**
-     * Gets custom tab information.
-     *
-     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/tab_definitions/{customTabId}` endpoint.
-     *
-     * Retrieves information about the requested custom tab on the specified account.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
-     */
+    * Gets custom tab information.
+    *
+    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/tab_definitions/{customTabId}` endpoint.
+    *
+    * Retrieves information about the requested custom tab on the specified account.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
+    */
     pub async fn tab_get_custom(
         &self,
         account_id: &str,
@@ -90,8 +90,8 @@ impl CustomTabs {
     ) -> Result<crate::types::TabMetadata> {
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&custom_tab_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -119,8 +119,8 @@ impl CustomTabs {
     ) -> Result<crate::types::TabMetadata> {
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&custom_tab_id.to_string()),
         );
 
         self.client
@@ -129,22 +129,22 @@ impl CustomTabs {
     }
 
     /**
-     * Deletes custom tab information.
-     *
-     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/tab_definitions/{customTabId}` endpoint.
-     *
-     * Deletes the custom from the specified account.
-     *
-     * **Parameters:**
-     *
-     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-     * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
-     */
+    * Deletes custom tab information.
+    *
+    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/tab_definitions/{customTabId}` endpoint.
+    *
+    * Deletes the custom from the specified account.
+    *
+    * **Parameters:**
+    *
+    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+    * * `custom_tab_id: &str` -- The DocuSign-generated custom tab id for the custom tab to be applied. This can only be used when adding new tabs for a recipient. When used, the new tab inherits all the custom tab properties.
+    */
     pub async fn tab_delete_custom(&self, account_id: &str, custom_tab_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&custom_tab_id.to_string()),
         );
 
         self.client.delete(&url, None).await

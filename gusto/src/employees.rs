@@ -13,16 +13,16 @@ impl Employees {
     }
 
     /**
-     * Get an employee.
-     *
-     * This function performs a `GET` to the `/v1/employees/{employee_id_or_uuid}` endpoint.
-     *
-     * Get an employee.
-     *
-     * **Parameters:**
-     *
-     * * `include: &[String]` -- Include the requested attribute(s) in each employee response.
-     */
+    * Get an employee.
+    *
+    * This function performs a `GET` to the `/v1/employees/{employee_id_or_uuid}` endpoint.
+    *
+    * Get an employee.
+    *
+    * **Parameters:**
+    *
+    * * `include: &[String]` -- Include the requested attribute(s) in each employee response.
+    */
     pub async fn get(
         &self,
         employee_id_or_uuid: &str,
@@ -35,7 +35,7 @@ impl Employees {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/employees/{}?{}",
-            crate::progenitor_support::encode_path(employee_id_or_uuid),
+            crate::progenitor_support::encode_path(&employee_id_or_uuid.to_string()),
             query_
         );
 
@@ -43,12 +43,12 @@ impl Employees {
     }
 
     /**
-     * Update an employee.
-     *
-     * This function performs a `PUT` to the `/v1/employees/{employee_id_or_uuid}` endpoint.
-     *
-     * Update an employee.
-     */
+    * Update an employee.
+    *
+    * This function performs a `PUT` to the `/v1/employees/{employee_id_or_uuid}` endpoint.
+    *
+    * Update an employee.
+    */
     pub async fn put(
         &self,
         employee_id_or_uuid: &str,
@@ -56,7 +56,7 @@ impl Employees {
     ) -> Result<crate::types::Employee> {
         let url = format!(
             "/v1/employees/{}",
-            crate::progenitor_support::encode_path(employee_id_or_uuid),
+            crate::progenitor_support::encode_path(&employee_id_or_uuid.to_string()),
         );
 
         self.client
@@ -65,19 +65,19 @@ impl Employees {
     }
 
     /**
-     * Get employees of a company.
-     *
-     * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
-     *
-     * Get all of the employees, onboarding, active and terminated, for a given company.
-     *
-     * **Parameters:**
-     *
-     * * `terminated: bool` -- Filters employees by the provided boolean.
-     * * `page: f64` -- The page that is requested. When unspecified, will load all employees.
-     * * `per: f64` -- Number of employees per page. When unspecified, will default to 25.
-     * * `include: &[String]` -- Include the requested attribute(s) in each employee response.
-     */
+    * Get employees of a company.
+    *
+    * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
+    *
+    * Get all of the employees, onboarding, active and terminated, for a given company.
+    *
+    * **Parameters:**
+    *
+    * * `terminated: bool` -- Filters employees by the provided boolean.
+    * * `page: f64` -- The page that is requested. When unspecified, will load all employees.
+    * * `per: f64` -- Number of employees per page. When unspecified, will default to 25.
+    * * `include: &[String]` -- Include the requested attribute(s) in each employee response.
+    */
     pub async fn get_company(
         &self,
         company_id_or_uuid: &str,
@@ -102,7 +102,7 @@ impl Employees {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/employees?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
             query_
         );
 
@@ -110,14 +110,14 @@ impl Employees {
     }
 
     /**
-     * Get employees of a company.
-     *
-     * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
-     *
-     * As opposed to `get_company`, this function returns all the pages of the request at once.
-     *
-     * Get all of the employees, onboarding, active and terminated, for a given company.
-     */
+    * Get employees of a company.
+    *
+    * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
+    *
+    * As opposed to `get_company`, this function returns all the pages of the request at once.
+    *
+    * Get all of the employees, onboarding, active and terminated, for a given company.
+    */
     pub async fn get_all_company(
         &self,
         company_id_or_uuid: &str,
@@ -134,7 +134,7 @@ impl Employees {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/employees?{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
             query_
         );
 
@@ -142,12 +142,12 @@ impl Employees {
     }
 
     /**
-     * Create an employee.
-     *
-     * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
-     *
-     * Create an employee.
-     */
+    * Create an employee.
+    *
+    * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/employees` endpoint.
+    *
+    * Create an employee.
+    */
     pub async fn post(
         &self,
         company_id_or_uuid: &str,
@@ -155,7 +155,7 @@ impl Employees {
     ) -> Result<crate::types::Employee> {
         let url = format!(
             "/v1/companies/{}/employees",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client
@@ -164,28 +164,28 @@ impl Employees {
     }
 
     /**
-     * Get an employee's home address.
-     *
-     * This function performs a `GET` to the `/v1/employees/{employee_id}/home_address` endpoint.
-     *
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
-     */
+    * Get an employee's home address.
+    *
+    * This function performs a `GET` to the `/v1/employees/{employee_id}/home_address` endpoint.
+    *
+    * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+    */
     pub async fn get_home_address(&self, employee_id: &str) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/employees/{}/home_address",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-     * Update an employee's home address.
-     *
-     * This function performs a `PUT` to the `/v1/employees/{employee_id}/home_address` endpoint.
-     *
-     * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
-     */
+    * Update an employee's home address.
+    *
+    * This function performs a `PUT` to the `/v1/employees/{employee_id}/home_address` endpoint.
+    *
+    * The home address of an employee is used to determine certain tax information about them. Addresses are geocoded on create and update to ensure validity.
+    */
     pub async fn put_home_address(
         &self,
         employee_id: &str,
@@ -193,7 +193,7 @@ impl Employees {
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/employees/{}/home_address",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client

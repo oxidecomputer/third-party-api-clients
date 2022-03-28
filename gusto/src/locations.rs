@@ -13,58 +13,58 @@ impl Locations {
     }
 
     /**
-     * Get company locations.
-     *
-     * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
-     *
-     * Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
-     *
-     * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
-     */
+    * Get company locations.
+    *
+    * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
+    *
+    * Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+    *
+    * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+    */
     pub async fn get_company(
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Location>> {
         let url = format!(
             "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-     * Get company locations.
-     *
-     * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
-     *
-     * As opposed to `get_company`, this function returns all the pages of the request at once.
-     *
-     * Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
-     *
-     * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
-     */
+    * Get company locations.
+    *
+    * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
+    *
+    * As opposed to `get_company`, this function returns all the pages of the request at once.
+    *
+    * Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+    *
+    * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+    */
     pub async fn get_all_company(
         &self,
         company_id_or_uuid: &str,
     ) -> Result<Vec<crate::types::Location>> {
         let url = format!(
             "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
     }
 
     /**
-     * Create a company location.
-     *
-     * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
-     *
-     * Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
-     *
-     * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
-     */
+    * Create a company location.
+    *
+    * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/locations` endpoint.
+    *
+    * Company locations represent all addresses associated with a company. These can be filing addesses, mailing addresses, and/or work locations; one address may serve multiple, or all, purposes.
+    *
+    * Since all company locations are subsets of locations, retrieving or updating an individual record should be done via the locations endpoints.
+    */
     pub async fn post_company(
         &self,
         company_id_or_uuid: &str,
@@ -72,7 +72,7 @@ impl Locations {
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/companies/{}/locations",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client
@@ -81,28 +81,28 @@ impl Locations {
     }
 
     /**
-     * Get a location.
-     *
-     * This function performs a `GET` to the `/v1/locations/{location_id}` endpoint.
-     *
-     * Get a location.
-     */
+    * Get a location.
+    *
+    * This function performs a `GET` to the `/v1/locations/{location_id}` endpoint.
+    *
+    * Get a location.
+    */
     pub async fn get(&self, location_id: &str) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
     }
 
     /**
-     * Update a location.
-     *
-     * This function performs a `PUT` to the `/v1/locations/{location_id}` endpoint.
-     *
-     * Update a location.
-     */
+    * Update a location.
+    *
+    * This function performs a `PUT` to the `/v1/locations/{location_id}` endpoint.
+    *
+    * Update a location.
+    */
     pub async fn put(
         &self,
         location_id: &str,
@@ -110,7 +110,7 @@ impl Locations {
     ) -> Result<crate::types::Location> {
         let url = format!(
             "/v1/locations/{}",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client

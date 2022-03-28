@@ -13,15 +13,15 @@ impl Returns {
     }
 
     /**
-     * Get Return Order.
-     *
-     * This function performs a `GET` to the `/return/{id}` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
-     */
+    * Get Return Order.
+    *
+    * This function performs a `GET` to the `/return/{id}` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `id: i64` -- Unique id of the channel.
+    * * `channel_id: i64` -- Unique id of the channel.
+    */
     pub async fn get(&self, id: i64) -> Result<crate::types::ReturnOrder> {
         let url = format!(
             "/return/{}",
@@ -32,15 +32,15 @@ impl Returns {
     }
 
     /**
-     * Modify Return Order.
-     *
-     * This function performs a `PUT` to the `/return/{id}` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `channel_id: i64` -- Unique id of the channel.
-     * * `id: i64` -- Unique id of the channel.
-     */
+    * Modify Return Order.
+    *
+    * This function performs a `PUT` to the `/return/{id}` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `channel_id: i64` -- Unique id of the channel.
+    * * `id: i64` -- Unique id of the channel.
+    */
     pub async fn put(
         &self,
         id: i64,
@@ -57,26 +57,26 @@ impl Returns {
     }
 
     /**
-     * Get Return Orders.
-     *
-     * This function performs a `GET` to the `/return` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `page: i64` -- Page of return orders to get.
-     * * `limit: i64` -- Amount of return orders per page to request.
-     * * `sort_order: crate::types::SortOrder` -- Order to sort results in.
-     * * `start_date: chrono::DateTime<chrono::Utc>` -- Start date to filter orders inserted later than.
-     * * `end_date: chrono::DateTime<chrono::Utc>` -- End date to filter orders inserted earlier than.
-     * * `i_ds: &[String]` -- Comma separated list of return orders ids to filter by.
-     * * `reference_ids: &[String]` -- Comma separated list of reference ids to filter by.
-     * * `status: &[String]` -- Comma separated list of statuses to filter by.
-     * * `fulfillment_center_ids: &[String]` -- Comma separated list of destination fulfillment center IDs to filter by.
-     * * `tracking_numbers: &[String]` -- Comma separated list of tracking numbers to filter by.
-     * * `original_shipment_ids: &[String]` -- Comma separated list of original shipment IDs to filter by.
-     * * `inventory_ids: &[String]` -- Comma separated list of inventory IDs contained in return to filter by.
-     * * `channel_id: i64` -- Unique id of the channel.
-     */
+    * Get Return Orders.
+    *
+    * This function performs a `GET` to the `/return` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `page: i64` -- Page of return orders to get.
+    * * `limit: i64` -- Amount of return orders per page to request.
+    * * `sort_order: crate::types::SortOrder` -- Order to sort results in.
+    * * `start_date: chrono::DateTime<chrono::Utc>` -- Start date to filter orders inserted later than.
+    * * `end_date: chrono::DateTime<chrono::Utc>` -- End date to filter orders inserted earlier than.
+    * * `i_ds: &[String]` -- Comma separated list of return orders ids to filter by.
+    * * `reference_ids: &[String]` -- Comma separated list of reference ids to filter by.
+    * * `status: &[String]` -- Comma separated list of statuses to filter by.
+    * * `fulfillment_center_ids: &[String]` -- Comma separated list of destination fulfillment center IDs to filter by.
+    * * `tracking_numbers: &[String]` -- Comma separated list of tracking numbers to filter by.
+    * * `original_shipment_ids: &[String]` -- Comma separated list of original shipment IDs to filter by.
+    * * `inventory_ids: &[String]` -- Comma separated list of inventory IDs contained in return to filter by.
+    * * `channel_id: i64` -- Unique id of the channel.
+    */
     pub async fn get_page(
         &self,
         page: i64,
@@ -142,12 +142,12 @@ impl Returns {
     }
 
     /**
-     * Get Return Orders.
-     *
-     * This function performs a `GET` to the `/return` endpoint.
-     *
-     * As opposed to `get`, this function returns all the pages of the request at once.
-     */
+    * Get Return Orders.
+    *
+    * This function performs a `GET` to the `/return` endpoint.
+    *
+    * As opposed to `get`, this function returns all the pages of the request at once.
+    */
     pub async fn get_all(
         &self,
         sort_order: crate::types::SortOrder,
@@ -205,14 +205,14 @@ impl Returns {
     }
 
     /**
-     * Create Return Order.
-     *
-     * This function performs a `POST` to the `/return` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `channel_id: i64` -- Unique id of the channel.
-     */
+    * Create Return Order.
+    *
+    * This function performs a `POST` to the `/return` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `channel_id: i64` -- Unique id of the channel.
+    */
     pub async fn post(
         &self,
         body: &crate::types::ReturnsCreateReturn,
@@ -224,15 +224,15 @@ impl Returns {
     }
 
     /**
-     * Cancel Return Order.
-     *
-     * This function performs a `POST` to the `/return/{id}/cancel` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
-     */
+    * Cancel Return Order.
+    *
+    * This function performs a `POST` to the `/return/{id}/cancel` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `id: i64` -- Unique id of the channel.
+    * * `channel_id: i64` -- Unique id of the channel.
+    */
     pub async fn post_cancel(&self, id: i64) -> Result<crate::types::ReturnOrder> {
         let url = format!(
             "/return/{}/cancel",
@@ -243,15 +243,15 @@ impl Returns {
     }
 
     /**
-     * Get One Return's status history.
-     *
-     * This function performs a `GET` to the `/return/{id}/statushistory` endpoint.
-     *
-     * **Parameters:**
-     *
-     * * `id: i64` -- Unique id of the channel.
-     * * `channel_id: i64` -- Unique id of the channel.
-     */
+    * Get One Return's status history.
+    *
+    * This function performs a `GET` to the `/return/{id}/statushistory` endpoint.
+    *
+    * **Parameters:**
+    *
+    * * `id: i64` -- Unique id of the channel.
+    * * `channel_id: i64` -- Unique id of the channel.
+    */
     pub async fn get_status_history(
         &self,
         id: i64,

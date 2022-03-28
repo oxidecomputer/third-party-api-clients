@@ -13,20 +13,20 @@ impl AdminConversationsEkm {
     }
 
     /**
-     * This function performs a `GET` to the `/admin.conversations.ekm.listOriginalConnectedChannelInfo` endpoint.
-     *
-     * List all disconnected channels—i.e., channels that were once connected to other workspaces and then disconnected—and the corresponding original channel IDs for key revocation with EKM.
-     *
-     * FROM: <https://api.slack.com/methods/admin.conversations.ekm.listOriginalConnectedChannelInfo>
-     *
-     * **Parameters:**
-     *
-     * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:read`.
-     * * `channel_ids: &str` -- A comma-separated list of channels to filter to.
-     * * `team_ids: &str` -- A comma-separated list of the workspaces to which the channels you would like returned belong.
-     * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
-     * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
-     */
+    * This function performs a `GET` to the `/admin.conversations.ekm.listOriginalConnectedChannelInfo` endpoint.
+    *
+    * List all disconnected channels—i.e., channels that were once connected to other workspaces and then disconnected—and the corresponding original channel IDs for key revocation with EKM.
+    *
+    * FROM: <https://api.slack.com/methods/admin.conversations.ekm.listOriginalConnectedChannelInfo>
+    *
+    * **Parameters:**
+    *
+    * * `token: &str` -- Authentication token. Requires scope: `admin.conversations:read`.
+    * * `channel_ids: &str` -- A comma-separated list of channels to filter to.
+    * * `team_ids: &str` -- A comma-separated list of the workspaces to which the channels you would like returned belong.
+    * * `limit: i64` -- The maximum number of items to return. Must be between 1 - 1000 both inclusive.
+    * * `cursor: &str` -- Set `cursor` to `next_cursor` returned by the previous call to list items in the next page.
+    */
     pub async fn list_original_connected_channel_info(
         &self,
         channel_ids: &str,

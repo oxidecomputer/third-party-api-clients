@@ -13,19 +13,19 @@ impl Settings {
     }
 
     /**
-     * This function performs a `GET` to the `/users/me/settings` endpoint.
-     *
-     * Returns all user settings for the authenticated user.
-     *
-     * **Parameters:**
-     *
-     * * `max_results: i64` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
-     * * `page_token: &str` -- Token specifying which result page to return. Optional.
-     * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
-     *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
-     *   Learn more about incremental synchronization.
-     *   Optional. The default is to return all entries.
-     */
+    * This function performs a `GET` to the `/users/me/settings` endpoint.
+    *
+    * Returns all user settings for the authenticated user.
+    *
+    * **Parameters:**
+    *
+    * * `max_results: i64` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+    * * `page_token: &str` -- Token specifying which result page to return. Optional.
+    * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
+    *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+    *   Learn more about incremental synchronization.
+    *   Optional. The default is to return all entries.
+    */
     pub async fn list(
         &self,
         max_results: i64,
@@ -48,12 +48,12 @@ impl Settings {
     }
 
     /**
-     * This function performs a `GET` to the `/users/me/settings` endpoint.
-     *
-     * As opposed to `list`, this function returns all the pages of the request at once.
-     *
-     * Returns all user settings for the authenticated user.
-     */
+    * This function performs a `GET` to the `/users/me/settings` endpoint.
+    *
+    * As opposed to `list`, this function returns all the pages of the request at once.
+    *
+    * Returns all user settings for the authenticated user.
+    */
     pub async fn list_all(&self) -> Result<Vec<crate::types::Setting>> {
         let url = "/users/me/settings".to_string();
         let mut resp: crate::types::Settings = self.client.get(&url, None).await?;
@@ -89,19 +89,19 @@ impl Settings {
     }
 
     /**
-     * This function performs a `POST` to the `/users/me/settings/watch` endpoint.
-     *
-     * Watch for changes to Settings resources.
-     *
-     * **Parameters:**
-     *
-     * * `max_results: i64` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
-     * * `page_token: &str` -- Token specifying which result page to return. Optional.
-     * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
-     *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
-     *   Learn more about incremental synchronization.
-     *   Optional. The default is to return all entries.
-     */
+    * This function performs a `POST` to the `/users/me/settings/watch` endpoint.
+    *
+    * Watch for changes to Settings resources.
+    *
+    * **Parameters:**
+    *
+    * * `max_results: i64` -- Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.
+    * * `page_token: &str` -- Token specifying which result page to return. Optional.
+    * * `sync_token: &str` -- Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.
+    *   If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.
+    *   Learn more about incremental synchronization.
+    *   Optional. The default is to return all entries.
+    */
     pub async fn watch(
         &self,
         max_results: i64,
@@ -124,18 +124,18 @@ impl Settings {
     }
 
     /**
-     * This function performs a `GET` to the `/users/me/settings/{setting}` endpoint.
-     *
-     * Returns a single user setting.
-     *
-     * **Parameters:**
-     *
-     * * `setting: &str` -- The id of the user setting.
-     */
+    * This function performs a `GET` to the `/users/me/settings/{setting}` endpoint.
+    *
+    * Returns a single user setting.
+    *
+    * **Parameters:**
+    *
+    * * `setting: &str` -- The id of the user setting.
+    */
     pub async fn get(&self, setting: &str) -> Result<crate::types::Setting> {
         let url = format!(
             "/users/me/settings/{}",
-            crate::progenitor_support::encode_path(setting),
+            crate::progenitor_support::encode_path(&setting.to_string()),
         );
 
         self.client.get(&url, None).await
