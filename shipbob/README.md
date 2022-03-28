@@ -29,7 +29,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-shipbob = "0.1.4"
+shipbob = "0.1.5"
 ```
 
 ## Basic example

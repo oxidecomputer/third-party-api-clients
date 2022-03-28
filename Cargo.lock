@@ -1879,7 +1879,7 @@ dependencies = [
 
 [[package]]
 name = "shipbob"
-version = "0.1.4"
+version = "0.1.5"
 dependencies = [
  "anyhow",
  "async-recursion",
