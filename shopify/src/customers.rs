@@ -149,7 +149,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -174,7 +174,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -196,7 +196,7 @@ impl Customers {
     pub async fn deprecated_202001_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -221,7 +221,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -247,7 +247,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -281,7 +281,7 @@ impl Customers {
     pub async fn deprecated_202001_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -424,7 +424,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -449,7 +449,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -471,7 +471,7 @@ impl Customers {
     pub async fn deprecated_202004_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -496,7 +496,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -522,7 +522,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -556,7 +556,7 @@ impl Customers {
     pub async fn deprecated_202004_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -699,7 +699,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -724,7 +724,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -746,7 +746,7 @@ impl Customers {
     pub async fn deprecated_202007_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -771,7 +771,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -797,7 +797,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -831,7 +831,7 @@ impl Customers {
     pub async fn deprecated_202007_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -974,7 +974,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -995,7 +995,7 @@ impl Customers {
     pub async fn update_param(&self, customer_id: &str, body: &serde_json::Value) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1017,7 +1017,7 @@ impl Customers {
     pub async fn delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1042,7 +1042,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1068,7 +1068,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1102,7 +1102,7 @@ impl Customers {
     pub async fn get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1245,7 +1245,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -1270,7 +1270,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1292,7 +1292,7 @@ impl Customers {
     pub async fn deprecated_202101_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1317,7 +1317,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1343,7 +1343,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1377,7 +1377,7 @@ impl Customers {
     pub async fn deprecated_202101_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1524,7 +1524,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customers/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -1549,7 +1549,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1571,7 +1571,7 @@ impl Customers {
     pub async fn deprecated_unstable_delete_param(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1596,7 +1596,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/account_activation_url.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1622,7 +1622,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/send_invite.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1656,7 +1656,7 @@ impl Customers {
     pub async fn deprecated_unstable_get_param_order(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/orders.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1676,7 +1676,7 @@ impl Customers {
     pub async fn deprecated_202001_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1700,7 +1700,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1727,8 +1727,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1754,8 +1754,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client
@@ -1782,8 +1782,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1818,7 +1818,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -1844,8 +1844,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -1865,7 +1865,7 @@ impl Customers {
     pub async fn deprecated_202004_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1889,7 +1889,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -1916,8 +1916,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1943,8 +1943,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client
@@ -1971,8 +1971,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -2007,7 +2007,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -2033,8 +2033,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -2054,7 +2054,7 @@ impl Customers {
     pub async fn deprecated_202007_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2078,7 +2078,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -2105,8 +2105,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2132,8 +2132,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client
@@ -2160,8 +2160,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -2196,7 +2196,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -2222,8 +2222,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -2243,7 +2243,7 @@ impl Customers {
     pub async fn get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2267,7 +2267,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -2294,8 +2294,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2321,8 +2321,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client
@@ -2349,8 +2349,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -2385,7 +2385,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -2411,8 +2411,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -2432,7 +2432,7 @@ impl Customers {
     pub async fn deprecated_202101_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2456,7 +2456,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -2483,8 +2483,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2510,8 +2510,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client
@@ -2538,8 +2538,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -2574,7 +2574,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -2600,8 +2600,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -2621,7 +2621,7 @@ impl Customers {
     pub async fn deprecated_unstable_get_param_addresse(&self, customer_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2645,7 +2645,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses.json",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -2672,8 +2672,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2699,8 +2699,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client
@@ -2727,8 +2727,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -2763,7 +2763,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/set.json?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -2789,8 +2789,8 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customers/{}/addresses/{}/default.json",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(address_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&address_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -2898,7 +2898,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -2923,7 +2923,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client
@@ -2948,7 +2948,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -2990,7 +2990,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3099,7 +3099,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3124,7 +3124,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client
@@ -3149,7 +3149,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -3191,7 +3191,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3300,7 +3300,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3325,7 +3325,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client
@@ -3350,7 +3350,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -3392,7 +3392,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3493,7 +3493,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3518,7 +3518,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client
@@ -3543,7 +3543,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -3585,7 +3585,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3694,7 +3694,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3719,7 +3719,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client
@@ -3744,7 +3744,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -3786,7 +3786,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3898,7 +3898,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 
@@ -3923,7 +3923,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client
@@ -3948,7 +3948,7 @@ impl Customers {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/json",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -3990,7 +3990,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/customer_saved_searches/{}/customers.json?{}",
-            crate::progenitor_support::encode_path(customer_saved_search_id),
+            crate::progenitor_support::encode_path(&customer_saved_search_id.to_string()),
             query_
         );
 

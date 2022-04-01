@@ -71,7 +71,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -95,7 +95,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client
@@ -162,7 +162,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -186,7 +186,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client
@@ -253,7 +253,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -277,7 +277,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client
@@ -336,7 +336,7 @@ impl Inventory {
     pub async fn get_items_param_item(&self, inventory_item_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -360,7 +360,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client
@@ -427,7 +427,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -451,7 +451,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client
@@ -518,7 +518,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -542,7 +542,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/inventory_items/{}/json",
-            crate::progenitor_support::encode_path(inventory_item_id),
+            crate::progenitor_support::encode_path(&inventory_item_id.to_string()),
         );
 
         self.client
@@ -2256,7 +2256,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2291,7 +2291,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2326,7 +2326,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2361,7 +2361,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2396,7 +2396,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2431,7 +2431,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2463,7 +2463,7 @@ impl Inventory {
     pub async fn get_locations_param_location(&self, location_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2495,7 +2495,7 @@ impl Inventory {
     pub async fn get_locations_param_location_level(&self, location_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2530,7 +2530,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2565,7 +2565,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2600,7 +2600,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/locations/{}/json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -2635,7 +2635,7 @@ impl Inventory {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/locations/{}/inventory_levels.json",
-            crate::progenitor_support::encode_path(location_id),
+            crate::progenitor_support::encode_path(&location_id.to_string()),
         );
 
         self.client.get(&url, None).await

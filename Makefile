@@ -220,6 +220,7 @@ google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
 		-d "A fully generated & opinionated API client for the Google Admin API." \
 		--spec-link "https://admin.googleapis.com/$discovery/rest?version=directory_v1" \
 		--token-endpoint "oauth2.googleapis.com/token" \
+		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "www.googleapis.com" $(EXTRA_ARGS)
 	cargo fmt -p gsuite-api
 	@echo -e "- [Google Admin](google/admin/) [![docs.rs](https://docs.rs/gsuite-api/badge.svg)](https://docs.rs/gsuite-api)" >> README.md
@@ -238,6 +239,7 @@ google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
 		-d "A fully generated & opinionated API client for the Google Calendar API." \
 		--spec-link "https://calendar-json.googleapis.com/$discovery/rest?version=v3" \
 		--token-endpoint "oauth2.googleapis.com/token" \
+		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "www.googleapis.com/calendar/v3" $(EXTRA_ARGS)
 	cargo fmt -p google-calendar
 	@echo -e "- [Google Calendar](google/calendar/) [![docs.rs](https://docs.rs/google-calendar/badge.svg)](https://docs.rs/google-calendar)" >> README.md
@@ -256,6 +258,7 @@ google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MA
 		-d "A fully generated & opinionated API client for the Google Cloud Resource Manager API." \
 		--spec-link "https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v2" \
 		--token-endpoint "oauth2.googleapis.com/token" \
+		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "cloudresourcemanager.googleapis.com/v2" $(EXTRA_ARGS)
 	cargo fmt -p google-cloud-resource-manager
 	@echo -e "- [Google Cloud Resource Manager](google/cloud-resource-manager/) [![docs.rs](https://docs.rs/google-cloud-resource-manager/badge.svg)](https://docs.rs/google-cloud-resource-manager)" >> README.md
@@ -274,6 +277,7 @@ google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
 		-d "A fully generated & opinionated API client for the Google Drive API." \
 		--spec-link "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest" \
 		--token-endpoint "oauth2.googleapis.com/token" \
+		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "www.googleapis.com/drive/v3" $(EXTRA_ARGS)
 	cargo fmt -p google-drive
 	@echo -e "- [Google Drive](google/drive/) [![docs.rs](https://docs.rs/google-drive/badge.svg)](https://docs.rs/google-drive)" >> README.md
@@ -292,6 +296,7 @@ google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
 		-d "A fully generated & opinionated API client for the Google Groups Settings API." \
 		--spec-link "https://groupssettings.googleapis.com/$discovery/rest?version=v1" \
 		--token-endpoint "oauth2.googleapis.com/token" \
+		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "www.googleapis.com/groups/v1/groups" $(EXTRA_ARGS)
 	cargo fmt -p google-groups-settings
 	@echo -e "- [Google Groups Settings](google/groups-settings/) [![docs.rs](https://docs.rs/google-groups-settings/badge.svg)](https://docs.rs/google-groups-settings)" >> README.md
@@ -310,6 +315,7 @@ google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
 		-d "A fully generated & opinionated API client for the Google Sheets API." \
 		--spec-link "https://sheets.googleapis.com/$discovery/rest?version=v4" \
 		--token-endpoint "oauth2.googleapis.com/token" \
+		--user-consent-endpoint "accounts.google.com/o/oauth2/v2/auth" \
 		--host "sheets.googleapis.com" $(EXTRA_ARGS)
 	cargo fmt -p sheets
 	@echo -e "- [Google Sheets](google/sheets/) [![docs.rs](https://docs.rs/sheets/badge.svg)](https://docs.rs/sheets)" >> README.md

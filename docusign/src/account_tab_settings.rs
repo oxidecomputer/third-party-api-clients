@@ -26,7 +26,7 @@ impl AccountTabSettings {
     pub async fn tab_settings_get(&self, account_id: &str) -> Result<crate::types::TabsBlob> {
         let url = format!(
             "/v2.1/accounts/{}/settings/tabs",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -50,7 +50,7 @@ impl AccountTabSettings {
     ) -> Result<crate::types::TabsBlob> {
         let url = format!(
             "/v2.1/accounts/{}/settings/tabs",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client

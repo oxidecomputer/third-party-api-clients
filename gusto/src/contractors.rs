@@ -22,7 +22,7 @@ impl Contractors {
     pub async fn get(&self, contractor_id_or_uuid: &str) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/contractors/{}",
-            crate::progenitor_support::encode_path(contractor_id_or_uuid),
+            crate::progenitor_support::encode_path(&contractor_id_or_uuid.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -42,7 +42,7 @@ impl Contractors {
     ) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/contractors/{}",
-            crate::progenitor_support::encode_path(contractor_id_or_uuid),
+            crate::progenitor_support::encode_path(&contractor_id_or_uuid.to_string()),
         );
 
         self.client
@@ -63,7 +63,7 @@ impl Contractors {
     ) -> Result<Vec<crate::types::Contractor>> {
         let url = format!(
             "/v1/companies/{}/contractors",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -84,7 +84,7 @@ impl Contractors {
     ) -> Result<Vec<crate::types::Contractor>> {
         let url = format!(
             "/v1/companies/{}/contractors",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -104,7 +104,7 @@ impl Contractors {
     ) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/companies/{}/contractors",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
         );
 
         self.client

@@ -109,7 +109,7 @@ impl Accounts {
     pub async fn account(&self, account_id: &str) -> Result<crate::types::AccountResponse> {
         let url = format!(
             "/accounts/{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -140,7 +140,7 @@ impl Accounts {
     pub async fn disassociate(&self, account_id: &str) -> Result<()> {
         let url = format!(
             "/accounts/{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -174,7 +174,7 @@ impl Accounts {
     ) -> Result<()> {
         let url = format!(
             "/accounts/{}/options",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -229,7 +229,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -283,7 +283,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -337,7 +337,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -391,7 +391,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -445,7 +445,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -482,7 +482,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -517,7 +517,7 @@ impl Accounts {
     pub async fn managed_domain(&self, account_id: &str) -> Result<crate::types::DomainsList> {
         let url = format!(
             "/accounts/{}/managed_domains",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -545,7 +545,7 @@ impl Accounts {
     ) -> Result<crate::types::AccountTrustedDomainResponse> {
         let url = format!(
             "/accounts/{}/trusted_domains",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -603,7 +603,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/lock_settings?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -634,7 +634,7 @@ impl Accounts {
     pub async fn update_lock_settings(&self, account_id: &str) -> Result<()> {
         let url = format!(
             "/accounts/{}/lock_settings",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.patch(&url, None).await
@@ -662,7 +662,7 @@ impl Accounts {
     pub async fn update_owner(&self, account_id: &str, body: &crate::types::Members) -> Result<()> {
         let url = format!(
             "/accounts/{}/owner",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -696,7 +696,7 @@ impl Accounts {
     ) -> Result<crate::types::Files> {
         let url = format!(
             "/accounts/{}/settings/virtual_backgrounds",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -730,7 +730,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/accounts/{}/settings/virtual_backgrounds?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 

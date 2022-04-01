@@ -64,7 +64,7 @@ impl LinkedObjects {
     ) -> Result<crate::types::LinkedObject> {
         let url = format!(
             "/api/v1/meta/schemas/user/linkedObjects/{}",
-            crate::progenitor_support::encode_path(linked_object_name),
+            crate::progenitor_support::encode_path(&linked_object_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -82,7 +82,7 @@ impl LinkedObjects {
     pub async fn delete_definition(&self, linked_object_name: &str) -> Result<()> {
         let url = format!(
             "/api/v1/meta/schemas/user/linkedObjects/{}",
-            crate::progenitor_support::encode_path(linked_object_name),
+            crate::progenitor_support::encode_path(&linked_object_name.to_string()),
         );
 
         self.client.delete(&url, None).await

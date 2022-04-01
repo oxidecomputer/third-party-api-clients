@@ -35,7 +35,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/{}?{}",
-            crate::progenitor_support::encode_path(group_unique_id),
+            crate::progenitor_support::encode_path(&group_unique_id.to_string()),
             query_
         );
 
@@ -66,7 +66,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/{}?{}",
-            crate::progenitor_support::encode_path(group_unique_id),
+            crate::progenitor_support::encode_path(&group_unique_id.to_string()),
             query_
         );
 
@@ -99,7 +99,7 @@ impl Groups {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/{}?{}",
-            crate::progenitor_support::encode_path(group_unique_id),
+            crate::progenitor_support::encode_path(&group_unique_id.to_string()),
             query_
         );
 

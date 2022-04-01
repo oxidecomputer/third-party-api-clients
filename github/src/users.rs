@@ -125,7 +125,7 @@ impl Users {
     pub async fn check_blocked(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/blocks/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -147,7 +147,7 @@ impl Users {
     pub async fn block(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/blocks/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -169,7 +169,7 @@ impl Users {
     pub async fn unblock(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/blocks/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -396,7 +396,7 @@ impl Users {
     pub async fn check_person_is_followed_by_authenticated(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/following/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -420,7 +420,7 @@ impl Users {
     pub async fn follow(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/following/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -442,7 +442,7 @@ impl Users {
     pub async fn unfollow(&self, username: &str) -> Result<()> {
         let url = format!(
             "/user/following/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -807,7 +807,7 @@ impl Users {
     ) -> Result<crate::types::PublicUser> {
         let url = format!(
             "/users/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -838,7 +838,7 @@ impl Users {
     ) -> Result<crate::types::PrivateUser> {
         let url = format!(
             "/users/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -869,7 +869,7 @@ impl Users {
     ) -> Result<crate::types::UsersGetByUsernameResponseOneOf> {
         let url = format!(
             "/users/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -906,7 +906,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/followers?{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             query_
         );
 
@@ -930,7 +930,7 @@ impl Users {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/users/{}/followers",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -967,7 +967,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/following?{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             query_
         );
 
@@ -991,7 +991,7 @@ impl Users {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/users/{}/following",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1014,8 +1014,8 @@ impl Users {
     pub async fn check_following_for_user(&self, username: &str, target_user: &str) -> Result<()> {
         let url = format!(
             "/users/{}/following/{}",
-            crate::progenitor_support::encode_path(username),
-            crate::progenitor_support::encode_path(target_user),
+            crate::progenitor_support::encode_path(&username.to_string()),
+            crate::progenitor_support::encode_path(&target_user.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1052,7 +1052,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/gpg_keys?{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             query_
         );
 
@@ -1076,7 +1076,7 @@ impl Users {
     ) -> Result<Vec<crate::types::GpgKey>> {
         let url = format!(
             "/users/{}/gpg_keys",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1120,7 +1120,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/hovercard?{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             query_
         );
 
@@ -1158,7 +1158,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/keys?{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             query_
         );
 
@@ -1182,7 +1182,7 @@ impl Users {
     ) -> Result<Vec<crate::types::KeySimple>> {
         let url = format!(
             "/users/{}/keys",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await

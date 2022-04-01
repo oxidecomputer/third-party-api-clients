@@ -167,7 +167,7 @@ impl Groups {
     pub async fn get(&self, group_key: &str) -> Result<crate::types::Group> {
         let url = format!(
             "/admin/directory/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -189,7 +189,7 @@ impl Groups {
     ) -> Result<crate::types::Group> {
         let url = format!(
             "/admin/directory/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
         );
 
         self.client
@@ -209,7 +209,7 @@ impl Groups {
     pub async fn delete(&self, group_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -231,7 +231,7 @@ impl Groups {
     ) -> Result<crate::types::Group> {
         let url = format!(
             "/admin/directory/v1/groups/{}",
-            crate::progenitor_support::encode_path(group_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
         );
 
         self.client
@@ -251,7 +251,7 @@ impl Groups {
     pub async fn aliases_list(&self, group_key: &str) -> Result<crate::types::Aliases> {
         let url = format!(
             "/admin/directory/v1/groups/{}/aliases",
-            crate::progenitor_support::encode_path(group_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -273,7 +273,7 @@ impl Groups {
     ) -> Result<crate::types::Alias> {
         let url = format!(
             "/admin/directory/v1/groups/{}/aliases",
-            crate::progenitor_support::encode_path(group_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
         );
 
         self.client
@@ -294,8 +294,8 @@ impl Groups {
     pub async fn aliases_delete(&self, group_key: &str, alias: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/groups/{}/aliases/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(alias),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
+            crate::progenitor_support::encode_path(&alias.to_string()),
         );
 
         self.client.delete(&url, None).await

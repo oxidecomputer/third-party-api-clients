@@ -34,7 +34,7 @@ impl Pac {
     pub async fn user_pa_cs(&self, user_id: &str) -> Result<crate::types::UserPaCsResponse> {
         let url = format!(
             "/users/{}/pac",
-            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(&user_id.to_string()),
         );
 
         self.client.get(&url, None).await

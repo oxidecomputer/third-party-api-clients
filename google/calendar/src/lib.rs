@@ -151,7 +151,7 @@ mod progenitor_support {
 use std::env;
 
 const TOKEN_ENDPOINT: &str = "https://oauth2.googleapis.com/token";
-const USER_CONSENT_ENDPOINT: &str = "https://";
+const USER_CONSENT_ENDPOINT: &str = "https://accounts.google.com/o/oauth2/v2/auth";
 
 /// Entrypoint for interacting with the API client.
 #[derive(Clone)]
@@ -833,7 +833,7 @@ impl Client {
         while !items.is_empty() {
             global_items.append(&mut items);
             // We need to get the next link.
-            if let Some(url) = link.as_ref().and_then(crate::utils::next_link) {
+            if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
                 let url = reqwest::Url::parse(&url)?;
                 let (new_link, new_items) = self.get_pages_url(&url).await?;
                 link = new_link;

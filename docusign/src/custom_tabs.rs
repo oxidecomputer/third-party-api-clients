@@ -36,7 +36,7 @@ impl CustomTabs {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -63,7 +63,7 @@ impl CustomTabs {
     ) -> Result<crate::types::TabMetadata> {
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -90,8 +90,8 @@ impl CustomTabs {
     ) -> Result<crate::types::TabMetadata> {
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&custom_tab_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -119,8 +119,8 @@ impl CustomTabs {
     ) -> Result<crate::types::TabMetadata> {
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&custom_tab_id.to_string()),
         );
 
         self.client
@@ -143,8 +143,8 @@ impl CustomTabs {
     pub async fn tab_delete_custom(&self, account_id: &str, custom_tab_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/tab_definitions/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(custom_tab_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&custom_tab_id.to_string()),
         );
 
         self.client.delete(&url, None).await

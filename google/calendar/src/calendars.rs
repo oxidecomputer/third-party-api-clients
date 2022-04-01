@@ -36,7 +36,7 @@ impl Calendars {
     pub async fn get(&self, calendar_id: &str) -> Result<crate::types::Calendar> {
         let url = format!(
             "/calendars/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -58,7 +58,7 @@ impl Calendars {
     ) -> Result<crate::types::Calendar> {
         let url = format!(
             "/calendars/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
         );
 
         self.client
@@ -78,7 +78,7 @@ impl Calendars {
     pub async fn delete(&self, calendar_id: &str) -> Result<()> {
         let url = format!(
             "/calendars/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -100,7 +100,7 @@ impl Calendars {
     ) -> Result<crate::types::Calendar> {
         let url = format!(
             "/calendars/{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
         );
 
         self.client
@@ -120,7 +120,7 @@ impl Calendars {
     pub async fn clear(&self, calendar_id: &str) -> Result<()> {
         let url = format!(
             "/calendars/{}/clear",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
         );
 
         self.client.post(&url, None).await

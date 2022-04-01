@@ -128,7 +128,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -214,7 +214,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -304,7 +304,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -347,7 +347,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/import?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -393,7 +393,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/quickAdd?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -517,7 +517,7 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/watch?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -556,8 +556,8 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&event_id.to_string()),
             query_
         );
 
@@ -621,8 +621,8 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&event_id.to_string()),
             query_
         );
 
@@ -665,8 +665,8 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&event_id.to_string()),
             query_
         );
 
@@ -730,8 +730,8 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&event_id.to_string()),
             query_
         );
 
@@ -800,8 +800,8 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}/instances?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&event_id.to_string()),
             query_
         );
 
@@ -851,8 +851,8 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}/instances?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&event_id.to_string()),
             query_
         );
 
@@ -927,8 +927,8 @@ impl Events {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/events/{}/move?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(event_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&event_id.to_string()),
             query_
         );
 

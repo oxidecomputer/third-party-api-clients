@@ -61,7 +61,7 @@ impl SubuserStatistics {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/subusers/{}/stats/monthly?{}",
-            crate::progenitor_support::encode_path(subuser_name),
+            crate::progenitor_support::encode_path(&subuser_name.to_string()),
             query_
         );
 
