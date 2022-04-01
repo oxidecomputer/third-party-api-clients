@@ -86,7 +86,7 @@ impl TransactionalTemplates {
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -110,7 +110,7 @@ impl TransactionalTemplates {
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client
@@ -132,7 +132,7 @@ impl TransactionalTemplates {
     pub async fn delete_templates_template(&self, template_id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -158,7 +158,7 @@ impl TransactionalTemplates {
     ) -> Result<crate::types::TransactionalTemplateAllOf> {
         let url = format!(
             "/templates/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client

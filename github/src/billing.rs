@@ -35,7 +35,7 @@ impl Billing {
     ) -> Result<crate::types::ActionsBillingUsage> {
         let url = format!(
             "/enterprises/{}/settings/billing/actions",
-            crate::progenitor_support::encode_path(enterprise),
+            crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -64,7 +64,7 @@ impl Billing {
     ) -> Result<crate::types::PackagesBillingUsage> {
         let url = format!(
             "/enterprises/{}/settings/billing/packages",
-            crate::progenitor_support::encode_path(enterprise),
+            crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -93,7 +93,7 @@ impl Billing {
     ) -> Result<crate::types::CombinedBillingUsage> {
         let url = format!(
             "/enterprises/{}/settings/billing/shared-storage",
-            crate::progenitor_support::encode_path(enterprise),
+            crate::progenitor_support::encode_path(&enterprise.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -122,7 +122,7 @@ impl Billing {
     ) -> Result<crate::types::ActionsBillingUsage> {
         let url = format!(
             "/orgs/{}/settings/billing/actions",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -151,7 +151,7 @@ impl Billing {
     ) -> Result<crate::types::PackagesBillingUsage> {
         let url = format!(
             "/orgs/{}/settings/billing/packages",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -180,7 +180,7 @@ impl Billing {
     ) -> Result<crate::types::CombinedBillingUsage> {
         let url = format!(
             "/orgs/{}/settings/billing/shared-storage",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -209,7 +209,7 @@ impl Billing {
     ) -> Result<crate::types::ActionsBillingUsage> {
         let url = format!(
             "/users/{}/settings/billing/actions",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -238,7 +238,7 @@ impl Billing {
     ) -> Result<crate::types::PackagesBillingUsage> {
         let url = format!(
             "/users/{}/settings/billing/packages",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -267,7 +267,7 @@ impl Billing {
     ) -> Result<crate::types::CombinedBillingUsage> {
         let url = format!(
             "/users/{}/settings/billing/shared-storage",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
         );
 
         self.client.get(&url, None).await

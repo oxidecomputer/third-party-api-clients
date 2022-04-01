@@ -44,8 +44,8 @@ impl TemplateLocks {
     ) -> Result<crate::types::LockInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -93,8 +93,8 @@ impl TemplateLocks {
     ) -> Result<crate::types::LockInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client
@@ -178,8 +178,8 @@ impl TemplateLocks {
     ) -> Result<crate::types::LockInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client
@@ -224,8 +224,8 @@ impl TemplateLocks {
     ) -> Result<crate::types::LockInformation> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client

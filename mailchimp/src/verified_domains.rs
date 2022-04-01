@@ -26,7 +26,7 @@ impl VerifiedDomains {
     pub async fn get(&self, domain_name: &str) -> Result<crate::types::VerifiedDomains> {
         let url = format!(
             "/verified-domains/{}",
-            crate::progenitor_support::encode_path(domain_name),
+            crate::progenitor_support::encode_path(&domain_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -46,7 +46,7 @@ impl VerifiedDomains {
     pub async fn delete(&self, domain_name: &str) -> Result<()> {
         let url = format!(
             "/verified-domains/{}",
-            crate::progenitor_support::encode_path(domain_name),
+            crate::progenitor_support::encode_path(&domain_name.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -70,7 +70,7 @@ impl VerifiedDomains {
     ) -> Result<crate::types::VerifiedDomains> {
         let url = format!(
             "/verified-domains/{}/actions/verify",
-            crate::progenitor_support::encode_path(domain_name),
+            crate::progenitor_support::encode_path(&domain_name.to_string()),
         );
 
         self.client

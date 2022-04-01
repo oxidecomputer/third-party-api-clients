@@ -43,8 +43,8 @@ impl EnvelopeLocks {
     ) -> Result<crate::types::EnvelopeLocks> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -92,8 +92,8 @@ impl EnvelopeLocks {
     ) -> Result<crate::types::EnvelopeLocks> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -177,8 +177,8 @@ impl EnvelopeLocks {
     ) -> Result<crate::types::EnvelopeLocks> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -221,8 +221,8 @@ impl EnvelopeLocks {
     ) -> Result<crate::types::EnvelopeLocks> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/lock",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client.delete(&url, None).await

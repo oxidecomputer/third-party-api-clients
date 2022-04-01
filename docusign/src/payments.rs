@@ -43,7 +43,7 @@ impl Payments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/billing_payments?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -75,7 +75,7 @@ impl Payments {
     ) -> Result<crate::types::BillingPaymentResponse> {
         let url = format!(
             "/v2.1/accounts/{}/billing_payments",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -104,8 +104,8 @@ impl Payments {
     ) -> Result<crate::types::BillingPaymentItem> {
         let url = format!(
             "/v2.1/accounts/{}/billing_payments/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(payment_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&payment_id.to_string()),
         );
 
         self.client.get(&url, None).await

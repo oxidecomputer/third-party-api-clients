@@ -77,8 +77,8 @@ impl CustomIds {
     ) -> Result<crate::types::GetEntityTypeCustomRampResponse> {
         let url = format!(
             "/custom-id-provider/{}/{}/ramp-id",
-            crate::progenitor_support::encode_path(entity_type),
-            crate::progenitor_support::encode_path(custom_id),
+            crate::progenitor_support::encode_path(&entity_type.to_string()),
+            crate::progenitor_support::encode_path(&custom_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -100,8 +100,8 @@ impl CustomIds {
     ) -> Result<crate::types::GetEntityTypeRampCustomResponse> {
         let url = format!(
             "/custom-id-provider/{}/{}/custom-id",
-            crate::progenitor_support::encode_path(entity_type),
-            crate::progenitor_support::encode_path(ramp_id),
+            crate::progenitor_support::encode_path(&entity_type.to_string()),
+            crate::progenitor_support::encode_path(&ramp_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -121,7 +121,7 @@ impl CustomIds {
     ) -> Result<()> {
         let url = format!(
             "/custom-id-provider/{}/custom-id-link",
-            crate::progenitor_support::encode_path(entity_type),
+            crate::progenitor_support::encode_path(&entity_type.to_string()),
         );
 
         self.client

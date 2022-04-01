@@ -164,7 +164,7 @@ impl Folders {
     pub async fn get(&self, name: &str) -> Result<crate::types::Folder> {
         let url = format!(
             "/v2/{}",
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -182,7 +182,7 @@ impl Folders {
     pub async fn delete(&self, name: &str) -> Result<crate::types::Folder> {
         let url = format!(
             "/v2/{}",
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -211,7 +211,7 @@ impl Folders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2/{}?{}",
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&name.to_string()),
             query_
         );
 
@@ -236,7 +236,7 @@ impl Folders {
     ) -> Result<crate::types::Operation> {
         let url = format!(
             "/v2/{}/move",
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client
@@ -260,7 +260,7 @@ impl Folders {
     ) -> Result<crate::types::Folder> {
         let url = format!(
             "/v2/{}/undelete",
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client
@@ -284,7 +284,7 @@ impl Folders {
     ) -> Result<crate::types::Policy> {
         let url = format!(
             "/v2/{}/getIamPolicy",
-            crate::progenitor_support::encode_path(resource),
+            crate::progenitor_support::encode_path(&resource.to_string()),
         );
 
         self.client
@@ -308,7 +308,7 @@ impl Folders {
     ) -> Result<crate::types::Policy> {
         let url = format!(
             "/v2/{}/setIamPolicy",
-            crate::progenitor_support::encode_path(resource),
+            crate::progenitor_support::encode_path(&resource.to_string()),
         );
 
         self.client
@@ -332,7 +332,7 @@ impl Folders {
     ) -> Result<crate::types::TestIamPermissionsResponse> {
         let url = format!(
             "/v2/{}/testIamPermissions",
-            crate::progenitor_support::encode_path(resource),
+            crate::progenitor_support::encode_path(&resource.to_string()),
         );
 
         self.client

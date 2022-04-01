@@ -26,7 +26,7 @@ impl ENoteConfigurations {
     pub async fn get(&self, account_id: &str) -> Result<crate::types::ENoteConfiguration> {
         let url = format!(
             "/v2.1/accounts/{}/settings/enote_configuration",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -50,7 +50,7 @@ impl ENoteConfigurations {
     ) -> Result<crate::types::ENoteConfiguration> {
         let url = format!(
             "/v2.1/accounts/{}/settings/enote_configuration",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -72,7 +72,7 @@ impl ENoteConfigurations {
     pub async fn delete(&self, account_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/settings/enote_configuration",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.delete(&url, None).await

@@ -129,7 +129,7 @@ impl SpamReportsApi {
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
         let url = format!(
             "/suppression/spam_reports/{}",
-            crate::progenitor_support::encode_path(email),
+            crate::progenitor_support::encode_path(&email.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -150,7 +150,7 @@ impl SpamReportsApi {
     ) -> Result<Vec<crate::types::SpamReportsResponse>> {
         let url = format!(
             "/suppression/spam_reports/{}",
-            crate::progenitor_support::encode_path(email),
+            crate::progenitor_support::encode_path(&email.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -175,7 +175,7 @@ impl SpamReportsApi {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/suppression/spam_reports/{}",
-            crate::progenitor_support::encode_path(email),
+            crate::progenitor_support::encode_path(&email.to_string()),
         );
 
         self.client.delete(&url, None).await

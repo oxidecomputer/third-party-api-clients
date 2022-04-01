@@ -59,7 +59,7 @@ impl Gitignore {
     pub async fn get_template(&self, name: &str) -> Result<crate::types::GitignoreTemplate> {
         let url = format!(
             "/gitignore/templates/{}",
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client.get(&url, None).await

@@ -24,7 +24,7 @@ impl Asps {
     pub async fn list(&self, user_key: &str) -> Result<crate::types::Asps> {
         let url = format!(
             "/admin/directory/v1/users/{}/asps",
-            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(&user_key.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -43,7 +43,7 @@ impl Asps {
     pub async fn get(&self, user_key: &str, code_id: i64) -> Result<crate::types::Asp> {
         let url = format!(
             "/admin/directory/v1/users/{}/asps/{}",
-            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(&user_key.to_string()),
             crate::progenitor_support::encode_path(&code_id.to_string()),
         );
 
@@ -63,7 +63,7 @@ impl Asps {
     pub async fn delete(&self, user_key: &str, code_id: i64) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/asps/{}",
-            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(&user_key.to_string()),
             crate::progenitor_support::encode_path(&code_id.to_string()),
         );
 
