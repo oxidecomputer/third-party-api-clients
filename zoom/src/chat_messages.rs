@@ -77,7 +77,7 @@ impl ChatMessages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/chat/users/{}/messages?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -132,7 +132,7 @@ impl ChatMessages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/chat/users/{}/messages?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -189,7 +189,7 @@ impl ChatMessages {
     ) -> Result<crate::types::Groups> {
         let url = format!(
             "/chat/users/{}/messages",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -221,8 +221,8 @@ impl ChatMessages {
     ) -> Result<()> {
         let url = format!(
             "/chat/users/{}/messages/{}/status",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
-            crate::progenitor_support::encode_path(&message_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(message_id),
         );
 
         self.client
@@ -254,8 +254,8 @@ impl ChatMessages {
     ) -> Result<()> {
         let url = format!(
             "/chat/users/{}/messages/{}/emoji_reactions",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
-            crate::progenitor_support::encode_path(&message_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(message_id),
         );
 
         self.client
@@ -301,8 +301,8 @@ impl ChatMessages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/chat/users/{}/messages/{}?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
-            crate::progenitor_support::encode_path(&message_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(message_id),
             query_
         );
 
@@ -335,8 +335,8 @@ impl ChatMessages {
     ) -> Result<()> {
         let url = format!(
             "/chat/users/{}/messages/{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
-            crate::progenitor_support::encode_path(&message_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(message_id),
         );
 
         self.client
@@ -389,8 +389,8 @@ impl ChatMessages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/chat/users/{}/messages/{}?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
-            crate::progenitor_support::encode_path(&message_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(message_id),
             query_
         );
 

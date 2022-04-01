@@ -41,7 +41,7 @@ impl Sessions {
     pub async fn get(&self, session_id: &str) -> Result<crate::types::Session> {
         let url = format!(
             "/api/v1/sessions/{}",
-            crate::progenitor_support::encode_path(&session_id.to_string()),
+            crate::progenitor_support::encode_path(session_id),
         );
 
         self.client.get(&url, None).await
@@ -61,7 +61,7 @@ impl Sessions {
     pub async fn end(&self, session_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/sessions/{}",
-            crate::progenitor_support::encode_path(&session_id.to_string()),
+            crate::progenitor_support::encode_path(session_id),
         );
 
         self.client.delete(&url, None).await
@@ -81,7 +81,7 @@ impl Sessions {
     pub async fn refresh(&self, session_id: &str) -> Result<crate::types::Session> {
         let url = format!(
             "/api/v1/sessions/{}/lifecycle/refresh",
-            crate::progenitor_support::encode_path(&session_id.to_string()),
+            crate::progenitor_support::encode_path(session_id),
         );
 
         self.client.post(&url, None).await

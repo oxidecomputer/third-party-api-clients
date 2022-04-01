@@ -41,7 +41,7 @@ impl BccEmailArchive {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/settings/bcc_email_archives?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
 
@@ -71,7 +71,7 @@ impl BccEmailArchive {
     ) -> Result<crate::types::BccEmailArchiveData> {
         let url = format!(
             "/v2.1/accounts/{}/settings/bcc_email_archives",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
@@ -110,8 +110,8 @@ impl BccEmailArchive {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/settings/bcc_email_archives/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&bcc_email_archive_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(bcc_email_archive_id),
             query_
         );
 
@@ -136,8 +136,8 @@ impl BccEmailArchive {
     pub async fn delete(&self, account_id: &str, bcc_email_archive_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/settings/bcc_email_archives/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&bcc_email_archive_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(bcc_email_archive_id),
         );
 
         self.client.delete(&url, None).await

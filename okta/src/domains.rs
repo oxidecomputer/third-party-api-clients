@@ -52,7 +52,7 @@ impl Domains {
     pub async fn get(&self, domain_id: &str) -> Result<crate::types::Domain> {
         let url = format!(
             "/api/v1/domains/{}",
-            crate::progenitor_support::encode_path(&domain_id.to_string()),
+            crate::progenitor_support::encode_path(domain_id),
         );
 
         self.client.get(&url, None).await
@@ -72,7 +72,7 @@ impl Domains {
     pub async fn delete(&self, domain_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/domains/{}",
-            crate::progenitor_support::encode_path(&domain_id.to_string()),
+            crate::progenitor_support::encode_path(domain_id),
         );
 
         self.client.delete(&url, None).await
@@ -96,7 +96,7 @@ impl Domains {
     ) -> Result<()> {
         let url = format!(
             "/api/v1/domains/{}/certificate",
-            crate::progenitor_support::encode_path(&domain_id.to_string()),
+            crate::progenitor_support::encode_path(domain_id),
         );
 
         self.client
@@ -118,7 +118,7 @@ impl Domains {
     pub async fn verify(&self, domain_id: &str) -> Result<crate::types::Domain> {
         let url = format!(
             "/api/v1/domains/{}/verify",
-            crate::progenitor_support::encode_path(&domain_id.to_string()),
+            crate::progenitor_support::encode_path(domain_id),
         );
 
         self.client.post(&url, None).await

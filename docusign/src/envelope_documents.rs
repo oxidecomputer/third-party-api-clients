@@ -69,8 +69,8 @@ impl EnvelopeDocuments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
             query_
         );
 
@@ -106,8 +106,8 @@ impl EnvelopeDocuments {
     ) -> Result<crate::types::EnvelopeDocumentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
 
         self.client
@@ -158,8 +158,8 @@ impl EnvelopeDocuments {
     ) -> Result<crate::types::EnvelopeDocumentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
 
         self.client
@@ -242,9 +242,9 @@ impl EnvelopeDocuments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(document_id),
             query_
         );
 
@@ -288,9 +288,9 @@ impl EnvelopeDocuments {
     ) -> Result<crate::types::EnvelopeDocument> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(document_id),
         );
 
         self.client.put(&url, None).await

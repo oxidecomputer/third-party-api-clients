@@ -26,7 +26,7 @@ impl FavoriteTemplates {
     pub async fn get(&self, account_id: &str) -> Result<crate::types::FavoriteTemplates> {
         let url = format!(
             "/v2.1/accounts/{}/favorite_templates",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client.get(&url, None).await
@@ -51,7 +51,7 @@ impl FavoriteTemplates {
     ) -> Result<crate::types::FavoriteTemplates> {
         let url = format!(
             "/v2.1/accounts/{}/favorite_templates",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
@@ -77,7 +77,7 @@ impl FavoriteTemplates {
     ) -> Result<crate::types::FavoriteTemplates> {
         let url = format!(
             "/v2.1/accounts/{}/favorite_templates",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client

@@ -91,7 +91,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -119,7 +119,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client
@@ -144,7 +144,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.delete(&url, None).await
@@ -229,7 +229,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -257,7 +257,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client
@@ -282,7 +282,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.delete(&url, None).await
@@ -367,7 +367,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -395,7 +395,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client
@@ -420,7 +420,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.delete(&url, None).await
@@ -501,7 +501,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -529,7 +529,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client
@@ -551,7 +551,7 @@ impl StoreProperties {
     pub async fn delete_countries_param_country(&self, country_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.delete(&url, None).await
@@ -636,7 +636,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -664,7 +664,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client
@@ -689,7 +689,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.delete(&url, None).await
@@ -781,7 +781,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/countries/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -809,7 +809,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client
@@ -834,7 +834,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/countries/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.delete(&url, None).await
@@ -1013,7 +1013,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -1037,7 +1037,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.get(&url, None).await
@@ -1069,8 +1069,8 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
             query_
         );
 
@@ -1100,8 +1100,8 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
         );
 
         self.client
@@ -1138,7 +1138,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -1162,7 +1162,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.get(&url, None).await
@@ -1194,8 +1194,8 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
             query_
         );
 
@@ -1225,8 +1225,8 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
         );
 
         self.client
@@ -1263,7 +1263,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -1287,7 +1287,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.get(&url, None).await
@@ -1319,8 +1319,8 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
             query_
         );
 
@@ -1350,8 +1350,8 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
         );
 
         self.client
@@ -1388,7 +1388,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -1412,7 +1412,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.get(&url, None).await
@@ -1444,8 +1444,8 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
             query_
         );
 
@@ -1475,8 +1475,8 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
         );
 
         self.client
@@ -1513,7 +1513,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -1537,7 +1537,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.get(&url, None).await
@@ -1569,8 +1569,8 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
             query_
         );
 
@@ -1600,8 +1600,8 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
         );
 
         self.client
@@ -1638,7 +1638,7 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/countries/{}/provinces.json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
             query_
         );
 
@@ -1662,7 +1662,7 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/countries/{}/provinces/count.json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
         );
 
         self.client.get(&url, None).await
@@ -1694,8 +1694,8 @@ impl StoreProperties {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/countries/{}/provinces/{}/json?{}",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
             query_
         );
 
@@ -1725,8 +1725,8 @@ impl StoreProperties {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/countries/{}/provinces/{}/json",
-            crate::progenitor_support::encode_path(&country_id.to_string()),
-            crate::progenitor_support::encode_path(&province_id.to_string()),
+            crate::progenitor_support::encode_path(country_id),
+            crate::progenitor_support::encode_path(province_id),
         );
 
         self.client

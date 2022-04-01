@@ -130,7 +130,7 @@ impl CardPrograms {
     pub async fn get_program(&self, id: &str) -> Result<crate::types::CardProgram> {
         let url = format!(
             "/card-programs/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

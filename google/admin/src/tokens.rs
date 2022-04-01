@@ -24,7 +24,7 @@ impl Tokens {
     pub async fn list(&self, user_key: &str) -> Result<crate::types::Tokens> {
         let url = format!(
             "/admin/directory/v1/users/{}/tokens",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
+            crate::progenitor_support::encode_path(user_key),
         );
 
         self.client.get(&url, None).await
@@ -43,8 +43,8 @@ impl Tokens {
     pub async fn get(&self, user_key: &str, client_id: &str) -> Result<crate::types::Token> {
         let url = format!(
             "/admin/directory/v1/users/{}/tokens/{}",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
-            crate::progenitor_support::encode_path(&client_id.to_string()),
+            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(client_id),
         );
 
         self.client.get(&url, None).await
@@ -63,8 +63,8 @@ impl Tokens {
     pub async fn delete(&self, user_key: &str, client_id: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/users/{}/tokens/{}",
-            crate::progenitor_support::encode_path(&user_key.to_string()),
-            crate::progenitor_support::encode_path(&client_id.to_string()),
+            crate::progenitor_support::encode_path(user_key),
+            crate::progenitor_support::encode_path(client_id),
         );
 
         self.client.delete(&url, None).await

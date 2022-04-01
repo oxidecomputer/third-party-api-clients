@@ -145,7 +145,7 @@ impl Receipts {
     pub async fn get(&self, id: &str) -> Result<crate::types::Receipt> {
         let url = format!(
             "/receipts/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

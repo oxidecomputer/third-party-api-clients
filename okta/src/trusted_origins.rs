@@ -102,7 +102,7 @@ impl TrustedOrigins {
     pub async fn get_origin(&self, trusted_origin_id: &str) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}",
-            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+            crate::progenitor_support::encode_path(trusted_origin_id),
         );
 
         self.client.get(&url, None).await
@@ -124,7 +124,7 @@ impl TrustedOrigins {
     ) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}",
-            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+            crate::progenitor_support::encode_path(trusted_origin_id),
         );
 
         self.client
@@ -144,7 +144,7 @@ impl TrustedOrigins {
     pub async fn delete_origin(&self, trusted_origin_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/trustedOrigins/{}",
-            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+            crate::progenitor_support::encode_path(trusted_origin_id),
         );
 
         self.client.delete(&url, None).await
@@ -165,7 +165,7 @@ impl TrustedOrigins {
     ) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+            crate::progenitor_support::encode_path(trusted_origin_id),
         );
 
         self.client.post(&url, None).await
@@ -186,7 +186,7 @@ impl TrustedOrigins {
     ) -> Result<crate::types::TrustedOrigin> {
         let url = format!(
             "/api/v1/trustedOrigins/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(&trusted_origin_id.to_string()),
+            crate::progenitor_support::encode_path(trusted_origin_id),
         );
 
         self.client.post(&url, None).await

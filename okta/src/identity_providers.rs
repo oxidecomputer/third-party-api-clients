@@ -171,7 +171,7 @@ impl IdentityProviders {
     pub async fn get_key(&self, key_id: &str) -> Result<crate::types::JsonWebKey> {
         let url = format!(
             "/api/v1/idps/credentials/keys/{}",
-            crate::progenitor_support::encode_path(&key_id.to_string()),
+            crate::progenitor_support::encode_path(key_id),
         );
 
         self.client.get(&url, None).await
@@ -191,7 +191,7 @@ impl IdentityProviders {
     pub async fn delete_key(&self, key_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/idps/credentials/keys/{}",
-            crate::progenitor_support::encode_path(&key_id.to_string()),
+            crate::progenitor_support::encode_path(key_id),
         );
 
         self.client.delete(&url, None).await
@@ -211,7 +211,7 @@ impl IdentityProviders {
     pub async fn get(&self, idp_id: &str) -> Result<crate::types::IdentityProvider> {
         let url = format!(
             "/api/v1/idps/{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.get(&url, None).await
@@ -235,7 +235,7 @@ impl IdentityProviders {
     ) -> Result<crate::types::IdentityProvider> {
         let url = format!(
             "/api/v1/idps/{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client
@@ -257,7 +257,7 @@ impl IdentityProviders {
     pub async fn delete(&self, idp_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/idps/{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.delete(&url, None).await
@@ -277,7 +277,7 @@ impl IdentityProviders {
     pub async fn list_csrs_fors(&self, idp_id: &str) -> Result<Vec<crate::types::Csr>> {
         let url = format!(
             "/api/v1/idps/{}/credentials/csrs",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.get(&url, None).await
@@ -295,7 +295,7 @@ impl IdentityProviders {
     pub async fn list_all_csrs_fors(&self, idp_id: &str) -> Result<Vec<crate::types::Csr>> {
         let url = format!(
             "/api/v1/idps/{}/credentials/csrs",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -319,7 +319,7 @@ impl IdentityProviders {
     ) -> Result<crate::types::Csr> {
         let url = format!(
             "/api/v1/idps/{}/credentials/csrs",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client
@@ -340,8 +340,8 @@ impl IdentityProviders {
     pub async fn get_csr_for(&self, idp_id: &str, csr_id: &str) -> Result<crate::types::Csr> {
         let url = format!(
             "/api/v1/idps/{}/credentials/csrs/{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&csr_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(csr_id),
         );
 
         self.client.get(&url, None).await
@@ -360,8 +360,8 @@ impl IdentityProviders {
     pub async fn revoke_csr_for(&self, idp_id: &str, csr_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/idps/{}/credentials/csrs/{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&csr_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(csr_id),
         );
 
         self.client.delete(&url, None).await
@@ -384,8 +384,8 @@ impl IdentityProviders {
     ) -> Result<crate::types::JsonWebKey> {
         let url = format!(
             "/api/v1/idps/{}/credentials/csrs/{}/lifecycle/publish",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&csr_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(csr_id),
         );
 
         self.client.post(&url, None).await
@@ -405,7 +405,7 @@ impl IdentityProviders {
     pub async fn list_signing_keys(&self, idp_id: &str) -> Result<Vec<crate::types::JsonWebKey>> {
         let url = format!(
             "/api/v1/idps/{}/credentials/keys",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.get(&url, None).await
@@ -426,7 +426,7 @@ impl IdentityProviders {
     ) -> Result<Vec<crate::types::JsonWebKey>> {
         let url = format!(
             "/api/v1/idps/{}/credentials/keys",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -456,7 +456,7 @@ impl IdentityProviders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/idps/{}/credentials/keys/generate?{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
             query_
         );
 
@@ -482,8 +482,8 @@ impl IdentityProviders {
     ) -> Result<crate::types::JsonWebKey> {
         let url = format!(
             "/api/v1/idps/{}/credentials/keys/{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&key_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(key_id),
         );
 
         self.client.get(&url, None).await
@@ -515,8 +515,8 @@ impl IdentityProviders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/api/v1/idps/{}/credentials/keys/{}/clone?{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&key_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(key_id),
             query_
         );
 
@@ -537,7 +537,7 @@ impl IdentityProviders {
     pub async fn activate(&self, idp_id: &str) -> Result<crate::types::IdentityProvider> {
         let url = format!(
             "/api/v1/idps/{}/lifecycle/activate",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.post(&url, None).await
@@ -557,7 +557,7 @@ impl IdentityProviders {
     pub async fn deactivate(&self, idp_id: &str) -> Result<crate::types::IdentityProvider> {
         let url = format!(
             "/api/v1/idps/{}/lifecycle/deactivate",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.post(&url, None).await
@@ -580,7 +580,7 @@ impl IdentityProviders {
     ) -> Result<Vec<crate::types::IdentityProviderApplicationUser>> {
         let url = format!(
             "/api/v1/idps/{}/users",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.get(&url, None).await
@@ -601,7 +601,7 @@ impl IdentityProviders {
     ) -> Result<Vec<crate::types::IdentityProviderApplicationUser>> {
         let url = format!(
             "/api/v1/idps/{}/users",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -624,8 +624,8 @@ impl IdentityProviders {
     ) -> Result<crate::types::IdentityProviderApplicationUser> {
         let url = format!(
             "/api/v1/idps/{}/users/{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.get(&url, None).await
@@ -651,8 +651,8 @@ impl IdentityProviders {
     ) -> Result<crate::types::IdentityProviderApplicationUser> {
         let url = format!(
             "/api/v1/idps/{}/users/{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -675,8 +675,8 @@ impl IdentityProviders {
     pub async fn unlink_user_from(&self, idp_id: &str, user_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/idps/{}/users/{}",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.delete(&url, None).await
@@ -701,8 +701,8 @@ impl IdentityProviders {
     ) -> Result<Vec<crate::types::SocialAuthToken>> {
         let url = format!(
             "/api/v1/idps/{}/users/{}/credentials/tokens",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.get(&url, None).await
@@ -724,8 +724,8 @@ impl IdentityProviders {
     ) -> Result<Vec<crate::types::SocialAuthToken>> {
         let url = format!(
             "/api/v1/idps/{}/users/{}/credentials/tokens",
-            crate::progenitor_support::encode_path(&idp_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(idp_id),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.get_all_pages(&url, None).await

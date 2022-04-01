@@ -31,7 +31,7 @@ impl ConnectEvents {
     ) -> Result<crate::types::ConnectFailureResults> {
         let url = format!(
             "/v2.1/accounts/{}/connect/envelopes/retry_queue",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
@@ -58,8 +58,8 @@ impl ConnectEvents {
     ) -> Result<crate::types::ConnectFailureResults> {
         let url = format!(
             "/v2.1/accounts/{}/connect/envelopes/{}/retry_queue",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
 
         self.client.put(&url, None).await
@@ -98,7 +98,7 @@ impl ConnectEvents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/connect/failures?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
 
@@ -124,8 +124,8 @@ impl ConnectEvents {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/connect/failures/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&failure_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(failure_id),
         );
 
         self.client.delete(&url, None).await
@@ -166,7 +166,7 @@ impl ConnectEvents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/connect/logs?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
             query_
         );
 
@@ -187,7 +187,7 @@ impl ConnectEvents {
     pub async fn connect_log_delete_logs(&self, account_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/connect/logs",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client.delete(&url, None).await
@@ -221,8 +221,8 @@ impl ConnectEvents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/connect/logs/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&log_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(log_id),
             query_
         );
 
@@ -245,8 +245,8 @@ impl ConnectEvents {
     pub async fn connect_log_delete(&self, account_id: &str, log_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/connect/logs/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&log_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(log_id),
         );
 
         self.client.delete(&url, None).await

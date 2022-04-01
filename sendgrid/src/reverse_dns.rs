@@ -131,7 +131,7 @@ impl ReverseDns {
     ) -> Result<crate::types::PostWhitelabelIpsValidateResponse> {
         let url = format!(
             "/whitelabel/ips/{}/validate",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -153,7 +153,7 @@ impl ReverseDns {
     pub async fn get_whitelabel_ip(&self, id: &str) -> Result<crate::types::ReverseDns> {
         let url = format!(
             "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -177,7 +177,7 @@ impl ReverseDns {
     pub async fn delete_whitelabel_ips(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/whitelabel/ips/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await
