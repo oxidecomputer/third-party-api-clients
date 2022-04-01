@@ -98,7 +98,7 @@ impl Reimbursements {
     pub async fn get(&self, id: &str) -> Result<crate::types::Reimbursement> {
         let url = format!(
             "/reimbursements/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

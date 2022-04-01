@@ -91,7 +91,7 @@ impl NotaryJurisdiction {
     ) -> Result<crate::types::NotaryJurisdictionData> {
         let url = format!(
             "/v2.1/current_user/notary/jurisdictions/{}",
-            crate::progenitor_support::encode_path(&jurisdiction_id.to_string()),
+            crate::progenitor_support::encode_path(jurisdiction_id),
         );
 
         self.client.get(&url, None).await
@@ -201,7 +201,7 @@ impl NotaryJurisdiction {
     ) -> Result<crate::types::NotaryJurisdictionData> {
         let url = format!(
             "/v2.1/current_user/notary/jurisdictions/{}",
-            crate::progenitor_support::encode_path(&jurisdiction_id.to_string()),
+            crate::progenitor_support::encode_path(jurisdiction_id),
         );
 
         self.client
@@ -251,7 +251,7 @@ impl NotaryJurisdiction {
     pub async fn s_delete_jurisdiction(&self, jurisdiction_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/current_user/notary/jurisdictions/{}",
-            crate::progenitor_support::encode_path(&jurisdiction_id.to_string()),
+            crate::progenitor_support::encode_path(jurisdiction_id),
         );
 
         self.client.delete(&url, None).await

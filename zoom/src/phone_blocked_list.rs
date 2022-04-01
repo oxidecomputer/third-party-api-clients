@@ -146,7 +146,7 @@ impl PhoneBlockedList {
     ) -> Result<crate::types::BlockedList> {
         let url = format!(
             "/phone/blocked_list/{}",
-            crate::progenitor_support::encode_path(&blocked_list_id.to_string()),
+            crate::progenitor_support::encode_path(blocked_list_id),
         );
 
         self.client.get(&url, None).await
@@ -173,7 +173,7 @@ impl PhoneBlockedList {
     pub async fn delete_blocked_list(&self, blocked_list_id: &str) -> Result<()> {
         let url = format!(
             "/phone/blocked_list/{}",
-            crate::progenitor_support::encode_path(&blocked_list_id.to_string()),
+            crate::progenitor_support::encode_path(blocked_list_id),
         );
 
         self.client.delete(&url, None).await
@@ -203,7 +203,7 @@ impl PhoneBlockedList {
     ) -> Result<()> {
         let url = format!(
             "/phone/blocked_list/{}",
-            crate::progenitor_support::encode_path(&blocked_list_id.to_string()),
+            crate::progenitor_support::encode_path(blocked_list_id),
         );
 
         self.client

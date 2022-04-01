@@ -106,7 +106,7 @@ impl ContactsApiSegments {
     ) -> Result<crate::types::ContactdbSegments> {
         let url = format!(
             "/contactdb/segments/{}",
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(segment_id),
         );
 
         self.client.get(&url, None).await
@@ -139,7 +139,7 @@ impl ContactsApiSegments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/contactdb/segments/{}?{}",
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(segment_id),
             query_
         );
 
@@ -167,7 +167,7 @@ impl ContactsApiSegments {
     ) -> Result<crate::types::ContactdbSegments> {
         let url = format!(
             "/contactdb/segments/{}",
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(segment_id),
         );
 
         self.client
