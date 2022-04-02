@@ -82,6 +82,10 @@ SLACK_SPEC = $(SLACK_SPEC_DIR)/slack.json
 SLACK_SPEC_REPO = slackapi/slack-api-specs
 SLACK_SPEC_REMOTE = https://raw.githubusercontent.com/$(SLACK_SPEC_REPO)/master/web-api/slack_web_openapi_v2.json
 
+STRIPE_SPEC_DIR = $(CURDIR)/specs/stripe
+STRIPE_SPEC = $(STRIPE_SPEC_DIR)/stripe.json
+STRIPE_SPEC_REMOTE = https://raw.githubusercontent.com/stripe/openapi/master/openapi/spec3.json
+
 TRIPACTIONS_SPEC_DIR = $(CURDIR)/specs/tripactions
 TRIPACTIONS_SPEC = $(TRIPACTIONS_SPEC_DIR)/tripactions.yaml
 TRIPACTIONS_SPEC_REMOTE = https://app.tripactions.com/api/public-api.yml
@@ -503,6 +507,26 @@ slack: target/debug/generator $(SLACK_SPEC)
 		--user-consent-endpoint "slack.com/oauth/v2/authorize" $(EXTRA_ARGS)
 	cargo fmt -p slack-chat-api
 	@echo -e "- [Slack](slack/) [![docs.rs](https://docs.rs/slack-chat-api/badge.svg)](https://docs.rs/slack-chat-api)" >> README.md
+
+$(STRIPE_SPEC_DIR):
+	mkdir -p $@
+
+$(STRIPE_SPEC): $(STRIPE_SPEC_DIR)
+	npx swagger2openapi \
+		--outfile $@ \
+		--patch \
+		$(STRIPE_SPEC_REMOTE)
+
+stripe: target/debug/generator $(STRIPE_SPEC)
+	./target/debug/generator -i $(STRIPE_SPEC) -v 0.1.0 \
+		-o stripe \
+		-n stripe-api \
+		--proper-name Stripe \
+		-d "A fully generated & opinionated API client for the Stripe API." \
+		--spec-link "$(STRIPE_SPEC_REMOTE)" \
+		--host "api.stripe.com/v1" $(EXTRA_ARGS)
+	cargo fmt -p stripe-api
+	@echo -e "- [Stripe](stripe/) [![docs.rs](https://docs.rs/stripe-api/badge.svg)](https://docs.rs/stripe-api)" >> README.md
 
 $(TRIPACTIONS_SPEC_DIR):
 	mkdir -p $@

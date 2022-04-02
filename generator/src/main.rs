@@ -258,6 +258,7 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     Empty => "&str".to_string(),
                                     Unknown(f) => match f.as_str() {
                                         "float" => "f64".to_string(),
+                                        "decimal" => "f64".to_string(),
                                         "int64" => "i64".to_string(),
                                         "uint64" => "u64".to_string(),
                                         "google-fieldmask" => "&str".to_string(),
@@ -301,6 +302,10 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                             uint = true;
                                             width = 32;
                                         }
+                                        "unix-time" => {
+                                            uint = false;
+                                            width = 64;
+                                        }
                                         f => bail!("XXX unknown integer format {}", f),
                                     }
                                 } else {
@@ -341,7 +346,8 @@ impl ParameterDataExt for openapiv3::ParameterData {
                             }
                             openapiv3::SchemaKind::OneOf { one_of: _ } => "&str".to_string(), /* TODO: make this smarter. */
                             openapiv3::SchemaKind::Any(_) => "&str".to_string(), /* TODO: make this smarter. */
-                            x => bail!("unexpected type {:#?}", x),
+                            // Any thing weird just make it a string.
+                            _ => "&str".to_string(),
                         }
                     }
                 }
@@ -640,9 +646,9 @@ impl PartialEq for TypeDetails {
                     return i == oi;
                 }
             }
-            TypeDetails::Object(s, _d) => {
-                if let TypeDetails::Object(os, _od) = other {
-                    return s == os;
+            TypeDetails::Object(s, d) => {
+                if let TypeDetails::Object(os, od) = other {
+                    return s == os || (d.title == od.title && d.title.is_some());
                 }
             }
             TypeDetails::OneOf(s, _d) => {
@@ -1422,6 +1428,9 @@ impl TypeSpace {
         let uid = uuid::Uuid::new_v4();
 
         match &s.schema_kind {
+            openapiv3::SchemaKind::Not { .. } => {
+                bail!("unsupported schema kind NOT: {:?}", s.schema_kind);
+            }
             openapiv3::SchemaKind::Type(t) => match t {
                 openapiv3::Type::Array(at) => {
                     if let Some(items) = &at.items {
@@ -1700,6 +1709,10 @@ impl TypeSpace {
                         }
                         Unknown(f) => match f.as_str() {
                             "float" => Ok((
+                                Some(uid.to_string()),
+                                TypeDetails::Basic("f64".to_string(), s.schema_data.clone()),
+                            )),
+                            "decimal" => Ok((
                                 Some(uid.to_string()),
                                 TypeDetails::Basic("f64".to_string(), s.schema_data.clone()),
                             )),
@@ -2096,7 +2109,7 @@ fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::Parame
     match param {
         openapiv3::Parameter::Path {
             parameter_data,
-            style: openapiv3::PathStyle::Simple,
+            style: _,
         } => return Some(parameter_data),
         openapiv3::Parameter::Header {
             parameter_data,
@@ -2109,15 +2122,12 @@ fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::Parame
         openapiv3::Parameter::Query {
             parameter_data,
             allow_reserved: _,
-            style: openapiv3::QueryStyle::Form,
+            style: _,
             allow_empty_value: _,
         } => {
             return Some(parameter_data);
         }
-        _ => (),
     }
-
-    None
 }
 
 fn render_param(
