@@ -96,7 +96,7 @@ impl Reporting {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -195,7 +195,7 @@ impl Reporting {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**

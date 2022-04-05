@@ -94,7 +94,7 @@ impl Coupons {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**

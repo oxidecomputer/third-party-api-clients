@@ -2167,8 +2167,8 @@ pub struct ApiErrors {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_intent: Option<PaymentIntent>,
+    #[serde()]
+    pub payment_intent: Box<Option<PaymentIntent>>,
     /**
     *
     */

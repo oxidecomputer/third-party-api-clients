@@ -115,7 +115,7 @@ impl Customers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -220,7 +220,7 @@ impl Customers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -376,7 +376,7 @@ impl Customers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -540,7 +540,7 @@ impl Customers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -760,7 +760,7 @@ impl Customers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -1002,7 +1002,7 @@ impl Customers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -1107,7 +1107,7 @@ impl Customers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -1320,7 +1320,7 @@ impl Customers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -1559,7 +1559,7 @@ impl Customers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**

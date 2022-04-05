@@ -834,7 +834,7 @@ fn get_fn_inner(
             }}
 
             // Return our response data.
-            Ok({})"#,
+            Ok({}.to_vec())"#,
             response_type,
             m.to_lowercase(),
             body,
@@ -1052,16 +1052,23 @@ fn get_fn_inner(
             ));
         }
 
+        let additional = if response_type.starts_with("Vec<") {
+            ".to_vec()"
+        } else {
+            ""
+        };
+
         // Okay we have an inner response type, let's return that instead.
         return Ok(format!(
             r#"let resp: {} = self.client.{}(&url, {}).await?;
 
                 // Return our response data.
-                Ok(resp.{})"#,
+                Ok(resp.{}{})"#,
             response_type,
             m.to_lowercase(),
             body,
-            pagination_property
+            pagination_property,
+            additional
         ));
     }
 

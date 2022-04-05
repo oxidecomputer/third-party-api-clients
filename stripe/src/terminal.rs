@@ -101,7 +101,7 @@ impl Terminal {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -289,7 +289,7 @@ impl Terminal {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**

@@ -33,3 +33,5 @@ A place for keeping all our generated third party API clients.
 - [Stripe](stripe/) [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)
 - [Stripe](stripe/) [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)
 - [Stripe](stripe/) [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)
+- [Stripe](stripe/) [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)
+- [Stripe](stripe/) [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)

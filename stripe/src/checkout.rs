@@ -114,7 +114,7 @@ impl Checkout {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -263,6 +263,6 @@ impl Checkout {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 }

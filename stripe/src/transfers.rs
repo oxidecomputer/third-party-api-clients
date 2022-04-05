@@ -115,7 +115,7 @@ impl Transfers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -218,7 +218,7 @@ impl Transfers {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**

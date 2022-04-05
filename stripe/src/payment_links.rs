@@ -103,7 +103,7 @@ impl PaymentLinks {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -247,6 +247,6 @@ impl PaymentLinks {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 }

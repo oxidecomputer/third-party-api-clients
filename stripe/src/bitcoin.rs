@@ -122,7 +122,7 @@ impl Bitcoin {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -250,7 +250,7 @@ impl Bitcoin {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -353,6 +353,6 @@ impl Bitcoin {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 }

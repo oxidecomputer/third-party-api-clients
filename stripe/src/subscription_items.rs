@@ -103,7 +103,7 @@ impl SubscriptionItems {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
@@ -271,7 +271,7 @@ impl SubscriptionItems {
         }
 
         // Return our response data.
-        Ok(data)
+        Ok(data.to_vec())
     }
 
     /**
