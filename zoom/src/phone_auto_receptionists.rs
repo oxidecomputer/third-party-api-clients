@@ -37,7 +37,7 @@ impl PhoneAutoReceptionists {
     ) -> Result<()> {
         let url = format!(
             "/phone/auto_receptionists/{}",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
+            crate::progenitor_support::encode_path(&auto_receptionist_id.to_string()),
         );
 
         self.client
@@ -71,7 +71,7 @@ impl PhoneAutoReceptionists {
     ) -> Result<()> {
         let url = format!(
             "/phone/auto_receptionists/{}/phone_numbers",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
+            crate::progenitor_support::encode_path(&auto_receptionist_id.to_string()),
         );
 
         self.client
@@ -100,7 +100,7 @@ impl PhoneAutoReceptionists {
     ) -> Result<()> {
         let url = format!(
             "/phone/auto_receptionists/{}/phone_numbers",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
+            crate::progenitor_support::encode_path(&auto_receptionist_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -133,8 +133,8 @@ impl PhoneAutoReceptionists {
     ) -> Result<()> {
         let url = format!(
             "/phone/auto_receptionists/{}/phone_numbers/{}",
-            crate::progenitor_support::encode_path(auto_receptionist_id),
-            crate::progenitor_support::encode_path(phone_number_id),
+            crate::progenitor_support::encode_path(&auto_receptionist_id.to_string()),
+            crate::progenitor_support::encode_path(&phone_number_id.to_string()),
         );
 
         self.client.delete(&url, None).await

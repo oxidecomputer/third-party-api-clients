@@ -98,7 +98,7 @@ impl CampaignFolders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/campaign-folders/{}?{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
             query_
         );
 
@@ -119,7 +119,7 @@ impl CampaignFolders {
     pub async fn delete(&self, folder_id: &str) -> Result<()> {
         let url = format!(
             "/campaign-folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -143,7 +143,7 @@ impl CampaignFolders {
     ) -> Result<crate::types::CampaignFolder> {
         let url = format!(
             "/campaign-folders/{}",
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client

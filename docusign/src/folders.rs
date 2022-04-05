@@ -67,7 +67,7 @@ impl Folders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/folders?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -106,7 +106,7 @@ impl Folders {
         start_position: &str,
         status: &str,
         to_date: &str,
-    ) -> Result<crate::types::FoldersResponse> {
+    ) -> Result<crate::types::FolderItemsResponse> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !from_date.is_empty() {
             query_args.push(("from_date".to_string(), from_date.to_string()));
@@ -135,8 +135,8 @@ impl Folders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/folders/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
             query_
         );
 
@@ -168,8 +168,8 @@ impl Folders {
     ) -> Result<crate::types::FoldersResponse> {
         let url = format!(
             "/v2.1/accounts/{}/folders/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(folder_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&folder_id.to_string()),
         );
 
         self.client
@@ -247,8 +247,8 @@ impl Folders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/search_folders/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(search_folder_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&search_folder_id.to_string()),
             query_
         );
 

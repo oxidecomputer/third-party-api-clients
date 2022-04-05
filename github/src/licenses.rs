@@ -90,7 +90,7 @@ impl Licenses {
     pub async fn get(&self, license: &str) -> Result<crate::types::LicenseData> {
         let url = format!(
             "/licenses/{}",
-            crate::progenitor_support::encode_path(license),
+            crate::progenitor_support::encode_path(&license.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -119,8 +119,8 @@ impl Licenses {
     ) -> Result<crate::types::LicenseContent> {
         let url = format!(
             "/repos/{}/{}/license",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get(&url, None).await

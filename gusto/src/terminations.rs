@@ -24,7 +24,7 @@ impl Terminations {
     pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Termination>> {
         let url = format!(
             "/v1/employees/{}/terminations",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -47,7 +47,7 @@ impl Terminations {
     ) -> Result<Vec<crate::types::Termination>> {
         let url = format!(
             "/v1/employees/{}/terminations",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -69,7 +69,7 @@ impl Terminations {
     ) -> Result<crate::types::Termination> {
         let url = format!(
             "/v1/employees/{}/terminations",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client

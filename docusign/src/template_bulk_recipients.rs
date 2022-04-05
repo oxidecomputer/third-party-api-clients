@@ -45,9 +45,9 @@ impl TemplateBulkRecipients {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
             query_
         );
 
@@ -78,9 +78,9 @@ impl TemplateBulkRecipients {
     ) -> Result<crate::types::BulkRecipientsSummaryResponse> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
 
         self.client
@@ -109,9 +109,9 @@ impl TemplateBulkRecipients {
     ) -> Result<crate::types::BulkRecipientsUpdateResponse> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}/bulk_recipients",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
 
         self.client.delete(&url, None).await

@@ -26,7 +26,7 @@ impl Suppressions {
     pub async fn get_asm_groups_group(&self, group_id: &str) -> Result<Vec<String>> {
         let url = format!(
             "/asm/groups/{}/suppressions",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -44,7 +44,7 @@ impl Suppressions {
     pub async fn get_all_asm_groups_group(&self, group_id: &str) -> Result<Vec<String>> {
         let url = format!(
             "/asm/groups/{}/suppressions",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -70,7 +70,7 @@ impl Suppressions {
     ) -> Result<crate::types::PostAsmGroupsGroupSuppressionsResponse> {
         let url = format!(
             "/asm/groups/{}/suppressions",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
         self.client
@@ -98,7 +98,7 @@ impl Suppressions {
     ) -> Result<Vec<String>> {
         let url = format!(
             "/asm/groups/{}/suppressions/search",
-            crate::progenitor_support::encode_path(group_id),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
         );
 
         self.client
@@ -153,7 +153,7 @@ impl Suppressions {
     ) -> Result<crate::types::GetAsmSuppressionsEmailResponse> {
         let url = format!(
             "/asm/suppressions/{}",
-            crate::progenitor_support::encode_path(email),
+            crate::progenitor_support::encode_path(&email.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -175,8 +175,8 @@ impl Suppressions {
     pub async fn delete_asm_groups_group_email(&self, group_id: &str, email: &str) -> Result<()> {
         let url = format!(
             "/asm/groups/{}/suppressions/{}",
-            crate::progenitor_support::encode_path(group_id),
-            crate::progenitor_support::encode_path(email),
+            crate::progenitor_support::encode_path(&group_id.to_string()),
+            crate::progenitor_support::encode_path(&email.to_string()),
         );
 
         self.client.delete(&url, None).await

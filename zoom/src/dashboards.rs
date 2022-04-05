@@ -100,7 +100,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/meetings/{}?{}",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
             query_
         );
 
@@ -155,7 +155,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/meetings/{}/participants?{}",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
             query_
         );
 
@@ -197,8 +197,8 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/meetings/{}/participants/{}/qos?{}",
-            crate::progenitor_support::encode_path(meeting_id),
-            crate::progenitor_support::encode_path(participant_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            crate::progenitor_support::encode_path(&participant_id.to_string()),
             query_
         );
 
@@ -247,7 +247,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/meetings/{}/participants/qos?{}",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
             query_
         );
 
@@ -296,7 +296,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/meetings/{}/participants/sharing?{}",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
             query_
         );
 
@@ -387,7 +387,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/webinars/{}?{}",
-            crate::progenitor_support::encode_path(webinar_id),
+            crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
 
@@ -441,7 +441,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/webinars/{}/participants?{}",
-            crate::progenitor_support::encode_path(webinar_id),
+            crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
 
@@ -481,8 +481,8 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/webinars/{}/participants/{}/qos?{}",
-            crate::progenitor_support::encode_path(webinar_id),
-            crate::progenitor_support::encode_path(participant_id),
+            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            crate::progenitor_support::encode_path(&participant_id.to_string()),
             query_
         );
 
@@ -531,7 +531,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/webinars/{}/participants/qos?{}",
-            crate::progenitor_support::encode_path(webinar_id),
+            crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
 
@@ -580,7 +580,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/webinars/{}/participants/sharing?{}",
-            crate::progenitor_support::encode_path(webinar_id),
+            crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
 
@@ -676,7 +676,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/zoomrooms/{}?{}",
-            crate::progenitor_support::encode_path(zoomroom_id),
+            crate::progenitor_support::encode_path(&zoomroom_id.to_string()),
             query_
         );
 
@@ -973,7 +973,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/issues/zoomrooms/{}?{}",
-            crate::progenitor_support::encode_path(zoomroom_id),
+            crate::progenitor_support::encode_path(&zoomroom_id.to_string()),
             query_
         );
 
@@ -1028,7 +1028,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/client/feedback/{}?{}",
-            crate::progenitor_support::encode_path(feedback_id),
+            crate::progenitor_support::encode_path(&feedback_id.to_string()),
             query_
         );
 
@@ -1241,7 +1241,7 @@ impl Dashboards {
     ) -> Result<crate::types::ListCallLogsMetricsResponse> {
         let url = format!(
             "/phone/metrics/call_logs/{}",
-            crate::progenitor_support::encode_path(call_id),
+            crate::progenitor_support::encode_path(&call_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1267,7 +1267,7 @@ impl Dashboards {
     pub async fn get_call_qo(&self, call_id: &str) -> Result<crate::types::GetCallQoSResponse> {
         let url = format!(
             "/phone/metrics/call_logs/{}/qos",
-            crate::progenitor_support::encode_path(call_id),
+            crate::progenitor_support::encode_path(&call_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1319,7 +1319,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/meetings/{}/participants/satisfaction?{}",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
             query_
         );
 
@@ -1358,7 +1358,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/meetings/{}/participants/satisfaction?{}",
-            crate::progenitor_support::encode_path(meeting_id),
+            crate::progenitor_support::encode_path(&meeting_id.to_string()),
             query_
         );
 
@@ -1443,7 +1443,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/webinars/{}/participants/satisfaction?{}",
-            crate::progenitor_support::encode_path(webinar_id),
+            crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
 
@@ -1483,7 +1483,7 @@ impl Dashboards {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/metrics/webinars/{}/participants/satisfaction?{}",
-            crate::progenitor_support::encode_path(webinar_id),
+            crate::progenitor_support::encode_path(&webinar_id.to_string()),
             query_
         );
 

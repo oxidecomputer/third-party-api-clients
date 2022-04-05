@@ -22,7 +22,7 @@ impl Garnishments {
     pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Garnishment>> {
         let url = format!(
             "/v1/employees/{}/garnishments",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -43,7 +43,7 @@ impl Garnishments {
     ) -> Result<Vec<crate::types::Garnishment>> {
         let url = format!(
             "/v1/employees/{}/garnishments",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -63,7 +63,7 @@ impl Garnishments {
     ) -> Result<crate::types::Garnishment> {
         let url = format!(
             "/v1/employees/{}/garnishments",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client
@@ -81,7 +81,7 @@ impl Garnishments {
     pub async fn get(&self, garnishment_id: &str) -> Result<crate::types::Garnishment> {
         let url = format!(
             "/v1/garnishments/{}",
-            crate::progenitor_support::encode_path(garnishment_id),
+            crate::progenitor_support::encode_path(&garnishment_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -101,7 +101,7 @@ impl Garnishments {
     ) -> Result<crate::types::Garnishment> {
         let url = format!(
             "/v1/garnishments/{}",
-            crate::progenitor_support::encode_path(garnishment_id),
+            crate::progenitor_support::encode_path(&garnishment_id.to_string()),
         );
 
         self.client

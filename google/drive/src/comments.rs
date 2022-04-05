@@ -52,7 +52,7 @@ impl Comments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/comments?{}",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
             query_
         );
 
@@ -88,7 +88,7 @@ impl Comments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/comments?{}",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
             query_
         );
 
@@ -140,7 +140,7 @@ impl Comments {
     ) -> Result<crate::types::Comment> {
         let url = format!(
             "/files/{}/comments",
-            crate::progenitor_support::encode_path(file_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
         );
 
         self.client
@@ -172,8 +172,8 @@ impl Comments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/comments/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
 
@@ -193,8 +193,8 @@ impl Comments {
     pub async fn delete(&self, file_id: &str, comment_id: &str) -> Result<()> {
         let url = format!(
             "/files/{}/comments/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -218,8 +218,8 @@ impl Comments {
     ) -> Result<crate::types::Comment> {
         let url = format!(
             "/files/{}/comments/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
         self.client

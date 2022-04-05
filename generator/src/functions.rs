@@ -491,6 +491,25 @@ fn get_response_type_from_object(
             }
         }
 
+        // For Ramp, the pagination values are passed _in_ the resulting
+        // struct, so we want to ignore them and just get the data.
+        if p.get("has_more").is_some() {
+            if let Some(did) = p.get("data") {
+                let rt = ts.render_type(did, false)?;
+                return Ok((og_rt, did.clone(), rt, "data".to_string()));
+            } else if p.len() == 2 {
+                // We know for the Ramp API there will only be two fields in
+                // these structs. This should help prevent errors.
+                // Let's find the value of the struct that is the vec!
+                for (n, id) in p {
+                    let rt = ts.render_type(id, false)?;
+                    if rt.starts_with("Vec<") {
+                        return Ok((og_rt, id.clone(), rt, to_snake_case(n)));
+                    }
+                }
+            }
+        }
+
         // For Zoom, the pagination values are passed _in_ the resulting
         // struct, so we want to ignore them and just get the data.
         if let Some(pid) = p.get("next_page_token") {
@@ -778,6 +797,49 @@ fn get_fn_inner(
 
     if all_pages && pagination_property.is_empty() {
         return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
+    } else if all_pages && proper_name.starts_with("Stripe") {
+        // We will do a custom function here.
+        let inner = format!(
+            r#"let mut resp: {} = self.client.{}(&url, {}).await?;
+
+            let mut {} = resp.{};
+            let mut has_more = resp.has_more;
+            let mut page = "";
+
+            // Paginate if we should.
+            while has_more {{
+                if !resp.data.is_empty() {{
+                   page = resp.data.last().unwrap().id.to_string();
+                }}
+                if !url.contains('?') {{
+                    resp = self.client.{}(&format!("{{}}?startng_after={{}}", url, page), {}).await?;
+                }} else {{
+                    resp = self.client.{}(&format!("{{}}&starting_after={{}}", url, page), {}).await?;
+                }}
+
+
+                {}.append(&mut resp.{});
+
+                resp.has_more = resp.has_more;
+            }}
+
+            // Return our response data.
+            Ok({})"#,
+            response_type,
+            m.to_lowercase(),
+            body,
+            pagination_property,
+            pagination_property,
+            m.to_lowercase(),
+            body,
+            m.to_lowercase(),
+            body,
+            pagination_property,
+            pagination_property,
+            pagination_property,
+        );
+
+        return Ok(inner);
     } else if all_pages && proper_name.starts_with("Google") {
         // We will do a custom function here.
         let inner = format!(
@@ -1144,7 +1206,9 @@ fn is_page_param(s: &str, proper_name: &str) -> bool {
         || s == "start"
         || s == "sync_token"
         || s == "limit"
+        || s == "ending_before"
         || (s == "after" && proper_name == "Okta")
+        || (s == "starting_after" && proper_name == "Stripe")
 }
 
 fn is_google_unnecessary_param(proper_name: &str, s: &str) -> bool {

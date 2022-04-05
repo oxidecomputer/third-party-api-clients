@@ -26,10 +26,10 @@ impl AccountSealProviders {
     pub async fn account_signature_providers_get_seal(
         &self,
         account_id: &str,
-    ) -> Result<crate::types::AccountSeals> {
+    ) -> Result<crate::types::AccountSealProviders> {
         let url = format!(
             "/v2.1/accounts/{}/seals",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await

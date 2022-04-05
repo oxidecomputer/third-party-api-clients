@@ -412,7 +412,7 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -539,7 +539,7 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -718,7 +718,7 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/status?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -771,8 +771,8 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
             query_
         );
 
@@ -975,8 +975,8 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
             query_
         );
 
@@ -1004,8 +1004,8 @@ impl Envelopes {
     ) -> Result<crate::types::EnvelopeAuditEventResponse> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/audit_events",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1069,9 +1069,9 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
             query_
         );
 
@@ -1101,10 +1101,10 @@ impl Envelopes {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(page_number),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(&page_number.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1155,10 +1155,10 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/page_image?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(page_number),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(&page_number.to_string()),
             query_
         );
 
@@ -1189,10 +1189,10 @@ impl Envelopes {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/documents/{}/pages/{}/page_image",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(document_id),
-            crate::progenitor_support::encode_path(page_number),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&document_id.to_string()),
+            crate::progenitor_support::encode_path(&page_number.to_string()),
         );
 
         self.client
@@ -1219,8 +1219,8 @@ impl Envelopes {
     ) -> Result<crate::types::Notification> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/notification",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1244,12 +1244,12 @@ impl Envelopes {
         &self,
         account_id: &str,
         envelope_id: &str,
-        body: &crate::types::Notification,
+        body: &crate::types::EnvelopeNotificationRequest,
     ) -> Result<crate::types::Notification> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/notification",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -1293,9 +1293,9 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/initials_image?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
             query_
         );
 
@@ -1325,9 +1325,9 @@ impl Envelopes {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/initials_image",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
 
         self.client.put(&url, None).await
@@ -1354,9 +1354,9 @@ impl Envelopes {
     ) -> Result<crate::types::UserSignature> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1398,9 +1398,9 @@ impl Envelopes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature_image?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
             query_
         );
 
@@ -1430,9 +1430,9 @@ impl Envelopes {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/signature_image",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
 
         self.client.put(&url, None).await

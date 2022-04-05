@@ -22,7 +22,7 @@ impl PaySchedules {
     pub async fn get_company(&self, company_id: &str) -> Result<Vec<crate::types::PaySchedule>> {
         let url = format!(
             "/v1/companies/{}/pay_schedules",
-            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -43,7 +43,7 @@ impl PaySchedules {
     ) -> Result<Vec<crate::types::PaySchedule>> {
         let url = format!(
             "/v1/companies/{}/pay_schedules",
-            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -63,8 +63,8 @@ impl PaySchedules {
     ) -> Result<crate::types::PaySchedule> {
         let url = format!(
             "/v1/companies/{}/pay_schedules/{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(pay_schedule_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(&pay_schedule_id_or_uuid.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -87,8 +87,8 @@ impl PaySchedules {
     ) -> Result<crate::types::PaySchedule> {
         let url = format!(
             "/v1/companies/{}/pay_schedules/{}",
-            crate::progenitor_support::encode_path(company_id_or_uuid),
-            crate::progenitor_support::encode_path(pay_schedule_id_or_uuid),
+            crate::progenitor_support::encode_path(&company_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(&pay_schedule_id_or_uuid.to_string()),
         );
 
         self.client

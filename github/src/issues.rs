@@ -251,7 +251,7 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/issues?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             query_
         );
 
@@ -306,7 +306,7 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/issues?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             query_
         );
 
@@ -346,8 +346,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/assignees?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -372,8 +372,8 @@ impl Issues {
     ) -> Result<Vec<crate::types::SimpleUser>> {
         let url = format!(
             "/repos/{}/{}/assignees",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -406,9 +406,9 @@ impl Issues {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/assignees/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(assignee),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&assignee.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -499,8 +499,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -568,8 +568,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -600,8 +600,8 @@ impl Issues {
     ) -> Result<crate::types::Issue> {
         let url = format!(
             "/repos/{}/{}/issues",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -659,8 +659,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -699,8 +699,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -730,8 +730,8 @@ impl Issues {
     ) -> Result<crate::types::IssueComment> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
@@ -756,8 +756,8 @@ impl Issues {
     pub async fn delete_comment(&self, owner: &str, repo: &str, comment_id: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
@@ -788,8 +788,8 @@ impl Issues {
     ) -> Result<crate::types::IssueComment> {
         let url = format!(
             "/repos/{}/{}/issues/comments/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
@@ -831,8 +831,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/events?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -857,8 +857,8 @@ impl Issues {
     ) -> Result<Vec<crate::types::IssueEvent>> {
         let url = format!(
             "/repos/{}/{}/issues/events",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -887,8 +887,8 @@ impl Issues {
     ) -> Result<crate::types::IssueEvent> {
         let url = format!(
             "/repos/{}/{}/issues/events/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&event_id.to_string()),
         );
 
@@ -928,8 +928,8 @@ impl Issues {
     ) -> Result<crate::types::Issue> {
         let url = format!(
             "/repos/{}/{}/issues/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -960,8 +960,8 @@ impl Issues {
     ) -> Result<crate::types::Issue> {
         let url = format!(
             "/repos/{}/{}/issues/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -994,8 +994,8 @@ impl Issues {
     ) -> Result<crate::types::IssueSimple> {
         let url = format!(
             "/repos/{}/{}/issues/{}/assignees",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1028,8 +1028,8 @@ impl Issues {
     ) -> Result<crate::types::IssueSimple> {
         let url = format!(
             "/repos/{}/{}/issues/{}/assignees",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1078,8 +1078,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             query_
         );
@@ -1112,8 +1112,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/comments?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             query_
         );
@@ -1145,8 +1145,8 @@ impl Issues {
     ) -> Result<crate::types::IssueComment> {
         let url = format!(
             "/repos/{}/{}/issues/{}/comments",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1190,8 +1190,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/events?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             query_
         );
@@ -1218,8 +1218,8 @@ impl Issues {
     ) -> Result<Vec<crate::types::IssueEventAnyOf>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/events",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1261,8 +1261,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/labels?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             query_
         );
@@ -1289,8 +1289,8 @@ impl Issues {
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1321,8 +1321,8 @@ impl Issues {
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1355,8 +1355,8 @@ impl Issues {
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1388,8 +1388,8 @@ impl Issues {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1421,10 +1421,10 @@ impl Issues {
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/labels/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1456,8 +1456,8 @@ impl Issues {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/{}/lock",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1484,8 +1484,8 @@ impl Issues {
     pub async fn unlock(&self, owner: &str, repo: &str, issue_number: i64) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/issues/{}/lock",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1527,8 +1527,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/issues/{}/timeline?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
             query_
         );
@@ -1555,8 +1555,8 @@ impl Issues {
     ) -> Result<Vec<crate::types::Data>> {
         let url = format!(
             "/repos/{}/{}/issues/{}/timeline",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&issue_number.to_string()),
         );
 
@@ -1596,8 +1596,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/labels?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -1622,8 +1622,8 @@ impl Issues {
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -1651,8 +1651,8 @@ impl Issues {
     ) -> Result<crate::types::Label> {
         let url = format!(
             "/repos/{}/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -1683,9 +1683,9 @@ impl Issues {
     ) -> Result<crate::types::Label> {
         let url = format!(
             "/repos/{}/{}/labels/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1709,9 +1709,9 @@ impl Issues {
     pub async fn delete_label(&self, owner: &str, repo: &str, name: &str) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/labels/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1741,9 +1741,9 @@ impl Issues {
     ) -> Result<crate::types::Label> {
         let url = format!(
             "/repos/{}/{}/labels/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
-            crate::progenitor_support::encode_path(name),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
+            crate::progenitor_support::encode_path(&name.to_string()),
         );
 
         self.client
@@ -1801,8 +1801,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/milestones?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -1841,8 +1841,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/milestones?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             query_
         );
 
@@ -1871,8 +1871,8 @@ impl Issues {
     ) -> Result<crate::types::Milestone> {
         let url = format!(
             "/repos/{}/{}/milestones",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client
@@ -1903,8 +1903,8 @@ impl Issues {
     ) -> Result<crate::types::Milestone> {
         let url = format!(
             "/repos/{}/{}/milestones/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
@@ -1934,8 +1934,8 @@ impl Issues {
     ) -> Result<()> {
         let url = format!(
             "/repos/{}/{}/milestones/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
@@ -1966,8 +1966,8 @@ impl Issues {
     ) -> Result<crate::types::Milestone> {
         let url = format!(
             "/repos/{}/{}/milestones/{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&milestone_number.to_string()),
         );
 
@@ -2011,8 +2011,8 @@ impl Issues {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/repos/{}/{}/milestones/{}/labels?{}",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&milestone_number.to_string()),
             query_
         );
@@ -2039,8 +2039,8 @@ impl Issues {
     ) -> Result<Vec<crate::types::Label>> {
         let url = format!(
             "/repos/{}/{}/milestones/{}/labels",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
             crate::progenitor_support::encode_path(&milestone_number.to_string()),
         );
 

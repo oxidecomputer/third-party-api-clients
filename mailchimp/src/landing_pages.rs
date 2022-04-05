@@ -114,7 +114,7 @@ impl LandingPages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/landing-pages/{}?{}",
-            crate::progenitor_support::encode_path(page_id),
+            crate::progenitor_support::encode_path(&page_id.to_string()),
             query_
         );
 
@@ -135,7 +135,7 @@ impl LandingPages {
     pub async fn delete(&self, page_id: &str) -> Result<()> {
         let url = format!(
             "/landing-pages/{}",
-            crate::progenitor_support::encode_path(page_id),
+            crate::progenitor_support::encode_path(&page_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -159,7 +159,7 @@ impl LandingPages {
     ) -> Result<crate::types::LandingPage> {
         let url = format!(
             "/landing-pages/{}",
-            crate::progenitor_support::encode_path(page_id),
+            crate::progenitor_support::encode_path(&page_id.to_string()),
         );
 
         self.client
@@ -181,7 +181,7 @@ impl LandingPages {
     pub async fn post_actions_publish(&self, page_id: &str) -> Result<crate::types::LandingPage> {
         let url = format!(
             "/landing-pages/{}/actions/publish",
-            crate::progenitor_support::encode_path(page_id),
+            crate::progenitor_support::encode_path(&page_id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -201,7 +201,7 @@ impl LandingPages {
     pub async fn post_actions_unpublish(&self, page_id: &str) -> Result<()> {
         let url = format!(
             "/landing-pages/{}/actions/unpublish",
-            crate::progenitor_support::encode_path(page_id),
+            crate::progenitor_support::encode_path(&page_id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -236,7 +236,7 @@ impl LandingPages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/landing-pages/{}/content?{}",
-            crate::progenitor_support::encode_path(page_id),
+            crate::progenitor_support::encode_path(&page_id.to_string()),
             query_
         );
 

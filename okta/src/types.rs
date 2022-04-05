@@ -1076,7 +1076,7 @@ pub struct AuthorizationServerCredentialsSigningConfig {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct Policy {
+pub struct AuthorizationServerPolicy {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_embedded")]
     pub embedded: Option<Links>,
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "_links")]
@@ -1230,7 +1230,7 @@ pub struct AuthorizationServerPolicyRuleConditions {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub people: Option<PolicyPeopleCondition>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub scopes: Option<ClientPolicyCondition>,
+    pub scopes: Option<OAuth2ScopesMediationPolicyRuleCondition>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -2911,11 +2911,27 @@ pub struct GroupRuleAssignment {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct GroupRuleCondition {
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
+    pub exclude: Vec<String>,
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
+    pub include: Vec<String>,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct GroupRulePeopleCondition {
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub groups: Option<UserCondition>,
+    pub groups: Option<GroupRuleCondition>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub users: Option<UserCondition>,
+    pub users: Option<GroupRuleCondition>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -3433,7 +3449,7 @@ pub struct InlineHookChannelConfig {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub headers: Vec<EventHookChannelConfigHeader>,
+    pub headers: Vec<InlineHookChannelConfigHeaders>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -3463,6 +3479,22 @@ pub struct InlineHookChannelConfigAuthScheme {
         rename = "type"
     )]
     pub type_: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub value: String,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct InlineHookChannelConfigHeaders {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub key: String,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -4748,6 +4780,23 @@ impl NetworkZoneUsage {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct OAuth2Actor {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "type"
+    )]
+    pub type_: String,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum ClaimType {
     #[serde(rename = "IDENTITY")]
     Identity,
@@ -5001,7 +5050,7 @@ pub struct OAuth2RefreshToken {
     )]
     pub created: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "createdBy")]
-    pub created_by: Option<LogIssuer>,
+    pub created_by: Option<OAuth2Actor>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -5185,7 +5234,7 @@ pub struct OAuth2ScopeConsentGrant {
     )]
     pub created: Option<chrono::DateTime<chrono::Utc>>,
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "createdBy")]
-    pub created_by: Option<LogIssuer>,
+    pub created_by: Option<OAuth2Actor>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -5258,6 +5307,16 @@ impl OAuth2ScopeConsentGrantSource {
     pub fn is_noop(&self) -> bool {
         matches!(self, OAuth2ScopeConsentGrantSource::Noop)
     }
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct OAuth2ScopesMediationPolicyRuleCondition {
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
+    pub include: Vec<String>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -6523,6 +6582,62 @@ pub struct PlatformPolicyRuleCondition {
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct Policy {
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "_embedded")]
+    pub embedded: Option<Links>,
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "_links")]
+    pub links: Option<Links>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub conditions: Option<PolicyRuleConditions>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize"
+    )]
+    pub created: Option<chrono::DateTime<chrono::Utc>>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub description: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_time_format::deserialize",
+        rename = "lastUpdated"
+    )]
+    pub last_updated: Option<chrono::DateTime<chrono::Utc>>,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
+    )]
+    pub priority: i64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub status: Option<RoleStatus>,
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
+    )]
+    pub system: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
+    pub type_: Option<PolicyType>,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub enum Action {
     #[serde(rename = "AUTO")]
     Auto,
@@ -6887,7 +7002,7 @@ pub struct PolicyRuleConditions {
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "riskScore")]
     pub risk_score: Option<RiskScorePolicyRuleCondition>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub scopes: Option<ClientPolicyCondition>,
+    pub scopes: Option<OAuth2ScopesMediationPolicyRuleCondition>,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -8899,7 +9014,7 @@ pub struct TokenAuthorizationServerPolicyRuleAction {
         skip_serializing_if = "Option::is_none",
         rename = "inlineHook"
     )]
-    pub inline_hook: Option<SignOnInlineHook>,
+    pub inline_hook: Option<TokenAuthorizationServerPolicyRuleActionInlineHook>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -8914,6 +9029,16 @@ pub struct TokenAuthorizationServerPolicyRuleAction {
         rename = "refreshTokenWindowMinutes"
     )]
     pub refresh_token_window_minutes: i64,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct TokenAuthorizationServerPolicyRuleActionInlineHook {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -9832,9 +9957,26 @@ pub struct UserSchemaAttributeMaster {
         skip_serializing_if = "Vec::is_empty",
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
     )]
-    pub priority: Vec<GroupRuleExpression>,
+    pub priority: Vec<UserSchemaAttributeMasterPriority>,
     #[serde(default, skip_serializing_if = "Option::is_none", rename = "type")]
     pub type_: Option<UserSchemaAttributeMasterType>,
+}
+
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct UserSchemaAttributeMasterPriority {
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "type"
+    )]
+    pub type_: String,
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub value: String,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]

@@ -197,7 +197,7 @@ impl IpAddresses {
     ) -> Result<crate::types::GetIpsIpAddressResponse> {
         let url = format!(
             "/ips/{}",
-            crate::progenitor_support::encode_path(ip_address),
+            crate::progenitor_support::encode_path(&ip_address.to_string()),
         );
 
         self.client.get(&url, None).await

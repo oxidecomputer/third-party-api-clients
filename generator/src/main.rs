@@ -648,7 +648,16 @@ impl PartialEq for TypeDetails {
             }
             TypeDetails::Object(s, d) => {
                 if let TypeDetails::Object(os, od) = other {
-                    return s == os || (d.title == od.title && d.title.is_some());
+                    if d.title == od.title && d.title.is_some() && Some("".to_string()) != od.title
+                    {
+                        println!(
+                            "TITLE LEFT: {}, TITLE RIGHT: {}",
+                            d.title.as_ref().unwrap(),
+                            od.title.as_ref().unwrap()
+                        );
+                    }
+                    return s == os;
+                    //|| (d.title == od.title && d.title.is_some());
                 }
             }
             TypeDetails::OneOf(s, _d) => {
@@ -2399,6 +2408,7 @@ fn gen(
         || proper_name == "Rev.ai"
         || proper_name == "Okta"
         || proper_name == "ShipBob"
+        || proper_name == "Stripe"
     {
         a(&crate::client::generate_client_generic_api_key(
             proper_name,
@@ -3268,6 +3278,7 @@ rustdoc-args = ["--cfg", "docsrs"]
                 || proper_name == "Rev.ai"
                 || proper_name == "Okta"
                 || proper_name == "ShipBob"
+                || proper_name == "Stripe"
             {
                 template::generate_docs_generic_api_key(
                     &api,

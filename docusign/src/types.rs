@@ -652,7 +652,7 @@ pub struct AccountPermissionProfiles {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AccountSeals {
+pub struct AccountSealProviders {
     /**
     *
     */
@@ -683,7 +683,7 @@ pub struct AccountSignatureProviders {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AccountSignature {
+pub struct AccountSignatures {
     /**
     *
     */
@@ -1409,7 +1409,7 @@ pub struct AccountTabSettings {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct Watermark {
+pub struct AccountWatermarks {
     /**
     *
     */
@@ -2917,7 +2917,7 @@ pub struct ConnectEvents {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ConnectLogs {
+pub struct ConnectSecret {
     /**
     *
     */
@@ -3635,7 +3635,7 @@ pub struct ENoteConfigurations {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct EnvelopeAttachment {
+pub struct EnvelopeAttachments {
     /**
     *
     */
@@ -4065,7 +4065,7 @@ pub struct EnvelopeDocumentFields {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct EnvelopeHtmlDefinitions {
+pub struct EnvelopeDocumentHtmlDefinitions {
     /**
     *
     */
@@ -4120,7 +4120,7 @@ pub struct EnvelopeDocumentTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
-    pub commission_county_tabs: Vec<PhoneNumber>,
+    pub commission_county_tabs: Vec<CommissionCounty>,
     /**
     * Envelope Document Tabs resource
     */
@@ -4130,7 +4130,7 @@ pub struct EnvelopeDocumentTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
-    pub commission_expiration_tabs: Vec<PhoneNumber>,
+    pub commission_expiration_tabs: Vec<CommissionExpiration>,
     /**
     * Envelope Document Tabs resource
     */
@@ -4140,7 +4140,7 @@ pub struct EnvelopeDocumentTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
-    pub commission_number_tabs: Vec<PhoneNumber>,
+    pub commission_number_tabs: Vec<CommissionNumber>,
     /**
     * Envelope Document Tabs resource
     */
@@ -4150,7 +4150,7 @@ pub struct EnvelopeDocumentTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
-    pub commission_state_tabs: Vec<PhoneNumber>,
+    pub commission_state_tabs: Vec<CommissionState>,
     /**
     * Envelope Document Tabs resource
     */
@@ -4639,6 +4639,21 @@ pub struct EnvelopeFormData {
     pub status: String,
 }
 
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct EnvelopeHtmlDefinitions {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "htmlDefinitions"
+    )]
+    pub html_definitions: Vec<DocumentHtmlDefinitionOriginal>,
+}
+
 /// This section provides information about envelope locks.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeLocks {
@@ -4769,7 +4784,7 @@ pub struct EnvelopeRecipientTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
-    pub commission_county_tabs: Vec<PhoneNumber>,
+    pub commission_county_tabs: Vec<CommissionCounty>,
     /**
     * All of the tabs associated with a recipient. Each property is a list of a type of tab.
     *
@@ -4780,7 +4795,7 @@ pub struct EnvelopeRecipientTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
-    pub commission_expiration_tabs: Vec<PhoneNumber>,
+    pub commission_expiration_tabs: Vec<CommissionExpiration>,
     /**
     * All of the tabs associated with a recipient. Each property is a list of a type of tab.
     *
@@ -4791,7 +4806,7 @@ pub struct EnvelopeRecipientTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
-    pub commission_number_tabs: Vec<PhoneNumber>,
+    pub commission_number_tabs: Vec<CommissionNumber>,
     /**
     * All of the tabs associated with a recipient. Each property is a list of a type of tab.
     *
@@ -4802,7 +4817,7 @@ pub struct EnvelopeRecipientTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
-    pub commission_state_tabs: Vec<PhoneNumber>,
+    pub commission_state_tabs: Vec<CommissionState>,
     /**
     * All of the tabs associated with a recipient. Each property is a list of a type of tab.
     *
@@ -6625,7 +6640,7 @@ pub struct Notary {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct NotaryJournal {
+pub struct NotaryJournals {
     /**
     *
     */
@@ -8014,6 +8029,21 @@ pub struct TemplateDocumentFields {
     pub document_fields: Vec<NameValue>,
 }
 
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct TemplateDocumentHtmlDefinitions {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "htmlDefinitions"
+    )]
+    pub html_definitions: Vec<DocumentHtmlDefinitionOriginal>,
+}
+
 /// This resource is used to create a responsive preview of a specific template document.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateDocumentResponsiveHtmlPreview {
@@ -8031,7 +8061,7 @@ pub struct TemplateDocumentResponsiveHtmlPreview {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct TemplateTabs {
+pub struct TemplateDocumentTabs {
     /**
     *
     */
@@ -8071,7 +8101,7 @@ pub struct TemplateTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
-    pub commission_county_tabs: Vec<PhoneNumber>,
+    pub commission_county_tabs: Vec<CommissionCounty>,
     /**
     *
     */
@@ -8081,7 +8111,7 @@ pub struct TemplateTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
-    pub commission_expiration_tabs: Vec<PhoneNumber>,
+    pub commission_expiration_tabs: Vec<CommissionExpiration>,
     /**
     *
     */
@@ -8091,7 +8121,7 @@ pub struct TemplateTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
-    pub commission_number_tabs: Vec<PhoneNumber>,
+    pub commission_number_tabs: Vec<CommissionNumber>,
     /**
     *
     */
@@ -8101,7 +8131,7 @@ pub struct TemplateTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
-    pub commission_state_tabs: Vec<PhoneNumber>,
+    pub commission_state_tabs: Vec<CommissionState>,
     /**
     *
     */
@@ -8423,6 +8453,39 @@ pub struct TemplateTabs {
     pub zip_tabs: Vec<Zip>,
 }
 
+/// Document Visibility enables senders to control the visibility of the documents in an envelope at the recipient level. For example, if the parties associated with a legal proceeding should have access to different documents, the Document Visibility feature enables you to keep all of the documents in the same envelope and set view permissions for the documents by recipient. This functionality is enabled for envelopes and templates. It is not available for PowerForms.
+///
+/// **Note**: Before you use Document Visibility, you should be aware of the following information:
+///
+/// - Document Visibility must be enabled for your account by your DocuSign administrator.
+/// - A document cannot be hidden from a recipient if the recipient has tabs assigned to them on the document.
+/// - When the Document Visibility setting hides a document from a recipient, the document also does not appear in the recipient's list of envelopes, documents, or page images.
+/// - Carbon Copy, Certified Delivery (Needs to Sign), Editor, and Agent recipients can always see all of the documents associated with the envelope or template.
+///
+/// The Document Visibility feature has multiple settings that specify the options that senders have when sending documents. For more information, see [Use Document Visibility to Control Recipient Access](https://support.docusign.com/en/guides/ndse-user-guide-document-visibility).
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct TemplateDocumentVisibility {
+    /**
+    * Document Visibility enables senders to control the visibility of the documents in an envelope at the recipient level. For example, if the parties associated with a legal proceeding should have access to different documents, the Document Visibility feature enables you to keep all of the documents in the same envelope and set view permissions for the documents by recipient. This functionality is enabled for envelopes and templates. It is not available for PowerForms.
+    *  
+    *  \*\*Note\*\*: Before you use Document Visibility, you should be aware of the following information:
+    *  
+    *  - Document Visibility must be enabled for your account by your DocuSign administrator.
+    *  - A document cannot be hidden from a recipient if the recipient has tabs assigned to them on the document.
+    *  - When the Document Visibility setting hides a document from a recipient, the document also does not appear in the recipient's list of envelopes, documents, or page images.
+    *  - Carbon Copy, Certified Delivery (Needs to Sign), Editor, and Agent recipients can always see all of the documents associated with the envelope or template.
+    *  
+    *  The Document Visibility feature has multiple settings that specify the options that senders have when sending documents. For more information, see [Use Document Visibility to Control Recipient Access](https://support.docusign.com/en/guides/ndse-user-guide-document-visibility).
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "documentVisibility"
+    )]
+    pub document_visibility: Vec<DocumentVisibility>,
+}
+
 /// Template documents
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TemplateDocuments {
@@ -8446,6 +8509,21 @@ pub struct TemplateDocuments {
         rename = "templateId"
     )]
     pub template_id: String,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct TemplateHtmlDefinitions {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "htmlDefinitions"
+    )]
+    pub html_definitions: Vec<DocumentHtmlDefinitionOriginal>,
 }
 
 /// This section provides information about template locks. You use template locks to prevent others from making changes to a template while you are modifying it.
@@ -8573,7 +8651,7 @@ pub struct TemplateRecipientTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
-    pub commission_county_tabs: Vec<PhoneNumber>,
+    pub commission_county_tabs: Vec<CommissionCounty>,
     /**
     * Template tabs
     */
@@ -8583,7 +8661,7 @@ pub struct TemplateRecipientTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
-    pub commission_expiration_tabs: Vec<PhoneNumber>,
+    pub commission_expiration_tabs: Vec<CommissionExpiration>,
     /**
     * Template tabs
     */
@@ -8593,7 +8671,7 @@ pub struct TemplateRecipientTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
-    pub commission_number_tabs: Vec<PhoneNumber>,
+    pub commission_number_tabs: Vec<CommissionNumber>,
     /**
     * Template tabs
     */
@@ -8603,7 +8681,7 @@ pub struct TemplateRecipientTabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
-    pub commission_state_tabs: Vec<PhoneNumber>,
+    pub commission_state_tabs: Vec<CommissionState>,
     /**
     * Template tabs
     */
@@ -11099,7 +11177,7 @@ pub struct WorkspaceItems {
 
 /// A DocuSign workspace is a collaboration area for sharing files and data.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct Workspace {
+pub struct Workspaces {
     /**
     * A DocuSign workspace is a collaboration area for sharing files and data.
     */
@@ -13440,6 +13518,20 @@ pub struct AccountRoleSettings {
         rename = "vaultingModeMetadata"
     )]
     pub vaulting_mode_metadata: Option<SettingsMetadata>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct AccountSeals {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
+    pub seals: Vec<SealIdentifier>,
 }
 
 /// Contains account settings information. Used in requests to set property values. Used in responses to report property values.
@@ -18159,7 +18251,7 @@ pub struct AccountSettingsInformation {
         skip_serializing_if = "Option::is_none",
         rename = "tabAccountSettings"
     )]
-    pub tab_account_settings: Option<TabsBlob>,
+    pub tab_account_settings: Option<TabAccountSettings>,
     /**
     * Contains account settings information. Used in requests to set property values. Used in responses to report property values.
     */
@@ -18644,6 +18736,328 @@ pub struct AccountSharedAccess {
         rename = "totalSetSize"
     )]
     pub total_set_size: String,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct AccountSignature {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "adoptedDateTime"
+    )]
+    pub adopted_date_time: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "createdDateTime"
+    )]
+    pub created_date_time: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customField"
+    )]
+    pub custom_field: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "dateStampProperties"
+    )]
+    pub date_stamp_properties: Option<DateStampProperties>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "disallowUserResizeStamp"
+    )]
+    pub disallow_user_resize_stamp: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "errorDetails"
+    )]
+    pub error_details: Option<ErrorDetails>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "externalID"
+    )]
+    pub external_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "imageBase64"
+    )]
+    pub image_base_64: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "imageType"
+    )]
+    pub image_type: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "initials150ImageId"
+    )]
+    pub initials_150_image_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "initialsImageUri"
+    )]
+    pub initials_image_uri: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "isDefault"
+    )]
+    pub is_default: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "lastModifiedDateTime"
+    )]
+    pub last_modified_date_time: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nrdsId"
+    )]
+    pub nrds_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nrdsLastName"
+    )]
+    pub nrds_last_name: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nrdsStatus"
+    )]
+    pub nrds_status: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "phoneticName"
+    )]
+    pub phonetic_name: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "signature150ImageId"
+    )]
+    pub signature_150_image_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "signatureFont"
+    )]
+    pub signature_font: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "signatureGroups"
+    )]
+    pub signature_groups: Vec<SignatureGroup>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "signatureId"
+    )]
+    pub signature_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "signatureImageUri"
+    )]
+    pub signature_image_uri: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "signatureInitials"
+    )]
+    pub signature_initials: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "signatureName"
+    )]
+    pub signature_name: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "signatureRights"
+    )]
+    pub signature_rights: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "signatureType"
+    )]
+    pub signature_type: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "signatureUsers"
+    )]
+    pub signature_users: Vec<SignatureUser>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "stampFormat"
+    )]
+    pub stamp_format: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "stampImageUri"
+    )]
+    pub stamp_image_uri: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "stampSizeMM"
+    )]
+    pub stamp_size_mm: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "stampType"
+    )]
+    pub stamp_type: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub status: String,
 }
 
 ///
@@ -23840,7 +24254,7 @@ pub struct BulkRecipient {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "recipientSignatureProviderInfo"
     )]
-    pub recipient_signature_provider_info: Vec<BulkRecipientTabLabel>,
+    pub recipient_signature_provider_info: Vec<BulkRecipientSignatureProvider>,
     /**
     *
     */
@@ -23861,6 +24275,29 @@ pub struct BulkRecipient {
         rename = "tabLabels"
     )]
     pub tab_labels: Vec<BulkRecipientTabLabel>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct BulkRecipientSignatureProvider {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub value: String,
 }
 
 ///
@@ -28742,7 +29179,2803 @@ pub struct CommentsPublish {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PhoneNumber {
+pub struct CommissionCounty {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorAllowWhiteSpaceInCharacters"
+    )]
+    pub anchor_allow_white_space_in_characters: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorAllowWhiteSpaceInCharactersMetadata"
+    )]
+    pub anchor_allow_white_space_in_characters_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorCaseSensitive"
+    )]
+    pub anchor_case_sensitive: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorCaseSensitiveMetadata"
+    )]
+    pub anchor_case_sensitive_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorHorizontalAlignment"
+    )]
+    pub anchor_horizontal_alignment: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorHorizontalAlignmentMetadata"
+    )]
+    pub anchor_horizontal_alignment_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorIgnoreIfNotPresent"
+    )]
+    pub anchor_ignore_if_not_present: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorIgnoreIfNotPresentMetadata"
+    )]
+    pub anchor_ignore_if_not_present_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorMatchWholeWord"
+    )]
+    pub anchor_match_whole_word: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorMatchWholeWordMetadata"
+    )]
+    pub anchor_match_whole_word_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorString"
+    )]
+    pub anchor_string: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorStringMetadata"
+    )]
+    pub anchor_string_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorTabProcessorVersion"
+    )]
+    pub anchor_tab_processor_version: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorTabProcessorVersionMetadata"
+    )]
+    pub anchor_tab_processor_version_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorUnits"
+    )]
+    pub anchor_units: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorUnitsMetadata"
+    )]
+    pub anchor_units_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorXOffset"
+    )]
+    pub anchor_x_offset: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorXOffsetMetadata"
+    )]
+    pub anchor_x_offset_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorYOffset"
+    )]
+    pub anchor_y_offset: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorYOffsetMetadata"
+    )]
+    pub anchor_y_offset_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub bold: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "boldMetadata"
+    )]
+    pub bold_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "concealValueOnDocument"
+    )]
+    pub conceal_value_on_document: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "concealValueOnDocumentMetadata"
+    )]
+    pub conceal_value_on_document_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "conditionalParentLabel"
+    )]
+    pub conditional_parent_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conditionalParentLabelMetadata"
+    )]
+    pub conditional_parent_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "conditionalParentValue"
+    )]
+    pub conditional_parent_value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conditionalParentValueMetadata"
+    )]
+    pub conditional_parent_value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customTabId"
+    )]
+    pub custom_tab_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "customTabIdMetadata"
+    )]
+    pub custom_tab_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "disableAutoSize"
+    )]
+    pub disable_auto_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "disableAutoSizeMetadata"
+    )]
+    pub disable_auto_size_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "documentId"
+    )]
+    pub document_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "documentIdMetadata"
+    )]
+    pub document_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "errorDetails"
+    )]
+    pub error_details: Option<ErrorDetails>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub font: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontColor"
+    )]
+    pub font_color: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontColorMetadata"
+    )]
+    pub font_color_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontMetadata"
+    )]
+    pub font_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontSize"
+    )]
+    pub font_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontSizeMetadata"
+    )]
+    pub font_size_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formOrder"
+    )]
+    pub form_order: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formOrderMetadata"
+    )]
+    pub form_order_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formPageLabel"
+    )]
+    pub form_page_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formPageLabelMetadata"
+    )]
+    pub form_page_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formPageNumber"
+    )]
+    pub form_page_number: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formPageNumberMetadata"
+    )]
+    pub form_page_number_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub height: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "heightMetadata"
+    )]
+    pub height_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub italic: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "italicMetadata"
+    )]
+    pub italic_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "localePolicy"
+    )]
+    pub locale_policy: Option<LocalePolicyTab>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub locked: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "lockedMetadata"
+    )]
+    pub locked_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "maxLength"
+    )]
+    pub max_length: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "maxLengthMetadata"
+    )]
+    pub max_length_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "mergeField"
+    )]
+    pub merge_field: Option<MergeField>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mergeFieldXml"
+    )]
+    pub merge_field_xml: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "nameMetadata"
+    )]
+    pub name_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "originalValue"
+    )]
+    pub original_value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "originalValueMetadata"
+    )]
+    pub original_value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "pageNumber"
+    )]
+    pub page_number: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "pageNumberMetadata"
+    )]
+    pub page_number_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recipientId"
+    )]
+    pub recipient_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recipientIdGuid"
+    )]
+    pub recipient_id_guid: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "recipientIdGuidMetadata"
+    )]
+    pub recipient_id_guid_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "recipientIdMetadata"
+    )]
+    pub recipient_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub required: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "requiredMetadata"
+    )]
+    pub required_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "smartContractInformation"
+    )]
+    pub smart_contract_information: Option<SmartContractInformation>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub status: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "statusMetadata"
+    )]
+    pub status_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroupLabels"
+    )]
+    pub tab_group_labels: Vec<String>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabGroupLabelsMetadata"
+    )]
+    pub tab_group_labels_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabId"
+    )]
+    pub tab_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabIdMetadata"
+    )]
+    pub tab_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabLabel"
+    )]
+    pub tab_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabLabelMetadata"
+    )]
+    pub tab_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabOrder"
+    )]
+    pub tab_order: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabOrderMetadata"
+    )]
+    pub tab_order_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabType"
+    )]
+    pub tab_type: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabTypeMetadata"
+    )]
+    pub tab_type_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "templateLocked"
+    )]
+    pub template_locked: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "templateLockedMetadata"
+    )]
+    pub template_locked_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "templateRequired"
+    )]
+    pub template_required: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "templateRequiredMetadata"
+    )]
+    pub template_required_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "toolTipMetadata"
+    )]
+    pub tool_tip_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub tooltip: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub underline: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "underlineMetadata"
+    )]
+    pub underline_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "valueMetadata"
+    )]
+    pub value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub width: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "widthMetadata"
+    )]
+    pub width_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "xPosition"
+    )]
+    pub x_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "xPositionMetadata"
+    )]
+    pub x_position_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "yPosition"
+    )]
+    pub y_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "yPositionMetadata"
+    )]
+    pub y_position_metadata: Option<PropertyMetadata>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct CommissionExpiration {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorAllowWhiteSpaceInCharacters"
+    )]
+    pub anchor_allow_white_space_in_characters: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorAllowWhiteSpaceInCharactersMetadata"
+    )]
+    pub anchor_allow_white_space_in_characters_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorCaseSensitive"
+    )]
+    pub anchor_case_sensitive: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorCaseSensitiveMetadata"
+    )]
+    pub anchor_case_sensitive_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorHorizontalAlignment"
+    )]
+    pub anchor_horizontal_alignment: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorHorizontalAlignmentMetadata"
+    )]
+    pub anchor_horizontal_alignment_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorIgnoreIfNotPresent"
+    )]
+    pub anchor_ignore_if_not_present: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorIgnoreIfNotPresentMetadata"
+    )]
+    pub anchor_ignore_if_not_present_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorMatchWholeWord"
+    )]
+    pub anchor_match_whole_word: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorMatchWholeWordMetadata"
+    )]
+    pub anchor_match_whole_word_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorString"
+    )]
+    pub anchor_string: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorStringMetadata"
+    )]
+    pub anchor_string_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorTabProcessorVersion"
+    )]
+    pub anchor_tab_processor_version: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorTabProcessorVersionMetadata"
+    )]
+    pub anchor_tab_processor_version_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorUnits"
+    )]
+    pub anchor_units: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorUnitsMetadata"
+    )]
+    pub anchor_units_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorXOffset"
+    )]
+    pub anchor_x_offset: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorXOffsetMetadata"
+    )]
+    pub anchor_x_offset_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorYOffset"
+    )]
+    pub anchor_y_offset: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorYOffsetMetadata"
+    )]
+    pub anchor_y_offset_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub bold: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "boldMetadata"
+    )]
+    pub bold_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "concealValueOnDocument"
+    )]
+    pub conceal_value_on_document: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "concealValueOnDocumentMetadata"
+    )]
+    pub conceal_value_on_document_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "conditionalParentLabel"
+    )]
+    pub conditional_parent_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conditionalParentLabelMetadata"
+    )]
+    pub conditional_parent_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "conditionalParentValue"
+    )]
+    pub conditional_parent_value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conditionalParentValueMetadata"
+    )]
+    pub conditional_parent_value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customTabId"
+    )]
+    pub custom_tab_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "customTabIdMetadata"
+    )]
+    pub custom_tab_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "disableAutoSize"
+    )]
+    pub disable_auto_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "disableAutoSizeMetadata"
+    )]
+    pub disable_auto_size_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "documentId"
+    )]
+    pub document_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "documentIdMetadata"
+    )]
+    pub document_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "errorDetails"
+    )]
+    pub error_details: Option<ErrorDetails>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub font: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontColor"
+    )]
+    pub font_color: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontColorMetadata"
+    )]
+    pub font_color_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontMetadata"
+    )]
+    pub font_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontSize"
+    )]
+    pub font_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontSizeMetadata"
+    )]
+    pub font_size_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formOrder"
+    )]
+    pub form_order: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formOrderMetadata"
+    )]
+    pub form_order_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formPageLabel"
+    )]
+    pub form_page_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formPageLabelMetadata"
+    )]
+    pub form_page_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formPageNumber"
+    )]
+    pub form_page_number: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formPageNumberMetadata"
+    )]
+    pub form_page_number_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub height: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "heightMetadata"
+    )]
+    pub height_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub italic: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "italicMetadata"
+    )]
+    pub italic_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "localePolicy"
+    )]
+    pub locale_policy: Option<LocalePolicyTab>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub locked: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "lockedMetadata"
+    )]
+    pub locked_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "maxLength"
+    )]
+    pub max_length: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "maxLengthMetadata"
+    )]
+    pub max_length_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "mergeField"
+    )]
+    pub merge_field: Option<MergeField>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mergeFieldXml"
+    )]
+    pub merge_field_xml: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "nameMetadata"
+    )]
+    pub name_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "originalValue"
+    )]
+    pub original_value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "originalValueMetadata"
+    )]
+    pub original_value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "pageNumber"
+    )]
+    pub page_number: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "pageNumberMetadata"
+    )]
+    pub page_number_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recipientId"
+    )]
+    pub recipient_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recipientIdGuid"
+    )]
+    pub recipient_id_guid: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "recipientIdGuidMetadata"
+    )]
+    pub recipient_id_guid_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "recipientIdMetadata"
+    )]
+    pub recipient_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub required: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "requiredMetadata"
+    )]
+    pub required_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "smartContractInformation"
+    )]
+    pub smart_contract_information: Option<SmartContractInformation>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub status: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "statusMetadata"
+    )]
+    pub status_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroupLabels"
+    )]
+    pub tab_group_labels: Vec<String>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabGroupLabelsMetadata"
+    )]
+    pub tab_group_labels_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabId"
+    )]
+    pub tab_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabIdMetadata"
+    )]
+    pub tab_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabLabel"
+    )]
+    pub tab_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabLabelMetadata"
+    )]
+    pub tab_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabOrder"
+    )]
+    pub tab_order: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabOrderMetadata"
+    )]
+    pub tab_order_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabType"
+    )]
+    pub tab_type: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabTypeMetadata"
+    )]
+    pub tab_type_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "templateLocked"
+    )]
+    pub template_locked: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "templateLockedMetadata"
+    )]
+    pub template_locked_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "templateRequired"
+    )]
+    pub template_required: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "templateRequiredMetadata"
+    )]
+    pub template_required_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "toolTipMetadata"
+    )]
+    pub tool_tip_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub tooltip: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub underline: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "underlineMetadata"
+    )]
+    pub underline_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "valueMetadata"
+    )]
+    pub value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub width: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "widthMetadata"
+    )]
+    pub width_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "xPosition"
+    )]
+    pub x_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "xPositionMetadata"
+    )]
+    pub x_position_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "yPosition"
+    )]
+    pub y_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "yPositionMetadata"
+    )]
+    pub y_position_metadata: Option<PropertyMetadata>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct CommissionNumber {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorAllowWhiteSpaceInCharacters"
+    )]
+    pub anchor_allow_white_space_in_characters: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorAllowWhiteSpaceInCharactersMetadata"
+    )]
+    pub anchor_allow_white_space_in_characters_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorCaseSensitive"
+    )]
+    pub anchor_case_sensitive: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorCaseSensitiveMetadata"
+    )]
+    pub anchor_case_sensitive_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorHorizontalAlignment"
+    )]
+    pub anchor_horizontal_alignment: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorHorizontalAlignmentMetadata"
+    )]
+    pub anchor_horizontal_alignment_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorIgnoreIfNotPresent"
+    )]
+    pub anchor_ignore_if_not_present: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorIgnoreIfNotPresentMetadata"
+    )]
+    pub anchor_ignore_if_not_present_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorMatchWholeWord"
+    )]
+    pub anchor_match_whole_word: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorMatchWholeWordMetadata"
+    )]
+    pub anchor_match_whole_word_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorString"
+    )]
+    pub anchor_string: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorStringMetadata"
+    )]
+    pub anchor_string_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorTabProcessorVersion"
+    )]
+    pub anchor_tab_processor_version: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorTabProcessorVersionMetadata"
+    )]
+    pub anchor_tab_processor_version_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorUnits"
+    )]
+    pub anchor_units: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorUnitsMetadata"
+    )]
+    pub anchor_units_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorXOffset"
+    )]
+    pub anchor_x_offset: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorXOffsetMetadata"
+    )]
+    pub anchor_x_offset_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorYOffset"
+    )]
+    pub anchor_y_offset: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorYOffsetMetadata"
+    )]
+    pub anchor_y_offset_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub bold: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "boldMetadata"
+    )]
+    pub bold_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "concealValueOnDocument"
+    )]
+    pub conceal_value_on_document: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "concealValueOnDocumentMetadata"
+    )]
+    pub conceal_value_on_document_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "conditionalParentLabel"
+    )]
+    pub conditional_parent_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conditionalParentLabelMetadata"
+    )]
+    pub conditional_parent_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "conditionalParentValue"
+    )]
+    pub conditional_parent_value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conditionalParentValueMetadata"
+    )]
+    pub conditional_parent_value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customTabId"
+    )]
+    pub custom_tab_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "customTabIdMetadata"
+    )]
+    pub custom_tab_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "disableAutoSize"
+    )]
+    pub disable_auto_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "disableAutoSizeMetadata"
+    )]
+    pub disable_auto_size_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "documentId"
+    )]
+    pub document_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "documentIdMetadata"
+    )]
+    pub document_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "errorDetails"
+    )]
+    pub error_details: Option<ErrorDetails>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub font: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontColor"
+    )]
+    pub font_color: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontColorMetadata"
+    )]
+    pub font_color_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontMetadata"
+    )]
+    pub font_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontSize"
+    )]
+    pub font_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontSizeMetadata"
+    )]
+    pub font_size_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formOrder"
+    )]
+    pub form_order: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formOrderMetadata"
+    )]
+    pub form_order_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formPageLabel"
+    )]
+    pub form_page_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formPageLabelMetadata"
+    )]
+    pub form_page_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formPageNumber"
+    )]
+    pub form_page_number: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formPageNumberMetadata"
+    )]
+    pub form_page_number_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub height: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "heightMetadata"
+    )]
+    pub height_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub italic: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "italicMetadata"
+    )]
+    pub italic_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "localePolicy"
+    )]
+    pub locale_policy: Option<LocalePolicyTab>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub locked: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "lockedMetadata"
+    )]
+    pub locked_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "maxLength"
+    )]
+    pub max_length: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "maxLengthMetadata"
+    )]
+    pub max_length_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "mergeField"
+    )]
+    pub merge_field: Option<MergeField>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mergeFieldXml"
+    )]
+    pub merge_field_xml: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "nameMetadata"
+    )]
+    pub name_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "originalValue"
+    )]
+    pub original_value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "originalValueMetadata"
+    )]
+    pub original_value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "pageNumber"
+    )]
+    pub page_number: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "pageNumberMetadata"
+    )]
+    pub page_number_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recipientId"
+    )]
+    pub recipient_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recipientIdGuid"
+    )]
+    pub recipient_id_guid: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "recipientIdGuidMetadata"
+    )]
+    pub recipient_id_guid_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "recipientIdMetadata"
+    )]
+    pub recipient_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub required: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "requiredMetadata"
+    )]
+    pub required_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "smartContractInformation"
+    )]
+    pub smart_contract_information: Option<SmartContractInformation>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub status: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "statusMetadata"
+    )]
+    pub status_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroupLabels"
+    )]
+    pub tab_group_labels: Vec<String>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabGroupLabelsMetadata"
+    )]
+    pub tab_group_labels_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabId"
+    )]
+    pub tab_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabIdMetadata"
+    )]
+    pub tab_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabLabel"
+    )]
+    pub tab_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabLabelMetadata"
+    )]
+    pub tab_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabOrder"
+    )]
+    pub tab_order: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabOrderMetadata"
+    )]
+    pub tab_order_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabType"
+    )]
+    pub tab_type: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabTypeMetadata"
+    )]
+    pub tab_type_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "templateLocked"
+    )]
+    pub template_locked: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "templateLockedMetadata"
+    )]
+    pub template_locked_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "templateRequired"
+    )]
+    pub template_required: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "templateRequiredMetadata"
+    )]
+    pub template_required_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "toolTipMetadata"
+    )]
+    pub tool_tip_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub tooltip: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub underline: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "underlineMetadata"
+    )]
+    pub underline_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "valueMetadata"
+    )]
+    pub value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub width: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "widthMetadata"
+    )]
+    pub width_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "xPosition"
+    )]
+    pub x_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "xPositionMetadata"
+    )]
+    pub x_position_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "yPosition"
+    )]
+    pub y_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "yPositionMetadata"
+    )]
+    pub y_position_metadata: Option<PropertyMetadata>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct CommissionState {
     /**
     *
     */
@@ -31680,6 +34913,49 @@ pub struct ConnectLog {
         rename = "userName"
     )]
     pub user_name: String,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct ConnectLogs {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
+    pub failures: Vec<ConnectLog>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
+    pub logs: Vec<ConnectLog>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "totalRecords"
+    )]
+    pub total_records: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "type"
+    )]
+    pub type_: String,
 }
 
 /// This object is used to match a DocuSign field to a Salesforce field so that Docusign can send information to your Salesforce account.
@@ -38863,6 +42139,21 @@ pub struct DocumentHtmlDefinitionOriginal {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct DocumentHtmlDefinitionOriginals {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "htmlDefinitions"
+    )]
+    pub html_definitions: Vec<DocumentHtmlDefinitionOriginal>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct DocumentHtmlDefinitions {
     /**
     *
@@ -44633,6 +47924,68 @@ pub struct Envelope {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct EnvelopeAttachment {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "accessControl"
+    )]
+    pub access_control: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "attachmentId"
+    )]
+    pub attachment_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "attachmentType"
+    )]
+    pub attachment_type: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "errorDetails"
+    )]
+    pub error_details: Option<ErrorDetails>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct EnvelopeAttachmentsRequest {
     /**
     *
@@ -46909,7 +50262,7 @@ pub struct EnvelopeMetadata {
 
 /// A complex element that specifies the notification settings for the envelope.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct Notification {
+pub struct EnvelopeNotificationRequest {
     /**
     * A complex element that specifies the notification settings for the envelope.
     */
@@ -49202,6 +52555,40 @@ pub struct FavoriteTemplatesContentItem {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct FavoriteTemplatesInfo {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "errorDetails"
+    )]
+    pub error_details: Option<ErrorDetails>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "favoriteTemplates"
+    )]
+    pub favorite_templates: Vec<FavoriteTemplatesContentItem>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "crate::utils::zero_i64",
+        deserialize_with = "crate::utils::deserialize_null_i64::deserialize",
+        rename = "templatesUpdatedCount"
+    )]
+    pub templates_updated_count: i64,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct FeatureAvailableMetadata {
     /**
     *
@@ -51058,7 +54445,7 @@ pub struct FolderItemV2 {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct FoldersResponse {
+pub struct FolderItemsResponse {
     /**
     *
     */
@@ -51272,6 +54659,89 @@ pub struct FoldersRequest {
         rename = "fromFolderId"
     )]
     pub from_folder_id: String,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct FoldersResponse {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "endPosition"
+    )]
+    pub end_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
+    pub envelopes: Vec<EnvelopeSummary>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
+    pub folders: Vec<Folder>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "nextUri"
+    )]
+    pub next_uri: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "previousUri"
+    )]
+    pub previous_uri: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "resultSetSize"
+    )]
+    pub result_set_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "startPosition"
+    )]
+    pub start_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "totalSetSize"
+    )]
+    pub total_set_size: String,
 }
 
 /// A complex element that has up to four Question/Answer pairs for forgotten password information.
@@ -66131,6 +69601,65 @@ pub struct NotaryHost {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct NotaryJournal {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "crate::utils::date_format::deserialize",
+        rename = "createdDate"
+    )]
+    pub created_date: Option<chrono::NaiveDate>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "documentName"
+    )]
+    pub document_name: String,
+    /**
+    *
+    */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub jurisdiction: Option<Jurisdiction>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "notaryJournalId"
+    )]
+    pub notary_journal_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "notaryJournalMetaData"
+    )]
+    pub notary_journal_meta_data: Option<NotaryJournalMetaData>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "signerName"
+    )]
+    pub signer_name: String,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotaryJournalCredibleWitness {
     /**
     *
@@ -69059,6 +72588,31 @@ pub struct Note {
     pub y_position_metadata: Option<PropertyMetadata>,
 }
 
+/// A complex element that specifies the notification settings for the envelope.
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct Notification {
+    /**
+    * A complex element that specifies the notification settings for the envelope.
+    */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub expirations: Option<Expirations>,
+    /**
+    * A complex element that specifies the notification settings for the envelope.
+    */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub reminders: Option<Reminders>,
+    /**
+    * A complex element that specifies the notification settings for the envelope.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "useAccountDefaults"
+    )]
+    pub use_account_defaults: String,
+}
+
 /// Contains details about the default notification settings for the envelope notifications that senders and signers receive.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct NotificationDefaultSettings {
@@ -71452,6 +75006,938 @@ pub struct PermissionProfileInformation {
         rename = "permissionProfiles"
     )]
     pub permission_profiles: Vec<PermissionProfile>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct PhoneNumber {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorAllowWhiteSpaceInCharacters"
+    )]
+    pub anchor_allow_white_space_in_characters: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorAllowWhiteSpaceInCharactersMetadata"
+    )]
+    pub anchor_allow_white_space_in_characters_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorCaseSensitive"
+    )]
+    pub anchor_case_sensitive: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorCaseSensitiveMetadata"
+    )]
+    pub anchor_case_sensitive_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorHorizontalAlignment"
+    )]
+    pub anchor_horizontal_alignment: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorHorizontalAlignmentMetadata"
+    )]
+    pub anchor_horizontal_alignment_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorIgnoreIfNotPresent"
+    )]
+    pub anchor_ignore_if_not_present: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorIgnoreIfNotPresentMetadata"
+    )]
+    pub anchor_ignore_if_not_present_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorMatchWholeWord"
+    )]
+    pub anchor_match_whole_word: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorMatchWholeWordMetadata"
+    )]
+    pub anchor_match_whole_word_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorString"
+    )]
+    pub anchor_string: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorStringMetadata"
+    )]
+    pub anchor_string_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorTabProcessorVersion"
+    )]
+    pub anchor_tab_processor_version: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorTabProcessorVersionMetadata"
+    )]
+    pub anchor_tab_processor_version_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorUnits"
+    )]
+    pub anchor_units: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorUnitsMetadata"
+    )]
+    pub anchor_units_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorXOffset"
+    )]
+    pub anchor_x_offset: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorXOffsetMetadata"
+    )]
+    pub anchor_x_offset_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "anchorYOffset"
+    )]
+    pub anchor_y_offset: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "anchorYOffsetMetadata"
+    )]
+    pub anchor_y_offset_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub bold: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "boldMetadata"
+    )]
+    pub bold_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "concealValueOnDocument"
+    )]
+    pub conceal_value_on_document: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "concealValueOnDocumentMetadata"
+    )]
+    pub conceal_value_on_document_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "conditionalParentLabel"
+    )]
+    pub conditional_parent_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conditionalParentLabelMetadata"
+    )]
+    pub conditional_parent_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "conditionalParentValue"
+    )]
+    pub conditional_parent_value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "conditionalParentValueMetadata"
+    )]
+    pub conditional_parent_value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "customTabId"
+    )]
+    pub custom_tab_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "customTabIdMetadata"
+    )]
+    pub custom_tab_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "disableAutoSize"
+    )]
+    pub disable_auto_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "disableAutoSizeMetadata"
+    )]
+    pub disable_auto_size_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "documentId"
+    )]
+    pub document_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "documentIdMetadata"
+    )]
+    pub document_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "errorDetails"
+    )]
+    pub error_details: Option<ErrorDetails>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub font: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontColor"
+    )]
+    pub font_color: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontColorMetadata"
+    )]
+    pub font_color_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontMetadata"
+    )]
+    pub font_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontSize"
+    )]
+    pub font_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "fontSizeMetadata"
+    )]
+    pub font_size_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formOrder"
+    )]
+    pub form_order: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formOrderMetadata"
+    )]
+    pub form_order_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formPageLabel"
+    )]
+    pub form_page_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formPageLabelMetadata"
+    )]
+    pub form_page_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "formPageNumber"
+    )]
+    pub form_page_number: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "formPageNumberMetadata"
+    )]
+    pub form_page_number_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub height: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "heightMetadata"
+    )]
+    pub height_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub italic: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "italicMetadata"
+    )]
+    pub italic_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "localePolicy"
+    )]
+    pub locale_policy: Option<LocalePolicyTab>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub locked: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "lockedMetadata"
+    )]
+    pub locked_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "maxLength"
+    )]
+    pub max_length: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "maxLengthMetadata"
+    )]
+    pub max_length_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "mergeField"
+    )]
+    pub merge_field: Option<MergeField>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "mergeFieldXml"
+    )]
+    pub merge_field_xml: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub name: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "nameMetadata"
+    )]
+    pub name_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "originalValue"
+    )]
+    pub original_value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "originalValueMetadata"
+    )]
+    pub original_value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "pageNumber"
+    )]
+    pub page_number: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "pageNumberMetadata"
+    )]
+    pub page_number_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recipientId"
+    )]
+    pub recipient_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "recipientIdGuid"
+    )]
+    pub recipient_id_guid: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "recipientIdGuidMetadata"
+    )]
+    pub recipient_id_guid_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "recipientIdMetadata"
+    )]
+    pub recipient_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub required: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "requiredMetadata"
+    )]
+    pub required_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "smartContractInformation"
+    )]
+    pub smart_contract_information: Option<SmartContractInformation>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub status: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "statusMetadata"
+    )]
+    pub status_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroupLabels"
+    )]
+    pub tab_group_labels: Vec<String>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabGroupLabelsMetadata"
+    )]
+    pub tab_group_labels_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabId"
+    )]
+    pub tab_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabIdMetadata"
+    )]
+    pub tab_id_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabLabel"
+    )]
+    pub tab_label: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabLabelMetadata"
+    )]
+    pub tab_label_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabOrder"
+    )]
+    pub tab_order: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabOrderMetadata"
+    )]
+    pub tab_order_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabType"
+    )]
+    pub tab_type: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabTypeMetadata"
+    )]
+    pub tab_type_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "templateLocked"
+    )]
+    pub template_locked: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "templateLockedMetadata"
+    )]
+    pub template_locked_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "templateRequired"
+    )]
+    pub template_required: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "templateRequiredMetadata"
+    )]
+    pub template_required_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "toolTipMetadata"
+    )]
+    pub tool_tip_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub tooltip: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub underline: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "underlineMetadata"
+    )]
+    pub underline_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub value: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "valueMetadata"
+    )]
+    pub value_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub width: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "widthMetadata"
+    )]
+    pub width_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "xPosition"
+    )]
+    pub x_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "xPositionMetadata"
+    )]
+    pub x_position_metadata: Option<PropertyMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "yPosition"
+    )]
+    pub y_position: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "yPositionMetadata"
+    )]
+    pub y_position_metadata: Option<PropertyMetadata>,
 }
 
 /// An object used to identify the features and attributes of the account being created.
@@ -76570,6 +81056,20 @@ pub struct ReportInProductGet {
         rename = "sortFieldName"
     )]
     pub sort_field_name: String,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct ReportInProductList {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
+    )]
+    pub reports: Vec<ReportInProductListItem>,
 }
 
 ///
@@ -84602,6 +89102,110 @@ pub struct SmartSectionAnchorPosition {
     pub y_position: f64,
 }
 
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct SmartSectionCollapsibleDisplaySettings {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "arrowClosed"
+    )]
+    pub arrow_closed: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "arrowColor"
+    )]
+    pub arrow_color: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "arrowLocation"
+    )]
+    pub arrow_location: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "arrowOpen"
+    )]
+    pub arrow_open: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "arrowSize"
+    )]
+    pub arrow_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "arrowStyle"
+    )]
+    pub arrow_style: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "containerStyle"
+    )]
+    pub container_style: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "labelStyle"
+    )]
+    pub label_style: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        deserialize_with = "crate::utils::deserialize_null_boolean::deserialize",
+        rename = "onlyArrowIsClickable"
+    )]
+    pub only_arrow_is_clickable: bool,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "outerLabelAndArrowStyle"
+    )]
+    pub outer_label_and_arrow_style: String,
+}
+
 /// These properties define how a Smart Section displays. A Smart Section is a type of display section.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SmartSectionDisplaySettings {
@@ -84623,7 +89227,7 @@ pub struct SmartSectionDisplaySettings {
         skip_serializing_if = "Option::is_none",
         rename = "collapsibleSettings"
     )]
-    pub collapsible_settings: Option<DocumentHtmlCollapsibleDisplaySettings>,
+    pub collapsible_settings: Option<SmartSectionCollapsibleDisplaySettings>,
     /**
     * These properties define how a Smart Section displays. A Smart Section is a type of display section.
     */
@@ -86520,6 +91124,410 @@ pub struct SupportedLanguages {
 
 ///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct TabAccountSettings {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "allowTabOrder"
+    )]
+    pub allow_tab_order: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "allowTabOrderMetadata"
+    )]
+    pub allow_tab_order_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "approveDeclineTabsEnabled"
+    )]
+    pub approve_decline_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "approveDeclineTabsMetadata"
+    )]
+    pub approve_decline_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "calculatedFieldsEnabled"
+    )]
+    pub calculated_fields_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "calculatedFieldsMetadata"
+    )]
+    pub calculated_fields_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "checkBoxTabsMetadata"
+    )]
+    pub check_box_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "checkboxTabsEnabled"
+    )]
+    pub checkbox_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "dataFieldRegexEnabled"
+    )]
+    pub data_field_regex_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "dataFieldRegexMetadata"
+    )]
+    pub data_field_regex_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "dataFieldSizeEnabled"
+    )]
+    pub data_field_size_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "dataFieldSizeMetadata"
+    )]
+    pub data_field_size_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "drawTabsEnabled"
+    )]
+    pub draw_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "drawTabsMetadata"
+    )]
+    pub draw_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "firstLastEmailTabsEnabled"
+    )]
+    pub first_last_email_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "firstLastEmailTabsMetadata"
+    )]
+    pub first_last_email_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "listTabsEnabled"
+    )]
+    pub list_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "listTabsMetadata"
+    )]
+    pub list_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "noteTabsEnabled"
+    )]
+    pub note_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "noteTabsMetadata"
+    )]
+    pub note_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "prefillTabsEnabled"
+    )]
+    pub prefill_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "prefillTabsMetadata"
+    )]
+    pub prefill_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "radioTabsEnabled"
+    )]
+    pub radio_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "radioTabsMetadata"
+    )]
+    pub radio_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "savingCustomTabsEnabled"
+    )]
+    pub saving_custom_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "savingCustomTabsMetadata"
+    )]
+    pub saving_custom_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "senderToChangeTabAssignmentsEnabled"
+    )]
+    pub sender_to_change_tab_assignments_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "senderToChangeTabAssignmentsMetadata"
+    )]
+    pub sender_to_change_tab_assignments_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "sharedCustomTabsEnabled"
+    )]
+    pub shared_custom_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "sharedCustomTabsMetadata"
+    )]
+    pub shared_custom_tabs_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabDataLabelEnabled"
+    )]
+    pub tab_data_label_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabDataLabelMetadata"
+    )]
+    pub tab_data_label_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabLocationEnabled"
+    )]
+    pub tab_location_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabLocationMetadata"
+    )]
+    pub tab_location_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabLockingEnabled"
+    )]
+    pub tab_locking_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabLockingMetadata"
+    )]
+    pub tab_locking_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabScaleEnabled"
+    )]
+    pub tab_scale_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabScaleMetadata"
+    )]
+    pub tab_scale_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "tabTextFormattingEnabled"
+    )]
+    pub tab_text_formatting_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabTextFormattingMetadata"
+    )]
+    pub tab_text_formatting_metadata: Option<SettingsMetadata>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "textTabsEnabled"
+    )]
+    pub text_tabs_enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "textTabsMetadata"
+    )]
+    pub text_tabs_metadata: Option<SettingsMetadata>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TabGroup {
     /**
     *
@@ -87802,7 +92810,7 @@ pub struct Tabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionCountyTabs"
     )]
-    pub commission_county_tabs: Vec<PhoneNumber>,
+    pub commission_county_tabs: Vec<CommissionCounty>,
     /**
     * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
     */
@@ -87812,7 +92820,7 @@ pub struct Tabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionExpirationTabs"
     )]
-    pub commission_expiration_tabs: Vec<PhoneNumber>,
+    pub commission_expiration_tabs: Vec<CommissionExpiration>,
     /**
     * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
     */
@@ -87822,7 +92830,7 @@ pub struct Tabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionNumberTabs"
     )]
-    pub commission_number_tabs: Vec<PhoneNumber>,
+    pub commission_number_tabs: Vec<CommissionNumber>,
     /**
     * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
     */
@@ -87832,7 +92840,7 @@ pub struct Tabs {
         deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
         rename = "commissionStateTabs"
     )]
-    pub commission_state_tabs: Vec<PhoneNumber>,
+    pub commission_state_tabs: Vec<CommissionState>,
     /**
     * Tabs indicate to recipients where they should sign, initial, or enter data on a document. They are represented graphically as symbols on documents at the time of signing. Tabs can also display data to the recipients.
     */
@@ -88152,6 +93160,31 @@ pub struct Tabs {
         rename = "zipTabs"
     )]
     pub zip_tabs: Vec<Zip>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct TemplateCustomFieldsData {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listCustomFields"
+    )]
+    pub list_custom_fields: Vec<ListCustomField>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "textCustomFields"
+    )]
+    pub text_custom_fields: Vec<TextCustomField>,
 }
 
 /// A list of `documentVisibility` objects that specify whether the documents associated with a template are visible to recipients.
@@ -88686,6 +93719,491 @@ pub struct TemplateSummary {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub uri: String,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct TemplateTabs {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "approveTabs"
+    )]
+    pub approve_tabs: Vec<Approve>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "checkboxTabs"
+    )]
+    pub checkbox_tabs: Vec<Checkbox>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "commentThreadTabs"
+    )]
+    pub comment_thread_tabs: Vec<CommentThread>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "commissionCountyTabs"
+    )]
+    pub commission_county_tabs: Vec<CommissionCounty>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "commissionExpirationTabs"
+    )]
+    pub commission_expiration_tabs: Vec<CommissionExpiration>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "commissionNumberTabs"
+    )]
+    pub commission_number_tabs: Vec<CommissionNumber>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "commissionStateTabs"
+    )]
+    pub commission_state_tabs: Vec<CommissionState>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "companyTabs"
+    )]
+    pub company_tabs: Vec<Company>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "currencyTabs"
+    )]
+    pub currency_tabs: Vec<Currency>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dateSignedTabs"
+    )]
+    pub date_signed_tabs: Vec<DateSigned>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "dateTabs"
+    )]
+    pub date_tabs: Vec<Date>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "declineTabs"
+    )]
+    pub decline_tabs: Vec<Decline>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "drawTabs"
+    )]
+    pub draw_tabs: Vec<Draw>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "emailAddressTabs"
+    )]
+    pub email_address_tabs: Vec<EmailAddress>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "emailTabs"
+    )]
+    pub email_tabs: Vec<Email>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "envelopeIdTabs"
+    )]
+    pub envelope_id_tabs: Vec<EnvelopeId>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "firstNameTabs"
+    )]
+    pub first_name_tabs: Vec<FirstName>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "formulaTabs"
+    )]
+    pub formula_tabs: Vec<FormulaTab>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "fullNameTabs"
+    )]
+    pub full_name_tabs: Vec<FullName>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "initialHereTabs"
+    )]
+    pub initial_here_tabs: Vec<InitialHere>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "lastNameTabs"
+    )]
+    pub last_name_tabs: Vec<LastName>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listTabs"
+    )]
+    pub list_tabs: Vec<List>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "notarizeTabs"
+    )]
+    pub notarize_tabs: Vec<Notarize>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "notarySealTabs"
+    )]
+    pub notary_seal_tabs: Vec<NotarySeal>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "noteTabs"
+    )]
+    pub note_tabs: Vec<Note>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "numberTabs"
+    )]
+    pub number_tabs: Vec<Number>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "phoneNumberTabs"
+    )]
+    pub phone_number_tabs: Vec<PhoneNumber>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "polyLineOverlayTabs"
+    )]
+    pub poly_line_overlay_tabs: Vec<PolyLineOverlay>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "prefillTabs"
+    )]
+    pub prefill_tabs: Option<PrefillTabs>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "radioGroupTabs"
+    )]
+    pub radio_group_tabs: Vec<RadioGroup>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "signHereTabs"
+    )]
+    pub sign_here_tabs: Vec<SignHere>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "signerAttachmentTabs"
+    )]
+    pub signer_attachment_tabs: Vec<SignerAttachment>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "smartSectionTabs"
+    )]
+    pub smart_section_tabs: Vec<SmartSection>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "ssnTabs"
+    )]
+    pub ssn_tabs: Vec<Ssn>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "tabGroups"
+    )]
+    pub tab_groups: Vec<TabGroup>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "textTabs"
+    )]
+    pub text_tabs: Vec<Text>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "titleTabs"
+    )]
+    pub title_tabs: Vec<Title>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "viewTabs"
+    )]
+    pub view_tabs: Vec<View>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "zipTabs"
+    )]
+    pub zip_tabs: Vec<Zip>,
+}
+
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct TemplateUpdateSummary {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "bulkEnvelopeStatus"
+    )]
+    pub bulk_envelope_status: Option<BulkEnvelopeStatus>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "envelopeId"
+    )]
+    pub envelope_id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "errorDetails"
+    )]
+    pub error_details: Option<ErrorDetails>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "listCustomFieldUpdateResults"
+    )]
+    pub list_custom_field_update_results: Vec<ListCustomField>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "lockInformation"
+    )]
+    pub lock_information: Option<EnvelopeLocks>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "purgeState"
+    )]
+    pub purge_state: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "recipientUpdateResults"
+    )]
+    pub recipient_update_results: Vec<RecipientUpdateResponse>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "tabUpdateResults"
+    )]
+    pub tab_update_results: Option<EnvelopeRecipientTabs>,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Vec::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_vector::deserialize",
+        rename = "textCustomFieldUpdateResults"
+    )]
+    pub text_custom_field_update_results: Vec<TextCustomField>,
 }
 
 /// A tab that allows the recipient to enter any type of text.
@@ -94960,6 +100478,97 @@ pub struct ViewUrl {
     pub url: String,
 }
 
+///
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct Watermark {
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "displayAngle"
+    )]
+    pub display_angle: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub enabled: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub font: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontColor"
+    )]
+    pub font_color: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "fontSize"
+    )]
+    pub font_size: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub id: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "imageBase64"
+    )]
+    pub image_base_64: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub transparency: String,
+    /**
+    *
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "watermarkText"
+    )]
+    pub watermark_text: String,
+}
+
 /// A complex type containing information about a witness recipient. Witnesses are recipients whose signatures affirm that the identified signers have signed the documents in the envelope.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Witness {
@@ -95961,6 +101570,131 @@ pub struct WorkflowStep {
         rename = "workflowStepId"
     )]
     pub workflow_step_id: String,
+}
+
+/// A DocuSign workspace is a collaboration area for sharing files and data.
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+pub struct Workspace {
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "billableAccountId"
+    )]
+    pub billable_account_id: String,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "callerInformation"
+    )]
+    pub caller_information: Option<WorkspaceUser>,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub created: String,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "createdByInformation"
+    )]
+    pub created_by_information: Option<WorkspaceUser>,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "lastModified"
+    )]
+    pub last_modified: String,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        rename = "lastModifiedByInformation"
+    )]
+    pub last_modified_by_information: Option<WorkspaceUser>,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub settings: Option<WorkspaceSettings>,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
+    )]
+    pub status: String,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workspaceBaseUrl"
+    )]
+    pub workspace_base_url: String,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workspaceDescription"
+    )]
+    pub workspace_description: String,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workspaceId"
+    )]
+    pub workspace_id: String,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workspaceName"
+    )]
+    pub workspace_name: String,
+    /**
+    * A DocuSign workspace is a collaboration area for sharing files and data.
+    */
+    #[serde(
+        default,
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize",
+        rename = "workspaceUri"
+    )]
+    pub workspace_uri: String,
 }
 
 /// This object's properties describe the contents of a workspace folder.

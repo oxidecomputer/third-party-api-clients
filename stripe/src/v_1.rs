@@ -168,12 +168,59 @@ impl V1 {
     *
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_account_capabilitie(
+    pub async fn get_account_capabilities(
         &self,
         expand: &[String],
-    ) -> Result<crate::types::ListAccountCapability> {
+    ) -> Result<Vec<crate::types::Capability>> {
         let url = "/v1/account/capabilities".to_string();
-        self.client.get(&url, None).await
+        let resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/account/capabilities` endpoint.
+    *
+    * As opposed to `get_account_capabilities`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of capabilities associated with the account. The capabilities are returned sorted by creation date, with the most recent capability appearing first.</p>
+    */
+    pub async fn get_all_account_capabilities(
+        &self,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::Capability>> {
+        let url = "/v1/account/capabilities".to_string();
+        let mut resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -232,13 +279,13 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_account_external_account(
+    pub async fn get_account_external_accounts(
         &self,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::ExternalAccounts> {
+    ) -> Result<Vec<crate::types::DataAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -252,7 +299,54 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/account/external_accounts?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/account/external_accounts` endpoint.
+    *
+    * As opposed to `get_account_external_accounts`, this function returns all the pages of the request at once.
+    *
+    * <p>List external accounts for an account.</p>
+    */
+    pub async fn get_all_account_external_accounts(
+        &self,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::DataAnyOf>> {
+        let url = "/v1/account/external_accounts".to_string();
+        let mut resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -275,7 +369,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_account_external_account_v_1(
+    pub async fn get_account_external_account(
         &self,
         expand: &[String],
         id: &str,
@@ -361,7 +455,7 @@ impl V1 {
         limit: i64,
         relationship: &str,
         starting_after: &str,
-    ) -> Result<crate::types::GetAccountPeopleResponse> {
+    ) -> Result<Vec<crate::types::Person>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -375,7 +469,55 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/account/people?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/account/people` endpoint.
+    *
+    * As opposed to `get_account_people`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.</p>
+    */
+    pub async fn get_all_account_people(
+        &self,
+        expand: &[String],
+        relationship: &str,
+    ) -> Result<Vec<crate::types::Person>> {
+        let url = "/v1/account/people".to_string();
+        let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -470,7 +612,7 @@ impl V1 {
         limit: i64,
         relationship: &str,
         starting_after: &str,
-    ) -> Result<crate::types::GetAccountPeopleResponse> {
+    ) -> Result<Vec<crate::types::Person>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -484,7 +626,55 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/account/persons?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/account/persons` endpoint.
+    *
+    * As opposed to `get_account_persons`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.</p>
+    */
+    pub async fn get_all_account_persons(
+        &self,
+        expand: &[String],
+        relationship: &str,
+    ) -> Result<Vec<crate::types::Person>> {
+        let url = "/v1/account/persons".to_string();
+        let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -589,7 +779,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetAccountsResponse> {
+    ) -> Result<Vec<crate::types::Account>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -603,7 +793,55 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/accounts?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetAccountsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/accounts` endpoint.
+    *
+    * As opposed to `get_accounts`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>. If you’re not a platform, the list is empty.</p>
+    */
+    pub async fn get_all_accounts(
+        &self,
+        created: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::Account>> {
+        let url = "/v1/accounts".to_string();
+        let mut resp: crate::types::GetAccountsResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -792,17 +1030,69 @@ impl V1 {
     * * `account: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_accounts_account_capabilitie(
+    pub async fn get_accounts_account_capabilities(
         &self,
         account: &str,
         expand: &[String],
-    ) -> Result<crate::types::ListAccountCapability> {
+    ) -> Result<Vec<crate::types::Capability>> {
         let url = format!(
             "/v1/accounts/{}/capabilities",
             crate::progenitor_support::encode_path(&account.to_string()),
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/accounts/{account}/capabilities` endpoint.
+    *
+    * As opposed to `get_accounts_account_capabilities`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of capabilities associated with the account. The capabilities are returned sorted by creation date, with the most recent capability appearing first.</p>
+    */
+    pub async fn get_all_accounts_account_capabilities(
+        &self,
+        account: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::Capability>> {
+        let url = format!(
+            "/v1/accounts/{}/capabilities",
+            crate::progenitor_support::encode_path(&account.to_string()),
+        );
+
+        let mut resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -875,7 +1165,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::ExternalAccounts> {
+    ) -> Result<Vec<crate::types::DataAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -893,7 +1183,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/accounts/{account}/external_accounts` endpoint.
+    *
+    * As opposed to `get_accounts_account_external`, this function returns all the pages of the request at once.
+    *
+    * <p>List external accounts for an account.</p>
+    */
+    pub async fn get_all_accounts_account_external(
+        &self,
+        account: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::DataAnyOf>> {
+        let url = format!(
+            "/v1/accounts/{}/external_accounts",
+            crate::progenitor_support::encode_path(&account.to_string()),
+        );
+
+        let mut resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1038,7 +1380,7 @@ impl V1 {
         limit: i64,
         relationship: &str,
         starting_after: &str,
-    ) -> Result<crate::types::GetAccountPeopleResponse> {
+    ) -> Result<Vec<crate::types::Person>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -1056,7 +1398,60 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/accounts/{account}/people` endpoint.
+    *
+    * As opposed to `get_accounts_account_people`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.</p>
+    */
+    pub async fn get_all_accounts_account_people(
+        &self,
+        account: &str,
+        expand: &[String],
+        relationship: &str,
+    ) -> Result<Vec<crate::types::Person>> {
+        let url = format!(
+            "/v1/accounts/{}/people",
+            crate::progenitor_support::encode_path(&account.to_string()),
+        );
+
+        let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1176,7 +1571,7 @@ impl V1 {
         limit: i64,
         relationship: &str,
         starting_after: &str,
-    ) -> Result<crate::types::GetAccountPeopleResponse> {
+    ) -> Result<Vec<crate::types::Person>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -1194,7 +1589,60 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/accounts/{account}/persons` endpoint.
+    *
+    * As opposed to `get_accounts_account_persons`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.</p>
+    */
+    pub async fn get_all_accounts_account_persons(
+        &self,
+        account: &str,
+        expand: &[String],
+        relationship: &str,
+    ) -> Result<Vec<crate::types::Person>> {
+        let url = format!(
+            "/v1/accounts/{}/persons",
+            crate::progenitor_support::encode_path(&account.to_string()),
+        );
+
+        let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1328,14 +1776,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_apple_pay_domain(
+    pub async fn get_apple_pay_domains(
         &self,
         domain_name: &str,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::ApplePayDomainList> {
+    ) -> Result<Vec<crate::types::ApplePayDomain>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !domain_name.is_empty() {
             query_args.push(("domain_name".to_string(), domain_name.to_string()));
@@ -1352,7 +1800,61 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/apple_pay/domains?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ApplePayDomainList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/apple_pay/domains` endpoint.
+    *
+    * As opposed to `get_apple_pay_domains`, this function returns all the pages of the request at once.
+    *
+    * <p>List apple pay domains.</p>
+    */
+    pub async fn get_all_apple_pay_domains(
+        &self,
+        domain_name: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::ApplePayDomain>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !domain_name.is_empty() {
+            query_args.push(("domain_name".to_string(), domain_name.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/apple_pay/domains?{}", query_);
+
+        let mut resp: crate::types::ApplePayDomainList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1431,7 +1933,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetApplicationFeesResponse> {
+    ) -> Result<Vec<crate::types::PlatformFee>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -1448,7 +1950,63 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/application_fees?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetApplicationFeesResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/application_fees` endpoint.
+    *
+    * As opposed to `get_application_fees`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of application fees you’ve previously collected. The application fees are returned in sorted order, with the most recent fees appearing first.</p>
+    */
+    pub async fn get_all_application_fees(
+        &self,
+        charge: &str,
+        created: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::PlatformFee>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !charge.is_empty() {
+            query_args.push(("charge".to_string(), charge.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/application_fees?{}", query_);
+
+        let mut resp: crate::types::GetApplicationFeesResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1560,14 +2118,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_application_fees_refund(
+    pub async fn get_application_fees_refunds(
         &self,
         ending_before: &str,
         expand: &[String],
         id: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::Refunds> {
+    ) -> Result<Vec<crate::types::FeeRefund>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -1585,7 +2143,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Refunds = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/application_fees/{id}/refunds` endpoint.
+    *
+    * As opposed to `get_application_fees_refunds`, this function returns all the pages of the request at once.
+    *
+    * <p>You can see a list of the refunds belonging to a specific application fee. Note that the 10 most recent refunds are always available by default on the application fee object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
+    */
+    pub async fn get_all_application_fees_refunds(
+        &self,
+        expand: &[String],
+        id: &str,
+    ) -> Result<Vec<crate::types::FeeRefund>> {
+        let url = format!(
+            "/v1/application_fees/{}/refunds",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
+        let mut resp: crate::types::Refunds = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1662,7 +2272,7 @@ impl V1 {
         source: &str,
         starting_after: &str,
         type_: &str,
-    ) -> Result<crate::types::BalanceTransactionsList> {
+    ) -> Result<Vec<crate::types::BalanceTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -1688,7 +2298,76 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/balance/history?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/balance/history` endpoint.
+    *
+    * As opposed to `get_balance_history`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth). The transactions are returned in sorted order, with the most recent transactions appearing first.</p>
+    *
+    * <p>Note that this endpoint was previously called “Balance history” and used the path <code>/v1/balance/history</code>.</p>
+    */
+    pub async fn get_all_balance_history(
+        &self,
+        created: &str,
+        currency: &str,
+        expand: &[String],
+        payout: &str,
+        source: &str,
+        type_: &str,
+    ) -> Result<Vec<crate::types::BalanceTransaction>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !currency.is_empty() {
+            query_args.push(("currency".to_string(), currency.to_string()));
+        }
+        if !payout.is_empty() {
+            query_args.push(("payout".to_string(), payout.to_string()));
+        }
+        if !source.is_empty() {
+            query_args.push(("source".to_string(), source.to_string()));
+        }
+        if !type_.is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/balance/history?{}", query_);
+
+        let mut resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1735,7 +2414,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `type_: &str` -- Only returns transactions of the given type. One of: `adjustment`, `advance`, `advance_funding`, `anticipation_repayment`, `application_fee`, `application_fee_refund`, `charge`, `connect_collection_transfer`, `contribution`, `issuing_authorization_hold`, `issuing_authorization_release`, `issuing_dispute`, `issuing_transaction`, `payment`, `payment_failure_refund`, `payment_refund`, `payout`, `payout_cancel`, `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`, `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`, `transfer_cancel`, `transfer_failure`, or `transfer_refund`.
     */
-    pub async fn get_balance_transaction(
+    pub async fn get_balance_transactions(
         &self,
         created: &str,
         currency: &str,
@@ -1746,7 +2425,7 @@ impl V1 {
         source: &str,
         starting_after: &str,
         type_: &str,
-    ) -> Result<crate::types::BalanceTransactionsList> {
+    ) -> Result<Vec<crate::types::BalanceTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !currency.is_empty() {
             query_args.push(("currency".to_string(), currency.to_string()));
@@ -1772,7 +2451,76 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/balance_transactions?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/balance_transactions` endpoint.
+    *
+    * As opposed to `get_balance_transactions`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of transactions that have contributed to the Stripe account balance (e.g., charges, transfers, and so forth). The transactions are returned in sorted order, with the most recent transactions appearing first.</p>
+    *
+    * <p>Note that this endpoint was previously called “Balance history” and used the path <code>/v1/balance/history</code>.</p>
+    */
+    pub async fn get_all_balance_transactions(
+        &self,
+        created: &str,
+        currency: &str,
+        expand: &[String],
+        payout: &str,
+        source: &str,
+        type_: &str,
+    ) -> Result<Vec<crate::types::BalanceTransaction>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !currency.is_empty() {
+            query_args.push(("currency".to_string(), currency.to_string()));
+        }
+        if !payout.is_empty() {
+            query_args.push(("payout".to_string(), payout.to_string()));
+        }
+        if !source.is_empty() {
+            query_args.push(("source".to_string(), source.to_string()));
+        }
+        if !type_.is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/balance_transactions?{}", query_);
+
+        let mut resp: crate::types::BalanceTransactionsList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1787,7 +2535,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_balance_transaction_v_1(
+    pub async fn get_balance_transaction(
         &self,
         expand: &[String],
         id: &str,
@@ -1822,7 +2570,7 @@ impl V1 {
         is_default: bool,
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetBillingPortalConfigurationsResponse> {
+    ) -> Result<Vec<crate::types::PortalConfiguration>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -1842,7 +2590,67 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/billing_portal/configurations?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetBillingPortalConfigurationsResponse =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/billing_portal/configurations` endpoint.
+    *
+    * As opposed to `get_billing_portal_configurations`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of configurations that describe the functionality of the customer portal.</p>
+    */
+    pub async fn get_all_billing_portal_configurations(
+        &self,
+        active: bool,
+        expand: &[String],
+        is_default: bool,
+    ) -> Result<Vec<crate::types::PortalConfiguration>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        if is_default {
+            query_args.push(("is_default".to_string(), is_default.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/billing_portal/configurations?{}", query_);
+
+        let mut resp: crate::types::GetBillingPortalConfigurationsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1935,7 +2743,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         uncaptured_funds: bool,
-    ) -> Result<crate::types::GetBitcoinReceiversResponse> {
+    ) -> Result<Vec<crate::types::BitcoinReceiver>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -1958,7 +2766,70 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bitcoin/receivers?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetBitcoinReceiversResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/bitcoin/receivers` endpoint.
+    *
+    * As opposed to `get_bitcoin_receivers`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your receivers. Receivers are returned sorted by creation date, with the most recently created receivers appearing first.</p>
+    */
+    pub async fn get_all_bitcoin_receivers(
+        &self,
+        active: bool,
+        expand: &[String],
+        filled: bool,
+        uncaptured_funds: bool,
+    ) -> Result<Vec<crate::types::BitcoinReceiver>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        if filled {
+            query_args.push(("filled".to_string(), filled.to_string()));
+        }
+        if uncaptured_funds {
+            query_args.push(("uncaptured_funds".to_string(), uncaptured_funds.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/bitcoin/receivers?{}", query_);
+
+        let mut resp: crate::types::GetBitcoinReceiversResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -1998,7 +2869,7 @@ impl V1 {
     * * `receiver: &str` -- The account's country.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_bitcoin_receivers_receiver_transaction(
+    pub async fn get_bitcoin_receivers_receiver_transactions(
         &self,
         customer: &str,
         ending_before: &str,
@@ -2006,7 +2877,7 @@ impl V1 {
         limit: i64,
         receiver: &str,
         starting_after: &str,
-    ) -> Result<crate::types::Transactions> {
+    ) -> Result<Vec<crate::types::BitcoinTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -2027,7 +2898,66 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Transactions = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/bitcoin/receivers/{receiver}/transactions` endpoint.
+    *
+    * As opposed to `get_bitcoin_receivers_receiver_transactions`, this function returns all the pages of the request at once.
+    *
+    * <p>List bitcoin transacitons for a given receiver.</p>
+    */
+    pub async fn get_all_bitcoin_receivers_receiver_transactions(
+        &self,
+        customer: &str,
+        expand: &[String],
+        receiver: &str,
+    ) -> Result<Vec<crate::types::BitcoinTransaction>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!(
+            "/v1/bitcoin/receivers/{}/transactions?{}",
+            crate::progenitor_support::encode_path(&receiver.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::Transactions = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2044,7 +2974,7 @@ impl V1 {
     * * `receiver: &str` -- The account's country.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_bitcoin_transaction(
+    pub async fn get_bitcoin_transactions(
         &self,
         customer: &str,
         ending_before: &str,
@@ -2052,7 +2982,7 @@ impl V1 {
         limit: i64,
         receiver: &str,
         starting_after: &str,
-    ) -> Result<crate::types::Transactions> {
+    ) -> Result<Vec<crate::types::BitcoinTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -2072,7 +3002,65 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/bitcoin/transactions?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Transactions = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/bitcoin/transactions` endpoint.
+    *
+    * As opposed to `get_bitcoin_transactions`, this function returns all the pages of the request at once.
+    *
+    * <p>List bitcoin transacitons for a given receiver.</p>
+    */
+    pub async fn get_all_bitcoin_transactions(
+        &self,
+        customer: &str,
+        expand: &[String],
+        receiver: &str,
+    ) -> Result<Vec<crate::types::BitcoinTransaction>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !receiver.is_empty() {
+            query_args.push(("receiver".to_string(), receiver.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/bitcoin/transactions?{}", query_);
+
+        let mut resp: crate::types::Transactions = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2091,7 +3079,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `transfer_group: &str` -- Only return charges for this transfer group.
     */
-    pub async fn get_charge(
+    pub async fn get_charges(
         &self,
         created: &str,
         customer: &str,
@@ -2101,7 +3089,7 @@ impl V1 {
         payment_intent: &str,
         starting_after: &str,
         transfer_group: &str,
-    ) -> Result<crate::types::Charges> {
+    ) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -2124,7 +3112,70 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/charges?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Charges = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/charges` endpoint.
+    *
+    * As opposed to `get_charges`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of charges you’ve previously created. The charges are returned in sorted order, with the most recent charges appearing first.</p>
+    */
+    pub async fn get_all_charges(
+        &self,
+        created: &str,
+        customer: &str,
+        expand: &[String],
+        payment_intent: &str,
+        transfer_group: &str,
+    ) -> Result<Vec<crate::types::Charge>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !payment_intent.is_empty() {
+            query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
+        }
+        if !transfer_group.is_empty() {
+            query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/charges?{}", query_);
+
+        let mut resp: crate::types::Charges = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2158,7 +3209,7 @@ impl V1 {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<crate::types::SearchResult> {
+    ) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -2172,7 +3223,64 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/charges/search?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/charges/search` endpoint.
+    *
+    * As opposed to `get_charges_search`, this function returns all the pages of the request at once.
+    *
+    * <p>Search for charges you’ve previously created using Stripe’s <a href="/docs/search#search-query-language">Search Query Language</a>.
+    * Don’t use search in read-after-write flows where strict consistency is necessary. Under normal operating
+    * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
+    * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
+    */
+    pub async fn get_all_charges_search(
+        &self,
+        expand: &[String],
+        query: &str,
+    ) -> Result<Vec<crate::types::Charge>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !query.is_empty() {
+            query_args.push(("query".to_string(), query.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/charges/search?{}", query_);
+
+        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2339,14 +3447,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_charges_charge_refund(
+    pub async fn get_charges_charge_refunds(
         &self,
         charge: &str,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::RefundList> {
+    ) -> Result<Vec<crate::types::Refund>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -2364,7 +3472,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::RefundList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/charges/{charge}/refunds` endpoint.
+    *
+    * As opposed to `get_charges_charge_refunds`, this function returns all the pages of the request at once.
+    *
+    * <p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
+    */
+    pub async fn get_all_charges_charge_refunds(
+        &self,
+        charge: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::Refund>> {
+        let url = format!(
+            "/v1/charges/{}/refunds",
+            crate::progenitor_support::encode_path(&charge.to_string()),
+        );
+
+        let mut resp: crate::types::RefundList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2452,7 +3612,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `subscription: &str` -- Only return the Checkout Session for the subscription specified.
     */
-    pub async fn get_checkout_session(
+    pub async fn get_checkout_sessions(
         &self,
         ending_before: &str,
         expand: &[String],
@@ -2460,7 +3620,7 @@ impl V1 {
         payment_intent: &str,
         starting_after: &str,
         subscription: &str,
-    ) -> Result<crate::types::PaymentPagesCheckoutSessionList> {
+    ) -> Result<Vec<crate::types::Session>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -2480,7 +3640,67 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/checkout/sessions?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PaymentPagesCheckoutSessionList =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/checkout/sessions` endpoint.
+    *
+    * As opposed to `get_checkout_sessions`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of Checkout Sessions.</p>
+    */
+    pub async fn get_all_checkout_sessions(
+        &self,
+        expand: &[String],
+        payment_intent: &str,
+        subscription: &str,
+    ) -> Result<Vec<crate::types::Session>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !payment_intent.is_empty() {
+            query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
+        }
+        if !subscription.is_empty() {
+            query_args.push(("subscription".to_string(), subscription.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/checkout/sessions?{}", query_);
+
+        let mut resp: crate::types::PaymentPagesCheckoutSessionList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2552,14 +3772,14 @@ impl V1 {
     * * `session: &str` -- The account's country.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_checkout_sessions_session_line_item(
+    pub async fn get_checkout_sessions_session_line_items(
         &self,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         session: &str,
         starting_after: &str,
-    ) -> Result<crate::types::LineItems> {
+    ) -> Result<Vec<crate::types::Item>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -2577,7 +3797,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::LineItems = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
+    *
+    * As opposed to `get_checkout_sessions_session_line_items`, this function returns all the pages of the request at once.
+    *
+    * <p>When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+    */
+    pub async fn get_all_checkout_sessions_session_line_items(
+        &self,
+        expand: &[String],
+        session: &str,
+    ) -> Result<Vec<crate::types::Item>> {
+        let url = format!(
+            "/v1/checkout/sessions/{}/line_items",
+            crate::progenitor_support::encode_path(&session.to_string()),
+        );
+
+        let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2598,7 +3870,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetCountrySpecsResponse> {
+    ) -> Result<Vec<crate::types::CountrySpec>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -2612,7 +3884,54 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/country_specs?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetCountrySpecsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/country_specs` endpoint.
+    *
+    * As opposed to `get_country_specs`, this function returns all the pages of the request at once.
+    *
+    * <p>Lists all Country Spec objects available in the API.</p>
+    */
+    pub async fn get_all_country_specs(
+        &self,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::CountrySpec>> {
+        let url = "/v1/country_specs".to_string();
+        let mut resp: crate::types::GetCountrySpecsResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2658,7 +3977,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetCouponsResponse> {
+    ) -> Result<Vec<crate::types::Coupon>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -2672,7 +3991,55 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/coupons?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetCouponsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/coupons` endpoint.
+    *
+    * As opposed to `get_coupons`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your coupons.</p>
+    */
+    pub async fn get_all_coupons(
+        &self,
+        created: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::Coupon>> {
+        let url = "/v1/coupons".to_string();
+        let mut resp: crate::types::GetCouponsResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2760,7 +4127,7 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_credit_note(
+    pub async fn get_credit_notes(
         &self,
         customer: &str,
         ending_before: &str,
@@ -2768,7 +4135,7 @@ impl V1 {
         invoice: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::CreditNotesList> {
+    ) -> Result<Vec<crate::types::CreditNote>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -2788,7 +4155,65 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/credit_notes?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::CreditNotesList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/credit_notes` endpoint.
+    *
+    * As opposed to `get_credit_notes`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of credit notes.</p>
+    */
+    pub async fn get_all_credit_notes(
+        &self,
+        customer: &str,
+        expand: &[String],
+        invoice: &str,
+    ) -> Result<Vec<crate::types::CreditNote>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !invoice.is_empty() {
+            query_args.push(("invoice".to_string(), invoice.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/credit_notes?{}", query_);
+
+        let mut resp: crate::types::CreditNotesList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2903,7 +4328,7 @@ impl V1 {
     * * `refund_amount: i64` -- The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_credit_notes_preview_line(
+    pub async fn get_credit_notes_preview_lines(
         &self,
         amount: i64,
         credit_amount: i64,
@@ -2919,7 +4344,7 @@ impl V1 {
         refund: &str,
         refund_amount: i64,
         starting_after: &str,
-    ) -> Result<crate::types::Lines> {
+    ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if amount > 0 {
             query_args.push(("amount".to_string(), amount.to_string()));
@@ -2960,7 +4385,94 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/credit_notes/preview/lines?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Lines = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/credit_notes/preview/lines` endpoint.
+    *
+    * As opposed to `get_credit_notes_preview_lines`, this function returns all the pages of the request at once.
+    *
+    * <p>When retrieving a credit note preview, you’ll get a <strong>lines</strong> property containing the first handful of those items. This URL you can retrieve the full (paginated) list of line items.</p>
+    */
+    pub async fn get_all_credit_notes_preview_lines(
+        &self,
+        amount: i64,
+        credit_amount: i64,
+        expand: &[String],
+        invoice: &str,
+        lines: &[String],
+        memo: &str,
+        metadata: &str,
+        out_of_band_amount: i64,
+        reason: crate::types::Reason,
+        refund: &str,
+        refund_amount: i64,
+    ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if amount > 0 {
+            query_args.push(("amount".to_string(), amount.to_string()));
+        }
+        if credit_amount > 0 {
+            query_args.push(("credit_amount".to_string(), credit_amount.to_string()));
+        }
+        if !invoice.is_empty() {
+            query_args.push(("invoice".to_string(), invoice.to_string()));
+        }
+        if !memo.is_empty() {
+            query_args.push(("memo".to_string(), memo.to_string()));
+        }
+        if out_of_band_amount > 0 {
+            query_args.push((
+                "out_of_band_amount".to_string(),
+                out_of_band_amount.to_string(),
+            ));
+        }
+        if !reason.to_string().is_empty() {
+            query_args.push(("reason".to_string(), reason.to_string()));
+        }
+        if !refund.is_empty() {
+            query_args.push(("refund".to_string(), refund.to_string()));
+        }
+        if refund_amount > 0 {
+            query_args.push(("refund_amount".to_string(), refund_amount.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/credit_notes/preview/lines?{}", query_);
+
+        let mut resp: crate::types::Lines = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -2976,14 +4488,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_credit_notes_note_line(
+    pub async fn get_credit_notes_note_lines(
         &self,
         credit_note: &str,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::Lines> {
+    ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -3001,7 +4513,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Lines = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/credit_notes/{credit_note}/lines` endpoint.
+    *
+    * As opposed to `get_credit_notes_note_lines`, this function returns all the pages of the request at once.
+    *
+    * <p>When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+    */
+    pub async fn get_all_credit_notes_note_lines(
+        &self,
+        credit_note: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
+        let url = format!(
+            "/v1/credit_notes/{}/lines",
+            crate::progenitor_support::encode_path(&credit_note.to_string()),
+        );
+
+        let mut resp: crate::types::Lines = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -3014,7 +4578,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_credit_note_v_1(
+    pub async fn get_credit_note(
         &self,
         expand: &[String],
         id: &str,
@@ -3087,7 +4651,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         test_clock: &str,
-    ) -> Result<crate::types::GetCustomersResponse> {
+    ) -> Result<Vec<crate::types::Customer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -3107,7 +4671,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetCustomersResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/customers` endpoint.
+    *
+    * As opposed to `get_customers`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your customers. The customers are returned sorted by creation date, with the most recent customers appearing first.</p>
+    */
+    pub async fn get_all_customers(
+        &self,
+        created: &str,
+        email: &str,
+        expand: &[String],
+        test_clock: &str,
+    ) -> Result<Vec<crate::types::Customer>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !email.is_empty() {
+            query_args.push(("email".to_string(), email.to_string()));
+        }
+        if !test_clock.is_empty() {
+            query_args.push(("test_clock".to_string(), test_clock.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/customers?{}", query_);
+
+        let mut resp: crate::types::GetCustomersResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -3141,7 +4764,7 @@ impl V1 {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<crate::types::SearchResult> {
+    ) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -3155,7 +4778,64 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/customers/search?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/customers/search` endpoint.
+    *
+    * As opposed to `get_customers_search`, this function returns all the pages of the request at once.
+    *
+    * <p>Search for customers you’ve previously created using Stripe’s <a href="/docs/search#search-query-language">Search Query Language</a>.
+    * Don’t use search in read-after-write flows where strict consistency is necessary. Under normal operating
+    * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
+    * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
+    */
+    pub async fn get_all_customers_search(
+        &self,
+        expand: &[String],
+        query: &str,
+    ) -> Result<Vec<crate::types::Charge>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !query.is_empty() {
+            query_args.push(("query".to_string(), query.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/customers/search?{}", query_);
+
+        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -3235,14 +4915,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_customers_customer_balance_transaction(
+    pub async fn get_customers_customer_balance_transactions(
         &self,
         customer: &str,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::CustomerBalanceTransactionList> {
+    ) -> Result<Vec<crate::types::CustomerBalanceTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -3260,7 +4940,61 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::CustomerBalanceTransactionList =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/customers/{customer}/balance_transactions` endpoint.
+    *
+    * As opposed to `get_customers_customer_balance_transactions`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of transactions that updated the customer’s <a href="/docs/billing/customer/balance">balances</a>.</p>
+    */
+    pub async fn get_all_customers_customer_balance_transactions(
+        &self,
+        customer: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::CustomerBalanceTransaction>> {
+        let url = format!(
+            "/v1/customers/{}/balance_transactions",
+            crate::progenitor_support::encode_path(&customer.to_string()),
+        );
+
+        let mut resp: crate::types::CustomerBalanceTransactionList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -3347,14 +5081,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_customers_customer_bank_account(
+    pub async fn get_customers_customer_bank_accounts(
         &self,
         customer: &str,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::BankAccountList> {
+    ) -> Result<Vec<crate::types::BankAccount>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -3372,7 +5106,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::BankAccountList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/customers/{customer}/bank_accounts` endpoint.
+    *
+    * As opposed to `get_customers_customer_bank_accounts`, this function returns all the pages of the request at once.
+    *
+    * <p>You can see a list of the bank accounts belonging to a Customer. Note that the 10 most recent sources are always available by default on the Customer. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional bank accounts.</p>
+    */
+    pub async fn get_all_customers_customer_bank_accounts(
+        &self,
+        customer: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::BankAccount>> {
+        let url = format!(
+            "/v1/customers/{}/bank_accounts",
+            crate::progenitor_support::encode_path(&customer.to_string()),
+        );
+
+        let mut resp: crate::types::BankAccountList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -3411,7 +5197,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_customers_customer_bank_account_v_1(
+    pub async fn get_customers_customer_bank_account(
         &self,
         customer: &str,
         expand: &[String],
@@ -3513,14 +5299,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_customers_customer_card(
+    pub async fn get_customers_customer_cards(
         &self,
         customer: &str,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::Cards> {
+    ) -> Result<Vec<crate::types::Card>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -3538,7 +5324,61 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Cards = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/customers/{customer}/cards` endpoint.
+    *
+    * As opposed to `get_customers_customer_cards`, this function returns all the pages of the request at once.
+    *
+    * <p>You can see a list of the cards belonging to a customer.
+    * Note that the 10 most recent sources are always available on the <code>Customer</code> object.
+    * If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional cards.</p>
+    */
+    pub async fn get_all_customers_customer_cards(
+        &self,
+        customer: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::Card>> {
+        let url = format!(
+            "/v1/customers/{}/cards",
+            crate::progenitor_support::encode_path(&customer.to_string()),
+        );
+
+        let mut resp: crate::types::Cards = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -3577,7 +5417,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_customers_customer_card_v_1(
+    pub async fn get_customers_customer_card(
         &self,
         customer: &str,
         expand: &[String],
@@ -3698,7 +5538,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `type_: crate::types::GetCustomersCustomerPaymentMethodsType` -- A required filter on the list, based on the object `type` field.
     */
-    pub async fn get_customers_customer_payment_method(
+    pub async fn get_customers_customer_payment_methods(
         &self,
         customer: &str,
         ending_before: &str,
@@ -3706,7 +5546,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
-    ) -> Result<crate::types::PaymentFlowsMethodList> {
+    ) -> Result<Vec<crate::types::PaymentMethod>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -3727,7 +5567,66 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PaymentFlowsMethodList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/customers/{customer}/payment_methods` endpoint.
+    *
+    * As opposed to `get_customers_customer_payment_methods`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of PaymentMethods for a given Customer</p>
+    */
+    pub async fn get_all_customers_customer_payment_methods(
+        &self,
+        customer: &str,
+        expand: &[String],
+        type_: crate::types::GetCustomersCustomerPaymentMethodsType,
+    ) -> Result<Vec<crate::types::PaymentMethod>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !type_.to_string().is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!(
+            "/v1/customers/{}/payment_methods?{}",
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::PaymentFlowsMethodList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -3744,7 +5643,7 @@ impl V1 {
     * * `object: &str` -- Filter sources according to a particular object type.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_customers_customer_source(
+    pub async fn get_customers_customer_sources(
         &self,
         customer: &str,
         ending_before: &str,
@@ -3752,7 +5651,7 @@ impl V1 {
         limit: i64,
         object: &str,
         starting_after: &str,
-    ) -> Result<crate::types::Sources> {
+    ) -> Result<Vec<crate::types::CustomerSourcesDataAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -3773,7 +5672,66 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Sources = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/customers/{customer}/sources` endpoint.
+    *
+    * As opposed to `get_customers_customer_sources`, this function returns all the pages of the request at once.
+    *
+    * <p>List sources for a specified customer.</p>
+    */
+    pub async fn get_all_customers_customer_sources(
+        &self,
+        customer: &str,
+        expand: &[String],
+        object: &str,
+    ) -> Result<Vec<crate::types::CustomerSourcesDataAnyOf>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !object.is_empty() {
+            query_args.push(("object".to_string(), object.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!(
+            "/v1/customers/{}/sources?{}",
+            crate::progenitor_support::encode_path(&customer.to_string()),
+            query_
+        );
+
+        let mut resp: crate::types::Sources = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -3812,7 +5770,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_customers_customer_source_v_1(
+    pub async fn get_customers_customer_source(
         &self,
         customer: &str,
         expand: &[String],
@@ -3912,14 +5870,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_customers_customer_subscription(
+    pub async fn get_customers_customer_subscriptions(
         &self,
         customer: &str,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::Subscriptions> {
+    ) -> Result<Vec<crate::types::Subscription>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -3937,7 +5895,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/customers/{customer}/subscriptions` endpoint.
+    *
+    * As opposed to `get_customers_customer_subscriptions`, this function returns all the pages of the request at once.
+    *
+    * <p>You can see a list of the customer’s active subscriptions. Note that the 10 most recent active subscriptions are always available by default on the customer object. If you need more than those 10, you can use the limit and starting_after parameters to page through additional subscriptions.</p>
+    */
+    pub async fn get_all_customers_customer_subscriptions(
+        &self,
+        customer: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::Subscription>> {
+        let url = format!(
+            "/v1/customers/{}/subscriptions",
+            crate::progenitor_support::encode_path(&customer.to_string()),
+        );
+
+        let mut resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -4102,14 +6112,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_customers_customer_tax_id(
+    pub async fn get_customers_customer_tax_ids(
         &self,
         customer: &str,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::TaxIds> {
+    ) -> Result<Vec<crate::types::TaxId>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -4127,7 +6137,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::TaxIds = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/customers/{customer}/tax_ids` endpoint.
+    *
+    * As opposed to `get_customers_customer_tax_ids`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of tax IDs for a customer.</p>
+    */
+    pub async fn get_all_customers_customer_tax_ids(
+        &self,
+        customer: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::TaxId>> {
+        let url = format!(
+            "/v1/customers/{}/tax_ids",
+            crate::progenitor_support::encode_path(&customer.to_string()),
+        );
+
+        let mut resp: crate::types::TaxIds = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -4162,7 +6224,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_customers_customer_tax_id_v_1(
+    pub async fn get_customers_customer_tax_id(
         &self,
         customer: &str,
         expand: &[String],
@@ -4225,7 +6287,7 @@ impl V1 {
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
-    ) -> Result<crate::types::GetDisputesResponse> {
+    ) -> Result<Vec<crate::types::Dispute>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -4245,7 +6307,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/disputes?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetDisputesResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/disputes` endpoint.
+    *
+    * As opposed to `get_disputes`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your disputes.</p>
+    */
+    pub async fn get_all_disputes(
+        &self,
+        charge: &str,
+        created: &str,
+        expand: &[String],
+        payment_intent: &str,
+    ) -> Result<Vec<crate::types::Dispute>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !charge.is_empty() {
+            query_args.push(("charge".to_string(), charge.to_string()));
+        }
+        if !payment_intent.is_empty() {
+            query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/disputes?{}", query_);
+
+        let mut resp: crate::types::GetDisputesResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -4358,7 +6479,7 @@ impl V1 {
     * * `type_: &str` -- A string containing a specific event name, or group of events using * as a wildcard. The list will be filtered to include only events with a matching event property.
     * * `types: &[String]` -- An array of up to 20 strings containing specific event names. The list will be filtered to include only events with a matching event property. You may pass either `type` or `types`, but not both.
     */
-    pub async fn get_event(
+    pub async fn get_events(
         &self,
         created: &str,
         delivery_success: bool,
@@ -4368,7 +6489,7 @@ impl V1 {
         starting_after: &str,
         type_: &str,
         types: &[String],
-    ) -> Result<crate::types::NotificationEventList> {
+    ) -> Result<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delivery_success {
             query_args.push(("delivery_success".to_string(), delivery_success.to_string()));
@@ -4388,7 +6509,67 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/events?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::NotificationEventList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/events` endpoint.
+    *
+    * As opposed to `get_events`, this function returns all the pages of the request at once.
+    *
+    * <p>List events, going back up to 30 days. Each event data is rendered according to Stripe API version at its creation time, specified in <a href="/docs/api/events/object">event object</a> <code>api_version</code> attribute (not according to your current Stripe API version or <code>Stripe-Version</code> header).</p>
+    */
+    pub async fn get_all_events(
+        &self,
+        created: &str,
+        delivery_success: bool,
+        expand: &[String],
+        type_: &str,
+        types: &[String],
+    ) -> Result<Vec<crate::types::Event>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if delivery_success {
+            query_args.push(("delivery_success".to_string(), delivery_success.to_string()));
+        }
+        if !type_.is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/events?{}", query_);
+
+        let mut resp: crate::types::NotificationEventList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -4401,7 +6582,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_event_v_1(&self, expand: &[String], id: &str) -> Result<crate::types::Event> {
+    pub async fn get_event(&self, expand: &[String], id: &str) -> Result<crate::types::Event> {
         let url = format!(
             "/v1/events/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -4428,7 +6609,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetExchangeRatesResponse> {
+    ) -> Result<Vec<crate::types::ExchangeRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -4442,7 +6623,54 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/exchange_rates?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetExchangeRatesResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/exchange_rates` endpoint.
+    *
+    * As opposed to `get_exchange_rates`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
+    */
+    pub async fn get_all_exchange_rates(
+        &self,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::ExchangeRate>> {
+        let url = "/v1/exchange_rates".to_string();
+        let mut resp: crate::types::GetExchangeRatesResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -4483,7 +6711,7 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_file_link(
+    pub async fn get_file_links(
         &self,
         created: &str,
         ending_before: &str,
@@ -4492,7 +6720,7 @@ impl V1 {
         file: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::Links> {
+    ) -> Result<Vec<crate::types::FileLink>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -4512,7 +6740,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/file_links?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Links = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/file_links` endpoint.
+    *
+    * As opposed to `get_file_links`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of file links.</p>
+    */
+    pub async fn get_all_file_links(
+        &self,
+        created: &str,
+        expand: &[String],
+        expired: bool,
+        file: &str,
+    ) -> Result<Vec<crate::types::FileLink>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if expired {
+            query_args.push(("expired".to_string(), expired.to_string()));
+        }
+        if !file.is_empty() {
+            query_args.push(("file".to_string(), file.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/file_links?{}", query_);
+
+        let mut resp: crate::types::Links = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -4588,7 +6875,7 @@ impl V1 {
         limit: i64,
         purpose: crate::types::Purpose,
         starting_after: &str,
-    ) -> Result<crate::types::GetFilesResponse> {
+    ) -> Result<Vec<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -4605,7 +6892,62 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/files?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetFilesResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/files` endpoint.
+    *
+    * As opposed to `get_files`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of the files that your account has access to. The files are returned sorted by creation date, with the most recently created files appearing first.</p>
+    */
+    pub async fn get_all_files(
+        &self,
+        created: &str,
+        expand: &[String],
+        purpose: crate::types::Purpose,
+    ) -> Result<Vec<crate::types::File>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !purpose.to_string().is_empty() {
+            query_args.push(("purpose".to_string(), purpose.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/files?{}", query_);
+
+        let mut resp: crate::types::GetFilesResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -4667,7 +7009,7 @@ impl V1 {
         starting_after: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
-    ) -> Result<crate::types::GetIdentityVerificationReportsResponse> {
+    ) -> Result<Vec<crate::types::GelatoVerificationReport>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -4690,7 +7032,71 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/identity/verification_reports?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetIdentityVerificationReportsResponse =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/identity/verification_reports` endpoint.
+    *
+    * As opposed to `get_identity_verification_reports`, this function returns all the pages of the request at once.
+    *
+    * <p>List all verification reports.</p>
+    */
+    pub async fn get_all_identity_verification_reports(
+        &self,
+        created: &str,
+        expand: &[String],
+        type_: crate::types::GelatoVerificationReportType,
+        verification_session: &str,
+    ) -> Result<Vec<crate::types::GelatoVerificationReport>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !type_.to_string().is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        if !verification_session.is_empty() {
+            query_args.push((
+                "verification_session".to_string(),
+                verification_session.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/identity/verification_reports?{}", query_);
+
+        let mut resp: crate::types::GetIdentityVerificationReportsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -4738,7 +7144,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         status: crate::types::GelatoVerificationSessionStatus,
-    ) -> Result<crate::types::GetIdentityVerificationSessionsResponse> {
+    ) -> Result<Vec<crate::types::GelatoVerificationSession>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -4755,7 +7161,64 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/identity/verification_sessions?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetIdentityVerificationSessionsResponse =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/identity/verification_sessions` endpoint.
+    *
+    * As opposed to `get_identity_verification_sessions`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of VerificationSessions</p>
+    */
+    pub async fn get_all_identity_verification_sessions(
+        &self,
+        created: &str,
+        expand: &[String],
+        status: crate::types::GelatoVerificationSessionStatus,
+    ) -> Result<Vec<crate::types::GelatoVerificationSession>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/identity/verification_sessions?{}", query_);
+
+        let mut resp: crate::types::GetIdentityVerificationSessionsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -4914,7 +7377,7 @@ impl V1 {
         limit: i64,
         pending: bool,
         starting_after: &str,
-    ) -> Result<crate::types::GetInvoiceitemsResponse> {
+    ) -> Result<Vec<crate::types::InvoiceItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -4937,7 +7400,70 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoiceitems?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetInvoiceitemsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/invoiceitems` endpoint.
+    *
+    * As opposed to `get_invoiceitems`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your invoice items. Invoice items are returned sorted by creation date, with the most recently created invoice items appearing first.</p>
+    */
+    pub async fn get_all_invoiceitems(
+        &self,
+        created: &str,
+        customer: &str,
+        expand: &[String],
+        invoice: &str,
+        pending: bool,
+    ) -> Result<Vec<crate::types::InvoiceItem>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !invoice.is_empty() {
+            query_args.push(("invoice".to_string(), invoice.to_string()));
+        }
+        if pending {
+            query_args.push(("pending".to_string(), pending.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/invoiceitems?{}", query_);
+
+        let mut resp: crate::types::GetInvoiceitemsResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -5033,7 +7559,7 @@ impl V1 {
     * * `status: crate::types::GetInvoicesStatus` -- The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview).
     * * `subscription: &str` -- Only return invoices for the subscription specified by this subscription ID.
     */
-    pub async fn get_invoice(
+    pub async fn get_invoices(
         &self,
         collection_method: crate::types::CollectionMethod,
         created: &str,
@@ -5045,7 +7571,7 @@ impl V1 {
         starting_after: &str,
         status: crate::types::GetInvoicesStatus,
         subscription: &str,
-    ) -> Result<crate::types::InvoicesList> {
+    ) -> Result<Vec<crate::types::Invoice>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -5074,7 +7600,78 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::InvoicesList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/invoices` endpoint.
+    *
+    * As opposed to `get_invoices`, this function returns all the pages of the request at once.
+    *
+    * <p>You can list all invoices, or list the invoices for a specific customer. The invoices are returned sorted by creation date, with the most recently created invoices appearing first.</p>
+    */
+    pub async fn get_all_invoices(
+        &self,
+        collection_method: crate::types::CollectionMethod,
+        created: &str,
+        customer: &str,
+        due_date: &str,
+        expand: &[String],
+        status: crate::types::GetInvoicesStatus,
+        subscription: &str,
+    ) -> Result<Vec<crate::types::Invoice>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !collection_method.to_string().is_empty() {
+            query_args.push((
+                "collection_method".to_string(),
+                collection_method.to_string(),
+            ));
+        }
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        if !subscription.is_empty() {
+            query_args.push(("subscription".to_string(), subscription.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/invoices?{}", query_);
+
+        let mut resp: crate::types::InvoicesList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -5108,7 +7705,7 @@ impl V1 {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<crate::types::SearchResult> {
+    ) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -5122,7 +7719,64 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices/search?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/invoices/search` endpoint.
+    *
+    * As opposed to `get_invoices_search`, this function returns all the pages of the request at once.
+    *
+    * <p>Search for invoices you’ve previously created using Stripe’s <a href="/docs/search#search-query-language">Search Query Language</a>.
+    * Don’t use search in read-after-write flows where strict consistency is necessary. Under normal operating
+    * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
+    * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
+    */
+    pub async fn get_all_invoices_search(
+        &self,
+        expand: &[String],
+        query: &str,
+    ) -> Result<Vec<crate::types::Charge>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !query.is_empty() {
+            query_args.push(("query".to_string(), query.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/invoices/search?{}", query_);
+
+        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -5152,9 +7806,9 @@ impl V1 {
     * * `subscription_default_tax_rates: &str` -- If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set.
     * * `subscription_items: &[String]` -- A list of up to 20 subscription items, each with an attached price.
     * * `subscription_proration_behavior: crate::types::ProrationBehavior` -- Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes. Valid values are `create_prorations`, `none`, or `always_invoice`.
-    *
+    *   
     *   Passing `create_prorations` will cause proration invoice items to be created when applicable. These proration items will only be invoiced immediately under [certain conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In order to always invoice immediately for prorations, pass `always_invoice`.
-    *
+    *   
     *   Prorations can be disabled by passing `none`.
     * * `subscription_proration_date: i64` -- If previewing an update to a subscription, and doing proration, `subscription_proration_date` forces the proration to be calculated as though the update was done at the specified time. The time given must be within the current subscription period, and cannot be before the subscription was on its current plan. If set, `subscription`, and one of `subscription_items`, or `subscription_trial_end` are required. Also, `subscription_proration_behavior` cannot be set to 'none'.
     * * `subscription_start_date: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
@@ -5265,16 +7919,16 @@ impl V1 {
     * * `subscription_default_tax_rates: &str` -- If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set.
     * * `subscription_items: &[String]` -- A list of up to 20 subscription items, each with an attached price.
     * * `subscription_proration_behavior: crate::types::ProrationBehavior` -- Determines how to handle [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial), or if an item's `quantity` changes. Valid values are `create_prorations`, `none`, or `always_invoice`.
-    *
+    *   
     *   Passing `create_prorations` will cause proration invoice items to be created when applicable. These proration items will only be invoiced immediately under [certain conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In order to always invoice immediately for prorations, pass `always_invoice`.
-    *
+    *   
     *   Prorations can be disabled by passing `none`.
     * * `subscription_proration_date: i64` -- If previewing an update to a subscription, and doing proration, `subscription_proration_date` forces the proration to be calculated as though the update was done at the specified time. The time given must be within the current subscription period, and cannot be before the subscription was on its current plan. If set, `subscription`, and one of `subscription_items`, or `subscription_trial_end` are required. Also, `subscription_proration_behavior` cannot be set to 'none'.
     * * `subscription_start_date: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
     * * `subscription_trial_end: &str` -- If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of `subscription_items` or `subscription` is required.
     * * `subscription_trial_from_plan: bool` -- Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `subscription_trial_end` is not allowed. See [Using trial periods on subscriptions](https://stripe.com/docs/billing/subscriptions/trials) to learn more.
     */
-    pub async fn get_invoices_upcoming_line(
+    pub async fn get_invoices_upcoming_lines(
         &self,
         automatic_tax: &str,
         coupon: &str,
@@ -5299,7 +7953,7 @@ impl V1 {
         subscription_start_date: i64,
         subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
-    ) -> Result<crate::types::InvoiceLinesList> {
+    ) -> Result<Vec<crate::types::LineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !coupon.is_empty() {
             query_args.push(("coupon".to_string(), coupon.to_string()));
@@ -5361,7 +8015,124 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/invoices/upcoming/lines?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::InvoiceLinesList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/invoices/upcoming/lines` endpoint.
+    *
+    * As opposed to `get_invoices_upcoming_lines`, this function returns all the pages of the request at once.
+    *
+    * <p>When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing the total count of line items and the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+    */
+    pub async fn get_all_invoices_upcoming_lines(
+        &self,
+        automatic_tax: &str,
+        coupon: &str,
+        customer: &str,
+        customer_details: &str,
+        discounts: &str,
+        expand: &[String],
+        invoice_items: &[String],
+        schedule: &str,
+        subscription: &str,
+        subscription_billing_cycle_anchor: &str,
+        subscription_cancel_at: &str,
+        subscription_cancel_at_period_end: bool,
+        subscription_cancel_now: bool,
+        subscription_default_tax_rates: &str,
+        subscription_items: &[String],
+        subscription_proration_behavior: crate::types::ProrationBehavior,
+        subscription_proration_date: i64,
+        subscription_start_date: i64,
+        subscription_trial_end: &str,
+        subscription_trial_from_plan: bool,
+    ) -> Result<Vec<crate::types::LineItem>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !coupon.is_empty() {
+            query_args.push(("coupon".to_string(), coupon.to_string()));
+        }
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !schedule.is_empty() {
+            query_args.push(("schedule".to_string(), schedule.to_string()));
+        }
+        if !subscription.is_empty() {
+            query_args.push(("subscription".to_string(), subscription.to_string()));
+        }
+        if subscription_cancel_at_period_end {
+            query_args.push((
+                "subscription_cancel_at_period_end".to_string(),
+                subscription_cancel_at_period_end.to_string(),
+            ));
+        }
+        if subscription_cancel_now {
+            query_args.push((
+                "subscription_cancel_now".to_string(),
+                subscription_cancel_now.to_string(),
+            ));
+        }
+        if !subscription_proration_behavior.to_string().is_empty() {
+            query_args.push((
+                "subscription_proration_behavior".to_string(),
+                subscription_proration_behavior.to_string(),
+            ));
+        }
+        if subscription_proration_date > 0 {
+            query_args.push((
+                "subscription_proration_date".to_string(),
+                subscription_proration_date.to_string(),
+            ));
+        }
+        if subscription_start_date > 0 {
+            query_args.push((
+                "subscription_start_date".to_string(),
+                subscription_start_date.to_string(),
+            ));
+        }
+        if subscription_trial_from_plan {
+            query_args.push((
+                "subscription_trial_from_plan".to_string(),
+                subscription_trial_from_plan.to_string(),
+            ));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/invoices/upcoming/lines?{}", query_);
+
+        let mut resp: crate::types::InvoiceLinesList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -5465,14 +8236,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_invoices_invoice_line(
+    pub async fn get_invoices_invoice_lines(
         &self,
         ending_before: &str,
         expand: &[String],
         invoice: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::InvoiceLinesList> {
+    ) -> Result<Vec<crate::types::LineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -5490,7 +8261,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::InvoiceLinesList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/invoices/{invoice}/lines` endpoint.
+    *
+    * As opposed to `get_invoices_invoice_lines`, this function returns all the pages of the request at once.
+    *
+    * <p>When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total count of line items and the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+    */
+    pub async fn get_all_invoices_invoice_lines(
+        &self,
+        expand: &[String],
+        invoice: &str,
+    ) -> Result<Vec<crate::types::LineItem>> {
+        let url = format!(
+            "/v1/invoices/{}/lines",
+            crate::progenitor_support::encode_path(&invoice.to_string()),
+        );
+
+        let mut resp: crate::types::InvoiceLinesList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -5583,14 +8406,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_issuer_fraud_record(
+    pub async fn get_issuer_fraud_records(
         &self,
         charge: &str,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::RadarIssuerFraudRecordList> {
+    ) -> Result<Vec<crate::types::IssuerFraudRecord>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -5607,7 +8430,62 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuer_fraud_records?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::RadarIssuerFraudRecordList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/issuer_fraud_records` endpoint.
+    *
+    * As opposed to `get_issuer_fraud_records`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of issuer fraud records.</p>
+    */
+    pub async fn get_all_issuer_fraud_records(
+        &self,
+        charge: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::IssuerFraudRecord>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !charge.is_empty() {
+            query_args.push(("charge".to_string(), charge.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/issuer_fraud_records?{}", query_);
+
+        let mut resp: crate::types::RadarIssuerFraudRecordList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -5661,7 +8539,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         status: crate::types::IssuingAuthorizationStatus,
-    ) -> Result<crate::types::GetIssuingAuthorizationsResponse> {
+    ) -> Result<Vec<crate::types::IssuingAuthorization>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -5684,7 +8562,72 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/authorizations?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetIssuingAuthorizationsResponse =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/issuing/authorizations` endpoint.
+    *
+    * As opposed to `get_issuing_authorizations`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of Issuing <code>Authorization</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    */
+    pub async fn get_all_issuing_authorizations(
+        &self,
+        card: &str,
+        cardholder: &str,
+        created: &str,
+        expand: &[String],
+        status: crate::types::IssuingAuthorizationStatus,
+    ) -> Result<Vec<crate::types::IssuingAuthorization>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !card.is_empty() {
+            query_args.push(("card".to_string(), card.to_string()));
+        }
+        if !cardholder.is_empty() {
+            query_args.push(("cardholder".to_string(), cardholder.to_string()));
+        }
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/issuing/authorizations?{}", query_);
+
+        let mut resp: crate::types::GetIssuingAuthorizationsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -5797,7 +8740,7 @@ impl V1 {
         starting_after: &str,
         status: crate::types::IssuingCardholderStatus,
         type_: crate::types::AccountHolderType,
-    ) -> Result<crate::types::GetIssuingCardholdersResponse> {
+    ) -> Result<Vec<crate::types::IssuingCardholder>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !email.is_empty() {
             query_args.push(("email".to_string(), email.to_string()));
@@ -5823,7 +8766,75 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/cardholders?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetIssuingCardholdersResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/issuing/cardholders` endpoint.
+    *
+    * As opposed to `get_issuing_cardholders`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    */
+    pub async fn get_all_issuing_cardholders(
+        &self,
+        created: &str,
+        email: &str,
+        expand: &[String],
+        phone_number: &str,
+        status: crate::types::IssuingCardholderStatus,
+        type_: crate::types::AccountHolderType,
+    ) -> Result<Vec<crate::types::IssuingCardholder>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !email.is_empty() {
+            query_args.push(("email".to_string(), email.to_string()));
+        }
+        if !phone_number.is_empty() {
+            query_args.push(("phone_number".to_string(), phone_number.to_string()));
+        }
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/issuing/cardholders?{}", query_);
+
+        let mut resp: crate::types::GetIssuingCardholdersResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -5912,7 +8923,7 @@ impl V1 {
         starting_after: &str,
         status: crate::types::IssuingCardStatus,
         type_: crate::types::IssuingCardType,
-    ) -> Result<crate::types::GetIssuingCardsResponse> {
+    ) -> Result<Vec<crate::types::IssuingCard>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cardholder.is_empty() {
             query_args.push(("cardholder".to_string(), cardholder.to_string()));
@@ -5944,7 +8955,82 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/cards?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetIssuingCardsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/issuing/cards` endpoint.
+    *
+    * As opposed to `get_issuing_cards`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of Issuing <code>Card</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    */
+    pub async fn get_all_issuing_cards(
+        &self,
+        cardholder: &str,
+        created: &str,
+        exp_month: i64,
+        exp_year: i64,
+        expand: &[String],
+        last_4: &str,
+        status: crate::types::IssuingCardStatus,
+        type_: crate::types::IssuingCardType,
+    ) -> Result<Vec<crate::types::IssuingCard>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !cardholder.is_empty() {
+            query_args.push(("cardholder".to_string(), cardholder.to_string()));
+        }
+        if exp_month > 0 {
+            query_args.push(("exp_month".to_string(), exp_month.to_string()));
+        }
+        if exp_year > 0 {
+            query_args.push(("exp_year".to_string(), exp_year.to_string()));
+        }
+        if !last_4.is_empty() {
+            query_args.push(("last4".to_string(), last_4.to_string()));
+        }
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/issuing/cards?{}", query_);
+
+        let mut resp: crate::types::GetIssuingCardsResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6013,7 +9099,7 @@ impl V1 {
     * * `status: crate::types::IssuingDisputeStatus` -- Select Issuing disputes with the given status.
     * * `transaction: &str` -- Select the Issuing dispute for the given transaction.
     */
-    pub async fn get_issuing_dispute(
+    pub async fn get_issuing_disputes(
         &self,
         created: &str,
         ending_before: &str,
@@ -6022,7 +9108,7 @@ impl V1 {
         starting_after: &str,
         status: crate::types::IssuingDisputeStatus,
         transaction: &str,
-    ) -> Result<crate::types::IssuingDisputeList> {
+    ) -> Result<Vec<crate::types::IssuingDispute>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -6042,7 +9128,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/disputes?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::IssuingDisputeList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/issuing/disputes` endpoint.
+    *
+    * As opposed to `get_issuing_disputes`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    */
+    pub async fn get_all_issuing_disputes(
+        &self,
+        created: &str,
+        expand: &[String],
+        status: crate::types::IssuingDisputeStatus,
+        transaction: &str,
+    ) -> Result<Vec<crate::types::IssuingDispute>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        if !transaction.is_empty() {
+            query_args.push(("transaction".to_string(), transaction.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/issuing/disputes?{}", query_);
+
+        let mut resp: crate::types::IssuingDisputeList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6140,7 +9285,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetIssuingSettlementsResponse> {
+    ) -> Result<Vec<crate::types::IssuingSettlement>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -6154,7 +9299,56 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/settlements?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetIssuingSettlementsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/issuing/settlements` endpoint.
+    *
+    * As opposed to `get_issuing_settlements`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of Issuing <code>Settlement</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    */
+    pub async fn get_all_issuing_settlements(
+        &self,
+        created: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::IssuingSettlement>> {
+        let url = "/v1/issuing/settlements".to_string();
+        let mut resp: crate::types::GetIssuingSettlementsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6227,7 +9421,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         type_: crate::types::IssuingTransactionType,
-    ) -> Result<crate::types::GetIssuingTransactionsResponse> {
+    ) -> Result<Vec<crate::types::IssuingTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !card.is_empty() {
             query_args.push(("card".to_string(), card.to_string()));
@@ -6250,7 +9444,72 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/issuing/transactions?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetIssuingTransactionsResponse =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/issuing/transactions` endpoint.
+    *
+    * As opposed to `get_issuing_transactions`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    */
+    pub async fn get_all_issuing_transactions(
+        &self,
+        card: &str,
+        cardholder: &str,
+        created: &str,
+        expand: &[String],
+        type_: crate::types::IssuingTransactionType,
+    ) -> Result<Vec<crate::types::IssuingTransaction>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !card.is_empty() {
+            query_args.push(("card".to_string(), card.to_string()));
+        }
+        if !cardholder.is_empty() {
+            query_args.push(("cardholder".to_string(), cardholder.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/issuing/transactions?{}", query_);
+
+        let mut resp: crate::types::GetIssuingTransactionsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6334,7 +9593,7 @@ impl V1 {
     * * `order: &str` -- The order to retrieve returns for.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_order_return(
+    pub async fn get_order_returns(
         &self,
         created: &str,
         ending_before: &str,
@@ -6342,7 +9601,7 @@ impl V1 {
         limit: i64,
         order: &str,
         starting_after: &str,
-    ) -> Result<crate::types::Returns> {
+    ) -> Result<Vec<crate::types::OrderReturn>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -6359,7 +9618,62 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/order_returns?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Returns = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/order_returns` endpoint.
+    *
+    * As opposed to `get_order_returns`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your order returns. The returns are returned sorted by creation date, with the most recently created return appearing first.</p>
+    */
+    pub async fn get_all_order_returns(
+        &self,
+        created: &str,
+        expand: &[String],
+        order: &str,
+    ) -> Result<Vec<crate::types::OrderReturn>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !order.is_empty() {
+            query_args.push(("order".to_string(), order.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/order_returns?{}", query_);
+
+        let mut resp: crate::types::Returns = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6372,7 +9686,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_order_return_v_1(
+    pub async fn get_order_return(
         &self,
         expand: &[String],
         id: &str,
@@ -6403,7 +9717,7 @@ impl V1 {
     * * `status_transitions: &str` -- Filter orders based on when they were paid, fulfilled, canceled, or returned.
     * * `upstream_ids: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_order(
+    pub async fn get_orders(
         &self,
         created: &str,
         customer: &str,
@@ -6415,7 +9729,7 @@ impl V1 {
         status: &str,
         status_transitions: &str,
         upstream_ids: &[String],
-    ) -> Result<crate::types::OrdersLegacyResourceOrderList> {
+    ) -> Result<Vec<crate::types::Order>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -6435,7 +9749,70 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/orders?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::OrdersLegacyResourceOrderList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/orders` endpoint.
+    *
+    * As opposed to `get_orders`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your orders. The orders are returned sorted by creation date, with the most recently created orders appearing first.</p>
+    */
+    pub async fn get_all_orders(
+        &self,
+        created: &str,
+        customer: &str,
+        expand: &[String],
+        ids: &[String],
+        status: &str,
+        status_transitions: &str,
+        upstream_ids: &[String],
+    ) -> Result<Vec<crate::types::Order>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !status.is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/orders?{}", query_);
+
+        let mut resp: crate::types::OrdersLegacyResourceOrderList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6458,7 +9835,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_order_v_1(&self, expand: &[String], id: &str) -> Result<crate::types::Order> {
+    pub async fn get_order(&self, expand: &[String], id: &str) -> Result<crate::types::Order> {
         let url = format!(
             "/v1/orders/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -6535,7 +9912,7 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_payment_intent(
+    pub async fn get_payment_intents(
         &self,
         created: &str,
         customer: &str,
@@ -6543,7 +9920,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::PaymentFlowsIntentList> {
+    ) -> Result<Vec<crate::types::PaymentIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -6560,7 +9937,62 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_intents?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PaymentFlowsIntentList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/payment_intents` endpoint.
+    *
+    * As opposed to `get_payment_intents`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of PaymentIntents.</p>
+    */
+    pub async fn get_all_payment_intents(
+        &self,
+        created: &str,
+        customer: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::PaymentIntent>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/payment_intents?{}", query_);
+
+        let mut resp: crate::types::PaymentFlowsIntentList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6603,7 +10035,7 @@ impl V1 {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<crate::types::SearchResult> {
+    ) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -6617,7 +10049,64 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_intents/search?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/payment_intents/search` endpoint.
+    *
+    * As opposed to `get_payment_intents_search`, this function returns all the pages of the request at once.
+    *
+    * <p>Search for PaymentIntents you’ve previously created using Stripe’s <a href="/docs/search#search-query-language">Search Query Language</a>.
+    * Don’t use search in read-after-write flows where strict consistency is necessary. Under normal operating
+    * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
+    * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
+    */
+    pub async fn get_all_payment_intents_search(
+        &self,
+        expand: &[String],
+        query: &str,
+    ) -> Result<Vec<crate::types::Charge>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !query.is_empty() {
+            query_args.push(("query".to_string(), query.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/payment_intents/search?{}", query_);
+
+        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6818,7 +10307,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetPaymentLinksResponse> {
+    ) -> Result<Vec<crate::types::PaymentLink>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -6835,7 +10324,61 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_links?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetPaymentLinksResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/payment_links` endpoint.
+    *
+    * As opposed to `get_payment_links`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your payment links.</p>
+    */
+    pub async fn get_all_payment_links(
+        &self,
+        active: bool,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::PaymentLink>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/payment_links?{}", query_);
+
+        let mut resp: crate::types::GetPaymentLinksResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6905,14 +10448,14 @@ impl V1 {
     * * `payment_link: &str` -- The account's country.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_payment_links_link_line_item(
+    pub async fn get_payment_links_link_line_items(
         &self,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         payment_link: &str,
         starting_after: &str,
-    ) -> Result<crate::types::LineItems> {
+    ) -> Result<Vec<crate::types::Item>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -6930,7 +10473,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::LineItems = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/payment_links/{payment_link}/line_items` endpoint.
+    *
+    * As opposed to `get_payment_links_link_line_items`, this function returns all the pages of the request at once.
+    *
+    * <p>When retrieving a payment link, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+    */
+    pub async fn get_all_payment_links_link_line_items(
+        &self,
+        expand: &[String],
+        payment_link: &str,
+    ) -> Result<Vec<crate::types::Item>> {
+        let url = format!(
+            "/v1/payment_links/{}/line_items",
+            crate::progenitor_support::encode_path(&payment_link.to_string()),
+        );
+
+        let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -6947,7 +10542,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `type_: crate::types::GetCustomersCustomerPaymentMethodsType` -- A required filter on the list, based on the object `type` field.
     */
-    pub async fn get_payment_method(
+    pub async fn get_payment_methods(
         &self,
         customer: &str,
         ending_before: &str,
@@ -6955,7 +10550,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
-    ) -> Result<crate::types::PaymentFlowsMethodList> {
+    ) -> Result<Vec<crate::types::PaymentMethod>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -6975,7 +10570,65 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payment_methods?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PaymentFlowsMethodList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/payment_methods` endpoint.
+    *
+    * As opposed to `get_payment_methods`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of PaymentMethods. For listing a customer’s payment methods, you should use <a href="/docs/api/payment_methods/customer_list">List a Customer’s PaymentMethods</a></p>
+    */
+    pub async fn get_all_payment_methods(
+        &self,
+        customer: &str,
+        expand: &[String],
+        type_: crate::types::GetCustomersCustomerPaymentMethodsType,
+    ) -> Result<Vec<crate::types::PaymentMethod>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/payment_methods?{}", query_);
+
+        let mut resp: crate::types::PaymentFlowsMethodList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7102,7 +10755,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `status: &str` -- Only return payouts that have the given status: `pending`, `paid`, `failed`, or `canceled`.
     */
-    pub async fn get_payout(
+    pub async fn get_payouts(
         &self,
         arrival_date: &str,
         created: &str,
@@ -7112,7 +10765,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         status: &str,
-    ) -> Result<crate::types::PayoutList> {
+    ) -> Result<Vec<crate::types::Payout>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -7132,7 +10785,67 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/payouts?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PayoutList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/payouts` endpoint.
+    *
+    * As opposed to `get_payouts`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent you. The payouts are returned in sorted order, with the most recently created payouts appearing first.</p>
+    */
+    pub async fn get_all_payouts(
+        &self,
+        arrival_date: &str,
+        created: &str,
+        destination: &str,
+        expand: &[String],
+        status: &str,
+    ) -> Result<Vec<crate::types::Payout>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !destination.is_empty() {
+            query_args.push(("destination".to_string(), destination.to_string()));
+        }
+        if !status.is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/payouts?{}", query_);
+
+        let mut resp: crate::types::PayoutList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7243,7 +10956,7 @@ impl V1 {
     * * `product: &str` -- Only return plans for the given product.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_plan(
+    pub async fn get_plans(
         &self,
         active: bool,
         created: &str,
@@ -7252,7 +10965,7 @@ impl V1 {
         limit: i64,
         product: &str,
         starting_after: &str,
-    ) -> Result<crate::types::PlanList> {
+    ) -> Result<Vec<crate::types::PlanData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -7272,7 +10985,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/plans?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PlanList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/plans` endpoint.
+    *
+    * As opposed to `get_plans`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your plans.</p>
+    */
+    pub async fn get_all_plans(
+        &self,
+        active: bool,
+        created: &str,
+        expand: &[String],
+        product: &str,
+    ) -> Result<Vec<crate::types::PlanData>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        if !product.is_empty() {
+            query_args.push(("product".to_string(), product.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/plans?{}", query_);
+
+        let mut resp: crate::types::PlanList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7363,7 +11135,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `type_: crate::types::PriceType` -- One of `one_time` or `recurring` depending on whether the price is for a one-time purchase or a recurring (subscription) purchase.
     */
-    pub async fn get_price(
+    pub async fn get_prices(
         &self,
         active: bool,
         created: &str,
@@ -7376,7 +11148,7 @@ impl V1 {
         recurring: &str,
         starting_after: &str,
         type_: crate::types::PriceType,
-    ) -> Result<crate::types::PriceList> {
+    ) -> Result<Vec<crate::types::PriceData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -7402,7 +11174,76 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/prices?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PriceList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/prices` endpoint.
+    *
+    * As opposed to `get_prices`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your prices.</p>
+    */
+    pub async fn get_all_prices(
+        &self,
+        active: bool,
+        created: &str,
+        currency: &str,
+        expand: &[String],
+        lookup_keys: &[String],
+        product: &str,
+        recurring: &str,
+        type_: crate::types::PriceType,
+    ) -> Result<Vec<crate::types::PriceData>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        if !currency.is_empty() {
+            query_args.push(("currency".to_string(), currency.to_string()));
+        }
+        if !product.is_empty() {
+            query_args.push(("product".to_string(), product.to_string()));
+        }
+        if !type_.to_string().is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/prices?{}", query_);
+
+        let mut resp: crate::types::PriceList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7436,7 +11277,7 @@ impl V1 {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<crate::types::SearchResult> {
+    ) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -7450,7 +11291,64 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/prices/search?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/prices/search` endpoint.
+    *
+    * As opposed to `get_prices_search`, this function returns all the pages of the request at once.
+    *
+    * <p>Search for prices you’ve previously created using Stripe’s <a href="/docs/search#search-query-language">Search Query Language</a>.
+    * Don’t use search in read-after-write flows where strict consistency is necessary. Under normal operating
+    * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
+    * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
+    */
+    pub async fn get_all_prices_search(
+        &self,
+        expand: &[String],
+        query: &str,
+    ) -> Result<Vec<crate::types::Charge>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !query.is_empty() {
+            query_args.push(("query".to_string(), query.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/prices/search?{}", query_);
+
+        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7511,7 +11409,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `url: &str` -- Only return products with the given url.
     */
-    pub async fn get_product(
+    pub async fn get_products(
         &self,
         active: bool,
         created: &str,
@@ -7522,7 +11420,7 @@ impl V1 {
         shippable: bool,
         starting_after: &str,
         url: &str,
-    ) -> Result<crate::types::ProductList> {
+    ) -> Result<Vec<crate::types::Product>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -7545,7 +11443,71 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/products?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ProductList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/products` endpoint.
+    *
+    * As opposed to `get_products`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your products. The products are returned sorted by creation date, with the most recently created products appearing first.</p>
+    */
+    pub async fn get_all_products(
+        &self,
+        active: bool,
+        created: &str,
+        expand: &[String],
+        ids: &[String],
+        shippable: bool,
+        url: &str,
+    ) -> Result<Vec<crate::types::Product>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        if shippable {
+            query_args.push(("shippable".to_string(), shippable.to_string()));
+        }
+        if !url.is_empty() {
+            query_args.push(("url".to_string(), url.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/products?{}", query_);
+
+        let mut resp: crate::types::ProductList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7579,7 +11541,7 @@ impl V1 {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<crate::types::SearchResult> {
+    ) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -7593,7 +11555,64 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/products/search?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/products/search` endpoint.
+    *
+    * As opposed to `get_products_search`, this function returns all the pages of the request at once.
+    *
+    * <p>Search for products you’ve previously created using Stripe’s <a href="/docs/search#search-query-language">Search Query Language</a>.
+    * Don’t use search in read-after-write flows where strict consistency is necessary. Under normal operating
+    * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
+    * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
+    */
+    pub async fn get_all_products_search(
+        &self,
+        expand: &[String],
+        query: &str,
+    ) -> Result<Vec<crate::types::Charge>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !query.is_empty() {
+            query_args.push(("query".to_string(), query.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/products/search?{}", query_);
+
+        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7606,11 +11625,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_product_v_1(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::Product> {
+    pub async fn get_product(&self, expand: &[String], id: &str) -> Result<crate::types::Product> {
         let url = format!(
             "/v1/products/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -7683,7 +11698,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetPromotionCodesResponse> {
+    ) -> Result<Vec<crate::types::PromotionCode>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -7709,7 +11724,74 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/promotion_codes?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetPromotionCodesResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/promotion_codes` endpoint.
+    *
+    * As opposed to `get_promotion_codes`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your promotion codes.</p>
+    */
+    pub async fn get_all_promotion_codes(
+        &self,
+        active: bool,
+        code: &str,
+        coupon: &str,
+        created: &str,
+        customer: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::PromotionCode>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        if !code.is_empty() {
+            query_args.push(("code".to_string(), code.to_string()));
+        }
+        if !coupon.is_empty() {
+            query_args.push(("coupon".to_string(), coupon.to_string()));
+        }
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/promotion_codes?{}", query_);
+
+        let mut resp: crate::types::GetPromotionCodesResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7790,7 +11872,7 @@ impl V1 {
         starting_after: &str,
         status: crate::types::QuoteStatus,
         test_clock: &str,
-    ) -> Result<crate::types::GetQuotesResponse> {
+    ) -> Result<Vec<crate::types::Quote>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -7813,7 +11895,69 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/quotes?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetQuotesResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/quotes` endpoint.
+    *
+    * As opposed to `get_quotes`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your quotes.</p>
+    */
+    pub async fn get_all_quotes(
+        &self,
+        customer: &str,
+        expand: &[String],
+        status: crate::types::QuoteStatus,
+        test_clock: &str,
+    ) -> Result<Vec<crate::types::Quote>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        if !test_clock.is_empty() {
+            query_args.push(("test_clock".to_string(), test_clock.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/quotes?{}", query_);
+
+        let mut resp: crate::types::GetQuotesResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7916,14 +12060,14 @@ impl V1 {
     * * `quote: &str` -- The account's country.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_quotes_quote_computed_upfront_line_item(
+    pub async fn get_quotes_quote_computed_upfront_line_items(
         &self,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         quote: &str,
         starting_after: &str,
-    ) -> Result<crate::types::LineItems> {
+    ) -> Result<Vec<crate::types::Item>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -7941,7 +12085,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::LineItems = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/quotes/{quote}/computed_upfront_line_items` endpoint.
+    *
+    * As opposed to `get_quotes_quote_computed_upfront_line_items`, this function returns all the pages of the request at once.
+    *
+    * <p>When retrieving a quote, there is an includable <a href="https://stripe.com/docs/api/quotes/object#quote_object-computed-upfront-line_items"><strong>computed.upfront.line_items</strong></a> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of upfront line items.</p>
+    */
+    pub async fn get_all_quotes_quote_computed_upfront_line_items(
+        &self,
+        expand: &[String],
+        quote: &str,
+    ) -> Result<Vec<crate::types::Item>> {
+        let url = format!(
+            "/v1/quotes/{}/computed_upfront_line_items",
+            crate::progenitor_support::encode_path(&quote.to_string()),
+        );
+
+        let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -7975,14 +12171,14 @@ impl V1 {
     * * `quote: &str` -- The account's country.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_quotes_quote_line_item(
+    pub async fn get_quotes_quote_line_items(
         &self,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         quote: &str,
         starting_after: &str,
-    ) -> Result<crate::types::LineItems> {
+    ) -> Result<Vec<crate::types::Item>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -8000,7 +12196,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::LineItems = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/quotes/{quote}/line_items` endpoint.
+    *
+    * As opposed to `get_quotes_quote_line_items`, this function returns all the pages of the request at once.
+    *
+    * <p>When retrieving a quote, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+    */
+    pub async fn get_all_quotes_quote_line_items(
+        &self,
+        expand: &[String],
+        quote: &str,
+    ) -> Result<Vec<crate::types::Item>> {
+        let url = format!(
+            "/v1/quotes/{}/line_items",
+            crate::progenitor_support::encode_path(&quote.to_string()),
+        );
+
+        let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8036,7 +12284,7 @@ impl V1 {
     * * `payment_intent: &str` -- Only return early fraud warnings for charges that were created by the PaymentIntent specified by this PaymentIntent ID.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_radar_early_fraud_warning(
+    pub async fn get_radar_early_fraud_warnings(
         &self,
         charge: &str,
         ending_before: &str,
@@ -8044,7 +12292,7 @@ impl V1 {
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
-    ) -> Result<crate::types::RadarEarlyFraudWarningList> {
+    ) -> Result<Vec<crate::types::RadarEarlyFraudWarning>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -8064,7 +12312,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/radar/early_fraud_warnings?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::RadarEarlyFraudWarningList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/radar/early_fraud_warnings` endpoint.
+    *
+    * As opposed to `get_radar_early_fraud_warnings`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of early fraud warnings.</p>
+    */
+    pub async fn get_all_radar_early_fraud_warnings(
+        &self,
+        charge: &str,
+        expand: &[String],
+        payment_intent: &str,
+    ) -> Result<Vec<crate::types::RadarEarlyFraudWarning>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !charge.is_empty() {
+            query_args.push(("charge".to_string(), charge.to_string()));
+        }
+        if !payment_intent.is_empty() {
+            query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/radar/early_fraud_warnings?{}", query_);
+
+        let mut resp: crate::types::RadarEarlyFraudWarningList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8107,7 +12414,7 @@ impl V1 {
     * * `value: &str` -- Return items belonging to the parent list whose value matches the specified value (using an "is like" match).
     * * `value_list: &str` -- Identifier for the parent value list this item belongs to.
     */
-    pub async fn get_radar_value_list_item(
+    pub async fn get_radar_value_list_items(
         &self,
         created: &str,
         ending_before: &str,
@@ -8116,7 +12423,7 @@ impl V1 {
         starting_after: &str,
         value: &str,
         value_list: &str,
-    ) -> Result<crate::types::ListItems> {
+    ) -> Result<Vec<crate::types::RadarListItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -8136,7 +12443,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/radar/value_list_items?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ListItems = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/radar/value_list_items` endpoint.
+    *
+    * As opposed to `get_radar_value_list_items`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of <code>ValueListItem</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    */
+    pub async fn get_all_radar_value_list_all_items(
+        &self,
+        created: &str,
+        expand: &[String],
+        value: &str,
+        value_list: &str,
+    ) -> Result<Vec<crate::types::RadarListItem>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !value.is_empty() {
+            query_args.push(("value".to_string(), value.to_string()));
+        }
+        if !value_list.is_empty() {
+            query_args.push(("value_list".to_string(), value_list.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/radar/value_list_items?{}", query_);
+
+        let mut resp: crate::types::ListItems = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8217,7 +12583,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetRadarValueListsResponse> {
+    ) -> Result<Vec<crate::types::RadarList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {
             query_args.push(("alias".to_string(), alias.to_string()));
@@ -8237,7 +12603,67 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/radar/value_lists?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetRadarValueListsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/radar/value_lists` endpoint.
+    *
+    * As opposed to `get_radar_value_lists`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of <code>ValueList</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    */
+    pub async fn get_all_radar_value_lists(
+        &self,
+        alias: &str,
+        contains: &str,
+        created: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::RadarList>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !alias.is_empty() {
+            query_args.push(("alias".to_string(), alias.to_string()));
+        }
+        if !contains.is_empty() {
+            query_args.push(("contains".to_string(), contains.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/radar/value_lists?{}", query_);
+
+        let mut resp: crate::types::GetRadarValueListsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8339,7 +12765,7 @@ impl V1 {
         starting_after: &str,
         type_: crate::types::GetRecipientsType,
         verified: bool,
-    ) -> Result<crate::types::GetRecipientsResponse> {
+    ) -> Result<Vec<crate::types::Recipient>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -8359,7 +12785,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/recipients?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetRecipientsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/recipients` endpoint.
+    *
+    * As opposed to `get_recipients`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your recipients. The recipients are returned sorted by creation date, with the most recently created recipients appearing first.</p>
+    */
+    pub async fn get_all_recipients(
+        &self,
+        created: &str,
+        expand: &[String],
+        type_: crate::types::GetRecipientsType,
+        verified: bool,
+    ) -> Result<Vec<crate::types::Recipient>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !type_.to_string().is_empty() {
+            query_args.push(("type".to_string(), type_.to_string()));
+        }
+        if verified {
+            query_args.push(("verified".to_string(), verified.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/recipients?{}", query_);
+
+        let mut resp: crate::types::GetRecipientsResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8451,7 +12936,7 @@ impl V1 {
     * * `payment_intent: &str` -- Only return refunds for the PaymentIntent specified by this ID.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_refund(
+    pub async fn get_refunds(
         &self,
         charge: &str,
         created: &str,
@@ -8460,7 +12945,7 @@ impl V1 {
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
-    ) -> Result<crate::types::RefundList> {
+    ) -> Result<Vec<crate::types::Refund>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -8480,7 +12965,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/refunds?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::RefundList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/refunds` endpoint.
+    *
+    * As opposed to `get_refunds`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of all refunds you’ve previously created. The refunds are returned in sorted order, with the most recent refunds appearing first. For convenience, the 10 most recent refunds are always available by default on the charge object.</p>
+    */
+    pub async fn get_all_refunds(
+        &self,
+        charge: &str,
+        created: &str,
+        expand: &[String],
+        payment_intent: &str,
+    ) -> Result<Vec<crate::types::Refund>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !charge.is_empty() {
+            query_args.push(("charge".to_string(), charge.to_string()));
+        }
+        if !payment_intent.is_empty() {
+            query_args.push(("payment_intent".to_string(), payment_intent.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/refunds?{}", query_);
+
+        let mut resp: crate::types::RefundList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8576,7 +13120,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetReportingReportRunsResponse> {
+    ) -> Result<Vec<crate::types::ReportingReportRun>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -8590,7 +13134,57 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/reporting/report_runs?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetReportingReportRunsResponse =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/reporting/report_runs` endpoint.
+    *
+    * As opposed to `get_reporting_report_runs`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of Report Runs, with the most recent appearing first.</p>
+    */
+    pub async fn get_all_reporting_report_runs(
+        &self,
+        created: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::ReportingReportRun>> {
+        let url = "/v1/reporting/report_runs".to_string();
+        let mut resp: crate::types::GetReportingReportRunsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8635,12 +13229,61 @@ impl V1 {
     *
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_reporting_report_type(
+    pub async fn get_reporting_report_types(
         &self,
         expand: &[String],
-    ) -> Result<crate::types::FinancialReportingFinanceReportTypeList> {
+    ) -> Result<Vec<crate::types::ReportingReportType>> {
         let url = "/v1/reporting/report_types".to_string();
-        self.client.get(&url, None).await
+        let resp: crate::types::FinancialReportingFinanceReportTypeList =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/reporting/report_types` endpoint.
+    *
+    * As opposed to `get_reporting_report_types`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a full list of Report Types.</p>
+    */
+    pub async fn get_all_reporting_report_types(
+        &self,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::ReportingReportType>> {
+        let url = "/v1/reporting/report_types".to_string();
+        let mut resp: crate::types::FinancialReportingFinanceReportTypeList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8686,7 +13329,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetReviewsResponse> {
+    ) -> Result<Vec<crate::types::Review>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -8700,7 +13343,55 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/reviews?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetReviewsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/reviews` endpoint.
+    *
+    * As opposed to `get_reviews`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true</code>. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+    */
+    pub async fn get_all_reviews(
+        &self,
+        created: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::Review>> {
+        let url = "/v1/reviews".to_string();
+        let mut resp: crate::types::GetReviewsResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8761,7 +13452,7 @@ impl V1 {
     *   this ID.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_setup_attempt(
+    pub async fn get_setup_attempts(
         &self,
         created: &str,
         ending_before: &str,
@@ -8769,7 +13460,7 @@ impl V1 {
         limit: i64,
         setup_intent: &str,
         starting_after: &str,
-    ) -> Result<crate::types::PaymentFlowsSetupIntentAttemptList> {
+    ) -> Result<Vec<crate::types::SetupAttempt>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -8786,7 +13477,64 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/setup_attempts?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PaymentFlowsSetupIntentAttemptList =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/setup_attempts` endpoint.
+    *
+    * As opposed to `get_setup_attempts`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of SetupAttempts associated with a provided SetupIntent.</p>
+    */
+    pub async fn get_all_setup_attempts(
+        &self,
+        created: &str,
+        expand: &[String],
+        setup_intent: &str,
+    ) -> Result<Vec<crate::types::SetupAttempt>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !setup_intent.is_empty() {
+            query_args.push(("setup_intent".to_string(), setup_intent.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/setup_attempts?{}", query_);
+
+        let mut resp: crate::types::PaymentFlowsSetupIntentAttemptList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8804,7 +13552,7 @@ impl V1 {
     * * `payment_method: &str` -- Only return SetupIntents associated with the specified payment method.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_setup_intent(
+    pub async fn get_setup_intents(
         &self,
         created: &str,
         customer: &str,
@@ -8813,7 +13561,7 @@ impl V1 {
         limit: i64,
         payment_method: &str,
         starting_after: &str,
-    ) -> Result<crate::types::PaymentFlowsSetupIntentList> {
+    ) -> Result<Vec<crate::types::SetupIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -8833,7 +13581,67 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/setup_intents?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::PaymentFlowsSetupIntentList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/setup_intents` endpoint.
+    *
+    * As opposed to `get_setup_intents`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of SetupIntents.</p>
+    */
+    pub async fn get_all_setup_intents(
+        &self,
+        created: &str,
+        customer: &str,
+        expand: &[String],
+        payment_method: &str,
+    ) -> Result<Vec<crate::types::SetupIntent>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !payment_method.is_empty() {
+            query_args.push(("payment_method".to_string(), payment_method.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/setup_intents?{}", query_);
+
+        let mut resp: crate::types::PaymentFlowsSetupIntentList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -8997,7 +13805,7 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_shipping_rate(
+    pub async fn get_shipping_rates(
         &self,
         active: bool,
         created: &str,
@@ -9006,7 +13814,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::ShippingResourcesRateList> {
+    ) -> Result<Vec<crate::types::ShippingRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -9026,7 +13834,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/shipping_rates?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ShippingResourcesRateList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/shipping_rates` endpoint.
+    *
+    * As opposed to `get_shipping_rates`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your shipping rates.</p>
+    */
+    pub async fn get_all_shipping_rates(
+        &self,
+        active: bool,
+        created: &str,
+        currency: &str,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::ShippingRate>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        if !currency.is_empty() {
+            query_args.push(("currency".to_string(), currency.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/shipping_rates?{}", query_);
+
+        let mut resp: crate::types::ShippingResourcesRateList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -9101,7 +13968,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetSigmaScheduledQueryRunsResponse> {
+    ) -> Result<Vec<crate::types::ScheduledQueryRun>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -9115,7 +13982,56 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/sigma/scheduled_query_runs?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetSigmaScheduledQueryRunsResponse =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/sigma/scheduled_query_runs` endpoint.
+    *
+    * As opposed to `get_sigma_scheduled_query_runs`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of scheduled query runs.</p>
+    */
+    pub async fn get_all_sigma_scheduled_query_runs(
+        &self,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::ScheduledQueryRun>> {
+        let url = "/v1/sigma/scheduled_query_runs".to_string();
+        let mut resp: crate::types::GetSigmaScheduledQueryRunsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -9169,7 +14085,7 @@ impl V1 {
         limit: i64,
         product: &str,
         starting_after: &str,
-    ) -> Result<crate::types::GetSkusResponse> {
+    ) -> Result<Vec<crate::types::Sku>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -9192,7 +14108,71 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/skus?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetSkusResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/skus` endpoint.
+    *
+    * As opposed to `get_skus`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your SKUs. The SKUs are returned sorted by creation date, with the most recently created SKUs appearing first.</p>
+    */
+    pub async fn get_all_skus(
+        &self,
+        active: bool,
+        attributes: &str,
+        expand: &[String],
+        ids: &[String],
+        in_stock: bool,
+        product: &str,
+    ) -> Result<Vec<crate::types::Sku>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        if in_stock {
+            query_args.push(("in_stock".to_string(), in_stock.to_string()));
+        }
+        if !product.is_empty() {
+            query_args.push(("product".to_string(), product.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/skus?{}", query_);
+
+        let mut resp: crate::types::GetSkusResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -9366,14 +14346,14 @@ impl V1 {
     * * `source: &str` -- The account's country.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_sources_source_transaction(
+    pub async fn get_sources_source_transactions(
         &self,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         source: &str,
         starting_after: &str,
-    ) -> Result<crate::types::ApmsSourcesSourceTransactionList> {
+    ) -> Result<Vec<crate::types::SourceTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -9391,7 +14371,61 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::ApmsSourcesSourceTransactionList =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/sources/{source}/source_transactions` endpoint.
+    *
+    * As opposed to `get_sources_source_transactions`, this function returns all the pages of the request at once.
+    *
+    * <p>List source transactions for a given source.</p>
+    */
+    pub async fn get_all_sources_source_transactions(
+        &self,
+        expand: &[String],
+        source: &str,
+    ) -> Result<Vec<crate::types::SourceTransaction>> {
+        let url = format!(
+            "/v1/sources/{}/source_transactions",
+            crate::progenitor_support::encode_path(&source.to_string()),
+        );
+
+        let mut resp: crate::types::ApmsSourcesSourceTransactionList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -9454,14 +14488,14 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `subscription: &str` -- The ID of the subscription whose items will be retrieved.
     */
-    pub async fn get_subscription_item(
+    pub async fn get_subscription_items(
         &self,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
         subscription: &str,
-    ) -> Result<crate::types::Items> {
+    ) -> Result<Vec<crate::types::SubscriptionItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -9478,7 +14512,61 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/subscription_items?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Items = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/subscription_items` endpoint.
+    *
+    * As opposed to `get_subscription_items`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your subscription items for a given subscription.</p>
+    */
+    pub async fn get_all_subscription_items(
+        &self,
+        expand: &[String],
+        subscription: &str,
+    ) -> Result<Vec<crate::types::SubscriptionItem>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !subscription.is_empty() {
+            query_args.push(("subscription".to_string(), subscription.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/subscription_items?{}", query_);
+
+        let mut resp: crate::types::Items = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -9578,7 +14666,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         subscription_item: &str,
-    ) -> Result<crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse> {
+    ) -> Result<Vec<crate::types::UsageRecordSummary>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -9596,7 +14684,63 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/subscription_items/{subscription_item}/usage_record_summaries` endpoint.
+    *
+    * As opposed to `get_subscription_items_item_usage_record_summaries`, this function returns all the pages of the request at once.
+    *
+    * <p>For the specified subscription item, returns a list of summary objects. Each object in the list provides usage information that’s been summarized from multiple usage records and over a subscription billing period (e.g., 15 usage records in the month of September).</p>
+    *
+    * <p>The list is sorted in reverse-chronological order (newest first). The first list item represents the most current usage period that hasn’t ended yet. Since new usage records can still be added, the returned summary information for the subscription item’s ID should be seen as unstable until the subscription billing period ends.</p>
+    */
+    pub async fn get_all_subscription_items_item_usage_record_summaries(
+        &self,
+        expand: &[String],
+        subscription_item: &str,
+    ) -> Result<Vec<crate::types::UsageRecordSummary>> {
+        let url = format!(
+            "/v1/subscription_items/{}/usage_record_summaries",
+            crate::progenitor_support::encode_path(&subscription_item.to_string()),
+        );
+
+        let mut resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -9656,7 +14800,7 @@ impl V1 {
         released_at: &str,
         scheduled: bool,
         starting_after: &str,
-    ) -> Result<crate::types::GetSubscriptionSchedulesResponse> {
+    ) -> Result<Vec<crate::types::SubscriptionSchedule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
             query_args.push(("customer".to_string(), customer.to_string()));
@@ -9676,7 +14820,71 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/subscription_schedules?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetSubscriptionSchedulesResponse =
+            self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/subscription_schedules` endpoint.
+    *
+    * As opposed to `get_subscription_schedules`, this function returns all the pages of the request at once.
+    *
+    * <p>Retrieves the list of your subscription schedules.</p>
+    */
+    pub async fn get_all_subscription_schedules(
+        &self,
+        canceled_at: &str,
+        completed_at: &str,
+        created: &str,
+        customer: &str,
+        expand: &[String],
+        released_at: &str,
+        scheduled: bool,
+    ) -> Result<Vec<crate::types::SubscriptionSchedule>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if scheduled {
+            query_args.push(("scheduled".to_string(), scheduled.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/subscription_schedules?{}", query_);
+
+        let mut resp: crate::types::GetSubscriptionSchedulesResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -9795,7 +15003,7 @@ impl V1 {
     * * `status: crate::types::GetSubscriptionsStatus` -- The status of the subscriptions to retrieve. Passing in a value of `canceled` will return all canceled subscriptions, including those belonging to deleted customers. Pass `ended` to find subscriptions that are canceled and subscriptions that are expired due to [incomplete payment](https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses). Passing in a value of `all` will return subscriptions of all statuses. If no value is supplied, all subscriptions that have not been canceled are returned.
     * * `test_clock: &str` -- Filter for subscriptions that are associated with the specified test clock. The response will not include subscriptions with test clocks if this and the customer parameter is not set.
     */
-    pub async fn get_subscription(
+    pub async fn get_subscriptions(
         &self,
         collection_method: crate::types::CollectionMethod,
         created: &str,
@@ -9809,7 +15017,7 @@ impl V1 {
         starting_after: &str,
         status: crate::types::GetSubscriptionsStatus,
         test_clock: &str,
-    ) -> Result<crate::types::Subscriptions> {
+    ) -> Result<Vec<crate::types::Subscription>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !collection_method.to_string().is_empty() {
             query_args.push((
@@ -9841,7 +15049,83 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/subscriptions?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/subscriptions` endpoint.
+    *
+    * As opposed to `get_subscriptions`, this function returns all the pages of the request at once.
+    *
+    * <p>By default, returns a list of subscriptions that have not been canceled. In order to list canceled subscriptions, specify <code>status=canceled</code>.</p>
+    */
+    pub async fn get_all_subscriptions(
+        &self,
+        collection_method: crate::types::CollectionMethod,
+        created: &str,
+        current_period_end: &str,
+        current_period_start: &str,
+        customer: &str,
+        expand: &[String],
+        price: &str,
+        status: crate::types::GetSubscriptionsStatus,
+        test_clock: &str,
+    ) -> Result<Vec<crate::types::Subscription>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !collection_method.to_string().is_empty() {
+            query_args.push((
+                "collection_method".to_string(),
+                collection_method.to_string(),
+            ));
+        }
+        if !customer.is_empty() {
+            query_args.push(("customer".to_string(), customer.to_string()));
+        }
+        if !price.is_empty() {
+            query_args.push(("price".to_string(), price.to_string()));
+        }
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        if !test_clock.is_empty() {
+            query_args.push(("test_clock".to_string(), test_clock.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/subscriptions?{}", query_);
+
+        let mut resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -9881,7 +15165,7 @@ impl V1 {
         limit: i64,
         page: &str,
         query: &str,
-    ) -> Result<crate::types::SearchResult> {
+    ) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if limit > 0 {
             query_args.push(("limit".to_string(), limit.to_string()));
@@ -9895,7 +15179,64 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/subscriptions/search?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/subscriptions/search` endpoint.
+    *
+    * As opposed to `get_subscriptions_search`, this function returns all the pages of the request at once.
+    *
+    * <p>Search for subscriptions you’ve previously created using Stripe’s <a href="/docs/search#search-query-language">Search Query Language</a>.
+    * Don’t use search in read-after-write flows where strict consistency is necessary. Under normal operating
+    * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
+    * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
+    */
+    pub async fn get_all_subscriptions_search(
+        &self,
+        expand: &[String],
+        query: &str,
+    ) -> Result<Vec<crate::types::Charge>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !query.is_empty() {
+            query_args.push(("query".to_string(), query.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/subscriptions/search?{}", query_);
+
+        let mut resp: crate::types::SearchResult = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -10000,13 +15341,13 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_tax_code(
+    pub async fn get_tax_codes(
         &self,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::TaxProductResourceCodeList> {
+    ) -> Result<Vec<crate::types::TaxCode>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -10020,7 +15361,52 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/tax_codes?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::TaxProductResourceCodeList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/tax_codes` endpoint.
+    *
+    * As opposed to `get_tax_codes`, this function returns all the pages of the request at once.
+    *
+    * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
+    */
+    pub async fn get_all_tax_codes(&self, expand: &[String]) -> Result<Vec<crate::types::TaxCode>> {
+        let url = "/v1/tax_codes".to_string();
+        let mut resp: crate::types::TaxProductResourceCodeList =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -10033,11 +15419,7 @@ impl V1 {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_tax_code_v_1(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::TaxCode> {
+    pub async fn get_tax_code(&self, expand: &[String], id: &str) -> Result<crate::types::TaxCode> {
         let url = format!(
             "/v1/tax_codes/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -10070,7 +15452,7 @@ impl V1 {
         inclusive: bool,
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetTaxRatesResponse> {
+    ) -> Result<Vec<crate::types::TaxRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -10090,7 +15472,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/tax_rates?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetTaxRatesResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/tax_rates` endpoint.
+    *
+    * As opposed to `get_tax_rates`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your tax rates. Tax rates are returned sorted by creation date, with the most recently created tax rates appearing first.</p>
+    */
+    pub async fn get_all_tax_rates(
+        &self,
+        active: bool,
+        created: &str,
+        expand: &[String],
+        inclusive: bool,
+    ) -> Result<Vec<crate::types::TaxRate>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if active {
+            query_args.push(("active".to_string(), active.to_string()));
+        }
+        if inclusive {
+            query_args.push(("inclusive".to_string(), inclusive.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/tax_rates?{}", query_);
+
+        let mut resp: crate::types::GetTaxRatesResponse = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -10168,13 +15609,13 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_terminal_location(
+    pub async fn get_terminal_locations(
         &self,
         ending_before: &str,
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::TerminalLocationList> {
+    ) -> Result<Vec<crate::types::TerminalLocation>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -10188,7 +15629,54 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/terminal/locations?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::TerminalLocationList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/terminal/locations` endpoint.
+    *
+    * As opposed to `get_terminal_locations`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of <code>Location</code> objects.</p>
+    */
+    pub async fn get_all_terminal_locations(
+        &self,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::TerminalLocation>> {
+        let url = "/v1/terminal/locations".to_string();
+        let mut resp: crate::types::TerminalLocationList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -10282,7 +15770,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `status: crate::types::CustomerAcceptanceType` -- The type of customer acceptance information included with the Mandate. One of `online` or `offline`.
     */
-    pub async fn get_terminal_reader(
+    pub async fn get_terminal_readers(
         &self,
         device_type: crate::types::DeviceType,
         ending_before: &str,
@@ -10291,7 +15779,7 @@ impl V1 {
         location: &str,
         starting_after: &str,
         status: crate::types::CustomerAcceptanceType,
-    ) -> Result<crate::types::TerminalReaderRetrieve> {
+    ) -> Result<Vec<crate::types::TerminalReader>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !device_type.to_string().is_empty() {
             query_args.push(("device_type".to_string(), device_type.to_string()));
@@ -10314,7 +15802,69 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/terminal/readers?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::TerminalReaderRetrieve = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/terminal/readers` endpoint.
+    *
+    * As opposed to `get_terminal_readers`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of <code>Reader</code> objects.</p>
+    */
+    pub async fn get_all_terminal_readers(
+        &self,
+        device_type: crate::types::DeviceType,
+        expand: &[String],
+        location: &str,
+        status: crate::types::CustomerAcceptanceType,
+    ) -> Result<Vec<crate::types::TerminalReader>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !device_type.to_string().is_empty() {
+            query_args.push(("device_type".to_string(), device_type.to_string()));
+        }
+        if !location.is_empty() {
+            query_args.push(("location".to_string(), location.to_string()));
+        }
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/terminal/readers?{}", query_);
+
+        let mut resp: crate::types::TerminalReaderRetrieve = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -10515,7 +16065,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetTestHelpersClocksResponse> {
+    ) -> Result<Vec<crate::types::TestClock>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -10529,7 +16079,55 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/test_helpers/test_clocks?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetTestHelpersClocksResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/test_helpers/test_clocks` endpoint.
+    *
+    * As opposed to `get_test_helpers_clocks`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your test clocks.</p>
+    */
+    pub async fn get_all_test_helpers_clocks(
+        &self,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::TestClock>> {
+        let url = "/v1/test_helpers/test_clocks".to_string();
+        let mut resp: crate::types::GetTestHelpersClocksResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -10656,7 +16254,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `status: crate::types::GetTopupsStatus` -- Only return top-ups that have the given status. One of `canceled`, `failed`, `pending` or `succeeded`.
     */
-    pub async fn get_topup(
+    pub async fn get_topups(
         &self,
         amount: &str,
         created: &str,
@@ -10665,7 +16263,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         status: crate::types::GetTopupsStatus,
-    ) -> Result<crate::types::TopupList> {
+    ) -> Result<Vec<crate::types::Topup>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -10682,7 +16280,63 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/topups?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::TopupList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/topups` endpoint.
+    *
+    * As opposed to `get_topups`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of top-ups.</p>
+    */
+    pub async fn get_all_topups(
+        &self,
+        amount: &str,
+        created: &str,
+        expand: &[String],
+        status: crate::types::GetTopupsStatus,
+    ) -> Result<Vec<crate::types::Topup>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !status.to_string().is_empty() {
+            query_args.push(("status".to_string(), status.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/topups?{}", query_);
+
+        let mut resp: crate::types::TopupList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -10769,7 +16423,7 @@ impl V1 {
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     * * `transfer_group: &str` -- Only return transfers with the specified transfer group.
     */
-    pub async fn get_transfer(
+    pub async fn get_transfers(
         &self,
         created: &str,
         destination: &str,
@@ -10778,7 +16432,7 @@ impl V1 {
         limit: i64,
         starting_after: &str,
         transfer_group: &str,
-    ) -> Result<crate::types::TransferList> {
+    ) -> Result<Vec<crate::types::Transfer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !destination.is_empty() {
             query_args.push(("destination".to_string(), destination.to_string()));
@@ -10798,7 +16452,66 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/transfers?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::TransferList = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/transfers` endpoint.
+    *
+    * As opposed to `get_transfers`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of existing transfers sent to connected accounts. The transfers are returned in sorted order, with the most recently created transfers appearing first.</p>
+    */
+    pub async fn get_all_transfers(
+        &self,
+        created: &str,
+        destination: &str,
+        expand: &[String],
+        transfer_group: &str,
+    ) -> Result<Vec<crate::types::Transfer>> {
+        let mut query_args: Vec<(String, String)> = Default::default();
+        if !destination.is_empty() {
+            query_args.push(("destination".to_string(), destination.to_string()));
+        }
+        if !transfer_group.is_empty() {
+            query_args.push(("transfer_group".to_string(), transfer_group.to_string()));
+        }
+        let query_ = serde_urlencoded::to_string(&query_args).unwrap();
+        let url = format!("/v1/transfers?{}", query_);
+
+        let mut resp: crate::types::TransferList = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -10824,14 +16537,14 @@ impl V1 {
     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
     */
-    pub async fn get_transfers_reversal(
+    pub async fn get_transfers_reversals(
         &self,
         ending_before: &str,
         expand: &[String],
         id: &str,
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::Reversals> {
+    ) -> Result<Vec<crate::types::TransferReversal>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -10849,7 +16562,59 @@ impl V1 {
             query_
         );
 
-        self.client.get(&url, None).await
+        let resp: crate::types::Reversals = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/transfers/{id}/reversals` endpoint.
+    *
+    * As opposed to `get_transfers_reversals`, this function returns all the pages of the request at once.
+    *
+    * <p>You can see a list of the reversals belonging to a specific transfer. Note that the 10 most recent reversals are always available by default on the transfer object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional reversals.</p>
+    */
+    pub async fn get_all_transfers_reversals(
+        &self,
+        expand: &[String],
+        id: &str,
+    ) -> Result<Vec<crate::types::TransferReversal>> {
+        let url = format!(
+            "/v1/transfers/{}/reversals",
+            crate::progenitor_support::encode_path(&id.to_string()),
+        );
+
+        let mut resp: crate::types::Reversals = self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**
@@ -10990,7 +16755,7 @@ impl V1 {
         expand: &[String],
         limit: i64,
         starting_after: &str,
-    ) -> Result<crate::types::GetWebhookEndpointsResponse> {
+    ) -> Result<Vec<crate::types::WebhookEndpoint>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !ending_before.is_empty() {
             query_args.push(("ending_before".to_string(), ending_before.to_string()));
@@ -11004,7 +16769,55 @@ impl V1 {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/v1/webhook_endpoints?{}", query_);
 
-        self.client.get(&url, None).await
+        let resp: crate::types::GetWebhookEndpointsResponse = self.client.get(&url, None).await?;
+
+        // Return our response data.
+        Ok(resp.data)
+    }
+
+    /**
+    * This function performs a `GET` to the `/v1/webhook_endpoints` endpoint.
+    *
+    * As opposed to `get_webhook_endpoints`, this function returns all the pages of the request at once.
+    *
+    * <p>Returns a list of your webhook endpoints.</p>
+    */
+    pub async fn get_all_webhook_endpoints(
+        &self,
+        expand: &[String],
+    ) -> Result<Vec<crate::types::WebhookEndpoint>> {
+        let url = "/v1/webhook_endpoints".to_string();
+        let mut resp: crate::types::GetWebhookEndpointsResponse =
+            self.client.get(&url, None).await?;
+
+        let mut data = resp.data;
+        let mut has_more = resp.has_more;
+        let mut page = "";
+
+        // Paginate if we should.
+        while has_more {
+            if !resp.data.is_empty() {
+                page = resp.data.last().unwrap().id.to_string();
+            }
+            if !url.contains('?') {
+                resp = self
+                    .client
+                    .get(&format!("{}?startng_after={}", url, page), None)
+                    .await?;
+            } else {
+                resp = self
+                    .client
+                    .get(&format!("{}&starting_after={}", url, page), None)
+                    .await?;
+            }
+
+            data.append(&mut resp.data);
+
+            resp.has_more = resp.has_more;
+        }
+
+        // Return our response data.
+        Ok(data)
     }
 
     /**

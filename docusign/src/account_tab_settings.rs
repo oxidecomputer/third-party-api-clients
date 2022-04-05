@@ -23,10 +23,13 @@ impl AccountTabSettings {
     *
     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
     */
-    pub async fn tab_settings_get(&self, account_id: &str) -> Result<crate::types::TabsBlob> {
+    pub async fn tab_settings_get(
+        &self,
+        account_id: &str,
+    ) -> Result<crate::types::TabAccountSettings> {
         let url = format!(
             "/v2.1/accounts/{}/settings/tabs",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -46,11 +49,11 @@ impl AccountTabSettings {
     pub async fn tab_settings_put(
         &self,
         account_id: &str,
-        body: &crate::types::TabsBlob,
-    ) -> Result<crate::types::TabsBlob> {
+        body: &crate::types::TabAccountSettings,
+    ) -> Result<crate::types::TabAccountSettings> {
         let url = format!(
             "/v2.1/accounts/{}/settings/tabs",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
