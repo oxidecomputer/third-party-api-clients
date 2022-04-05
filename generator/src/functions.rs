@@ -702,7 +702,7 @@ fn get_fn_params(
                 fn_params_str.push(format!("ids: {},", typ));
                 fn_params.push("ids".to_string());
             } else if (!all_pages || !is_page_param(nam, proper_name))
-                && !(nam == "authorization" && proper_name != "Stripe")
+                && (nam != "authorization" || proper_name == "Stripe")
                 && !nam.starts_with("authorization_bearer")
                 && (!proper_name.starts_with("Google")
                     || !is_google_unnecessary_param(proper_name, nam))
@@ -753,7 +753,7 @@ fn get_fn_params(
                         (typ.to_string(), parameter_data.name.to_string()),
                     );
                 } else if (!all_pages || !is_page_param(nam, proper_name))
-                    && !(nam == "authorization" && proper_name != "Stripe")
+                    && (nam != "authorization" || proper_name == "Stripe")
                     && !nam.starts_with("authorization_bearer")
                     && (!proper_name.starts_with("Google")
                         || !is_google_unnecessary_param(proper_name, nam))
