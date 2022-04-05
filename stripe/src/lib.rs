@@ -1,6 +1,6 @@
 //! A fully generated, opinionated API client library for Stripe.
 //!
-//! [![docs.rs](https://docs.rs/stripe-api/badge.svg)](https://docs.rs/stripe-api)
+//! [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)
 //!
 //! ## API Details
 //!
@@ -29,7 +29,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! stripe-api = "0.1.0"
+//! dolladollabills = "0.1.0"
 //! ```
 //!
 //! ## Basic example
@@ -38,7 +38,7 @@
 //! a user agent string and set of credentials.
 //!
 //! ```
-//! use stripe_api::Client;
+//! use dolladollabills::Client;
 //!
 //! let stripe = Client::new(
 //!     String::from("api-key"),
@@ -53,7 +53,7 @@
 //! And then you can create a client from the environment.
 //!
 //! ```
-//! use stripe_api::Client;
+//! use dolladollabills::Client;
 //!
 //! let stripe = Client::new_from_env();
 //! ```
@@ -65,12 +65,72 @@
 #![allow(missing_docs)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+pub mod account;
+pub mod account_links;
+pub mod accounts;
+pub mod apple_pay;
+pub mod application_fees;
+pub mod balance;
+pub mod balance_transactions;
+pub mod billing_portal;
+pub mod bitcoin;
+pub mod charges;
+pub mod checkout;
+pub mod country_specs;
+pub mod coupons;
+pub mod credit_notes;
+pub mod customers;
+pub mod disputes;
+pub mod ephemeral_keys;
+pub mod events;
+pub mod exchange_rates;
+pub mod file_links;
+pub mod files;
+pub mod identity;
+pub mod invoiceitems;
+pub mod invoices;
+pub mod issuer_fraud_records;
+pub mod issuing;
+pub mod mandates;
+pub mod order_returns;
+pub mod orders;
+pub mod payment_intents;
+pub mod payment_links;
+pub mod payment_methods;
+pub mod payouts;
+pub mod plans;
+pub mod prices;
+pub mod products;
+pub mod promotion_codes;
+pub mod quotes;
+pub mod radar;
+pub mod recipients;
+pub mod refunds;
+pub mod reporting;
+pub mod reviews;
+pub mod setup_attempts;
+pub mod setup_intents;
+pub mod shipping_rates;
+pub mod sigma;
+pub mod skus;
+pub mod sources;
+pub mod subscription_items;
+pub mod subscription_schedules;
+pub mod subscriptions;
+pub mod tax_codes;
+pub mod tax_rates;
+pub mod terminal;
+pub mod test_helpers;
 #[cfg(test)]
 mod tests;
+pub mod three_d_secure;
+pub mod tokens;
+pub mod topups;
+pub mod transfers;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;
-pub mod v_1;
+pub mod webhook_endpoints;
 
 use anyhow::{anyhow, Error, Result};
 
@@ -647,7 +707,247 @@ impl Client {
         .await
     }
 
-    pub fn v_1(&self) -> v_1::V1 {
-        v_1::V1::new(self.clone())
+    pub fn account(&self) -> account::Account {
+        account::Account::new(self.clone())
+    }
+
+    pub fn account_links(&self) -> account_links::AccountLinks {
+        account_links::AccountLinks::new(self.clone())
+    }
+
+    pub fn accounts(&self) -> accounts::Accounts {
+        accounts::Accounts::new(self.clone())
+    }
+
+    pub fn apple_pay(&self) -> apple_pay::ApplePay {
+        apple_pay::ApplePay::new(self.clone())
+    }
+
+    pub fn application_fees(&self) -> application_fees::ApplicationFees {
+        application_fees::ApplicationFees::new(self.clone())
+    }
+
+    pub fn balance(&self) -> balance::Balance {
+        balance::Balance::new(self.clone())
+    }
+
+    pub fn balance_transactions(&self) -> balance_transactions::BalanceTransactions {
+        balance_transactions::BalanceTransactions::new(self.clone())
+    }
+
+    pub fn billing_portal(&self) -> billing_portal::BillingPortal {
+        billing_portal::BillingPortal::new(self.clone())
+    }
+
+    pub fn bitcoin(&self) -> bitcoin::Bitcoin {
+        bitcoin::Bitcoin::new(self.clone())
+    }
+
+    pub fn charges(&self) -> charges::Charges {
+        charges::Charges::new(self.clone())
+    }
+
+    pub fn checkout(&self) -> checkout::Checkout {
+        checkout::Checkout::new(self.clone())
+    }
+
+    pub fn country_specs(&self) -> country_specs::CountrySpecs {
+        country_specs::CountrySpecs::new(self.clone())
+    }
+
+    pub fn coupons(&self) -> coupons::Coupons {
+        coupons::Coupons::new(self.clone())
+    }
+
+    pub fn credit_notes(&self) -> credit_notes::CreditNotes {
+        credit_notes::CreditNotes::new(self.clone())
+    }
+
+    pub fn customers(&self) -> customers::Customers {
+        customers::Customers::new(self.clone())
+    }
+
+    pub fn disputes(&self) -> disputes::Disputes {
+        disputes::Disputes::new(self.clone())
+    }
+
+    pub fn ephemeral_keys(&self) -> ephemeral_keys::EphemeralKeys {
+        ephemeral_keys::EphemeralKeys::new(self.clone())
+    }
+
+    pub fn events(&self) -> events::Events {
+        events::Events::new(self.clone())
+    }
+
+    pub fn exchange_rates(&self) -> exchange_rates::ExchangeRates {
+        exchange_rates::ExchangeRates::new(self.clone())
+    }
+
+    pub fn file_links(&self) -> file_links::FileLinks {
+        file_links::FileLinks::new(self.clone())
+    }
+
+    pub fn files(&self) -> files::Files {
+        files::Files::new(self.clone())
+    }
+
+    pub fn identity(&self) -> identity::Identity {
+        identity::Identity::new(self.clone())
+    }
+
+    pub fn invoiceitems(&self) -> invoiceitems::Invoiceitems {
+        invoiceitems::Invoiceitems::new(self.clone())
+    }
+
+    pub fn invoices(&self) -> invoices::Invoices {
+        invoices::Invoices::new(self.clone())
+    }
+
+    pub fn issuer_fraud_records(&self) -> issuer_fraud_records::IssuerFraudRecords {
+        issuer_fraud_records::IssuerFraudRecords::new(self.clone())
+    }
+
+    pub fn issuing(&self) -> issuing::Issuing {
+        issuing::Issuing::new(self.clone())
+    }
+
+    pub fn mandates(&self) -> mandates::Mandates {
+        mandates::Mandates::new(self.clone())
+    }
+
+    pub fn order_returns(&self) -> order_returns::OrderReturns {
+        order_returns::OrderReturns::new(self.clone())
+    }
+
+    pub fn orders(&self) -> orders::Orders {
+        orders::Orders::new(self.clone())
+    }
+
+    pub fn payment_intents(&self) -> payment_intents::PaymentIntents {
+        payment_intents::PaymentIntents::new(self.clone())
+    }
+
+    pub fn payment_links(&self) -> payment_links::PaymentLinks {
+        payment_links::PaymentLinks::new(self.clone())
+    }
+
+    pub fn payment_methods(&self) -> payment_methods::PaymentMethods {
+        payment_methods::PaymentMethods::new(self.clone())
+    }
+
+    pub fn payouts(&self) -> payouts::Payouts {
+        payouts::Payouts::new(self.clone())
+    }
+
+    pub fn plans(&self) -> plans::Plans {
+        plans::Plans::new(self.clone())
+    }
+
+    pub fn prices(&self) -> prices::Prices {
+        prices::Prices::new(self.clone())
+    }
+
+    pub fn products(&self) -> products::Products {
+        products::Products::new(self.clone())
+    }
+
+    pub fn promotion_codes(&self) -> promotion_codes::PromotionCodes {
+        promotion_codes::PromotionCodes::new(self.clone())
+    }
+
+    pub fn quotes(&self) -> quotes::Quotes {
+        quotes::Quotes::new(self.clone())
+    }
+
+    pub fn radar(&self) -> radar::Radar {
+        radar::Radar::new(self.clone())
+    }
+
+    pub fn recipients(&self) -> recipients::Recipients {
+        recipients::Recipients::new(self.clone())
+    }
+
+    pub fn refunds(&self) -> refunds::Refunds {
+        refunds::Refunds::new(self.clone())
+    }
+
+    pub fn reporting(&self) -> reporting::Reporting {
+        reporting::Reporting::new(self.clone())
+    }
+
+    pub fn reviews(&self) -> reviews::Reviews {
+        reviews::Reviews::new(self.clone())
+    }
+
+    pub fn setup_attempts(&self) -> setup_attempts::SetupAttempts {
+        setup_attempts::SetupAttempts::new(self.clone())
+    }
+
+    pub fn setup_intents(&self) -> setup_intents::SetupIntents {
+        setup_intents::SetupIntents::new(self.clone())
+    }
+
+    pub fn shipping_rates(&self) -> shipping_rates::ShippingRates {
+        shipping_rates::ShippingRates::new(self.clone())
+    }
+
+    pub fn sigma(&self) -> sigma::Sigma {
+        sigma::Sigma::new(self.clone())
+    }
+
+    pub fn skus(&self) -> skus::Skus {
+        skus::Skus::new(self.clone())
+    }
+
+    pub fn sources(&self) -> sources::Sources {
+        sources::Sources::new(self.clone())
+    }
+
+    pub fn subscription_items(&self) -> subscription_items::SubscriptionItems {
+        subscription_items::SubscriptionItems::new(self.clone())
+    }
+
+    pub fn subscription_schedules(&self) -> subscription_schedules::SubscriptionSchedules {
+        subscription_schedules::SubscriptionSchedules::new(self.clone())
+    }
+
+    pub fn subscriptions(&self) -> subscriptions::Subscriptions {
+        subscriptions::Subscriptions::new(self.clone())
+    }
+
+    pub fn tax_codes(&self) -> tax_codes::TaxCodes {
+        tax_codes::TaxCodes::new(self.clone())
+    }
+
+    pub fn tax_rates(&self) -> tax_rates::TaxRates {
+        tax_rates::TaxRates::new(self.clone())
+    }
+
+    pub fn terminal(&self) -> terminal::Terminal {
+        terminal::Terminal::new(self.clone())
+    }
+
+    pub fn test_helpers(&self) -> test_helpers::TestHelpers {
+        test_helpers::TestHelpers::new(self.clone())
+    }
+
+    pub fn three_d_secure(&self) -> three_d_secure::ThreeDSecure {
+        three_d_secure::ThreeDSecure::new(self.clone())
+    }
+
+    pub fn tokens(&self) -> tokens::Tokens {
+        tokens::Tokens::new(self.clone())
+    }
+
+    pub fn topups(&self) -> topups::Topups {
+        topups::Topups::new(self.clone())
+    }
+
+    pub fn transfers(&self) -> transfers::Transfers {
+        transfers::Transfers::new(self.clone())
+    }
+
+    pub fn webhook_endpoints(&self) -> webhook_endpoints::WebhookEndpoints {
+        webhook_endpoints::WebhookEndpoints::new(self.clone())
     }
 }

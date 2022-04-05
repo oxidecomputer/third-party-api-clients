@@ -1,8 +1,8 @@
 [package]
-name = "stripe-api"
+name = "dolladollabills"
 description = "A fully generated & opinionated API client for the Stripe API."
 version = "0.1.0"
-documentation = "https://docs.rs/stripe-api/"
+documentation = "https://docs.rs/dolladollabills/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/stripe"
 readme = "README.md"
 edition = "2018"

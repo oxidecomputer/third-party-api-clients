@@ -94,7 +94,7 @@ ZOOM_SPEC_DIR = $(CURDIR)/specs/zoom
 ZOOM_SPEC = $(ZOOM_SPEC_DIR)/zoom.json
 ZOOM_SPEC_REMOTE = https://marketplace.zoom.us/docs/api-reference/zoom-api/Zoom%20API.oas2.json
 
-generate: README.md docusign giphy github google-admin google-calendar google-cloud-resource-manager google-drive google-groups-settings google-sheets gusto mailchimp okta revai sendgrid shipbob shopify slack tripactions zoom
+generate: README.md docusign giphy github google-admin google-calendar google-cloud-resource-manager google-drive google-groups-settings google-sheets gusto mailchimp okta revai sendgrid shipbob shopify slack stripe tripactions zoom
 	cargo test tests
 	cargo clippy
 
@@ -520,13 +520,13 @@ $(STRIPE_SPEC): $(STRIPE_SPEC_DIR)
 stripe: target/debug/generator $(STRIPE_SPEC)
 	./target/debug/generator -i $(STRIPE_SPEC) -v 0.1.0 \
 		-o stripe \
-		-n stripe-api \
+		-n dolladollabills \
 		--proper-name Stripe \
 		-d "A fully generated & opinionated API client for the Stripe API." \
 		--spec-link "$(STRIPE_SPEC_REMOTE)" \
 		--host "api.stripe.com/v1" $(EXTRA_ARGS)
-	cargo fmt -p stripe-api
-	@echo -e "- [Stripe](stripe/) [![docs.rs](https://docs.rs/stripe-api/badge.svg)](https://docs.rs/stripe-api)" >> README.md
+	cargo fmt -p dolladollabills
+	@echo -e "- [Stripe](stripe/) [![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)" >> README.md
 
 $(TRIPACTIONS_SPEC_DIR):
 	mkdir -p $@

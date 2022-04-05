@@ -46,13 +46,16 @@ impl BusinessType {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `BankAccount`
 /// - `Card`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DataAnyOf {
+#[serde(untagged)]
+pub enum DataAnyOf {
     /**
     * These bank accounts are payment methods on `Customer` objects.
     *  
@@ -62,8 +65,7 @@ pub struct DataAnyOf {
     *  
     *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
     */
-    #[serde(flatten)]
-    pub bank_account: BankAccount,
+    BankAccount(BankAccount),
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -71,8 +73,23 @@ pub struct DataAnyOf {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(flatten)]
-    pub card: Card,
+    Card(Card),
+}
+
+impl DataAnyOf {
+    pub fn bank_account(&self) -> Option<&BankAccount> {
+        if let DataAnyOf::BankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn card(&self) -> Option<&Card> {
+        if let DataAnyOf::Card(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -116,12 +133,8 @@ pub struct ExternalAccounts {
     /**
     * The list contains all external accounts that have been attached to the Stripe account. These may be bank accounts or cards.
     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub data: Vec<DataAnyOf>,
+    #[serde()]
+    pub data: Box<Vec<DataAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -474,18 +487,20 @@ pub struct AccountBacsDebitPaymentsSettings {
     pub display_name: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `File`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IconAnyOf {
+#[serde(untagged)]
+pub enum IconAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * This is an object representing a file hosted on Stripe's servers. The
     *  file may have been uploaded by yourself using the [create file](https://stripe.com/docs/api#create_file)
@@ -495,8 +510,35 @@ pub struct IconAnyOf {
     *  
     *  Related guide: [File Upload Guide](https://stripe.com/docs/file-upload).
     */
-    #[serde(flatten)]
-    pub file: File,
+    File(File),
+}
+
+impl IconAnyOf {
+    pub fn file(&self) -> Option<&File> {
+        if let IconAnyOf::File(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let IconAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for IconAnyOf {
+    fn from(f: String) -> Self {
+        IconAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<IconAnyOf> for String {
+    fn from(f: IconAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 ///
@@ -505,13 +547,13 @@ pub struct AccountBrandingSettings {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub icon: Option<IconAnyOf>,
+    #[serde()]
+    pub icon: Box<Option<IconAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub logo: Option<IconAnyOf>,
+    #[serde()]
+    pub logo: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -1759,31 +1801,66 @@ pub struct Address {
     pub state: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Customer`
 /// - `DeletedCustomer`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct CustomerAnyOf {
+#[serde(untagged)]
+pub enum CustomerAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * This object represents a customer of your business. It lets you create recurring charges and track payments that belong to the same customer.
     *  
     *  Related guide: [Save a card during payment](https://stripe.com/docs/payments/save-during-payment).
     */
-    #[serde(flatten)]
-    pub customer: Customer,
+    Customer(Customer),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_customer: DeletedCustomer,
+    DeletedCustomer(DeletedCustomer),
+}
+
+impl CustomerAnyOf {
+    pub fn customer(&self) -> Option<&Customer> {
+        if let CustomerAnyOf::Customer(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn deleted_customer(&self) -> Option<&DeletedCustomer> {
+        if let CustomerAnyOf::DeletedCustomer(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let CustomerAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for CustomerAnyOf {
+    fn from(f: String) -> Self {
+        CustomerAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<CustomerAnyOf> for String {
+    fn from(f: CustomerAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -1836,8 +1913,8 @@ pub struct AlipayAccount {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * The account's country.
     */
@@ -1923,14 +2000,17 @@ pub struct AlipayAccount {
     pub username: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `BankAccount`
 /// - `Card`
 /// - `SourceData`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SourceAnyOf {
+#[serde(untagged)]
+pub enum SourceAnyOf {
     /**
     * These bank accounts are payment methods on `Customer` objects.
     *  
@@ -1940,8 +2020,7 @@ pub struct SourceAnyOf {
     *  
     *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
     */
-    #[serde(flatten)]
-    pub bank_account: BankAccount,
+    BankAccount(BankAccount),
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -1949,8 +2028,7 @@ pub struct SourceAnyOf {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(flatten)]
-    pub card: Card,
+    Card(Card),
     /**
     * `Source` objects allow you to accept a variety of payment methods. They
     *  represent a customer's payment instrument, and can be used with the Stripe API
@@ -1959,8 +2037,30 @@ pub struct SourceAnyOf {
     *  
     *  Related guides: [Sources API](https://stripe.com/docs/sources) and [Sources & Customers](https://stripe.com/docs/sources/customers).
     */
-    #[serde(flatten)]
-    pub source_data: SourceData,
+    SourceData(SourceData),
+}
+
+impl SourceAnyOf {
+    pub fn bank_account(&self) -> Option<&BankAccount> {
+        if let SourceAnyOf::BankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn card(&self) -> Option<&Card> {
+        if let SourceAnyOf::Card(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn source_data(&self) -> Option<&SourceData> {
+        if let SourceAnyOf::SourceData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -2091,8 +2191,8 @@ pub struct ApiErrors {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub source: Option<SourceAnyOf>,
+    #[serde()]
+    pub source: Box<Option<SourceAnyOf>>,
     /**
     * The type of error returned. One of `api_error`, `card_error`, `idempotency_error`, or `invalid_request_error`
     */
@@ -2247,18 +2347,20 @@ pub struct Application {
     pub object: ApplicationObject,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Account`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AccountAnyOf {
+#[serde(untagged)]
+pub enum AccountAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * This is an object representing a Stripe account. You can retrieve it to see
     *  properties on the account like its current e-mail address or if the account is
@@ -2267,63 +2369,150 @@ pub struct AccountAnyOf {
     *  Some properties, marked below, are available only to platforms that want to
     *  [create and manage Express or Custom accounts](https://stripe.com/docs/connect/accounts).
     */
-    #[serde(flatten)]
-    pub account: Account,
+    Account(Account),
 }
 
-/// All of the following types are flattened into one object:
+impl AccountAnyOf {
+    pub fn account(&self) -> Option<&Account> {
+        if let AccountAnyOf::Account(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let AccountAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for AccountAnyOf {
+    fn from(f: String) -> Self {
+        AccountAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<AccountAnyOf> for String {
+    fn from(f: AccountAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `Application`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ApplicationAnyOf {
+#[serde(untagged)]
+pub enum ApplicationAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     *
     */
-    #[serde(flatten)]
-    pub application: Application,
+    Application(Application),
 }
 
-/// All of the following types are flattened into one object:
+impl ApplicationAnyOf {
+    pub fn application(&self) -> Option<&Application> {
+        if let ApplicationAnyOf::Application(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ApplicationAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for ApplicationAnyOf {
+    fn from(f: String) -> Self {
+        ApplicationAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<ApplicationAnyOf> for String {
+    fn from(f: ApplicationAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `BalanceTransaction`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct BalanceTransactionAnyOf {
+#[serde(untagged)]
+pub enum BalanceTransactionAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Balance transactions represent funds moving through your Stripe account.
     *  They're created for every type of transaction that comes into or flows out of your Stripe account balance.
     *  
     *  Related guide: [Balance Transaction Types](https://stripe.com/docs/reports/balance-transaction-types).
     */
-    #[serde(flatten)]
-    pub balance_transaction: BalanceTransaction,
+    BalanceTransaction(BalanceTransaction),
 }
 
-/// All of the following types are flattened into one object:
+impl BalanceTransactionAnyOf {
+    pub fn balance_transaction(&self) -> Option<&BalanceTransaction> {
+        if let BalanceTransactionAnyOf::BalanceTransaction(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let BalanceTransactionAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for BalanceTransactionAnyOf {
+    fn from(f: String) -> Self {
+        BalanceTransactionAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<BalanceTransactionAnyOf> for String {
+    fn from(f: BalanceTransactionAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `Charge`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ChargeAnyOf {
+#[serde(untagged)]
+pub enum ChargeAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * To charge a credit or a debit card, you create a `Charge` object. You can
     *  retrieve and refund individual charges as well as list all charges. Charges
@@ -2331,8 +2520,35 @@ pub struct ChargeAnyOf {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(flatten)]
-    pub charge: Charge,
+    Charge(Charge),
+}
+
+impl ChargeAnyOf {
+    pub fn charge(&self) -> Option<&Charge> {
+        if let ChargeAnyOf::Charge(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ChargeAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for ChargeAnyOf {
+    fn from(f: String) -> Self {
+        ChargeAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<ChargeAnyOf> for String {
+    fn from(f: ChargeAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -2410,7 +2626,7 @@ pub struct Refunds {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PlatformFee {
     #[serde()]
-    pub account: AccountAnyOf,
+    pub account: Box<AccountAnyOf>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -2430,14 +2646,14 @@ pub struct PlatformFee {
     )]
     pub amount_refunded: i64,
     #[serde()]
-    pub application: ApplicationAnyOf,
+    pub application: Box<ApplicationAnyOf>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub balance_transaction: Option<BalanceTransactionAnyOf>,
     #[serde()]
-    pub charge: ChargeAnyOf,
+    pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
+    #[serde()]
+    pub charge: Box<ChargeAnyOf>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -2481,8 +2697,8 @@ pub struct PlatformFee {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub originating_transaction: Option<ChargeAnyOf>,
+    #[serde()]
+    pub originating_transaction: Box<Option<ChargeAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -2800,7 +3016,7 @@ impl BalanceTransactionObject {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Charge`
@@ -2820,13 +3036,15 @@ impl BalanceTransactionObject {
 /// - `Transfer`
 /// - `TransferReversal`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct BalanceTransactionSourceAnyOf {
+#[serde(untagged)]
+pub enum BalanceTransactionSourceAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * To charge a credit or a debit card, you create a `Charge` object. You can
     *  retrieve and refund individual charges as well as list all charges. Charges
@@ -2834,8 +3052,7 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(flatten)]
-    pub charge: Charge,
+    Charge(Charge),
     /**
     * `Application Fee Refund` objects allow you to refund an application fee that
     *  has previously been created but not yet refunded. Funds will be refunded to
@@ -2843,18 +3060,15 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Refunding Application Fees](https://stripe.com/docs/connect/destination-charges#refunding-app-fee).
     */
-    #[serde(flatten)]
-    pub fee_refund: FeeRefund,
+    FeeRefund(FeeRefund),
     /**
     *
     */
-    #[serde(flatten)]
-    pub platform_fee: PlatformFee,
+    PlatformFee(PlatformFee),
     /**
     *
     */
-    #[serde(flatten)]
-    pub connect_collection_transfer: ConnectCollectionTransfer,
+    ConnectCollectionTransfer(ConnectCollectionTransfer),
     /**
     * A dispute occurs when a customer questions your charge with their card issuer.
     *  When this happens, you're given the opportunity to respond to the dispute with
@@ -2864,8 +3078,7 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Disputes and Fraud](https://stripe.com/docs/disputes).
     */
-    #[serde(flatten)]
-    pub dispute: Dispute,
+    Dispute(Dispute),
     /**
     * When an [issued card](https://stripe.com/docs/issuing) is used to make a purchase, an Issuing `Authorization`
     *  object is created. [Authorizations](https://stripe.com/docs/issuing/purchases/authorizations) must be approved for the
@@ -2873,15 +3086,13 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Issued Card Authorizations](https://stripe.com/docs/issuing/purchases/authorizations).
     */
-    #[serde(flatten)]
-    pub issuing_authorization: IssuingAuthorization,
+    IssuingAuthorization(IssuingAuthorization),
     /**
     * As a [card issuer](https://stripe.com/docs/issuing), you can dispute transactions that the cardholder does not recognize, suspects to be fraudulent, or has other issues with.
     *  
     *  Related guide: [Disputing Transactions](https://stripe.com/docs/issuing/purchases/disputes)
     */
-    #[serde(flatten)]
-    pub issuing_dispute: IssuingDispute,
+    IssuingDispute(IssuingDispute),
     /**
     * Any use of an [issued card](https://stripe.com/docs/issuing) that results in funds entering or leaving
     *  your Stripe account, such as a completed purchase or refund, is represented by an Issuing
@@ -2889,8 +3100,7 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
     */
-    #[serde(flatten)]
-    pub issuing_transaction: IssuingTransaction,
+    IssuingTransaction(IssuingTransaction),
     /**
     * A `Payout` object is created when you receive funds from Stripe, or when you
     *  initiate a payout to either a bank account or debit card of a [connected
@@ -2901,13 +3111,11 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
     */
-    #[serde(flatten)]
-    pub payout: Payout,
+    Payout(Payout),
     /**
     *
     */
-    #[serde(flatten)]
-    pub platform_tax: PlatformTax,
+    PlatformTax(PlatformTax),
     /**
     * `Refund` objects allow you to refund a charge that has previously been created
     *  but not yet refunded. Funds will be refunded to the credit or debit card that
@@ -2915,18 +3123,15 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Refunds](https://stripe.com/docs/refunds).
     */
-    #[serde(flatten)]
-    pub refund: Refund,
+    Refund(Refund),
     /**
     *
     */
-    #[serde(flatten)]
-    pub reserve_transaction: ReserveTransaction,
+    ReserveTransaction(ReserveTransaction),
     /**
     *
     */
-    #[serde(flatten)]
-    pub tax_deducted_at_source: TaxDeductedAtSource,
+    TaxDeductedAtSource(TaxDeductedAtSource),
     /**
     * To top up your Stripe balance, you create a top-up object. You can retrieve
     *  individual top-ups, as well as list all top-ups. Top-ups are identified by a
@@ -2934,8 +3139,7 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Topping Up your Platform Account](https://stripe.com/docs/connect/top-ups).
     */
-    #[serde(flatten)]
-    pub topup: Topup,
+    Topup(Topup),
     /**
     * A `Transfer` object is created when you move funds between Stripe accounts as
     *  part of Connect.
@@ -2948,8 +3152,7 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
     */
-    #[serde(flatten)]
-    pub transfer: Transfer,
+    Transfer(Transfer),
     /**
     * [Stripe Connect](https://stripe.com/docs/connect) platforms can reverse transfers made to a
     *  connected account, either entirely or partially, and can also specify whether
@@ -2965,8 +3168,140 @@ pub struct BalanceTransactionSourceAnyOf {
     *  
     *  Related guide: [Reversing Transfers](https://stripe.com/docs/connect/charges-transfers#reversing-transfers).
     */
-    #[serde(flatten)]
-    pub transfer_reversal: TransferReversal,
+    TransferReversal(TransferReversal),
+}
+
+impl BalanceTransactionSourceAnyOf {
+    pub fn charge(&self) -> Option<&Charge> {
+        if let BalanceTransactionSourceAnyOf::Charge(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn connect_collection_transfer(&self) -> Option<&ConnectCollectionTransfer> {
+        if let BalanceTransactionSourceAnyOf::ConnectCollectionTransfer(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn dispute(&self) -> Option<&Dispute> {
+        if let BalanceTransactionSourceAnyOf::Dispute(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn fee_refund(&self) -> Option<&FeeRefund> {
+        if let BalanceTransactionSourceAnyOf::FeeRefund(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn issuing_authorization(&self) -> Option<&IssuingAuthorization> {
+        if let BalanceTransactionSourceAnyOf::IssuingAuthorization(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn issuing_dispute(&self) -> Option<&IssuingDispute> {
+        if let BalanceTransactionSourceAnyOf::IssuingDispute(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn issuing_transaction(&self) -> Option<&IssuingTransaction> {
+        if let BalanceTransactionSourceAnyOf::IssuingTransaction(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payout(&self) -> Option<&Payout> {
+        if let BalanceTransactionSourceAnyOf::Payout(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn platform_fee(&self) -> Option<&PlatformFee> {
+        if let BalanceTransactionSourceAnyOf::PlatformFee(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn platform_tax(&self) -> Option<&PlatformTax> {
+        if let BalanceTransactionSourceAnyOf::PlatformTax(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn refund(&self) -> Option<&Refund> {
+        if let BalanceTransactionSourceAnyOf::Refund(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn reserve_transaction(&self) -> Option<&ReserveTransaction> {
+        if let BalanceTransactionSourceAnyOf::ReserveTransaction(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let BalanceTransactionSourceAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn tax_deducted_at_source(&self) -> Option<&TaxDeductedAtSource> {
+        if let BalanceTransactionSourceAnyOf::TaxDeductedAtSource(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn topup(&self) -> Option<&Topup> {
+        if let BalanceTransactionSourceAnyOf::Topup(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn transfer(&self) -> Option<&Transfer> {
+        if let BalanceTransactionSourceAnyOf::Transfer(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn transfer_reversal(&self) -> Option<&TransferReversal> {
+        if let BalanceTransactionSourceAnyOf::TransferReversal(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for BalanceTransactionSourceAnyOf {
+    fn from(f: String) -> Self {
+        BalanceTransactionSourceAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<BalanceTransactionSourceAnyOf> for String {
+    fn from(f: BalanceTransactionSourceAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -3216,8 +3551,8 @@ pub struct BalanceTransaction {
     *  
     *  Related guide: [Balance Transaction Types](https://stripe.com/docs/reports/balance-transaction-types).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub source: Option<BalanceTransactionSourceAnyOf>,
+    #[serde()]
+    pub source: Box<Option<BalanceTransactionSourceAnyOf>>,
     /**
     * The account's country.
     */
@@ -3326,8 +3661,8 @@ pub struct BankAccount {
     *  
     *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub account: Option<AccountAnyOf>,
+    #[serde()]
+    pub account: Box<Option<AccountAnyOf>>,
     /**
     * These bank accounts are payment methods on `Customer` objects.
     *  
@@ -3424,8 +3759,8 @@ pub struct BankAccount {
     *  
     *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * These bank accounts are payment methods on `Customer` objects.
     *  
@@ -3690,23 +4025,52 @@ pub struct PortalConfiguration {
     pub updated: i64,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `PortalConfiguration`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ConfigurationAnyOf {
+#[serde(untagged)]
+pub enum ConfigurationAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A portal configuration describes the functionality and behavior of a portal session.
     */
-    #[serde(flatten)]
-    pub portal_configuration: PortalConfiguration,
+    PortalConfiguration(PortalConfiguration),
+}
+
+impl ConfigurationAnyOf {
+    pub fn portal_configuration(&self) -> Option<&PortalConfiguration> {
+        if let ConfigurationAnyOf::PortalConfiguration(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ConfigurationAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for ConfigurationAnyOf {
+    fn from(f: String) -> Self {
+        ConfigurationAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<ConfigurationAnyOf> for String {
+    fn from(f: ConfigurationAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -3934,7 +4298,7 @@ impl PortalSessionObject {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct PortalSession {
     #[serde()]
-    pub configuration: ConfigurationAnyOf,
+    pub configuration: Box<ConfigurationAnyOf>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -4470,7 +4834,7 @@ impl CapabilityStatus {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Capability {
     #[serde()]
-    pub account: AccountAnyOf,
+    pub account: Box<AccountAnyOf>,
     /**
     * This is an object representing a capability for a Stripe account.
     *  
@@ -4560,18 +4924,20 @@ impl CardObject {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Recipient`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct RecipientAnyOf {
+#[serde(untagged)]
+pub enum RecipientAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * With `Recipient` objects, you can transfer money from your Stripe account to a
     *  third-party bank account or debit card. The API allows you to create, delete,
@@ -4584,8 +4950,35 @@ pub struct RecipientAnyOf {
     *  recipients can no longer begin doing so. Please use `Account` objects
     *  instead.\*\*
     */
-    #[serde(flatten)]
-    pub recipient: Recipient,
+    Recipient(Recipient),
+}
+
+impl RecipientAnyOf {
+    pub fn recipient(&self) -> Option<&Recipient> {
+        if let RecipientAnyOf::Recipient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let RecipientAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for RecipientAnyOf {
+    fn from(f: String) -> Self {
+        RecipientAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<RecipientAnyOf> for String {
+    fn from(f: RecipientAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// You can store multiple cards on a customer in order to charge the customer
@@ -4602,8 +4995,8 @@ pub struct Card {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub account: Option<AccountAnyOf>,
+    #[serde()]
+    pub account: Box<Option<AccountAnyOf>>,
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -4762,8 +5155,8 @@ pub struct Card {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -4900,8 +5293,8 @@ pub struct Card {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub recipient: Option<RecipientAnyOf>,
+    #[serde()]
+    pub recipient: Box<Option<RecipientAnyOf>>,
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -4986,37 +5379,68 @@ pub struct CardIssuingAccountTermsOfService {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct UseStripeSdk {}
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `PlatformFee`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct FeeAnyOf {
+#[serde(untagged)]
+pub enum FeeAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     *
     */
-    #[serde(flatten)]
-    pub platform_fee: PlatformFee,
+    PlatformFee(PlatformFee),
 }
 
-/// All of the following types are flattened into one object:
+impl FeeAnyOf {
+    pub fn platform_fee(&self) -> Option<&PlatformFee> {
+        if let FeeAnyOf::PlatformFee(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let FeeAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for FeeAnyOf {
+    fn from(f: String) -> Self {
+        FeeAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<FeeAnyOf> for String {
+    fn from(f: FeeAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `Invoice`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct InvoiceAnyOf {
+#[serde(untagged)]
+pub enum InvoiceAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Invoices are statements of amounts owed by a customer, and are either
     *  generated one-off, or generated periodically from a subscription.
@@ -5051,8 +5475,35 @@ pub struct InvoiceAnyOf {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(flatten)]
-    pub invoice: Invoice,
+    Invoice(Invoice),
+}
+
+impl InvoiceAnyOf {
+    pub fn invoice(&self) -> Option<&Invoice> {
+        if let InvoiceAnyOf::Invoice(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let InvoiceAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for InvoiceAnyOf {
+    fn from(f: String) -> Self {
+        InvoiceAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<InvoiceAnyOf> for String {
+    fn from(f: InvoiceAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -5090,18 +5541,20 @@ impl ChargeObject {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Order`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OrderAnyOf {
+#[serde(untagged)]
+pub enum OrderAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Order objects are created to handle end customers' purchases of previously
     *  defined [products](https://stripe.com/docs/api#products). You can create, retrieve, and pay individual orders, as well
@@ -5109,22 +5562,51 @@ pub struct OrderAnyOf {
     *  
     *  Related guide: [Tax, Shipping, and Inventory](https://stripe.com/docs/orders-legacy).
     */
-    #[serde(flatten)]
-    pub order: Order,
+    Order(Order),
 }
 
-/// All of the following types are flattened into one object:
+impl OrderAnyOf {
+    pub fn order(&self) -> Option<&Order> {
+        if let OrderAnyOf::Order(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let OrderAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for OrderAnyOf {
+    fn from(f: String) -> Self {
+        OrderAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<OrderAnyOf> for String {
+    fn from(f: OrderAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `PaymentIntent`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PaymentIntentAnyOf {
+#[serde(untagged)]
+pub enum PaymentIntentAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A PaymentIntent guides you through the process of collecting a payment from your customer.
     *  We recommend that you create exactly one PaymentIntent for each order or
@@ -5138,8 +5620,35 @@ pub struct PaymentIntentAnyOf {
     *  
     *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
     */
-    #[serde(flatten)]
-    pub payment_intent: PaymentIntent,
+    PaymentIntent(PaymentIntent),
+}
+
+impl PaymentIntentAnyOf {
+    pub fn payment_intent(&self) -> Option<&PaymentIntent> {
+        if let PaymentIntentAnyOf::PaymentIntent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let PaymentIntentAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for PaymentIntentAnyOf {
+    fn from(f: String) -> Self {
+        PaymentIntentAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<PaymentIntentAnyOf> for String {
+    fn from(f: PaymentIntentAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// A list of refunds that have been applied to the charge.
@@ -5178,40 +5687,71 @@ pub struct RefundList {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Review`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReviewAnyOf {
+#[serde(untagged)]
+pub enum ReviewAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Reviews can be used to supplement automated fraud detection with human expertise.
     *  
     *  Learn more about [Radar](/radar) and reviewing payments
     *  [here](https://stripe.com/docs/radar/reviews).
     */
-    #[serde(flatten)]
-    pub review: Review,
+    Review(Review),
 }
 
-/// All of the following types are flattened into one object:
+impl ReviewAnyOf {
+    pub fn review(&self) -> Option<&Review> {
+        if let ReviewAnyOf::Review(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ReviewAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for ReviewAnyOf {
+    fn from(f: String) -> Self {
+        ReviewAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<ReviewAnyOf> for String {
+    fn from(f: ReviewAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `Transfer`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct TransferAnyOf {
+#[serde(untagged)]
+pub enum TransferAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A `Transfer` object is created when you move funds between Stripe accounts as
     *  part of Connect.
@@ -5224,8 +5764,35 @@ pub struct TransferAnyOf {
     *  
     *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
     */
-    #[serde(flatten)]
-    pub transfer: Transfer,
+    Transfer(Transfer),
+}
+
+impl TransferAnyOf {
+    pub fn string(&self) -> Option<&String> {
+        if let TransferAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn transfer(&self) -> Option<&Transfer> {
+        if let TransferAnyOf::Transfer(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for TransferAnyOf {
+    fn from(f: String) -> Self {
+        TransferAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<TransferAnyOf> for String {
+    fn from(f: TransferAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -5310,8 +5877,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub application: Option<ApplicationAnyOf>,
+    #[serde()]
+    pub application: Box<Option<ApplicationAnyOf>>,
     /**
     * To charge a credit or a debit card, you create a `Charge` object. You can
     *  retrieve and refund individual charges as well as list all charges. Charges
@@ -5319,8 +5886,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub application_fee: Option<FeeAnyOf>,
+    #[serde()]
+    pub application_fee: Box<Option<FeeAnyOf>>,
     /**
     * To charge a credit or a debit card, you create a `Charge` object. You can
     *  retrieve and refund individual charges as well as list all charges. Charges
@@ -5341,8 +5908,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     *
     */
@@ -5394,8 +5961,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * To charge a credit or a debit card, you create a `Charge` object. You can
     *  retrieve and refund individual charges as well as list all charges. Charges
@@ -5424,8 +5991,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub failure_balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub failure_balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     * To charge a credit or a debit card, you create a `Charge` object. You can
     *  retrieve and refund individual charges as well as list all charges. Charges
@@ -5473,8 +6040,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub invoice: Option<InvoiceAnyOf>,
+    #[serde()]
+    pub invoice: Box<Option<InvoiceAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -5504,8 +6071,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub on_behalf_of: Option<AccountAnyOf>,
+    #[serde()]
+    pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
     * To charge a credit or a debit card, you create a `Charge` object. You can
     *  retrieve and refund individual charges as well as list all charges. Charges
@@ -5513,8 +6080,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub order: Option<OrderAnyOf>,
+    #[serde()]
+    pub order: Box<Option<OrderAnyOf>>,
     /**
     * Details about whether the payment was accepted, and why. See [understanding declines](https://stripe.com/docs/declines) for details.
     */
@@ -5535,8 +6102,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_intent: Option<PaymentIntentAnyOf>,
+    #[serde()]
+    pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
     * To charge a credit or a debit card, you create a `Charge` object. You can
     *  retrieve and refund individual charges as well as list all charges. Charges
@@ -5614,8 +6181,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub review: Option<ReviewAnyOf>,
+    #[serde()]
+    pub review: Box<Option<ReviewAnyOf>>,
     /**
     * Shipping information for the charge.
     */
@@ -5628,8 +6195,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub source_transfer: Option<TransferAnyOf>,
+    #[serde()]
+    pub source_transfer: Box<Option<TransferAnyOf>>,
     /**
     * To charge a credit or a debit card, you create a `Charge` object. You can
     *  retrieve and refund individual charges as well as list all charges. Charges
@@ -5668,8 +6235,8 @@ pub struct Charge {
     *  
     *  Related guide: [Accept a payment with the Charges API](https://stripe.com/docs/payments/accept-a-payment-charges).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub transfer: Option<TransferAnyOf>,
+    #[serde()]
+    pub transfer: Box<Option<TransferAnyOf>>,
     /**
     * An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.
     */
@@ -5713,23 +6280,52 @@ pub struct ChargeFraudDetails {
     pub user_report: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Rule`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct RuleAnyOf {
+#[serde(untagged)]
+pub enum RuleAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     *
     */
-    #[serde(flatten)]
-    pub rule: Rule,
+    Rule(Rule),
+}
+
+impl RuleAnyOf {
+    pub fn rule(&self) -> Option<&Rule> {
+        if let RuleAnyOf::Rule(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let RuleAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for RuleAnyOf {
+    fn from(f: String) -> Self {
+        RuleAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<RuleAnyOf> for String {
+    fn from(f: RuleAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 ///
@@ -5774,8 +6370,8 @@ pub struct ChargeOutcome {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub rule: Option<RuleAnyOf>,
+    #[serde()]
+    pub rule: Box<Option<RuleAnyOf>>,
     /**
     *
     */
@@ -5810,7 +6406,7 @@ pub struct ChargeTransferData {
     )]
     pub amount: i64,
     #[serde()]
-    pub destination: AccountAnyOf,
+    pub destination: Box<AccountAnyOf>,
 }
 
 /**
@@ -6156,18 +6752,20 @@ impl SessionObject {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `PaymentLink`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PaymentLinkAnyOf {
+#[serde(untagged)]
+pub enum PaymentLinkAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A payment link is a shareable URL that will take your customers to a hosted payment page. A payment link can be shared and used multiple times.
     *  
@@ -6175,8 +6773,35 @@ pub struct PaymentLinkAnyOf {
     *  
     *  Related guide: [Payment Links API](https://stripe.com/docs/payments/payment-links/api)
     */
-    #[serde(flatten)]
-    pub payment_link: PaymentLink,
+    PaymentLink(PaymentLink),
+}
+
+impl PaymentLinkAnyOf {
+    pub fn payment_link(&self) -> Option<&PaymentLink> {
+        if let PaymentLinkAnyOf::PaymentLink(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let PaymentLinkAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for PaymentLinkAnyOf {
+    fn from(f: String) -> Self {
+        PaymentLinkAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<PaymentLinkAnyOf> for String {
+    fn from(f: PaymentLinkAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -6221,18 +6846,20 @@ impl PaymentStatus {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `SetupIntent`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SetupIntentAnyOf {
+#[serde(untagged)]
+pub enum SetupIntentAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
     *  For example, you could use a SetupIntent to set up and save your customer's card without immediately collecting a payment.
@@ -6257,28 +6884,84 @@ pub struct SetupIntentAnyOf {
     *  
     *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
     */
-    #[serde(flatten)]
-    pub setup_intent: SetupIntent,
+    SetupIntent(SetupIntent),
 }
 
-/// All of the following types are flattened into one object:
+impl SetupIntentAnyOf {
+    pub fn setup_intent(&self) -> Option<&SetupIntent> {
+        if let SetupIntentAnyOf::SetupIntent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let SetupIntentAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for SetupIntentAnyOf {
+    fn from(f: String) -> Self {
+        SetupIntentAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<SetupIntentAnyOf> for String {
+    fn from(f: SetupIntentAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `ShippingRate`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShippingRateAnyOf {
+#[serde(untagged)]
+pub enum ShippingRateAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Shipping rates describe the price of shipping presented to your customers and can be
     *  applied to [Checkout Sessions](https://stripe.com/docs/payments/checkout/shipping) to collect shipping costs.
     */
-    #[serde(flatten)]
-    pub shipping_rate: ShippingRate,
+    ShippingRate(ShippingRate),
+}
+
+impl ShippingRateAnyOf {
+    pub fn shipping_rate(&self) -> Option<&ShippingRate> {
+        if let ShippingRateAnyOf::ShippingRate(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ShippingRateAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for ShippingRateAnyOf {
+    fn from(f: String) -> Self {
+        ShippingRateAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<ShippingRateAnyOf> for String {
+    fn from(f: ShippingRateAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -6369,25 +7052,54 @@ impl SubmitType {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Subscription`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SubscriptionAnyOf {
+#[serde(untagged)]
+pub enum SubscriptionAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Subscriptions allow you to charge a customer on a recurring basis.
     *  
     *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
     */
-    #[serde(flatten)]
-    pub subscription: Subscription,
+    Subscription(Subscription),
+}
+
+impl SubscriptionAnyOf {
+    pub fn string(&self) -> Option<&String> {
+        if let SubscriptionAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn subscription(&self) -> Option<&Subscription> {
+        if let SubscriptionAnyOf::Subscription(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for SubscriptionAnyOf {
+    fn from(f: String) -> Self {
+        SubscriptionAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<SubscriptionAnyOf> for String {
+    fn from(f: SubscriptionAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// A Checkout Session represents your customer's session as they pay for
@@ -6565,8 +7277,8 @@ pub struct Session {
     *  
     *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * Configure whether a Checkout Session creates a Customer when the Checkout Session completes.
     */
@@ -6696,8 +7408,8 @@ pub struct Session {
     *  
     *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_intent: Option<PaymentIntentAnyOf>,
+    #[serde()]
+    pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
     * A Checkout Session represents your customer's session as they pay for
     *  one-time purchases or subscriptions through [Checkout](https://stripe.com/docs/payments/checkout)
@@ -6714,8 +7426,8 @@ pub struct Session {
     *  
     *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_link: Option<PaymentLinkAnyOf>,
+    #[serde()]
+    pub payment_link: Box<Option<PaymentLinkAnyOf>>,
     /**
     * Payment-method-specific configuration for the PaymentIntent or SetupIntent of this CheckoutSession.
     */
@@ -6792,8 +7504,8 @@ pub struct Session {
     *  
     *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub setup_intent: Option<SetupIntentAnyOf>,
+    #[serde()]
+    pub setup_intent: Box<Option<SetupIntentAnyOf>>,
     /**
     * Shipping information for the charge.
     */
@@ -6829,8 +7541,8 @@ pub struct Session {
     *  
     *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub shipping_rate: Option<ShippingRateAnyOf>,
+    #[serde()]
+    pub shipping_rate: Box<Option<ShippingRateAnyOf>>,
     /**
     * The status of the Checkout Session, one of `open`, `complete`, or `expired`.
     */
@@ -6860,8 +7572,8 @@ pub struct Session {
     *  
     *  Related guide: [Checkout Server Quickstart](https://stripe.com/docs/payments/checkout/api).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub subscription: Option<SubscriptionAnyOf>,
+    #[serde()]
+    pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
     * The account's country.
     */
@@ -7341,7 +8053,7 @@ pub struct ConnectCollectionTransfer {
     )]
     pub currency: String,
     #[serde()]
-    pub destination: AccountAnyOf,
+    pub destination: Box<AccountAnyOf>,
     /**
     * The account's country.
     */
@@ -7759,18 +8471,20 @@ pub struct CouponAppliesTo {
     pub products: Vec<String>,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `CustomerBalanceTransaction`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct CustomerBalanceTransactionAnyOf {
+#[serde(untagged)]
+pub enum CustomerBalanceTransactionAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Each customer has a [`balance`](https://stripe.com/docs/api/customers/object#customer_object-balance) value,
     *  which denotes a debit or credit that's automatically applied to their next invoice upon finalization.
@@ -7779,8 +8493,35 @@ pub struct CustomerBalanceTransactionAnyOf {
     *  
     *  Related guide: [Customer Balance](https://stripe.com/docs/billing/customer/balance) to learn more.
     */
-    #[serde(flatten)]
-    pub customer_balance_transaction: CustomerBalanceTransaction,
+    CustomerBalanceTransaction(CustomerBalanceTransaction),
+}
+
+impl CustomerBalanceTransactionAnyOf {
+    pub fn customer_balance_transaction(&self) -> Option<&CustomerBalanceTransaction> {
+        if let CustomerBalanceTransactionAnyOf::CustomerBalanceTransaction(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let CustomerBalanceTransactionAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for CustomerBalanceTransactionAnyOf {
+    fn from(f: String) -> Self {
+        CustomerBalanceTransactionAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<CustomerBalanceTransactionAnyOf> for String {
+    fn from(f: CustomerBalanceTransactionAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// Line items that make up the credit note
@@ -7898,18 +8639,20 @@ impl Reason {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Refund`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct RefundAnyOf {
+#[serde(untagged)]
+pub enum RefundAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * `Refund` objects allow you to refund a charge that has previously been created
     *  but not yet refunded. Funds will be refunded to the credit or debit card that
@@ -7917,8 +8660,35 @@ pub struct RefundAnyOf {
     *  
     *  Related guide: [Refunds](https://stripe.com/docs/refunds).
     */
-    #[serde(flatten)]
-    pub refund: Refund,
+    Refund(Refund),
+}
+
+impl RefundAnyOf {
+    pub fn refund(&self) -> Option<&Refund> {
+        if let RefundAnyOf::Refund(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let RefundAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for RefundAnyOf {
+    fn from(f: String) -> Self {
+        RefundAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<RefundAnyOf> for String {
+    fn from(f: RefundAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -8030,14 +8800,14 @@ pub struct CreditNote {
     )]
     pub currency: String,
     #[serde()]
-    pub customer: CustomerAnyOf,
+    pub customer: Box<CustomerAnyOf>,
     /**
     * Issue a credit note to adjust an invoice's amount after the invoice is finalized.
     *  
     *  Related guide: [Credit Notes](https://stripe.com/docs/billing/invoices/credit-notes).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer_balance_transaction: Option<CustomerBalanceTransactionAnyOf>,
+    #[serde()]
+    pub customer_balance_transaction: Box<Option<CustomerBalanceTransactionAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -8066,7 +8836,7 @@ pub struct CreditNote {
     )]
     pub id: String,
     #[serde()]
-    pub invoice: InvoiceAnyOf,
+    pub invoice: Box<InvoiceAnyOf>,
     /**
     * Line items that make up the credit note
     */
@@ -8146,8 +8916,8 @@ pub struct CreditNote {
     *  
     *  Related guide: [Credit Notes](https://stripe.com/docs/billing/invoices/credit-notes).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub refund: Option<RefundAnyOf>,
+    #[serde()]
+    pub refund: Box<Option<RefundAnyOf>>,
     /**
     * Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
     */
@@ -8401,25 +9171,54 @@ pub struct CreditNoteLineItem {
     pub unit_amount_decimal: f64,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `TaxRate`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct TaxRateAnyOf {
+#[serde(untagged)]
+pub enum TaxRateAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Tax rates can be applied to [invoices](https://stripe.com/docs/billing/invoices/tax-rates), [subscriptions](https://stripe.com/docs/billing/subscriptions/taxes) and [Checkout Sessions](https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates) to collect tax.
     *  
     *  Related guide: [Tax Rates](https://stripe.com/docs/billing/taxes/tax-rates).
     */
-    #[serde(flatten)]
-    pub tax_rate: TaxRate,
+    TaxRate(TaxRate),
+}
+
+impl TaxRateAnyOf {
+    pub fn string(&self) -> Option<&String> {
+        if let TaxRateAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn tax_rate(&self) -> Option<&TaxRate> {
+        if let TaxRateAnyOf::TaxRate(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for TaxRateAnyOf {
+    fn from(f: String) -> Self {
+        TaxRateAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<TaxRateAnyOf> for String {
+    fn from(f: TaxRateAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 ///
@@ -8443,10 +9242,10 @@ pub struct InvoiceTaxAmount {
     )]
     pub inclusive: bool,
     #[serde()]
-    pub tax_rate: TaxRateAnyOf,
+    pub tax_rate: Box<TaxRateAnyOf>,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `BankAccount`
@@ -8455,13 +9254,15 @@ pub struct InvoiceTaxAmount {
 /// - `SourceData`
 /// - `BitcoinReceiver`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DefaultSourceAnyOf {
+#[serde(untagged)]
+pub enum DefaultSourceAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * These bank accounts are payment methods on `Customer` objects.
     *  
@@ -8471,8 +9272,7 @@ pub struct DefaultSourceAnyOf {
     *  
     *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
     */
-    #[serde(flatten)]
-    pub bank_account: BankAccount,
+    BankAccount(BankAccount),
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -8480,13 +9280,11 @@ pub struct DefaultSourceAnyOf {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(flatten)]
-    pub card: Card,
+    Card(Card),
     /**
     *
     */
-    #[serde(flatten)]
-    pub alipay_account: AlipayAccount,
+    AlipayAccount(AlipayAccount),
     /**
     * `Source` objects allow you to accept a variety of payment methods. They
     *  represent a customer's payment instrument, and can be used with the Stripe API
@@ -8495,13 +9293,67 @@ pub struct DefaultSourceAnyOf {
     *  
     *  Related guides: [Sources API](https://stripe.com/docs/sources) and [Sources & Customers](https://stripe.com/docs/sources/customers).
     */
-    #[serde(flatten)]
-    pub source_data: SourceData,
+    SourceData(SourceData),
     /**
     *
     */
-    #[serde(flatten)]
-    pub bitcoin_receiver: BitcoinReceiver,
+    BitcoinReceiver(BitcoinReceiver),
+}
+
+impl DefaultSourceAnyOf {
+    pub fn alipay_account(&self) -> Option<&AlipayAccount> {
+        if let DefaultSourceAnyOf::AlipayAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn bank_account(&self) -> Option<&BankAccount> {
+        if let DefaultSourceAnyOf::BankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn bitcoin_receiver(&self) -> Option<&BitcoinReceiver> {
+        if let DefaultSourceAnyOf::BitcoinReceiver(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn card(&self) -> Option<&Card> {
+        if let DefaultSourceAnyOf::Card(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn source_data(&self) -> Option<&SourceData> {
+        if let DefaultSourceAnyOf::SourceData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let DefaultSourceAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for DefaultSourceAnyOf {
+    fn from(f: String) -> Self {
+        DefaultSourceAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<DefaultSourceAnyOf> for String {
+    fn from(f: DefaultSourceAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -8539,7 +9391,7 @@ impl CustomerObject {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `BankAccount`
 /// - `Card`
@@ -8547,8 +9399,11 @@ impl CustomerObject {
 /// - `SourceData`
 /// - `BitcoinReceiver`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct CustomerSourcesDataAnyOf {
+#[serde(untagged)]
+pub enum CustomerSourcesDataAnyOf {
     /**
     * These bank accounts are payment methods on `Customer` objects.
     *  
@@ -8558,8 +9413,7 @@ pub struct CustomerSourcesDataAnyOf {
     *  
     *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
     */
-    #[serde(flatten)]
-    pub bank_account: BankAccount,
+    BankAccount(BankAccount),
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -8567,13 +9421,11 @@ pub struct CustomerSourcesDataAnyOf {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(flatten)]
-    pub card: Card,
+    Card(Card),
     /**
     *
     */
-    #[serde(flatten)]
-    pub alipay_account: AlipayAccount,
+    AlipayAccount(AlipayAccount),
     /**
     * `Source` objects allow you to accept a variety of payment methods. They
     *  represent a customer's payment instrument, and can be used with the Stripe API
@@ -8582,13 +9434,48 @@ pub struct CustomerSourcesDataAnyOf {
     *  
     *  Related guides: [Sources API](https://stripe.com/docs/sources) and [Sources & Customers](https://stripe.com/docs/sources/customers).
     */
-    #[serde(flatten)]
-    pub source_data: SourceData,
+    SourceData(SourceData),
     /**
     *
     */
-    #[serde(flatten)]
-    pub bitcoin_receiver: BitcoinReceiver,
+    BitcoinReceiver(BitcoinReceiver),
+}
+
+impl CustomerSourcesDataAnyOf {
+    pub fn alipay_account(&self) -> Option<&AlipayAccount> {
+        if let CustomerSourcesDataAnyOf::AlipayAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn bank_account(&self) -> Option<&BankAccount> {
+        if let CustomerSourcesDataAnyOf::BankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn bitcoin_receiver(&self) -> Option<&BitcoinReceiver> {
+        if let CustomerSourcesDataAnyOf::BitcoinReceiver(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn card(&self) -> Option<&Card> {
+        if let CustomerSourcesDataAnyOf::Card(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn source_data(&self) -> Option<&SourceData> {
+        if let CustomerSourcesDataAnyOf::SourceData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /// The customer's payment sources, if any.
@@ -8597,12 +9484,8 @@ pub struct Sources {
     /**
     * Details about each object.
     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub data: Vec<CustomerSourcesDataAnyOf>,
+    #[serde()]
+    pub data: Box<Vec<CustomerSourcesDataAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -8740,25 +9623,54 @@ pub struct TaxIds {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `TestClock`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct TestClockAnyOf {
+#[serde(untagged)]
+pub enum TestClockAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A test clock enables deterministic control over objects in testmode. With a test clock, you can create
     *  objects at a frozen time in the past or future, and advance to a specific future time to observe webhooks and state changes. After the clock advances,
     *  you can either validate the current state of your scenario (and test your assumptions), change the current state of your scenario (and test more complex scenarios), or keep advancing forward in time.
     */
-    #[serde(flatten)]
-    pub test_clock: TestClock,
+    TestClock(TestClock),
+}
+
+impl TestClockAnyOf {
+    pub fn string(&self) -> Option<&String> {
+        if let TestClockAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn test_clock(&self) -> Option<&TestClock> {
+        if let TestClockAnyOf::TestClock(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for TestClockAnyOf {
+    fn from(f: String) -> Self {
+        TestClockAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<TestClockAnyOf> for String {
+    fn from(f: TestClockAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// This object represents a customer of your business. It lets you create recurring charges and track payments that belong to the same customer.
@@ -8807,8 +9719,8 @@ pub struct Customer {
     *  
     *  Related guide: [Save a card during payment](https://stripe.com/docs/payments/save-during-payment).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_source: Option<DefaultSourceAnyOf>,
+    #[serde()]
+    pub default_source: Box<Option<DefaultSourceAnyOf>>,
     /**
     * This object represents a customer of your business. It lets you create recurring charges and track payments that belong to the same customer.
     *  
@@ -8984,8 +9896,8 @@ pub struct Customer {
     *  
     *  Related guide: [Save a card during payment](https://stripe.com/docs/payments/save-during-payment).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub test_clock: Option<TestClockAnyOf>,
+    #[serde()]
+    pub test_clock: Box<Option<TestClockAnyOf>>,
 }
 
 /**
@@ -9059,46 +9971,104 @@ pub struct CustomerAcceptance {
     pub type_: CustomerAcceptanceType,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `CreditNote`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct CreditNoteAnyOf {
+#[serde(untagged)]
+pub enum CreditNoteAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Issue a credit note to adjust an invoice's amount after the invoice is finalized.
     *  
     *  Related guide: [Credit Notes](https://stripe.com/docs/billing/invoices/credit-notes).
     */
-    #[serde(flatten)]
-    pub credit_note: CreditNote,
+    CreditNote(CreditNote),
 }
 
-/// All of the following types are flattened into one object:
+impl CreditNoteAnyOf {
+    pub fn credit_note(&self) -> Option<&CreditNote> {
+        if let CreditNoteAnyOf::CreditNote(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let CreditNoteAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for CreditNoteAnyOf {
+    fn from(f: String) -> Self {
+        CreditNoteAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<CreditNoteAnyOf> for String {
+    fn from(f: CreditNoteAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `Customer`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct CustomerBalanceTransactionAnyOf {
+#[serde(untagged)]
+pub enum CustomerAnyOfData {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * This object represents a customer of your business. It lets you create recurring charges and track payments that belong to the same customer.
     *  
     *  Related guide: [Save a card during payment](https://stripe.com/docs/payments/save-during-payment).
     */
-    #[serde(flatten)]
-    pub customer: Customer,
+    Customer(Customer),
+}
+
+impl CustomerAnyOfData {
+    pub fn customer(&self) -> Option<&Customer> {
+        if let CustomerAnyOfData::Customer(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let CustomerAnyOfData::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for CustomerAnyOfData {
+    fn from(f: String) -> Self {
+        CustomerAnyOfData::String(f)
+    }
+}
+
+impl std::convert::From<CustomerAnyOfData> for String {
+    fn from(f: CustomerAnyOfData) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -9231,8 +10201,8 @@ pub struct CustomerBalanceTransaction {
     *  
     *  Related guide: [Customer Balance](https://stripe.com/docs/billing/customer/balance) to learn more.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub credit_note: Option<CreditNoteAnyOf>,
+    #[serde()]
+    pub credit_note: Box<Option<CreditNoteAnyOf>>,
     /**
     * The account's country.
     */
@@ -9243,7 +10213,7 @@ pub struct CustomerBalanceTransaction {
     )]
     pub currency: String,
     #[serde()]
-    pub customer: CustomerBalanceTransactionAnyOf,
+    pub customer: CustomerAnyOfData,
     /**
     * Each customer has a [`balance`](https://stripe.com/docs/api/customers/object#customer_object-balance) value,
     *  which denotes a debit or credit that's automatically applied to their next invoice upon finalization.
@@ -9284,8 +10254,8 @@ pub struct CustomerBalanceTransaction {
     *  
     *  Related guide: [Customer Balance](https://stripe.com/docs/billing/customer/balance) to learn more.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub invoice: Option<InvoiceAnyOf>,
+    #[serde()]
+    pub invoice: Box<Option<InvoiceAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -9736,24 +10706,53 @@ impl DeletedDiscountObject {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `PromotionCode`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PromotionCodeAnyOf {
+#[serde(untagged)]
+pub enum PromotionCodeAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A Promotion Code represents a customer-redeemable code for a coupon. It can be used to
     *  create multiple codes for a single coupon.
     */
-    #[serde(flatten)]
-    pub promotion_code: PromotionCode,
+    PromotionCode(PromotionCode),
+}
+
+impl PromotionCodeAnyOf {
+    pub fn promotion_code(&self) -> Option<&PromotionCode> {
+        if let PromotionCodeAnyOf::PromotionCode(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let PromotionCodeAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for PromotionCodeAnyOf {
+    fn from(f: String) -> Self {
+        PromotionCodeAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<PromotionCodeAnyOf> for String {
+    fn from(f: PromotionCodeAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 ///
@@ -9778,8 +10777,8 @@ pub struct DeletedDiscount {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -9823,8 +10822,8 @@ pub struct DeletedDiscount {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub promotion_code: Option<PromotionCodeAnyOf>,
+    #[serde()]
+    pub promotion_code: Box<Option<PromotionCodeAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -9845,23 +10844,40 @@ pub struct DeletedDiscount {
     pub subscription: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `DeletedBankAccount`
 /// - `DeletedCard`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DeletedExternalAccountAnyOf {
+#[serde(untagged)]
+pub enum DeletedExternalAccountAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_bank_account: DeletedBankAccount,
+    DeletedBankAccount(DeletedBankAccount),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_card: DeletedCard,
+    DeletedCard(DeletedCard),
+}
+
+impl DeletedExternalAccountAnyOf {
+    pub fn deleted_bank_account(&self) -> Option<&DeletedBankAccount> {
+        if let DeletedExternalAccountAnyOf::DeletedBankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn deleted_card(&self) -> Option<&DeletedCard> {
+        if let DeletedExternalAccountAnyOf::DeletedCard(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -9988,35 +11004,64 @@ pub struct DeletedInvoiceItem {
     pub object: DeletedInvoiceItemObject,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `AlipayDeletedAccount`
 /// - `DeletedBankAccount`
 /// - `BitcoinDeletedReceiver`
 /// - `DeletedCard`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DeletedPaymentSourceAnyOf {
+#[serde(untagged)]
+pub enum DeletedPaymentSourceAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub alipay_deleted_account: AlipayDeletedAccount,
+    AlipayDeletedAccount(AlipayDeletedAccount),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_bank_account: DeletedBankAccount,
+    DeletedBankAccount(DeletedBankAccount),
     /**
     *
     */
-    #[serde(flatten)]
-    pub bitcoin_deleted_receiver: BitcoinDeletedReceiver,
+    BitcoinDeletedReceiver(BitcoinDeletedReceiver),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_card: DeletedCard,
+    DeletedCard(DeletedCard),
+}
+
+impl DeletedPaymentSourceAnyOf {
+    pub fn alipay_deleted_account(&self) -> Option<&AlipayDeletedAccount> {
+        if let DeletedPaymentSourceAnyOf::AlipayDeletedAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn bitcoin_deleted_receiver(&self) -> Option<&BitcoinDeletedReceiver> {
+        if let DeletedPaymentSourceAnyOf::BitcoinDeletedReceiver(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn deleted_bank_account(&self) -> Option<&DeletedBankAccount> {
+        if let DeletedPaymentSourceAnyOf::DeletedBankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn deleted_card(&self) -> Option<&DeletedCard> {
+        if let DeletedPaymentSourceAnyOf::DeletedCard(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -10969,8 +12014,8 @@ pub struct DiscountData {
     *  
     *  Related guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * A discount represents the actual application of a coupon to a particular
     *  customer. It contains information about when the discount began and when it
@@ -11031,8 +12076,8 @@ pub struct DiscountData {
     *  
     *  Related guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub promotion_code: Option<PromotionCodeAnyOf>,
+    #[serde()]
+    pub promotion_code: Box<Option<PromotionCodeAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -11057,19 +12102,21 @@ pub struct DiscountData {
     pub subscription: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `DiscountData`
 /// - `DeletedDiscount`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DiscountAnyOf {
+#[serde(untagged)]
+pub enum DiscountAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A discount represents the actual application of a coupon to a particular
     *  customer. It contains information about when the discount began and when it
@@ -11077,13 +12124,46 @@ pub struct DiscountAnyOf {
     *  
     *  Related guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).
     */
-    #[serde(flatten)]
-    pub discount_data: DiscountData,
+    DiscountData(DiscountData),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_discount: DeletedDiscount,
+    DeletedDiscount(DeletedDiscount),
+}
+
+impl DiscountAnyOf {
+    pub fn deleted_discount(&self) -> Option<&DeletedDiscount> {
+        if let DiscountAnyOf::DeletedDiscount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn discount_data(&self) -> Option<&DiscountData> {
+        if let DiscountAnyOf::DiscountData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let DiscountAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for DiscountAnyOf {
+    fn from(f: String) -> Self {
+        DiscountAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<DiscountAnyOf> for String {
+    fn from(f: DiscountAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 ///
@@ -11099,7 +12179,7 @@ pub struct DiscountsResourceDiscountAmount {
     )]
     pub amount: i64,
     #[serde()]
-    pub discount: DiscountAnyOf,
+    pub discount: Box<DiscountAnyOf>,
 }
 
 /**
@@ -11221,7 +12301,7 @@ pub struct Dispute {
     )]
     pub balance_transactions: Vec<BalanceTransaction>,
     #[serde()]
-    pub charge: ChargeAnyOf,
+    pub charge: Box<ChargeAnyOf>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -11298,8 +12378,8 @@ pub struct Dispute {
     *  
     *  Related guide: [Disputes and Fraud](https://stripe.com/docs/disputes).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_intent: Option<PaymentIntentAnyOf>,
+    #[serde()]
+    pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
     * The account's country.
     */
@@ -11340,8 +12420,8 @@ pub struct DisputeEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub cancellation_policy: Option<IconAnyOf>,
+    #[serde()]
+    pub cancellation_policy: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -11363,8 +12443,8 @@ pub struct DisputeEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer_communication: Option<IconAnyOf>,
+    #[serde()]
+    pub customer_communication: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -11395,13 +12475,13 @@ pub struct DisputeEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer_signature: Option<IconAnyOf>,
+    #[serde()]
+    pub customer_signature: Box<Option<IconAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub duplicate_charge_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub duplicate_charge_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -11432,13 +12512,13 @@ pub struct DisputeEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub receipt: Option<IconAnyOf>,
+    #[serde()]
+    pub receipt: Box<Option<IconAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub refund_policy: Option<IconAnyOf>,
+    #[serde()]
+    pub refund_policy: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -11469,8 +12549,8 @@ pub struct DisputeEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub service_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub service_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -11501,8 +12581,8 @@ pub struct DisputeEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub shipping_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub shipping_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -11515,8 +12595,8 @@ pub struct DisputeEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub uncategorized_file: Option<IconAnyOf>,
+    #[serde()]
+    pub uncategorized_file: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -11753,7 +12833,7 @@ impl EventObject {
 ///
 /// **NOTE:** Right now, access to events through the [Retrieve Event API](https://stripe.com/docs/api#retrieve_event) is
 /// guaranteed only for 30 days.
-#[derive(Serialize, Default, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
+#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Event {
     /**
     * Events are our way of letting you know when something interesting happens in
@@ -12073,8 +13153,8 @@ pub struct FeeRefund {
     *  
     *  Related guide: [Refunding Application Fees](https://stripe.com/docs/connect/destination-charges#refunding-app-fee).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -12094,7 +13174,7 @@ pub struct FeeRefund {
     )]
     pub currency: String,
     #[serde()]
-    pub fee: FeeAnyOf,
+    pub fee: Box<FeeAnyOf>,
     /**
     * The account's country.
     */
@@ -12467,7 +13547,7 @@ pub struct FileLink {
     )]
     pub expires_at: i64,
     #[serde()]
-    pub file: IconAnyOf,
+    pub file: Box<IconAnyOf>,
     /**
     * The account's country.
     */
@@ -13680,18 +14760,20 @@ pub struct GelatoVerificationReport {
     pub verification_session: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `GelatoVerificationReport`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct LastVerificationReportAnyOf {
+#[serde(untagged)]
+pub enum LastVerificationReportAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A VerificationReport is the result of an attempt to collect and verify data from a user.
     *  The collection of verification checks performed is determined from the `type` and `options`
@@ -13705,8 +14787,35 @@ pub struct LastVerificationReportAnyOf {
     *  
     *  Related guides: [Accessing verification results](https://stripe.com/docs/identity/verification-sessions#results).
     */
-    #[serde(flatten)]
-    pub gelato_verification_report: GelatoVerificationReport,
+    GelatoVerificationReport(GelatoVerificationReport),
+}
+
+impl LastVerificationReportAnyOf {
+    pub fn gelato_verification_report(&self) -> Option<&GelatoVerificationReport> {
+        if let LastVerificationReportAnyOf::GelatoVerificationReport(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let LastVerificationReportAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for LastVerificationReportAnyOf {
+    fn from(f: String) -> Self {
+        LastVerificationReportAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<LastVerificationReportAnyOf> for String {
+    fn from(f: LastVerificationReportAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -13858,8 +14967,8 @@ pub struct GelatoVerificationSession {
     *  
     *  Related guide: [The Verification Sessions API](https://stripe.com/docs/identity/verification-sessions)
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub last_verification_report: Option<LastVerificationReportAnyOf>,
+    #[serde()]
+    pub last_verification_report: Box<Option<LastVerificationReportAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -13938,32 +15047,67 @@ pub struct GelatoVerificationSession {
     pub verified_outputs: Option<GelatoVerifiedOutputs>,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `TaxId`
 /// - `DeletedTaxId`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AccountTaxIdsAnyOf {
+#[serde(untagged)]
+pub enum AccountTaxIdsAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * You can add one or multiple tax IDs to a [customer](https://stripe.com/docs/api/customers).
     *  A customer's tax IDs are displayed on invoices and credit notes issued for the customer.
     *  
     *  Related guide: [Customer Tax Identification Numbers](https://stripe.com/docs/billing/taxes/tax-ids).
     */
-    #[serde(flatten)]
-    pub tax_id: TaxId,
+    TaxId(TaxId),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_tax_id: DeletedTaxId,
+    DeletedTaxId(DeletedTaxId),
+}
+
+impl AccountTaxIdsAnyOf {
+    pub fn deleted_tax_id(&self) -> Option<&DeletedTaxId> {
+        if let AccountTaxIdsAnyOf::DeletedTaxId(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let AccountTaxIdsAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn tax_id(&self) -> Option<&TaxId> {
+        if let AccountTaxIdsAnyOf::TaxId(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for AccountTaxIdsAnyOf {
+    fn from(f: String) -> Self {
+        AccountTaxIdsAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<AccountTaxIdsAnyOf> for String {
+    fn from(f: AccountTaxIdsAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -14063,18 +15207,20 @@ impl CollectionMethod {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `PaymentMethod`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PaymentMethodAnyOf {
+#[serde(untagged)]
+pub enum PaymentMethodAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * PaymentMethod objects represent your customer's payment instruments.
     *  They can be used with [PaymentIntents](https://stripe.com/docs/payments/payment-intents) to collect payments or saved to
@@ -14082,8 +15228,35 @@ pub struct PaymentMethodAnyOf {
     *  
     *  Related guides: [Payment Methods](https://stripe.com/docs/payments/payment-methods) and [More Payment Scenarios](https://stripe.com/docs/payments/more-payment-scenarios).
     */
-    #[serde(flatten)]
-    pub payment_method: PaymentMethod,
+    PaymentMethod(PaymentMethod),
+}
+
+impl PaymentMethodAnyOf {
+    pub fn payment_method(&self) -> Option<&PaymentMethod> {
+        if let PaymentMethodAnyOf::PaymentMethod(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let PaymentMethodAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for PaymentMethodAnyOf {
+    fn from(f: String) -> Self {
+        PaymentMethodAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<PaymentMethodAnyOf> for String {
+    fn from(f: PaymentMethodAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// The individual line items that make up the invoice. `lines` is sorted as follows: invoice items in reverse chronological order, followed by the subscription, if any.
@@ -14122,24 +15295,53 @@ pub struct InvoiceLinesList {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Quote`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct QuoteAnyOf {
+#[serde(untagged)]
+pub enum QuoteAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A Quote is a way to model prices that you'd like to provide to a customer.
     *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
     */
-    #[serde(flatten)]
-    pub quote: Quote,
+    Quote(Quote),
+}
+
+impl QuoteAnyOf {
+    pub fn quote(&self) -> Option<&Quote> {
+        if let QuoteAnyOf::Quote(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let QuoteAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for QuoteAnyOf {
+    fn from(f: String) -> Self {
+        QuoteAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<QuoteAnyOf> for String {
+    fn from(f: QuoteAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -14309,12 +15511,8 @@ pub struct Invoice {
     /**
     * The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub account_tax_ids: Vec<AccountTaxIdsAnyOf>,
+    #[serde()]
+    pub account_tax_ids: Box<Vec<AccountTaxIdsAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -14482,8 +15680,8 @@ pub struct Invoice {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub charge: Option<ChargeAnyOf>,
+    #[serde()]
+    pub charge: Box<Option<ChargeAnyOf>>,
     /**
     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay this invoice using the default source attached to the customer. When sending an invoice, Stripe will email this invoice to the customer with payment instructions.
     */
@@ -14550,8 +15748,8 @@ pub struct Invoice {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * A publicly available mailing address for sending support issues to.
     */
@@ -14730,8 +15928,8 @@ pub struct Invoice {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_payment_method: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
     * Invoices are statements of amounts owed by a customer, and are either
     *  generated one-off, or generated periodically from a subscription.
@@ -14766,8 +15964,8 @@ pub struct Invoice {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_source: Option<DefaultSourceAnyOf>,
+    #[serde()]
+    pub default_source: Box<Option<DefaultSourceAnyOf>>,
     /**
     * The tax rates which apply to the line item.
     */
@@ -14825,12 +16023,8 @@ pub struct Invoice {
     /**
     * The discounts applied to the invoice. Line item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub discounts: Vec<DiscountAnyOf>,
+    #[serde()]
+    pub discounts: Box<Vec<DiscountAnyOf>>,
     /**
     * Invoices are statements of amounts owed by a customer, and are either
     *  generated one-off, or generated periodically from a subscription.
@@ -15074,8 +16268,8 @@ pub struct Invoice {
     /**
     * The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub last_finalization_error: Option<ApiErrors>,
+    #[serde()]
+    pub last_finalization_error: Box<Option<ApiErrors>>,
     /**
     * The individual line items that make up the invoice. `lines` is sorted as follows: invoice items in reverse chronological order, followed by the subscription, if any.
     */
@@ -15248,8 +16442,8 @@ pub struct Invoice {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub on_behalf_of: Option<AccountAnyOf>,
+    #[serde()]
+    pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -15300,8 +16494,8 @@ pub struct Invoice {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_intent: Option<PaymentIntentAnyOf>,
+    #[serde()]
+    pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
     *
     */
@@ -15377,8 +16571,8 @@ pub struct Invoice {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub quote: Option<QuoteAnyOf>,
+    #[serde()]
+    pub quote: Box<Option<QuoteAnyOf>>,
     /**
     * Invoices are statements of amounts owed by a customer, and are either
     *  generated one-off, or generated periodically from a subscription.
@@ -15512,8 +16706,8 @@ pub struct Invoice {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub subscription: Option<SubscriptionAnyOf>,
+    #[serde()]
+    pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
     * Invoices are statements of amounts owed by a customer, and are either
     *  generated one-off, or generated periodically from a subscription.
@@ -15637,8 +16831,8 @@ pub struct Invoice {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub test_clock: Option<TestClockAnyOf>,
+    #[serde()]
+    pub test_clock: Box<Option<TestClockAnyOf>>,
     /**
     * Invoices are statements of amounts owed by a customer, and are either
     *  generated one-off, or generated periodically from a subscription.
@@ -16132,8 +17326,8 @@ pub struct InvoiceSettingCustomer {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_payment_method: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
     *
     */
@@ -16209,21 +17403,23 @@ pub struct InvoiceTransferDataType {
     )]
     pub amount: i64,
     #[serde()]
-    pub destination: AccountAnyOf,
+    pub destination: Box<AccountAnyOf>,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `DiscountData`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DiscountsAnyOf {
+#[serde(untagged)]
+pub enum DiscountsAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A discount represents the actual application of a coupon to a particular
     *  customer. It contains information about when the discount began and when it
@@ -16231,8 +17427,35 @@ pub struct DiscountsAnyOf {
     *  
     *  Related guide: [Applying Discounts to Subscriptions](https://stripe.com/docs/billing/subscriptions/discounts).
     */
-    #[serde(flatten)]
-    pub discount_data: DiscountData,
+    DiscountData(DiscountData),
+}
+
+impl DiscountsAnyOf {
+    pub fn discount_data(&self) -> Option<&DiscountData> {
+        if let DiscountsAnyOf::DiscountData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let DiscountsAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for DiscountsAnyOf {
+    fn from(f: String) -> Self {
+        DiscountsAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<DiscountsAnyOf> for String {
+    fn from(f: DiscountsAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// Sometimes you want to add a charge or credit to a customer, but actually
@@ -16263,7 +17486,7 @@ pub struct InvoiceItem {
     )]
     pub currency: String,
     #[serde()]
-    pub customer: CustomerAnyOf,
+    pub customer: Box<CustomerAnyOf>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -16299,12 +17522,8 @@ pub struct InvoiceItem {
     /**
     * The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub discounts: Vec<DiscountsAnyOf>,
+    #[serde()]
+    pub discounts: Box<Vec<DiscountsAnyOf>>,
     /**
     * The account's country.
     */
@@ -16323,8 +17542,8 @@ pub struct InvoiceItem {
     *  
     *  Related guide: [Subscription Invoices](https://stripe.com/docs/billing/invoices/subscription#adding-upcoming-invoice-items).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub invoice: Option<InvoiceAnyOf>,
+    #[serde()]
+    pub invoice: Box<Option<InvoiceAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -16389,8 +17608,8 @@ pub struct InvoiceItem {
     *  
     *  Related guide: [Subscription Invoices](https://stripe.com/docs/billing/invoices/subscription#adding-upcoming-invoice-items).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub subscription: Option<SubscriptionAnyOf>,
+    #[serde()]
+    pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
     * Sometimes you want to add a charge or credit to a customer, but actually
     *  charge or credit the customer's card only at the end of a regular billing
@@ -16430,8 +17649,8 @@ pub struct InvoiceItem {
     *  
     *  Related guide: [Subscription Invoices](https://stripe.com/docs/billing/invoices/subscription#adding-upcoming-invoice-items).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub test_clock: Option<TestClockAnyOf>,
+    #[serde()]
+    pub test_clock: Box<Option<TestClockAnyOf>>,
     /**
     * Sometimes you want to add a charge or credit to a customer, but actually
     *  charge or credit the customer's card only at the end of a regular billing
@@ -16914,7 +18133,7 @@ pub struct IssuerFraudRecord {
     )]
     pub actionable: bool,
     #[serde()]
-    pub charge: ChargeAnyOf,
+    pub charge: Box<ChargeAnyOf>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -17021,25 +18240,54 @@ impl AuthorizationMethod {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `IssuingCardholder`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct CardholderAnyOf {
+#[serde(untagged)]
+pub enum CardholderAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * An Issuing `Cardholder` object represents an individual or business entity who is [issued](https://stripe.com/docs/issuing) cards.
     *  
     *  Related guide: [How to create a Cardholder](https://stripe.com/docs/issuing/cards#create-cardholder)
     */
-    #[serde(flatten)]
-    pub issuing_cardholder: IssuingCardholder,
+    IssuingCardholder(IssuingCardholder),
+}
+
+impl CardholderAnyOf {
+    pub fn issuing_cardholder(&self) -> Option<&IssuingCardholder> {
+        if let CardholderAnyOf::IssuingCardholder(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let CardholderAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for CardholderAnyOf {
+    fn from(f: String) -> Self {
+        CardholderAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<CardholderAnyOf> for String {
+    fn from(f: CardholderAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -17173,8 +18421,8 @@ pub struct IssuingAuthorization {
     *  
     *  Related guide: [Issued Card Authorizations](https://stripe.com/docs/issuing/purchases/authorizations).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub cardholder: Option<CardholderAnyOf>,
+    #[serde()]
+    pub cardholder: Box<Option<CardholderAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -17368,23 +18616,52 @@ impl IssuingCardObject {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `IssuingCard`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct CardAnyOf {
+#[serde(untagged)]
+pub enum CardAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * You can [create physical or virtual cards](https://stripe.com/docs/issuing/cards) that are issued to cardholders.
     */
-    #[serde(flatten)]
-    pub issuing_card: IssuingCard,
+    IssuingCard(IssuingCard),
+}
+
+impl CardAnyOf {
+    pub fn issuing_card(&self) -> Option<&IssuingCard> {
+        if let CardAnyOf::IssuingCard(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let CardAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for CardAnyOf {
+    fn from(f: String) -> Self {
+        CardAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<CardAnyOf> for String {
+    fn from(f: CardAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -17632,13 +18909,13 @@ pub struct IssuingCard {
     /**
     * You can [create physical or virtual cards](https://stripe.com/docs/issuing/cards) that are issued to cardholders.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub replaced_by: Option<CardAnyOf>,
+    #[serde()]
+    pub replaced_by: Box<Option<CardAnyOf>>,
     /**
     * You can [create physical or virtual cards](https://stripe.com/docs/issuing/cards) that are issued to cardholders.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub replacement_for: Option<CardAnyOf>,
+    #[serde()]
+    pub replacement_for: Box<Option<CardAnyOf>>,
     /**
     * The reason why the previous card needed to be replaced.
     */
@@ -17988,18 +19265,20 @@ impl IssuingDisputeStatus {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `IssuingTransaction`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct TransactionAnyOf {
+#[serde(untagged)]
+pub enum TransactionAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Any use of an [issued card](https://stripe.com/docs/issuing) that results in funds entering or leaving
     *  your Stripe account, such as a completed purchase or refund, is represented by an Issuing
@@ -18007,8 +19286,35 @@ pub struct TransactionAnyOf {
     *  
     *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
     */
-    #[serde(flatten)]
-    pub issuing_transaction: IssuingTransaction,
+    IssuingTransaction(IssuingTransaction),
+}
+
+impl TransactionAnyOf {
+    pub fn issuing_transaction(&self) -> Option<&IssuingTransaction> {
+        if let TransactionAnyOf::IssuingTransaction(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let TransactionAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for TransactionAnyOf {
+    fn from(f: String) -> Self {
+        TransactionAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<TransactionAnyOf> for String {
+    fn from(f: TransactionAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// As a [card issuer](https://stripe.com/docs/issuing), you can dispute transactions that the cardholder does not recognize, suspects to be fraudulent, or has other issues with.
@@ -18096,7 +19402,7 @@ pub struct IssuingDispute {
     #[serde(default, skip_serializing_if = "IssuingDisputeStatus::is_noop")]
     pub status: IssuingDisputeStatus,
     #[serde()]
-    pub transaction: TransactionAnyOf,
+    pub transaction: Box<TransactionAnyOf>,
 }
 
 /**
@@ -18309,18 +19615,20 @@ pub struct IssuingSettlement {
     pub transaction_volume: i64,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `IssuingAuthorization`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AuthorizationAnyOf {
+#[serde(untagged)]
+pub enum AuthorizationAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * When an [issued card](https://stripe.com/docs/issuing) is used to make a purchase, an Issuing `Authorization`
     *  object is created. [Authorizations](https://stripe.com/docs/issuing/purchases/authorizations) must be approved for the
@@ -18328,29 +19636,85 @@ pub struct AuthorizationAnyOf {
     *  
     *  Related guide: [Issued Card Authorizations](https://stripe.com/docs/issuing/purchases/authorizations).
     */
-    #[serde(flatten)]
-    pub issuing_authorization: IssuingAuthorization,
+    IssuingAuthorization(IssuingAuthorization),
 }
 
-/// All of the following types are flattened into one object:
+impl AuthorizationAnyOf {
+    pub fn issuing_authorization(&self) -> Option<&IssuingAuthorization> {
+        if let AuthorizationAnyOf::IssuingAuthorization(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let AuthorizationAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for AuthorizationAnyOf {
+    fn from(f: String) -> Self {
+        AuthorizationAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<AuthorizationAnyOf> for String {
+    fn from(f: AuthorizationAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `IssuingDispute`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DisputeAnyOf {
+#[serde(untagged)]
+pub enum DisputeAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * As a [card issuer](https://stripe.com/docs/issuing), you can dispute transactions that the cardholder does not recognize, suspects to be fraudulent, or has other issues with.
     *  
     *  Related guide: [Disputing Transactions](https://stripe.com/docs/issuing/purchases/disputes)
     */
-    #[serde(flatten)]
-    pub issuing_dispute: IssuingDispute,
+    IssuingDispute(IssuingDispute),
+}
+
+impl DisputeAnyOf {
+    pub fn issuing_dispute(&self) -> Option<&IssuingDispute> {
+        if let DisputeAnyOf::IssuingDispute(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let DisputeAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for DisputeAnyOf {
+    fn from(f: String) -> Self {
+        DisputeAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<DisputeAnyOf> for String {
+    fn from(f: DisputeAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -18495,19 +19859,8 @@ pub struct IssuingTransaction {
     *  
     *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub authorization: Option<AuthorizationAnyOf>,
-    /**
-    * Any use of an [issued card](https://stripe.com/docs/issuing) that results in funds entering or leaving
-    *  your Stripe account, such as a completed purchase or refund, is represented by an Issuing
-    *  `Transaction` object.
-    *  
-    *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
-    */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub balance_transaction: Option<BalanceTransactionAnyOf>,
     #[serde()]
-    pub card: CardAnyOf,
+    pub authorization: Box<Option<AuthorizationAnyOf>>,
     /**
     * Any use of an [issued card](https://stripe.com/docs/issuing) that results in funds entering or leaving
     *  your Stripe account, such as a completed purchase or refund, is represented by an Issuing
@@ -18515,8 +19868,19 @@ pub struct IssuingTransaction {
     *  
     *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub cardholder: Option<CardholderAnyOf>,
+    #[serde()]
+    pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
+    #[serde()]
+    pub card: Box<CardAnyOf>,
+    /**
+    * Any use of an [issued card](https://stripe.com/docs/issuing) that results in funds entering or leaving
+    *  your Stripe account, such as a completed purchase or refund, is represented by an Issuing
+    *  `Transaction` object.
+    *  
+    *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
+    */
+    #[serde()]
+    pub cardholder: Box<Option<CardholderAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -18542,8 +19906,8 @@ pub struct IssuingTransaction {
     *  
     *  Related guide: [Issued Card Transactions](https://stripe.com/docs/issuing/purchases/transactions).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub dispute: Option<DisputeAnyOf>,
+    #[serde()]
+    pub dispute: Box<Option<DisputeAnyOf>>,
     /**
     * The account's country.
     */
@@ -20448,13 +21812,13 @@ pub struct IssuingCardholderDocument {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub back: Option<IconAnyOf>,
+    #[serde()]
+    pub back: Box<Option<IconAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub front: Option<IconAnyOf>,
+    #[serde()]
+    pub front: Box<Option<IconAnyOf>>,
 }
 
 ///
@@ -20724,8 +22088,8 @@ pub struct IssuingDisputeCanceledEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub additional_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -20806,23 +22170,23 @@ pub struct IssuingDisputeDuplicateEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub additional_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub card_statement: Option<IconAnyOf>,
+    #[serde()]
+    pub card_statement: Box<Option<IconAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub cash_receipt: Option<IconAnyOf>,
+    #[serde()]
+    pub cash_receipt: Box<Option<IconAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub check_image: Option<IconAnyOf>,
+    #[serde()]
+    pub check_image: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -20949,8 +22313,8 @@ pub struct IssuingDisputeFraudulentEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub additional_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -20968,8 +22332,8 @@ pub struct IssuingDisputeMerchandiseNotAsDescribedEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub additional_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -21019,8 +22383,8 @@ pub struct IssuingDisputeNotReceivedEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub additional_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -21061,8 +22425,8 @@ pub struct IssuingDisputeOtherEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub additional_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -21094,8 +22458,8 @@ pub struct IssuingDisputeServiceNotAsDescribedEvidence {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub additional_documentation: Option<IconAnyOf>,
+    #[serde()]
+    pub additional_documentation: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -21751,8 +23115,8 @@ pub struct LegalEntityCompanyVerificationDocument {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub back: Option<IconAnyOf>,
+    #[serde()]
+    pub back: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -21774,8 +23138,8 @@ pub struct LegalEntityCompanyVerificationDocument {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub front: Option<IconAnyOf>,
+    #[serde()]
+    pub front: Box<Option<IconAnyOf>>,
 }
 
 ///
@@ -21928,8 +23292,8 @@ pub struct LegalEntityPersonVerificationDocument {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub back: Option<IconAnyOf>,
+    #[serde()]
+    pub back: Box<Option<IconAnyOf>>,
     /**
     *
     */
@@ -21951,8 +23315,8 @@ pub struct LegalEntityPersonVerificationDocument {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub front: Option<IconAnyOf>,
+    #[serde()]
+    pub front: Box<Option<IconAnyOf>>,
 }
 
 ///
@@ -22110,12 +23474,8 @@ pub struct LineItem {
     /**
     * The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub discounts: Vec<DiscountsAnyOf>,
+    #[serde()]
+    pub discounts: Box<Vec<DiscountsAnyOf>>,
     /**
     * The account's country.
     */
@@ -22451,7 +23811,7 @@ pub struct Mandate {
     #[serde(default, skip_serializing_if = "MandateObject::is_noop")]
     pub object: MandateObject,
     #[serde()]
-    pub payment_method: PaymentMethodAnyOf,
+    pub payment_method: Box<PaymentMethodAnyOf>,
     /**
     *
     */
@@ -22901,8 +24261,8 @@ pub struct Order {
     *  
     *  Related guide: [Tax, Shipping, and Inventory](https://stripe.com/docs/orders-legacy).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub charge: Option<ChargeAnyOf>,
+    #[serde()]
+    pub charge: Box<Option<ChargeAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -22928,8 +24288,8 @@ pub struct Order {
     *  
     *  Related guide: [Tax, Shipping, and Inventory](https://stripe.com/docs/orders-legacy).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * Order objects are created to handle end customers' purchases of previously
     *  defined [products](https://stripe.com/docs/api#products). You can create, retrieve, and pay individual orders, as well
@@ -23109,18 +24469,20 @@ impl OrderItemObject {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Sku`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ParentAnyOf {
+#[serde(untagged)]
+pub enum ParentAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Stores representations of [stock keeping units](http://en.wikipedia.org/wiki/Stock_keeping_unit).
     *  SKUs describe specific product variations, taking into account any combination of: attributes,
@@ -23129,8 +24491,35 @@ pub struct ParentAnyOf {
     *  
     *  Can also be used to manage inventory.
     */
-    #[serde(flatten)]
-    pub sku: Sku,
+    Sku(Sku),
+}
+
+impl ParentAnyOf {
+    pub fn sku(&self) -> Option<&Sku> {
+        if let ParentAnyOf::Sku(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ParentAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for ParentAnyOf {
+    fn from(f: String) -> Self {
+        ParentAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<ParentAnyOf> for String {
+    fn from(f: ParentAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// A representation of the constituent items of any given order. Can be used to
@@ -23177,8 +24566,8 @@ pub struct OrderItem {
     *  
     *  Related guide: [Orders](https://stripe.com/docs/orders/guide).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub parent: Option<ParentAnyOf>,
+    #[serde()]
+    pub parent: Box<Option<ParentAnyOf>>,
     /**
     * A representation of the constituent items of any given order. Can be used to
     *  represent [SKUs](https://stripe.com/docs/api#skus), shipping costs, or taxes owed on the order.
@@ -23308,16 +24697,16 @@ pub struct OrderReturn {
     *  
     *  Related guide: [Handling Returns](https://stripe.com/docs/orders/guide#handling-returns).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub order: Option<OrderAnyOf>,
+    #[serde()]
+    pub order: Box<Option<OrderAnyOf>>,
     /**
     * A return represents the full or partial return of a number of [order items](https://stripe.com/docs/api#order_items).
     *  Returns always belong to an order, and may optionally contain a refund.
     *  
     *  Related guide: [Handling Returns](https://stripe.com/docs/orders/guide#handling-returns).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub refund: Option<RefundAnyOf>,
+    #[serde()]
+    pub refund: Box<Option<RefundAnyOf>>,
 }
 
 ///
@@ -23768,8 +25157,8 @@ pub struct PaymentIntent {
     *  
     *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub application: Option<ApplicationAnyOf>,
+    #[serde()]
+    pub application: Box<Option<ApplicationAnyOf>>,
     /**
     * A PaymentIntent guides you through the process of collecting a payment from your customer.
     *  We recommend that you create exactly one PaymentIntent for each order or
@@ -23893,8 +25282,8 @@ pub struct PaymentIntent {
     *  
     *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * A PaymentIntent guides you through the process of collecting a payment from your customer.
     *  We recommend that you create exactly one PaymentIntent for each order or
@@ -23936,13 +25325,13 @@ pub struct PaymentIntent {
     *  
     *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub invoice: Option<InvoiceAnyOf>,
+    #[serde()]
+    pub invoice: Box<Option<InvoiceAnyOf>>,
     /**
     * The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub last_payment_error: Option<ApiErrors>,
+    #[serde()]
+    pub last_payment_error: Box<Option<ApiErrors>>,
     /**
     * Whether the account can create live charges.
     */
@@ -23993,8 +25382,8 @@ pub struct PaymentIntent {
     *  
     *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub on_behalf_of: Option<AccountAnyOf>,
+    #[serde()]
+    pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
     * A PaymentIntent guides you through the process of collecting a payment from your customer.
     *  We recommend that you create exactly one PaymentIntent for each order or
@@ -24008,8 +25397,8 @@ pub struct PaymentIntent {
     *  
     *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_method: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
     * Payment-method-specific configuration for this PaymentIntent.
     */
@@ -24061,8 +25450,8 @@ pub struct PaymentIntent {
     *  
     *  Related guide: [Payment Intents API](https://stripe.com/docs/payments/payment-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub review: Option<ReviewAnyOf>,
+    #[serde()]
+    pub review: Box<Option<ReviewAnyOf>>,
     /**
     * Indicates that you intend to make future payments with this PaymentIntent's payment method.
     *  
@@ -24757,484 +26146,929 @@ pub struct PaymentIntentNextActionWechatPayRedirectIosApp {
     pub native_url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `PaymentIntentMethodOptionsAcssDebit`
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AcssDebitAnyOf {
+#[serde(untagged)]
+pub enum AcssDebitAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_method_options_acss_debit: PaymentIntentMethodOptionsAcssDebit,
+    PaymentIntentMethodOptionsAcssDebit(PaymentIntentMethodOptionsAcssDebit),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
 }
 
-/// All of the following types are flattened into one object:
+impl AcssDebitAnyOf {
+    pub fn payment_intent_method_options_acss_debit(
+        &self,
+    ) -> Option<&PaymentIntentMethodOptionsAcssDebit> {
+        if let AcssDebitAnyOf::PaymentIntentMethodOptionsAcssDebit(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let AcssDebitAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsAfterpayClearpay`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AfterpayClearpayAnyOf {
+#[serde(untagged)]
+pub enum AfterpayClearpayAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_afterpay_clearpay: PaymentMethodOptionsAfterpayClearpay,
+    PaymentMethodOptionsAfterpayClearpay(PaymentMethodOptionsAfterpayClearpay),
 }
 
-/// All of the following types are flattened into one object:
+impl AfterpayClearpayAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let AfterpayClearpayAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_afterpay_clearpay(
+        &self,
+    ) -> Option<&PaymentMethodOptionsAfterpayClearpay> {
+        if let AfterpayClearpayAnyOf::PaymentMethodOptionsAfterpayClearpay(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsAlipay`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AlipayAnyOf {
+#[serde(untagged)]
+pub enum AlipayAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_alipay: PaymentMethodOptionsAlipay,
+    PaymentMethodOptionsAlipay(PaymentMethodOptionsAlipay),
 }
 
-/// All of the following types are flattened into one object:
+impl AlipayAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let AlipayAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_alipay(&self) -> Option<&PaymentMethodOptionsAlipay> {
+        if let AlipayAnyOf::PaymentMethodOptionsAlipay(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentIntentMethodOptionsAuBecsDebit`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AuBecsDebitAnyOf {
+#[serde(untagged)]
+pub enum AuBecsDebitAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_method_options_au_becs_debit: PaymentIntentMethodOptionsAuBecsDebit,
+    PaymentIntentMethodOptionsAuBecsDebit(PaymentIntentMethodOptionsAuBecsDebit),
 }
 
-/// All of the following types are flattened into one object:
+impl AuBecsDebitAnyOf {
+    pub fn payment_intent_method_options_au_becs_debit(
+        &self,
+    ) -> Option<&PaymentIntentMethodOptionsAuBecsDebit> {
+        if let AuBecsDebitAnyOf::PaymentIntentMethodOptionsAuBecsDebit(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let AuBecsDebitAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsBacsDebit`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct BacsDebitAnyOf {
+#[serde(untagged)]
+pub enum BacsDebitAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_bacs_debit: PaymentMethodOptionsBacsDebit,
+    PaymentMethodOptionsBacsDebit(PaymentMethodOptionsBacsDebit),
 }
 
-/// All of the following types are flattened into one object:
+impl BacsDebitAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let BacsDebitAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_bacs_debit(&self) -> Option<&PaymentMethodOptionsBacsDebit> {
+        if let BacsDebitAnyOf::PaymentMethodOptionsBacsDebit(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsBancontact`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct BancontactAnyOf {
+#[serde(untagged)]
+pub enum BancontactAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_bancontact: PaymentMethodOptionsBancontact,
+    PaymentMethodOptionsBancontact(PaymentMethodOptionsBancontact),
 }
 
-/// All of the following types are flattened into one object:
+impl BancontactAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let BancontactAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_bancontact(&self) -> Option<&PaymentMethodOptionsBancontact> {
+        if let BancontactAnyOf::PaymentMethodOptionsBancontact(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsBoleto`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct BoletoAnyOf {
+#[serde(untagged)]
+pub enum BoletoAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_boleto: PaymentMethodOptionsBoleto,
+    PaymentMethodOptionsBoleto(PaymentMethodOptionsBoleto),
 }
 
-/// All of the following types are flattened into one object:
+impl BoletoAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let BoletoAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_boleto(&self) -> Option<&PaymentMethodOptionsBoleto> {
+        if let BoletoAnyOf::PaymentMethodOptionsBoleto(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentIntentMethodOptionsCard`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PaymentIntentMethodOptionsCardAnyOf {
+#[serde(untagged)]
+pub enum PaymentIntentMethodOptionsCardAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_method_options_card: PaymentIntentMethodOptionsCard,
+    PaymentIntentMethodOptionsCard(PaymentIntentMethodOptionsCard),
 }
 
-/// All of the following types are flattened into one object:
+impl PaymentIntentMethodOptionsCardAnyOf {
+    pub fn payment_intent_method_options_card(&self) -> Option<&PaymentIntentMethodOptionsCard> {
+        if let PaymentIntentMethodOptionsCardAnyOf::PaymentIntentMethodOptionsCard(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let PaymentIntentMethodOptionsCardAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(
+            ref_,
+        ) = self
+        {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsCardPresent`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct CardPresentAnyOf {
+#[serde(untagged)]
+pub enum CardPresentAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_card_present: PaymentMethodOptionsCardPresent,
+    PaymentMethodOptionsCardPresent(PaymentMethodOptionsCardPresent),
 }
 
-/// All of the following types are flattened into one object:
+impl CardPresentAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let CardPresentAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_card_present(&self) -> Option<&PaymentMethodOptionsCardPresent> {
+        if let CardPresentAnyOf::PaymentMethodOptionsCardPresent(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentIntentMethodOptionsEps`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct EpsAnyOf {
+#[serde(untagged)]
+pub enum EpsAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_method_options_eps: PaymentIntentMethodOptionsEps,
+    PaymentIntentMethodOptionsEps(PaymentIntentMethodOptionsEps),
 }
 
-/// All of the following types are flattened into one object:
+impl EpsAnyOf {
+    pub fn payment_intent_method_options_eps(&self) -> Option<&PaymentIntentMethodOptionsEps> {
+        if let EpsAnyOf::PaymentIntentMethodOptionsEps(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let EpsAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsFpx`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct FpxAnyOf {
+#[serde(untagged)]
+pub enum FpxAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_fpx: PaymentMethodOptionsFpx,
+    PaymentMethodOptionsFpx(PaymentMethodOptionsFpx),
 }
 
-/// All of the following types are flattened into one object:
+impl FpxAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let FpxAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_fpx(&self) -> Option<&PaymentMethodOptionsFpx> {
+        if let FpxAnyOf::PaymentMethodOptionsFpx(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsGiropay`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GiropayAnyOf {
+#[serde(untagged)]
+pub enum GiropayAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_giropay: PaymentMethodOptionsGiropay,
+    PaymentMethodOptionsGiropay(PaymentMethodOptionsGiropay),
 }
 
-/// All of the following types are flattened into one object:
+impl GiropayAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let GiropayAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_giropay(&self) -> Option<&PaymentMethodOptionsGiropay> {
+        if let GiropayAnyOf::PaymentMethodOptionsGiropay(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsGrabpay`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GrabpayAnyOf {
+#[serde(untagged)]
+pub enum GrabpayAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_grabpay: PaymentMethodOptionsGrabpay,
+    PaymentMethodOptionsGrabpay(PaymentMethodOptionsGrabpay),
 }
 
-/// All of the following types are flattened into one object:
+impl GrabpayAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let GrabpayAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_grabpay(&self) -> Option<&PaymentMethodOptionsGrabpay> {
+        if let GrabpayAnyOf::PaymentMethodOptionsGrabpay(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsIdeal`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IdealAnyOf {
+#[serde(untagged)]
+pub enum IdealAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_ideal: PaymentMethodOptionsIdeal,
+    PaymentMethodOptionsIdeal(PaymentMethodOptionsIdeal),
 }
 
-/// All of the following types are flattened into one object:
+impl IdealAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let IdealAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_ideal(&self) -> Option<&PaymentMethodOptionsIdeal> {
+        if let IdealAnyOf::PaymentMethodOptionsIdeal(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `UseStripeSdk`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct InteracPresentAnyOf {
+#[serde(untagged)]
+pub enum InteracPresentAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     * When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this dictionary to invoke authentication flows. The shape of the contents is subject to change and is only intended to be used by Stripe.js.
     */
-    #[serde(flatten)]
-    pub use_stripe_sdk: UseStripeSdk,
+    UseStripeSdk(UseStripeSdk),
 }
 
-/// All of the following types are flattened into one object:
+impl InteracPresentAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let InteracPresentAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn use_stripe_sdk(&self) -> Option<&UseStripeSdk> {
+        if let InteracPresentAnyOf::UseStripeSdk(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsKlarna`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct KlarnaAnyOf {
+#[serde(untagged)]
+pub enum KlarnaAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_klarna: PaymentMethodOptionsKlarna,
+    PaymentMethodOptionsKlarna(PaymentMethodOptionsKlarna),
 }
 
-/// All of the following types are flattened into one object:
+impl KlarnaAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let KlarnaAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_klarna(&self) -> Option<&PaymentMethodOptionsKlarna> {
+        if let KlarnaAnyOf::PaymentMethodOptionsKlarna(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsKonbini`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct KonbiniAnyOf {
+#[serde(untagged)]
+pub enum KonbiniAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_konbini: PaymentMethodOptionsKonbini,
+    PaymentMethodOptionsKonbini(PaymentMethodOptionsKonbini),
 }
 
-/// All of the following types are flattened into one object:
+impl KonbiniAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let KonbiniAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_konbini(&self) -> Option<&PaymentMethodOptionsKonbini> {
+        if let KonbiniAnyOf::PaymentMethodOptionsKonbini(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsOxxo`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct OxxoAnyOf {
+#[serde(untagged)]
+pub enum OxxoAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_oxxo: PaymentMethodOptionsOxxo,
+    PaymentMethodOptionsOxxo(PaymentMethodOptionsOxxo),
 }
 
-/// All of the following types are flattened into one object:
+impl OxxoAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let OxxoAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_oxxo(&self) -> Option<&PaymentMethodOptionsOxxo> {
+        if let OxxoAnyOf::PaymentMethodOptionsOxxo(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsP24`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct P24AnyOf {
+#[serde(untagged)]
+pub enum P24AnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_p24: PaymentMethodOptionsP24,
+    PaymentMethodOptionsP24(PaymentMethodOptionsP24),
 }
 
-/// All of the following types are flattened into one object:
+impl P24AnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let P24AnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_p24(&self) -> Option<&PaymentMethodOptionsP24> {
+        if let P24AnyOf::PaymentMethodOptionsP24(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsPaynow`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PaynowAnyOf {
+#[serde(untagged)]
+pub enum PaynowAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_paynow: PaymentMethodOptionsPaynow,
+    PaymentMethodOptionsPaynow(PaymentMethodOptionsPaynow),
 }
 
-/// All of the following types are flattened into one object:
+impl PaynowAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let PaynowAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_paynow(&self) -> Option<&PaymentMethodOptionsPaynow> {
+        if let PaynowAnyOf::PaymentMethodOptionsPaynow(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentIntentMethodOptionsSepaDebit`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SepaDebitAnyOf {
+#[serde(untagged)]
+pub enum SepaDebitAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_method_options_sepa_debit: PaymentIntentMethodOptionsSepaDebit,
+    PaymentIntentMethodOptionsSepaDebit(PaymentIntentMethodOptionsSepaDebit),
 }
 
-/// All of the following types are flattened into one object:
+impl SepaDebitAnyOf {
+    pub fn payment_intent_method_options_sepa_debit(
+        &self,
+    ) -> Option<&PaymentIntentMethodOptionsSepaDebit> {
+        if let SepaDebitAnyOf::PaymentIntentMethodOptionsSepaDebit(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let SepaDebitAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsSofort`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SofortAnyOf {
+#[serde(untagged)]
+pub enum SofortAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_sofort: PaymentMethodOptionsSofort,
+    PaymentMethodOptionsSofort(PaymentMethodOptionsSofort),
 }
 
-/// All of the following types are flattened into one object:
+impl SofortAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let SofortAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_sofort(&self) -> Option<&PaymentMethodOptionsSofort> {
+        if let SofortAnyOf::PaymentMethodOptionsSofort(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentIntentMethodOptionsUsBankAccount`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct UsBankAccountAnyOf {
+#[serde(untagged)]
+pub enum UsBankAccountAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_method_options_us_bank_account: PaymentIntentMethodOptionsUsBankAccount,
+    PaymentIntentMethodOptionsUsBankAccount(PaymentIntentMethodOptionsUsBankAccount),
 }
 
-/// All of the following types are flattened into one object:
+impl UsBankAccountAnyOf {
+    pub fn payment_intent_method_options_us_bank_account(
+        &self,
+    ) -> Option<&PaymentIntentMethodOptionsUsBankAccount> {
+        if let UsBankAccountAnyOf::PaymentIntentMethodOptionsUsBankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let UsBankAccountAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `PaymentIntentTypeSpecificMethodOptionsClient`
 /// - `PaymentMethodOptionsWechatPay`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct WechatPayAnyOf {
+#[serde(untagged)]
+pub enum WechatPayAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_intent_type_specific_method_options_client:
-        PaymentIntentTypeSpecificMethodOptionsClient,
+    PaymentIntentTypeSpecificMethodOptionsClient(PaymentIntentTypeSpecificMethodOptionsClient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub payment_method_options_wechat_pay: PaymentMethodOptionsWechatPay,
+    PaymentMethodOptionsWechatPay(PaymentMethodOptionsWechatPay),
+}
+
+impl WechatPayAnyOf {
+    pub fn payment_intent_type_specific_method_options_client(
+        &self,
+    ) -> Option<&PaymentIntentTypeSpecificMethodOptionsClient> {
+        if let WechatPayAnyOf::PaymentIntentTypeSpecificMethodOptionsClient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_method_options_wechat_pay(&self) -> Option<&PaymentMethodOptionsWechatPay> {
+        if let WechatPayAnyOf::PaymentMethodOptionsWechatPay(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 ///
@@ -25243,123 +27077,123 @@ pub struct PaymentIntentMethodOptionsData {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub acss_debit: Option<AcssDebitAnyOf>,
+    #[serde()]
+    pub acss_debit: Box<Option<AcssDebitAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub afterpay_clearpay: Option<AfterpayClearpayAnyOf>,
+    #[serde()]
+    pub afterpay_clearpay: Box<Option<AfterpayClearpayAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub alipay: Option<AlipayAnyOf>,
+    #[serde()]
+    pub alipay: Box<Option<AlipayAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub au_becs_debit: Option<AuBecsDebitAnyOf>,
+    #[serde()]
+    pub au_becs_debit: Box<Option<AuBecsDebitAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub bacs_debit: Option<BacsDebitAnyOf>,
+    #[serde()]
+    pub bacs_debit: Box<Option<BacsDebitAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub bancontact: Option<BancontactAnyOf>,
+    #[serde()]
+    pub bancontact: Box<Option<BancontactAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub boleto: Option<BoletoAnyOf>,
+    #[serde()]
+    pub boleto: Box<Option<BoletoAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub card: Option<PaymentIntentMethodOptionsCardAnyOf>,
+    #[serde()]
+    pub card: Box<Option<PaymentIntentMethodOptionsCardAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub card_present: Option<CardPresentAnyOf>,
+    #[serde()]
+    pub card_present: Box<Option<CardPresentAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub eps: Option<EpsAnyOf>,
+    #[serde()]
+    pub eps: Box<Option<EpsAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub fpx: Option<FpxAnyOf>,
+    #[serde()]
+    pub fpx: Box<Option<FpxAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub giropay: Option<GiropayAnyOf>,
+    #[serde()]
+    pub giropay: Box<Option<GiropayAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub grabpay: Option<GrabpayAnyOf>,
+    #[serde()]
+    pub grabpay: Box<Option<GrabpayAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub ideal: Option<IdealAnyOf>,
+    #[serde()]
+    pub ideal: Box<Option<IdealAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub interac_present: Option<InteracPresentAnyOf>,
+    #[serde()]
+    pub interac_present: Box<Option<InteracPresentAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub klarna: Option<KlarnaAnyOf>,
+    #[serde()]
+    pub klarna: Box<Option<KlarnaAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub konbini: Option<KonbiniAnyOf>,
+    #[serde()]
+    pub konbini: Box<Option<KonbiniAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub oxxo: Option<OxxoAnyOf>,
+    #[serde()]
+    pub oxxo: Box<Option<OxxoAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none", rename = "p24")]
-    pub p_24: Option<P24AnyOf>,
+    #[serde(rename = "p24")]
+    pub p_24: Box<Option<P24AnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub paynow: Option<PaynowAnyOf>,
+    #[serde()]
+    pub paynow: Box<Option<PaynowAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub sepa_debit: Option<SepaDebitAnyOf>,
+    #[serde()]
+    pub sepa_debit: Box<Option<SepaDebitAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub sofort: Option<SofortAnyOf>,
+    #[serde()]
+    pub sofort: Box<Option<SofortAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub us_bank_account: Option<UsBankAccountAnyOf>,
+    #[serde()]
+    pub us_bank_account: Box<Option<UsBankAccountAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub wechat_pay: Option<WechatPayAnyOf>,
+    #[serde()]
+    pub wechat_pay: Box<Option<WechatPayAnyOf>>,
 }
 
 /**
@@ -25929,8 +27763,8 @@ pub struct PaymentLink {
     *  
     *  Related guide: [Payment Links API](https://stripe.com/docs/payments/payment-links/api)
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub on_behalf_of: Option<AccountAnyOf>,
+    #[serde()]
+    pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
     * The list of payment method types that customers can use. When `null`, Stripe will dynamically show relevant payment methods you've enabled in your [payment method settings](https://dashboard.stripe.com/settings/payment_methods).
     */
@@ -26828,7 +28662,7 @@ pub struct PaymentLinksResourceTransferData {
     )]
     pub amount: i64,
     #[serde()]
-    pub destination: AccountAnyOf,
+    pub destination: Box<AccountAnyOf>,
 }
 
 /**
@@ -27080,7 +28914,7 @@ pub struct PaymentMethod {
     *  Related guides: [Payment Methods](https://stripe.com/docs/payments/payment-methods) and [More Payment Scenarios](https://stripe.com/docs/payments/more-payment-scenarios).
     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerBalanceTransactionAnyOf>,
+    pub customer: Option<CustomerAnyOfData>,
     /**
     * PaymentMethod objects represent your customer's payment instruments.
     *  They can be used with [PaymentIntents](https://stripe.com/docs/payments/payment-intents) to collect payments or saved to
@@ -27520,26 +29354,55 @@ pub struct PaymentMethodCardChecks {
     pub cvc_check: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `SetupAttempt`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SetupAttemptAnyOf {
+#[serde(untagged)]
+pub enum SetupAttemptAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A SetupAttempt describes one attempted confirmation of a SetupIntent,
     *  whether that confirmation was successful or unsuccessful. You can use
     *  SetupAttempts to inspect details of a specific attempt at setting up a
     *  payment method using a SetupIntent.
     */
-    #[serde(flatten)]
-    pub setup_attempt: SetupAttempt,
+    SetupAttempt(SetupAttempt),
+}
+
+impl SetupAttemptAnyOf {
+    pub fn setup_attempt(&self) -> Option<&SetupAttempt> {
+        if let SetupAttemptAnyOf::SetupAttempt(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let SetupAttemptAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for SetupAttemptAnyOf {
+    fn from(f: String) -> Self {
+        SetupAttemptAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<SetupAttemptAnyOf> for String {
+    fn from(f: SetupAttemptAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 ///
@@ -27562,8 +29425,8 @@ pub struct PaymentMethodCardGenerated {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub setup_attempt: Option<SetupAttemptAnyOf>,
+    #[serde()]
+    pub setup_attempt: Box<Option<SetupAttemptAnyOf>>,
 }
 
 /**
@@ -28151,23 +30014,52 @@ pub struct PaymentMethodDetailsBacsDebit {
     pub sort_code: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Mandate`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct MandateAnyOf {
+#[serde(untagged)]
+pub enum MandateAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A Mandate is a record of the permission a customer has given you to debit their payment method.
     */
-    #[serde(flatten)]
-    pub mandate: Mandate,
+    Mandate(Mandate),
+}
+
+impl MandateAnyOf {
+    pub fn mandate(&self) -> Option<&Mandate> {
+        if let MandateAnyOf::Mandate(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let MandateAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for MandateAnyOf {
+    fn from(f: String) -> Self {
+        MandateAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<MandateAnyOf> for String {
+    fn from(f: MandateAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 ///
@@ -28203,13 +30095,13 @@ pub struct PaymentMethodDetailsBancontact {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit_mandate: Option<MandateAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
     *
     */
@@ -29381,13 +31273,13 @@ pub struct PaymentMethodDetailsIdeal {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit_mandate: Option<MandateAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
     *
     */
@@ -30088,13 +31980,13 @@ pub struct PaymentMethodDetailsSofort {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit_mandate: Option<MandateAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
     *
     */
@@ -31177,7 +33069,7 @@ pub struct PaymentPagesCheckoutSessionShippingOption {
     )]
     pub shipping_amount: i64,
     #[serde()]
-    pub shipping_rate: ShippingRateAnyOf,
+    pub shipping_rate: Box<ShippingRateAnyOf>,
 }
 
 ///
@@ -31263,7 +33155,7 @@ pub struct QuotesResourceTotalDetailsBreakdown {
     pub taxes: Vec<LineItemsTaxAmount>,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `BankAccount`
 /// - `Card`
@@ -31272,8 +33164,11 @@ pub struct QuotesResourceTotalDetailsBreakdown {
 /// - `SourceData`
 /// - `BitcoinReceiver`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PaymentSourceAnyOf {
+#[serde(untagged)]
+pub enum PaymentSourceAnyOf {
     /**
     * These bank accounts are payment methods on `Customer` objects.
     *  
@@ -31283,8 +33178,7 @@ pub struct PaymentSourceAnyOf {
     *  
     *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
     */
-    #[serde(flatten)]
-    pub bank_account: BankAccount,
+    BankAccount(BankAccount),
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -31292,8 +33186,7 @@ pub struct PaymentSourceAnyOf {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(flatten)]
-    pub card: Card,
+    Card(Card),
     /**
     * This is an object representing a Stripe account. You can retrieve it to see
     *  properties on the account like its current e-mail address or if the account is
@@ -31302,13 +33195,11 @@ pub struct PaymentSourceAnyOf {
     *  Some properties, marked below, are available only to platforms that want to
     *  [create and manage Express or Custom accounts](https://stripe.com/docs/connect/accounts).
     */
-    #[serde(flatten)]
-    pub account: Account,
+    Account(Account),
     /**
     *
     */
-    #[serde(flatten)]
-    pub alipay_account: AlipayAccount,
+    AlipayAccount(AlipayAccount),
     /**
     * `Source` objects allow you to accept a variety of payment methods. They
     *  represent a customer's payment instrument, and can be used with the Stripe API
@@ -31317,16 +33208,58 @@ pub struct PaymentSourceAnyOf {
     *  
     *  Related guides: [Sources API](https://stripe.com/docs/sources) and [Sources & Customers](https://stripe.com/docs/sources/customers).
     */
-    #[serde(flatten)]
-    pub source_data: SourceData,
+    SourceData(SourceData),
     /**
     *
     */
-    #[serde(flatten)]
-    pub bitcoin_receiver: BitcoinReceiver,
+    BitcoinReceiver(BitcoinReceiver),
 }
 
-/// All of the following types are flattened into one object:
+impl PaymentSourceAnyOf {
+    pub fn account(&self) -> Option<&Account> {
+        if let PaymentSourceAnyOf::Account(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn alipay_account(&self) -> Option<&AlipayAccount> {
+        if let PaymentSourceAnyOf::AlipayAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn bank_account(&self) -> Option<&BankAccount> {
+        if let PaymentSourceAnyOf::BankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn bitcoin_receiver(&self) -> Option<&BitcoinReceiver> {
+        if let PaymentSourceAnyOf::BitcoinReceiver(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn card(&self) -> Option<&Card> {
+        if let PaymentSourceAnyOf::Card(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn source_data(&self) -> Option<&SourceData> {
+        if let PaymentSourceAnyOf::SourceData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `BankAccount`
@@ -31334,13 +33267,15 @@ pub struct PaymentSourceAnyOf {
 /// - `DeletedBankAccount`
 /// - `DeletedCard`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DestinationAnyOf {
+#[serde(untagged)]
+pub enum DestinationAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * These bank accounts are payment methods on `Customer` objects.
     *  
@@ -31350,8 +33285,7 @@ pub struct DestinationAnyOf {
     *  
     *  Related guide: [Bank Debits and Transfers](https://stripe.com/docs/payments/bank-debits-transfers).
     */
-    #[serde(flatten)]
-    pub bank_account: BankAccount,
+    BankAccount(BankAccount),
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -31359,18 +33293,64 @@ pub struct DestinationAnyOf {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(flatten)]
-    pub card: Card,
+    Card(Card),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_bank_account: DeletedBankAccount,
+    DeletedBankAccount(DeletedBankAccount),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_card: DeletedCard,
+    DeletedCard(DeletedCard),
+}
+
+impl DestinationAnyOf {
+    pub fn bank_account(&self) -> Option<&BankAccount> {
+        if let DestinationAnyOf::BankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn card(&self) -> Option<&Card> {
+        if let DestinationAnyOf::Card(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn deleted_bank_account(&self) -> Option<&DeletedBankAccount> {
+        if let DestinationAnyOf::DeletedBankAccount(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn deleted_card(&self) -> Option<&DeletedCard> {
+        if let DestinationAnyOf::DeletedCard(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let DestinationAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for DestinationAnyOf {
+    fn from(f: String) -> Self {
+        DestinationAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<DestinationAnyOf> for String {
+    fn from(f: DestinationAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -31408,18 +33388,20 @@ impl PayoutObject {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Payout`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ReversedByAnyOf {
+#[serde(untagged)]
+pub enum ReversedByAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A `Payout` object is created when you receive funds from Stripe, or when you
     *  initiate a payout to either a bank account or debit card of a [connected
@@ -31430,8 +33412,35 @@ pub struct ReversedByAnyOf {
     *  
     *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
     */
-    #[serde(flatten)]
-    pub payout: Payout,
+    Payout(Payout),
+}
+
+impl ReversedByAnyOf {
+    pub fn payout(&self) -> Option<&Payout> {
+        if let ReversedByAnyOf::Payout(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ReversedByAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for ReversedByAnyOf {
+    fn from(f: String) -> Self {
+        ReversedByAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<ReversedByAnyOf> for String {
+    fn from(f: ReversedByAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -31518,8 +33527,8 @@ pub struct Payout {
     *  
     *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -31564,8 +33573,8 @@ pub struct Payout {
     *  
     *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub destination: Option<DestinationAnyOf>,
+    #[serde()]
+    pub destination: Box<Option<DestinationAnyOf>>,
     /**
     * A `Payout` object is created when you receive funds from Stripe, or when you
     *  initiate a payout to either a bank account or debit card of a [connected
@@ -31576,8 +33585,8 @@ pub struct Payout {
     *  
     *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub failure_balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub failure_balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     * A `Payout` object is created when you receive funds from Stripe, or when you
     *  initiate a payout to either a bank account or debit card of a [connected
@@ -31667,8 +33676,8 @@ pub struct Payout {
     *  
     *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub original_payout: Option<ReversedByAnyOf>,
+    #[serde()]
+    pub original_payout: Box<Option<ReversedByAnyOf>>,
     /**
     * A `Payout` object is created when you receive funds from Stripe, or when you
     *  initiate a payout to either a bank account or debit card of a [connected
@@ -31679,8 +33688,8 @@ pub struct Payout {
     *  
     *  Related guide: [Receiving Payouts](https://stripe.com/docs/payouts).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub reversed_by: Option<ReversedByAnyOf>,
+    #[serde()]
+    pub reversed_by: Box<Option<ReversedByAnyOf>>,
     /**
     * The account's country.
     */
@@ -32337,24 +34346,25 @@ impl PlanInterval {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `DeletedProduct`
 /// - `Product`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ProductAnyOf {
+#[serde(untagged)]
+pub enum ProductAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_product: DeletedProduct,
+    DeletedProduct(DeletedProduct),
     /**
     * Products describe the specific goods or services you offer to your customers.
     *  For example, you might offer a Standard and Premium version of your goods or service; each version would be a separate Product.
@@ -32365,8 +34375,42 @@ pub struct ProductAnyOf {
     *  [accept payments with Checkout](https://stripe.com/docs/payments/accept-a-payment#create-product-prices-upfront),
     *  and more about [Products and Prices](https://stripe.com/docs/products-prices/overview)
     */
-    #[serde(flatten)]
-    pub product: Product,
+    Product(Product),
+}
+
+impl ProductAnyOf {
+    pub fn deleted_product(&self) -> Option<&DeletedProduct> {
+        if let ProductAnyOf::DeletedProduct(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn product(&self) -> Option<&Product> {
+        if let ProductAnyOf::Product(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let ProductAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for ProductAnyOf {
+    fn from(f: String) -> Self {
+        ProductAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<ProductAnyOf> for String {
+    fn from(f: ProductAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -32594,8 +34638,8 @@ pub struct PlanData {
     *  
     *  Related guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription) and more about [products and prices](https://stripe.com/docs/products-prices/overview).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub product: Option<ProductAnyOf>,
+    #[serde()]
+    pub product: Box<Option<ProductAnyOf>>,
     /**
     * You can now model subscriptions more flexibly using the [Prices API](https://stripe.com/docs/api#prices). It replaces the Plans API and is backwards compatible to simplify your migration.
     *  
@@ -33367,7 +35411,7 @@ pub struct PriceData {
     #[serde(default, skip_serializing_if = "DeletedPriceObject::is_noop")]
     pub object: DeletedPriceObject,
     #[serde()]
-    pub product: ProductAnyOf,
+    pub product: Box<ProductAnyOf>,
     /**
     * The recurring components of a price such as `interval` and `usage_type`.
     */
@@ -33482,23 +35526,52 @@ pub struct PriceTier {
     pub up_to: i64,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `TaxCode`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct TaxCodeAnyOf {
+#[serde(untagged)]
+pub enum TaxCodeAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * [Tax codes](https://stripe.com/docs/tax/tax-codes) classify goods and services for tax purposes.
     */
-    #[serde(flatten)]
-    pub tax_code: TaxCode,
+    TaxCode(TaxCode),
+}
+
+impl TaxCodeAnyOf {
+    pub fn string(&self) -> Option<&String> {
+        if let TaxCodeAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn tax_code(&self) -> Option<&TaxCode> {
+        if let TaxCodeAnyOf::TaxCode(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for TaxCodeAnyOf {
+    fn from(f: String) -> Self {
+        TaxCodeAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<TaxCodeAnyOf> for String {
+    fn from(f: TaxCodeAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// Products describe the specific goods or services you offer to your customers.
@@ -33639,8 +35712,8 @@ pub struct Product {
     *  [accept payments with Checkout](https://stripe.com/docs/payments/accept-a-payment#create-product-prices-upfront),
     *  and more about [Products and Prices](https://stripe.com/docs/products-prices/overview)
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub tax_code: Option<TaxCodeAnyOf>,
+    #[serde()]
+    pub tax_code: Box<Option<TaxCodeAnyOf>>,
     /**
     * Products describe the specific goods or services you offer to your customers.
     *  For example, you might offer a Standard and Premium version of your goods or service; each version would be a separate Product.
@@ -33760,8 +35833,8 @@ pub struct PromotionCode {
     * A Promotion Code represents a customer-redeemable code for a coupon. It can be used to
     *  create multiple codes for a single coupon.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * A Promotion Code represents a customer-redeemable code for a coupon. It can be used to
     *  create multiple codes for a single coupon.
@@ -33861,19 +35934,21 @@ pub struct PromotionCodesResourceRestrictions {
     pub minimum_amount_currency: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Invoice`
 /// - `DeletedInvoice`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct QuoteInvoiceAnyOf {
+#[serde(untagged)]
+pub enum QuoteInvoiceAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Invoices are statements of amounts owed by a customer, and are either
     *  generated one-off, or generated periodically from a subscription.
@@ -33908,13 +35983,46 @@ pub struct QuoteInvoiceAnyOf {
     *  
     *  Related guide: [Send Invoices to Customers](https://stripe.com/docs/billing/invoices/sending).
     */
-    #[serde(flatten)]
-    pub invoice: Invoice,
+    Invoice(Invoice),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_invoice: DeletedInvoice,
+    DeletedInvoice(DeletedInvoice),
+}
+
+impl QuoteInvoiceAnyOf {
+    pub fn deleted_invoice(&self) -> Option<&DeletedInvoice> {
+        if let QuoteInvoiceAnyOf::DeletedInvoice(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn invoice(&self) -> Option<&Invoice> {
+        if let QuoteInvoiceAnyOf::Invoice(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let QuoteInvoiceAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for QuoteInvoiceAnyOf {
+    fn from(f: String) -> Self {
+        QuoteInvoiceAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<QuoteInvoiceAnyOf> for String {
+    fn from(f: QuoteInvoiceAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /**
@@ -33996,25 +36104,54 @@ impl QuoteStatus {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `SubscriptionSchedule`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ScheduleAnyOf {
+#[serde(untagged)]
+pub enum ScheduleAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A subscription schedule allows you to create and manage the lifecycle of a subscription by predefining expected changes.
     *  
     *  Related guide: [Subscription Schedules](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
     */
-    #[serde(flatten)]
-    pub subscription_schedule: SubscriptionSchedule,
+    SubscriptionSchedule(SubscriptionSchedule),
+}
+
+impl ScheduleAnyOf {
+    pub fn string(&self) -> Option<&String> {
+        if let ScheduleAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn subscription_schedule(&self) -> Option<&SubscriptionSchedule> {
+        if let ScheduleAnyOf::SubscriptionSchedule(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for ScheduleAnyOf {
+    fn from(f: String) -> Self {
+        ScheduleAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<ScheduleAnyOf> for String {
+    fn from(f: ScheduleAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// A Quote is a way to model prices that you'd like to provide to a customer.
@@ -34096,18 +36233,14 @@ pub struct Quote {
     * A Quote is a way to model prices that you'd like to provide to a customer.
     *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * A Quote is a way to model prices that you'd like to provide to a customer.
     *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub default_tax_rates: Vec<TaxRateAnyOf>,
+    #[serde()]
+    pub default_tax_rates: Box<Vec<TaxRateAnyOf>>,
     /**
     * A Quote is a way to model prices that you'd like to provide to a customer.
     *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
@@ -34121,12 +36254,8 @@ pub struct Quote {
     /**
     * The discounts which apply to the invoice item. Item discounts are applied before invoice discounts. Use `expand[]=discounts` to expand each discount.
     */
-    #[serde(
-        default,
-        skip_serializing_if = "Vec::is_empty",
-        deserialize_with = "crate::utils::deserialize_null_vector::deserialize"
-    )]
-    pub discounts: Vec<DiscountsAnyOf>,
+    #[serde()]
+    pub discounts: Box<Vec<DiscountsAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -34174,8 +36303,8 @@ pub struct Quote {
     * A Quote is a way to model prices that you'd like to provide to a customer.
     *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub invoice: Option<QuoteInvoiceAnyOf>,
+    #[serde()]
+    pub invoice: Box<Option<QuoteInvoiceAnyOf>>,
     /**
     * All invoices will be billed using the specified settings.
     */
@@ -34223,8 +36352,8 @@ pub struct Quote {
     * A Quote is a way to model prices that you'd like to provide to a customer.
     *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub on_behalf_of: Option<AccountAnyOf>,
+    #[serde()]
+    pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
     * The status of the quote.
     */
@@ -34239,8 +36368,8 @@ pub struct Quote {
     * A Quote is a way to model prices that you'd like to provide to a customer.
     *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub subscription: Option<SubscriptionAnyOf>,
+    #[serde()]
+    pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
     *
     */
@@ -34250,14 +36379,14 @@ pub struct Quote {
     * A Quote is a way to model prices that you'd like to provide to a customer.
     *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub subscription_schedule: Option<ScheduleAnyOf>,
+    #[serde()]
+    pub subscription_schedule: Box<Option<ScheduleAnyOf>>,
     /**
     * A Quote is a way to model prices that you'd like to provide to a customer.
     *  Once accepted, it will automatically create an invoice, subscription or subscription schedule.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub test_clock: Option<TestClockAnyOf>,
+    #[serde()]
+    pub test_clock: Box<Option<TestClockAnyOf>>,
     /**
     *
     */
@@ -34297,7 +36426,7 @@ pub struct QuotesResourceFromQuote {
     )]
     pub is_revision: bool,
     #[serde()]
-    pub quote: QuoteAnyOf,
+    pub quote: Box<QuoteAnyOf>,
 }
 
 ///
@@ -34456,7 +36585,7 @@ pub struct QuotesResourceTransferData {
     )]
     pub amount_percent: f64,
     #[serde()]
-    pub destination: AccountAnyOf,
+    pub destination: Box<AccountAnyOf>,
 }
 
 ///
@@ -34542,7 +36671,7 @@ pub struct RadarEarlyFraudWarning {
     )]
     pub actionable: bool,
     #[serde()]
-    pub charge: ChargeAnyOf,
+    pub charge: Box<ChargeAnyOf>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -34589,8 +36718,8 @@ pub struct RadarEarlyFraudWarning {
     *  
     *  Related guide: [Early Fraud Warnings](https://stripe.com/docs/disputes/measuring#early-fraud-warnings).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_intent: Option<PaymentIntentAnyOf>,
+    #[serde()]
+    pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
 }
 
 /**
@@ -34958,18 +37087,20 @@ pub struct Cards {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Card`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DefaultCardAnyOf {
+#[serde(untagged)]
+pub enum DefaultCardAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * You can store multiple cards on a customer in order to charge the customer
     *  later. You can also store multiple debit cards on a recipient in order to
@@ -34977,8 +37108,35 @@ pub struct DefaultCardAnyOf {
     *  
     *  Related guide: [Card Payments with Sources](https://stripe.com/docs/sources/cards).
     */
-    #[serde(flatten)]
-    pub card: Card,
+    Card(Card),
+}
+
+impl DefaultCardAnyOf {
+    pub fn card(&self) -> Option<&Card> {
+        if let DefaultCardAnyOf::Card(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let DefaultCardAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for DefaultCardAnyOf {
+    fn from(f: String) -> Self {
+        DefaultCardAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<DefaultCardAnyOf> for String {
+    fn from(f: DefaultCardAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// With `Recipient` objects, you can transfer money from your Stripe account to a
@@ -35024,8 +37182,8 @@ pub struct Recipient {
     *  recipients can no longer begin doing so. Please use `Account` objects
     *  instead.\*\*
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_card: Option<DefaultCardAnyOf>,
+    #[serde()]
+    pub default_card: Box<Option<DefaultCardAnyOf>>,
     /**
     * With `Recipient` objects, you can transfer money from your Stripe account to a
     *  third-party bank account or debit card. The API allows you to create, delete,
@@ -35100,8 +37258,8 @@ pub struct Recipient {
     *  recipients can no longer begin doing so. Please use `Account` objects
     *  instead.\*\*
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub migrated_to: Option<AccountAnyOf>,
+    #[serde()]
+    pub migrated_to: Box<Option<AccountAnyOf>>,
     /**
     * With `Recipient` objects, you can transfer money from your Stripe account to a
     *  third-party bank account or debit card. The API allows you to create, delete,
@@ -35137,8 +37295,8 @@ pub struct Recipient {
     *  recipients can no longer begin doing so. Please use `Account` objects
     *  instead.\*\*
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub rolled_back_from: Option<AccountAnyOf>,
+    #[serde()]
+    pub rolled_back_from: Box<Option<AccountAnyOf>>,
     /**
     * The account's country.
     */
@@ -35259,18 +37417,20 @@ impl RefundReason {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `TransferReversal`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct TransferReversalAnyOf {
+#[serde(untagged)]
+pub enum TransferReversalAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * [Stripe Connect](https://stripe.com/docs/connect) platforms can reverse transfers made to a
     *  connected account, either entirely or partially, and can also specify whether
@@ -35286,8 +37446,35 @@ pub struct TransferReversalAnyOf {
     *  
     *  Related guide: [Reversing Transfers](https://stripe.com/docs/connect/charges-transfers#reversing-transfers).
     */
-    #[serde(flatten)]
-    pub transfer_reversal: TransferReversal,
+    TransferReversal(TransferReversal),
+}
+
+impl TransferReversalAnyOf {
+    pub fn string(&self) -> Option<&String> {
+        if let TransferReversalAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn transfer_reversal(&self) -> Option<&TransferReversal> {
+        if let TransferReversalAnyOf::TransferReversal(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for TransferReversalAnyOf {
+    fn from(f: String) -> Self {
+        TransferReversalAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<TransferReversalAnyOf> for String {
+    fn from(f: TransferReversalAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// `Refund` objects allow you to refund a charge that has previously been created
@@ -35313,8 +37500,8 @@ pub struct Refund {
     *  
     *  Related guide: [Refunds](https://stripe.com/docs/refunds).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     * `Refund` objects allow you to refund a charge that has previously been created
     *  but not yet refunded. Funds will be refunded to the credit or debit card that
@@ -35322,8 +37509,8 @@ pub struct Refund {
     *  
     *  Related guide: [Refunds](https://stripe.com/docs/refunds).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub charge: Option<ChargeAnyOf>,
+    #[serde()]
+    pub charge: Box<Option<ChargeAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -35362,8 +37549,8 @@ pub struct Refund {
     *  
     *  Related guide: [Refunds](https://stripe.com/docs/refunds).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub failure_balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub failure_balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     * `Refund` objects allow you to refund a charge that has previously been created
     *  but not yet refunded. Funds will be refunded to the credit or debit card that
@@ -35420,8 +37607,8 @@ pub struct Refund {
     *  
     *  Related guide: [Refunds](https://stripe.com/docs/refunds).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_intent: Option<PaymentIntentAnyOf>,
+    #[serde()]
+    pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
     * Reason for the refund, either user-provided (`duplicate`, `fraudulent`, or `requested_by_customer`) or generated by Stripe internally (`expired_uncaptured_charge`).
     */
@@ -35447,8 +37634,8 @@ pub struct Refund {
     *  
     *  Related guide: [Refunds](https://stripe.com/docs/refunds).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub source_transfer_reversal: Option<TransferReversalAnyOf>,
+    #[serde()]
+    pub source_transfer_reversal: Box<Option<TransferReversalAnyOf>>,
     /**
     * `Refund` objects allow you to refund a charge that has previously been created
     *  but not yet refunded. Funds will be refunded to the credit or debit card that
@@ -35469,8 +37656,8 @@ pub struct Refund {
     *  
     *  Related guide: [Refunds](https://stripe.com/docs/refunds).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub transfer_reversal: Option<TransferReversalAnyOf>,
+    #[serde()]
+    pub transfer_reversal: Box<Option<TransferReversalAnyOf>>,
 }
 
 ///
@@ -36006,8 +38193,8 @@ pub struct Review {
     *  Learn more about [Radar](/radar) and reviewing payments
     *  [here](https://stripe.com/docs/radar/reviews).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub charge: Option<ChargeAnyOf>,
+    #[serde()]
+    pub charge: Box<Option<ChargeAnyOf>>,
     /**
     * The reason the review was closed, or null if it has not yet been closed. One of `approved`, `refunded`, `refunded_as_fraud`, `disputed`, or `redacted`.
     */
@@ -36080,8 +38267,8 @@ pub struct Review {
     *  Learn more about [Radar](/radar) and reviewing payments
     *  [here](https://stripe.com/docs/radar/reviews).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_intent: Option<PaymentIntentAnyOf>,
+    #[serde()]
+    pub payment_intent: Box<Option<PaymentIntentAnyOf>>,
     /**
     * The account's country.
     */
@@ -36269,13 +38456,13 @@ pub struct SepaDebitGeneratedFrom {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub charge: Option<ChargeAnyOf>,
+    #[serde()]
+    pub charge: Box<Option<ChargeAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub setup_attempt: Option<SetupAttemptAnyOf>,
+    #[serde()]
+    pub setup_attempt: Box<Option<SetupAttemptAnyOf>>,
 }
 
 /**
@@ -36325,8 +38512,8 @@ pub struct SetupAttempt {
     *  SetupAttempts to inspect details of a specific attempt at setting up a
     *  payment method using a SetupIntent.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub application: Option<ApplicationAnyOf>,
+    #[serde()]
+    pub application: Box<Option<ApplicationAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -36342,8 +38529,8 @@ pub struct SetupAttempt {
     *  SetupAttempts to inspect details of a specific attempt at setting up a
     *  payment method using a SetupIntent.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * The account's country.
     */
@@ -36372,10 +38559,10 @@ pub struct SetupAttempt {
     *  SetupAttempts to inspect details of a specific attempt at setting up a
     *  payment method using a SetupIntent.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub on_behalf_of: Option<AccountAnyOf>,
     #[serde()]
-    pub payment_method: PaymentMethodAnyOf,
+    pub on_behalf_of: Box<Option<AccountAnyOf>>,
+    #[serde()]
+    pub payment_method: Box<PaymentMethodAnyOf>,
     /**
     *
     */
@@ -36384,10 +38571,10 @@ pub struct SetupAttempt {
     /**
     * The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub setup_error: Option<ApiErrors>,
     #[serde()]
-    pub setup_intent: SetupIntentAnyOf,
+    pub setup_error: Box<Option<ApiErrors>>,
+    #[serde()]
+    pub setup_intent: Box<SetupIntentAnyOf>,
     /**
     * The account's country.
     */
@@ -36511,13 +38698,13 @@ pub struct SetupAttemptPaymentMethodDetailsBancontact {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit_mandate: Option<MandateAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
     *
     */
@@ -36560,8 +38747,8 @@ pub struct SetupAttemptPaymentMethodDetailsCardPresent {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_card: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub generated_card: Box<Option<PaymentMethodAnyOf>>,
 }
 
 ///
@@ -36580,13 +38767,13 @@ pub struct SetupAttemptPaymentMethodDetailsIdeal {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit_mandate: Option<MandateAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
     *
     */
@@ -36641,13 +38828,13 @@ pub struct SetupAttemptPaymentMethodDetailsSofort {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit: Box<Option<PaymentMethodAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub generated_sepa_debit_mandate: Option<MandateAnyOf>,
+    #[serde()]
+    pub generated_sepa_debit_mandate: Box<Option<MandateAnyOf>>,
     /**
     *
     */
@@ -36848,8 +39035,8 @@ pub struct SetupIntent {
     *  
     *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub application: Option<ApplicationAnyOf>,
+    #[serde()]
+    pub application: Box<Option<ApplicationAnyOf>>,
     /**
     * Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or `duplicate`.
     */
@@ -36918,8 +39105,8 @@ pub struct SetupIntent {
     *  
     *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerAnyOf>,
+    #[serde()]
+    pub customer: Box<Option<CustomerAnyOf>>,
     /**
     * A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
     *  For example, you could use a SetupIntent to set up and save your customer's card without immediately collecting a payment.
@@ -36962,8 +39149,8 @@ pub struct SetupIntent {
     /**
     * The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub last_setup_error: Option<ApiErrors>,
+    #[serde()]
+    pub last_setup_error: Box<Option<ApiErrors>>,
     /**
     * A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
     *  For example, you could use a SetupIntent to set up and save your customer's card without immediately collecting a payment.
@@ -36988,8 +39175,8 @@ pub struct SetupIntent {
     *  
     *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub latest_attempt: Option<SetupAttemptAnyOf>,
+    #[serde()]
+    pub latest_attempt: Box<Option<SetupAttemptAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -37022,8 +39209,8 @@ pub struct SetupIntent {
     *  
     *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub mandate: Option<MandateAnyOf>,
+    #[serde()]
+    pub mandate: Box<Option<MandateAnyOf>>,
     /**
     * A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
     *  For example, you could use a SetupIntent to set up and save your customer's card without immediately collecting a payment.
@@ -37088,8 +39275,8 @@ pub struct SetupIntent {
     *  
     *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub on_behalf_of: Option<AccountAnyOf>,
+    #[serde()]
+    pub on_behalf_of: Box<Option<AccountAnyOf>>,
     /**
     * A SetupIntent guides you through the process of setting up and saving a customer's payment credentials for future payments.
     *  For example, you could use a SetupIntent to set up and save your customer's card without immediately collecting a payment.
@@ -37114,8 +39301,8 @@ pub struct SetupIntent {
     *  
     *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub payment_method: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
     * Payment-method-specific configuration for this SetupIntent.
     */
@@ -37154,8 +39341,8 @@ pub struct SetupIntent {
     *  
     *  Related guide: [Setup Intents API](https://stripe.com/docs/payments/setup-intents).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub single_use_mandate: Option<MandateAnyOf>,
+    #[serde()]
+    pub single_use_mandate: Box<Option<MandateAnyOf>>,
     /**
     * [Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`, `canceled`, or `succeeded`.
     */
@@ -37225,65 +39412,130 @@ pub struct SetupIntentNextActionRedirectUrl {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `SetupIntentPaymentMethodOptionsAcssDebit`
 /// - `SetupIntentTypeSpecificPaymentMethodOptionsClient`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SetupIntentPaymentMethodOptionsAcssDebitAnyOf {
+#[serde(untagged)]
+pub enum SetupIntentPaymentMethodOptionsAcssDebitAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub setup_intent_payment_method_options_acss_debit: SetupIntentPaymentMethodOptionsAcssDebit,
+    SetupIntentPaymentMethodOptionsAcssDebit(SetupIntentPaymentMethodOptionsAcssDebit),
     /**
     *
     */
-    #[serde(flatten)]
-    pub setup_intent_type_specific_payment_method_options_client:
+    SetupIntentTypeSpecificPaymentMethodOptionsClient(
         SetupIntentTypeSpecificPaymentMethodOptionsClient,
+    ),
 }
 
-/// All of the following types are flattened into one object:
+impl SetupIntentPaymentMethodOptionsAcssDebitAnyOf {
+    pub fn setup_intent_payment_method_options_acss_debit(
+        &self,
+    ) -> Option<&SetupIntentPaymentMethodOptionsAcssDebit> {
+        if let SetupIntentPaymentMethodOptionsAcssDebitAnyOf::SetupIntentPaymentMethodOptionsAcssDebit(ref_) = self {
+                                return Some(ref_);
+                            }
+        None
+    }
+
+    pub fn setup_intent_type_specific_payment_method_options_client(
+        &self,
+    ) -> Option<&SetupIntentTypeSpecificPaymentMethodOptionsClient> {
+        if let SetupIntentPaymentMethodOptionsAcssDebitAnyOf::SetupIntentTypeSpecificPaymentMethodOptionsClient(ref_) = self {
+                                return Some(ref_);
+                            }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `SetupIntentTypeSpecificPaymentMethodOptionsClient`
 /// - `SetupIntentPaymentMethodOptionsSepaDebit`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SetupIntentPaymentMethodOptionsSepaDebitAnyOf {
+#[serde(untagged)]
+pub enum SetupIntentPaymentMethodOptionsSepaDebitAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub setup_intent_type_specific_payment_method_options_client:
+    SetupIntentTypeSpecificPaymentMethodOptionsClient(
         SetupIntentTypeSpecificPaymentMethodOptionsClient,
+    ),
     /**
     *
     */
-    #[serde(flatten)]
-    pub setup_intent_payment_method_options_sepa_debit: SetupIntentPaymentMethodOptionsSepaDebit,
+    SetupIntentPaymentMethodOptionsSepaDebit(SetupIntentPaymentMethodOptionsSepaDebit),
 }
 
-/// All of the following types are flattened into one object:
+impl SetupIntentPaymentMethodOptionsSepaDebitAnyOf {
+    pub fn setup_intent_payment_method_options_sepa_debit(
+        &self,
+    ) -> Option<&SetupIntentPaymentMethodOptionsSepaDebit> {
+        if let SetupIntentPaymentMethodOptionsSepaDebitAnyOf::SetupIntentPaymentMethodOptionsSepaDebit(ref_) = self {
+                                return Some(ref_);
+                            }
+        None
+    }
+
+    pub fn setup_intent_type_specific_payment_method_options_client(
+        &self,
+    ) -> Option<&SetupIntentTypeSpecificPaymentMethodOptionsClient> {
+        if let SetupIntentPaymentMethodOptionsSepaDebitAnyOf::SetupIntentTypeSpecificPaymentMethodOptionsClient(ref_) = self {
+                                return Some(ref_);
+                            }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `SetupIntentTypeSpecificPaymentMethodOptionsClient`
 /// - `SetupIntentPaymentMethodOptionsUsBankAccount`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SetupIntentPaymentMethodOptionsUsBankAccountAnyOf {
+#[serde(untagged)]
+pub enum SetupIntentPaymentMethodOptionsUsBankAccountAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub setup_intent_type_specific_payment_method_options_client:
+    SetupIntentTypeSpecificPaymentMethodOptionsClient(
         SetupIntentTypeSpecificPaymentMethodOptionsClient,
+    ),
     /**
     *
     */
-    #[serde(flatten)]
-    pub setup_intent_payment_method_options_us_bank_account:
-        SetupIntentPaymentMethodOptionsUsBankAccount,
+    SetupIntentPaymentMethodOptionsUsBankAccount(SetupIntentPaymentMethodOptionsUsBankAccount),
+}
+
+impl SetupIntentPaymentMethodOptionsUsBankAccountAnyOf {
+    pub fn setup_intent_payment_method_options_us_bank_account(
+        &self,
+    ) -> Option<&SetupIntentPaymentMethodOptionsUsBankAccount> {
+        if let SetupIntentPaymentMethodOptionsUsBankAccountAnyOf::SetupIntentPaymentMethodOptionsUsBankAccount(ref_) = self {
+                                return Some(ref_);
+                            }
+        None
+    }
+
+    pub fn setup_intent_type_specific_payment_method_options_client(
+        &self,
+    ) -> Option<&SetupIntentTypeSpecificPaymentMethodOptionsClient> {
+        if let SetupIntentPaymentMethodOptionsUsBankAccountAnyOf::SetupIntentTypeSpecificPaymentMethodOptionsClient(ref_) = self {
+                                return Some(ref_);
+                            }
+        None
+    }
 }
 
 ///
@@ -37292,8 +39544,8 @@ pub struct SetupIntentPaymentMethodOptionsData {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub acss_debit: Option<SetupIntentPaymentMethodOptionsAcssDebitAnyOf>,
+    #[serde()]
+    pub acss_debit: Box<Option<SetupIntentPaymentMethodOptionsAcssDebitAnyOf>>,
     /**
     *
     */
@@ -37302,13 +39554,13 @@ pub struct SetupIntentPaymentMethodOptionsData {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub sepa_debit: Option<SetupIntentPaymentMethodOptionsSepaDebitAnyOf>,
+    #[serde()]
+    pub sepa_debit: Box<Option<SetupIntentPaymentMethodOptionsSepaDebitAnyOf>>,
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub us_bank_account: Option<SetupIntentPaymentMethodOptionsUsBankAccountAnyOf>,
+    #[serde()]
+    pub us_bank_account: Box<Option<SetupIntentPaymentMethodOptionsUsBankAccountAnyOf>>,
 }
 
 ///
@@ -37752,8 +40004,8 @@ pub struct ShippingRate {
     * Shipping rates describe the price of shipping presented to your customers and can be
     *  applied to [Checkout Sessions](https://stripe.com/docs/payments/checkout/shipping) to collect shipping costs.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub tax_code: Option<TaxCodeAnyOf>,
+    #[serde()]
+    pub tax_code: Box<Option<TaxCodeAnyOf>>,
     /**
     * The type of calculation to use on the shipping rate. Can only be `fixed_amount` for now.
     */
@@ -37860,18 +40112,20 @@ pub struct SigmaScheduledQueryRunError {
     pub message: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Product`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SkuProductAnyOf {
+#[serde(untagged)]
+pub enum SkuProductAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * Products describe the specific goods or services you offer to your customers.
     *  For example, you might offer a Standard and Premium version of your goods or service; each version would be a separate Product.
@@ -37882,8 +40136,35 @@ pub struct SkuProductAnyOf {
     *  [accept payments with Checkout](https://stripe.com/docs/payments/accept-a-payment#create-product-prices-upfront),
     *  and more about [Products and Prices](https://stripe.com/docs/products-prices/overview)
     */
-    #[serde(flatten)]
-    pub product: Product,
+    Product(Product),
+}
+
+impl SkuProductAnyOf {
+    pub fn product(&self) -> Option<&Product> {
+        if let SkuProductAnyOf::Product(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let SkuProductAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for SkuProductAnyOf {
+    fn from(f: String) -> Self {
+        SkuProductAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<SkuProductAnyOf> for String {
+    fn from(f: SkuProductAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// Stores representations of [stock keeping units](http://en.wikipedia.org/wiki/Stock_keeping_unit).
@@ -37994,7 +40275,7 @@ pub struct Sku {
     )]
     pub price: i64,
     #[serde()]
-    pub product: SkuProductAnyOf,
+    pub product: Box<SkuProductAnyOf>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -41249,7 +43530,7 @@ pub struct Subscription {
     )]
     pub current_period_start: i64,
     #[serde()]
-    pub customer: CustomerAnyOf,
+    pub customer: Box<CustomerAnyOf>,
     /**
     * Subscriptions allow you to charge a customer on a recurring basis.
     *  
@@ -41266,15 +43547,15 @@ pub struct Subscription {
     *  
     *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_payment_method: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
     * Subscriptions allow you to charge a customer on a recurring basis.
     *  
     *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_source: Option<DefaultSourceAnyOf>,
+    #[serde()]
+    pub default_source: Box<Option<DefaultSourceAnyOf>>,
     /**
     * Subscriptions allow you to charge a customer on a recurring basis.
     *  
@@ -41321,8 +43602,8 @@ pub struct Subscription {
     *  
     *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub latest_invoice: Option<InvoiceAnyOf>,
+    #[serde()]
+    pub latest_invoice: Box<Option<InvoiceAnyOf>>,
     /**
     * Whether the account can create live charges.
     */
@@ -41376,8 +43657,8 @@ pub struct Subscription {
     *  
     *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub pending_setup_intent: Option<SetupIntentAnyOf>,
+    #[serde()]
+    pub pending_setup_intent: Box<Option<SetupIntentAnyOf>>,
     /**
     * If specified, [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates) that will be applied to the subscription once the `latest_invoice` has been paid.
     */
@@ -41388,8 +43669,8 @@ pub struct Subscription {
     *  
     *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub schedule: Option<ScheduleAnyOf>,
+    #[serde()]
+    pub schedule: Box<Option<ScheduleAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -41417,8 +43698,8 @@ pub struct Subscription {
     *  
     *  Related guide: [Creating Subscriptions](https://stripe.com/docs/billing/subscriptions/creating).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub test_clock: Option<TestClockAnyOf>,
+    #[serde()]
+    pub test_clock: Box<Option<TestClockAnyOf>>,
     /**
     * The account (if any) the subscription's payments will be attributed to for tax reporting, and where funds from each payment will be transferred to for each of the subscription's invoices.
     */
@@ -41771,7 +44052,7 @@ pub struct SubscriptionSchedule {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub current_phase: Option<SubscriptionScheduleCurrentPhase>,
     #[serde()]
-    pub customer: CustomerAnyOf,
+    pub customer: Box<CustomerAnyOf>,
     /**
     *
     */
@@ -41856,35 +44137,36 @@ pub struct SubscriptionSchedule {
     *  
     *  Related guide: [Subscription Schedules](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub subscription: Option<SubscriptionAnyOf>,
+    #[serde()]
+    pub subscription: Box<Option<SubscriptionAnyOf>>,
     /**
     * A subscription schedule allows you to create and manage the lifecycle of a subscription by predefining expected changes.
     *  
     *  Related guide: [Subscription Schedules](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub test_clock: Option<TestClockAnyOf>,
+    #[serde()]
+    pub test_clock: Box<Option<TestClockAnyOf>>,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `DeletedPrice`
 /// - `PriceData`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PriceAnyOf {
+#[serde(untagged)]
+pub enum PriceAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_price: DeletedPrice,
+    DeletedPrice(DeletedPrice),
     /**
     * Prices define the unit cost, currency, and (optional) billing cycle for both recurring and one-time purchases of products.
     *  [Products](https://stripe.com/docs/api#products) help you track inventory or provisioning, and prices help you track payment terms. Different physical goods or levels of service should be represented by products, and pricing options should be represented by prices. This approach lets you change prices without having to change your provisioning scheme.
@@ -41893,15 +44175,49 @@ pub struct PriceAnyOf {
     *  
     *  Related guides: [Set up a subscription](https://stripe.com/docs/billing/subscriptions/set-up-subscription), [create an invoice](https://stripe.com/docs/billing/invoices/create), and more about [products and prices](https://stripe.com/docs/products-prices/overview).
     */
-    #[serde(flatten)]
-    pub price_data: PriceData,
+    PriceData(PriceData),
+}
+
+impl PriceAnyOf {
+    pub fn deleted_price(&self) -> Option<&DeletedPrice> {
+        if let PriceAnyOf::DeletedPrice(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn price_data(&self) -> Option<&PriceData> {
+        if let PriceAnyOf::PriceData(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let PriceAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for PriceAnyOf {
+    fn from(f: String) -> Self {
+        PriceAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<PriceAnyOf> for String {
+    fn from(f: PriceAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// An Add Invoice Item describes the prices and quantities that will be added as pending invoice items when entering a phase.
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriptionScheduleAddInvoiceItem {
     #[serde()]
-    pub price: PriceAnyOf,
+    pub price: Box<PriceAnyOf>,
     /**
     * An Add Invoice Item describes the prices and quantities that will be added as pending invoice items when entering a phase.
     */
@@ -41931,7 +44247,7 @@ pub struct SubscriptionScheduleConfigurationItem {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub billing_thresholds: Option<SubscriptionItemBillingThresholdsData>,
     #[serde()]
-    pub price: PriceAnyOf,
+    pub price: Box<PriceAnyOf>,
     /**
     * A phase item describes the price and quantity of a phase.
     */
@@ -42013,31 +44329,66 @@ impl BillingCycleAnchor {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `Coupon`
 /// - `DeletedCoupon`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct CouponAnyOf {
+#[serde(untagged)]
+pub enum CouponAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A coupon contains information about a percent-off or amount-off discount you
     *  might want to apply to a customer. Coupons may be applied to [invoices](https://stripe.com/docs/api#invoices) or
     *  [orders](https://stripe.com/docs/api#create_order_legacy-coupon). Coupons do not work with conventional one-off [charges](https://stripe.com/docs/api#create_charge).
     */
-    #[serde(flatten)]
-    pub coupon: Coupon,
+    Coupon(Coupon),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_coupon: DeletedCoupon,
+    DeletedCoupon(DeletedCoupon),
+}
+
+impl CouponAnyOf {
+    pub fn coupon(&self) -> Option<&Coupon> {
+        if let CouponAnyOf::Coupon(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn deleted_coupon(&self) -> Option<&DeletedCoupon> {
+        if let CouponAnyOf::DeletedCoupon(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let CouponAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for CouponAnyOf {
+    fn from(f: String) -> Self {
+        CouponAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<CouponAnyOf> for String {
+    fn from(f: CouponAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// A phase describes the plans, coupon, and trialing status of a subscription for a predefined time period.
@@ -42084,13 +44435,13 @@ pub struct SubscriptionSchedulePhaseConfiguration {
     /**
     * A phase describes the plans, coupon, and trialing status of a subscription for a predefined time period.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub coupon: Option<CouponAnyOf>,
+    #[serde()]
+    pub coupon: Box<Option<CouponAnyOf>>,
     /**
     * A phase describes the plans, coupon, and trialing status of a subscription for a predefined time period.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_payment_method: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
     * A phase describes the plans, coupon, and trialing status of a subscription for a predefined time period.
     */
@@ -42188,8 +44539,8 @@ pub struct SubscriptionSchedulesResourceDefaultSettings {
     /**
     *
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub default_payment_method: Option<PaymentMethodAnyOf>,
+    #[serde()]
+    pub default_payment_method: Box<Option<PaymentMethodAnyOf>>,
     /**
     * The invoice settings applicable during this phase.
     */
@@ -42215,7 +44566,7 @@ pub struct SubscriptionTransferDataType {
     )]
     pub amount_percent: f64,
     #[serde()]
-    pub destination: AccountAnyOf,
+    pub destination: Box<AccountAnyOf>,
 }
 
 /**
@@ -42575,7 +44926,7 @@ pub struct TaxId {
     *  Related guide: [Customer Tax Identification Numbers](https://stripe.com/docs/billing/taxes/tax-ids).
     */
     #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub customer: Option<CustomerBalanceTransactionAnyOf>,
+    pub customer: Option<CustomerAnyOfData>,
     /**
     * The account's country.
     */
@@ -43090,25 +45441,54 @@ impl DeviceType {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `String`
 /// - `TerminalLocation`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct LocationAnyOf {
+#[serde(untagged)]
+pub enum LocationAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
+    String(String),
     /**
     * A Location represents a grouping of readers.
     *  
     *  Related guide: [Fleet Management](https://stripe.com/docs/terminal/fleet/locations).
     */
-    #[serde(flatten)]
-    pub terminal_location: TerminalLocation,
+    TerminalLocation(TerminalLocation),
+}
+
+impl LocationAnyOf {
+    pub fn string(&self) -> Option<&String> {
+        if let LocationAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn terminal_location(&self) -> Option<&TerminalLocation> {
+        if let LocationAnyOf::TerminalLocation(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for LocationAnyOf {
+    fn from(f: String) -> Self {
+        LocationAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<LocationAnyOf> for String {
+    fn from(f: LocationAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 /// A Reader represents a physical device for accepting payment details.
@@ -43179,8 +45559,8 @@ pub struct TerminalReader {
     *  
     *  Related guide: [Connecting to a Reader](https://stripe.com/docs/terminal/payments/connect-reader).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub location: Option<LocationAnyOf>,
+    #[serde()]
+    pub location: Box<Option<LocationAnyOf>>,
     /**
     * Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     */
@@ -43294,7 +45674,7 @@ pub struct TerminalReaderResourceLineItem {
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct TerminalReaderResourceProcessPaymentIntentAction {
     #[serde()]
-    pub payment_intent: PaymentIntentAnyOf,
+    pub payment_intent: Box<PaymentIntentAnyOf>,
 }
 
 /// Represents a reader action to process a setup intent
@@ -43310,7 +45690,7 @@ pub struct TerminalReaderResourceProcessSetupIntentAction {
     )]
     pub generated_card: String,
     #[serde()]
-    pub setup_intent: SetupIntentAnyOf,
+    pub setup_intent: Box<SetupIntentAnyOf>,
 }
 
 /**
@@ -44263,8 +46643,8 @@ pub struct Topup {
     *  
     *  Related guide: [Topping Up your Platform Account](https://stripe.com/docs/connect/top-ups).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -44522,8 +46902,8 @@ pub struct Transfer {
     *  
     *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -44572,8 +46952,8 @@ pub struct Transfer {
     *  
     *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub destination: Option<AccountAnyOf>,
+    #[serde()]
+    pub destination: Box<Option<AccountAnyOf>>,
     /**
     * A `Transfer` object is created when you move funds between Stripe accounts as
     *  part of Connect.
@@ -44586,8 +46966,8 @@ pub struct Transfer {
     *  
     *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub destination_payment: Option<ChargeAnyOf>,
+    #[serde()]
+    pub destination_payment: Box<Option<ChargeAnyOf>>,
     /**
     * The account's country.
     */
@@ -44644,8 +47024,8 @@ pub struct Transfer {
     *  
     *  Related guide: [Creating Separate Charges and Transfers](https://stripe.com/docs/connect/charges-transfers).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub source_transaction: Option<ChargeAnyOf>,
+    #[serde()]
+    pub source_transaction: Box<Option<ChargeAnyOf>>,
     /**
     * A `Transfer` object is created when you move funds between Stripe accounts as
     *  part of Connect.
@@ -44697,7 +47077,7 @@ pub struct TransferData {
     )]
     pub amount: i64,
     #[serde()]
-    pub destination: AccountAnyOf,
+    pub destination: Box<AccountAnyOf>,
 }
 
 /**
@@ -44774,8 +47154,8 @@ pub struct TransferReversal {
     *  
     *  Related guide: [Reversing Transfers](https://stripe.com/docs/connect/charges-transfers#reversing-transfers).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub balance_transaction: Option<BalanceTransactionAnyOf>,
+    #[serde()]
+    pub balance_transaction: Box<Option<BalanceTransactionAnyOf>>,
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
@@ -44809,8 +47189,8 @@ pub struct TransferReversal {
     *  
     *  Related guide: [Reversing Transfers](https://stripe.com/docs/connect/charges-transfers#reversing-transfers).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub destination_payment_refund: Option<RefundAnyOf>,
+    #[serde()]
+    pub destination_payment_refund: Box<Option<RefundAnyOf>>,
     /**
     * The account's country.
     */
@@ -44861,10 +47241,10 @@ pub struct TransferReversal {
     *  
     *  Related guide: [Reversing Transfers](https://stripe.com/docs/connect/charges-transfers#reversing-transfers).
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub source_refund: Option<RefundAnyOf>,
     #[serde()]
-    pub transfer: TransferAnyOf,
+    pub source_refund: Box<Option<RefundAnyOf>>,
+    #[serde()]
+    pub transfer: Box<TransferAnyOf>,
 }
 
 ///
@@ -45471,20 +47851,49 @@ pub struct Paid {
     pub lte: i64,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `i64`
 /// - `Paid`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct PaidAnyOf {
+#[serde(untagged)]
+pub enum PaidAnyOf {
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
-    #[serde(flatten)]
-    pub i64: i64,
-    #[serde(flatten)]
-    pub paid: Paid,
+    I64(i64),
+    Paid(Paid),
+}
+
+impl PaidAnyOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let PaidAnyOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn paid(&self) -> Option<&Paid> {
+        if let PaidAnyOf::Paid(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<i64> for PaidAnyOf {
+    fn from(f: i64) -> Self {
+        PaidAnyOf::I64(f)
+    }
+}
+
+impl std::convert::From<PaidAnyOf> for i64 {
+    fn from(f: PaidAnyOf) -> Self {
+        *f.i64().unwrap()
+    }
 }
 
 ///
@@ -45938,20 +48347,49 @@ impl Shipping {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `Vec<String>`
 /// - `Shipping`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct TaxRatesAnyOf {
+#[serde(untagged)]
+pub enum TaxRatesAnyOf {
     /**
     * Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    #[serde(flatten)]
-    pub string_vector: Vec<String>,
-    #[serde(flatten)]
-    pub shipping: Shipping,
+    StringVector(Vec<String>),
+    Shipping(Shipping),
+}
+
+impl TaxRatesAnyOf {
+    pub fn shipping(&self) -> Option<&Shipping> {
+        if let TaxRatesAnyOf::Shipping(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn vec_string(&self) -> Option<&Vec<String>> {
+        if let TaxRatesAnyOf::StringVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<Vec<String>> for TaxRatesAnyOf {
+    fn from(f: Vec<String>) -> Self {
+        TaxRatesAnyOf::StringVector(f)
+    }
+}
+
+impl std::convert::From<TaxRatesAnyOf> for Vec<String> {
+    fn from(f: TaxRatesAnyOf) -> Self {
+        f.vec_string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -45980,8 +48418,8 @@ pub struct CreditNoteLineItemParams {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub tax_rates: Option<TaxRatesAnyOf>,
+    #[serde()]
+    pub tax_rates: Box<Option<TaxRatesAnyOf>>,
     /**
     * The type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. When the type is `invoice_line_item` there is an additional `invoice_line_item` property on the resource the value of which is the id of the credited line item on the invoice.
     */
@@ -46041,25 +48479,42 @@ pub struct GetCustomersResponse {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `Customer`
 /// - `DeletedCustomer`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetCustomersCustomerResponseAnyOf {
+#[serde(untagged)]
+pub enum GetCustomersCustomerResponseAnyOf {
     /**
     * This object represents a customer of your business. It lets you create recurring charges and track payments that belong to the same customer.
     *  
     *  Related guide: [Save a card during payment](https://stripe.com/docs/payments/save-during-payment).
     */
-    #[serde(flatten)]
-    pub customer: Customer,
+    Customer(Customer),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_customer: DeletedCustomer,
+    DeletedCustomer(DeletedCustomer),
+}
+
+impl GetCustomersCustomerResponseAnyOf {
+    pub fn customer(&self) -> Option<&Customer> {
+        if let GetCustomersCustomerResponseAnyOf::Customer(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn deleted_customer(&self) -> Option<&DeletedCustomer> {
+        if let GetCustomersCustomerResponseAnyOf::DeletedCustomer(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 ///
@@ -46134,17 +48589,34 @@ pub struct BankAccountList {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `DeletedPaymentSourceAnyOf`
 /// - `PaymentSourceAnyOf`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct DeleteCustomersCustomerCardsResponseAnyOf {
-    #[serde(flatten)]
-    pub deleted_payment_source_any_of: DeletedPaymentSourceAnyOf,
-    #[serde(flatten)]
-    pub payment_source_any_of: PaymentSourceAnyOf,
+#[serde(untagged)]
+pub enum DeleteCustomersCustomerCardsResponseAnyOf {
+    DeletedPaymentSourceAnyOf(DeletedPaymentSourceAnyOf),
+    PaymentSourceAnyOf(PaymentSourceAnyOf),
+}
+
+impl DeleteCustomersCustomerCardsResponseAnyOf {
+    pub fn deleted_payment_source_any_of(&self) -> Option<&DeletedPaymentSourceAnyOf> {
+        if let DeleteCustomersCustomerCardsResponseAnyOf::DeletedPaymentSourceAnyOf(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn payment_source_any_of(&self) -> Option<&PaymentSourceAnyOf> {
+        if let DeleteCustomersCustomerCardsResponseAnyOf::PaymentSourceAnyOf(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 /**
@@ -46631,17 +49103,34 @@ pub struct OptionalFieldsAddress {
     pub state: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `Shipping`
 /// - `OptionalFieldsAddress`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct AddressAnyOf {
-    #[serde(flatten)]
-    pub shipping: Shipping,
-    #[serde(flatten)]
-    pub optional_fields_address: OptionalFieldsAddress,
+#[serde(untagged)]
+pub enum AddressAnyOf {
+    Shipping(Shipping),
+    OptionalFieldsAddress(OptionalFieldsAddress),
+}
+
+impl AddressAnyOf {
+    pub fn optional_fields_address(&self) -> Option<&OptionalFieldsAddress> {
+        if let AddressAnyOf::OptionalFieldsAddress(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn shipping(&self) -> Option<&Shipping> {
+        if let AddressAnyOf::Shipping(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -46665,39 +49154,85 @@ pub struct CustomerShipping {
     pub phone: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `Shipping`
 /// - `CustomerShipping`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct ShippingAnyOf {
-    #[serde(flatten)]
-    pub shipping: Shipping,
-    #[serde(flatten)]
-    pub customer_shipping: CustomerShipping,
+#[serde(untagged)]
+pub enum ShippingAnyOf {
+    Shipping(Shipping),
+    CustomerShipping(CustomerShipping),
 }
 
-/// All of the following types are flattened into one object:
+impl ShippingAnyOf {
+    pub fn customer_shipping(&self) -> Option<&CustomerShipping> {
+        if let ShippingAnyOf::CustomerShipping(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn shipping(&self) -> Option<&Shipping> {
+        if let ShippingAnyOf::Shipping(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `Shipping`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct IpAddressAnyOf {
+#[serde(untagged)]
+pub enum IpAddressAnyOf {
     /**
     * The account's country.
     */
-    #[serde(flatten)]
-    pub string: String,
-    #[serde(flatten)]
-    pub shipping: Shipping,
+    String(String),
+    Shipping(Shipping),
+}
+
+impl IpAddressAnyOf {
+    pub fn shipping(&self) -> Option<&Shipping> {
+        if let IpAddressAnyOf::Shipping(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let IpAddressAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for IpAddressAnyOf {
+    fn from(f: String) -> Self {
+        IpAddressAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<IpAddressAnyOf> for String {
+    fn from(f: IpAddressAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct Tax {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub ip_address: Option<IpAddressAnyOf>,
+    #[serde()]
+    pub ip_address: Box<Option<IpAddressAnyOf>>,
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -46927,13 +49462,13 @@ pub struct CustomerDetails {
     /**
     * Details about the customer you want to invoice or overrides for an existing customer.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub address: Option<AddressAnyOf>,
+    #[serde()]
+    pub address: Box<Option<AddressAnyOf>>,
     /**
     * Details about the customer you want to invoice or overrides for an existing customer.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub shipping: Option<ShippingAnyOf>,
+    #[serde()]
+    pub shipping: Box<Option<ShippingAnyOf>>,
     /**
     * Details about the customer you want to invoice or overrides for an existing customer.
     */
@@ -46971,36 +49506,94 @@ pub struct Discounts {
     pub discount: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `Shipping`
 /// - `Vec<Discounts>`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetInvoicesUpcomingDiscountsAnyOf {
-    #[serde(flatten)]
-    pub shipping: Shipping,
+#[serde(untagged)]
+pub enum GetInvoicesUpcomingDiscountsAnyOf {
+    Shipping(Shipping),
     /**
     * The coupons to redeem into discounts for the invoice preview. If not specified, inherits the discount from the customer or subscription. This only works for coupons directly applied to the invoice. To apply a coupon to a subscription, you must use the `coupon` parameter instead. Pass an empty string to avoid inheriting any discounts. To preview the upcoming invoice for a subscription that hasn't been created, use `coupon` instead.
     */
-    #[serde(flatten)]
-    pub discounts_vector: Vec<Discounts>,
+    DiscountsVector(Vec<Discounts>),
 }
 
-/// All of the following types are flattened into one object:
+impl GetInvoicesUpcomingDiscountsAnyOf {
+    pub fn vec_discounts(&self) -> Option<&Vec<Discounts>> {
+        if let GetInvoicesUpcomingDiscountsAnyOf::DiscountsVector(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn shipping(&self) -> Option<&Shipping> {
+        if let GetInvoicesUpcomingDiscountsAnyOf::Shipping(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<Vec<Discounts>> for GetInvoicesUpcomingDiscountsAnyOf {
+    fn from(f: Vec<Discounts>) -> Self {
+        GetInvoicesUpcomingDiscountsAnyOf::DiscountsVector(f)
+    }
+}
+
+impl std::convert::From<GetInvoicesUpcomingDiscountsAnyOf> for Vec<Discounts> {
+    fn from(f: GetInvoicesUpcomingDiscountsAnyOf) -> Self {
+        f.vec_discounts().unwrap().clone()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `String`
 /// - `Shipping`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct MetadataAnyOf {
+#[serde(untagged)]
+pub enum MetadataAnyOf {
     /**
     * Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
     */
-    #[serde(flatten)]
-    pub string: String,
-    #[serde(flatten)]
-    pub shipping: Shipping,
+    String(String),
+    Shipping(Shipping),
+}
+
+impl MetadataAnyOf {
+    pub fn shipping(&self) -> Option<&Shipping> {
+        if let MetadataAnyOf::Shipping(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn string(&self) -> Option<&String> {
+        if let MetadataAnyOf::String(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<String> for MetadataAnyOf {
+    fn from(f: String) -> Self {
+        MetadataAnyOf::String(f)
+    }
+}
+
+impl std::convert::From<MetadataAnyOf> for String {
+    fn from(f: MetadataAnyOf) -> Self {
+        f.string().unwrap().clone()
+    }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -47070,16 +49663,16 @@ pub struct InvoiceItems {
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
     )]
     pub discountable: bool,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub discounts: Option<GetInvoicesUpcomingDiscountsAnyOf>,
+    #[serde()]
+    pub discounts: Box<Option<GetInvoicesUpcomingDiscountsAnyOf>>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub invoiceitem: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub metadata: Option<MetadataAnyOf>,
+    #[serde()]
+    pub metadata: Box<Option<MetadataAnyOf>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub period: Option<InvoiceLineItemPeriod>,
     #[serde(
@@ -47096,8 +49689,8 @@ pub struct InvoiceItems {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub tax_rates: Option<TaxRatesAnyOf>,
+    #[serde()]
+    pub tax_rates: Box<Option<TaxRatesAnyOf>>,
     #[serde(
         default,
         skip_serializing_if = "crate::utils::zero_i64",
@@ -47153,39 +49746,97 @@ impl SubscriptionBillingCycleAnchor {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `i64`
 /// - `SubscriptionBillingCycleAnchor`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SubscriptionBillingCycleAnchorAnyOf {
+#[serde(untagged)]
+pub enum SubscriptionBillingCycleAnchorAnyOf {
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
-    #[serde(flatten)]
-    pub i64: i64,
+    I64(i64),
     /**
     * For new subscriptions, a future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.
     */
-    #[serde(flatten)]
-    pub subscription_billing_cycle_anchor: SubscriptionBillingCycleAnchor,
+    SubscriptionBillingCycleAnchor(SubscriptionBillingCycleAnchor),
 }
 
-/// All of the following types are flattened into one object:
+impl SubscriptionBillingCycleAnchorAnyOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let SubscriptionBillingCycleAnchorAnyOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn subscription_billing_cycle_anchor(&self) -> Option<&SubscriptionBillingCycleAnchor> {
+        if let SubscriptionBillingCycleAnchorAnyOf::SubscriptionBillingCycleAnchor(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<i64> for SubscriptionBillingCycleAnchorAnyOf {
+    fn from(f: i64) -> Self {
+        SubscriptionBillingCycleAnchorAnyOf::I64(f)
+    }
+}
+
+impl std::convert::From<SubscriptionBillingCycleAnchorAnyOf> for i64 {
+    fn from(f: SubscriptionBillingCycleAnchorAnyOf) -> Self {
+        *f.i64().unwrap()
+    }
+}
+
+/// All of the following types:
 ///
 /// - `i64`
 /// - `Shipping`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SubscriptionCancelAtAnyOf {
+#[serde(untagged)]
+pub enum SubscriptionCancelAtAnyOf {
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
-    #[serde(flatten)]
-    pub i64: i64,
-    #[serde(flatten)]
-    pub shipping: Shipping,
+    I64(i64),
+    Shipping(Shipping),
+}
+
+impl SubscriptionCancelAtAnyOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let SubscriptionCancelAtAnyOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn shipping(&self) -> Option<&Shipping> {
+        if let SubscriptionCancelAtAnyOf::Shipping(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<i64> for SubscriptionCancelAtAnyOf {
+    fn from(f: i64) -> Self {
+        SubscriptionCancelAtAnyOf::I64(f)
+    }
+}
+
+impl std::convert::From<SubscriptionCancelAtAnyOf> for i64 {
+    fn from(f: SubscriptionCancelAtAnyOf) -> Self {
+        *f.i64().unwrap()
+    }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -47201,17 +49852,34 @@ pub struct BillingThresholds {
     pub usage_gte: i64,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `Shipping`
 /// - `BillingThresholds`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct BillingThresholdsAnyOf {
-    #[serde(flatten)]
-    pub shipping: Shipping,
-    #[serde(flatten)]
-    pub billing_thresholds: BillingThresholds,
+#[serde(untagged)]
+pub enum BillingThresholdsAnyOf {
+    Shipping(Shipping),
+    BillingThresholds(BillingThresholds),
+}
+
+impl BillingThresholdsAnyOf {
+    pub fn billing_thresholds(&self) -> Option<&BillingThresholds> {
+        if let BillingThresholdsAnyOf::BillingThresholds(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn shipping(&self) -> Option<&Shipping> {
+        if let BillingThresholdsAnyOf::Shipping(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
@@ -47275,8 +49943,8 @@ pub struct RecurringPriceData {
 
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
 pub struct SubscriptionItems {
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub billing_thresholds: Option<BillingThresholdsAnyOf>,
+    #[serde()]
+    pub billing_thresholds: Box<Option<BillingThresholdsAnyOf>>,
     #[serde(
         default,
         deserialize_with = "crate::utils::deserialize_null_boolean::deserialize"
@@ -47293,8 +49961,8 @@ pub struct SubscriptionItems {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub id: String,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub metadata: Option<MetadataAnyOf>,
+    #[serde()]
+    pub metadata: Box<Option<MetadataAnyOf>>,
     #[serde(
         default,
         skip_serializing_if = "String::is_empty",
@@ -47309,8 +49977,8 @@ pub struct SubscriptionItems {
         deserialize_with = "crate::utils::deserialize_null_i64::deserialize"
     )]
     pub quantity: i64,
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub tax_rates: Option<TaxRatesAnyOf>,
+    #[serde()]
+    pub tax_rates: Box<Option<TaxRatesAnyOf>>,
 }
 
 /**
@@ -47348,23 +50016,52 @@ impl SubscriptionTrialEnd {
     }
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `i64`
 /// - `SubscriptionTrialEnd`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct SubscriptionTrialEndAnyOf {
+#[serde(untagged)]
+pub enum SubscriptionTrialEndAnyOf {
     /**
     * Time at which the account was connected. Measured in seconds since the Unix epoch.
     */
-    #[serde(flatten)]
-    pub i64: i64,
+    I64(i64),
     /**
     * If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of `subscription_items` or `subscription` is required.
     */
-    #[serde(flatten)]
-    pub subscription_trial_end: SubscriptionTrialEnd,
+    SubscriptionTrialEnd(SubscriptionTrialEnd),
+}
+
+impl SubscriptionTrialEndAnyOf {
+    pub fn i64(&self) -> Option<&i64> {
+        if let SubscriptionTrialEndAnyOf::I64(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn subscription_trial_end(&self) -> Option<&SubscriptionTrialEnd> {
+        if let SubscriptionTrialEndAnyOf::SubscriptionTrialEnd(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+}
+
+impl std::convert::From<i64> for SubscriptionTrialEndAnyOf {
+    fn from(f: i64) -> Self {
+        SubscriptionTrialEndAnyOf::I64(f)
+    }
+}
+
+impl std::convert::From<SubscriptionTrialEndAnyOf> for i64 {
+    fn from(f: SubscriptionTrialEndAnyOf) -> Self {
+        *f.i64().unwrap()
+    }
 }
 
 ///
@@ -47607,23 +50304,23 @@ pub struct OrderTimestampSpecs {
     /**
     * Filter orders based on when they were paid, fulfilled, canceled, or returned.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub canceled: Option<PaidAnyOf>,
+    #[serde()]
+    pub canceled: Box<Option<PaidAnyOf>>,
     /**
     * Filter orders based on when they were paid, fulfilled, canceled, or returned.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub fulfilled: Option<PaidAnyOf>,
+    #[serde()]
+    pub fulfilled: Box<Option<PaidAnyOf>>,
     /**
     * Filter orders based on when they were paid, fulfilled, canceled, or returned.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub paid: Option<PaidAnyOf>,
+    #[serde()]
+    pub paid: Box<Option<PaidAnyOf>>,
     /**
     * Filter orders based on when they were paid, fulfilled, canceled, or returned.
     */
-    #[serde(default, skip_serializing_if = "Option::is_none")]
-    pub returned: Option<PaidAnyOf>,
+    #[serde()]
+    pub returned: Box<Option<PaidAnyOf>>,
 }
 
 ///
@@ -48081,13 +50778,16 @@ pub struct GetRecipientsResponse {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `Recipient`
 /// - `DeletedRecipient`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetRecipientsResponseAnyOf {
+#[serde(untagged)]
+pub enum GetRecipientsResponseAnyOf {
     /**
     * With `Recipient` objects, you can transfer money from your Stripe account to a
     *  third-party bank account or debit card. The API allows you to create, delete,
@@ -48100,13 +50800,27 @@ pub struct GetRecipientsResponseAnyOf {
     *  recipients can no longer begin doing so. Please use `Account` objects
     *  instead.\*\*
     */
-    #[serde(flatten)]
-    pub recipient: Recipient,
+    Recipient(Recipient),
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_recipient: DeletedRecipient,
+    DeletedRecipient(DeletedRecipient),
+}
+
+impl GetRecipientsResponseAnyOf {
+    pub fn deleted_recipient(&self) -> Option<&DeletedRecipient> {
+        if let GetRecipientsResponseAnyOf::DeletedRecipient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn recipient(&self) -> Option<&Recipient> {
+        if let GetRecipientsResponseAnyOf::Recipient(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 ///
@@ -48373,18 +51087,20 @@ pub struct GetSkusResponse {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `DeletedSku`
 /// - `Sku`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetSkusResponseAnyOf {
+#[serde(untagged)]
+pub enum GetSkusResponseAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_sku: DeletedSku,
+    DeletedSku(DeletedSku),
     /**
     * Stores representations of [stock keeping units](http://en.wikipedia.org/wiki/Stock_keeping_unit).
     *  SKUs describe specific product variations, taking into account any combination of: attributes,
@@ -48393,8 +51109,23 @@ pub struct GetSkusResponseAnyOf {
     *  
     *  Can also be used to manage inventory.
     */
-    #[serde(flatten)]
-    pub sku: Sku,
+    Sku(Sku),
+}
+
+impl GetSkusResponseAnyOf {
+    pub fn deleted_sku(&self) -> Option<&DeletedSku> {
+        if let GetSkusResponseAnyOf::DeletedSku(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn sku(&self) -> Option<&Sku> {
+        if let GetSkusResponseAnyOf::Sku(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 ///
@@ -48657,25 +51388,42 @@ pub struct TerminalLocationList {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `DeletedTerminalLocation`
 /// - `TerminalLocation`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetTerminalLocationResponseAnyOf {
+#[serde(untagged)]
+pub enum GetTerminalLocationResponseAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_terminal_location: DeletedTerminalLocation,
+    DeletedTerminalLocation(DeletedTerminalLocation),
     /**
     * A Location represents a grouping of readers.
     *  
     *  Related guide: [Fleet Management](https://stripe.com/docs/terminal/fleet/locations).
     */
-    #[serde(flatten)]
-    pub terminal_location: TerminalLocation,
+    TerminalLocation(TerminalLocation),
+}
+
+impl GetTerminalLocationResponseAnyOf {
+    pub fn deleted_terminal_location(&self) -> Option<&DeletedTerminalLocation> {
+        if let GetTerminalLocationResponseAnyOf::DeletedTerminalLocation(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn terminal_location(&self) -> Option<&TerminalLocation> {
+        if let GetTerminalLocationResponseAnyOf::TerminalLocation(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 ///
@@ -48714,25 +51462,42 @@ pub struct TerminalReaderRetrieve {
     pub url: String,
 }
 
-/// All of the following types are flattened into one object:
+/// All of the following types:
 ///
 /// - `DeletedTerminalReader`
 /// - `TerminalReader`
 ///
+/// You can easily convert this enum to the inner value with `From` and `Into`, as both are implemented for each type.
+///
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
-pub struct GetTerminalReadersReaderResponseAnyOf {
+#[serde(untagged)]
+pub enum GetTerminalReadersReaderResponseAnyOf {
     /**
     *
     */
-    #[serde(flatten)]
-    pub deleted_terminal_reader: DeletedTerminalReader,
+    DeletedTerminalReader(DeletedTerminalReader),
     /**
     * A Reader represents a physical device for accepting payment details.
     *  
     *  Related guide: [Connecting to a Reader](https://stripe.com/docs/terminal/payments/connect-reader).
     */
-    #[serde(flatten)]
-    pub terminal_reader: TerminalReader,
+    TerminalReader(TerminalReader),
+}
+
+impl GetTerminalReadersReaderResponseAnyOf {
+    pub fn deleted_terminal_reader(&self) -> Option<&DeletedTerminalReader> {
+        if let GetTerminalReadersReaderResponseAnyOf::DeletedTerminalReader(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
+
+    pub fn terminal_reader(&self) -> Option<&TerminalReader> {
+        if let GetTerminalReadersReaderResponseAnyOf::TerminalReader(ref_) = self {
+            return Some(ref_);
+        }
+        None
+    }
 }
 
 ///

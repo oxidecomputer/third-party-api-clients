@@ -1,8 +1,8 @@
-# `stripe-api`
+# `dolladollabills`
 
 A fully generated, opinionated API client library for Stripe.
 
-[![docs.rs](https://docs.rs/stripe-api/badge.svg)](https://docs.rs/stripe-api)
+[![docs.rs](https://docs.rs/dolladollabills/badge.svg)](https://docs.rs/dolladollabills)
 
 ## API Details
 
@@ -31,7 +31,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-stripe-api = "0.1.0"
+dolladollabills = "0.1.0"
 ```
 
 ## Basic example
@@ -40,7 +40,7 @@ Typical use will require intializing a `Client`. This requires
 a user agent string and set of credentials.
 
 ```
-use stripe_api::Client;
+use dolladollabills::Client;
 
 let stripe = Client::new(
     String::from("api-key"),
@@ -55,7 +55,7 @@ the client in the environment:
 And then you can create a client from the environment.
 
 ```
-use stripe_api::Client;
+use dolladollabills::Client;
 
 let stripe = Client::new_from_env();
 ```

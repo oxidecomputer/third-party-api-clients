@@ -251,6 +251,38 @@ dependencies = [
 ]
 
 [[package]]
+name = "dolladollabills"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-recursion",
+ "async-trait",
+ "base64 0.12.3",
+ "bytes 1.1.0",
+ "chrono",
+ "dirs",
+ "http",
+ "hyperx",
+ "jsonwebtoken",
+ "log",
+ "mime",
+ "nom_pem",
+ "percent-encoding",
+ "reqwest",
+ "reqwest-middleware",
+ "reqwest-retry",
+ "reqwest-tracing",
+ "schemars",
+ "serde",
+ "serde_json",
+ "serde_urlencoded",
+ "tokio",
+ "url",
+ "urlencoding",
+ "uuid",
+]
+
+[[package]]
 name = "dtoa"
 version = "0.4.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2020,38 +2052,6 @@ name = "spin"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
-
-[[package]]
-name = "stripe-api"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "async-recursion",
- "async-trait",
- "base64 0.12.3",
- "bytes 1.1.0",
- "chrono",
- "dirs",
- "http",
- "hyperx",
- "jsonwebtoken",
- "log",
- "mime",
- "nom_pem",
- "percent-encoding",
- "reqwest",
- "reqwest-middleware",
- "reqwest-retry",
- "reqwest-tracing",
- "schemars",
- "serde",
- "serde_json",
- "serde_urlencoded",
- "tokio",
- "url",
- "urlencoding",
- "uuid",
-]
 
 [[package]]
 name = "syn"

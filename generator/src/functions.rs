@@ -54,8 +54,18 @@ pub fn generate_files(
                 // the path.
                 let split = pn.trim_start_matches('/').split('/');
                 let vec = split.collect::<Vec<&str>>();
+                let mut t = vec.first().unwrap().to_string();
+                if t == "v1" && vec.len() > 1 {
+                    //  Try to get the second part of the path.
+                    t = vec[1].to_string();
+                }
 
-                tags.push(vec.first().unwrap().to_string());
+                if t == "3d_secure" {
+                    // This is a special case.
+                    t = "three_d_secure".to_string();
+                }
+
+                tags.push(t);
             }
             let tag = to_snake_case(&clean_name(&make_plural(
                 proper_name,
@@ -692,7 +702,7 @@ fn get_fn_params(
                 fn_params_str.push(format!("ids: {},", typ));
                 fn_params.push("ids".to_string());
             } else if (!all_pages || !is_page_param(nam, proper_name))
-                && nam != "authorization"
+                && !(nam == "authorization" && proper_name != "Stripe")
                 && !nam.starts_with("authorization_bearer")
                 && (!proper_name.starts_with("Google")
                     || !is_google_unnecessary_param(proper_name, nam))
@@ -742,7 +752,7 @@ fn get_fn_params(
                         (typ.to_string(), parameter_data.name.to_string()),
                     );
                 } else if (!all_pages || !is_page_param(nam, proper_name))
-                    && nam != "authorization"
+                    && !(nam == "authorization" && proper_name != "Stripe")
                     && !nam.starts_with("authorization_bearer")
                     && (!proper_name.starts_with("Google")
                         || !is_google_unnecessary_param(proper_name, nam))
@@ -797,19 +807,19 @@ fn get_fn_inner(
 
     if all_pages && pagination_property.is_empty() {
         return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
-    } else if all_pages && proper_name.starts_with("Stripe") {
+    } else if all_pages && proper_name.starts_with("Stripe") && !response_type.ends_with("AnyOf>") {
         // We will do a custom function here.
         let inner = format!(
             r#"let mut resp: {} = self.client.{}(&url, {}).await?;
 
             let mut {} = resp.{};
             let mut has_more = resp.has_more;
-            let mut page = "";
+            let mut page = "".to_string();
 
             // Paginate if we should.
             while has_more {{
-                if !resp.data.is_empty() {{
-                   page = resp.data.last().unwrap().id.to_string();
+                if !{}.is_empty() {{
+                   page = {}.last().unwrap().id.to_string();
                 }}
                 if !url.contains('?') {{
                     resp = self.client.{}(&format!("{{}}?startng_after={{}}", url, page), {}).await?;
@@ -820,7 +830,7 @@ fn get_fn_inner(
 
                 {}.append(&mut resp.{});
 
-                resp.has_more = resp.has_more;
+                has_more = resp.has_more;
             }}
 
             // Return our response data.
@@ -828,6 +838,8 @@ fn get_fn_inner(
             response_type,
             m.to_lowercase(),
             body,
+            pagination_property,
+            pagination_property,
             pagination_property,
             pagination_property,
             m.to_lowercase(),

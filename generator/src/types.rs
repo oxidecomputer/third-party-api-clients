@@ -40,8 +40,16 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                     );
                     a(&p);
                 }
-                TypeDetails::OneOf(omap, _) => a(&do_of_type(ts, omap, sn)),
-                TypeDetails::AnyOf(omap, _) => a(&do_all_of_type(ts, omap, sn)),
+                TypeDetails::OneOf(omap, _) => a(&do_one_of_type(ts, omap, sn)),
+                TypeDetails::AnyOf(omap, _) => {
+                    // When Stripe uses anyof what they really mean is one of.
+                    // Because something can not both be a string and an object.
+                    if proper_name == "Stripe" {
+                        a(&do_one_of_type(ts, omap, sn));
+                    } else {
+                        a(&do_all_of_type(ts, omap, sn));
+                    }
+                }
                 TypeDetails::AllOf(omap, _) => a(&do_all_of_type(ts, omap, sn)),
                 TypeDetails::Object(omap, schema_data) => {
                     /*
@@ -71,7 +79,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                         || sn == "PagesHttpsCertificate"
                         || sn == "ErrorDetails"
                         || sn == "EnvelopeDefinition"
-                        || sn == "Event"
+                        || (sn == "Event" && proper_name != "Stripe")
                         || sn == "User"
                         || sn == "Group"
                         || sn == "CalendarResource"
@@ -94,14 +102,36 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                              JsonSchema)]",
                         );
                     } else {
-                        a(
-                            "#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, \
-                             JsonSchema)]",
-                        );
+                        a("#[derive(Serialize, Deserialize, PartialEq, Debug, Clone, \
+                             JsonSchema)]");
                     }
                     a(&format!("pub struct {} {{", sn));
                     for (name, tid) in omap.iter() {
                         if let Ok(mut rt) = ts.render_type(tid, true) {
+                            // Stripe has some really weird recursive types.
+                            if rt.ends_with("AnyOf") && proper_name == "Stripe" {
+                                // Stripe uses anyof, but we want oneof.
+                                rt = format!("Box<{}>", rt);
+                            } else if ((rt.ends_with("AnyOf>") && rt.starts_with("Option<"))
+                                || rt == "Option<ApiErrors>"
+                                || rt == "Option<PaymentIntent>")
+                                && proper_name == "Stripe"
+                            {
+                                // Stripe uses anyof, but we want oneof.
+                                rt = format!(
+                                    "Box<Option<{}>>",
+                                    rt.trim_start_matches("Option<").trim_end_matches(">")
+                                );
+                            } else if rt.ends_with("AnyOf>")
+                                && rt.starts_with("Vec<")
+                                && proper_name == "Stripe"
+                            {
+                                // Stripe uses anyof, but we want oneof.
+                                rt = format!(
+                                    "Box<Vec<{}>>",
+                                    rt.trim_start_matches("Vec<").trim_end_matches(">")
+                                );
+                            }
                             let mut prop = name.trim().to_string();
                             if prop == "next" {
                                 rt = "String".to_string();
@@ -280,7 +310,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
     Ok(out.to_string())
 }
 
-fn do_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String {
+fn do_one_of_type(ts: &mut TypeSpace, omap: &[crate::TypeId], sn: String) -> String {
     let mut out = String::new();
 
     let mut a = |s: &str| {

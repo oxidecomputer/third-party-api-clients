@@ -648,16 +648,15 @@ impl PartialEq for TypeDetails {
             }
             TypeDetails::Object(s, d) => {
                 if let TypeDetails::Object(os, od) = other {
-                    if d.title == od.title && d.title.is_some() && Some("".to_string()) != od.title
+                    // Fix for stripe.
+                    if (d.title == od.title && d.title.is_some())
+                        && (Some("range_query_specs".to_string()) == od.title
+                            || Some("SearchResult".to_string()) == od.title)
                     {
-                        println!(
-                            "TITLE LEFT: {}, TITLE RIGHT: {}",
-                            d.title.as_ref().unwrap(),
-                            od.title.as_ref().unwrap()
-                        );
+                        return true;
                     }
+
                     return s == os;
-                    //|| (d.title == od.title && d.title.is_some());
                 }
             }
             TypeDetails::OneOf(s, _d) => {
@@ -2604,6 +2603,14 @@ fn clean_name(t: &str) -> String {
         st = "ids".to_string();
     }
 
+    if st == "v 1" || st == "v_1" {
+        st = "v1".to_string();
+    }
+
+    if st == "customer balance transaction customer any of" {
+        st = "customer any of".to_string();
+    }
+
     let mut words: Vec<String> = Default::default();
     // Only get a string with unique words.
     let split = st.split(' ');
@@ -3023,9 +3030,18 @@ fn main() -> Result<()> {
                     // the path.
                     let split = pn.trim_start_matches('/').split('/');
                     let vec = split.collect::<Vec<&str>>();
-
-                    tags.push(vec.first().unwrap().to_string());
+                    let mut t = vec.first().unwrap().to_string();
+                    if t == "v1" && vec.len() > 1 {
+                        //  Try to get the second part of the path.
+                        t = vec[1].to_string();
+                    }
+                    if t == "3d_secure" {
+                        // This is a special case.
+                        t = "three_d_secure".to_string();
+                    }
+                    tags.push(t);
                 }
+
                 let tag = to_snake_case(&clean_name(&make_plural(
                     &proper_name,
                     tags.first().unwrap(),
