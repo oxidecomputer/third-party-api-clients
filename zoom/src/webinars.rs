@@ -255,7 +255,7 @@ impl Webinars {
             self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.participants)
+        Ok(resp.participants.to_vec())
     }
 
     /**

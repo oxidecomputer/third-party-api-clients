@@ -607,7 +607,7 @@ impl Reports {
             self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.activity_logs)
+        Ok(resp.activity_logs.to_vec())
     }
 
     /**

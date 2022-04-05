@@ -113,7 +113,7 @@ impl Phone {
             self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.phone_numbers)
+        Ok(resp.phone_numbers.to_vec())
     }
 
     /**
@@ -361,7 +361,7 @@ impl Phone {
         let resp: crate::types::ListSettingTemplatesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.templates)
+        Ok(resp.templates.to_vec())
     }
 
     /**
@@ -500,7 +500,7 @@ impl Phone {
         let resp: crate::types::ListLocationsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.locations)
+        Ok(resp.locations.to_vec())
     }
 
     /**
@@ -695,7 +695,7 @@ impl Phone {
         let resp: crate::types::ListSipGroupsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.sip_groups)
+        Ok(resp.sip_groups.to_vec())
     }
 
     /**
@@ -887,7 +887,7 @@ impl Phone {
         let resp: crate::types::PhoneUserCallLogsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.call_logs)
+        Ok(resp.call_logs.to_vec())
     }
 
     /**
@@ -1022,7 +1022,7 @@ impl Phone {
         let resp: crate::types::PhoneUserRecordingsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.recordings)
+        Ok(resp.recordings.to_vec())
     }
 
     /**
@@ -1151,7 +1151,7 @@ impl Phone {
         let resp: crate::types::PhoneUserVoiceMailsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.voice_mails)
+        Ok(resp.voice_mails.to_vec())
     }
 
     /**
@@ -1415,7 +1415,7 @@ impl Phone {
         let resp: crate::types::AccountCallLogsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.call_logs)
+        Ok(resp.call_logs.to_vec())
     }
 
     /**
@@ -1687,7 +1687,7 @@ impl Phone {
             self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.recordings)
+        Ok(resp.recordings.to_vec())
     }
 
     /**
@@ -1806,7 +1806,7 @@ impl Phone {
         let resp: crate::types::ListByocsipTrunkResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.byoc_sip_trunk)
+        Ok(resp.byoc_sip_trunk.to_vec())
     }
 
     /**
@@ -1959,7 +1959,7 @@ impl Phone {
         let resp: crate::types::ListExternalContactsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.external_contacts)
+        Ok(resp.external_contacts.to_vec())
     }
 
     /**
@@ -2267,7 +2267,7 @@ impl Phone {
         let resp: crate::types::ListPhoneUsersResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.users)
+        Ok(resp.users.to_vec())
     }
 
     /**

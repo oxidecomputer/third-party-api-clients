@@ -71,7 +71,7 @@ impl Chromeosdevices {
         let resp: crate::types::ChromeOsDevices = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.chromeosdevices)
+        Ok(resp.chromeosdevices.to_vec())
     }
 
     /**

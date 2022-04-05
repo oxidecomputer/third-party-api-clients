@@ -44,7 +44,7 @@ impl Settings {
         let resp: crate::types::Settings = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.items)
+        Ok(resp.items.to_vec())
     }
 
     /**

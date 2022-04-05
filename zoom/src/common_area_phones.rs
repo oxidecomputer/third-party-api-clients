@@ -52,7 +52,7 @@ impl CommonAreaPhones {
         let resp: crate::types::ListCommonAreaPhonesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.common_area_phones)
+        Ok(resp.common_area_phones.to_vec())
     }
 
     /**

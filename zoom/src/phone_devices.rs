@@ -53,7 +53,7 @@ impl PhoneDevices {
         let resp: crate::types::ListPhoneDevicesResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.devices)
+        Ok(resp.devices.to_vec())
     }
 
     /**

@@ -135,7 +135,7 @@ impl Events {
         let resp: crate::types::Events = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.items)
+        Ok(resp.items.to_vec())
     }
 
     /**
@@ -808,7 +808,7 @@ impl Events {
         let resp: crate::types::Events = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.items)
+        Ok(resp.items.to_vec())
     }
 
     /**

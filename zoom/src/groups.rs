@@ -184,7 +184,7 @@ impl Groups {
         let resp: crate::types::GroupMembersResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.members)
+        Ok(resp.members.to_vec())
     }
 
     /**

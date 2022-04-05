@@ -59,7 +59,7 @@ impl Contacts {
         let resp: crate::types::SearchCompanyContactsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.contacts)
+        Ok(resp.contacts.to_vec())
     }
 
     /**
@@ -170,7 +170,7 @@ impl Contacts {
         let resp: crate::types::GetUserContactsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.contacts)
+        Ok(resp.contacts.to_vec())
     }
 
     /**

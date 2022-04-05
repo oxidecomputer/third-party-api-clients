@@ -62,7 +62,7 @@ impl RoomsLocation {
         let resp: crate::types::ListZrLocationsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.locations)
+        Ok(resp.locations.to_vec())
     }
 
     /**

@@ -111,7 +111,7 @@ impl Files {
         let resp: crate::types::FileList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.files)
+        Ok(resp.files.to_vec())
     }
 
     /**

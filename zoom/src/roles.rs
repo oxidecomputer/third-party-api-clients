@@ -108,7 +108,7 @@ impl Roles {
         let resp: crate::types::RoleMembersList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.members)
+        Ok(resp.members.to_vec())
     }
 
     /**

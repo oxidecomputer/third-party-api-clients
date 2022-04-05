@@ -48,7 +48,7 @@ impl PhoneBlockedList {
         let resp: crate::types::ListBlockedResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.blocked_list)
+        Ok(resp.blocked_list.to_vec())
     }
 
     /**

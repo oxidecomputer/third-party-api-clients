@@ -71,7 +71,7 @@ impl Users {
         let resp: crate::types::UsersResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.users)
+        Ok(resp.users.to_vec())
     }
 
     /**

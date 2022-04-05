@@ -51,7 +51,7 @@ impl PhoneSharedLineGroups {
         let resp: crate::types::ListSharedLineGroupsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.shared_line_groups)
+        Ok(resp.shared_line_groups.to_vec())
     }
 
     /**

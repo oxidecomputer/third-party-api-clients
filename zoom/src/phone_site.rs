@@ -48,7 +48,7 @@ impl PhoneSite {
         let resp: crate::types::ListPhoneSitesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.sites)
+        Ok(resp.sites.to_vec())
     }
 
     /**

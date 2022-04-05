@@ -70,7 +70,7 @@ impl Groups {
         let resp: crate::types::Groups = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.groups)
+        Ok(resp.groups.to_vec())
     }
 
     /**

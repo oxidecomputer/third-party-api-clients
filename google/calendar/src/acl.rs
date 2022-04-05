@@ -55,7 +55,7 @@ impl Acl {
         let resp: crate::types::Acl = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.items)
+        Ok(resp.items.to_vec())
     }
 
     /**

@@ -54,7 +54,7 @@ impl ChatChannels {
         let resp: crate::types::GetChannelsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.channels)
+        Ok(resp.channels.to_vec())
     }
 
     /**

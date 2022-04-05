@@ -150,7 +150,7 @@ impl ChatChannelsAccountLevel {
             self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.members)
+        Ok(resp.members.to_vec())
     }
 
     /**

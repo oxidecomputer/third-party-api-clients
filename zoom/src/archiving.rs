@@ -64,7 +64,7 @@ impl Archiving {
         let resp: crate::types::ListArchivedFilesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.meetings)
+        Ok(resp.meetings.to_vec())
     }
 
     /**

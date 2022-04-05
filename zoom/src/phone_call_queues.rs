@@ -51,7 +51,7 @@ impl PhoneCallQueues {
         let resp: crate::types::ListCallQueuesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.call_queues)
+        Ok(resp.call_queues.to_vec())
     }
 
     /**
@@ -507,7 +507,7 @@ impl PhoneCallQueues {
             self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.recordings)
+        Ok(resp.recordings.to_vec())
     }
 
     /**

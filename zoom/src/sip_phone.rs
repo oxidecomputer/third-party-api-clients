@@ -60,7 +60,7 @@ impl SipPhone {
         let resp: crate::types::ListSipPhonesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.phones)
+        Ok(resp.phones.to_vec())
     }
 
     /**

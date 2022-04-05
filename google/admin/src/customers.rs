@@ -195,7 +195,7 @@ impl Customers {
         let resp: crate::types::ListPrintersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.printers)
+        Ok(resp.printers.to_vec())
     }
 
     /**
@@ -368,7 +368,7 @@ impl Customers {
         let resp: crate::types::ListPrinterModelsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.printer_models)
+        Ok(resp.printer_models.to_vec())
     }
 
     /**

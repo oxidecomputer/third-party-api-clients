@@ -172,7 +172,7 @@ impl ImChat {
         let resp: crate::types::ListimmessagesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.messages)
+        Ok(resp.messages.to_vec())
     }
 
     /**

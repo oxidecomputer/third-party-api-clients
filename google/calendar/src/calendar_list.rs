@@ -60,7 +60,7 @@ impl CalendarList {
         let resp: crate::types::CalendarList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.items)
+        Ok(resp.items.to_vec())
     }
 
     /**

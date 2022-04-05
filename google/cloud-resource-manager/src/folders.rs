@@ -50,7 +50,7 @@ impl Folders {
         let resp: crate::types::ListFoldersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.folders)
+        Ok(resp.folders.to_vec())
     }
 
     /**
@@ -149,7 +149,7 @@ impl Folders {
             .await?;
 
         // Return our response data.
-        Ok(resp.folders)
+        Ok(resp.folders.to_vec())
     }
 
     /**

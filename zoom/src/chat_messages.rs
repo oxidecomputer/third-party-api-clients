@@ -84,7 +84,7 @@ impl ChatMessages {
         let resp: crate::types::GetChatMessagesResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.messages)
+        Ok(resp.messages.to_vec())
     }
 
     /**

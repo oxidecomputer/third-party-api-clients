@@ -710,6 +710,7 @@ fn get_fn_params(
                 && (proper_name != "Slack" || !is_slack_unnecessary_param(nam))
                 && (proper_name != "Okta" || !is_okta_unnecessary_param(nam))
                 && (proper_name != "ShipBob" || !is_shipbob_unnecessary_param(nam))
+                && (proper_name != "Stripe" || !is_stripe_unnecessary_param(nam))
             {
                 if typ == "chrono::DateTime<chrono::Utc>" {
                     fn_params_str.push(format!("{}: Option<{}>,", nam, typ));
@@ -760,6 +761,7 @@ fn get_fn_params(
                     && (proper_name != "Slack" || !is_slack_unnecessary_param(nam))
                     && (proper_name != "Okta" || !is_okta_unnecessary_param(nam))
                     && (proper_name != "ShipBob" || !is_shipbob_unnecessary_param(nam))
+                    && (proper_name != "Stripe" || !is_stripe_unnecessary_param(nam))
                 {
                     if typ == "chrono::DateTime<chrono::Utc>" {
                         query_params.insert(
@@ -1277,4 +1279,8 @@ fn is_okta_unnecessary_param(s: &str) -> bool {
 
 fn is_shipbob_unnecessary_param(s: &str) -> bool {
     s == "shipbob_channel_id"
+}
+
+fn is_stripe_unnecessary_param(s: &str) -> bool {
+    s == "expand"
 }

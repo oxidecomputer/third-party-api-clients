@@ -46,7 +46,7 @@ impl Resources {
         let resp: crate::types::Buildings = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.buildings)
+        Ok(resp.buildings.to_vec())
     }
 
     /**
@@ -293,7 +293,7 @@ impl Resources {
         let resp: crate::types::CalendarResources = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.items)
+        Ok(resp.items.to_vec())
     }
 
     /**
@@ -511,7 +511,7 @@ impl Resources {
         let resp: crate::types::Features = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.features)
+        Ok(resp.features.to_vec())
     }
 
     /**

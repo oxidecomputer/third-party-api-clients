@@ -46,7 +46,7 @@ impl Revisions {
         let resp: crate::types::RevisionList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.revisions)
+        Ok(resp.revisions.to_vec())
     }
 
     /**

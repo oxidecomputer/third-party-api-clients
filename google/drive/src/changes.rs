@@ -116,7 +116,7 @@ impl Changes {
         let resp: crate::types::ChangeList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.changes)
+        Ok(resp.changes.to_vec())
     }
 
     /**

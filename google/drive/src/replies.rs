@@ -54,7 +54,7 @@ impl Replies {
         let resp: crate::types::ReplyList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.replies)
+        Ok(resp.replies.to_vec())
     }
 
     /**

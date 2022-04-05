@@ -59,7 +59,7 @@ impl Comments {
         let resp: crate::types::CommentList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.comments)
+        Ok(resp.comments.to_vec())
     }
 
     /**

@@ -1136,7 +1136,7 @@ impl Dashboards {
             self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.call_logs)
+        Ok(resp.call_logs.to_vec())
     }
 
     /**
@@ -1326,7 +1326,7 @@ impl Dashboards {
         let resp: crate::types::ParticipantFeedbackResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.participants)
+        Ok(resp.participants.to_vec())
     }
 
     /**
@@ -1450,7 +1450,7 @@ impl Dashboards {
         let resp: crate::types::ParticipantFeedbackResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.participants)
+        Ok(resp.participants.to_vec())
     }
 
     /**

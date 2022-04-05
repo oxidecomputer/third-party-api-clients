@@ -53,7 +53,7 @@ impl Teamdrives {
         let resp: crate::types::TeamDriveList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.team_drives)
+        Ok(resp.team_drives.to_vec())
     }
 
     /**

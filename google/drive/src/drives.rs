@@ -53,7 +53,7 @@ impl Drives {
         let resp: crate::types::DriveList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.drives)
+        Ok(resp.drives.to_vec())
     }
 
     /**

@@ -78,7 +78,7 @@ impl Permissions {
         let resp: crate::types::PermissionList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.permissions)
+        Ok(resp.permissions.to_vec())
     }
 
     /**

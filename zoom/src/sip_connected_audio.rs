@@ -332,7 +332,7 @@ impl SipConnectedAudio {
         let resp: crate::types::ListInternalNumbersResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.internal_numbers)
+        Ok(resp.internal_numbers.to_vec())
     }
 
     /**

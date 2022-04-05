@@ -66,7 +66,7 @@ impl Mobiledevices {
         let resp: crate::types::MobileDevices = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.mobiledevices)
+        Ok(resp.mobiledevices.to_vec())
     }
 
     /**

@@ -66,7 +66,7 @@ impl Rooms {
         let resp: crate::types::ListZoomRoomsResponseData = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.rooms)
+        Ok(resp.rooms.to_vec())
     }
 
     /**
@@ -453,7 +453,7 @@ impl Rooms {
             self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.contents)
+        Ok(resp.contents.to_vec())
     }
 
     /**
