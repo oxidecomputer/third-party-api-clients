@@ -164,7 +164,7 @@ impl Drives {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/drives/{}?{}",
-            crate::progenitor_support::encode_path(drive_id),
+            crate::progenitor_support::encode_path(&drive_id.to_string()),
             query_
         );
 
@@ -183,7 +183,7 @@ impl Drives {
     pub async fn delete(&self, drive_id: &str) -> Result<()> {
         let url = format!(
             "/drives/{}",
-            crate::progenitor_support::encode_path(drive_id),
+            crate::progenitor_support::encode_path(&drive_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -215,7 +215,7 @@ impl Drives {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/drives/{}?{}",
-            crate::progenitor_support::encode_path(drive_id),
+            crate::progenitor_support::encode_path(&drive_id.to_string()),
             query_
         );
 
@@ -236,7 +236,7 @@ impl Drives {
     pub async fn hide(&self, drive_id: &str) -> Result<crate::types::Drive> {
         let url = format!(
             "/drives/{}/hide",
-            crate::progenitor_support::encode_path(drive_id),
+            crate::progenitor_support::encode_path(&drive_id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -254,7 +254,7 @@ impl Drives {
     pub async fn unhide(&self, drive_id: &str) -> Result<crate::types::Drive> {
         let url = format!(
             "/drives/{}/unhide",
-            crate::progenitor_support::encode_path(drive_id),
+            crate::progenitor_support::encode_path(&drive_id.to_string()),
         );
 
         self.client.post(&url, None).await

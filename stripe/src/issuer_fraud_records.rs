@@ -82,10 +82,8 @@ impl IssuerFraudRecords {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -129,7 +127,7 @@ impl IssuerFraudRecords {
     ) -> Result<crate::types::IssuerFraudRecord> {
         let url = format!(
             "/v1/issuer_fraud_records/{}",
-            crate::progenitor_support::encode_path(issuer_fraud_record),
+            crate::progenitor_support::encode_path(&issuer_fraud_record.to_string()),
         );
 
         self.client.get(&url, None).await

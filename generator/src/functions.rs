@@ -824,10 +824,8 @@ fn get_fn_inner(
                    let last = {}.last().unwrap();
                    let j = serde_json::json!(last);
                    if let serde_json::Value::Object(o) = j {{
-                       if let Some(p) = o.get("id") {{
-                           if let serde_json::Value::String(s) = p {{
-                               page = s.to_string();
-                           }}
+                       if let Some(serde_json::Value::String(s)) = o.get("id") {{
+                            page = s.to_string();
                        }}
                    }}
                 }}

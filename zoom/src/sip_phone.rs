@@ -158,7 +158,7 @@ impl SipPhone {
     pub async fn delete(&self, phone_id: &str) -> Result<()> {
         let url = format!(
             "/sip_phones/{}",
-            crate::progenitor_support::encode_path(phone_id),
+            crate::progenitor_support::encode_path(&phone_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -187,7 +187,7 @@ impl SipPhone {
     ) -> Result<()> {
         let url = format!(
             "/sip_phones/{}",
-            crate::progenitor_support::encode_path(phone_id),
+            crate::progenitor_support::encode_path(&phone_id.to_string()),
         );
 
         self.client

@@ -32,9 +32,9 @@ impl Skus {
     pub async fn get_page(
         &self,
         active: bool,
-        _attributes: &str,
+        attributes: &str,
         ending_before: &str,
-        _ids: &[String],
+        ids: &[String],
         in_stock: bool,
         limit: i64,
         product: &str,
@@ -78,8 +78,8 @@ impl Skus {
     pub async fn get_all(
         &self,
         active: bool,
-        _attributes: &str,
-        _ids: &[String],
+        attributes: &str,
+        ids: &[String],
         in_stock: bool,
         product: &str,
     ) -> Result<Vec<crate::types::Sku>> {
@@ -108,10 +108,8 @@ impl Skus {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -160,7 +158,7 @@ impl Skus {
     pub async fn get(&self, id: &str) -> Result<crate::types::GetSkusResponseAnyOf> {
         let url = format!(
             "/v1/skus/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -180,7 +178,7 @@ impl Skus {
     pub async fn post_skus(&self, id: &str) -> Result<crate::types::Sku> {
         let url = format!(
             "/v1/skus/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -198,7 +196,7 @@ impl Skus {
     pub async fn delete(&self, id: &str) -> Result<crate::types::DeletedSku> {
         let url = format!(
             "/v1/skus/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.delete(&url, None).await

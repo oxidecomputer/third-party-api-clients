@@ -27,7 +27,7 @@ impl Coupons {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -58,7 +58,7 @@ impl Coupons {
     *
     * <p>Returns a list of your coupons.</p>
     */
-    pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Coupon>> {
+    pub async fn get_all(&self, created: &str) -> Result<Vec<crate::types::Coupon>> {
         let url = "/v1/coupons".to_string();
         let mut resp: crate::types::GetCouponsResponse = self.client.get(&url, None).await?;
 
@@ -72,10 +72,8 @@ impl Coupons {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -126,7 +124,7 @@ impl Coupons {
     pub async fn get(&self, coupon: &str) -> Result<crate::types::Coupon> {
         let url = format!(
             "/v1/coupons/{}",
-            crate::progenitor_support::encode_path(coupon),
+            crate::progenitor_support::encode_path(&coupon.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -144,7 +142,7 @@ impl Coupons {
     pub async fn post_coupons(&self, coupon: &str) -> Result<crate::types::Coupon> {
         let url = format!(
             "/v1/coupons/{}",
-            crate::progenitor_support::encode_path(coupon),
+            crate::progenitor_support::encode_path(&coupon.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -162,7 +160,7 @@ impl Coupons {
     pub async fn delete(&self, coupon: &str) -> Result<crate::types::DeletedCoupon> {
         let url = format!(
             "/v1/coupons/{}",
-            crate::progenitor_support::encode_path(coupon),
+            crate::progenitor_support::encode_path(&coupon.to_string()),
         );
 
         self.client.delete(&url, None).await

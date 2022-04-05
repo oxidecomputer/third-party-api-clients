@@ -32,15 +32,15 @@ impl Orders {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
-        _ids: &[String],
+        ids: &[String],
         limit: i64,
         starting_after: &str,
         status: &str,
-        _status_transitions: &str,
-        _upstream_ids: &[String],
+        status_transitions: &str,
+        upstream_ids: &[String],
     ) -> Result<Vec<crate::types::Order>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
@@ -76,12 +76,12 @@ impl Orders {
     */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
-        _ids: &[String],
+        ids: &[String],
         status: &str,
-        _status_transitions: &str,
-        _upstream_ids: &[String],
+        status_transitions: &str,
+        upstream_ids: &[String],
     ) -> Result<Vec<crate::types::Order>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
@@ -106,10 +106,8 @@ impl Orders {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -158,7 +156,7 @@ impl Orders {
     pub async fn get(&self, id: &str) -> Result<crate::types::Order> {
         let url = format!(
             "/v1/orders/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -176,7 +174,7 @@ impl Orders {
     pub async fn post_orders(&self, id: &str) -> Result<crate::types::Order> {
         let url = format!(
             "/v1/orders/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -194,7 +192,7 @@ impl Orders {
     pub async fn post_pay(&self, id: &str) -> Result<crate::types::Order> {
         let url = format!(
             "/v1/orders/{}/pay",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -212,7 +210,7 @@ impl Orders {
     pub async fn post_return(&self, id: &str) -> Result<crate::types::OrderReturn> {
         let url = format!(
             "/v1/orders/{}/returns",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await

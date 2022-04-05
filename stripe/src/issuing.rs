@@ -32,7 +32,7 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -78,7 +78,7 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         status: crate::types::IssuingAuthorizationStatus,
     ) -> Result<Vec<crate::types::IssuingAuthorization>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -107,10 +107,8 @@ impl Issuing {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -152,7 +150,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingAuthorization> {
         let url = format!(
             "/v1/issuing/authorizations/{}",
-            crate::progenitor_support::encode_path(authorization),
+            crate::progenitor_support::encode_path(&authorization.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -173,7 +171,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingAuthorization> {
         let url = format!(
             "/v1/issuing/authorizations/{}",
-            crate::progenitor_support::encode_path(authorization),
+            crate::progenitor_support::encode_path(&authorization.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -194,7 +192,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingAuthorization> {
         let url = format!(
             "/v1/issuing/authorizations/{}/approve",
-            crate::progenitor_support::encode_path(authorization),
+            crate::progenitor_support::encode_path(&authorization.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -215,7 +213,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingAuthorization> {
         let url = format!(
             "/v1/issuing/authorizations/{}/decline",
-            crate::progenitor_support::encode_path(authorization),
+            crate::progenitor_support::encode_path(&authorization.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -240,7 +238,7 @@ impl Issuing {
     */
     pub async fn get_cardholders(
         &self,
-        _created: &str,
+        created: &str,
         email: &str,
         ending_before: &str,
         limit: i64,
@@ -289,7 +287,7 @@ impl Issuing {
     */
     pub async fn get_all_cardholders(
         &self,
-        _created: &str,
+        created: &str,
         email: &str,
         phone_number: &str,
         status: crate::types::IssuingCardholderStatus,
@@ -324,10 +322,8 @@ impl Issuing {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -379,7 +375,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingCardholder> {
         let url = format!(
             "/v1/issuing/cardholders/{}",
-            crate::progenitor_support::encode_path(cardholder),
+            crate::progenitor_support::encode_path(&cardholder.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -400,7 +396,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingCardholder> {
         let url = format!(
             "/v1/issuing/cardholders/{}",
-            crate::progenitor_support::encode_path(cardholder),
+            crate::progenitor_support::encode_path(&cardholder.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -428,7 +424,7 @@ impl Issuing {
     pub async fn get_cards(
         &self,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         exp_month: i64,
         exp_year: i64,
@@ -485,7 +481,7 @@ impl Issuing {
     pub async fn get_all_cards(
         &self,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         exp_month: i64,
         exp_year: i64,
         last_4: &str,
@@ -526,10 +522,8 @@ impl Issuing {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -578,7 +572,7 @@ impl Issuing {
     pub async fn get_cards_card(&self, card: &str) -> Result<crate::types::IssuingCard> {
         let url = format!(
             "/v1/issuing/cards/{}",
-            crate::progenitor_support::encode_path(card),
+            crate::progenitor_support::encode_path(&card.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -596,7 +590,7 @@ impl Issuing {
     pub async fn post_cards_card(&self, card: &str) -> Result<crate::types::IssuingCard> {
         let url = format!(
             "/v1/issuing/cards/{}",
-            crate::progenitor_support::encode_path(card),
+            crate::progenitor_support::encode_path(&card.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -619,7 +613,7 @@ impl Issuing {
     */
     pub async fn get_disputes(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -660,7 +654,7 @@ impl Issuing {
     */
     pub async fn get_all_disputes(
         &self,
-        _created: &str,
+        created: &str,
         status: crate::types::IssuingDisputeStatus,
         transaction: &str,
     ) -> Result<Vec<crate::types::IssuingDispute>> {
@@ -686,10 +680,8 @@ impl Issuing {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -741,7 +733,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingDispute> {
         let url = format!(
             "/v1/issuing/disputes/{}",
-            crate::progenitor_support::encode_path(dispute),
+            crate::progenitor_support::encode_path(&dispute.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -762,7 +754,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingDispute> {
         let url = format!(
             "/v1/issuing/disputes/{}",
-            crate::progenitor_support::encode_path(dispute),
+            crate::progenitor_support::encode_path(&dispute.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -783,7 +775,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingDispute> {
         let url = format!(
             "/v1/issuing/disputes/{}/submit",
-            crate::progenitor_support::encode_path(dispute),
+            crate::progenitor_support::encode_path(&dispute.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -804,7 +796,7 @@ impl Issuing {
     */
     pub async fn get_settlements(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -837,7 +829,7 @@ impl Issuing {
     */
     pub async fn get_all_settlements(
         &self,
-        _created: &str,
+        created: &str,
     ) -> Result<Vec<crate::types::IssuingSettlement>> {
         let url = "/v1/issuing/settlements".to_string();
         let mut resp: crate::types::GetIssuingSettlementsResponse =
@@ -853,10 +845,8 @@ impl Issuing {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -898,7 +888,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingSettlement> {
         let url = format!(
             "/v1/issuing/settlements/{}",
-            crate::progenitor_support::encode_path(settlement),
+            crate::progenitor_support::encode_path(&settlement.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -919,7 +909,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingSettlement> {
         let url = format!(
             "/v1/issuing/settlements/{}",
-            crate::progenitor_support::encode_path(settlement),
+            crate::progenitor_support::encode_path(&settlement.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -945,7 +935,7 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -991,7 +981,7 @@ impl Issuing {
         &self,
         card: &str,
         cardholder: &str,
-        _created: &str,
+        created: &str,
         type_: crate::types::IssuingTransactionType,
     ) -> Result<Vec<crate::types::IssuingTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -1020,10 +1010,8 @@ impl Issuing {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -1065,7 +1053,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingTransaction> {
         let url = format!(
             "/v1/issuing/transactions/{}",
-            crate::progenitor_support::encode_path(transaction),
+            crate::progenitor_support::encode_path(&transaction.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -1086,7 +1074,7 @@ impl Issuing {
     ) -> Result<crate::types::IssuingTransaction> {
         let url = format!(
             "/v1/issuing/transactions/{}",
-            crate::progenitor_support::encode_path(transaction),
+            crate::progenitor_support::encode_path(&transaction.to_string()),
         );
 
         self.client.post(&url, None).await

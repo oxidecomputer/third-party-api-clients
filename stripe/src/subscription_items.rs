@@ -81,10 +81,8 @@ impl SubscriptionItems {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -133,7 +131,7 @@ impl SubscriptionItems {
     pub async fn get_item(&self, item: &str) -> Result<crate::types::SubscriptionItem> {
         let url = format!(
             "/v1/subscription_items/{}",
-            crate::progenitor_support::encode_path(item),
+            crate::progenitor_support::encode_path(&item.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -151,7 +149,7 @@ impl SubscriptionItems {
     pub async fn post_item(&self, item: &str) -> Result<crate::types::SubscriptionItem> {
         let url = format!(
             "/v1/subscription_items/{}",
-            crate::progenitor_support::encode_path(item),
+            crate::progenitor_support::encode_path(&item.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -169,7 +167,7 @@ impl SubscriptionItems {
     pub async fn delete_item(&self, item: &str) -> Result<crate::types::DeletedSubscriptionItem> {
         let url = format!(
             "/v1/subscription_items/{}",
-            crate::progenitor_support::encode_path(item),
+            crate::progenitor_support::encode_path(&item.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -210,7 +208,7 @@ impl SubscriptionItems {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/subscription_items/{}/usage_record_summaries?{}",
-            crate::progenitor_support::encode_path(subscription_item),
+            crate::progenitor_support::encode_path(&subscription_item.to_string()),
             query_
         );
 
@@ -236,7 +234,7 @@ impl SubscriptionItems {
     ) -> Result<Vec<crate::types::UsageRecordSummary>> {
         let url = format!(
             "/v1/subscription_items/{}/usage_record_summaries",
-            crate::progenitor_support::encode_path(subscription_item),
+            crate::progenitor_support::encode_path(&subscription_item.to_string()),
         );
 
         let mut resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse =
@@ -252,10 +250,8 @@ impl SubscriptionItems {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -302,7 +298,7 @@ impl SubscriptionItems {
     ) -> Result<crate::types::UsageRecord> {
         let url = format!(
             "/v1/subscription_items/{}/usage_records",
-            crate::progenitor_support::encode_path(subscription_item),
+            crate::progenitor_support::encode_path(&subscription_item.to_string()),
         );
 
         self.client.post(&url, None).await

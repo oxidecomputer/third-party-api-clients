@@ -93,10 +93,8 @@ impl CreditNotes {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -169,9 +167,9 @@ impl CreditNotes {
         amount: i64,
         credit_amount: i64,
         invoice: &str,
-        _lines: &[String],
+        lines: &[String],
         memo: &str,
-        _metadata: &str,
+        metadata: &str,
         out_of_band_amount: i64,
         reason: crate::types::Reason,
         refund: &str,
@@ -240,9 +238,9 @@ impl CreditNotes {
         ending_before: &str,
         invoice: &str,
         limit: i64,
-        _lines: &[String],
+        lines: &[String],
         memo: &str,
-        _metadata: &str,
+        metadata: &str,
         out_of_band_amount: i64,
         reason: crate::types::Reason,
         refund: &str,
@@ -307,9 +305,9 @@ impl CreditNotes {
         amount: i64,
         credit_amount: i64,
         invoice: &str,
-        _lines: &[String],
+        lines: &[String],
         memo: &str,
-        _metadata: &str,
+        metadata: &str,
         out_of_band_amount: i64,
         reason: crate::types::Reason,
         refund: &str,
@@ -358,10 +356,8 @@ impl CreditNotes {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -420,7 +416,7 @@ impl CreditNotes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/credit_notes/{}/lines?{}",
-            crate::progenitor_support::encode_path(credit_note),
+            crate::progenitor_support::encode_path(&credit_note.to_string()),
             query_
         );
 
@@ -443,7 +439,7 @@ impl CreditNotes {
     ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
         let url = format!(
             "/v1/credit_notes/{}/lines",
-            crate::progenitor_support::encode_path(credit_note),
+            crate::progenitor_support::encode_path(&credit_note.to_string()),
         );
 
         let mut resp: crate::types::Lines = self.client.get(&url, None).await?;
@@ -458,10 +454,8 @@ impl CreditNotes {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -500,7 +494,7 @@ impl CreditNotes {
     pub async fn get(&self, id: &str) -> Result<crate::types::CreditNote> {
         let url = format!(
             "/v1/credit_notes/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -518,7 +512,7 @@ impl CreditNotes {
     pub async fn post_credit_notes(&self, id: &str) -> Result<crate::types::CreditNote> {
         let url = format!(
             "/v1/credit_notes/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -536,7 +530,7 @@ impl CreditNotes {
     pub async fn post_void(&self, id: &str) -> Result<crate::types::CreditNote> {
         let url = format!(
             "/v1/credit_notes/{}/void",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await

@@ -28,7 +28,7 @@ impl PaymentIntents {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -65,7 +65,7 @@ impl PaymentIntents {
     */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
     ) -> Result<Vec<crate::types::PaymentIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -87,10 +87,8 @@ impl PaymentIntents {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -205,10 +203,8 @@ impl PaymentIntents {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -261,7 +257,7 @@ impl PaymentIntents {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/payment_intents/{}?{}",
-            crate::progenitor_support::encode_path(intent),
+            crate::progenitor_support::encode_path(&intent.to_string()),
             query_
         );
 
@@ -286,7 +282,7 @@ impl PaymentIntents {
     pub async fn post_intent(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
         let url = format!(
             "/v1/payment_intents/{}",
-            crate::progenitor_support::encode_path(intent),
+            crate::progenitor_support::encode_path(&intent.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -308,7 +304,7 @@ impl PaymentIntents {
     pub async fn post_intent_cancel(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
         let url = format!(
             "/v1/payment_intents/{}/cancel",
-            crate::progenitor_support::encode_path(intent),
+            crate::progenitor_support::encode_path(&intent.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -330,7 +326,7 @@ impl PaymentIntents {
     pub async fn post_intent_capture(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
         let url = format!(
             "/v1/payment_intents/{}/capture",
-            crate::progenitor_support::encode_path(intent),
+            crate::progenitor_support::encode_path(&intent.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -372,7 +368,7 @@ impl PaymentIntents {
     pub async fn post_intent_confirm(&self, intent: &str) -> Result<crate::types::PaymentIntent> {
         let url = format!(
             "/v1/payment_intents/{}/confirm",
-            crate::progenitor_support::encode_path(intent),
+            crate::progenitor_support::encode_path(&intent.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -393,7 +389,7 @@ impl PaymentIntents {
     ) -> Result<crate::types::PaymentIntent> {
         let url = format!(
             "/v1/payment_intents/{}/verify_microdeposits",
-            crate::progenitor_support::encode_path(intent),
+            crate::progenitor_support::encode_path(&intent.to_string()),
         );
 
         self.client.post(&url, None).await

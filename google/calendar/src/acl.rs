@@ -48,7 +48,7 @@ impl Acl {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -77,7 +77,7 @@ impl Acl {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -139,7 +139,7 @@ impl Acl {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -185,7 +185,7 @@ impl Acl {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl/watch?{}",
-            crate::progenitor_support::encode_path(calendar_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
             query_
         );
 
@@ -207,8 +207,8 @@ impl Acl {
     pub async fn get(&self, calendar_id: &str, rule_id: &str) -> Result<crate::types::AclRule> {
         let url = format!(
             "/calendars/{}/acl/{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -242,8 +242,8 @@ impl Acl {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
             query_
         );
 
@@ -265,8 +265,8 @@ impl Acl {
     pub async fn delete(&self, calendar_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/calendars/{}/acl/{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -300,8 +300,8 @@ impl Acl {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/calendars/{}/acl/{}?{}",
-            crate::progenitor_support::encode_path(calendar_id),
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
             query_
         );
 

@@ -70,10 +70,8 @@ impl CountrySpecs {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -112,7 +110,7 @@ impl CountrySpecs {
     pub async fn get(&self, country: &str) -> Result<crate::types::CountrySpec> {
         let url = format!(
             "/v1/country_specs/{}",
-            crate::progenitor_support::encode_path(country),
+            crate::progenitor_support::encode_path(&country.to_string()),
         );
 
         self.client.get(&url, None).await

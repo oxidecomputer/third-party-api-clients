@@ -64,7 +64,7 @@ impl Chromeosdevices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -109,7 +109,7 @@ impl Chromeosdevices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -168,7 +168,7 @@ impl Chromeosdevices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/moveDevicesToOu?{}",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
             query_
         );
 
@@ -201,8 +201,8 @@ impl Chromeosdevices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}?{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(device_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&device_id.to_string()),
             query_
         );
 
@@ -234,8 +234,8 @@ impl Chromeosdevices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}?{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(device_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&device_id.to_string()),
             query_
         );
 
@@ -269,8 +269,8 @@ impl Chromeosdevices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}?{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(device_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&device_id.to_string()),
             query_
         );
 
@@ -297,8 +297,8 @@ impl Chromeosdevices {
     ) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/chromeos/{}/action",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(resource_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&resource_id.to_string()),
         );
 
         self.client

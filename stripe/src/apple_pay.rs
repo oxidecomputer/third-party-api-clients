@@ -84,10 +84,8 @@ impl ApplePay {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -136,7 +134,7 @@ impl ApplePay {
     pub async fn get_domains_domain(&self, domain: &str) -> Result<crate::types::ApplePayDomain> {
         let url = format!(
             "/v1/apple_pay/domains/{}",
-            crate::progenitor_support::encode_path(domain),
+            crate::progenitor_support::encode_path(&domain.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -157,7 +155,7 @@ impl ApplePay {
     ) -> Result<crate::types::DeletedApplePayDomain> {
         let url = format!(
             "/v1/apple_pay/domains/{}",
-            crate::progenitor_support::encode_path(domain),
+            crate::progenitor_support::encode_path(&domain.to_string()),
         );
 
         self.client.delete(&url, None).await

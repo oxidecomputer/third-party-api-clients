@@ -41,7 +41,7 @@ impl Sources {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/sources/{}?{}",
-            crate::progenitor_support::encode_path(source),
+            crate::progenitor_support::encode_path(&source.to_string()),
             query_
         );
 
@@ -62,7 +62,7 @@ impl Sources {
     pub async fn post_sources(&self, source: &str) -> Result<crate::types::SourceData> {
         let url = format!(
             "/v1/sources/{}",
-            crate::progenitor_support::encode_path(source),
+            crate::progenitor_support::encode_path(&source.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -86,8 +86,8 @@ impl Sources {
     ) -> Result<crate::types::SourceMandateNotification> {
         let url = format!(
             "/v1/sources/{}/mandate_notifications/{}",
-            crate::progenitor_support::encode_path(source),
-            crate::progenitor_support::encode_path(mandate_notification),
+            crate::progenitor_support::encode_path(&source.to_string()),
+            crate::progenitor_support::encode_path(&mandate_notification.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -126,7 +126,7 @@ impl Sources {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/sources/{}/source_transactions?{}",
-            crate::progenitor_support::encode_path(source),
+            crate::progenitor_support::encode_path(&source.to_string()),
             query_
         );
 
@@ -150,7 +150,7 @@ impl Sources {
     ) -> Result<Vec<crate::types::SourceTransaction>> {
         let url = format!(
             "/v1/sources/{}/source_transactions",
-            crate::progenitor_support::encode_path(source),
+            crate::progenitor_support::encode_path(&source.to_string()),
         );
 
         let mut resp: crate::types::ApmsSourcesSourceTransactionList =
@@ -166,10 +166,8 @@ impl Sources {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -213,8 +211,8 @@ impl Sources {
     ) -> Result<crate::types::SourceTransaction> {
         let url = format!(
             "/v1/sources/{}/source_transactions/{}",
-            crate::progenitor_support::encode_path(source),
-            crate::progenitor_support::encode_path(source_transaction),
+            crate::progenitor_support::encode_path(&source.to_string()),
+            crate::progenitor_support::encode_path(&source_transaction.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -232,7 +230,7 @@ impl Sources {
     pub async fn post_verify(&self, source: &str) -> Result<crate::types::SourceData> {
         let url = format!(
             "/v1/sources/{}/verify",
-            crate::progenitor_support::encode_path(source),
+            crate::progenitor_support::encode_path(&source.to_string()),
         );
 
         self.client.post(&url, None).await

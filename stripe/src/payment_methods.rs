@@ -93,10 +93,8 @@ impl PaymentMethods {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -147,7 +145,7 @@ impl PaymentMethods {
     pub async fn get_method(&self, payment_method: &str) -> Result<crate::types::PaymentMethod> {
         let url = format!(
             "/v1/payment_methods/{}",
-            crate::progenitor_support::encode_path(payment_method),
+            crate::progenitor_support::encode_path(&payment_method.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -165,7 +163,7 @@ impl PaymentMethods {
     pub async fn post_method(&self, payment_method: &str) -> Result<crate::types::PaymentMethod> {
         let url = format!(
             "/v1/payment_methods/{}",
-            crate::progenitor_support::encode_path(payment_method),
+            crate::progenitor_support::encode_path(&payment_method.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -196,7 +194,7 @@ impl PaymentMethods {
     ) -> Result<crate::types::PaymentMethod> {
         let url = format!(
             "/v1/payment_methods/{}/attach",
-            crate::progenitor_support::encode_path(payment_method),
+            crate::progenitor_support::encode_path(&payment_method.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -217,7 +215,7 @@ impl PaymentMethods {
     ) -> Result<crate::types::PaymentMethod> {
         let url = format!(
             "/v1/payment_methods/{}/detach",
-            crate::progenitor_support::encode_path(payment_method),
+            crate::progenitor_support::encode_path(&payment_method.to_string()),
         );
 
         self.client.post(&url, None).await

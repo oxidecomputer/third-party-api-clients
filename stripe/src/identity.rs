@@ -29,7 +29,7 @@ impl Identity {
     */
     pub async fn get_verification_reports(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -74,7 +74,7 @@ impl Identity {
     */
     pub async fn get_all_verification_reports(
         &self,
-        _created: &str,
+        created: &str,
         type_: crate::types::GelatoVerificationReportType,
         verification_session: &str,
     ) -> Result<Vec<crate::types::GelatoVerificationReport>> {
@@ -104,10 +104,8 @@ impl Identity {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -149,7 +147,7 @@ impl Identity {
     ) -> Result<crate::types::GelatoVerificationReport> {
         let url = format!(
             "/v1/identity/verification_reports/{}",
-            crate::progenitor_support::encode_path(report),
+            crate::progenitor_support::encode_path(&report.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -171,7 +169,7 @@ impl Identity {
     */
     pub async fn get_verification_sessions(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -209,7 +207,7 @@ impl Identity {
     */
     pub async fn get_all_verification_sessions(
         &self,
-        _created: &str,
+        created: &str,
         status: crate::types::GelatoVerificationSessionStatus,
     ) -> Result<Vec<crate::types::GelatoVerificationSession>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -232,10 +230,8 @@ impl Identity {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -298,7 +294,7 @@ impl Identity {
     ) -> Result<crate::types::GelatoVerificationSession> {
         let url = format!(
             "/v1/identity/verification_sessions/{}",
-            crate::progenitor_support::encode_path(session),
+            crate::progenitor_support::encode_path(&session.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -322,7 +318,7 @@ impl Identity {
     ) -> Result<crate::types::GelatoVerificationSession> {
         let url = format!(
             "/v1/identity/verification_sessions/{}",
-            crate::progenitor_support::encode_path(session),
+            crate::progenitor_support::encode_path(&session.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -345,7 +341,7 @@ impl Identity {
     ) -> Result<crate::types::GelatoVerificationSession> {
         let url = format!(
             "/v1/identity/verification_sessions/{}/cancel",
-            crate::progenitor_support::encode_path(session),
+            crate::progenitor_support::encode_path(&session.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -384,7 +380,7 @@ impl Identity {
     ) -> Result<crate::types::GelatoVerificationSession> {
         let url = format!(
             "/v1/identity/verification_sessions/{}/redact",
-            crate::progenitor_support::encode_path(session),
+            crate::progenitor_support::encode_path(&session.to_string()),
         );
 
         self.client.post(&url, None).await

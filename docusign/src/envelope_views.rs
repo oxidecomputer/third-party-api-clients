@@ -47,8 +47,8 @@ impl EnvelopeViews {
     ) -> Result<crate::types::EnvelopeViews> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/views/correct",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -76,8 +76,8 @@ impl EnvelopeViews {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/views/correct",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -122,8 +122,8 @@ impl EnvelopeViews {
     ) -> Result<crate::types::EnvelopeViews> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/views/edit",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -177,8 +177,8 @@ impl EnvelopeViews {
     ) -> Result<crate::types::EnvelopeViews> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/views/recipient",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -234,8 +234,8 @@ impl EnvelopeViews {
     ) -> Result<crate::types::EnvelopeViews> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/views/sender",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -268,8 +268,8 @@ impl EnvelopeViews {
     ) -> Result<crate::types::ViewUrl> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/views/shared",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -300,7 +300,7 @@ impl EnvelopeViews {
     ) -> Result<crate::types::EnvelopeViews> {
         let url = format!(
             "/v2.1/accounts/{}/views/console",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client

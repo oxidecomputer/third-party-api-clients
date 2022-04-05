@@ -30,7 +30,7 @@ impl TaxRates {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         inclusive: bool,
         limit: i64,
@@ -71,7 +71,7 @@ impl TaxRates {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         inclusive: bool,
     ) -> Result<Vec<crate::types::TaxRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -96,10 +96,8 @@ impl TaxRates {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -148,7 +146,7 @@ impl TaxRates {
     pub async fn get_rate(&self, tax_rate: &str) -> Result<crate::types::TaxRate> {
         let url = format!(
             "/v1/tax_rates/{}",
-            crate::progenitor_support::encode_path(tax_rate),
+            crate::progenitor_support::encode_path(&tax_rate.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -166,7 +164,7 @@ impl TaxRates {
     pub async fn post_rate(&self, tax_rate: &str) -> Result<crate::types::TaxRate> {
         let url = format!(
             "/v1/tax_rates/{}",
-            crate::progenitor_support::encode_path(tax_rate),
+            crate::progenitor_support::encode_path(&tax_rate.to_string()),
         );
 
         self.client.post(&url, None).await

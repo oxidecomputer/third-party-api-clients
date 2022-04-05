@@ -70,10 +70,8 @@ impl ExchangeRates {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -112,7 +110,7 @@ impl ExchangeRates {
     pub async fn get_rate(&self, rate_id: &str) -> Result<crate::types::ExchangeRate> {
         let url = format!(
             "/v1/exchange_rates/{}",
-            crate::progenitor_support::encode_path(rate_id),
+            crate::progenitor_support::encode_path(&rate_id.to_string()),
         );
 
         self.client.get(&url, None).await

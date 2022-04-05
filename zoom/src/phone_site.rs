@@ -149,7 +149,7 @@ impl PhoneSite {
     pub async fn get_site(&self, site_id: &str) -> Result<crate::types::GetSiteResponse> {
         let url = format!(
             "/phone/sites/{}",
-            crate::progenitor_support::encode_path(site_id),
+            crate::progenitor_support::encode_path(&site_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -184,7 +184,7 @@ impl PhoneSite {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/phone/sites/{}?{}",
-            crate::progenitor_support::encode_path(site_id),
+            crate::progenitor_support::encode_path(&site_id.to_string()),
             query_
         );
 
@@ -217,7 +217,7 @@ impl PhoneSite {
     ) -> Result<()> {
         let url = format!(
             "/phone/sites/{}",
-            crate::progenitor_support::encode_path(site_id),
+            crate::progenitor_support::encode_path(&site_id.to_string()),
         );
 
         self.client

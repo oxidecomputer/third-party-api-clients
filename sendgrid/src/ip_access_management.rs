@@ -123,7 +123,7 @@ impl IpAccessManagement {
     ) -> Result<crate::types::IpAccessResponse> {
         let url = format!(
             "/access_settings/whitelist/{}",
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -148,7 +148,7 @@ impl IpAccessManagement {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/access_settings/whitelist/{}",
-            crate::progenitor_support::encode_path(rule_id),
+            crate::progenitor_support::encode_path(&rule_id.to_string()),
         );
 
         self.client.delete(&url, None).await

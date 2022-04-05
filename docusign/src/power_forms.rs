@@ -66,7 +66,7 @@ impl PowerForms {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/powerforms?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -130,7 +130,7 @@ impl PowerForms {
     ) -> Result<crate::types::PowerForm> {
         let url = format!(
             "/v2.1/accounts/{}/powerforms",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -156,7 +156,7 @@ impl PowerForms {
     ) -> Result<crate::types::PowerFormsResponse> {
         let url = format!(
             "/v2.1/accounts/{}/powerforms",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client
@@ -188,7 +188,7 @@ impl PowerForms {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/powerforms/senders?{}",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
             query_
         );
 
@@ -214,8 +214,8 @@ impl PowerForms {
     ) -> Result<crate::types::PowerForm> {
         let url = format!(
             "/v2.1/accounts/{}/powerforms/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(power_form_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&power_form_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -241,8 +241,8 @@ impl PowerForms {
     ) -> Result<crate::types::PowerForm> {
         let url = format!(
             "/v2.1/accounts/{}/powerforms/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(power_form_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&power_form_id.to_string()),
         );
 
         self.client
@@ -265,8 +265,8 @@ impl PowerForms {
     pub async fn delete_form(&self, account_id: &str, power_form_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/powerforms/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(power_form_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&power_form_id.to_string()),
         );
 
         self.client.delete(&url, None).await

@@ -34,7 +34,7 @@ impl PromotionCodes {
         active: bool,
         code: &str,
         coupon: &str,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -83,7 +83,7 @@ impl PromotionCodes {
         active: bool,
         code: &str,
         coupon: &str,
-        _created: &str,
+        created: &str,
         customer: &str,
     ) -> Result<Vec<crate::types::PromotionCode>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -114,10 +114,8 @@ impl PromotionCodes {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -166,7 +164,7 @@ impl PromotionCodes {
     pub async fn get_code(&self, promotion_code: &str) -> Result<crate::types::PromotionCode> {
         let url = format!(
             "/v1/promotion_codes/{}",
-            crate::progenitor_support::encode_path(promotion_code),
+            crate::progenitor_support::encode_path(&promotion_code.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -184,7 +182,7 @@ impl PromotionCodes {
     pub async fn post_code(&self, promotion_code: &str) -> Result<crate::types::PromotionCode> {
         let url = format!(
             "/v1/promotion_codes/{}",
-            crate::progenitor_support::encode_path(promotion_code),
+            crate::progenitor_support::encode_path(&promotion_code.to_string()),
         );
 
         self.client.post(&url, None).await

@@ -95,10 +95,8 @@ impl BillingPortal {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -150,7 +148,7 @@ impl BillingPortal {
     ) -> Result<crate::types::PortalConfiguration> {
         let url = format!(
             "/v1/billing_portal/configurations/{}",
-            crate::progenitor_support::encode_path(configuration),
+            crate::progenitor_support::encode_path(&configuration.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -171,7 +169,7 @@ impl BillingPortal {
     ) -> Result<crate::types::PortalConfiguration> {
         let url = format!(
             "/v1/billing_portal/configurations/{}",
-            crate::progenitor_support::encode_path(configuration),
+            crate::progenitor_support::encode_path(&configuration.to_string()),
         );
 
         self.client.post(&url, None).await

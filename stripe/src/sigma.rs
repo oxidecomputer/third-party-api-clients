@@ -74,10 +74,8 @@ impl Sigma {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -119,7 +117,7 @@ impl Sigma {
     ) -> Result<crate::types::ScheduledQueryRun> {
         let url = format!(
             "/v1/sigma/scheduled_query_runs/{}",
-            crate::progenitor_support::encode_path(scheduled_query_run),
+            crate::progenitor_support::encode_path(&scheduled_query_run.to_string()),
         );
 
         self.client.get(&url, None).await

@@ -31,7 +31,7 @@ impl SetupAttempts {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         setup_intent: &str,
@@ -69,7 +69,7 @@ impl SetupAttempts {
     */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         setup_intent: &str,
     ) -> Result<Vec<crate::types::SetupAttempt>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -92,10 +92,8 @@ impl SetupAttempts {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }

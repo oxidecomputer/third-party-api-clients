@@ -38,9 +38,9 @@ impl Packages {
     ) -> Result<crate::types::Package> {
         let url = format!(
             "/orgs/{}/packages/{}/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -73,9 +73,9 @@ impl Packages {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/packages/{}/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -119,9 +119,9 @@ impl Packages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/packages/{}/{}/restore?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             query_
         );
 
@@ -171,9 +171,9 @@ impl Packages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             query_
         );
 
@@ -208,9 +208,9 @@ impl Packages {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             query_
         );
 
@@ -245,9 +245,9 @@ impl Packages {
     ) -> Result<crate::types::PackageVersion> {
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
@@ -283,9 +283,9 @@ impl Packages {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions/{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
@@ -325,9 +325,9 @@ impl Packages {
     ) -> Result<()> {
         let url = format!(
             "/orgs/{}/packages/{}/{}/versions/{}/restore",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
@@ -359,7 +359,7 @@ impl Packages {
         let url = format!(
             "/user/packages/{}/{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -390,7 +390,7 @@ impl Packages {
         let url = format!(
             "/user/packages/{}/{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -431,7 +431,7 @@ impl Packages {
         let url = format!(
             "/user/packages/{}/{}/restore?{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             query_
         );
 
@@ -480,7 +480,7 @@ impl Packages {
         let url = format!(
             "/user/packages/{}/{}/versions?{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             query_
         );
 
@@ -515,7 +515,7 @@ impl Packages {
         let url = format!(
             "/user/packages/{}/{}/versions?{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             query_
         );
 
@@ -549,7 +549,7 @@ impl Packages {
         let url = format!(
             "/user/packages/{}/{}/versions/{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
@@ -583,7 +583,7 @@ impl Packages {
         let url = format!(
             "/user/packages/{}/{}/versions/{}",
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
@@ -620,7 +620,7 @@ impl Packages {
         let url = format!(
             "/user/packages/{}/{}/versions/{}/restore",
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 
@@ -653,9 +653,9 @@ impl Packages {
     ) -> Result<crate::types::Package> {
         let url = format!(
             "/users/{}/packages/{}/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -687,9 +687,9 @@ impl Packages {
     ) -> Result<Vec<crate::types::PackageVersion>> {
         let url = format!(
             "/users/{}/packages/{}/{}/versions",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -717,9 +717,9 @@ impl Packages {
     ) -> Result<Vec<crate::types::PackageVersion>> {
         let url = format!(
             "/users/{}/packages/{}/{}/versions",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -753,9 +753,9 @@ impl Packages {
     ) -> Result<crate::types::PackageVersion> {
         let url = format!(
             "/users/{}/packages/{}/{}/versions/{}",
-            crate::progenitor_support::encode_path(username),
+            crate::progenitor_support::encode_path(&username.to_string()),
             crate::progenitor_support::encode_path(&package_type.to_string()),
-            crate::progenitor_support::encode_path(package_name),
+            crate::progenitor_support::encode_path(&package_name.to_string()),
             crate::progenitor_support::encode_path(&package_version_id.to_string()),
         );
 

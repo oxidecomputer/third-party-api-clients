@@ -29,7 +29,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! dolladollabills = "0.1.0"
+//! dolladollabills = "0.2.0"
 //! ```
 //!
 //! ## Basic example
@@ -635,7 +635,7 @@ impl Client {
         while !items.is_empty() {
             global_items.append(&mut items);
             // We need to get the next link.
-            if let Some(url) = link.as_ref().and_then(crate::utils::next_link) {
+            if let Some(url) = link.as_ref().and_then(|l| crate::utils::next_link(l)) {
                 let url = reqwest::Url::parse(&url)?;
                 let (new_link, new_items) = self.get_pages_url(&url).await?;
                 link = new_link;

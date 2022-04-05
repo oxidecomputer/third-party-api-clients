@@ -87,7 +87,7 @@ impl Devices {
     pub async fn delete(&self, device_id: &str) -> Result<()> {
         let url = format!(
             "/h323/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+            crate::progenitor_support::encode_path(&device_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -110,7 +110,7 @@ impl Devices {
     pub async fn update(&self, device_id: &str, body: &crate::types::Device) -> Result<()> {
         let url = format!(
             "/h323/devices/{}",
-            crate::progenitor_support::encode_path(device_id),
+            crate::progenitor_support::encode_path(&device_id.to_string()),
         );
 
         self.client

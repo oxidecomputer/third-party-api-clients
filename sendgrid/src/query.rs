@@ -100,7 +100,7 @@ impl Query {
     pub async fn get_messages_msg(&self, msg_id: &str) -> Result<crate::types::Message> {
         let url = format!(
             "/messages/{}",
-            crate::progenitor_support::encode_path(msg_id),
+            crate::progenitor_support::encode_path(&msg_id.to_string()),
         );
 
         self.client.get(&url, None).await

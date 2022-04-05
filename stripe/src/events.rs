@@ -30,13 +30,13 @@ impl Events {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         delivery_success: bool,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
         type_: &str,
-        _types: &[String],
+        types: &[String],
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delivery_success {
@@ -72,10 +72,10 @@ impl Events {
     */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         delivery_success: bool,
         type_: &str,
-        _types: &[String],
+        types: &[String],
     ) -> Result<Vec<crate::types::Event>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if delivery_success {
@@ -99,10 +99,8 @@ impl Events {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -141,7 +139,7 @@ impl Events {
     pub async fn get(&self, id: &str) -> Result<crate::types::Event> {
         let url = format!(
             "/v1/events/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await

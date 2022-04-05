@@ -29,8 +29,8 @@ impl Members {
     ) -> Result<crate::types::MembersHasMember> {
         let url = format!(
             "/admin/directory/v1/groups/{}/hasMember/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
+            crate::progenitor_support::encode_path(&member_key.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -76,7 +76,7 @@ impl Members {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/groups/{}/members?{}",
-            crate::progenitor_support::encode_path(group_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
             query_
         );
 
@@ -112,7 +112,7 @@ impl Members {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/groups/{}/members?{}",
-            crate::progenitor_support::encode_path(group_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
             query_
         );
 
@@ -164,7 +164,7 @@ impl Members {
     ) -> Result<crate::types::Member> {
         let url = format!(
             "/admin/directory/v1/groups/{}/members",
-            crate::progenitor_support::encode_path(group_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
         );
 
         self.client
@@ -185,8 +185,8 @@ impl Members {
     pub async fn get(&self, group_key: &str, member_key: &str) -> Result<crate::types::Member> {
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
+            crate::progenitor_support::encode_path(&member_key.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -210,8 +210,8 @@ impl Members {
     ) -> Result<crate::types::Member> {
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
+            crate::progenitor_support::encode_path(&member_key.to_string()),
         );
 
         self.client
@@ -232,8 +232,8 @@ impl Members {
     pub async fn delete(&self, group_key: &str, member_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
+            crate::progenitor_support::encode_path(&member_key.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -257,8 +257,8 @@ impl Members {
     ) -> Result<crate::types::Member> {
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}",
-            crate::progenitor_support::encode_path(group_key),
-            crate::progenitor_support::encode_path(member_key),
+            crate::progenitor_support::encode_path(&group_key.to_string()),
+            crate::progenitor_support::encode_path(&member_key.to_string()),
         );
 
         self.client

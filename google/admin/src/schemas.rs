@@ -24,7 +24,7 @@ impl Schemas {
     pub async fn list(&self, customer_id: &str) -> Result<crate::types::Schemas> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -46,7 +46,7 @@ impl Schemas {
     ) -> Result<crate::types::Schema> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas",
-            crate::progenitor_support::encode_path(customer_id),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
         );
 
         self.client
@@ -67,8 +67,8 @@ impl Schemas {
     pub async fn get(&self, customer_id: &str, schema_key: &str) -> Result<crate::types::Schema> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(schema_key),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&schema_key.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -92,8 +92,8 @@ impl Schemas {
     ) -> Result<crate::types::Schema> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(schema_key),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&schema_key.to_string()),
         );
 
         self.client
@@ -114,8 +114,8 @@ impl Schemas {
     pub async fn delete(&self, customer_id: &str, schema_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(schema_key),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&schema_key.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -139,8 +139,8 @@ impl Schemas {
     ) -> Result<crate::types::Schema> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}",
-            crate::progenitor_support::encode_path(customer_id),
-            crate::progenitor_support::encode_path(schema_key),
+            crate::progenitor_support::encode_path(&customer_id.to_string()),
+            crate::progenitor_support::encode_path(&schema_key.to_string()),
         );
 
         self.client

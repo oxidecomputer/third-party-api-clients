@@ -27,7 +27,7 @@ impl Accounts {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -58,7 +58,7 @@ impl Accounts {
     *
     * <p>Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>. If you’re not a platform, the list is empty.</p>
     */
-    pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Account>> {
+    pub async fn get_all(&self, created: &str) -> Result<Vec<crate::types::Account>> {
         let url = "/v1/accounts".to_string();
         let mut resp: crate::types::GetAccountsResponse = self.client.get(&url, None).await?;
 
@@ -72,10 +72,8 @@ impl Accounts {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -125,7 +123,7 @@ impl Accounts {
     pub async fn get(&self, account: &str) -> Result<crate::types::Account> {
         let url = format!(
             "/v1/accounts/{}",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -145,7 +143,7 @@ impl Accounts {
     pub async fn post_accounts(&self, account: &str) -> Result<crate::types::Account> {
         let url = format!(
             "/v1/accounts/{}",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -167,7 +165,7 @@ impl Accounts {
     pub async fn delete(&self, account: &str) -> Result<crate::types::DeletedAccount> {
         let url = format!(
             "/v1/accounts/{}",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -185,7 +183,7 @@ impl Accounts {
     pub async fn post_bank(&self, account: &str) -> Result<crate::types::DataAnyOf> {
         let url = format!(
             "/v1/accounts/{}/bank_accounts",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -205,8 +203,8 @@ impl Accounts {
     pub async fn get_bank(&self, account: &str, id: &str) -> Result<crate::types::DataAnyOf> {
         let url = format!(
             "/v1/accounts/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -231,8 +229,8 @@ impl Accounts {
     ) -> Result<crate::types::DataAnyOf> {
         let url = format!(
             "/v1/accounts/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -255,8 +253,8 @@ impl Accounts {
     ) -> Result<crate::types::DeletedExternalAccountAnyOf> {
         let url = format!(
             "/v1/accounts/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -275,7 +273,7 @@ impl Accounts {
     pub async fn get_capabilities(&self, account: &str) -> Result<Vec<crate::types::Capability>> {
         let url = format!(
             "/v1/accounts/{}/capabilities",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         let resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
@@ -297,7 +295,7 @@ impl Accounts {
     ) -> Result<Vec<crate::types::Capability>> {
         let url = format!(
             "/v1/accounts/{}/capabilities",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         let mut resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
@@ -312,10 +310,8 @@ impl Accounts {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -359,8 +355,8 @@ impl Accounts {
     ) -> Result<crate::types::Capability> {
         let url = format!(
             "/v1/accounts/{}/capabilities/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(capability),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&capability.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -383,8 +379,8 @@ impl Accounts {
     ) -> Result<crate::types::Capability> {
         let url = format!(
             "/v1/accounts/{}/capabilities/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(capability),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&capability.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -423,7 +419,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/accounts/{}/external_accounts?{}",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
             query_
         );
 
@@ -443,7 +439,7 @@ impl Accounts {
     pub async fn get_all_external(&self, account: &str) -> Result<Vec<crate::types::DataAnyOf>> {
         let url = format!(
             "/v1/accounts/{}/external_accounts",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         let mut resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
@@ -458,10 +454,8 @@ impl Accounts {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -499,7 +493,7 @@ impl Accounts {
     pub async fn post_external(&self, account: &str) -> Result<crate::types::DataAnyOf> {
         let url = format!(
             "/v1/accounts/{}/external_accounts",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -523,8 +517,8 @@ impl Accounts {
     ) -> Result<crate::types::DataAnyOf> {
         let url = format!(
             "/v1/accounts/{}/external_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -549,8 +543,8 @@ impl Accounts {
     ) -> Result<crate::types::DataAnyOf> {
         let url = format!(
             "/v1/accounts/{}/external_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -573,8 +567,8 @@ impl Accounts {
     ) -> Result<crate::types::DeletedExternalAccountAnyOf> {
         let url = format!(
             "/v1/accounts/{}/external_accounts/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -594,7 +588,7 @@ impl Accounts {
     pub async fn post_login_link(&self, account: &str) -> Result<crate::types::LoginLink> {
         let url = format!(
             "/v1/accounts/{}/login_links",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -619,7 +613,7 @@ impl Accounts {
         account: &str,
         ending_before: &str,
         limit: i64,
-        _relationship: &str,
+        relationship: &str,
         starting_after: &str,
     ) -> Result<Vec<crate::types::Person>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -635,7 +629,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/accounts/{}/people?{}",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
             query_
         );
 
@@ -655,11 +649,11 @@ impl Accounts {
     pub async fn get_all_people(
         &self,
         account: &str,
-        _relationship: &str,
+        relationship: &str,
     ) -> Result<Vec<crate::types::Person>> {
         let url = format!(
             "/v1/accounts/{}/people",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
@@ -674,10 +668,8 @@ impl Accounts {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -715,7 +707,7 @@ impl Accounts {
     pub async fn post_people(&self, account: &str) -> Result<crate::types::Person> {
         let url = format!(
             "/v1/accounts/{}/people",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -739,8 +731,8 @@ impl Accounts {
     ) -> Result<crate::types::Person> {
         let url = format!(
             "/v1/accounts/{}/people/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&person.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -763,8 +755,8 @@ impl Accounts {
     ) -> Result<crate::types::Person> {
         let url = format!(
             "/v1/accounts/{}/people/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&person.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -787,8 +779,8 @@ impl Accounts {
     ) -> Result<crate::types::DeletedPerson> {
         let url = format!(
             "/v1/accounts/{}/people/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&person.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -813,7 +805,7 @@ impl Accounts {
         account: &str,
         ending_before: &str,
         limit: i64,
-        _relationship: &str,
+        relationship: &str,
         starting_after: &str,
     ) -> Result<Vec<crate::types::Person>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -829,7 +821,7 @@ impl Accounts {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/accounts/{}/persons?{}",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
             query_
         );
 
@@ -849,11 +841,11 @@ impl Accounts {
     pub async fn get_all_persons(
         &self,
         account: &str,
-        _relationship: &str,
+        relationship: &str,
     ) -> Result<Vec<crate::types::Person>> {
         let url = format!(
             "/v1/accounts/{}/persons",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
@@ -868,10 +860,8 @@ impl Accounts {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -909,7 +899,7 @@ impl Accounts {
     pub async fn post_person(&self, account: &str) -> Result<crate::types::Person> {
         let url = format!(
             "/v1/accounts/{}/persons",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -933,8 +923,8 @@ impl Accounts {
     ) -> Result<crate::types::Person> {
         let url = format!(
             "/v1/accounts/{}/persons/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&person.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -957,8 +947,8 @@ impl Accounts {
     ) -> Result<crate::types::Person> {
         let url = format!(
             "/v1/accounts/{}/persons/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&person.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -981,8 +971,8 @@ impl Accounts {
     ) -> Result<crate::types::DeletedPerson> {
         let url = format!(
             "/v1/accounts/{}/persons/{}",
-            crate::progenitor_support::encode_path(account),
-            crate::progenitor_support::encode_path(person),
+            crate::progenitor_support::encode_path(&account.to_string()),
+            crate::progenitor_support::encode_path(&person.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1002,7 +992,7 @@ impl Accounts {
     pub async fn post_reject(&self, account: &str) -> Result<crate::types::Account> {
         let url = format!(
             "/v1/accounts/{}/reject",
-            crate::progenitor_support::encode_path(account),
+            crate::progenitor_support::encode_path(&account.to_string()),
         );
 
         self.client.post(&url, None).await

@@ -27,7 +27,7 @@ impl Reporting {
     */
     pub async fn get_report_runs(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -61,7 +61,7 @@ impl Reporting {
     */
     pub async fn get_all_report_runs(
         &self,
-        _created: &str,
+        created: &str,
     ) -> Result<Vec<crate::types::ReportingReportRun>> {
         let url = "/v1/reporting/report_runs".to_string();
         let mut resp: crate::types::GetReportingReportRunsResponse =
@@ -77,10 +77,8 @@ impl Reporting {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -132,7 +130,7 @@ impl Reporting {
     ) -> Result<crate::types::ReportingReportRun> {
         let url = format!(
             "/v1/reporting/report_runs/{}",
-            crate::progenitor_support::encode_path(report_run),
+            crate::progenitor_support::encode_path(&report_run.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -178,10 +176,8 @@ impl Reporting {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -223,7 +219,7 @@ impl Reporting {
     ) -> Result<crate::types::ReportingReportType> {
         let url = format!(
             "/v1/reporting/report_types/{}",
-            crate::progenitor_support::encode_path(report_type),
+            crate::progenitor_support::encode_path(&report_type.to_string()),
         );
 
         self.client.get(&url, None).await

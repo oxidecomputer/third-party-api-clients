@@ -71,10 +71,8 @@ impl WebhookEndpoints {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -126,7 +124,7 @@ impl WebhookEndpoints {
     ) -> Result<crate::types::WebhookEndpoint> {
         let url = format!(
             "/v1/webhook_endpoints/{}",
-            crate::progenitor_support::encode_path(webhook_endpoint),
+            crate::progenitor_support::encode_path(&webhook_endpoint.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -147,7 +145,7 @@ impl WebhookEndpoints {
     ) -> Result<crate::types::WebhookEndpoint> {
         let url = format!(
             "/v1/webhook_endpoints/{}",
-            crate::progenitor_support::encode_path(webhook_endpoint),
+            crate::progenitor_support::encode_path(&webhook_endpoint.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -168,7 +166,7 @@ impl WebhookEndpoints {
     ) -> Result<crate::types::DeletedWebhookEndpoint> {
         let url = format!(
             "/v1/webhook_endpoints/{}",
-            crate::progenitor_support::encode_path(webhook_endpoint),
+            crate::progenitor_support::encode_path(&webhook_endpoint.to_string()),
         );
 
         self.client.delete(&url, None).await

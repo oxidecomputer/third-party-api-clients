@@ -91,7 +91,7 @@ impl Reporting {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/reporting/facebook-ads/{}?{}",
-            crate::progenitor_support::encode_path(outreach_id),
+            crate::progenitor_support::encode_path(&outreach_id.to_string()),
             query_
         );
 
@@ -142,7 +142,7 @@ impl Reporting {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/reporting/facebook-ads/{}/ecommerce-product-activity?{}",
-            crate::progenitor_support::encode_path(outreach_id),
+            crate::progenitor_support::encode_path(&outreach_id.to_string()),
             query_
         );
 
@@ -178,7 +178,7 @@ impl Reporting {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/reporting/landing-pages/{}?{}",
-            crate::progenitor_support::encode_path(outreach_id),
+            crate::progenitor_support::encode_path(&outreach_id.to_string()),
             query_
         );
 

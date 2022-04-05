@@ -30,7 +30,7 @@ impl ShippingRates {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
@@ -71,7 +71,7 @@ impl ShippingRates {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
     ) -> Result<Vec<crate::types::ShippingRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -96,10 +96,8 @@ impl ShippingRates {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -151,7 +149,7 @@ impl ShippingRates {
     ) -> Result<crate::types::ShippingRate> {
         let url = format!(
             "/v1/shipping_rates/{}",
-            crate::progenitor_support::encode_path(shipping_rate_token),
+            crate::progenitor_support::encode_path(&shipping_rate_token.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -172,7 +170,7 @@ impl ShippingRates {
     ) -> Result<crate::types::ShippingRate> {
         let url = format!(
             "/v1/shipping_rates/{}",
-            crate::progenitor_support::encode_path(shipping_rate_token),
+            crate::progenitor_support::encode_path(&shipping_rate_token.to_string()),
         );
 
         self.client.post(&url, None).await

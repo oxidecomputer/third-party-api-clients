@@ -30,7 +30,7 @@ impl Charges {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -75,7 +75,7 @@ impl Charges {
     */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         payment_intent: &str,
         transfer_group: &str,
@@ -105,10 +105,8 @@ impl Charges {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -214,10 +212,8 @@ impl Charges {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -256,7 +252,7 @@ impl Charges {
     pub async fn get(&self, charge: &str) -> Result<crate::types::Charge> {
         let url = format!(
             "/v1/charges/{}",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -274,7 +270,7 @@ impl Charges {
     pub async fn post_charges(&self, charge: &str) -> Result<crate::types::Charge> {
         let url = format!(
             "/v1/charges/{}",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -294,7 +290,7 @@ impl Charges {
     pub async fn post_capture(&self, charge: &str) -> Result<crate::types::Charge> {
         let url = format!(
             "/v1/charges/{}/capture",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -313,7 +309,7 @@ impl Charges {
     pub async fn get_dispute(&self, charge: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/charges/{}/dispute",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -331,7 +327,7 @@ impl Charges {
     pub async fn post_dispute(&self, charge: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/charges/{}/dispute",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -349,7 +345,7 @@ impl Charges {
     pub async fn post_dispute_close(&self, charge: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/charges/{}/dispute/close",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -377,7 +373,7 @@ impl Charges {
     pub async fn post_refund(&self, charge: &str) -> Result<crate::types::Charge> {
         let url = format!(
             "/v1/charges/{}/refund",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -416,7 +412,7 @@ impl Charges {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/charges/{}/refunds?{}",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
             query_
         );
 
@@ -436,7 +432,7 @@ impl Charges {
     pub async fn get_all_refunds(&self, charge: &str) -> Result<Vec<crate::types::Refund>> {
         let url = format!(
             "/v1/charges/{}/refunds",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
         );
 
         let mut resp: crate::types::RefundList = self.client.get(&url, None).await?;
@@ -451,10 +447,8 @@ impl Charges {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -492,7 +486,7 @@ impl Charges {
     pub async fn post_refund_charges(&self, charge: &str) -> Result<crate::types::Refund> {
         let url = format!(
             "/v1/charges/{}/refunds",
-            crate::progenitor_support::encode_path(charge),
+            crate::progenitor_support::encode_path(&charge.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -516,8 +510,8 @@ impl Charges {
     ) -> Result<crate::types::Refund> {
         let url = format!(
             "/v1/charges/{}/refunds/{}",
-            crate::progenitor_support::encode_path(charge),
-            crate::progenitor_support::encode_path(refund),
+            crate::progenitor_support::encode_path(&charge.to_string()),
+            crate::progenitor_support::encode_path(&refund.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -540,8 +534,8 @@ impl Charges {
     ) -> Result<crate::types::Refund> {
         let url = format!(
             "/v1/charges/{}/refunds/{}",
-            crate::progenitor_support::encode_path(charge),
-            crate::progenitor_support::encode_path(refund),
+            crate::progenitor_support::encode_path(&charge.to_string()),
+            crate::progenitor_support::encode_path(&refund.to_string()),
         );
 
         self.client.post(&url, None).await

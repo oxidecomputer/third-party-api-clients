@@ -29,7 +29,7 @@ impl Transfers {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         destination: &str,
         ending_before: &str,
         limit: i64,
@@ -70,7 +70,7 @@ impl Transfers {
     */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         destination: &str,
         transfer_group: &str,
     ) -> Result<Vec<crate::types::Transfer>> {
@@ -96,10 +96,8 @@ impl Transfers {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -168,7 +166,7 @@ impl Transfers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/transfers/{}/reversals?{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
             query_
         );
 
@@ -188,7 +186,7 @@ impl Transfers {
     pub async fn get_all_reversals(&self, id: &str) -> Result<Vec<crate::types::TransferReversal>> {
         let url = format!(
             "/v1/transfers/{}/reversals",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         let mut resp: crate::types::Reversals = self.client.get(&url, None).await?;
@@ -203,10 +201,8 @@ impl Transfers {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -248,7 +244,7 @@ impl Transfers {
     pub async fn post_reversal(&self, id: &str) -> Result<crate::types::TransferReversal> {
         let url = format!(
             "/v1/transfers/{}/reversals",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -267,7 +263,7 @@ impl Transfers {
     pub async fn get(&self, transfer: &str) -> Result<crate::types::Transfer> {
         let url = format!(
             "/v1/transfers/{}",
-            crate::progenitor_support::encode_path(transfer),
+            crate::progenitor_support::encode_path(&transfer.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -287,7 +283,7 @@ impl Transfers {
     pub async fn post_transfers(&self, transfer: &str) -> Result<crate::types::Transfer> {
         let url = format!(
             "/v1/transfers/{}",
-            crate::progenitor_support::encode_path(transfer),
+            crate::progenitor_support::encode_path(&transfer.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -311,8 +307,8 @@ impl Transfers {
     ) -> Result<crate::types::TransferReversal> {
         let url = format!(
             "/v1/transfers/{}/reversals/{}",
-            crate::progenitor_support::encode_path(transfer),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&transfer.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -337,8 +333,8 @@ impl Transfers {
     ) -> Result<crate::types::TransferReversal> {
         let url = format!(
             "/v1/transfers/{}/reversals/{}",
-            crate::progenitor_support::encode_path(transfer),
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&transfer.to_string()),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.post(&url, None).await

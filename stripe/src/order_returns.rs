@@ -28,7 +28,7 @@ impl OrderReturns {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         order: &str,
@@ -65,7 +65,7 @@ impl OrderReturns {
     */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         order: &str,
     ) -> Result<Vec<crate::types::OrderReturn>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -87,10 +87,8 @@ impl OrderReturns {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -129,7 +127,7 @@ impl OrderReturns {
     pub async fn get(&self, id: &str) -> Result<crate::types::OrderReturn> {
         let url = format!(
             "/v1/order_returns/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await

@@ -30,7 +30,7 @@ impl Disputes {
     pub async fn get_page(
         &self,
         charge: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         payment_intent: &str,
@@ -71,7 +71,7 @@ impl Disputes {
     pub async fn get_all(
         &self,
         charge: &str,
-        _created: &str,
+        created: &str,
         payment_intent: &str,
     ) -> Result<Vec<crate::types::Dispute>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -96,10 +96,8 @@ impl Disputes {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -138,7 +136,7 @@ impl Disputes {
     pub async fn get(&self, dispute: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/disputes/{}",
-            crate::progenitor_support::encode_path(dispute),
+            crate::progenitor_support::encode_path(&dispute.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -158,7 +156,7 @@ impl Disputes {
     pub async fn post(&self, dispute: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/disputes/{}",
-            crate::progenitor_support::encode_path(dispute),
+            crate::progenitor_support::encode_path(&dispute.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -178,7 +176,7 @@ impl Disputes {
     pub async fn post_close(&self, dispute: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/disputes/{}/close",
-            crate::progenitor_support::encode_path(dispute),
+            crate::progenitor_support::encode_path(&dispute.to_string()),
         );
 
         self.client.post(&url, None).await

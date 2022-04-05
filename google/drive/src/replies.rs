@@ -46,8 +46,8 @@ impl Replies {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/comments/{}/replies?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
 
@@ -77,8 +77,8 @@ impl Replies {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/comments/{}/replies?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
 
@@ -132,8 +132,8 @@ impl Replies {
     ) -> Result<crate::types::Reply> {
         let url = format!(
             "/files/{}/comments/{}/replies",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
         self.client
@@ -167,9 +167,9 @@ impl Replies {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/files/{}/comments/{}/replies/{}?{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            crate::progenitor_support::encode_path(reply_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(&reply_id.to_string()),
             query_
         );
 
@@ -190,9 +190,9 @@ impl Replies {
     pub async fn delete(&self, file_id: &str, comment_id: &str, reply_id: &str) -> Result<()> {
         let url = format!(
             "/files/{}/comments/{}/replies/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            crate::progenitor_support::encode_path(reply_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(&reply_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -218,9 +218,9 @@ impl Replies {
     ) -> Result<crate::types::Reply> {
         let url = format!(
             "/files/{}/comments/{}/replies/{}",
-            crate::progenitor_support::encode_path(file_id),
-            crate::progenitor_support::encode_path(comment_id),
-            crate::progenitor_support::encode_path(reply_id),
+            crate::progenitor_support::encode_path(&file_id.to_string()),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
+            crate::progenitor_support::encode_path(&reply_id.to_string()),
         );
 
         self.client

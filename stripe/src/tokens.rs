@@ -36,7 +36,7 @@ impl Tokens {
     pub async fn get(&self, token: &str) -> Result<crate::types::Token> {
         let url = format!(
             "/v1/tokens/{}",
-            crate::progenitor_support::encode_path(token),
+            crate::progenitor_support::encode_path(&token.to_string()),
         );
 
         self.client.get(&url, None).await

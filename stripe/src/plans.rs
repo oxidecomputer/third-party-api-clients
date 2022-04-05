@@ -30,7 +30,7 @@ impl Plans {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         product: &str,
@@ -71,7 +71,7 @@ impl Plans {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         product: &str,
     ) -> Result<Vec<crate::types::PlanData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -96,10 +96,8 @@ impl Plans {
                 let last = data.last().unwrap();
                 let j = serde_json::json!(last);
                 if let serde_json::Value::Object(o) = j {
-                    if let Some(p) = o.get("id") {
-                        if let serde_json::Value::String(s) = p {
-                            page = s.to_string();
-                        }
+                    if let Some(serde_json::Value::String(s)) = o.get("id") {
+                        page = s.to_string();
                     }
                 }
             }
@@ -148,7 +146,7 @@ impl Plans {
     pub async fn get(&self, plan: &str) -> Result<crate::types::PlanData> {
         let url = format!(
             "/v1/plans/{}",
-            crate::progenitor_support::encode_path(plan),
+            crate::progenitor_support::encode_path(&plan.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -166,7 +164,7 @@ impl Plans {
     pub async fn post_plans(&self, plan: &str) -> Result<crate::types::PlanData> {
         let url = format!(
             "/v1/plans/{}",
-            crate::progenitor_support::encode_path(plan),
+            crate::progenitor_support::encode_path(&plan.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -184,7 +182,7 @@ impl Plans {
     pub async fn delete(&self, plan: &str) -> Result<crate::types::DeletedPlan> {
         let url = format!(
             "/v1/plans/{}",
-            crate::progenitor_support::encode_path(plan),
+            crate::progenitor_support::encode_path(&plan.to_string()),
         );
 
         self.client.delete(&url, None).await
