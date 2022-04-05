@@ -807,7 +807,7 @@ fn get_fn_inner(
 
     if all_pages && pagination_property.is_empty() {
         return Ok(format!("self.client.get_all_pages(&url, {}).await", body));
-    } else if all_pages && proper_name.starts_with("Stripe") && !response_type.ends_with("AnyOf>") {
+    } else if all_pages && proper_name.starts_with("Stripe") {
         // We will do a custom function here.
         let inner = format!(
             r#"let mut resp: {} = self.client.{}(&url, {}).await?;
@@ -819,8 +819,17 @@ fn get_fn_inner(
             // Paginate if we should.
             while has_more {{
                 if !{}.is_empty() {{
-                   page = {}.last().unwrap().id.to_string();
+                   let last = {}.last().unwrap();
+                   let j = serde_json::json!(last);
+                   if let serde_json::Value::Object(o) = j {{
+                       if let Some(p) = o.get("id") {{
+                           if let serde_json::Value::String(s) = p {{
+                               page = s.to_string();
+                           }}
+                       }}
+                   }}
                 }}
+
                 if !url.contains('?') {{
                     resp = self.client.{}(&format!("{{}}?startng_after={{}}", url, page), {}).await?;
                 }} else {{
@@ -1052,7 +1061,7 @@ fn get_fn_inner(
             ));
         }
 
-        let additional = if response_type.starts_with("Vec<") {
+        let additional = if inner_response_type.starts_with("Vec<") {
             ".to_vec()"
         } else {
             ""

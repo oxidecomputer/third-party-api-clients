@@ -244,9 +244,10 @@ impl ParameterDataExt for openapiv3::ParameterData {
                                     return ts.render_type(&id, false);
                                 }
 
-                                if st.min_length.is_some() || st.max_length.is_some() {
-                                    println!("XXX min/max length");
-                                }
+                                //if st.min_length.is_some() || st.max_length.is_some() {
+
+                                //println!("XXX min/max length");
+                                //}
 
                                 match &st.format {
                                     Item(DateTime) => "chrono::DateTime<chrono::Utc>".to_string(),

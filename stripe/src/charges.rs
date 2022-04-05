@@ -64,7 +64,7 @@ impl Charges {
         let resp: crate::types::Charges = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.data.to_vec())
     }
 
     /**
@@ -104,8 +104,17 @@ impl Charges {
         // Paginate if we should.
         while has_more {
             if !data.is_empty() {
-                page = data.last().unwrap().id.to_string();
+                let last = data.last().unwrap();
+                let j = serde_json::json!(last);
+                if let serde_json::Value::Object(o) = j {
+                    if let Some(p) = o.get("id") {
+                        if let serde_json::Value::String(s) = p {
+                            page = s.to_string();
+                        }
+                    }
+                }
             }
+
             if !url.contains('?') {
                 resp = self
                     .client
@@ -175,7 +184,7 @@ impl Charges {
         let resp: crate::types::SearchResult = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.data.to_vec())
     }
 
     /**
@@ -209,8 +218,17 @@ impl Charges {
         // Paginate if we should.
         while has_more {
             if !data.is_empty() {
-                page = data.last().unwrap().id.to_string();
+                let last = data.last().unwrap();
+                let j = serde_json::json!(last);
+                if let serde_json::Value::Object(o) = j {
+                    if let Some(p) = o.get("id") {
+                        if let serde_json::Value::String(s) = p {
+                            page = s.to_string();
+                        }
+                    }
+                }
             }
+
             if !url.contains('?') {
                 resp = self
                     .client
@@ -417,7 +435,7 @@ impl Charges {
         let resp: crate::types::RefundList = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.data.to_vec())
     }
 
     /**
@@ -446,8 +464,17 @@ impl Charges {
         // Paginate if we should.
         while has_more {
             if !data.is_empty() {
-                page = data.last().unwrap().id.to_string();
+                let last = data.last().unwrap();
+                let j = serde_json::json!(last);
+                if let serde_json::Value::Object(o) = j {
+                    if let Some(p) = o.get("id") {
+                        if let serde_json::Value::String(s) = p {
+                            page = s.to_string();
+                        }
+                    }
+                }
             }
+
             if !url.contains('?') {
                 resp = self
                     .client
