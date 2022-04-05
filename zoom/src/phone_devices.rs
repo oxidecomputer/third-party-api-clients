@@ -159,7 +159,7 @@ impl PhoneDevices {
     pub async fn get_device(&self, device_id: &str) -> Result<crate::types::GetDeviceResponse> {
         let url = format!(
             "/phone/devices/{}",
-            crate::progenitor_support::encode_path(&device_id.to_string()),
+            crate::progenitor_support::encode_path(device_id),
         );
 
         self.client.get(&url, None).await
@@ -187,7 +187,7 @@ impl PhoneDevices {
     pub async fn delete_device(&self, device_id: &str) -> Result<()> {
         let url = format!(
             "/phone/devices/{}",
-            crate::progenitor_support::encode_path(&device_id.to_string()),
+            crate::progenitor_support::encode_path(device_id),
         );
 
         self.client.delete(&url, None).await
@@ -218,7 +218,7 @@ impl PhoneDevices {
     ) -> Result<()> {
         let url = format!(
             "/phone/devices/{}",
-            crate::progenitor_support::encode_path(&device_id.to_string()),
+            crate::progenitor_support::encode_path(device_id),
         );
 
         self.client

@@ -30,7 +30,7 @@ impl TaxRates {
     pub async fn get_page(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         inclusive: bool,
         limit: i64,
@@ -71,7 +71,7 @@ impl TaxRates {
     pub async fn get_all(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         inclusive: bool,
     ) -> Result<Vec<crate::types::TaxRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -148,7 +148,7 @@ impl TaxRates {
     pub async fn get_rate(&self, tax_rate: &str) -> Result<crate::types::TaxRate> {
         let url = format!(
             "/v1/tax_rates/{}",
-            crate::progenitor_support::encode_path(&tax_rate.to_string()),
+            crate::progenitor_support::encode_path(tax_rate),
         );
 
         self.client.get(&url, None).await
@@ -166,7 +166,7 @@ impl TaxRates {
     pub async fn post_rate(&self, tax_rate: &str) -> Result<crate::types::TaxRate> {
         let url = format!(
             "/v1/tax_rates/{}",
-            crate::progenitor_support::encode_path(&tax_rate.to_string()),
+            crate::progenitor_support::encode_path(tax_rate),
         );
 
         self.client.post(&url, None).await

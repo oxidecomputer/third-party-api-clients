@@ -112,7 +112,7 @@ impl CountrySpecs {
     pub async fn get(&self, country: &str) -> Result<crate::types::CountrySpec> {
         let url = format!(
             "/v1/country_specs/{}",
-            crate::progenitor_support::encode_path(&country.to_string()),
+            crate::progenitor_support::encode_path(country),
         );
 
         self.client.get(&url, None).await

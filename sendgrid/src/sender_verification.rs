@@ -126,7 +126,7 @@ impl SenderVerification {
     pub async fn get_verified_senders_verify_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/verified_senders/verify/{}",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
 
         self.client.get(&url, None).await
@@ -146,7 +146,7 @@ impl SenderVerification {
     pub async fn delete_verified_senders(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/verified_senders/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await
@@ -172,7 +172,7 @@ impl SenderVerification {
     ) -> Result<crate::types::VerifiedSenderResponseSchema> {
         let url = format!(
             "/verified_senders/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client
@@ -194,7 +194,7 @@ impl SenderVerification {
     pub async fn post_verified_senders_resend(&self, id: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/verified_senders/resend/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await

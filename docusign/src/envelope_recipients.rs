@@ -58,8 +58,8 @@ impl EnvelopeRecipients {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
             query_
         );
 
@@ -135,8 +135,8 @@ impl EnvelopeRecipients {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
             query_
         );
 
@@ -174,8 +174,8 @@ impl EnvelopeRecipients {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
             query_
         );
 
@@ -206,8 +206,8 @@ impl EnvelopeRecipients {
     ) -> Result<crate::types::EnvelopeRecipients> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
 
         self.client
@@ -237,8 +237,8 @@ impl EnvelopeRecipients {
     ) -> Result<crate::types::DocumentVisibilityList> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/document_visibility",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
 
         self.client
@@ -269,9 +269,9 @@ impl EnvelopeRecipients {
     ) -> Result<crate::types::EnvelopeRecipients> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client.delete(&url, None).await
@@ -298,9 +298,9 @@ impl EnvelopeRecipients {
     ) -> Result<crate::types::ProofServiceResourceToken> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/identity_proof_token",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client.post(&url, None).await
@@ -340,9 +340,9 @@ impl EnvelopeRecipients {
     ) -> Result<crate::types::ViewUrl> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/recipients/{}/views/identity_manual_review",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client.post(&url, None).await
@@ -370,8 +370,8 @@ impl EnvelopeRecipients {
     ) -> Result<crate::types::ViewUrl> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/views/recipient_preview",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(envelope_id),
         );
 
         self.client

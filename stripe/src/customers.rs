@@ -29,7 +29,7 @@ impl Customers {
     */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         email: &str,
         ending_before: &str,
         limit: i64,
@@ -70,7 +70,7 @@ impl Customers {
     */
     pub async fn get_all(
         &self,
-        created: &str,
+        _created: &str,
         email: &str,
         test_clock: &str,
     ) -> Result<Vec<crate::types::Customer>> {
@@ -250,7 +250,7 @@ impl Customers {
     ) -> Result<crate::types::GetCustomersCustomerResponseAnyOf> {
         let url = format!(
             "/v1/customers/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.get(&url, None).await
@@ -270,7 +270,7 @@ impl Customers {
     pub async fn post_customers(&self, customer: &str) -> Result<crate::types::Customer> {
         let url = format!(
             "/v1/customers/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.post(&url, None).await
@@ -288,7 +288,7 @@ impl Customers {
     pub async fn delete(&self, customer: &str) -> Result<crate::types::DeletedCustomer> {
         let url = format!(
             "/v1/customers/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.delete(&url, None).await
@@ -327,7 +327,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/customers/{}/balance_transactions?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -351,7 +351,7 @@ impl Customers {
     ) -> Result<Vec<crate::types::CustomerBalanceTransaction>> {
         let url = format!(
             "/v1/customers/{}/balance_transactions",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         let mut resp: crate::types::CustomerBalanceTransactionList =
@@ -411,7 +411,7 @@ impl Customers {
     ) -> Result<crate::types::CustomerBalanceTransaction> {
         let url = format!(
             "/v1/customers/{}/balance_transactions",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.post(&url, None).await
@@ -435,8 +435,8 @@ impl Customers {
     ) -> Result<crate::types::CustomerBalanceTransaction> {
         let url = format!(
             "/v1/customers/{}/balance_transactions/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&transaction.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(transaction),
         );
 
         self.client.get(&url, None).await
@@ -459,8 +459,8 @@ impl Customers {
     ) -> Result<crate::types::CustomerBalanceTransaction> {
         let url = format!(
             "/v1/customers/{}/balance_transactions/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&transaction.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(transaction),
         );
 
         self.client.post(&url, None).await
@@ -499,7 +499,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/customers/{}/bank_accounts?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -522,7 +522,7 @@ impl Customers {
     ) -> Result<Vec<crate::types::BankAccount>> {
         let url = format!(
             "/v1/customers/{}/bank_accounts",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         let mut resp: crate::types::BankAccountList = self.client.get(&url, None).await?;
@@ -585,7 +585,7 @@ impl Customers {
     ) -> Result<crate::types::PaymentSourceAnyOf> {
         let url = format!(
             "/v1/customers/{}/bank_accounts",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.post(&url, None).await
@@ -609,8 +609,8 @@ impl Customers {
     ) -> Result<crate::types::BankAccount> {
         let url = format!(
             "/v1/customers/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -633,8 +633,8 @@ impl Customers {
     ) -> Result<crate::types::SourceAnyOf> {
         let url = format!(
             "/v1/customers/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -657,8 +657,8 @@ impl Customers {
     ) -> Result<crate::types::DeleteCustomersCustomerCardsResponseAnyOf> {
         let url = format!(
             "/v1/customers/{}/bank_accounts/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await
@@ -681,8 +681,8 @@ impl Customers {
     ) -> Result<crate::types::BankAccount> {
         let url = format!(
             "/v1/customers/{}/bank_accounts/{}/verify",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -723,7 +723,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/customers/{}/cards?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -745,7 +745,7 @@ impl Customers {
     pub async fn get_all_cards(&self, customer: &str) -> Result<Vec<crate::types::Card>> {
         let url = format!(
             "/v1/customers/{}/cards",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         let mut resp: crate::types::Cards = self.client.get(&url, None).await?;
@@ -805,7 +805,7 @@ impl Customers {
     pub async fn post_card(&self, customer: &str) -> Result<crate::types::PaymentSourceAnyOf> {
         let url = format!(
             "/v1/customers/{}/cards",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.post(&url, None).await
@@ -825,8 +825,8 @@ impl Customers {
     pub async fn get_card(&self, customer: &str, id: &str) -> Result<crate::types::Card> {
         let url = format!(
             "/v1/customers/{}/cards/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -849,8 +849,8 @@ impl Customers {
     ) -> Result<crate::types::SourceAnyOf> {
         let url = format!(
             "/v1/customers/{}/cards/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -873,8 +873,8 @@ impl Customers {
     ) -> Result<crate::types::DeleteCustomersCustomerCardsResponseAnyOf> {
         let url = format!(
             "/v1/customers/{}/cards/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await
@@ -893,7 +893,7 @@ impl Customers {
     pub async fn get_discount(&self, customer: &str) -> Result<crate::types::DiscountData> {
         let url = format!(
             "/v1/customers/{}/discount",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.get(&url, None).await
@@ -911,7 +911,7 @@ impl Customers {
     pub async fn delete_discount(&self, customer: &str) -> Result<crate::types::DeletedDiscount> {
         let url = format!(
             "/v1/customers/{}/discount",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.delete(&url, None).await
@@ -955,7 +955,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/customers/{}/payment_methods?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -984,7 +984,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/customers/{}/payment_methods?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -1067,7 +1067,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/customers/{}/sources?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -1096,7 +1096,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/customers/{}/sources?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -1157,7 +1157,7 @@ impl Customers {
     pub async fn post_source(&self, customer: &str) -> Result<crate::types::PaymentSourceAnyOf> {
         let url = format!(
             "/v1/customers/{}/sources",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.post(&url, None).await
@@ -1181,8 +1181,8 @@ impl Customers {
     ) -> Result<crate::types::PaymentSourceAnyOf> {
         let url = format!(
             "/v1/customers/{}/sources/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -1205,8 +1205,8 @@ impl Customers {
     ) -> Result<crate::types::SourceAnyOf> {
         let url = format!(
             "/v1/customers/{}/sources/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -1229,8 +1229,8 @@ impl Customers {
     ) -> Result<crate::types::DeleteCustomersCustomerCardsResponseAnyOf> {
         let url = format!(
             "/v1/customers/{}/sources/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await
@@ -1253,8 +1253,8 @@ impl Customers {
     ) -> Result<crate::types::BankAccount> {
         let url = format!(
             "/v1/customers/{}/sources/{}/verify",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -1293,7 +1293,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/customers/{}/subscriptions?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -1316,7 +1316,7 @@ impl Customers {
     ) -> Result<Vec<crate::types::Subscription>> {
         let url = format!(
             "/v1/customers/{}/subscriptions",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         let mut resp: crate::types::Subscriptions = self.client.get(&url, None).await?;
@@ -1372,7 +1372,7 @@ impl Customers {
     pub async fn post_subscription(&self, customer: &str) -> Result<crate::types::Subscription> {
         let url = format!(
             "/v1/customers/{}/subscriptions",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.post(&url, None).await
@@ -1396,8 +1396,8 @@ impl Customers {
     ) -> Result<crate::types::Subscription> {
         let url = format!(
             "/v1/customers/{}/subscriptions/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(subscription_exposed_id),
         );
 
         self.client.get(&url, None).await
@@ -1420,8 +1420,8 @@ impl Customers {
     ) -> Result<crate::types::Subscription> {
         let url = format!(
             "/v1/customers/{}/subscriptions/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(subscription_exposed_id),
         );
 
         self.client.post(&url, None).await
@@ -1448,8 +1448,8 @@ impl Customers {
     ) -> Result<crate::types::Subscription> {
         let url = format!(
             "/v1/customers/{}/subscriptions/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(subscription_exposed_id),
         );
 
         self.client.delete(&url, None).await
@@ -1473,8 +1473,8 @@ impl Customers {
     ) -> Result<crate::types::DiscountData> {
         let url = format!(
             "/v1/customers/{}/subscriptions/{}/discount",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(subscription_exposed_id),
         );
 
         self.client.get(&url, None).await
@@ -1497,8 +1497,8 @@ impl Customers {
     ) -> Result<crate::types::DeletedDiscount> {
         let url = format!(
             "/v1/customers/{}/subscriptions/{}/discount",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(subscription_exposed_id),
         );
 
         self.client.delete(&url, None).await
@@ -1537,7 +1537,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/customers/{}/tax_ids?{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
             query_
         );
 
@@ -1557,7 +1557,7 @@ impl Customers {
     pub async fn get_all_tax_ids(&self, customer: &str) -> Result<Vec<crate::types::TaxId>> {
         let url = format!(
             "/v1/customers/{}/tax_ids",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         let mut resp: crate::types::TaxIds = self.client.get(&url, None).await?;
@@ -1613,7 +1613,7 @@ impl Customers {
     pub async fn post_tax_id(&self, customer: &str) -> Result<crate::types::TaxId> {
         let url = format!(
             "/v1/customers/{}/tax_ids",
-            crate::progenitor_support::encode_path(&customer.to_string()),
+            crate::progenitor_support::encode_path(customer),
         );
 
         self.client.post(&url, None).await
@@ -1633,8 +1633,8 @@ impl Customers {
     pub async fn get_tax_id(&self, customer: &str, id: &str) -> Result<crate::types::TaxId> {
         let url = format!(
             "/v1/customers/{}/tax_ids/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -1657,8 +1657,8 @@ impl Customers {
     ) -> Result<crate::types::DeletedTaxId> {
         let url = format!(
             "/v1/customers/{}/tax_ids/{}",
-            crate::progenitor_support::encode_path(&customer.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(customer),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await

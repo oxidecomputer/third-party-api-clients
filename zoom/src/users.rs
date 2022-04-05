@@ -198,7 +198,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -258,7 +258,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -298,7 +298,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -346,7 +346,7 @@ impl Users {
     pub async fn assistant(&self, user_id: &str) -> Result<crate::types::UserAssistantsList> {
         let url = format!(
             "/users/{}/assistants",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.get(&url, None).await
@@ -378,7 +378,7 @@ impl Users {
     ) -> Result<crate::types::AddRoleMembersResponse> {
         let url = format!(
             "/users/{}/assistants",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -408,7 +408,7 @@ impl Users {
     pub async fn assistants_delete(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/assistants",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.delete(&url, None).await
@@ -437,8 +437,8 @@ impl Users {
     pub async fn assistant_delete(&self, user_id: &str, assistant_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/assistants/{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
-            crate::progenitor_support::encode_path(&assistant_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(assistant_id),
         );
 
         self.client.delete(&url, None).await
@@ -465,7 +465,7 @@ impl Users {
     pub async fn scheduler(&self, user_id: &str) -> Result<crate::types::UserSchedulersList> {
         let url = format!(
             "/users/{}/schedulers",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.get(&url, None).await
@@ -492,7 +492,7 @@ impl Users {
     pub async fn schedulers_delete(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/schedulers",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.delete(&url, None).await
@@ -520,8 +520,8 @@ impl Users {
     pub async fn scheduler_delete(&self, user_id: &str, scheduler_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/schedulers/{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
-            crate::progenitor_support::encode_path(&scheduler_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(scheduler_id),
         );
 
         self.client.delete(&url, None).await
@@ -545,7 +545,7 @@ impl Users {
     pub async fn picture(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/picture",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.post(&url, None).await
@@ -606,7 +606,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/settings?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -668,7 +668,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/settings?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -730,7 +730,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/settings?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -792,7 +792,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/settings?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -826,7 +826,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/settings?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -857,7 +857,7 @@ impl Users {
     ) -> Result<()> {
         let url = format!(
             "/users/{}/status",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -890,7 +890,7 @@ impl Users {
     ) -> Result<()> {
         let url = format!(
             "/users/{}/password",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -916,7 +916,7 @@ impl Users {
     pub async fn permission(&self, user_id: &str) -> Result<crate::types::UserPermissions> {
         let url = format!(
             "/users/{}/permissions",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.get(&url, None).await
@@ -955,7 +955,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/token?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -980,7 +980,7 @@ impl Users {
     pub async fn sso_token_delete(&self, user_id: &str) -> Result<()> {
         let url = format!(
             "/users/{}/token",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client.delete(&url, None).await
@@ -1038,7 +1038,7 @@ impl Users {
     pub async fn email_update(&self, user_id: &str, body: &crate::types::Members) -> Result<()> {
         let url = format!(
             "/users/{}/email",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -1107,8 +1107,8 @@ impl Users {
     ) -> Result<()> {
         let url = format!(
             "/accounts/{}/users/{}/account",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -1145,7 +1145,7 @@ impl Users {
     ) -> Result<()> {
         let url = format!(
             "/users/{}/presence_status",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -1179,7 +1179,7 @@ impl Users {
     ) -> Result<crate::types::Files> {
         let url = format!(
             "/users/{}/settings/virtual_backgrounds",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -1212,7 +1212,7 @@ impl Users {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/{}/settings/virtual_backgrounds?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 

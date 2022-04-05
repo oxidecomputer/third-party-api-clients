@@ -85,7 +85,7 @@ impl Teammates {
     ) -> Result<crate::types::PostTeammatesResponse> {
         let url = format!(
             "/teammates/pending/{}/resend",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
 
         self.client.post(&url, None).await
@@ -185,7 +185,7 @@ impl Teammates {
     ) -> Result<crate::types::GetTeammatesUsernameResponse> {
         let url = format!(
             "/teammates/{}",
-            crate::progenitor_support::encode_path(&username.to_string()),
+            crate::progenitor_support::encode_path(username),
         );
 
         self.client.get(&url, None).await
@@ -210,7 +210,7 @@ impl Teammates {
     ) -> Result<crate::types::PostSendersResponse> {
         let url = format!(
             "/teammates/{}",
-            crate::progenitor_support::encode_path(&username.to_string()),
+            crate::progenitor_support::encode_path(username),
         );
 
         self.client.delete(&url, None).await
@@ -240,7 +240,7 @@ impl Teammates {
     ) -> Result<crate::types::GetTeammatesUsernameResponse> {
         let url = format!(
             "/teammates/{}",
-            crate::progenitor_support::encode_path(&username.to_string()),
+            crate::progenitor_support::encode_path(username),
         );
 
         self.client
@@ -263,7 +263,7 @@ impl Teammates {
     ) -> Result<crate::types::PatchScopesRequestsApproveResponse> {
         let url = format!(
             "/scopes/requests/{}/approve",
-            crate::progenitor_support::encode_path(&request_id.to_string()),
+            crate::progenitor_support::encode_path(request_id),
         );
 
         self.client.patch(&url, None).await
@@ -281,7 +281,7 @@ impl Teammates {
     pub async fn delete_scopes_requests_request(&self, request_id: &str) -> Result<()> {
         let url = format!(
             "/scopes/requests/{}",
-            crate::progenitor_support::encode_path(&request_id.to_string()),
+            crate::progenitor_support::encode_path(request_id),
         );
 
         self.client.delete(&url, None).await
@@ -301,7 +301,7 @@ impl Teammates {
     pub async fn delete_pending_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/teammates/pending/{}",
-            crate::progenitor_support::encode_path(&token.to_string()),
+            crate::progenitor_support::encode_path(token),
         );
 
         self.client.delete(&url, None).await

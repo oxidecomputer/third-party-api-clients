@@ -30,7 +30,7 @@ impl Disputes {
     pub async fn get_page(
         &self,
         charge: &str,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         payment_intent: &str,
@@ -71,7 +71,7 @@ impl Disputes {
     pub async fn get_all(
         &self,
         charge: &str,
-        created: &str,
+        _created: &str,
         payment_intent: &str,
     ) -> Result<Vec<crate::types::Dispute>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -138,7 +138,7 @@ impl Disputes {
     pub async fn get(&self, dispute: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/disputes/{}",
-            crate::progenitor_support::encode_path(&dispute.to_string()),
+            crate::progenitor_support::encode_path(dispute),
         );
 
         self.client.get(&url, None).await
@@ -158,7 +158,7 @@ impl Disputes {
     pub async fn post(&self, dispute: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/disputes/{}",
-            crate::progenitor_support::encode_path(&dispute.to_string()),
+            crate::progenitor_support::encode_path(dispute),
         );
 
         self.client.post(&url, None).await
@@ -178,7 +178,7 @@ impl Disputes {
     pub async fn post_close(&self, dispute: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/disputes/{}/close",
-            crate::progenitor_support::encode_path(&dispute.to_string()),
+            crate::progenitor_support::encode_path(dispute),
         );
 
         self.client.post(&url, None).await

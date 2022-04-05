@@ -120,7 +120,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 // Stripe uses anyof, but we want oneof.
                                 rt = format!(
                                     "Box<Option<{}>>",
-                                    rt.trim_start_matches("Option<").trim_end_matches(">")
+                                    rt.trim_start_matches("Option<").trim_end_matches('>')
                                 );
                             } else if rt.ends_with("AnyOf>")
                                 && rt.starts_with("Vec<")
@@ -129,7 +129,7 @@ pub fn generate_types(ts: &mut TypeSpace, proper_name: &str) -> Result<String> {
                                 // Stripe uses anyof, but we want oneof.
                                 rt = format!(
                                     "Box<Vec<{}>>",
-                                    rt.trim_start_matches("Vec<").trim_end_matches(">")
+                                    rt.trim_start_matches("Vec<").trim_end_matches('>')
                                 );
                             }
                             let mut prop = name.trim().to_string();

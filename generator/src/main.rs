@@ -2119,22 +2119,22 @@ fn get_parameter_data(param: &openapiv3::Parameter) -> Option<&openapiv3::Parame
         openapiv3::Parameter::Path {
             parameter_data,
             style: _,
-        } => return Some(parameter_data),
+        } => Some(parameter_data),
         openapiv3::Parameter::Header {
             parameter_data,
             style: openapiv3::HeaderStyle::Simple,
-        } => return Some(parameter_data),
+        } => Some(parameter_data),
         openapiv3::Parameter::Cookie {
             parameter_data,
             style: openapiv3::CookieStyle::Form,
-        } => return Some(parameter_data),
+        } => Some(parameter_data),
         openapiv3::Parameter::Query {
             parameter_data,
             allow_reserved: _,
             style: _,
             allow_empty_value: _,
         } => {
-            return Some(parameter_data);
+            Some(parameter_data)
         }
     }
 }

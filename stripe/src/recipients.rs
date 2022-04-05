@@ -29,7 +29,7 @@ impl Recipients {
     */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -70,7 +70,7 @@ impl Recipients {
     */
     pub async fn get_all(
         &self,
-        created: &str,
+        _created: &str,
         type_: crate::types::GetRecipientsType,
         verified: bool,
     ) -> Result<Vec<crate::types::Recipient>> {
@@ -149,7 +149,7 @@ impl Recipients {
     pub async fn get(&self, id: &str) -> Result<crate::types::GetRecipientsResponseAnyOf> {
         let url = format!(
             "/v1/recipients/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -171,7 +171,7 @@ impl Recipients {
     pub async fn post_recipients(&self, id: &str) -> Result<crate::types::Recipient> {
         let url = format!(
             "/v1/recipients/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -189,7 +189,7 @@ impl Recipients {
     pub async fn delete(&self, id: &str) -> Result<crate::types::DeletedRecipient> {
         let url = format!(
             "/v1/recipients/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await

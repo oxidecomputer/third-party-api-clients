@@ -126,7 +126,7 @@ impl WebhookEndpoints {
     ) -> Result<crate::types::WebhookEndpoint> {
         let url = format!(
             "/v1/webhook_endpoints/{}",
-            crate::progenitor_support::encode_path(&webhook_endpoint.to_string()),
+            crate::progenitor_support::encode_path(webhook_endpoint),
         );
 
         self.client.get(&url, None).await
@@ -147,7 +147,7 @@ impl WebhookEndpoints {
     ) -> Result<crate::types::WebhookEndpoint> {
         let url = format!(
             "/v1/webhook_endpoints/{}",
-            crate::progenitor_support::encode_path(&webhook_endpoint.to_string()),
+            crate::progenitor_support::encode_path(webhook_endpoint),
         );
 
         self.client.post(&url, None).await
@@ -168,7 +168,7 @@ impl WebhookEndpoints {
     ) -> Result<crate::types::DeletedWebhookEndpoint> {
         let url = format!(
             "/v1/webhook_endpoints/{}",
-            crate::progenitor_support::encode_path(&webhook_endpoint.to_string()),
+            crate::progenitor_support::encode_path(webhook_endpoint),
         );
 
         self.client.delete(&url, None).await

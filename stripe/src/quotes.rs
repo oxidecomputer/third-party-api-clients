@@ -154,7 +154,7 @@ impl Quotes {
     pub async fn get(&self, quote: &str) -> Result<crate::types::Quote> {
         let url = format!(
             "/v1/quotes/{}",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
         );
 
         self.client.get(&url, None).await
@@ -172,7 +172,7 @@ impl Quotes {
     pub async fn post_quotes(&self, quote: &str) -> Result<crate::types::Quote> {
         let url = format!(
             "/v1/quotes/{}",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
         );
 
         self.client.post(&url, None).await
@@ -190,7 +190,7 @@ impl Quotes {
     pub async fn post_accept(&self, quote: &str) -> Result<crate::types::Quote> {
         let url = format!(
             "/v1/quotes/{}/accept",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
         );
 
         self.client.post(&url, None).await
@@ -208,7 +208,7 @@ impl Quotes {
     pub async fn post_cancel(&self, quote: &str) -> Result<crate::types::Quote> {
         let url = format!(
             "/v1/quotes/{}/cancel",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
         );
 
         self.client.post(&url, None).await
@@ -247,7 +247,7 @@ impl Quotes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/quotes/{}/computed_upfront_line_items?{}",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
             query_
         );
 
@@ -270,7 +270,7 @@ impl Quotes {
     ) -> Result<Vec<crate::types::Item>> {
         let url = format!(
             "/v1/quotes/{}/computed_upfront_line_items",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
         );
 
         let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
@@ -326,7 +326,7 @@ impl Quotes {
     pub async fn post_finalize(&self, quote: &str) -> Result<crate::types::Quote> {
         let url = format!(
             "/v1/quotes/{}/finalize",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
         );
 
         self.client.post(&url, None).await
@@ -365,7 +365,7 @@ impl Quotes {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/quotes/{}/line_items?{}",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
             query_
         );
 
@@ -385,7 +385,7 @@ impl Quotes {
     pub async fn get_all_line_items(&self, quote: &str) -> Result<Vec<crate::types::Item>> {
         let url = format!(
             "/v1/quotes/{}/line_items",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
         );
 
         let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;
@@ -442,7 +442,7 @@ impl Quotes {
     pub async fn get_pdf(&self, quote: &str) -> Result<()> {
         let url = format!(
             "/v1/quotes/{}/pdf",
-            crate::progenitor_support::encode_path(&quote.to_string()),
+            crate::progenitor_support::encode_path(quote),
         );
 
         self.client.get(&url, None).await

@@ -32,13 +32,13 @@ impl SubscriptionSchedules {
     */
     pub async fn get_page(
         &self,
-        canceled_at: &str,
-        completed_at: &str,
-        created: &str,
+        _canceled_at: &str,
+        _completed_at: &str,
+        _created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
-        released_at: &str,
+        _released_at: &str,
         scheduled: bool,
         starting_after: &str,
     ) -> Result<Vec<crate::types::SubscriptionSchedule>> {
@@ -77,11 +77,11 @@ impl SubscriptionSchedules {
     */
     pub async fn get_all(
         &self,
-        canceled_at: &str,
-        completed_at: &str,
-        created: &str,
+        _canceled_at: &str,
+        _completed_at: &str,
+        _created: &str,
         customer: &str,
-        released_at: &str,
+        _released_at: &str,
         scheduled: bool,
     ) -> Result<Vec<crate::types::SubscriptionSchedule>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -159,7 +159,7 @@ impl SubscriptionSchedules {
     pub async fn get_schedule(&self, schedule: &str) -> Result<crate::types::SubscriptionSchedule> {
         let url = format!(
             "/v1/subscription_schedules/{}",
-            crate::progenitor_support::encode_path(&schedule.to_string()),
+            crate::progenitor_support::encode_path(schedule),
         );
 
         self.client.get(&url, None).await
@@ -180,7 +180,7 @@ impl SubscriptionSchedules {
     ) -> Result<crate::types::SubscriptionSchedule> {
         let url = format!(
             "/v1/subscription_schedules/{}",
-            crate::progenitor_support::encode_path(&schedule.to_string()),
+            crate::progenitor_support::encode_path(schedule),
         );
 
         self.client.post(&url, None).await
@@ -201,7 +201,7 @@ impl SubscriptionSchedules {
     ) -> Result<crate::types::SubscriptionSchedule> {
         let url = format!(
             "/v1/subscription_schedules/{}/cancel",
-            crate::progenitor_support::encode_path(&schedule.to_string()),
+            crate::progenitor_support::encode_path(schedule),
         );
 
         self.client.post(&url, None).await
@@ -222,7 +222,7 @@ impl SubscriptionSchedules {
     ) -> Result<crate::types::SubscriptionSchedule> {
         let url = format!(
             "/v1/subscription_schedules/{}/release",
-            crate::progenitor_support::encode_path(&schedule.to_string()),
+            crate::progenitor_support::encode_path(schedule),
         );
 
         self.client.post(&url, None).await

@@ -34,7 +34,7 @@ impl PromotionCodes {
         active: bool,
         code: &str,
         coupon: &str,
-        created: &str,
+        _created: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -83,7 +83,7 @@ impl PromotionCodes {
         active: bool,
         code: &str,
         coupon: &str,
-        created: &str,
+        _created: &str,
         customer: &str,
     ) -> Result<Vec<crate::types::PromotionCode>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -166,7 +166,7 @@ impl PromotionCodes {
     pub async fn get_code(&self, promotion_code: &str) -> Result<crate::types::PromotionCode> {
         let url = format!(
             "/v1/promotion_codes/{}",
-            crate::progenitor_support::encode_path(&promotion_code.to_string()),
+            crate::progenitor_support::encode_path(promotion_code),
         );
 
         self.client.get(&url, None).await
@@ -184,7 +184,7 @@ impl PromotionCodes {
     pub async fn post_code(&self, promotion_code: &str) -> Result<crate::types::PromotionCode> {
         let url = format!(
             "/v1/promotion_codes/{}",
-            crate::progenitor_support::encode_path(&promotion_code.to_string()),
+            crate::progenitor_support::encode_path(promotion_code),
         );
 
         self.client.post(&url, None).await

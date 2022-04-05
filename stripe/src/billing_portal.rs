@@ -150,7 +150,7 @@ impl BillingPortal {
     ) -> Result<crate::types::PortalConfiguration> {
         let url = format!(
             "/v1/billing_portal/configurations/{}",
-            crate::progenitor_support::encode_path(&configuration.to_string()),
+            crate::progenitor_support::encode_path(configuration),
         );
 
         self.client.get(&url, None).await
@@ -171,7 +171,7 @@ impl BillingPortal {
     ) -> Result<crate::types::PortalConfiguration> {
         let url = format!(
             "/v1/billing_portal/configurations/{}",
-            crate::progenitor_support::encode_path(&configuration.to_string()),
+            crate::progenitor_support::encode_path(configuration),
         );
 
         self.client.post(&url, None).await

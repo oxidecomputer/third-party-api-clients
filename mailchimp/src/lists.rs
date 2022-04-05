@@ -166,7 +166,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -209,7 +209,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -232,7 +232,7 @@ impl Lists {
     pub async fn delete(&self, list_id: &str) -> Result<()> {
         let url = format!(
             "/lists/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client.delete(&url, None).await
@@ -256,7 +256,7 @@ impl Lists {
     ) -> Result<crate::types::Lists> {
         let url = format!(
             "/lists/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client
@@ -303,7 +303,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/abuse-reports?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -351,8 +351,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/abuse-reports/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&report_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(report_id),
             query_
         );
 
@@ -388,7 +388,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/activity?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -424,7 +424,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/clients?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -480,7 +480,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/growth-history?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -518,8 +518,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/growth-history/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&month.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(month),
             query_
         );
 
@@ -570,7 +570,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/interest-categories?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -595,7 +595,7 @@ impl Lists {
     ) -> Result<crate::types::Categories> {
         let url = format!(
             "/lists/{}/interest-categories",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client
@@ -634,8 +634,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/interest-categories/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_category_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(interest_category_id),
             query_
         );
 
@@ -661,8 +661,8 @@ impl Lists {
     ) -> Result<()> {
         let url = format!(
             "/lists/{}/interest-categories/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_category_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(interest_category_id),
         );
 
         self.client.delete(&url, None).await
@@ -688,8 +688,8 @@ impl Lists {
     ) -> Result<crate::types::Categories> {
         let url = format!(
             "/lists/{}/interest-categories/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_category_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(interest_category_id),
         );
 
         self.client
@@ -738,8 +738,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/interest-categories/{}/interests?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_category_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(interest_category_id),
             query_
         );
 
@@ -766,8 +766,8 @@ impl Lists {
     ) -> Result<crate::types::InterestsInterest> {
         let url = format!(
             "/lists/{}/interest-categories/{}/interests",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_category_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(interest_category_id),
         );
 
         self.client
@@ -808,9 +808,9 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/interest-categories/{}/interests/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_category_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(interest_category_id),
+            crate::progenitor_support::encode_path(interest_id),
             query_
         );
 
@@ -838,9 +838,9 @@ impl Lists {
     ) -> Result<()> {
         let url = format!(
             "/lists/{}/interest-categories/{}/interests/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_category_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(interest_category_id),
+            crate::progenitor_support::encode_path(interest_id),
         );
 
         self.client.delete(&url, None).await
@@ -868,9 +868,9 @@ impl Lists {
     ) -> Result<crate::types::InterestsInterest> {
         let url = format!(
             "/lists/{}/interest-categories/{}/interests/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_category_id.to_string()),
-            crate::progenitor_support::encode_path(&interest_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(interest_category_id),
+            crate::progenitor_support::encode_path(interest_id),
         );
 
         self.client
@@ -969,7 +969,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/segments?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -994,7 +994,7 @@ impl Lists {
     ) -> Result<crate::types::Segments> {
         let url = format!(
             "/lists/{}/segments",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client
@@ -1054,8 +1054,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/segments/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(segment_id),
             query_
         );
 
@@ -1082,8 +1082,8 @@ impl Lists {
     ) -> Result<crate::types::BatchAddRemoveListMembersFromStaticSegment> {
         let url = format!(
             "/lists/{}/segments/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(segment_id),
         );
 
         self.client
@@ -1106,8 +1106,8 @@ impl Lists {
     pub async fn delete_segments(&self, list_id: &str, segment_id: &str) -> Result<()> {
         let url = format!(
             "/lists/{}/segments/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(segment_id),
         );
 
         self.client.delete(&url, None).await
@@ -1133,8 +1133,8 @@ impl Lists {
     ) -> Result<crate::types::Segments> {
         let url = format!(
             "/lists/{}/segments/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(segment_id),
         );
 
         self.client
@@ -1204,8 +1204,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/segments/{}/members?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(segment_id),
             query_
         );
 
@@ -1232,8 +1232,8 @@ impl Lists {
     ) -> Result<crate::types::ListMembers> {
         let url = format!(
             "/lists/{}/segments/{}/members",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(segment_id),
         );
 
         self.client
@@ -1262,9 +1262,9 @@ impl Lists {
     ) -> Result<()> {
         let url = format!(
             "/lists/{}/segments/{}/members/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&segment_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(segment_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
         );
 
         self.client.delete(&url, None).await
@@ -1294,7 +1294,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/tag-search?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -1436,7 +1436,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -1471,7 +1471,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -1511,8 +1511,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
 
@@ -1549,8 +1549,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
 
@@ -1574,8 +1574,8 @@ impl Lists {
     pub async fn delete_members(&self, list_id: &str, subscriber_hash: &str) -> Result<()> {
         let url = format!(
             "/lists/{}/members/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
         );
 
         self.client.delete(&url, None).await
@@ -1611,8 +1611,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
 
@@ -1657,8 +1657,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}/activity?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
 
@@ -1711,8 +1711,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}/activity-feed?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
 
@@ -1760,8 +1760,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}/tags?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
 
@@ -1788,8 +1788,8 @@ impl Lists {
     ) -> Result<()> {
         let url = format!(
             "/lists/{}/members/{}/tags",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
         );
 
         self.client
@@ -1838,8 +1838,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}/events?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
 
@@ -1866,8 +1866,8 @@ impl Lists {
     ) -> Result<()> {
         let url = format!(
             "/lists/{}/members/{}/events",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
         );
 
         self.client
@@ -1906,8 +1906,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}/goals?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
 
@@ -1965,8 +1965,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}/notes?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
             query_
         );
 
@@ -1993,8 +1993,8 @@ impl Lists {
     ) -> Result<crate::types::CollectionOfNotesMember> {
         let url = format!(
             "/lists/{}/members/{}/notes",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
         );
 
         self.client
@@ -2035,9 +2035,9 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/members/{}/notes/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
-            crate::progenitor_support::encode_path(&note_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
+            crate::progenitor_support::encode_path(note_id),
             query_
         );
 
@@ -2065,9 +2065,9 @@ impl Lists {
     ) -> Result<()> {
         let url = format!(
             "/lists/{}/members/{}/notes/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
-            crate::progenitor_support::encode_path(&note_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
+            crate::progenitor_support::encode_path(note_id),
         );
 
         self.client.delete(&url, None).await
@@ -2095,9 +2095,9 @@ impl Lists {
     ) -> Result<crate::types::CollectionOfNotesMember> {
         let url = format!(
             "/lists/{}/members/{}/notes/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
-            crate::progenitor_support::encode_path(&note_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
+            crate::progenitor_support::encode_path(note_id),
         );
 
         self.client
@@ -2124,8 +2124,8 @@ impl Lists {
     ) -> Result<()> {
         let url = format!(
             "/lists/{}/members/{}/actions/delete-permanent",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&subscriber_hash.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(subscriber_hash),
         );
 
         self.client.post(&url, None).await
@@ -2180,7 +2180,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/merge-fields?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 
@@ -2205,7 +2205,7 @@ impl Lists {
     ) -> Result<crate::types::MergeField> {
         let url = format!(
             "/lists/{}/merge-fields",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client
@@ -2244,8 +2244,8 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/merge-fields/{}?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&merge_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(merge_id),
             query_
         );
 
@@ -2267,8 +2267,8 @@ impl Lists {
     pub async fn delete_merge_fields(&self, list_id: &str, merge_id: &str) -> Result<()> {
         let url = format!(
             "/lists/{}/merge-fields/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&merge_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(merge_id),
         );
 
         self.client.delete(&url, None).await
@@ -2294,8 +2294,8 @@ impl Lists {
     ) -> Result<crate::types::MergeField> {
         let url = format!(
             "/lists/{}/merge-fields/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&merge_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(merge_id),
         );
 
         self.client
@@ -2317,7 +2317,7 @@ impl Lists {
     pub async fn get_webhook(&self, list_id: &str) -> Result<crate::types::ListWebhooksData> {
         let url = format!(
             "/lists/{}/webhooks",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client.get(&url, None).await
@@ -2341,7 +2341,7 @@ impl Lists {
     ) -> Result<crate::types::ListWebhooks> {
         let url = format!(
             "/lists/{}/webhooks",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client
@@ -2368,8 +2368,8 @@ impl Lists {
     ) -> Result<crate::types::ListWebhooks> {
         let url = format!(
             "/lists/{}/webhooks/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client.get(&url, None).await
@@ -2390,8 +2390,8 @@ impl Lists {
     pub async fn delete_webhooks(&self, list_id: &str, webhook_id: &str) -> Result<()> {
         let url = format!(
             "/lists/{}/webhooks/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client.delete(&url, None).await
@@ -2417,8 +2417,8 @@ impl Lists {
     ) -> Result<crate::types::ListWebhooks> {
         let url = format!(
             "/lists/{}/webhooks/{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
-            crate::progenitor_support::encode_path(&webhook_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
+            crate::progenitor_support::encode_path(webhook_id),
         );
 
         self.client
@@ -2440,7 +2440,7 @@ impl Lists {
     pub async fn get_signup_form(&self, list_id: &str) -> Result<crate::types::ListSignupForms> {
         let url = format!(
             "/lists/{}/signup-forms",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client.get(&url, None).await
@@ -2464,7 +2464,7 @@ impl Lists {
     ) -> Result<crate::types::SignupForm> {
         let url = format!(
             "/lists/{}/signup-forms",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
         );
 
         self.client
@@ -2501,7 +2501,7 @@ impl Lists {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/lists/{}/locations?{}",
-            crate::progenitor_support::encode_path(&list_id.to_string()),
+            crate::progenitor_support::encode_path(list_id),
             query_
         );
 

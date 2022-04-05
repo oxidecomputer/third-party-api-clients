@@ -136,7 +136,7 @@ impl Terminal {
     ) -> Result<crate::types::GetTerminalLocationResponseAnyOf> {
         let url = format!(
             "/v1/terminal/locations/{}",
-            crate::progenitor_support::encode_path(&location.to_string()),
+            crate::progenitor_support::encode_path(location),
         );
 
         self.client.get(&url, None).await
@@ -157,7 +157,7 @@ impl Terminal {
     ) -> Result<crate::types::GetTerminalLocationResponseAnyOf> {
         let url = format!(
             "/v1/terminal/locations/{}",
-            crate::progenitor_support::encode_path(&location.to_string()),
+            crate::progenitor_support::encode_path(location),
         );
 
         self.client.post(&url, None).await
@@ -178,7 +178,7 @@ impl Terminal {
     ) -> Result<crate::types::DeletedTerminalLocation> {
         let url = format!(
             "/v1/terminal/locations/{}",
-            crate::progenitor_support::encode_path(&location.to_string()),
+            crate::progenitor_support::encode_path(location),
         );
 
         self.client.delete(&url, None).await
@@ -329,7 +329,7 @@ impl Terminal {
     ) -> Result<crate::types::GetTerminalReadersReaderResponseAnyOf> {
         let url = format!(
             "/v1/terminal/readers/{}",
-            crate::progenitor_support::encode_path(&reader.to_string()),
+            crate::progenitor_support::encode_path(reader),
         );
 
         self.client.get(&url, None).await
@@ -350,7 +350,7 @@ impl Terminal {
     ) -> Result<crate::types::GetTerminalReadersReaderResponseAnyOf> {
         let url = format!(
             "/v1/terminal/readers/{}",
-            crate::progenitor_support::encode_path(&reader.to_string()),
+            crate::progenitor_support::encode_path(reader),
         );
 
         self.client.post(&url, None).await
@@ -371,7 +371,7 @@ impl Terminal {
     ) -> Result<crate::types::DeletedTerminalReader> {
         let url = format!(
             "/v1/terminal/readers/{}",
-            crate::progenitor_support::encode_path(&reader.to_string()),
+            crate::progenitor_support::encode_path(reader),
         );
 
         self.client.delete(&url, None).await
@@ -392,7 +392,7 @@ impl Terminal {
     ) -> Result<crate::types::TerminalReader> {
         let url = format!(
             "/v1/terminal/readers/{}/cancel_action",
-            crate::progenitor_support::encode_path(&reader.to_string()),
+            crate::progenitor_support::encode_path(reader),
         );
 
         self.client.post(&url, None).await
@@ -413,7 +413,7 @@ impl Terminal {
     ) -> Result<crate::types::TerminalReader> {
         let url = format!(
             "/v1/terminal/readers/{}/process_payment_intent",
-            crate::progenitor_support::encode_path(&reader.to_string()),
+            crate::progenitor_support::encode_path(reader),
         );
 
         self.client.post(&url, None).await
@@ -434,7 +434,7 @@ impl Terminal {
     ) -> Result<crate::types::TerminalReader> {
         let url = format!(
             "/v1/terminal/readers/{}/process_setup_intent",
-            crate::progenitor_support::encode_path(&reader.to_string()),
+            crate::progenitor_support::encode_path(reader),
         );
 
         self.client.post(&url, None).await
@@ -455,7 +455,7 @@ impl Terminal {
     ) -> Result<crate::types::TerminalReader> {
         let url = format!(
             "/v1/terminal/readers/{}/set_reader_display",
-            crate::progenitor_support::encode_path(&reader.to_string()),
+            crate::progenitor_support::encode_path(reader),
         );
 
         self.client.post(&url, None).await

@@ -29,7 +29,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client.get(&url, None).await
@@ -53,7 +53,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -80,8 +80,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.get(&url, None).await
@@ -107,8 +107,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client
@@ -135,8 +135,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.delete(&url, None).await
@@ -201,7 +201,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -228,8 +228,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -256,8 +256,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -280,7 +280,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client.get(&url, None).await
@@ -304,7 +304,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -331,8 +331,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.get(&url, None).await
@@ -358,8 +358,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client
@@ -386,8 +386,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.delete(&url, None).await
@@ -452,7 +452,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -479,8 +479,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -507,8 +507,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -531,7 +531,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client.get(&url, None).await
@@ -555,7 +555,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -582,8 +582,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.get(&url, None).await
@@ -609,8 +609,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client
@@ -637,8 +637,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.delete(&url, None).await
@@ -703,7 +703,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -730,8 +730,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -758,8 +758,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -779,7 +779,7 @@ impl Discounts {
     pub async fn get_price_rules_param_rule_code(&self, price_rule_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client.get(&url, None).await
@@ -803,7 +803,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -830,8 +830,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.get(&url, None).await
@@ -857,8 +857,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client
@@ -885,8 +885,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.delete(&url, None).await
@@ -951,7 +951,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -978,8 +978,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -1006,8 +1006,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -1030,7 +1030,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client.get(&url, None).await
@@ -1054,7 +1054,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -1081,8 +1081,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.get(&url, None).await
@@ -1108,8 +1108,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client
@@ -1136,8 +1136,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.delete(&url, None).await
@@ -1202,7 +1202,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -1229,8 +1229,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -1257,8 +1257,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -1281,7 +1281,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client.get(&url, None).await
@@ -1305,7 +1305,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -1332,8 +1332,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.get(&url, None).await
@@ -1359,8 +1359,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client
@@ -1387,8 +1387,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/discount_codes/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&discount_code_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(discount_code_id),
         );
 
         self.client.delete(&url, None).await
@@ -1453,7 +1453,7 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/batch.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
         );
 
         self.client
@@ -1480,8 +1480,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/batch/{}/json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await
@@ -1508,8 +1508,8 @@ impl Discounts {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/price_rules/{}/batch/{}/discount_codes.json",
-            crate::progenitor_support::encode_path(&price_rule_id.to_string()),
-            crate::progenitor_support::encode_path(&batch_id.to_string()),
+            crate::progenitor_support::encode_path(price_rule_id),
+            crate::progenitor_support::encode_path(batch_id),
         );
 
         self.client.get(&url, None).await

@@ -27,7 +27,7 @@ impl Reporting {
     */
     pub async fn get_report_runs(
         &self,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -61,7 +61,7 @@ impl Reporting {
     */
     pub async fn get_all_report_runs(
         &self,
-        created: &str,
+        _created: &str,
     ) -> Result<Vec<crate::types::ReportingReportRun>> {
         let url = "/v1/reporting/report_runs".to_string();
         let mut resp: crate::types::GetReportingReportRunsResponse =
@@ -132,7 +132,7 @@ impl Reporting {
     ) -> Result<crate::types::ReportingReportRun> {
         let url = format!(
             "/v1/reporting/report_runs/{}",
-            crate::progenitor_support::encode_path(&report_run.to_string()),
+            crate::progenitor_support::encode_path(report_run),
         );
 
         self.client.get(&url, None).await
@@ -223,7 +223,7 @@ impl Reporting {
     ) -> Result<crate::types::ReportingReportType> {
         let url = format!(
             "/v1/reporting/report_types/{}",
-            crate::progenitor_support::encode_path(&report_type.to_string()),
+            crate::progenitor_support::encode_path(report_type),
         );
 
         self.client.get(&url, None).await

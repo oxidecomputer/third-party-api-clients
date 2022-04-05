@@ -518,7 +518,7 @@ $(STRIPE_SPEC): $(STRIPE_SPEC_DIR)
 		$(STRIPE_SPEC_REMOTE)
 
 stripe: target/debug/generator $(STRIPE_SPEC)
-	./target/debug/generator -i $(STRIPE_SPEC) -v 0.1.0 \
+	./target/debug/generator -i $(STRIPE_SPEC) -v 0.2.0 \
 		-o stripe \
 		-n dolladollabills \
 		--proper-name Stripe \

@@ -151,7 +151,7 @@ impl ContactsApiRecipients {
     ) -> Result<crate::types::ContactdbRecipient> {
         let url = format!(
             "/contactdb/recipients/{}",
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client.get(&url, None).await
@@ -176,7 +176,7 @@ impl ContactsApiRecipients {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/contactdb/recipients/{}",
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client.delete(&url, None).await
@@ -201,7 +201,7 @@ impl ContactsApiRecipients {
     ) -> Result<crate::types::GetContactdbRecipientsRecipientListsResponse> {
         let url = format!(
             "/contactdb/recipients/{}/lists",
-            crate::progenitor_support::encode_path(&recipient_id.to_string()),
+            crate::progenitor_support::encode_path(recipient_id),
         );
 
         self.client.get(&url, None).await

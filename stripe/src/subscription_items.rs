@@ -133,7 +133,7 @@ impl SubscriptionItems {
     pub async fn get_item(&self, item: &str) -> Result<crate::types::SubscriptionItem> {
         let url = format!(
             "/v1/subscription_items/{}",
-            crate::progenitor_support::encode_path(&item.to_string()),
+            crate::progenitor_support::encode_path(item),
         );
 
         self.client.get(&url, None).await
@@ -151,7 +151,7 @@ impl SubscriptionItems {
     pub async fn post_item(&self, item: &str) -> Result<crate::types::SubscriptionItem> {
         let url = format!(
             "/v1/subscription_items/{}",
-            crate::progenitor_support::encode_path(&item.to_string()),
+            crate::progenitor_support::encode_path(item),
         );
 
         self.client.post(&url, None).await
@@ -169,7 +169,7 @@ impl SubscriptionItems {
     pub async fn delete_item(&self, item: &str) -> Result<crate::types::DeletedSubscriptionItem> {
         let url = format!(
             "/v1/subscription_items/{}",
-            crate::progenitor_support::encode_path(&item.to_string()),
+            crate::progenitor_support::encode_path(item),
         );
 
         self.client.delete(&url, None).await
@@ -210,7 +210,7 @@ impl SubscriptionItems {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/subscription_items/{}/usage_record_summaries?{}",
-            crate::progenitor_support::encode_path(&subscription_item.to_string()),
+            crate::progenitor_support::encode_path(subscription_item),
             query_
         );
 
@@ -236,7 +236,7 @@ impl SubscriptionItems {
     ) -> Result<Vec<crate::types::UsageRecordSummary>> {
         let url = format!(
             "/v1/subscription_items/{}/usage_record_summaries",
-            crate::progenitor_support::encode_path(&subscription_item.to_string()),
+            crate::progenitor_support::encode_path(subscription_item),
         );
 
         let mut resp: crate::types::GetSubscriptionItemsItemUsageRecordSummariesResponse =
@@ -302,7 +302,7 @@ impl SubscriptionItems {
     ) -> Result<crate::types::UsageRecord> {
         let url = format!(
             "/v1/subscription_items/{}/usage_records",
-            crate::progenitor_support::encode_path(&subscription_item.to_string()),
+            crate::progenitor_support::encode_path(subscription_item),
         );
 
         self.client.post(&url, None).await

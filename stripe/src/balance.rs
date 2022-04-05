@@ -48,7 +48,7 @@ impl Balance {
     */
     pub async fn get_history(
         &self,
-        created: &str,
+        _created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
@@ -99,7 +99,7 @@ impl Balance {
     */
     pub async fn get_all_history(
         &self,
-        created: &str,
+        _created: &str,
         currency: &str,
         payout: &str,
         source: &str,
@@ -177,7 +177,7 @@ impl Balance {
     pub async fn get_history_balance(&self, id: &str) -> Result<crate::types::BalanceTransaction> {
         let url = format!(
             "/v1/balance/history/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

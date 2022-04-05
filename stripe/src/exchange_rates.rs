@@ -112,7 +112,7 @@ impl ExchangeRates {
     pub async fn get_rate(&self, rate_id: &str) -> Result<crate::types::ExchangeRate> {
         let url = format!(
             "/v1/exchange_rates/{}",
-            crate::progenitor_support::encode_path(&rate_id.to_string()),
+            crate::progenitor_support::encode_path(rate_id),
         );
 
         self.client.get(&url, None).await

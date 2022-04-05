@@ -136,7 +136,7 @@ impl ApplePay {
     pub async fn get_domains_domain(&self, domain: &str) -> Result<crate::types::ApplePayDomain> {
         let url = format!(
             "/v1/apple_pay/domains/{}",
-            crate::progenitor_support::encode_path(&domain.to_string()),
+            crate::progenitor_support::encode_path(domain),
         );
 
         self.client.get(&url, None).await
@@ -157,7 +157,7 @@ impl ApplePay {
     ) -> Result<crate::types::DeletedApplePayDomain> {
         let url = format!(
             "/v1/apple_pay/domains/{}",
-            crate::progenitor_support::encode_path(&domain.to_string()),
+            crate::progenitor_support::encode_path(domain),
         );
 
         self.client.delete(&url, None).await

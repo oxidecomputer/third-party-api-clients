@@ -32,9 +32,9 @@ impl Products {
     pub async fn get_page(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         ending_before: &str,
-        ids: &[String],
+        _ids: &[String],
         limit: i64,
         shippable: bool,
         starting_after: &str,
@@ -78,8 +78,8 @@ impl Products {
     pub async fn get_all(
         &self,
         active: bool,
-        created: &str,
-        ids: &[String],
+        _created: &str,
+        _ids: &[String],
         shippable: bool,
         url: &str,
     ) -> Result<Vec<crate::types::Product>> {
@@ -259,7 +259,7 @@ impl Products {
     pub async fn get(&self, id: &str) -> Result<crate::types::Product> {
         let url = format!(
             "/v1/products/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -277,7 +277,7 @@ impl Products {
     pub async fn post_products(&self, id: &str) -> Result<crate::types::Product> {
         let url = format!(
             "/v1/products/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -295,7 +295,7 @@ impl Products {
     pub async fn delete(&self, id: &str) -> Result<crate::types::DeletedProduct> {
         let url = format!(
             "/v1/products/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await

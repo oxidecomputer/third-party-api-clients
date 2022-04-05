@@ -29,7 +29,7 @@ impl ApplicationFees {
     pub async fn get_page(
         &self,
         charge: &str,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -66,7 +66,7 @@ impl ApplicationFees {
     pub async fn get_all(
         &self,
         charge: &str,
-        created: &str,
+        _created: &str,
     ) -> Result<Vec<crate::types::PlatformFee>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
@@ -131,8 +131,8 @@ impl ApplicationFees {
     pub async fn get_fee_refund(&self, fee: &str, id: &str) -> Result<crate::types::FeeRefund> {
         let url = format!(
             "/v1/application_fees/{}/refunds/{}",
-            crate::progenitor_support::encode_path(&fee.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(fee),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -153,8 +153,8 @@ impl ApplicationFees {
     pub async fn post_fee_refund(&self, fee: &str, id: &str) -> Result<crate::types::FeeRefund> {
         let url = format!(
             "/v1/application_fees/{}/refunds/{}",
-            crate::progenitor_support::encode_path(&fee.to_string()),
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(fee),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -173,7 +173,7 @@ impl ApplicationFees {
     pub async fn get(&self, id: &str) -> Result<crate::types::PlatformFee> {
         let url = format!(
             "/v1/application_fees/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -191,7 +191,7 @@ impl ApplicationFees {
     pub async fn post_refund(&self, id: &str) -> Result<crate::types::PlatformFee> {
         let url = format!(
             "/v1/application_fees/{}/refund",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await
@@ -230,7 +230,7 @@ impl ApplicationFees {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/application_fees/{}/refunds?{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
             query_
         );
 
@@ -250,7 +250,7 @@ impl ApplicationFees {
     pub async fn get_all_refunds(&self, id: &str) -> Result<Vec<crate::types::FeeRefund>> {
         let url = format!(
             "/v1/application_fees/{}/refunds",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         let mut resp: crate::types::Refunds = self.client.get(&url, None).await?;
@@ -314,7 +314,7 @@ impl ApplicationFees {
     pub async fn post_refund_application_fees(&self, id: &str) -> Result<crate::types::FeeRefund> {
         let url = format!(
             "/v1/application_fees/{}/refunds",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.post(&url, None).await

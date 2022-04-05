@@ -35,9 +35,9 @@ impl Subscriptions {
     pub async fn get_page(
         &self,
         collection_method: crate::types::CollectionMethod,
-        created: &str,
-        current_period_end: &str,
-        current_period_start: &str,
+        _created: &str,
+        _current_period_end: &str,
+        _current_period_start: &str,
         customer: &str,
         ending_before: &str,
         limit: i64,
@@ -93,9 +93,9 @@ impl Subscriptions {
     pub async fn get_all(
         &self,
         collection_method: crate::types::CollectionMethod,
-        created: &str,
-        current_period_end: &str,
-        current_period_start: &str,
+        _created: &str,
+        _current_period_end: &str,
+        _current_period_start: &str,
         customer: &str,
         price: &str,
         status: crate::types::GetSubscriptionsStatus,
@@ -295,7 +295,7 @@ impl Subscriptions {
     ) -> Result<crate::types::Subscription> {
         let url = format!(
             "/v1/subscriptions/{}",
-            crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+            crate::progenitor_support::encode_path(subscription_exposed_id),
         );
 
         self.client.get(&url, None).await
@@ -316,7 +316,7 @@ impl Subscriptions {
     ) -> Result<crate::types::Subscription> {
         let url = format!(
             "/v1/subscriptions/{}",
-            crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+            crate::progenitor_support::encode_path(subscription_exposed_id),
         );
 
         self.client.post(&url, None).await
@@ -341,7 +341,7 @@ impl Subscriptions {
     ) -> Result<crate::types::Subscription> {
         let url = format!(
             "/v1/subscriptions/{}",
-            crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+            crate::progenitor_support::encode_path(subscription_exposed_id),
         );
 
         self.client.delete(&url, None).await
@@ -362,7 +362,7 @@ impl Subscriptions {
     ) -> Result<crate::types::DeletedDiscount> {
         let url = format!(
             "/v1/subscriptions/{}/discount",
-            crate::progenitor_support::encode_path(&subscription_exposed_id.to_string()),
+            crate::progenitor_support::encode_path(subscription_exposed_id),
         );
 
         self.client.delete(&url, None).await

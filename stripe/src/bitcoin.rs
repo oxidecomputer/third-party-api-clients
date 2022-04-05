@@ -145,7 +145,7 @@ impl Bitcoin {
     pub async fn get_receiver(&self, id: &str) -> Result<crate::types::BitcoinReceiver> {
         let url = format!(
             "/v1/bitcoin/receivers/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await
@@ -189,7 +189,7 @@ impl Bitcoin {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/bitcoin/receivers/{}/transactions?{}",
-            crate::progenitor_support::encode_path(&receiver.to_string()),
+            crate::progenitor_support::encode_path(receiver),
             query_
         );
 
@@ -218,7 +218,7 @@ impl Bitcoin {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/bitcoin/receivers/{}/transactions?{}",
-            crate::progenitor_support::encode_path(&receiver.to_string()),
+            crate::progenitor_support::encode_path(receiver),
             query_
         );
 
