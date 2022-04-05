@@ -43,8 +43,8 @@ impl CloudStorageProviders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -72,8 +72,8 @@ impl CloudStorageProviders {
     ) -> Result<crate::types::CloudStorageProvidersData> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -102,8 +102,8 @@ impl CloudStorageProviders {
     ) -> Result<crate::types::CloudStorageProvidersData> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(user_id),
         );
 
         self.client
@@ -145,9 +145,9 @@ impl CloudStorageProviders {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage/{}?{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
-            crate::progenitor_support::encode_path(&service_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(service_id),
             query_
         );
 
@@ -178,9 +178,9 @@ impl CloudStorageProviders {
     ) -> Result<crate::types::CloudStorageProvidersData> {
         let url = format!(
             "/v2.1/accounts/{}/users/{}/cloud_storage/{}",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
-            crate::progenitor_support::encode_path(&user_id.to_string()),
-            crate::progenitor_support::encode_path(&service_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(user_id),
+            crate::progenitor_support::encode_path(service_id),
         );
 
         self.client.delete(&url, None).await

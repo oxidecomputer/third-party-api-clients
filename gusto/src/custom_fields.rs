@@ -25,7 +25,7 @@ impl CustomFields {
     ) -> Result<crate::types::GetEmployeeCustomFieldsResponse> {
         let url = format!(
             "/v1/employees/{}/custom_fields",
-            crate::progenitor_support::encode_path(&employee_id.to_string()),
+            crate::progenitor_support::encode_path(employee_id),
         );
 
         self.client.get(&url, None).await
@@ -44,7 +44,7 @@ impl CustomFields {
     ) -> Result<crate::types::GetCompanyCustomFieldsResponse> {
         let url = format!(
             "/v1/companies/{}/custom_fields",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(company_id),
         );
 
         self.client.get(&url, None).await

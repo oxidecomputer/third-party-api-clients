@@ -150,7 +150,7 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/report/users/{}/meetings?{}",
-            crate::progenitor_support::encode_path(&user_id.to_string()),
+            crate::progenitor_support::encode_path(user_id),
             query_
         );
 
@@ -182,7 +182,7 @@ impl Reports {
     ) -> Result<crate::types::ReportMeetingDetailsResponse> {
         let url = format!(
             "/report/meetings/{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            crate::progenitor_support::encode_path(meeting_id),
         );
 
         self.client.get(&url, None).await
@@ -231,7 +231,7 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/report/meetings/{}/participants?{}",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            crate::progenitor_support::encode_path(meeting_id),
             query_
         );
 
@@ -263,7 +263,7 @@ impl Reports {
     ) -> Result<crate::types::ReportMeetingPollsResponse> {
         let url = format!(
             "/report/meetings/{}/polls",
-            crate::progenitor_support::encode_path(&meeting_id.to_string()),
+            crate::progenitor_support::encode_path(meeting_id),
         );
 
         self.client.get(&url, None).await
@@ -293,7 +293,7 @@ impl Reports {
     ) -> Result<crate::types::ReportMeetingDetailsResponse> {
         let url = format!(
             "/report/webinars/{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            crate::progenitor_support::encode_path(webinar_id),
         );
 
         self.client.get(&url, None).await
@@ -340,7 +340,7 @@ impl Reports {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/report/webinars/{}/participants?{}",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            crate::progenitor_support::encode_path(webinar_id),
             query_
         );
 
@@ -371,7 +371,7 @@ impl Reports {
     ) -> Result<crate::types::ReportMeetingPollsResponse> {
         let url = format!(
             "/report/webinars/{}/polls",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            crate::progenitor_support::encode_path(webinar_id),
         );
 
         self.client.get(&url, None).await
@@ -403,7 +403,7 @@ impl Reports {
     ) -> Result<crate::types::ReportWebinarQaResponse> {
         let url = format!(
             "/report/webinars/{}/qa",
-            crate::progenitor_support::encode_path(&webinar_id.to_string()),
+            crate::progenitor_support::encode_path(webinar_id),
         );
 
         self.client.get(&url, None).await

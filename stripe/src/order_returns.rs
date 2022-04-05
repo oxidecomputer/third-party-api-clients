@@ -28,7 +28,7 @@ impl OrderReturns {
     */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         order: &str,
@@ -65,7 +65,7 @@ impl OrderReturns {
     */
     pub async fn get_all(
         &self,
-        created: &str,
+        _created: &str,
         order: &str,
     ) -> Result<Vec<crate::types::OrderReturn>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -127,7 +127,7 @@ impl OrderReturns {
     pub async fn get(&self, id: &str) -> Result<crate::types::OrderReturn> {
         let url = format!(
             "/v1/order_returns/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.get(&url, None).await

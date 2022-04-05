@@ -25,7 +25,7 @@ impl Mandates {
     pub async fn get(&self, mandate: &str) -> Result<crate::types::Mandate> {
         let url = format!(
             "/v1/mandates/{}",
-            crate::progenitor_support::encode_path(&mandate.to_string()),
+            crate::progenitor_support::encode_path(mandate),
         );
 
         self.client.get(&url, None).await

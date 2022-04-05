@@ -127,7 +127,7 @@ impl BlocksApi {
     ) -> Result<Vec<crate::types::BlocksResponse>> {
         let url = format!(
             "/suppression/blocks/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
 
         self.client.get(&url, None).await
@@ -148,7 +148,7 @@ impl BlocksApi {
     ) -> Result<Vec<crate::types::BlocksResponse>> {
         let url = format!(
             "/suppression/blocks/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -168,7 +168,7 @@ impl BlocksApi {
     pub async fn delete_suppression_blocks_email(&self, email: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/suppression/blocks/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
 
         self.client.delete(&url, None).await

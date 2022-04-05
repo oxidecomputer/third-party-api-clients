@@ -30,8 +30,8 @@ impl Payouts {
     */
     pub async fn get_page(
         &self,
-        arrival_date: &str,
-        created: &str,
+        _arrival_date: &str,
+        _created: &str,
         destination: &str,
         ending_before: &str,
         limit: i64,
@@ -72,8 +72,8 @@ impl Payouts {
     */
     pub async fn get_all(
         &self,
-        arrival_date: &str,
-        created: &str,
+        _arrival_date: &str,
+        _created: &str,
         destination: &str,
         status: &str,
     ) -> Result<Vec<crate::types::Payout>> {
@@ -153,7 +153,7 @@ impl Payouts {
     pub async fn get(&self, payout: &str) -> Result<crate::types::Payout> {
         let url = format!(
             "/v1/payouts/{}",
-            crate::progenitor_support::encode_path(&payout.to_string()),
+            crate::progenitor_support::encode_path(payout),
         );
 
         self.client.get(&url, None).await
@@ -171,7 +171,7 @@ impl Payouts {
     pub async fn post_payouts(&self, payout: &str) -> Result<crate::types::Payout> {
         let url = format!(
             "/v1/payouts/{}",
-            crate::progenitor_support::encode_path(&payout.to_string()),
+            crate::progenitor_support::encode_path(payout),
         );
 
         self.client.post(&url, None).await
@@ -189,7 +189,7 @@ impl Payouts {
     pub async fn post_cancel(&self, payout: &str) -> Result<crate::types::Payout> {
         let url = format!(
             "/v1/payouts/{}/cancel",
-            crate::progenitor_support::encode_path(&payout.to_string()),
+            crate::progenitor_support::encode_path(payout),
         );
 
         self.client.post(&url, None).await
@@ -209,7 +209,7 @@ impl Payouts {
     pub async fn post_reverse(&self, payout: &str) -> Result<crate::types::Payout> {
         let url = format!(
             "/v1/payouts/{}/reverse",
-            crate::progenitor_support::encode_path(&payout.to_string()),
+            crate::progenitor_support::encode_path(payout),
         );
 
         self.client.post(&url, None).await
