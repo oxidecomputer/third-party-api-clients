@@ -27,7 +27,6 @@ impl TaxCodes {
     pub async fn get_page(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::TaxCode>> {
@@ -57,7 +56,7 @@ impl TaxCodes {
     *
     * <p>A list of <a href="https://stripe.com/docs/tax/tax-codes">all tax codes available</a> to add to Products in order to allow specific tax calculations.</p>
     */
-    pub async fn get_all(&self, expand: &[String]) -> Result<Vec<crate::types::TaxCode>> {
+    pub async fn get_all(&self) -> Result<Vec<crate::types::TaxCode>> {
         let url = "/v1/tax_codes".to_string();
         let mut resp: crate::types::TaxProductResourceCodeList =
             self.client.get(&url, None).await?;
@@ -111,7 +110,7 @@ impl TaxCodes {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], id: &str) -> Result<crate::types::TaxCode> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::TaxCode> {
         let url = format!(
             "/v1/tax_codes/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

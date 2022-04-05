@@ -37,7 +37,6 @@ impl Invoices {
         customer: &str,
         due_date: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         status: crate::types::GetInvoicesStatus,
@@ -90,7 +89,6 @@ impl Invoices {
         created: &str,
         customer: &str,
         due_date: &str,
-        expand: &[String],
         status: crate::types::GetInvoicesStatus,
         subscription: &str,
     ) -> Result<Vec<crate::types::Invoice>> {
@@ -181,7 +179,6 @@ impl Invoices {
     */
     pub async fn get_search(
         &self,
-        expand: &[String],
         limit: i64,
         page: &str,
         query: &str,
@@ -215,11 +212,7 @@ impl Invoices {
     * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
     * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
     */
-    pub async fn get_all_search(
-        &self,
-        expand: &[String],
-        query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -311,7 +304,6 @@ impl Invoices {
         customer: &str,
         customer_details: &str,
         discounts: &str,
-        expand: &[String],
         invoice_items: &[String],
         schedule: &str,
         subscription: &str,
@@ -425,7 +417,6 @@ impl Invoices {
         customer_details: &str,
         discounts: &str,
         ending_before: &str,
-        expand: &[String],
         invoice_items: &[String],
         limit: i64,
         schedule: &str,
@@ -524,7 +515,6 @@ impl Invoices {
         customer: &str,
         customer_details: &str,
         discounts: &str,
-        expand: &[String],
         invoice_items: &[String],
         schedule: &str,
         subscription: &str,
@@ -643,7 +633,7 @@ impl Invoices {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `invoice: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], invoice: &str) -> Result<crate::types::Invoice> {
+    pub async fn get(&self, invoice: &str) -> Result<crate::types::Invoice> {
         let url = format!(
             "/v1/invoices/{}",
             crate::progenitor_support::encode_path(&invoice.to_string()),
@@ -727,7 +717,6 @@ impl Invoices {
     pub async fn get_lines(
         &self,
         ending_before: &str,
-        expand: &[String],
         invoice: &str,
         limit: i64,
         starting_after: &str,
@@ -762,11 +751,7 @@ impl Invoices {
     *
     * <p>When retrieving an invoice, you’ll get a <strong>lines</strong> property containing the total count of line items and the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
     */
-    pub async fn get_all_lines(
-        &self,
-        expand: &[String],
-        invoice: &str,
-    ) -> Result<Vec<crate::types::LineItem>> {
+    pub async fn get_all_lines(&self, invoice: &str) -> Result<Vec<crate::types::LineItem>> {
         let url = format!(
             "/v1/invoices/{}/lines",
             crate::progenitor_support::encode_path(&invoice.to_string()),

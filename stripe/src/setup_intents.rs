@@ -32,7 +32,6 @@ impl SetupIntents {
         created: &str,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         payment_method: &str,
         starting_after: &str,
@@ -73,7 +72,6 @@ impl SetupIntents {
         &self,
         created: &str,
         customer: &str,
-        expand: &[String],
         payment_method: &str,
     ) -> Result<Vec<crate::types::SetupIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -159,7 +157,6 @@ impl SetupIntents {
     pub async fn get_intent(
         &self,
         client_secret: &str,
-        expand: &[String],
         intent: &str,
     ) -> Result<crate::types::SetupIntent> {
         let mut query_args: Vec<(String, String)> = Default::default();

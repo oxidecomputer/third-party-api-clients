@@ -32,7 +32,6 @@ impl Customers {
         created: &str,
         email: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         test_clock: &str,
@@ -73,7 +72,6 @@ impl Customers {
         &self,
         created: &str,
         email: &str,
-        expand: &[String],
         test_clock: &str,
     ) -> Result<Vec<crate::types::Customer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -154,7 +152,6 @@ impl Customers {
     */
     pub async fn get_search(
         &self,
-        expand: &[String],
         limit: i64,
         page: &str,
         query: &str,
@@ -188,11 +185,7 @@ impl Customers {
     * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
     * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
     */
-    pub async fn get_all_search(
-        &self,
-        expand: &[String],
-        query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -254,7 +247,6 @@ impl Customers {
     pub async fn get(
         &self,
         customer: &str,
-        expand: &[String],
     ) -> Result<crate::types::GetCustomersCustomerResponseAnyOf> {
         let url = format!(
             "/v1/customers/{}",
@@ -319,7 +311,6 @@ impl Customers {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::CustomerBalanceTransaction>> {
@@ -357,7 +348,6 @@ impl Customers {
     pub async fn get_all_balance_transactions(
         &self,
         customer: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::CustomerBalanceTransaction>> {
         let url = format!(
             "/v1/customers/{}/balance_transactions",
@@ -441,7 +431,6 @@ impl Customers {
     pub async fn get_balance_transactions_transaction(
         &self,
         customer: &str,
-        expand: &[String],
         transaction: &str,
     ) -> Result<crate::types::CustomerBalanceTransaction> {
         let url = format!(
@@ -494,7 +483,6 @@ impl Customers {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::BankAccount>> {
@@ -531,7 +519,6 @@ impl Customers {
     pub async fn get_all_bank_accounts(
         &self,
         customer: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::BankAccount>> {
         let url = format!(
             "/v1/customers/{}/bank_accounts",
@@ -618,7 +605,6 @@ impl Customers {
     pub async fn get_bank_account(
         &self,
         customer: &str,
-        expand: &[String],
         id: &str,
     ) -> Result<crate::types::BankAccount> {
         let url = format!(
@@ -721,7 +707,6 @@ impl Customers {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::Card>> {
@@ -757,11 +742,7 @@ impl Customers {
     * Note that the 10 most recent sources are always available on the <code>Customer</code> object.
     * If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional cards.</p>
     */
-    pub async fn get_all_cards(
-        &self,
-        customer: &str,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::Card>> {
+    pub async fn get_all_cards(&self, customer: &str) -> Result<Vec<crate::types::Card>> {
         let url = format!(
             "/v1/customers/{}/cards",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -841,12 +822,7 @@ impl Customers {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_card(
-        &self,
-        customer: &str,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::Card> {
+    pub async fn get_card(&self, customer: &str, id: &str) -> Result<crate::types::Card> {
         let url = format!(
             "/v1/customers/{}/cards/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -914,11 +890,7 @@ impl Customers {
     * * `customer: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_discount(
-        &self,
-        customer: &str,
-        expand: &[String],
-    ) -> Result<crate::types::DiscountData> {
+    pub async fn get_discount(&self, customer: &str) -> Result<crate::types::DiscountData> {
         let url = format!(
             "/v1/customers/{}/discount",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -963,7 +935,6 @@ impl Customers {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
@@ -1004,7 +975,6 @@ impl Customers {
     pub async fn get_all_payment_methods(
         &self,
         customer: &str,
-        expand: &[String],
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
     ) -> Result<Vec<crate::types::PaymentMethod>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -1077,7 +1047,6 @@ impl Customers {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         object: &str,
         starting_after: &str,
@@ -1118,7 +1087,6 @@ impl Customers {
     pub async fn get_all_sources(
         &self,
         customer: &str,
-        expand: &[String],
         object: &str,
     ) -> Result<Vec<crate::types::CustomerSourcesDataAnyOf>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -1209,7 +1177,6 @@ impl Customers {
     pub async fn get_source(
         &self,
         customer: &str,
-        expand: &[String],
         id: &str,
     ) -> Result<crate::types::PaymentSourceAnyOf> {
         let url = format!(
@@ -1310,7 +1277,6 @@ impl Customers {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::Subscription>> {
@@ -1347,7 +1313,6 @@ impl Customers {
     pub async fn get_all_subscriptions(
         &self,
         customer: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::Subscription>> {
         let url = format!(
             "/v1/customers/{}/subscriptions",
@@ -1427,7 +1392,6 @@ impl Customers {
     pub async fn get_subscriptions_subscription_exposed(
         &self,
         customer: &str,
-        expand: &[String],
         subscription_exposed_id: &str,
     ) -> Result<crate::types::Subscription> {
         let url = format!(
@@ -1505,7 +1469,6 @@ impl Customers {
     pub async fn get_subscriptions_subscription_exposed_discount(
         &self,
         customer: &str,
-        expand: &[String],
         subscription_exposed_id: &str,
     ) -> Result<crate::types::DiscountData> {
         let url = format!(
@@ -1558,7 +1521,6 @@ impl Customers {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::TaxId>> {
@@ -1592,11 +1554,7 @@ impl Customers {
     *
     * <p>Returns a list of tax IDs for a customer.</p>
     */
-    pub async fn get_all_tax_ids(
-        &self,
-        customer: &str,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::TaxId>> {
+    pub async fn get_all_tax_ids(&self, customer: &str) -> Result<Vec<crate::types::TaxId>> {
         let url = format!(
             "/v1/customers/{}/tax_ids",
             crate::progenitor_support::encode_path(&customer.to_string()),
@@ -1672,12 +1630,7 @@ impl Customers {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_tax_id(
-        &self,
-        customer: &str,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::TaxId> {
+    pub async fn get_tax_id(&self, customer: &str, id: &str) -> Result<crate::types::TaxId> {
         let url = format!(
             "/v1/customers/{}/tax_ids/{}",
             crate::progenitor_support::encode_path(&customer.to_string()),

@@ -27,7 +27,6 @@ impl Sigma {
     pub async fn get_scheduled_query_runs(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::ScheduledQueryRun>> {
@@ -60,7 +59,6 @@ impl Sigma {
     */
     pub async fn get_all_scheduled_query_runs(
         &self,
-        expand: &[String],
     ) -> Result<Vec<crate::types::ScheduledQueryRun>> {
         let url = "/v1/sigma/scheduled_query_runs".to_string();
         let mut resp: crate::types::GetSigmaScheduledQueryRunsResponse =
@@ -117,7 +115,6 @@ impl Sigma {
     */
     pub async fn get_scheduled_query_runs_run(
         &self,
-        expand: &[String],
         scheduled_query_run: &str,
     ) -> Result<crate::types::ScheduledQueryRun> {
         let url = format!(

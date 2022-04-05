@@ -30,7 +30,6 @@ impl PaymentMethods {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
@@ -70,7 +69,6 @@ impl PaymentMethods {
     pub async fn get_all(
         &self,
         customer: &str,
-        expand: &[String],
         type_: crate::types::GetCustomersCustomerPaymentMethodsType,
     ) -> Result<Vec<crate::types::PaymentMethod>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -146,11 +144,7 @@ impl PaymentMethods {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `payment_method: &str` -- The account's country.
     */
-    pub async fn get_method(
-        &self,
-        expand: &[String],
-        payment_method: &str,
-    ) -> Result<crate::types::PaymentMethod> {
+    pub async fn get_method(&self, payment_method: &str) -> Result<crate::types::PaymentMethod> {
         let url = format!(
             "/v1/payment_methods/{}",
             crate::progenitor_support::encode_path(&payment_method.to_string()),

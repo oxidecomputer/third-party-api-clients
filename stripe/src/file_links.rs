@@ -31,7 +31,6 @@ impl FileLinks {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         expired: bool,
         file: &str,
         limit: i64,
@@ -72,7 +71,6 @@ impl FileLinks {
     pub async fn get_all(
         &self,
         created: &str,
-        expand: &[String],
         expired: bool,
         file: &str,
     ) -> Result<Vec<crate::types::FileLink>> {
@@ -147,7 +145,7 @@ impl FileLinks {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `link: &str` -- The account's country.
     */
-    pub async fn get_link(&self, expand: &[String], link: &str) -> Result<crate::types::FileLink> {
+    pub async fn get_link(&self, link: &str) -> Result<crate::types::FileLink> {
         let url = format!(
             "/v1/file_links/{}",
             crate::progenitor_support::encode_path(&link.to_string()),

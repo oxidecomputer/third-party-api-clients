@@ -36,7 +36,6 @@ impl BalanceTransactions {
         created: &str,
         currency: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         payout: &str,
         source: &str,
@@ -87,7 +86,6 @@ impl BalanceTransactions {
         &self,
         created: &str,
         currency: &str,
-        expand: &[String],
         payout: &str,
         source: &str,
         type_: &str,
@@ -161,11 +159,7 @@ impl BalanceTransactions {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::BalanceTransaction> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::BalanceTransaction> {
         let url = format!(
             "/v1/balance_transactions/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

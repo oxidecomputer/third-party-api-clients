@@ -31,7 +31,6 @@ impl Quotes {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         status: crate::types::QuoteStatus,
@@ -75,7 +74,6 @@ impl Quotes {
     pub async fn get_all(
         &self,
         customer: &str,
-        expand: &[String],
         status: crate::types::QuoteStatus,
         test_clock: &str,
     ) -> Result<Vec<crate::types::Quote>> {
@@ -153,7 +151,7 @@ impl Quotes {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `quote: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], quote: &str) -> Result<crate::types::Quote> {
+    pub async fn get(&self, quote: &str) -> Result<crate::types::Quote> {
         let url = format!(
             "/v1/quotes/{}",
             crate::progenitor_support::encode_path(&quote.to_string()),
@@ -232,7 +230,6 @@ impl Quotes {
     pub async fn get_computed_upfront_line_items(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         quote: &str,
         starting_after: &str,
@@ -269,7 +266,6 @@ impl Quotes {
     */
     pub async fn get_all_computed_upfront_line_items(
         &self,
-        expand: &[String],
         quote: &str,
     ) -> Result<Vec<crate::types::Item>> {
         let url = format!(
@@ -352,7 +348,6 @@ impl Quotes {
     pub async fn get_line_items(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         quote: &str,
         starting_after: &str,
@@ -387,11 +382,7 @@ impl Quotes {
     *
     * <p>When retrieving a quote, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
     */
-    pub async fn get_all_line_items(
-        &self,
-        expand: &[String],
-        quote: &str,
-    ) -> Result<Vec<crate::types::Item>> {
+    pub async fn get_all_line_items(&self, quote: &str) -> Result<Vec<crate::types::Item>> {
         let url = format!(
             "/v1/quotes/{}/line_items",
             crate::progenitor_support::encode_path(&quote.to_string()),
@@ -448,7 +439,7 @@ impl Quotes {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `quote: &str` -- The account's country.
     */
-    pub async fn get_pdf(&self, expand: &[String], quote: &str) -> Result<()> {
+    pub async fn get_pdf(&self, quote: &str) -> Result<()> {
         let url = format!(
             "/v1/quotes/{}/pdf",
             crate::progenitor_support::encode_path(&quote.to_string()),

@@ -48,7 +48,6 @@ impl TestHelpers {
     pub async fn get_clocks(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::TestClock>> {
@@ -78,7 +77,7 @@ impl TestHelpers {
     *
     * <p>Returns a list of your test clocks.</p>
     */
-    pub async fn get_all_clocks(&self, expand: &[String]) -> Result<Vec<crate::types::TestClock>> {
+    pub async fn get_all_clocks(&self) -> Result<Vec<crate::types::TestClock>> {
         let url = "/v1/test_helpers/test_clocks".to_string();
         let mut resp: crate::types::GetTestHelpersClocksResponse =
             self.client.get(&url, None).await?;
@@ -142,11 +141,7 @@ impl TestHelpers {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `test_clock: &str` -- The account's country.
     */
-    pub async fn get_clocks_clock(
-        &self,
-        expand: &[String],
-        test_clock: &str,
-    ) -> Result<crate::types::TestClock> {
+    pub async fn get_clocks_clock(&self, test_clock: &str) -> Result<crate::types::TestClock> {
         let url = format!(
             "/v1/test_helpers/test_clocks/{}",
             crate::progenitor_support::encode_path(&test_clock.to_string()),

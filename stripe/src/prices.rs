@@ -37,7 +37,6 @@ impl Prices {
         created: &str,
         currency: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         lookup_keys: &[String],
         product: &str,
@@ -88,7 +87,6 @@ impl Prices {
         active: bool,
         created: &str,
         currency: &str,
-        expand: &[String],
         lookup_keys: &[String],
         product: &str,
         recurring: &str,
@@ -178,7 +176,6 @@ impl Prices {
     */
     pub async fn get_search(
         &self,
-        expand: &[String],
         limit: i64,
         page: &str,
         query: &str,
@@ -212,11 +209,7 @@ impl Prices {
     * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
     * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
     */
-    pub async fn get_all_search(
-        &self,
-        expand: &[String],
-        query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -275,7 +268,7 @@ impl Prices {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `price: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], price: &str) -> Result<crate::types::PriceData> {
+    pub async fn get(&self, price: &str) -> Result<crate::types::PriceData> {
         let url = format!(
             "/v1/prices/{}",
             crate::progenitor_support::encode_path(&price.to_string()),

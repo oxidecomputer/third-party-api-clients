@@ -34,7 +34,6 @@ impl Payouts {
         created: &str,
         destination: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         status: &str,
@@ -76,7 +75,6 @@ impl Payouts {
         arrival_date: &str,
         created: &str,
         destination: &str,
-        expand: &[String],
         status: &str,
     ) -> Result<Vec<crate::types::Payout>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -154,7 +152,7 @@ impl Payouts {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `payout: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], payout: &str) -> Result<crate::types::Payout> {
+    pub async fn get(&self, payout: &str) -> Result<crate::types::Payout> {
         let url = format!(
             "/v1/payouts/{}",
             crate::progenitor_support::encode_path(&payout.to_string()),

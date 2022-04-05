@@ -30,7 +30,6 @@ impl Files {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         purpose: crate::types::Purpose,
         starting_after: &str,
@@ -67,7 +66,6 @@ impl Files {
     pub async fn get_all(
         &self,
         created: &str,
-        expand: &[String],
         purpose: crate::types::Purpose,
     ) -> Result<Vec<crate::types::File>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -140,7 +138,7 @@ impl Files {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `file: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], file: &str) -> Result<crate::types::File> {
+    pub async fn get(&self, file: &str) -> Result<crate::types::File> {
         let url = format!(
             "/v1/files/{}",
             crate::progenitor_support::encode_path(&file.to_string()),

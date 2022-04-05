@@ -29,7 +29,6 @@ impl Coupons {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::Coupon>> {
@@ -59,11 +58,7 @@ impl Coupons {
     *
     * <p>Returns a list of your coupons.</p>
     */
-    pub async fn get_all(
-        &self,
-        created: &str,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::Coupon>> {
+    pub async fn get_all(&self, created: &str) -> Result<Vec<crate::types::Coupon>> {
         let url = "/v1/coupons".to_string();
         let mut resp: crate::types::GetCouponsResponse = self.client.get(&url, None).await?;
 
@@ -128,7 +123,7 @@ impl Coupons {
     * * `coupon: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get(&self, coupon: &str, expand: &[String]) -> Result<crate::types::Coupon> {
+    pub async fn get(&self, coupon: &str) -> Result<crate::types::Coupon> {
         let url = format!(
             "/v1/coupons/{}",
             crate::progenitor_support::encode_path(&coupon.to_string()),

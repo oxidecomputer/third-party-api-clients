@@ -29,7 +29,6 @@ impl Accounts {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::Account>> {
@@ -59,11 +58,7 @@ impl Accounts {
     *
     * <p>Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>. If you’re not a platform, the list is empty.</p>
     */
-    pub async fn get_all(
-        &self,
-        created: &str,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::Account>> {
+    pub async fn get_all(&self, created: &str) -> Result<Vec<crate::types::Account>> {
         let url = "/v1/accounts".to_string();
         let mut resp: crate::types::GetAccountsResponse = self.client.get(&url, None).await?;
 
@@ -127,7 +122,7 @@ impl Accounts {
     * * `account: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get(&self, account: &str, expand: &[String]) -> Result<crate::types::Account> {
+    pub async fn get(&self, account: &str) -> Result<crate::types::Account> {
         let url = format!(
             "/v1/accounts/{}",
             crate::progenitor_support::encode_path(&account.to_string()),
@@ -207,12 +202,7 @@ impl Accounts {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_bank(
-        &self,
-        account: &str,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::DataAnyOf> {
+    pub async fn get_bank(&self, account: &str, id: &str) -> Result<crate::types::DataAnyOf> {
         let url = format!(
             "/v1/accounts/{}/bank_accounts/{}",
             crate::progenitor_support::encode_path(&account.to_string()),
@@ -282,11 +272,7 @@ impl Accounts {
     * * `account: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_capabilities(
-        &self,
-        account: &str,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::Capability>> {
+    pub async fn get_capabilities(&self, account: &str) -> Result<Vec<crate::types::Capability>> {
         let url = format!(
             "/v1/accounts/{}/capabilities",
             crate::progenitor_support::encode_path(&account.to_string()),
@@ -308,7 +294,6 @@ impl Accounts {
     pub async fn get_all_capabilities(
         &self,
         account: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::Capability>> {
         let url = format!(
             "/v1/accounts/{}/capabilities",
@@ -371,7 +356,6 @@ impl Accounts {
         &self,
         account: &str,
         capability: &str,
-        expand: &[String],
     ) -> Result<crate::types::Capability> {
         let url = format!(
             "/v1/accounts/{}/capabilities/{}",
@@ -423,7 +407,6 @@ impl Accounts {
         &self,
         account: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::DataAnyOf>> {
@@ -457,11 +440,7 @@ impl Accounts {
     *
     * <p>List external accounts for an account.</p>
     */
-    pub async fn get_all_external(
-        &self,
-        account: &str,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::DataAnyOf>> {
+    pub async fn get_all_external(&self, account: &str) -> Result<Vec<crate::types::DataAnyOf>> {
         let url = format!(
             "/v1/accounts/{}/external_accounts",
             crate::progenitor_support::encode_path(&account.to_string()),
@@ -540,7 +519,6 @@ impl Accounts {
     pub async fn get_external_accounts(
         &self,
         account: &str,
-        expand: &[String],
         id: &str,
     ) -> Result<crate::types::DataAnyOf> {
         let url = format!(
@@ -640,7 +618,6 @@ impl Accounts {
         &self,
         account: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         relationship: &str,
         starting_after: &str,
@@ -678,7 +655,6 @@ impl Accounts {
     pub async fn get_all_people(
         &self,
         account: &str,
-        expand: &[String],
         relationship: &str,
     ) -> Result<Vec<crate::types::Person>> {
         let url = format!(
@@ -759,7 +735,6 @@ impl Accounts {
     pub async fn get_people_person(
         &self,
         account: &str,
-        expand: &[String],
         person: &str,
     ) -> Result<crate::types::Person> {
         let url = format!(
@@ -837,7 +812,6 @@ impl Accounts {
         &self,
         account: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         relationship: &str,
         starting_after: &str,
@@ -875,7 +849,6 @@ impl Accounts {
     pub async fn get_all_persons(
         &self,
         account: &str,
-        expand: &[String],
         relationship: &str,
     ) -> Result<Vec<crate::types::Person>> {
         let url = format!(
@@ -956,7 +929,6 @@ impl Accounts {
     pub async fn get_persons_person(
         &self,
         account: &str,
-        expand: &[String],
         person: &str,
     ) -> Result<crate::types::Person> {
         let url = format!(

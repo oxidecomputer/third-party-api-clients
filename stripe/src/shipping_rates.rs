@@ -33,7 +33,6 @@ impl ShippingRates {
         created: &str,
         currency: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::ShippingRate>> {
@@ -74,7 +73,6 @@ impl ShippingRates {
         active: bool,
         created: &str,
         currency: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::ShippingRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
@@ -149,7 +147,6 @@ impl ShippingRates {
     */
     pub async fn get_rate_token(
         &self,
-        expand: &[String],
         shipping_rate_token: &str,
     ) -> Result<crate::types::ShippingRate> {
         let url = format!(

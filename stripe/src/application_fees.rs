@@ -31,7 +31,6 @@ impl ApplicationFees {
         charge: &str,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::PlatformFee>> {
@@ -68,7 +67,6 @@ impl ApplicationFees {
         &self,
         charge: &str,
         created: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::PlatformFee>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
@@ -130,12 +128,7 @@ impl ApplicationFees {
     * * `fee: &str` -- The account's country.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_fee_refund(
-        &self,
-        expand: &[String],
-        fee: &str,
-        id: &str,
-    ) -> Result<crate::types::FeeRefund> {
+    pub async fn get_fee_refund(&self, fee: &str, id: &str) -> Result<crate::types::FeeRefund> {
         let url = format!(
             "/v1/application_fees/{}/refunds/{}",
             crate::progenitor_support::encode_path(&fee.to_string()),
@@ -177,7 +170,7 @@ impl ApplicationFees {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], id: &str) -> Result<crate::types::PlatformFee> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::PlatformFee> {
         let url = format!(
             "/v1/application_fees/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -220,7 +213,6 @@ impl ApplicationFees {
     pub async fn get_refunds(
         &self,
         ending_before: &str,
-        expand: &[String],
         id: &str,
         limit: i64,
         starting_after: &str,
@@ -255,11 +247,7 @@ impl ApplicationFees {
     *
     * <p>You can see a list of the refunds belonging to a specific application fee. Note that the 10 most recent refunds are always available by default on the application fee object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
     */
-    pub async fn get_all_refunds(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<Vec<crate::types::FeeRefund>> {
+    pub async fn get_all_refunds(&self, id: &str) -> Result<Vec<crate::types::FeeRefund>> {
         let url = format!(
             "/v1/application_fees/{}/refunds",
             crate::progenitor_support::encode_path(&id.to_string()),

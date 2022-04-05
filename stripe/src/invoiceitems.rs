@@ -33,7 +33,6 @@ impl Invoiceitems {
         created: &str,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         invoice: &str,
         limit: i64,
         pending: bool,
@@ -78,7 +77,6 @@ impl Invoiceitems {
         &self,
         created: &str,
         customer: &str,
-        expand: &[String],
         invoice: &str,
         pending: bool,
     ) -> Result<Vec<crate::types::InvoiceItem>> {
@@ -156,11 +154,7 @@ impl Invoiceitems {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `invoiceitem: &str` -- The account's country.
     */
-    pub async fn get(
-        &self,
-        expand: &[String],
-        invoiceitem: &str,
-    ) -> Result<crate::types::InvoiceItem> {
+    pub async fn get(&self, invoiceitem: &str) -> Result<crate::types::InvoiceItem> {
         let url = format!(
             "/v1/invoiceitems/{}",
             crate::progenitor_support::encode_path(&invoiceitem.to_string()),

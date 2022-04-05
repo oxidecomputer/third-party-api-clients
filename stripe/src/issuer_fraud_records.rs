@@ -29,7 +29,6 @@ impl IssuerFraudRecords {
         &self,
         charge: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::IssuerFraudRecord>> {
@@ -62,11 +61,7 @@ impl IssuerFraudRecords {
     *
     * <p>Returns a list of issuer fraud records.</p>
     */
-    pub async fn get_all(
-        &self,
-        charge: &str,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::IssuerFraudRecord>> {
+    pub async fn get_all(&self, charge: &str) -> Result<Vec<crate::types::IssuerFraudRecord>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !charge.is_empty() {
             query_args.push(("charge".to_string(), charge.to_string()));
@@ -130,7 +125,6 @@ impl IssuerFraudRecords {
     */
     pub async fn get_record(
         &self,
-        expand: &[String],
         issuer_fraud_record: &str,
     ) -> Result<crate::types::IssuerFraudRecord> {
         let url = format!(

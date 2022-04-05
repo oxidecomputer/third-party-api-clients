@@ -33,7 +33,6 @@ impl SetupAttempts {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         setup_intent: &str,
         starting_after: &str,
@@ -71,7 +70,6 @@ impl SetupAttempts {
     pub async fn get_all(
         &self,
         created: &str,
-        expand: &[String],
         setup_intent: &str,
     ) -> Result<Vec<crate::types::SetupAttempt>> {
         let mut query_args: Vec<(String, String)> = Default::default();

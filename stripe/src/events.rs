@@ -33,7 +33,6 @@ impl Events {
         created: &str,
         delivery_success: bool,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         type_: &str,
@@ -75,7 +74,6 @@ impl Events {
         &self,
         created: &str,
         delivery_success: bool,
-        expand: &[String],
         type_: &str,
         types: &[String],
     ) -> Result<Vec<crate::types::Event>> {
@@ -140,7 +138,7 @@ impl Events {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], id: &str) -> Result<crate::types::Event> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::Event> {
         let url = format!(
             "/v1/events/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

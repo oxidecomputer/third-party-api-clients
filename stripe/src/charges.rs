@@ -33,7 +33,6 @@ impl Charges {
         created: &str,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
@@ -78,7 +77,6 @@ impl Charges {
         &self,
         created: &str,
         customer: &str,
-        expand: &[String],
         payment_intent: &str,
         transfer_group: &str,
     ) -> Result<Vec<crate::types::Charge>> {
@@ -163,7 +161,6 @@ impl Charges {
     */
     pub async fn get_search(
         &self,
-        expand: &[String],
         limit: i64,
         page: &str,
         query: &str,
@@ -197,11 +194,7 @@ impl Charges {
     * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
     * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
     */
-    pub async fn get_all_search(
-        &self,
-        expand: &[String],
-        query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -260,7 +253,7 @@ impl Charges {
     * * `charge: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get(&self, charge: &str, expand: &[String]) -> Result<crate::types::Charge> {
+    pub async fn get(&self, charge: &str) -> Result<crate::types::Charge> {
         let url = format!(
             "/v1/charges/{}",
             crate::progenitor_support::encode_path(&charge.to_string()),
@@ -317,11 +310,7 @@ impl Charges {
     * * `charge: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_dispute(
-        &self,
-        charge: &str,
-        expand: &[String],
-    ) -> Result<crate::types::Dispute> {
+    pub async fn get_dispute(&self, charge: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/charges/{}/dispute",
             crate::progenitor_support::encode_path(&charge.to_string()),
@@ -411,7 +400,6 @@ impl Charges {
         &self,
         charge: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::Refund>> {
@@ -445,11 +433,7 @@ impl Charges {
     *
     * <p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
     */
-    pub async fn get_all_refunds(
-        &self,
-        charge: &str,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::Refund>> {
+    pub async fn get_all_refunds(&self, charge: &str) -> Result<Vec<crate::types::Refund>> {
         let url = format!(
             "/v1/charges/{}/refunds",
             crate::progenitor_support::encode_path(&charge.to_string()),
@@ -528,7 +512,6 @@ impl Charges {
     pub async fn get_refunds_refund(
         &self,
         charge: &str,
-        expand: &[String],
         refund: &str,
     ) -> Result<crate::types::Refund> {
         let url = format!(

@@ -29,7 +29,6 @@ impl Reporting {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::ReportingReportRun>> {
@@ -63,7 +62,6 @@ impl Reporting {
     pub async fn get_all_report_runs(
         &self,
         created: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::ReportingReportRun>> {
         let url = "/v1/reporting/report_runs".to_string();
         let mut resp: crate::types::GetReportingReportRunsResponse =
@@ -130,7 +128,6 @@ impl Reporting {
     */
     pub async fn get_report_runs_run(
         &self,
-        expand: &[String],
         report_run: &str,
     ) -> Result<crate::types::ReportingReportRun> {
         let url = format!(
@@ -150,10 +147,7 @@ impl Reporting {
     *
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_report_types(
-        &self,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::ReportingReportType>> {
+    pub async fn get_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
         let url = "/v1/reporting/report_types".to_string();
         let resp: crate::types::FinancialReportingFinanceReportTypeList =
             self.client.get(&url, None).await?;
@@ -169,10 +163,7 @@ impl Reporting {
     *
     * <p>Returns a full list of Report Types.</p>
     */
-    pub async fn get_all_report_types(
-        &self,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::ReportingReportType>> {
+    pub async fn get_all_report_types(&self) -> Result<Vec<crate::types::ReportingReportType>> {
         let url = "/v1/reporting/report_types".to_string();
         let mut resp: crate::types::FinancialReportingFinanceReportTypeList =
             self.client.get(&url, None).await?;
@@ -228,7 +219,6 @@ impl Reporting {
     */
     pub async fn get_report_types_type(
         &self,
-        expand: &[String],
         report_type: &str,
     ) -> Result<crate::types::ReportingReportType> {
         let url = format!(

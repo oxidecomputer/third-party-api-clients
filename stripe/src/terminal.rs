@@ -37,7 +37,6 @@ impl Terminal {
     pub async fn get_locations(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::TerminalLocation>> {
@@ -67,10 +66,7 @@ impl Terminal {
     *
     * <p>Returns a list of <code>Location</code> objects.</p>
     */
-    pub async fn get_all_locations(
-        &self,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::TerminalLocation>> {
+    pub async fn get_all_locations(&self) -> Result<Vec<crate::types::TerminalLocation>> {
         let url = "/v1/terminal/locations".to_string();
         let mut resp: crate::types::TerminalLocationList = self.client.get(&url, None).await?;
 
@@ -136,7 +132,6 @@ impl Terminal {
     */
     pub async fn get_locations_location(
         &self,
-        expand: &[String],
         location: &str,
     ) -> Result<crate::types::GetTerminalLocationResponseAnyOf> {
         let url = format!(
@@ -208,7 +203,6 @@ impl Terminal {
         &self,
         device_type: crate::types::DeviceType,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         location: &str,
         starting_after: &str,
@@ -252,7 +246,6 @@ impl Terminal {
     pub async fn get_all_readers(
         &self,
         device_type: crate::types::DeviceType,
-        expand: &[String],
         location: &str,
         status: crate::types::CustomerAcceptanceType,
     ) -> Result<Vec<crate::types::TerminalReader>> {
@@ -332,7 +325,6 @@ impl Terminal {
     */
     pub async fn get_readers_reader(
         &self,
-        expand: &[String],
         reader: &str,
     ) -> Result<crate::types::GetTerminalReadersReaderResponseAnyOf> {
         let url = format!(

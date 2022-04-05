@@ -40,7 +40,6 @@ impl Subscriptions {
         current_period_start: &str,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         price: &str,
         starting_after: &str,
@@ -98,7 +97,6 @@ impl Subscriptions {
         current_period_end: &str,
         current_period_start: &str,
         customer: &str,
-        expand: &[String],
         price: &str,
         status: crate::types::GetSubscriptionsStatus,
         test_clock: &str,
@@ -199,7 +197,6 @@ impl Subscriptions {
     */
     pub async fn get_search(
         &self,
-        expand: &[String],
         limit: i64,
         page: &str,
         query: &str,
@@ -233,11 +230,7 @@ impl Subscriptions {
     * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
     * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
     */
-    pub async fn get_all_search(
-        &self,
-        expand: &[String],
-        query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -298,7 +291,6 @@ impl Subscriptions {
     */
     pub async fn get_exposed(
         &self,
-        expand: &[String],
         subscription_exposed_id: &str,
     ) -> Result<crate::types::Subscription> {
         let url = format!(

@@ -29,7 +29,6 @@ impl Checkout {
     pub async fn get_sessions(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
@@ -70,7 +69,6 @@ impl Checkout {
     */
     pub async fn get_all_sessions(
         &self,
-        expand: &[String],
         payment_intent: &str,
         subscription: &str,
     ) -> Result<Vec<crate::types::Session>> {
@@ -146,11 +144,7 @@ impl Checkout {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `session: &str` -- The account's country.
     */
-    pub async fn get_sessions_session(
-        &self,
-        expand: &[String],
-        session: &str,
-    ) -> Result<crate::types::Session> {
+    pub async fn get_sessions_session(&self, session: &str) -> Result<crate::types::Session> {
         let url = format!(
             "/v1/checkout/sessions/{}",
             crate::progenitor_support::encode_path(&session.to_string()),
@@ -198,7 +192,6 @@ impl Checkout {
     pub async fn get_sessions_session_line_items(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         session: &str,
         starting_after: &str,
@@ -235,7 +228,6 @@ impl Checkout {
     */
     pub async fn get_all_sessions_session_line_items(
         &self,
-        expand: &[String],
         session: &str,
     ) -> Result<Vec<crate::types::Item>> {
         let url = format!(

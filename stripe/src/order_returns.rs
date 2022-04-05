@@ -30,7 +30,6 @@ impl OrderReturns {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         order: &str,
         starting_after: &str,
@@ -67,7 +66,6 @@ impl OrderReturns {
     pub async fn get_all(
         &self,
         created: &str,
-        expand: &[String],
         order: &str,
     ) -> Result<Vec<crate::types::OrderReturn>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -128,7 +126,7 @@ impl OrderReturns {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], id: &str) -> Result<crate::types::OrderReturn> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::OrderReturn> {
         let url = format!(
             "/v1/order_returns/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

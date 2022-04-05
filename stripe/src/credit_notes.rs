@@ -30,7 +30,6 @@ impl CreditNotes {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         invoice: &str,
         limit: i64,
         starting_after: &str,
@@ -70,7 +69,6 @@ impl CreditNotes {
     pub async fn get_all(
         &self,
         customer: &str,
-        expand: &[String],
         invoice: &str,
     ) -> Result<Vec<crate::types::CreditNote>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -170,7 +168,6 @@ impl CreditNotes {
         &self,
         amount: i64,
         credit_amount: i64,
-        expand: &[String],
         invoice: &str,
         lines: &[String],
         memo: &str,
@@ -241,7 +238,6 @@ impl CreditNotes {
         amount: i64,
         credit_amount: i64,
         ending_before: &str,
-        expand: &[String],
         invoice: &str,
         limit: i64,
         lines: &[String],
@@ -310,7 +306,6 @@ impl CreditNotes {
         &self,
         amount: i64,
         credit_amount: i64,
-        expand: &[String],
         invoice: &str,
         lines: &[String],
         memo: &str,
@@ -409,7 +404,6 @@ impl CreditNotes {
         &self,
         credit_note: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
@@ -446,7 +440,6 @@ impl CreditNotes {
     pub async fn get_all_note_lines(
         &self,
         credit_note: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::CreditNoteLineItem>> {
         let url = format!(
             "/v1/credit_notes/{}/lines",
@@ -504,7 +497,7 @@ impl CreditNotes {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], id: &str) -> Result<crate::types::CreditNote> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::CreditNote> {
         let url = format!(
             "/v1/credit_notes/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

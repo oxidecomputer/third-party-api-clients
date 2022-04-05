@@ -32,7 +32,6 @@ impl Transfers {
         created: &str,
         destination: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         transfer_group: &str,
@@ -73,7 +72,6 @@ impl Transfers {
         &self,
         created: &str,
         destination: &str,
-        expand: &[String],
         transfer_group: &str,
     ) -> Result<Vec<crate::types::Transfer>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -153,7 +151,6 @@ impl Transfers {
     pub async fn get_reversals(
         &self,
         ending_before: &str,
-        expand: &[String],
         id: &str,
         limit: i64,
         starting_after: &str,
@@ -188,11 +185,7 @@ impl Transfers {
     *
     * <p>You can see a list of the reversals belonging to a specific transfer. Note that the 10 most recent reversals are always available by default on the transfer object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional reversals.</p>
     */
-    pub async fn get_all_reversals(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<Vec<crate::types::TransferReversal>> {
+    pub async fn get_all_reversals(&self, id: &str) -> Result<Vec<crate::types::TransferReversal>> {
         let url = format!(
             "/v1/transfers/{}/reversals",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -271,7 +264,7 @@ impl Transfers {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `transfer: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], transfer: &str) -> Result<crate::types::Transfer> {
+    pub async fn get(&self, transfer: &str) -> Result<crate::types::Transfer> {
         let url = format!(
             "/v1/transfers/{}",
             crate::progenitor_support::encode_path(&transfer.to_string()),
@@ -313,7 +306,6 @@ impl Transfers {
     */
     pub async fn get_reversal(
         &self,
-        expand: &[String],
         id: &str,
         transfer: &str,
     ) -> Result<crate::types::TransferReversal> {

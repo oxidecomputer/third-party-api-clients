@@ -34,7 +34,6 @@ impl ThreeDSecure {
     */
     pub async fn get_3d_secure_three_d(
         &self,
-        expand: &[String],
         three_d_secure: &str,
     ) -> Result<crate::types::ThreeDSecure> {
         let url = format!(

@@ -31,7 +31,6 @@ impl Bitcoin {
         &self,
         active: bool,
         ending_before: &str,
-        expand: &[String],
         filled: bool,
         limit: i64,
         starting_after: &str,
@@ -75,7 +74,6 @@ impl Bitcoin {
     pub async fn get_all_receivers(
         &self,
         active: bool,
-        expand: &[String],
         filled: bool,
         uncaptured_funds: bool,
     ) -> Result<Vec<crate::types::BitcoinReceiver>> {
@@ -144,11 +142,7 @@ impl Bitcoin {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_receiver(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::BitcoinReceiver> {
+    pub async fn get_receiver(&self, id: &str) -> Result<crate::types::BitcoinReceiver> {
         let url = format!(
             "/v1/bitcoin/receivers/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -175,7 +169,6 @@ impl Bitcoin {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         receiver: &str,
         starting_after: &str,
@@ -216,7 +209,6 @@ impl Bitcoin {
     pub async fn get_all_receivers_receiver_transactions(
         &self,
         customer: &str,
-        expand: &[String],
         receiver: &str,
     ) -> Result<Vec<crate::types::BitcoinTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -289,7 +281,6 @@ impl Bitcoin {
         &self,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         receiver: &str,
         starting_after: &str,
@@ -329,7 +320,6 @@ impl Bitcoin {
     pub async fn get_all_transactions(
         &self,
         customer: &str,
-        expand: &[String],
         receiver: &str,
     ) -> Result<Vec<crate::types::BitcoinTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();

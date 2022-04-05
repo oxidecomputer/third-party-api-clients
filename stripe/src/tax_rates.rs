@@ -32,7 +32,6 @@ impl TaxRates {
         active: bool,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         inclusive: bool,
         limit: i64,
         starting_after: &str,
@@ -73,7 +72,6 @@ impl TaxRates {
         &self,
         active: bool,
         created: &str,
-        expand: &[String],
         inclusive: bool,
     ) -> Result<Vec<crate::types::TaxRate>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -147,11 +145,7 @@ impl TaxRates {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `tax_rate: &str` -- The account's country.
     */
-    pub async fn get_rate(
-        &self,
-        expand: &[String],
-        tax_rate: &str,
-    ) -> Result<crate::types::TaxRate> {
+    pub async fn get_rate(&self, tax_rate: &str) -> Result<crate::types::TaxRate> {
         let url = format!(
             "/v1/tax_rates/{}",
             crate::progenitor_support::encode_path(&tax_rate.to_string()),

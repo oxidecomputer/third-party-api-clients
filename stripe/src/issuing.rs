@@ -34,7 +34,6 @@ impl Issuing {
         cardholder: &str,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         status: crate::types::IssuingAuthorizationStatus,
@@ -80,7 +79,6 @@ impl Issuing {
         card: &str,
         cardholder: &str,
         created: &str,
-        expand: &[String],
         status: crate::types::IssuingAuthorizationStatus,
     ) -> Result<Vec<crate::types::IssuingAuthorization>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -151,7 +149,6 @@ impl Issuing {
     pub async fn get_authorizations_authorization(
         &self,
         authorization: &str,
-        expand: &[String],
     ) -> Result<crate::types::IssuingAuthorization> {
         let url = format!(
             "/v1/issuing/authorizations/{}",
@@ -246,7 +243,6 @@ impl Issuing {
         created: &str,
         email: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         phone_number: &str,
         starting_after: &str,
@@ -295,7 +291,6 @@ impl Issuing {
         &self,
         created: &str,
         email: &str,
-        expand: &[String],
         phone_number: &str,
         status: crate::types::IssuingCardholderStatus,
         type_: crate::types::AccountHolderType,
@@ -381,7 +376,6 @@ impl Issuing {
     pub async fn get_cardholders_cardholder(
         &self,
         cardholder: &str,
-        expand: &[String],
     ) -> Result<crate::types::IssuingCardholder> {
         let url = format!(
             "/v1/issuing/cardholders/{}",
@@ -438,7 +432,6 @@ impl Issuing {
         ending_before: &str,
         exp_month: i64,
         exp_year: i64,
-        expand: &[String],
         last_4: &str,
         limit: i64,
         starting_after: &str,
@@ -495,7 +488,6 @@ impl Issuing {
         created: &str,
         exp_month: i64,
         exp_year: i64,
-        expand: &[String],
         last_4: &str,
         status: crate::types::IssuingCardStatus,
         type_: crate::types::IssuingCardType,
@@ -583,11 +575,7 @@ impl Issuing {
     * * `card: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_cards_card(
-        &self,
-        card: &str,
-        expand: &[String],
-    ) -> Result<crate::types::IssuingCard> {
+    pub async fn get_cards_card(&self, card: &str) -> Result<crate::types::IssuingCard> {
         let url = format!(
             "/v1/issuing/cards/{}",
             crate::progenitor_support::encode_path(&card.to_string()),
@@ -633,7 +621,6 @@ impl Issuing {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         status: crate::types::IssuingDisputeStatus,
@@ -674,7 +661,6 @@ impl Issuing {
     pub async fn get_all_disputes(
         &self,
         created: &str,
-        expand: &[String],
         status: crate::types::IssuingDisputeStatus,
         transaction: &str,
     ) -> Result<Vec<crate::types::IssuingDispute>> {
@@ -752,7 +738,6 @@ impl Issuing {
     pub async fn get_disputes_dispute(
         &self,
         dispute: &str,
-        expand: &[String],
     ) -> Result<crate::types::IssuingDispute> {
         let url = format!(
             "/v1/issuing/disputes/{}",
@@ -821,7 +806,6 @@ impl Issuing {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::IssuingSettlement>> {
@@ -854,7 +838,6 @@ impl Issuing {
     pub async fn get_all_settlements(
         &self,
         created: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::IssuingSettlement>> {
         let url = "/v1/issuing/settlements".to_string();
         let mut resp: crate::types::GetIssuingSettlementsResponse =
@@ -911,7 +894,6 @@ impl Issuing {
     */
     pub async fn get_settlements_settlement(
         &self,
-        expand: &[String],
         settlement: &str,
     ) -> Result<crate::types::IssuingSettlement> {
         let url = format!(
@@ -965,7 +947,6 @@ impl Issuing {
         cardholder: &str,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         type_: crate::types::IssuingTransactionType,
@@ -1011,7 +992,6 @@ impl Issuing {
         card: &str,
         cardholder: &str,
         created: &str,
-        expand: &[String],
         type_: crate::types::IssuingTransactionType,
     ) -> Result<Vec<crate::types::IssuingTransaction>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -1081,7 +1061,6 @@ impl Issuing {
     */
     pub async fn get_transactions_transaction(
         &self,
-        expand: &[String],
         transaction: &str,
     ) -> Result<crate::types::IssuingTransaction> {
         let url = format!(

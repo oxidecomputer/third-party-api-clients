@@ -32,7 +32,6 @@ impl Plans {
         active: bool,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         product: &str,
         starting_after: &str,
@@ -73,7 +72,6 @@ impl Plans {
         &self,
         active: bool,
         created: &str,
-        expand: &[String],
         product: &str,
     ) -> Result<Vec<crate::types::PlanData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -147,7 +145,7 @@ impl Plans {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `plan: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], plan: &str) -> Result<crate::types::PlanData> {
+    pub async fn get(&self, plan: &str) -> Result<crate::types::PlanData> {
         let url = format!(
             "/v1/plans/{}",
             crate::progenitor_support::encode_path(&plan.to_string()),

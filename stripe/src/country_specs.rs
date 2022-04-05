@@ -27,7 +27,6 @@ impl CountrySpecs {
     pub async fn get_page(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::CountrySpec>> {
@@ -57,7 +56,7 @@ impl CountrySpecs {
     *
     * <p>Lists all Country Spec objects available in the API.</p>
     */
-    pub async fn get_all(&self, expand: &[String]) -> Result<Vec<crate::types::CountrySpec>> {
+    pub async fn get_all(&self) -> Result<Vec<crate::types::CountrySpec>> {
         let url = "/v1/country_specs".to_string();
         let mut resp: crate::types::GetCountrySpecsResponse = self.client.get(&url, None).await?;
 
@@ -110,7 +109,7 @@ impl CountrySpecs {
     * * `country: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get(&self, country: &str, expand: &[String]) -> Result<crate::types::CountrySpec> {
+    pub async fn get(&self, country: &str) -> Result<crate::types::CountrySpec> {
         let url = format!(
             "/v1/country_specs/{}",
             crate::progenitor_support::encode_path(&country.to_string()),

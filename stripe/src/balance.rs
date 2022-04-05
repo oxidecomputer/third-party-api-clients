@@ -22,7 +22,7 @@ impl Balance {
     *
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get(&self, expand: &[String]) -> Result<crate::types::Balance> {
+    pub async fn get(&self) -> Result<crate::types::Balance> {
         let url = "/v1/balance".to_string();
         self.client.get(&url, None).await
     }
@@ -51,7 +51,6 @@ impl Balance {
         created: &str,
         currency: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         payout: &str,
         source: &str,
@@ -102,7 +101,6 @@ impl Balance {
         &self,
         created: &str,
         currency: &str,
-        expand: &[String],
         payout: &str,
         source: &str,
         type_: &str,
@@ -176,11 +174,7 @@ impl Balance {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_history_balance(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::BalanceTransaction> {
+    pub async fn get_history_balance(&self, id: &str) -> Result<crate::types::BalanceTransaction> {
         let url = format!(
             "/v1/balance/history/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

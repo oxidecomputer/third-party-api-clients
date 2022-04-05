@@ -30,7 +30,6 @@ impl Radar {
         &self,
         charge: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
@@ -70,7 +69,6 @@ impl Radar {
     pub async fn get_all_early_fraud_warnings(
         &self,
         charge: &str,
-        expand: &[String],
         payment_intent: &str,
     ) -> Result<Vec<crate::types::RadarEarlyFraudWarning>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -140,7 +138,6 @@ impl Radar {
     pub async fn get_early_fraud_warnings_warning(
         &self,
         early_fraud_warning: &str,
-        expand: &[String],
     ) -> Result<crate::types::RadarEarlyFraudWarning> {
         let url = format!(
             "/v1/radar/early_fraud_warnings/{}",
@@ -169,7 +166,6 @@ impl Radar {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         value: &str,
@@ -210,7 +206,6 @@ impl Radar {
     pub async fn get_all_value_list_all_items(
         &self,
         created: &str,
-        expand: &[String],
         value: &str,
         value_list: &str,
     ) -> Result<Vec<crate::types::RadarListItem>> {
@@ -287,7 +282,6 @@ impl Radar {
     */
     pub async fn get_value_list_items_item(
         &self,
-        expand: &[String],
         item: &str,
     ) -> Result<crate::types::RadarListItem> {
         let url = format!(
@@ -340,7 +334,6 @@ impl Radar {
         contains: &str,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::RadarList>> {
@@ -381,7 +374,6 @@ impl Radar {
         alias: &str,
         contains: &str,
         created: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::RadarList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {
@@ -455,11 +447,7 @@ impl Radar {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `value_list: &str` -- The account's country.
     */
-    pub async fn get_value_lists_list(
-        &self,
-        expand: &[String],
-        value_list: &str,
-    ) -> Result<crate::types::RadarList> {
+    pub async fn get_value_lists_list(&self, value_list: &str) -> Result<crate::types::RadarList> {
         let url = format!(
             "/v1/radar/value_lists/{}",
             crate::progenitor_support::encode_path(&value_list.to_string()),

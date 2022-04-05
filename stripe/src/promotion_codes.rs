@@ -37,7 +37,6 @@ impl PromotionCodes {
         created: &str,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::PromotionCode>> {
@@ -86,7 +85,6 @@ impl PromotionCodes {
         coupon: &str,
         created: &str,
         customer: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::PromotionCode>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
@@ -165,11 +163,7 @@ impl PromotionCodes {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `promotion_code: &str` -- The account's country.
     */
-    pub async fn get_code(
-        &self,
-        expand: &[String],
-        promotion_code: &str,
-    ) -> Result<crate::types::PromotionCode> {
+    pub async fn get_code(&self, promotion_code: &str) -> Result<crate::types::PromotionCode> {
         let url = format!(
             "/v1/promotion_codes/{}",
             crate::progenitor_support::encode_path(&promotion_code.to_string()),

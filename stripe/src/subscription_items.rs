@@ -28,7 +28,6 @@ impl SubscriptionItems {
     pub async fn get_page(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         subscription: &str,
@@ -62,11 +61,7 @@ impl SubscriptionItems {
     *
     * <p>Returns a list of your subscription items for a given subscription.</p>
     */
-    pub async fn get_all(
-        &self,
-        expand: &[String],
-        subscription: &str,
-    ) -> Result<Vec<crate::types::SubscriptionItem>> {
+    pub async fn get_all(&self, subscription: &str) -> Result<Vec<crate::types::SubscriptionItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !subscription.is_empty() {
             query_args.push(("subscription".to_string(), subscription.to_string()));
@@ -135,11 +130,7 @@ impl SubscriptionItems {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `item: &str` -- The account's country.
     */
-    pub async fn get_item(
-        &self,
-        expand: &[String],
-        item: &str,
-    ) -> Result<crate::types::SubscriptionItem> {
+    pub async fn get_item(&self, item: &str) -> Result<crate::types::SubscriptionItem> {
         let url = format!(
             "/v1/subscription_items/{}",
             crate::progenitor_support::encode_path(&item.to_string()),
@@ -202,7 +193,6 @@ impl SubscriptionItems {
     pub async fn get_item_usage_record_summaries(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         subscription_item: &str,
@@ -242,7 +232,6 @@ impl SubscriptionItems {
     */
     pub async fn get_all_item_usage_record_summaries(
         &self,
-        expand: &[String],
         subscription_item: &str,
     ) -> Result<Vec<crate::types::UsageRecordSummary>> {
         let url = format!(

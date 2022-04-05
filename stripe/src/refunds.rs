@@ -32,7 +32,6 @@ impl Refunds {
         charge: &str,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
@@ -73,7 +72,6 @@ impl Refunds {
         &self,
         charge: &str,
         created: &str,
-        expand: &[String],
         payment_intent: &str,
     ) -> Result<Vec<crate::types::Refund>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -147,7 +145,7 @@ impl Refunds {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `refund: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], refund: &str) -> Result<crate::types::Refund> {
+    pub async fn get(&self, refund: &str) -> Result<crate::types::Refund> {
         let url = format!(
             "/v1/refunds/{}",
             crate::progenitor_support::encode_path(&refund.to_string()),

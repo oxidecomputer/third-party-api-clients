@@ -30,7 +30,6 @@ impl BillingPortal {
         &self,
         active: bool,
         ending_before: &str,
-        expand: &[String],
         is_default: bool,
         limit: i64,
         starting_after: &str,
@@ -71,7 +70,6 @@ impl BillingPortal {
     pub async fn get_all_configurations(
         &self,
         active: bool,
-        expand: &[String],
         is_default: bool,
     ) -> Result<Vec<crate::types::PortalConfiguration>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -149,7 +147,6 @@ impl BillingPortal {
     pub async fn get_configurations_configuration(
         &self,
         configuration: &str,
-        expand: &[String],
     ) -> Result<crate::types::PortalConfiguration> {
         let url = format!(
             "/v1/billing_portal/configurations/{}",

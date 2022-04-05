@@ -31,7 +31,6 @@ impl PaymentIntents {
         created: &str,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::PaymentIntent>> {
@@ -68,7 +67,6 @@ impl PaymentIntents {
         &self,
         created: &str,
         customer: &str,
-        expand: &[String],
     ) -> Result<Vec<crate::types::PaymentIntent>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !customer.is_empty() {
@@ -154,7 +152,6 @@ impl PaymentIntents {
     */
     pub async fn get_search(
         &self,
-        expand: &[String],
         limit: i64,
         page: &str,
         query: &str,
@@ -188,11 +185,7 @@ impl PaymentIntents {
     * conditions, data is searchable in less than a minute. Occasionally, propagation of new or updated data can be up
     * to an hour behind during outages. Search functionality is not available to merchants in India.</p>
     */
-    pub async fn get_all_search(
-        &self,
-        expand: &[String],
-        query: &str,
-    ) -> Result<Vec<crate::types::Charge>> {
+    pub async fn get_all_search(&self, query: &str) -> Result<Vec<crate::types::Charge>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !query.is_empty() {
             query_args.push(("query".to_string(), query.to_string()));
@@ -259,7 +252,6 @@ impl PaymentIntents {
     pub async fn get_intent(
         &self,
         client_secret: &str,
-        expand: &[String],
         intent: &str,
     ) -> Result<crate::types::PaymentIntent> {
         let mut query_args: Vec<(String, String)> = Default::default();

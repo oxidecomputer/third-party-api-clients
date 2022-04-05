@@ -32,7 +32,6 @@ impl Topups {
         amount: &str,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         status: crate::types::GetTopupsStatus,
@@ -70,7 +69,6 @@ impl Topups {
         &self,
         amount: &str,
         created: &str,
-        expand: &[String],
         status: crate::types::GetTopupsStatus,
     ) -> Result<Vec<crate::types::Topup>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -141,7 +139,7 @@ impl Topups {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `topup: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], topup: &str) -> Result<crate::types::Topup> {
+    pub async fn get(&self, topup: &str) -> Result<crate::types::Topup> {
         let url = format!(
             "/v1/topups/{}",
             crate::progenitor_support::encode_path(&topup.to_string()),

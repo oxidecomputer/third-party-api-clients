@@ -35,7 +35,6 @@ impl Orders {
         created: &str,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         ids: &[String],
         limit: i64,
         starting_after: &str,
@@ -79,7 +78,6 @@ impl Orders {
         &self,
         created: &str,
         customer: &str,
-        expand: &[String],
         ids: &[String],
         status: &str,
         status_transitions: &str,
@@ -157,7 +155,7 @@ impl Orders {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], id: &str) -> Result<crate::types::Order> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::Order> {
         let url = format!(
             "/v1/orders/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

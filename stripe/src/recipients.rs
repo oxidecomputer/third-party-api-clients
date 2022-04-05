@@ -31,7 +31,6 @@ impl Recipients {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
         type_: crate::types::GetRecipientsType,
@@ -72,7 +71,6 @@ impl Recipients {
     pub async fn get_all(
         &self,
         created: &str,
-        expand: &[String],
         type_: crate::types::GetRecipientsType,
         verified: bool,
     ) -> Result<Vec<crate::types::Recipient>> {
@@ -148,11 +146,7 @@ impl Recipients {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::GetRecipientsResponseAnyOf> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::GetRecipientsResponseAnyOf> {
         let url = format!(
             "/v1/recipients/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

@@ -21,7 +21,7 @@ impl Account {
     *
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get(&self, expand: &[String]) -> Result<crate::types::Account> {
+    pub async fn get(&self) -> Result<crate::types::Account> {
         let url = "/v1/account".to_string();
         self.client.get(&url, None).await
     }
@@ -72,7 +72,7 @@ impl Account {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_bank(&self, expand: &[String], id: &str) -> Result<crate::types::DataAnyOf> {
+    pub async fn get_bank(&self, id: &str) -> Result<crate::types::DataAnyOf> {
         let url = format!(
             "/v1/account/bank_accounts/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -128,10 +128,7 @@ impl Account {
     *
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get_capabilities(
-        &self,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::Capability>> {
+    pub async fn get_capabilities(&self) -> Result<Vec<crate::types::Capability>> {
         let url = "/v1/account/capabilities".to_string();
         let resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
 
@@ -146,10 +143,7 @@ impl Account {
     *
     * <p>Returns a list of capabilities associated with the account. The capabilities are returned sorted by creation date, with the most recent capability appearing first.</p>
     */
-    pub async fn get_all_capabilities(
-        &self,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::Capability>> {
+    pub async fn get_all_capabilities(&self) -> Result<Vec<crate::types::Capability>> {
         let url = "/v1/account/capabilities".to_string();
         let mut resp: crate::types::ListAccountCapability = self.client.get(&url, None).await?;
 
@@ -205,7 +199,6 @@ impl Account {
     pub async fn get_capabilities_capability(
         &self,
         capability: &str,
-        expand: &[String],
     ) -> Result<crate::types::Capability> {
         let url = format!(
             "/v1/account/capabilities/{}",
@@ -251,7 +244,6 @@ impl Account {
     pub async fn get_external(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::DataAnyOf>> {
@@ -281,10 +273,7 @@ impl Account {
     *
     * <p>List external accounts for an account.</p>
     */
-    pub async fn get_all_external(
-        &self,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::DataAnyOf>> {
+    pub async fn get_all_external(&self) -> Result<Vec<crate::types::DataAnyOf>> {
         let url = "/v1/account/external_accounts".to_string();
         let mut resp: crate::types::ExternalAccounts = self.client.get(&url, None).await?;
 
@@ -347,11 +336,7 @@ impl Account {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get_external_account(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::DataAnyOf> {
+    pub async fn get_external_account(&self, id: &str) -> Result<crate::types::DataAnyOf> {
         let url = format!(
             "/v1/account/external_accounts/{}",
             crate::progenitor_support::encode_path(&id.to_string()),
@@ -429,7 +414,6 @@ impl Account {
     pub async fn get_people(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         relationship: &str,
         starting_after: &str,
@@ -460,11 +444,7 @@ impl Account {
     *
     * <p>Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.</p>
     */
-    pub async fn get_all_people(
-        &self,
-        expand: &[String],
-        relationship: &str,
-    ) -> Result<Vec<crate::types::Person>> {
+    pub async fn get_all_people(&self, relationship: &str) -> Result<Vec<crate::types::Person>> {
         let url = "/v1/account/people".to_string();
         let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
 
@@ -527,11 +507,7 @@ impl Account {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `person: &str` -- The account's country.
     */
-    pub async fn get_people_person(
-        &self,
-        expand: &[String],
-        person: &str,
-    ) -> Result<crate::types::Person> {
+    pub async fn get_people_person(&self, person: &str) -> Result<crate::types::Person> {
         let url = format!(
             "/v1/account/people/{}",
             crate::progenitor_support::encode_path(&person.to_string()),
@@ -592,7 +568,6 @@ impl Account {
     pub async fn get_persons(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         relationship: &str,
         starting_after: &str,
@@ -623,11 +598,7 @@ impl Account {
     *
     * <p>Returns a list of people associated with the account’s legal entity. The people are returned sorted by creation date, with the most recent people appearing first.</p>
     */
-    pub async fn get_all_persons(
-        &self,
-        expand: &[String],
-        relationship: &str,
-    ) -> Result<Vec<crate::types::Person>> {
+    pub async fn get_all_persons(&self, relationship: &str) -> Result<Vec<crate::types::Person>> {
         let url = "/v1/account/persons".to_string();
         let mut resp: crate::types::GetAccountPeopleResponse = self.client.get(&url, None).await?;
 
@@ -690,11 +661,7 @@ impl Account {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `person: &str` -- The account's country.
     */
-    pub async fn get_persons_person(
-        &self,
-        expand: &[String],
-        person: &str,
-    ) -> Result<crate::types::Person> {
+    pub async fn get_persons_person(&self, person: &str) -> Result<crate::types::Person> {
         let url = format!(
             "/v1/account/persons/{}",
             crate::progenitor_support::encode_path(&person.to_string()),

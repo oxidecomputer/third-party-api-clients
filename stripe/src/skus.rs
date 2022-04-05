@@ -34,7 +34,6 @@ impl Skus {
         active: bool,
         attributes: &str,
         ending_before: &str,
-        expand: &[String],
         ids: &[String],
         in_stock: bool,
         limit: i64,
@@ -80,7 +79,6 @@ impl Skus {
         &self,
         active: bool,
         attributes: &str,
-        expand: &[String],
         ids: &[String],
         in_stock: bool,
         product: &str,
@@ -159,11 +157,7 @@ impl Skus {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `id: &str` -- The account's country.
     */
-    pub async fn get(
-        &self,
-        expand: &[String],
-        id: &str,
-    ) -> Result<crate::types::GetSkusResponseAnyOf> {
+    pub async fn get(&self, id: &str) -> Result<crate::types::GetSkusResponseAnyOf> {
         let url = format!(
             "/v1/skus/{}",
             crate::progenitor_support::encode_path(&id.to_string()),

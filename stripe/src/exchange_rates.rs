@@ -27,7 +27,6 @@ impl ExchangeRates {
     pub async fn get_page(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::ExchangeRate>> {
@@ -57,7 +56,7 @@ impl ExchangeRates {
     *
     * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
     */
-    pub async fn get_all(&self, expand: &[String]) -> Result<Vec<crate::types::ExchangeRate>> {
+    pub async fn get_all(&self) -> Result<Vec<crate::types::ExchangeRate>> {
         let url = "/v1/exchange_rates".to_string();
         let mut resp: crate::types::GetExchangeRatesResponse = self.client.get(&url, None).await?;
 
@@ -110,11 +109,7 @@ impl ExchangeRates {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `rate_id: &str` -- The account's country.
     */
-    pub async fn get_rate(
-        &self,
-        expand: &[String],
-        rate_id: &str,
-    ) -> Result<crate::types::ExchangeRate> {
+    pub async fn get_rate(&self, rate_id: &str) -> Result<crate::types::ExchangeRate> {
         let url = format!(
             "/v1/exchange_rates/{}",
             crate::progenitor_support::encode_path(&rate_id.to_string()),

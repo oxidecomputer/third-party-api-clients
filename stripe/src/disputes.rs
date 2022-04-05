@@ -32,7 +32,6 @@ impl Disputes {
         charge: &str,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         payment_intent: &str,
         starting_after: &str,
@@ -73,7 +72,6 @@ impl Disputes {
         &self,
         charge: &str,
         created: &str,
-        expand: &[String],
         payment_intent: &str,
     ) -> Result<Vec<crate::types::Dispute>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -137,7 +135,7 @@ impl Disputes {
     * * `dispute: &str` -- The account's country.
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     */
-    pub async fn get(&self, dispute: &str, expand: &[String]) -> Result<crate::types::Dispute> {
+    pub async fn get(&self, dispute: &str) -> Result<crate::types::Dispute> {
         let url = format!(
             "/v1/disputes/{}",
             crate::progenitor_support::encode_path(&dispute.to_string()),

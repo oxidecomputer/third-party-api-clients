@@ -29,7 +29,6 @@ impl PaymentLinks {
         &self,
         active: bool,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::PaymentLink>> {
@@ -62,11 +61,7 @@ impl PaymentLinks {
     *
     * <p>Returns a list of your payment links.</p>
     */
-    pub async fn get_all(
-        &self,
-        active: bool,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::PaymentLink>> {
+    pub async fn get_all(&self, active: bool) -> Result<Vec<crate::types::PaymentLink>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if active {
             query_args.push(("active".to_string(), active.to_string()));
@@ -135,11 +130,7 @@ impl PaymentLinks {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `payment_link: &str` -- The account's country.
     */
-    pub async fn get_link(
-        &self,
-        expand: &[String],
-        payment_link: &str,
-    ) -> Result<crate::types::PaymentLink> {
+    pub async fn get_link(&self, payment_link: &str) -> Result<crate::types::PaymentLink> {
         let url = format!(
             "/v1/payment_links/{}",
             crate::progenitor_support::encode_path(&payment_link.to_string()),
@@ -182,7 +173,6 @@ impl PaymentLinks {
     pub async fn get_link_line_items(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         payment_link: &str,
         starting_after: &str,
@@ -219,7 +209,6 @@ impl PaymentLinks {
     */
     pub async fn get_all_link_line_items(
         &self,
-        expand: &[String],
         payment_link: &str,
     ) -> Result<Vec<crate::types::Item>> {
         let url = format!(

@@ -37,7 +37,6 @@ impl SubscriptionSchedules {
         created: &str,
         customer: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         released_at: &str,
         scheduled: bool,
@@ -82,7 +81,6 @@ impl SubscriptionSchedules {
         completed_at: &str,
         created: &str,
         customer: &str,
-        expand: &[String],
         released_at: &str,
         scheduled: bool,
     ) -> Result<Vec<crate::types::SubscriptionSchedule>> {
@@ -158,11 +156,7 @@ impl SubscriptionSchedules {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `schedule: &str` -- The account's country.
     */
-    pub async fn get_schedule(
-        &self,
-        expand: &[String],
-        schedule: &str,
-    ) -> Result<crate::types::SubscriptionSchedule> {
+    pub async fn get_schedule(&self, schedule: &str) -> Result<crate::types::SubscriptionSchedule> {
         let url = format!(
             "/v1/subscription_schedules/{}",
             crate::progenitor_support::encode_path(&schedule.to_string()),

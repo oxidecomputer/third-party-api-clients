@@ -27,7 +27,6 @@ impl WebhookEndpoints {
     pub async fn get_page(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::WebhookEndpoint>> {
@@ -57,7 +56,7 @@ impl WebhookEndpoints {
     *
     * <p>Returns a list of your webhook endpoints.</p>
     */
-    pub async fn get_all(&self, expand: &[String]) -> Result<Vec<crate::types::WebhookEndpoint>> {
+    pub async fn get_all(&self) -> Result<Vec<crate::types::WebhookEndpoint>> {
         let url = "/v1/webhook_endpoints".to_string();
         let mut resp: crate::types::GetWebhookEndpointsResponse =
             self.client.get(&url, None).await?;
@@ -123,7 +122,6 @@ impl WebhookEndpoints {
     */
     pub async fn get_endpoint(
         &self,
-        expand: &[String],
         webhook_endpoint: &str,
     ) -> Result<crate::types::WebhookEndpoint> {
         let url = format!(

@@ -33,12 +33,7 @@ impl Sources {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `source: &str` -- The account's country.
     */
-    pub async fn get(
-        &self,
-        client_secret: &str,
-        expand: &[String],
-        source: &str,
-    ) -> Result<crate::types::SourceData> {
+    pub async fn get(&self, client_secret: &str, source: &str) -> Result<crate::types::SourceData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_secret.is_empty() {
             query_args.push(("client_secret".to_string(), client_secret.to_string()));
@@ -86,7 +81,6 @@ impl Sources {
     */
     pub async fn get_mandate_notifications_notification(
         &self,
-        expand: &[String],
         mandate_notification: &str,
         source: &str,
     ) -> Result<crate::types::SourceMandateNotification> {
@@ -115,7 +109,6 @@ impl Sources {
     pub async fn get_transactions(
         &self,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         source: &str,
         starting_after: &str,
@@ -153,7 +146,6 @@ impl Sources {
     */
     pub async fn get_all_transactions(
         &self,
-        expand: &[String],
         source: &str,
     ) -> Result<Vec<crate::types::SourceTransaction>> {
         let url = format!(
@@ -216,7 +208,6 @@ impl Sources {
     */
     pub async fn get_transactions_transaction(
         &self,
-        expand: &[String],
         source: &str,
         source_transaction: &str,
     ) -> Result<crate::types::SourceTransaction> {

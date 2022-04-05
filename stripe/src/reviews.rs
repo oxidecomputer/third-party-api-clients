@@ -29,7 +29,6 @@ impl Reviews {
         &self,
         created: &str,
         ending_before: &str,
-        expand: &[String],
         limit: i64,
         starting_after: &str,
     ) -> Result<Vec<crate::types::Review>> {
@@ -59,11 +58,7 @@ impl Reviews {
     *
     * <p>Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true</code>. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
     */
-    pub async fn get_all(
-        &self,
-        created: &str,
-        expand: &[String],
-    ) -> Result<Vec<crate::types::Review>> {
+    pub async fn get_all(&self, created: &str) -> Result<Vec<crate::types::Review>> {
         let url = "/v1/reviews".to_string();
         let mut resp: crate::types::GetReviewsResponse = self.client.get(&url, None).await?;
 
@@ -116,7 +111,7 @@ impl Reviews {
     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
     * * `review: &str` -- The account's country.
     */
-    pub async fn get(&self, expand: &[String], review: &str) -> Result<crate::types::Review> {
+    pub async fn get(&self, review: &str) -> Result<crate::types::Review> {
         let url = format!(
             "/v1/reviews/{}",
             crate::progenitor_support::encode_path(&review.to_string()),
