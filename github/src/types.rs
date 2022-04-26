@@ -25478,7 +25478,7 @@ pub struct GistsCreateRequest {
     * Names and content for the files that make up the gist
     */
     #[serde()]
-    pub files: FilesAdditionalPropertiesData,
+    pub files: hashmap<String, FilesAdditionalPropertiesData>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub public: Option<PublicOneOf>,
 }
