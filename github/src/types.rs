@@ -1,6 +1,7 @@
 //! The data types sent to and returned from the API client.
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use std::collections::HashMap;
 
 /// Simple User
 #[derive(Serialize, Deserialize, PartialEq, Debug, Clone, JsonSchema)]
