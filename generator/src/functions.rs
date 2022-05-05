@@ -966,9 +966,9 @@ fn get_fn_inner(
             // Paginate if we should.
             while page <= (resp.page.total_pages - 1) {{
                 if !url.contains('?') {{
-                    resp = self.client.{}(&format!("{{}}?page={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}?page={{}}&size=100", url, page), {}).await?;
                 }} else {{
-                    resp = self.client.{}(&format!("{{}}&page={{}}", url, page), {}).await?;
+                    resp = self.client.{}(&format!("{{}}&page={{}}&size=100", url, page), {}).await?;
                 }}
 
                 {}.append(&mut resp.{});
