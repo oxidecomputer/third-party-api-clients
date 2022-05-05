@@ -535,7 +535,7 @@ $(TRIPACTIONS_SPEC): $(TRIPACTIONS_SPEC_DIR)
 	curl -sSL $(TRIPACTIONS_SPEC_REMOTE) -o $@
 
 tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
-	./target/debug/generator -i $(TRIPACTIONS_SPEC) -v 0.2.2 \
+	./target/debug/generator -i $(TRIPACTIONS_SPEC) -v 0.2.3 \
 		-o tripactions \
 		-n tripactions \
 		--proper-name "TripActions" \
