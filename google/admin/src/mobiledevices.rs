@@ -13,20 +13,20 @@ impl Mobiledevices {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile` endpoint.
-    *
-    * Retrieves a paginated list of all mobile devices for an account.
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-    * * `max_results: i64` -- Maximum number of results to return. Max allowed value is 100.
-    * * `order_by: crate::types::DirectoryMobiledevicesListOrderBy` -- Device property to use for sorting results.
-    * * `page_token: &str` -- Token to specify next page in the list.
-    * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
-    * * `query: &str` -- Search string in the format given at https://developers.google.com/admin-sdk/directory/v1/search-operators.
-    * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile` endpoint.
+     *
+     * Retrieves a paginated list of all mobile devices for an account.
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `max_results: i64` -- Maximum number of results to return. Max allowed value is 100.
+     * * `order_by: crate::types::DirectoryMobiledevicesListOrderBy` -- Device property to use for sorting results.
+     * * `page_token: &str` -- Token to specify next page in the list.
+     * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
+     * * `query: &str` -- Search string in the format given at https://developers.google.com/admin-sdk/directory/v1/search-operators.
+     * * `sort_order: crate::types::SortOrder` -- Whether to return results in ascending or descending order. Must be used with the `orderBy` parameter.
+     */
     pub async fn list(
         &self,
         customer_id: &str,
@@ -70,12 +70,12 @@ impl Mobiledevices {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile` endpoint.
-    *
-    * As opposed to `list`, this function returns all the pages of the request at once.
-    *
-    * Retrieves a paginated list of all mobile devices for an account.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Retrieves a paginated list of all mobile devices for an account.
+     */
     pub async fn list_all(
         &self,
         customer_id: &str,
@@ -137,16 +137,16 @@ impl Mobiledevices {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}` endpoint.
-    *
-    * Retrieves a mobile device's properties.
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-    * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
-    * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}` endpoint.
+     *
+     * Retrieves a mobile device's properties.
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
+     * * `projection: crate::types::Projection` -- Restrict information returned to a set of selected fields.
+     */
     pub async fn get(
         &self,
         customer_id: &str,
@@ -169,15 +169,15 @@ impl Mobiledevices {
     }
 
     /**
-    * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}` endpoint.
-    *
-    * Removes a mobile device.
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-    * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
-    */
+     * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}` endpoint.
+     *
+     * Removes a mobile device.
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
+     */
     pub async fn delete(&self, customer_id: &str, resource_id: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/devices/mobile/{}",
@@ -189,15 +189,15 @@ impl Mobiledevices {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}/action` endpoint.
-    *
-    * Takes an action that affects a mobile device. For example, remotely wiping a device.
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
-    * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/mobile/{resourceId}/action` endpoint.
+     *
+     * Takes an action that affects a mobile device. For example, remotely wiping a device.
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- The unique ID for the customer's Google Workspace account. As an account administrator, you can also use the `my_customer` alias to represent your account's `customerId`. The `customerId` is also returned as part of the [Users resource](/admin-sdk/directory/v1/reference/users).
+     * * `resource_id: &str` -- The unique ID the API service uses to identify the mobile device.
+     */
     pub async fn action(
         &self,
         customer_id: &str,

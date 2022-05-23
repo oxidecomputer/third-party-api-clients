@@ -2350,10 +2350,6 @@ fn gen(
     }
 
     a("");
-    if proper_name.starts_with("Google") {
-        a("use std::io::Write;");
-        a("");
-    }
 
     a("use anyhow::{anyhow, Error, Result};");
     a("");

@@ -13,15 +13,15 @@ impl DomainAliases {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/domainaliases` endpoint.
-    *
-    * Lists the domain aliases of the customer.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    * * `parent_domain_name: &str` -- Name of the parent domain for which domain aliases are to be fetched.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/domainaliases` endpoint.
+     *
+     * Lists the domain aliases of the customer.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `parent_domain_name: &str` -- Name of the parent domain for which domain aliases are to be fetched.
+     */
     pub async fn list(
         &self,
         customer: &str,
@@ -45,14 +45,14 @@ impl DomainAliases {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/domainaliases` endpoint.
-    *
-    * Inserts a domain alias of the customer.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/domainaliases` endpoint.
+     *
+     * Inserts a domain alias of the customer.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     */
     pub async fn insert(
         &self,
         customer: &str,
@@ -69,15 +69,15 @@ impl DomainAliases {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/domainaliases/{domainAliasName}` endpoint.
-    *
-    * Retrieves a domain alias of the customer.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/domainaliases/{domainAliasName}` endpoint.
+     *
+     * Retrieves a domain alias of the customer.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
+     */
     pub async fn get(
         &self,
         customer: &str,
@@ -93,15 +93,15 @@ impl DomainAliases {
     }
 
     /**
-    * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/domainaliases/{domainAliasName}` endpoint.
-    *
-    * Deletes a domain Alias of the customer.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
-    */
+     * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/domainaliases/{domainAliasName}` endpoint.
+     *
+     * Deletes a domain Alias of the customer.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `domain_alias_name: &str` -- Name of domain alias to be retrieved.
+     */
     pub async fn delete(&self, customer: &str, domain_alias_name: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/domainaliases/{}",

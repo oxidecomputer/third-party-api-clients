@@ -13,16 +13,16 @@ impl Customer {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/{deviceId}/commands/{commandId}` endpoint.
-    *
-    * Gets command data a specific command issued to the device.
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- Immutable. Immutable ID of the Google Workspace account.
-    * * `device_id: &str` -- Immutable. Immutable ID of Chrome OS Device.
-    * * `command_id: &str` -- Immutable. Immutable ID of Chrome OS Device Command.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/{deviceId}/commands/{commandId}` endpoint.
+     *
+     * Gets command data a specific command issued to the device.
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- Immutable. Immutable ID of the Google Workspace account.
+     * * `device_id: &str` -- Immutable. Immutable ID of Chrome OS Device.
+     * * `command_id: &str` -- Immutable. Immutable ID of Chrome OS Device Command.
+     */
     pub async fn admin_devices_chromeos_commands_get(
         &self,
         customer_id: &str,
@@ -40,15 +40,15 @@ impl Customer {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/{deviceId}:issueCommand` endpoint.
-    *
-    * Issues a command for the device to execute.
-    *
-    * **Parameters:**
-    *
-    * * `customer_id: &str` -- Immutable. Immutable ID of the Google Workspace account.
-    * * `device_id: &str` -- Immutable. Immutable ID of Chrome OS Device.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/devices/chromeos/{deviceId}:issueCommand` endpoint.
+     *
+     * Issues a command for the device to execute.
+     *
+     * **Parameters:**
+     *
+     * * `customer_id: &str` -- Immutable. Immutable ID of the Google Workspace account.
+     * * `device_id: &str` -- Immutable. Immutable ID of Chrome OS Device.
+     */
     pub async fn admin_devices_chromeos_issue_command(
         &self,
         customer_id: &str,
