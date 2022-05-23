@@ -13,10 +13,10 @@ impl Channels {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory_v1/channels/stop` endpoint.
-    *
-    * Stops watching resources through this channel.
-    */
+     * This function performs a `POST` to the `/admin/directory_v1/channels/stop` endpoint.
+     *
+     * Stops watching resources through this channel.
+     */
     pub async fn admin_stop(&self, body: &crate::types::Channel) -> Result<()> {
         let url = "/admin/directory_v1/channels/stop".to_string();
         self.client

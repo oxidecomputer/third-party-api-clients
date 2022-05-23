@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! sheets = "0.2.3"
+//! sheets = "0.2.4"
 //! ```
 //!
 //! ## Basic example
@@ -100,7 +100,6 @@
 //!     access_token = google sheets.refresh_access_token().await.unwrap();
 //! }
 //! ```
-//!
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -115,8 +114,6 @@ pub mod traits;
 pub mod types;
 #[doc(hidden)]
 pub mod utils;
-
-use std::io::Write;
 
 use anyhow::{anyhow, Error, Result};
 
@@ -275,19 +272,9 @@ impl Client {
         R: ToString,
     {
         let google_key = env::var("GOOGLE_KEY_ENCODED").unwrap_or_default();
-        let b = base64::decode(google_key).unwrap();
-        // Save the google key to a tmp file.
-        let mut file_path = env::temp_dir();
-        file_path.push("google_key.json");
-        // Create the file and write to it.
-        let mut file = std::fs::File::create(file_path.clone()).unwrap();
-        file.write_all(&b).unwrap();
-        // Set the Google credential file to the temp path.
-        let google_credential_file = file_path.to_str().unwrap().to_string();
-
-        let secret = yup_oauth2::read_application_secret(google_credential_file)
-            .await
-            .expect("failed to read google credential file");
+        let decoded_google_key = base64::decode(google_key).unwrap();
+        let secret = yup_oauth2::parse_application_secret(decoded_google_key)
+            .expect("failed to read from google credential env var");
 
         let client = reqwest::Client::builder().build();
         let retry_policy =

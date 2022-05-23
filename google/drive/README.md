@@ -37,7 +37,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-google-drive = "0.2.9"
+google-drive = "0.2.10"
 ```
 
 ## Basic example
