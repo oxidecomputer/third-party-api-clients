@@ -1464,7 +1464,6 @@ pub struct Client {{
     token: String,
     client_id: String,
     client_secret: String,
-
     client: reqwest_middleware::ClientWithMiddleware,
 }}
 
