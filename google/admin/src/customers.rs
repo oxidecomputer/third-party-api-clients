@@ -24,7 +24,7 @@ impl Customers {
     pub async fn get(&self, customer_key: &str) -> Result<crate::types::Customer> {
         let url = format!(
             "/admin/directory/v1/customers/{}",
-            crate::progenitor_support::encode_path(&customer_key.to_string()),
+            crate::progenitor_support::encode_path(customer_key),
         );
 
         self.client.get(&url, None).await
@@ -46,7 +46,7 @@ impl Customers {
     ) -> Result<crate::types::Customer> {
         let url = format!(
             "/admin/directory/v1/customers/{}",
-            crate::progenitor_support::encode_path(&customer_key.to_string()),
+            crate::progenitor_support::encode_path(customer_key),
         );
 
         self.client
@@ -70,7 +70,7 @@ impl Customers {
     ) -> Result<crate::types::Customer> {
         let url = format!(
             "/admin/directory/v1/customers/{}",
-            crate::progenitor_support::encode_path(&customer_key.to_string()),
+            crate::progenitor_support::encode_path(customer_key),
         );
 
         self.client
@@ -90,7 +90,7 @@ impl Customers {
     pub async fn admin_chrome_printers_get(&self, name: &str) -> Result<crate::types::Printer> {
         let url = format!(
             "/admin/directory/v1/{}",
-            crate::progenitor_support::encode_path(&name.to_string()),
+            crate::progenitor_support::encode_path(name),
         );
 
         self.client.get(&url, None).await
@@ -108,7 +108,7 @@ impl Customers {
     pub async fn admin_chrome_printers_delete(&self, name: &str) -> Result<crate::types::Empty> {
         let url = format!(
             "/admin/directory/v1/{}",
-            crate::progenitor_support::encode_path(&name.to_string()),
+            crate::progenitor_support::encode_path(name),
         );
 
         self.client.delete(&url, None).await
@@ -142,7 +142,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}?{}",
-            crate::progenitor_support::encode_path(&name.to_string()),
+            crate::progenitor_support::encode_path(name),
             query_
         );
 
@@ -188,7 +188,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers?{}",
-            crate::progenitor_support::encode_path(&parent.to_string()),
+            crate::progenitor_support::encode_path(parent),
             query_
         );
 
@@ -221,7 +221,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers?{}",
-            crate::progenitor_support::encode_path(&parent.to_string()),
+            crate::progenitor_support::encode_path(parent),
             query_
         );
 
@@ -273,7 +273,7 @@ impl Customers {
     ) -> Result<crate::types::Printer> {
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers",
-            crate::progenitor_support::encode_path(&parent.to_string()),
+            crate::progenitor_support::encode_path(parent),
         );
 
         self.client
@@ -297,7 +297,7 @@ impl Customers {
     ) -> Result<crate::types::BatchCreatePrintersResponse> {
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers:batchCreatePrinters",
-            crate::progenitor_support::encode_path(&parent.to_string()),
+            crate::progenitor_support::encode_path(parent),
         );
 
         self.client
@@ -321,7 +321,7 @@ impl Customers {
     ) -> Result<crate::types::BatchDeletePrintersResponse> {
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers:batchDeletePrinters",
-            crate::progenitor_support::encode_path(&parent.to_string()),
+            crate::progenitor_support::encode_path(parent),
         );
 
         self.client
@@ -361,7 +361,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers:listPrinterModels?{}",
-            crate::progenitor_support::encode_path(&parent.to_string()),
+            crate::progenitor_support::encode_path(parent),
             query_
         );
 
@@ -390,7 +390,7 @@ impl Customers {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/directory/v1/{}/chrome/printers:listPrinterModels?{}",
-            crate::progenitor_support::encode_path(&parent.to_string()),
+            crate::progenitor_support::encode_path(parent),
             query_
         );
 
