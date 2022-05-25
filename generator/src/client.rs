@@ -521,7 +521,9 @@ pub fn generate_client_generic_token(
 
     format!(
         r#"use std::sync::Arc;
+use std::convert::TryInto;
 use std::env;
+use std::ops::Add;
 use std::time::{{Duration, Instant}};
 use tokio::sync::RwLock;
 
@@ -862,7 +864,7 @@ async fn url_and_auth(
 ) -> Result<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>();
 
-    let auth = format!("Bearer {}", self.token.read().await.access_token);
+    let auth = format!("Bearer {} {{}}", self.token.read().await.access_token);
     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
 }}
 
