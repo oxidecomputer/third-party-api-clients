@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! sheets = "0.2.4"
+//! sheets = "0.3.0"
 //! ```
 //!
 //! ## Basic example
@@ -139,7 +139,9 @@ mod progenitor_support {
     }
 }
 
-use std::env;
+use std::{env, sync::Arc};
+
+use tokio::sync::RwLock;
 
 const TOKEN_ENDPOINT: &str = "https://oauth2.googleapis.com/token";
 const USER_CONSENT_ENDPOINT: &str = "https://accounts.google.com/o/oauth2/v2/auth";
@@ -148,14 +150,15 @@ const USER_CONSENT_ENDPOINT: &str = "https://accounts.google.com/o/oauth2/v2/aut
 #[derive(Clone)]
 pub struct Client {
     host: String,
-    token: String,
+    token: Arc<RwLock<String>>,
     // This will expire within a certain amount of time as determined by the
     // expiration date passed back in the initial request.
-    refresh_token: String,
+    refresh_token: Arc<RwLock<String>>,
     client_id: String,
     client_secret: String,
     redirect_uri: String,
 
+    retry_auth: bool,
     client: reqwest_middleware::ClientWithMiddleware,
 }
 
@@ -240,9 +243,10 @@ impl Client {
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     redirect_uri: redirect_uri.to_string(),
-                    token: token.to_string(),
-                    refresh_token: refresh_token.to_string(),
+                    token: Arc::new(RwLock::new(token.to_string())),
+                    refresh_token: Arc::new(RwLock::new(refresh_token.to_string())),
 
+                    retry_auth: false,
                     client,
                 }
             }
@@ -300,9 +304,9 @@ impl Client {
                     client_id: secret.client_id.to_string(),
                     client_secret: secret.client_secret.to_string(),
                     redirect_uri: secret.redirect_uris[0].to_string(),
-                    token: token.to_string(),
-                    refresh_token: refresh_token.to_string(),
-
+                    token: Arc::new(RwLock::new(token.to_string())),
+                    refresh_token: Arc::new(RwLock::new(refresh_token.to_string())),
+                    retry_auth: false,
                     client,
                 }
             }
@@ -331,37 +335,41 @@ impl Client {
     /// Refresh an access token from a refresh token. Client must have a refresh token
     /// for this to work.
     pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
-        if self.refresh_token.is_empty() {
-            anyhow!("refresh token cannot be empty");
-        }
+        let response = {
+            let refresh_token = &self.refresh_token.read().await;
 
-        let mut headers = reqwest::header::HeaderMap::new();
-        headers.append(
-            reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
+            if refresh_token.is_empty() {
+                anyhow!("refresh token cannot be empty");
+            }
 
-        let params = [
-            ("grant_type", "refresh_token"),
-            ("refresh_token", &self.refresh_token),
-            ("client_id", &self.client_id),
-            ("client_secret", &self.client_secret),
-            ("redirect_uri", &self.redirect_uri),
-        ];
-        let client = reqwest::Client::new();
-        let resp = client
-            .post(TOKEN_ENDPOINT)
-            .headers(headers)
-            .form(&params)
-            .basic_auth(&self.client_id, Some(&self.client_secret))
-            .send()
-            .await?;
+            let mut headers = reqwest::header::HeaderMap::new();
+            headers.append(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            );
+
+            let params = [
+                ("grant_type", "refresh_token"),
+                ("refresh_token", refresh_token),
+                ("client_id", &self.client_id),
+                ("client_secret", &self.client_secret),
+                ("redirect_uri", &self.redirect_uri),
+            ];
+            let client = reqwest::Client::new();
+            client
+                .post(TOKEN_ENDPOINT)
+                .headers(headers)
+                .form(&params)
+                .basic_auth(&self.client_id, Some(&self.client_secret))
+                .send()
+                .await?
+        };
 
         // Unwrap the response.
-        let t: AccessToken = resp.json().await?;
+        let t: AccessToken = response.json().await?;
 
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
+        *self.token.write().await = t.access_token.to_string();
+        *self.refresh_token.write().await = t.refresh_token.to_string();
 
         Ok(t)
     }
@@ -395,8 +403,8 @@ impl Client {
         // Unwrap the response.
         let t: AccessToken = resp.json().await?;
 
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
+        *self.token.write().await = t.access_token.to_string();
+        *self.refresh_token.write().await = t.refresh_token.to_string();
 
         Ok(t)
     }
@@ -404,16 +412,16 @@ impl Client {
     async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
         let parsed_url = uri.parse::<reqwest::Url>();
 
-        let auth = format!("Bearer {}", self.token);
+        let auth = format!("Bearer {}", self.token.read().await);
         parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
     }
 
-    async fn request_raw(
+    async fn make_request(
         &self,
-        method: reqwest::Method,
+        method: &reqwest::Method,
         uri: &str,
         body: Option<reqwest::Body>,
-    ) -> Result<reqwest::Response> {
+    ) -> Result<reqwest::Request> {
         let u = if uri.starts_with("https://") {
             uri.to_string()
         } else {
@@ -444,9 +452,39 @@ impl Client {
                 "body: {:?}",
                 String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
             );
+
             req = req.body(body);
         }
-        Ok(req.send().await?)
+
+        Ok(req.build()?)
+    }
+
+    async fn request_raw(
+        &self,
+        method: reqwest::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<reqwest::Response> {
+        let req = self.make_request(&method, uri, body).await?;
+
+        let resp = if self.retry_auth {
+            if let Some(first_try) = req.try_clone() {
+                let resp = self.client.execute(first_try).await?;
+                if resp.status() == http::status::StatusCode::UNAUTHORIZED {
+                    self.client.execute(req).await?
+                } else {
+                    resp
+                }
+            } else {
+                // We may be handling a request that can not be cloned, and therefore
+                // we will execute without auth retry
+                self.client.execute(req).await?
+            }
+        } else {
+            self.client.execute(req).await?
+        };
+
+        Ok(resp)
     }
 
     async fn request<Out>(
