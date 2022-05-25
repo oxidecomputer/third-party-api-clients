@@ -1454,13 +1454,13 @@ pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
     // Unwrap the response.
     let t: AccessToken = response.json().await?;
 
-    *self.token.write().await = InnerToken {{
+    *self.token.write().await = InnerToken {
         access_token: t.access_token.clone(),
         refresh_token: t.refresh_token.clone(),
         expires_at: Instant::now().add(
             Duration::from_secs(t.expires_in.try_into().unwrap_or(0))
         ).checked_sub(REFRESH_THRESHOLD)
-    }};
+    };
 
     Ok(t)
 }
