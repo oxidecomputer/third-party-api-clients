@@ -741,11 +741,11 @@ where
                 client_id: secret.client_id.to_string(),
                 client_secret: secret.client_secret.to_string(),
                 redirect_uri: secret.redirect_uris[0].to_string(),
-                token: Arc::new(RwLock::new(InnerToken {{
+                token: Arc::new(RwLock::new(InnerToken {
                     access_token: token.to_string(),
                     refresh_token: refresh_token.to_string(),
                     expires_at: None
-                }})),
+                })),
                 auto_refresh: false,
                 client,
             }
@@ -1494,13 +1494,13 @@ pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<Acce
     // Unwrap the response.
     let t: AccessToken = resp.json().await?;
 
-    *self.token.write().await = InnerToken {{
+    *self.token.write().await = InnerToken {
         access_token: t.access_token.clone(),
         refresh_token: t.refresh_token.clone(),
         expires_at: Instant::now().add(
             Duration::from_secs(t.expires_in.try_into().unwrap_or(0))
         ).checked_sub(REFRESH_THRESHOLD)
-    }};
+    };
 
     Ok(t)
 }"#;
