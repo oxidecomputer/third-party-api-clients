@@ -522,6 +522,7 @@ pub fn generate_client_generic_token(
     format!(
         r#"use std::sync::Arc;
 use std::env;
+use std::time::{{Duration, Instant}};
 use tokio::sync::RwLock;
 
 const TOKEN_ENDPOINT: &str = "https://{}";
@@ -531,10 +532,7 @@ const USER_CONSENT_ENDPOINT: &str = "https://{}";
 #[derive(Clone)]
 pub struct Client {{
     host: String,
-    token: Arc<RwLock<String>>,
-    // This will expire within a certain amount of time as determined by the
-    // expiration date passed back in the initial request.
-    refresh_token: Arc<RwLock<String>>,
+    token: Arc<RwLock<InnerToken>>,
     client_id: String,
     client_secret: String,
     redirect_uri: String,
@@ -544,6 +542,17 @@ pub struct Client {{
 }}
 
 {}
+
+/// Time in seconds before the access token expiration point that a refresh should
+/// be performed. This value is subtracted from the `expires_in` value returned by
+/// the provider prior to storing
+const REFRESH_THRESHOLD: Duration = Duration::from_secs(60);
+
+struct InnerToken {{
+    access_token: String,
+    refresh_token: String,
+    expires_at: Option<Instant>,
+}}
 
 impl Client {{
     /// Create a new Client struct. It takes a type that can convert into
