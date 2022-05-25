@@ -3255,12 +3255,12 @@ serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1"
 serde_urlencoded = "^0.7"
 url = {{ version = "2", features = ["serde"] }}{}{}
+tokio = {{ version = "1.8.0", features = ["full"] }}
 
 [dev-dependencies]
 base64 = "^0.12"
 dirs = "^3.0.2"
 nom_pem = "4"
-tokio = {{ version = "1.8.0", features = ["full"] }}
 
 [features]
 # enable etag-based http_cache functionality
