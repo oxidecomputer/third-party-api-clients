@@ -1420,7 +1420,7 @@ pub fn user_consent_url(&self, scopes: &[String]) -> String {
 
 /// Refresh an access token from a refresh token. Client must have a refresh token
 /// for this to work.
-pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
+pub async fn refresh_access_token(&self) -> Result<AccessToken> {
     let response = {
         let refresh_token = &self.token.read().await.refresh_token;
 
