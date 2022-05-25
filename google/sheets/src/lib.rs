@@ -139,7 +139,13 @@ mod progenitor_support {
     }
 }
 
-use std::{env, sync::Arc};
+use std::{
+    convert::TryInto,
+    env,
+    ops::Add,
+    sync::Arc,
+    time::{Duration, Instant},
+};
 
 use tokio::sync::RwLock;
 
@@ -150,15 +156,12 @@ const USER_CONSENT_ENDPOINT: &str = "https://accounts.google.com/o/oauth2/v2/aut
 #[derive(Clone)]
 pub struct Client {
     host: String,
-    token: Arc<RwLock<String>>,
-    // This will expire within a certain amount of time as determined by the
-    // expiration date passed back in the initial request.
-    refresh_token: Arc<RwLock<String>>,
+    token: Arc<RwLock<InnerToken>>,
     client_id: String,
     client_secret: String,
     redirect_uri: String,
 
-    retry_auth: bool,
+    auto_refresh: bool,
     client: reqwest_middleware::ClientWithMiddleware,
 }
 
@@ -198,6 +201,17 @@ pub struct AccessToken {
         deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
     pub scope: String,
+}
+
+/// Time in seconds before the access token expiration point that a refresh should
+/// be performed. This value is subtracted from the `expires_in` value returned by
+/// the provider prior to storing
+const REFRESH_THRESHOLD: Duration = Duration::from_secs(60);
+
+struct InnerToken {
+    access_token: String,
+    refresh_token: String,
+    expires_at: Option<Instant>,
 }
 
 impl Client {
@@ -243,10 +257,13 @@ impl Client {
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     redirect_uri: redirect_uri.to_string(),
-                    token: Arc::new(RwLock::new(token.to_string())),
-                    refresh_token: Arc::new(RwLock::new(refresh_token.to_string())),
+                    token: Arc::new(RwLock::new(InnerToken {
+                        access_token: token.to_string(),
+                        refresh_token: refresh_token.to_string(),
+                        expires_at: None,
+                    })),
 
-                    retry_auth: false,
+                    auto_refresh: false,
                     client,
                 }
             }
@@ -304,9 +321,12 @@ impl Client {
                     client_id: secret.client_id.to_string(),
                     client_secret: secret.client_secret.to_string(),
                     redirect_uri: secret.redirect_uris[0].to_string(),
-                    token: Arc::new(RwLock::new(token.to_string())),
-                    refresh_token: Arc::new(RwLock::new(refresh_token.to_string())),
-                    retry_auth: false,
+                    token: Arc::new(RwLock::new(InnerToken {
+                        access_token: token.to_string(),
+                        refresh_token: refresh_token.to_string(),
+                        expires_at: None,
+                    })),
+                    auto_refresh: false,
                     client,
                 }
             }
@@ -334,9 +354,9 @@ impl Client {
 
     /// Refresh an access token from a refresh token. Client must have a refresh token
     /// for this to work.
-    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
+    pub async fn refresh_access_token(&self) -> Result<AccessToken> {
         let response = {
-            let refresh_token = &self.refresh_token.read().await;
+            let refresh_token = &self.token.read().await.refresh_token;
 
             if refresh_token.is_empty() {
                 anyhow!("refresh token cannot be empty");
@@ -368,8 +388,13 @@ impl Client {
         // Unwrap the response.
         let t: AccessToken = response.json().await?;
 
-        *self.token.write().await = t.access_token.to_string();
-        *self.refresh_token.write().await = t.refresh_token.to_string();
+        *self.token.write().await = InnerToken {
+            access_token: t.access_token.clone(),
+            refresh_token: t.refresh_token.clone(),
+            expires_at: Instant::now()
+                .add(Duration::from_secs(t.expires_in.try_into().unwrap_or(0)))
+                .checked_sub(REFRESH_THRESHOLD),
+        };
 
         Ok(t)
     }
@@ -403,8 +428,13 @@ impl Client {
         // Unwrap the response.
         let t: AccessToken = resp.json().await?;
 
-        *self.token.write().await = t.access_token.to_string();
-        *self.refresh_token.write().await = t.refresh_token.to_string();
+        *self.token.write().await = InnerToken {
+            access_token: t.access_token.clone(),
+            refresh_token: t.refresh_token.clone(),
+            expires_at: Instant::now()
+                .add(Duration::from_secs(t.expires_in.try_into().unwrap_or(0)))
+                .checked_sub(REFRESH_THRESHOLD),
+        };
 
         Ok(t)
     }
@@ -412,7 +442,7 @@ impl Client {
     async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
         let parsed_url = uri.parse::<reqwest::Url>();
 
-        let auth = format!("Bearer {}", self.token.read().await);
+        let auth = format!("Bearer Bearer {}", self.token.read().await.access_token);
         parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
     }
 
@@ -467,18 +497,48 @@ impl Client {
     ) -> Result<reqwest::Response> {
         let req = self.make_request(&method, uri, body).await?;
 
-        let resp = if self.retry_auth {
-            if let Some(first_try) = req.try_clone() {
-                let resp = self.client.execute(first_try).await?;
-                if resp.status() == http::status::StatusCode::UNAUTHORIZED {
+        let resp = if self.auto_refresh {
+            let expired = self
+                .token
+                .read()
+                .await
+                .expires_at
+                .map(|expiration| Instant::now() < expiration);
+
+            match expired {
+                // We have a known expired token, there is no point in trying to make a request
+                // without refreshing it first
+                Some(true) => {
+                    self.refresh_access_token().await?;
                     self.client.execute(req).await?
-                } else {
-                    resp
                 }
-            } else {
-                // We may be handling a request that can not be cloned, and therefore
-                // we will execute without auth retry
-                self.client.execute(req).await?
+                // We have a (theoretically) known good token available. We make an optimistic
+                // attempting at the request. If the token is no longer good, then something other
+                // than the expiration is triggering the failure. We defer handling of these errors
+                // to the caller
+                Some(false) => self.client.execute(req).await?,
+
+                // We do not know what state we are in. We could have a valid or expired token.
+                // Generally this means we are in one of two cases:
+                //   1. We have not yet performed a token refresh (and do not know the expiration
+                //      of the user provided token)
+                //   2. The provider is returning unusable expiration times, at which point we
+                //      choose to ignore them
+                None => {
+                    if let Some(first_try) = req.try_clone() {
+                        let resp = self.client.execute(first_try).await?;
+                        if resp.status() == http::status::StatusCode::UNAUTHORIZED {
+                            self.refresh_access_token().await?;
+                            self.client.execute(req).await?
+                        } else {
+                            resp
+                        }
+                    } else {
+                        // We may be handling a request that can not be cloned, and therefore
+                        // we will execute without auth retry
+                        self.client.execute(req).await?
+                    }
+                }
             }
         } else {
             self.client.execute(req).await?
