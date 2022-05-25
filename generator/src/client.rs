@@ -731,7 +731,7 @@ where
                 redirect_uri: secret.redirect_uris[0].to_string(),
                 token: Arc::new(RwLock::new(token.to_string())),
                 refresh_token: Arc::new(RwLock::new(refresh_token.to_string())),
-                retry_auth: bool,
+                retry_auth: false,
                 client,
             }
         },
@@ -847,10 +847,9 @@ async fn url_and_auth(
 ) -> Result<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>();
 
-    let auth = format!("Bearer {}", self.token.read().await);
+    let auth = format!("{} {{}}", self.token.read().await);
     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
 }}
-
 
 async fn make_request(
     &self,
@@ -923,6 +922,44 @@ async fn request_raw(
     }};
 
     Ok(resp)
+}}
+
+async fn request<Out>(
+    &self,
+    method: reqwest::Method,
+    uri: &str,
+    body: Option<reqwest::Body>,
+) -> Result<Out>
+    where
+    Out: serde::de::DeserializeOwned + 'static + Send,
+{{
+    let response = self.request_raw(method, uri, body).await?;
+
+    let status = response.status();
+
+    let response_body = response.bytes().await?;
+
+    if status.is_success() {{
+        log::debug!("response payload {{}}", String::from_utf8_lossy(&response_body));
+        let parsed_response = if status == http::StatusCode::NO_CONTENT || std::any::TypeId::of::<Out>() == std::any::TypeId::of::<()>(){{
+            serde_json::from_str("null")
+        }} else {{
+            serde_json::from_slice::<Out>(&response_body)
+        }};
+        parsed_response.map_err(Error::from)
+    }} else {{
+        let error = if response_body.is_empty() {{
+            anyhow!("code: {{}}, empty response", status)
+        }} else {{
+            anyhow!(
+                "code: {{}}, error: {{:?}}",
+                status,
+                String::from_utf8_lossy(&response_body),
+            )
+        }};
+
+        Err(error)
+    }}
 }}
 
 async fn request_with_links<Out>(
@@ -1357,7 +1394,7 @@ pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
 
         let params = [
             ("grant_type", "refresh_token"),
-            ("refresh_token", &refresh_token),
+            ("refresh_token", refresh_token),
             ("client_id", &self.client_id),
             ("client_secret", &self.client_secret),
             ("redirect_uri", &self.redirect_uri),
