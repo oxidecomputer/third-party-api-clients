@@ -272,6 +272,22 @@ impl Client {
         }
     }
 
+    /// Enables or disables the automatic refreshing of access tokens upon expiration
+    pub fn set_auto_access_token_refresh(&mut self, enabled: bool) -> &mut Self {
+        self.auto_refresh = enabled;
+        self
+    }
+
+    /// Sets a specific instant at which the access token should be considered expired.
+    /// The expiration value will only be used when automatic access token refreshing is
+    /// also enabled. `None` may be passed in if the expiration is unknown. In this case
+    /// automatic refreshes will be attempted when encountering an UNAUTHENTICATED status
+    /// code on a response.
+    pub async fn set_expires_at(&mut self, expires_at: Option<Instant>) -> &mut Self {
+        self.token.write().await.expires_at = expires_at;
+        self
+    }
+
     /// Override the default host for the client.
     pub fn with_host<H>(&self, host: H) -> Self
     where
