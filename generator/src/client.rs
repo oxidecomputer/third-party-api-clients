@@ -1,3 +1,5 @@
+use std::{os::linux::raw, fmt::format};
+
 use inflector::cases::snakecase::to_snake_case;
 
 /*
@@ -581,11 +583,6 @@ impl Client {{
         let client = reqwest::Client::builder().build();
         match client {{
             Ok(c) => {{
-                // We do not refresh the access token here since we leave that up to the
-                // user to do so they can re-save it to their database.
-                // TODO: But in the future we should save the expires in date and refresh it
-                // if it needs to be refreshed.
-                //
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
@@ -723,20 +720,16 @@ where
         .expect("failed to read from google credential env var");
 
     let client = reqwest::Client::builder().build();
-        let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
-        match client {
-            Ok(c) => {
-            // We do not refresh the access token here since we leave that up to the
-            // user to do so they can re-save it to their database.
-            // TODO: But in the future we should save the expires in date and refresh it
-            // if it needs to be refreshed.
-            //
-                let client = reqwest_middleware::ClientBuilder::new(c)
-                    // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware)
-                    // Retry failed requests.
-                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
-                    .build();
+    let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
+
+    match client {
+        Ok(c) => {
+            let client = reqwest_middleware::ClientBuilder::new(c)
+                // Trace HTTP requests. See the tracing crate to make use of these traces.
+                .with(reqwest_tracing::TracingMiddleware)
+                // Retry failed requests.
+                .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                .build();
 
             Client {
                 host: DEFAULT_HOST.to_string(),
@@ -856,117 +849,24 @@ fn get_shared_functions(proper_name: &str, add_post_header: &str) -> String {
         "Bearer".to_string()
     };
 
+    // Add auto refresh functionality to clients that support it
+    let raw_request = if
+        proper_name.starts_with("Google") ||
+        proper_name == "DocuSign" ||
+        proper_name == "Gusto" ||
+        proper_name == "MailChimp" ||
+        proper_name == "Shopify" ||
+        proper_name == "Slack" ||
+        proper_name == "Zoom"
+    {
+        get_shared_raw_functions_with_refresh("Bearer", &post_header_args)
+    } else {
+        get_shared_raw_functions_without_refresh(&bearer, &post_header_args)
+    };
+
     format!(
         r#"
-async fn url_and_auth(
-    &self,
-    uri: &str,
-) -> Result<(reqwest::Url, Option<String>)> {{
-    let parsed_url = uri.parse::<reqwest::Url>();
-
-    let auth = format!("Bearer {} {{}}", self.token.read().await.access_token);
-    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
-}}
-
-async fn make_request(
-    &self,
-    method: &reqwest::Method,
-    uri: &str,
-    body: Option<reqwest::Body>,
-) -> Result<reqwest::Request> {{
-    let u = if uri.starts_with("https://") {{
-        uri.to_string()
-    }} else {{
-        (self.host.clone() + uri).to_string()
-    }};
-    let (url, auth) = self.url_and_auth(&u).await?;
-
-    let instance = <&Client>::clone(&self);
-
-    let mut req = instance.client.request(method.clone(), url);
-
-    // Set the default headers.
-    req = req.header(
-        reqwest::header::ACCEPT,
-        reqwest::header::HeaderValue::from_static("application/json"),
-    );
-    req = req.header(
-        reqwest::header::CONTENT_TYPE,
-        reqwest::header::HeaderValue::from_static("application/json"),
-    );
-    {}
-
-    if let Some(auth_str) = auth {{
-        req = req.header(http::header::AUTHORIZATION, &*auth_str);
-    }}
-
-    if let Some(body) = body {{
-        log::debug!(
-            "body: {{:?}}",
-            String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
-        );
-
-        req = req.body(body);
-    }}
-
-    Ok(req.build()?)
-}}
-
-async fn request_raw(
-    &self,
-    method: reqwest::Method,
-    uri: &str,
-    body: Option<reqwest::Body>,
-) -> Result<reqwest::Response> {{
-    let req = self.make_request(&method, uri, body).await?;
-
-    let resp = if self.auto_refresh {{
-        let expired = self.token.read().await.expires_at.map(|expiration| {{
-            Instant::now() < expiration
-        }});
-
-        match expired {{
-
-            // We have a known expired token, there is no point in trying to make a request
-            // without refreshing it first
-            Some(true) => {{
-                self.refresh_access_token().await?;
-                self.client.execute(req).await?
-            }},
-            // We have a (theoretically) known good token available. We make an optimistic
-            // attempting at the request. If the token is no longer good, then something other
-            // than the expiration is triggering the failure. We defer handling of these errors
-            // to the caller
-            Some(false) => self.client.execute(req).await?,
-
-            // We do not know what state we are in. We could have a valid or expired token.
-            // Generally this means we are in one of two cases:
-            //   1. We have not yet performed a token refresh (and do not know the expiration
-            //      of the user provided token)
-            //   2. The provider is returning unusable expiration times, at which point we
-            //      choose to ignore them
-            None => {{
-                if let Some(first_try) = req.try_clone() {{
-                    let resp = self.client.execute(first_try).await?;
-                    if resp.status() == http::status::StatusCode::UNAUTHORIZED {{
-                        self.refresh_access_token().await?;
-                        self.client.execute(req).await?
-                    }} else {{
-                        resp
-                    }}
-                }} else {{
-                    // We may be handling a request that can not be cloned, and therefore
-                    // we will execute without auth retry
-                    self.client.execute(req).await?
-                }}
-            }}
-        }}
-    }} else {{
-        self.client.execute(req).await?
-    }};
-
-    Ok(resp)
-}}
+{}
 
 async fn request<Out>(
     &self,
@@ -1396,9 +1296,168 @@ where
         &(self.host.to_string() + uri),
         message,
     ).await
-}}"#,
-        bearer, post_header_args
-    )
+}}"#, raw_request)
+}
+
+fn get_shared_raw_functions_without_refresh(bearer: &str, post_header_args: &str) -> String {
+    format!(r#"
+async fn url_and_auth(
+    &self,
+    uri: &str,
+) -> Result<(reqwest::Url, Option<String>)> {{
+    let parsed_url = uri.parse::<reqwest::Url>();
+    let auth = format!("{} {{}}", self.token);
+    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+}}
+
+async fn request_raw(
+    &self,
+    method: reqwest::Method,
+    uri: &str,
+    body: Option<reqwest::Body>,
+) -> Result<reqwest::Response>
+{{
+    let u = if uri.starts_with("https://") {{
+        uri.to_string()
+    }} else {{
+        (self.host.clone() + uri).to_string()
+    }};
+    let (url, auth) = self.url_and_auth(&u).await?;
+    let instance = <&Client>::clone(&self);
+    let mut req = instance.client.request(method.clone(), url);
+    // Set the default headers.
+    req = req.header(
+        reqwest::header::ACCEPT,
+        reqwest::header::HeaderValue::from_static("application/json"),
+    );
+    req = req.header(
+        reqwest::header::CONTENT_TYPE,
+        reqwest::header::HeaderValue::from_static("application/json"),
+    );
+    {}
+    if let Some(auth_str) = auth {{
+        req = req.header(http::header::AUTHORIZATION, &*auth_str);
+    }}
+    if let Some(body) = body {{
+        log::debug!("body: {{:?}}", String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap());
+        req = req.body(body);
+    }}
+    Ok(req.send().await?)
+}}
+"#, bearer, post_header_args)
+}
+
+fn get_shared_raw_functions_with_refresh(bearer: &str, post_header_args: &str) -> String {
+    format!(r#"
+async fn url_and_auth(
+    &self,
+    uri: &str,
+) -> Result<(reqwest::Url, Option<String>)> {{
+    let parsed_url = uri.parse::<reqwest::Url>();
+
+    let auth = format!("{} {{}}", self.token.read().await.access_token);
+    parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
+}}
+
+async fn make_request(
+    &self,
+    method: &reqwest::Method,
+    uri: &str,
+    body: Option<reqwest::Body>,
+) -> Result<reqwest::Request> {{
+    let u = if uri.starts_with("https://") {{
+        uri.to_string()
+    }} else {{
+        (self.host.clone() + uri).to_string()
+    }};
+    let (url, auth) = self.url_and_auth(&u).await?;
+
+    let instance = <&Client>::clone(&self);
+
+    let mut req = instance.client.request(method.clone(), url);
+
+    // Set the default headers.
+    req = req.header(
+        reqwest::header::ACCEPT,
+        reqwest::header::HeaderValue::from_static("application/json"),
+    );
+    req = req.header(
+        reqwest::header::CONTENT_TYPE,
+        reqwest::header::HeaderValue::from_static("application/json"),
+    );
+    {}
+
+    if let Some(auth_str) = auth {{
+        req = req.header(http::header::AUTHORIZATION, &*auth_str);
+    }}
+
+    if let Some(body) = body {{
+        log::debug!(
+            "body: {{:?}}",
+            String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
+        );
+
+        req = req.body(body);
+    }}
+
+    Ok(req.build()?)
+}}
+
+async fn request_raw(
+    &self,
+    method: reqwest::Method,
+    uri: &str,
+    body: Option<reqwest::Body>,
+) -> Result<reqwest::Response> {{
+    let req = self.make_request(&method, uri, body).await?;
+
+    let resp = if self.auto_refresh {{
+        let expired = self.token.read().await.expires_at.map(|expiration| {{
+            Instant::now() < expiration
+        }});
+
+        match expired {{
+
+            // We have a known expired token, there is no point in trying to make a request
+            // without refreshing it first
+            Some(true) => {{
+                self.refresh_access_token().await?;
+                self.client.execute(req).await?
+            }},
+            // We have a (theoretically) known good token available. We make an optimistic
+            // attempting at the request. If the token is no longer good, then something other
+            // than the expiration is triggering the failure. We defer handling of these errors
+            // to the caller
+            Some(false) => self.client.execute(req).await?,
+
+            // We do not know what state we are in. We could have a valid or expired token.
+            // Generally this means we are in one of two cases:
+            //   1. We have not yet performed a token refresh (and do not know the expiration
+            //      of the user provided token)
+            //   2. The provider is returning unusable expiration times, at which point we
+            //      choose to ignore them
+            None => {{
+                if let Some(first_try) = req.try_clone() {{
+                    let resp = self.client.execute(first_try).await?;
+                    if resp.status() == http::status::StatusCode::UNAUTHORIZED {{
+                        self.refresh_access_token().await?;
+                        self.client.execute(req).await?
+                    }} else {{
+                        resp
+                    }}
+                }} else {{
+                    // We may be handling a request that can not be cloned, and therefore
+                    // we will execute without auth retry
+                    self.client.execute(req).await?
+                }}
+            }}
+        }}
+    }} else {{
+        self.client.execute(req).await?
+    }};
+
+    Ok(resp)
+}}"#, bearer, post_header_args)
 }
 
 const TOKEN_AUTH_TEMPLATE: &str = r#"
