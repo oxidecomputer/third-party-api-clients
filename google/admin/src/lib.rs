@@ -256,11 +256,6 @@ impl Client {
         let client = reqwest::Client::builder().build();
         match client {
             Ok(c) => {
-                // We do not refresh the access token here since we leave that up to the
-                // user to do so they can re-save it to their database.
-                // TODO: But in the future we should save the expires in date and refresh it
-                // if it needs to be refreshed.
-                //
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
@@ -318,13 +313,9 @@ impl Client {
         let client = reqwest::Client::builder().build();
         let retry_policy =
             reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
+
         match client {
             Ok(c) => {
-                // We do not refresh the access token here since we leave that up to the
-                // user to do so they can re-save it to their database.
-                // TODO: But in the future we should save the expires in date and refresh it
-                // if it needs to be refreshed.
-                //
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
@@ -470,7 +461,7 @@ impl Client {
     async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
         let parsed_url = uri.parse::<reqwest::Url>();
 
-        let auth = format!("Bearer Bearer {}", self.token.read().await.access_token);
+        let auth = format!("Bearer {}", self.token.read().await.access_token);
         parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
     }
 
