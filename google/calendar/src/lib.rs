@@ -393,13 +393,18 @@ impl Client {
 
         // Unwrap the response.
         let t: AccessToken = response.json().await?;
+        let seconds_valid = t
+            .expires_in
+            .try_into()
+            .ok()
+            .map(Duration::from_secs)
+            .and_then(|dur| dur.checked_sub(REFRESH_THRESHOLD));
+        let expires_at = seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid));
 
         *self.token.write().await = InnerToken {
             access_token: t.access_token.clone(),
             refresh_token: t.refresh_token.clone(),
-            expires_at: Instant::now()
-                .add(Duration::from_secs(t.expires_in.try_into().unwrap_or(0)))
-                .checked_sub(REFRESH_THRESHOLD),
+            expires_at,
         };
 
         Ok(t)
@@ -433,13 +438,18 @@ impl Client {
 
         // Unwrap the response.
         let t: AccessToken = resp.json().await?;
+        let seconds_valid = t
+            .expires_in
+            .try_into()
+            .ok()
+            .map(Duration::from_secs)
+            .and_then(|dur| dur.checked_sub(REFRESH_THRESHOLD));
+        let expires_at = seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid));
 
         *self.token.write().await = InnerToken {
             access_token: t.access_token.clone(),
             refresh_token: t.refresh_token.clone(),
-            expires_at: Instant::now()
-                .add(Duration::from_secs(t.expires_in.try_into().unwrap_or(0)))
-                .checked_sub(REFRESH_THRESHOLD),
+            expires_at,
         };
 
         Ok(t)
