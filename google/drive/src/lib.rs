@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-drive = "0.2.10"
+//! google-drive = "0.3.0"
 //! ```
 //!
 //! ## Basic example
@@ -148,7 +148,15 @@ mod progenitor_support {
     }
 }
 
-use std::env;
+use std::{
+    convert::TryInto,
+    env,
+    ops::Add,
+    sync::Arc,
+    time::{Duration, Instant},
+};
+
+use tokio::sync::RwLock;
 
 const TOKEN_ENDPOINT: &str = "https://oauth2.googleapis.com/token";
 const USER_CONSENT_ENDPOINT: &str = "https://accounts.google.com/o/oauth2/v2/auth";
@@ -157,14 +165,12 @@ const USER_CONSENT_ENDPOINT: &str = "https://accounts.google.com/o/oauth2/v2/aut
 #[derive(Clone)]
 pub struct Client {
     host: String,
-    token: String,
-    // This will expire within a certain amount of time as determined by the
-    // expiration date passed back in the initial request.
-    refresh_token: String,
+    token: Arc<RwLock<InnerToken>>,
     client_id: String,
     client_secret: String,
     redirect_uri: String,
 
+    auto_refresh: bool,
     client: reqwest_middleware::ClientWithMiddleware,
 }
 
@@ -206,6 +212,17 @@ pub struct AccessToken {
     pub scope: String,
 }
 
+/// Time in seconds before the access token expiration point that a refresh should
+/// be performed. This value is subtracted from the `expires_in` value returned by
+/// the provider prior to storing
+const REFRESH_THRESHOLD: Duration = Duration::from_secs(60);
+
+struct InnerToken {
+    access_token: String,
+    refresh_token: String,
+    expires_at: Option<Instant>,
+}
+
 impl Client {
     /// Create a new Client struct. It takes a type that can convert into
     /// an &str (`String` or `Vec<u8>` for example). As long as the function is
@@ -230,11 +247,6 @@ impl Client {
         let client = reqwest::Client::builder().build();
         match client {
             Ok(c) => {
-                // We do not refresh the access token here since we leave that up to the
-                // user to do so they can re-save it to their database.
-                // TODO: But in the future we should save the expires in date and refresh it
-                // if it needs to be refreshed.
-                //
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
@@ -249,14 +261,34 @@ impl Client {
                     client_id: client_id.to_string(),
                     client_secret: client_secret.to_string(),
                     redirect_uri: redirect_uri.to_string(),
-                    token: token.to_string(),
-                    refresh_token: refresh_token.to_string(),
+                    token: Arc::new(RwLock::new(InnerToken {
+                        access_token: token.to_string(),
+                        refresh_token: refresh_token.to_string(),
+                        expires_at: None,
+                    })),
 
+                    auto_refresh: false,
                     client,
                 }
             }
             Err(e) => panic!("creating reqwest client failed: {:?}", e),
         }
+    }
+
+    /// Enables or disables the automatic refreshing of access tokens upon expiration
+    pub fn set_auto_access_token_refresh(&mut self, enabled: bool) -> &mut Self {
+        self.auto_refresh = enabled;
+        self
+    }
+
+    /// Sets a specific instant at which the access token should be considered expired.
+    /// The expiration value will only be used when automatic access token refreshing is
+    /// also enabled. `None` may be passed in if the expiration is unknown. In this case
+    /// automatic refreshes will be attempted when encountering an UNAUTHENTICATED status
+    /// code on a response.
+    pub async fn set_expires_at(&mut self, expires_at: Option<Instant>) -> &mut Self {
+        self.token.write().await.expires_at = expires_at;
+        self
     }
 
     /// Override the default host for the client.
@@ -288,13 +320,9 @@ impl Client {
         let client = reqwest::Client::builder().build();
         let retry_policy =
             reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
+
         match client {
             Ok(c) => {
-                // We do not refresh the access token here since we leave that up to the
-                // user to do so they can re-save it to their database.
-                // TODO: But in the future we should save the expires in date and refresh it
-                // if it needs to be refreshed.
-                //
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
@@ -309,9 +337,12 @@ impl Client {
                     client_id: secret.client_id.to_string(),
                     client_secret: secret.client_secret.to_string(),
                     redirect_uri: secret.redirect_uris[0].to_string(),
-                    token: token.to_string(),
-                    refresh_token: refresh_token.to_string(),
-
+                    token: Arc::new(RwLock::new(InnerToken {
+                        access_token: token.to_string(),
+                        refresh_token: refresh_token.to_string(),
+                        expires_at: None,
+                    })),
+                    auto_refresh: false,
                     client,
                 }
             }
@@ -339,38 +370,52 @@ impl Client {
 
     /// Refresh an access token from a refresh token. Client must have a refresh token
     /// for this to work.
-    pub async fn refresh_access_token(&mut self) -> Result<AccessToken> {
-        if self.refresh_token.is_empty() {
-            anyhow!("refresh token cannot be empty");
-        }
+    pub async fn refresh_access_token(&self) -> Result<AccessToken> {
+        let response = {
+            let refresh_token = &self.token.read().await.refresh_token;
 
-        let mut headers = reqwest::header::HeaderMap::new();
-        headers.append(
-            reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
+            if refresh_token.is_empty() {
+                anyhow!("refresh token cannot be empty");
+            }
 
-        let params = [
-            ("grant_type", "refresh_token"),
-            ("refresh_token", &self.refresh_token),
-            ("client_id", &self.client_id),
-            ("client_secret", &self.client_secret),
-            ("redirect_uri", &self.redirect_uri),
-        ];
-        let client = reqwest::Client::new();
-        let resp = client
-            .post(TOKEN_ENDPOINT)
-            .headers(headers)
-            .form(&params)
-            .basic_auth(&self.client_id, Some(&self.client_secret))
-            .send()
-            .await?;
+            let mut headers = reqwest::header::HeaderMap::new();
+            headers.append(
+                reqwest::header::ACCEPT,
+                reqwest::header::HeaderValue::from_static("application/json"),
+            );
+
+            let params = [
+                ("grant_type", "refresh_token"),
+                ("refresh_token", refresh_token),
+                ("client_id", &self.client_id),
+                ("client_secret", &self.client_secret),
+                ("redirect_uri", &self.redirect_uri),
+            ];
+            let client = reqwest::Client::new();
+            client
+                .post(TOKEN_ENDPOINT)
+                .headers(headers)
+                .form(&params)
+                .basic_auth(&self.client_id, Some(&self.client_secret))
+                .send()
+                .await?
+        };
 
         // Unwrap the response.
-        let t: AccessToken = resp.json().await?;
+        let t: AccessToken = response.json().await?;
+        let seconds_valid = t
+            .expires_in
+            .try_into()
+            .ok()
+            .map(Duration::from_secs)
+            .and_then(|dur| dur.checked_sub(REFRESH_THRESHOLD));
+        let expires_at = seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid));
 
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
+        *self.token.write().await = InnerToken {
+            access_token: t.access_token.clone(),
+            refresh_token: t.refresh_token.clone(),
+            expires_at,
+        };
 
         Ok(t)
     }
@@ -403,9 +448,19 @@ impl Client {
 
         // Unwrap the response.
         let t: AccessToken = resp.json().await?;
+        let seconds_valid = t
+            .expires_in
+            .try_into()
+            .ok()
+            .map(Duration::from_secs)
+            .and_then(|dur| dur.checked_sub(REFRESH_THRESHOLD));
+        let expires_at = seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid));
 
-        self.token = t.access_token.to_string();
-        self.refresh_token = t.refresh_token.to_string();
+        *self.token.write().await = InnerToken {
+            access_token: t.access_token.clone(),
+            refresh_token: t.refresh_token.clone(),
+            expires_at,
+        };
 
         Ok(t)
     }
@@ -413,16 +468,16 @@ impl Client {
     async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
         let parsed_url = uri.parse::<reqwest::Url>();
 
-        let auth = format!("Bearer {}", self.token);
+        let auth = format!("Bearer {}", self.token.read().await.access_token);
         parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
     }
 
-    async fn request_raw(
+    async fn make_request(
         &self,
-        method: reqwest::Method,
+        method: &reqwest::Method,
         uri: &str,
         body: Option<reqwest::Body>,
-    ) -> Result<reqwest::Response> {
+    ) -> Result<reqwest::Request> {
         let u = if uri.starts_with("https://") {
             uri.to_string()
         } else {
@@ -453,9 +508,69 @@ impl Client {
                 "body: {:?}",
                 String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
             );
+
             req = req.body(body);
         }
-        Ok(req.send().await?)
+
+        Ok(req.build()?)
+    }
+
+    async fn request_raw(
+        &self,
+        method: reqwest::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<reqwest::Response> {
+        let req = self.make_request(&method, uri, body).await?;
+
+        let resp = if self.auto_refresh {
+            let expired = self
+                .token
+                .read()
+                .await
+                .expires_at
+                .map(|expiration| Instant::now() < expiration);
+
+            match expired {
+                // We have a known expired token, there is no point in trying to make a request
+                // without refreshing it first
+                Some(true) => {
+                    self.refresh_access_token().await?;
+                    self.client.execute(req).await?
+                }
+                // We have a (theoretically) known good token available. We make an optimistic
+                // attempting at the request. If the token is no longer good, then something other
+                // than the expiration is triggering the failure. We defer handling of these errors
+                // to the caller
+                Some(false) => self.client.execute(req).await?,
+
+                // We do not know what state we are in. We could have a valid or expired token.
+                // Generally this means we are in one of two cases:
+                //   1. We have not yet performed a token refresh (and do not know the expiration
+                //      of the user provided token)
+                //   2. The provider is returning unusable expiration times, at which point we
+                //      choose to ignore them
+                None => {
+                    if let Some(first_try) = req.try_clone() {
+                        let resp = self.client.execute(first_try).await?;
+                        if resp.status() == http::status::StatusCode::UNAUTHORIZED {
+                            self.refresh_access_token().await?;
+                            self.client.execute(req).await?
+                        } else {
+                            resp
+                        }
+                    } else {
+                        // We may be handling a request that can not be cloned, and therefore
+                        // we will execute without auth retry
+                        self.client.execute(req).await?
+                    }
+                }
+            }
+        } else {
+            self.client.execute(req).await?
+        };
+
+        Ok(resp)
     }
 
     async fn request<Out>(
