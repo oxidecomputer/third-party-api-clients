@@ -30,7 +30,6 @@ serde_urlencoded = "^0.7"
 url = { version = "2", features = ["serde"] }
 github-scopes-rs = { version = "1" }
 
-
 [dev-dependencies]
 base64 = "^0.12"
 dirs = "^3.0.2"
