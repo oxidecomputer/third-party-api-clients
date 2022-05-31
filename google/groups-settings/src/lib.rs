@@ -320,7 +320,8 @@ impl Client {
             .try_into()
             .ok()
             .map(Duration::from_secs)
-            .and_then(|dur| dur.checked_sub(REFRESH_THRESHOLD));
+            .and_then(|dur| dur.checked_sub(REFRESH_THRESHOLD))
+            .or_else(|| Some(Duration::from_secs(0)));
 
         seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid))
     }
