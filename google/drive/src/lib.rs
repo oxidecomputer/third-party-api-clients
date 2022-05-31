@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-drive = "0.3.0"
+//! google-drive = "0.3.1"
 //! ```
 //!
 //! ## Basic example
