@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-groups-settings = "0.2.0"
+//! google-groups-settings = "0.2.1"
 //! ```
 //!
 //! ## Basic example
@@ -207,6 +207,7 @@ pub struct AccessToken {
 /// the provider prior to storing
 const REFRESH_THRESHOLD: Duration = Duration::from_secs(60);
 
+#[derive(Debug, Clone)]
 struct InnerToken {
     access_token: String,
     refresh_token: String,
@@ -271,14 +272,58 @@ impl Client {
         self
     }
 
-    /// Sets a specific instant at which the access token should be considered expired.
+    /// Sets a specific `Instant` at which the access token should be considered expired.
     /// The expiration value will only be used when automatic access token refreshing is
     /// also enabled. `None` may be passed in if the expiration is unknown. In this case
     /// automatic refreshes will be attempted when encountering an UNAUTHENTICATED status
     /// code on a response.
-    pub async fn set_expires_at(&mut self, expires_at: Option<Instant>) -> &mut Self {
+    pub async fn set_expires_at(&self, expires_at: Option<Instant>) -> &Self {
         self.token.write().await.expires_at = expires_at;
         self
+    }
+
+    /// Gets the `Instant` at which the access token used by this client is set to expire
+    /// if one is known
+    pub async fn expires_at(&self) -> Option<Instant> {
+        self.token.read().await.expires_at
+    }
+
+    /// Sets the number of seconds in which the current access token should be considered
+    /// expired
+    pub async fn set_expires_in(&self, expires_in: i64) -> &Self {
+        self.token.write().await.expires_at = Self::compute_expires_at(expires_in);
+        self
+    }
+
+    /// Gets the number of seconds from now in which the current access token will be
+    /// considered expired if one is known
+    pub async fn expires_in(&self) -> Option<Duration> {
+        self.token
+            .read()
+            .await
+            .expires_at
+            .map(|i| i.duration_since(Instant::now()))
+    }
+
+    /// Determines if the access token currently stored in the client is expired. If the
+    /// expiration can not be determined, None is returned
+    pub async fn is_expired(&self) -> Option<bool> {
+        self.token
+            .read()
+            .await
+            .expires_at
+            .map(|expiration| expiration <= Instant::now())
+    }
+
+    fn compute_expires_at(expires_in: i64) -> Option<Instant> {
+        let seconds_valid = expires_in
+            .try_into()
+            .ok()
+            .map(Duration::from_secs)
+            .and_then(|dur| dur.checked_sub(REFRESH_THRESHOLD))
+            .or_else(|| Some(Duration::from_secs(0)));
+
+        seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid))
     }
 
     /// Override the default host for the client.
@@ -393,18 +438,13 @@ impl Client {
 
         // Unwrap the response.
         let t: AccessToken = response.json().await?;
-        let seconds_valid = t
-            .expires_in
-            .try_into()
-            .ok()
-            .map(Duration::from_secs)
-            .and_then(|dur| dur.checked_sub(REFRESH_THRESHOLD));
-        let expires_at = seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid));
+
+        let refresh_token = self.token.read().await.refresh_token.clone();
 
         *self.token.write().await = InnerToken {
             access_token: t.access_token.clone(),
-            refresh_token: t.refresh_token.clone(),
-            expires_at,
+            refresh_token,
+            expires_at: Self::compute_expires_at(t.expires_in),
         };
 
         Ok(t)
@@ -438,18 +478,11 @@ impl Client {
 
         // Unwrap the response.
         let t: AccessToken = resp.json().await?;
-        let seconds_valid = t
-            .expires_in
-            .try_into()
-            .ok()
-            .map(Duration::from_secs)
-            .and_then(|dur| dur.checked_sub(REFRESH_THRESHOLD));
-        let expires_at = seconds_valid.map(|seconds_valid| Instant::now().add(seconds_valid));
 
         *self.token.write().await = InnerToken {
             access_token: t.access_token.clone(),
             refresh_token: t.refresh_token.clone(),
-            expires_at,
+            expires_at: Self::compute_expires_at(t.expires_in),
         };
 
         Ok(t)
@@ -514,12 +547,7 @@ impl Client {
         let req = self.make_request(&method, uri, body).await?;
 
         let resp = if self.auto_refresh {
-            let expired = self
-                .token
-                .read()
-                .await
-                .expires_at
-                .map(|expiration| Instant::now() < expiration);
+            let expired = self.is_expired().await;
 
             match expired {
                 // We have a known expired token, there is no point in trying to make a request
@@ -540,21 +568,7 @@ impl Client {
                 //      of the user provided token)
                 //   2. The provider is returning unusable expiration times, at which point we
                 //      choose to ignore them
-                None => {
-                    if let Some(first_try) = req.try_clone() {
-                        let resp = self.client.execute(first_try).await?;
-                        if resp.status() == http::status::StatusCode::UNAUTHORIZED {
-                            self.refresh_access_token().await?;
-                            self.client.execute(req).await?
-                        } else {
-                            resp
-                        }
-                    } else {
-                        // We may be handling a request that can not be cloned, and therefore
-                        // we will execute without auth retry
-                        self.client.execute(req).await?
-                    }
-                }
+                None => self.client.execute(req).await?,
             }
         } else {
             self.client.execute(req).await?

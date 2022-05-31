@@ -217,7 +217,7 @@ $(GOOGLE_ADMIN_SPEC): $(GOOGLE_ADMIN_SPEC_DIR)
 	curl -sSL $(GOOGLE_ADMIN_SPEC_REMOTE) -o $@
 
 google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
-	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.3.0 \
+	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.3.1 \
 		-o google/admin \
 		-n gsuite-api \
 		--proper-name "Google Admin" \
@@ -236,7 +236,7 @@ $(GOOGLE_CALENDAR_SPEC): $(GOOGLE_CALENDAR_SPEC_DIR)
 	curl -sSL $(GOOGLE_CALENDAR_SPEC_REMOTE) -o $@
 
 google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
-	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.2.0 \
+	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.2.1 \
 		-o google/calendar \
 		-n google-calendar \
 		--proper-name "Google Calendar" \
@@ -274,7 +274,7 @@ $(GOOGLE_DRIVE_SPEC): $(GOOGLE_DRIVE_SPEC_DIR)
 	curl -sSL $(GOOGLE_DRIVE_SPEC_REMOTE) -o $@
 
 google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
-	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.3.0 \
+	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.3.1 \
 		-o google/drive \
 		-n google-drive \
 		--proper-name "Google Drive" \
@@ -293,7 +293,7 @@ $(GOOGLE_GROUPS_SETTINGS_SPEC): $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR)
 	curl -sSL $(GOOGLE_GROUPS_SETTINGS_SPEC_REMOTE) -o $@
 
 google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
-	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.2.0 \
+	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.2.1 \
 		-o google/groups-settings \
 		-n google-groups-settings \
 		--proper-name "Google Groups Settings" \
@@ -312,7 +312,7 @@ $(GOOGLE_SHEETS_SPEC): $(GOOGLE_SHEETS_SPEC_DIR)
 	curl -sSL $(GOOGLE_SHEETS_SPEC_REMOTE) -o $@
 
 google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
-	./target/debug/generator -i $(GOOGLE_SHEETS_SPEC) -v 0.3.0 \
+	./target/debug/generator -i $(GOOGLE_SHEETS_SPEC) -v 0.3.1 \
 		-o google/sheets \
 		-n sheets \
 		--proper-name "Google Sheets" \
