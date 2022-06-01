@@ -124,7 +124,7 @@ impl SuppressionsGlobal {
     ) -> Result<crate::types::RetrieveAGlobalSuppressionResponse> {
         let url = format!(
             "/asm/suppressions/global/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
 
         self.client.get(&url, None).await
@@ -146,7 +146,7 @@ impl SuppressionsGlobal {
     pub async fn delete_asm_email(&self, email: &str) -> Result<crate::types::Help> {
         let url = format!(
             "/asm/suppressions/global/{}",
-            crate::progenitor_support::encode_path(&email.to_string()),
+            crate::progenitor_support::encode_path(email),
         );
 
         self.client.delete(&url, None).await

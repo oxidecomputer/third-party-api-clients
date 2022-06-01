@@ -89,7 +89,7 @@ impl ProfileMappings {
     pub async fn get(&self, mapping_id: &str) -> Result<crate::types::ProfileMapping> {
         let url = format!(
             "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(&mapping_id.to_string()),
+            crate::progenitor_support::encode_path(mapping_id),
         );
 
         self.client.get(&url, None).await
@@ -113,7 +113,7 @@ impl ProfileMappings {
     ) -> Result<crate::types::ProfileMapping> {
         let url = format!(
             "/api/v1/mappings/{}",
-            crate::progenitor_support::encode_path(&mapping_id.to_string()),
+            crate::progenitor_support::encode_path(mapping_id),
         );
 
         self.client

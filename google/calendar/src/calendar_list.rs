@@ -210,7 +210,7 @@ impl CalendarList {
     pub async fn list_get(&self, calendar_id: &str) -> Result<crate::types::CalendarListEntry> {
         let url = format!(
             "/users/me/calendarList/{}",
-            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(calendar_id),
         );
 
         self.client.get(&url, None).await
@@ -239,7 +239,7 @@ impl CalendarList {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/me/calendarList/{}?{}",
-            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(calendar_id),
             query_
         );
 
@@ -260,7 +260,7 @@ impl CalendarList {
     pub async fn list_delete(&self, calendar_id: &str) -> Result<()> {
         let url = format!(
             "/users/me/calendarList/{}",
-            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(calendar_id),
         );
 
         self.client.delete(&url, None).await
@@ -289,7 +289,7 @@ impl CalendarList {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/users/me/calendarList/{}?{}",
-            crate::progenitor_support::encode_path(&calendar_id.to_string()),
+            crate::progenitor_support::encode_path(calendar_id),
             query_
         );
 

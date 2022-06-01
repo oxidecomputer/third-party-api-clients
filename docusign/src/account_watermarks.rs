@@ -26,7 +26,7 @@ impl AccountWatermarks {
     pub async fn watermark_get(&self, account_id: &str) -> Result<crate::types::Watermark> {
         let url = format!(
             "/v2.1/accounts/{}/watermark",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client.get(&url, None).await
@@ -50,7 +50,7 @@ impl AccountWatermarks {
     ) -> Result<crate::types::Watermark> {
         let url = format!(
             "/v2.1/accounts/{}/watermark",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client
@@ -76,7 +76,7 @@ impl AccountWatermarks {
     ) -> Result<crate::types::Watermark> {
         let url = format!(
             "/v2.1/accounts/{}/watermark/preview",
-            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(account_id),
         );
 
         self.client

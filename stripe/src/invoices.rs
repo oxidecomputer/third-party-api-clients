@@ -33,9 +33,9 @@ impl Invoices {
     pub async fn get_page(
         &self,
         collection_method: crate::types::CollectionMethod,
-        created: &str,
+        _created: &str,
         customer: &str,
-        due_date: &str,
+        _due_date: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -86,9 +86,9 @@ impl Invoices {
     pub async fn get_all(
         &self,
         collection_method: crate::types::CollectionMethod,
-        created: &str,
+        _created: &str,
         customer: &str,
-        due_date: &str,
+        _due_date: &str,
         status: crate::types::GetInvoicesStatus,
         subscription: &str,
     ) -> Result<Vec<crate::types::Invoice>> {
@@ -295,24 +295,24 @@ impl Invoices {
     */
     pub async fn get_upcoming(
         &self,
-        automatic_tax: &str,
+        _automatic_tax: &str,
         coupon: &str,
         customer: &str,
-        customer_details: &str,
-        discounts: &str,
-        invoice_items: &[String],
+        _customer_details: &str,
+        _discounts: &str,
+        _invoice_items: &[String],
         schedule: &str,
         subscription: &str,
-        subscription_billing_cycle_anchor: &str,
-        subscription_cancel_at: &str,
+        _subscription_billing_cycle_anchor: &str,
+        _subscription_cancel_at: &str,
         subscription_cancel_at_period_end: bool,
         subscription_cancel_now: bool,
-        subscription_default_tax_rates: &str,
-        subscription_items: &[String],
+        _subscription_default_tax_rates: &str,
+        _subscription_items: &[String],
         subscription_proration_behavior: crate::types::ProrationBehavior,
         subscription_proration_date: i64,
         subscription_start_date: i64,
-        subscription_trial_end: &str,
+        _subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
     ) -> Result<crate::types::Invoice> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -407,27 +407,27 @@ impl Invoices {
     */
     pub async fn get_upcoming_lines(
         &self,
-        automatic_tax: &str,
+        _automatic_tax: &str,
         coupon: &str,
         customer: &str,
-        customer_details: &str,
-        discounts: &str,
+        _customer_details: &str,
+        _discounts: &str,
         ending_before: &str,
-        invoice_items: &[String],
+        _invoice_items: &[String],
         limit: i64,
         schedule: &str,
         starting_after: &str,
         subscription: &str,
-        subscription_billing_cycle_anchor: &str,
-        subscription_cancel_at: &str,
+        _subscription_billing_cycle_anchor: &str,
+        _subscription_cancel_at: &str,
         subscription_cancel_at_period_end: bool,
         subscription_cancel_now: bool,
-        subscription_default_tax_rates: &str,
-        subscription_items: &[String],
+        _subscription_default_tax_rates: &str,
+        _subscription_items: &[String],
         subscription_proration_behavior: crate::types::ProrationBehavior,
         subscription_proration_date: i64,
         subscription_start_date: i64,
-        subscription_trial_end: &str,
+        _subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
     ) -> Result<Vec<crate::types::LineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -506,24 +506,24 @@ impl Invoices {
     */
     pub async fn get_all_upcoming_lines(
         &self,
-        automatic_tax: &str,
+        _automatic_tax: &str,
         coupon: &str,
         customer: &str,
-        customer_details: &str,
-        discounts: &str,
-        invoice_items: &[String],
+        _customer_details: &str,
+        _discounts: &str,
+        _invoice_items: &[String],
         schedule: &str,
         subscription: &str,
-        subscription_billing_cycle_anchor: &str,
-        subscription_cancel_at: &str,
+        _subscription_billing_cycle_anchor: &str,
+        _subscription_cancel_at: &str,
         subscription_cancel_at_period_end: bool,
         subscription_cancel_now: bool,
-        subscription_default_tax_rates: &str,
-        subscription_items: &[String],
+        _subscription_default_tax_rates: &str,
+        _subscription_items: &[String],
         subscription_proration_behavior: crate::types::ProrationBehavior,
         subscription_proration_date: i64,
         subscription_start_date: i64,
-        subscription_trial_end: &str,
+        _subscription_trial_end: &str,
         subscription_trial_from_plan: bool,
     ) -> Result<Vec<crate::types::LineItem>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -630,7 +630,7 @@ impl Invoices {
     pub async fn get(&self, invoice: &str) -> Result<crate::types::Invoice> {
         let url = format!(
             "/v1/invoices/{}",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
         );
 
         self.client.get(&url, None).await
@@ -653,7 +653,7 @@ impl Invoices {
     pub async fn post_invoices(&self, invoice: &str) -> Result<crate::types::Invoice> {
         let url = format!(
             "/v1/invoices/{}",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
         );
 
         self.client.post(&url, None).await
@@ -671,7 +671,7 @@ impl Invoices {
     pub async fn delete(&self, invoice: &str) -> Result<crate::types::DeletedInvoice> {
         let url = format!(
             "/v1/invoices/{}",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
         );
 
         self.client.delete(&url, None).await
@@ -689,7 +689,7 @@ impl Invoices {
     pub async fn post_finalize(&self, invoice: &str) -> Result<crate::types::Invoice> {
         let url = format!(
             "/v1/invoices/{}/finalize",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
         );
 
         self.client.post(&url, None).await
@@ -728,7 +728,7 @@ impl Invoices {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/invoices/{}/lines?{}",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
             query_
         );
 
@@ -748,7 +748,7 @@ impl Invoices {
     pub async fn get_all_lines(&self, invoice: &str) -> Result<Vec<crate::types::LineItem>> {
         let url = format!(
             "/v1/invoices/{}/lines",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
         );
 
         let mut resp: crate::types::InvoiceLinesList = self.client.get(&url, None).await?;
@@ -802,7 +802,7 @@ impl Invoices {
     pub async fn post_mark_uncollectible(&self, invoice: &str) -> Result<crate::types::Invoice> {
         let url = format!(
             "/v1/invoices/{}/mark_uncollectible",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
         );
 
         self.client.post(&url, None).await
@@ -820,7 +820,7 @@ impl Invoices {
     pub async fn post_pay(&self, invoice: &str) -> Result<crate::types::Invoice> {
         let url = format!(
             "/v1/invoices/{}/pay",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
         );
 
         self.client.post(&url, None).await
@@ -840,7 +840,7 @@ impl Invoices {
     pub async fn post_send(&self, invoice: &str) -> Result<crate::types::Invoice> {
         let url = format!(
             "/v1/invoices/{}/send",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
         );
 
         self.client.post(&url, None).await
@@ -858,7 +858,7 @@ impl Invoices {
     pub async fn post_void(&self, invoice: &str) -> Result<crate::types::Invoice> {
         let url = format!(
             "/v1/invoices/{}/void",
-            crate::progenitor_support::encode_path(&invoice.to_string()),
+            crate::progenitor_support::encode_path(invoice),
         );
 
         self.client.post(&url, None).await

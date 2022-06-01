@@ -38,7 +38,7 @@ impl ThreeDSecure {
     ) -> Result<crate::types::ThreeDSecure> {
         let url = format!(
             "/v1/3d_secure/{}",
-            crate::progenitor_support::encode_path(&three_d_secure.to_string()),
+            crate::progenitor_support::encode_path(three_d_secure),
         );
 
         self.client.get(&url, None).await

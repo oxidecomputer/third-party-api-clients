@@ -106,7 +106,7 @@ impl SingleSignOnSettings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/sso/integrations/{}?{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
             query_
         );
 
@@ -125,7 +125,7 @@ impl SingleSignOnSettings {
     pub async fn delete_sso_integrations(&self, id: &str) -> Result<()> {
         let url = format!(
             "/sso/integrations/{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
         );
 
         self.client.delete(&url, None).await
@@ -157,7 +157,7 @@ impl SingleSignOnSettings {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/sso/integrations/{}?{}",
-            crate::progenitor_support::encode_path(&id.to_string()),
+            crate::progenitor_support::encode_path(id),
             query_
         );
 

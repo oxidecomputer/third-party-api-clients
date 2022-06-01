@@ -27,7 +27,7 @@ impl Reviews {
     */
     pub async fn get_page(
         &self,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -58,7 +58,7 @@ impl Reviews {
     *
     * <p>Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true</code>. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
     */
-    pub async fn get_all(&self, created: &str) -> Result<Vec<crate::types::Review>> {
+    pub async fn get_all(&self, _created: &str) -> Result<Vec<crate::types::Review>> {
         let url = "/v1/reviews".to_string();
         let mut resp: crate::types::GetReviewsResponse = self.client.get(&url, None).await?;
 
@@ -112,7 +112,7 @@ impl Reviews {
     pub async fn get(&self, review: &str) -> Result<crate::types::Review> {
         let url = format!(
             "/v1/reviews/{}",
-            crate::progenitor_support::encode_path(&review.to_string()),
+            crate::progenitor_support::encode_path(review),
         );
 
         self.client.get(&url, None).await
@@ -130,7 +130,7 @@ impl Reviews {
     pub async fn post_approve(&self, review: &str) -> Result<crate::types::Review> {
         let url = format!(
             "/v1/reviews/{}/approve",
-            crate::progenitor_support::encode_path(&review.to_string()),
+            crate::progenitor_support::encode_path(review),
         );
 
         self.client.post(&url, None).await

@@ -145,7 +145,7 @@ impl PaymentMethods {
     pub async fn get_method(&self, payment_method: &str) -> Result<crate::types::PaymentMethod> {
         let url = format!(
             "/v1/payment_methods/{}",
-            crate::progenitor_support::encode_path(&payment_method.to_string()),
+            crate::progenitor_support::encode_path(payment_method),
         );
 
         self.client.get(&url, None).await
@@ -163,7 +163,7 @@ impl PaymentMethods {
     pub async fn post_method(&self, payment_method: &str) -> Result<crate::types::PaymentMethod> {
         let url = format!(
             "/v1/payment_methods/{}",
-            crate::progenitor_support::encode_path(&payment_method.to_string()),
+            crate::progenitor_support::encode_path(payment_method),
         );
 
         self.client.post(&url, None).await
@@ -194,7 +194,7 @@ impl PaymentMethods {
     ) -> Result<crate::types::PaymentMethod> {
         let url = format!(
             "/v1/payment_methods/{}/attach",
-            crate::progenitor_support::encode_path(&payment_method.to_string()),
+            crate::progenitor_support::encode_path(payment_method),
         );
 
         self.client.post(&url, None).await
@@ -215,7 +215,7 @@ impl PaymentMethods {
     ) -> Result<crate::types::PaymentMethod> {
         let url = format!(
             "/v1/payment_methods/{}/detach",
-            crate::progenitor_support::encode_path(&payment_method.to_string()),
+            crate::progenitor_support::encode_path(payment_method),
         );
 
         self.client.post(&url, None).await

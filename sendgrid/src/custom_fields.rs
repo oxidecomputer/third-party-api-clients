@@ -61,7 +61,7 @@ impl CustomFields {
     pub async fn delete_mc_field_definitions_custom(&self, custom_field_id: &str) -> Result<()> {
         let url = format!(
             "/marketing/field_definitions/{}",
-            crate::progenitor_support::encode_path(&custom_field_id.to_string()),
+            crate::progenitor_support::encode_path(custom_field_id),
         );
 
         self.client.delete(&url, None).await
@@ -83,7 +83,7 @@ impl CustomFields {
     ) -> Result<crate::types::PostMcFieldDefinitionsResponseAllOf> {
         let url = format!(
             "/marketing/field_definitions/{}",
-            crate::progenitor_support::encode_path(&custom_field_id.to_string()),
+            crate::progenitor_support::encode_path(custom_field_id),
         );
 
         self.client

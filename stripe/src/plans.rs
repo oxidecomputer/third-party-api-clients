@@ -30,7 +30,7 @@ impl Plans {
     pub async fn get_page(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         ending_before: &str,
         limit: i64,
         product: &str,
@@ -71,7 +71,7 @@ impl Plans {
     pub async fn get_all(
         &self,
         active: bool,
-        created: &str,
+        _created: &str,
         product: &str,
     ) -> Result<Vec<crate::types::PlanData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -146,7 +146,7 @@ impl Plans {
     pub async fn get(&self, plan: &str) -> Result<crate::types::PlanData> {
         let url = format!(
             "/v1/plans/{}",
-            crate::progenitor_support::encode_path(&plan.to_string()),
+            crate::progenitor_support::encode_path(plan),
         );
 
         self.client.get(&url, None).await
@@ -164,7 +164,7 @@ impl Plans {
     pub async fn post_plans(&self, plan: &str) -> Result<crate::types::PlanData> {
         let url = format!(
             "/v1/plans/{}",
-            crate::progenitor_support::encode_path(&plan.to_string()),
+            crate::progenitor_support::encode_path(plan),
         );
 
         self.client.post(&url, None).await
@@ -182,7 +182,7 @@ impl Plans {
     pub async fn delete(&self, plan: &str) -> Result<crate::types::DeletedPlan> {
         let url = format!(
             "/v1/plans/{}",
-            crate::progenitor_support::encode_path(&plan.to_string()),
+            crate::progenitor_support::encode_path(plan),
         );
 
         self.client.delete(&url, None).await

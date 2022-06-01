@@ -40,7 +40,7 @@ impl ContractorPayments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/contractor_payments?{}",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(company_id),
             query_
         );
 
@@ -97,7 +97,7 @@ impl ContractorPayments {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/companies/{}/contractor_payments?{}",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(company_id),
             query_
         );
 
@@ -118,8 +118,8 @@ impl ContractorPayments {
     ) -> Result<crate::types::ContractorPayment> {
         let url = format!(
             "/v1/companies/{}/contractor_payments/{}",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
-            crate::progenitor_support::encode_path(&contractor_payment_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
         );
 
         self.client.get(&url, None).await
@@ -141,8 +141,8 @@ impl ContractorPayments {
     ) -> Result<()> {
         let url = format!(
             "/v1/companies/{}/contractor_payments/{}",
-            crate::progenitor_support::encode_path(&company_id.to_string()),
-            crate::progenitor_support::encode_path(&contractor_payment_id_or_uuid.to_string()),
+            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(contractor_payment_id_or_uuid),
         );
 
         self.client.delete(&url, None).await

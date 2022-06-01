@@ -110,7 +110,7 @@ impl SubusersApi {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/subusers/{}",
-            crate::progenitor_support::encode_path(&subuser_name.to_string()),
+            crate::progenitor_support::encode_path(subuser_name),
         );
 
         self.client.delete(&url, None).await
@@ -130,7 +130,7 @@ impl SubusersApi {
     ) -> Result<crate::types::Help> {
         let url = format!(
             "/subusers/{}",
-            crate::progenitor_support::encode_path(&subuser_name.to_string()),
+            crate::progenitor_support::encode_path(subuser_name),
         );
 
         self.client
@@ -211,7 +211,7 @@ impl SubusersApi {
     ) -> Result<crate::types::PutSubusersSubuserNameIpsResponse> {
         let url = format!(
             "/subusers/{}/ips",
-            crate::progenitor_support::encode_path(&subuser_name.to_string()),
+            crate::progenitor_support::encode_path(subuser_name),
         );
 
         self.client
