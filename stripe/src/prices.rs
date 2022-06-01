@@ -34,13 +34,13 @@ impl Prices {
     pub async fn get_page(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
-        _lookup_keys: &[String],
+        lookup_keys: &[String],
         product: &str,
-        _recurring: &str,
+        recurring: &str,
         starting_after: &str,
         type_: crate::types::PriceType,
     ) -> Result<Vec<crate::types::PriceData>> {
@@ -85,11 +85,11 @@ impl Prices {
     pub async fn get_all(
         &self,
         active: bool,
-        _created: &str,
+        created: &str,
         currency: &str,
-        _lookup_keys: &[String],
+        lookup_keys: &[String],
         product: &str,
-        _recurring: &str,
+        recurring: &str,
         type_: crate::types::PriceType,
     ) -> Result<Vec<crate::types::PriceData>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -267,7 +267,7 @@ impl Prices {
     pub async fn get(&self, price: &str) -> Result<crate::types::PriceData> {
         let url = format!(
             "/v1/prices/{}",
-            crate::progenitor_support::encode_path(price),
+            crate::progenitor_support::encode_path(&price.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -285,7 +285,7 @@ impl Prices {
     pub async fn post_prices(&self, price: &str) -> Result<crate::types::PriceData> {
         let url = format!(
             "/v1/prices/{}",
-            crate::progenitor_support::encode_path(price),
+            crate::progenitor_support::encode_path(&price.to_string()),
         );
 
         self.client.post(&url, None).await

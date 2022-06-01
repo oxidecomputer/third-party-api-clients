@@ -69,7 +69,7 @@ impl Scim {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/scim/v2/organizations/{}/Users?{}",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
             query_
         );
 
@@ -96,7 +96,7 @@ impl Scim {
     ) -> Result<crate::types::ScimUser> {
         let url = format!(
             "/scim/v2/organizations/{}/Users",
-            crate::progenitor_support::encode_path(org),
+            crate::progenitor_support::encode_path(&org.to_string()),
         );
 
         self.client
@@ -125,8 +125,8 @@ impl Scim {
     ) -> Result<crate::types::ScimUser> {
         let url = format!(
             "/scim/v2/organizations/{}/Users/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(scim_user_id),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -158,8 +158,8 @@ impl Scim {
     ) -> Result<crate::types::ScimUser> {
         let url = format!(
             "/scim/v2/organizations/{}/Users/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(scim_user_id),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
         self.client
@@ -184,8 +184,8 @@ impl Scim {
     pub async fn delete_user_from_org(&self, org: &str, scim_user_id: &str) -> Result<()> {
         let url = format!(
             "/scim/v2/organizations/{}/Users/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(scim_user_id),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -228,8 +228,8 @@ impl Scim {
     ) -> Result<crate::types::ScimUser> {
         let url = format!(
             "/scim/v2/organizations/{}/Users/{}",
-            crate::progenitor_support::encode_path(org),
-            crate::progenitor_support::encode_path(scim_user_id),
+            crate::progenitor_support::encode_path(&org.to_string()),
+            crate::progenitor_support::encode_path(&scim_user_id.to_string()),
         );
 
         self.client

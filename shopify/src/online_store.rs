@@ -102,7 +102,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -127,7 +127,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
 
         self.client
@@ -194,7 +194,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -227,8 +227,8 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
 
@@ -255,8 +255,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client
@@ -283,8 +283,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -422,7 +422,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -447,7 +447,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
 
         self.client
@@ -514,7 +514,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -547,8 +547,8 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
 
@@ -575,8 +575,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client
@@ -603,8 +603,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -742,7 +742,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -767,7 +767,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
 
         self.client
@@ -834,7 +834,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -867,8 +867,8 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
 
@@ -895,8 +895,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client
@@ -923,8 +923,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1062,7 +1062,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -1087,7 +1087,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
 
         self.client
@@ -1154,7 +1154,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -1187,8 +1187,8 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
 
@@ -1215,8 +1215,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client
@@ -1243,8 +1243,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1378,7 +1378,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -1403,7 +1403,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
 
         self.client
@@ -1470,7 +1470,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -1503,8 +1503,8 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
 
@@ -1531,8 +1531,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client
@@ -1559,8 +1559,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1698,7 +1698,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -1723,7 +1723,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles.json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
 
         self.client
@@ -1790,7 +1790,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles/count.json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -1823,8 +1823,8 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
             query_
         );
 
@@ -1851,8 +1851,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client
@@ -1879,8 +1879,8 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/blogs/{}/articles/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
-            crate::progenitor_support::encode_path(article_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
+            crate::progenitor_support::encode_path(&article_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -1959,7 +1959,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -1997,7 +1997,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2030,7 +2030,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2068,7 +2068,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2106,7 +2106,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2139,7 +2139,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2177,7 +2177,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2215,7 +2215,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2248,7 +2248,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2286,7 +2286,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2324,7 +2324,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2357,7 +2357,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2395,7 +2395,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2433,7 +2433,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2466,7 +2466,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2504,7 +2504,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2542,7 +2542,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2575,7 +2575,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/themes/{}/assets.json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -2673,7 +2673,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/blogs/{}/json?{}",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
             query_
         );
 
@@ -2698,7 +2698,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
 
         self.client
@@ -2720,7 +2720,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_delete_blogs_param_blog(&self, blog_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/blogs/{}/json",
-            crate::progenitor_support::encode_path(blog_id),
+            crate::progenitor_support::encode_path(&blog_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -2938,7 +2938,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/comments/{}/json?{}",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
             query_
         );
 
@@ -2963,7 +2963,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
         self.client
@@ -2989,7 +2989,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/spam.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
         self.client
@@ -3015,7 +3015,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/not_spam.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
         self.client
@@ -3041,7 +3041,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/approve.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
         self.client
@@ -3067,7 +3067,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/remove.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
         self.client
@@ -3093,7 +3093,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/comments/{}/restore.json",
-            crate::progenitor_support::encode_path(comment_id),
+            crate::progenitor_support::encode_path(&comment_id.to_string()),
         );
 
         self.client
@@ -3216,7 +3216,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
 
@@ -3241,7 +3241,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client
@@ -3266,7 +3266,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -3387,7 +3387,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
 
@@ -3412,7 +3412,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client
@@ -3437,7 +3437,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -3558,7 +3558,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
 
@@ -3583,7 +3583,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client
@@ -3608,7 +3608,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -3725,7 +3725,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
 
@@ -3750,7 +3750,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client
@@ -3772,7 +3772,7 @@ impl OnlineStore {
     pub async fn delete_redirects_param_redirect(&self, redirect_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -3893,7 +3893,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
 
@@ -3918,7 +3918,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client
@@ -3943,7 +3943,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -4067,7 +4067,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/redirects/{}/json?{}",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
             query_
         );
 
@@ -4092,7 +4092,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client
@@ -4117,7 +4117,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/redirects/{}/json",
-            crate::progenitor_support::encode_path(redirect_id),
+            crate::progenitor_support::encode_path(&redirect_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -4247,7 +4247,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
 
@@ -4272,7 +4272,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client
@@ -4297,7 +4297,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -4427,7 +4427,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
 
@@ -4452,7 +4452,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client
@@ -4477,7 +4477,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -4607,7 +4607,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
 
@@ -4632,7 +4632,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client
@@ -4657,7 +4657,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -4780,7 +4780,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
 
@@ -4805,7 +4805,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client
@@ -4827,7 +4827,7 @@ impl OnlineStore {
     pub async fn delete_script_tags_param_tag(&self, script_tag_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -4957,7 +4957,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
 
@@ -4982,7 +4982,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client
@@ -5007,7 +5007,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -5137,7 +5137,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/script_tags/{}/json?{}",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
             query_
         );
 
@@ -5162,7 +5162,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client
@@ -5187,7 +5187,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/script_tags/{}/json",
-            crate::progenitor_support::encode_path(script_tag_id),
+            crate::progenitor_support::encode_path(&script_tag_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -5256,7 +5256,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -5281,7 +5281,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client
@@ -5303,7 +5303,7 @@ impl OnlineStore {
     pub async fn deprecated_202001_delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -5372,7 +5372,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -5397,7 +5397,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client
@@ -5419,7 +5419,7 @@ impl OnlineStore {
     pub async fn deprecated_202004_delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -5488,7 +5488,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -5513,7 +5513,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client
@@ -5535,7 +5535,7 @@ impl OnlineStore {
     pub async fn deprecated_202007_delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -5600,7 +5600,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -5625,7 +5625,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client
@@ -5647,7 +5647,7 @@ impl OnlineStore {
     pub async fn delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -5716,7 +5716,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -5741,7 +5741,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client
@@ -5763,7 +5763,7 @@ impl OnlineStore {
     pub async fn deprecated_202101_delete_themes_param_theme(&self, theme_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -5832,7 +5832,7 @@ impl OnlineStore {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/themes/{}/json?{}",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
             query_
         );
 
@@ -5857,7 +5857,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client
@@ -5882,7 +5882,7 @@ impl OnlineStore {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/themes/{}/json",
-            crate::progenitor_support::encode_path(theme_id),
+            crate::progenitor_support::encode_path(&theme_id.to_string()),
         );
 
         self.client.delete(&url, None).await

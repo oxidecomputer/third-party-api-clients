@@ -145,7 +145,7 @@ impl Checkout {
     pub async fn get_sessions_session(&self, session: &str) -> Result<crate::types::Session> {
         let url = format!(
             "/v1/checkout/sessions/{}",
-            crate::progenitor_support::encode_path(session),
+            crate::progenitor_support::encode_path(&session.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -168,7 +168,7 @@ impl Checkout {
     ) -> Result<crate::types::Session> {
         let url = format!(
             "/v1/checkout/sessions/{}/expire",
-            crate::progenitor_support::encode_path(session),
+            crate::progenitor_support::encode_path(&session.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -207,7 +207,7 @@ impl Checkout {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/checkout/sessions/{}/line_items?{}",
-            crate::progenitor_support::encode_path(session),
+            crate::progenitor_support::encode_path(&session.to_string()),
             query_
         );
 
@@ -230,7 +230,7 @@ impl Checkout {
     ) -> Result<Vec<crate::types::Item>> {
         let url = format!(
             "/v1/checkout/sessions/{}/line_items",
-            crate::progenitor_support::encode_path(session),
+            crate::progenitor_support::encode_path(&session.to_string()),
         );
 
         let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;

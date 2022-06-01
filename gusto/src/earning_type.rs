@@ -31,7 +31,7 @@ impl EarningType {
     ) -> Result<crate::types::EarningTypeListResponse> {
         let url = format!(
             "/v1/companies/{}/earning_types",
-            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -53,7 +53,7 @@ impl EarningType {
     ) -> Result<crate::types::EarningType> {
         let url = format!(
             "/v1/companies/{}/earning_types",
-            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
         self.client
@@ -76,8 +76,8 @@ impl EarningType {
     ) -> Result<crate::types::EarningType> {
         let url = format!(
             "/v1/companies/{}/earning_types/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(earning_type_uuid),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(&earning_type_uuid.to_string()),
         );
 
         self.client
@@ -99,8 +99,8 @@ impl EarningType {
     ) -> Result<()> {
         let url = format!(
             "/v1/companies/{}/earning_types/{}",
-            crate::progenitor_support::encode_path(company_id),
-            crate::progenitor_support::encode_path(earning_type_uuid),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
+            crate::progenitor_support::encode_path(&earning_type_uuid.to_string()),
         );
 
         self.client.delete(&url, None).await

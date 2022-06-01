@@ -33,7 +33,7 @@ impl BalanceTransactions {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         currency: &str,
         ending_before: &str,
         limit: i64,
@@ -84,7 +84,7 @@ impl BalanceTransactions {
     */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         currency: &str,
         payout: &str,
         source: &str,
@@ -160,7 +160,7 @@ impl BalanceTransactions {
     pub async fn get(&self, id: &str) -> Result<crate::types::BalanceTransaction> {
         let url = format!(
             "/v1/balance_transactions/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await

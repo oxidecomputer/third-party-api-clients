@@ -27,7 +27,7 @@ impl TestHelpers {
     ) -> Result<crate::types::TerminalReader> {
         let url = format!(
             "/v1/test_helpers/terminal/readers/{}/present_payment_method",
-            crate::progenitor_support::encode_path(reader),
+            crate::progenitor_support::encode_path(&reader.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -142,7 +142,7 @@ impl TestHelpers {
     pub async fn get_clocks_clock(&self, test_clock: &str) -> Result<crate::types::TestClock> {
         let url = format!(
             "/v1/test_helpers/test_clocks/{}",
-            crate::progenitor_support::encode_path(test_clock),
+            crate::progenitor_support::encode_path(&test_clock.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -163,7 +163,7 @@ impl TestHelpers {
     ) -> Result<crate::types::DeletedTestClock> {
         let url = format!(
             "/v1/test_helpers/test_clocks/{}",
-            crate::progenitor_support::encode_path(test_clock),
+            crate::progenitor_support::encode_path(&test_clock.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -184,7 +184,7 @@ impl TestHelpers {
     ) -> Result<crate::types::TestClock> {
         let url = format!(
             "/v1/test_helpers/test_clocks/{}/advance",
-            crate::progenitor_support::encode_path(test_clock),
+            crate::progenitor_support::encode_path(&test_clock.to_string()),
         );
 
         self.client.post(&url, None).await

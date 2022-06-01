@@ -104,7 +104,7 @@ impl SingleSends {
     ) -> Result<crate::types::SinglesendResponseAllOf> {
         let url = format!(
             "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -128,7 +128,7 @@ impl SingleSends {
     ) -> Result<crate::types::SinglesendResponseAllOf> {
         let url = format!(
             "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client
@@ -150,7 +150,7 @@ impl SingleSends {
     pub async fn delete_marketing_singlesends_single_sends(&self, id: &str) -> Result<()> {
         let url = format!(
             "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -172,7 +172,7 @@ impl SingleSends {
     ) -> Result<crate::types::SinglesendResponseAllOf> {
         let url = format!(
             "/marketing/singlesends/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client
@@ -245,7 +245,7 @@ impl SingleSends {
     ) -> Result<crate::types::PutMarketingSinglesendsScheduleResponse> {
         let url = format!(
             "/marketing/singlesends/{}/schedule",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client
@@ -268,7 +268,7 @@ impl SingleSends {
     ) -> Result<crate::types::SinglesendSchedule> {
         let url = format!(
             "/marketing/singlesends/{}/schedule",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.delete(&url, None).await

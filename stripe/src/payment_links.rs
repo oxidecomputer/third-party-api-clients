@@ -131,7 +131,7 @@ impl PaymentLinks {
     pub async fn get_link(&self, payment_link: &str) -> Result<crate::types::PaymentLink> {
         let url = format!(
             "/v1/payment_links/{}",
-            crate::progenitor_support::encode_path(payment_link),
+            crate::progenitor_support::encode_path(&payment_link.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -149,7 +149,7 @@ impl PaymentLinks {
     pub async fn post_link(&self, payment_link: &str) -> Result<crate::types::PaymentLink> {
         let url = format!(
             "/v1/payment_links/{}",
-            crate::progenitor_support::encode_path(payment_link),
+            crate::progenitor_support::encode_path(&payment_link.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -188,7 +188,7 @@ impl PaymentLinks {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v1/payment_links/{}/line_items?{}",
-            crate::progenitor_support::encode_path(payment_link),
+            crate::progenitor_support::encode_path(&payment_link.to_string()),
             query_
         );
 
@@ -211,7 +211,7 @@ impl PaymentLinks {
     ) -> Result<Vec<crate::types::Item>> {
         let url = format!(
             "/v1/payment_links/{}/line_items",
-            crate::progenitor_support::encode_path(payment_link),
+            crate::progenitor_support::encode_path(&payment_link.to_string()),
         );
 
         let mut resp: crate::types::LineItems = self.client.get(&url, None).await?;

@@ -117,7 +117,7 @@ impl Sigma {
     ) -> Result<crate::types::ScheduledQueryRun> {
         let url = format!(
             "/v1/sigma/scheduled_query_runs/{}",
-            crate::progenitor_support::encode_path(scheduled_query_run),
+            crate::progenitor_support::encode_path(&scheduled_query_run.to_string()),
         );
 
         self.client.get(&url, None).await

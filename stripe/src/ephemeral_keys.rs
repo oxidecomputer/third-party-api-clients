@@ -34,7 +34,7 @@ impl EphemeralKeys {
     pub async fn delete_key(&self, key: &str) -> Result<crate::types::EphemeralKey> {
         let url = format!(
             "/v1/ephemeral_keys/{}",
-            crate::progenitor_support::encode_path(key),
+            crate::progenitor_support::encode_path(&key.to_string()),
         );
 
         self.client.delete(&url, None).await

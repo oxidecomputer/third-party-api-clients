@@ -58,7 +58,7 @@ impl CodesOfConduct {
     pub async fn get_conduct_code(&self, key: &str) -> Result<crate::types::CodeOfConduct> {
         let url = format!(
             "/codes_of_conduct/{}",
-            crate::progenitor_support::encode_path(key),
+            crate::progenitor_support::encode_path(&key.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -87,8 +87,8 @@ impl CodesOfConduct {
     ) -> Result<crate::types::CodeOfConduct> {
         let url = format!(
             "/repos/{}/{}/community/code_of_conduct",
-            crate::progenitor_support::encode_path(owner),
-            crate::progenitor_support::encode_path(repo),
+            crate::progenitor_support::encode_path(&owner.to_string()),
+            crate::progenitor_support::encode_path(&repo.to_string()),
         );
 
         self.client.get(&url, None).await

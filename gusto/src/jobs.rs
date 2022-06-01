@@ -22,7 +22,7 @@ impl Jobs {
     pub async fn get(&self, job_id: &str) -> Result<crate::types::Job> {
         let url = format!(
             "/v1/jobs/{}",
-            crate::progenitor_support::encode_path(job_id),
+            crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -42,7 +42,7 @@ impl Jobs {
     ) -> Result<crate::types::Job> {
         let url = format!(
             "/v1/jobs/{}",
-            crate::progenitor_support::encode_path(job_id),
+            crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
         self.client
@@ -60,7 +60,7 @@ impl Jobs {
     pub async fn delete(&self, job_id: &str) -> Result<()> {
         let url = format!(
             "/v1/jobs/{}",
-            crate::progenitor_support::encode_path(job_id),
+            crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -76,7 +76,7 @@ impl Jobs {
     pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Job>> {
         let url = format!(
             "/v1/employees/{}/jobs",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -94,7 +94,7 @@ impl Jobs {
     pub async fn get_all_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Job>> {
         let url = format!(
             "/v1/employees/{}/jobs",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -114,7 +114,7 @@ impl Jobs {
     ) -> Result<crate::types::Job> {
         let url = format!(
             "/v1/employees/{}/jobs",
-            crate::progenitor_support::encode_path(employee_id),
+            crate::progenitor_support::encode_path(&employee_id.to_string()),
         );
 
         self.client
@@ -138,7 +138,7 @@ impl Jobs {
     ) -> Result<crate::types::Compensation> {
         let url = format!(
             "/v1/jobs/{}/compensations",
-            crate::progenitor_support::encode_path(job_id),
+            crate::progenitor_support::encode_path(&job_id.to_string()),
         );
 
         self.client

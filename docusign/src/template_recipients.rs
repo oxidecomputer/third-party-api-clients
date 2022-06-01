@@ -51,8 +51,8 @@ impl TemplateRecipients {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
             query_
         );
 
@@ -90,8 +90,8 @@ impl TemplateRecipients {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
             query_
         );
 
@@ -129,8 +129,8 @@ impl TemplateRecipients {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients?{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
             query_
         );
 
@@ -159,8 +159,8 @@ impl TemplateRecipients {
     ) -> Result<crate::types::Recipients> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client
@@ -190,9 +190,9 @@ impl TemplateRecipients {
     ) -> Result<crate::types::Recipients> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/recipients/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
-            crate::progenitor_support::encode_path(recipient_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
+            crate::progenitor_support::encode_path(&recipient_id.to_string()),
         );
 
         self.client
@@ -222,8 +222,8 @@ impl TemplateRecipients {
     ) -> Result<crate::types::ViewUrl> {
         let url = format!(
             "/v2.1/accounts/{}/templates/{}/views/recipient_preview",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client

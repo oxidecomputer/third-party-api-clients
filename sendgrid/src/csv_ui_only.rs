@@ -61,7 +61,7 @@ impl CsvUiOnly {
     ) -> Result<crate::types::GetMessagesDownloadResponse> {
         let url = format!(
             "/messages/download/{}",
-            crate::progenitor_support::encode_path(download_uuid),
+            crate::progenitor_support::encode_path(&download_uuid.to_string()),
         );
 
         self.client.get(&url, None).await

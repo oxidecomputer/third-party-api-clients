@@ -81,7 +81,7 @@ impl AuthorizedApps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/authorized-apps/{}?{}",
-            crate::progenitor_support::encode_path(app_id),
+            crate::progenitor_support::encode_path(&app_id.to_string()),
             query_
         );
 

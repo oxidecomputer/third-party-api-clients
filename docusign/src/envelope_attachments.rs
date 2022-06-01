@@ -31,8 +31,8 @@ impl EnvelopeAttachments {
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -58,8 +58,8 @@ impl EnvelopeAttachments {
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -87,8 +87,8 @@ impl EnvelopeAttachments {
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
         );
 
         self.client
@@ -117,9 +117,9 @@ impl EnvelopeAttachments {
     ) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(attachment_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&attachment_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -147,9 +147,9 @@ impl EnvelopeAttachments {
     ) -> Result<crate::types::EnvelopeAttachmentsResult> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/{}/attachments/{}",
-            crate::progenitor_support::encode_path(account_id),
-            crate::progenitor_support::encode_path(envelope_id),
-            crate::progenitor_support::encode_path(attachment_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
+            crate::progenitor_support::encode_path(&envelope_id.to_string()),
+            crate::progenitor_support::encode_path(&attachment_id.to_string()),
         );
 
         self.client

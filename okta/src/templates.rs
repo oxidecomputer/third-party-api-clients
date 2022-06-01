@@ -88,7 +88,7 @@ impl Templates {
     pub async fn get_sm(&self, template_id: &str) -> Result<crate::types::SmsTemplate> {
         let url = format!(
             "/api/v1/templates/sms/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -112,7 +112,7 @@ impl Templates {
     ) -> Result<crate::types::SmsTemplate> {
         let url = format!(
             "/api/v1/templates/sms/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client
@@ -138,7 +138,7 @@ impl Templates {
     ) -> Result<crate::types::SmsTemplate> {
         let url = format!(
             "/api/v1/templates/sms/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client
@@ -160,7 +160,7 @@ impl Templates {
     pub async fn delete_sms(&self, template_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/templates/sms/{}",
-            crate::progenitor_support::encode_path(template_id),
+            crate::progenitor_support::encode_path(&template_id.to_string()),
         );
 
         self.client.delete(&url, None).await

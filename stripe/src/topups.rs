@@ -29,8 +29,8 @@ impl Topups {
     */
     pub async fn get_page(
         &self,
-        _amount: &str,
-        _created: &str,
+        amount: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -67,8 +67,8 @@ impl Topups {
     */
     pub async fn get_all(
         &self,
-        _amount: &str,
-        _created: &str,
+        amount: &str,
+        created: &str,
         status: crate::types::GetTopupsStatus,
     ) -> Result<Vec<crate::types::Topup>> {
         let mut query_args: Vec<(String, String)> = Default::default();
@@ -140,7 +140,7 @@ impl Topups {
     pub async fn get(&self, topup: &str) -> Result<crate::types::Topup> {
         let url = format!(
             "/v1/topups/{}",
-            crate::progenitor_support::encode_path(topup),
+            crate::progenitor_support::encode_path(&topup.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -158,7 +158,7 @@ impl Topups {
     pub async fn post_topups(&self, topup: &str) -> Result<crate::types::Topup> {
         let url = format!(
             "/v1/topups/{}",
-            crate::progenitor_support::encode_path(topup),
+            crate::progenitor_support::encode_path(&topup.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -176,7 +176,7 @@ impl Topups {
     pub async fn post_cancel(&self, topup: &str) -> Result<crate::types::Topup> {
         let url = format!(
             "/v1/topups/{}/cancel",
-            crate::progenitor_support::encode_path(topup),
+            crate::progenitor_support::encode_path(&topup.to_string()),
         );
 
         self.client.post(&url, None).await

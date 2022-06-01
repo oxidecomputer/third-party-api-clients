@@ -24,7 +24,7 @@ impl AdminsBeta {
     pub async fn get_company_admins(&self, company_id: &str) -> Result<Vec<crate::types::Admin>> {
         let url = format!(
             "/v1/companies/{}/admins",
-            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -47,7 +47,7 @@ impl AdminsBeta {
     ) -> Result<Vec<crate::types::Admin>> {
         let url = format!(
             "/v1/companies/{}/admins",
-            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
         self.client.get_all_pages(&url, None).await
@@ -69,7 +69,7 @@ impl AdminsBeta {
     ) -> Result<crate::types::Admin> {
         let url = format!(
             "/v1/companies/{}/admins",
-            crate::progenitor_support::encode_path(company_id),
+            crate::progenitor_support::encode_path(&company_id.to_string()),
         );
 
         self.client

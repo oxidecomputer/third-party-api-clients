@@ -29,7 +29,7 @@ impl AccountTabSettings {
     ) -> Result<crate::types::TabAccountSettings> {
         let url = format!(
             "/v2.1/accounts/{}/settings/tabs",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -53,7 +53,7 @@ impl AccountTabSettings {
     ) -> Result<crate::types::TabAccountSettings> {
         let url = format!(
             "/v2.1/accounts/{}/settings/tabs",
-            crate::progenitor_support::encode_path(account_id),
+            crate::progenitor_support::encode_path(&account_id.to_string()),
         );
 
         self.client

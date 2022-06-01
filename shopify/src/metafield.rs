@@ -98,7 +98,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-01/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
             query_
         );
 
@@ -123,7 +123,7 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client
@@ -145,7 +145,7 @@ impl Metafield {
     pub async fn deprecated_202001_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -237,7 +237,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-04/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
             query_
         );
 
@@ -262,7 +262,7 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client
@@ -284,7 +284,7 @@ impl Metafield {
     pub async fn deprecated_202004_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -376,7 +376,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-07/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
             query_
         );
 
@@ -401,7 +401,7 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client
@@ -423,7 +423,7 @@ impl Metafield {
     pub async fn deprecated_202007_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -507,7 +507,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2020-10/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
             query_
         );
 
@@ -528,7 +528,7 @@ impl Metafield {
     pub async fn update_param(&self, metafield_id: &str, body: &serde_json::Value) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client
@@ -550,7 +550,7 @@ impl Metafield {
     pub async fn delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -642,7 +642,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/2021-01/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
             query_
         );
 
@@ -667,7 +667,7 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client
@@ -689,7 +689,7 @@ impl Metafield {
     pub async fn deprecated_202101_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -781,7 +781,7 @@ impl Metafield {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!(
             "/admin/api/unstable/metafields/{}/json?{}",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
             query_
         );
 
@@ -806,7 +806,7 @@ impl Metafield {
     ) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client
@@ -828,7 +828,7 @@ impl Metafield {
     pub async fn deprecated_unstable_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/metafields/{}/json",
-            crate::progenitor_support::encode_path(metafield_id),
+            crate::progenitor_support::encode_path(&metafield_id.to_string()),
         );
 
         self.client.delete(&url, None).await

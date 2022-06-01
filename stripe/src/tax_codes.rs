@@ -111,7 +111,7 @@ impl TaxCodes {
     pub async fn get(&self, id: &str) -> Result<crate::types::TaxCode> {
         let url = format!(
             "/v1/tax_codes/{}",
-            crate::progenitor_support::encode_path(id),
+            crate::progenitor_support::encode_path(&id.to_string()),
         );
 
         self.client.get(&url, None).await

@@ -30,7 +30,7 @@ impl Invoiceitems {
     */
     pub async fn get_page(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         ending_before: &str,
         invoice: &str,
@@ -75,7 +75,7 @@ impl Invoiceitems {
     */
     pub async fn get_all(
         &self,
-        _created: &str,
+        created: &str,
         customer: &str,
         invoice: &str,
         pending: bool,
@@ -155,7 +155,7 @@ impl Invoiceitems {
     pub async fn get(&self, invoiceitem: &str) -> Result<crate::types::InvoiceItem> {
         let url = format!(
             "/v1/invoiceitems/{}",
-            crate::progenitor_support::encode_path(invoiceitem),
+            crate::progenitor_support::encode_path(&invoiceitem.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -173,7 +173,7 @@ impl Invoiceitems {
     pub async fn post_invoiceitems(&self, invoiceitem: &str) -> Result<crate::types::InvoiceItem> {
         let url = format!(
             "/v1/invoiceitems/{}",
-            crate::progenitor_support::encode_path(invoiceitem),
+            crate::progenitor_support::encode_path(&invoiceitem.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -191,7 +191,7 @@ impl Invoiceitems {
     pub async fn delete(&self, invoiceitem: &str) -> Result<crate::types::DeletedInvoiceItem> {
         let url = format!(
             "/v1/invoiceitems/{}",
-            crate::progenitor_support::encode_path(invoiceitem),
+            crate::progenitor_support::encode_path(&invoiceitem.to_string()),
         );
 
         self.client.delete(&url, None).await

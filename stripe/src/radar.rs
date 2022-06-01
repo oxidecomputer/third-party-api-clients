@@ -139,7 +139,7 @@ impl Radar {
     ) -> Result<crate::types::RadarEarlyFraudWarning> {
         let url = format!(
             "/v1/radar/early_fraud_warnings/{}",
-            crate::progenitor_support::encode_path(early_fraud_warning),
+            crate::progenitor_support::encode_path(&early_fraud_warning.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -162,7 +162,7 @@ impl Radar {
     */
     pub async fn get_value_list_items(
         &self,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -203,7 +203,7 @@ impl Radar {
     */
     pub async fn get_all_value_list_all_items(
         &self,
-        _created: &str,
+        created: &str,
         value: &str,
         value_list: &str,
     ) -> Result<Vec<crate::types::RadarListItem>> {
@@ -282,7 +282,7 @@ impl Radar {
     ) -> Result<crate::types::RadarListItem> {
         let url = format!(
             "/v1/radar/value_list_items/{}",
-            crate::progenitor_support::encode_path(item),
+            crate::progenitor_support::encode_path(&item.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -303,7 +303,7 @@ impl Radar {
     ) -> Result<crate::types::RadarListDeletedItem> {
         let url = format!(
             "/v1/radar/value_list_items/{}",
-            crate::progenitor_support::encode_path(item),
+            crate::progenitor_support::encode_path(&item.to_string()),
         );
 
         self.client.delete(&url, None).await
@@ -328,7 +328,7 @@ impl Radar {
         &self,
         alias: &str,
         contains: &str,
-        _created: &str,
+        created: &str,
         ending_before: &str,
         limit: i64,
         starting_after: &str,
@@ -369,7 +369,7 @@ impl Radar {
         &self,
         alias: &str,
         contains: &str,
-        _created: &str,
+        created: &str,
     ) -> Result<Vec<crate::types::RadarList>> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !alias.is_empty() {
@@ -444,7 +444,7 @@ impl Radar {
     pub async fn get_value_lists_list(&self, value_list: &str) -> Result<crate::types::RadarList> {
         let url = format!(
             "/v1/radar/value_lists/{}",
-            crate::progenitor_support::encode_path(value_list),
+            crate::progenitor_support::encode_path(&value_list.to_string()),
         );
 
         self.client.get(&url, None).await
@@ -462,7 +462,7 @@ impl Radar {
     pub async fn post_value_lists_list(&self, value_list: &str) -> Result<crate::types::RadarList> {
         let url = format!(
             "/v1/radar/value_lists/{}",
-            crate::progenitor_support::encode_path(value_list),
+            crate::progenitor_support::encode_path(&value_list.to_string()),
         );
 
         self.client.post(&url, None).await
@@ -483,7 +483,7 @@ impl Radar {
     ) -> Result<crate::types::RadarListDeleted> {
         let url = format!(
             "/v1/radar/value_lists/{}",
-            crate::progenitor_support::encode_path(value_list),
+            crate::progenitor_support::encode_path(&value_list.to_string()),
         );
 
         self.client.delete(&url, None).await
