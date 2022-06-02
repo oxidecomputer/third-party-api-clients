@@ -13,10 +13,10 @@ impl Freebusy {
     }
 
     /**
-     * This function performs a `POST` to the `/freeBusy` endpoint.
-     *
-     * Returns free/busy information for a set of calendars.
-     */
+    * This function performs a `POST` to the `/freeBusy` endpoint.
+    *
+    * Returns free/busy information for a set of calendars.
+    */
     pub async fn query(
         &self,
         body: &crate::types::FreeBusyRequest,

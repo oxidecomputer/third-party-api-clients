@@ -13,18 +13,18 @@ impl RoleAssignments {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
-     *
-     * Retrieves a paginated list of all roleAssignments.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `max_results: i64` -- Maximum number of results to return.
-     * * `page_token: &str` -- Token to specify the next page in the list.
-     * * `role_id: &str` -- Immutable ID of a role. If included in the request, returns only role assignments containing this role ID.
-     * * `user_key: &str` -- The user's primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
+    *
+    * Retrieves a paginated list of all roleAssignments.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- Immutable ID of the Google Workspace account.
+    * * `max_results: i64` -- Maximum number of results to return.
+    * * `page_token: &str` -- Token to specify the next page in the list.
+    * * `role_id: &str` -- Immutable ID of a role. If included in the request, returns only role assignments containing this role ID.
+    * * `user_key: &str` -- The user's primary email address, alias email address, or unique user ID. If included in the request, returns role assignments only for this user.
+    */
     pub async fn list(
         &self,
         customer: &str,
@@ -60,12 +60,12 @@ impl RoleAssignments {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
-     *
-     * As opposed to `list`, this function returns all the pages of the request at once.
-     *
-     * Retrieves a paginated list of all roleAssignments.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
+    *
+    * As opposed to `list`, this function returns all the pages of the request at once.
+    *
+    * Retrieves a paginated list of all roleAssignments.
+    */
     pub async fn list_all(
         &self,
         customer: &str,
@@ -119,14 +119,14 @@ impl RoleAssignments {
     }
 
     /**
-     * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
-     *
-     * Creates a role assignment.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     */
+    * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/roleassignments` endpoint.
+    *
+    * Creates a role assignment.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- Immutable ID of the Google Workspace account.
+    */
     pub async fn insert(
         &self,
         customer: &str,
@@ -143,15 +143,15 @@ impl RoleAssignments {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments/{roleAssignmentId}` endpoint.
-     *
-     * Retrieves a role assignment.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `role_assignment_id: &str` -- Immutable ID of the role assignment.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roleassignments/{roleAssignmentId}` endpoint.
+    *
+    * Retrieves a role assignment.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- Immutable ID of the Google Workspace account.
+    * * `role_assignment_id: &str` -- Immutable ID of the role assignment.
+    */
     pub async fn get(
         &self,
         customer: &str,
@@ -167,15 +167,15 @@ impl RoleAssignments {
     }
 
     /**
-     * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/roleassignments/{roleAssignmentId}` endpoint.
-     *
-     * Deletes a role assignment.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     * * `role_assignment_id: &str` -- Immutable ID of the role assignment.
-     */
+    * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/roleassignments/{roleAssignmentId}` endpoint.
+    *
+    * Deletes a role assignment.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- Immutable ID of the Google Workspace account.
+    * * `role_assignment_id: &str` -- Immutable ID of the role assignment.
+    */
     pub async fn delete(&self, customer: &str, role_assignment_id: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roleassignments/{}",

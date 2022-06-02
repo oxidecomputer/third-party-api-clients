@@ -13,18 +13,18 @@ impl Replies {
     }
 
     /**
-     * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
-     *
-     * Lists a comment's replies.
-     *
-     * **Parameters:**
-     *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `comment_id: &str` -- A link to this theme's background image.
-     * * `include_deleted: bool` -- Whether to include deleted replies. Deleted replies will not include their original content.
-     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
-     * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
-     */
+    * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
+    *
+    * Lists a comment's replies.
+    *
+    * **Parameters:**
+    *
+    * * `file_id: &str` -- A link to this theme's background image.
+    * * `comment_id: &str` -- A link to this theme's background image.
+    * * `include_deleted: bool` -- Whether to include deleted replies. Deleted replies will not include their original content.
+    * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
+    * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+    */
     pub async fn list(
         &self,
         file_id: &str,
@@ -58,12 +58,12 @@ impl Replies {
     }
 
     /**
-     * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
-     *
-     * As opposed to `list`, this function returns all the pages of the request at once.
-     *
-     * Lists a comment's replies.
-     */
+    * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
+    *
+    * As opposed to `list`, this function returns all the pages of the request at once.
+    *
+    * Lists a comment's replies.
+    */
     pub async fn list_all(
         &self,
         file_id: &str,
@@ -115,15 +115,15 @@ impl Replies {
     }
 
     /**
-     * This function performs a `POST` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
-     *
-     * Creates a new reply to a comment.
-     *
-     * **Parameters:**
-     *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `comment_id: &str` -- A link to this theme's background image.
-     */
+    * This function performs a `POST` to the `/files/{fileId}/comments/{commentId}/replies` endpoint.
+    *
+    * Creates a new reply to a comment.
+    *
+    * **Parameters:**
+    *
+    * * `file_id: &str` -- A link to this theme's background image.
+    * * `comment_id: &str` -- A link to this theme's background image.
+    */
     pub async fn create(
         &self,
         file_id: &str,
@@ -142,17 +142,17 @@ impl Replies {
     }
 
     /**
-     * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
-     *
-     * Gets a reply by ID.
-     *
-     * **Parameters:**
-     *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `comment_id: &str` -- A link to this theme's background image.
-     * * `reply_id: &str` -- A link to this theme's background image.
-     * * `include_deleted: bool` -- Whether to return deleted replies. Deleted replies will not include their original content.
-     */
+    * This function performs a `GET` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
+    *
+    * Gets a reply by ID.
+    *
+    * **Parameters:**
+    *
+    * * `file_id: &str` -- A link to this theme's background image.
+    * * `comment_id: &str` -- A link to this theme's background image.
+    * * `reply_id: &str` -- A link to this theme's background image.
+    * * `include_deleted: bool` -- Whether to return deleted replies. Deleted replies will not include their original content.
+    */
     pub async fn get(
         &self,
         file_id: &str,
@@ -177,16 +177,16 @@ impl Replies {
     }
 
     /**
-     * This function performs a `DELETE` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
-     *
-     * Deletes a reply.
-     *
-     * **Parameters:**
-     *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `comment_id: &str` -- A link to this theme's background image.
-     * * `reply_id: &str` -- A link to this theme's background image.
-     */
+    * This function performs a `DELETE` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
+    *
+    * Deletes a reply.
+    *
+    * **Parameters:**
+    *
+    * * `file_id: &str` -- A link to this theme's background image.
+    * * `comment_id: &str` -- A link to this theme's background image.
+    * * `reply_id: &str` -- A link to this theme's background image.
+    */
     pub async fn delete(&self, file_id: &str, comment_id: &str, reply_id: &str) -> Result<()> {
         let url = format!(
             "/files/{}/comments/{}/replies/{}",
@@ -199,16 +199,16 @@ impl Replies {
     }
 
     /**
-     * This function performs a `PATCH` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
-     *
-     * Updates a reply with patch semantics.
-     *
-     * **Parameters:**
-     *
-     * * `file_id: &str` -- A link to this theme's background image.
-     * * `comment_id: &str` -- A link to this theme's background image.
-     * * `reply_id: &str` -- A link to this theme's background image.
-     */
+    * This function performs a `PATCH` to the `/files/{fileId}/comments/{commentId}/replies/{replyId}` endpoint.
+    *
+    * Updates a reply with patch semantics.
+    *
+    * **Parameters:**
+    *
+    * * `file_id: &str` -- A link to this theme's background image.
+    * * `comment_id: &str` -- A link to this theme's background image.
+    * * `reply_id: &str` -- A link to this theme's background image.
+    */
     pub async fn update(
         &self,
         file_id: &str,

@@ -13,14 +13,14 @@ impl Privileges {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles/ALL/privileges` endpoint.
-     *
-     * Retrieves a paginated list of all privileges for a customer.
-     *
-     * **Parameters:**
-     *
-     * * `customer: &str` -- Immutable ID of the Google Workspace account.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles/ALL/privileges` endpoint.
+    *
+    * Retrieves a paginated list of all privileges for a customer.
+    *
+    * **Parameters:**
+    *
+    * * `customer: &str` -- Immutable ID of the Google Workspace account.
+    */
     pub async fn list(&self, customer: &str) -> Result<crate::types::Privileges> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/ALL/privileges",

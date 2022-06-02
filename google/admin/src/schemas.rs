@@ -13,14 +13,14 @@ impl Schemas {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/schemas` endpoint.
-     *
-     * Retrieves all schemas for a customer.
-     *
-     * **Parameters:**
-     *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/schemas` endpoint.
+    *
+    * Retrieves all schemas for a customer.
+    *
+    * **Parameters:**
+    *
+    * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
+    */
     pub async fn list(&self, customer_id: &str) -> Result<crate::types::Schemas> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas",
@@ -31,14 +31,14 @@ impl Schemas {
     }
 
     /**
-     * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/schemas` endpoint.
-     *
-     * Creates a schema.
-     *
-     * **Parameters:**
-     *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     */
+    * This function performs a `POST` to the `/admin/directory/v1/customer/{customerId}/schemas` endpoint.
+    *
+    * Creates a schema.
+    *
+    * **Parameters:**
+    *
+    * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
+    */
     pub async fn insert(
         &self,
         customer_id: &str,
@@ -55,15 +55,15 @@ impl Schemas {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/schemas/{schemaKey}` endpoint.
-     *
-     * Retrieves a schema.
-     *
-     * **Parameters:**
-     *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     * * `schema_key: &str` -- Name or immutable ID of the schema.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/customer/{customerId}/schemas/{schemaKey}` endpoint.
+    *
+    * Retrieves a schema.
+    *
+    * **Parameters:**
+    *
+    * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
+    * * `schema_key: &str` -- Name or immutable ID of the schema.
+    */
     pub async fn get(&self, customer_id: &str, schema_key: &str) -> Result<crate::types::Schema> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}",
@@ -75,15 +75,15 @@ impl Schemas {
     }
 
     /**
-     * This function performs a `PUT` to the `/admin/directory/v1/customer/{customerId}/schemas/{schemaKey}` endpoint.
-     *
-     * Updates a schema.
-     *
-     * **Parameters:**
-     *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     * * `schema_key: &str` -- Name or immutable ID of the schema.
-     */
+    * This function performs a `PUT` to the `/admin/directory/v1/customer/{customerId}/schemas/{schemaKey}` endpoint.
+    *
+    * Updates a schema.
+    *
+    * **Parameters:**
+    *
+    * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
+    * * `schema_key: &str` -- Name or immutable ID of the schema.
+    */
     pub async fn update(
         &self,
         customer_id: &str,
@@ -102,15 +102,15 @@ impl Schemas {
     }
 
     /**
-     * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customerId}/schemas/{schemaKey}` endpoint.
-     *
-     * Deletes a schema.
-     *
-     * **Parameters:**
-     *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     * * `schema_key: &str` -- Name or immutable ID of the schema.
-     */
+    * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customerId}/schemas/{schemaKey}` endpoint.
+    *
+    * Deletes a schema.
+    *
+    * **Parameters:**
+    *
+    * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
+    * * `schema_key: &str` -- Name or immutable ID of the schema.
+    */
     pub async fn delete(&self, customer_id: &str, schema_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/schemas/{}",
@@ -122,15 +122,15 @@ impl Schemas {
     }
 
     /**
-     * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customerId}/schemas/{schemaKey}` endpoint.
-     *
-     * Patches a schema.
-     *
-     * **Parameters:**
-     *
-     * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
-     * * `schema_key: &str` -- Name or immutable ID of the schema.
-     */
+    * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customerId}/schemas/{schemaKey}` endpoint.
+    *
+    * Patches a schema.
+    *
+    * **Parameters:**
+    *
+    * * `customer_id: &str` -- Immutable ID of the Google Workspace account.
+    * * `schema_key: &str` -- Name or immutable ID of the schema.
+    */
     pub async fn patch(
         &self,
         customer_id: &str,
