@@ -54,7 +54,9 @@
 //! ```
 //! use tripactions::Client;
 //!
-//! let tripactions = Client::new_from_env(String::from("token"));
+//! let tripactions = Client::new_from_env(
+//!     String::from("token"),
+//! );
 //! ```
 //!
 //! It is okay to pass an empty value for `token`. In
@@ -71,6 +73,7 @@
 //!     let mut access_token = tripactions.get_access_token().await.unwrap();
 //! }
 //! ```
+//!
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -120,7 +123,6 @@ pub struct Client {
     token: String,
     client_id: String,
     client_secret: String,
-
     client: reqwest_middleware::ClientWithMiddleware,
 }
 
@@ -259,7 +261,6 @@ impl Client {
 
     async fn url_and_auth(&self, uri: &str) -> Result<(reqwest::Url, Option<String>)> {
         let parsed_url = uri.parse::<reqwest::Url>();
-
         let auth = format!("Bearer {}", self.token);
         parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
     }
@@ -276,11 +277,8 @@ impl Client {
             (self.host.clone() + uri).to_string()
         };
         let (url, auth) = self.url_and_auth(&u).await?;
-
         let instance = <&Client>::clone(&self);
-
         let mut req = instance.client.request(method.clone(), url);
-
         // Set the default headers.
         req = req.header(
             reqwest::header::ACCEPT,
@@ -294,7 +292,6 @@ impl Client {
         if let Some(auth_str) = auth {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
-
         if let Some(body) = body {
             log::debug!(
                 "body: {:?}",

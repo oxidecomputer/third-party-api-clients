@@ -13,15 +13,15 @@ impl Members {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/hasMember/{memberKey}` endpoint.
-     *
-     * Checks whether the given user is a member of the group. Membership can be direct or nested.
-     *
-     * **Parameters:**
-     *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the user member in the API request. The value can be the user's primary email address, alias, or unique ID.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/hasMember/{memberKey}` endpoint.
+    *
+    * Checks whether the given user is a member of the group. Membership can be direct or nested.
+    *
+    * **Parameters:**
+    *
+    * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+    * * `member_key: &str` -- Identifies the user member in the API request. The value can be the user's primary email address, alias, or unique ID.
+    */
     pub async fn has(
         &self,
         group_key: &str,
@@ -37,18 +37,18 @@ impl Members {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
-     *
-     * Retrieves a paginated list of all members in a group.
-     *
-     * **Parameters:**
-     *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `include_derived_membership: bool` -- A Boolean value to indicate whether payload is wanted. Optional.
-     * * `max_results: i64` -- Maximum number of results to return. Max allowed value is 200.
-     * * `page_token: &str` -- Token to specify next page in the list.
-     * * `roles: &str` -- The `roles` query parameter allows you to retrieve group members by role. Allowed values are `OWNER`, `MANAGER`, and `MEMBER`.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
+    *
+    * Retrieves a paginated list of all members in a group.
+    *
+    * **Parameters:**
+    *
+    * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+    * * `include_derived_membership: bool` -- A Boolean value to indicate whether payload is wanted. Optional.
+    * * `max_results: i64` -- Maximum number of results to return. Max allowed value is 200.
+    * * `page_token: &str` -- Token to specify next page in the list.
+    * * `roles: &str` -- The `roles` query parameter allows you to retrieve group members by role. Allowed values are `OWNER`, `MANAGER`, and `MEMBER`.
+    */
     pub async fn list(
         &self,
         group_key: &str,
@@ -87,12 +87,12 @@ impl Members {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
-     *
-     * As opposed to `list`, this function returns all the pages of the request at once.
-     *
-     * Retrieves a paginated list of all members in a group.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
+    *
+    * As opposed to `list`, this function returns all the pages of the request at once.
+    *
+    * Retrieves a paginated list of all members in a group.
+    */
     pub async fn list_all(
         &self,
         group_key: &str,
@@ -149,14 +149,14 @@ impl Members {
     }
 
     /**
-     * This function performs a `POST` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
-     *
-     * Adds a user to the specified group.
-     *
-     * **Parameters:**
-     *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     */
+    * This function performs a `POST` to the `/admin/directory/v1/groups/{groupKey}/members` endpoint.
+    *
+    * Adds a user to the specified group.
+    *
+    * **Parameters:**
+    *
+    * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+    */
     pub async fn insert(
         &self,
         group_key: &str,
@@ -173,15 +173,15 @@ impl Members {
     }
 
     /**
-     * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
-     *
-     * Retrieves a group member's properties.
-     *
-     * **Parameters:**
-     *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
-     */
+    * This function performs a `GET` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
+    *
+    * Retrieves a group member's properties.
+    *
+    * **Parameters:**
+    *
+    * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+    * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
+    */
     pub async fn get(&self, group_key: &str, member_key: &str) -> Result<crate::types::Member> {
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}",
@@ -193,15 +193,15 @@ impl Members {
     }
 
     /**
-     * This function performs a `PUT` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
-     *
-     * Updates the membership of a user in the specified group.
-     *
-     * **Parameters:**
-     *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
-     */
+    * This function performs a `PUT` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
+    *
+    * Updates the membership of a user in the specified group.
+    *
+    * **Parameters:**
+    *
+    * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+    * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
+    */
     pub async fn update(
         &self,
         group_key: &str,
@@ -220,15 +220,15 @@ impl Members {
     }
 
     /**
-     * This function performs a `DELETE` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
-     *
-     * Removes a member from a group.
-     *
-     * **Parameters:**
-     *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
-     */
+    * This function performs a `DELETE` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
+    *
+    * Removes a member from a group.
+    *
+    * **Parameters:**
+    *
+    * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+    * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
+    */
     pub async fn delete(&self, group_key: &str, member_key: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/groups/{}/members/{}",
@@ -240,15 +240,15 @@ impl Members {
     }
 
     /**
-     * This function performs a `PATCH` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
-     *
-     * Updates the membership properties of a user in the specified group. This method supports [patch semantics](/admin-sdk/directory/v1/guides/performance#patch).
-     *
-     * **Parameters:**
-     *
-     * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
-     * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
-     */
+    * This function performs a `PATCH` to the `/admin/directory/v1/groups/{groupKey}/members/{memberKey}` endpoint.
+    *
+    * Updates the membership properties of a user in the specified group. This method supports [patch semantics](/admin-sdk/directory/v1/guides/performance#patch).
+    *
+    * **Parameters:**
+    *
+    * * `group_key: &str` -- Identifies the group in the API request. The value can be the group's email address, group alias, or the unique group ID.
+    * * `member_key: &str` -- Identifies the group member in the API request. A group member can be a user or another group. The value can be the member's (group or user) primary email address, alias, or unique ID.
+    */
     pub async fn patch(
         &self,
         group_key: &str,

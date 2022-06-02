@@ -100,6 +100,7 @@
 //!     access_token = google sheets.refresh_access_token().await.unwrap();
 //! }
 //! ```
+//!
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -139,14 +140,11 @@ mod progenitor_support {
     }
 }
 
-use std::{
-    convert::TryInto,
-    env,
-    ops::Add,
-    sync::Arc,
-    time::{Duration, Instant},
-};
-
+use std::convert::TryInto;
+use std::env;
+use std::ops::Add;
+use std::sync::Arc;
+use std::time::{Duration, Instant};
 use tokio::sync::RwLock;
 
 const TOKEN_ENDPOINT: &str = "https://oauth2.googleapis.com/token";

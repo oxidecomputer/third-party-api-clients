@@ -13,10 +13,10 @@ impl Channels {
     }
 
     /**
-     * This function performs a `POST` to the `/channels/stop` endpoint.
-     *
-     * Stop watching resources through this channel
-     */
+    * This function performs a `POST` to the `/channels/stop` endpoint.
+    *
+    * Stop watching resources through this channel
+    */
     pub async fn stop(&self, body: &crate::types::Channel) -> Result<()> {
         let url = "/channels/stop".to_string();
         self.client

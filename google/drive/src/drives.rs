@@ -13,17 +13,17 @@ impl Drives {
     }
 
     /**
-     * This function performs a `GET` to the `/drives` endpoint.
-     *
-     * Lists the user's shared drives.
-     *
-     * **Parameters:**
-     *
-     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
-     * * `page_token: &str` -- A link to this theme's background image.
-     * * `q: &str` -- A link to this theme's background image.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then all shared drives of the domain in which the requester is an administrator are returned.
-     */
+    * This function performs a `GET` to the `/drives` endpoint.
+    *
+    * Lists the user's shared drives.
+    *
+    * **Parameters:**
+    *
+    * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
+    * * `page_token: &str` -- A link to this theme's background image.
+    * * `q: &str` -- A link to this theme's background image.
+    * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then all shared drives of the domain in which the requester is an administrator are returned.
+    */
     pub async fn list(
         &self,
         page_size: i64,
@@ -57,12 +57,12 @@ impl Drives {
     }
 
     /**
-     * This function performs a `GET` to the `/drives` endpoint.
-     *
-     * As opposed to `list`, this function returns all the pages of the request at once.
-     *
-     * Lists the user's shared drives.
-     */
+    * This function performs a `GET` to the `/drives` endpoint.
+    *
+    * As opposed to `list`, this function returns all the pages of the request at once.
+    *
+    * Lists the user's shared drives.
+    */
     pub async fn list_all(
         &self,
         q: &str,
@@ -114,14 +114,14 @@ impl Drives {
     }
 
     /**
-     * This function performs a `POST` to the `/drives` endpoint.
-     *
-     * Creates a new shared drive.
-     *
-     * **Parameters:**
-     *
-     * * `request_id: &str` -- An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
-     */
+    * This function performs a `POST` to the `/drives` endpoint.
+    *
+    * Creates a new shared drive.
+    *
+    * **Parameters:**
+    *
+    * * `request_id: &str` -- An ID, such as a random UUID, which uniquely identifies this user's request for idempotent creation of a shared drive. A repeated request by the same user and with the same request ID will avoid creating duplicates by attempting to create the same shared drive. If the shared drive already exists a 409 error will be returned.
+    */
     pub async fn create(
         &self,
         request_id: &str,
@@ -140,15 +140,15 @@ impl Drives {
     }
 
     /**
-     * This function performs a `GET` to the `/drives/{driveId}` endpoint.
-     *
-     * Gets a shared drive's metadata by ID.
-     *
-     * **Parameters:**
-     *
-     * * `drive_id: &str` -- A link to this theme's background image.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
-     */
+    * This function performs a `GET` to the `/drives/{driveId}` endpoint.
+    *
+    * Gets a shared drive's metadata by ID.
+    *
+    * **Parameters:**
+    *
+    * * `drive_id: &str` -- A link to this theme's background image.
+    * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    */
     pub async fn get(
         &self,
         drive_id: &str,
@@ -172,14 +172,14 @@ impl Drives {
     }
 
     /**
-     * This function performs a `DELETE` to the `/drives/{driveId}` endpoint.
-     *
-     * Permanently deletes a shared drive for which the user is an organizer. The shared drive cannot contain any untrashed items.
-     *
-     * **Parameters:**
-     *
-     * * `drive_id: &str` -- A link to this theme's background image.
-     */
+    * This function performs a `DELETE` to the `/drives/{driveId}` endpoint.
+    *
+    * Permanently deletes a shared drive for which the user is an organizer. The shared drive cannot contain any untrashed items.
+    *
+    * **Parameters:**
+    *
+    * * `drive_id: &str` -- A link to this theme's background image.
+    */
     pub async fn delete(&self, drive_id: &str) -> Result<()> {
         let url = format!(
             "/drives/{}",
@@ -190,15 +190,15 @@ impl Drives {
     }
 
     /**
-     * This function performs a `PATCH` to the `/drives/{driveId}` endpoint.
-     *
-     * Updates the metadate for a shared drive.
-     *
-     * **Parameters:**
-     *
-     * * `drive_id: &str` -- A link to this theme's background image.
-     * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
-     */
+    * This function performs a `PATCH` to the `/drives/{driveId}` endpoint.
+    *
+    * Updates the metadate for a shared drive.
+    *
+    * **Parameters:**
+    *
+    * * `drive_id: &str` -- A link to this theme's background image.
+    * * `use_domain_admin_access: bool` -- Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
+    */
     pub async fn update(
         &self,
         drive_id: &str,
@@ -225,14 +225,14 @@ impl Drives {
     }
 
     /**
-     * This function performs a `POST` to the `/drives/{driveId}/hide` endpoint.
-     *
-     * Hides a shared drive from the default view.
-     *
-     * **Parameters:**
-     *
-     * * `drive_id: &str` -- A link to this theme's background image.
-     */
+    * This function performs a `POST` to the `/drives/{driveId}/hide` endpoint.
+    *
+    * Hides a shared drive from the default view.
+    *
+    * **Parameters:**
+    *
+    * * `drive_id: &str` -- A link to this theme's background image.
+    */
     pub async fn hide(&self, drive_id: &str) -> Result<crate::types::Drive> {
         let url = format!(
             "/drives/{}/hide",
@@ -243,14 +243,14 @@ impl Drives {
     }
 
     /**
-     * This function performs a `POST` to the `/drives/{driveId}/unhide` endpoint.
-     *
-     * Restores a shared drive to the default view.
-     *
-     * **Parameters:**
-     *
-     * * `drive_id: &str` -- A link to this theme's background image.
-     */
+    * This function performs a `POST` to the `/drives/{driveId}/unhide` endpoint.
+    *
+    * Restores a shared drive to the default view.
+    *
+    * **Parameters:**
+    *
+    * * `drive_id: &str` -- A link to this theme's background image.
+    */
     pub async fn unhide(&self, drive_id: &str) -> Result<crate::types::Drive> {
         let url = format!(
             "/drives/{}/unhide",

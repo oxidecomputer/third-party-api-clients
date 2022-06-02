@@ -13,16 +13,16 @@ impl Groups {
     }
 
     /**
-     * This function performs a `GET` to the `/{groupUniqueId}` endpoint.
-     *
-     * Gets one resource by id.
-     *
-     * **Parameters:**
-     *
-     * * `group_unique_id: &str` -- Identifies whether members external to your organization can join the group. Possible values are:  
-     *  - true: G Suite users external to your organization can become members of this group.
-     *  - false: Users not belonging to the organization are not allowed to become members of this group.
-     */
+    * This function performs a `GET` to the `/{groupUniqueId}` endpoint.
+    *
+    * Gets one resource by id.
+    *
+    * **Parameters:**
+    *
+    * * `group_unique_id: &str` -- Identifies whether members external to your organization can join the group. Possible values are:  
+    *  - true: G Suite users external to your organization can become members of this group.
+    *  - false: Users not belonging to the organization are not allowed to become members of this group.
+    */
     pub async fn get(
         &self,
         alt: crate::types::Alt,
@@ -43,16 +43,16 @@ impl Groups {
     }
 
     /**
-     * This function performs a `PUT` to the `/{groupUniqueId}` endpoint.
-     *
-     * Updates an existing resource.
-     *
-     * **Parameters:**
-     *
-     * * `group_unique_id: &str` -- Identifies whether members external to your organization can join the group. Possible values are:  
-     *  - true: G Suite users external to your organization can become members of this group.
-     *  - false: Users not belonging to the organization are not allowed to become members of this group.
-     */
+    * This function performs a `PUT` to the `/{groupUniqueId}` endpoint.
+    *
+    * Updates an existing resource.
+    *
+    * **Parameters:**
+    *
+    * * `group_unique_id: &str` -- Identifies whether members external to your organization can join the group. Possible values are:  
+    *  - true: G Suite users external to your organization can become members of this group.
+    *  - false: Users not belonging to the organization are not allowed to become members of this group.
+    */
     pub async fn update(
         &self,
         alt: crate::types::Alt,
@@ -76,16 +76,16 @@ impl Groups {
     }
 
     /**
-     * This function performs a `PATCH` to the `/{groupUniqueId}` endpoint.
-     *
-     * Updates an existing resource. This method supports patch semantics.
-     *
-     * **Parameters:**
-     *
-     * * `group_unique_id: &str` -- Identifies whether members external to your organization can join the group. Possible values are:  
-     *  - true: G Suite users external to your organization can become members of this group.
-     *  - false: Users not belonging to the organization are not allowed to become members of this group.
-     */
+    * This function performs a `PATCH` to the `/{groupUniqueId}` endpoint.
+    *
+    * Updates an existing resource. This method supports patch semantics.
+    *
+    * **Parameters:**
+    *
+    * * `group_unique_id: &str` -- Identifies whether members external to your organization can join the group. Possible values are:  
+    *  - true: G Suite users external to your organization can become members of this group.
+    *  - false: Users not belonging to the organization are not allowed to become members of this group.
+    */
     pub async fn patch(
         &self,
         alt: crate::types::Alt,
