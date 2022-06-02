@@ -6,7 +6,7 @@ on:
       - Cargo.lock
       - '**/Cargo.toml'
       - '**/Cargo.lock'
-      - .github/workflows/cargo-test.yml
+      - .github/workflows/cargo-fmt.yml
 name: cargo test
 jobs:
   cargotest:
