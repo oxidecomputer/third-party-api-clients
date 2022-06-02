@@ -37,7 +37,7 @@ uuid = { version = "^0.8", features = ["serde", "v4"] }
 base64 = "^0.12"
 dirs = "^3.0.2"
 nom_pem = "4"
-tokio = { version = "1.8.0", features = ["full"] }
+tokio = { version = "1.16.1", features = ["full"] }
 
 [features]
 # enable etag-based http_cache functionality
