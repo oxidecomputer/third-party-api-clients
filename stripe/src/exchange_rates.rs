@@ -13,17 +13,17 @@ impl ExchangeRates {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/exchange_rates` endpoint.
-    *
-    * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
-    *
-    * **Parameters:**
-    *
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with the exchange rate for currency X your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and total number of supported payout currencies, and the default is the max.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with the exchange rate for currency X, your subsequent call can include `starting_after=X` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/exchange_rates` endpoint.
+     *
+     * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
+     *
+     * **Parameters:**
+     *
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with the exchange rate for currency X your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and total number of supported payout currencies, and the default is the max.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is the currency that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with the exchange rate for currency X, your subsequent call can include `starting_after=X` in order to fetch the next page of the list.
+     */
     pub async fn get_page(
         &self,
         ending_before: &str,
@@ -50,12 +50,12 @@ impl ExchangeRates {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/exchange_rates` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
-    */
+     * This function performs a `GET` to the `/v1/exchange_rates` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * <p>Returns a list of objects that contain the rates at which foreign currencies are converted to one another. Only shows the currencies for which Stripe supports.</p>
+     */
     pub async fn get_all(&self) -> Result<Vec<crate::types::ExchangeRate>> {
         let url = "/v1/exchange_rates".to_string();
         let mut resp: crate::types::GetExchangeRatesResponse = self.client.get(&url, None).await?;
@@ -98,15 +98,15 @@ impl ExchangeRates {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/exchange_rates/{rate_id}` endpoint.
-    *
-    * <p>Retrieves the exchange rates from the given currency to every supported currency.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `rate_id: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/exchange_rates/{rate_id}` endpoint.
+     *
+     * <p>Retrieves the exchange rates from the given currency to every supported currency.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `rate_id: &str` -- The account's country.
+     */
     pub async fn get_rate(&self, rate_id: &str) -> Result<crate::types::ExchangeRate> {
         let url = format!(
             "/v1/exchange_rates/{}",

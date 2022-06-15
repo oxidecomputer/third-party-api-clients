@@ -1,5 +1,3 @@
-
-
 use inflector::cases::snakecase::to_snake_case;
 
 /*
@@ -907,14 +905,13 @@ fn get_shared_functions(proper_name: &str, add_post_header: &str) -> String {
     };
 
     // Add auto refresh functionality to clients that support it
-    let raw_request = if
-        proper_name.starts_with("Google") ||
-        proper_name == "DocuSign" ||
-        proper_name == "Gusto" ||
-        proper_name == "MailChimp" ||
-        proper_name == "Shopify" ||
-        proper_name == "Slack" ||
-        proper_name == "Zoom"
+    let raw_request = if proper_name.starts_with("Google")
+        || proper_name == "DocuSign"
+        || proper_name == "Gusto"
+        || proper_name == "MailChimp"
+        || proper_name == "Shopify"
+        || proper_name == "Slack"
+        || proper_name == "Zoom"
     {
         get_shared_raw_functions_with_refresh("Bearer", &post_header_args)
     } else {
@@ -1030,10 +1027,6 @@ async fn post_form<Out>(
     // Set the default headers.
     req = req.header(
         reqwest::header::ACCEPT,
-        reqwest::header::HeaderValue::from_static("application/json"),
-    );
-    req = req.header(
-        reqwest::header::CONTENT_TYPE,
         reqwest::header::HeaderValue::from_static("application/json"),
     );
 
@@ -1353,11 +1346,14 @@ where
         &(self.host.to_string() + uri),
         message,
     ).await
-}}"#, raw_request)
+}}"#,
+        raw_request
+    )
 }
 
 fn get_shared_raw_functions_without_refresh(bearer: &str, post_header_args: &str) -> String {
-    format!(r#"
+    format!(
+        r#"
 async fn url_and_auth(
     &self,
     uri: &str,
@@ -1401,11 +1397,14 @@ async fn request_raw(
     }}
     Ok(req.send().await?)
 }}
-"#, bearer, post_header_args)
+"#,
+        bearer, post_header_args
+    )
 }
 
 fn get_shared_raw_functions_with_refresh(bearer: &str, post_header_args: &str) -> String {
-    format!(r#"
+    format!(
+        r#"
 async fn url_and_auth(
     &self,
     uri: &str,
@@ -1499,7 +1498,9 @@ async fn request_raw(
     }};
 
     Ok(resp)
-}}"#, bearer, post_header_args)
+}}"#,
+        bearer, post_header_args
+    )
 }
 
 const TOKEN_AUTH_TEMPLATE: &str = r#"

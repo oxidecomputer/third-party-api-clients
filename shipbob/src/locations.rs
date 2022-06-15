@@ -13,16 +13,16 @@ impl Locations {
     }
 
     /**
-    * Get locations.
-    *
-    * This function performs a `GET` to the `/location` endpoint.
-    *
-    * **Parameters:**
-    *
-    * * `include_inactive: bool` -- True if the inventory item is marked as a digital item.
-    * * `receiving_enabled: bool` -- True if the inventory item is marked as a digital item.
-    * * `access_granted: bool` -- True if the inventory item is marked as a digital item.
-    */
+     * Get locations.
+     *
+     * This function performs a `GET` to the `/location` endpoint.
+     *
+     * **Parameters:**
+     *
+     * * `include_inactive: bool` -- True if the inventory item is marked as a digital item.
+     * * `receiving_enabled: bool` -- True if the inventory item is marked as a digital item.
+     * * `access_granted: bool` -- True if the inventory item is marked as a digital item.
+     */
     pub async fn get_page(
         &self,
         include_inactive: bool,
@@ -49,12 +49,12 @@ impl Locations {
     }
 
     /**
-    * Get locations.
-    *
-    * This function performs a `GET` to the `/location` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    */
+     * Get locations.
+     *
+     * This function performs a `GET` to the `/location` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     */
     pub async fn get_all(
         &self,
         include_inactive: bool,

@@ -13,18 +13,18 @@ impl Webhooks {
     }
 
     /**
-    * Get Webhooks.
-    *
-    * This function performs a `GET` to the `/webhook` endpoint.
-    *
-    * All parameters are AND filters
-    *
-    * **Parameters:**
-    *
-    * * `topic: crate::types::WebhooksTopics` -- Topic of the webhooks requested.
-    * * `page: u64` -- Unique id of the channel.
-    * * `limit: i64` -- Amount of Webhooks per page to request.
-    */
+     * Get Webhooks.
+     *
+     * This function performs a `GET` to the `/webhook` endpoint.
+     *
+     * All parameters are AND filters
+     *
+     * **Parameters:**
+     *
+     * * `topic: crate::types::WebhooksTopics` -- Topic of the webhooks requested.
+     * * `page: u64` -- Unique id of the channel.
+     * * `limit: i64` -- Amount of Webhooks per page to request.
+     */
     pub async fn get_page(
         &self,
         topic: crate::types::WebhooksTopics,
@@ -48,14 +48,14 @@ impl Webhooks {
     }
 
     /**
-    * Get Webhooks.
-    *
-    * This function performs a `GET` to the `/webhook` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * All parameters are AND filters
-    */
+     * Get Webhooks.
+     *
+     * This function performs a `GET` to the `/webhook` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * All parameters are AND filters
+     */
     pub async fn get_all(
         &self,
         topic: crate::types::WebhooksTopics,
@@ -71,14 +71,14 @@ impl Webhooks {
     }
 
     /**
-    * Create a new webhook subscription.
-    *
-    * This function performs a `POST` to the `/webhook` endpoint.
-    *
-    * **Parameters:**
-    *
-    * * `channel_id: i64` -- Unique id of the channel.
-    */
+     * Create a new webhook subscription.
+     *
+     * This function performs a `POST` to the `/webhook` endpoint.
+     *
+     * **Parameters:**
+     *
+     * * `channel_id: i64` -- Unique id of the channel.
+     */
     pub async fn post(
         &self,
         body: &crate::types::WebhooksCreateWebhookSubscriptionModel,
@@ -90,14 +90,14 @@ impl Webhooks {
     }
 
     /**
-    * Delete an existing webhook subscription.
-    *
-    * This function performs a `DELETE` to the `/webhook/{id}` endpoint.
-    *
-    * **Parameters:**
-    *
-    * * `id: i64` -- Unique id of the channel.
-    */
+     * Delete an existing webhook subscription.
+     *
+     * This function performs a `DELETE` to the `/webhook/{id}` endpoint.
+     *
+     * **Parameters:**
+     *
+     * * `id: i64` -- Unique id of the channel.
+     */
     pub async fn delete(&self, id: i64) -> Result<()> {
         let url = format!(
             "/webhook/{}",

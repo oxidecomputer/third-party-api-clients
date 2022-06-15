@@ -13,16 +13,16 @@ impl AccountCustomFields {
     }
 
     /**
-    * Gets a list of custom fields.
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/custom_fields` endpoint.
-    *
-    * This method returns a list of the envelope and document custom fields associated with an account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Gets a list of custom fields.
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/custom_fields` endpoint.
+     *
+     * This method returns a list of the envelope and document custom fields associated with an account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn get(&self, account_id: &str) -> Result<crate::types::AccountCustomFields> {
         let url = format!(
             "/v2.1/accounts/{}/custom_fields",
@@ -33,17 +33,17 @@ impl AccountCustomFields {
     }
 
     /**
-    * Creates an account custom field.
-    *
-    * This function performs a `POST` to the `/v2.1/accounts/{accountId}/custom_fields` endpoint.
-    *
-    * This method creates a custom field and makes it available for all new envelopes associated with an account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `apply_to_templates: &str` -- (Optional) When set to **true**, the new custom field is applied to all of the templates on the account.
-    */
+     * Creates an account custom field.
+     *
+     * This function performs a `POST` to the `/v2.1/accounts/{accountId}/custom_fields` endpoint.
+     *
+     * This method creates a custom field and makes it available for all new envelopes associated with an account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `apply_to_templates: &str` -- (Optional) When set to **true**, the new custom field is applied to all of the templates on the account.
+     */
     pub async fn post(
         &self,
         account_id: &str,
@@ -70,18 +70,18 @@ impl AccountCustomFields {
     }
 
     /**
-    * Updates an account custom field.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/custom_fields/{customFieldId}` endpoint.
-    *
-    * This method updates an existing account custom field.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `custom_field_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `apply_to_templates: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Updates an account custom field.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/custom_fields/{customFieldId}` endpoint.
+     *
+     * This method updates an existing account custom field.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `custom_field_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `apply_to_templates: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn put(
         &self,
         account_id: &str,
@@ -110,18 +110,18 @@ impl AccountCustomFields {
     }
 
     /**
-    * Deletes an account custom field.
-    *
-    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/custom_fields/{customFieldId}` endpoint.
-    *
-    * This method deletes an existing account custom field.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `custom_field_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `apply_to_templates: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Deletes an account custom field.
+     *
+     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/custom_fields/{customFieldId}` endpoint.
+     *
+     * This method deletes an existing account custom field.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `custom_field_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `apply_to_templates: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn delete(
         &self,
         account_id: &str,

@@ -13,12 +13,12 @@ impl Contractors {
     }
 
     /**
-    * Get a contractor.
-    *
-    * This function performs a `GET` to the `/v1/contractors/{contractor_id_or_uuid}` endpoint.
-    *
-    * Get a contractor.
-    */
+     * Get a contractor.
+     *
+     * This function performs a `GET` to the `/v1/contractors/{contractor_id_or_uuid}` endpoint.
+     *
+     * Get a contractor.
+     */
     pub async fn get(&self, contractor_id_or_uuid: &str) -> Result<crate::types::Contractor> {
         let url = format!(
             "/v1/contractors/{}",
@@ -29,12 +29,12 @@ impl Contractors {
     }
 
     /**
-    * Update a contractor.
-    *
-    * This function performs a `PUT` to the `/v1/contractors/{contractor_id_or_uuid}` endpoint.
-    *
-    * Update a contractor.
-    */
+     * Update a contractor.
+     *
+     * This function performs a `PUT` to the `/v1/contractors/{contractor_id_or_uuid}` endpoint.
+     *
+     * Update a contractor.
+     */
     pub async fn put(
         &self,
         contractor_id_or_uuid: &str,
@@ -51,12 +51,12 @@ impl Contractors {
     }
 
     /**
-    * Get contractors of a company.
-    *
-    * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
-    *
-    * Get all contractors, active and inactive, individual and business, for a company.
-    */
+     * Get contractors of a company.
+     *
+     * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
+     *
+     * Get all contractors, active and inactive, individual and business, for a company.
+     */
     pub async fn get_company(
         &self,
         company_id_or_uuid: &str,
@@ -70,14 +70,14 @@ impl Contractors {
     }
 
     /**
-    * Get contractors of a company.
-    *
-    * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
-    *
-    * As opposed to `get_company`, this function returns all the pages of the request at once.
-    *
-    * Get all contractors, active and inactive, individual and business, for a company.
-    */
+     * Get contractors of a company.
+     *
+     * This function performs a `GET` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
+     *
+     * As opposed to `get_company`, this function returns all the pages of the request at once.
+     *
+     * Get all contractors, active and inactive, individual and business, for a company.
+     */
     pub async fn get_all_company(
         &self,
         company_id_or_uuid: &str,
@@ -91,12 +91,12 @@ impl Contractors {
     }
 
     /**
-    * Create a contractor.
-    *
-    * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
-    *
-    * Create an individual or business contractor.
-    */
+     * Create a contractor.
+     *
+     * This function performs a `POST` to the `/v1/companies/{company_id_or_uuid}/contractors` endpoint.
+     *
+     * Create an individual or business contractor.
+     */
     pub async fn post_company(
         &self,
         company_id_or_uuid: &str,

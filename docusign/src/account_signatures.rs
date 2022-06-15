@@ -13,19 +13,19 @@ impl AccountSignatures {
     }
 
     /**
-    * Returns the managed signature definitions for the account.
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/signatures` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `stamp_format: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `stamp_name: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `stamp_type: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Returns the managed signature definitions for the account.
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/signatures` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `stamp_format: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `stamp_name: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `stamp_type: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn get(
         &self,
         account_id: &str,
@@ -116,17 +116,17 @@ impl AccountSignatures {
     }
 
     /**
-    * Returns information about the specified signature.
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Returns information about the specified signature.
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn get_signature(
         &self,
         account_id: &str,
@@ -142,18 +142,18 @@ impl AccountSignatures {
     }
 
     /**
-    * Updates an account signature.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `close_existing_signature: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Updates an account signature.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `close_existing_signature: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn put_signature_account_signatures(
         &self,
         account_id: &str,
@@ -182,17 +182,17 @@ impl AccountSignatures {
     }
 
     /**
-    * Close the specified signature by ID.
-    *
-    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Close the specified signature by ID.
+     *
+     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn delete_signature(&self, account_id: &str, signature_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/signatures/{}",
@@ -204,22 +204,22 @@ impl AccountSignatures {
     }
 
     /**
-    * Returns a signature image, initials, or stamp.
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}/{imageType}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `image_type: &str` -- Specificies the type of image. Valid values are:
-    *   
-    *   - `signature_image`
-    *   - `initials_image`.
-    * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `include_chrome: &str` -- When **true**, the chrome (or frame containing the added line and identifier) is included with the signature image.
-    */
+     * Returns a signature image, initials, or stamp.
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}/{imageType}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `image_type: &str` -- Specificies the type of image. Valid values are:
+     *   
+     *   - `signature_image`
+     *   - `initials_image`.
+     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `include_chrome: &str` -- When **true**, the chrome (or frame containing the added line and identifier) is included with the signature image.
+     */
     pub async fn get_signature_image(
         &self,
         account_id: &str,
@@ -244,22 +244,22 @@ impl AccountSignatures {
     }
 
     /**
-    * Sets a signature image, initials, or stamp.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}/{imageType}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `image_type: &str` -- Specificies the type of image. Valid values are:
-    *   
-    *   - `signature_image`
-    *   - `initials_image`.
-    * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `transparent_png: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Sets a signature image, initials, or stamp.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}/{imageType}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `image_type: &str` -- Specificies the type of image. Valid values are:
+     *   
+     *   - `signature_image`
+     *   - `initials_image`.
+     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `transparent_png: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn put_signature_image(
         &self,
         account_id: &str,
@@ -284,21 +284,21 @@ impl AccountSignatures {
     }
 
     /**
-    * Deletes a signature image, initials, or stamp.
-    *
-    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}/{imageType}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `image_type: &str` -- Specificies the type of image. Valid values are:
-    *   
-    *   - `signature_image`
-    *   - `initials_image`.
-    * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Deletes a signature image, initials, or stamp.
+     *
+     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/signatures/{signatureId}/{imageType}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `image_type: &str` -- Specificies the type of image. Valid values are:
+     *   
+     *   - `signature_image`
+     *   - `initials_image`.
+     * * `signature_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn delete_signature_image(
         &self,
         account_id: &str,

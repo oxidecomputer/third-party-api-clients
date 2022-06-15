@@ -39,7 +39,7 @@
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
 //!     String::from("token"),
-//!     String::from("refresh-token")
+//!     String::from("refresh-token"),
 //! );
 //! ```
 //!
@@ -55,10 +55,7 @@
 //! ```
 //! use shopify::Client;
 //!
-//! let shopify = Client::new_from_env(
-//!     String::from("token"),
-//!     String::from("refresh-token")
-//! );
+//! let shopify = Client::new_from_env(String::from("token"), String::from("refresh-token"));
 //! ```
 //!
 //! It is okay to pass empty values for `token` and `refresh_token`. In
@@ -88,7 +85,6 @@
 //!     access_token = shopify.refresh_access_token().await.unwrap();
 //! }
 //! ```
-//!
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -144,11 +140,14 @@ mod progenitor_support {
     }
 }
 
-use std::convert::TryInto;
-use std::env;
-use std::ops::Add;
-use std::sync::Arc;
-use std::time::{Duration, Instant};
+use std::{
+    convert::TryInto,
+    env,
+    ops::Add,
+    sync::Arc,
+    time::{Duration, Instant},
+};
+
 use tokio::sync::RwLock;
 
 const TOKEN_ENDPOINT: &str = "https://{shop}.myshopify.com/admin/oauth/access_token";
@@ -661,10 +660,6 @@ impl Client {
         // Set the default headers.
         req = req.header(
             reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
-        req = req.header(
-            reqwest::header::CONTENT_TYPE,
             reqwest::header::HeaderValue::from_static("application/json"),
         );
 

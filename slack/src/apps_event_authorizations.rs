@@ -13,19 +13,19 @@ impl AppsEventAuthorizations {
     }
 
     /**
-    * This function performs a `GET` to the `/apps.event.authorizations.list` endpoint.
-    *
-    * Get a list of authorizations for the given event context. Each authorization represents an app installation that the event is visible to.
-    *
-    * FROM: <https://api.slack.com/methods/apps.event.authorizations.list>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `authorizations:read`.
-    * * `event_context: &str`
-    * * `cursor: &str`
-    * * `limit: i64`
-    */
+     * This function performs a `GET` to the `/apps.event.authorizations.list` endpoint.
+     *
+     * Get a list of authorizations for the given event context. Each authorization represents an app installation that the event is visible to.
+     *
+     * FROM: <https://api.slack.com/methods/apps.event.authorizations.list>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `authorizations:read`.
+     * * `event_context: &str`
+     * * `cursor: &str`
+     * * `limit: i64`
+     */
     pub async fn list(
         &self,
         event_context: &str,

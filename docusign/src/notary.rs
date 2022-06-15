@@ -13,17 +13,17 @@ impl Notary {
     }
 
     /**
-    * Gets settings for a  notary user.
-    *
-    * This function performs a `GET` to the `/v2.1/current_user/notary` endpoint.
-    *
-    * Gets settings for a notary user.
-    * The current user must be a notary.
-    *
-    * **Parameters:**
-    *
-    * * `include_jurisdictions: &str` -- If **true**, the response will include a `jurisdiction` property that contains an array of all supported jurisdictions for the current user.
-    */
+     * Gets settings for a  notary user.
+     *
+     * This function performs a `GET` to the `/v2.1/current_user/notary` endpoint.
+     *
+     * Gets settings for a notary user.
+     * The current user must be a notary.
+     *
+     * **Parameters:**
+     *
+     * * `include_jurisdictions: &str` -- If **true**, the response will include a `jurisdiction` property that contains an array of all supported jurisdictions for the current user.
+     */
     pub async fn get(&self, include_jurisdictions: &str) -> Result<crate::types::NotaryResult> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !include_jurisdictions.is_empty() {
@@ -39,12 +39,12 @@ impl Notary {
     }
 
     /**
-    * Updates notary information for the current user.
-    *
-    * This function performs a `PUT` to the `/v2.1/current_user/notary` endpoint.
-    *
-    * Updates notary information for the current user.
-    */
+     * Updates notary information for the current user.
+     *
+     * This function performs a `PUT` to the `/v2.1/current_user/notary` endpoint.
+     *
+     * Updates notary information for the current user.
+     */
     pub async fn put(&self, body: &crate::types::NotaryData) -> Result<crate::types::NotaryData> {
         let url = "/v2.1/current_user/notary".to_string();
         self.client
@@ -53,12 +53,12 @@ impl Notary {
     }
 
     /**
-    * Registers the current user as a notary.
-    *
-    * This function performs a `POST` to the `/v2.1/current_user/notary` endpoint.
-    *
-    * Registers the current user as a notary.
-    */
+     * Registers the current user as a notary.
+     *
+     * This function performs a `POST` to the `/v2.1/current_user/notary` endpoint.
+     *
+     * Registers the current user as a notary.
+     */
     pub async fn post(&self, body: &crate::types::NotaryData) -> Result<crate::types::NotaryData> {
         let url = "/v2.1/current_user/notary".to_string();
         self.client

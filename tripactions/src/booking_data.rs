@@ -13,23 +13,23 @@ impl BookingData {
     }
 
     /**
-    * Your company's bookings.
-    *
-    * This function performs a `GET` to the `/v1/bookings` endpoint.
-    *
-    * Return booking rows filtered by the parameters you select.
-    *
-    * **Parameters:**
-    *
-    * * `created_from: &str` -- Filter based on booking created date in epoch seconds.
-    * * `created_to: &str` -- Filter based on booking created date in epoch seconds.
-    * * `start_date_from: &str` -- Filter based on travel start date in epoch seconds.
-    * * `start_date_to: &str` -- Filter based on travel end date in epoch seconds.
-    * * `booking_status: crate::types::BookingStatus` -- Filter based on booking status.
-    * * `page: u64` -- Page cursor for use in pagination.
-    * * `size: i64` -- Number of records returned per page.
-    * * `booking_type: crate::types::BookingType` -- Filter based on Booking type.
-    */
+     * Your company's bookings.
+     *
+     * This function performs a `GET` to the `/v1/bookings` endpoint.
+     *
+     * Return booking rows filtered by the parameters you select.
+     *
+     * **Parameters:**
+     *
+     * * `created_from: &str` -- Filter based on booking created date in epoch seconds.
+     * * `created_to: &str` -- Filter based on booking created date in epoch seconds.
+     * * `start_date_from: &str` -- Filter based on travel start date in epoch seconds.
+     * * `start_date_to: &str` -- Filter based on travel end date in epoch seconds.
+     * * `booking_status: crate::types::BookingStatus` -- Filter based on booking status.
+     * * `page: u64` -- Page cursor for use in pagination.
+     * * `size: i64` -- Number of records returned per page.
+     * * `booking_type: crate::types::BookingType` -- Filter based on Booking type.
+     */
     pub async fn get_booking_report(
         &self,
         created_from: &str,
@@ -76,14 +76,14 @@ impl BookingData {
     }
 
     /**
-    * Your company's bookings.
-    *
-    * This function performs a `GET` to the `/v1/bookings` endpoint.
-    *
-    * As opposed to `get_booking_report`, this function returns all the pages of the request at once.
-    *
-    * Return booking rows filtered by the parameters you select.
-    */
+     * Your company's bookings.
+     *
+     * This function performs a `GET` to the `/v1/bookings` endpoint.
+     *
+     * As opposed to `get_booking_report`, this function returns all the pages of the request at once.
+     *
+     * Return booking rows filtered by the parameters you select.
+     */
     pub async fn get_all_booking_report(
         &self,
         created_from: &str,

@@ -40,9 +40,7 @@
 //! ```
 //! use giphy_api::Client;
 //!
-//! let giphy = Client::new(
-//!     String::from("api-key"),
-//! );
+//! let giphy = Client::new(String::from("api-key"));
 //! ```
 //!
 //! Alternatively, the library can search for most of the variables required for
@@ -57,7 +55,6 @@
 //!
 //! let giphy = Client::new_from_env();
 //! ```
-//!
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -317,10 +314,6 @@ impl Client {
         // Set the default headers.
         req = req.header(
             reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
-        req = req.header(
-            reqwest::header::CONTENT_TYPE,
             reqwest::header::HeaderValue::from_static("application/json"),
         );
 

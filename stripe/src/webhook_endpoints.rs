@@ -13,17 +13,17 @@ impl WebhookEndpoints {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/webhook_endpoints` endpoint.
-    *
-    * <p>Returns a list of your webhook endpoints.</p>
-    *
-    * **Parameters:**
-    *
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/webhook_endpoints` endpoint.
+     *
+     * <p>Returns a list of your webhook endpoints.</p>
+     *
+     * **Parameters:**
+     *
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_page(
         &self,
         ending_before: &str,
@@ -50,12 +50,12 @@ impl WebhookEndpoints {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/webhook_endpoints` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * <p>Returns a list of your webhook endpoints.</p>
-    */
+     * This function performs a `GET` to the `/v1/webhook_endpoints` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * <p>Returns a list of your webhook endpoints.</p>
+     */
     pub async fn get_all(&self) -> Result<Vec<crate::types::WebhookEndpoint>> {
         let url = "/v1/webhook_endpoints".to_string();
         let mut resp: crate::types::GetWebhookEndpointsResponse =
@@ -99,25 +99,25 @@ impl WebhookEndpoints {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/webhook_endpoints` endpoint.
-    *
-    * <p>A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a Connect webhook endpoint that notifies the specified <code>url</code> about events from all connected accounts is created; otherwise an account webhook endpoint that notifies the specified <code>url</code> only about events from your account is created. You can also create webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of the Dashboard.</p>
-    */
+     * This function performs a `POST` to the `/v1/webhook_endpoints` endpoint.
+     *
+     * <p>A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a Connect webhook endpoint that notifies the specified <code>url</code> about events from all connected accounts is created; otherwise an account webhook endpoint that notifies the specified <code>url</code> only about events from your account is created. You can also create webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks settings</a> section of the Dashboard.</p>
+     */
     pub async fn post(&self) -> Result<crate::types::WebhookEndpoint> {
         let url = "/v1/webhook_endpoints".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
-    *
-    * <p>Retrieves the webhook endpoint with the given ID.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `webhook_endpoint: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
+     *
+     * <p>Retrieves the webhook endpoint with the given ID.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `webhook_endpoint: &str` -- The account's country.
+     */
     pub async fn get_endpoint(
         &self,
         webhook_endpoint: &str,
@@ -131,14 +131,14 @@ impl WebhookEndpoints {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
-    *
-    * <p>Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>enabled_events</code>, and the status of your endpoint.</p>
-    *
-    * **Parameters:**
-    *
-    * * `webhook_endpoint: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
+     *
+     * <p>Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>enabled_events</code>, and the status of your endpoint.</p>
+     *
+     * **Parameters:**
+     *
+     * * `webhook_endpoint: &str` -- The account's country.
+     */
     pub async fn post_endpoint(
         &self,
         webhook_endpoint: &str,
@@ -152,14 +152,14 @@ impl WebhookEndpoints {
     }
 
     /**
-    * This function performs a `DELETE` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
-    *
-    * <p>You can also delete webhook endpoints via the <a href="https://dashboard.stripe.com/account/webhooks">webhook endpoint management</a> page of the Stripe dashboard.</p>
-    *
-    * **Parameters:**
-    *
-    * * `webhook_endpoint: &str` -- The account's country.
-    */
+     * This function performs a `DELETE` to the `/v1/webhook_endpoints/{webhook_endpoint}` endpoint.
+     *
+     * <p>You can also delete webhook endpoints via the <a href="https://dashboard.stripe.com/account/webhooks">webhook endpoint management</a> page of the Stripe dashboard.</p>
+     *
+     * **Parameters:**
+     *
+     * * `webhook_endpoint: &str` -- The account's country.
+     */
     pub async fn delete_endpoint(
         &self,
         webhook_endpoint: &str,

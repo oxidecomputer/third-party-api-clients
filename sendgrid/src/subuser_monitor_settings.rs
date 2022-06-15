@@ -13,10 +13,10 @@ impl SubuserMonitorSettings {
     }
 
     /**
-    * Retrieve monitor settings for a subuser.
-    *
-    * This function performs a `GET` to the `/subusers/{subuser_name}/monitor` endpoint.
-    */
+     * Retrieve monitor settings for a subuser.
+     *
+     * This function performs a `GET` to the `/subusers/{subuser_name}/monitor` endpoint.
+     */
     pub async fn get_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
@@ -30,10 +30,10 @@ impl SubuserMonitorSettings {
     }
 
     /**
-    * Update Monitor Settings for a subuser.
-    *
-    * This function performs a `PUT` to the `/subusers/{subuser_name}/monitor` endpoint.
-    */
+     * Update Monitor Settings for a subuser.
+     *
+     * This function performs a `PUT` to the `/subusers/{subuser_name}/monitor` endpoint.
+     */
     pub async fn put_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
@@ -50,10 +50,10 @@ impl SubuserMonitorSettings {
     }
 
     /**
-    * Create monitor settings.
-    *
-    * This function performs a `POST` to the `/subusers/{subuser_name}/monitor` endpoint.
-    */
+     * Create monitor settings.
+     *
+     * This function performs a `POST` to the `/subusers/{subuser_name}/monitor` endpoint.
+     */
     pub async fn post_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,
@@ -70,10 +70,10 @@ impl SubuserMonitorSettings {
     }
 
     /**
-    * Delete monitor settings.
-    *
-    * This function performs a `DELETE` to the `/subusers/{subuser_name}/monitor` endpoint.
-    */
+     * Delete monitor settings.
+     *
+     * This function performs a `DELETE` to the `/subusers/{subuser_name}/monitor` endpoint.
+     */
     pub async fn delete_subusers_subuser_name_monitor(
         &self,
         subuser_name: &str,

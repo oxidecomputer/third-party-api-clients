@@ -13,23 +13,23 @@ impl SubuserStatistics {
     }
 
     /**
-    * Retrieve the monthly email statistics for a single subuser.
-    *
-    * This function performs a `GET` to the `/subusers/{subuser_name}/stats/monthly` endpoint.
-    *
-    * **This endpoint allows you to retrive the monthly email statistics for a specific subuser.**
-    *
-    * When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
-    * `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
-    *
-    * **Parameters:**
-    *
-    * * `date: &str` -- The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD.
-    * * `sort_by_metric: &str` -- The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'.
-    * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
-    * * `limit: i64` -- Optional field to limit the number of results returned.
-    * * `offset: i64` -- Optional beginning point in the list to retrieve from.
-    */
+     * Retrieve the monthly email statistics for a single subuser.
+     *
+     * This function performs a `GET` to the `/subusers/{subuser_name}/stats/monthly` endpoint.
+     *
+     * **This endpoint allows you to retrive the monthly email statistics for a specific subuser.**
+     *
+     * When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
+     * `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
+     *
+     * **Parameters:**
+     *
+     * * `date: &str` -- The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD.
+     * * `sort_by_metric: &str` -- The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'.
+     * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
+     * * `limit: i64` -- Optional field to limit the number of results returned.
+     * * `offset: i64` -- Optional beginning point in the list to retrieve from.
+     */
     pub async fn get_subusers_subuser_name_stats_monthly(
         &self,
         subuser_name: &str,
@@ -69,24 +69,24 @@ impl SubuserStatistics {
     }
 
     /**
-    * Retrieve monthly stats for all subusers.
-    *
-    * This function performs a `GET` to the `/subusers/stats/monthly` endpoint.
-    *
-    * **This endpoint allows you to retrieve the monthly email statistics for all subusers over the given date range.**
-    *
-    * When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
-    * `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
-    *
-    * **Parameters:**
-    *
-    * * `date: &str` -- The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD.
-    * * `subuser: &str` -- The license key provided with your New Relic account.
-    * * `sort_by_metric: crate::types::SortByMetric` -- The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'.
-    * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
-    * * `limit: i64` -- Optional field to limit the number of results returned.
-    * * `offset: i64` -- Optional beginning point in the list to retrieve from.
-    */
+     * Retrieve monthly stats for all subusers.
+     *
+     * This function performs a `GET` to the `/subusers/stats/monthly` endpoint.
+     *
+     * **This endpoint allows you to retrieve the monthly email statistics for all subusers over the given date range.**
+     *
+     * When using the `sort_by_metric` to sort your stats by a specific metric, you can not sort by the following metrics:
+     * `bounce_drops`, `deferred`, `invalid_emails`, `processed`, `spam_report_drops`, `spam_reports`, or `unsubscribe_drops`.
+     *
+     * **Parameters:**
+     *
+     * * `date: &str` -- The date of the month to retrieve statistics for. Must be formatted YYYY-MM-DD.
+     * * `subuser: &str` -- The license key provided with your New Relic account.
+     * * `sort_by_metric: crate::types::SortByMetric` -- The metric that you want to sort by. Metrics that you can sort by are: `blocks`, `bounces`, `clicks`, `delivered`, `opens`, `requests`, `unique_clicks`, `unique_opens`, and `unsubscribes`.'.
+     * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
+     * * `limit: i64` -- Optional field to limit the number of results returned.
+     * * `offset: i64` -- Optional beginning point in the list to retrieve from.
+     */
     pub async fn get_subusers_stats_monthly(
         &self,
         date: &str,
@@ -125,22 +125,22 @@ impl SubuserStatistics {
     }
 
     /**
-    * Retrieve the totals for each email statistic metric for all subusers.
-    *
-    * This function performs a `GET` to the `/subusers/stats/sums` endpoint.
-    *
-    * **This endpoint allows you to retrieve the total sums of each email statistic metric for all subusers over the given date range.**
-    *
-    * **Parameters:**
-    *
-    * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
-    * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-    * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
-    * * `limit: i64` -- Limits the number of results returned per page.
-    * * `offset: i64` -- The point in the list to begin retrieving results from.
-    * * `aggregated_by: &str` -- How to group the statistics. Defaults to today. Must follow format YYYY-MM-DD.
-    * * `sort_by_metric: &str` -- The metric that you want to sort by.  Must be a single metric.
-    */
+     * Retrieve the totals for each email statistic metric for all subusers.
+     *
+     * This function performs a `GET` to the `/subusers/stats/sums` endpoint.
+     *
+     * **This endpoint allows you to retrieve the total sums of each email statistic metric for all subusers over the given date range.**
+     *
+     * **Parameters:**
+     *
+     * * `sort_by_direction: crate::types::SortByDirection` -- The direction you want to sort.
+     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `limit: i64` -- Limits the number of results returned per page.
+     * * `offset: i64` -- The point in the list to begin retrieving results from.
+     * * `aggregated_by: &str` -- How to group the statistics. Defaults to today. Must follow format YYYY-MM-DD.
+     * * `sort_by_metric: &str` -- The metric that you want to sort by.  Must be a single metric.
+     */
     pub async fn get_subusers_stats_sum(
         &self,
         sort_by_direction: crate::types::SortByDirection,
@@ -183,23 +183,23 @@ impl SubuserStatistics {
     }
 
     /**
-    * Retrieve email statistics for your subusers.
-    *
-    * This function performs a `GET` to the `/subusers/stats` endpoint.
-    *
-    * **This endpoint allows you to retrieve the email statistics for the given subusers.**
-    *
-    * You may retrieve statistics for up to 10 different subusers by including an additional _subusers_ parameter for each additional subuser.
-    *
-    * **Parameters:**
-    *
-    * * `limit: i64` -- Limits the number of results returned per page.
-    * * `offset: i64` -- The point in the list to begin retrieving results from.
-    * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-    * * `subusers: &str` -- The subuser you want to retrieve statistics for. You may include this parameter up to 10 times to retrieve statistics for multiple subusers.
-    * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
-    * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today.
-    */
+     * Retrieve email statistics for your subusers.
+     *
+     * This function performs a `GET` to the `/subusers/stats` endpoint.
+     *
+     * **This endpoint allows you to retrieve the email statistics for the given subusers.**
+     *
+     * You may retrieve statistics for up to 10 different subusers by including an additional _subusers_ parameter for each additional subuser.
+     *
+     * **Parameters:**
+     *
+     * * `limit: i64` -- Limits the number of results returned per page.
+     * * `offset: i64` -- The point in the list to begin retrieving results from.
+     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `subusers: &str` -- The subuser you want to retrieve statistics for. You may include this parameter up to 10 times to retrieve statistics for multiple subusers.
+     * * `start_date: &str` -- The starting date of the statistics to retrieve. Must follow format YYYY-MM-DD.
+     * * `end_date: &str` -- The end date of the statistics to retrieve. Defaults to today.
+     */
     pub async fn get_subusers_stat(
         &self,
         limit: i64,

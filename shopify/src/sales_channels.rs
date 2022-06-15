@@ -13,12 +13,12 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/checkouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2020-01
-    */
+     * Creates a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/checkouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2020-01
+     */
     pub async fn deprecated_202001_create_checkouts(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-01/checkouts.json".to_string();
         self.client
@@ -27,12 +27,12 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/checkouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2020-04
-    */
+     * Creates a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/checkouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2020-04
+     */
     pub async fn deprecated_202004_create_checkouts(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-04/checkouts.json".to_string();
         self.client
@@ -41,12 +41,12 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/checkouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2020-07
-    */
+     * Creates a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/checkouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2020-07
+     */
     pub async fn deprecated_202007_create_checkouts(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-07/checkouts.json".to_string();
         self.client
@@ -55,12 +55,12 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/checkouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2020-10
-    */
+     * Creates a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/checkouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2020-10
+     */
     pub async fn create_checkouts(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/checkouts.json".to_string();
         self.client
@@ -69,12 +69,12 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/checkouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2021-01
-    */
+     * Creates a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/checkouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-2021-01
+     */
     pub async fn deprecated_202101_create_checkouts(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2021-01/checkouts.json".to_string();
         self.client
@@ -83,12 +83,12 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/checkouts.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-unstable
-    */
+     * Creates a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/checkouts.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#create-unstable
+     */
     pub async fn deprecated_unstable_create_checkouts(
         &self,
         body: &serde_json::Value,
@@ -100,16 +100,16 @@ impl SalesChannels {
     }
 
     /**
-    * Completes a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/checkouts/{token}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Completes a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/checkouts/{token}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_checkouts_param_token_complete(
         &self,
         token: &str,
@@ -126,16 +126,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/checkouts/{}/json",
@@ -146,16 +146,16 @@ impl SalesChannels {
     }
 
     /**
-    * Modifies an existing checkout.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Modifies an existing checkout.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_checkouts_param_token(
         &self,
         token: &str,
@@ -197,16 +197,16 @@ impl SalesChannels {
     }
 
     /**
-    * Completes a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/checkouts/{token}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Completes a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/checkouts/{token}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_checkouts_param_token_complete(
         &self,
         token: &str,
@@ -223,16 +223,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/checkouts/{}/json",
@@ -243,16 +243,16 @@ impl SalesChannels {
     }
 
     /**
-    * Modifies an existing checkout.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Modifies an existing checkout.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_checkouts_param_token(
         &self,
         token: &str,
@@ -294,16 +294,16 @@ impl SalesChannels {
     }
 
     /**
-    * Completes a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/checkouts/{token}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Completes a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/checkouts/{token}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_checkouts_param_token_complete(
         &self,
         token: &str,
@@ -320,16 +320,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/checkouts/{}/json",
@@ -340,16 +340,16 @@ impl SalesChannels {
     }
 
     /**
-    * Modifies an existing checkout.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Modifies an existing checkout.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_checkouts_param_token(
         &self,
         token: &str,
@@ -391,16 +391,16 @@ impl SalesChannels {
     }
 
     /**
-    * Completes a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/checkouts/{token}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Completes a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/checkouts/{token}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn create_checkouts_param_token_complete(
         &self,
         token: &str,
@@ -417,16 +417,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/json",
@@ -437,16 +437,16 @@ impl SalesChannels {
     }
 
     /**
-    * Modifies an existing checkout.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Modifies an existing checkout.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn update_checkouts_param_token(
         &self,
         token: &str,
@@ -485,16 +485,16 @@ impl SalesChannels {
     }
 
     /**
-    * Completes a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/checkouts/{token}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Completes a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/checkouts/{token}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_checkouts_param_token_complete(
         &self,
         token: &str,
@@ -511,16 +511,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/checkouts/{}/json",
@@ -531,16 +531,16 @@ impl SalesChannels {
     }
 
     /**
-    * Modifies an existing checkout.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Modifies an existing checkout.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_checkouts_param_token(
         &self,
         token: &str,
@@ -582,16 +582,16 @@ impl SalesChannels {
     }
 
     /**
-    * Completes a checkout.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/checkouts/{token}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-unstable
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Completes a checkout.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/checkouts/{token}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#complete-unstable
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_checkouts_param_token_complete(
         &self,
         token: &str,
@@ -608,16 +608,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_checkouts_param_token(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/checkouts/{}/json",
@@ -628,16 +628,16 @@ impl SalesChannels {
     }
 
     /**
-    * Modifies an existing checkout.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/checkouts/{token}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Modifies an existing checkout.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/checkouts/{token}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/checkout#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_checkouts_param_token(
         &self,
         token: &str,
@@ -679,17 +679,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/collection_listings.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/collection_listings.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202001_get_collection_listing(&self, limit: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
@@ -702,18 +702,18 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202001_get_collection_listings_param_listing_product_id(
         &self,
         collection_listing_id: &str,
@@ -734,16 +734,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve a specific collection listing that is published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a specific collection listing that is published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -757,16 +757,16 @@ impl SalesChannels {
     }
 
     /**
-    * Create a collection listing to publish a collection to your app.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Create a collection listing to publish a collection to your app.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -783,16 +783,16 @@ impl SalesChannels {
     }
 
     /**
-    * Delete a collection listing to unpublish a collection from your app.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Delete a collection listing to unpublish a collection from your app.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -806,17 +806,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/collection_listings.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/collection_listings.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202004_get_collection_listing(&self, limit: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
@@ -829,18 +829,18 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202004_get_collection_listings_param_listing_product_id(
         &self,
         collection_listing_id: &str,
@@ -861,16 +861,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve a specific collection listing that is published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a specific collection listing that is published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -884,16 +884,16 @@ impl SalesChannels {
     }
 
     /**
-    * Create a collection listing to publish a collection to your app.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Create a collection listing to publish a collection to your app.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -910,16 +910,16 @@ impl SalesChannels {
     }
 
     /**
-    * Delete a collection listing to unpublish a collection from your app.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Delete a collection listing to unpublish a collection from your app.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -933,17 +933,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/collection_listings.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/collection_listings.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202007_get_collection_listing(&self, limit: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
@@ -956,18 +956,18 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202007_get_collection_listings_param_listing_product_id(
         &self,
         collection_listing_id: &str,
@@ -988,16 +988,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve a specific collection listing that is published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a specific collection listing that is published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1011,16 +1011,16 @@ impl SalesChannels {
     }
 
     /**
-    * Create a collection listing to publish a collection to your app.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Create a collection listing to publish a collection to your app.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1037,16 +1037,16 @@ impl SalesChannels {
     }
 
     /**
-    * Delete a collection listing to unpublish a collection from your app.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Delete a collection listing to unpublish a collection from your app.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1060,17 +1060,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/collection_listings.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/collection_listings.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn get_collection_listing(&self, limit: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
@@ -1083,18 +1083,18 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn get_collection_listings_param_listing_product_id(
         &self,
         collection_listing_id: &str,
@@ -1115,16 +1115,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve a specific collection listing that is published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a specific collection listing that is published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1138,16 +1138,16 @@ impl SalesChannels {
     }
 
     /**
-    * Create a collection listing to publish a collection to your app.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Create a collection listing to publish a collection to your app.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1164,16 +1164,16 @@ impl SalesChannels {
     }
 
     /**
-    * Delete a collection listing to unpublish a collection from your app.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Delete a collection listing to unpublish a collection from your app.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1187,17 +1187,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/collection_listings.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/collection_listings.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202101_get_collection_listing(&self, limit: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
@@ -1210,18 +1210,18 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202101_get_collection_listings_param_listing_product_id(
         &self,
         collection_listing_id: &str,
@@ -1242,16 +1242,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve a specific collection listing that is published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a specific collection listing that is published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1265,16 +1265,16 @@ impl SalesChannels {
     }
 
     /**
-    * Create a collection listing to publish a collection to your app.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Create a collection listing to publish a collection to your app.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1291,16 +1291,16 @@ impl SalesChannels {
     }
 
     /**
-    * Delete a collection listing to unpublish a collection from your app.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Delete a collection listing to unpublish a collection from your app.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1314,17 +1314,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/collection_listings.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve collection listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/collection_listings.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_unstable_get_collection_listing(&self, limit: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
@@ -1337,18 +1337,18 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-unstable
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve product_ids that are published to a collection_id.       Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/collection_listings/{collection_listing_id}/product_ids.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#product_ids-unstable
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_unstable_get_collection_listings_param_listing_product_id(
         &self,
         collection_listing_id: &str,
@@ -1369,16 +1369,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve a specific collection listing that is published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a specific collection listing that is published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1392,16 +1392,16 @@ impl SalesChannels {
     }
 
     /**
-    * Create a collection listing to publish a collection to your app.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-unstable
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Create a collection listing to publish a collection to your app.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#create-unstable
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1418,16 +1418,16 @@ impl SalesChannels {
     }
 
     /**
-    * Delete a collection listing to unpublish a collection from your app.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/collection_listings/{collection_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `collection_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Delete a collection listing to unpublish a collection from your app.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/collection_listings/{collection_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/collectionlisting#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `collection_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_delete_collection_listings_param_listing(
         &self,
         collection_listing_id: &str,
@@ -1441,16 +1441,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a list of payments on a particular checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of payments on a particular checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_checkouts_param_token_payment(
         &self,
         token: &str,
@@ -1464,25 +1464,25 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a payment on a checkout using the session ID returned by the card vault.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `amount_required: &str` -- The amount of the payment.
-    * * `request_details_required: &str` -- The details of the request, including the following attributes:
-    *                       
-    *                           ip_address: The IP address of the customer.
-    *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-    *   
-    *                           user_agent: The user agent string for the customer's device.
-    * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-    * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
-    */
+     * Creates a payment on a checkout using the session ID returned by the card vault.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `amount_required: &str` -- The amount of the payment.
+     * * `request_details_required: &str` -- The details of the request, including the following attributes:
+     *                       
+     *                           ip_address: The IP address of the customer.
+     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *   
+     *                           user_agent: The user agent string for the customer's device.
+     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     */
     pub async fn deprecated_202001_create_checkouts_param_token_payments(
         &self,
         token: &str,
@@ -1538,17 +1538,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves the payment information for an existing payment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/payments/{payment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `payment_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves the payment information for an existing payment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/payments/{payment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `payment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_checkouts_param_token_payments_payment(
         &self,
         token: &str,
@@ -1564,16 +1564,16 @@ impl SalesChannels {
     }
 
     /**
-    * Counts the number of payments attempted on a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/payments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Counts the number of payments attempted on a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/checkouts/{token}/payments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
@@ -1587,16 +1587,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a list of payments on a particular checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of payments on a particular checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_checkouts_param_token_payment(
         &self,
         token: &str,
@@ -1610,25 +1610,25 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a payment on a checkout using the session ID returned by the card vault.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `amount_required: &str` -- The amount of the payment.
-    * * `request_details_required: &str` -- The details of the request, including the following attributes:
-    *                       
-    *                           ip_address: The IP address of the customer.
-    *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-    *   
-    *                           user_agent: The user agent string for the customer's device.
-    * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-    * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
-    */
+     * Creates a payment on a checkout using the session ID returned by the card vault.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `amount_required: &str` -- The amount of the payment.
+     * * `request_details_required: &str` -- The details of the request, including the following attributes:
+     *                       
+     *                           ip_address: The IP address of the customer.
+     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *   
+     *                           user_agent: The user agent string for the customer's device.
+     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     */
     pub async fn deprecated_202004_create_checkouts_param_token_payments(
         &self,
         token: &str,
@@ -1684,17 +1684,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves the payment information for an existing payment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/payments/{payment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `payment_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves the payment information for an existing payment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/payments/{payment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `payment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_checkouts_param_token_payments_payment(
         &self,
         token: &str,
@@ -1710,16 +1710,16 @@ impl SalesChannels {
     }
 
     /**
-    * Counts the number of payments attempted on a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/payments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Counts the number of payments attempted on a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/checkouts/{token}/payments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
@@ -1733,16 +1733,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a list of payments on a particular checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of payments on a particular checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_checkouts_param_token_payment(
         &self,
         token: &str,
@@ -1756,25 +1756,25 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a payment on a checkout using the session ID returned by the card vault.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `amount_required: &str` -- The amount of the payment.
-    * * `request_details_required: &str` -- The details of the request, including the following attributes:
-    *                       
-    *                           ip_address: The IP address of the customer.
-    *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-    *   
-    *                           user_agent: The user agent string for the customer's device.
-    * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-    * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
-    */
+     * Creates a payment on a checkout using the session ID returned by the card vault.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `amount_required: &str` -- The amount of the payment.
+     * * `request_details_required: &str` -- The details of the request, including the following attributes:
+     *                       
+     *                           ip_address: The IP address of the customer.
+     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *   
+     *                           user_agent: The user agent string for the customer's device.
+     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     */
     pub async fn deprecated_202007_create_checkouts_param_token_payments(
         &self,
         token: &str,
@@ -1830,17 +1830,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves the payment information for an existing payment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/payments/{payment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `payment_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves the payment information for an existing payment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/payments/{payment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `payment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_checkouts_param_token_payments_payment(
         &self,
         token: &str,
@@ -1856,16 +1856,16 @@ impl SalesChannels {
     }
 
     /**
-    * Counts the number of payments attempted on a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/payments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Counts the number of payments attempted on a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/checkouts/{token}/payments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
@@ -1879,16 +1879,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a list of payments on a particular checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of payments on a particular checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn get_checkouts_param_token_payment(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/payments.json",
@@ -1899,25 +1899,25 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a payment on a checkout using the session ID returned by the card vault.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `amount_required: &str` -- The amount of the payment.
-    * * `request_details_required: &str` -- The details of the request, including the following attributes:
-    *                       
-    *                           ip_address: The IP address of the customer.
-    *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-    *   
-    *                           user_agent: The user agent string for the customer's device.
-    * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-    * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
-    */
+     * Creates a payment on a checkout using the session ID returned by the card vault.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `amount_required: &str` -- The amount of the payment.
+     * * `request_details_required: &str` -- The details of the request, including the following attributes:
+     *                       
+     *                           ip_address: The IP address of the customer.
+     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *   
+     *                           user_agent: The user agent string for the customer's device.
+     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     */
     pub async fn create_checkouts_param_token_payments(
         &self,
         token: &str,
@@ -1973,17 +1973,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves the payment information for an existing payment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/payments/{payment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `payment_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves the payment information for an existing payment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/payments/{payment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `payment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_checkouts_param_token_payments_payment(
         &self,
         token: &str,
@@ -1999,16 +1999,16 @@ impl SalesChannels {
     }
 
     /**
-    * Counts the number of payments attempted on a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/payments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Counts the number of payments attempted on a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/checkouts/{token}/payments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn get_checkouts_param_token_payments_count(&self, token: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/checkouts/{}/payments/count.json",
@@ -2019,16 +2019,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a list of payments on a particular checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of payments on a particular checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_checkouts_param_token_payment(
         &self,
         token: &str,
@@ -2042,25 +2042,25 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a payment on a checkout using the session ID returned by the card vault.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `amount_required: &str` -- The amount of the payment.
-    * * `request_details_required: &str` -- The details of the request, including the following attributes:
-    *                       
-    *                           ip_address: The IP address of the customer.
-    *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-    *   
-    *                           user_agent: The user agent string for the customer's device.
-    * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-    * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
-    */
+     * Creates a payment on a checkout using the session ID returned by the card vault.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `amount_required: &str` -- The amount of the payment.
+     * * `request_details_required: &str` -- The details of the request, including the following attributes:
+     *                       
+     *                           ip_address: The IP address of the customer.
+     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *   
+     *                           user_agent: The user agent string for the customer's device.
+     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     */
     pub async fn deprecated_202101_create_checkouts_param_token_payments(
         &self,
         token: &str,
@@ -2116,17 +2116,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves the payment information for an existing payment.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/payments/{payment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `payment_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves the payment information for an existing payment.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/payments/{payment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `payment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_checkouts_param_token_payments_payment(
         &self,
         token: &str,
@@ -2142,16 +2142,16 @@ impl SalesChannels {
     }
 
     /**
-    * Counts the number of payments attempted on a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/payments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Counts the number of payments attempted on a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/checkouts/{token}/payments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
@@ -2165,16 +2165,16 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves a list of payments on a particular checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of payments on a particular checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_checkouts_param_token_payment(
         &self,
         token: &str,
@@ -2188,25 +2188,25 @@ impl SalesChannels {
     }
 
     /**
-    * Creates a payment on a checkout using the session ID returned by the card vault.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/checkouts/{token}/payments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-unstable
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `amount_required: &str` -- The amount of the payment.
-    * * `request_details_required: &str` -- The details of the request, including the following attributes:
-    *                       
-    *                           ip_address: The IP address of the customer.
-    *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
-    *   
-    *                           user_agent: The user agent string for the customer's device.
-    * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
-    * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
-    */
+     * Creates a payment on a checkout using the session ID returned by the card vault.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/checkouts/{token}/payments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#create_payment-unstable
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `amount_required: &str` -- The amount of the payment.
+     * * `request_details_required: &str` -- The details of the request, including the following attributes:
+     *                       
+     *                           ip_address: The IP address of the customer.
+     *                           accept_language: The language preferences of the customer, in the same format as a standard Accept-Language request header.
+     *   
+     *                           user_agent: The user agent string for the customer's device.
+     * * `session_required: &str` -- A session ID provided by the card vault when creating a payment session.
+     * * `unique_token_required: &str` -- A unique idempotency token generated by your app. This can be any value, but must be unique across all payment requests.
+     */
     pub async fn deprecated_unstable_create_checkouts_param_token_payments(
         &self,
         token: &str,
@@ -2262,17 +2262,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieves the payment information for an existing payment.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/payments/{payment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    * * `payment_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves the payment information for an existing payment.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/payments/{payment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     * * `payment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_checkouts_param_token_payments_payment(
         &self,
         token: &str,
@@ -2288,16 +2288,16 @@ impl SalesChannels {
     }
 
     /**
-    * Counts the number of payments attempted on a checkout.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/payments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-unstable
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- storefront_access_token_id.
-    */
+     * Counts the number of payments attempted on a checkout.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/checkouts/{token}/payments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/payment#count-unstable
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_checkouts_param_token_payments_count(
         &self,
         token: &str,
@@ -2311,21 +2311,21 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/product_listings.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `product_ids: &str` -- A comma-separated list of product ids.
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    * * `collection_id: &str` -- Filter by products belonging to a particular collection.
-    * * `updated_at_min: &str` -- Filter by products last updated after a certain date and time (formatted in ISO 8601).
-    * * `handle: &str` -- Filter by product handle.
-    */
+     * Retrieve product listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/product_listings.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `product_ids: &str` -- A comma-separated list of product ids.
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     * * `collection_id: &str` -- Filter by products belonging to a particular collection.
+     * * `updated_at_min: &str` -- Filter by products last updated after a certain date and time (formatted in ISO 8601).
+     * * `handle: &str` -- Filter by product handle.
+     */
     pub async fn deprecated_202001_get_product_listing(
         &self,
         product_ids: &str,
@@ -2357,17 +2357,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product_ids that are published to your app. Maximum 1,000 results per page.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/product_listings/product_ids.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#product_ids-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve product_ids that are published to your app. Maximum 1,000 results per page.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/product_listings/product_ids.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#product_ids-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202001_get_product_listings_id(&self, limit: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
@@ -2383,28 +2383,28 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve a count of products that are published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/product_listings/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#count-2020-01
-    */
+     * Retrieve a count of products that are published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/product_listings/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#count-2020-01
+     */
     pub async fn deprecated_202001_get_product_listings_count(&self) -> Result<()> {
         let url = "/admin/api/2020-01/product_listings/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieve a specific product listing that is published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/product_listings/{product_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `product_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a specific product listing that is published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/product_listings/{product_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `product_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_product_listings_param_listing(
         &self,
         product_listing_id: &str,
@@ -2418,16 +2418,16 @@ impl SalesChannels {
     }
 
     /**
-    * Create a product listing to publish a product to your app.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/product_listings/{product_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `product_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Create a product listing to publish a product to your app.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/product_listings/{product_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#create-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `product_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_product_listings_param_listing(
         &self,
         product_listing_id: &str,
@@ -2444,16 +2444,16 @@ impl SalesChannels {
     }
 
     /**
-    * Delete a product listing to unpublish a product from your app.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/product_listings/{product_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `product_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Delete a product listing to unpublish a product from your app.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/product_listings/{product_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `product_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_product_listings_param_listing(
         &self,
         product_listing_id: &str,
@@ -2467,21 +2467,21 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/product_listings.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `product_ids: &str` -- A comma-separated list of product ids.
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    * * `collection_id: &str` -- Filter by products belonging to a particular collection.
-    * * `updated_at_min: &str` -- Filter by products last updated after a certain date and time (formatted in ISO 8601).
-    * * `handle: &str` -- Filter by product handle.
-    */
+     * Retrieve product listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/product_listings.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `product_ids: &str` -- A comma-separated list of product ids.
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     * * `collection_id: &str` -- Filter by products belonging to a particular collection.
+     * * `updated_at_min: &str` -- Filter by products last updated after a certain date and time (formatted in ISO 8601).
+     * * `handle: &str` -- Filter by product handle.
+     */
     pub async fn deprecated_202004_get_product_listing(
         &self,
         product_ids: &str,
@@ -2513,17 +2513,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product_ids that are published to your app. Maximum 1,000 results per page.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/product_listings/product_ids.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#product_ids-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve product_ids that are published to your app. Maximum 1,000 results per page.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/product_listings/product_ids.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#product_ids-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202004_get_product_listings_id(&self, limit: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
@@ -2539,28 +2539,28 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve a count of products that are published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/product_listings/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#count-2020-04
-    */
+     * Retrieve a count of products that are published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/product_listings/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#count-2020-04
+     */
     pub async fn deprecated_202004_get_product_listings_count(&self) -> Result<()> {
         let url = "/admin/api/2020-04/product_listings/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieve a specific product listing that is published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/product_listings/{product_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `product_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a specific product listing that is published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/product_listings/{product_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `product_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_product_listings_param_listing(
         &self,
         product_listing_id: &str,
@@ -2574,16 +2574,16 @@ impl SalesChannels {
     }
 
     /**
-    * Create a product listing to publish a product to your app.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/product_listings/{product_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `product_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Create a product listing to publish a product to your app.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/product_listings/{product_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#create-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `product_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_product_listings_param_listing(
         &self,
         product_listing_id: &str,
@@ -2600,16 +2600,16 @@ impl SalesChannels {
     }
 
     /**
-    * Delete a product listing to unpublish a product from your app.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/product_listings/{product_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `product_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Delete a product listing to unpublish a product from your app.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/product_listings/{product_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `product_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_product_listings_param_listing(
         &self,
         product_listing_id: &str,
@@ -2623,21 +2623,21 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/product_listings.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `product_ids: &str` -- A comma-separated list of product ids.
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    * * `collection_id: &str` -- Filter by products belonging to a particular collection.
-    * * `updated_at_min: &str` -- Filter by products last updated after a certain date and time (formatted in ISO 8601).
-    * * `handle: &str` -- Filter by product handle.
-    */
+     * Retrieve product listings that are published to your app. Note: As of version 2019-07, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/product_listings.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `product_ids: &str` -- A comma-separated list of product ids.
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     * * `collection_id: &str` -- Filter by products belonging to a particular collection.
+     * * `updated_at_min: &str` -- Filter by products last updated after a certain date and time (formatted in ISO 8601).
+     * * `handle: &str` -- Filter by product handle.
+     */
     pub async fn deprecated_202007_get_product_listing(
         &self,
         product_ids: &str,
@@ -2669,17 +2669,17 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve product_ids that are published to your app. Maximum 1,000 results per page.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/product_listings/product_ids.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#product_ids-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- Amount of results
-    *                     (default: 50, maximum: 1000).
-    */
+     * Retrieve product_ids that are published to your app. Maximum 1,000 results per page.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/product_listings/product_ids.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#product_ids-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- Amount of results
+     *                     (default: 50, maximum: 1000).
+     */
     pub async fn deprecated_202007_get_product_listings_id(&self, limit: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !limit.is_empty() {
@@ -2695,28 +2695,28 @@ impl SalesChannels {
     }
 
     /**
-    * Retrieve a count of products that are published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/product_listings/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#count-2020-07
-    */
+     * Retrieve a count of products that are published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/product_listings/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#count-2020-07
+     */
     pub async fn deprecated_202007_get_product_listings_count(&self) -> Result<()> {
         let url = "/admin/api/2020-07/product_listings/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieve a specific product listing that is published to your app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/product_listings/{product_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `product_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a specific product listing that is published to your app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/product_listings/{product_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `product_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_product_listings_param_listing(
         &self,
         product_listing_id: &str,
@@ -2730,16 +2730,16 @@ impl SalesChannels {
     }
 
     /**
-    * Create a product listing to publish a product to your app.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/product_listings/{product_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `product_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Create a product listing to publish a product to your app.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/product_listings/{product_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#create-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `product_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_product_listings_param_listing(
         &self,
         product_listing_id: &str,
@@ -2756,16 +2756,16 @@ impl SalesChannels {
     }
 
     /**
-    * Delete a product listing to unpublish a product from your app.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/product_listings/{product_listing_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `product_listing_id: &str` -- storefront_access_token_id.
-    */
+     * Delete a product listing to unpublish a product from your app.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/product_listings/{product_listing_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/sales-channels/productlisting#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `product_listing_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_product_listings_param_listing(
         &self,
         product_listing_id: &str,

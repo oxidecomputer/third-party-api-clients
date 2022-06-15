@@ -13,22 +13,22 @@ impl Logs {
     }
 
     /**
-    * Fetch a list of events from your Okta organization system log.
-    *
-    * This function performs a `GET` to the `/api/v1/logs` endpoint.
-    *
-    * The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API
-    *
-    * **Parameters:**
-    *
-    * * `since: chrono::DateTime<chrono::Utc>`
-    * * `until: chrono::DateTime<chrono::Utc>`
-    * * `filter: &str`
-    * * `q: &str`
-    * * `limit: i64`
-    * * `sort_order: &str`
-    * * `after: &str`
-    */
+     * Fetch a list of events from your Okta organization system log.
+     *
+     * This function performs a `GET` to the `/api/v1/logs` endpoint.
+     *
+     * The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API
+     *
+     * **Parameters:**
+     *
+     * * `since: chrono::DateTime<chrono::Utc>`
+     * * `until: chrono::DateTime<chrono::Utc>`
+     * * `filter: &str`
+     * * `q: &str`
+     * * `limit: i64`
+     * * `sort_order: &str`
+     * * `after: &str`
+     */
     pub async fn get_page(
         &self,
         since: Option<chrono::DateTime<chrono::Utc>>,
@@ -68,14 +68,14 @@ impl Logs {
     }
 
     /**
-    * Fetch a list of events from your Okta organization system log.
-    *
-    * This function performs a `GET` to the `/api/v1/logs` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API
-    */
+     * Fetch a list of events from your Okta organization system log.
+     *
+     * This function performs a `GET` to the `/api/v1/logs` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API
+     */
     pub async fn get_all(
         &self,
         since: Option<chrono::DateTime<chrono::Utc>>,

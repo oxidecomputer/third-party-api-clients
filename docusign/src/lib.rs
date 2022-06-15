@@ -45,7 +45,7 @@
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
 //!     String::from("token"),
-//!     String::from("refresh-token")
+//!     String::from("refresh-token"),
 //! );
 //! ```
 //!
@@ -61,10 +61,7 @@
 //! ```
 //! use docusign::Client;
 //!
-//! let docusign = Client::new_from_env(
-//!     String::from("token"),
-//!     String::from("refresh-token")
-//! );
+//! let docusign = Client::new_from_env(String::from("token"), String::from("refresh-token"));
 //! ```
 //!
 //! It is okay to pass empty values for `token` and `refresh_token`. In
@@ -94,7 +91,6 @@
 //!     access_token = docusign.refresh_access_token().await.unwrap();
 //! }
 //! ```
-//!
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -652,7 +648,7 @@ pub mod envelope_locks;
 ///add the values of the same two `number` tabs.
 ///
 ///```json
-///{
+/// {
 ///  "documents": [
 ///    {
 ///      "documentBase64": "<base64-encoded PDF document>",
@@ -730,8 +726,8 @@ pub mod envelope_locks;
 ///    ]
 ///  },
 ///  "status": "sent"
-///}
-///```
+/// }
+/// ```
 ///
 ///Use the
 ///[EnvelopeRecipients: list][enveloperecipientslist] method
@@ -742,7 +738,7 @@ pub mod envelope_locks;
 ///is `payment_complete`.
 ///
 ///```json
-///{
+/// {
 ///  "signers": [
 ///    {
 ///      "tabs": {
@@ -807,8 +803,8 @@ pub mod envelope_locks;
 ///    }
 ///  ],
 ///  . . .
-///}
-///```
+/// }
+/// ```
 ///
 ///#### How to make a request for future payments
 ///
@@ -822,7 +818,7 @@ pub mod envelope_locks;
 ///The following example builds on the previous code block to also collect a payment method for future use:
 ///
 ///```
-///{
+/// {
 ///  "documents": [
 ///    {
 ///      "documentBase64": "<base64-encoded PDF document>",
@@ -919,8 +915,8 @@ pub mod envelope_locks;
 ///    ]
 ///  },
 ///  "status": "sent"
-///}
-///```
+/// }
+/// ```
 ///
 ///### Some Things to Keep in Mind About Payments
 ///
@@ -1767,7 +1763,7 @@ pub mod template_recipient_tabs;
 ///The following shows the core JSON layout for a recipient.
 ///
 ///```
-///"email": "email.name@company.com",
+/// "email": "email.name@company.com",
 ///  "name": "recipient name",
 ///  "accessCode": "",
 ///  "addAccessCodeToEmail": false,
@@ -1851,8 +1847,8 @@ pub mod template_recipient_tabs;
 ///  "templateAccessCodeRequired": false,
 ///  "templateLocked": false,
 ///  "templateRequired": false,
-///...
-///```
+/// ...
+/// ```
 ///
 ///### Core Recipient Parameters
 ///
@@ -1893,12 +1889,12 @@ pub mod template_recipient_tabs;
 ///#### Example Agents layout
 ///
 ///```
-///"agents": [{
+/// "agents": [{
 /// <core parameters>
 ///  "canEditRecipientEmails": false,
 ///  "canEditRecipientNames": false
-///}],
-///```
+/// }],
+/// ```
 ///
 ///The additional parameters for Agents recipient are shown below:
 ///
@@ -1914,9 +1910,9 @@ pub mod template_recipient_tabs;
 ///#### Example Carbon Copies layout
 ///
 ///```
-///"carbonCopies": [{
+/// "carbonCopies": [{
 /// <core parameters>
-///```
+/// ```
 ///
 ///The Carbon Copies recipient uses only the core parameters.
 ///
@@ -1927,10 +1923,10 @@ pub mod template_recipient_tabs;
 ///#### Example Certified Deliveries layout
 ///
 ///```
-///"certifiedDeliveries": [{
-///<core parameters>
-///}],
-///```
+/// "certifiedDeliveries": [{
+/// <core parameters>
+/// }],
+/// ```
 ///The Certified Deliveries recipient uses only the core parameters.
 ///
 ///## <a name="editors"></a>Editors Recipient
@@ -1940,12 +1936,12 @@ pub mod template_recipient_tabs;
 ///#### Example Editors layout
 ///
 ///```
-///"editors": [{
+/// "editors": [{
 /// <core parameters>
 ///  "canEditRecipientEmails": false,
 ///  "canEditRecipientNames": false
-///}],
-///```
+/// }],
+/// ```
 ///
 ///The additional parameters for Editors recipient are shown below:
 ///
@@ -1961,7 +1957,7 @@ pub mod template_recipient_tabs;
 ///#### Example In Person Signers layout
 ///
 ///```
-///"inPersonSigners": [{
+/// "inPersonSigners": [{
 ///  "hostEmail": "signing.host@company.com",
 ///  "hostName": "Mike Host",
 /// <core parameters>
@@ -1993,8 +1989,8 @@ pub mod template_recipient_tabs;
 ///    "titleTabs": null,
 ///    "zipTabs": null
 ///  }
-///}],
-///```
+/// }],
+/// ```
 ///
 ///The additional and changed parameters for In Person Signers recipient are shown below:
 ///
@@ -2017,12 +2013,12 @@ pub mod template_recipient_tabs;
 ///#### Example Intermediaries layout
 ///
 ///```
-///"intermediaries": [{
-///<core parameters>
+/// "intermediaries": [{
+/// <core parameters>
 ///  "canEditRecipientEmails": false,
 ///  "canEditRecipientNames": false
-///}],
-///```
+/// }],
+/// ```
 ///
 ///The parameters for Intermediaries recipient are shown below:
 ///
@@ -2038,8 +2034,8 @@ pub mod template_recipient_tabs;
 ///#### Example Signers layout
 ///
 ///```
-///"Signers": [{
-///<core paramters>
+/// "Signers": [{
+/// <core paramters>
 ///  "autoNavigation": false,
 ///  "defaultRecipient": false,
 ///  "signInEachLocation": false,
@@ -2076,8 +2072,8 @@ pub mod template_recipient_tabs;
 ///    "gpsLongitude":"String Content",
 ///    "accountEsignId":"String Content"
 ///  }
-///}],
-///```
+/// }],
+/// ```
 ///
 ///The additional parameters for Signers recipient are shown below:
 ///
@@ -2206,11 +2202,14 @@ mod progenitor_support {
     }
 }
 
-use std::convert::TryInto;
-use std::env;
-use std::ops::Add;
-use std::sync::Arc;
-use std::time::{Duration, Instant};
+use std::{
+    convert::TryInto,
+    env,
+    ops::Add,
+    sync::Arc,
+    time::{Duration, Instant},
+};
+
 use tokio::sync::RwLock;
 
 const TOKEN_ENDPOINT: &str = "https://account.docusign.com/oauth/token";
@@ -2724,10 +2723,6 @@ impl Client {
         // Set the default headers.
         req = req.header(
             reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
-        req = req.header(
-            reqwest::header::CONTENT_TYPE,
             reqwest::header::HeaderValue::from_static("application/json"),
         );
 
@@ -3615,7 +3610,7 @@ impl Client {
     ///add the values of the same two `number` tabs.
     ///
     ///```json
-    ///{
+    /// {
     ///  "documents": [
     ///    {
     ///      "documentBase64": "<base64-encoded PDF document>",
@@ -3693,8 +3688,8 @@ impl Client {
     ///    ]
     ///  },
     ///  "status": "sent"
-    ///}
-    ///```
+    /// }
+    /// ```
     ///
     ///Use the
     ///[EnvelopeRecipients: list][enveloperecipientslist] method
@@ -3705,7 +3700,7 @@ impl Client {
     ///is `payment_complete`.
     ///
     ///```json
-    ///{
+    /// {
     ///  "signers": [
     ///    {
     ///      "tabs": {
@@ -3770,8 +3765,8 @@ impl Client {
     ///    }
     ///  ],
     ///  . . .
-    ///}
-    ///```
+    /// }
+    /// ```
     ///
     ///#### How to make a request for future payments
     ///
@@ -3785,7 +3780,7 @@ impl Client {
     ///The following example builds on the previous code block to also collect a payment method for future use:
     ///
     ///```
-    ///{
+    /// {
     ///  "documents": [
     ///    {
     ///      "documentBase64": "<base64-encoded PDF document>",
@@ -3882,8 +3877,8 @@ impl Client {
     ///    ]
     ///  },
     ///  "status": "sent"
-    ///}
-    ///```
+    /// }
+    /// ```
     ///
     ///### Some Things to Keep in Mind About Payments
     ///
@@ -4363,7 +4358,7 @@ impl Client {
     ///The following shows the core JSON layout for a recipient.
     ///
     ///```
-    ///"email": "email.name@company.com",
+    /// "email": "email.name@company.com",
     ///  "name": "recipient name",
     ///  "accessCode": "",
     ///  "addAccessCodeToEmail": false,
@@ -4447,8 +4442,8 @@ impl Client {
     ///  "templateAccessCodeRequired": false,
     ///  "templateLocked": false,
     ///  "templateRequired": false,
-    ///...
-    ///```
+    /// ...
+    /// ```
     ///
     ///### Core Recipient Parameters
     ///
@@ -4489,12 +4484,12 @@ impl Client {
     ///#### Example Agents layout
     ///
     ///```
-    ///"agents": [{
+    /// "agents": [{
     /// <core parameters>
     ///  "canEditRecipientEmails": false,
     ///  "canEditRecipientNames": false
-    ///}],
-    ///```
+    /// }],
+    /// ```
     ///
     ///The additional parameters for Agents recipient are shown below:
     ///
@@ -4510,9 +4505,9 @@ impl Client {
     ///#### Example Carbon Copies layout
     ///
     ///```
-    ///"carbonCopies": [{
+    /// "carbonCopies": [{
     /// <core parameters>
-    ///```
+    /// ```
     ///
     ///The Carbon Copies recipient uses only the core parameters.
     ///
@@ -4523,10 +4518,10 @@ impl Client {
     ///#### Example Certified Deliveries layout
     ///
     ///```
-    ///"certifiedDeliveries": [{
-    ///<core parameters>
-    ///}],
-    ///```
+    /// "certifiedDeliveries": [{
+    /// <core parameters>
+    /// }],
+    /// ```
     ///The Certified Deliveries recipient uses only the core parameters.
     ///
     ///## <a name="editors"></a>Editors Recipient
@@ -4536,12 +4531,12 @@ impl Client {
     ///#### Example Editors layout
     ///
     ///```
-    ///"editors": [{
+    /// "editors": [{
     /// <core parameters>
     ///  "canEditRecipientEmails": false,
     ///  "canEditRecipientNames": false
-    ///}],
-    ///```
+    /// }],
+    /// ```
     ///
     ///The additional parameters for Editors recipient are shown below:
     ///
@@ -4557,7 +4552,7 @@ impl Client {
     ///#### Example In Person Signers layout
     ///
     ///```
-    ///"inPersonSigners": [{
+    /// "inPersonSigners": [{
     ///  "hostEmail": "signing.host@company.com",
     ///  "hostName": "Mike Host",
     /// <core parameters>
@@ -4589,8 +4584,8 @@ impl Client {
     ///    "titleTabs": null,
     ///    "zipTabs": null
     ///  }
-    ///}],
-    ///```
+    /// }],
+    /// ```
     ///
     ///The additional and changed parameters for In Person Signers recipient are shown below:
     ///
@@ -4613,12 +4608,12 @@ impl Client {
     ///#### Example Intermediaries layout
     ///
     ///```
-    ///"intermediaries": [{
-    ///<core parameters>
+    /// "intermediaries": [{
+    /// <core parameters>
     ///  "canEditRecipientEmails": false,
     ///  "canEditRecipientNames": false
-    ///}],
-    ///```
+    /// }],
+    /// ```
     ///
     ///The parameters for Intermediaries recipient are shown below:
     ///
@@ -4634,8 +4629,8 @@ impl Client {
     ///#### Example Signers layout
     ///
     ///```
-    ///"Signers": [{
-    ///<core paramters>
+    /// "Signers": [{
+    /// <core paramters>
     ///  "autoNavigation": false,
     ///  "defaultRecipient": false,
     ///  "signInEachLocation": false,
@@ -4672,8 +4667,8 @@ impl Client {
     ///    "gpsLongitude":"String Content",
     ///    "accountEsignId":"String Content"
     ///  }
-    ///}],
-    ///```
+    /// }],
+    /// ```
     ///
     ///The additional parameters for Signers recipient are shown below:
     ///

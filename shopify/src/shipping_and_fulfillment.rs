@@ -13,22 +13,22 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders on a shop for a specific app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/assigned_fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
-    *                       
-    *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
-    *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
-    *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
-    * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
-    * * `location_ids: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves a list of fulfillment orders on a shop for a specific app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/assigned_fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
+     *                       
+     *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
+     *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
+     *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
+     * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
+     * * `location_ids: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_202001_get_assigned_fulfillment_order(
         &self,
         assignment_status: &str,
@@ -54,22 +54,22 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders on a shop for a specific app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/assigned_fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
-    *                       
-    *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
-    *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
-    *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
-    * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
-    * * `location_ids: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves a list of fulfillment orders on a shop for a specific app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/assigned_fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
+     *                       
+     *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
+     *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
+     *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
+     * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
+     * * `location_ids: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_202004_get_assigned_fulfillment_order(
         &self,
         assignment_status: &str,
@@ -95,22 +95,22 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders on a shop for a specific app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/assigned_fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
-    *                       
-    *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
-    *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
-    *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
-    * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
-    * * `location_ids: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves a list of fulfillment orders on a shop for a specific app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/assigned_fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
+     *                       
+     *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
+     *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
+     *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
+     * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
+     * * `location_ids: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_202007_get_assigned_fulfillment_order(
         &self,
         assignment_status: &str,
@@ -136,22 +136,22 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders on a shop for a specific app.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/assigned_fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
-    *                       
-    *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
-    *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
-    *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
-    * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
-    * * `location_ids: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves a list of fulfillment orders on a shop for a specific app.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/assigned_fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
+     *                       
+     *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
+     *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
+     *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
+     * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
+     * * `location_ids: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn get_assigned_fulfillment_order(
         &self,
         assignment_status: &str,
@@ -177,22 +177,22 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders on a shop for a specific app.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/assigned_fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
-    *                       
-    *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
-    *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
-    *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
-    * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
-    * * `location_ids: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves a list of fulfillment orders on a shop for a specific app.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/assigned_fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
+     *                       
+     *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
+     *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
+     *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
+     * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
+     * * `location_ids: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_202101_get_assigned_fulfillment_order(
         &self,
         assignment_status: &str,
@@ -218,22 +218,22 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders on a shop for a specific app.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/assigned_fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
-    *                       
-    *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
-    *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
-    *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
-    * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
-    * * `location_ids: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Retrieves a list of fulfillment orders on a shop for a specific app.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/assigned_fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/assignedfulfillmentorder#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `assignment_status: &str` -- The assigment status of the fulfillment orders that should be returned:
+     *                       
+     *                           cancellation_requested: Fulfillment orders for which the merchant has requested cancellation of the previously accepted fulfillment request.
+     *                           fulfillment_requested: Fulfillment orders for which the merchant has requested fulfillment.
+     *                           fulfillment_accepted: Fulfillment orders for which the merchant's fulfillment request has been accepted. Any number of fulfillments can be created on these fulfillment orders to completely fulfill the requested items.
+     * * `location_ids: &str` -- The IDs of the assigned locations of the fulfillment orders that should be returned.
+     * * `location_ids: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_unstable_get_assigned_fulfillment_order(
         &self,
         assignment_status: &str,
@@ -259,17 +259,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a cancellation request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for the cancellation request.
-    */
+     * Sends a cancellation request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for the cancellation request.
+     */
     pub async fn deprecated_202001_create_fulfillment_orders_param_order_cancellation_request(
         &self,
         fulfillment_order_id: &str,
@@ -293,17 +293,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the cancellation request.
-    */
+     * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the cancellation request.
+     */
     pub async fn deprecated_202001_create_fulfillment_orders_param_order_cancellation_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -327,17 +327,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the cancellation request.
-    */
+     * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the cancellation request.
+     */
     pub async fn deprecated_202001_create_fulfillment_orders_param_order_cancellation_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -361,17 +361,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a cancellation request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for the cancellation request.
-    */
+     * Sends a cancellation request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for the cancellation request.
+     */
     pub async fn deprecated_202004_create_fulfillment_orders_param_order_cancellation_request(
         &self,
         fulfillment_order_id: &str,
@@ -395,17 +395,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the cancellation request.
-    */
+     * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the cancellation request.
+     */
     pub async fn deprecated_202004_create_fulfillment_orders_param_order_cancellation_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -429,17 +429,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the cancellation request.
-    */
+     * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the cancellation request.
+     */
     pub async fn deprecated_202004_create_fulfillment_orders_param_order_cancellation_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -463,17 +463,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a cancellation request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for the cancellation request.
-    */
+     * Sends a cancellation request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for the cancellation request.
+     */
     pub async fn deprecated_202007_create_fulfillment_orders_param_order_cancellation_request(
         &self,
         fulfillment_order_id: &str,
@@ -497,17 +497,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the cancellation request.
-    */
+     * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the cancellation request.
+     */
     pub async fn deprecated_202007_create_fulfillment_orders_param_order_cancellation_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -531,17 +531,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the cancellation request.
-    */
+     * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the cancellation request.
+     */
     pub async fn deprecated_202007_create_fulfillment_orders_param_order_cancellation_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -565,17 +565,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a cancellation request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for the cancellation request.
-    */
+     * Sends a cancellation request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for the cancellation request.
+     */
     pub async fn create_fulfillment_orders_param_order_cancellation_request(
         &self,
         fulfillment_order_id: &str,
@@ -599,17 +599,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the cancellation request.
-    */
+     * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the cancellation request.
+     */
     pub async fn create_fulfillment_orders_param_order_cancellation_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -633,17 +633,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the cancellation request.
-    */
+     * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the cancellation request.
+     */
     pub async fn create_fulfillment_orders_param_order_cancellation_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -667,17 +667,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a cancellation request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for the cancellation request.
-    */
+     * Sends a cancellation request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for the cancellation request.
+     */
     pub async fn deprecated_202101_create_fulfillment_orders_param_order_cancellation_request(
         &self,
         fulfillment_order_id: &str,
@@ -701,17 +701,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the cancellation request.
-    */
+     * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the cancellation request.
+     */
     pub async fn deprecated_202101_create_fulfillment_orders_param_order_cancellation_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -735,17 +735,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the cancellation request.
-    */
+     * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the cancellation request.
+     */
     pub async fn deprecated_202101_create_fulfillment_orders_param_order_cancellation_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -769,17 +769,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a cancellation request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for the cancellation request.
-    */
+     * Sends a cancellation request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/cancellation_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#create-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for the cancellation request.
+     */
     pub async fn deprecated_unstable_create_fulfillment_orders_param_order_cancellation_request(
         &self,
         fulfillment_order_id: &str,
@@ -803,17 +803,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the cancellation request.
-    */
+     * Accepts a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/cancellation_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#accept-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the cancellation request.
+     */
     pub async fn deprecated_unstable_create_fulfillment_orders_param_order_cancellation_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -837,17 +837,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the cancellation request.
-    */
+     * Rejects a cancellation request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/cancellation_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/cancellationrequest#reject-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the cancellation request.
+     */
     pub async fn deprecated_unstable_create_fulfillment_orders_param_order_cancellation_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -871,24 +871,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of carrier services.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-01
-    */
+     * Retrieves a list of carrier services.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-01
+     */
     pub async fn deprecated_202001_get_carrier_service(&self) -> Result<()> {
         let url = "/admin/api/2020-01/carrier_services.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a carrier service.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-01
-    */
+     * Creates a carrier service.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-01
+     */
     pub async fn deprecated_202001_create_carrier_services(
         &self,
         body: &serde_json::Value,
@@ -900,16 +900,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a single carrier service by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single carrier service by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -923,16 +923,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates a carrier service. Only the app that creates a carrier service can update it.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a carrier service. Only the app that creates a carrier service can update it.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -949,16 +949,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a carrier service.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a carrier service.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -972,24 +972,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of carrier services.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-04
-    */
+     * Retrieves a list of carrier services.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-04
+     */
     pub async fn deprecated_202004_get_carrier_service(&self) -> Result<()> {
         let url = "/admin/api/2020-04/carrier_services.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a carrier service.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-04
-    */
+     * Creates a carrier service.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-04
+     */
     pub async fn deprecated_202004_create_carrier_services(
         &self,
         body: &serde_json::Value,
@@ -1001,16 +1001,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a single carrier service by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single carrier service by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1024,16 +1024,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates a carrier service. Only the app that creates a carrier service can update it.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a carrier service. Only the app that creates a carrier service can update it.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1050,16 +1050,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a carrier service.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a carrier service.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1073,24 +1073,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of carrier services.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-07
-    */
+     * Retrieves a list of carrier services.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-07
+     */
     pub async fn deprecated_202007_get_carrier_service(&self) -> Result<()> {
         let url = "/admin/api/2020-07/carrier_services.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a carrier service.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-07
-    */
+     * Creates a carrier service.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-07
+     */
     pub async fn deprecated_202007_create_carrier_services(
         &self,
         body: &serde_json::Value,
@@ -1102,16 +1102,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a single carrier service by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single carrier service by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1125,16 +1125,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates a carrier service. Only the app that creates a carrier service can update it.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a carrier service. Only the app that creates a carrier service can update it.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1151,16 +1151,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a carrier service.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a carrier service.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1174,24 +1174,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of carrier services.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-10
-    */
+     * Retrieves a list of carrier services.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2020-10
+     */
     pub async fn get_carrier_service(&self) -> Result<()> {
         let url = "/admin/api/2020-10/carrier_services.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a carrier service.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-10
-    */
+     * Creates a carrier service.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2020-10
+     */
     pub async fn create_carrier_services(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/carrier_services.json".to_string();
         self.client
@@ -1200,16 +1200,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a single carrier service by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single carrier service by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_carrier_services_param_service(&self, carrier_service_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/carrier_services/{}/json",
@@ -1220,16 +1220,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates a carrier service. Only the app that creates a carrier service can update it.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a carrier service. Only the app that creates a carrier service can update it.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1246,16 +1246,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a carrier service.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a carrier service.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1269,24 +1269,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of carrier services.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2021-01
-    */
+     * Retrieves a list of carrier services.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-2021-01
+     */
     pub async fn deprecated_202101_get_carrier_service(&self) -> Result<()> {
         let url = "/admin/api/2021-01/carrier_services.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a carrier service.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2021-01
-    */
+     * Creates a carrier service.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-2021-01
+     */
     pub async fn deprecated_202101_create_carrier_services(
         &self,
         body: &serde_json::Value,
@@ -1298,16 +1298,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a single carrier service by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single carrier service by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1321,16 +1321,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates a carrier service. Only the app that creates a carrier service can update it.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a carrier service. Only the app that creates a carrier service can update it.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1347,16 +1347,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a carrier service.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a carrier service.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1370,24 +1370,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of carrier services.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-unstable
-    */
+     * Retrieves a list of carrier services.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#index-unstable
+     */
     pub async fn deprecated_unstable_get_carrier_service(&self) -> Result<()> {
         let url = "/admin/api/unstable/carrier_services.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Creates a carrier service.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/carrier_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-unstable
-    */
+     * Creates a carrier service.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/carrier_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#create-unstable
+     */
     pub async fn deprecated_unstable_create_carrier_services(
         &self,
         body: &serde_json::Value,
@@ -1399,16 +1399,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a single carrier service by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single carrier service by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1422,16 +1422,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates a carrier service. Only the app that creates a carrier service can update it.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a carrier service. Only the app that creates a carrier service can update it.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1448,16 +1448,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a carrier service.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/carrier_services/{carrier_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `carrier_service_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a carrier service.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/carrier_services/{carrier_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/carrierservice#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `carrier_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_delete_carrier_services_param_service(
         &self,
         carrier_service_id: &str,
@@ -1471,24 +1471,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    * * `limit: &str` -- Limit the amount of results.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit: &str` -- Limit the amount of results.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_202001_get_orders_param_order_fulfillment(
         &self,
         order_id: &str,
@@ -1581,17 +1581,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with a fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
-    */
+     * Retrieves fulfillments associated with a fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
+     */
     pub async fn deprecated_202001_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
@@ -1605,20 +1605,20 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a count of fulfillments associated with a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves a count of fulfillments associated with a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_202001_get_orders_param_order_fulfillments_count(
         &self,
         order_id: &str,
@@ -1651,18 +1651,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieve a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Comma-separated list of fields to include in the response.
-    */
+     * Retrieve a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202001_get_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -1685,17 +1685,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Update information associated with a fulfillment.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Update information associated with a fulfillment.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -1714,12 +1714,12 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-01
-    */
+     * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-01
+     */
     pub async fn deprecated_202001_create_fulfillments(
         &self,
         body: &serde_json::Value,
@@ -1731,16 +1731,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates the tracking information for a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Updates the tracking information for a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_fulfillments_param_fulfillment_update_tracking(
         &self,
         fulfillment_id: &str,
@@ -1757,17 +1757,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as complete.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as complete.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_orders_param_order_fulfillments_fulfillment_complete(
         &self,
         order_id: &str,
@@ -1786,17 +1786,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as open.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as open.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_orders_param_order_fulfillments_fulfillment_open(
         &self,
         order_id: &str,
@@ -1815,17 +1815,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancel a fulfillment for a specific order ID.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancel a fulfillment for a specific order ID.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_orders_param_order_fulfillments_fulfillment_cancel(
         &self,
         order_id: &str,
@@ -1844,16 +1844,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancels a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancels a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_fulfillments_param_fulfillment_cancel(
         &self,
         fulfillment_id: &str,
@@ -1870,24 +1870,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    * * `limit: &str` -- Limit the amount of results.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit: &str` -- Limit the amount of results.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_202004_get_orders_param_order_fulfillment(
         &self,
         order_id: &str,
@@ -1980,17 +1980,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with a fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
-    */
+     * Retrieves fulfillments associated with a fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
+     */
     pub async fn deprecated_202004_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
@@ -2004,20 +2004,20 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a count of fulfillments associated with a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves a count of fulfillments associated with a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_202004_get_orders_param_order_fulfillments_count(
         &self,
         order_id: &str,
@@ -2050,18 +2050,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieve a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Comma-separated list of fields to include in the response.
-    */
+     * Retrieve a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202004_get_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -2084,17 +2084,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Update information associated with a fulfillment.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Update information associated with a fulfillment.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -2113,12 +2113,12 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-04
-    */
+     * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-04
+     */
     pub async fn deprecated_202004_create_fulfillments(
         &self,
         body: &serde_json::Value,
@@ -2130,16 +2130,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates the tracking information for a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Updates the tracking information for a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_fulfillments_param_fulfillment_update_tracking(
         &self,
         fulfillment_id: &str,
@@ -2156,17 +2156,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as complete.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as complete.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_orders_param_order_fulfillments_fulfillment_complete(
         &self,
         order_id: &str,
@@ -2185,17 +2185,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as open.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as open.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_orders_param_order_fulfillments_fulfillment_open(
         &self,
         order_id: &str,
@@ -2214,17 +2214,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancel a fulfillment for a specific order ID.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancel a fulfillment for a specific order ID.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_orders_param_order_fulfillments_fulfillment_cancel(
         &self,
         order_id: &str,
@@ -2243,16 +2243,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancels a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancels a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_fulfillments_param_fulfillment_cancel(
         &self,
         fulfillment_id: &str,
@@ -2269,24 +2269,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    * * `limit: &str` -- Limit the amount of results.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit: &str` -- Limit the amount of results.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_202007_get_orders_param_order_fulfillment(
         &self,
         order_id: &str,
@@ -2379,17 +2379,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with a fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
-    */
+     * Retrieves fulfillments associated with a fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
+     */
     pub async fn deprecated_202007_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
@@ -2403,20 +2403,20 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a count of fulfillments associated with a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves a count of fulfillments associated with a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_202007_get_orders_param_order_fulfillments_count(
         &self,
         order_id: &str,
@@ -2449,18 +2449,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieve a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Comma-separated list of fields to include in the response.
-    */
+     * Retrieve a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202007_get_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -2483,17 +2483,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Update information associated with a fulfillment.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Update information associated with a fulfillment.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -2512,12 +2512,12 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-07
-    */
+     * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-07
+     */
     pub async fn deprecated_202007_create_fulfillments(
         &self,
         body: &serde_json::Value,
@@ -2529,16 +2529,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates the tracking information for a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Updates the tracking information for a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_fulfillments_param_fulfillment_update_tracking(
         &self,
         fulfillment_id: &str,
@@ -2555,17 +2555,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as complete.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as complete.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_orders_param_order_fulfillments_fulfillment_complete(
         &self,
         order_id: &str,
@@ -2584,17 +2584,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as open.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as open.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_orders_param_order_fulfillments_fulfillment_open(
         &self,
         order_id: &str,
@@ -2613,17 +2613,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancel a fulfillment for a specific order ID.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancel a fulfillment for a specific order ID.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_orders_param_order_fulfillments_fulfillment_cancel(
         &self,
         order_id: &str,
@@ -2642,16 +2642,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancels a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancels a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_fulfillments_param_fulfillment_cancel(
         &self,
         fulfillment_id: &str,
@@ -2668,24 +2668,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    * * `limit: &str` -- Limit the amount of results.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit: &str` -- Limit the amount of results.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn get_orders_param_order_fulfillment(
         &self,
         order_id: &str,
@@ -2778,17 +2778,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with a fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
-    */
+     * Retrieves fulfillments associated with a fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
+     */
     pub async fn get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
@@ -2802,20 +2802,20 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a count of fulfillments associated with a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves a count of fulfillments associated with a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn get_orders_param_order_fulfillments_count(
         &self,
         order_id: &str,
@@ -2848,18 +2848,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieve a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Comma-separated list of fields to include in the response.
-    */
+     * Retrieve a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Comma-separated list of fields to include in the response.
+     */
     pub async fn get_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -2882,17 +2882,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Update information associated with a fulfillment.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Update information associated with a fulfillment.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -2911,12 +2911,12 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-10
-    */
+     * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2020-10
+     */
     pub async fn create_fulfillments(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/fulfillments.json".to_string();
         self.client
@@ -2925,16 +2925,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates the tracking information for a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Updates the tracking information for a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_fulfillments_param_fulfillment_update_tracking(
         &self,
         fulfillment_id: &str,
@@ -2951,17 +2951,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as complete.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as complete.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_orders_param_order_fulfillments_fulfillment_complete(
         &self,
         order_id: &str,
@@ -2980,17 +2980,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as open.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as open.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_orders_param_order_fulfillments_fulfillment_open(
         &self,
         order_id: &str,
@@ -3009,17 +3009,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancel a fulfillment for a specific order ID.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancel a fulfillment for a specific order ID.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_orders_param_order_fulfillments_fulfillment_cancel(
         &self,
         order_id: &str,
@@ -3038,16 +3038,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancels a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancels a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_fulfillments_param_fulfillment_cancel(
         &self,
         fulfillment_id: &str,
@@ -3064,24 +3064,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    * * `limit: &str` -- Limit the amount of results.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit: &str` -- Limit the amount of results.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_202101_get_orders_param_order_fulfillment(
         &self,
         order_id: &str,
@@ -3174,17 +3174,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with a fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
-    */
+     * Retrieves fulfillments associated with a fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
+     */
     pub async fn deprecated_202101_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
@@ -3198,20 +3198,20 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a count of fulfillments associated with a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves a count of fulfillments associated with a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_202101_get_orders_param_order_fulfillments_count(
         &self,
         order_id: &str,
@@ -3244,18 +3244,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieve a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Comma-separated list of fields to include in the response.
-    */
+     * Retrieve a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202101_get_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -3278,17 +3278,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Update information associated with a fulfillment.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Update information associated with a fulfillment.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -3307,12 +3307,12 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2021-01
-    */
+     * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-2021-01
+     */
     pub async fn deprecated_202101_create_fulfillments(
         &self,
         body: &serde_json::Value,
@@ -3324,16 +3324,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates the tracking information for a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Updates the tracking information for a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_fulfillments_param_fulfillment_update_tracking(
         &self,
         fulfillment_id: &str,
@@ -3350,17 +3350,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as complete.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as complete.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_orders_param_order_fulfillments_fulfillment_complete(
         &self,
         order_id: &str,
@@ -3379,17 +3379,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as open.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as open.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_orders_param_order_fulfillments_fulfillment_open(
         &self,
         order_id: &str,
@@ -3408,17 +3408,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancel a fulfillment for a specific order ID.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancel a fulfillment for a specific order ID.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_orders_param_order_fulfillments_fulfillment_cancel(
         &self,
         order_id: &str,
@@ -3437,16 +3437,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancels a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancels a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_fulfillments_param_fulfillment_cancel(
         &self,
         fulfillment_id: &str,
@@ -3463,24 +3463,24 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    * * `limit: &str` -- Limit the amount of results.
-    *                     (default: 50, maximum: 250).
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves fulfillments associated with an order. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_max: &str` -- Show fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_min: &str` -- Show fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     * * `limit: &str` -- Limit the amount of results.
+     *                     (default: 50, maximum: 250).
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `updated_at_max: &str` -- Show fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Show fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_unstable_get_orders_param_order_fulfillment(
         &self,
         order_id: &str,
@@ -3573,17 +3573,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves fulfillments associated with a fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
-    */
+     * Retrieves fulfillments associated with a fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#indexV2-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_order_id: &str` -- The ID of the fulfillment order that is associated with the fulfillments.
+     */
     pub async fn deprecated_unstable_get_fulfillment_orders_param_order_fulfillment(
         &self,
         fulfillment_order_id: &str,
@@ -3597,20 +3597,20 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a count of fulfillments associated with a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
-    * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
-    * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
-    */
+     * Retrieves a count of fulfillments associated with a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#count-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `created_at_min: &str` -- Count fulfillments created after date (format: 2014-04-25T16:15:47-04:00).
+     * * `created_at_max: &str` -- Count fulfillments created before date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_min: &str` -- Count fulfillments last updated after date (format: 2014-04-25T16:15:47-04:00).
+     * * `updated_at_max: &str` -- Count fulfillments last updated before date (format: 2014-04-25T16:15:47-04:00).
+     */
     pub async fn deprecated_unstable_get_orders_param_order_fulfillments_count(
         &self,
         order_id: &str,
@@ -3643,18 +3643,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieve a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Comma-separated list of fields to include in the response.
-    */
+     * Retrieve a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_unstable_get_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -3677,17 +3677,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Update information associated with a fulfillment.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Update information associated with a fulfillment.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_orders_param_order_fulfillments_fulfillment(
         &self,
         order_id: &str,
@@ -3706,12 +3706,12 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillments.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-unstable
-    */
+     * Creates a fulfillment for one or many fulfillment orders. The fulfillment orders are associated with the same order and are assigned to the same location.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillments.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#createV2-unstable
+     */
     pub async fn deprecated_unstable_create_fulfillments(
         &self,
         body: &serde_json::Value,
@@ -3723,16 +3723,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Updates the tracking information for a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Updates the tracking information for a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillments/{fulfillment_id}/update_tracking.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#update_tracking-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_fulfillments_param_fulfillment_update_tracking(
         &self,
         fulfillment_id: &str,
@@ -3749,17 +3749,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as complete.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as complete.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/complete.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#complete-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_orders_param_order_fulfillments_fulfillment_complete(
         &self,
         order_id: &str,
@@ -3778,17 +3778,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Mark a fulfillment as open.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Mark a fulfillment as open.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/open.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#open-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_orders_param_order_fulfillments_fulfillment_open(
         &self,
         order_id: &str,
@@ -3807,17 +3807,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancel a fulfillment for a specific order ID.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancel a fulfillment for a specific order ID.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancel-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_orders_param_order_fulfillments_fulfillment_cancel(
         &self,
         order_id: &str,
@@ -3836,16 +3836,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Cancels a fulfillment.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillments/{fulfillment_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Cancels a fulfillment.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillments/{fulfillment_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillment#cancelV2-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_fulfillments_param_fulfillment_cancel(
         &self,
         fulfillment_id: &str,
@@ -3862,19 +3862,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment events for a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
-    * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
-    */
+     * Retrieves a list of fulfillment events for a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
+     * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
+     */
     pub async fn deprecated_202001_get_orders_param_order_fulfillments_fulfillment_event(
         &self,
         order_id: &str,
@@ -3890,17 +3890,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment event.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a fulfillment event.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_orders_param_order_fulfillments_fulfillment_events(
         &self,
         order_id: &str,
@@ -3919,19 +3919,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment event.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- The ID of the fulfillment event.
-    */
+     * Retrieves a specific fulfillment event.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- The ID of the fulfillment event.
+     */
     pub async fn deprecated_202001_get_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -3949,18 +3949,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a fulfillment event.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a fulfillment event.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -3978,19 +3978,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment events for a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
-    * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
-    */
+     * Retrieves a list of fulfillment events for a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
+     * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
+     */
     pub async fn deprecated_202004_get_orders_param_order_fulfillments_fulfillment_event(
         &self,
         order_id: &str,
@@ -4006,17 +4006,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment event.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a fulfillment event.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_orders_param_order_fulfillments_fulfillment_events(
         &self,
         order_id: &str,
@@ -4035,19 +4035,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment event.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- The ID of the fulfillment event.
-    */
+     * Retrieves a specific fulfillment event.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- The ID of the fulfillment event.
+     */
     pub async fn deprecated_202004_get_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4065,18 +4065,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a fulfillment event.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a fulfillment event.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4094,19 +4094,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment events for a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
-    * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
-    */
+     * Retrieves a list of fulfillment events for a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
+     * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
+     */
     pub async fn deprecated_202007_get_orders_param_order_fulfillments_fulfillment_event(
         &self,
         order_id: &str,
@@ -4122,17 +4122,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment event.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a fulfillment event.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_orders_param_order_fulfillments_fulfillment_events(
         &self,
         order_id: &str,
@@ -4151,19 +4151,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment event.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- The ID of the fulfillment event.
-    */
+     * Retrieves a specific fulfillment event.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- The ID of the fulfillment event.
+     */
     pub async fn deprecated_202007_get_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4181,18 +4181,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a fulfillment event.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a fulfillment event.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4210,19 +4210,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment events for a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
-    * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
-    */
+     * Retrieves a list of fulfillment events for a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
+     * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
+     */
     pub async fn get_orders_param_order_fulfillments_fulfillment_event(
         &self,
         order_id: &str,
@@ -4238,17 +4238,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment event.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a fulfillment event.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_orders_param_order_fulfillments_fulfillment_events(
         &self,
         order_id: &str,
@@ -4267,19 +4267,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment event.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- The ID of the fulfillment event.
-    */
+     * Retrieves a specific fulfillment event.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- The ID of the fulfillment event.
+     */
     pub async fn get_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4297,18 +4297,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a fulfillment event.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a fulfillment event.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     */
     pub async fn delete_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4326,19 +4326,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment events for a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
-    * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
-    */
+     * Retrieves a list of fulfillment events for a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
+     * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
+     */
     pub async fn deprecated_202101_get_orders_param_order_fulfillments_fulfillment_event(
         &self,
         order_id: &str,
@@ -4354,17 +4354,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment event.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a fulfillment event.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_orders_param_order_fulfillments_fulfillment_events(
         &self,
         order_id: &str,
@@ -4383,19 +4383,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment event.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- The ID of the fulfillment event.
-    */
+     * Retrieves a specific fulfillment event.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- The ID of the fulfillment event.
+     */
     pub async fn deprecated_202101_get_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4413,18 +4413,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a fulfillment event.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a fulfillment event.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_delete_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4442,19 +4442,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment events for a specific fulfillment.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
-    * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
-    */
+     * Retrieves a list of fulfillment events for a specific fulfillment.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- The ID of the fulfillment that's associated with the fulfillment event.
+     * * `order_id: &str` -- The ID of the order that's associated with the fulfillment event.
+     */
     pub async fn deprecated_unstable_get_orders_param_order_fulfillments_fulfillment_event(
         &self,
         order_id: &str,
@@ -4470,17 +4470,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Creates a fulfillment event.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a fulfillment event.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/events.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#create-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_orders_param_order_fulfillments_fulfillment_events(
         &self,
         order_id: &str,
@@ -4499,19 +4499,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment event.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- The ID of the fulfillment event.
-    */
+     * Retrieves a specific fulfillment event.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- The ID of the fulfillment event.
+     */
     pub async fn deprecated_unstable_get_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4529,18 +4529,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Deletes a fulfillment event.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `fulfillment_id: &str` -- storefront_access_token_id.
-    * * `event_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a fulfillment event.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/orders/{order_id}/fulfillments/{fulfillment_id}/events/{event_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentevent#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `fulfillment_id: &str` -- storefront_access_token_id.
+     * * `event_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_delete_orders_param_order_fulfillments_fulfillment_events_event(
         &self,
         order_id: &str,
@@ -4558,17 +4558,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders for a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
-    */
+     * Retrieves a list of fulfillment orders for a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/orders/{order_id}/fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
+     */
     pub async fn deprecated_202001_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
@@ -4582,16 +4582,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a specific fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
@@ -4605,16 +4605,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Marks a fulfillment order as cancelled.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Marks a fulfillment order as cancelled.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_fulfillment_orders_param_order_cancel(
         &self,
         fulfillment_order_id: &str,
@@ -4666,17 +4666,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Moves a fulfillment order from one merchant managed location to another merchant managed location.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
-    */
+     * Moves a fulfillment order from one merchant managed location to another merchant managed location.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
+     */
     pub async fn deprecated_202001_create_fulfillment_orders_param_order_move(
         &self,
         fulfillment_order_id: &str,
@@ -4700,17 +4700,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders for a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
-    */
+     * Retrieves a list of fulfillment orders for a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/orders/{order_id}/fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
+     */
     pub async fn deprecated_202004_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
@@ -4724,16 +4724,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a specific fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
@@ -4747,16 +4747,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Marks a fulfillment order as cancelled.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Marks a fulfillment order as cancelled.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_fulfillment_orders_param_order_cancel(
         &self,
         fulfillment_order_id: &str,
@@ -4808,17 +4808,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Moves a fulfillment order from one merchant managed location to another merchant managed location.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
-    */
+     * Moves a fulfillment order from one merchant managed location to another merchant managed location.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
+     */
     pub async fn deprecated_202004_create_fulfillment_orders_param_order_move(
         &self,
         fulfillment_order_id: &str,
@@ -4842,17 +4842,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders for a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
-    */
+     * Retrieves a list of fulfillment orders for a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/orders/{order_id}/fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
+     */
     pub async fn deprecated_202007_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
@@ -4866,16 +4866,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a specific fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
@@ -4889,16 +4889,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Marks a fulfillment order as cancelled.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Marks a fulfillment order as cancelled.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_fulfillment_orders_param_order_cancel(
         &self,
         fulfillment_order_id: &str,
@@ -4950,17 +4950,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Moves a fulfillment order from one merchant managed location to another merchant managed location.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
-    */
+     * Moves a fulfillment order from one merchant managed location to another merchant managed location.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
+     */
     pub async fn deprecated_202007_create_fulfillment_orders_param_order_move(
         &self,
         fulfillment_order_id: &str,
@@ -4984,17 +4984,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders for a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
-    */
+     * Retrieves a list of fulfillment orders for a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/orders/{order_id}/fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
+     */
     pub async fn get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
@@ -5008,16 +5008,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a specific fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
@@ -5031,16 +5031,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Marks a fulfillment order as cancelled.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Marks a fulfillment order as cancelled.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_fulfillment_orders_param_order_cancel(
         &self,
         fulfillment_order_id: &str,
@@ -5092,17 +5092,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Moves a fulfillment order from one merchant managed location to another merchant managed location.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
-    */
+     * Moves a fulfillment order from one merchant managed location to another merchant managed location.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
+     */
     pub async fn create_fulfillment_orders_param_order_move(
         &self,
         fulfillment_order_id: &str,
@@ -5126,17 +5126,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders for a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
-    */
+     * Retrieves a list of fulfillment orders for a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/orders/{order_id}/fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
+     */
     pub async fn deprecated_202101_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
@@ -5150,16 +5150,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a specific fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
@@ -5173,16 +5173,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Marks a fulfillment order as cancelled.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Marks a fulfillment order as cancelled.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_fulfillment_orders_param_order_cancel(
         &self,
         fulfillment_order_id: &str,
@@ -5234,17 +5234,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Moves a fulfillment order from one merchant managed location to another merchant managed location.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
-    */
+     * Moves a fulfillment order from one merchant managed location to another merchant managed location.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
+     */
     pub async fn deprecated_202101_create_fulfillment_orders_param_order_move(
         &self,
         fulfillment_order_id: &str,
@@ -5322,17 +5322,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a list of fulfillment orders for a specific order.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillment_orders.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `order_id: &str` -- storefront_access_token_id.
-    * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
-    */
+     * Retrieves a list of fulfillment orders for a specific order.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/orders/{order_id}/fulfillment_orders.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `order_id: &str` -- storefront_access_token_id.
+     * * `order_id: &str` -- The ID of the order that is associated with the fulfillment orders.
+     */
     pub async fn deprecated_unstable_get_orders_param_order_fulfillment_shipping_and_fulfillment(
         &self,
         order_id: &str,
@@ -5346,16 +5346,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Retrieves a specific fulfillment order.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a specific fulfillment order.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_fulfillment_orders_param_order(
         &self,
         fulfillment_order_id: &str,
@@ -5369,16 +5369,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Marks a fulfillment order as cancelled.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    */
+     * Marks a fulfillment order as cancelled.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/cancel.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#cancel-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_fulfillment_orders_param_order_cancel(
         &self,
         fulfillment_order_id: &str,
@@ -5462,17 +5462,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Moves a fulfillment order from one merchant managed location to another merchant managed location.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
-    */
+     * Moves a fulfillment order from one merchant managed location to another merchant managed location.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/move.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentorder#move-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `new_location_id: &str` -- The id of the location to which the fulfillment order will be moved.
+     */
     pub async fn deprecated_unstable_create_fulfillment_orders_param_order_move(
         &self,
         fulfillment_order_id: &str,
@@ -5550,18 +5550,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a fulfillment request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional message for the fulfillment request.
-    * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
-    */
+     * Sends a fulfillment request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional message for the fulfillment request.
+     * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
+     */
     pub async fn deprecated_202001_create_fulfillment_orders_param_order_request(
         &self,
         fulfillment_order_id: &str,
@@ -5592,17 +5592,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the fulfillment request.
-    */
+     * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the fulfillment request.
+     */
     pub async fn deprecated_202001_create_fulfillment_orders_param_order_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -5626,17 +5626,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the fulfillment request.
-    */
+     * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the fulfillment request.
+     */
     pub async fn deprecated_202001_create_fulfillment_orders_param_order_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -5660,18 +5660,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a fulfillment request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional message for the fulfillment request.
-    * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
-    */
+     * Sends a fulfillment request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional message for the fulfillment request.
+     * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
+     */
     pub async fn deprecated_202004_create_fulfillment_orders_param_order_request(
         &self,
         fulfillment_order_id: &str,
@@ -5702,17 +5702,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the fulfillment request.
-    */
+     * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the fulfillment request.
+     */
     pub async fn deprecated_202004_create_fulfillment_orders_param_order_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -5736,17 +5736,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the fulfillment request.
-    */
+     * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the fulfillment request.
+     */
     pub async fn deprecated_202004_create_fulfillment_orders_param_order_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -5770,18 +5770,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a fulfillment request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional message for the fulfillment request.
-    * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
-    */
+     * Sends a fulfillment request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional message for the fulfillment request.
+     * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
+     */
     pub async fn deprecated_202007_create_fulfillment_orders_param_order_request(
         &self,
         fulfillment_order_id: &str,
@@ -5812,17 +5812,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the fulfillment request.
-    */
+     * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the fulfillment request.
+     */
     pub async fn deprecated_202007_create_fulfillment_orders_param_order_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -5846,17 +5846,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the fulfillment request.
-    */
+     * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the fulfillment request.
+     */
     pub async fn deprecated_202007_create_fulfillment_orders_param_order_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -5880,18 +5880,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a fulfillment request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional message for the fulfillment request.
-    * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
-    */
+     * Sends a fulfillment request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional message for the fulfillment request.
+     * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
+     */
     pub async fn create_fulfillment_orders_param_order_request(
         &self,
         fulfillment_order_id: &str,
@@ -5922,17 +5922,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the fulfillment request.
-    */
+     * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the fulfillment request.
+     */
     pub async fn create_fulfillment_orders_param_order_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -5956,17 +5956,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the fulfillment request.
-    */
+     * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the fulfillment request.
+     */
     pub async fn create_fulfillment_orders_param_order_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -5990,18 +5990,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a fulfillment request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional message for the fulfillment request.
-    * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
-    */
+     * Sends a fulfillment request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional message for the fulfillment request.
+     * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
+     */
     pub async fn deprecated_202101_create_fulfillment_orders_param_order_request(
         &self,
         fulfillment_order_id: &str,
@@ -6032,17 +6032,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the fulfillment request.
-    */
+     * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the fulfillment request.
+     */
     pub async fn deprecated_202101_create_fulfillment_orders_param_order_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -6066,17 +6066,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the fulfillment request.
-    */
+     * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the fulfillment request.
+     */
     pub async fn deprecated_202101_create_fulfillment_orders_param_order_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -6100,18 +6100,18 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Sends a fulfillment request to the fulfillment service of a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional message for the fulfillment request.
-    * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
-    */
+     * Sends a fulfillment request to the fulfillment service of a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/fulfillment_request.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#create-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional message for the fulfillment request.
+     * * `fulfillment_order_line_items: &str` -- The fulfillment order line items to be requested for fulfillment. If left blank, all line items of the fulfillment order are requested for fulfillment.
+     */
     pub async fn deprecated_unstable_create_fulfillment_orders_param_order_request(
         &self,
         fulfillment_order_id: &str,
@@ -6142,17 +6142,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for accepting the fulfillment request.
-    */
+     * Accepts a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/accept.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#accept-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for accepting the fulfillment request.
+     */
     pub async fn deprecated_unstable_create_fulfillment_orders_param_order_request_accept(
         &self,
         fulfillment_order_id: &str,
@@ -6176,17 +6176,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_order_id: &str` -- storefront_access_token_id.
-    * * `message: &str` -- An optional reason for rejecting the fulfillment request.
-    */
+     * Rejects a fulfillment request sent to a fulfillment service for a fulfillment order.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/fulfillment_orders/{fulfillment_order_id}/fulfillment_request/reject.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentrequest#reject-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_order_id: &str` -- storefront_access_token_id.
+     * * `message: &str` -- An optional reason for rejecting the fulfillment request.
+     */
     pub async fn deprecated_unstable_create_fulfillment_orders_param_order_request_reject(
         &self,
         fulfillment_order_id: &str,
@@ -6210,17 +6210,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Get tracking numbers for orders.
-    *
-    * This function performs a `GET` to the `/fetch_tracking_numbers` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#fetch-tracking-numbers
-    *
-    * **Parameters:**
-    *
-    * * `order_names: &str` -- The fulfillment names we require tracking numbers for (i.e. #1001.1).
-    * * `shop: &str` -- The shop's myshopify url.
-    */
+     * Get tracking numbers for orders.
+     *
+     * This function performs a `GET` to the `/fetch_tracking_numbers` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#fetch-tracking-numbers
+     *
+     * **Parameters:**
+     *
+     * * `order_names: &str` -- The fulfillment names we require tracking numbers for (i.e. #1001.1).
+     * * `shop: &str` -- The shop's myshopify url.
+     */
     pub async fn deprecated_unknown_version_get_fetch_tracking_number(
         &self,
         order_names: &str,
@@ -6240,19 +6240,19 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * Get inventory levels.
-    *
-    * This function performs a `GET` to the `/fetch_stock` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#fetch-stock
-    *
-    * **Parameters:**
-    *
-    * * `max_retries: &str` -- The maximum amount of times Shopify will send the request for inventory levels.
-    * * `shop: &str` -- The shop's myshopify url.
-    * * `sku: &str` -- The SKU for the Product Variant we need stock levels for.
-    * * `timestamp: &str` -- The Unix timestamp from when the inventory request was made.
-    */
+     * Get inventory levels.
+     *
+     * This function performs a `GET` to the `/fetch_stock` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#fetch-stock
+     *
+     * **Parameters:**
+     *
+     * * `max_retries: &str` -- The maximum amount of times Shopify will send the request for inventory levels.
+     * * `shop: &str` -- The shop's myshopify url.
+     * * `sku: &str` -- The SKU for the Product Variant we need stock levels for.
+     * * `timestamp: &str` -- The Unix timestamp from when the inventory request was made.
+     */
     pub async fn deprecated_unknown_version_get_fetch_stock(
         &self,
         max_retries: &str,
@@ -6280,17 +6280,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
-    *                           all: Returns all the fulfillment providers.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
+     *                           all: Returns all the fulfillment providers.
+     */
     pub async fn deprecated_202001_get_fulfillment_service(&self, scope: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
@@ -6323,16 +6323,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6346,16 +6346,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6372,16 +6372,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6395,17 +6395,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
-    *                           all: Returns all the fulfillment providers.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
+     *                           all: Returns all the fulfillment providers.
+     */
     pub async fn deprecated_202004_get_fulfillment_service(&self, scope: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
@@ -6438,16 +6438,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6461,16 +6461,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6487,16 +6487,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6510,17 +6510,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
-    *                           all: Returns all the fulfillment providers.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
+     *                           all: Returns all the fulfillment providers.
+     */
     pub async fn deprecated_202007_get_fulfillment_service(&self, scope: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
@@ -6553,16 +6553,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6576,16 +6576,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6602,16 +6602,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6625,17 +6625,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
-    *                           all: Returns all the fulfillment providers.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
+     *                           all: Returns all the fulfillment providers.
+     */
     pub async fn get_fulfillment_service(&self, scope: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
@@ -6665,16 +6665,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6688,16 +6688,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6714,16 +6714,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6737,17 +6737,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
-    *                           all: Returns all the fulfillment providers.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
+     *                           all: Returns all the fulfillment providers.
+     */
     pub async fn deprecated_202101_get_fulfillment_service(&self, scope: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
@@ -6780,16 +6780,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6803,16 +6803,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6829,16 +6829,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6852,17 +6852,17 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/fulfillment_services.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
-    *                           all: Returns all the fulfillment providers.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/fulfillment_services.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `scope: &str` -- current_client: Returns fulfillment providers that have been created by the app sending the request (default)
+     *                           all: Returns all the fulfillment providers.
+     */
     pub async fn deprecated_unstable_get_fulfillment_service(&self, scope: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !scope.is_empty() {
@@ -6895,16 +6895,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6918,16 +6918,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,
@@ -6944,16 +6944,16 @@ impl ShippingAndFulfillment {
     }
 
     /**
-    * .
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/fulfillment_services/{fulfillment_service_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fulfillment_service_id: &str` -- storefront_access_token_id.
-    */
+     * .
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/fulfillment_services/{fulfillment_service_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/shipping-and-fulfillment/fulfillmentservice#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fulfillment_service_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_delete_fulfillment_services_param_service(
         &self,
         fulfillment_service_id: &str,

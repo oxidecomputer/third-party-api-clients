@@ -13,18 +13,18 @@ impl Apps {
     }
 
     /**
-    * This function performs a `GET` to the `/apps.uninstall` endpoint.
-    *
-    * Uninstalls your app from a workspace.
-    *
-    * FROM: <https://api.slack.com/methods/apps.uninstall>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `none`.
-    * * `client_id: &str` -- Issued when you created your application.
-    * * `client_secret: &str` -- Issued when you created your application.
-    */
+     * This function performs a `GET` to the `/apps.uninstall` endpoint.
+     *
+     * Uninstalls your app from a workspace.
+     *
+     * FROM: <https://api.slack.com/methods/apps.uninstall>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `none`.
+     * * `client_id: &str` -- Issued when you created your application.
+     * * `client_secret: &str` -- Issued when you created your application.
+     */
     pub async fn uninstall(
         &self,
         client_id: &str,

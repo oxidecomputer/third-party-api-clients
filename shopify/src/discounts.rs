@@ -13,16 +13,16 @@ impl Discounts {
     }
 
     /**
-    * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
@@ -36,16 +36,16 @@ impl Discounts {
     }
 
     /**
-    * Creates a discount code.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_create_price_rules_param_rule_codes(
         &self,
         price_rule_id: &str,
@@ -62,17 +62,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a single discount code.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single discount code.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -88,17 +88,17 @@ impl Discounts {
     }
 
     /**
-    * Updates an existing discount code.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing discount code.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -117,17 +117,17 @@ impl Discounts {
     }
 
     /**
-    * Deletes a discount code.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a discount code.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -210,17 +210,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a discount code creation job.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a discount code creation job.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `batch_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -264,16 +264,16 @@ impl Discounts {
     }
 
     /**
-    * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
@@ -287,16 +287,16 @@ impl Discounts {
     }
 
     /**
-    * Creates a discount code.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_create_price_rules_param_rule_codes(
         &self,
         price_rule_id: &str,
@@ -313,17 +313,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a single discount code.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single discount code.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -339,17 +339,17 @@ impl Discounts {
     }
 
     /**
-    * Updates an existing discount code.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing discount code.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -368,17 +368,17 @@ impl Discounts {
     }
 
     /**
-    * Deletes a discount code.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a discount code.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -461,17 +461,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a discount code creation job.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a discount code creation job.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `batch_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -515,16 +515,16 @@ impl Discounts {
     }
 
     /**
-    * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
@@ -538,16 +538,16 @@ impl Discounts {
     }
 
     /**
-    * Creates a discount code.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_create_price_rules_param_rule_codes(
         &self,
         price_rule_id: &str,
@@ -564,17 +564,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a single discount code.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single discount code.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -590,17 +590,17 @@ impl Discounts {
     }
 
     /**
-    * Updates an existing discount code.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing discount code.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -619,17 +619,17 @@ impl Discounts {
     }
 
     /**
-    * Deletes a discount code.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a discount code.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -712,17 +712,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a discount code creation job.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a discount code creation job.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `batch_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -766,16 +766,16 @@ impl Discounts {
     }
 
     /**
-    * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_price_rules_param_rule_code(&self, price_rule_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/price_rules/{}/discount_codes.json",
@@ -786,16 +786,16 @@ impl Discounts {
     }
 
     /**
-    * Creates a discount code.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn create_price_rules_param_rule_codes(
         &self,
         price_rule_id: &str,
@@ -812,17 +812,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a single discount code.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single discount code.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -838,17 +838,17 @@ impl Discounts {
     }
 
     /**
-    * Updates an existing discount code.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing discount code.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -867,17 +867,17 @@ impl Discounts {
     }
 
     /**
-    * Deletes a discount code.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a discount code.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn delete_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -960,17 +960,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a discount code creation job.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a discount code creation job.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `batch_id: &str` -- storefront_access_token_id.
+     */
     pub async fn get_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -1014,16 +1014,16 @@ impl Discounts {
     }
 
     /**
-    * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
@@ -1037,16 +1037,16 @@ impl Discounts {
     }
 
     /**
-    * Creates a discount code.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_create_price_rules_param_rule_codes(
         &self,
         price_rule_id: &str,
@@ -1063,17 +1063,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a single discount code.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single discount code.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -1089,17 +1089,17 @@ impl Discounts {
     }
 
     /**
-    * Updates an existing discount code.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing discount code.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -1118,17 +1118,17 @@ impl Discounts {
     }
 
     /**
-    * Deletes a discount code.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a discount code.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_delete_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -1211,17 +1211,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a discount code creation job.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a discount code creation job.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `batch_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,
@@ -1265,16 +1265,16 @@ impl Discounts {
     }
 
     /**
-    * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieve a list of discount codes. Note: As of version 2019-10, this endpoint implements pagination by using links that are provided in the response header. Sending the page parameter will return an error. To learn more, see Making requests to paginated REST Admin API endpoints.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_price_rules_param_rule_code(
         &self,
         price_rule_id: &str,
@@ -1288,16 +1288,16 @@ impl Discounts {
     }
 
     /**
-    * Creates a discount code.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-unstable
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    */
+     * Creates a discount code.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#create-unstable
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_create_price_rules_param_rule_codes(
         &self,
         price_rule_id: &str,
@@ -1314,17 +1314,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a single discount code.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a single discount code.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -1340,17 +1340,17 @@ impl Discounts {
     }
 
     /**
-    * Updates an existing discount code.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Updates an existing discount code.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -1369,17 +1369,17 @@ impl Discounts {
     }
 
     /**
-    * Deletes a discount code.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `discount_code_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a discount code.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/price_rules/{price_rule_id}/discount_codes/{discount_code_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `discount_code_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_delete_price_rules_param_rule_codes_code(
         &self,
         price_rule_id: &str,
@@ -1462,17 +1462,17 @@ impl Discounts {
     }
 
     /**
-    * Retrieves a discount code creation job.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `price_rule_id: &str` -- storefront_access_token_id.
-    * * `batch_id: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a discount code creation job.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/price_rules/{price_rule_id}/batch/{batch_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/discounts/discountcode#batch_show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `price_rule_id: &str` -- storefront_access_token_id.
+     * * `batch_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get_price_rules_param_rule_batch(
         &self,
         price_rule_id: &str,

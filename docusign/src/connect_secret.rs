@@ -13,17 +13,17 @@ impl ConnectSecret {
     }
 
     /**
-    * Deletes the connect HMAC Secret for specified account.
-    *
-    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/connect/secret/{keyId}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `key_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Deletes the connect HMAC Secret for specified account.
+     *
+     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/connect/secret/{keyId}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `key_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn connect_hmac_delete_secret(&self, account_id: &str, key_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/connect/secret/{}",

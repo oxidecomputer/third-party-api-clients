@@ -13,17 +13,17 @@ impl GroupBrands {
     }
 
     /**
-    * Gets the brand information for a group.
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/groups/{groupId}/brands` endpoint.
-    *
-    * This method returns information about the brands associated with a group.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Gets the brand information for a group.
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/groups/{groupId}/brands` endpoint.
+     *
+     * This method returns information about the brands associated with a group.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn brands_get_group(
         &self,
         account_id: &str,
@@ -39,17 +39,17 @@ impl GroupBrands {
     }
 
     /**
-    * Adds an existing brand to a group.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/groups/{groupId}/brands` endpoint.
-    *
-    * This method adds one or more existing brands to a group based on the `groupId`.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Adds an existing brand to a group.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/groups/{groupId}/brands` endpoint.
+     *
+     * This method adds one or more existing brands to a group based on the `groupId`.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn brands_put_group(
         &self,
         account_id: &str,
@@ -68,17 +68,17 @@ impl GroupBrands {
     }
 
     /**
-    * Deletes brand information from a group.
-    *
-    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/groups/{groupId}/brands` endpoint.
-    *
-    * This method deletes one or more brands from a group.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Deletes brand information from a group.
+     *
+     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/groups/{groupId}/brands` endpoint.
+     *
+     * This method deletes one or more brands from a group.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn brands_delete_group(
         &self,
         account_id: &str,

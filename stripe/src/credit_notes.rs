@@ -13,19 +13,19 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/credit_notes` endpoint.
-    *
-    * <p>Returns a list of credit notes.</p>
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Only return credit notes for the customer specified by this customer ID.
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `invoice: &str` -- Only return credit notes for the invoice specified by this invoice ID.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/credit_notes` endpoint.
+     *
+     * <p>Returns a list of credit notes.</p>
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Only return credit notes for the customer specified by this customer ID.
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `invoice: &str` -- Only return credit notes for the invoice specified by this invoice ID.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_page(
         &self,
         customer: &str,
@@ -60,12 +60,12 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/credit_notes` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * <p>Returns a list of credit notes.</p>
-    */
+     * This function performs a `GET` to the `/v1/credit_notes` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * <p>Returns a list of credit notes.</p>
+     */
     pub async fn get_all(
         &self,
         customer: &str,
@@ -121,47 +121,47 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/credit_notes` endpoint.
-    *
-    * <p>Issue a credit note to adjust the amount of a finalized invoice. For a <code>status=open</code> invoice, a credit note reduces
-    * its <code>amount_due</code>. For a <code>status=paid</code> invoice, a credit note does not affect its <code>amount_due</code>. Instead, it can result
-    * in any combination of the following:</p>
-    *
-    * <ul>
-    * <li>Refund: create a new refund (using <code>refund_amount</code>) or link an existing refund (using <code>refund</code>).</li>
-    * <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>) which will be automatically applied to their next invoice when it’s finalized.</li>
-    * <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe (using <code>out_of_band_amount</code>).</li>
-    * </ul>
-    *
-    * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts must equal the credit note total.</p>
-    *
-    * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the invoice’s <code>pre_payment_credit_notes_amount</code>
-    * or <code>post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of credit note creation.</p>
-    */
+     * This function performs a `POST` to the `/v1/credit_notes` endpoint.
+     *
+     * <p>Issue a credit note to adjust the amount of a finalized invoice. For a <code>status=open</code> invoice, a credit note reduces
+     * its <code>amount_due</code>. For a <code>status=paid</code> invoice, a credit note does not affect its <code>amount_due</code>. Instead, it can result
+     * in any combination of the following:</p>
+     *
+     * <ul>
+     * <li>Refund: create a new refund (using <code>refund_amount</code>) or link an existing refund (using <code>refund</code>).</li>
+     * <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>) which will be automatically applied to their next invoice when it’s finalized.</li>
+     * <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe (using <code>out_of_band_amount</code>).</li>
+     * </ul>
+     *
+     * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts must equal the credit note total.</p>
+     *
+     * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the invoice’s <code>pre_payment_credit_notes_amount</code>
+     * or <code>post_payment_credit_notes_amount</code> depending on its <code>status</code> at the time of credit note creation.</p>
+     */
     pub async fn post(&self) -> Result<crate::types::CreditNote> {
         let url = "/v1/credit_notes".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/credit_notes/preview` endpoint.
-    *
-    * <p>Get a preview of a credit note without creating it.</p>
-    *
-    * **Parameters:**
-    *
-    * * `amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-    * * `credit_amount: i64` -- The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `invoice: &str` -- The account's country.
-    * * `lines: &[String]` -- Line items that make up the credit note.
-    * * `memo: &str` -- The credit note's memo appears on the credit note PDF.
-    * * `metadata: &str` -- Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
-    * * `out_of_band_amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-    * * `reason: crate::types::Reason` -- Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`.
-    * * `refund: &str` -- ID of an existing refund to link this credit note to.
-    * * `refund_amount: i64` -- The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
-    */
+     * This function performs a `GET` to the `/v1/credit_notes/preview` endpoint.
+     *
+     * <p>Get a preview of a credit note without creating it.</p>
+     *
+     * **Parameters:**
+     *
+     * * `amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
+     * * `credit_amount: i64` -- The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `invoice: &str` -- The account's country.
+     * * `lines: &[String]` -- Line items that make up the credit note.
+     * * `memo: &str` -- The credit note's memo appears on the credit note PDF.
+     * * `metadata: &str` -- Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+     * * `out_of_band_amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
+     * * `reason: crate::types::Reason` -- Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`.
+     * * `refund: &str` -- ID of an existing refund to link this credit note to.
+     * * `refund_amount: i64` -- The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+     */
     pub async fn get_preview(
         &self,
         amount: i64,
@@ -210,27 +210,27 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/credit_notes/preview/lines` endpoint.
-    *
-    * <p>When retrieving a credit note preview, you’ll get a <strong>lines</strong> property containing the first handful of those items. This URL you can retrieve the full (paginated) list of line items.</p>
-    *
-    * **Parameters:**
-    *
-    * * `amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-    * * `credit_amount: i64` -- The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `invoice: &str` -- The account's country.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `lines: &[String]` -- Line items that make up the credit note.
-    * * `memo: &str` -- The credit note's memo appears on the credit note PDF.
-    * * `metadata: &str` -- Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
-    * * `out_of_band_amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
-    * * `reason: crate::types::Reason` -- Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`.
-    * * `refund: &str` -- ID of an existing refund to link this credit note to.
-    * * `refund_amount: i64` -- The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/credit_notes/preview/lines` endpoint.
+     *
+     * <p>When retrieving a credit note preview, you’ll get a <strong>lines</strong> property containing the first handful of those items. This URL you can retrieve the full (paginated) list of line items.</p>
+     *
+     * **Parameters:**
+     *
+     * * `amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
+     * * `credit_amount: i64` -- The integer amount in %s representing the amount to credit the customer's balance, which will be automatically applied to their next invoice.
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `invoice: &str` -- The account's country.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `lines: &[String]` -- Line items that make up the credit note.
+     * * `memo: &str` -- The credit note's memo appears on the credit note PDF.
+     * * `metadata: &str` -- Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+     * * `out_of_band_amount: i64` -- Time at which the account was connected. Measured in seconds since the Unix epoch.
+     * * `reason: crate::types::Reason` -- Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or `product_unsatisfactory`.
+     * * `refund: &str` -- ID of an existing refund to link this credit note to.
+     * * `refund_amount: i64` -- The integer amount in %s representing the amount to refund. If set, a refund will be created for the charge associated with the invoice.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_preview_lines(
         &self,
         amount: i64,
@@ -294,12 +294,12 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/credit_notes/preview/lines` endpoint.
-    *
-    * As opposed to `get_preview_lines`, this function returns all the pages of the request at once.
-    *
-    * <p>When retrieving a credit note preview, you’ll get a <strong>lines</strong> property containing the first handful of those items. This URL you can retrieve the full (paginated) list of line items.</p>
-    */
+     * This function performs a `GET` to the `/v1/credit_notes/preview/lines` endpoint.
+     *
+     * As opposed to `get_preview_lines`, this function returns all the pages of the request at once.
+     *
+     * <p>When retrieving a credit note preview, you’ll get a <strong>lines</strong> property containing the first handful of those items. This URL you can retrieve the full (paginated) list of line items.</p>
+     */
     pub async fn get_all_preview_lines(
         &self,
         amount: i64,
@@ -384,18 +384,18 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/credit_notes/{credit_note}/lines` endpoint.
-    *
-    * <p>When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
-    *
-    * **Parameters:**
-    *
-    * * `credit_note: &str` -- The account's country.
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/credit_notes/{credit_note}/lines` endpoint.
+     *
+     * <p>When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+     *
+     * **Parameters:**
+     *
+     * * `credit_note: &str` -- The account's country.
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_note_lines(
         &self,
         credit_note: &str,
@@ -427,12 +427,12 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/credit_notes/{credit_note}/lines` endpoint.
-    *
-    * As opposed to `get_note_lines`, this function returns all the pages of the request at once.
-    *
-    * <p>When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
-    */
+     * This function performs a `GET` to the `/v1/credit_notes/{credit_note}/lines` endpoint.
+     *
+     * As opposed to `get_note_lines`, this function returns all the pages of the request at once.
+     *
+     * <p>When retrieving a credit note, you’ll get a <strong>lines</strong> property containing the the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+     */
     pub async fn get_all_note_lines(
         &self,
         credit_note: &str,
@@ -482,15 +482,15 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/credit_notes/{id}` endpoint.
-    *
-    * <p>Retrieves the credit note object with the given identifier.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `id: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/credit_notes/{id}` endpoint.
+     *
+     * <p>Retrieves the credit note object with the given identifier.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `id: &str` -- The account's country.
+     */
     pub async fn get(&self, id: &str) -> Result<crate::types::CreditNote> {
         let url = format!(
             "/v1/credit_notes/{}",
@@ -501,14 +501,14 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/credit_notes/{id}` endpoint.
-    *
-    * <p>Updates an existing credit note.</p>
-    *
-    * **Parameters:**
-    *
-    * * `id: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/credit_notes/{id}` endpoint.
+     *
+     * <p>Updates an existing credit note.</p>
+     *
+     * **Parameters:**
+     *
+     * * `id: &str` -- The account's country.
+     */
     pub async fn post_credit_notes(&self, id: &str) -> Result<crate::types::CreditNote> {
         let url = format!(
             "/v1/credit_notes/{}",
@@ -519,14 +519,14 @@ impl CreditNotes {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/credit_notes/{id}/void` endpoint.
-    *
-    * <p>Marks a credit note as void. Learn more about <a href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.</p>
-    *
-    * **Parameters:**
-    *
-    * * `id: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/credit_notes/{id}/void` endpoint.
+     *
+     * <p>Marks a credit note as void. Learn more about <a href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.</p>
+     *
+     * **Parameters:**
+     *
+     * * `id: &str` -- The account's country.
+     */
     pub async fn post_void(&self, id: &str) -> Result<crate::types::CreditNote> {
         let url = format!(
             "/v1/credit_notes/{}/void",

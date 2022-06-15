@@ -13,16 +13,16 @@ impl UserSchemas {
     }
 
     /**
-    * Fetches the Schema for an App User.
-    *
-    * This function performs a `GET` to the `/api/v1/meta/schemas/apps/{appInstanceId}/default` endpoint.
-    *
-    * Fetches the Schema for an App User
-    *
-    * **Parameters:**
-    *
-    * * `app_instance_id: &str`
-    */
+     * Fetches the Schema for an App User.
+     *
+     * This function performs a `GET` to the `/api/v1/meta/schemas/apps/{appInstanceId}/default` endpoint.
+     *
+     * Fetches the Schema for an App User
+     *
+     * **Parameters:**
+     *
+     * * `app_instance_id: &str`
+     */
     pub async fn get_application(&self, app_instance_id: &str) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/apps/{}/default",
@@ -33,16 +33,16 @@ impl UserSchemas {
     }
 
     /**
-    * Partial updates on the User Profile properties of the Application User Schema.
-    *
-    * This function performs a `POST` to the `/api/v1/meta/schemas/apps/{appInstanceId}/default` endpoint.
-    *
-    * Partial updates on the User Profile properties of the Application User Schema.
-    *
-    * **Parameters:**
-    *
-    * * `app_instance_id: &str`
-    */
+     * Partial updates on the User Profile properties of the Application User Schema.
+     *
+     * This function performs a `POST` to the `/api/v1/meta/schemas/apps/{appInstanceId}/default` endpoint.
+     *
+     * Partial updates on the User Profile properties of the Application User Schema.
+     *
+     * **Parameters:**
+     *
+     * * `app_instance_id: &str`
+     */
     pub async fn update_application_user_profile(
         &self,
         app_instance_id: &str,
@@ -59,16 +59,16 @@ impl UserSchemas {
     }
 
     /**
-    * Fetches the schema for a Schema Id.
-    *
-    * This function performs a `GET` to the `/api/v1/meta/schemas/user/{schemaId}` endpoint.
-    *
-    * Fetches the schema for a Schema Id.
-    *
-    * **Parameters:**
-    *
-    * * `schema_id: &str`
-    */
+     * Fetches the schema for a Schema Id.
+     *
+     * This function performs a `GET` to the `/api/v1/meta/schemas/user/{schemaId}` endpoint.
+     *
+     * Fetches the schema for a Schema Id.
+     *
+     * **Parameters:**
+     *
+     * * `schema_id: &str`
+     */
     pub async fn get(&self, schema_id: &str) -> Result<crate::types::UserSchema> {
         let url = format!(
             "/api/v1/meta/schemas/user/{}",
@@ -79,14 +79,14 @@ impl UserSchemas {
     }
 
     /**
-    * This function performs a `POST` to the `/api/v1/meta/schemas/user/{schemaId}` endpoint.
-    *
-    * Partial updates on the User Profile properties of the user schema.
-    *
-    * **Parameters:**
-    *
-    * * `schema_id: &str`
-    */
+     * This function performs a `POST` to the `/api/v1/meta/schemas/user/{schemaId}` endpoint.
+     *
+     * Partial updates on the User Profile properties of the user schema.
+     *
+     * **Parameters:**
+     *
+     * * `schema_id: &str`
+     */
     pub async fn update_user_profile(
         &self,
         schema_id: &str,

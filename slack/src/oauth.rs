@@ -13,20 +13,20 @@ impl Oauth {
     }
 
     /**
-    * This function performs a `GET` to the `/oauth.access` endpoint.
-    *
-    * Exchanges a temporary OAuth verifier code for an access token.
-    *
-    * FROM: <https://api.slack.com/methods/oauth.access>
-    *
-    * **Parameters:**
-    *
-    * * `client_id: &str` -- Issued when you created your application.
-    * * `client_secret: &str` -- Issued when you created your application.
-    * * `code: &str` -- The `code` param returned via the OAuth callback.
-    * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
-    * * `single_channel: bool` -- Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps).
-    */
+     * This function performs a `GET` to the `/oauth.access` endpoint.
+     *
+     * Exchanges a temporary OAuth verifier code for an access token.
+     *
+     * FROM: <https://api.slack.com/methods/oauth.access>
+     *
+     * **Parameters:**
+     *
+     * * `client_id: &str` -- Issued when you created your application.
+     * * `client_secret: &str` -- Issued when you created your application.
+     * * `code: &str` -- The `code` param returned via the OAuth callback.
+     * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
+     * * `single_channel: bool` -- Request the user to add your app only to a single channel. Only valid with a [legacy workspace app](https://api.slack.com/legacy-workspace-apps).
+     */
     pub async fn access(
         &self,
         client_id: &str,
@@ -58,20 +58,20 @@ impl Oauth {
     }
 
     /**
-    * This function performs a `GET` to the `/oauth.token` endpoint.
-    *
-    * Exchanges a temporary OAuth verifier code for a workspace token.
-    *
-    * FROM: <https://api.slack.com/methods/oauth.token>
-    *
-    * **Parameters:**
-    *
-    * * `client_id: &str` -- Issued when you created your application.
-    * * `client_secret: &str` -- Issued when you created your application.
-    * * `code: &str` -- The `code` param returned via the OAuth callback.
-    * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
-    * * `single_channel: bool` -- Request the user to add your app only to a single channel.
-    */
+     * This function performs a `GET` to the `/oauth.token` endpoint.
+     *
+     * Exchanges a temporary OAuth verifier code for a workspace token.
+     *
+     * FROM: <https://api.slack.com/methods/oauth.token>
+     *
+     * **Parameters:**
+     *
+     * * `client_id: &str` -- Issued when you created your application.
+     * * `client_secret: &str` -- Issued when you created your application.
+     * * `code: &str` -- The `code` param returned via the OAuth callback.
+     * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
+     * * `single_channel: bool` -- Request the user to add your app only to a single channel.
+     */
     pub async fn token(
         &self,
         client_id: &str,
