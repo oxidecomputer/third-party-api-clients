@@ -35,7 +35,7 @@ impl Client {
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
                     // Retry failed requests.
-                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy).with_streaming_passthrough(true))
                     .build();
         #[cfg(feature = "httpcache")]
         {
@@ -586,7 +586,7 @@ impl Client {{
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
                     // Retry failed requests.
-                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy).with_streaming_passthrough(true))
                     .build();
 
                 Client {{
@@ -783,7 +783,7 @@ where
                 // Trace HTTP requests. See the tracing crate to make use of these traces.
                 .with(reqwest_tracing::TracingMiddleware)
                 // Retry failed requests.
-                .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy).with_streaming_passthrough(true))
                 .build();
 
             Client {
@@ -836,7 +836,7 @@ impl Client {{
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
                     // Retry failed requests.
-                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy).with_streaming_passthrough(true))
                     .build();
 
                 Client {{
@@ -1684,7 +1684,7 @@ impl Client {{
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
                     // Retry failed requests.
-                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy))
+                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy).with_streaming_passthrough(true))
                     .build();
 
                 Client {{
