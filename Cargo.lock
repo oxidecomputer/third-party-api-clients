@@ -220,7 +220,7 @@ dependencies = [
 
 [[package]]
 name = "docusign"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -256,7 +256,7 @@ dependencies = [
 
 [[package]]
 name = "dolladollabills"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -486,7 +486,7 @@ checksum = "f0a01e0497841a3b2db4f8afa483cce65f7e96a3498bd6c541734792aeac8fe7"
 
 [[package]]
 name = "giphy-api"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -522,7 +522,7 @@ dependencies = [
 
 [[package]]
 name = "google-calendar"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -559,7 +559,7 @@ dependencies = [
 
 [[package]]
 name = "google-cloud-resource-manager"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -596,7 +596,7 @@ dependencies = [
 
 [[package]]
 name = "google-drive"
-version = "0.3.1"
+version = "0.3.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -633,7 +633,7 @@ dependencies = [
 
 [[package]]
 name = "google-groups-settings"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -670,7 +670,7 @@ dependencies = [
 
 [[package]]
 name = "gsuite-api"
-version = "0.3.1"
+version = "0.3.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -707,7 +707,7 @@ dependencies = [
 
 [[package]]
 name = "gusto-api"
-version = "0.2.13"
+version = "0.2.14"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -992,7 +992,7 @@ dependencies = [
 
 [[package]]
 name = "mailchimp-api"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1183,7 +1183,7 @@ dependencies = [
 
 [[package]]
 name = "octorust"
-version = "0.1.36"
+version = "0.1.37"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1215,7 +1215,7 @@ dependencies = [
 
 [[package]]
 name = "okta"
-version = "0.2.4"
+version = "0.2.5"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1667,7 +1667,7 @@ dependencies = [
 
 [[package]]
 name = "revai"
-version = "0.2.4"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1838,7 +1838,7 @@ dependencies = [
 
 [[package]]
 name = "sendgrid-api"
-version = "0.2.3"
+version = "0.2.4"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1949,7 +1949,7 @@ dependencies = [
 
 [[package]]
 name = "sheets"
-version = "0.3.1"
+version = "0.3.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1986,7 +1986,7 @@ dependencies = [
 
 [[package]]
 name = "shipbob"
-version = "0.1.5"
+version = "0.1.6"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2022,7 +2022,7 @@ dependencies = [
 
 [[package]]
 name = "shopify"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2084,7 +2084,7 @@ checksum = "c307a32c1c5c437f38c7fd45d753050587732ba8628319fbdf12a7e289ccc590"
 
 [[package]]
 name = "slack-chat-api"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2369,7 +2369,7 @@ dependencies = [
 
 [[package]]
 name = "tripactions"
-version = "0.2.3"
+version = "0.2.4"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2675,7 +2675,7 @@ dependencies = [
 
 [[package]]
 name = "zoom-api"
-version = "0.2.6"
+version = "0.2.7"
 dependencies = [
  "anyhow",
  "async-recursion",

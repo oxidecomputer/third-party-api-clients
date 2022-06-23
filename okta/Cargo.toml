@@ -1,7 +1,7 @@
 [package]
 name = "okta"
 description = "A fully generated & opinionated API client for the Okta API."
-version = "0.2.4"
+version = "0.2.5"
 documentation = "https://docs.rs/okta/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/okta"
 readme = "README.md"

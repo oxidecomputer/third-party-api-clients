@@ -159,7 +159,7 @@ $(DOCUSIGN_SPEC): $(DOCUSIGN_SPEC_DIR)
 	curl -sSL $(DOCUSIGN_SPEC_REMOTE) -o $@
 
 docusign: target/debug/generator $(DOCUSIGN_SPEC)
-	./target/debug/generator -i $(DOCUSIGN_SPEC) -v 0.2.0 \
+	./target/debug/generator -i $(DOCUSIGN_SPEC) -v 0.2.1 \
 		-o docusign \
 		-n docusign \
 		--proper-name DocuSign \
@@ -178,7 +178,7 @@ $(GIPHY_SPEC): $(GIPHY_SPEC_DIR)
 	curl -sSL $(GIPHY_SPEC_REMOTE) -o $@
 
 giphy: target/debug/generator $(GIPHY_SPEC)
-	./target/debug/generator -i $(GIPHY_SPEC) -v 0.2.0 \
+	./target/debug/generator -i $(GIPHY_SPEC) -v 0.2.1 \
 		-o giphy \
 		-n giphy-api \
 		--proper-name "Giphy" \
@@ -195,7 +195,7 @@ $(GITHUB_SPEC): $(GITHUB_SPEC_DIR)
 	curl -sSL $(GITHUB_SPEC_REMOTE) -o $@
 
 github: target/debug/generator $(GITHUB_SPEC)
-	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.36 \
+	./target/debug/generator -i $(GITHUB_SPEC) -v 0.1.37 \
 		-o github \
 		-n octorust \
 		--proper-name GitHub \
@@ -217,7 +217,7 @@ $(GOOGLE_ADMIN_SPEC): $(GOOGLE_ADMIN_SPEC_DIR)
 	curl -sSL $(GOOGLE_ADMIN_SPEC_REMOTE) -o $@
 
 google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
-	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.3.1 \
+	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.3.2 \
 		-o google/admin \
 		-n gsuite-api \
 		--proper-name "Google Admin" \
@@ -236,7 +236,7 @@ $(GOOGLE_CALENDAR_SPEC): $(GOOGLE_CALENDAR_SPEC_DIR)
 	curl -sSL $(GOOGLE_CALENDAR_SPEC_REMOTE) -o $@
 
 google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
-	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.2.2 \
 		-o google/calendar \
 		-n google-calendar \
 		--proper-name "Google Calendar" \
@@ -255,7 +255,7 @@ $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC): $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR)
 	curl -sSL $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_REMOTE) -o $@
 
 google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC)
-	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.1.3 \
+	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.1.4 \
 		-o google/cloud-resource-manager \
 		-n google-cloud-resource-manager \
 		--proper-name "Google Cloud Resource Manager" \
@@ -274,7 +274,7 @@ $(GOOGLE_DRIVE_SPEC): $(GOOGLE_DRIVE_SPEC_DIR)
 	curl -sSL $(GOOGLE_DRIVE_SPEC_REMOTE) -o $@
 
 google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
-	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.3.1 \
+	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.3.2 \
 		-o google/drive \
 		-n google-drive \
 		--proper-name "Google Drive" \
@@ -293,7 +293,7 @@ $(GOOGLE_GROUPS_SETTINGS_SPEC): $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR)
 	curl -sSL $(GOOGLE_GROUPS_SETTINGS_SPEC_REMOTE) -o $@
 
 google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
-	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.2.2 \
 		-o google/groups-settings \
 		-n google-groups-settings \
 		--proper-name "Google Groups Settings" \
@@ -312,7 +312,7 @@ $(GOOGLE_SHEETS_SPEC): $(GOOGLE_SHEETS_SPEC_DIR)
 	curl -sSL $(GOOGLE_SHEETS_SPEC_REMOTE) -o $@
 
 google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
-	./target/debug/generator -i $(GOOGLE_SHEETS_SPEC) -v 0.3.1 \
+	./target/debug/generator -i $(GOOGLE_SHEETS_SPEC) -v 0.3.2 \
 		-o google/sheets \
 		-n sheets \
 		--proper-name "Google Sheets" \
@@ -331,7 +331,7 @@ $(GUSTO_SPEC): $(GUSTO_SPEC_DIR)
 	curl -sSL $(GUSTO_SPEC_REMOTE) -o $@
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.13 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.14 \
 		-o gusto \
 		-n gusto-api \
 		--proper-name Gusto \
@@ -353,7 +353,7 @@ $(MAILCHIMP_SPEC): $(MAILCHIMP_SPEC_DIR)
 		$(MAILCHIMP_SPEC_REMOTE)
 
 mailchimp: target/debug/generator $(MAILCHIMP_SPEC)
-	./target/debug/generator -i $(MAILCHIMP_SPEC) -v 0.2.0 \
+	./target/debug/generator -i $(MAILCHIMP_SPEC) -v 0.2.1 \
 		-o mailchimp \
 		-n mailchimp-api \
 		--proper-name MailChimp \
@@ -375,7 +375,7 @@ $(OKTA_SPEC): $(OKTA_SPEC_DIR)
 		$(OKTA_SPEC_REMOTE)
 
 okta: target/debug/generator $(OKTA_SPEC)
-	./target/debug/generator -i $(OKTA_SPEC) -v 0.2.4 \
+	./target/debug/generator -i $(OKTA_SPEC) -v 0.2.5 \
 		-o okta \
 		-n okta \
 		--proper-name Okta \
@@ -397,7 +397,7 @@ $(RAMP_SPEC):
 		-o $@ $?
 
 ramp: target/debug/generator $(RAMP_SPEC)
-	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.9 \
+	./target/debug/generator -i $(RAMP_SPEC) -v 0.2.10 \
 		-o ramp \
 		-n ramp-api \
 		--proper-name Ramp \
@@ -416,7 +416,7 @@ $(REVAI_SPEC): $(REVAI_SPEC_DIR)
 	curl -sSL $(REVAI_SPEC_REMOTE) -o $@
 
 revai: target/debug/generator $(REVAI_SPEC)
-	./target/debug/generator -i $(REVAI_SPEC) -v 0.2.4 \
+	./target/debug/generator -i $(REVAI_SPEC) -v 0.3.0 \
 		-o rev.ai \
 		-n revai \
 		--proper-name "Rev.ai" \
@@ -436,7 +436,7 @@ $(SENDGRID_SPEC): $(SENDGRID_SPEC_DIR)
 		$(SENDGRID_SPEC_REMOTE)
 
 sendgrid: target/debug/generator $(SENDGRID_SPEC)
-	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.2.3 \
+	./target/debug/generator -i $(SENDGRID_SPEC) -v 0.2.4 \
 		-o sendgrid \
 		-n sendgrid-api \
 		--proper-name SendGrid \
@@ -457,7 +457,7 @@ $(SHIPBOB_SPEC): $(SHIPBOB_SPEC_DIR)
 
 .PHONY: shipbob
 shipbob: target/debug/generator $(SHIPBOB_SPEC)
-	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.5 \
+	./target/debug/generator -i $(SHIPBOB_SPEC) -v 0.1.6 \
 		-o shipbob \
 		-n shipbob \
 		--proper-name "ShipBob" \
@@ -474,7 +474,7 @@ $(SHOPIFY_SPEC): $(SHOPIFY_SPEC_DIR)
 	curl -sSL $(SHOPIFY_SPEC_REMOTE) -o $@
 
 shopify: target/debug/generator $(SHOPIFY_SPEC)
-	./target/debug/generator -i $(SHOPIFY_SPEC) -v 0.1.0 \
+	./target/debug/generator -i $(SHOPIFY_SPEC) -v 0.1.1 \
 		-o shopify \
 		-n shopify \
 		--proper-name "Shopify" \
@@ -496,7 +496,7 @@ $(SLACK_SPEC): $(SLACK_SPEC_DIR)
 		$(SLACK_SPEC_REMOTE)
 
 slack: target/debug/generator $(SLACK_SPEC)
-	./target/debug/generator -i $(SLACK_SPEC) -v 0.2.0 \
+	./target/debug/generator -i $(SLACK_SPEC) -v 0.2.1 \
 		-o slack \
 		-n slack-chat-api \
 		--proper-name Slack \
@@ -518,7 +518,7 @@ $(STRIPE_SPEC): $(STRIPE_SPEC_DIR)
 		$(STRIPE_SPEC_REMOTE)
 
 stripe: target/debug/generator $(STRIPE_SPEC)
-	./target/debug/generator -i $(STRIPE_SPEC) -v 0.2.0 \
+	./target/debug/generator -i $(STRIPE_SPEC) -v 0.2.1 \
 		-o stripe \
 		-n dolladollabills \
 		--proper-name Stripe \
@@ -535,7 +535,7 @@ $(TRIPACTIONS_SPEC): $(TRIPACTIONS_SPEC_DIR)
 	curl -sSL $(TRIPACTIONS_SPEC_REMOTE) -o $@
 
 tripactions: target/debug/generator $(TRIPACTIONS_SPEC)
-	./target/debug/generator -i $(TRIPACTIONS_SPEC) -v 0.2.3 \
+	./target/debug/generator -i $(TRIPACTIONS_SPEC) -v 0.2.4 \
 		-o tripactions \
 		-n tripactions \
 		--proper-name "TripActions" \
@@ -556,7 +556,7 @@ $(ZOOM_SPEC): $(ZOOM_SPEC_DIR)
 		$(ZOOM_SPEC_REMOTE)
 
 zoom: target/debug/generator $(ZOOM_SPEC)
-	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.6 \
+	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.7 \
 		-o zoom \
 		-n zoom-api \
 		--proper-name Zoom \

@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gsuite-api = "0.3.1"
+//! gsuite-api = "0.3.2"
 //! ```
 //!
 //! ## Basic example
