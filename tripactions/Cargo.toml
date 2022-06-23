@@ -1,7 +1,7 @@
 [package]
 name = "tripactions"
 description = "A fully generated & opinionated API client for the TripActions API."
-version = "0.3.0"
+version = "0.2.4"
 documentation = "https://docs.rs/tripactions/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/tripactions"
 readme = "README.md"

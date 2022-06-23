@@ -37,7 +37,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-okta = "0.3.0"
+okta = "0.2.5"
 ```
 
 ## Basic example

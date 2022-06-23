@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-groups-settings = "0.3.0"
+//! google-groups-settings = "0.2.2"
 //! ```
 //!
 //! ## Basic example
