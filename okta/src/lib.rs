@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! okta = "0.2.4"
+//! okta = "0.3.0"
 //! ```
 //!
 //! ## Basic example
