@@ -1594,7 +1594,8 @@ dependencies = [
 [[package]]
 name = "reqwest-conditional-middleware"
 version = "0.1.0"
-source = "git+https://github.com/oxidecomputer/reqwest-conditional-middleware#364ff0c919361a6cc2e944f36467d67f502b7b67"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bce134f515eb4c2748bbd928086e7b0aae0d1568daf6c63b51e829aa6f2cf464"
 dependencies = [
  "async-trait",
  "reqwest",
