@@ -13,19 +13,19 @@ impl GroupUsers {
     }
 
     /**
-    * Gets a list of users in a group.
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/groups/{groupId}/users` endpoint.
-    *
-    * Retrieves a list of users in a group.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `count: &str` -- Number of records to return. The number must be greater than 1 and less than or equal to 100. .
-    * * `start_position: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Gets a list of users in a group.
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/groups/{groupId}/users` endpoint.
+     *
+     * Retrieves a list of users in a group.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count: &str` -- Number of records to return. The number must be greater than 1 and less than or equal to 100. .
+     * * `start_position: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn groups_get(
         &self,
         account_id: &str,
@@ -52,17 +52,17 @@ impl GroupUsers {
     }
 
     /**
-    * Adds one or more users to an existing group.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/groups/{groupId}/users` endpoint.
-    *
-    * Adds one or more existing DocuSign users to an existing group.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Adds one or more users to an existing group.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/groups/{groupId}/users` endpoint.
+     *
+     * Adds one or more existing DocuSign users to an existing group.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn groups_put(
         &self,
         account_id: &str,
@@ -81,18 +81,18 @@ impl GroupUsers {
     }
 
     /**
-    * Deletes one or more users from a group.
-    *
-    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/groups/{groupId}/users` endpoint.
-    *
-    * Deletes one or more users from a group. This request takes a `userInfoList` that contains the users that you want to delete.
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Deletes one or more users from a group.
+     *
+     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/groups/{groupId}/users` endpoint.
+     *
+     * Deletes one or more users from a group. This request takes a `userInfoList` that contains the users that you want to delete.
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `group_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn groups_delete(
         &self,
         account_id: &str,

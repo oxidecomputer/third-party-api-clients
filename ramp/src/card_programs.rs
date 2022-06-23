@@ -13,18 +13,18 @@ impl CardPrograms {
     }
 
     /**
-    * List card programs.
-    *
-    * This function performs a `GET` to the `/card-programs` endpoint.
-    *
-    * Retrieve all card programs.
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-    * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-    */
+     * List card programs.
+     *
+     * This function performs a `GET` to the `/card-programs` endpoint.
+     *
+     * Retrieve all card programs.
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     */
     pub async fn get_page(
         &self,
         start: &str,
@@ -47,14 +47,14 @@ impl CardPrograms {
     }
 
     /**
-    * List card programs.
-    *
-    * This function performs a `GET` to the `/card-programs` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * Retrieve all card programs.
-    */
+     * List card programs.
+     *
+     * This function performs a `GET` to the `/card-programs` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Retrieve all card programs.
+     */
     pub async fn get_all(&self) -> Result<Vec<crate::types::CardProgram>> {
         let url = "/card-programs".to_string();
         let resp: crate::types::GetCardProgramsResponse = self.client.get(&url, None).await?;
@@ -96,16 +96,16 @@ impl CardPrograms {
     }
 
     /**
-    * Create a card program.
-    *
-    * This function performs a `POST` to the `/card-programs` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * Create a card program.
+     *
+     * This function performs a `POST` to the `/card-programs` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn post_resources(
         &self,
         body: &crate::types::PostResourcesCardProgramRequest,
@@ -117,16 +117,16 @@ impl CardPrograms {
     }
 
     /**
-    * GET a card program.
-    *
-    * This function performs a `GET` to the `/card-programs/{id}` endpoint.
-    *
-    * Retrieve a single card program.
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * GET a card program.
+     *
+     * This function performs a `GET` to the `/card-programs/{id}` endpoint.
+     *
+     * Retrieve a single card program.
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn get_program(&self, id: &str) -> Result<crate::types::CardProgram> {
         let url = format!(
             "/card-programs/{}",

@@ -13,18 +13,18 @@ impl EarningType {
     }
 
     /**
-    * Get all earning types for a company.
-    *
-    * This function performs a `GET` to the `/v1/companies/{company_id}/earning_types` endpoint.
-    *
-    * A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
-    *
-    * #### Default Earning Type
-    * Certain earning types are special because they have tax considerations. Those earning types are mostly the same for every company depending on its legal structure (LLC, Corporation, etc.)
-    *
-    * #### Custom Earning Type
-    * Custom earning types are all the other earning types added specifically for a company.
-    */
+     * Get all earning types for a company.
+     *
+     * This function performs a `GET` to the `/v1/companies/{company_id}/earning_types` endpoint.
+     *
+     * A payroll item in Gusto is associated to an earning type to name the type of earning described by the payroll item.
+     *
+     * #### Default Earning Type
+     * Certain earning types are special because they have tax considerations. Those earning types are mostly the same for every company depending on its legal structure (LLC, Corporation, etc.)
+     *
+     * #### Custom Earning Type
+     * Custom earning types are all the other earning types added specifically for a company.
+     */
     pub async fn get_company(
         &self,
         company_id: &str,
@@ -38,14 +38,14 @@ impl EarningType {
     }
 
     /**
-    * Create a custom earning type.
-    *
-    * This function performs a `POST` to the `/v1/companies/{company_id}/earning_types` endpoint.
-    *
-    * Create a custom earning type.
-    *
-    * If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
-    */
+     * Create a custom earning type.
+     *
+     * This function performs a `POST` to the `/v1/companies/{company_id}/earning_types` endpoint.
+     *
+     * Create a custom earning type.
+     *
+     * If an inactive earning type exists with the same name, this will reactivate it instead of creating a new one.
+     */
     pub async fn post_company(
         &self,
         company_id: &str,
@@ -62,12 +62,12 @@ impl EarningType {
     }
 
     /**
-    * Update an earning type.
-    *
-    * This function performs a `PUT` to the `/v1/companies/{company_id}/earning_types/{earning_type_uuid}` endpoint.
-    *
-    * Update an earning type.
-    */
+     * Update an earning type.
+     *
+     * This function performs a `PUT` to the `/v1/companies/{company_id}/earning_types/{earning_type_uuid}` endpoint.
+     *
+     * Update an earning type.
+     */
     pub async fn put_company_type(
         &self,
         company_id: &str,
@@ -86,12 +86,12 @@ impl EarningType {
     }
 
     /**
-    * Deactivate an earning type.
-    *
-    * This function performs a `DELETE` to the `/v1/companies/{company_id}/earning_types/{earning_type_uuid}` endpoint.
-    *
-    * Deactivate an earning type.
-    */
+     * Deactivate an earning type.
+     *
+     * This function performs a `DELETE` to the `/v1/companies/{company_id}/earning_types/{earning_type_uuid}` endpoint.
+     *
+     * Deactivate an earning type.
+     */
     pub async fn delete_company_type(
         &self,
         company_id: &str,

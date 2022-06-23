@@ -13,17 +13,17 @@ impl Services {
     }
 
     /**
-    * Retrieves the available REST API versions.
-    *
-    * This function performs a `GET` to the `/service_information` endpoint.
-    *
-    * Retrieves the available REST API versions.
-    *
-    * DocuSign Production system: https://www.docusign.net/restapi/service_information
-    * DocuSign Demo system: https://demo.docusign.net/restapi/service_information
-    *
-    * You do not need an integrator key to view the REST API versions and resources.
-    */
+     * Retrieves the available REST API versions.
+     *
+     * This function performs a `GET` to the `/service_information` endpoint.
+     *
+     * Retrieves the available REST API versions.
+     *
+     * DocuSign Production system: https://www.docusign.net/restapi/service_information
+     * DocuSign Demo system: https://demo.docusign.net/restapi/service_information
+     *
+     * You do not need an integrator key to view the REST API versions and resources.
+     */
     pub async fn information_get(&self) -> Result<crate::types::ServiceInformation> {
         let url = "/service_information".to_string();
         self.client.get(&url, None).await

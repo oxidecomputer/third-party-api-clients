@@ -13,16 +13,16 @@ impl Revisions {
     }
 
     /**
-    * This function performs a `GET` to the `/files/{fileId}/revisions` endpoint.
-    *
-    * Lists a file's revisions.
-    *
-    * **Parameters:**
-    *
-    * * `file_id: &str` -- A link to this theme's background image.
-    * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
-    * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
-    */
+     * This function performs a `GET` to the `/files/{fileId}/revisions` endpoint.
+     *
+     * Lists a file's revisions.
+     *
+     * **Parameters:**
+     *
+     * * `file_id: &str` -- A link to this theme's background image.
+     * * `page_size: i64` -- A map of maximum import sizes by MIME type, in bytes.
+     * * `page_token: &str` -- The token for continuing a previous list request on the next page. This should be set to the value of 'nextPageToken' from the previous response.
+     */
     pub async fn list(
         &self,
         file_id: &str,
@@ -50,12 +50,12 @@ impl Revisions {
     }
 
     /**
-    * This function performs a `GET` to the `/files/{fileId}/revisions` endpoint.
-    *
-    * As opposed to `list`, this function returns all the pages of the request at once.
-    *
-    * Lists a file's revisions.
-    */
+     * This function performs a `GET` to the `/files/{fileId}/revisions` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Lists a file's revisions.
+     */
     pub async fn list_all(&self, file_id: &str) -> Result<Vec<crate::types::Revision>> {
         let url = format!(
             "/files/{}/revisions",
@@ -95,16 +95,16 @@ impl Revisions {
     }
 
     /**
-    * This function performs a `GET` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
-    *
-    * Gets a revision's metadata or content by ID.
-    *
-    * **Parameters:**
-    *
-    * * `file_id: &str` -- A link to this theme's background image.
-    * * `revision_id: &str` -- A link to this theme's background image.
-    * * `acknowledge_abuse: bool` -- Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
-    */
+     * This function performs a `GET` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
+     *
+     * Gets a revision's metadata or content by ID.
+     *
+     * **Parameters:**
+     *
+     * * `file_id: &str` -- A link to this theme's background image.
+     * * `revision_id: &str` -- A link to this theme's background image.
+     * * `acknowledge_abuse: bool` -- Whether the user is acknowledging the risk of downloading known malware or other abusive files. This is only applicable when alt=media.
+     */
     pub async fn get(
         &self,
         file_id: &str,
@@ -130,15 +130,15 @@ impl Revisions {
     }
 
     /**
-    * This function performs a `DELETE` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
-    *
-    * Permanently deletes a file version. You can only delete revisions for files with binary content in Google Drive, like images or videos. Revisions for other files, like Google Docs or Sheets, and the last remaining file version can't be deleted.
-    *
-    * **Parameters:**
-    *
-    * * `file_id: &str` -- A link to this theme's background image.
-    * * `revision_id: &str` -- A link to this theme's background image.
-    */
+     * This function performs a `DELETE` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
+     *
+     * Permanently deletes a file version. You can only delete revisions for files with binary content in Google Drive, like images or videos. Revisions for other files, like Google Docs or Sheets, and the last remaining file version can't be deleted.
+     *
+     * **Parameters:**
+     *
+     * * `file_id: &str` -- A link to this theme's background image.
+     * * `revision_id: &str` -- A link to this theme's background image.
+     */
     pub async fn delete(&self, file_id: &str, revision_id: &str) -> Result<()> {
         let url = format!(
             "/files/{}/revisions/{}",
@@ -150,15 +150,15 @@ impl Revisions {
     }
 
     /**
-    * This function performs a `PATCH` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
-    *
-    * Updates a revision with patch semantics.
-    *
-    * **Parameters:**
-    *
-    * * `file_id: &str` -- A link to this theme's background image.
-    * * `revision_id: &str` -- A link to this theme's background image.
-    */
+     * This function performs a `PATCH` to the `/files/{fileId}/revisions/{revisionId}` endpoint.
+     *
+     * Updates a revision with patch semantics.
+     *
+     * **Parameters:**
+     *
+     * * `file_id: &str` -- A link to this theme's background image.
+     * * `revision_id: &str` -- A link to this theme's background image.
+     */
     pub async fn update(
         &self,
         file_id: &str,

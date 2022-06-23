@@ -13,16 +13,16 @@ impl AccountTabSettings {
     }
 
     /**
-    * Returns tab settings list for specified account.
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/settings/tabs` endpoint.
-    *
-    * This method returns information about the tab types and tab functionality that is currently enabled for an account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Returns tab settings list for specified account.
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/settings/tabs` endpoint.
+     *
+     * This method returns information about the tab types and tab functionality that is currently enabled for an account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn tab_settings_get(
         &self,
         account_id: &str,
@@ -36,16 +36,16 @@ impl AccountTabSettings {
     }
 
     /**
-    * Modifies tab settings for specified account.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/settings/tabs` endpoint.
-    *
-    * This method modifies the tab types and tab functionality that is enabled for an account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Modifies tab settings for specified account.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/settings/tabs` endpoint.
+     *
+     * This method modifies the tab types and tab functionality that is enabled for an account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn tab_settings_put(
         &self,
         account_id: &str,

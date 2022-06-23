@@ -13,17 +13,17 @@ impl TemplateViews {
     }
 
     /**
-    * Gets a URL for a template edit view.
-    *
-    * This function performs a `POST` to the `/v2.1/accounts/{accountId}/templates/{templateId}/views/edit` endpoint.
-    *
-    * This method returns a URL for starting an edit view of a template that uses the DocuSign Template UI.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Gets a URL for a template edit view.
+     *
+     * This function performs a `POST` to the `/v2.1/accounts/{accountId}/templates/{templateId}/views/edit` endpoint.
+     *
+     * This method returns a URL for starting an edit view of a template that uses the DocuSign Template UI.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `template_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn views_post_template_edit_view(
         &self,
         account_id: &str,

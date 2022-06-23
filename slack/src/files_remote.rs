@@ -13,30 +13,30 @@ impl FilesRemote {
     }
 
     /**
-    * This function performs a `POST` to the `/files.remote.add` endpoint.
-    *
-    * Adds a file from a remote service
-    *
-    * FROM: <https://api.slack.com/methods/files.remote.add>
-    */
+     * This function performs a `POST` to the `/files.remote.add` endpoint.
+     *
+     * Adds a file from a remote service
+     *
+     * FROM: <https://api.slack.com/methods/files.remote.add>
+     */
     pub async fn add(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/files.remote.add".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/files.remote.info` endpoint.
-    *
-    * Retrieve information about a remote file added to Slack
-    *
-    * FROM: <https://api.slack.com/methods/files.remote.info>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `remote_files:read`.
-    * * `file: &str` -- Specify a file by providing its ID.
-    * * `external_id: &str` -- Creator defined GUID for the file.
-    */
+     * This function performs a `GET` to the `/files.remote.info` endpoint.
+     *
+     * Retrieve information about a remote file added to Slack
+     *
+     * FROM: <https://api.slack.com/methods/files.remote.info>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `remote_files:read`.
+     * * `file: &str` -- Specify a file by providing its ID.
+     * * `external_id: &str` -- Creator defined GUID for the file.
+     */
     pub async fn info(&self, file: &str, external_id: &str) -> Result<crate::types::DndEndSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !external_id.is_empty() {
@@ -52,21 +52,21 @@ impl FilesRemote {
     }
 
     /**
-    * This function performs a `GET` to the `/files.remote.list` endpoint.
-    *
-    * Retrieve information about a remote file added to Slack
-    *
-    * FROM: <https://api.slack.com/methods/files.remote.list>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `remote_files:read`.
-    * * `channel: &str` -- Filter files appearing in a specific channel, indicated by its ID.
-    * * `ts_from: f64` -- Filter files created after this timestamp (inclusive).
-    * * `ts_to: f64` -- Filter files created before this timestamp (inclusive).
-    * * `limit: i64` -- The maximum number of items to return.
-    * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
-    */
+     * This function performs a `GET` to the `/files.remote.list` endpoint.
+     *
+     * Retrieve information about a remote file added to Slack
+     *
+     * FROM: <https://api.slack.com/methods/files.remote.list>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `remote_files:read`.
+     * * `channel: &str` -- Filter files appearing in a specific channel, indicated by its ID.
+     * * `ts_from: f64` -- Filter files created after this timestamp (inclusive).
+     * * `ts_to: f64` -- Filter files created before this timestamp (inclusive).
+     * * `limit: i64` -- The maximum number of items to return.
+     * * `cursor: &str` -- Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+     */
     pub async fn list(
         &self,
         channel: &str,
@@ -98,31 +98,31 @@ impl FilesRemote {
     }
 
     /**
-    * This function performs a `POST` to the `/files.remote.remove` endpoint.
-    *
-    * Remove a remote file.
-    *
-    * FROM: <https://api.slack.com/methods/files.remote.remove>
-    */
+     * This function performs a `POST` to the `/files.remote.remove` endpoint.
+     *
+     * Remove a remote file.
+     *
+     * FROM: <https://api.slack.com/methods/files.remote.remove>
+     */
     pub async fn remove(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/files.remote.remove".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/files.remote.share` endpoint.
-    *
-    * Share a remote file into a channel.
-    *
-    * FROM: <https://api.slack.com/methods/files.remote.share>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `remote_files:share`.
-    * * `file: &str` -- Specify a file registered with Slack by providing its ID. Either this field or `external_id` or both are required.
-    * * `external_id: &str` -- The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or `file` or both are required.
-    * * `channels: &str` -- Comma-separated list of channel IDs where the file will be shared.
-    */
+     * This function performs a `GET` to the `/files.remote.share` endpoint.
+     *
+     * Share a remote file into a channel.
+     *
+     * FROM: <https://api.slack.com/methods/files.remote.share>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `remote_files:share`.
+     * * `file: &str` -- Specify a file registered with Slack by providing its ID. Either this field or `external_id` or both are required.
+     * * `external_id: &str` -- The globally unique identifier (GUID) for the file, as set by the app registering the file with Slack.  Either this field or `file` or both are required.
+     * * `channels: &str` -- Comma-separated list of channel IDs where the file will be shared.
+     */
     pub async fn share(
         &self,
         file: &str,
@@ -146,12 +146,12 @@ impl FilesRemote {
     }
 
     /**
-    * This function performs a `POST` to the `/files.remote.update` endpoint.
-    *
-    * Updates an existing remote file.
-    *
-    * FROM: <https://api.slack.com/methods/files.remote.update>
-    */
+     * This function performs a `POST` to the `/files.remote.update` endpoint.
+     *
+     * Updates an existing remote file.
+     *
+     * FROM: <https://api.slack.com/methods/files.remote.update>
+     */
     pub async fn update(&self) -> Result<crate::types::DndEndSchema> {
         let url = "/files.remote.update".to_string();
         self.client.post(&url, None).await

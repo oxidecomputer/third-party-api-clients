@@ -13,25 +13,25 @@ impl ThreeDSecure {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/3d_secure` endpoint.
-    *
-    * <p>Initiate 3D Secure authentication.</p>
-    */
+     * This function performs a `POST` to the `/v1/3d_secure` endpoint.
+     *
+     * <p>Initiate 3D Secure authentication.</p>
+     */
     pub async fn post_3d_secure(&self) -> Result<crate::types::ThreeDSecure> {
         let url = "/v1/3d_secure".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/3d_secure/{three_d_secure}` endpoint.
-    *
-    * <p>Retrieves a 3D Secure object.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `three_d_secure: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/3d_secure/{three_d_secure}` endpoint.
+     *
+     * <p>Retrieves a 3D Secure object.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `three_d_secure: &str` -- The account's country.
+     */
     pub async fn get_3d_secure_three_d(
         &self,
         three_d_secure: &str,

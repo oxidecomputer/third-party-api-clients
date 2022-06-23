@@ -562,8 +562,8 @@ pub struct BookingReport {
     )]
     pub cancellation_reason: String,
     /**
-    * Time at which the object was created.
-    */
+     * Time at which the object was created.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -613,8 +613,8 @@ pub struct BookingReport {
     )]
     pub corporate_discount_used: String,
     /**
-    * Time at which the object was created.
-    */
+     * Time at which the object was created.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -644,8 +644,8 @@ pub struct BookingReport {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub destination: Option<Location>,
     /**
-    * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
-    */
+     * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -736,8 +736,8 @@ pub struct BookingReport {
     )]
     pub invoice: String,
     /**
-    * Time at which the object was created.
-    */
+     * Time at which the object was created.
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -918,8 +918,8 @@ pub struct BookingReport {
     )]
     pub segments: Vec<Segment>,
     /**
-    * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
-    */
+     * Local date when the booking starts, e.g. checkin date for hotel, date of depart for flight
+     */
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",

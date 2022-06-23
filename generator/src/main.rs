@@ -3254,6 +3254,7 @@ openssl = {{ version = "0.10", default-features = false, optional = true }}
 pem = {{ version = "0.8",  default-features = false, optional = true }}
 percent-encoding = "2.1"
 reqwest = {{ version = "0.11", default-features = false, features = ["json", "multipart"] }}
+reqwest-conditional-middleware = {{ git = "https://github.com/oxidecomputer/reqwest-conditional-middleware" }}
 reqwest-middleware = "0.1.5"
 reqwest-retry = "0.1.4"
 reqwest-tracing = {{ version = "0.2.1", features = ["opentelemetry_0_17"] }}

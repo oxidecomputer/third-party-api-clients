@@ -13,20 +13,20 @@ impl EnvelopeTransferRules {
     }
 
     /**
-    * Gets envelope transfer rules.
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules` endpoint.
-    *
-    * This method retrieves a list of envelope transfer rules associated with an account.
-    *
-    * **Note**: Only Administrators can create and use envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `start_position: &str` -- (Optional) The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
-    */
+     * Gets envelope transfer rules.
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules` endpoint.
+     *
+     * This method retrieves a list of envelope transfer rules associated with an account.
+     *
+     * **Note**: Only Administrators can create and use envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `count: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `start_position: &str` -- (Optional) The position within the total result set from which to start returning values. The value **thumbnail** may be used to return the page image.
+     */
     pub async fn get(
         &self,
         account_id: &str,
@@ -51,18 +51,18 @@ impl EnvelopeTransferRules {
     }
 
     /**
-    * Changes the status of multiple envelope transfer rules.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules` endpoint.
-    *
-    * This method changes the status for one or more envelope transfer rules based on the `envelopeTransferRuleId`s in the request body. You use this method to change whether or not the rules are enabled.
-    *
-    * **Note**: You cannot change any other information about the envelope transfer rule. Only Administrators can update envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Changes the status of multiple envelope transfer rules.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules` endpoint.
+     *
+     * This method changes the status for one or more envelope transfer rules based on the `envelopeTransferRuleId`s in the request body. You use this method to change whether or not the rules are enabled.
+     *
+     * **Note**: You cannot change any other information about the envelope transfer rule. Only Administrators can update envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn put(
         &self,
         account_id: &str,
@@ -79,27 +79,27 @@ impl EnvelopeTransferRules {
     }
 
     /**
-    * Creates an envelope transfer rule.
-    *
-    * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules` endpoint.
-    *
-    * This method creates an envelope transfer rule.
-    *
-    * When you create an envelope transfer rule, you specify the following properties:
-    *
-    * - `eventType`
-    * - `fromGroups`
-    * - `toUser`
-    * - `toFolder`
-    * - `carbonCopyOriginalOwner`
-    * - `enabled`
-    *
-    * **Note**: Only Administrators can create envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Creates an envelope transfer rule.
+     *
+     * This function performs a `POST` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules` endpoint.
+     *
+     * This method creates an envelope transfer rule.
+     *
+     * When you create an envelope transfer rule, you specify the following properties:
+     *
+     * - `eventType`
+     * - `fromGroups`
+     * - `toUser`
+     * - `toFolder`
+     * - `carbonCopyOriginalOwner`
+     * - `enabled`
+     *
+     * **Note**: Only Administrators can create envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn post(
         &self,
         account_id: &str,
@@ -116,21 +116,21 @@ impl EnvelopeTransferRules {
     }
 
     /**
-    * Changes the status of an envelope transfer rule.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules/{envelopeTransferRuleId}` endpoint.
-    *
-    * This method changes the status of an envelope transfer rule. You use this method to change whether or not the rule is enabled.
-    *
-    * You must include the `envelopeTransferRuleId` both as a query parameter, and in the request body.
-    *
-    * **Note**: You cannot change any other information about the envelope transfer rule. Only Administrators can update an envelope transfer rule. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `envelope_transfer_rule_id: &str` -- The id of the envelope transfer rule. The system generates this id when the rule is first created.
-    */
+     * Changes the status of an envelope transfer rule.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules/{envelopeTransferRuleId}` endpoint.
+     *
+     * This method changes the status of an envelope transfer rule. You use this method to change whether or not the rule is enabled.
+     *
+     * You must include the `envelopeTransferRuleId` both as a query parameter, and in the request body.
+     *
+     * **Note**: You cannot change any other information about the envelope transfer rule. Only Administrators can update an envelope transfer rule. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_transfer_rule_id: &str` -- The id of the envelope transfer rule. The system generates this id when the rule is first created.
+     */
     pub async fn put_rule(
         &self,
         account_id: &str,
@@ -149,19 +149,19 @@ impl EnvelopeTransferRules {
     }
 
     /**
-    * Deletes an envelope transfer rule.
-    *
-    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules/{envelopeTransferRuleId}` endpoint.
-    *
-    * This method deletes an envelope transfer rule.
-    *
-    * **Note**: Only Administrators can delete envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `envelope_transfer_rule_id: &str` -- The id of the envelope transfer rule. The system generates this id when the rule is first created.
-    */
+     * Deletes an envelope transfer rule.
+     *
+     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/envelopes/transfer_rules/{envelopeTransferRuleId}` endpoint.
+     *
+     * This method deletes an envelope transfer rule.
+     *
+     * **Note**: Only Administrators can delete envelope transfer rules. In addition, to use envelope transfer rules, the **Transfer Custody** feature must be enabled for your account.
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `envelope_transfer_rule_id: &str` -- The id of the envelope transfer rule. The system generates this id when the rule is first created.
+     */
     pub async fn delete(&self, account_id: &str, envelope_transfer_rule_id: &str) -> Result<()> {
         let url = format!(
             "/v2.1/accounts/{}/envelopes/transfer_rules/{}",

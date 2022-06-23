@@ -13,20 +13,20 @@ impl Licenses {
     }
 
     /**
-    * Get all commonly used licenses.
-    *
-    * This function performs a `GET` to the `/licenses` endpoint.
-    *
-    *
-    *
-    * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
-    *
-    * **Parameters:**
-    *
-    * * `featured: bool`
-    * * `per_page: i64` -- Results per page (max 100).
-    * * `page: i64` -- Page number of the results to fetch.
-    */
+     * Get all commonly used licenses.
+     *
+     * This function performs a `GET` to the `/licenses` endpoint.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
+     *
+     * **Parameters:**
+     *
+     * * `featured: bool`
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `page: i64` -- Page number of the results to fetch.
+     */
     pub async fn get_all_commonly_used(
         &self,
         featured: bool,
@@ -50,16 +50,16 @@ impl Licenses {
     }
 
     /**
-    * Get all commonly used licenses.
-    *
-    * This function performs a `GET` to the `/licenses` endpoint.
-    *
-    * As opposed to `get_all_commonly_used`, this function returns all the pages of the request at once.
-    *
-    *
-    *
-    * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
-    */
+     * Get all commonly used licenses.
+     *
+     * This function performs a `GET` to the `/licenses` endpoint.
+     *
+     * As opposed to `get_all_commonly_used`, this function returns all the pages of the request at once.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses>
+     */
     pub async fn get_all_all_commonly_used(
         &self,
         featured: bool,
@@ -75,18 +75,18 @@ impl Licenses {
     }
 
     /**
-    * Get a license.
-    *
-    * This function performs a `GET` to the `/licenses/{license}` endpoint.
-    *
-    *
-    *
-    * FROM: <https://docs.github.com/rest/reference/licenses#get-a-license>
-    *
-    * **Parameters:**
-    *
-    * * `license: &str`
-    */
+     * Get a license.
+     *
+     * This function performs a `GET` to the `/licenses/{license}` endpoint.
+     *
+     *
+     *
+     * FROM: <https://docs.github.com/rest/reference/licenses#get-a-license>
+     *
+     * **Parameters:**
+     *
+     * * `license: &str`
+     */
     pub async fn get(&self, license: &str) -> Result<crate::types::LicenseData> {
         let url = format!(
             "/licenses/{}",
@@ -97,21 +97,21 @@ impl Licenses {
     }
 
     /**
-    * Get the license for a repository.
-    *
-    * This function performs a `GET` to the `/repos/{owner}/{repo}/license` endpoint.
-    *
-    * This method returns the contents of the repository's license file, if one is detected.
-    *
-    * Similar to [Get repository content](https://docs.github.com/rest/reference/repos#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
-    *
-    * FROM: <https://docs.github.com/rest/reference/licenses/#get-the-license-for-a-repository>
-    *
-    * **Parameters:**
-    *
-    * * `owner: &str`
-    * * `repo: &str`
-    */
+     * Get the license for a repository.
+     *
+     * This function performs a `GET` to the `/repos/{owner}/{repo}/license` endpoint.
+     *
+     * This method returns the contents of the repository's license file, if one is detected.
+     *
+     * Similar to [Get repository content](https://docs.github.com/rest/reference/repos#get-repository-content), this method also supports [custom media types](https://docs.github.com/rest/overview/media-types) for retrieving the raw license content or rendered license HTML.
+     *
+     * FROM: <https://docs.github.com/rest/reference/licenses/#get-the-license-for-a-repository>
+     *
+     * **Parameters:**
+     *
+     * * `owner: &str`
+     * * `repo: &str`
+     */
     pub async fn get_for_repo(
         &self,
         owner: &str,

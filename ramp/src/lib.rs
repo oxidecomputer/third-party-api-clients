@@ -41,7 +41,7 @@
 //!     String::from("client-secret"),
 //!     String::from("redirect-uri"),
 //!     String::from("token"),
-//!     String::from("refresh-token")
+//!     String::from("refresh-token"),
 //! );
 //! ```
 //!
@@ -57,10 +57,7 @@
 //! ```
 //! use ramp_api::Client;
 //!
-//! let ramp = Client::new_from_env(
-//!     String::from("token"),
-//!     String::from("refresh-token")
-//! );
+//! let ramp = Client::new_from_env(String::from("token"), String::from("refresh-token"));
 //! ```
 //!
 //! It is okay to pass empty values for `token` and `refresh_token`. In
@@ -90,7 +87,6 @@
 //!     access_token = ramp.refresh_access_token().await.unwrap();
 //! }
 //! ```
-//!
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]

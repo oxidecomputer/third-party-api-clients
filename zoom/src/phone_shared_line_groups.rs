@@ -13,26 +13,26 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * List shared line groups.
-    *
-    * This function performs a `GET` to the `/phone/shared_line_groups` endpoint.
-    *
-    * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to list all the Shared Line Groups.
-    *
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * Account owner or admin privileges  <br>
-    *
-    * **Scopes:** `phone:read:admin`, `phone:write:admin`
-    *
-    *  
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
-    *
-    * **Parameters:**
-    *
-    * * `page_size: i64` -- The number of records returned within a single API call.
-    * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
-    */
+     * List shared line groups.
+     *
+     * This function performs a `GET` to the `/phone/shared_line_groups` endpoint.
+     *
+     * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to list all the Shared Line Groups.
+     *
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * Account owner or admin privileges  <br>
+     *
+     * **Scopes:** `phone:read:admin`, `phone:write:admin`
+     *
+     *  
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     *
+     * **Parameters:**
+     *
+     * * `page_size: i64` -- The number of records returned within a single API call.
+     * * `next_page_token: &str` -- The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+     */
     pub async fn list_shared_line_groups(
         &self,
         page_size: i64,
@@ -55,23 +55,23 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * List shared line groups.
-    *
-    * This function performs a `GET` to the `/phone/shared_line_groups` endpoint.
-    *
-    * As opposed to `list_shared_line_groups`, this function returns all the pages of the request at once.
-    *
-    * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to list all the Shared Line Groups.
-    *
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * Account owner or admin privileges  <br>
-    *
-    * **Scopes:** `phone:read:admin`, `phone:write:admin`
-    *
-    *  
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
-    */
+     * List shared line groups.
+     *
+     * This function performs a `GET` to the `/phone/shared_line_groups` endpoint.
+     *
+     * As opposed to `list_shared_line_groups`, this function returns all the pages of the request at once.
+     *
+     * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to list all the Shared Line Groups.
+     *
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * Account owner or admin privileges  <br>
+     *
+     * **Scopes:** `phone:read:admin`, `phone:write:admin`
+     *
+     *  
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+     */
     pub async fn list_all_shared_line_groups(&self) -> Result<Vec<crate::types::SharedLineGroups>> {
         let url = "/phone/shared_line_groups".to_string();
         let mut resp: crate::types::ListSharedLineGroupsResponse =
@@ -109,20 +109,20 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Create a shared line group.
-    *
-    * This function performs a `POST` to the `/phone/shared_line_groups` endpoint.
-    *
-    * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to create a shared line group.
-    *
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:write:admin`
-    *  
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    */
+     * Create a shared line group.
+     *
+     * This function performs a `POST` to the `/phone/shared_line_groups` endpoint.
+     *
+     * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to create a shared line group.
+     *
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:write:admin`
+     *  
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     */
     pub async fn create_shared_line_group(
         &self,
         body: &crate::types::CreateSharedLineGroupRequest,
@@ -134,25 +134,25 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Get a shared line group.
-    *
-    * This function performs a `GET` to the `/phone/shared_line_groups/{sharedLineGroupId}` endpoint.
-    *
-    * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to list all the Shared Line Groups.
-    *
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:read:admin` or `phone:write:admin`
-    *
-    *
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `shared_line_group_id: &str` -- Unique Identifier of the Shared Line Group.
-    */
+     * Get a shared line group.
+     *
+     * This function performs a `GET` to the `/phone/shared_line_groups/{sharedLineGroupId}` endpoint.
+     *
+     * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to list all the Shared Line Groups.
+     *
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:read:admin` or `phone:write:admin`
+     *
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `shared_line_group_id: &str` -- Unique Identifier of the Shared Line Group.
+     */
     pub async fn get_shared_line_group(
         &self,
         shared_line_group_id: &str,
@@ -166,24 +166,24 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Delete a shared line group.
-    *
-    * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}` endpoint.
-    *
-    * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. Use this API to delete a Shared Line Group.
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:write:admin`
-    *
-    *
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group that you would like to delete.
-    */
+     * Delete a shared line group.
+     *
+     * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}` endpoint.
+     *
+     * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. Use this API to delete a Shared Line Group.
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:write:admin`
+     *
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group that you would like to delete.
+     */
     pub async fn delete_shared_line_group(&self, shared_line_group_id: &str) -> Result<()> {
         let url = format!(
             "/phone/shared_line_groups/{}",
@@ -194,23 +194,23 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Update a shared line group.
-    *
-    * This function performs a `PATCH` to the `/phone/shared_line_groups/{sharedLineGroupId}` endpoint.
-    *
-    * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to update information of a Shared Line Group.
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:write:admin`
-    *
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `shared_line_group_id: &str` -- Unique identifier of the shared line group that is to be updated.
-    */
+     * Update a shared line group.
+     *
+     * This function performs a `PATCH` to the `/phone/shared_line_groups/{sharedLineGroupId}` endpoint.
+     *
+     * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to update information of a Shared Line Group.
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:write:admin`
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `shared_line_group_id: &str` -- Unique identifier of the shared line group that is to be updated.
+     */
     pub async fn update_shared_line_group(
         &self,
         shared_line_group_id: &str,
@@ -227,26 +227,26 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Add members to a shared line group.
-    *
-    * This function performs a `POST` to the `/phone/shared_line_groups/{sharedLineGroupId}/members` endpoint.
-    *
-    * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to [add members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_7cb42370-48f6-4a8f-84f4-c6eee4d9f0ca) to a Shared Line Group. Note that a member can only be added to one shared line group.
-    *
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * A valid Shared Line Group
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:write:admin`
-    *
-    *
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group.
-    */
+     * Add members to a shared line group.
+     *
+     * This function performs a `POST` to the `/phone/shared_line_groups/{sharedLineGroupId}/members` endpoint.
+     *
+     * A [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) allows Zoom Phone admins to share a phone number and extension with a group of phone users or common area phones. This gives members of the shared line group access to the group's direct phone number and voicemail. Use this API to [add members](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups#h_7cb42370-48f6-4a8f-84f4-c6eee4d9f0ca) to a Shared Line Group. Note that a member can only be added to one shared line group.
+     *
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * A valid Shared Line Group
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:write:admin`
+     *
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group.
+     */
     pub async fn add_members_shared_line_group(
         &self,
         shared_line_group_id: &str,
@@ -263,25 +263,25 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Unassign members of a shared line group.
-    *
-    * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}/members` endpoint.
-    *
-    * Members of the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) have access to the group's phone number and voicemail. Use this API to unassign **all** the existing members from a Shared Line Group.
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * A valid Shared Line Group
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:write:admin`
-    *
-    *
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `shared_line_group_id: &str` -- Unique identifier of the Shared Line Group that you would like to delete.
-    */
+     * Unassign members of a shared line group.
+     *
+     * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}/members` endpoint.
+     *
+     * Members of the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) have access to the group's phone number and voicemail. Use this API to unassign **all** the existing members from a Shared Line Group.
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * A valid Shared Line Group
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:write:admin`
+     *
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `shared_line_group_id: &str` -- Unique identifier of the Shared Line Group that you would like to delete.
+     */
     pub async fn delete_members_of_slg(&self, shared_line_group_id: &str) -> Result<()> {
         let url = format!(
             "/phone/shared_line_groups/{}/members",
@@ -292,26 +292,26 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Unassign a member from a shared line group.
-    *
-    * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}/members/{memberId}` endpoint.
-    *
-    * Members of the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) have access to the group's phone number and voicemail. Use this API to unassign **a specific member** from a Shared Line Group.
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * A valid Shared Line Group
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:write:admin`
-    *
-    *
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group from which you would like to remove a member.
-    * * `member_id: &str` -- Unique identifier of the member who is to be removed.
-    */
+     * Unassign a member from a shared line group.
+     *
+     * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}/members/{memberId}` endpoint.
+     *
+     * Members of the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792) have access to the group's phone number and voicemail. Use this API to unassign **a specific member** from a Shared Line Group.
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * A valid Shared Line Group
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:write:admin`
+     *
+     *
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `shared_line_group_id: &str` -- Unique Identifier of the shared line group from which you would like to remove a member.
+     * * `member_id: &str` -- Unique identifier of the member who is to be removed.
+     */
     pub async fn delete_member_slg(
         &self,
         shared_line_group_id: &str,
@@ -327,23 +327,23 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Assign phone numbers.
-    *
-    * This function performs a `POST` to the `/phone/shared_line_groups/{sharedLineGroupId}/phone_numbers` endpoint.
-    *
-    * Use this API to assign phone numbers to a shared line groups. These direct phone numbers will be shared among members of the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups).
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * A valid Shared Line Group
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:write:admin`
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `shared_line_group_id: &str` -- Unique Identifier of the Shared Line Group.
-    */
+     * Assign phone numbers.
+     *
+     * This function performs a `POST` to the `/phone/shared_line_groups/{sharedLineGroupId}/phone_numbers` endpoint.
+     *
+     * Use this API to assign phone numbers to a shared line groups. These direct phone numbers will be shared among members of the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups).
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * A valid Shared Line Group
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:write:admin`
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `shared_line_group_id: &str` -- Unique Identifier of the Shared Line Group.
+     */
     pub async fn assign_phone_numbers_slg(
         &self,
         shared_line_group_id: &str,
@@ -360,23 +360,23 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Unassign all phone numbers.
-    *
-    * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}/phone_numbers` endpoint.
-    *
-    * Use this API to unassign all the phone numbers that have been assigned to the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups).
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * A valid Shared Line Group
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:write:admin`
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `shared_line_group_id: &str` -- Unique Identifier of the Shared Line Group.
-    */
+     * Unassign all phone numbers.
+     *
+     * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}/phone_numbers` endpoint.
+     *
+     * Use this API to unassign all the phone numbers that have been assigned to the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups).
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * A valid Shared Line Group
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:write:admin`
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `shared_line_group_id: &str` -- Unique Identifier of the Shared Line Group.
+     */
     pub async fn delete_phone_numbers_slg(&self, shared_line_group_id: &str) -> Result<()> {
         let url = format!(
             "/phone/shared_line_groups/{}/phone_numbers",
@@ -387,24 +387,24 @@ impl PhoneSharedLineGroups {
     }
 
     /**
-    * Unassign a phone number.
-    *
-    * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}/phone_numbers/{phoneNumberId}` endpoint.
-    *
-    * Use this API to unassign a specific phone number that was assigned to the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups).
-    * **Prerequisties:** <br>
-    * * Pro or higher account with Zoom Phone license.
-    * * A valid Shared Line Group
-    * * Account owner or admin privileges
-    *
-    * **Scopes:** `phone:write:admin`
-    *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
-    *
-    * **Parameters:**
-    *
-    * * `shared_line_group_id: &str` -- Unique identifier of the shared line group from which you would like to unassign a phone number.
-    * * `phone_number_id: &str` -- Unique identifier of the phone number which is to be unassigned. This can be retrieved from Get a Shared Line Group API.
-    */
+     * Unassign a phone number.
+     *
+     * This function performs a `DELETE` to the `/phone/shared_line_groups/{sharedLineGroupId}/phone_numbers/{phoneNumberId}` endpoint.
+     *
+     * Use this API to unassign a specific phone number that was assigned to the [shared line group](https://support.zoom.us/hc/en-us/articles/360038850792-Setting-up-shared-line-groups).
+     * **Prerequisties:** <br>
+     * * Pro or higher account with Zoom Phone license.
+     * * A valid Shared Line Group
+     * * Account owner or admin privileges
+     *
+     * **Scopes:** `phone:write:admin`
+     *  **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+     *
+     * **Parameters:**
+     *
+     * * `shared_line_group_id: &str` -- Unique identifier of the shared line group from which you would like to unassign a phone number.
+     * * `phone_number_id: &str` -- Unique identifier of the phone number which is to be unassigned. This can be retrieved from Get a Shared Line Group API.
+     */
     pub async fn delete_phone_number_slg(
         &self,
         shared_line_group_id: &str,

@@ -13,18 +13,18 @@ impl Departments {
     }
 
     /**
-    * List departments.
-    *
-    * This function performs a `GET` to the `/departments` endpoint.
-    *
-    * Retrieve all departments.
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
-    * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
-    */
+     * List departments.
+     *
+     * This function performs a `GET` to the `/departments` endpoint.
+     *
+     * Retrieve all departments.
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     * * `start: &str` -- The ID of the last entity of the previous page, used for pagination to get the next page.
+     * * `page_size: f64` -- The number of results to be returned in each page. The value must be between 2 and 10,000. If not specified, the default will be 1,000.
+     */
     pub async fn get_page(
         &self,
         start: &str,
@@ -47,14 +47,14 @@ impl Departments {
     }
 
     /**
-    * List departments.
-    *
-    * This function performs a `GET` to the `/departments` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * Retrieve all departments.
-    */
+     * List departments.
+     *
+     * This function performs a `GET` to the `/departments` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * Retrieve all departments.
+     */
     pub async fn get_all(&self) -> Result<Vec<crate::types::Department>> {
         let url = "/departments".to_string();
         let resp: crate::types::GetDepartmentsResponse = self.client.get(&url, None).await?;
@@ -96,12 +96,12 @@ impl Departments {
     }
 
     /**
-    * Create department.
-    *
-    * This function performs a `POST` to the `/departments` endpoint.
-    *
-    * Create a new department.
-    */
+     * Create department.
+     *
+     * This function performs a `POST` to the `/departments` endpoint.
+     *
+     * Create a new department.
+     */
     pub async fn post(
         &self,
         body: &crate::types::PostLocationRequest,
@@ -113,16 +113,16 @@ impl Departments {
     }
 
     /**
-    * GET a department.
-    *
-    * This function performs a `GET` to the `/departments/{id}` endpoint.
-    *
-    * Retrieve a single department.
-    *
-    * **Parameters:**
-    *
-    * * `authorization: &str` -- The OAuth2 token header.
-    */
+     * GET a department.
+     *
+     * This function performs a `GET` to the `/departments/{id}` endpoint.
+     *
+     * Retrieve a single department.
+     *
+     * **Parameters:**
+     *
+     * * `authorization: &str` -- The OAuth2 token header.
+     */
     pub async fn get(&self, id: &str) -> Result<crate::types::Department> {
         let url = format!(
             "/departments/{}",
@@ -133,12 +133,12 @@ impl Departments {
     }
 
     /**
-    * Update department.
-    *
-    * This function performs a `PATCH` to the `/departments/{id}` endpoint.
-    *
-    * Modify a department.
-    */
+     * Update department.
+     *
+     * This function performs a `PATCH` to the `/departments/{id}` endpoint.
+     *
+     * Modify a department.
+     */
     pub async fn patch(
         &self,
         id: &str,

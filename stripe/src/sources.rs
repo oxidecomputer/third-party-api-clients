@@ -13,26 +13,26 @@ impl Sources {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/sources` endpoint.
-    *
-    * <p>Creates a new source object.</p>
-    */
+     * This function performs a `POST` to the `/v1/sources` endpoint.
+     *
+     * <p>Creates a new source object.</p>
+     */
     pub async fn post(&self) -> Result<crate::types::SourceData> {
         let url = "/v1/sources".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/sources/{source}` endpoint.
-    *
-    * <p>Retrieves an existing source object. Supply the unique source ID from a source creation request and Stripe will return the corresponding up-to-date source object information.</p>
-    *
-    * **Parameters:**
-    *
-    * * `client_secret: &str` -- The client secret of the source. Required if a publishable key is used to retrieve the source.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `source: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/sources/{source}` endpoint.
+     *
+     * <p>Retrieves an existing source object. Supply the unique source ID from a source creation request and Stripe will return the corresponding up-to-date source object information.</p>
+     *
+     * **Parameters:**
+     *
+     * * `client_secret: &str` -- The client secret of the source. Required if a publishable key is used to retrieve the source.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `source: &str` -- The account's country.
+     */
     pub async fn get(&self, client_secret: &str, source: &str) -> Result<crate::types::SourceData> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !client_secret.is_empty() {
@@ -49,16 +49,16 @@ impl Sources {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/sources/{source}` endpoint.
-    *
-    * <p>Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
-    *
-    * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our <a href="/docs/sources">payment method guides</a> for more detail.</p>
-    *
-    * **Parameters:**
-    *
-    * * `source: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/sources/{source}` endpoint.
+     *
+     * <p>Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+     *
+     * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our <a href="/docs/sources">payment method guides</a> for more detail.</p>
+     *
+     * **Parameters:**
+     *
+     * * `source: &str` -- The account's country.
+     */
     pub async fn post_sources(&self, source: &str) -> Result<crate::types::SourceData> {
         let url = format!(
             "/v1/sources/{}",
@@ -69,16 +69,16 @@ impl Sources {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/sources/{source}/mandate_notifications/{mandate_notification}` endpoint.
-    *
-    * <p>Retrieves a new Source MandateNotification.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `mandate_notification: &str` -- The account's country.
-    * * `source: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/sources/{source}/mandate_notifications/{mandate_notification}` endpoint.
+     *
+     * <p>Retrieves a new Source MandateNotification.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `mandate_notification: &str` -- The account's country.
+     * * `source: &str` -- The account's country.
+     */
     pub async fn get_mandate_notifications_notification(
         &self,
         mandate_notification: &str,
@@ -94,18 +94,18 @@ impl Sources {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/sources/{source}/source_transactions` endpoint.
-    *
-    * <p>List source transactions for a given source.</p>
-    *
-    * **Parameters:**
-    *
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `source: &str` -- The account's country.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/sources/{source}/source_transactions` endpoint.
+     *
+     * <p>List source transactions for a given source.</p>
+     *
+     * **Parameters:**
+     *
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `source: &str` -- The account's country.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_transactions(
         &self,
         ending_before: &str,
@@ -138,12 +138,12 @@ impl Sources {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/sources/{source}/source_transactions` endpoint.
-    *
-    * As opposed to `get_transactions`, this function returns all the pages of the request at once.
-    *
-    * <p>List source transactions for a given source.</p>
-    */
+     * This function performs a `GET` to the `/v1/sources/{source}/source_transactions` endpoint.
+     *
+     * As opposed to `get_transactions`, this function returns all the pages of the request at once.
+     *
+     * <p>List source transactions for a given source.</p>
+     */
     pub async fn get_all_transactions(
         &self,
         source: &str,
@@ -194,16 +194,16 @@ impl Sources {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/sources/{source}/source_transactions/{source_transaction}` endpoint.
-    *
-    * <p>Retrieve an existing source transaction object. Supply the unique source ID from a source creation request and the source transaction ID and Stripe will return the corresponding up-to-date source object information.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `source: &str` -- The account's country.
-    * * `source_transaction: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/sources/{source}/source_transactions/{source_transaction}` endpoint.
+     *
+     * <p>Retrieve an existing source transaction object. Supply the unique source ID from a source creation request and the source transaction ID and Stripe will return the corresponding up-to-date source object information.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `source: &str` -- The account's country.
+     * * `source_transaction: &str` -- The account's country.
+     */
     pub async fn get_transactions_transaction(
         &self,
         source: &str,
@@ -219,14 +219,14 @@ impl Sources {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/sources/{source}/verify` endpoint.
-    *
-    * <p>Verify a given source.</p>
-    *
-    * **Parameters:**
-    *
-    * * `source: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/sources/{source}/verify` endpoint.
+     *
+     * <p>Verify a given source.</p>
+     *
+     * **Parameters:**
+     *
+     * * `source: &str` -- The account's country.
+     */
     pub async fn post_verify(&self, source: &str) -> Result<crate::types::SourceData> {
         let url = format!(
             "/v1/sources/{}/verify",

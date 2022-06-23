@@ -13,34 +13,34 @@ impl AppsPermissions {
     }
 
     /**
-    * This function performs a `GET` to the `/apps.permissions.info` endpoint.
-    *
-    * Returns list of permissions this app has on a team.
-    *
-    * FROM: <https://api.slack.com/methods/apps.permissions.info>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `none`.
-    */
+     * This function performs a `GET` to the `/apps.permissions.info` endpoint.
+     *
+     * Returns list of permissions this app has on a team.
+     *
+     * FROM: <https://api.slack.com/methods/apps.permissions.info>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `none`.
+     */
     pub async fn info(&self) -> Result<crate::types::AppsPermissionsInfoSchema> {
         let url = "/apps.permissions.info".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/apps.permissions.request` endpoint.
-    *
-    * Allows an app to request additional scopes
-    *
-    * FROM: <https://api.slack.com/methods/apps.permissions.request>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `none`.
-    * * `scopes: &str` -- A comma separated list of scopes to request for.
-    * * `trigger_id: &str` -- Token used to trigger the permissions API.
-    */
+     * This function performs a `GET` to the `/apps.permissions.request` endpoint.
+     *
+     * Allows an app to request additional scopes
+     *
+     * FROM: <https://api.slack.com/methods/apps.permissions.request>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `none`.
+     * * `scopes: &str` -- A comma separated list of scopes to request for.
+     * * `trigger_id: &str` -- Token used to trigger the permissions API.
+     */
     pub async fn request(
         &self,
         scopes: &str,

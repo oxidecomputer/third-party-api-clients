@@ -13,36 +13,36 @@ impl Features {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/features` endpoint.
-    *
-    * Success
-    */
+     * This function performs a `GET` to the `/api/v1/features` endpoint.
+     *
+     * Success
+     */
     pub async fn list(&self) -> Result<Vec<crate::types::Feature>> {
         let url = "/api/v1/features".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/features` endpoint.
-    *
-    * As opposed to `list`, this function returns all the pages of the request at once.
-    *
-    * Success
-    */
+     * This function performs a `GET` to the `/api/v1/features` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Success
+     */
     pub async fn list_all(&self) -> Result<Vec<crate::types::Feature>> {
         let url = "/api/v1/features".to_string();
         self.client.get_all_pages(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/features/{featureId}` endpoint.
-    *
-    * Success
-    *
-    * **Parameters:**
-    *
-    * * `feature_id: &str`
-    */
+     * This function performs a `GET` to the `/api/v1/features/{featureId}` endpoint.
+     *
+     * Success
+     *
+     * **Parameters:**
+     *
+     * * `feature_id: &str`
+     */
     pub async fn get(&self, feature_id: &str) -> Result<crate::types::Feature> {
         let url = format!(
             "/api/v1/features/{}",
@@ -53,14 +53,14 @@ impl Features {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/features/{featureId}/dependencies` endpoint.
-    *
-    * Success
-    *
-    * **Parameters:**
-    *
-    * * `feature_id: &str`
-    */
+     * This function performs a `GET` to the `/api/v1/features/{featureId}/dependencies` endpoint.
+     *
+     * Success
+     *
+     * **Parameters:**
+     *
+     * * `feature_id: &str`
+     */
     pub async fn list_dependencies(&self, feature_id: &str) -> Result<Vec<crate::types::Feature>> {
         let url = format!(
             "/api/v1/features/{}/dependencies",
@@ -71,12 +71,12 @@ impl Features {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/features/{featureId}/dependencies` endpoint.
-    *
-    * As opposed to `list_dependencies`, this function returns all the pages of the request at once.
-    *
-    * Success
-    */
+     * This function performs a `GET` to the `/api/v1/features/{featureId}/dependencies` endpoint.
+     *
+     * As opposed to `list_dependencies`, this function returns all the pages of the request at once.
+     *
+     * Success
+     */
     pub async fn list_all_dependencies(
         &self,
         feature_id: &str,
@@ -90,14 +90,14 @@ impl Features {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/features/{featureId}/dependents` endpoint.
-    *
-    * Success
-    *
-    * **Parameters:**
-    *
-    * * `feature_id: &str`
-    */
+     * This function performs a `GET` to the `/api/v1/features/{featureId}/dependents` endpoint.
+     *
+     * Success
+     *
+     * **Parameters:**
+     *
+     * * `feature_id: &str`
+     */
     pub async fn list_dependents(&self, feature_id: &str) -> Result<Vec<crate::types::Feature>> {
         let url = format!(
             "/api/v1/features/{}/dependents",
@@ -108,12 +108,12 @@ impl Features {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/features/{featureId}/dependents` endpoint.
-    *
-    * As opposed to `list_dependents`, this function returns all the pages of the request at once.
-    *
-    * Success
-    */
+     * This function performs a `GET` to the `/api/v1/features/{featureId}/dependents` endpoint.
+     *
+     * As opposed to `list_dependents`, this function returns all the pages of the request at once.
+     *
+     * Success
+     */
     pub async fn list_all_dependents(
         &self,
         feature_id: &str,
@@ -127,16 +127,16 @@ impl Features {
     }
 
     /**
-    * This function performs a `POST` to the `/api/v1/features/{featureId}/{lifecycle}` endpoint.
-    *
-    * Success
-    *
-    * **Parameters:**
-    *
-    * * `feature_id: &str`
-    * * `lifecycle: &str`
-    * * `mode: &str`
-    */
+     * This function performs a `POST` to the `/api/v1/features/{featureId}/{lifecycle}` endpoint.
+     *
+     * Success
+     *
+     * **Parameters:**
+     *
+     * * `feature_id: &str`
+     * * `lifecycle: &str`
+     * * `mode: &str`
+     */
     pub async fn update_lifecycle(
         &self,
         feature_id: &str,

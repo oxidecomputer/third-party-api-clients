@@ -13,22 +13,22 @@ impl Reports {
     }
 
     /**
-    * List campaign reports.
-    *
-    * This function performs a `GET` to the `/reports` endpoint.
-    *
-    * Get campaign reports.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `type_: crate::types::CampaignType` -- There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
-    * * `before_send_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to campaigns sent before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-    * * `since_send_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to campaigns sent after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-    */
+     * List campaign reports.
+     *
+     * This function performs a `GET` to the `/reports` endpoint.
+     *
+     * Get campaign reports.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `type_: crate::types::CampaignType` -- There are four types of [campaigns](https://mailchimp.com/help/getting-started-with-campaigns/) you can create in Mailchimp. A/B Split campaigns have been deprecated and variate campaigns should be used instead.
+     * * `before_send_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to campaigns sent before the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     * * `since_send_time: chrono::DateTime<chrono::Utc>` -- Restrict the response to campaigns sent after the set time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     */
     pub async fn get(
         &self,
         fields: &[String],
@@ -68,18 +68,18 @@ impl Reports {
     }
 
     /**
-    * Get campaign report.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}` endpoint.
-    *
-    * Get report details for a specific sent campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    */
+     * Get campaign report.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}` endpoint.
+     *
+     * Get report details for a specific sent campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     */
     pub async fn get_reports(
         &self,
         fields: &[String],
@@ -104,18 +104,18 @@ impl Reports {
     }
 
     /**
-    * List abuse reports.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/abuse-reports` endpoint.
-    *
-    * Get a list of abuse complaints for a specific campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    */
+     * List abuse reports.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/abuse-reports` endpoint.
+     *
+     * Get a list of abuse complaints for a specific campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     */
     pub async fn get_abuse(
         &self,
         fields: &[String],
@@ -140,19 +140,19 @@ impl Reports {
     }
 
     /**
-    * Get abuse report.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/abuse-reports/{report_id}` endpoint.
-    *
-    * Get information about a specific abuse report for a campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `report_id: &str` -- The id for the abuse report.
-    */
+     * Get abuse report.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/abuse-reports/{report_id}` endpoint.
+     *
+     * Get information about a specific abuse report for a campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `report_id: &str` -- The id for the abuse report.
+     */
     pub async fn get_abuse_reports(
         &self,
         fields: &[String],
@@ -179,18 +179,18 @@ impl Reports {
     }
 
     /**
-    * List campaign feedback.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/advice` endpoint.
-    *
-    * Get feedback based on a campaign's statistics. Advice feedback is based on campaign stats like opens, clicks, unsubscribes, bounces, and more.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    */
+     * List campaign feedback.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/advice` endpoint.
+     *
+     * Get feedback based on a campaign's statistics. Advice feedback is based on campaign stats like opens, clicks, unsubscribes, bounces, and more.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     */
     pub async fn get_advice(
         &self,
         fields: &[String],
@@ -215,20 +215,20 @@ impl Reports {
     }
 
     /**
-    * List campaign details.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/click-details` endpoint.
-    *
-    * Get information about clicks on specific links in your Mailchimp campaigns.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    */
+     * List campaign details.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/click-details` endpoint.
+     *
+     * Get information about clicks on specific links in your Mailchimp campaigns.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     */
     pub async fn get_click_detail(
         &self,
         fields: &[String],
@@ -261,19 +261,19 @@ impl Reports {
     }
 
     /**
-    * Get campaign link details.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/click-details/{link_id}` endpoint.
-    *
-    * Get click details for a specific link in a campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `link_id: &str` -- The name of the folder.
-    */
+     * Get campaign link details.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/click-details/{link_id}` endpoint.
+     *
+     * Get click details for a specific link in a campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `link_id: &str` -- The name of the folder.
+     */
     pub async fn get_click_detail_reports(
         &self,
         fields: &[String],
@@ -300,21 +300,21 @@ impl Reports {
     }
 
     /**
-    * List clicked link subscribers.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/click-details/{link_id}/members` endpoint.
-    *
-    * Get information about list members who clicked on a specific link in a campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `link_id: &str` -- The name of the folder.
-    */
+     * List clicked link subscribers.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/click-details/{link_id}/members` endpoint.
+     *
+     * Get information about list members who clicked on a specific link in a campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `link_id: &str` -- The name of the folder.
+     */
     pub async fn get_click_details_member(
         &self,
         fields: &[String],
@@ -349,20 +349,20 @@ impl Reports {
     }
 
     /**
-    * Get clicked link subscriber.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/click-details/{link_id}/members/{subscriber_hash}` endpoint.
-    *
-    * Get information about a specific subscriber who clicked a link in a specific campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `link_id: &str` -- The name of the folder.
-    * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-    */
+     * Get clicked link subscriber.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/click-details/{link_id}/members/{subscriber_hash}` endpoint.
+     *
+     * Get information about a specific subscriber who clicked a link in a specific campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `link_id: &str` -- The name of the folder.
+     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     */
     pub async fn get_click_details_member_reports(
         &self,
         fields: &[String],
@@ -391,21 +391,21 @@ impl Reports {
     }
 
     /**
-    * List campaign open details.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/open-details` endpoint.
-    *
-    * Get detailed information about any campaign emails that were opened by a list member.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `since: &str` -- Restrict results to campaign open events that occur after a specific time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-    */
+     * List campaign open details.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/open-details` endpoint.
+     *
+     * Get detailed information about any campaign emails that were opened by a list member.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `since: &str` -- Restrict results to campaign open events that occur after a specific time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     */
     pub async fn get_open_detail(
         &self,
         fields: &[String],
@@ -442,19 +442,19 @@ impl Reports {
     }
 
     /**
-    * Get opened campaign subscriber.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/open-details/{subscriber_hash}` endpoint.
-    *
-    * Get information about a specific subscriber who opened a campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-    */
+     * Get opened campaign subscriber.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/open-details/{subscriber_hash}` endpoint.
+     *
+     * Get information about a specific subscriber who opened a campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     */
     pub async fn get_open_details_member(
         &self,
         fields: &[String],
@@ -481,18 +481,18 @@ impl Reports {
     }
 
     /**
-    * List domain performance stats.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/domain-performance` endpoint.
-    *
-    * Get statistics for the top-performing email domains in a campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    */
+     * List domain performance stats.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/domain-performance` endpoint.
+     *
+     * Get statistics for the top-performing email domains in a campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     */
     pub async fn get_domain_performance(
         &self,
         fields: &[String],
@@ -517,18 +517,18 @@ impl Reports {
     }
 
     /**
-    * List EepURL activity.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/eepurl` endpoint.
-    *
-    * Get a summary of social activity for the campaign, tracked by EepURL.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    */
+     * List EepURL activity.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/eepurl` endpoint.
+     *
+     * Get a summary of social activity for the campaign, tracked by EepURL.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     */
     pub async fn get_eepurl(
         &self,
         fields: &[String],
@@ -553,21 +553,21 @@ impl Reports {
     }
 
     /**
-    * List email activity.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/email-activity` endpoint.
-    *
-    * Get a list of member's subscriber activity in a specific campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `since: &str` -- Restrict results to email activity events that occur after a specific time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-    */
+     * List email activity.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/email-activity` endpoint.
+     *
+     * Get a list of member's subscriber activity in a specific campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `since: &str` -- Restrict results to email activity events that occur after a specific time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     */
     pub async fn get_email_activity(
         &self,
         fields: &[String],
@@ -604,20 +604,20 @@ impl Reports {
     }
 
     /**
-    * Get subscriber email activity.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/email-activity/{subscriber_hash}` endpoint.
-    *
-    * Get a specific list member's activity in a campaign including opens, clicks, and bounces.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-    * * `since: &str` -- Restrict results to email activity events that occur after a specific time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
-    */
+     * Get subscriber email activity.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/email-activity/{subscriber_hash}` endpoint.
+     *
+     * Get a specific list member's activity in a campaign including opens, clicks, and bounces.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     * * `since: &str` -- Restrict results to email activity events that occur after a specific time. Uses ISO 8601 time format: 2015-10-21T15:41:36+00:00.
+     */
     pub async fn get_email_activity_reports(
         &self,
         fields: &[String],
@@ -648,20 +648,20 @@ impl Reports {
     }
 
     /**
-    * List top open activities.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/locations` endpoint.
-    *
-    * Get top open locations for a specific campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    */
+     * List top open activities.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/locations` endpoint.
+     *
+     * Get top open locations for a specific campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     */
     pub async fn get_location(
         &self,
         fields: &[String],
@@ -694,20 +694,20 @@ impl Reports {
     }
 
     /**
-    * List campaign recipients.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/sent-to` endpoint.
-    *
-    * Get information about campaign recipients.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    */
+     * List campaign recipients.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/sent-to` endpoint.
+     *
+     * Get information about campaign recipients.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     */
     pub async fn get_sent(
         &self,
         fields: &[String],
@@ -740,19 +740,19 @@ impl Reports {
     }
 
     /**
-    * Get campaign recipient info.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/sent-to/{subscriber_hash}` endpoint.
-    *
-    * Get information about a specific campaign recipient.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-    */
+     * Get campaign recipient info.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/sent-to/{subscriber_hash}` endpoint.
+     *
+     * Get information about a specific campaign recipient.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     */
     pub async fn get_sent_reports(
         &self,
         fields: &[String],
@@ -779,18 +779,18 @@ impl Reports {
     }
 
     /**
-    * List child campaign reports.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/sub-reports` endpoint.
-    *
-    * Get a list of reports with child campaigns for a specific parent campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    */
+     * List child campaign reports.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/sub-reports` endpoint.
+     *
+     * Get a list of reports with child campaigns for a specific parent campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     */
     pub async fn get_sub(
         &self,
         fields: &[String],
@@ -815,20 +815,20 @@ impl Reports {
     }
 
     /**
-    * List unsubscribed members.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/unsubscribed` endpoint.
-    *
-    * Get information about members who have unsubscribed from a specific campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    */
+     * List unsubscribed members.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/unsubscribed` endpoint.
+     *
+     * Get information about members who have unsubscribed from a specific campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     */
     pub async fn get_unsubscribed(
         &self,
         fields: &[String],
@@ -861,19 +861,19 @@ impl Reports {
     }
 
     /**
-    * Get unsubscribed member.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/unsubscribed/{subscriber_hash}` endpoint.
-    *
-    * Get information about a specific list member who unsubscribed from a campaign.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
-    */
+     * Get unsubscribed member.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/unsubscribed/{subscriber_hash}` endpoint.
+     *
+     * Get information about a specific list member who unsubscribed from a campaign.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `subscriber_hash: &str` -- The MD5 hash of the lowercase version of the list member's email address.
+     */
     pub async fn get_unsubscribed_reports(
         &self,
         fields: &[String],
@@ -900,21 +900,21 @@ impl Reports {
     }
 
     /**
-    * List campaign product activity.
-    *
-    * This function performs a `GET` to the `/reports/{campaign_id}/ecommerce-product-activity` endpoint.
-    *
-    * Get breakdown of product activity for a campaign
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `campaign_id: &str` -- The unique id for the campaign.
-    * * `sort_field: crate::types::GetReportsEcommerceProductActivitySortField` -- Returns files sorted by the specified field.
-    */
+     * List campaign product activity.
+     *
+     * This function performs a `GET` to the `/reports/{campaign_id}/ecommerce-product-activity` endpoint.
+     *
+     * Get breakdown of product activity for a campaign
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `campaign_id: &str` -- The unique id for the campaign.
+     * * `sort_field: crate::types::GetReportsEcommerceProductActivitySortField` -- Returns files sorted by the specified field.
+     */
     pub async fn get_ecommerce_product_activity(
         &self,
         fields: &[String],

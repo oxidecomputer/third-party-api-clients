@@ -13,20 +13,20 @@ impl Plans {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/plans` endpoint.
-    *
-    * <p>Returns a list of your plans.</p>
-    *
-    * **Parameters:**
-    *
-    * * `active: bool` -- Only return plans that are active or inactive (e.g., pass `false` to list all inactive plans).
-    * * `created: &str` -- A filter on the list, based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `product: &str` -- Only return plans for the given product.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/plans` endpoint.
+     *
+     * <p>Returns a list of your plans.</p>
+     *
+     * **Parameters:**
+     *
+     * * `active: bool` -- Only return plans that are active or inactive (e.g., pass `false` to list all inactive plans).
+     * * `created: &str` -- A filter on the list, based on the object `created` field. The value can be a string with an integer Unix timestamp, or it can be a dictionary with a number of different query options.
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `product: &str` -- Only return plans for the given product.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_page(
         &self,
         active: bool,
@@ -62,12 +62,12 @@ impl Plans {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/plans` endpoint.
-    *
-    * As opposed to `get`, this function returns all the pages of the request at once.
-    *
-    * <p>Returns a list of your plans.</p>
-    */
+     * This function performs a `GET` to the `/v1/plans` endpoint.
+     *
+     * As opposed to `get`, this function returns all the pages of the request at once.
+     *
+     * <p>Returns a list of your plans.</p>
+     */
     pub async fn get_all(
         &self,
         active: bool,
@@ -124,66 +124,57 @@ impl Plans {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/plans` endpoint.
-    *
-    * <p>You can now model subscriptions more flexibly using the <a href="#prices">Prices API</a>. It replaces the Plans API and is backwards compatible to simplify your migration.</p>
-    */
+     * This function performs a `POST` to the `/v1/plans` endpoint.
+     *
+     * <p>You can now model subscriptions more flexibly using the <a href="#prices">Prices API</a>. It replaces the Plans API and is backwards compatible to simplify your migration.</p>
+     */
     pub async fn post(&self) -> Result<crate::types::PlanData> {
         let url = "/v1/plans".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/plans/{plan}` endpoint.
-    *
-    * <p>Retrieves the plan with the given ID.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `plan: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/plans/{plan}` endpoint.
+     *
+     * <p>Retrieves the plan with the given ID.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `plan: &str` -- The account's country.
+     */
     pub async fn get(&self, plan: &str) -> Result<crate::types::PlanData> {
-        let url = format!(
-            "/v1/plans/{}",
-            crate::progenitor_support::encode_path(plan),
-        );
+        let url = format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),);
 
         self.client.get(&url, None).await
     }
 
     /**
-    * This function performs a `POST` to the `/v1/plans/{plan}` endpoint.
-    *
-    * <p>Updates the specified plan by setting the values of the parameters passed. Any parameters not provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or billing cycle.</p>
-    *
-    * **Parameters:**
-    *
-    * * `plan: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/plans/{plan}` endpoint.
+     *
+     * <p>Updates the specified plan by setting the values of the parameters passed. Any parameters not provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or billing cycle.</p>
+     *
+     * **Parameters:**
+     *
+     * * `plan: &str` -- The account's country.
+     */
     pub async fn post_plans(&self, plan: &str) -> Result<crate::types::PlanData> {
-        let url = format!(
-            "/v1/plans/{}",
-            crate::progenitor_support::encode_path(plan),
-        );
+        let url = format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),);
 
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `DELETE` to the `/v1/plans/{plan}` endpoint.
-    *
-    * <p>Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected.</p>
-    *
-    * **Parameters:**
-    *
-    * * `plan: &str` -- The account's country.
-    */
+     * This function performs a `DELETE` to the `/v1/plans/{plan}` endpoint.
+     *
+     * <p>Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected.</p>
+     *
+     * **Parameters:**
+     *
+     * * `plan: &str` -- The account's country.
+     */
     pub async fn delete(&self, plan: &str) -> Result<crate::types::DeletedPlan> {
-        let url = format!(
-            "/v1/plans/{}",
-            crate::progenitor_support::encode_path(plan),
-        );
+        let url = format!("/v1/plans/{}", crate::progenitor_support::encode_path(plan),);
 
         self.client.delete(&url, None).await
     }

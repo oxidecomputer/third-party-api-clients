@@ -13,22 +13,22 @@ impl Webhooks {
     }
 
     /**
-    * Retrieve Event Webhook settings.
-    *
-    * This function performs a `GET` to the `/user/webhooks/event/settings` endpoint.
-    *
-    * **This endpoint allows you to retrieve your current event webhook settings.**
-    *
-    * If an event type is marked as `true`, then the event webhook will include information about that event.
-    *
-    * SendGrid’s Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.
-    *
-    * Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Retrieve Event Webhook settings.
+     *
+     * This function performs a `GET` to the `/user/webhooks/event/settings` endpoint.
+     *
+     * **This endpoint allows you to retrieve your current event webhook settings.**
+     *
+     * If an event type is marked as `true`, then the event webhook will include information about that event.
+     *
+     * SendGrid’s Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.
+     *
+     * Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn get_user_event_settings(
         &self,
     ) -> Result<crate::types::WebhooksEventWebhookResponse> {
@@ -37,22 +37,22 @@ impl Webhooks {
     }
 
     /**
-    * Update Event Notification Settings.
-    *
-    * This function performs a `PATCH` to the `/user/webhooks/event/settings` endpoint.
-    *
-    * **This endpoint allows you to update your current event webhook settings.**
-    *
-    * If an event type is marked as `true`, then the event webhook will include information about that event.
-    *
-    * SendGrid’s Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.
-    *
-    * Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Update Event Notification Settings.
+     *
+     * This function performs a `PATCH` to the `/user/webhooks/event/settings` endpoint.
+     *
+     * **This endpoint allows you to update your current event webhook settings.**
+     *
+     * If an event type is marked as `true`, then the event webhook will include information about that event.
+     *
+     * SendGrid’s Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.
+     *
+     * Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn patch_user_event_settings(
         &self,
         body: &crate::types::WebhooksEventWebhookUpdateWithOAuthRequest,
@@ -64,16 +64,16 @@ impl Webhooks {
     }
 
     /**
-    * Retrieve all parse settings.
-    *
-    * This function performs a `GET` to the `/user/webhooks/parse/settings` endpoint.
-    *
-    * **This endpoint allows you to retrieve all of your current inbound parse settings.**
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Retrieve all parse settings.
+     *
+     * This function performs a `GET` to the `/user/webhooks/parse/settings` endpoint.
+     *
+     * **This endpoint allows you to retrieve all of your current inbound parse settings.**
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn get_user_parse_settings(
         &self,
     ) -> Result<crate::types::GetUserWebhooksParseSettingsResponse> {
@@ -82,25 +82,25 @@ impl Webhooks {
     }
 
     /**
-    * Retrieves Inbound Parse Webhook statistics.
-    *
-    * This function performs a `GET` to the `/user/webhooks/parse/stats` endpoint.
-    *
-    * **This endpoint allows you to retrieve the statistics for your Parse Webhook useage.**
-    *
-    * SendGrid's Inbound Parse Webhook allows you to parse the contents and attachments of incomming emails. The Parse API can then POST the parsed emails to a URL that you specify. The Inbound Parse Webhook cannot parse messages greater than 30MB in size, including all attachments.
-    *
-    * There are a number of pre-made integrations for the SendGrid Parse Webhook which make processing events easy. You can find these integrations in the [Library Index](https://sendgrid.com/docs/Integrate/libraries.html#-Webhook-Libraries).
-    *
-    * **Parameters:**
-    *
-    * * `limit: &str` -- The license key provided with your New Relic account.
-    * * `offset: &str` -- The license key provided with your New Relic account.
-    * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
-    * * `start_date: &str` -- The starting date of the statistics you want to retrieve. Must be in the format YYYY-MM-DD.
-    * * `end_date: &str` -- The end date of the statistics you want to retrieve. Must be in the format YYYY-MM-DD.
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Retrieves Inbound Parse Webhook statistics.
+     *
+     * This function performs a `GET` to the `/user/webhooks/parse/stats` endpoint.
+     *
+     * **This endpoint allows you to retrieve the statistics for your Parse Webhook useage.**
+     *
+     * SendGrid's Inbound Parse Webhook allows you to parse the contents and attachments of incomming emails. The Parse API can then POST the parsed emails to a URL that you specify. The Inbound Parse Webhook cannot parse messages greater than 30MB in size, including all attachments.
+     *
+     * There are a number of pre-made integrations for the SendGrid Parse Webhook which make processing events easy. You can find these integrations in the [Library Index](https://sendgrid.com/docs/Integrate/libraries.html#-Webhook-Libraries).
+     *
+     * **Parameters:**
+     *
+     * * `limit: &str` -- The license key provided with your New Relic account.
+     * * `offset: &str` -- The license key provided with your New Relic account.
+     * * `aggregated_by: crate::types::TraitStatsAdvancedBaseQueryStringsAggregatedBy` -- How to group the statistics. Must be either "day", "week", or "month".
+     * * `start_date: &str` -- The starting date of the statistics you want to retrieve. Must be in the format YYYY-MM-DD.
+     * * `end_date: &str` -- The end date of the statistics you want to retrieve. Must be in the format YYYY-MM-DD.
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn get_user_parse_stats(
         &self,
         limit: &str,
@@ -132,18 +132,18 @@ impl Webhooks {
     }
 
     /**
-    * Retrieves Inbound Parse Webhook statistics.
-    *
-    * This function performs a `GET` to the `/user/webhooks/parse/stats` endpoint.
-    *
-    * As opposed to `get_user_parse_stats`, this function returns all the pages of the request at once.
-    *
-    * **This endpoint allows you to retrieve the statistics for your Parse Webhook useage.**
-    *
-    * SendGrid's Inbound Parse Webhook allows you to parse the contents and attachments of incomming emails. The Parse API can then POST the parsed emails to a URL that you specify. The Inbound Parse Webhook cannot parse messages greater than 30MB in size, including all attachments.
-    *
-    * There are a number of pre-made integrations for the SendGrid Parse Webhook which make processing events easy. You can find these integrations in the [Library Index](https://sendgrid.com/docs/Integrate/libraries.html#-Webhook-Libraries).
-    */
+     * Retrieves Inbound Parse Webhook statistics.
+     *
+     * This function performs a `GET` to the `/user/webhooks/parse/stats` endpoint.
+     *
+     * As opposed to `get_user_parse_stats`, this function returns all the pages of the request at once.
+     *
+     * **This endpoint allows you to retrieve the statistics for your Parse Webhook useage.**
+     *
+     * SendGrid's Inbound Parse Webhook allows you to parse the contents and attachments of incomming emails. The Parse API can then POST the parsed emails to a URL that you specify. The Inbound Parse Webhook cannot parse messages greater than 30MB in size, including all attachments.
+     *
+     * There are a number of pre-made integrations for the SendGrid Parse Webhook which make processing events easy. You can find these integrations in the [Library Index](https://sendgrid.com/docs/Integrate/libraries.html#-Webhook-Libraries).
+     */
     pub async fn get_all_user_parse_stats(
         &self,
         offset: &str,
@@ -171,20 +171,20 @@ impl Webhooks {
     }
 
     /**
-    * Retrieve Signed Webhook Public Key.
-    *
-    * This function performs a `GET` to the `/user/webhooks/event/settings/signed` endpoint.
-    *
-    * **This endpoint allows you to retrieve your signed webhook's public key.**
-    *
-    * Once you have enabled signing of the Event Webhook, you will need the public key provided to verify the signatures on requests coming from Twilio SendGrid. You can retrieve the public key from this endpoint at any time.
-    *
-    * For more information about cryptographically signing the Event Webhook, see [Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Retrieve Signed Webhook Public Key.
+     *
+     * This function performs a `GET` to the `/user/webhooks/event/settings/signed` endpoint.
+     *
+     * **This endpoint allows you to retrieve your signed webhook's public key.**
+     *
+     * Once you have enabled signing of the Event Webhook, you will need the public key provided to verify the signatures on requests coming from Twilio SendGrid. You can retrieve the public key from this endpoint at any time.
+     *
+     * For more information about cryptographically signing the Event Webhook, see [Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn get_user_event_settings_signed(
         &self,
     ) -> Result<crate::types::GetUserWebhooksEventSettingsSignedResponse> {
@@ -193,20 +193,20 @@ impl Webhooks {
     }
 
     /**
-    * Enable/Disable Signed Webhook.
-    *
-    * This function performs a `PATCH` to the `/user/webhooks/event/settings/signed` endpoint.
-    *
-    * **This endpoint allows you to enable or disable signing of the Event Webhook.**
-    *
-    * This endpoint takes a single boolean request parameter, `enabled`. You may either enable or disable signing of the Event Webhook using this endpoint. Once enabled, you can retrieve your public key using the `/webhooks/event/settings/signed` endpoint.
-    *
-    * For more information about cryptographically signing the Event Webhook, see [Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Enable/Disable Signed Webhook.
+     *
+     * This function performs a `PATCH` to the `/user/webhooks/event/settings/signed` endpoint.
+     *
+     * **This endpoint allows you to enable or disable signing of the Event Webhook.**
+     *
+     * This endpoint takes a single boolean request parameter, `enabled`. You may either enable or disable signing of the Event Webhook using this endpoint. Once enabled, you can retrieve your public key using the `/webhooks/event/settings/signed` endpoint.
+     *
+     * For more information about cryptographically signing the Event Webhook, see [Getting Started with the Event Webhook Security Features](https://sendgrid.com/docs/for-developers/tracking-events/getting-started-event-webhook-security-features).
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn patch_user_event_settings_signed(
         &self,
         body: &crate::types::GetTrackingSettingsOpenResponse,
@@ -218,24 +218,24 @@ impl Webhooks {
     }
 
     /**
-    * Test Event Notification Settings.
-    *
-    * This function performs a `POST` to the `/user/webhooks/event/test` endpoint.
-    *
-    * **This endpoint allows you to test your event webhook by sending a fake event notification post to the provided URL.**
-    *
-    * SendGrid’s Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.
-    *
-    * Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
-    *
-    * >**Tip**: Retry logic for this endpoint differs from other endpoints, which use a rolling 24-hour retry.
-    *
-    * If your web server does not return a 2xx response type, we will retry a POST request until we receive a 2xx response or the maximum time of 10 minutes has expired.
-    *
-    * **Parameters:**
-    *
-    * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
-    */
+     * Test Event Notification Settings.
+     *
+     * This function performs a `POST` to the `/user/webhooks/event/test` endpoint.
+     *
+     * **This endpoint allows you to test your event webhook by sending a fake event notification post to the provided URL.**
+     *
+     * SendGrid’s Event Webhook will notify a URL of your choice via HTTP POST with information about events that occur as SendGrid processes your email.
+     *
+     * Common uses of this data are to remove unsubscribes, react to spam reports, determine unengaged recipients, identify bounced email addresses, or create advanced analytics of your email program.
+     *
+     * >**Tip**: Retry logic for this endpoint differs from other endpoints, which use a rolling 24-hour retry.
+     *
+     * If your web server does not return a 2xx response type, we will retry a POST request until we receive a 2xx response or the maximum time of 10 minutes has expired.
+     *
+     * **Parameters:**
+     *
+     * * `on_behalf_of: &str` -- The license key provided with your New Relic account.
+     */
     pub async fn post_user_event_test(
         &self,
         body: &crate::types::PostUserWebhooksEventTestRequest,

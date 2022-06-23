@@ -13,17 +13,17 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a list of metafields that belong to a Product Image resource.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-    * * `metafield_owner_resource: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of metafields that belong to a Product Image resource.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
+     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_get(
         &self,
         metafield_owner_id: i64,
@@ -49,12 +49,12 @@ impl Metafield {
     }
 
     /**
-    * Creates a new metafield for a resource.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-01
-    */
+     * Creates a new metafield for a resource.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-01
+     */
     pub async fn deprecated_202001_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-01/metafields.json".to_string();
         self.client
@@ -63,29 +63,29 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a count of a resource's metafields.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/metafields/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-01
-    */
+     * Retrieves a count of a resource's metafields.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/metafields/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-01
+     */
     pub async fn deprecated_202001_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-01/metafields/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a single metafield from a resource by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single metafield from a resource by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202001_get_param(
         &self,
         metafield_id: &str,
@@ -106,16 +106,16 @@ impl Metafield {
     }
 
     /**
-    * Updates a metafield.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a metafield.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_update_param(
         &self,
         metafield_id: &str,
@@ -132,16 +132,16 @@ impl Metafield {
     }
 
     /**
-    * Deletes a metafield by its ID.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a metafield by its ID.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202001_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-01/metafields/{}/json",
@@ -152,17 +152,17 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a list of metafields that belong to a Product Image resource.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-    * * `metafield_owner_resource: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of metafields that belong to a Product Image resource.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
+     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_get(
         &self,
         metafield_owner_id: i64,
@@ -188,12 +188,12 @@ impl Metafield {
     }
 
     /**
-    * Creates a new metafield for a resource.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-04
-    */
+     * Creates a new metafield for a resource.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-04
+     */
     pub async fn deprecated_202004_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-04/metafields.json".to_string();
         self.client
@@ -202,29 +202,29 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a count of a resource's metafields.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/metafields/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-04
-    */
+     * Retrieves a count of a resource's metafields.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/metafields/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-04
+     */
     pub async fn deprecated_202004_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-04/metafields/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a single metafield from a resource by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single metafield from a resource by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202004_get_param(
         &self,
         metafield_id: &str,
@@ -245,16 +245,16 @@ impl Metafield {
     }
 
     /**
-    * Updates a metafield.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a metafield.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_update_param(
         &self,
         metafield_id: &str,
@@ -271,16 +271,16 @@ impl Metafield {
     }
 
     /**
-    * Deletes a metafield by its ID.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a metafield by its ID.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202004_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-04/metafields/{}/json",
@@ -291,17 +291,17 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a list of metafields that belong to a Product Image resource.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-    * * `metafield_owner_resource: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of metafields that belong to a Product Image resource.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
+     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_get(
         &self,
         metafield_owner_id: i64,
@@ -327,12 +327,12 @@ impl Metafield {
     }
 
     /**
-    * Creates a new metafield for a resource.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-07
-    */
+     * Creates a new metafield for a resource.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-07
+     */
     pub async fn deprecated_202007_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-07/metafields.json".to_string();
         self.client
@@ -341,29 +341,29 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a count of a resource's metafields.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/metafields/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-07
-    */
+     * Retrieves a count of a resource's metafields.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/metafields/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-07
+     */
     pub async fn deprecated_202007_get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-07/metafields/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a single metafield from a resource by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single metafield from a resource by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202007_get_param(
         &self,
         metafield_id: &str,
@@ -384,16 +384,16 @@ impl Metafield {
     }
 
     /**
-    * Updates a metafield.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a metafield.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_update_param(
         &self,
         metafield_id: &str,
@@ -410,16 +410,16 @@ impl Metafield {
     }
 
     /**
-    * Deletes a metafield by its ID.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a metafield by its ID.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202007_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-07/metafields/{}/json",
@@ -430,17 +430,17 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a list of metafields that belong to a Product Image resource.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-    * * `metafield_owner_resource: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of metafields that belong to a Product Image resource.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
+     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     */
     pub async fn get(&self, metafield_owner_id: i64, metafield_owner_resource: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if metafield_owner_id > 0 {
@@ -462,12 +462,12 @@ impl Metafield {
     }
 
     /**
-    * Creates a new metafield for a resource.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-10
-    */
+     * Creates a new metafield for a resource.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2020-10
+     */
     pub async fn create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/metafields.json".to_string();
         self.client
@@ -476,29 +476,29 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a count of a resource's metafields.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/metafields/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-10
-    */
+     * Retrieves a count of a resource's metafields.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/metafields/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2020-10
+     */
     pub async fn get_count(&self) -> Result<()> {
         let url = "/admin/api/2020-10/metafields/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a single metafield from a resource by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single metafield from a resource by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn get_param(&self, metafield_id: &str, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -515,16 +515,16 @@ impl Metafield {
     }
 
     /**
-    * Updates a metafield.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a metafield.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn update_param(&self, metafield_id: &str, body: &serde_json::Value) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/metafields/{}/json",
@@ -537,16 +537,16 @@ impl Metafield {
     }
 
     /**
-    * Deletes a metafield by its ID.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a metafield by its ID.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2020-10/metafields/{}/json",
@@ -557,17 +557,17 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a list of metafields that belong to a Product Image resource.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-    * * `metafield_owner_resource: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of metafields that belong to a Product Image resource.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
+     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_get(
         &self,
         metafield_owner_id: i64,
@@ -593,12 +593,12 @@ impl Metafield {
     }
 
     /**
-    * Creates a new metafield for a resource.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2021-01
-    */
+     * Creates a new metafield for a resource.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-2021-01
+     */
     pub async fn deprecated_202101_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2021-01/metafields.json".to_string();
         self.client
@@ -607,29 +607,29 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a count of a resource's metafields.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/metafields/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2021-01
-    */
+     * Retrieves a count of a resource's metafields.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/metafields/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-2021-01
+     */
     pub async fn deprecated_202101_get_count(&self) -> Result<()> {
         let url = "/admin/api/2021-01/metafields/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a single metafield from a resource by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single metafield from a resource by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_202101_get_param(
         &self,
         metafield_id: &str,
@@ -650,16 +650,16 @@ impl Metafield {
     }
 
     /**
-    * Updates a metafield.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a metafield.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_update_param(
         &self,
         metafield_id: &str,
@@ -676,16 +676,16 @@ impl Metafield {
     }
 
     /**
-    * Deletes a metafield by its ID.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a metafield by its ID.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_202101_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/2021-01/metafields/{}/json",
@@ -696,17 +696,17 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a list of metafields that belong to a Product Image resource.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
-    * * `metafield_owner_resource: &str` -- storefront_access_token_id.
-    */
+     * Retrieves a list of metafields that belong to a Product Image resource.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `metafield_owner_id: i64` -- recurring_application_charge[capped_amount].
+     * * `metafield_owner_resource: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_get(
         &self,
         metafield_owner_id: i64,
@@ -732,12 +732,12 @@ impl Metafield {
     }
 
     /**
-    * Creates a new metafield for a resource.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/metafields.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-unstable
-    */
+     * Creates a new metafield for a resource.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/metafields.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#create-unstable
+     */
     pub async fn deprecated_unstable_create(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/unstable/metafields.json".to_string();
         self.client
@@ -746,29 +746,29 @@ impl Metafield {
     }
 
     /**
-    * Retrieves a count of a resource's metafields.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/metafields/count.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-unstable
-    */
+     * Retrieves a count of a resource's metafields.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/metafields/count.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#count-unstable
+     */
     pub async fn deprecated_unstable_get_count(&self) -> Result<()> {
         let url = "/admin/api/unstable/metafields/count.json".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Retrieves a single metafield from a resource by its ID.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
-    */
+     * Retrieves a single metafield from a resource by its ID.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- Show only certain fields, specified by a comma-separated list of field names.
+     */
     pub async fn deprecated_unstable_get_param(
         &self,
         metafield_id: &str,
@@ -789,16 +789,16 @@ impl Metafield {
     }
 
     /**
-    * Updates a metafield.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-unstable
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Updates a metafield.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#update-unstable
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_update_param(
         &self,
         metafield_id: &str,
@@ -815,16 +815,16 @@ impl Metafield {
     }
 
     /**
-    * Deletes a metafield by its ID.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/metafields/{metafield_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `metafield_id: &str` -- storefront_access_token_id.
-    */
+     * Deletes a metafield by its ID.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/metafields/{metafield_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/metafield#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `metafield_id: &str` -- storefront_access_token_id.
+     */
     pub async fn deprecated_unstable_delete_param(&self, metafield_id: &str) -> Result<()> {
         let url = format!(
             "/admin/api/unstable/metafields/{}/json",

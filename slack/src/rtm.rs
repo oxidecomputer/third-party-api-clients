@@ -13,18 +13,18 @@ impl Rtm {
     }
 
     /**
-    * This function performs a `GET` to the `/rtm.connect` endpoint.
-    *
-    * Starts a Real Time Messaging session.
-    *
-    * FROM: <https://api.slack.com/methods/rtm.connect>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `rtm:stream`.
-    * * `batch_presence_aware: bool` -- Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).
-    * * `presence_sub: bool` -- Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).
-    */
+     * This function performs a `GET` to the `/rtm.connect` endpoint.
+     *
+     * Starts a Real Time Messaging session.
+     *
+     * FROM: <https://api.slack.com/methods/rtm.connect>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `rtm:stream`.
+     * * `batch_presence_aware: bool` -- Batch presence deliveries via subscription. Enabling changes the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).
+     * * `presence_sub: bool` -- Only deliver presence events when requested by subscription. See [presence subscriptions](/docs/presence-and-status#subscriptions).
+     */
     pub async fn connect(
         &self,
         batch_presence_aware: bool,

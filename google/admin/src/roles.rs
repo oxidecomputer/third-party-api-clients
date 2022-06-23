@@ -13,16 +13,16 @@ impl Roles {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles` endpoint.
-    *
-    * Retrieves a paginated list of all the roles in a domain.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    * * `max_results: i64` -- Maximum number of results to return.
-    * * `page_token: &str` -- Token to specify the next page in the list.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles` endpoint.
+     *
+     * Retrieves a paginated list of all the roles in a domain.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `max_results: i64` -- Maximum number of results to return.
+     * * `page_token: &str` -- Token to specify the next page in the list.
+     */
     pub async fn list(
         &self,
         customer: &str,
@@ -50,12 +50,12 @@ impl Roles {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles` endpoint.
-    *
-    * As opposed to `list`, this function returns all the pages of the request at once.
-    *
-    * Retrieves a paginated list of all the roles in a domain.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Retrieves a paginated list of all the roles in a domain.
+     */
     pub async fn list_all(&self, customer: &str) -> Result<Vec<crate::types::Role>> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles",
@@ -95,14 +95,14 @@ impl Roles {
     }
 
     /**
-    * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/roles` endpoint.
-    *
-    * Creates a role.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    */
+     * This function performs a `POST` to the `/admin/directory/v1/customer/{customer}/roles` endpoint.
+     *
+     * Creates a role.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     */
     pub async fn insert(
         &self,
         customer: &str,
@@ -119,15 +119,15 @@ impl Roles {
     }
 
     /**
-    * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles/{roleId}` endpoint.
-    *
-    * Retrieves a role.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    * * `role_id: &str` -- Immutable ID of the role.
-    */
+     * This function performs a `GET` to the `/admin/directory/v1/customer/{customer}/roles/{roleId}` endpoint.
+     *
+     * Retrieves a role.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `role_id: &str` -- Immutable ID of the role.
+     */
     pub async fn get(&self, customer: &str, role_id: &str) -> Result<crate::types::Role> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/{}",
@@ -139,15 +139,15 @@ impl Roles {
     }
 
     /**
-    * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/roles/{roleId}` endpoint.
-    *
-    * Updates a role.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    * * `role_id: &str` -- Immutable ID of the role.
-    */
+     * This function performs a `PUT` to the `/admin/directory/v1/customer/{customer}/roles/{roleId}` endpoint.
+     *
+     * Updates a role.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `role_id: &str` -- Immutable ID of the role.
+     */
     pub async fn update(
         &self,
         customer: &str,
@@ -166,15 +166,15 @@ impl Roles {
     }
 
     /**
-    * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/roles/{roleId}` endpoint.
-    *
-    * Deletes a role.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    * * `role_id: &str` -- Immutable ID of the role.
-    */
+     * This function performs a `DELETE` to the `/admin/directory/v1/customer/{customer}/roles/{roleId}` endpoint.
+     *
+     * Deletes a role.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `role_id: &str` -- Immutable ID of the role.
+     */
     pub async fn delete(&self, customer: &str, role_id: &str) -> Result<()> {
         let url = format!(
             "/admin/directory/v1/customer/{}/roles/{}",
@@ -186,15 +186,15 @@ impl Roles {
     }
 
     /**
-    * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/roles/{roleId}` endpoint.
-    *
-    * Patches a role.
-    *
-    * **Parameters:**
-    *
-    * * `customer: &str` -- Immutable ID of the Google Workspace account.
-    * * `role_id: &str` -- Immutable ID of the role.
-    */
+     * This function performs a `PATCH` to the `/admin/directory/v1/customer/{customer}/roles/{roleId}` endpoint.
+     *
+     * Patches a role.
+     *
+     * **Parameters:**
+     *
+     * * `customer: &str` -- Immutable ID of the Google Workspace account.
+     * * `role_id: &str` -- Immutable ID of the role.
+     */
     pub async fn patch(
         &self,
         customer: &str,

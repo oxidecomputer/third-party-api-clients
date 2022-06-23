@@ -13,26 +13,26 @@ impl SegmentingContactsBeta {
     }
 
     /**
-    * Get List of Segments.
-    *
-    * This function performs a `GET` to the `/marketing/segments/2.0` endpoint.
-    *
-    * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
-    *
-    * The query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.
-    *
-    * `parent_list_ids` | `no_parent_list_id` | `result`
-    * -----------------:|:--------------------:|:-------------
-    * empty | false | all segments
-    * values | false | segments filtered by list_ids
-    * values | true | segments filtered by list_ids and segments with no parent list_ids
-    * empty | true | segments with no parent list_ids
-    *
-    * **Parameters:**
-    *
-    * * `parent_list_ids: &str` -- A comma separated list up to 50 in size, to filter segments on.  Only segments that have any of these list ids as the parent list will be retrieved. This is different from the parameter of the same name used when creating a segment.
-    * * `no_parent_list_id: bool` -- If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.
-    */
+     * Get List of Segments.
+     *
+     * This function performs a `GET` to the `/marketing/segments/2.0` endpoint.
+     *
+     * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+     *
+     * The query param `parent_list_ids` is treated as a filter.  Any match will be returned.  0 matches will return a response code of 200 with an empty `results` array.
+     *
+     * `parent_list_ids` | `no_parent_list_id` | `result`
+     * -----------------:|:--------------------:|:-------------
+     * empty | false | all segments
+     * values | false | segments filtered by list_ids
+     * values | true | segments filtered by list_ids and segments with no parent list_ids
+     * empty | true | segments with no parent list_ids
+     *
+     * **Parameters:**
+     *
+     * * `parent_list_ids: &str` -- A comma separated list up to 50 in size, to filter segments on.  Only segments that have any of these list ids as the parent list will be retrieved. This is different from the parameter of the same name used when creating a segment.
+     * * `no_parent_list_id: bool` -- If set to `true` segments with an empty value of `parent_list_id` will be returned in the filter.  If the value is not present it defaults to 'false'.
+     */
     pub async fn get_segments(
         &self,
         parent_list_ids: &str,
@@ -55,14 +55,14 @@ impl SegmentingContactsBeta {
     }
 
     /**
-    * Create Segment.
-    *
-    * This function performs a `POST` to the `/marketing/segments/2.0` endpoint.
-    *
-    * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
-    *
-    * Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
-    */
+     * Create Segment.
+     *
+     * This function performs a `POST` to the `/marketing/segments/2.0` endpoint.
+     *
+     * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+     *
+     * Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
+     */
     pub async fn post_segment(
         &self,
         body: &crate::types::SegmentWriteV2,
@@ -74,16 +74,16 @@ impl SegmentingContactsBeta {
     }
 
     /**
-    * Get Segment by ID.
-    *
-    * This function performs a `GET` to the `/marketing/segments/2.0/{segment_id}` endpoint.
-    *
-    * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
-    *
-    * **Parameters:**
-    *
-    * * `contacts_sample: bool` -- Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.
-    */
+     * Get Segment by ID.
+     *
+     * This function performs a `GET` to the `/marketing/segments/2.0/{segment_id}` endpoint.
+     *
+     * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+     *
+     * **Parameters:**
+     *
+     * * `contacts_sample: bool` -- Defaults to `true`. Set to `false` to exclude the contacts_sample in the response.
+     */
     pub async fn get_segments_segment(
         &self,
         segment_id: &str,
@@ -104,12 +104,12 @@ impl SegmentingContactsBeta {
     }
 
     /**
-    * Delete segment.
-    *
-    * This function performs a `DELETE` to the `/marketing/segments/2.0/{segment_id}` endpoint.
-    *
-    * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
-    */
+     * Delete segment.
+     *
+     * This function performs a `DELETE` to the `/marketing/segments/2.0/{segment_id}` endpoint.
+     *
+     * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+     */
     pub async fn delete_segments_segment(&self, segment_id: &str) -> Result<()> {
         let url = format!(
             "/marketing/segments/2.0/{}",
@@ -120,14 +120,14 @@ impl SegmentingContactsBeta {
     }
 
     /**
-    * Update Segment.
-    *
-    * This function performs a `PATCH` to the `/marketing/segments/2.0/{segment_id}` endpoint.
-    *
-    * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
-    *
-    * Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
-    */
+     * Update Segment.
+     *
+     * This function performs a `PATCH` to the `/marketing/segments/2.0/{segment_id}` endpoint.
+     *
+     * **The Segmentation V2 API is currently in private beta. If you'd like to be added to the beta, please fill out this [form](https://docs.google.com/forms/d/e/1FAIpQLSd5zwC9dRk8lAp1oTWjdGc-aSY69flW_7wnutvKBhpUluSnfQ/viewform)**
+     *
+     * Segment `name` has to be unique. A user can not create a new segment with an existing segment name.
+     */
     pub async fn patch_segments_segment(
         &self,
         segment_id: &str,

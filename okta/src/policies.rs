@@ -13,16 +13,16 @@ impl Policies {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/policies` endpoint.
-    *
-    * Gets all policies with the specified type.
-    *
-    * **Parameters:**
-    *
-    * * `type_: &str`
-    * * `status: &str`
-    * * `expand: &str`
-    */
+     * This function performs a `GET` to the `/api/v1/policies` endpoint.
+     *
+     * Gets all policies with the specified type.
+     *
+     * **Parameters:**
+     *
+     * * `type_: &str`
+     * * `status: &str`
+     * * `expand: &str`
+     */
     pub async fn list(
         &self,
         type_: &str,
@@ -46,12 +46,12 @@ impl Policies {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/policies` endpoint.
-    *
-    * As opposed to `list`, this function returns all the pages of the request at once.
-    *
-    * Gets all policies with the specified type.
-    */
+     * This function performs a `GET` to the `/api/v1/policies` endpoint.
+     *
+     * As opposed to `list`, this function returns all the pages of the request at once.
+     *
+     * Gets all policies with the specified type.
+     */
     pub async fn list_all(
         &self,
         type_: &str,
@@ -75,14 +75,14 @@ impl Policies {
     }
 
     /**
-    * This function performs a `POST` to the `/api/v1/policies` endpoint.
-    *
-    * Creates a policy.
-    *
-    * **Parameters:**
-    *
-    * * `activate: bool`
-    */
+     * This function performs a `POST` to the `/api/v1/policies` endpoint.
+     *
+     * Creates a policy.
+     *
+     * **Parameters:**
+     *
+     * * `activate: bool`
+     */
     pub async fn create_policy(
         &self,
         activate: bool,
@@ -101,15 +101,15 @@ impl Policies {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/policies/{policyId}` endpoint.
-    *
-    * Gets a policy.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    * * `expand: &str`
-    */
+     * This function performs a `GET` to the `/api/v1/policies/{policyId}` endpoint.
+     *
+     * Gets a policy.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     * * `expand: &str`
+     */
     pub async fn get_policy(&self, policy_id: &str, expand: &str) -> Result<crate::types::Policy> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !expand.is_empty() {
@@ -126,14 +126,14 @@ impl Policies {
     }
 
     /**
-    * This function performs a `PUT` to the `/api/v1/policies/{policyId}` endpoint.
-    *
-    * Updates a policy.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    */
+     * This function performs a `PUT` to the `/api/v1/policies/{policyId}` endpoint.
+     *
+     * Updates a policy.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     */
     pub async fn update_policy(
         &self,
         policy_id: &str,
@@ -150,14 +150,14 @@ impl Policies {
     }
 
     /**
-    * This function performs a `DELETE` to the `/api/v1/policies/{policyId}` endpoint.
-    *
-    * Removes a policy.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    */
+     * This function performs a `DELETE` to the `/api/v1/policies/{policyId}` endpoint.
+     *
+     * Removes a policy.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     */
     pub async fn delete_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}",
@@ -168,14 +168,14 @@ impl Policies {
     }
 
     /**
-    * This function performs a `POST` to the `/api/v1/policies/{policyId}/lifecycle/activate` endpoint.
-    *
-    * Activates a policy.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    */
+     * This function performs a `POST` to the `/api/v1/policies/{policyId}/lifecycle/activate` endpoint.
+     *
+     * Activates a policy.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     */
     pub async fn activate_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/lifecycle/activate",
@@ -186,14 +186,14 @@ impl Policies {
     }
 
     /**
-    * This function performs a `POST` to the `/api/v1/policies/{policyId}/lifecycle/deactivate` endpoint.
-    *
-    * Deactivates a policy.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    */
+     * This function performs a `POST` to the `/api/v1/policies/{policyId}/lifecycle/deactivate` endpoint.
+     *
+     * Deactivates a policy.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     */
     pub async fn deactivate_policy(&self, policy_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/lifecycle/deactivate",
@@ -204,14 +204,14 @@ impl Policies {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules` endpoint.
-    *
-    * Enumerates all policy rules.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    */
+     * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules` endpoint.
+     *
+     * Enumerates all policy rules.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     */
     pub async fn list_policy_rules(
         &self,
         policy_id: &str,
@@ -225,12 +225,12 @@ impl Policies {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules` endpoint.
-    *
-    * As opposed to `list_policy_rules`, this function returns all the pages of the request at once.
-    *
-    * Enumerates all policy rules.
-    */
+     * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules` endpoint.
+     *
+     * As opposed to `list_policy_rules`, this function returns all the pages of the request at once.
+     *
+     * Enumerates all policy rules.
+     */
     pub async fn list_all_policy_rules(
         &self,
         policy_id: &str,
@@ -244,14 +244,14 @@ impl Policies {
     }
 
     /**
-    * This function performs a `POST` to the `/api/v1/policies/{policyId}/rules` endpoint.
-    *
-    * Creates a policy rule.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    */
+     * This function performs a `POST` to the `/api/v1/policies/{policyId}/rules` endpoint.
+     *
+     * Creates a policy rule.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     */
     pub async fn create_policy_rule(
         &self,
         policy_id: &str,
@@ -268,15 +268,15 @@ impl Policies {
     }
 
     /**
-    * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules/{ruleId}` endpoint.
-    *
-    * Gets a policy rule.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    * * `rule_id: &str`
-    */
+     * This function performs a `GET` to the `/api/v1/policies/{policyId}/rules/{ruleId}` endpoint.
+     *
+     * Gets a policy rule.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     * * `rule_id: &str`
+     */
     pub async fn get_policy_rule(
         &self,
         policy_id: &str,
@@ -292,15 +292,15 @@ impl Policies {
     }
 
     /**
-    * This function performs a `PUT` to the `/api/v1/policies/{policyId}/rules/{ruleId}` endpoint.
-    *
-    * Updates a policy rule.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    * * `rule_id: &str`
-    */
+     * This function performs a `PUT` to the `/api/v1/policies/{policyId}/rules/{ruleId}` endpoint.
+     *
+     * Updates a policy rule.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     * * `rule_id: &str`
+     */
     pub async fn update_policy_rule(
         &self,
         policy_id: &str,
@@ -319,15 +319,15 @@ impl Policies {
     }
 
     /**
-    * This function performs a `DELETE` to the `/api/v1/policies/{policyId}/rules/{ruleId}` endpoint.
-    *
-    * Removes a policy rule.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    * * `rule_id: &str`
-    */
+     * This function performs a `DELETE` to the `/api/v1/policies/{policyId}/rules/{ruleId}` endpoint.
+     *
+     * Removes a policy rule.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     * * `rule_id: &str`
+     */
     pub async fn delete_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}",
@@ -339,15 +339,15 @@ impl Policies {
     }
 
     /**
-    * This function performs a `POST` to the `/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate` endpoint.
-    *
-    * Activates a policy rule.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    * * `rule_id: &str`
-    */
+     * This function performs a `POST` to the `/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/activate` endpoint.
+     *
+     * Activates a policy rule.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     * * `rule_id: &str`
+     */
     pub async fn activate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}/lifecycle/activate",
@@ -359,15 +359,15 @@ impl Policies {
     }
 
     /**
-    * This function performs a `POST` to the `/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate` endpoint.
-    *
-    * Deactivates a policy rule.
-    *
-    * **Parameters:**
-    *
-    * * `policy_id: &str`
-    * * `rule_id: &str`
-    */
+     * This function performs a `POST` to the `/api/v1/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate` endpoint.
+     *
+     * Deactivates a policy rule.
+     *
+     * **Parameters:**
+     *
+     * * `policy_id: &str`
+     * * `rule_id: &str`
+     */
     pub async fn deactivate_policy_rule(&self, policy_id: &str, rule_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/policies/{}/rules/{}/lifecycle/deactivate",

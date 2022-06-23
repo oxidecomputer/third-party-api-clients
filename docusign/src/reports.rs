@@ -37,16 +37,16 @@ impl Reports {
     }
 
     /**
-    * Creates a customized report.
-    *
-    * This function performs a `POST` to the `/v2.1/accounts/{accountId}/reports` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Creates a customized report.
+     *
+     * This function performs a `POST` to the `/v2.1/accounts/{accountId}/reports` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn product_post_create(
         &self,
         account_id: &str,
@@ -63,16 +63,16 @@ impl Reports {
     }
 
     /**
-    * Returns the result set from running the specified report.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/reports/report_results` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Returns the result set from running the specified report.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/reports/report_results` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn product_put_run_results(
         &self,
         account_id: &str,
@@ -89,16 +89,16 @@ impl Reports {
     }
 
     /**
-    * Returns the specified report as a CSV string.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/reports/report_results_csv` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Returns the specified report as a CSV string.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/reports/report_results_csv` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn product_put_results_csv(
         &self,
         account_id: &str,
@@ -115,17 +115,17 @@ impl Reports {
     }
 
     /**
-    * Gets the specified report.
-    *
-    * This function performs a `GET` to the `/v2.1/accounts/{accountId}/reports/{id}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Gets the specified report.
+     *
+     * This function performs a `GET` to the `/v2.1/accounts/{accountId}/reports/{id}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn product_get(
         &self,
         account_id: &str,
@@ -141,17 +141,17 @@ impl Reports {
     }
 
     /**
-    * Saves a customized report.
-    *
-    * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/reports/{id}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Saves a customized report.
+     *
+     * This function performs a `PUT` to the `/v2.1/accounts/{accountId}/reports/{id}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn product_put_save(
         &self,
         account_id: &str,
@@ -170,17 +170,17 @@ impl Reports {
     }
 
     /**
-    * Removes a customized report.
-    *
-    * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/reports/{id}` endpoint.
-    *
-    *
-    *
-    * **Parameters:**
-    *
-    * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    * * `id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
-    */
+     * Removes a customized report.
+     *
+     * This function performs a `DELETE` to the `/v2.1/accounts/{accountId}/reports/{id}` endpoint.
+     *
+     *
+     *
+     * **Parameters:**
+     *
+     * * `account_id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     * * `id: &str` -- The brand that envelope recipients see when a brand is not explicitly set.
+     */
     pub async fn product_delete(
         &self,
         account_id: &str,

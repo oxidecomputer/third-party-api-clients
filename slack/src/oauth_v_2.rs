@@ -13,19 +13,19 @@ impl OauthV2 {
     }
 
     /**
-    * This function performs a `GET` to the `/oauth.v2.access` endpoint.
-    *
-    * Exchanges a temporary OAuth verifier code for an access token.
-    *
-    * FROM: <https://api.slack.com/methods/oauth.v2.access>
-    *
-    * **Parameters:**
-    *
-    * * `client_id: &str` -- Issued when you created your application.
-    * * `client_secret: &str` -- Issued when you created your application.
-    * * `code: &str` -- The `code` param returned via the OAuth callback.
-    * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
-    */
+     * This function performs a `GET` to the `/oauth.v2.access` endpoint.
+     *
+     * Exchanges a temporary OAuth verifier code for an access token.
+     *
+     * FROM: <https://api.slack.com/methods/oauth.v2.access>
+     *
+     * **Parameters:**
+     *
+     * * `client_id: &str` -- Issued when you created your application.
+     * * `client_secret: &str` -- Issued when you created your application.
+     * * `code: &str` -- The `code` param returned via the OAuth callback.
+     * * `redirect_uri: &str` -- This must match the originally submitted URI (if one was sent).
+     */
     pub async fn oauth_access(
         &self,
         client_id: &str,

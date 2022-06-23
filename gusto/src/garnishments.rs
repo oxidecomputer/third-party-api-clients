@@ -13,12 +13,12 @@ impl Garnishments {
     }
 
     /**
-    * Get garnishments for an employee.
-    *
-    * This function performs a `GET` to the `/v1/employees/{employee_id}/garnishments` endpoint.
-    *
-    * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
-    */
+     * Get garnishments for an employee.
+     *
+     * This function performs a `GET` to the `/v1/employees/{employee_id}/garnishments` endpoint.
+     *
+     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     */
     pub async fn get_employee(&self, employee_id: &str) -> Result<Vec<crate::types::Garnishment>> {
         let url = format!(
             "/v1/employees/{}/garnishments",
@@ -29,14 +29,14 @@ impl Garnishments {
     }
 
     /**
-    * Get garnishments for an employee.
-    *
-    * This function performs a `GET` to the `/v1/employees/{employee_id}/garnishments` endpoint.
-    *
-    * As opposed to `get_employee`, this function returns all the pages of the request at once.
-    *
-    * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
-    */
+     * Get garnishments for an employee.
+     *
+     * This function performs a `GET` to the `/v1/employees/{employee_id}/garnishments` endpoint.
+     *
+     * As opposed to `get_employee`, this function returns all the pages of the request at once.
+     *
+     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     */
     pub async fn get_all_employee(
         &self,
         employee_id: &str,
@@ -50,12 +50,12 @@ impl Garnishments {
     }
 
     /**
-    * Create a garnishment.
-    *
-    * This function performs a `POST` to the `/v1/employees/{employee_id}/garnishments` endpoint.
-    *
-    * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
-    */
+     * Create a garnishment.
+     *
+     * This function performs a `POST` to the `/v1/employees/{employee_id}/garnishments` endpoint.
+     *
+     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     */
     pub async fn post_employee(
         &self,
         employee_id: &str,
@@ -72,12 +72,12 @@ impl Garnishments {
     }
 
     /**
-    * Get a garnishment.
-    *
-    * This function performs a `GET` to the `/v1/garnishments/{garnishment_id}` endpoint.
-    *
-    * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
-    */
+     * Get a garnishment.
+     *
+     * This function performs a `GET` to the `/v1/garnishments/{garnishment_id}` endpoint.
+     *
+     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     */
     pub async fn get(&self, garnishment_id: &str) -> Result<crate::types::Garnishment> {
         let url = format!(
             "/v1/garnishments/{}",
@@ -88,12 +88,12 @@ impl Garnishments {
     }
 
     /**
-    * Update a garnishment.
-    *
-    * This function performs a `PUT` to the `/v1/garnishments/{garnishment_id}` endpoint.
-    *
-    * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
-    */
+     * Update a garnishment.
+     *
+     * This function performs a `PUT` to the `/v1/garnishments/{garnishment_id}` endpoint.
+     *
+     * Garnishments, or employee deductions, are fixed amounts or percentages deducted from an employee’s pay. They can be deducted a specific number of times or on a recurring basis. Garnishments can also have maximum deductions on a yearly or per-pay-period bases. Common uses for garnishments are court-ordered payments for child support or back taxes. Some companies provide loans to their employees that are repaid via garnishments.
+     */
     pub async fn put(
         &self,
         garnishment_id: &str,

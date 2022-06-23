@@ -13,23 +13,23 @@ impl Ecommerce {
     }
 
     /**
-    * List account orders.
-    *
-    * This function performs a `GET` to the `/ecommerce/orders` endpoint.
-    *
-    * Get information about an account's orders.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `campaign_id: &str` -- Restrict results to orders with a specific `campaign_id` value.
-    * * `outreach_id: &str` -- Restrict results to orders with a specific `outreach_id` value.
-    * * `customer_id: &str` -- Restrict results to orders made by a specific customer.
-    * * `has_outreach: bool` -- Restrict results to orders that have an outreach attached. For example, an email campaign or Facebook ad.
-    */
+     * List account orders.
+     *
+     * This function performs a `GET` to the `/ecommerce/orders` endpoint.
+     *
+     * Get information about an account's orders.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `campaign_id: &str` -- Restrict results to orders with a specific `campaign_id` value.
+     * * `outreach_id: &str` -- Restrict results to orders with a specific `outreach_id` value.
+     * * `customer_id: &str` -- Restrict results to orders made by a specific customer.
+     * * `has_outreach: bool` -- Restrict results to orders that have an outreach attached. For example, an email campaign or Facebook ad.
+     */
     pub async fn get_order(
         &self,
         fields: &[String],
@@ -73,19 +73,19 @@ impl Ecommerce {
     }
 
     /**
-    * List stores.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores` endpoint.
-    *
-    * Get information about all stores in the account.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    */
+     * List stores.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores` endpoint.
+     *
+     * Get information about all stores in the account.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     */
     pub async fn get_store(
         &self,
         fields: &[String],
@@ -113,12 +113,12 @@ impl Ecommerce {
     }
 
     /**
-    * Add store.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores` endpoint.
-    *
-    * Add a new store to your Mailchimp account.
-    */
+     * Add store.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores` endpoint.
+     *
+     * Add a new store to your Mailchimp account.
+     */
     pub async fn post_store(
         &self,
         body: &crate::types::ECommerceStore,
@@ -130,18 +130,18 @@ impl Ecommerce {
     }
 
     /**
-    * Get store info.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}` endpoint.
-    *
-    * Get information about a specific store.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * Get store info.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}` endpoint.
+     *
+     * Get information about a specific store.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn get_store_ecommerce(
         &self,
         fields: &[String],
@@ -166,16 +166,16 @@ impl Ecommerce {
     }
 
     /**
-    * Delete store.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}` endpoint.
-    *
-    * Delete a store. Deleting a store will also delete any associated subresources, including Customers, Orders, Products, and Carts.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * Delete store.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}` endpoint.
+     *
+     * Delete a store. Deleting a store will also delete any associated subresources, including Customers, Orders, Products, and Carts.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn delete_stores(&self, store_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}",
@@ -186,16 +186,16 @@ impl Ecommerce {
     }
 
     /**
-    * Update store.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}` endpoint.
-    *
-    * Update a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * Update store.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}` endpoint.
+     *
+     * Update a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn patch_stores(
         &self,
         store_id: &str,
@@ -212,20 +212,20 @@ impl Ecommerce {
     }
 
     /**
-    * List carts.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/carts` endpoint.
-    *
-    * Get information about a store's carts.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * List carts.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/carts` endpoint.
+     *
+     * Get information about a store's carts.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn get_stores_cart(
         &self,
         fields: &[String],
@@ -258,16 +258,16 @@ impl Ecommerce {
     }
 
     /**
-    * Add cart.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/carts` endpoint.
-    *
-    * Add a new cart to a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * Add cart.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/carts` endpoint.
+     *
+     * Add a new cart to a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn post_stores_cart(
         &self,
         store_id: &str,
@@ -284,19 +284,19 @@ impl Ecommerce {
     }
 
     /**
-    * Get cart info.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/carts/{cart_id}` endpoint.
-    *
-    * Get information about a specific cart.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `cart_id: &str` -- The name of the folder.
-    */
+     * Get cart info.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/carts/{cart_id}` endpoint.
+     *
+     * Get information about a specific cart.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `cart_id: &str` -- The name of the folder.
+     */
     pub async fn get_stores_cart_ecommerce(
         &self,
         fields: &[String],
@@ -323,17 +323,17 @@ impl Ecommerce {
     }
 
     /**
-    * Delete cart.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/carts/{cart_id}` endpoint.
-    *
-    * Delete a cart.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `cart_id: &str` -- The name of the folder.
-    */
+     * Delete cart.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/carts/{cart_id}` endpoint.
+     *
+     * Delete a cart.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `cart_id: &str` -- The name of the folder.
+     */
     pub async fn delete_stores_carts(&self, store_id: &str, cart_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/carts/{}",
@@ -345,17 +345,17 @@ impl Ecommerce {
     }
 
     /**
-    * Update cart.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/carts/{cart_id}` endpoint.
-    *
-    * Update a specific cart.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `cart_id: &str` -- The name of the folder.
-    */
+     * Update cart.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/carts/{cart_id}` endpoint.
+     *
+     * Update a specific cart.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `cart_id: &str` -- The name of the folder.
+     */
     pub async fn patch_stores_carts(
         &self,
         store_id: &str,
@@ -374,21 +374,21 @@ impl Ecommerce {
     }
 
     /**
-    * List cart line items.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines` endpoint.
-    *
-    * Get information about a cart's line items.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `store_id: &str` -- The name of the folder.
-    * * `cart_id: &str` -- The name of the folder.
-    */
+     * List cart line items.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines` endpoint.
+     *
+     * Get information about a cart's line items.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `store_id: &str` -- The name of the folder.
+     * * `cart_id: &str` -- The name of the folder.
+     */
     pub async fn get_stores_carts_line(
         &self,
         fields: &[String],
@@ -423,17 +423,17 @@ impl Ecommerce {
     }
 
     /**
-    * Add cart line item.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines` endpoint.
-    *
-    * Add a new line item to an existing cart.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `cart_id: &str` -- The name of the folder.
-    */
+     * Add cart line item.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines` endpoint.
+     *
+     * Add a new line item to an existing cart.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `cart_id: &str` -- The name of the folder.
+     */
     pub async fn post_stores_carts_line(
         &self,
         store_id: &str,
@@ -452,20 +452,20 @@ impl Ecommerce {
     }
 
     /**
-    * Get cart line item.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}` endpoint.
-    *
-    * Get information about a specific cart line item.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `cart_id: &str` -- The name of the folder.
-    * * `line_id: &str` -- The id for the line item of a cart.
-    */
+     * Get cart line item.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}` endpoint.
+     *
+     * Get information about a specific cart line item.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `cart_id: &str` -- The name of the folder.
+     * * `line_id: &str` -- The id for the line item of a cart.
+     */
     pub async fn get_stores_carts_line_ecommerce(
         &self,
         fields: &[String],
@@ -494,18 +494,18 @@ impl Ecommerce {
     }
 
     /**
-    * Delete cart line item.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}` endpoint.
-    *
-    * Delete a specific cart line item.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `cart_id: &str` -- The name of the folder.
-    * * `line_id: &str` -- The id for the line item of a cart.
-    */
+     * Delete cart line item.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}` endpoint.
+     *
+     * Delete a specific cart line item.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `cart_id: &str` -- The name of the folder.
+     * * `line_id: &str` -- The id for the line item of a cart.
+     */
     pub async fn delete_stores_carts_lines(
         &self,
         store_id: &str,
@@ -523,18 +523,18 @@ impl Ecommerce {
     }
 
     /**
-    * Update cart line item.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}` endpoint.
-    *
-    * Update a specific cart line item.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `cart_id: &str` -- The name of the folder.
-    * * `line_id: &str` -- The id for the line item of a cart.
-    */
+     * Update cart line item.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/carts/{cart_id}/lines/{line_id}` endpoint.
+     *
+     * Update a specific cart line item.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `cart_id: &str` -- The name of the folder.
+     * * `line_id: &str` -- The id for the line item of a cart.
+     */
     pub async fn patch_stores_carts_lines(
         &self,
         store_id: &str,
@@ -555,21 +555,21 @@ impl Ecommerce {
     }
 
     /**
-    * List customers.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/customers` endpoint.
-    *
-    * Get information about a store's customers.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `store_id: &str` -- The name of the folder.
-    * * `email_address: &str` -- Restrict the response to customers with the email address.
-    */
+     * List customers.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/customers` endpoint.
+     *
+     * Get information about a store's customers.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `store_id: &str` -- The name of the folder.
+     * * `email_address: &str` -- Restrict the response to customers with the email address.
+     */
     pub async fn get_stores_customer(
         &self,
         fields: &[String],
@@ -606,16 +606,16 @@ impl Ecommerce {
     }
 
     /**
-    * Add customer.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/customers` endpoint.
-    *
-    * Add a new customer to a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * Add customer.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/customers` endpoint.
+     *
+     * Add a new customer to a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn post_stores_customer(
         &self,
         store_id: &str,
@@ -632,19 +632,19 @@ impl Ecommerce {
     }
 
     /**
-    * Get customer info.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/customers/{customer_id}` endpoint.
-    *
-    * Get information about a specific customer.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `customer_id: &str` -- The id for the customer of a store.
-    */
+     * Get customer info.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/customers/{customer_id}` endpoint.
+     *
+     * Get information about a specific customer.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `customer_id: &str` -- The id for the customer of a store.
+     */
     pub async fn get_stores_customer_ecommerce(
         &self,
         fields: &[String],
@@ -671,17 +671,17 @@ impl Ecommerce {
     }
 
     /**
-    * Add or update customer.
-    *
-    * This function performs a `PUT` to the `/ecommerce/stores/{store_id}/customers/{customer_id}` endpoint.
-    *
-    * Add or update a customer.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `customer_id: &str` -- The id for the customer of a store.
-    */
+     * Add or update customer.
+     *
+     * This function performs a `PUT` to the `/ecommerce/stores/{store_id}/customers/{customer_id}` endpoint.
+     *
+     * Add or update a customer.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `customer_id: &str` -- The id for the customer of a store.
+     */
     pub async fn put_stores_customers(
         &self,
         store_id: &str,
@@ -700,17 +700,17 @@ impl Ecommerce {
     }
 
     /**
-    * Delete customer.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/customers/{customer_id}` endpoint.
-    *
-    * Delete a customer from a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `customer_id: &str` -- The id for the customer of a store.
-    */
+     * Delete customer.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/customers/{customer_id}` endpoint.
+     *
+     * Delete a customer from a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `customer_id: &str` -- The id for the customer of a store.
+     */
     pub async fn delete_stores_customers(&self, store_id: &str, customer_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/customers/{}",
@@ -722,17 +722,17 @@ impl Ecommerce {
     }
 
     /**
-    * Update customer.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/customers/{customer_id}` endpoint.
-    *
-    * Update a customer.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `customer_id: &str` -- The id for the customer of a store.
-    */
+     * Update customer.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/customers/{customer_id}` endpoint.
+     *
+     * Update a customer.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `customer_id: &str` -- The id for the customer of a store.
+     */
     pub async fn patch_stores_customers(
         &self,
         store_id: &str,
@@ -751,20 +751,20 @@ impl Ecommerce {
     }
 
     /**
-    * List promo rules.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/promo-rules` endpoint.
-    *
-    * Get information about a store's promo rules.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * List promo rules.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/promo-rules` endpoint.
+     *
+     * Get information about a store's promo rules.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn get_stores_promorule(
         &self,
         fields: &[String],
@@ -797,16 +797,16 @@ impl Ecommerce {
     }
 
     /**
-    * Add promo rule.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/promo-rules` endpoint.
-    *
-    * Add a new promo rule to a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * Add promo rule.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/promo-rules` endpoint.
+     *
+     * Add a new promo rule to a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn post_stores_promorule(
         &self,
         store_id: &str,
@@ -823,19 +823,19 @@ impl Ecommerce {
     }
 
     /**
-    * Get promo rule.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}` endpoint.
-    *
-    * Get information about a specific promo rule.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `promo_rule_id: &str` -- The id for the promo rule of a store.
-    */
+     * Get promo rule.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}` endpoint.
+     *
+     * Get information about a specific promo rule.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `promo_rule_id: &str` -- The id for the promo rule of a store.
+     */
     pub async fn get_stores_promorule_ecommerce(
         &self,
         fields: &[String],
@@ -862,17 +862,17 @@ impl Ecommerce {
     }
 
     /**
-    * Delete promo rule.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}` endpoint.
-    *
-    * Delete a promo rule from a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `promo_rule_id: &str` -- The id for the promo rule of a store.
-    */
+     * Delete promo rule.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}` endpoint.
+     *
+     * Delete a promo rule from a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `promo_rule_id: &str` -- The id for the promo rule of a store.
+     */
     pub async fn delete_stores_promorules(
         &self,
         store_id: &str,
@@ -888,17 +888,17 @@ impl Ecommerce {
     }
 
     /**
-    * Update promo rule.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}` endpoint.
-    *
-    * Update a promo rule.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `promo_rule_id: &str` -- The id for the promo rule of a store.
-    */
+     * Update promo rule.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}` endpoint.
+     *
+     * Update a promo rule.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `promo_rule_id: &str` -- The id for the promo rule of a store.
+     */
     pub async fn patch_stores_promorules(
         &self,
         store_id: &str,
@@ -917,21 +917,21 @@ impl Ecommerce {
     }
 
     /**
-    * List promo codes.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes` endpoint.
-    *
-    * Get information about a store's promo codes.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `promo_rule_id: &str` -- The id for the promo rule of a store.
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * List promo codes.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes` endpoint.
+     *
+     * Get information about a store's promo codes.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `promo_rule_id: &str` -- The id for the promo rule of a store.
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn get_stores_promocode(
         &self,
         fields: &[String],
@@ -966,17 +966,17 @@ impl Ecommerce {
     }
 
     /**
-    * Add promo code.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes` endpoint.
-    *
-    * Add a new promo code to a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `promo_rule_id: &str` -- The id for the promo rule of a store.
-    */
+     * Add promo code.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes` endpoint.
+     *
+     * Add a new promo code to a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `promo_rule_id: &str` -- The id for the promo rule of a store.
+     */
     pub async fn post_stores_promocode(
         &self,
         store_id: &str,
@@ -995,20 +995,20 @@ impl Ecommerce {
     }
 
     /**
-    * Get promo code.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}` endpoint.
-    *
-    * Get information about a specific promo code.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `promo_rule_id: &str` -- The id for the promo rule of a store.
-    * * `promo_code_id: &str` -- The id for the promo code of a store.
-    */
+     * Get promo code.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}` endpoint.
+     *
+     * Get information about a specific promo code.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `promo_rule_id: &str` -- The id for the promo rule of a store.
+     * * `promo_code_id: &str` -- The id for the promo code of a store.
+     */
     pub async fn get_stores_promocode_ecommerce(
         &self,
         fields: &[String],
@@ -1037,18 +1037,18 @@ impl Ecommerce {
     }
 
     /**
-    * Delete promo code.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}` endpoint.
-    *
-    * Delete a promo code from a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `promo_rule_id: &str` -- The id for the promo rule of a store.
-    * * `promo_code_id: &str` -- The id for the promo code of a store.
-    */
+     * Delete promo code.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}` endpoint.
+     *
+     * Delete a promo code from a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `promo_rule_id: &str` -- The id for the promo rule of a store.
+     * * `promo_code_id: &str` -- The id for the promo code of a store.
+     */
     pub async fn delete_stores_promocodes(
         &self,
         store_id: &str,
@@ -1066,18 +1066,18 @@ impl Ecommerce {
     }
 
     /**
-    * Update promo code.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}` endpoint.
-    *
-    * Update a promo code.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `promo_rule_id: &str` -- The id for the promo rule of a store.
-    * * `promo_code_id: &str` -- The id for the promo code of a store.
-    */
+     * Update promo code.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/promo-rules/{promo_rule_id}/promo-codes/{promo_code_id}` endpoint.
+     *
+     * Update a promo code.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `promo_rule_id: &str` -- The id for the promo rule of a store.
+     * * `promo_code_id: &str` -- The id for the promo code of a store.
+     */
     pub async fn patch_stores_promocodes(
         &self,
         store_id: &str,
@@ -1098,24 +1098,24 @@ impl Ecommerce {
     }
 
     /**
-    * List orders.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/orders` endpoint.
-    *
-    * Get information about a store's orders.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `store_id: &str` -- The name of the folder.
-    * * `customer_id: &str` -- Restrict results to orders made by a specific customer.
-    * * `has_outreach: bool` -- Restrict results to orders that have an outreach attached. For example, an email campaign or Facebook ad.
-    * * `campaign_id: &str` -- Restrict results to orders with a specific `campaign_id` value.
-    * * `outreach_id: &str` -- Restrict results to orders with a specific `outreach_id` value.
-    */
+     * List orders.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/orders` endpoint.
+     *
+     * Get information about a store's orders.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `store_id: &str` -- The name of the folder.
+     * * `customer_id: &str` -- Restrict results to orders made by a specific customer.
+     * * `has_outreach: bool` -- Restrict results to orders that have an outreach attached. For example, an email campaign or Facebook ad.
+     * * `campaign_id: &str` -- Restrict results to orders with a specific `campaign_id` value.
+     * * `outreach_id: &str` -- Restrict results to orders with a specific `outreach_id` value.
+     */
     pub async fn get_stores_order(
         &self,
         fields: &[String],
@@ -1164,16 +1164,16 @@ impl Ecommerce {
     }
 
     /**
-    * Add order.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/orders` endpoint.
-    *
-    * Add a new order to a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * Add order.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/orders` endpoint.
+     *
+     * Add a new order to a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn post_stores_order(
         &self,
         store_id: &str,
@@ -1190,19 +1190,19 @@ impl Ecommerce {
     }
 
     /**
-    * Get order info.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/orders/{order_id}` endpoint.
-    *
-    * Get information about a specific order.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `order_id: &str` -- The id for the order in a store.
-    */
+     * Get order info.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/orders/{order_id}` endpoint.
+     *
+     * Get information about a specific order.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `order_id: &str` -- The id for the order in a store.
+     */
     pub async fn get_stores_order_ecommerce(
         &self,
         fields: &[String],
@@ -1229,17 +1229,17 @@ impl Ecommerce {
     }
 
     /**
-    * Delete order.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/orders/{order_id}` endpoint.
-    *
-    * Delete an order.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `order_id: &str` -- The id for the order in a store.
-    */
+     * Delete order.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/orders/{order_id}` endpoint.
+     *
+     * Delete an order.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `order_id: &str` -- The id for the order in a store.
+     */
     pub async fn delete_stores_orders(&self, store_id: &str, order_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/orders/{}",
@@ -1251,17 +1251,17 @@ impl Ecommerce {
     }
 
     /**
-    * Update order.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/orders/{order_id}` endpoint.
-    *
-    * Update a specific order.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `order_id: &str` -- The id for the order in a store.
-    */
+     * Update order.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/orders/{order_id}` endpoint.
+     *
+     * Update a specific order.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `order_id: &str` -- The id for the order in a store.
+     */
     pub async fn patch_stores_orders(
         &self,
         store_id: &str,
@@ -1280,21 +1280,21 @@ impl Ecommerce {
     }
 
     /**
-    * List order line items.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines` endpoint.
-    *
-    * Get information about an order's line items.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `store_id: &str` -- The name of the folder.
-    * * `order_id: &str` -- The id for the order in a store.
-    */
+     * List order line items.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines` endpoint.
+     *
+     * Get information about an order's line items.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `store_id: &str` -- The name of the folder.
+     * * `order_id: &str` -- The id for the order in a store.
+     */
     pub async fn get_stores_orders_line(
         &self,
         fields: &[String],
@@ -1329,17 +1329,17 @@ impl Ecommerce {
     }
 
     /**
-    * Add order line item.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines` endpoint.
-    *
-    * Add a new line item to an existing order.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `order_id: &str` -- The id for the order in a store.
-    */
+     * Add order line item.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines` endpoint.
+     *
+     * Add a new line item to an existing order.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `order_id: &str` -- The id for the order in a store.
+     */
     pub async fn post_stores_orders_line(
         &self,
         store_id: &str,
@@ -1358,20 +1358,20 @@ impl Ecommerce {
     }
 
     /**
-    * Get order line item.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}` endpoint.
-    *
-    * Get information about a specific order line item.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `order_id: &str` -- The id for the order in a store.
-    * * `line_id: &str` -- The id for the line item of an order.
-    */
+     * Get order line item.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}` endpoint.
+     *
+     * Get information about a specific order line item.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `order_id: &str` -- The id for the order in a store.
+     * * `line_id: &str` -- The id for the line item of an order.
+     */
     pub async fn get_stores_orders_line_ecommerce(
         &self,
         fields: &[String],
@@ -1400,18 +1400,18 @@ impl Ecommerce {
     }
 
     /**
-    * Delete order line item.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}` endpoint.
-    *
-    * Delete a specific order line item.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `order_id: &str` -- The id for the order in a store.
-    * * `line_id: &str` -- The id for the line item of an order.
-    */
+     * Delete order line item.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}` endpoint.
+     *
+     * Delete a specific order line item.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `order_id: &str` -- The id for the order in a store.
+     * * `line_id: &str` -- The id for the line item of an order.
+     */
     pub async fn delete_stores_orders_lines(
         &self,
         store_id: &str,
@@ -1429,18 +1429,18 @@ impl Ecommerce {
     }
 
     /**
-    * Update order line item.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}` endpoint.
-    *
-    * Update a specific order line item.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `order_id: &str` -- The id for the order in a store.
-    * * `line_id: &str` -- The id for the line item of an order.
-    */
+     * Update order line item.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/orders/{order_id}/lines/{line_id}` endpoint.
+     *
+     * Update a specific order line item.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `order_id: &str` -- The id for the order in a store.
+     * * `line_id: &str` -- The id for the line item of an order.
+     */
     pub async fn patch_stores_orders_lines(
         &self,
         store_id: &str,
@@ -1461,20 +1461,20 @@ impl Ecommerce {
     }
 
     /**
-    * List product.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products` endpoint.
-    *
-    * Get information about a store's products.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * List product.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products` endpoint.
+     *
+     * Get information about a store's products.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn get_stores_product(
         &self,
         fields: &[String],
@@ -1507,16 +1507,16 @@ impl Ecommerce {
     }
 
     /**
-    * Add product.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/products` endpoint.
-    *
-    * Add a new product to a store.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    */
+     * Add product.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/products` endpoint.
+     *
+     * Add a new product to a store.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     */
     pub async fn post_stores_product(
         &self,
         store_id: &str,
@@ -1533,19 +1533,19 @@ impl Ecommerce {
     }
 
     /**
-    * Get product info.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}` endpoint.
-    *
-    * Get information about a specific product.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    */
+     * Get product info.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}` endpoint.
+     *
+     * Get information about a specific product.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     */
     pub async fn get_stores_product_ecommerce(
         &self,
         fields: &[String],
@@ -1572,17 +1572,17 @@ impl Ecommerce {
     }
 
     /**
-    * Delete product.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/products/{product_id}` endpoint.
-    *
-    * Delete a product.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    */
+     * Delete product.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/products/{product_id}` endpoint.
+     *
+     * Delete a product.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     */
     pub async fn delete_stores_products(&self, store_id: &str, product_id: &str) -> Result<()> {
         let url = format!(
             "/ecommerce/stores/{}/products/{}",
@@ -1594,17 +1594,17 @@ impl Ecommerce {
     }
 
     /**
-    * Update product.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/products/{product_id}` endpoint.
-    *
-    * Update a specific product.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    */
+     * Update product.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/products/{product_id}` endpoint.
+     *
+     * Update a specific product.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     */
     pub async fn patch_stores_products(
         &self,
         store_id: &str,
@@ -1623,21 +1623,21 @@ impl Ecommerce {
     }
 
     /**
-    * List product variants.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants` endpoint.
-    *
-    * Get information about a product's variants.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    */
+     * List product variants.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants` endpoint.
+     *
+     * Get information about a product's variants.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     */
     pub async fn get_stores_products_variant(
         &self,
         fields: &[String],
@@ -1672,17 +1672,17 @@ impl Ecommerce {
     }
 
     /**
-    * Add product variant.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants` endpoint.
-    *
-    * Add a new variant to the product.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    */
+     * Add product variant.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants` endpoint.
+     *
+     * Add a new variant to the product.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     */
     pub async fn post_stores_products_variant(
         &self,
         store_id: &str,
@@ -1701,20 +1701,20 @@ impl Ecommerce {
     }
 
     /**
-    * Get product variant info.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}` endpoint.
-    *
-    * Get information about a specific product variant.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    * * `variant_id: &str` -- The id for the product variant.
-    */
+     * Get product variant info.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}` endpoint.
+     *
+     * Get information about a specific product variant.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     * * `variant_id: &str` -- The id for the product variant.
+     */
     pub async fn get_stores_products_variant_ecommerce(
         &self,
         fields: &[String],
@@ -1743,18 +1743,18 @@ impl Ecommerce {
     }
 
     /**
-    * Add or update product variant.
-    *
-    * This function performs a `PUT` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}` endpoint.
-    *
-    * Add or update a product variant.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    * * `variant_id: &str` -- The id for the product variant.
-    */
+     * Add or update product variant.
+     *
+     * This function performs a `PUT` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}` endpoint.
+     *
+     * Add or update a product variant.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     * * `variant_id: &str` -- The id for the product variant.
+     */
     pub async fn put_stores_products_variants(
         &self,
         store_id: &str,
@@ -1775,18 +1775,18 @@ impl Ecommerce {
     }
 
     /**
-    * Delete product variant.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}` endpoint.
-    *
-    * Delete a product variant.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    * * `variant_id: &str` -- The id for the product variant.
-    */
+     * Delete product variant.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}` endpoint.
+     *
+     * Delete a product variant.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     * * `variant_id: &str` -- The id for the product variant.
+     */
     pub async fn delete_stores_products_variants(
         &self,
         store_id: &str,
@@ -1804,18 +1804,18 @@ impl Ecommerce {
     }
 
     /**
-    * Update product variant.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}` endpoint.
-    *
-    * Update a product variant.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    * * `variant_id: &str` -- The id for the product variant.
-    */
+     * Update product variant.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/products/{product_id}/variants/{variant_id}` endpoint.
+     *
+     * Update a product variant.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     * * `variant_id: &str` -- The id for the product variant.
+     */
     pub async fn patch_stores_products_variants(
         &self,
         store_id: &str,
@@ -1836,21 +1836,21 @@ impl Ecommerce {
     }
 
     /**
-    * List product images.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}/images` endpoint.
-    *
-    * Get information about a product's images.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
-    * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    */
+     * List product images.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}/images` endpoint.
+     *
+     * Get information about a product's images.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `count: i64` -- The number of records to return. Default value is 10. Maximum value is 1000.
+     * * `offset: i64` -- Used for [pagination](https://mailchimp.com/developer/marketing/docs/methods-parameters/#pagination), this it the number of records from a collection to skip. Default value is 0.
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     */
     pub async fn get_stores_products_image(
         &self,
         fields: &[String],
@@ -1885,17 +1885,17 @@ impl Ecommerce {
     }
 
     /**
-    * Add product image.
-    *
-    * This function performs a `POST` to the `/ecommerce/stores/{store_id}/products/{product_id}/images` endpoint.
-    *
-    * Add a new image to the product.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    */
+     * Add product image.
+     *
+     * This function performs a `POST` to the `/ecommerce/stores/{store_id}/products/{product_id}/images` endpoint.
+     *
+     * Add a new image to the product.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     */
     pub async fn post_stores_products_image(
         &self,
         store_id: &str,
@@ -1914,20 +1914,20 @@ impl Ecommerce {
     }
 
     /**
-    * Get product image info.
-    *
-    * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}` endpoint.
-    *
-    * Get information about a specific product image.
-    *
-    * **Parameters:**
-    *
-    * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    * * `image_id: &str` -- The id for the product image.
-    */
+     * Get product image info.
+     *
+     * This function performs a `GET` to the `/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}` endpoint.
+     *
+     * Get information about a specific product image.
+     *
+     * **Parameters:**
+     *
+     * * `fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `exclude_fields: &[String]` -- A comma-separated list of fields to return. Reference parameters of sub-objects with dot notation.
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     * * `image_id: &str` -- The id for the product image.
+     */
     pub async fn get_stores_products_image_ecommerce(
         &self,
         fields: &[String],
@@ -1956,18 +1956,18 @@ impl Ecommerce {
     }
 
     /**
-    * Delete product image.
-    *
-    * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}` endpoint.
-    *
-    * Delete a product image.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    * * `image_id: &str` -- The id for the product image.
-    */
+     * Delete product image.
+     *
+     * This function performs a `DELETE` to the `/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}` endpoint.
+     *
+     * Delete a product image.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     * * `image_id: &str` -- The id for the product image.
+     */
     pub async fn delete_stores_products_images(
         &self,
         store_id: &str,
@@ -1985,18 +1985,18 @@ impl Ecommerce {
     }
 
     /**
-    * Update product image.
-    *
-    * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}` endpoint.
-    *
-    * Update a product image.
-    *
-    * **Parameters:**
-    *
-    * * `store_id: &str` -- The name of the folder.
-    * * `product_id: &str` -- The id for the product of a store.
-    * * `image_id: &str` -- The id for the product image.
-    */
+     * Update product image.
+     *
+     * This function performs a `PATCH` to the `/ecommerce/stores/{store_id}/products/{product_id}/images/{image_id}` endpoint.
+     *
+     * Update a product image.
+     *
+     * **Parameters:**
+     *
+     * * `store_id: &str` -- The name of the folder.
+     * * `product_id: &str` -- The id for the product of a store.
+     * * `image_id: &str` -- The id for the product image.
+     */
     pub async fn patch_stores_products_images(
         &self,
         store_id: &str,

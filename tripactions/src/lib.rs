@@ -54,9 +54,7 @@
 //! ```
 //! use tripactions::Client;
 //!
-//! let tripactions = Client::new_from_env(
-//!     String::from("token"),
-//! );
+//! let tripactions = Client::new_from_env(String::from("token"));
 //! ```
 //!
 //! It is okay to pass an empty value for `token`. In
@@ -73,7 +71,6 @@
 //!     let mut access_token = tripactions.get_access_token().await.unwrap();
 //! }
 //! ```
-//!
 #![allow(clippy::too_many_arguments)]
 #![allow(clippy::nonstandard_macro_braces)]
 #![allow(clippy::large_enum_variant)]
@@ -183,8 +180,9 @@ impl Client {
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
                     .with(reqwest_tracing::TracingMiddleware)
                     // Retry failed requests.
-                    .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(
-                        retry_policy,
+                    .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
+                        reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
+                        |req: &reqwest::Request| req.try_clone().is_some(),
                     ))
                     .build();
 
@@ -413,10 +411,6 @@ impl Client {
         // Set the default headers.
         req = req.header(
             reqwest::header::ACCEPT,
-            reqwest::header::HeaderValue::from_static("application/json"),
-        );
-        req = req.header(
-            reqwest::header::CONTENT_TYPE,
             reqwest::header::HeaderValue::from_static("application/json"),
         );
 

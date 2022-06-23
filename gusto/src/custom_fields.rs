@@ -13,12 +13,12 @@ impl CustomFields {
     }
 
     /**
-    * Get an employee's custom fields.
-    *
-    * This function performs a `GET` to the `/v1/employees/{employee_id}/custom_fields` endpoint.
-    *
-    * Returns a list of the employee's custom fields.
-    */
+     * Get an employee's custom fields.
+     *
+     * This function performs a `GET` to the `/v1/employees/{employee_id}/custom_fields` endpoint.
+     *
+     * Returns a list of the employee's custom fields.
+     */
     pub async fn get_employee(
         &self,
         employee_id: &str,
@@ -32,12 +32,12 @@ impl CustomFields {
     }
 
     /**
-    * Get the custom fields of a company.
-    *
-    * This function performs a `GET` to the `/v1/companies/{company_id}/custom_fields` endpoint.
-    *
-    * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
-    */
+     * Get the custom fields of a company.
+     *
+     * This function performs a `GET` to the `/v1/companies/{company_id}/custom_fields` endpoint.
+     *
+     * Returns a list of the custom fields of the company. Useful when you need to know the schema of custom fields for an entire company
+     */
     pub async fn get_company(
         &self,
         company_id: &str,

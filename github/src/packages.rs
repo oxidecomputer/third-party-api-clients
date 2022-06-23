@@ -13,23 +13,23 @@ impl Packages {
     }
 
     /**
-    * Get a package for an organization.
-    *
-    * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}` endpoint.
-    *
-    * Gets a specific package in an organization.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-for-an-organization>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `org: &str`
-    */
+     * Get a package for an organization.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}` endpoint.
+     *
+     * Gets a specific package in an organization.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-for-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `org: &str`
+     */
     pub async fn get_package_for_organization(
         &self,
         package_type: crate::types::PackageType,
@@ -47,24 +47,24 @@ impl Packages {
     }
 
     /**
-    * Delete a package for an organization.
-    *
-    * This function performs a `DELETE` to the `/orgs/{org}/packages/{package_type}/{package_name}` endpoint.
-    *
-    * Deletes an entire package in an organization. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
-    *
-    * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:delete` scopes. In addition:
-    * - If `package_type` is not `container`, your token must also include the `repo` scope.
-    * - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-for-an-organization>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `org: &str`
-    */
+     * Delete a package for an organization.
+     *
+     * This function performs a `DELETE` to the `/orgs/{org}/packages/{package_type}/{package_name}` endpoint.
+     *
+     * Deletes an entire package in an organization. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
+     *
+     * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:delete` scopes. In addition:
+     * - If `package_type` is not `container`, your token must also include the `repo` scope.
+     * - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-for-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `org: &str`
+     */
     pub async fn delete_package_for_org(
         &self,
         package_type: crate::types::PackageType,
@@ -82,29 +82,29 @@ impl Packages {
     }
 
     /**
-    * Restore a package for an organization.
-    *
-    * This function performs a `POST` to the `/orgs/{org}/packages/{package_type}/{package_name}/restore` endpoint.
-    *
-    * Restores an entire package in an organization.
-    *
-    * You can restore a deleted package under the following conditions:
-    *   - The package was deleted within the last 30 days.
-    *   - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
-    *
-    * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:write` scopes. In addition:
-    * - If `package_type` is not `container`, your token must also include the `repo` scope.
-    * - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-for-an-organization>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `org: &str`
-    * * `token: &str` -- package token.
-    */
+     * Restore a package for an organization.
+     *
+     * This function performs a `POST` to the `/orgs/{org}/packages/{package_type}/{package_name}/restore` endpoint.
+     *
+     * Restores an entire package in an organization.
+     *
+     * You can restore a deleted package under the following conditions:
+     *   - The package was deleted within the last 30 days.
+     *   - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
+     *
+     * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:write` scopes. In addition:
+     * - If `package_type` is not `container`, your token must also include the `repo` scope.
+     * - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-for-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `org: &str`
+     * * `token: &str` -- package token.
+     */
     pub async fn restore_package_for_org(
         &self,
         package_type: crate::types::PackageType,
@@ -129,26 +129,26 @@ impl Packages {
     }
 
     /**
-    * Get all package versions for a package owned by an organization.
-    *
-    * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions` endpoint.
-    *
-    * Returns all package versions for a package owned by an organization.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `org: &str`
-    * * `page: i64` -- Page number of the results to fetch.
-    * * `per_page: i64` -- Results per page (max 100).
-    * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
-    */
+     * Get all package versions for a package owned by an organization.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions` endpoint.
+     *
+     * Returns all package versions for a package owned by an organization.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `org: &str`
+     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
+     */
     pub async fn get_all_package_versions_for_package_owned_by_org(
         &self,
         package_type: crate::types::PackageType,
@@ -181,19 +181,19 @@ impl Packages {
     }
 
     /**
-    * Get all package versions for a package owned by an organization.
-    *
-    * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions` endpoint.
-    *
-    * As opposed to `get_all_package_versions_for_package_owned_by_org`, this function returns all the pages of the request at once.
-    *
-    * Returns all package versions for a package owned by an organization.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization>
-    */
+     * Get all package versions for a package owned by an organization.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions` endpoint.
+     *
+     * As opposed to `get_all_package_versions_for_package_owned_by_org`, this function returns all the pages of the request at once.
+     *
+     * Returns all package versions for a package owned by an organization.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization>
+     */
     pub async fn get_all_all_package_versions_for_package_owned_by_org(
         &self,
         package_type: crate::types::PackageType,
@@ -218,24 +218,24 @@ impl Packages {
     }
 
     /**
-    * Get a package version for an organization.
-    *
-    * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
-    *
-    * Gets a specific package version in an organization.
-    *
-    * You must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-version-for-an-organization>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `org: &str`
-    * * `package_version_id: i64` -- Unique identifier of the package version.
-    */
+     * Get a package version for an organization.
+     *
+     * This function performs a `GET` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
+     *
+     * Gets a specific package version in an organization.
+     *
+     * You must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-version-for-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `org: &str`
+     * * `package_version_id: i64` -- Unique identifier of the package version.
+     */
     pub async fn get_package_version_for_organization(
         &self,
         package_type: crate::types::PackageType,
@@ -255,25 +255,25 @@ impl Packages {
     }
 
     /**
-    * Delete package version for an organization.
-    *
-    * This function performs a `DELETE` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
-    *
-    * Deletes a specific package version in an organization. If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
-    *
-    * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:delete` scopes. In addition:
-    * - If `package_type` is not `container`, your token must also include the `repo` scope.
-    * - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-version-for-an-organization>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `org: &str`
-    * * `package_version_id: i64` -- Unique identifier of the package version.
-    */
+     * Delete package version for an organization.
+     *
+     * This function performs a `DELETE` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
+     *
+     * Deletes a specific package version in an organization. If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
+     *
+     * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:delete` scopes. In addition:
+     * - If `package_type` is not `container`, your token must also include the `repo` scope.
+     * - If `package_type` is `container`, you must also have admin permissions to the container you want to delete.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-version-for-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `org: &str`
+     * * `package_version_id: i64` -- Unique identifier of the package version.
+     */
     pub async fn delete_package_version_for_org(
         &self,
         package_type: crate::types::PackageType,
@@ -293,29 +293,29 @@ impl Packages {
     }
 
     /**
-    * Restore package version for an organization.
-    *
-    * This function performs a `POST` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}/restore` endpoint.
-    *
-    * Restores a specific package version in an organization.
-    *
-    * You can restore a deleted package under the following conditions:
-    *   - The package was deleted within the last 30 days.
-    *   - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
-    *
-    * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:write` scopes. In addition:
-    * - If `package_type` is not `container`, your token must also include the `repo` scope.
-    * - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-version-for-an-organization>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `org: &str`
-    * * `package_version_id: i64` -- Unique identifier of the package version.
-    */
+     * Restore package version for an organization.
+     *
+     * This function performs a `POST` to the `/orgs/{org}/packages/{package_type}/{package_name}/versions/{package_version_id}/restore` endpoint.
+     *
+     * Restores a specific package version in an organization.
+     *
+     * You can restore a deleted package under the following conditions:
+     *   - The package was deleted within the last 30 days.
+     *   - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
+     *
+     * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:write` scopes. In addition:
+     * - If `package_type` is not `container`, your token must also include the `repo` scope.
+     * - If `package_type` is `container`, you must also have admin permissions to the container that you want to restore.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-version-for-an-organization>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `org: &str`
+     * * `package_version_id: i64` -- Unique identifier of the package version.
+     */
     pub async fn restore_package_version_for_org(
         &self,
         package_type: crate::types::PackageType,
@@ -335,22 +335,22 @@ impl Packages {
     }
 
     /**
-    * Get a package for the authenticated user.
-    *
-    * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}` endpoint.
-    *
-    * Gets a specific package for a package owned by the authenticated user.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-for-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    */
+     * Get a package for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}` endpoint.
+     *
+     * Gets a specific package for a package owned by the authenticated user.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-for-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     */
     pub async fn get_package_for_authenticated_user(
         &self,
         package_type: crate::types::PackageType,
@@ -366,22 +366,22 @@ impl Packages {
     }
 
     /**
-    * Delete a package for the authenticated user.
-    *
-    * This function performs a `DELETE` to the `/user/packages/{package_type}/{package_name}` endpoint.
-    *
-    * Deletes a package owned by the authenticated user. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:delete` scopes.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-for-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    */
+     * Delete a package for the authenticated user.
+     *
+     * This function performs a `DELETE` to the `/user/packages/{package_type}/{package_name}` endpoint.
+     *
+     * Deletes a package owned by the authenticated user. You cannot delete a public package if any version of the package has more than 5,000 downloads. In this scenario, contact GitHub support for further assistance.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:delete` scopes.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-for-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     */
     pub async fn delete_package_for_authenticated_user(
         &self,
         package_type: crate::types::PackageType,
@@ -397,26 +397,26 @@ impl Packages {
     }
 
     /**
-    * Restore a package for the authenticated user.
-    *
-    * This function performs a `POST` to the `/user/packages/{package_type}/{package_name}/restore` endpoint.
-    *
-    * Restores a package owned by the authenticated user.
-    *
-    * You can restore a deleted package under the following conditions:
-    *   - The package was deleted within the last 30 days.
-    *   - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scopes. If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-for-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `token: &str` -- package token.
-    */
+     * Restore a package for the authenticated user.
+     *
+     * This function performs a `POST` to the `/user/packages/{package_type}/{package_name}/restore` endpoint.
+     *
+     * Restores a package owned by the authenticated user.
+     *
+     * You can restore a deleted package under the following conditions:
+     *   - The package was deleted within the last 30 days.
+     *   - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scopes. If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-for-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `token: &str` -- package token.
+     */
     pub async fn restore_package_for_authenticated_user(
         &self,
         package_type: crate::types::PackageType,
@@ -439,25 +439,25 @@ impl Packages {
     }
 
     /**
-    * Get all package versions for a package owned by the authenticated user.
-    *
-    * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions` endpoint.
-    *
-    * Returns all package versions for a package owned by the authenticated user.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `page: i64` -- Page number of the results to fetch.
-    * * `per_page: i64` -- Results per page (max 100).
-    * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
-    */
+     * Get all package versions for a package owned by the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions` endpoint.
+     *
+     * Returns all package versions for a package owned by the authenticated user.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `page: i64` -- Page number of the results to fetch.
+     * * `per_page: i64` -- Results per page (max 100).
+     * * `state: crate::types::PackagesGetAllPackageVersionsOwnedByOrgState` -- The state of the package, either active or deleted.
+     */
     pub async fn get_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
         package_type: crate::types::PackageType,
@@ -488,19 +488,19 @@ impl Packages {
     }
 
     /**
-    * Get all package versions for a package owned by the authenticated user.
-    *
-    * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions` endpoint.
-    *
-    * As opposed to `get_all_package_versions_for_package_owned_by_authenticated_user`, this function returns all the pages of the request at once.
-    *
-    * Returns all package versions for a package owned by the authenticated user.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user>
-    */
+     * Get all package versions for a package owned by the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions` endpoint.
+     *
+     * As opposed to `get_all_package_versions_for_package_owned_by_authenticated_user`, this function returns all the pages of the request at once.
+     *
+     * Returns all package versions for a package owned by the authenticated user.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user>
+     */
     pub async fn get_all_all_package_versions_for_package_owned_by_authenticated_user(
         &self,
         package_type: crate::types::PackageType,
@@ -523,23 +523,23 @@ impl Packages {
     }
 
     /**
-    * Get a package version for the authenticated user.
-    *
-    * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
-    *
-    * Gets a specific package version for a package owned by the authenticated user.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-version-for-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `package_version_id: i64` -- Unique identifier of the package version.
-    */
+     * Get a package version for the authenticated user.
+     *
+     * This function performs a `GET` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
+     *
+     * Gets a specific package version for a package owned by the authenticated user.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-version-for-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `package_version_id: i64` -- Unique identifier of the package version.
+     */
     pub async fn get_package_version_for_authenticated_user(
         &self,
         package_type: crate::types::PackageType,
@@ -557,23 +557,23 @@ impl Packages {
     }
 
     /**
-    * Delete a package version for the authenticated user.
-    *
-    * This function performs a `DELETE` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
-    *
-    * Deletes a specific package version for a package owned by the authenticated user.  If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
-    *
-    * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:delete` scopes.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-version-for-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `package_version_id: i64` -- Unique identifier of the package version.
-    */
+     * Delete a package version for the authenticated user.
+     *
+     * This function performs a `DELETE` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
+     *
+     * Deletes a specific package version for a package owned by the authenticated user.  If the package is public and the package version has more than 5,000 downloads, you cannot delete the package version. In this scenario, contact GitHub support for further assistance.
+     *
+     * To use this endpoint, you must have admin permissions in the organization and authenticate using an access token with the `packages:read` and `packages:delete` scopes.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#delete-a-package-version-for-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `package_version_id: i64` -- Unique identifier of the package version.
+     */
     pub async fn delete_package_version_for_authenticated_user(
         &self,
         package_type: crate::types::PackageType,
@@ -591,26 +591,26 @@ impl Packages {
     }
 
     /**
-    * Restore a package version for the authenticated user.
-    *
-    * This function performs a `POST` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}/restore` endpoint.
-    *
-    * Restores a package version owned by the authenticated user.
-    *
-    * You can restore a deleted package version under the following conditions:
-    *   - The package was deleted within the last 30 days.
-    *   - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scopes. If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-version-for-the-authenticated-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `package_version_id: i64` -- Unique identifier of the package version.
-    */
+     * Restore a package version for the authenticated user.
+     *
+     * This function performs a `POST` to the `/user/packages/{package_type}/{package_name}/versions/{package_version_id}/restore` endpoint.
+     *
+     * Restores a package version owned by the authenticated user.
+     *
+     * You can restore a deleted package version under the following conditions:
+     *   - The package was deleted within the last 30 days.
+     *   - The same package namespace and version is still available and not reused for a new package. If the same package namespace is not available, you will not be able to restore your package. In this scenario, to restore the deleted package, you must delete the new package that uses the deleted package's namespace first.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` and `packages:write` scopes. If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#restore-a-package-version-for-the-authenticated-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `package_version_id: i64` -- Unique identifier of the package version.
+     */
     pub async fn restore_package_version_for_authenticated_user(
         &self,
         package_type: crate::types::PackageType,
@@ -628,23 +628,23 @@ impl Packages {
     }
 
     /**
-    * Get a package for a user.
-    *
-    * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}` endpoint.
-    *
-    * Gets a specific package metadata for a public package owned by a user.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-for-a-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `username: &str`
-    */
+     * Get a package for a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}` endpoint.
+     *
+     * Gets a specific package metadata for a public package owned by a user.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-for-a-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `username: &str`
+     */
     pub async fn get_package_for_user(
         &self,
         package_type: crate::types::PackageType,
@@ -662,23 +662,23 @@ impl Packages {
     }
 
     /**
-    * Get all package versions for a package owned by a user.
-    *
-    * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions` endpoint.
-    *
-    * Returns all package versions for a public package owned by a specified user.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `username: &str`
-    */
+     * Get all package versions for a package owned by a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions` endpoint.
+     *
+     * Returns all package versions for a public package owned by a specified user.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `username: &str`
+     */
     pub async fn get_all_package_versions_for_package_owned_by_user(
         &self,
         package_type: crate::types::PackageType,
@@ -696,19 +696,19 @@ impl Packages {
     }
 
     /**
-    * Get all package versions for a package owned by a user.
-    *
-    * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions` endpoint.
-    *
-    * As opposed to `get_all_package_versions_for_package_owned_by_user`, this function returns all the pages of the request at once.
-    *
-    * Returns all package versions for a public package owned by a specified user.
-    *
-    * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user>
-    */
+     * Get all package versions for a package owned by a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions` endpoint.
+     *
+     * As opposed to `get_all_package_versions_for_package_owned_by_user`, this function returns all the pages of the request at once.
+     *
+     * Returns all package versions for a public package owned by a specified user.
+     *
+     * To use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-a-user>
+     */
     pub async fn get_all_all_package_versions_for_package_owned_by_user(
         &self,
         package_type: crate::types::PackageType,
@@ -726,24 +726,24 @@ impl Packages {
     }
 
     /**
-    * Get a package version for a user.
-    *
-    * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
-    *
-    * Gets a specific package version for a public package owned by a specified user.
-    *
-    * At this time, to use this endpoint, you must authenticate using an access token with the `packages:read` scope.
-    * If `package_type` is not `container`, your token must also include the `repo` scope.
-    *
-    * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-version-for-a-user>
-    *
-    * **Parameters:**
-    *
-    * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
-    * * `package_name: &str` -- The name of the package.
-    * * `package_version_id: i64` -- Unique identifier of the package version.
-    * * `username: &str`
-    */
+     * Get a package version for a user.
+     *
+     * This function performs a `GET` to the `/users/{username}/packages/{package_type}/{package_name}/versions/{package_version_id}` endpoint.
+     *
+     * Gets a specific package version for a public package owned by a specified user.
+     *
+     * At this time, to use this endpoint, you must authenticate using an access token with the `packages:read` scope.
+     * If `package_type` is not `container`, your token must also include the `repo` scope.
+     *
+     * FROM: <https://docs.github.com/rest/reference/packages#get-a-package-version-for-a-user>
+     *
+     * **Parameters:**
+     *
+     * * `package_type: crate::types::PackageType` -- The type of supported package. Can be one of `npm`, `maven`, `rubygems`, `nuget`, `docker`, or `container`. Packages in GitHub's Gradle registry have the type `maven`. Docker images pushed to GitHub's Container registry (`ghcr.io`) have the type `container`. You can use the type `docker` to find images that were pushed to GitHub's Docker registry (`docker.pkg.github.com`), even if these have now been migrated to the Container registry.
+     * * `package_name: &str` -- The name of the package.
+     * * `package_version_id: i64` -- Unique identifier of the package version.
+     * * `username: &str`
+     */
     pub async fn get_package_version_for_user(
         &self,
         package_type: crate::types::PackageType,

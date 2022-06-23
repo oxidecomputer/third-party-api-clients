@@ -13,17 +13,17 @@ impl Bots {
     }
 
     /**
-    * This function performs a `GET` to the `/bots.info` endpoint.
-    *
-    * Gets information about a bot user.
-    *
-    * FROM: <https://api.slack.com/methods/bots.info>
-    *
-    * **Parameters:**
-    *
-    * * `token: &str` -- Authentication token. Requires scope: `users:read`.
-    * * `bot: &str` -- Bot user to get info on.
-    */
+     * This function performs a `GET` to the `/bots.info` endpoint.
+     *
+     * Gets information about a bot user.
+     *
+     * FROM: <https://api.slack.com/methods/bots.info>
+     *
+     * **Parameters:**
+     *
+     * * `token: &str` -- Authentication token. Requires scope: `users:read`.
+     * * `bot: &str` -- Bot user to get info on.
+     */
     pub async fn info(&self, bot: &str) -> Result<crate::types::BotsInfoSchema> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !bot.is_empty() {

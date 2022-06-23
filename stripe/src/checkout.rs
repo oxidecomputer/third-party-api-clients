@@ -13,19 +13,19 @@ impl Checkout {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/checkout/sessions` endpoint.
-    *
-    * <p>Returns a list of Checkout Sessions.</p>
-    *
-    * **Parameters:**
-    *
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `payment_intent: &str` -- Only return the Checkout Session for the PaymentIntent specified.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    * * `subscription: &str` -- Only return the Checkout Session for the subscription specified.
-    */
+     * This function performs a `GET` to the `/v1/checkout/sessions` endpoint.
+     *
+     * <p>Returns a list of Checkout Sessions.</p>
+     *
+     * **Parameters:**
+     *
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `payment_intent: &str` -- Only return the Checkout Session for the PaymentIntent specified.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * * `subscription: &str` -- Only return the Checkout Session for the subscription specified.
+     */
     pub async fn get_sessions(
         &self,
         ending_before: &str,
@@ -61,12 +61,12 @@ impl Checkout {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/checkout/sessions` endpoint.
-    *
-    * As opposed to `get_sessions`, this function returns all the pages of the request at once.
-    *
-    * <p>Returns a list of Checkout Sessions.</p>
-    */
+     * This function performs a `GET` to the `/v1/checkout/sessions` endpoint.
+     *
+     * As opposed to `get_sessions`, this function returns all the pages of the request at once.
+     *
+     * <p>Returns a list of Checkout Sessions.</p>
+     */
     pub async fn get_all_sessions(
         &self,
         payment_intent: &str,
@@ -123,25 +123,25 @@ impl Checkout {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/checkout/sessions` endpoint.
-    *
-    * <p>Creates a Session object.</p>
-    */
+     * This function performs a `POST` to the `/v1/checkout/sessions` endpoint.
+     *
+     * <p>Creates a Session object.</p>
+     */
     pub async fn post_session(&self) -> Result<crate::types::Session> {
         let url = "/v1/checkout/sessions".to_string();
         self.client.post(&url, None).await
     }
 
     /**
-    * This function performs a `GET` to the `/v1/checkout/sessions/{session}` endpoint.
-    *
-    * <p>Retrieves a Session object.</p>
-    *
-    * **Parameters:**
-    *
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `session: &str` -- The account's country.
-    */
+     * This function performs a `GET` to the `/v1/checkout/sessions/{session}` endpoint.
+     *
+     * <p>Retrieves a Session object.</p>
+     *
+     * **Parameters:**
+     *
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `session: &str` -- The account's country.
+     */
     pub async fn get_sessions_session(&self, session: &str) -> Result<crate::types::Session> {
         let url = format!(
             "/v1/checkout/sessions/{}",
@@ -152,16 +152,16 @@ impl Checkout {
     }
 
     /**
-    * This function performs a `POST` to the `/v1/checkout/sessions/{session}/expire` endpoint.
-    *
-    * <p>A Session can be expired when it is in one of these statuses: <code>open</code> </p>
-    *
-    * <p>After it expires, a customer can’t complete a Session and customers loading the Session see a message saying the Session is expired.</p>
-    *
-    * **Parameters:**
-    *
-    * * `session: &str` -- The account's country.
-    */
+     * This function performs a `POST` to the `/v1/checkout/sessions/{session}/expire` endpoint.
+     *
+     * <p>A Session can be expired when it is in one of these statuses: <code>open</code> </p>
+     *
+     * <p>After it expires, a customer can’t complete a Session and customers loading the Session see a message saying the Session is expired.</p>
+     *
+     * **Parameters:**
+     *
+     * * `session: &str` -- The account's country.
+     */
     pub async fn post_sessions_session_expire(
         &self,
         session: &str,
@@ -175,18 +175,18 @@ impl Checkout {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
-    *
-    * <p>When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
-    *
-    * **Parameters:**
-    *
-    * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
-    * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
-    * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
-    * * `session: &str` -- The account's country.
-    * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
-    */
+     * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
+     *
+     * <p>When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+     *
+     * **Parameters:**
+     *
+     * * `ending_before: &str` -- A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * * `expand: &[String]` -- Fields that need to be collected to keep the capability enabled. If not collected by `future_requirements[current_deadline]`, these fields will transition to the main `requirements` hash.
+     * * `limit: i64` -- A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * * `session: &str` -- The account's country.
+     * * `starting_after: &str` -- A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     */
     pub async fn get_sessions_session_line_items(
         &self,
         ending_before: &str,
@@ -218,12 +218,12 @@ impl Checkout {
     }
 
     /**
-    * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
-    *
-    * As opposed to `get_sessions_session_line_items`, this function returns all the pages of the request at once.
-    *
-    * <p>When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
-    */
+     * This function performs a `GET` to the `/v1/checkout/sessions/{session}/line_items` endpoint.
+     *
+     * As opposed to `get_sessions_session_line_items`, this function returns all the pages of the request at once.
+     *
+     * <p>When retrieving a Checkout Session, there is an includable <strong>line_items</strong> property containing the first handful of those items. There is also a URL where you can retrieve the full (paginated) list of line items.</p>
+     */
     pub async fn get_all_sessions_session_line_items(
         &self,
         session: &str,

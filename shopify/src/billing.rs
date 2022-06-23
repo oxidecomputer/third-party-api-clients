@@ -13,17 +13,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202001_get_application_charge(
         &self,
         since_id: &str,
@@ -43,12 +43,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2020-01
-    */
+     * Creates an application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2020-01
+     */
     pub async fn deprecated_202001_create_application_charges(
         &self,
         body: &serde_json::Value,
@@ -60,17 +60,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves an application charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/application_charges/{application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `application_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves an application charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/application_charges/{application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202001_get_application_charges_param_charge(
         &self,
         application_charge_id: &str,
@@ -122,17 +122,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202004_get_application_charge(
         &self,
         since_id: &str,
@@ -152,12 +152,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2020-04
-    */
+     * Creates an application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2020-04
+     */
     pub async fn deprecated_202004_create_application_charges(
         &self,
         body: &serde_json::Value,
@@ -169,17 +169,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves an application charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/application_charges/{application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `application_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves an application charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/application_charges/{application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202004_get_application_charges_param_charge(
         &self,
         application_charge_id: &str,
@@ -231,17 +231,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202007_get_application_charge(
         &self,
         since_id: &str,
@@ -261,12 +261,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2020-07
-    */
+     * Creates an application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2020-07
+     */
     pub async fn deprecated_202007_create_application_charges(
         &self,
         body: &serde_json::Value,
@@ -278,17 +278,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves an application charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/application_charges/{application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `application_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves an application charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/application_charges/{application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202007_get_application_charges_param_charge(
         &self,
         application_charge_id: &str,
@@ -340,17 +340,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn get_application_charge(&self, since_id: &str, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -366,12 +366,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2020-10
-    */
+     * Creates an application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2020-10
+     */
     pub async fn create_application_charges(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/application_charges.json".to_string();
         self.client
@@ -380,17 +380,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves an application charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/application_charges/{application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `application_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves an application charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/application_charges/{application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn get_application_charges_param_charge(
         &self,
         application_charge_id: &str,
@@ -442,17 +442,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202101_get_application_charge(
         &self,
         since_id: &str,
@@ -472,12 +472,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2021-01
-    */
+     * Creates an application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-2021-01
+     */
     pub async fn deprecated_202101_create_application_charges(
         &self,
         body: &serde_json::Value,
@@ -489,17 +489,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves an application charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/application_charges/{application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `application_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves an application charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/application_charges/{application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202101_get_application_charges_param_charge(
         &self,
         application_charge_id: &str,
@@ -520,17 +520,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_unstable_get_application_charge(
         &self,
         since_id: &str,
@@ -550,12 +550,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-unstable
-    */
+     * Creates an application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#create-unstable
+     */
     pub async fn deprecated_unstable_create_application_charges(
         &self,
         body: &serde_json::Value,
@@ -567,17 +567,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves an application charge.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/application_charges/{application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `application_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves an application charge.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/application_charges/{application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcharge#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `application_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_unstable_get_application_charges_param_charge(
         &self,
         application_charge_id: &str,
@@ -598,16 +598,16 @@ impl Billing {
     }
 
     /**
-    * Retrieves all application credits.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves all application credits.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202001_get_application_credit(&self, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -620,12 +620,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application credit.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2020-01
-    */
+     * Creates an application credit.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2020-01
+     */
     pub async fn deprecated_202001_create_application_credits(
         &self,
         body: &serde_json::Value,
@@ -637,17 +637,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single application credit.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/application_credits/{application_credit_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `application_credit_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single application credit.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/application_credits/{application_credit_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `application_credit_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202001_get_application_credits_param_credit(
         &self,
         application_credit_id: &str,
@@ -668,16 +668,16 @@ impl Billing {
     }
 
     /**
-    * Retrieves all application credits.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves all application credits.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202004_get_application_credit(&self, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -690,12 +690,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application credit.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2020-04
-    */
+     * Creates an application credit.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2020-04
+     */
     pub async fn deprecated_202004_create_application_credits(
         &self,
         body: &serde_json::Value,
@@ -707,17 +707,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single application credit.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/application_credits/{application_credit_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `application_credit_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single application credit.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/application_credits/{application_credit_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `application_credit_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202004_get_application_credits_param_credit(
         &self,
         application_credit_id: &str,
@@ -738,16 +738,16 @@ impl Billing {
     }
 
     /**
-    * Retrieves all application credits.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves all application credits.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202007_get_application_credit(&self, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -760,12 +760,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application credit.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2020-07
-    */
+     * Creates an application credit.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2020-07
+     */
     pub async fn deprecated_202007_create_application_credits(
         &self,
         body: &serde_json::Value,
@@ -777,17 +777,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single application credit.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/application_credits/{application_credit_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `application_credit_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single application credit.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/application_credits/{application_credit_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `application_credit_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202007_get_application_credits_param_credit(
         &self,
         application_credit_id: &str,
@@ -808,16 +808,16 @@ impl Billing {
     }
 
     /**
-    * Retrieves all application credits.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves all application credits.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn get_application_credit(&self, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -830,12 +830,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application credit.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2020-10
-    */
+     * Creates an application credit.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2020-10
+     */
     pub async fn create_application_credits(&self, body: &serde_json::Value) -> Result<()> {
         let url = "/admin/api/2020-10/application_credits.json".to_string();
         self.client
@@ -844,17 +844,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single application credit.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/application_credits/{application_credit_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `application_credit_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single application credit.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/application_credits/{application_credit_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `application_credit_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn get_application_credits_param_credit(
         &self,
         application_credit_id: &str,
@@ -875,16 +875,16 @@ impl Billing {
     }
 
     /**
-    * Retrieves all application credits.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves all application credits.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202101_get_application_credit(&self, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -897,12 +897,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application credit.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2021-01
-    */
+     * Creates an application credit.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-2021-01
+     */
     pub async fn deprecated_202101_create_application_credits(
         &self,
         body: &serde_json::Value,
@@ -914,17 +914,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single application credit.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/application_credits/{application_credit_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `application_credit_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single application credit.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/application_credits/{application_credit_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `application_credit_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202101_get_application_credits_param_credit(
         &self,
         application_credit_id: &str,
@@ -945,16 +945,16 @@ impl Billing {
     }
 
     /**
-    * Retrieves all application credits.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves all application credits.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_unstable_get_application_credit(&self, fields: &str) -> Result<()> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !fields.is_empty() {
@@ -967,12 +967,12 @@ impl Billing {
     }
 
     /**
-    * Creates an application credit.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/application_credits.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-unstable
-    */
+     * Creates an application credit.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/application_credits.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#create-unstable
+     */
     pub async fn deprecated_unstable_create_application_credits(
         &self,
         body: &serde_json::Value,
@@ -984,17 +984,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single application credit.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/application_credits/{application_credit_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `application_credit_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single application credit.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/application_credits/{application_credit_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/applicationcredit#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `application_credit_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_unstable_get_application_credits_param_credit(
         &self,
         application_credit_id: &str,
@@ -1015,17 +1015,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of recurring application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of recurring application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202001_get_recurring_application_charge(
         &self,
         since_id: &str,
@@ -1048,12 +1048,12 @@ impl Billing {
     }
 
     /**
-    * Creates a recurring application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2020-01
-    */
+     * Creates a recurring application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2020-01
+     */
     pub async fn deprecated_202001_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
@@ -1065,17 +1065,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202001_get_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1096,16 +1096,16 @@ impl Billing {
     }
 
     /**
-    * Cancels a recurring application charge.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Cancels a recurring application charge.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_202001_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1150,17 +1150,17 @@ impl Billing {
     }
 
     /**
-    * Updates the capped amount of an active recurring application charge.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Updates the capped amount of an active recurring application charge.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_202001_update_recurring_application_charges_param_charge_customize(
         &self,
         recurring_application_charge_id: &str,
@@ -1184,17 +1184,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of recurring application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of recurring application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202004_get_recurring_application_charge(
         &self,
         since_id: &str,
@@ -1217,12 +1217,12 @@ impl Billing {
     }
 
     /**
-    * Creates a recurring application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2020-04
-    */
+     * Creates a recurring application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2020-04
+     */
     pub async fn deprecated_202004_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
@@ -1234,17 +1234,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202004_get_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1265,16 +1265,16 @@ impl Billing {
     }
 
     /**
-    * Cancels a recurring application charge.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Cancels a recurring application charge.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_202004_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1319,17 +1319,17 @@ impl Billing {
     }
 
     /**
-    * Updates the capped amount of an active recurring application charge.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Updates the capped amount of an active recurring application charge.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_202004_update_recurring_application_charges_param_charge_customize(
         &self,
         recurring_application_charge_id: &str,
@@ -1353,17 +1353,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of recurring application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of recurring application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202007_get_recurring_application_charge(
         &self,
         since_id: &str,
@@ -1386,12 +1386,12 @@ impl Billing {
     }
 
     /**
-    * Creates a recurring application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2020-07
-    */
+     * Creates a recurring application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2020-07
+     */
     pub async fn deprecated_202007_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
@@ -1403,17 +1403,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202007_get_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1434,16 +1434,16 @@ impl Billing {
     }
 
     /**
-    * Cancels a recurring application charge.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Cancels a recurring application charge.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_202007_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1488,17 +1488,17 @@ impl Billing {
     }
 
     /**
-    * Updates the capped amount of an active recurring application charge.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Updates the capped amount of an active recurring application charge.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_202007_update_recurring_application_charges_param_charge_customize(
         &self,
         recurring_application_charge_id: &str,
@@ -1522,17 +1522,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of recurring application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of recurring application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn get_recurring_application_charge(
         &self,
         since_id: &str,
@@ -1555,12 +1555,12 @@ impl Billing {
     }
 
     /**
-    * Creates a recurring application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2020-10
-    */
+     * Creates a recurring application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2020-10
+     */
     pub async fn create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
@@ -1572,17 +1572,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn get_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1603,16 +1603,16 @@ impl Billing {
     }
 
     /**
-    * Cancels a recurring application charge.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Cancels a recurring application charge.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1657,17 +1657,17 @@ impl Billing {
     }
 
     /**
-    * Updates the capped amount of an active recurring application charge.
-    *
-    * This function performs a `PUT` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Updates the capped amount of an active recurring application charge.
+     *
+     * This function performs a `PUT` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn update_recurring_application_charges_param_charge_customize(
         &self,
         recurring_application_charge_id: &str,
@@ -1691,17 +1691,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of recurring application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of recurring application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202101_get_recurring_application_charge(
         &self,
         since_id: &str,
@@ -1724,12 +1724,12 @@ impl Billing {
     }
 
     /**
-    * Creates a recurring application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2021-01
-    */
+     * Creates a recurring application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-2021-01
+     */
     pub async fn deprecated_202101_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
@@ -1741,17 +1741,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202101_get_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1772,16 +1772,16 @@ impl Billing {
     }
 
     /**
-    * Cancels a recurring application charge.
-    *
-    * This function performs a `DELETE` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Cancels a recurring application charge.
+     *
+     * This function performs a `DELETE` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_202101_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1795,17 +1795,17 @@ impl Billing {
     }
 
     /**
-    * Updates the capped amount of an active recurring application charge.
-    *
-    * This function performs a `PUT` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Updates the capped amount of an active recurring application charge.
+     *
+     * This function performs a `PUT` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_202101_update_recurring_application_charges_param_charge_customize(
         &self,
         recurring_application_charge_id: &str,
@@ -1829,17 +1829,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of recurring application charges.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `since_id: &str` -- Restrict results to after the specified ID.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of recurring application charges.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `since_id: &str` -- Restrict results to after the specified ID.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_unstable_get_recurring_application_charge(
         &self,
         since_id: &str,
@@ -1862,12 +1862,12 @@ impl Billing {
     }
 
     /**
-    * Creates a recurring application charge.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/recurring_application_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-unstable
-    */
+     * Creates a recurring application charge.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/recurring_application_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#create-unstable
+     */
     pub async fn deprecated_unstable_create_recurring_application_charges(
         &self,
         body: &serde_json::Value,
@@ -1879,17 +1879,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_unstable_get_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1910,16 +1910,16 @@ impl Billing {
     }
 
     /**
-    * Cancels a recurring application charge.
-    *
-    * This function performs a `DELETE` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-unstable
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Cancels a recurring application charge.
+     *
+     * This function performs a `DELETE` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#destroy-unstable
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_unstable_delete_recurring_application_charges_param_charge(
         &self,
         recurring_application_charge_id: &str,
@@ -1933,17 +1933,17 @@ impl Billing {
     }
 
     /**
-    * Updates the capped amount of an active recurring application charge.
-    *
-    * This function performs a `PUT` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-unstable
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
-    */
+     * Updates the capped amount of an active recurring application charge.
+     *
+     * This function performs a `PUT` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/customize.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/recurringapplicationcharge#customize-unstable
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `recurring_application_charge_capped_amount: i64` -- recurring_application_charge[capped_amount].
+     */
     pub async fn deprecated_unstable_update_recurring_application_charges_param_charge_customize(
         &self,
         recurring_application_charge_id: &str,
@@ -1967,17 +1967,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of usage charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of usage charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202001_get_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -1998,16 +1998,16 @@ impl Billing {
     }
 
     /**
-    * Creates a usage charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Creates a usage charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_202001_create_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2024,18 +2024,18 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2020-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `usage_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2020-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `usage_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202001_get_recurring_application_charges_param_charge_usage_billing(
         &self,
         recurring_application_charge_id: &str,
@@ -2058,17 +2058,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of usage charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of usage charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202004_get_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2089,16 +2089,16 @@ impl Billing {
     }
 
     /**
-    * Creates a usage charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Creates a usage charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_202004_create_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2115,18 +2115,18 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2020-04
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `usage_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-04/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2020-04
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `usage_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202004_get_recurring_application_charges_param_charge_usage_billing(
         &self,
         recurring_application_charge_id: &str,
@@ -2149,17 +2149,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of usage charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of usage charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202007_get_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2180,16 +2180,16 @@ impl Billing {
     }
 
     /**
-    * Creates a usage charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Creates a usage charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_202007_create_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2206,18 +2206,18 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2020-07
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `usage_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-07/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2020-07
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `usage_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202007_get_recurring_application_charges_param_charge_usage_billing(
         &self,
         recurring_application_charge_id: &str,
@@ -2240,17 +2240,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of usage charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of usage charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn get_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2271,16 +2271,16 @@ impl Billing {
     }
 
     /**
-    * Creates a usage charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Creates a usage charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn create_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2297,18 +2297,18 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2020-10
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `usage_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2020-10/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2020-10
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `usage_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn get_recurring_application_charges_param_charge_usage_billing(
         &self,
         recurring_application_charge_id: &str,
@@ -2331,17 +2331,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of usage charges.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of usage charges.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202101_get_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2362,16 +2362,16 @@ impl Billing {
     }
 
     /**
-    * Creates a usage charge.
-    *
-    * This function performs a `POST` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Creates a usage charge.
+     *
+     * This function performs a `POST` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_202101_create_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2388,18 +2388,18 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2021-01
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `usage_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/2021-01/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-2021-01
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `usage_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_202101_get_recurring_application_charges_param_charge_usage_billing(
         &self,
         recurring_application_charge_id: &str,
@@ -2422,17 +2422,17 @@ impl Billing {
     }
 
     /**
-    * Retrieves a list of usage charges.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-unstable
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a list of usage charges.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#index-unstable
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_unstable_get_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2453,16 +2453,16 @@ impl Billing {
     }
 
     /**
-    * Creates a usage charge.
-    *
-    * This function performs a `POST` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-unstable
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    */
+     * Creates a usage charge.
+     *
+     * This function performs a `POST` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/usage_charges.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#create-unstable
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     */
     pub async fn deprecated_unstable_create_recurring_application_charges_param_charge_usage(
         &self,
         recurring_application_charge_id: &str,
@@ -2479,18 +2479,18 @@ impl Billing {
     }
 
     /**
-    * Retrieves a single charge.
-    *
-    * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
-    *
-    * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-unstable
-    *
-    * **Parameters:**
-    *
-    * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
-    * * `usage_charge_id: &str` -- storefront_access_token_id.
-    * * `fields: &str` -- A comma-separated list of fields to include in the response.
-    */
+     * Retrieves a single charge.
+     *
+     * This function performs a `GET` to the `/admin/api/unstable/recurring_application_charges/{recurring_application_charge_id}/usage_charges/{usage_charge_id}.json` endpoint.
+     *
+     * https://shopify.dev/docs/admin-api/rest/reference/billing/usagecharge#show-unstable
+     *
+     * **Parameters:**
+     *
+     * * `recurring_application_charge_id: &str` -- recurring_application_charge_id.
+     * * `usage_charge_id: &str` -- storefront_access_token_id.
+     * * `fields: &str` -- A comma-separated list of fields to include in the response.
+     */
     pub async fn deprecated_unstable_get_recurring_application_charges_param_charge_usage_billing(
         &self,
         recurring_application_charge_id: &str,

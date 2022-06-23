@@ -13,24 +13,24 @@ impl Domains {
     }
 
     /**
-    * List Domains.
-    *
-    * This function performs a `GET` to the `/api/v1/domains` endpoint.
-    *
-    * List all verified custom Domains for the org.
-    */
+     * List Domains.
+     *
+     * This function performs a `GET` to the `/api/v1/domains` endpoint.
+     *
+     * List all verified custom Domains for the org.
+     */
     pub async fn list(&self) -> Result<crate::types::DomainListResponse> {
         let url = "/api/v1/domains".to_string();
         self.client.get(&url, None).await
     }
 
     /**
-    * Create Domain.
-    *
-    * This function performs a `POST` to the `/api/v1/domains` endpoint.
-    *
-    * Creates your domain.
-    */
+     * Create Domain.
+     *
+     * This function performs a `POST` to the `/api/v1/domains` endpoint.
+     *
+     * Creates your domain.
+     */
     pub async fn create(&self, body: &crate::types::Domain) -> Result<crate::types::Domain> {
         let url = "/api/v1/domains".to_string();
         self.client
@@ -39,16 +39,16 @@ impl Domains {
     }
 
     /**
-    * Get Domain.
-    *
-    * This function performs a `GET` to the `/api/v1/domains/{domainId}` endpoint.
-    *
-    * Fetches a Domain by `id`.
-    *
-    * **Parameters:**
-    *
-    * * `domain_id: &str`
-    */
+     * Get Domain.
+     *
+     * This function performs a `GET` to the `/api/v1/domains/{domainId}` endpoint.
+     *
+     * Fetches a Domain by `id`.
+     *
+     * **Parameters:**
+     *
+     * * `domain_id: &str`
+     */
     pub async fn get(&self, domain_id: &str) -> Result<crate::types::Domain> {
         let url = format!(
             "/api/v1/domains/{}",
@@ -59,16 +59,16 @@ impl Domains {
     }
 
     /**
-    * Delete Domain.
-    *
-    * This function performs a `DELETE` to the `/api/v1/domains/{domainId}` endpoint.
-    *
-    * Deletes a Domain by `id`.
-    *
-    * **Parameters:**
-    *
-    * * `domain_id: &str`
-    */
+     * Delete Domain.
+     *
+     * This function performs a `DELETE` to the `/api/v1/domains/{domainId}` endpoint.
+     *
+     * Deletes a Domain by `id`.
+     *
+     * **Parameters:**
+     *
+     * * `domain_id: &str`
+     */
     pub async fn delete(&self, domain_id: &str) -> Result<()> {
         let url = format!(
             "/api/v1/domains/{}",
@@ -79,16 +79,16 @@ impl Domains {
     }
 
     /**
-    * Create Certificate.
-    *
-    * This function performs a `PUT` to the `/api/v1/domains/{domainId}/certificate` endpoint.
-    *
-    * Creates the Certificate for the Domain.
-    *
-    * **Parameters:**
-    *
-    * * `domain_id: &str`
-    */
+     * Create Certificate.
+     *
+     * This function performs a `PUT` to the `/api/v1/domains/{domainId}/certificate` endpoint.
+     *
+     * Creates the Certificate for the Domain.
+     *
+     * **Parameters:**
+     *
+     * * `domain_id: &str`
+     */
     pub async fn create_certificate(
         &self,
         domain_id: &str,
@@ -105,16 +105,16 @@ impl Domains {
     }
 
     /**
-    * Verify Domain.
-    *
-    * This function performs a `POST` to the `/api/v1/domains/{domainId}/verify` endpoint.
-    *
-    * Verifies the Domain by `id`.
-    *
-    * **Parameters:**
-    *
-    * * `domain_id: &str`
-    */
+     * Verify Domain.
+     *
+     * This function performs a `POST` to the `/api/v1/domains/{domainId}/verify` endpoint.
+     *
+     * Verifies the Domain by `id`.
+     *
+     * **Parameters:**
+     *
+     * * `domain_id: &str`
+     */
     pub async fn verify(&self, domain_id: &str) -> Result<crate::types::Domain> {
         let url = format!(
             "/api/v1/domains/{}/verify",
