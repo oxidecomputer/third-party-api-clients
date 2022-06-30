@@ -524,6 +524,14 @@ pub fn generate_client_generic_token(
         "".to_string()
     };
 
+    let consent_pattern = if proper_name.starts_with("Google") {
+        "{}?client_id={}&access_type=offline&response_type=code&redirect_uri={}&state={}"
+    } else {
+        "{}?client_id={}&response_type=code&redirect_uri={}&state={}"
+    };
+
+    let token_auth_template = get_token_auth_template(consent_pattern);
+
     format!(
         r#"use std::sync::Arc;
 use std::convert::TryInto;
@@ -700,7 +708,7 @@ impl Client {{
         add_post_header_args_where,
         add_post_header_fn,
         new_from_env,
-        TOKEN_AUTH_TEMPLATE,
+        token_auth_template,
         get_shared_functions(proper_name, add_post_header)
     )
 }
@@ -1523,34 +1531,36 @@ async fn request_raw(
     )
 }
 
-const TOKEN_AUTH_TEMPLATE: &str = r#"
+fn get_token_auth_template<S: AsRef<str>>(consent_pattern: S) -> String {
+    format!(
+        r#"
 /// Return a user consent url with an optional set of scopes.
 /// If no scopes are provided, they will not be passed in the url.
-pub fn user_consent_url(&self, scopes: &[String]) -> String {
+pub fn user_consent_url(&self, scopes: &[String]) -> String {{
     let state = uuid::Uuid::new_v4();
 
     let url = format!(
-        "{}?client_id={}&response_type=code&redirect_uri={}&state={}",
+        "{}",
         USER_CONSENT_ENDPOINT, self.client_id, self.redirect_uri, state
     );
 
-    if scopes.is_empty() {
+    if scopes.is_empty() {{
         return url;
-    }
+    }}
 
     // Add the scopes.
-    format!("{}&scope={}", url, scopes.join(" "))
-}
+    format!("{{}}&scope={{}}", url, scopes.join(" "))
+}}
 
 /// Refresh an access token from a refresh token. Client must have a refresh token
 /// for this to work.
-pub async fn refresh_access_token(&self) -> Result<AccessToken> {
-    let response = {
+pub async fn refresh_access_token(&self) -> Result<AccessToken> {{
+    let response = {{
         let refresh_token = &self.token.read().await.refresh_token;
 
-        if refresh_token.is_empty() {
+        if refresh_token.is_empty() {{
             anyhow!("refresh token cannot be empty");
-        }
+        }}
 
         let mut headers = reqwest::header::HeaderMap::new();
         headers.append(
@@ -1573,25 +1583,25 @@ pub async fn refresh_access_token(&self) -> Result<AccessToken> {
             .basic_auth(&self.client_id, Some(&self.client_secret))
             .send()
             .await?
-    };
+    }};
 
     // Unwrap the response.
     let t: AccessToken = response.json().await?;
 
     let refresh_token = self.token.read().await.refresh_token.clone();
 
-    *self.token.write().await = InnerToken {
+    *self.token.write().await = InnerToken {{
         access_token: t.access_token.clone(),
         refresh_token,
         expires_at: Self::compute_expires_at(t.expires_in),
-    };
+    }};
 
     Ok(t)
-}
+}}
 
 /// Get an access token from the code returned by the URL paramter sent to the
 /// redirect URL.
-pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<AccessToken> {
+pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<AccessToken> {{
     let mut headers = reqwest::header::HeaderMap::new();
     headers.append(
         reqwest::header::ACCEPT,
@@ -1618,14 +1628,17 @@ pub async fn get_access_token(&mut self, code: &str, state: &str) -> Result<Acce
     // Unwrap the response.
     let t: AccessToken = resp.json().await?;
 
-    *self.token.write().await = InnerToken {
+    *self.token.write().await = InnerToken {{
         access_token: t.access_token.clone(),
         refresh_token: t.refresh_token.clone(),
         expires_at: Self::compute_expires_at(t.expires_in),
-    };
+    }};
 
     Ok(t)
-}"#;
+}}"#,
+        consent_pattern.as_ref()
+    )
+}
 
 const CLIENT_AUTH_TEMPLATE: &str = r#"
 /// Get an access token from the code returned by the URL paramter sent to the

@@ -522,7 +522,7 @@ dependencies = [
 
 [[package]]
 name = "google-calendar"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -559,7 +559,7 @@ dependencies = [
 
 [[package]]
 name = "google-cloud-resource-manager"
-version = "0.1.4"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -596,7 +596,7 @@ dependencies = [
 
 [[package]]
 name = "google-drive"
-version = "0.3.2"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -633,7 +633,7 @@ dependencies = [
 
 [[package]]
 name = "google-groups-settings"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -670,7 +670,7 @@ dependencies = [
 
 [[package]]
 name = "gsuite-api"
-version = "0.3.2"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1950,7 +1950,7 @@ dependencies = [
 
 [[package]]
 name = "sheets"
-version = "0.3.2"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",

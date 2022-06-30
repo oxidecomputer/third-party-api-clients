@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gsuite-api = "0.3.2"
+//! gsuite-api = "0.4.0"
 //! ```
 //!
 //! ## Basic example
@@ -412,7 +412,7 @@ impl Client {
         let state = uuid::Uuid::new_v4();
 
         let url = format!(
-            "{}?client_id={}&response_type=code&redirect_uri={}&state={}",
+            "{}?client_id={}&access_type=offline&response_type=code&redirect_uri={}&state={}",
             USER_CONSENT_ENDPOINT, self.client_id, self.redirect_uri, state
         );
 
