@@ -1,7 +1,7 @@
 [package]
 name = "google-cloud-resource-manager"
 description = "A fully generated & opinionated API client for the Google Cloud Resource Manager API."
-version = "0.1.4"
+version = "0.2.0"
 documentation = "https://docs.rs/google-cloud-resource-manager/"
 repository = "https://github.com/oxidecomputer/third-party-api-clients/tree/main/google/cloud-resource-manager"
 readme = "README.md"
