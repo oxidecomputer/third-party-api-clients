@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-calendar = "0.3.0"
+//! google-calendar = "0.3.1"
 //! ```
 //!
 //! ## Basic example
