@@ -2240,10 +2240,10 @@ pub struct Repository {
     pub has_wiki: bool,
     #[serde(
         default,
-        skip_serializing_if = "Option::is_none",
-        deserialize_with = "crate::utils::deserialize_empty_url::deserialize"
+        skip_serializing_if = "String::is_empty",
+        deserialize_with = "crate::utils::deserialize_null_string::deserialize"
     )]
-    pub homepage: Option<url::Url>,
+    pub homepage: String,
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
