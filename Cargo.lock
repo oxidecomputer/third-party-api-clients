@@ -220,7 +220,7 @@ dependencies = [
 
 [[package]]
 name = "docusign"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -522,7 +522,7 @@ dependencies = [
 
 [[package]]
 name = "google-calendar"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -559,7 +559,7 @@ dependencies = [
 
 [[package]]
 name = "google-cloud-resource-manager"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -596,7 +596,7 @@ dependencies = [
 
 [[package]]
 name = "google-drive"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -633,7 +633,7 @@ dependencies = [
 
 [[package]]
 name = "google-groups-settings"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -670,7 +670,7 @@ dependencies = [
 
 [[package]]
 name = "gsuite-api"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -707,7 +707,7 @@ dependencies = [
 
 [[package]]
 name = "gusto-api"
-version = "0.2.14"
+version = "0.2.15"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -992,7 +992,7 @@ dependencies = [
 
 [[package]]
 name = "mailchimp-api"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1950,7 +1950,7 @@ dependencies = [
 
 [[package]]
 name = "sheets"
-version = "0.4.0"
+version = "0.4.1"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2023,7 +2023,7 @@ dependencies = [
 
 [[package]]
 name = "shopify"
-version = "0.1.1"
+version = "0.1.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2085,7 +2085,7 @@ checksum = "c307a32c1c5c437f38c7fd45d753050587732ba8628319fbdf12a7e289ccc590"
 
 [[package]]
 name = "slack-chat-api"
-version = "0.2.1"
+version = "0.2.2"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2676,7 +2676,7 @@ dependencies = [
 
 [[package]]
 name = "zoom-api"
-version = "0.2.7"
+version = "0.2.8"
 dependencies = [
  "anyhow",
  "async-recursion",

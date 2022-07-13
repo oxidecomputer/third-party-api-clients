@@ -29,7 +29,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! gusto-api = "0.2.14"
+//! gusto-api = "0.2.15"
 //! ```
 //!
 //! ## Basic example
@@ -523,35 +523,35 @@ impl Client {
         uri: &str,
         body: Option<reqwest::Body>,
     ) -> Result<reqwest::Response> {
-        let req = self.make_request(&method, uri, body).await?;
-
-        let resp = if self.auto_refresh {
+        if self.auto_refresh {
             let expired = self.is_expired().await;
 
             match expired {
-                // We have a known expired token, there is no point in trying to make a request
-                // without refreshing it first
+                // We have a known expired token, we know we need to perform a refresh prior to
+                // attempting to make a request
                 Some(true) => {
                     self.refresh_access_token().await?;
-                    self.client.execute(req).await?
                 }
+
                 // We have a (theoretically) known good token available. We make an optimistic
                 // attempting at the request. If the token is no longer good, then something other
                 // than the expiration is triggering the failure. We defer handling of these errors
                 // to the caller
-                Some(false) => self.client.execute(req).await?,
+                Some(false) => (),
 
                 // We do not know what state we are in. We could have a valid or expired token.
                 // Generally this means we are in one of two cases:
-                //   1. We have not yet performed a token refresh (and do not know the expiration
-                //      of the user provided token)
+                //   1. We have not yet performed a token refresh, nor has the user provided
+                //      expiration data, and therefore do not know the expiration of the user
+                //      provided token
                 //   2. The provider is returning unusable expiration times, at which point we
                 //      choose to ignore them
-                None => self.client.execute(req).await?,
+                None => (),
             }
-        } else {
-            self.client.execute(req).await?
-        };
+        }
+
+        let req = self.make_request(&method, uri, body).await?;
+        let resp = self.client.execute(req).await?;
 
         Ok(resp)
     }

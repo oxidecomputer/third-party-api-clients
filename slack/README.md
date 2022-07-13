@@ -31,7 +31,7 @@ To install the library, add the following to your `Cargo.toml` file.
 
 ```toml
 [dependencies]
-slack-chat-api = "0.2.1"
+slack-chat-api = "0.2.2"
 ```
 
 ## Basic example

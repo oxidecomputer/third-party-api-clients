@@ -159,7 +159,7 @@ $(DOCUSIGN_SPEC): $(DOCUSIGN_SPEC_DIR)
 	curl -sSL $(DOCUSIGN_SPEC_REMOTE) -o $@
 
 docusign: target/debug/generator $(DOCUSIGN_SPEC)
-	./target/debug/generator -i $(DOCUSIGN_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(DOCUSIGN_SPEC) -v 0.2.2 \
 		-o docusign \
 		-n docusign \
 		--proper-name DocuSign \
@@ -217,7 +217,7 @@ $(GOOGLE_ADMIN_SPEC): $(GOOGLE_ADMIN_SPEC_DIR)
 	curl -sSL $(GOOGLE_ADMIN_SPEC_REMOTE) -o $@
 
 google-admin: target/debug/generator $(GOOGLE_ADMIN_SPEC)
-	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.4.0 \
+	./target/debug/generator -i $(GOOGLE_ADMIN_SPEC) -v 0.4.1 \
 		-o google/admin \
 		-n gsuite-api \
 		--proper-name "Google Admin" \
@@ -236,7 +236,7 @@ $(GOOGLE_CALENDAR_SPEC): $(GOOGLE_CALENDAR_SPEC_DIR)
 	curl -sSL $(GOOGLE_CALENDAR_SPEC_REMOTE) -o $@
 
 google-calendar: target/debug/generator $(GOOGLE_CALENDAR_SPEC)
-	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.3.0 \
+	./target/debug/generator -i $(GOOGLE_CALENDAR_SPEC) -v 0.3.1 \
 		-o google/calendar \
 		-n google-calendar \
 		--proper-name "Google Calendar" \
@@ -255,7 +255,7 @@ $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC): $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_DIR)
 	curl -sSL $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC_REMOTE) -o $@
 
 google-cloud-resource-manager: target/debug/generator $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC)
-	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.2.0 \
+	./target/debug/generator -i $(GOOGLE_CLOUD_RESOURCE_MANAGER_SPEC) -v 0.2.1 \
 		-o google/cloud-resource-manager \
 		-n google-cloud-resource-manager \
 		--proper-name "Google Cloud Resource Manager" \
@@ -274,7 +274,7 @@ $(GOOGLE_DRIVE_SPEC): $(GOOGLE_DRIVE_SPEC_DIR)
 	curl -sSL $(GOOGLE_DRIVE_SPEC_REMOTE) -o $@
 
 google-drive: target/debug/generator $(GOOGLE_DRIVE_SPEC)
-	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.4.0 \
+	./target/debug/generator -i $(GOOGLE_DRIVE_SPEC) -v 0.4.1 \
 		-o google/drive \
 		-n google-drive \
 		--proper-name "Google Drive" \
@@ -293,7 +293,7 @@ $(GOOGLE_GROUPS_SETTINGS_SPEC): $(GOOGLE_GROUPS_SETTINGS_SPEC_DIR)
 	curl -sSL $(GOOGLE_GROUPS_SETTINGS_SPEC_REMOTE) -o $@
 
 google-groups-settings: target/debug/generator $(GOOGLE_GROUPS_SETTINGS_SPEC)
-	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.3.0 \
+	./target/debug/generator -i $(GOOGLE_GROUPS_SETTINGS_SPEC) -v 0.3.1 \
 		-o google/groups-settings \
 		-n google-groups-settings \
 		--proper-name "Google Groups Settings" \
@@ -312,7 +312,7 @@ $(GOOGLE_SHEETS_SPEC): $(GOOGLE_SHEETS_SPEC_DIR)
 	curl -sSL $(GOOGLE_SHEETS_SPEC_REMOTE) -o $@
 
 google-sheets: target/debug/generator $(GOOGLE_SHEETS_SPEC)
-	./target/debug/generator -i $(GOOGLE_SHEETS_SPEC) -v 0.4.0 \
+	./target/debug/generator -i $(GOOGLE_SHEETS_SPEC) -v 0.4.1 \
 		-o google/sheets \
 		-n sheets \
 		--proper-name "Google Sheets" \
@@ -331,7 +331,7 @@ $(GUSTO_SPEC): $(GUSTO_SPEC_DIR)
 	curl -sSL $(GUSTO_SPEC_REMOTE) -o $@
 
 gusto: target/debug/generator $(GUSTO_SPEC)
-	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.14 \
+	./target/debug/generator -i $(GUSTO_SPEC) -v 0.2.15 \
 		-o gusto \
 		-n gusto-api \
 		--proper-name Gusto \
@@ -353,7 +353,7 @@ $(MAILCHIMP_SPEC): $(MAILCHIMP_SPEC_DIR)
 		$(MAILCHIMP_SPEC_REMOTE)
 
 mailchimp: target/debug/generator $(MAILCHIMP_SPEC)
-	./target/debug/generator -i $(MAILCHIMP_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(MAILCHIMP_SPEC) -v 0.2.2 \
 		-o mailchimp \
 		-n mailchimp-api \
 		--proper-name MailChimp \
@@ -474,7 +474,7 @@ $(SHOPIFY_SPEC): $(SHOPIFY_SPEC_DIR)
 	curl -sSL $(SHOPIFY_SPEC_REMOTE) -o $@
 
 shopify: target/debug/generator $(SHOPIFY_SPEC)
-	./target/debug/generator -i $(SHOPIFY_SPEC) -v 0.1.1 \
+	./target/debug/generator -i $(SHOPIFY_SPEC) -v 0.1.2 \
 		-o shopify \
 		-n shopify \
 		--proper-name "Shopify" \
@@ -496,7 +496,7 @@ $(SLACK_SPEC): $(SLACK_SPEC_DIR)
 		$(SLACK_SPEC_REMOTE)
 
 slack: target/debug/generator $(SLACK_SPEC)
-	./target/debug/generator -i $(SLACK_SPEC) -v 0.2.1 \
+	./target/debug/generator -i $(SLACK_SPEC) -v 0.2.2 \
 		-o slack \
 		-n slack-chat-api \
 		--proper-name Slack \
@@ -556,7 +556,7 @@ $(ZOOM_SPEC): $(ZOOM_SPEC_DIR)
 		$(ZOOM_SPEC_REMOTE)
 
 zoom: target/debug/generator $(ZOOM_SPEC)
-	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.7 \
+	./target/debug/generator -i $(ZOOM_SPEC) -v 0.2.8 \
 		-o zoom \
 		-n zoom-api \
 		--proper-name Zoom \
