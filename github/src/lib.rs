@@ -229,6 +229,8 @@ pub mod reactions;
 pub mod repos;
 /// Provisioning of GitHub organization membership for SCIM-enabled providers.
 pub mod scim;
+/// Provides exactly what type of access you have by a given token.
+pub mod scopes;
 /// Look for stuff on GitHub.
 pub mod search;
 /// Retrieve secret scanning alerts from a repository.

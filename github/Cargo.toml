@@ -40,6 +40,7 @@ serde_json = "1"
 serde_urlencoded = "^0.7"
 url = { version = "2", features = ["serde"] }
 tokio = { version = "1.8.0", features = ["full"] }
+github-scopes-rs = { version = "1" }
 
 [dev-dependencies]
 base64 = "^0.12"
