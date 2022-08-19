@@ -40,7 +40,7 @@ impl Reimbursements {
         let resp: crate::types::GetReimbursementsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.data.to_vec())
     }
 
     /**

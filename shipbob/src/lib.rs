@@ -27,7 +27,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! shipbob = "0.1.6"
+//! shipbob = "0.2.0"
 //! ```
 //!
 //! ## Basic example
@@ -202,7 +202,7 @@ impl Client {
             Ok(c) => {
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware)
+                    .with(reqwest_tracing::TracingMiddleware::default())
                     // Retry failed requests.
                     .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
                         reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),

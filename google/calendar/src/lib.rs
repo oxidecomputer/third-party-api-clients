@@ -35,7 +35,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! google-calendar = "0.3.1"
+//! google-calendar = "0.4.0"
 //! ```
 //!
 //! ## Basic example
@@ -247,7 +247,7 @@ impl Client {
             Ok(c) => {
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware)
+                    .with(reqwest_tracing::TracingMiddleware::default())
                     // Retry failed requests.
                     .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
                         reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),
@@ -368,7 +368,7 @@ impl Client {
             Ok(c) => {
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware)
+                    .with(reqwest_tracing::TracingMiddleware::default())
                     // Retry failed requests.
                     .with(reqwest_conditional_middleware::ConditionalMiddleware::new(
                         reqwest_retry::RetryTransientMiddleware::new_with_policy(retry_policy),

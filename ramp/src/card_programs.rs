@@ -43,7 +43,7 @@ impl CardPrograms {
         let resp: crate::types::GetCardProgramsResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.card_programs)
+        Ok(resp.card_programs.to_vec())
     }
 
     /**

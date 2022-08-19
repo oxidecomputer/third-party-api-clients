@@ -3257,7 +3257,7 @@ reqwest = {{ version = "0.11", default-features = false, features = ["json", "mu
 reqwest-conditional-middleware = "0.1.0"
 reqwest-middleware = "0.1.5"
 reqwest-retry = "0.1.4"
-reqwest-tracing = {{ version = "0.2.1", features = ["opentelemetry_0_17"] }}
+reqwest-tracing = {{ version = "0.3.0", features = ["opentelemetry_0_17"] }}
 ring = {{ version = "0.16", default-features = false, optional = true }}
 schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid"] }}
 serde = {{ version = "1", features = ["derive"] }}
