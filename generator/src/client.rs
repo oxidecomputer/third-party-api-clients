@@ -937,6 +937,7 @@ fn get_shared_functions(proper_name: &str, add_post_header: &str) -> String {
         || proper_name == "DocuSign"
         || proper_name == "Gusto"
         || proper_name == "MailChimp"
+        || proper_name == "Ramp"
         || proper_name == "Shopify"
         || proper_name == "Slack"
         || proper_name == "Zoom"
@@ -1387,8 +1388,7 @@ async fn url_and_auth(
     uri: &str,
 ) -> Result<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>();
-
-    let auth = format!("{} {{}}", self.token.read().await.access_token);
+    let auth = format!("{} {{}}", self.token);
     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
 }}
 

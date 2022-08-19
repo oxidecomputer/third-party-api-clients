@@ -462,20 +462,23 @@ impl Client {
         parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
     }
 
-    async fn request_raw(
+    async fn make_request(
         &self,
-        method: reqwest::Method,
+        method: &reqwest::Method,
         uri: &str,
         body: Option<reqwest::Body>,
-    ) -> Result<reqwest::Response> {
+    ) -> Result<reqwest::Request> {
         let u = if uri.starts_with("https://") {
             uri.to_string()
         } else {
             (self.host.clone() + uri).to_string()
         };
         let (url, auth) = self.url_and_auth(&u).await?;
+
         let instance = <&Client>::clone(&self);
+
         let mut req = instance.client.request(method.clone(), url);
+
         // Set the default headers.
         req = req.header(
             reqwest::header::ACCEPT,
@@ -489,14 +492,56 @@ impl Client {
         if let Some(auth_str) = auth {
             req = req.header(http::header::AUTHORIZATION, &*auth_str);
         }
+
         if let Some(body) = body {
             log::debug!(
                 "body: {:?}",
                 String::from_utf8(body.as_bytes().unwrap().to_vec()).unwrap()
             );
+
             req = req.body(body);
         }
-        Ok(req.send().await?)
+
+        Ok(req.build()?)
+    }
+
+    async fn request_raw(
+        &self,
+        method: reqwest::Method,
+        uri: &str,
+        body: Option<reqwest::Body>,
+    ) -> Result<reqwest::Response> {
+        if self.auto_refresh {
+            let expired = self.is_expired().await;
+
+            match expired {
+                // We have a known expired token, we know we need to perform a refresh prior to
+                // attempting to make a request
+                Some(true) => {
+                    self.refresh_access_token().await?;
+                }
+
+                // We have a (theoretically) known good token available. We make an optimistic
+                // attempting at the request. If the token is no longer good, then something other
+                // than the expiration is triggering the failure. We defer handling of these errors
+                // to the caller
+                Some(false) => (),
+
+                // We do not know what state we are in. We could have a valid or expired token.
+                // Generally this means we are in one of two cases:
+                //   1. We have not yet performed a token refresh, nor has the user provided
+                //      expiration data, and therefore do not know the expiration of the user
+                //      provided token
+                //   2. The provider is returning unusable expiration times, at which point we
+                //      choose to ignore them
+                None => (),
+            }
+        }
+
+        let req = self.make_request(&method, uri, body).await?;
+        let resp = self.client.execute(req).await?;
+
+        Ok(resp)
     }
 
     async fn request<Out>(
