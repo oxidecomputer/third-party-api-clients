@@ -398,7 +398,6 @@ $(RAMP_SPEC):
 
 ramp: target/debug/generator $(RAMP_SPEC)
 	./target/debug/generator -i $(RAMP_SPEC) -v 0.3.0 \
-		--debug \
 		-o ramp \
 		-n ramp-api \
 		--proper-name Ramp \
