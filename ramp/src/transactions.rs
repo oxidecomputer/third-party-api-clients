@@ -125,7 +125,7 @@ impl Transactions {
         let resp: crate::types::GetTransactionResponse = self.client.get(&url, None).await?;
 
         // Return our response data.
-        Ok(resp.data)
+        Ok(resp.data.to_vec())
     }
 
     /**

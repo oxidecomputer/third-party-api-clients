@@ -89,24 +89,18 @@
                       "type": "string"
                     },
                     "location_id": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
+                      "type": "string",
+                      "nullable": true,
                       "format": "uuid"
                     },
                     "department_id": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
+                      "type": "string",
+                      "nullable": true,
                       "format": "uuid"
                     },
                     "manager_id": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
+                      "type": "string",
+                      "nullable": true,
                       "format": "uuid"
                     },
                     "business_id": {
@@ -1152,24 +1146,18 @@
                             "type": "string"
                           },
                           "location_id": {
-                            "type": [
-                              "string",
-                              "null"
-                            ],
+                            "type": "string",
+                            "nullable": true,
                             "format": "uuid"
                           },
                           "department_id": {
-                            "type": [
-                              "string",
-                              "null"
-                            ],
+                            "type": "string",
+                            "nullable": true,
                             "format": "uuid"
                           },
                           "manager_id": {
-                            "type": [
-                              "string",
-                              "null"
-                            ],
+                            "type": "string",
+                            "nullable": true,
                             "format": "uuid"
                           },
                           "business_id": {
@@ -6177,24 +6165,18 @@
                       "type": "string"
                     },
                     "location_id": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
+                      "type": "string",
+                      "nullable": true,
                       "format": "uuid"
                     },
                     "department_id": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
+                      "type": "string",
+                      "nullable": true,
                       "format": "uuid"
                     },
                     "manager_id": {
-                      "type": [
-                        "string",
-                        "null"
-                      ],
+                      "type": "string",
+                      "nullable": true,
                       "format": "uuid"
                     },
                     "business_id": {

@@ -33,7 +33,7 @@ impl Client {
         let retry_policy = reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
                 let client = reqwest_middleware::ClientBuilder::new(http)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware)
+                    .with(reqwest_tracing::TracingMiddleware::default())
                     // Retry failed requests.
                     .with(
                         reqwest_conditional_middleware::ConditionalMiddleware::new(
@@ -597,7 +597,7 @@ impl Client {{
             Ok(c) => {{
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware)
+                    .with(reqwest_tracing::TracingMiddleware::default())
                     // Retry failed requests.
                     .with(
                         reqwest_conditional_middleware::ConditionalMiddleware::new(
@@ -799,7 +799,7 @@ where
         Ok(c) => {
             let client = reqwest_middleware::ClientBuilder::new(c)
                 // Trace HTTP requests. See the tracing crate to make use of these traces.
-                .with(reqwest_tracing::TracingMiddleware)
+                .with(reqwest_tracing::TracingMiddleware::default())
                 // Retry failed requests.
                 .with(
                     reqwest_conditional_middleware::ConditionalMiddleware::new(
@@ -857,7 +857,7 @@ impl Client {{
             Ok(c) => {{
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware)
+                    .with(reqwest_tracing::TracingMiddleware::default())
                     // Retry failed requests.
                     .with(
                         reqwest_conditional_middleware::ConditionalMiddleware::new(
@@ -1387,7 +1387,8 @@ async fn url_and_auth(
     uri: &str,
 ) -> Result<(reqwest::Url, Option<String>)> {{
     let parsed_url = uri.parse::<reqwest::Url>();
-    let auth = format!("{} {{}}", self.token);
+
+    let auth = format!("{} {{}}", self.token.read().await.access_token);
     parsed_url.map(|u| (u, Some(auth))).map_err(Error::from)
 }}
 
@@ -1713,7 +1714,7 @@ impl Client {{
             Ok(c) => {{
                 let client = reqwest_middleware::ClientBuilder::new(c)
                     // Trace HTTP requests. See the tracing crate to make use of these traces.
-                    .with(reqwest_tracing::TracingMiddleware)
+                    .with(reqwest_tracing::TracingMiddleware::default())
                     // Retry failed requests.
                     .with(
                         reqwest_conditional_middleware::ConditionalMiddleware::new(

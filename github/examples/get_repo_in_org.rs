@@ -29,7 +29,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         reqwest_retry::policies::ExponentialBackoff::builder().build_with_max_retries(3);
     let client = reqwest_middleware::ClientBuilder::new(http)
         // Trace HTTP requests. See the tracing crate to make use of these traces.
-        .with(reqwest_tracing::TracingMiddleware)
+        .with(reqwest_tracing::TracingMiddleware::default())
         // Retry failed requests.
         .with(reqwest_retry::RetryTransientMiddleware::new_with_policy(
             retry_policy,

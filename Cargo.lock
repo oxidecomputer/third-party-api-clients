@@ -220,7 +220,7 @@ dependencies = [
 
 [[package]]
 name = "docusign"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -256,7 +256,7 @@ dependencies = [
 
 [[package]]
 name = "dolladollabills"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -486,7 +486,7 @@ checksum = "f0a01e0497841a3b2db4f8afa483cce65f7e96a3498bd6c541734792aeac8fe7"
 
 [[package]]
 name = "giphy-api"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -522,7 +522,7 @@ dependencies = [
 
 [[package]]
 name = "google-calendar"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -559,7 +559,7 @@ dependencies = [
 
 [[package]]
 name = "google-cloud-resource-manager"
-version = "0.2.1"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -596,7 +596,7 @@ dependencies = [
 
 [[package]]
 name = "google-drive"
-version = "0.4.1"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -633,7 +633,7 @@ dependencies = [
 
 [[package]]
 name = "google-groups-settings"
-version = "0.3.1"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -670,7 +670,7 @@ dependencies = [
 
 [[package]]
 name = "gsuite-api"
-version = "0.4.1"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -707,7 +707,7 @@ dependencies = [
 
 [[package]]
 name = "gusto-api"
-version = "0.2.15"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -992,7 +992,7 @@ dependencies = [
 
 [[package]]
 name = "mailchimp-api"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1183,7 +1183,7 @@ dependencies = [
 
 [[package]]
 name = "octorust"
-version = "0.1.37"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1215,7 +1215,7 @@ dependencies = [
 
 [[package]]
 name = "okta"
-version = "0.2.5"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1436,7 +1436,7 @@ dependencies = [
 
 [[package]]
 name = "ramp-api"
-version = "0.2.9"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1451,11 +1451,15 @@ dependencies = [
  "log",
  "mime",
  "nom_pem",
+ "openssl",
+ "pem",
  "percent-encoding",
  "reqwest",
+ "reqwest-conditional-middleware",
  "reqwest-middleware",
  "reqwest-retry",
  "reqwest-tracing",
+ "ring",
  "schemars",
  "serde",
  "serde_json",
@@ -1605,9 +1609,9 @@ dependencies = [
 
 [[package]]
 name = "reqwest-middleware"
-version = "0.1.5"
+version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b58621b8223cfc85b63d38b8d335c69b96a666d9b7561aa30a3b070ce1df31c"
+checksum = "69539cea4148dce683bec9dc95be3f0397a9bb2c248a49c8296a9d21659a8cdd"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1641,9 +1645,9 @@ dependencies = [
 
 [[package]]
 name = "reqwest-tracing"
-version = "0.2.1"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "03f32bd53de59d66d157bd974bafbb69fbb9e98f665d14218b5b991e7dba8d75"
+checksum = "e131e50dcd8f24b88ff964404b96ff38ad4217e3ca6963256856952fe76dc8ec"
 dependencies = [
  "async-trait",
  "opentelemetry",
@@ -1668,7 +1672,7 @@ dependencies = [
 
 [[package]]
 name = "revai"
-version = "0.3.0"
+version = "0.4.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1839,7 +1843,7 @@ dependencies = [
 
 [[package]]
 name = "sendgrid-api"
-version = "0.2.4"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1950,7 +1954,7 @@ dependencies = [
 
 [[package]]
 name = "sheets"
-version = "0.4.1"
+version = "0.5.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -1987,7 +1991,7 @@ dependencies = [
 
 [[package]]
 name = "shipbob"
-version = "0.1.6"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2023,7 +2027,7 @@ dependencies = [
 
 [[package]]
 name = "shopify"
-version = "0.1.2"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2085,7 +2089,7 @@ checksum = "c307a32c1c5c437f38c7fd45d753050587732ba8628319fbdf12a7e289ccc590"
 
 [[package]]
 name = "slack-chat-api"
-version = "0.2.2"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2370,7 +2374,7 @@ dependencies = [
 
 [[package]]
 name = "tripactions"
-version = "0.2.4"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -2676,7 +2680,7 @@ dependencies = [
 
 [[package]]
 name = "zoom-api"
-version = "0.2.8"
+version = "0.3.0"
 dependencies = [
  "anyhow",
  "async-recursion",
