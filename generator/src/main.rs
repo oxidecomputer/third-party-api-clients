@@ -3208,14 +3208,13 @@ fn main() -> Result<()> {
                 uuid_lib = r#"
 bytes = { version = "1", features = ["serde"] }
 async-trait = "^0.1.51"
-urlencoding = "^1.3.3"
 uuid = { version = "1.1", features = ["serde", "v4"] }"#
                     .to_string();
             }
 
             if proper_name.starts_with("Google") {
                 yup_oauth2_lib = r#"
-base64 = "^0.12"
+base64 = "^0.13"
 yup-oauth2 = "^5""#
                     .to_string();
             }
@@ -3267,7 +3266,7 @@ url = {{ version = "2", features = ["serde"] }}{}{}
 tokio = {{ version = "1.20.1", features = ["full"] }}
 
 [dev-dependencies]
-base64 = "^0.12"
+base64 = "^0.13"
 dirs = "^3.0.2"
 nom_pem = "4"
 

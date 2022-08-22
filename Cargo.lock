@@ -90,12 +90,6 @@ dependencies = [
 
 [[package]]
 name = "base64"
-version = "0.12.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3441f0f7b02788e948e47f457ca01f1d7e6d92c693bc132c22b087d3141c03ff"
-
-[[package]]
-name = "base64"
 version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "904dfeac50f3cdaba28fc6f57fdcddb75f49ed61346676a78c4ffe55877802fd"
@@ -219,7 +213,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -244,7 +238,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -255,7 +248,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -280,7 +273,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -485,7 +477,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -510,7 +502,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -521,7 +512,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -546,7 +537,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
  "yup-oauth2",
 ]
@@ -558,7 +548,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -583,7 +573,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
  "yup-oauth2",
 ]
@@ -595,7 +584,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -620,7 +609,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
  "yup-oauth2",
 ]
@@ -632,7 +620,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -657,7 +645,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
  "yup-oauth2",
 ]
@@ -669,7 +656,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -694,7 +681,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
  "yup-oauth2",
 ]
@@ -706,7 +692,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -731,7 +717,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -876,7 +861,7 @@ version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5617e92fc2f2501c3e2bc6ce547cad841adba2bae5b921c7e52510beca6d084c"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "bytes",
  "http",
  "httpdate",
@@ -941,7 +926,7 @@ version = "8.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1aa4b4af834c6cfd35d8763d359661b90f2e45d8f750a0849156c7f4671af09c"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "pem",
  "ring",
  "serde",
@@ -1000,7 +985,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1025,7 +1010,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -1180,7 +1164,7 @@ version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
- "base64 0.12.3",
+ "base64",
  "chrono",
  "dirs",
  "http",
@@ -1213,7 +1197,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1238,7 +1222,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -1340,7 +1323,7 @@ version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "03c64931a1a212348ec4f3b4362585eca7159d0d09cbdf4a7f74f02173596fd4"
 dependencies = [
- "base64 0.13.0",
+ "base64",
 ]
 
 [[package]]
@@ -1407,11 +1390,11 @@ checksum = "bc881b2c22681370c6a780e47af9840ef841837bc98118431d4e1868bd0c1086"
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.29"
+version = "1.0.43"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b9f5105d4fdaab20335ca9565e106a5d9b82b6219b5ba735731124ac6711d23d"
+checksum = "0a2ca2c61bc9f3d74d2886294ab7b9853abd9c1ad903a3ac7815c58989bb7bab"
 dependencies = [
- "unicode-xid",
+ "unicode-ident",
 ]
 
 [[package]]
@@ -1430,7 +1413,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1455,7 +1438,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -1550,7 +1532,7 @@ version = "0.11.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b75aa69a3f06bbcc66ede33af2af253c6f7a86b1ca0033f60c580a27074fbf92"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "bytes",
  "encoding_rs",
  "futures-core",
@@ -1669,7 +1651,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1694,7 +1676,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -1725,7 +1706,7 @@ version = "0.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "35edb675feee39aec9c99fa5ff985081995a06d594114ae14cbe797ad7b7a6d7"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "log",
  "ring",
  "sct 0.6.1",
@@ -1762,7 +1743,7 @@ version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0864aeff53f8c05aa08d86e5ef839d3dfcf07aeba2db32f12db0ef716e87bd55"
 dependencies = [
- "base64 0.13.0",
+ "base64",
 ]
 
 [[package]]
@@ -1871,7 +1852,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1896,24 +1877,23 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
 [[package]]
 name = "serde"
-version = "1.0.136"
+version = "1.0.144"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ce31e24b01e1e524df96f1c2fdd054405f8d7376249a5110886fb4b658484789"
+checksum = "0f747710de3dcd43b88c9168773254e809d8ddbdf9653b84e2554ab219f17860"
 dependencies = [
  "serde_derive",
 ]
 
 [[package]]
 name = "serde_derive"
-version = "1.0.136"
+version = "1.0.144"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "08597e7152fcd306f41838ed3e37be9eaeed2b61c42e2117266a554fab4662f9"
+checksum = "94ed3a816fb1d101812f83e789f888322c34e291f894f19590dc310963e87a00"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1982,7 +1962,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2007,7 +1987,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
  "yup-oauth2",
 ]
@@ -2019,7 +1998,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2044,7 +2023,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -2055,7 +2033,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2080,7 +2058,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -2118,7 +2095,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2143,7 +2120,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -2171,13 +2147,13 @@ checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
 
 [[package]]
 name = "syn"
-version = "1.0.77"
+version = "1.0.99"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5239bc68e0fef57495900cfea4e8dc75596d9a319d7e16b1e0a440d24e6fe0a0"
+checksum = "58dbef6ec655055e20b86b15a8cc6d439cca19b667537ac6a1369572d151ab13"
 dependencies = [
  "proc-macro2",
  "quote",
- "unicode-xid",
+ "unicode-ident",
 ]
 
 [[package]]
@@ -2433,7 +2409,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2458,7 +2434,6 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
 
@@ -2484,6 +2459,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "246f4c42e67e7a4e3c6106ff716a5d067d4132a642840b242e357e468a2a0085"
 
 [[package]]
+name = "unicode-ident"
+version = "1.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c4f5b37a154999a8f3f98cc23a628d850e154479cd94decf3414696e12e31aaf"
+
+[[package]]
 name = "unicode-normalization"
 version = "0.1.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2497,12 +2478,6 @@ name = "unicode-width"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3ed742d4ea2bd1176e236172c8429aaf54486e7ac098db29ffe6529e0ce50973"
-
-[[package]]
-name = "unicode-xid"
-version = "0.2.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3"
 
 [[package]]
 name = "untrusted"
@@ -2522,12 +2497,6 @@ dependencies = [
  "percent-encoding",
  "serde",
 ]
-
-[[package]]
-name = "urlencoding"
-version = "1.3.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5a1f0175e03a0973cf4afd476bef05c26e228520400eb1fd473ad417b1c00ffb"
 
 [[package]]
 name = "uuid"
@@ -2773,7 +2742,7 @@ version = "5.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2573621fa28865489bdf556cdb8703604f4e8498612e3041a212ac20e59c4aeb"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "chrono",
  "futures",
  "http",
@@ -2796,7 +2765,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2821,6 +2790,5 @@ dependencies = [
  "serde_urlencoded",
  "tokio",
  "url",
- "urlencoding",
  "uuid",
 ]
