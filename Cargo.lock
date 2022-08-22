@@ -90,12 +90,6 @@ dependencies = [
 
 [[package]]
 name = "base64"
-version = "0.12.3"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3441f0f7b02788e948e47f457ca01f1d7e6d92c693bc132c22b087d3141c03ff"
-
-[[package]]
-name = "base64"
 version = "0.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "904dfeac50f3cdaba28fc6f57fdcddb75f49ed61346676a78c4ffe55877802fd"
@@ -219,7 +213,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -255,7 +249,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -485,7 +479,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -521,7 +515,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -558,7 +552,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -595,7 +589,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -632,7 +626,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -669,7 +663,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -706,7 +700,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -876,7 +870,7 @@ version = "1.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5617e92fc2f2501c3e2bc6ce547cad841adba2bae5b921c7e52510beca6d084c"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "bytes",
  "http",
  "httpdate",
@@ -941,7 +935,7 @@ version = "8.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1aa4b4af834c6cfd35d8763d359661b90f2e45d8f750a0849156c7f4671af09c"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "pem",
  "ring",
  "serde",
@@ -1000,7 +994,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1180,7 +1174,7 @@ version = "0.2.0"
 dependencies = [
  "anyhow",
  "async-recursion",
- "base64 0.12.3",
+ "base64",
  "chrono",
  "dirs",
  "http",
@@ -1213,7 +1207,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1340,7 +1334,7 @@ version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "03c64931a1a212348ec4f3b4362585eca7159d0d09cbdf4a7f74f02173596fd4"
 dependencies = [
- "base64 0.13.0",
+ "base64",
 ]
 
 [[package]]
@@ -1430,7 +1424,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1550,7 +1544,7 @@ version = "0.11.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b75aa69a3f06bbcc66ede33af2af253c6f7a86b1ca0033f60c580a27074fbf92"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "bytes",
  "encoding_rs",
  "futures-core",
@@ -1669,7 +1663,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1725,7 +1719,7 @@ version = "0.19.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "35edb675feee39aec9c99fa5ff985081995a06d594114ae14cbe797ad7b7a6d7"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "log",
  "ring",
  "sct 0.6.1",
@@ -1762,7 +1756,7 @@ version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0864aeff53f8c05aa08d86e5ef839d3dfcf07aeba2db32f12db0ef716e87bd55"
 dependencies = [
- "base64 0.13.0",
+ "base64",
 ]
 
 [[package]]
@@ -1871,7 +1865,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -1982,7 +1976,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2019,7 +2013,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2055,7 +2049,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2118,7 +2112,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2433,7 +2427,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
@@ -2773,7 +2767,7 @@ version = "5.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2573621fa28865489bdf556cdb8703604f4e8498612e3041a212ac20e59c4aeb"
 dependencies = [
- "base64 0.13.0",
+ "base64",
  "chrono",
  "futures",
  "http",
@@ -2796,7 +2790,7 @@ dependencies = [
  "anyhow",
  "async-recursion",
  "async-trait",
- "base64 0.12.3",
+ "base64",
  "bytes",
  "chrono",
  "dirs",
