@@ -3209,7 +3209,7 @@ fn main() -> Result<()> {
 bytes = { version = "1", features = ["serde"] }
 async-trait = "^0.1.51"
 urlencoding = "^1.3.3"
-uuid = { version = "^0.8", features = ["serde", "v4"] }"#
+uuid = { version = "1.1", features = ["serde", "v4"] }"#
                     .to_string();
             }
 
@@ -3242,7 +3242,7 @@ rustls-tls = ["reqwest/rustls-tls", "ring", "pem"]
 
 [dependencies]
 anyhow = "1"
-async-recursion = "^0.3.2"
+async-recursion = "^1.0"
 chrono = {{ version = "0.4", features = ["serde"] }}
 dirs = {{ version = "^3.0.2", optional = true }}
 http = "^0.2.4"
@@ -3259,7 +3259,7 @@ reqwest-middleware = "0.1.5"
 reqwest-retry = "0.1.4"
 reqwest-tracing = {{ version = "0.3.0", features = ["opentelemetry_0_17"] }}
 ring = {{ version = "0.16", default-features = false, optional = true }}
-schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid"] }}
+schemars = {{ version = "0.8", features = ["bytes", "chrono", "url", "uuid1"] }}
 serde = {{ version = "1", features = ["derive"] }}
 serde_json = "1"
 serde_urlencoded = "^0.7"
