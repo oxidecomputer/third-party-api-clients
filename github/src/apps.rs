@@ -110,7 +110,7 @@ impl Apps {
         &self,
         per_page: i64,
         cursor: &str,
-    ) -> Result<Vec<crate::types::HookDeliveryItem>> {
+    ) -> Result<(Vec<crate::types::HookDeliveryItem>, Option<hyperx::header::Link>)> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));
@@ -121,7 +121,17 @@ impl Apps {
         let query_ = serde_urlencoded::to_string(&query_args).unwrap();
         let url = format!("/app/hook/deliveries?{}", query_);
 
-        self.client.get(&url, None).await
+        /*
+         * We do this by hand here, so that we can expose the Link header value
+         * to the caller.  The "next" link provides the "cursor" value for the
+         * next page of results.
+         */
+        let (links, res) = self.client.request(http::Method::GET,
+            &(self.client.host.clone() + &url),
+            None,
+            crate::utils::MediaType::Json,
+            crate::auth::AuthenticationConstraint::Unconstrained).await?;
+        Ok((res, links))
     }
 
     /**
