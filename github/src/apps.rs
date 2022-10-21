@@ -110,7 +110,7 @@ impl Apps {
         &self,
         per_page: i64,
         cursor: &str,
-    ) -> Result<(Vec<crate::types::HookDeliveryItem>, Option<hyperx::header::Link>)> {
+    ) -> Result<(Vec<crate::types::HookDeliveryItem>, Option<parse_link_header::LinkMap>)> {
         let mut query_args: Vec<(String, String)> = Default::default();
         if !cursor.is_empty() {
             query_args.push(("cursor".to_string(), cursor.to_string()));

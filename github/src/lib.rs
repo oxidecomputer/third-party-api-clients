@@ -437,7 +437,7 @@ impl Client {
         body: Option<reqwest::Body>,
         media_type: crate::utils::MediaType,
         authentication: crate::auth::AuthenticationConstraint,
-    ) -> Result<(Option<hyperx::header::Link>, Out)>
+    ) -> Result<(Option<parse_link_header::LinkMap>, Out)>
     where
         Out: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -465,10 +465,8 @@ impl Client {
         req = req.header(http::header::USER_AGENT, &*instance.agent);
         req = req.header(
             http::header::ACCEPT,
-            &*format!(
-                "{}",
-                hyperx::header::qitem::<mime::Mime>(From::from(media_type))
-            ),
+            http::header::HeaderValue::from_str(&media_type.to_string())
+                .unwrap(),
         );
 
         if let Some(auth_str) = auth {
@@ -502,7 +500,7 @@ impl Client {
             .headers()
             .get(http::header::LINK)
             .and_then(|l| l.to_str().ok())
-            .and_then(|l| l.parse().ok());
+            .and_then(|l| parse_link_header::parse(l).ok());
 
         let response_body = response.bytes().await?;
 
@@ -640,7 +638,7 @@ impl Client {
         self.unfold(uri).await
     }
 
-    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    async fn get_pages<D>(&self, uri: &str) -> Result<(Option<parse_link_header::LinkMap>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {
@@ -657,7 +655,7 @@ impl Client {
     async fn get_pages_url<D>(
         &self,
         url: &reqwest::Url,
-    ) -> Result<(Option<hyperx::header::Link>, Vec<D>)>
+    ) -> Result<(Option<parse_link_header::LinkMap>, Vec<D>)>
     where
         D: serde::de::DeserializeOwned + 'static + Send,
     {

@@ -62,16 +62,12 @@ impl Default for MediaType {
     }
 }
 
-impl From<MediaType> for mime::Mime {
-    fn from(media: MediaType) -> mime::Mime {
-        match media {
-            MediaType::Json => "application/vnd.github.v3+json".parse().unwrap(),
+impl fmt::Display for MediaType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            MediaType::Json => write!(f, "application/vnd.github.v3+json"),
             MediaType::Preview(codename) => {
-                format!("application/vnd.github.{}-preview+json", codename)
-                    .parse()
-                    .unwrap_or_else(|_| {
-                        panic!("could not parse media type for preview {}", codename)
-                    })
+                write!(f, "application/vnd.github.{}-preview+json", codename)
             }
         }
     }
@@ -81,19 +77,8 @@ use std::{fmt, str::FromStr};
 
 use serde::de::{self, Visitor};
 
-pub fn next_link(l: &hyperx::header::Link) -> Option<String> {
-    l.values().iter().find_map(|value| {
-        value.rel().and_then(|rels| {
-            if rels
-                .iter()
-                .any(|rel| rel == &hyperx::header::RelationType::Next)
-            {
-                Some(value.link().into())
-            } else {
-                None
-            }
-        })
-    })
+pub fn next_link(lm: &parse_link_header::LinkMap) -> Option<String> {
+    lm.get(&Some("next".to_string())).map(|l| l.raw_uri.to_string())
 }
 
 pub mod date_format {
